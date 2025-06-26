@@ -1,0 +1,25 @@
+{
+  "name": "cloudflare-workers-d1",
+  "version": "1.0.0",
+  "description": "Cloudflare Workers with D1 database project",
+  "main": "src/index.js",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "db:create": "wrangler d1 create my-database",
+    "db:migrate": "wrangler d1 execute my-database --file=./db/schema.sql",
+    "db:seed": "wrangler d1 execute my-database --file=./db/seed.sql",
+    "generate-passwords": "node scripts/generate-hashed-passwords.js"
+  },
+  "devDependencies": {
+    "wrangler": "^4.22.0"
+  },
+  "keywords": [
+    "cloudflare",
+    "workers",
+    "d1",
+    "database"
+  ],
+  "author": "",
+  "license": "MIT"
+}

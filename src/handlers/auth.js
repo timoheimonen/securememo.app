@@ -1,0 +1,232 @@
+// Generate a random memo ID
+function generateMemoId() {
+    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    const array = new Uint8Array(16);
+    crypto.getRandomValues(array);
+    let result = '';
+    for (let i = 0; i < 16; i++) {
+        result += chars[array[i] % chars.length];
+    }
+    return result;
+}
+
+// Input validation functions
+function validateMemoId(memoId) {
+    return /^[A-Za-z0-9]{16}$/.test(memoId);
+}
+
+function validateEncryptedMessage(message) {
+    return message && typeof message === 'string' && message.length > 0 && message.length <= 50000;
+}
+
+function validateExpiryTime(expiryTime) {
+    if (!expiryTime) return false;
+    const expiry = new Date(expiryTime);
+    const now = new Date();
+    const maxExpiry = new Date(now.getTime() + 30 * 24 * 60 * 60 * 1000); // 30 days max
+    return expiry > now && expiry <= maxExpiry;
+}
+
+// Security logging function
+function logSecurityEvent(event, details, request) {
+    const clientIP = request.headers.get('CF-Connecting-IP') || 'unknown';
+    const userAgent = request.headers.get('User-Agent') || 'unknown';
+    const timestamp = new Date().toISOString();
+    
+    console.log(`[SECURITY] ${timestamp} | ${event} | IP: ${clientIP} | UA: ${userAgent} | Details: ${JSON.stringify(details)}`);
+}
+
+// Create a new memo
+export async function handleCreateMemo(request, env) {
+    try {
+        const { encryptedMessage, expiryTime, cfTurnstileResponse } = await request.json();
+        
+        // Input validation
+        if (!validateEncryptedMessage(encryptedMessage)) {
+            logSecurityEvent('INVALID_MESSAGE_FORMAT', { clientIP: request.headers.get('CF-Connecting-IP') || 'unknown', messageLength: encryptedMessage?.length }, request);
+            return new Response(JSON.stringify({ error: 'Invalid message format or size' }), {
+                status: 400,
+                headers: { 'Content-Type': 'application/json' }
+            });
+        }
+        
+        if (!validateExpiryTime(expiryTime)) {
+            logSecurityEvent('INVALID_EXPIRY_TIME', { clientIP: request.headers.get('CF-Connecting-IP') || 'unknown', expiryTime }, request);
+            return new Response(JSON.stringify({ error: 'Invalid expiry time' }), {
+                status: 400,
+                headers: { 'Content-Type': 'application/json' }
+            });
+        }
+        
+        // Verify Turnstile token
+        if (!cfTurnstileResponse) {
+            logSecurityEvent('MISSING_TURNSTILE', { clientIP: request.headers.get('CF-Connecting-IP') || 'unknown' }, request);
+            return new Response(JSON.stringify({ error: 'Please complete the security challenge' }), {
+                status: 400,
+                headers: { 'Content-Type': 'application/json' }
+            });
+        }
+
+        // Verify Turnstile with Cloudflare
+        const turnstileResponse = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: new URLSearchParams({
+                secret: env.TURNSTILE_SECRET,
+                response: cfTurnstileResponse,
+            }),
+        });
+
+        const turnstileResult = await turnstileResponse.json();
+        
+        if (!turnstileResult.success) {
+            logSecurityEvent('TURNSTILE_FAILED', { clientIP: request.headers.get('CF-Connecting-IP') || 'unknown', turnstileResult }, request);
+            return new Response(JSON.stringify({ error: 'Security challenge failed. Please try again.' }), {
+                status: 400,
+                headers: { 'Content-Type': 'application/json' }
+            });
+        }
+        
+        // Generate unique memo ID
+        const memoId = generateMemoId();
+        
+        // Insert memo into database
+        const stmt = env.DB.prepare(`
+            INSERT INTO memos (memo_id, encrypted_message, expiry_time)
+            VALUES (?, ?, ?)
+        `);
+        
+        await stmt.bind(memoId, encryptedMessage, expiryTime).run();
+        
+        logSecurityEvent('MEMO_CREATED', { clientIP: request.headers.get('CF-Connecting-IP') || 'unknown', memoId, expiryTime }, request);
+        
+        return new Response(JSON.stringify({ 
+            success: true, 
+            memoId: memoId 
+        }), {
+            status: 200,
+            headers: { 'Content-Type': 'application/json' }
+        });
+        
+    } catch (error) {
+        console.error('Error creating memo:', error);
+        logSecurityEvent('MEMO_CREATION_ERROR', { clientIP: request.headers.get('CF-Connecting-IP') || 'unknown', error: error.message }, request);
+        return new Response(JSON.stringify({ error: 'An error occurred' }), {
+            status: 500,
+            headers: { 'Content-Type': 'application/json' }
+        });
+    }
+}
+
+// Read a memo (and delete it after reading)
+export async function handleReadMemo(request, env) {
+    try {
+        const url = new URL(request.url);
+        const memoId = url.searchParams.get('id');
+        
+        // Input validation
+        if (!memoId || !validateMemoId(memoId)) {
+            logSecurityEvent('INVALID_MEMO_ID', { memoId, clientIP: request.headers.get('CF-Connecting-IP') || 'unknown' }, request);
+            return new Response(JSON.stringify({ error: 'Invalid memo ID' }), {
+                status: 400,
+                headers: { 'Content-Type': 'application/json' }
+            });
+        }
+        
+        // Get memo from database
+        const stmt = env.DB.prepare(`
+            SELECT encrypted_message, expiry_time, is_read
+            FROM memos 
+            WHERE memo_id = ?
+        `);
+        
+        const memo = await stmt.bind(memoId).first();
+        
+        if (!memo) {
+            logSecurityEvent('MEMO_NOT_FOUND', { memoId, clientIP: request.headers.get('CF-Connecting-IP') || 'unknown' }, request);
+            return new Response(JSON.stringify({ error: 'Memo not found' }), {
+                status: 404,
+                headers: { 'Content-Type': 'application/json' }
+            });
+        }
+        
+        // Check if memo has already been read
+        if (memo.is_read) {
+            logSecurityEvent('MEMO_ALREADY_READ', { memoId, clientIP: request.headers.get('CF-Connecting-IP') || 'unknown' }, request);
+            return new Response(JSON.stringify({ error: 'Memo not found' }), {
+                status: 404,
+                headers: { 'Content-Type': 'application/json' }
+            });
+        }
+        
+        // Check if memo has expired
+        if (memo.expiry_time) {
+            const expiryTime = new Date(memo.expiry_time);
+            const now = new Date();
+            
+            if (now > expiryTime) {
+                // Delete expired memo
+                const deleteStmt = env.DB.prepare('DELETE FROM memos WHERE memo_id = ?');
+                await deleteStmt.bind(memoId).run();
+                
+                logSecurityEvent('MEMO_EXPIRED', { memoId, clientIP: request.headers.get('CF-Connecting-IP') || 'unknown' }, request);
+                return new Response(JSON.stringify({ error: 'Memo expired' }), {
+                    status: 404,
+                    headers: { 'Content-Type': 'application/json' }
+                });
+            }
+        }
+        
+        // Mark memo as read and delete it
+        const deleteStmt = env.DB.prepare('DELETE FROM memos WHERE memo_id = ?');
+        await deleteStmt.bind(memoId).run();
+        
+        logSecurityEvent('MEMO_READ', { memoId, clientIP: request.headers.get('CF-Connecting-IP') || 'unknown' }, request);
+        
+        return new Response(JSON.stringify({ 
+            success: true, 
+            encryptedMessage: memo.encrypted_message 
+        }), {
+            status: 200,
+            headers: { 'Content-Type': 'application/json' }
+        });
+        
+    } catch (error) {
+        console.error('Error reading memo:', error);
+        logSecurityEvent('MEMO_READ_ERROR', { clientIP: request.headers.get('CF-Connecting-IP') || 'unknown', error: error.message }, request);
+        return new Response(JSON.stringify({ error: 'An error occurred' }), {
+            status: 500,
+            headers: { 'Content-Type': 'application/json' }
+        });
+    }
+}
+
+// Cleanup expired memos (can be called periodically)
+export async function handleCleanupMemos(env) {
+    try {
+        const stmt = env.DB.prepare(`
+            DELETE FROM memos 
+            WHERE expiry_time IS NOT NULL 
+            AND expiry_time < datetime('now')
+        `);
+        
+        const result = await stmt.run();
+        
+        return new Response(JSON.stringify({ 
+            success: true, 
+            deletedCount: result.changes 
+        }), {
+            status: 200,
+            headers: { 'Content-Type': 'application/json' }
+        });
+        
+    } catch (error) {
+        console.error('Error cleaning up memos:', error);
+        return new Response(JSON.stringify({ error: 'An error occurred' }), {
+            status: 500,
+            headers: { 'Content-Type': 'application/json' }
+        });
+    }
+} 
