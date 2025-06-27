@@ -263,19 +263,12 @@ export async function getCreateMemoHTML() {
                             <button type="button" id="copyUrl" class="btn btn-secondary">Copy</button>
                         </div>
                     </div>
-                    <div class="memo-password-section">
-                        <label for="memoPassword">Encryption Password:</label>
-                        <div class="password-copy-container">
-                            <input type="text" id="memoPassword" readonly onclick="this.select(); document.execCommand('copy'); showMessage('Password copied to clipboard!', 'success');">
-                            <button type="button" id="copyPassword" class="btn btn-secondary">Copy</button>
-                        </div>
-                        <small class="form-help">⚠️ Save this password! It's not stored on our servers and cannot be recovered.</small>
-                    </div>
                     <div class="memo-warning">
                         <p><strong>Important:</strong></p>
                         <ul>
                             <li>The memo will be deleted after being read or when the expiry time is reached</li>
-                            <li>Share both the URL and password with your recipient</li>
+                            <li>The encryption password is included in the URL hashtag</li>
+                            <li>Share only the URL - the recipient doesn't need a separate password</li>
                             <li>This page will be cleared when you navigate away</li>
                         </ul>
                     </div>
@@ -426,7 +419,6 @@ export async function getCreateMemoHTML() {
                     
                     // Show result
                     document.getElementById('memoUrl').value = memoUrl;
-                    document.getElementById('memoPassword').value = password;
                     document.getElementById('result').style.display = 'block';
                     document.getElementById('memoForm').style.display = 'none';
                     
@@ -454,14 +446,6 @@ export async function getCreateMemoHTML() {
             urlInput.select();
             document.execCommand('copy');
             showMessage('URL copied to clipboard!', 'success');
-        });
-
-        // Copy password to clipboard
-        document.getElementById('copyPassword').addEventListener('click', () => {
-            const passwordInput = document.getElementById('memoPassword');
-            passwordInput.select();
-            document.execCommand('copy');
-            showMessage('Password copied to clipboard!', 'success');
         });
 
         function showMessage(message, type) {
