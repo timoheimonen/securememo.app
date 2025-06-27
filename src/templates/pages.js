@@ -26,7 +26,7 @@ export async function getIndexHTML() {
     <main class="main-content">
         <div class="hero-section">
             <h1>securememo.app</h1>
-            <p>Create encrypted memos that self-destruct after being read. Your secrets stay safe.</p>
+            <p>Create encrypted memos that self-destruct after being read or expired. Your secrets stay safe.</p>
             <div class="cta-buttons">
                 <a href="/create-memo.html" class="btn btn-primary">Create Secure Memo</a>
                 <a href="/about.html" class="btn btn-secondary">Learn More</a>
@@ -46,7 +46,7 @@ export async function getIndexHTML() {
                 </div>
                 <div class="feature-card">
                     <h3>💥 Self-Destruct</h3>
-                    <p>Once read, the memo is permanently deleted from our database</p>
+                    <p>Once read or expired, the memo is permanently deleted from our database</p>
                 </div>
             </div>
         </div>
@@ -60,7 +60,7 @@ export async function getIndexHTML() {
                 </div>
                 <div class="feature-card">
                     <h3>🗑️ Auto-Delete</h3>
-                    <p>Memos are automatically deleted after being read once</p>
+                    <p>Memos are automatically deleted after being read or expired</p>
                 </div>
                 <div class="feature-card">
                     <h3>🌐 No Password Storage</h3>
@@ -121,7 +121,7 @@ export async function getAboutHTML() {
     <main class="main-content">
         <div class="about-section">
             <h1>About securememo.app</h1>
-            <p>securememo.app is a privacy-focused application that allows you to create encrypted messages that self-destruct after being read. Built with security and privacy as the top priorities.</p>
+            <p>securememo.app is a privacy-focused application that allows you to create encrypted messages that self-destruct after being read or expired. Built with security and privacy as the top priorities.</p>
             
             <div class="tech-stack">
                 <h2>Technology Stack</h2>
@@ -147,7 +147,7 @@ export async function getAboutHTML() {
                     </div>
                     <div class="feature-item">
                         <h3>💥 Self-Destructing Messages</h3>
-                        <p>Once a memo is read, it's immediately and permanently deleted from our database. No traces remain.</p>
+                        <p>Once a memo is read or expired, it's immediately and permanently deleted from our database. No traces remain.</p>
                     </div>
                     <div class="feature-item">
                         <h3>🌐 No Password Storage</h3>
@@ -177,7 +177,7 @@ export async function getAboutHTML() {
                     </div>
                     <div class="feature-item">
                         <h3>3. Self-Destruct</h3>
-                        <p>When the recipient opens the link and enters the password, the memo will be decrypted and then permanently deleted. Expired memos are automatically cleaned up every 8 hours.</p>
+                        <p>When the recipient opens the link and enters the password, the memo will be decrypted and then permanently deleted if read, or deleted automatically if expired. Expired memos are automatically cleaned up every 8 hours.</p>
                     </div>
                 </div>
             </div>
@@ -237,7 +237,7 @@ export async function getCreateMemoHTML() {
         <div class="memo-container">
             <div class="memo-card">
                 <h1>Create Secure Memo</h1>
-                <p class="memo-description">Your message will be encrypted in your browser and self-destruct after being read.</p>
+                <p class="memo-description">Your message will be encrypted in your browser and self-destruct after being read or expired.</p>
                 
                 <form id="memoForm" class="memo-form">
                     <div class="form-group">
@@ -535,7 +535,7 @@ export async function getReadMemoHTML() {
         <div class="memo-container">
             <div class="memo-card">
                 <h1>Read Secure Memo</h1>
-                <p class="memo-description">Enter the password to decrypt and read the memo. It will be deleted after reading.</p>
+                <p class="memo-description">Enter the password to decrypt and read the memo. It will be deleted after being read or expired.</p>
                 
                 <div id="passwordForm" class="memo-form">
                     <form id="decryptForm">
@@ -782,7 +782,7 @@ export async function getToSHTML() {
             
             <div class="tech-stack">
                 <h2>1. Service Description</h2>
-                <p>securememo.app is a secure messaging service that allows users to create encrypted memos that self-destruct after being read. The service uses client-side encryption to ensure that memo content is never accessible to our servers.</p>
+                <p>securememo.app is a secure messaging service that allows users to create encrypted memos that self-destruct after being read or expired. The service uses client-side encryption to ensure that memo content is never accessible to our servers.</p>
             </div>
 
             <div class="features-detail">
