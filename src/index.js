@@ -88,6 +88,47 @@ export default {
       });
     }
 
+    // Handle favicon and app icons
+    if (path === '/favicon.ico') {
+      return new Response(env.ASSETS.get('favicon.ico'), {
+        headers: { 
+          'Content-Type': 'image/x-icon',
+          'Cache-Control': 'public, max-age=31536000',
+          ...securityHeaders
+        }
+      });
+    }
+
+    if (path === '/apple-touch-icon.png') {
+      return new Response(env.ASSETS.get('apple-touch-icon.png'), {
+        headers: { 
+          'Content-Type': 'image/png',
+          'Cache-Control': 'public, max-age=31536000',
+          ...securityHeaders
+        }
+      });
+    }
+
+    if (path === '/android-chrome-192x192.png') {
+      return new Response(env.ASSETS.get('android-chrome-192x192.png'), {
+        headers: { 
+          'Content-Type': 'image/png',
+          'Cache-Control': 'public, max-age=31536000',
+          ...securityHeaders
+        }
+      });
+    }
+
+    if (path === '/android-chrome-512x512.png') {
+      return new Response(env.ASSETS.get('android-chrome-512x512.png'), {
+        headers: { 
+          'Content-Type': 'image/png',
+          'Cache-Control': 'public, max-age=31536000',
+          ...securityHeaders
+        }
+      });
+    }
+
     // Handle page routes
     let response;
     switch (path) {

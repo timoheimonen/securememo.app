@@ -6,6 +6,10 @@ export async function getIndexHTML() {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>securememo.app - Encrypted Memos</title>
     <link rel="stylesheet" href="/styles.css">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="/android-chrome-512x512.png">
 </head>
 <body>
     <nav class="navbar">
@@ -97,6 +101,10 @@ export async function getAboutHTML() {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About - securememo.app</title>
     <link rel="stylesheet" href="/styles.css">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="/android-chrome-512x512.png">
 </head>
 <body>
     <nav class="navbar">
@@ -207,6 +215,10 @@ export async function getCreateMemoHTML() {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create Secure Memo - securememo.app</title>
     <link rel="stylesheet" href="/styles.css">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="/android-chrome-512x512.png">
     <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 </head>
 <body>
@@ -502,6 +514,10 @@ export async function getReadMemoHTML() {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Read Secure Memo - securememo.app</title>
     <link rel="stylesheet" href="/styles.css">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="/android-chrome-512x512.png">
 </head>
 <body>
     <nav class="navbar">
@@ -742,6 +758,10 @@ export async function getToSHTML() {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Terms of Service - securememo.app</title>
     <link rel="stylesheet" href="/styles.css">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="/android-chrome-512x512.png">
 </head>
 <body>
     <nav class="navbar">
