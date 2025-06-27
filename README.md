@@ -23,3 +23,6 @@ A secure, encrypted memo service that self-destructs after being read.
 ## License
 
 This project is licensed under the [MIT License](LICENSE).
+
+## Author
+Timo Heimonen (timo.heimonen@gmail.com)
