@@ -122,6 +122,7 @@ export async function getAboutHTML() {
                     <li><strong>D1 Database:</strong> SQLite-powered database for secure storage</li>
                     <li><strong>Web Crypto API:</strong> Client-side AES-256 encryption</li>
                     <li><strong>HTML/CSS/JavaScript:</strong> Modern, responsive web interface</li>
+                    <li><strong>Source code available on GitHub:</strong> <a href="https://github.com/timoheimonen/securememo.app" target="_blank" rel="noopener noreferrer">View source code on GitHub</a></li>
                 </ul>
             </div>
 
