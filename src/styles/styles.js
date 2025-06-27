@@ -480,6 +480,12 @@ body {
   border: 1px solid #f5c6cb;
 }
 
+.message.warning {
+  background: #fff3cd;
+  color: #856404;
+  border: 1px solid #ffeaa7;
+}
+
 /* Footer */
 .footer {
   text-align: center;
@@ -646,6 +652,40 @@ body {
 .cf-turnstile iframe {
   border-radius: 8px;
   border: 2px solid #e1e5e9;
+}
+
+/* Copy button improvements */
+.url-copy-container {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.url-copy-container input {
+  flex: 1;
+  padding: 12px;
+  border: 2px solid #e1e5e9;
+  border-radius: 8px;
+  font-size: 14px;
+  background: #f8f9fa;
+  cursor: text;
+}
+
+.url-copy-container input:focus {
+  outline: none;
+  border-color: #667eea;
+  background: white;
+}
+
+.url-copy-container .btn {
+  white-space: nowrap;
+  min-width: 80px;
+  transition: all 0.3s ease;
+}
+
+.url-copy-container .btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
   `;
 } 

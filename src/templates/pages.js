@@ -261,7 +261,7 @@ export async function getCreateMemoHTML() {
                         <label for="memoUrl">Share this URL with your recipient:</label>
                         <div class="url-copy-container">
                             <input type="text" id="memoUrl" readonly onclick="this.select(); document.execCommand('copy'); showMessage('URL copied to clipboard!', 'success');">
-                            <button type="button" id="copyUrl" class="btn btn-secondary">Copy</button>
+                            <button type="button" id="copyUrl" class="btn btn-primary">Copy</button>
                         </div>
                     </div>
                     <div class="memo-warning">
@@ -441,12 +441,40 @@ export async function getCreateMemoHTML() {
             }
         });
 
-        // Copy URL to clipboard
-        document.getElementById('copyUrl').addEventListener('click', () => {
+        // Copy URL to clipboard using modern Clipboard API
+        document.getElementById('copyUrl').addEventListener('click', async () => {
             const urlInput = document.getElementById('memoUrl');
-            urlInput.select();
-            document.execCommand('copy');
-            showMessage('URL copied to clipboard!', 'success');
+            const url = urlInput.value;
+            
+            try {
+                // Use modern Clipboard API if available
+                if (navigator.clipboard && window.isSecureContext) {
+                    await navigator.clipboard.writeText(url);
+                    showMessage('✅ URL copied to clipboard!', 'success');
+                    
+                    // Visual feedback - briefly change button text
+                    const copyBtn = document.getElementById('copyUrl');
+                    const originalText = copyBtn.textContent;
+                    copyBtn.textContent = 'Copied!';
+                    copyBtn.style.backgroundColor = '#28a745';
+                    
+                    setTimeout(() => {
+                        copyBtn.textContent = originalText;
+                        copyBtn.style.backgroundColor = '';
+                    }, 2000);
+                } else {
+                    // Fallback for older browsers or non-secure contexts
+                    urlInput.select();
+                    urlInput.setSelectionRange(0, 99999); // For mobile devices
+                    document.execCommand('copy');
+                    showMessage('✅ URL copied to clipboard!', 'success');
+                }
+            } catch (err) {
+                // Final fallback - show the URL and ask user to copy manually
+                urlInput.select();
+                urlInput.setSelectionRange(0, 99999);
+                showMessage('⚠️ Please copy the URL manually (Ctrl+C / Cmd+C)', 'warning');
+            }
         });
 
         function showMessage(message, type) {
