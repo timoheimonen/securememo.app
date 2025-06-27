@@ -39,7 +39,28 @@ function logSecurityEvent(event, details, request) {
 // Create a new memo
 export async function handleCreateMemo(request, env) {
     try {
-        const { encryptedMessage, expiryTime, cfTurnstileResponse } = await request.json();
+        // Validate request content type
+        const contentType = request.headers.get('content-type');
+        if (!contentType || !contentType.includes('application/json')) {
+            return new Response(JSON.stringify({ error: 'Content-Type must be application/json' }), {
+                status: 400,
+                headers: { 'Content-Type': 'application/json' }
+            });
+        }
+
+        // Parse request body with error handling
+        let requestData;
+        try {
+            requestData = await request.json();
+        } catch (parseError) {
+            console.error('JSON parse error:', parseError);
+            return new Response(JSON.stringify({ error: 'Invalid JSON in request body' }), {
+                status: 400,
+                headers: { 'Content-Type': 'application/json' }
+            });
+        }
+
+        const { encryptedMessage, expiryTime, cfTurnstileResponse } = requestData;
         
         // Input validation
         if (!validateEncryptedMessage(encryptedMessage)) {
@@ -68,23 +89,41 @@ export async function handleCreateMemo(request, env) {
         }
 
         // Verify Turnstile with Cloudflare
-        const turnstileResponse = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-            },
-            body: new URLSearchParams({
-                secret: env.TURNSTILE_SECRET,
-                response: cfTurnstileResponse,
-            }),
-        });
+        try {
+            const turnstileResponse = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: new URLSearchParams({
+                    secret: env.TURNSTILE_SECRET,
+                    response: cfTurnstileResponse,
+                }),
+            });
 
-        const turnstileResult = await turnstileResponse.json();
-        
-        if (!turnstileResult.success) {
-            logSecurityEvent('TURNSTILE_FAILED', { clientIP: request.headers.get('CF-Connecting-IP') || 'unknown', turnstileResult }, request);
-            return new Response(JSON.stringify({ error: 'Security challenge failed. Please try again.' }), {
-                status: 400,
+            if (!turnstileResponse.ok) {
+                console.error('Turnstile API error:', turnstileResponse.status, turnstileResponse.statusText);
+                logSecurityEvent('TURNSTILE_API_ERROR', { clientIP: request.headers.get('CF-Connecting-IP') || 'unknown', status: turnstileResponse.status }, request);
+                return new Response(JSON.stringify({ error: 'Security challenge verification failed' }), {
+                    status: 500,
+                    headers: { 'Content-Type': 'application/json' }
+                });
+            }
+
+            const turnstileResult = await turnstileResponse.json();
+            
+            if (!turnstileResult.success) {
+                logSecurityEvent('TURNSTILE_FAILED', { clientIP: request.headers.get('CF-Connecting-IP') || 'unknown', turnstileResult }, request);
+                return new Response(JSON.stringify({ error: 'Security challenge failed. Please try again.' }), {
+                    status: 400,
+                    headers: { 'Content-Type': 'application/json' }
+                });
+            }
+        } catch (turnstileError) {
+            console.error('Turnstile verification error:', turnstileError);
+            logSecurityEvent('TURNSTILE_VERIFICATION_ERROR', { clientIP: request.headers.get('CF-Connecting-IP') || 'unknown', error: turnstileError.message }, request);
+            return new Response(JSON.stringify({ error: 'Security challenge verification failed' }), {
+                status: 500,
                 headers: { 'Content-Type': 'application/json' }
             });
         }
@@ -93,12 +132,21 @@ export async function handleCreateMemo(request, env) {
         const memoId = generateMemoId();
         
         // Insert memo into database
-        const stmt = env.DB.prepare(`
-            INSERT INTO memos (memo_id, encrypted_message, expiry_time)
-            VALUES (?, ?, ?)
-        `);
-        
-        await stmt.bind(memoId, encryptedMessage, expiryTime).run();
+        try {
+            const stmt = env.DB.prepare(`
+                INSERT INTO memos (memo_id, encrypted_message, expiry_time)
+                VALUES (?, ?, ?)
+            `);
+            
+            await stmt.bind(memoId, encryptedMessage, expiryTime).run();
+        } catch (dbError) {
+            console.error('Database error during memo creation:', dbError);
+            logSecurityEvent('DATABASE_ERROR', { clientIP: request.headers.get('CF-Connecting-IP') || 'unknown', error: dbError.message }, request);
+            return new Response(JSON.stringify({ error: 'Failed to save memo' }), {
+                status: 500,
+                headers: { 'Content-Type': 'application/json' }
+            });
+        }
         
         logSecurityEvent('MEMO_CREATED', { clientIP: request.headers.get('CF-Connecting-IP') || 'unknown', memoId, expiryTime }, request);
         
@@ -136,13 +184,23 @@ export async function handleReadMemo(request, env) {
         }
         
         // Get memo from database
-        const stmt = env.DB.prepare(`
-            SELECT encrypted_message, expiry_time, is_read
-            FROM memos 
-            WHERE memo_id = ?
-        `);
-        
-        const memo = await stmt.bind(memoId).first();
+        let memo;
+        try {
+            const stmt = env.DB.prepare(`
+                SELECT encrypted_message, expiry_time, is_read
+                FROM memos 
+                WHERE memo_id = ?
+            `);
+            
+            memo = await stmt.bind(memoId).first();
+        } catch (dbError) {
+            console.error('Database error during memo read:', dbError);
+            logSecurityEvent('DATABASE_READ_ERROR', { clientIP: request.headers.get('CF-Connecting-IP') || 'unknown', error: dbError.message }, request);
+            return new Response(JSON.stringify({ error: 'Failed to read memo' }), {
+                status: 500,
+                headers: { 'Content-Type': 'application/json' }
+            });
+        }
         
         if (!memo) {
             logSecurityEvent('MEMO_NOT_FOUND', { memoId, clientIP: request.headers.get('CF-Connecting-IP') || 'unknown' }, request);
