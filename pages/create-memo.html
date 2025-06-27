@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Secure Memo - securememo.app</title>
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="/android-chrome-512x512.png">
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="/" class="nav-logo">securememo.app</a>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="/" class="nav-link">Home</a></li>
+                <li><a href="/about.html" class="nav-link">About</a></li>
+                <li><a href="/create-memo.html" class="nav-link active">Create Secure Memo</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <div class="memo-container">
+            <div class="memo-card">
+                <h1>Create Secure Memo</h1>
+                <p class="memo-description">Your message will be encrypted in your browser and self-destruct after being read or expired.</p>
+                
+                <form id="memoForm" class="memo-form">
+                    <div class="form-group">
+                        <label for="message">Your Message</label>
+                        <textarea id="message" name="message" required 
+                                  placeholder="Type your secret message here..." 
+                                  rows="8" maxlength="10000"></textarea>
+                        <small class="form-help">Maximum 10,000 characters</small>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="expiryHours">Expiry Time (Optional)</label>
+                        <select id="expiryHours" name="expiryHours">
+                            <option value="0">Delete on read (max 30 days)</option>
+                            <option value="8">8 hours</option>
+                            <option value="24">24 hours</option>
+                            <option value="48">48 hours</option>
+                        </select>
+                        <small class="form-help">Delete on read: Memo will be deleted when read OR after 30 days, whichever comes first</small>
+                    </div>
+                    
+                    <div class="form-group">
+                        <div class="cf-turnstile" data-sitekey="MISSING_SITE_KEY"></div>
+                        <small class="form-help">Please complete the security challenge to create your memo</small>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary">Create Secure Memo</button>
+                </form>
+                
+                <div id="result" class="result-section" style="display: none;">
+                    <h3>✅ Memo Created Successfully!</h3>
+                    <div class="memo-url-section">
+                        <label for="memoUrl">Share this URL with your recipient:</label>
+                        <div class="url-copy-container">
+                            <input type="text" id="memoUrl" readonly onclick="this.select(); document.execCommand('copy'); showMessage('URL copied to clipboard!', 'success');">
+                            <button type="button" id="copyUrl" class="btn btn-primary">Copy</button>
+                        </div>
+                    </div>
+                    <div class="memo-warning">
+                        <p><strong>Important:</strong></p>
+                        <ul>
+                            <li>The memo will be deleted after being read or when the expiry time is reached</li>
+                            <li>The encryption password is included in the URL hashtag</li>
+                            <li>Share only the URL - the recipient doesn't need a separate password</li>
+                            <li>This page will be cleared when you navigate away</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div id="message" class="message"></div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p><a href="https://github.com/timoheimonen/securememo.app" target="_blank" rel="noopener noreferrer">View source code at GitHub</a> | <a href="/tos.html">Terms of Service</a></p>
+    </footer>
+
+    <script>
+        // API endpoint - using relative URLs since Pages will proxy to Workers
+        const API_BASE_URL = '';
+
+        function highlightCurrentPage() {
+            const currentPath = window.location.pathname;
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === currentPath) {
+                    link.classList.add('active');
+                }
+            });
+        }
+
+        // Generate a random password
+        function generatePassword() {
+            const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+            const array = new Uint8Array(32);
+            crypto.getRandomValues(array);
+            let password = '';
+            for (let i = 0; i < 32; i++) {
+                password += chars[array[i] % chars.length];
+            }
+            return password;
+        }
+
+        // Encrypt message using Web Crypto API
+        async function encryptMessage(message, password) {
+            const encoder = new TextEncoder();
+            const data = encoder.encode(message);
+            
+            // Generate a random salt
+            const salt = crypto.getRandomValues(new Uint8Array(16));
+            
+            // Derive key from password
+            const keyMaterial = await crypto.subtle.importKey(
+                'raw',
+                encoder.encode(password),
+                { name: 'PBKDF2' },
+                false,
+                ['deriveBits', 'deriveKey']
+            );
+            
+            const key = await crypto.subtle.deriveKey(
+                {
+                    name: 'PBKDF2',
+                    salt: salt,
+                    iterations: 100000,
+                    hash: 'SHA-256'
+                },
+                keyMaterial,
+                { name: 'AES-GCM', length: 256 },
+                false,
+                ['encrypt']
+            );
+            
+            // Generate random IV
+            const iv = crypto.getRandomValues(new Uint8Array(12));
+            
+            // Encrypt the data
+            const encrypted = await crypto.subtle.encrypt(
+                { name: 'AES-GCM', iv: iv },
+                key,
+                data
+            );
+            
+            // Combine salt + iv + encrypted data
+            const result = new Uint8Array(salt.length + iv.length + encrypted.byteLength);
+            result.set(salt, 0);
+            result.set(iv, salt.length);
+            result.set(new Uint8Array(encrypted), salt.length + iv.length);
+            
+            return btoa(String.fromCharCode(...result));
+        }
+
+        // Handle form submission
+        document.getElementById('memoForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const message = document.getElementById('message').value.trim();
+            const expiryHours = parseInt(document.getElementById('expiryHours').value);
+            
+            if (!message) {
+                showMessage('Please enter a message', 'error');
+                return;
+            }
+            
+            if (message.length > 10000) {
+                showMessage('Message is too long (max 10,000 characters)', 'error');
+                return;
+            }
+            
+            // Check if Turnstile is completed
+            const turnstileResponse = turnstile.getResponse();
+            if (!turnstileResponse) {
+                showMessage('Please complete the security challenge', 'error');
+                return;
+            }
+            
+            try {
+                // Generate password
+                const password = generatePassword();
+                
+                // Encrypt message
+                const encryptedMessage = await encryptMessage(message, password);
+                
+                // Calculate expiry time
+                let expiryTime;
+                if (expiryHours > 0) {
+                    // Set specific expiry time
+                    expiryTime = new Date(Date.now() + expiryHours * 60 * 60 * 1000).toISOString();
+                } else {
+                    // Delete on read: set 30-day maximum
+                    expiryTime = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString();
+                }
+                
+                // Send to API (Pages will proxy to Workers)
+                const response = await fetch('/api/create-memo', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        encryptedMessage,
+                        expiryTime,
+                        cfTurnstileResponse: turnstileResponse
+                    })
+                });
+                
+                const result = await response.json();
+                
+                if (response.ok) {
+                    // Generate URL with password in hashtag
+                    const memoUrl = `${window.location.origin}/read-memo.html?id=${result.memoId}#${password}`;
+                    
+                    // Show result
+                    document.getElementById('memoUrl').value = memoUrl;
+                    document.getElementById('result').style.display = 'block';
+                    document.getElementById('memoForm').style.display = 'none';
+                    
+                    // Clear form
+                    document.getElementById('message').value = '';
+                    
+                    // Reset Turnstile
+                    turnstile.reset();
+                } else {
+                    showMessage(result.error || 'Failed to create memo', 'error');
+                    // Reset Turnstile on error
+                    turnstile.reset();
+                }
+            } catch (error) {
+                showMessage('An error occurred while creating the memo', 'error');
+                console.error('Error:', error);
+                // Reset Turnstile on error
+                turnstile.reset();
+            }
+        });
+
+        // Copy URL to clipboard using modern Clipboard API
+        document.getElementById('copyUrl').addEventListener('click', async () => {
+            const urlInput = document.getElementById('memoUrl');
+            const url = urlInput.value;
+            
+            try {
+                // Use modern Clipboard API if available
+                if (navigator.clipboard && window.isSecureContext) {
+                    await navigator.clipboard.writeText(url);
+                    showMessage('✅ URL copied to clipboard!', 'success');
+                    
+                    // Visual feedback - briefly change button text
+                    const copyBtn = document.getElementById('copyUrl');
+                    const originalText = copyBtn.textContent;
+                    copyBtn.textContent = 'Copied!';
+                    copyBtn.style.backgroundColor = '#28a745';
+                    
+                    setTimeout(() => {
+                        copyBtn.textContent = originalText;
+                        copyBtn.style.backgroundColor = '';
+                    }, 2000);
+                } else {
+                    // Fallback for older browsers or non-secure contexts
+                    urlInput.select();
+                    urlInput.setSelectionRange(0, 99999); // For mobile devices
+                    document.execCommand('copy');
+                    showMessage('✅ URL copied to clipboard!', 'success');
+                }
+            } catch (err) {
+                // Final fallback - show the URL and ask user to copy manually
+                urlInput.select();
+                urlInput.setSelectionRange(0, 99999);
+                showMessage('⚠️ Please copy the URL manually (Ctrl+C / Cmd+C)', 'warning');
+            }
+        });
+
+        function showMessage(message, type) {
+            const messageDiv = document.getElementById('message');
+            messageDiv.className = 'message ' + type;
+            messageDiv.textContent = message;
+            messageDiv.style.display = 'block';
+            
+            setTimeout(() => {
+                messageDiv.style.display = 'none';
+            }, 5000);
+        }
+
+        highlightCurrentPage();
+    </script>
+</body>
+</html> 

@@ -1,11 +1,3 @@
-import { getStyles } from './styles/styles.js';
-import { 
-  getIndexHTML, 
-  getAboutHTML, 
-  getCreateMemoHTML,
-  getReadMemoHTML,
-  getToSHTML
-} from './templates/pages.js';
 import {
   handleCreateMemo,
   handleReadMemo,
@@ -21,35 +13,26 @@ const securityHeaders = {
   'Referrer-Policy': 'strict-origin-when-cross-origin',
   'Permissions-Policy': 'geolocation=(), microphone=(), camera=()',
   'Strict-Transport-Security': 'max-age=31536000; includeSubDomains',
-  'Access-Control-Allow-Origin': 'https://securememo.app',
+  'Access-Control-Allow-Origin': '*',
   'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
   'Access-Control-Allow-Headers': 'Content-Type',
   'Access-Control-Max-Age': '86400'
 };
-
-// Input validation functions
-function validateMemoId(memoId) {
-  return /^[A-Za-z0-9]{16}$/.test(memoId);
-}
-
-function validateEncryptedMessage(message) {
-  return message && typeof message === 'string' && message.length > 0 && message.length <= 50000;
-}
-
-function validateExpiryTime(expiryTime) {
-  if (!expiryTime) return false;
-  const expiry = new Date(expiryTime);
-  const now = new Date();
-  const maxExpiry = new Date(now.getTime() + 30 * 24 * 60 * 60 * 1000); // 30 days max
-  return expiry > now && expiry <= maxExpiry;
-}
 
 export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
     const path = url.pathname;
 
-    // Handle API routes
+    // Handle CORS preflight requests
+    if (request.method === 'OPTIONS') {
+      return new Response(null, {
+        status: 200,
+        headers: securityHeaders
+      });
+    }
+
+    // Only handle API routes
     if (path.startsWith('/api/')) {
       const apiPath = path.substring(5);
       
@@ -78,89 +61,10 @@ export default {
       }
     }
 
-    // Handle static assets
-    if (path === '/styles.css') {
-      return new Response(getStyles(), {
-        headers: { 
-          'Content-Type': 'text/css',
-          ...securityHeaders
-        }
-      });
-    }
-
-    // Handle favicon and app icons
-    if (path === '/favicon.ico') {
-      return new Response(env.ASSETS.get('favicon.ico'), {
-        headers: { 
-          'Content-Type': 'image/x-icon',
-          'Cache-Control': 'public, max-age=31536000',
-          ...securityHeaders
-        }
-      });
-    }
-
-    if (path === '/apple-touch-icon.png') {
-      return new Response(env.ASSETS.get('apple-touch-icon.png'), {
-        headers: { 
-          'Content-Type': 'image/png',
-          'Cache-Control': 'public, max-age=31536000',
-          ...securityHeaders
-        }
-      });
-    }
-
-    if (path === '/android-chrome-192x192.png') {
-      return new Response(env.ASSETS.get('android-chrome-192x192.png'), {
-        headers: { 
-          'Content-Type': 'image/png',
-          'Cache-Control': 'public, max-age=31536000',
-          ...securityHeaders
-        }
-      });
-    }
-
-    if (path === '/android-chrome-512x512.png') {
-      return new Response(env.ASSETS.get('android-chrome-512x512.png'), {
-        headers: { 
-          'Content-Type': 'image/png',
-          'Cache-Control': 'public, max-age=31536000',
-          ...securityHeaders
-        }
-      });
-    }
-
-    // Handle page routes
-    let response;
-    switch (path) {
-      case '/':
-        response = await getIndexHTML();
-        break;
-      case '/about.html':
-        response = await getAboutHTML();
-        break;
-      case '/create-memo.html':
-        const siteKey = env.TURNSTILE_SITE_KEY || 'MISSING_SITE_KEY';
-        console.log('TURNSTILE_SITE_KEY:', siteKey);
-        response = (await getCreateMemoHTML()).replace('{{TURNSTILE_SITE_KEY}}', siteKey);
-        break;
-      case '/read-memo.html':
-        response = await getReadMemoHTML();
-        break;
-      case '/tos.html':
-        response = await getToSHTML();
-        break;
-      default:
-        return new Response('Not Found', { 
-          status: 404,
-          headers: securityHeaders
-        });
-    }
-
-    return new Response(response, {
-      headers: { 
-        'Content-Type': 'text/html',
-        ...securityHeaders
-      }
+    // For non-API routes, redirect to Pages
+    return new Response('Not Found', { 
+      status: 404,
+      headers: securityHeaders
     });
   },
 
