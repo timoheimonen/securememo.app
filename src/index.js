@@ -3,7 +3,8 @@ import {
   getIndexHTML, 
   getAboutHTML, 
   getCreateMemoHTML,
-  getReadMemoHTML
+  getReadMemoHTML,
+  getToSHTML
 } from './templates/pages.js';
 import {
   handleCreateMemo,
@@ -103,6 +104,9 @@ export default {
         break;
       case '/read-memo.html':
         response = await getReadMemoHTML();
+        break;
+      case '/tos.html':
+        response = await getToSHTML();
         break;
       default:
         return new Response('Not Found', { 

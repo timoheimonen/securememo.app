@@ -67,7 +67,7 @@ export async function getIndexHTML() {
     </main>
 
     <footer class="footer">
-        <p><a href="https://github.com/timoheimonen/securememo.app" target="_blank" rel="noopener noreferrer">View source code at GitHub</a></p>
+        <p><a href="https://github.com/timoheimonen/securememo.app" target="_blank" rel="noopener noreferrer">View source code at GitHub</a> | <a href="/tos.html">Terms of Service</a></p>
     </footer>
 
     <script>
@@ -177,7 +177,7 @@ export async function getAboutHTML() {
     </main>
 
     <footer class="footer">
-        <p><a href="https://github.com/timoheimonen/securememo.app" target="_blank" rel="noopener noreferrer">View source code at GitHub</a></p>
+        <p><a href="https://github.com/timoheimonen/securememo.app" target="_blank" rel="noopener noreferrer">View source code at GitHub</a> | <a href="/tos.html">Terms of Service</a></p>
     </footer>
 
     <script>
@@ -281,7 +281,7 @@ export async function getCreateMemoHTML() {
     </main>
 
     <footer class="footer">
-        <p><a href="https://github.com/timoheimonen/securememo.app" target="_blank" rel="noopener noreferrer">View source code at GitHub</a></p>
+        <p><a href="https://github.com/timoheimonen/securememo.app" target="_blank" rel="noopener noreferrer">View source code at GitHub</a> | <a href="/tos.html">Terms of Service</a></p>
     </footer>
 
     <script>
@@ -535,7 +535,7 @@ export async function getReadMemoHTML() {
     </main>
 
     <footer class="footer">
-        <p><a href="https://github.com/timoheimonen/securememo.app" target="_blank" rel="noopener noreferrer">View source code at GitHub</a></p>
+        <p><a href="https://github.com/timoheimonen/securememo.app" target="_blank" rel="noopener noreferrer">View source code at GitHub</a> | <a href="/tos.html">Terms of Service</a></p>
     </footer>
 
     <script>
@@ -698,6 +698,121 @@ export async function getReadMemoHTML() {
             setTimeout(() => {
                 messageDiv.style.display = 'none';
             }, 5000);
+        }
+
+        highlightCurrentPage();
+    </script>
+</body>
+</html>`;
+}
+
+export async function getToSHTML() {
+  return `<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terms of Service - securememo.app</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="/" class="nav-logo">securememo.app</a>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="/" class="nav-link">Home</a></li>
+                <li><a href="/about.html" class="nav-link">About</a></li>
+                <li><a href="/create-memo.html" class="nav-link">Create Secure Memo</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <div class="about-section">
+            <h1>Terms of Service</h1>
+            <p><strong>Last updated:</strong> 27.6.2025</p>
+            
+            <div class="tech-stack">
+                <h2>1. Service Description</h2>
+                <p>securememo.app is a secure messaging service that allows users to create encrypted memos that self-destruct after being read. The service uses client-side encryption to ensure that memo content is never accessible to our servers.</p>
+            </div>
+
+            <div class="features-detail">
+                <h2>2. Acceptable Use</h2>
+                <p>You agree to use this service only for lawful purposes and in accordance with these Terms. You agree not to:</p>
+                <ul>
+                    <li>Use the service to transmit illegal, harmful, threatening, abusive, or defamatory content</li>
+                    <li>Attempt to bypass security measures or CAPTCHA protection</li>
+                    <li>Use automated tools or scripts to create memos</li>
+                    <li>Share memos containing malware, phishing links, or other harmful content</li>
+                    <li>Use the service for spam or mass unsolicited messaging</li>
+                    <li>Attempt to reverse engineer or compromise the service</li>
+                </ul>
+            </div>
+
+            <div class="usage-section">
+                <h2>3. Privacy & Data Handling</h2>
+                <ul>
+                    <li><strong>No Content Access:</strong> We cannot access, read, or recover your memo content. All encryption happens in your browser.</li>
+                    <li><strong>No Personal Data:</strong> We do not collect personal information or require user accounts.</li>
+                    <li><strong>Security Logging:</strong> We log IP addresses and security events for abuse prevention only.</li>
+                    <li><strong>Automatic Deletion:</strong> Memos are automatically deleted after being read or when they expire.</li>
+                    <li><strong>No Recovery:</strong> Once a memo is deleted, it cannot be recovered.</li>
+                </ul>
+            </div>
+
+            <div class="features-detail">
+                <h2>4. Service Limitations</h2>
+                <ul>
+                    <li><strong>Message Size:</strong> Maximum 10,000 characters per memo</li>
+                    <li><strong>Expiry Times:</strong> 8 hours, 24 hours, 48 hours, or delete on read (max 30 days)</li>
+                    <li><strong>Availability:</strong> Service provided "as is" without guarantees of availability</li>
+                    <li><strong>No Delivery Guarantee:</strong> We cannot guarantee that memos will be delivered or read</li>
+                </ul>
+            </div>
+
+            <div class="usage-section">
+                <h2>5. Security & Disclaimers</h2>
+                <ul>
+                    <li><strong>User Responsibility:</strong> You are responsible for securely sharing memo URLs and protecting the passwords.</li>
+                    <li><strong>No Warranty:</strong> The service is provided without warranties of any kind.</li>
+                    <li><strong>Limitation of Liability:</strong> We are not liable for any damages arising from use of the service.</li>
+                    <li><strong>Security Measures:</strong> While we implement security measures, no system is 100% secure.</li>
+                </ul>
+            </div>
+
+            <div class="features-detail">
+                <h2>6. Termination</h2>
+                <p>We reserve the right to terminate or suspend access to the service for violations of these terms or for any other reason at our discretion.</p>
+            </div>
+
+            <div class="usage-section">
+                <h2>7. Changes to Terms</h2>
+                <p>We may update these terms at any time. Continued use of the service constitutes acceptance of updated terms.</p>
+            </div>
+
+            <div class="features-detail">
+                <h2>8. Contact</h2>
+                <p>For questions about these terms, please visit our <a href="https://github.com/timoheimonen/securememo.app" target="_blank" rel="noopener noreferrer">GitHub repository</a>.</p>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p><a href="https://github.com/timoheimonen/securememo.app" target="_blank" rel="noopener noreferrer">View source code at GitHub</a> | <a href="/tos.html">Terms of Service</a></p>
+    </footer>
+
+    <script>
+        function highlightCurrentPage() {
+            const currentPath = window.location.pathname;
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === currentPath) {
+                    link.classList.add('active');
+                }
+            });
         }
 
         highlightCurrentPage();
