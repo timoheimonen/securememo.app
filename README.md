@@ -10,7 +10,7 @@ A secure, encrypted memo service that self-destructs after being read.
 
 ## Setup
 1. Clone this repository
-2. Copy `wrangler.example.toml` to `wrangler.toml`
+2. Create your own `wrangler.toml`
 3. Fill in your Cloudflare D1 database and Turnstile credentials
 4. Run `npm install`
 5. Deploy with `npx wrangler deploy`
