@@ -755,9 +755,10 @@ export async function getToSHTML() {
                 <ul>
                     <li><strong>No Content Access:</strong> We cannot access, read, or recover your memo content. All encryption happens in your browser.</li>
                     <li><strong>No Personal Data:</strong> We do not collect personal information or require user accounts.</li>
-                    <li><strong>Security Logging:</strong> We log IP addresses and security events for abuse prevention only.</li>
+                    <li><strong>Security Logging:</strong> We temporarily log IP addresses and security-related metadata strictly for abuse mitigation and to protect service integrity. These logs are never used for tracking or profiling.</li>
                     <li><strong>Automatic Deletion:</strong> Memos are automatically deleted after being read or when they expire.</li>
                     <li><strong>No Recovery:</strong> Once a memo is deleted, it cannot be recovered.</li>
+                    <li><strong>GDPR Compliance:</strong> This service does not collect personal data as defined under the EU GDPR.</li>
                 </ul>
             </div>
 
