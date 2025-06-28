@@ -1,6 +1,6 @@
 # securememo.app
 
-**securememo.app** is a simple, private memo service for sharing sensitive messages. Everything is encrypted right in your browser with AES-256 — and each note disappears forever once it’s read.
+**securememo.app** is a simple, private memo service for sharing sensitive messages. Everything is encrypted right in your browser with AES-256 — and each note disappears forever once it’s read or when the time limit expires.
 
 ---
 
