@@ -1,28 +1,33 @@
 # securememo.app
 
-A secure, encrypted memo service that self-destructs after being read.
+**securememo.app** is a simple, private memo service for sharing sensitive messages. Everything is encrypted right in your browser with AES-256 — and each note disappears forever once it’s read.
+
+---
 
 ## Features
-- Client-side AES-256 encryption
-- Self-destructing messages
-- No password storage on servers
-- Built on Cloudflare Workers
 
-## Setup
-1. Clone this repository
-2. Create your own `wrangler.toml`
-3. Fill in your Cloudflare D1 database and Turnstile credentials
-4. Run `npm install`
-5. Deploy with `npx wrangler deploy`
+- True end-to-end encryption in your browser — nothing stored in plain text
+- One-time readable notes — they self-destruct automatically after being read or when the time limit expires.
+- Runs on Cloudflare Workers, fast and lightweight
+- Turnstile CAPTCHA to block bots and spam
+- Strong security headers by default
+
+---
 
 ## Security
-- All encryption happens client-side
-- Cloudflare Turnstile CAPTCHA protection
-- Comprehensive security headers
+
+- All encryption happens **client-side**, so your message is never visible to the server.
+- Turnstile CAPTCHA stops bots from misusing the service.
+- Strict security headers help keep everything safe by default.
+
+---
 
 ## License
 
-This project is licensed under the [MIT License](LICENSE).
+This project is open source under the [MIT License](LICENSE).
+
+---
 
 ## Author
-Timo Heimonen (timo.heimonen@gmail.com) 
+
+Timo Heimonen  (timo.heimonen@gmail.com)
