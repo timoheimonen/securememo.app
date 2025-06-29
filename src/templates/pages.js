@@ -224,10 +224,10 @@ export async function getCreateMemoHTML() {
                     <div class="form-group">
                         <label for="expiryHours">Expiry Time (Optional)</label>
                         <select id="expiryHours" name="expiryHours">
-                            <option value="0">Delete on read (max 30 days)</option>
-                            <option value="8">8 hours</option>
-                            <option value="24">24 hours</option>
-                            <option value="48">48 hours</option>
+                            <option value="0">Delete on read or 30 days</option>
+                            <option value="8">Delete on read or 8 hours</option>
+                            <option value="24">Delete on read or 1 day</option>
+                            <option value="48">Delete on read or 2 days</option>
                         </select>
                         <small class="form-help">Delete on read: Memo will be deleted when read OR after 30 days, whichever comes first</small>
                     </div>
