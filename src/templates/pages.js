@@ -297,6 +297,9 @@ export async function getCreateMemoHTML() {
     </footer>
 
     <script>
+        // Turnstile site key - this will be replaced by the server
+        const TURNSTILE_SITE_KEY = '{{TURNSTILE_SITE_KEY}}';
+
         function highlightCurrentPage() {
             const currentPath = window.location.pathname;
             const navLinks = document.querySelectorAll('.nav-link');
@@ -307,6 +310,47 @@ export async function getCreateMemoHTML() {
                     link.classList.add('active');
                 }
             });
+        }
+
+        // Initialize Turnstile widget
+        function initTurnstile() {
+            console.log('Turnstile widget auto-initialized with data-sitekey attribute');
+        }
+
+        // Get Turnstile response safely
+        function getTurnstileResponse() {
+            console.log('Getting Turnstile response...');
+            if (typeof turnstile !== 'undefined' && turnstile.getResponse) {
+                const response = turnstile.getResponse();
+                console.log('Turnstile response:', response);
+                return response;
+            }
+            console.log('Turnstile not available or no response');
+            return null;
+        }
+
+        // Reset Turnstile safely
+        function resetTurnstile() {
+            console.log('Resetting Turnstile...');
+            if (typeof turnstile !== 'undefined' && turnstile.reset) {
+                turnstile.reset();
+                console.log('Turnstile reset successful');
+            } else {
+                console.log('Turnstile reset failed - not available');
+            }
+        }
+
+        // Initialize when DOM is ready
+        function initializePage() {
+            highlightCurrentPage();
+            initTurnstile();
+        }
+
+        // Wait for both DOM and Turnstile script to be ready
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initializePage);
+        } else {
+            initializePage();
         }
 
         // Generate a random password
@@ -373,26 +417,40 @@ export async function getCreateMemoHTML() {
         // Handle form submission
         document.getElementById('memoForm').addEventListener('submit', async (e) => {
             e.preventDefault();
+            console.log('Form submission started...');
             
             const message = document.getElementById('message').value.trim();
             const expiryHours = parseInt(document.getElementById('expiryHours').value);
             
+            console.log('Message length:', message.length);
+            console.log('Expiry hours:', expiryHours);
+            
             if (!message) {
+                console.log('No message provided');
                 showMessage('Please enter a message', 'error');
                 return;
             }
             
             if (message.length > 10000) {
+                console.log('Message too long');
                 showMessage('Message is too long (max 10,000 characters)', 'error');
                 return;
             }
             
             // Check if Turnstile is completed
-            const turnstileResponse = turnstile.getResponse();
+            console.log('Checking Turnstile response...');
+            const turnstileResponse = getTurnstileResponse();
+            console.log('Turnstile response:', turnstileResponse);
+            console.log('Turnstile response type:', typeof turnstileResponse);
+            console.log('Turnstile response length:', turnstileResponse ? turnstileResponse.length : 0);
+            
             if (!turnstileResponse) {
+                console.log('No Turnstile response - showing error');
                 showMessage('Please complete the security challenge', 'error');
                 return;
             }
+            
+            console.log('Turnstile validation passed, proceeding with memo creation...');
             
             try {
                 // Generate password
@@ -411,20 +469,29 @@ export async function getCreateMemoHTML() {
                     expiryTime = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString();
                 }
                 
-                // Send to server
+                // Send to API (Pages will proxy to Workers)
+                console.log('Sending API request to /api/create-memo...');
+                const requestBody = {
+                    encryptedMessage,
+                    expiryTime,
+                    cfTurnstileResponse: turnstileResponse
+                };
+                console.log('Request body keys:', Object.keys(requestBody));
+                console.log('Turnstile response in request:', requestBody.cfTurnstileResponse ? 'Present' : 'Missing');
+                
                 const response = await fetch('/api/create-memo', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
                     },
-                    body: JSON.stringify({
-                        encryptedMessage,
-                        expiryTime,
-                        cfTurnstileResponse: turnstileResponse
-                    })
+                    body: JSON.stringify(requestBody)
                 });
                 
+                console.log('API response status:', response.status);
+                console.log('API response headers:', Object.fromEntries(response.headers.entries()));
+                
                 const result = await response.json();
+                console.log('API response body:', result);
                 
                 if (response.ok) {
                     // Generate URL with password in hashtag
@@ -438,18 +505,18 @@ export async function getCreateMemoHTML() {
                     // Clear form
                     document.getElementById('message').value = '';
                     
-                    // Reset Turnstile
-                    turnstile.reset();
+                    // Reset Turnstile only on success
+                    resetTurnstile();
                 } else {
                     showMessage(result.error || 'Failed to create memo', 'error');
-                    // Reset Turnstile on error
-                    turnstile.reset();
+                    // Don't reset Turnstile on error to avoid refreshing the widget
+                    console.log('API error - keeping Turnstile widget as is');
                 }
             } catch (error) {
                 showMessage('An error occurred while creating the memo', 'error');
                 console.error('Error:', error);
-                // Reset Turnstile on error
-                turnstile.reset();
+                // Don't reset Turnstile on error to avoid refreshing the widget
+                console.log('Network error - keeping Turnstile widget as is');
             }
         });
 
@@ -499,8 +566,6 @@ export async function getCreateMemoHTML() {
                 messageDiv.style.display = 'none';
             }, 5000);
         }
-
-        highlightCurrentPage();
     </script>
 </body>
 </html>`;
