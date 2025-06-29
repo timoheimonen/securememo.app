@@ -8,11 +8,11 @@
 export function sanitizeInput(input) {
   if (typeof input !== 'string') return '';
   
-  // Remove potentially dangerous characters
+  // Remove all HTML tags
   return input
-    .replace(/[<>]/g, '') // Remove < and >
-    .replace(/javascript:/gi, '') // Remove javascript: protocol
-    .replace(/on\w+=/gi, '') // Remove event handlers
+    .replace(/<[^>]*>/g, '') // Remove all tags
+    .replace(/javascript:/gi, '') 
+    .replace(/on\w+=/gi, '')
     .trim();
 }
 
