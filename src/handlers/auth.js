@@ -1,3 +1,12 @@
+import { 
+  validateMemoId, 
+  validateEncryptedMessage, 
+  validateExpiryTime,
+  validatePassword,
+  sanitizeInput 
+} from '../utils/validation.js';
+import { getErrorMessage, getSecurityErrorMessage } from '../utils/errorMessages.js';
+
 // Generate a random memo ID
 function generateMemoId() {
     const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -8,23 +17,6 @@ function generateMemoId() {
         result += chars[array[i] % chars.length];
     }
     return result;
-}
-
-// Input validation functions
-function validateMemoId(memoId) {
-    return /^[A-Za-z0-9]{16}$/.test(memoId);
-}
-
-function validateEncryptedMessage(message) {
-    return message && typeof message === 'string' && message.length > 0 && message.length <= 50000;
-}
-
-function validateExpiryTime(expiryTime) {
-    if (!expiryTime) return false;
-    const expiry = new Date(expiryTime);
-    const now = new Date();
-    const maxExpiry = new Date(now.getTime() + 30 * 24 * 60 * 60 * 1000); // 30 days max
-    return expiry > now && expiry <= maxExpiry;
 }
 
 // Security logging function
@@ -42,7 +34,7 @@ export async function handleCreateMemo(request, env) {
         // Validate request content type
         const contentType = request.headers.get('content-type');
         if (!contentType || !contentType.includes('application/json')) {
-            return new Response(JSON.stringify({ error: 'Content-Type must be application/json' }), {
+            return new Response(JSON.stringify({ error: getErrorMessage('CONTENT_TYPE_ERROR') }), {
                 status: 400,
                 headers: { 'Content-Type': 'application/json' }
             });
@@ -54,7 +46,7 @@ export async function handleCreateMemo(request, env) {
             requestData = await request.json();
         } catch (parseError) {
             console.error('JSON parse error:', parseError);
-            return new Response(JSON.stringify({ error: 'Invalid JSON in request body' }), {
+            return new Response(JSON.stringify({ error: getErrorMessage('INVALID_JSON') }), {
                 status: 400,
                 headers: { 'Content-Type': 'application/json' }
             });
@@ -62,10 +54,10 @@ export async function handleCreateMemo(request, env) {
 
         const { encryptedMessage, expiryTime, cfTurnstileResponse } = requestData;
         
-        // Input validation
+        // Input validation with sanitization
         if (!validateEncryptedMessage(encryptedMessage)) {
             logSecurityEvent('INVALID_MESSAGE_FORMAT', { clientIP: request.headers.get('CF-Connecting-IP') || 'unknown', messageLength: encryptedMessage?.length }, request);
-            return new Response(JSON.stringify({ error: 'Invalid message format or size' }), {
+            return new Response(JSON.stringify({ error: getErrorMessage('INVALID_MESSAGE_FORMAT') }), {
                 status: 400,
                 headers: { 'Content-Type': 'application/json' }
             });
@@ -73,7 +65,7 @@ export async function handleCreateMemo(request, env) {
         
         if (!validateExpiryTime(expiryTime)) {
             logSecurityEvent('INVALID_EXPIRY_TIME', { clientIP: request.headers.get('CF-Connecting-IP') || 'unknown', expiryTime }, request);
-            return new Response(JSON.stringify({ error: 'Invalid expiry time' }), {
+            return new Response(JSON.stringify({ error: getErrorMessage('INVALID_EXPIRY_TIME') }), {
                 status: 400,
                 headers: { 'Content-Type': 'application/json' }
             });
@@ -82,7 +74,7 @@ export async function handleCreateMemo(request, env) {
         // Verify Turnstile token
         if (!cfTurnstileResponse) {
             logSecurityEvent('MISSING_TURNSTILE', { clientIP: request.headers.get('CF-Connecting-IP') || 'unknown' }, request);
-            return new Response(JSON.stringify({ error: 'Please complete the security challenge' }), {
+            return new Response(JSON.stringify({ error: getErrorMessage('MISSING_TURNSTILE') }), {
                 status: 400,
                 headers: { 'Content-Type': 'application/json' }
             });
@@ -104,7 +96,7 @@ export async function handleCreateMemo(request, env) {
             if (!turnstileResponse.ok) {
                 console.error('Turnstile API error:', turnstileResponse.status, turnstileResponse.statusText);
                 logSecurityEvent('TURNSTILE_API_ERROR', { clientIP: request.headers.get('CF-Connecting-IP') || 'unknown', status: turnstileResponse.status }, request);
-                return new Response(JSON.stringify({ error: 'Security challenge verification failed' }), {
+                return new Response(JSON.stringify({ error: getErrorMessage('TURNSTILE_API_ERROR') }), {
                     status: 500,
                     headers: { 'Content-Type': 'application/json' }
                 });
@@ -114,7 +106,7 @@ export async function handleCreateMemo(request, env) {
             
             if (!turnstileResult.success) {
                 logSecurityEvent('TURNSTILE_FAILED', { clientIP: request.headers.get('CF-Connecting-IP') || 'unknown', turnstileResult }, request);
-                return new Response(JSON.stringify({ error: 'Security challenge failed. Please try again.' }), {
+                return new Response(JSON.stringify({ error: getErrorMessage('TURNSTILE_FAILED') }), {
                     status: 400,
                     headers: { 'Content-Type': 'application/json' }
                 });
@@ -122,7 +114,7 @@ export async function handleCreateMemo(request, env) {
         } catch (turnstileError) {
             console.error('Turnstile verification error:', turnstileError);
             logSecurityEvent('TURNSTILE_VERIFICATION_ERROR', { clientIP: request.headers.get('CF-Connecting-IP') || 'unknown', error: turnstileError.message }, request);
-            return new Response(JSON.stringify({ error: 'Security challenge verification failed' }), {
+            return new Response(JSON.stringify({ error: getErrorMessage('TURNSTILE_VERIFICATION_ERROR') }), {
                 status: 500,
                 headers: { 'Content-Type': 'application/json' }
             });
@@ -142,7 +134,7 @@ export async function handleCreateMemo(request, env) {
         } catch (dbError) {
             console.error('Database error during memo creation:', dbError);
             logSecurityEvent('DATABASE_ERROR', { clientIP: request.headers.get('CF-Connecting-IP') || 'unknown', error: dbError.message }, request);
-            return new Response(JSON.stringify({ error: 'Failed to save memo' }), {
+            return new Response(JSON.stringify({ error: getErrorMessage('DATABASE_ERROR') }), {
                 status: 500,
                 headers: { 'Content-Type': 'application/json' }
             });
@@ -161,7 +153,7 @@ export async function handleCreateMemo(request, env) {
     } catch (error) {
         console.error('Error creating memo:', error);
         logSecurityEvent('MEMO_CREATION_ERROR', { clientIP: request.headers.get('CF-Connecting-IP') || 'unknown', error: error.message }, request);
-        return new Response(JSON.stringify({ error: 'An error occurred' }), {
+        return new Response(JSON.stringify({ error: getErrorMessage('MEMO_CREATION_ERROR') }), {
             status: 500,
             headers: { 'Content-Type': 'application/json' }
         });
@@ -177,7 +169,7 @@ export async function handleReadMemo(request, env) {
         // Input validation
         if (!memoId || !validateMemoId(memoId)) {
             logSecurityEvent('INVALID_MEMO_ID', { memoId, clientIP: request.headers.get('CF-Connecting-IP') || 'unknown' }, request);
-            return new Response(JSON.stringify({ error: 'Invalid memo ID' }), {
+            return new Response(JSON.stringify({ error: getErrorMessage('INVALID_MEMO_ID') }), {
                 status: 400,
                 headers: { 'Content-Type': 'application/json' }
             });
@@ -196,7 +188,7 @@ export async function handleReadMemo(request, env) {
         } catch (dbError) {
             console.error('Database error during memo read:', dbError);
             logSecurityEvent('DATABASE_READ_ERROR', { clientIP: request.headers.get('CF-Connecting-IP') || 'unknown', error: dbError.message }, request);
-            return new Response(JSON.stringify({ error: 'Failed to read memo' }), {
+            return new Response(JSON.stringify({ error: getErrorMessage('DATABASE_READ_ERROR') }), {
                 status: 500,
                 headers: { 'Content-Type': 'application/json' }
             });
@@ -204,7 +196,7 @@ export async function handleReadMemo(request, env) {
         
         if (!memo) {
             logSecurityEvent('MEMO_NOT_FOUND', { memoId, clientIP: request.headers.get('CF-Connecting-IP') || 'unknown' }, request);
-            return new Response(JSON.stringify({ error: 'Memo not found' }), {
+            return new Response(JSON.stringify({ error: getErrorMessage('MEMO_NOT_FOUND') }), {
                 status: 404,
                 headers: { 'Content-Type': 'application/json' }
             });
@@ -213,7 +205,7 @@ export async function handleReadMemo(request, env) {
         // Check if memo has already been read
         if (memo.is_read) {
             logSecurityEvent('MEMO_ALREADY_READ', { memoId, clientIP: request.headers.get('CF-Connecting-IP') || 'unknown' }, request);
-            return new Response(JSON.stringify({ error: 'Memo not found' }), {
+            return new Response(JSON.stringify({ error: getErrorMessage('MEMO_ALREADY_READ') }), {
                 status: 404,
                 headers: { 'Content-Type': 'application/json' }
             });
@@ -230,7 +222,7 @@ export async function handleReadMemo(request, env) {
                 await deleteStmt.bind(memoId).run();
                 
                 logSecurityEvent('MEMO_EXPIRED', { memoId, clientIP: request.headers.get('CF-Connecting-IP') || 'unknown' }, request);
-                return new Response(JSON.stringify({ error: 'Memo expired' }), {
+                return new Response(JSON.stringify({ error: getErrorMessage('MEMO_EXPIRED') }), {
                     status: 404,
                     headers: { 'Content-Type': 'application/json' }
                 });
@@ -254,14 +246,14 @@ export async function handleReadMemo(request, env) {
     } catch (error) {
         console.error('Error reading memo:', error);
         logSecurityEvent('MEMO_READ_ERROR', { clientIP: request.headers.get('CF-Connecting-IP') || 'unknown', error: error.message }, request);
-        return new Response(JSON.stringify({ error: 'An error occurred' }), {
+        return new Response(JSON.stringify({ error: getErrorMessage('MEMO_READ_ERROR') }), {
             status: 500,
             headers: { 'Content-Type': 'application/json' }
         });
     }
 }
 
-// Cleanup expired memos (can be called periodically)
+// Cleanup expired memos (called by cron job)
 export async function handleCleanupMemos(env) {
     try {
         const stmt = env.DB.prepare(`
@@ -271,10 +263,11 @@ export async function handleCleanupMemos(env) {
         `);
         
         const result = await stmt.run();
+        console.log(`Cleaned up ${result.changes} expired memos`);
         
         return new Response(JSON.stringify({ 
             success: true, 
-            deletedCount: result.changes 
+            cleanedUp: result.changes 
         }), {
             status: 200,
             headers: { 'Content-Type': 'application/json' }
@@ -282,7 +275,7 @@ export async function handleCleanupMemos(env) {
         
     } catch (error) {
         console.error('Error cleaning up memos:', error);
-        return new Response(JSON.stringify({ error: 'An error occurred' }), {
+        return new Response(JSON.stringify({ error: 'Failed to cleanup memos' }), {
             status: 500,
             headers: { 'Content-Type': 'application/json' }
         });

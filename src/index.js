@@ -7,20 +7,26 @@ import {
   getToSHTML
 } from './templates/pages.js';
 import {
+  getCreateMemoJS,
+  getReadMemoJS,
+  getCommonJS
+} from './templates/js.js';
+import {
   handleCreateMemo,
   handleReadMemo,
   handleCleanupMemos
 } from './handlers/auth.js';
+import { getErrorMessage } from './utils/errorMessages.js';
 
-// Security headers configuration
+// Security headers configuration with improved CSP
 const securityHeaders = {
   'X-Content-Type-Options': 'nosniff',
   'X-Frame-Options': 'DENY',
   'X-XSS-Protection': '1; mode=block',
-  'Content-Security-Policy': "default-src 'self'; script-src 'self' 'unsafe-inline' https://challenges.cloudflare.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://challenges.cloudflare.com https://assets.hcaptcha.com; frame-src https://challenges.cloudflare.com https://assets.hcaptcha.com; connect-src 'self' https://challenges.cloudflare.com https://assets.hcaptcha.com;",
+  'Content-Security-Policy': "default-src 'self'; script-src 'self' https://challenges.cloudflare.com; style-src 'self'; img-src 'self' data: https://challenges.cloudflare.com; frame-src https://challenges.cloudflare.com; connect-src 'self' https://challenges.cloudflare.com; object-src 'none'; base-uri 'self'; form-action 'self';",
   'Referrer-Policy': 'strict-origin-when-cross-origin',
-  'Permissions-Policy': 'geolocation=(), microphone=(), camera=()',
-  'Strict-Transport-Security': 'max-age=31536000; includeSubDomains',
+  'Permissions-Policy': 'geolocation=(), microphone=(), camera=(), payment=(), usb=(), magnetometer=(), gyroscope=()',
+  'Strict-Transport-Security': 'max-age=31536000; includeSubDomains; preload',
   'Access-Control-Allow-Origin': '*',
   'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
   'Access-Control-Allow-Headers': 'Content-Type',
@@ -51,7 +57,7 @@ export default {
         });
       }
 
-      const path = url.pathname;
+      const pathname = url.pathname;
 
       // Handle CORS preflight requests
       if (request.method === 'OPTIONS') {
@@ -62,13 +68,13 @@ export default {
       }
 
       // Handle API routes
-      if (path.startsWith('/api/')) {
-        const apiPath = path.substring(5);
+      if (pathname.startsWith('/api/')) {
+        const apiPath = pathname.substring(5);
         
         // Check request size for API endpoints
         const contentLength = request.headers.get('content-length');
         if (contentLength && parseInt(contentLength) > 100000) { // 100KB limit
-          return new Response(JSON.stringify({ error: 'Request too large' }), {
+          return new Response(JSON.stringify({ error: getErrorMessage('REQUEST_TOO_LARGE') }), {
             status: 413,
             headers: { 
               'Content-Type': 'application/json',
@@ -91,7 +97,7 @@ export default {
       }
 
       // Handle static assets
-      if (path === '/styles.css') {
+      if (pathname === '/styles.css') {
         return new Response(getStyles(), {
           headers: { 
             'Content-Type': 'text/css',
@@ -100,9 +106,38 @@ export default {
         });
       }
 
+      // Serve JavaScript files
+      if (pathname === '/js/create-memo.js') {
+        const jsContent = getCreateMemoJS().replace('{{TURNSTILE_SITE_KEY}}', env.TURNSTILE_SITE_KEY);
+        return new Response(jsContent, {
+          headers: { 
+            'Content-Type': 'application/javascript',
+            ...securityHeaders
+          }
+        });
+      }
+      
+      if (pathname === '/js/read-memo.js') {
+        return new Response(getReadMemoJS(), {
+          headers: { 
+            'Content-Type': 'application/javascript',
+            ...securityHeaders
+          }
+        });
+      }
+      
+      if (pathname === '/js/common.js') {
+        return new Response(getCommonJS(), {
+          headers: { 
+            'Content-Type': 'application/javascript',
+            ...securityHeaders
+          }
+        });
+      }
+
       // Handle page routes
       let response;
-      switch (path) {
+      switch (pathname) {
         case '/':
           response = await getIndexHTML();
           break;
