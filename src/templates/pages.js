@@ -155,7 +155,7 @@ export async function getAboutHTML() {
                 <div class="feature-list">
                     <div class="feature-item">
                         <h3>1. Create a Memo</h3>
-                        <p>Go to "Create Secure Memo" and type your message. Choose an expiry time (8h, 24h, 48h, or delete on read with 30-day maximum). The system will generate a random encryption password.</p>
+                        <p>Go to "Create Secure Memo” and type your message. Choose an expiry time (8h, 1d, 2d, or a maximum of 30 days). Memos are deleted when read or expired. The system will generate a random encryption password.</p>
                     </div>
                     <div class="feature-item">
                         <h3>2. Share the Link</h3>
