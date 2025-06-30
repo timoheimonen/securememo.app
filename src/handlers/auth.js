@@ -7,7 +7,7 @@ import {
 } from '../utils/validation.js';
 import { getErrorMessage, getSecurityErrorMessage } from '../utils/errorMessages.js';
 
-// Generate a random memo ID
+// Generate random 16-char memo ID
 function generateMemoId() {
     const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     const array = new Uint8Array(16);
@@ -19,7 +19,7 @@ function generateMemoId() {
     return result;
 }
 
-// Security logging function
+// Log security events with IP and UA
 function logSecurityEvent(event, details, request) {
     const clientIP = request.headers.get('CF-Connecting-IP') || 'unknown';
     const userAgent = request.headers.get('User-Agent') || 'unknown';
@@ -28,10 +28,10 @@ function logSecurityEvent(event, details, request) {
     console.log(`[SECURITY] ${timestamp} | ${event} | IP: ${clientIP} | UA: ${userAgent} | Details: ${JSON.stringify(details)}`);
 }
 
-// Create a new memo
+// Create new memo with validation and Turnstile verification
 export async function handleCreateMemo(request, env) {
     try {
-        // Validate request content type
+        // Validate content type
         const contentType = request.headers.get('content-type');
         if (!contentType || !contentType.includes('application/json')) {
             return new Response(JSON.stringify({ error: getErrorMessage('CONTENT_TYPE_ERROR') }), {
@@ -40,7 +40,7 @@ export async function handleCreateMemo(request, env) {
             });
         }
 
-        // Parse request body with error handling
+        // Parse request body
         let requestData;
         try {
             requestData = await request.json();
@@ -54,7 +54,7 @@ export async function handleCreateMemo(request, env) {
 
         const { encryptedMessage, expiryTime, cfTurnstileResponse } = requestData;
         
-        // Input validation with sanitization
+        // Validate inputs
         if (!validateEncryptedMessage(encryptedMessage)) {
             logSecurityEvent('INVALID_MESSAGE_FORMAT', { clientIP: request.headers.get('CF-Connecting-IP') || 'unknown', messageLength: encryptedMessage?.length }, request);
             return new Response(JSON.stringify({ error: getErrorMessage('INVALID_MESSAGE_FORMAT') }), {
@@ -80,7 +80,7 @@ export async function handleCreateMemo(request, env) {
             });
         }
 
-        // Verify Turnstile with Cloudflare
+        // Verify Turnstile with Cloudflare API
         try {
             const turnstileResponse = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
                 method: 'POST',
@@ -123,7 +123,7 @@ export async function handleCreateMemo(request, env) {
         // Generate unique memo ID
         const memoId = generateMemoId();
         
-        // Insert memo into database
+        // Insert memo into DB
         try {
             const stmt = env.DB.prepare(`
                 INSERT INTO memos (memo_id, encrypted_message, expiry_time)
@@ -160,13 +160,13 @@ export async function handleCreateMemo(request, env) {
     }
 }
 
-// Read a memo (and delete it after reading)
+// Read memo and delete it after reading
 export async function handleReadMemo(request, env) {
     try {
         const url = new URL(request.url);
         const memoId = url.searchParams.get('id');
         
-        // Input validation
+        // Validate memo ID
         if (!memoId || !validateMemoId(memoId)) {
             logSecurityEvent('INVALID_MEMO_ID', { memoId, clientIP: request.headers.get('CF-Connecting-IP') || 'unknown' }, request);
             return new Response(JSON.stringify({ error: getErrorMessage('INVALID_MEMO_ID') }), {
@@ -175,7 +175,7 @@ export async function handleReadMemo(request, env) {
             });
         }
         
-        // Get memo from database
+        // Fetch memo from DB
         let memo;
         try {
             const stmt = env.DB.prepare(`
@@ -202,7 +202,7 @@ export async function handleReadMemo(request, env) {
             });
         }
         
-        // Check if memo has already been read
+        // Check if already read
         if (memo.is_read) {
             logSecurityEvent('MEMO_ALREADY_READ', { memoId, clientIP: request.headers.get('CF-Connecting-IP') || 'unknown' }, request);
             return new Response(JSON.stringify({ error: getErrorMessage('MEMO_ALREADY_READ') }), {
@@ -211,7 +211,7 @@ export async function handleReadMemo(request, env) {
             });
         }
         
-        // Check if memo has expired
+        // Check expiry
         if (memo.expiry_time) {
             const expiryTime = new Date(memo.expiry_time);
             const now = new Date();
@@ -229,7 +229,7 @@ export async function handleReadMemo(request, env) {
             }
         }
         
-        // Mark memo as read and delete it
+        // Delete memo after reading
         const deleteStmt = env.DB.prepare('DELETE FROM memos WHERE memo_id = ?');
         await deleteStmt.bind(memoId).run();
         
@@ -253,7 +253,7 @@ export async function handleReadMemo(request, env) {
     }
 }
 
-// Cleanup expired memos (called by cron job)
+// Cleanup expired memos (cron job)
 export async function handleCleanupMemos(env) {
     try {
         const stmt = env.DB.prepare(`

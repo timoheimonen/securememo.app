@@ -1,7 +1,7 @@
-// Centralized error messages for better user experience
+// Centralized error message mapping for consistent UX
 
 /**
- * User-friendly error messages
+ * Error message mapping by error code
  */
 export const errorMessages = {
   // Memo creation errors
@@ -38,7 +38,7 @@ export const errorMessages = {
 };
 
 /**
- * Get user-friendly error message
+ * Get user-friendly error message by error code
  * @param {string} errorCode - The error code
  * @param {string} fallback - Fallback message if code not found
  * @returns {string} - User-friendly error message

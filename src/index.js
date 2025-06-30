@@ -18,12 +18,12 @@ import {
 } from './handlers/auth.js';
 import { getErrorMessage } from './utils/errorMessages.js';
 
-// Security headers configuration with improved CSP
+// Security headers with CSP for XSS protection
 const securityHeaders = {
   'X-Content-Type-Options': 'nosniff',
   'X-Frame-Options': 'DENY',
   'X-XSS-Protection': '1; mode=block',
-  'Content-Security-Policy': "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://challenges.cloudflare.com blob:; style-src 'self' 'unsafe-inline' blob:; img-src 'self' data: https://challenges.cloudflare.com blob:; frame-src https://challenges.cloudflare.com; connect-src 'self' https://challenges.cloudflare.com; object-src 'none'; base-uri 'self'; form-action 'self';",
+  'Content-Security-Policy': "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://challenges.cloudflare.com https://*.cloudflareinsights.com blob:; style-src 'self' 'unsafe-inline' blob:; img-src 'self' data: https://challenges.cloudflare.com https://*.cloudflareinsights.com blob:; frame-src https://challenges.cloudflare.com https://*.cloudflareinsights.com; connect-src 'self' https://challenges.cloudflare.com https://*.cloudflareinsights.com; worker-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'self';",
   'Referrer-Policy': 'strict-origin-when-cross-origin',
   'Permissions-Policy': 'geolocation=(), microphone=(), camera=(), payment=(), usb=(), magnetometer=(), gyroscope=()',
   'Strict-Transport-Security': 'max-age=31536000; includeSubDomains; preload',
@@ -36,7 +36,7 @@ const securityHeaders = {
 export default {
   async fetch(request, env, ctx) {
     try {
-      // Validate required environment variables
+      // Check DB availability
       if (!env.DB) {
         console.error('Database not available');
         return new Response('Service Unavailable', { 
@@ -45,7 +45,7 @@ export default {
         });
       }
 
-      // Validate request URL
+      // Parse and validate URL
       let url;
       try {
         url = new URL(request.url);
@@ -59,7 +59,7 @@ export default {
 
       const pathname = url.pathname;
 
-      // Handle CORS preflight requests
+      // Handle CORS preflight
       if (request.method === 'OPTIONS') {
         return new Response(null, {
           status: 200,
@@ -67,13 +67,13 @@ export default {
         });
       }
 
-      // Handle API routes
+      // Route API requests
       if (pathname.startsWith('/api/')) {
         const apiPath = pathname.substring(5);
         
-        // Check request size for API endpoints
+        // Check request size limit (100KB)
         const contentLength = request.headers.get('content-length');
-        if (contentLength && parseInt(contentLength) > 100000) { // 100KB limit
+        if (contentLength && parseInt(contentLength) > 100000) {
           return new Response(JSON.stringify({ error: getErrorMessage('REQUEST_TOO_LARGE') }), {
             status: 413,
             headers: { 
@@ -96,7 +96,7 @@ export default {
         }
       }
 
-      // Handle static assets
+      // Serve static assets
       if (pathname === '/styles.css') {
         return new Response(getStyles(), {
           headers: { 
@@ -106,7 +106,7 @@ export default {
         });
       }
 
-      // Serve JavaScript files
+      // Serve JS files with dynamic content injection
       if (pathname === '/js/create-memo.js') {
         const jsContent = getCreateMemoJS().replace('{{TURNSTILE_SITE_KEY}}', env.TURNSTILE_SITE_KEY);
         return new Response(jsContent, {
@@ -135,7 +135,7 @@ export default {
         });
       }
 
-      // Handle page routes
+      // Route page requests
       let response;
       switch (pathname) {
         case '/':
@@ -176,7 +176,7 @@ export default {
     }
   },
 
-  // Scheduled function that runs every 8 hours
+  // Cron job: cleanup expired memos
   async scheduled(event, env, ctx) {
     try {
       console.log('Running scheduled cleanup of expired memos...');

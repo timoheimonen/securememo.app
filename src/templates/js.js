@@ -1,8 +1,8 @@
-// External JavaScript files for templates
+// Client-side JS templates for memo operations
 
 export function getCreateMemoJS() {
   return `
-// Turnstile site key - this will be replaced by the server
+// Turnstile site key - injected by server
 const TURNSTILE_SITE_KEY = '{{TURNSTILE_SITE_KEY}}';
 
 function highlightCurrentPage() {
@@ -17,7 +17,7 @@ function highlightCurrentPage() {
     });
 }
 
-// Initialize Turnstile widget
+// Init Turnstile widget
 function initTurnstile() {
     console.log('Turnstile widget auto-initialized with data-sitekey attribute');
 }
@@ -45,32 +45,32 @@ function resetTurnstile() {
     }
 }
 
-// Initialize when DOM is ready
+// Init page state
 function initializePage() {
     highlightCurrentPage();
     initTurnstile();
     
-    // Ensure result section is hidden by default
+    // Hide result section by default
     const resultSection = document.getElementById('result');
     if (resultSection) {
         resultSection.style.display = 'none';
     }
     
-    // Ensure form is visible by default
+    // Show form by default
     const memoForm = document.getElementById('memoForm');
     if (memoForm) {
         memoForm.style.display = 'block';
     }
 }
 
-// Wait for both DOM and Turnstile script to be ready
+// Wait for DOM + Turnstile script
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', initializePage);
 } else {
     initializePage();
 }
 
-// Generate a random password
+// Generate random 32-char password
 function generatePassword() {
     const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     const array = new Uint8Array(32);
@@ -82,15 +82,15 @@ function generatePassword() {
     return password;
 }
 
-// Encrypt message using Web Crypto API
+// AES-256-GCM encryption with PBKDF2 key derivation
 async function encryptMessage(message, password) {
     const encoder = new TextEncoder();
     const data = encoder.encode(message);
     
-    // Generate a random salt
+    // Generate random salt
     const salt = crypto.getRandomValues(new Uint8Array(16));
     
-    // Derive key from password
+    // Derive key from password using PBKDF2
     const keyMaterial = await crypto.subtle.importKey(
         'raw',
         encoder.encode(password),
@@ -115,7 +115,7 @@ async function encryptMessage(message, password) {
     // Generate random IV
     const iv = crypto.getRandomValues(new Uint8Array(12));
     
-    // Encrypt the data
+    // Encrypt data
     const encrypted = await crypto.subtle.encrypt(
         { name: 'AES-GCM', iv: iv },
         key,
@@ -154,7 +154,7 @@ document.getElementById('memoForm').addEventListener('submit', async (e) => {
         return;
     }
     
-    // Check if Turnstile is completed
+    // Validate Turnstile completion
     console.log('Checking Turnstile response...');
     const turnstileResponse = getTurnstileResponse();
     console.log('Turnstile response:', turnstileResponse);
@@ -186,7 +186,7 @@ document.getElementById('memoForm').addEventListener('submit', async (e) => {
             expiryTime = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString();
         }
         
-        // Send to API (Pages will proxy to Workers)
+        // Send to API
         console.log('Sending API request to /api/create-memo...');
         const requestBody = {
             encryptedMessage,
@@ -300,33 +300,33 @@ function highlightCurrentPage() {
     });
 }
 
-// Get memo ID from URL
+// Extract memo ID from URL params
 function getMemoId() {
     const urlParams = new URLSearchParams(window.location.search);
     return urlParams.get('id');
 }
 
-// Get password from URL hashtag
+// Extract password from URL hashtag
 function getPasswordFromHash() {
     return window.location.hash.substring(1);
 }
 
-// Decrypt message using Web Crypto API
+// AES-256-GCM decryption with PBKDF2 key derivation
 async function decryptMessage(encryptedData, password) {
     try {
         const encoder = new TextEncoder();
         
-        // Decode the encrypted data
+        // Decode base64 encrypted data
         const encryptedBytes = new Uint8Array(
             atob(encryptedData).split('').map(char => char.charCodeAt(0))
         );
         
-        // Extract salt (first 16 bytes), IV (next 12 bytes), and encrypted data
+        // Extract salt (16 bytes), IV (12 bytes), and encrypted data
         const salt = encryptedBytes.slice(0, 16);
         const iv = encryptedBytes.slice(16, 28);
         const encrypted = encryptedBytes.slice(28);
         
-        // Derive key from password
+        // Derive key from password using PBKDF2
         const keyMaterial = await crypto.subtle.importKey(
             'raw',
             encoder.encode(password),
@@ -348,7 +348,7 @@ async function decryptMessage(encryptedData, password) {
             ['decrypt']
         );
         
-        // Decrypt the data
+        // Decrypt data
         const decrypted = await crypto.subtle.decrypt(
             { name: 'AES-GCM', iv: iv },
             key,
@@ -365,7 +365,7 @@ async function decryptMessage(encryptedData, password) {
 window.addEventListener('load', () => {
     console.log('Read memo page loaded');
     
-    // Initialize page sections properly
+    // Init page sections
     const passwordForm = document.getElementById('passwordForm');
     const memoContent = document.getElementById('memoContent');
     const errorContent = document.getElementById('errorContent');
@@ -378,7 +378,7 @@ window.addEventListener('load', () => {
         statusMessage: !!statusMessage
     });
     
-    // Ensure proper initial state
+    // Set initial state
     if (passwordForm) passwordForm.style.display = 'block';
     if (memoContent) memoContent.style.display = 'none';
     if (errorContent) errorContent.style.display = 'none';
@@ -425,7 +425,7 @@ window.addEventListener('load', () => {
             
             try {
                 console.log('Fetching memo from API...');
-                // Fetch the encrypted memo
+                // Fetch encrypted memo
                 const response = await fetch('/api/read-memo?id=' + memoId, {
                     method: 'GET',
                     headers: {
@@ -439,24 +439,24 @@ window.addEventListener('load', () => {
                 
                 if (response.ok) {
                     console.log('Memo fetched successfully, decrypting...');
-                    // Decrypt the message
+                    // Decrypt message
                     const decryptedMessage = await decryptMessage(result.encryptedMessage, password);
                     console.log('Message decrypted successfully');
                     
-                    // Display the message
+                    // Display message
                     document.getElementById('decryptedMessage').textContent = decryptedMessage;
                     document.getElementById('memoContent').style.display = 'block';
                     document.getElementById('passwordForm').style.display = 'none';
                     
-                    // Clear the password field
+                    // Clear password field
                     document.getElementById('password').value = '';
                     
-                    // Hide any error messages
+                    // Hide error messages
                     if (errorContent) errorContent.style.display = 'none';
                     if (statusMessage) statusMessage.style.display = 'none';
                     
                     console.log('Memo displayed successfully');
-                    // The memo is automatically deleted by the server after reading
+                    // Memo is automatically deleted by server after reading
                 } else {
                     console.log('API error:', result.error);
                     if (result.error === 'Memo not found') {

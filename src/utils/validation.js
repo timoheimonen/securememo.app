@@ -8,7 +8,7 @@
 export function sanitizeInput(input) {
   if (typeof input !== 'string') return '';
   
-  // Remove all HTML tags
+  // Remove HTML tags and event handlers
   return input
     .replace(/<[^>]*>/g, '') // Remove all tags
     .replace(/javascript:/gi, '') 
@@ -17,7 +17,7 @@ export function sanitizeInput(input) {
 }
 
 /**
- * Validate memo ID format
+ * Validate memo ID format (16 alphanumeric chars)
  * @param {string} memoId - The memo ID to validate
  * @returns {boolean} - Whether the memo ID is valid
  */
@@ -26,7 +26,7 @@ export function validateMemoId(memoId) {
 }
 
 /**
- * Validate encrypted message format and size
+ * Validate encrypted message format and size (max 50KB)
  * @param {string} message - The encrypted message to validate
  * @returns {boolean} - Whether the message is valid
  */
@@ -38,7 +38,7 @@ export function validateEncryptedMessage(message) {
 }
 
 /**
- * Validate expiry time
+ * Validate expiry time (must be future date, max 30 days)
  * @param {string} expiryTime - The expiry time to validate
  * @returns {boolean} - Whether the expiry time is valid
  */
@@ -57,7 +57,7 @@ export function validateExpiryTime(expiryTime) {
 }
 
 /**
- * Validate password format
+ * Validate password format (32-64 alphanumeric chars)
  * @param {string} password - The password to validate
  * @returns {boolean} - Whether the password is valid
  */
