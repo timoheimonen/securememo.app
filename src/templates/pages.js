@@ -107,7 +107,7 @@ export async function getAboutHTML() {
     <main class="main-content">
         <div class="about-section">
             <h1>About securememo.app</h1>
-            <p>securememo.app is a privacy-focused application that allows you to create encrypted messages that self-destruct after being read or expired. Built with security and privacy as the top priorities.</p>
+            <p>securememo.app is a privacy-focused application that allows you to create encrypted messages that self-destruct after being read or expired. Built with security and privacy as the top priorities. Source code available on GitHub.</p>
             
             <div class="tech-stack">
                 <h2>Technology Stack</h2>
@@ -298,6 +298,8 @@ export async function getReadMemoHTML() {
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png">
     <link rel="icon" type="image/png" sizes="512x512" href="/android-chrome-512x512.png">
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+    <script src="/js/read-memo.js" defer></script>
 </head>
 <body>
     <nav class="navbar">
@@ -326,7 +328,12 @@ export async function getReadMemoHTML() {
                             <small class="form-help">The password should have been shared with you separately from the memo URL</small>
                         </div>
                         
-                        <button type="submit" class="btn btn-primary">Decrypt Memo</button>
+                        <div class="form-group">
+                            <div class="cf-turnstile" data-sitekey="{{TURNSTILE_SITE_KEY}}" data-callback="onTurnstileSuccess" data-expired-callback="onTurnstileExpired" data-error-callback="onTurnstileError"></div>
+                            <small class="form-help">Please complete the security challenge to decrypt your memo</small>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary" id="decryptButton" disabled>Decrypt Memo</button>
                     </form>
                 </div>
                 
@@ -362,7 +369,6 @@ export async function getReadMemoHTML() {
         <p><a href="https://github.com/timoheimonen/securememo.app" target="_blank" rel="noopener noreferrer">View source code at GitHub</a> | <a href="/tos.html">Terms of Service</a></p>
     </footer>
 
-    <script src="/js/read-memo.js" defer></script>
     <script src="/js/common.js" defer></script>
 </body>
 </html>`;
