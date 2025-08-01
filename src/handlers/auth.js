@@ -22,6 +22,17 @@ function generateMemoId() {
 // Create new memo with validation and Turnstile verification
 export async function handleCreateMemo(request, env) {
     try {
+        // Validate request method
+        if (request.method !== 'POST') {
+            return new Response(JSON.stringify({ error: getErrorMessage('METHOD_NOT_ALLOWED') }), {
+                status: 405,
+                headers: { 
+                    'Content-Type': 'application/json',
+                    'Allow': 'POST'
+                }
+            });
+        }
+        
         // Validate content type
         const contentType = request.headers.get('content-type');
         if (!contentType || !contentType.includes('application/json')) {
@@ -36,7 +47,6 @@ export async function handleCreateMemo(request, env) {
         try {
             requestData = await request.json();
         } catch (parseError) {
-            console.error('JSON parse error:', parseError);
             return new Response(JSON.stringify({ error: getErrorMessage('INVALID_JSON') }), {
                 status: 400,
                 headers: { 'Content-Type': 'application/json' }
@@ -82,7 +92,6 @@ export async function handleCreateMemo(request, env) {
             });
 
             if (!turnstileResponse.ok) {
-                console.error('Turnstile API error:', turnstileResponse.status, turnstileResponse.statusText);
                 return new Response(JSON.stringify({ error: getErrorMessage('TURNSTILE_API_ERROR') }), {
                     status: 500,
                     headers: { 'Content-Type': 'application/json' }
@@ -98,7 +107,6 @@ export async function handleCreateMemo(request, env) {
                 });
             }
         } catch (turnstileError) {
-            console.error('Turnstile verification error:', turnstileError);
             return new Response(JSON.stringify({ error: getErrorMessage('TURNSTILE_VERIFICATION_ERROR') }), {
                 status: 500,
                 headers: { 'Content-Type': 'application/json' }
@@ -117,7 +125,6 @@ export async function handleCreateMemo(request, env) {
             
             await stmt.bind(memoId, encryptedMessage, expiryTime).run();
         } catch (dbError) {
-            console.error('Database error during memo creation:', dbError);
             return new Response(JSON.stringify({ error: getErrorMessage('DATABASE_ERROR') }), {
                 status: 500,
                 headers: { 'Content-Type': 'application/json' }
@@ -133,18 +140,28 @@ export async function handleCreateMemo(request, env) {
             headers: { 'Content-Type': 'application/json' }
         });
         
-    } catch (error) {
-        console.error('Error creating memo:', error);
-        return new Response(JSON.stringify({ error: getErrorMessage('MEMO_CREATION_ERROR') }), {
-            status: 500,
-            headers: { 'Content-Type': 'application/json' }
-        });
-    }
+            } catch (error) {
+            return new Response(JSON.stringify({ error: getErrorMessage('MEMO_CREATION_ERROR') }), {
+                status: 500,
+                headers: { 'Content-Type': 'application/json' }
+            });
+        }
 }
 
 // Read memo and delete it after reading
 export async function handleReadMemo(request, env) {
     try {
+        // Validate request method
+        if (request.method !== 'GET') {
+            return new Response(JSON.stringify({ error: getErrorMessage('METHOD_NOT_ALLOWED') }), {
+                status: 405,
+                headers: { 
+                    'Content-Type': 'application/json',
+                    'Allow': 'GET'
+                }
+            });
+        }
+        
         const url = new URL(request.url);
         const memoId = url.searchParams.get('id');
         
@@ -167,7 +184,6 @@ export async function handleReadMemo(request, env) {
             
             memo = await stmt.bind(memoId).first();
         } catch (dbError) {
-            console.error('Database error during memo read:', dbError);
             return new Response(JSON.stringify({ error: getErrorMessage('DATABASE_READ_ERROR') }), {
                 status: 500,
                 headers: { 'Content-Type': 'application/json' }
@@ -219,13 +235,12 @@ export async function handleReadMemo(request, env) {
             headers: { 'Content-Type': 'application/json' }
         });
         
-    } catch (error) {
-        console.error('Error reading memo:', error);
-        return new Response(JSON.stringify({ error: getErrorMessage('MEMO_READ_ERROR') }), {
-            status: 500,
-            headers: { 'Content-Type': 'application/json' }
-        });
-    }
+            } catch (error) {
+            return new Response(JSON.stringify({ error: getErrorMessage('MEMO_READ_ERROR') }), {
+                status: 500,
+                headers: { 'Content-Type': 'application/json' }
+            });
+        }
 }
 
 // Cleanup expired memos (cron job)
@@ -238,7 +253,6 @@ export async function handleCleanupMemos(env) {
         `);
         
         const result = await stmt.run();
-        console.log(`Cleaned up ${result.changes} expired memos`);
         
         return new Response(JSON.stringify({ 
             success: true, 
@@ -249,7 +263,6 @@ export async function handleCleanupMemos(env) {
         });
         
     } catch (error) {
-        console.error('Error cleaning up memos:', error);
         return new Response(JSON.stringify({ error: 'Failed to cleanup memos' }), {
             status: 500,
             headers: { 'Content-Type': 'application/json' }

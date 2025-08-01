@@ -26,6 +26,7 @@ export const errorMessages = {
   'INVALID_JSON': 'The request format is invalid. Please try again.',
   'REQUEST_TOO_LARGE': 'The request is too large. Please reduce the message size.',
   'CONTENT_TYPE_ERROR': 'Invalid request format. Please try again.',
+  'METHOD_NOT_ALLOWED': 'This endpoint does not support the requested HTTP method.',
   'GENERAL_ERROR': 'An unexpected error occurred. Please try again.',
   
   // Decryption errors
@@ -67,7 +68,8 @@ export function getSecurityErrorMessage(event) {
     'MEMO_ALREADY_READ': 'This memo has already been read and deleted.',
     'MEMO_EXPIRED': 'This memo has expired and has been deleted.',
     'DATABASE_READ_ERROR': 'Unable to read the memo.',
-    'MEMO_READ_ERROR': 'An error occurred while reading the memo.'
+    'MEMO_READ_ERROR': 'An error occurred while reading the memo.',
+    'METHOD_NOT_ALLOWED': 'This endpoint does not support the requested HTTP method.'
   };
   
   return securityErrorMap[event] || 'An error occurred. Please try again.';

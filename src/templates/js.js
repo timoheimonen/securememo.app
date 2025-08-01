@@ -19,29 +19,22 @@ function highlightCurrentPage() {
 
 // Init Turnstile widget
 function initTurnstile() {
-    console.log('Turnstile widget auto-initialized with data-sitekey attribute');
+    // Turnstile widget auto-initialized with data-sitekey attribute
 }
 
 // Get Turnstile response safely
 function getTurnstileResponse() {
-    console.log('Getting Turnstile response...');
     if (typeof turnstile !== 'undefined' && turnstile.getResponse) {
         const response = turnstile.getResponse();
-        console.log('Turnstile response:', response);
         return response;
     }
-    console.log('Turnstile not available or no response');
     return null;
 }
 
 // Reset Turnstile safely
 function resetTurnstile() {
-    console.log('Resetting Turnstile...');
     if (typeof turnstile !== 'undefined' && turnstile.reset) {
         turnstile.reset();
-        console.log('Turnstile reset successful');
-    } else {
-        console.log('Turnstile reset failed - not available');
     }
 }
 
@@ -134,40 +127,27 @@ async function encryptMessage(message, password) {
 // Handle form submission
 document.getElementById('memoForm').addEventListener('submit', async (e) => {
     e.preventDefault();
-    console.log('Form submission started...');
     
     const message = document.getElementById('message').value.trim();
     const expiryHours = parseInt(document.getElementById('expiryHours').value);
     
-    console.log('Message length:', message.length);
-    console.log('Expiry hours:', expiryHours);
-    
     if (!message) {
-        console.log('No message provided');
         showMessage('Please enter a message', 'error');
         return;
     }
     
     if (message.length > 10000) {
-        console.log('Message too long');
         showMessage('Message is too long (max 10,000 characters)', 'error');
         return;
     }
     
     // Validate Turnstile completion
-    console.log('Checking Turnstile response...');
     const turnstileResponse = getTurnstileResponse();
-    console.log('Turnstile response:', turnstileResponse);
-    console.log('Turnstile response type:', typeof turnstileResponse);
-    console.log('Turnstile response length:', turnstileResponse ? turnstileResponse.length : 0);
     
     if (!turnstileResponse) {
-        console.log('No Turnstile response - showing error');
         showMessage('Please complete the security challenge', 'error');
         return;
     }
-    
-    console.log('Turnstile validation passed, proceeding with memo creation...');
     
     try {
         // Generate password
@@ -187,14 +167,11 @@ document.getElementById('memoForm').addEventListener('submit', async (e) => {
         }
         
         // Send to API
-        console.log('Sending API request to /api/create-memo...');
         const requestBody = {
             encryptedMessage,
             expiryTime,
             cfTurnstileResponse: turnstileResponse
         };
-        console.log('Request body keys:', Object.keys(requestBody));
-        console.log('Turnstile response in request:', requestBody.cfTurnstileResponse ? 'Present' : 'Missing');
         
         const response = await fetch('/api/create-memo', {
             method: 'POST',
@@ -204,11 +181,7 @@ document.getElementById('memoForm').addEventListener('submit', async (e) => {
             body: JSON.stringify(requestBody)
         });
         
-        console.log('API response status:', response.status);
-        console.log('API response headers:', Object.fromEntries(response.headers.entries()));
-        
         const result = await response.json();
-        console.log('API response body:', result);
         
         if (response.ok) {
             // Generate URL without password
@@ -228,13 +201,10 @@ document.getElementById('memoForm').addEventListener('submit', async (e) => {
         } else {
             showMessage(result.error || 'Failed to create memo', 'error');
             // Don't reset Turnstile on error to avoid refreshing the widget
-            console.log('API error - keeping Turnstile widget as is');
         }
     } catch (error) {
         showMessage('An error occurred while creating the memo', 'error');
-        console.error('Error:', error);
         // Don't reset Turnstile on error to avoid refreshing the widget
-        console.log('Network error - keeping Turnstile widget as is');
     }
 });
 
@@ -400,20 +370,11 @@ async function decryptMessage(encryptedData, password) {
 
 // Auto-fill password from URL hashtag if available
 window.addEventListener('load', () => {
-    console.log('Read memo page loaded');
-    
     // Init page sections
     const passwordForm = document.getElementById('passwordForm');
     const memoContent = document.getElementById('memoContent');
     const errorContent = document.getElementById('errorContent');
     const statusMessage = document.getElementById('statusMessage');
-    
-    console.log('Page elements found:', {
-        passwordForm: !!passwordForm,
-        memoContent: !!memoContent,
-        errorContent: !!errorContent,
-        statusMessage: !!statusMessage
-    });
     
     // Set initial state
     if (passwordForm) passwordForm.style.display = 'block';
@@ -423,25 +384,14 @@ window.addEventListener('load', () => {
     
     const memoId = getMemoId();
     
-    console.log('URL parameters:', {
-        memoId: memoId
-    });
-    
     // Add form submission event listener after DOM is loaded
     const decryptForm = document.getElementById('decryptForm');
     if (decryptForm) {
-        console.log('Decrypt form found, adding event listener');
         decryptForm.addEventListener('submit', async (e) => {
             e.preventDefault();
-            console.log('Form submission started');
             
             const password = document.getElementById('password').value.trim();
             const memoId = getMemoId();
-            
-            console.log('Form data:', {
-                password: password ? 'present' : 'missing',
-                memoId: memoId
-            });
             
             if (!password) {
                 showError('Please enter the encryption password');
@@ -454,7 +404,6 @@ window.addEventListener('load', () => {
             }
             
             try {
-                console.log('Fetching memo from API...');
                 // Fetch encrypted memo
                 const response = await fetch('/api/read-memo?id=' + memoId, {
                     method: 'GET',
@@ -463,15 +412,11 @@ window.addEventListener('load', () => {
                     }
                 });
                 
-                console.log('API response status:', response.status);
                 const result = await response.json();
-                console.log('API response:', result);
                 
                 if (response.ok) {
-                    console.log('Memo fetched successfully, decrypting...');
                     // Decrypt message
                     const decryptedMessage = await decryptMessage(result.encryptedMessage, password);
-                    console.log('Message decrypted successfully');
                     
                     // Display message
                     document.getElementById('decryptedMessage').textContent = decryptedMessage;
@@ -485,10 +430,8 @@ window.addEventListener('load', () => {
                     if (errorContent) errorContent.style.display = 'none';
                     if (statusMessage) statusMessage.style.display = 'none';
                     
-                    console.log('Memo displayed successfully');
                     // Memo is automatically deleted by server after reading
                 } else {
-                    console.log('API error:', result.error);
                     if (result.error === 'Memo not found') {
                         showError('This memo has already been read and deleted, or it has expired.');
                     } else if (result.error === 'Memo expired') {
@@ -498,7 +441,6 @@ window.addEventListener('load', () => {
                     }
                 }
             } catch (error) {
-                console.error('Error during memo reading:', error);
                 if (error.message.includes('Failed to decrypt')) {
                     showError('Invalid password. Please check the password you received separately.');
                 } else {
@@ -506,8 +448,6 @@ window.addEventListener('load', () => {
                 }
             }
         });
-    } else {
-        console.error('Decrypt form not found!');
     }
 });
 
