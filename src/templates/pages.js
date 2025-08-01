@@ -42,7 +42,7 @@ export async function getIndexHTML() {
                 </div>
                 <div class="feature-card">
                     <h3>🔗 Share</h3>
-                    <p>Get a secure URL with the encryption password in the hashtag</p>
+                    <p>Get a secure URL and separate encryption password to share with your recipient</p>
                 </div>
                 <div class="feature-card">
                     <h3>💥 Self-Destruct</h3>
@@ -128,8 +128,8 @@ export async function getAboutHTML() {
                         <p>All encryption happens in your browser using the Web Crypto API. Your message is encrypted with AES-256 before being sent to our servers.</p>
                     </div>
                     <div class="feature-item">
-                        <h3>🔑 Password in URL Hash</h3>
-                        <p>The encryption password is included in the URL hashtag, which is never sent to our servers. Only you and the recipient have access to it.</p>
+                        <h3>🔑 Separate Password Sharing</h3>
+                        <p>The encryption password is generated separately from the URL and should be shared through a different channel for enhanced security.</p>
                     </div>
                     <div class="feature-item">
                         <h3>💥 Self-Destructing Messages</h3>
@@ -158,12 +158,12 @@ export async function getAboutHTML() {
                         <p>Go to "Create Secure Memo” and type your message. Choose an expiry time (8h, 1d, 2d, or a maximum of 30 days). Memos are deleted when read or expired. The system will generate a random encryption password.</p>
                     </div>
                     <div class="feature-item">
-                        <h3>2. Share the Link</h3>
-                        <p>Copy the generated URL and share it with your recipient. The password is included in the hashtag.</p>
+                        <h3>2. Share the Link and Password</h3>
+                        <p>Copy the generated URL and password, then share them with your recipient through separate channels for enhanced security.</p>
                     </div>
                     <div class="feature-item">
                         <h3>3. Self-Destruct</h3>
-                        <p>When the recipient opens the link and enters the password, the memo will be decrypted and then permanently deleted if read, or deleted automatically if expired. Expired memos are automatically cleaned up every 8 hours.</p>
+                        <p>When the recipient opens the link and enters the password separately, the memo will be decrypted and then permanently deleted if read, or deleted automatically if expired. Expired memos are automatically cleaned up every 8 hours.</p>
                     </div>
                 </div>
             </div>
@@ -242,19 +242,31 @@ export async function getCreateMemoHTML() {
                 
                 <div id="result" class="result-section" style="display: none;">
                     <h3>✅ Memo Created Successfully!</h3>
+                    
                     <div class="memo-url-section">
-                        <label for="memoUrl">Share this URL with your recipient:</label>
+                        <label for="memoUrl">Memo URL (share this with your recipient):</label>
                         <div class="url-copy-container">
-                            <input type="text" id="memoUrl" readonly onclick="this.select(); document.execCommand('copy'); showMessage('URL copied to clipboard!', 'success');">
-                            <button type="button" id="copyUrl" class="btn btn-primary">Copy</button>
+                            <input type="text" id="memoUrl" readonly onclick="this.select(); document.execCommand('copy'); showMessage('Memo URL copied to clipboard!', 'success');">
+                            <button type="button" id="copyUrl" class="btn btn-primary">Copy URL</button>
                         </div>
+                        <small class="form-help">This is the secure link to your memo. Share this URL with your recipient.</small>
                     </div>
+                    
+                    <div class="memo-password-section">
+                        <label for="memoPassword">Encryption Password (share this separately):</label>
+                        <div class="url-copy-container">
+                            <input type="text" id="memoPassword" readonly onclick="this.select(); document.execCommand('copy'); showMessage('Password copied to clipboard!', 'success');">
+                            <button type="button" id="copyPassword" class="btn btn-primary">Copy Password</button>
+                        </div>
+                        <small class="form-help">This is the encryption password. Share this separately from the URL for enhanced security. This is not saved on our servers, recovery not possible after leaving this page.</small>
+                    </div>
+                    
                     <div class="memo-warning">
                         <p><strong>Important:</strong></p>
                         <ul>
                             <li>The memo will be deleted after being read or when the expiry time is reached</li>
-                            <li>The encryption password is included in the URL hashtag</li>
-                            <li>Share only the URL - the recipient doesn't need a separate password</li>
+                            <li>Share the URL and password separately for maximum security</li>
+                            <li>The recipient needs both the URL and password to access the memo</li>
                             <li>This page will be cleared when you navigate away</li>
                         </ul>
                     </div>
@@ -303,15 +315,15 @@ export async function getReadMemoHTML() {
         <div class="memo-container">
             <div class="memo-card">
                 <h1>Read Secure Memo</h1>
-                <p class="memo-description">Enter the password to decrypt and read the memo. It will be deleted after being read or expired.</p>
+                <p class="memo-description">Enter the password to decrypt and read the memo. The password should have been shared with you separately from the URL. The memo will be deleted after being read or expired.</p>
                 
                 <div id="passwordForm" class="memo-form">
                     <form id="decryptForm">
                         <div class="form-group">
                             <label for="password">Encryption Password</label>
                             <input type="text" id="password" name="password" required 
-                                   placeholder="Enter the encryption password from the URL hashtag">
-                            <small class="form-help">The password is in the URL hashtag (after the # symbol)</small>
+                                   placeholder="Enter the encryption password shared with you separately">
+                            <small class="form-help">The password should have been shared with you separately from the memo URL</small>
                         </div>
                         
                         <button type="submit" class="btn btn-primary">Decrypt Memo</button>

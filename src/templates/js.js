@@ -211,11 +211,12 @@ document.getElementById('memoForm').addEventListener('submit', async (e) => {
         console.log('API response body:', result);
         
         if (response.ok) {
-            // Generate URL with password in hashtag
-            const memoUrl = window.location.origin + '/read-memo.html?id=' + result.memoId + '#' + password;
+            // Generate URL without password
+            const memoUrl = window.location.origin + '/read-memo.html?id=' + result.memoId;
             
             // Show result
             document.getElementById('memoUrl').value = memoUrl;
+            document.getElementById('memoPassword').value = password;
             document.getElementById('result').style.display = 'block';
             document.getElementById('memoForm').style.display = 'none';
             
@@ -270,6 +271,42 @@ document.getElementById('copyUrl').addEventListener('click', async () => {
         urlInput.select();
         urlInput.setSelectionRange(0, 99999);
         showMessage('⚠️ Please copy the URL manually (Ctrl+C / Cmd+C)', 'warning');
+    }
+});
+
+// Copy password to clipboard using modern Clipboard API
+document.getElementById('copyPassword').addEventListener('click', async () => {
+    const passwordInput = document.getElementById('memoPassword');
+    const password = passwordInput.value;
+    
+    try {
+        // Use modern Clipboard API if available
+        if (navigator.clipboard && window.isSecureContext) {
+            await navigator.clipboard.writeText(password);
+            showMessage('✅ Password copied to clipboard!', 'success');
+            
+            // Visual feedback - briefly change button text
+            const copyBtn = document.getElementById('copyPassword');
+            const originalText = copyBtn.textContent;
+            copyBtn.textContent = 'Copied!';
+            copyBtn.style.backgroundColor = '#28a745';
+            
+            setTimeout(() => {
+                copyBtn.textContent = originalText;
+                copyBtn.style.backgroundColor = '';
+            }, 2000);
+        } else {
+            // Fallback for older browsers or non-secure contexts
+            passwordInput.select();
+            passwordInput.setSelectionRange(0, 99999); // For mobile devices
+            document.execCommand('copy');
+            showMessage('✅ Password copied to clipboard!', 'success');
+        }
+    } catch (err) {
+        // Final fallback - show the password and ask user to copy manually
+        passwordInput.select();
+        passwordInput.setSelectionRange(0, 99999);
+        showMessage('⚠️ Please copy the password manually (Ctrl+C / Cmd+C)', 'warning');
     }
 });
 
@@ -384,18 +421,11 @@ window.addEventListener('load', () => {
     if (errorContent) errorContent.style.display = 'none';
     if (statusMessage) statusMessage.style.display = 'none';
     
-    const passwordFromHash = getPasswordFromHash();
     const memoId = getMemoId();
     
     console.log('URL parameters:', {
-        memoId: memoId,
-        passwordFromHash: passwordFromHash ? 'present' : 'missing'
+        memoId: memoId
     });
-    
-    if (passwordFromHash) {
-        document.getElementById('password').value = passwordFromHash;
-        console.log('Password auto-filled from URL hashtag');
-    }
     
     // Add form submission event listener after DOM is loaded
     const decryptForm = document.getElementById('decryptForm');
@@ -470,7 +500,7 @@ window.addEventListener('load', () => {
             } catch (error) {
                 console.error('Error during memo reading:', error);
                 if (error.message.includes('Failed to decrypt')) {
-                    showError('Invalid password. Please check the password from the URL hashtag.');
+                    showError('Invalid password. Please check the password you received separately.');
                 } else {
                     showError('An error occurred while reading the memo');
                 }
