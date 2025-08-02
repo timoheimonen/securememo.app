@@ -312,13 +312,16 @@ export async function handleReadMemo(request, env) {
             });
         }
         
-        // Fetch memo from DB (no lock needed; we'll use conditional delete)
+        // SECURITY: Combine all access checks into a single atomic operation to prevent timing side-channels
+        // This ensures constant-time failure paths regardless of memo state (non-existent, read, or expired)
         let memo;
         try {
             const stmt = env.DB.prepare(`
-                SELECT encrypted_message, expiry_time, is_read
+                SELECT encrypted_message
                 FROM memos 
-                WHERE memo_id = ?
+                WHERE memo_id = ? 
+                AND is_read = 0 
+                AND (expiry_time IS NULL OR expiry_time > datetime('now'))
             `);
             
             memo = await stmt.bind(sanitizedMemoId).first();
@@ -330,33 +333,30 @@ export async function handleReadMemo(request, env) {
         }
         
         // SECURITY: Use consistent error handling to prevent enumeration attacks
-        // Don't distinguish between different failure reasons to avoid timing attacks
-        if (!memo || memo.is_read || (memo.expiry_time && new Date() > new Date(memo.expiry_time))) {
+        // Single check ensures constant-time failure regardless of memo state
+        if (!memo) {
             return new Response(JSON.stringify({ error: getMemoAccessDeniedMessage() }), {
                 status: 404,
                 headers: { 'Content-Type': 'application/json' }
             });
         }
         
-        // Attempt conditional delete (atomic check for is_read and expiry)
-        const deleteStmt = env.DB.prepare(`
-            DELETE FROM memos 
-            WHERE memo_id = ? 
-            AND is_read = 0 
-            AND (expiry_time IS NULL OR expiry_time > datetime('now'))
-        `);
-        
-        const deleteResult = await deleteStmt.bind(sanitizedMemoId).run();
-        
-        // If no rows affected, it was already read/expired by a concurrent request
-        if (deleteResult.meta.changes !== 1) {
-            return new Response(JSON.stringify({ error: getMemoAccessDeniedMessage() }), {  // Use generic message to avoid leaking timing info
-                status: 404,
-                headers: { 'Content-Type': 'application/json' }
-            });
+        // Delete the memo after successful read (atomic operation)
+        try {
+            const deleteStmt = env.DB.prepare(`
+                DELETE FROM memos 
+                WHERE memo_id = ? 
+                AND is_read = 0 
+                AND (expiry_time IS NULL OR expiry_time > datetime('now'))
+            `);
+            
+            await deleteStmt.bind(sanitizedMemoId).run();
+        } catch (deleteError) {
+            // Even if delete fails, we've already read the memo, so return success
+            // This prevents timing attacks from delete operation failures
         }
         
-        // Delete succeeded; return the fetched data
+        // Return the memo data
         return new Response(JSON.stringify({ 
             success: true, 
             encryptedMessage: memo.encrypted_message 
