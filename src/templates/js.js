@@ -77,9 +77,9 @@ function generatePassword() {
 
 // Security configuration - easily updatable for future-proofing
 const SECURITY_CONFIG = {
-    // PBKDF2 iterations - OWASP 2025 recommendation: 310,000+ for SHA-256
-    // Current: 310,000 (meets 2025 recommendations)
-    PBKDF2_ITERATIONS: 310000,
+    // PBKDF2 iterations - OWASP 2025 recommendation: 600,000+ for SHA-256
+    // Current: 600,000 (meets 2025 recommendations)
+    PBKDF2_ITERATIONS: 600000,
     
     // Salt length in bytes (16 bytes = 128 bits)
     SALT_LENGTH: 16,
