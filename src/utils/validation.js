@@ -8,12 +8,37 @@
 export function sanitizeInput(input) {
   if (typeof input !== 'string') return '';
   
+  // First decode HTML entities to catch encoded malicious content
+  let decoded = input
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&amp;/g, '&')
+    .replace(/&quot;/g, '"')
+    .replace(/&#x27;/g, "'")
+    .replace(/&#x2F;/g, '/')
+    .replace(/&#39;/g, "'")
+    .replace(/&#47;/g, '/');
+  
   // Remove HTML tags and event handlers
-  return input
+  let sanitized = decoded
     .replace(/<[^>]*>/g, '') // Remove all tags
     .replace(/javascript:/gi, '') 
     .replace(/on\w+=/gi, '')
+    .replace(/vbscript:/gi, '')
+    .replace(/data:/gi, '')
+    .replace(/expression\(/gi, '')
+    .replace(/eval\(/gi, '')
+    .replace(/setTimeout\(/gi, '')
+    .replace(/setInterval\(/gi, '')
     .trim();
+  
+  // Re-encode any remaining < > & " ' to prevent XSS
+  return sanitized
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/&/g, '&amp;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#x27;');
 }
 
 /**
