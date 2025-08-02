@@ -163,7 +163,7 @@ export async function getAboutHTML() {
                     </div>
                     <div class="feature-item">
                         <h3>3. Self-Destruct</h3>
-                        <p>When the recipient opens the link and enters the password separately, the memo will be decrypted and then permanently deleted if read, or deleted automatically if expired. Expired memos are automatically cleaned up every 8 hours.</p>
+                        <p>When the recipient opens the link and enters the password separately, the memo will be decrypted and then permanently deleted if read, or deleted automatically if expired. Expired memos are automatically cleaned up every 1 hours.</p>
                     </div>
                 </div>
             </div>
