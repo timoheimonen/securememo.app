@@ -332,6 +332,11 @@ export function getReadMemoJS() {
 // Turnstile site key - injected by server
 const TURNSTILE_SITE_KEY = '{{TURNSTILE_SITE_KEY}}';
 
+// Error messages - injected by server
+const ERROR_MESSAGES = {
+    MISSING_MEMO_ID: '{{MISSING_MEMO_ID_ERROR}}'
+};
+
 // Security configuration - easily updatable for future-proofing
 const SECURITY_CONFIG = {
     // PBKDF2 iterations - OWASP 2025 recommendation: 310,000+ for SHA-256
@@ -478,6 +483,12 @@ window.addEventListener('load', () => {
     initializePage();
     
     const memoId = getMemoId();
+    
+    // Check if memo ID is present in URL
+    if (!memoId) {
+        showError(ERROR_MESSAGES.MISSING_MEMO_ID);
+        return;
+    }
     
     // Add form submission event listener after DOM is loaded
     const decryptForm = document.getElementById('decryptForm');

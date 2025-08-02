@@ -188,7 +188,9 @@ export default {
             }
           });
         }
-        const jsContent = getReadMemoJS().replace('{{TURNSTILE_SITE_KEY}}', env.TURNSTILE_SITE_KEY);
+        const jsContent = getReadMemoJS()
+          .replace('{{TURNSTILE_SITE_KEY}}', env.TURNSTILE_SITE_KEY)
+          .replace('{{MISSING_MEMO_ID_ERROR}}', getErrorMessage('MISSING_MEMO_ID'));
         return new Response(jsContent, {
           headers: { 
             'Content-Type': 'application/javascript',

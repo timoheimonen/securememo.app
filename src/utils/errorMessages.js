@@ -16,6 +16,7 @@ export const errorMessages = {
   
   // Memo reading errors
   'INVALID_MEMO_ID': 'The memo link appears to be invalid or corrupted.',
+  'MISSING_MEMO_ID': 'Missing memo ID. Please check the URL you received.',
   'MEMO_NOT_FOUND': 'This memo has already been read and deleted, or it has expired.',
   'MEMO_ALREADY_READ': 'This memo has already been read and deleted.',
   'MEMO_EXPIRED': 'This memo has expired and has been automatically deleted.',
@@ -64,6 +65,7 @@ export function getSecurityErrorMessage(event) {
     'DATABASE_ERROR': 'Unable to save your memo.',
     'MEMO_CREATION_ERROR': 'An error occurred while creating your memo.',
     'INVALID_MEMO_ID': 'The memo link appears to be invalid.',
+    'MISSING_MEMO_ID': 'Missing memo ID. Please check the URL you received.',
     'MEMO_NOT_FOUND': 'This memo has already been read and deleted, or it has expired.',
     'MEMO_ALREADY_READ': 'This memo has already been read and deleted.',
     'MEMO_EXPIRED': 'This memo has expired and has been deleted.',
