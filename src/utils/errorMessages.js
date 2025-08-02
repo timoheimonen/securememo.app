@@ -1,4 +1,5 @@
 // Centralized error message mapping for consistent UX
+// SECURITY: Generic error messages prevent information leakage and enumeration attacks
 
 /**
  * Error message mapping by error code
@@ -14,12 +15,13 @@ export const errorMessages = {
   'DATABASE_ERROR': 'Unable to save your memo. Please try again.',
   'MEMO_CREATION_ERROR': 'An error occurred while creating your memo. Please try again.',
   
-  // Memo reading errors
+  // Memo reading errors - SECURITY: Use generic messages to prevent enumeration attacks
   'INVALID_MEMO_ID': 'The memo link appears to be invalid or corrupted.',
   'MISSING_MEMO_ID': 'Missing memo ID. Please check the URL you received.',
-  'MEMO_NOT_FOUND': 'This memo has already been read and deleted, or it has expired.',
-  'MEMO_ALREADY_READ': 'This memo has already been read and deleted.',
-  'MEMO_EXPIRED': 'This memo has expired and has been automatically deleted.',
+  'MEMO_ACCESS_DENIED': 'This memo is no longer available. It may have been read, expired, or never existed.',
+  'MEMO_NOT_FOUND': 'This memo is no longer available. It may have been read, expired, or never existed.',
+  'MEMO_ALREADY_READ': 'This memo is no longer available. It may have been read, expired, or never existed.',
+  'MEMO_EXPIRED': 'This memo is no longer available. It may have been read, expired, or never existed.',
   'DATABASE_READ_ERROR': 'Unable to read the memo. Please try again.',
   'MEMO_READ_ERROR': 'An error occurred while reading the memo.',
   
@@ -66,13 +68,23 @@ export function getSecurityErrorMessage(event) {
     'MEMO_CREATION_ERROR': 'An error occurred while creating your memo.',
     'INVALID_MEMO_ID': 'The memo link appears to be invalid.',
     'MISSING_MEMO_ID': 'Missing memo ID. Please check the URL you received.',
-    'MEMO_NOT_FOUND': 'This memo has already been read and deleted, or it has expired.',
-    'MEMO_ALREADY_READ': 'This memo has already been read and deleted.',
-    'MEMO_EXPIRED': 'This memo has expired and has been deleted.',
+    'MEMO_NOT_FOUND': 'This memo is no longer available. It may have been read, expired, or never existed.',
+    'MEMO_ALREADY_READ': 'This memo is no longer available. It may have been read, expired, or never existed.',
+    'MEMO_EXPIRED': 'This memo is no longer available. It may have been read, expired, or never existed.',
     'DATABASE_READ_ERROR': 'Unable to read the memo.',
     'MEMO_READ_ERROR': 'An error occurred while reading the memo.',
     'METHOD_NOT_ALLOWED': 'This endpoint does not support the requested HTTP method.'
   };
   
   return securityErrorMap[event] || 'An error occurred. Please try again.';
+}
+
+/**
+ * Get a generic memo access error message to prevent enumeration attacks
+ * This function returns the same message regardless of the specific failure reason
+ * to avoid leaking information about memo states through error messages or timing
+ * @returns {string} - Generic memo access denied message
+ */
+export function getMemoAccessDeniedMessage() {
+  return getErrorMessage('MEMO_ACCESS_DENIED');
 } 

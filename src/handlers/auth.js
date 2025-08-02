@@ -6,7 +6,7 @@ import {
   validatePassword,
   sanitizeInput 
 } from '../utils/validation.js';
-import { getErrorMessage, getSecurityErrorMessage } from '../utils/errorMessages.js';
+import { getErrorMessage, getSecurityErrorMessage, getMemoAccessDeniedMessage } from '../utils/errorMessages.js';
 
 /**
  * Calculate expiry time based on expiry hours
@@ -207,6 +207,15 @@ export async function handleCreateMemo(request, env) {
 }
 
 // Read memo and delete it after reading
+/**
+ * Handle memo reading with security measures to prevent enumeration attacks
+ * 
+ * SECURITY FEATURES:
+ * - Uses generic error messages to prevent distinguishing between different failure reasons
+ * - Combines all access checks into a single condition to avoid timing attacks
+ * - Returns consistent HTTP status codes (404) for all access failures
+ * - Prevents information leakage about memo existence, read status, or expiry
+ */
 export async function handleReadMemo(request, env) {
     try {
         // Validate request method
@@ -320,33 +329,13 @@ export async function handleReadMemo(request, env) {
             });
         }
         
-        if (!memo) {
-            return new Response(JSON.stringify({ error: getErrorMessage('MEMO_NOT_FOUND') }), {
+        // SECURITY: Use consistent error handling to prevent enumeration attacks
+        // Don't distinguish between different failure reasons to avoid timing attacks
+        if (!memo || memo.is_read || (memo.expiry_time && new Date() > new Date(memo.expiry_time))) {
+            return new Response(JSON.stringify({ error: getMemoAccessDeniedMessage() }), {
                 status: 404,
                 headers: { 'Content-Type': 'application/json' }
             });
-        }
-        
-        // Check if already read (early exit; no need to attempt delete)
-        if (memo.is_read) {
-            return new Response(JSON.stringify({ error: getErrorMessage('MEMO_ALREADY_READ') }), {
-                status: 404,
-                headers: { 'Content-Type': 'application/json' }
-            });
-        }
-        
-        // Check expiry (early exit)
-        if (memo.expiry_time) {
-            const expiryTime = new Date(memo.expiry_time);
-            const now = new Date();
-            
-            if (now > expiryTime) {
-                // Optionally delete here if expired, but cron will handle it
-                return new Response(JSON.stringify({ error: getErrorMessage('MEMO_EXPIRED') }), {
-                    status: 404,
-                    headers: { 'Content-Type': 'application/json' }
-                });
-            }
         }
         
         // Attempt conditional delete (atomic check for is_read and expiry)
@@ -361,7 +350,7 @@ export async function handleReadMemo(request, env) {
         
         // If no rows affected, it was already read/expired by a concurrent request
         if (deleteResult.meta.changes !== 1) {
-            return new Response(JSON.stringify({ error: getErrorMessage('MEMO_NOT_FOUND') }), {  // Use generic "not found" to avoid leaking timing info
+            return new Response(JSON.stringify({ error: getMemoAccessDeniedMessage() }), {  // Use generic message to avoid leaking timing info
                 status: 404,
                 headers: { 'Content-Type': 'application/json' }
             });
