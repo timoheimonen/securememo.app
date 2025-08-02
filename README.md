@@ -9,7 +9,7 @@
 - **True end-to-end encryption** in your browser — nothing stored in plain text
 - **One-time readable notes** — they self-destruct automatically after being read or when the time limit expires
 - **Multiple expiry options** — delete on read, 8 hours, 24 hours, or 48 hours
-- **Password protection** — optional password for additional security
+- **Password protection** — password for security
 - **Runs on Cloudflare Workers** — fast, lightweight, and globally distributed
 - **D1 Database** — SQLite-based database for reliable storage
 - **Turnstile CAPTCHA** — blocks bots and spam without compromising privacy
