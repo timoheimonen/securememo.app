@@ -152,13 +152,78 @@ export async function handleCreateMemo(request, env) {
 export async function handleReadMemo(request, env) {
     try {
         // Validate request method
-        if (request.method !== 'GET') {
+        if (request.method !== 'POST') {
             return new Response(JSON.stringify({ error: getErrorMessage('METHOD_NOT_ALLOWED') }), {
                 status: 405,
                 headers: { 
                     'Content-Type': 'application/json',
-                    'Allow': 'GET'
+                    'Allow': 'POST'
                 }
+            });
+        }
+        
+        // Validate content type
+        const contentType = request.headers.get('content-type');
+        if (!contentType || !contentType.includes('application/json')) {
+            return new Response(JSON.stringify({ error: getErrorMessage('CONTENT_TYPE_ERROR') }), {
+                status: 400,
+                headers: { 'Content-Type': 'application/json' }
+            });
+        }
+
+        // Parse request body
+        let requestData;
+        try {
+            requestData = await request.json();
+        } catch (parseError) {
+            return new Response(JSON.stringify({ error: getErrorMessage('INVALID_JSON') }), {
+                status: 400,
+                headers: { 'Content-Type': 'application/json' }
+            });
+        }
+
+        const { cfTurnstileResponse } = requestData;
+        
+        // Verify Turnstile token
+        if (!cfTurnstileResponse) {
+            return new Response(JSON.stringify({ error: getErrorMessage('MISSING_TURNSTILE') }), {
+                status: 400,
+                headers: { 'Content-Type': 'application/json' }
+            });
+        }
+
+        // Verify Turnstile with Cloudflare API
+        try {
+            const turnstileResponse = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: new URLSearchParams({
+                    secret: env.TURNSTILE_SECRET,
+                    response: cfTurnstileResponse,
+                }),
+            });
+
+            if (!turnstileResponse.ok) {
+                return new Response(JSON.stringify({ error: getErrorMessage('TURNSTILE_API_ERROR') }), {
+                    status: 500,
+                    headers: { 'Content-Type': 'application/json' }
+                });
+            }
+
+            const turnstileResult = await turnstileResponse.json();
+            
+            if (!turnstileResult.success) {
+                return new Response(JSON.stringify({ error: getErrorMessage('TURNSTILE_FAILED') }), {
+                    status: 400,
+                    headers: { 'Content-Type': 'application/json' }
+                });
+            }
+        } catch (turnstileError) {
+            return new Response(JSON.stringify({ error: getErrorMessage('TURNSTILE_VERIFICATION_ERROR') }), {
+                status: 500,
+                headers: { 'Content-Type': 'application/json' }
             });
         }
         

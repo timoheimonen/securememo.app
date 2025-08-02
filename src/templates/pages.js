@@ -298,6 +298,8 @@ export async function getReadMemoHTML() {
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png">
     <link rel="icon" type="image/png" sizes="512x512" href="/android-chrome-512x512.png">
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+    <script src="/js/read-memo.js" defer></script>
 </head>
 <body>
     <nav class="navbar">
@@ -324,6 +326,10 @@ export async function getReadMemoHTML() {
                             <input type="text" id="password" name="password" required 
                                    placeholder="Enter the encryption password shared with you separately">
                             <small class="form-help">The password should have been shared with you separately from the memo URL</small>
+                        </div>
+                        <div class="form-group">
+                            <div class="cf-turnstile" data-sitekey="{{TURNSTILE_SITE_KEY}}"></div>
+                            <small class="form-help">Please complete the security challenge to decrypt your memo</small>
                         </div>
                         <button type="submit" class="btn btn-primary">Decrypt Memo</button>
                     </form>
@@ -362,7 +368,6 @@ export async function getReadMemoHTML() {
     </footer>
 
     <script src="/js/common.js" defer></script>
-    <script src="/js/read-memo.js" defer></script>
 </body>
 </html>`;
 }

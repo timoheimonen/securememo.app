@@ -295,6 +295,9 @@ function showMessage(message, type) {
 
 export function getReadMemoJS() {
   return `
+// Turnstile site key - injected by server
+const TURNSTILE_SITE_KEY = '{{TURNSTILE_SITE_KEY}}';
+
 function highlightCurrentPage() {
     const currentPath = window.location.pathname;
     const navLinks = document.querySelectorAll('.nav-link');
@@ -305,6 +308,27 @@ function highlightCurrentPage() {
             link.classList.add('active');
         }
     });
+}
+
+// Init Turnstile widget
+function initTurnstile() {
+    // Turnstile widget auto-initialized with data-sitekey attribute
+}
+
+// Get Turnstile response safely
+function getTurnstileResponse() {
+    if (typeof turnstile !== 'undefined' && turnstile.getResponse) {
+        const response = turnstile.getResponse();
+        return response;
+    }
+    return null;
+}
+
+// Reset Turnstile safely
+function resetTurnstile() {
+    if (typeof turnstile !== 'undefined' && turnstile.reset) {
+        turnstile.reset();
+    }
 }
 
 // Extract memo ID from URL params
@@ -368,8 +392,11 @@ async function decryptMessage(encryptedData, password) {
     }
 }
 
-// Auto-fill password from URL hashtag if available
-window.addEventListener('load', () => {
+// Init page state
+function initializePage() {
+    highlightCurrentPage();
+    initTurnstile();
+    
     // Init page sections
     const passwordForm = document.getElementById('passwordForm');
     const memoContent = document.getElementById('memoContent');
@@ -381,6 +408,11 @@ window.addEventListener('load', () => {
     if (memoContent) memoContent.style.display = 'none';
     if (errorContent) errorContent.style.display = 'none';
     if (statusMessage) statusMessage.style.display = 'none';
+}
+
+// Auto-fill password from URL hashtag if available
+window.addEventListener('load', () => {
+    initializePage();
     
     const memoId = getMemoId();
     
@@ -403,13 +435,26 @@ window.addEventListener('load', () => {
                 return;
             }
             
+            // Validate Turnstile completion
+            const turnstileResponse = getTurnstileResponse();
+            
+            if (!turnstileResponse) {
+                showError('Please complete the security challenge');
+                return;
+            }
+            
             try {
-                // Fetch encrypted memo
+                // Send request with Turnstile token
+                const requestBody = {
+                    cfTurnstileResponse: turnstileResponse
+                };
+                
                 const response = await fetch('/api/read-memo?id=' + memoId, {
-                    method: 'GET',
+                    method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
-                    }
+                    },
+                    body: JSON.stringify(requestBody)
                 });
                 
                 const result = await response.json();
@@ -430,6 +475,9 @@ window.addEventListener('load', () => {
                     if (errorContent) errorContent.style.display = 'none';
                     if (statusMessage) statusMessage.style.display = 'none';
                     
+                    // Reset Turnstile only on success
+                    resetTurnstile();
+                    
                     // Memo is automatically deleted by server after reading
                 } else {
                     if (result.error === 'Memo not found') {
@@ -439,6 +487,7 @@ window.addEventListener('load', () => {
                     } else {
                         showError(result.error || 'Failed to read memo');
                     }
+                    // Don't reset Turnstile on error to avoid refreshing the widget
                 }
             } catch (error) {
                 if (error.message.includes('Failed to decrypt')) {
@@ -446,6 +495,7 @@ window.addEventListener('load', () => {
                 } else {
                     showError('An error occurred while reading the memo');
                 }
+                // Don't reset Turnstile on error to avoid refreshing the widget
             }
         });
     }

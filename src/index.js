@@ -81,12 +81,15 @@ export default {
           });
         }
         
-        if (apiPath === 'read-memo' && request.method !== 'GET') {
+
+        
+        // Check allowed methods for read-memo endpoint
+        if (apiPath === 'read-memo' && request.method !== 'GET' && request.method !== 'POST') {
           return new Response(JSON.stringify({ error: getErrorMessage('METHOD_NOT_ALLOWED') }), {
             status: 405,
             headers: { 
               'Content-Type': 'application/json',
-              'Allow': 'GET',
+              'Allow': 'GET, POST',
               ...securityHeaders
             }
           });
@@ -168,7 +171,8 @@ export default {
             }
           });
         }
-        return new Response(getReadMemoJS(), {
+        const jsContent = getReadMemoJS().replace('{{TURNSTILE_SITE_KEY}}', env.TURNSTILE_SITE_KEY);
+        return new Response(jsContent, {
           headers: { 
             'Content-Type': 'application/javascript',
             ...securityHeaders
@@ -218,7 +222,8 @@ export default {
           response = (await getCreateMemoHTML()).replace('{{TURNSTILE_SITE_KEY}}', siteKey);
           break;
         case '/read-memo.html':
-          response = await getReadMemoHTML();
+          const readSiteKey = env.TURNSTILE_SITE_KEY || 'MISSING_SITE_KEY';
+          response = (await getReadMemoHTML()).replace('{{TURNSTILE_SITE_KEY}}', readSiteKey);
           break;
         case '/tos.html':
           response = await getToSHTML();
