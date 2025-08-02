@@ -156,20 +156,10 @@ document.getElementById('memoForm').addEventListener('submit', async (e) => {
         // Encrypt message
         const encryptedMessage = await encryptMessage(message, password);
         
-        // Calculate expiry time
-        let expiryTime;
-        if (expiryHours > 0) {
-            // Set specific expiry time
-            expiryTime = new Date(Date.now() + expiryHours * 60 * 60 * 1000).toISOString();
-        } else {
-            // Delete on read: set 30-day maximum
-            expiryTime = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString();
-        }
-        
         // Send to API
         const requestBody = {
             encryptedMessage,
-            expiryTime,
+            expiryHours,
             cfTurnstileResponse: turnstileResponse
         };
         

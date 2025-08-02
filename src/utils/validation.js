@@ -57,6 +57,20 @@ export function validateExpiryTime(expiryTime) {
 }
 
 /**
+ * Validate expiry hours (must be valid option: 0, 8, 24, 48)
+ * @param {string|number} expiryHours - The expiry hours to validate
+ * @returns {boolean} - Whether the expiry hours is valid
+ */
+export function validateExpiryHours(expiryHours) {
+  if (expiryHours === null || expiryHours === undefined) return false;
+  
+  const hours = parseInt(expiryHours);
+  const validOptions = [0, 8, 24, 48]; // 0 (delete on read), 8h, 24h, 48h
+  
+  return !isNaN(hours) && validOptions.includes(hours);
+}
+
+/**
  * Validate password format (32-64 alphanumeric chars)
  * @param {string} password - The password to validate
  * @returns {boolean} - Whether the password is valid

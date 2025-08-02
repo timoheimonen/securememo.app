@@ -2,10 +2,39 @@ import {
   validateMemoId, 
   validateEncryptedMessage, 
   validateExpiryTime,
+  validateExpiryHours,
   validatePassword,
   sanitizeInput 
 } from '../utils/validation.js';
 import { getErrorMessage, getSecurityErrorMessage } from '../utils/errorMessages.js';
+
+/**
+ * Calculate expiry time based on expiry hours
+ * @param {string|number} expiryHours - The expiry hours value from client (0, 8, 24, 48)
+ * @returns {string|null} - ISO string of calculated expiry time or null if invalid
+ */
+function calculateExpiryTime(expiryHours) {
+    // Parse expiry hours as integer
+    const hours = parseInt(expiryHours);
+    
+    // Validate that it's a valid option
+    if (!validateExpiryHours(expiryHours)) {
+        return null;
+    }
+    
+    const now = new Date();
+    let expiryTime;
+    
+    if (hours === 0) {
+        // Delete on read: set to 30 days maximum
+        expiryTime = new Date(now.getTime() + 30 * 24 * 60 * 60 * 1000);
+    } else {
+        // Specific expiry: calculate based on hours
+        expiryTime = new Date(now.getTime() + hours * 60 * 60 * 1000);
+    }
+    
+    return expiryTime.toISOString();
+}
 
 // Generate random 32-char memo ID
 function generateMemoId() {
@@ -54,11 +83,11 @@ export async function handleCreateMemo(request, env) {
             });
         }
 
-        const { encryptedMessage, expiryTime, cfTurnstileResponse } = requestData;
+        const { encryptedMessage, expiryHours, cfTurnstileResponse } = requestData;
         
         // Sanitize all user inputs
         const sanitizedEncryptedMessage = sanitizeInput(encryptedMessage);
-        const sanitizedExpiryTime = sanitizeInput(expiryTime);
+        const sanitizedExpiryHours = String(expiryHours); // Convert to string for validation
         const sanitizedTurnstileResponse = sanitizeInput(cfTurnstileResponse);
         
         // Validate inputs
@@ -69,7 +98,17 @@ export async function handleCreateMemo(request, env) {
             });
         }
         
-        if (!validateExpiryTime(sanitizedExpiryTime)) {
+        // Validate expiry hours
+        if (!validateExpiryHours(sanitizedExpiryHours)) {
+            return new Response(JSON.stringify({ error: getErrorMessage('INVALID_EXPIRY_TIME') }), {
+                status: 400,
+                headers: { 'Content-Type': 'application/json' }
+            });
+        }
+        
+        // Calculate expiry time server-side
+        const calculatedExpiryTime = calculateExpiryTime(sanitizedExpiryHours);
+        if (!calculatedExpiryTime) {
             return new Response(JSON.stringify({ error: getErrorMessage('INVALID_EXPIRY_TIME') }), {
                 status: 400,
                 headers: { 'Content-Type': 'application/json' }
@@ -129,7 +168,7 @@ export async function handleCreateMemo(request, env) {
                 VALUES (?, ?, ?)
             `);
             
-            await stmt.bind(memoId, sanitizedEncryptedMessage, sanitizedExpiryTime).run();
+            await stmt.bind(memoId, sanitizedEncryptedMessage, calculatedExpiryTime).run();
         } catch (dbError) {
             return new Response(JSON.stringify({ error: getErrorMessage('DATABASE_ERROR') }), {
                 status: 500,
