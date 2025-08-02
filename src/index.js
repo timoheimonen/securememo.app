@@ -18,8 +18,14 @@ import {
 } from './handlers/auth.js';
 import { getErrorMessage } from './utils/errorMessages.js';
 
-// Security headers with CSP for XSS protection
-const securityHeaders = {
+// Allowed origins for CORS
+const allowedOrigins = [
+  'https://securememo.app',
+  'https://www.securememo.app'
+];
+
+// Security headers with CSP for XSS protection (without CORS origin)
+const baseSecurityHeaders = {
   'X-Content-Type-Options': 'nosniff',
   'X-Frame-Options': 'DENY',
   'X-XSS-Protection': '1; mode=block',
@@ -27,11 +33,22 @@ const securityHeaders = {
   'Referrer-Policy': 'strict-origin-when-cross-origin',
   'Permissions-Policy': 'geolocation=(), microphone=(), camera=(), payment=(), usb=(), magnetometer=(), gyroscope=()',
   'Strict-Transport-Security': 'max-age=31536000; includeSubDomains; preload',
-  'Access-Control-Allow-Origin': '*',
   'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
   'Access-Control-Allow-Headers': 'Content-Type',
   'Access-Control-Max-Age': '86400'
 };
+
+// Function to get security headers with proper CORS origin
+function getSecurityHeaders(request) {
+  const origin = request.headers.get('origin');
+  const headers = { ...baseSecurityHeaders };
+  
+  if (allowedOrigins.includes(origin)) {
+    headers['Access-Control-Allow-Origin'] = origin;
+  }
+  
+  return headers;
+}
 
 export default {
   async fetch(request, env, ctx) {
@@ -40,7 +57,7 @@ export default {
       if (!env.DB) {
         return new Response('Service Unavailable', { 
           status: 503,
-          headers: securityHeaders
+          headers: getSecurityHeaders(request)
         });
       }
 
@@ -51,7 +68,7 @@ export default {
       } catch (urlError) {
         return new Response('Bad Request', { 
           status: 400,
-          headers: securityHeaders
+          headers: getSecurityHeaders(request)
         });
       }
 
@@ -61,7 +78,7 @@ export default {
       if (request.method === 'OPTIONS') {
         return new Response(null, {
           status: 200,
-          headers: securityHeaders
+          headers: getSecurityHeaders(request)
         });
       }
 
@@ -76,7 +93,7 @@ export default {
             headers: { 
               'Content-Type': 'application/json',
               'Allow': 'POST',
-              ...securityHeaders
+              ...getSecurityHeaders(request)
             }
           });
         }
@@ -90,7 +107,7 @@ export default {
             headers: { 
               'Content-Type': 'application/json',
               'Allow': 'GET, POST',
-              ...securityHeaders
+              ...getSecurityHeaders(request)
             }
           });
         }
@@ -103,7 +120,7 @@ export default {
               status: 413,
               headers: { 
                 'Content-Type': 'application/json',
-                ...securityHeaders
+                ...getSecurityHeaders(request)
               }
             });
           }
@@ -117,7 +134,7 @@ export default {
           default:
             return new Response('Not Found', { 
               status: 404,
-              headers: securityHeaders
+              headers: getSecurityHeaders(request)
             });
         }
       }
@@ -129,14 +146,14 @@ export default {
             status: 405,
             headers: { 
               'Allow': 'GET',
-              ...securityHeaders
+              ...getSecurityHeaders(request)
             }
           });
         }
         return new Response(getStyles(), {
           headers: { 
             'Content-Type': 'text/css',
-            ...securityHeaders
+            ...getSecurityHeaders(request)
           }
         });
       }
@@ -148,7 +165,7 @@ export default {
             status: 405,
             headers: { 
               'Allow': 'GET',
-              ...securityHeaders
+              ...getSecurityHeaders(request)
             }
           });
         }
@@ -156,7 +173,7 @@ export default {
         return new Response(jsContent, {
           headers: { 
             'Content-Type': 'application/javascript',
-            ...securityHeaders
+            ...getSecurityHeaders(request)
           }
         });
       }
@@ -167,7 +184,7 @@ export default {
             status: 405,
             headers: { 
               'Allow': 'GET',
-              ...securityHeaders
+              ...getSecurityHeaders(request)
             }
           });
         }
@@ -175,7 +192,7 @@ export default {
         return new Response(jsContent, {
           headers: { 
             'Content-Type': 'application/javascript',
-            ...securityHeaders
+            ...getSecurityHeaders(request)
           }
         });
       }
@@ -186,14 +203,14 @@ export default {
             status: 405,
             headers: { 
               'Allow': 'GET',
-              ...securityHeaders
+              ...getSecurityHeaders(request)
             }
           });
         }
         return new Response(getCommonJS(), {
           headers: { 
             'Content-Type': 'application/javascript',
-            ...securityHeaders
+            ...getSecurityHeaders(request)
           }
         });
       }
@@ -204,7 +221,7 @@ export default {
           status: 405,
           headers: { 
             'Allow': 'GET',
-            ...securityHeaders
+            ...getSecurityHeaders(request)
           }
         });
       }
@@ -231,20 +248,20 @@ export default {
         default:
           return new Response('Not Found', { 
             status: 404,
-            headers: securityHeaders
+            headers: getSecurityHeaders(request)
           });
       }
 
       return new Response(response, {
         headers: { 
           'Content-Type': 'text/html',
-          ...securityHeaders
+          ...getSecurityHeaders(request)
         }
       });
     } catch (error) {
       return new Response('Internal Server Error', { 
         status: 500,
-        headers: securityHeaders
+        headers: getSecurityHeaders(request)
       });
     }
   },
