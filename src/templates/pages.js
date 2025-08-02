@@ -72,6 +72,7 @@ export async function getIndexHTML() {
 
     <footer class="footer">
         <p><a href="https://github.com/timoheimonen/securememo.app" target="_blank" rel="noopener noreferrer">View source code at GitHub</a> | <a href="/tos.html">Terms of Service</a></p>
+        <p style="font-size: 0.8em; margin-top: 0.5em; opacity: 0.8;">No tracking, no ads, no nonsense.</p>
     </footer>
 
     <script src="/js/common.js" defer></script>
@@ -172,6 +173,7 @@ export async function getAboutHTML() {
 
     <footer class="footer">
         <p><a href="https://github.com/timoheimonen/securememo.app" target="_blank" rel="noopener noreferrer">View source code at GitHub</a> | <a href="/tos.html">Terms of Service</a></p>
+        <p style="font-size: 0.8em; margin-top: 0.5em; opacity: 0.8;">No tracking, no ads, no nonsense.</p>
     </footer>
 
     <script src="/js/common.js" defer></script>
@@ -279,6 +281,7 @@ export async function getCreateMemoHTML() {
 
     <footer class="footer">
         <p><a href="https://github.com/timoheimonen/securememo.app" target="_blank" rel="noopener noreferrer">View source code at GitHub</a> | <a href="/tos.html">Terms of Service</a></p>
+        <p style="font-size: 0.8em; margin-top: 0.5em; opacity: 0.8;">No tracking, no ads, no nonsense.</p>
     </footer>
 
     <script src="/js/common.js" defer></script>
@@ -365,6 +368,7 @@ export async function getReadMemoHTML() {
 
     <footer class="footer">
         <p><a href="https://github.com/timoheimonen/securememo.app" target="_blank" rel="noopener noreferrer">View source code at GitHub</a> | <a href="/tos.html">Terms of Service</a></p>
+        <p style="font-size: 0.8em; margin-top: 0.5em; opacity: 0.8;">No tracking, no ads, no nonsense.</p>
     </footer>
 
     <script src="/js/common.js" defer></script>
@@ -471,6 +475,7 @@ export async function getToSHTML() {
 
     <footer class="footer">
         <p><a href="https://github.com/timoheimonen/securememo.app" target="_blank" rel="noopener noreferrer">View source code at GitHub</a> | <a href="/tos.html">Terms of Service</a></p>
+        <p style="font-size: 0.8em; margin-top: 0.5em; opacity: 0.8;">No tracking, no ads, no nonsense.</p>
     </footer>
 
     <script src="/js/common.js" defer></script>
