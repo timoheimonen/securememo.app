@@ -290,7 +290,7 @@ export async function handleReadMemo(request, env) {
             });
         }
         
-        // Fetch memo from DB
+        // Fetch memo from DB (no lock needed; we'll use conditional delete)
         let memo;
         try {
             const stmt = env.DB.prepare(`
@@ -314,7 +314,7 @@ export async function handleReadMemo(request, env) {
             });
         }
         
-        // Check if already read
+        // Check if already read (early exit; no need to attempt delete)
         if (memo.is_read) {
             return new Response(JSON.stringify({ error: getErrorMessage('MEMO_ALREADY_READ') }), {
                 status: 404,
@@ -322,16 +322,13 @@ export async function handleReadMemo(request, env) {
             });
         }
         
-        // Check expiry
+        // Check expiry (early exit)
         if (memo.expiry_time) {
             const expiryTime = new Date(memo.expiry_time);
             const now = new Date();
             
             if (now > expiryTime) {
-                // Delete expired memo
-                const deleteStmt = env.DB.prepare('DELETE FROM memos WHERE memo_id = ?');
-                await deleteStmt.bind(sanitizedMemoId).run();
-                
+                // Optionally delete here if expired, but cron will handle it
                 return new Response(JSON.stringify({ error: getErrorMessage('MEMO_EXPIRED') }), {
                     status: 404,
                     headers: { 'Content-Type': 'application/json' }
@@ -339,11 +336,25 @@ export async function handleReadMemo(request, env) {
             }
         }
         
-        // Delete memo after reading
-        const deleteStmt = env.DB.prepare('DELETE FROM memos WHERE memo_id = ?');
-        await deleteStmt.bind(sanitizedMemoId).run();
+        // Attempt conditional delete (atomic check for is_read and expiry)
+        const deleteStmt = env.DB.prepare(`
+            DELETE FROM memos 
+            WHERE memo_id = ? 
+            AND is_read = 0 
+            AND (expiry_time IS NULL OR expiry_time > datetime('now'))
+        `);
         
+        const deleteResult = await deleteStmt.bind(sanitizedMemoId).run();
         
+        // If no rows affected, it was already read/expired by a concurrent request
+        if (deleteResult.meta.changes !== 1) {
+            return new Response(JSON.stringify({ error: getErrorMessage('MEMO_NOT_FOUND') }), {  // Use generic "not found" to avoid leaking timing info
+                status: 404,
+                headers: { 'Content-Type': 'application/json' }
+            });
+        }
+        
+        // Delete succeeded; return the fetched data
         return new Response(JSON.stringify({ 
             success: true, 
             encryptedMessage: memo.encrypted_message 
@@ -352,12 +363,12 @@ export async function handleReadMemo(request, env) {
             headers: { 'Content-Type': 'application/json' }
         });
         
-            } catch (error) {
-            return new Response(JSON.stringify({ error: getErrorMessage('MEMO_READ_ERROR') }), {
-                status: 500,
-                headers: { 'Content-Type': 'application/json' }
-            });
-        }
+    } catch (error) {
+        return new Response(JSON.stringify({ error: getErrorMessage('MEMO_READ_ERROR') }), {
+            status: 500,
+            headers: { 'Content-Type': 'application/json' }
+        });
+    }
 }
 
 // Cleanup expired memos (cron job)
