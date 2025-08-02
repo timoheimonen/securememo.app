@@ -35,7 +35,8 @@ export async function handleCreateMemo(request, env) {
         
         // Validate content type
         const contentType = request.headers.get('content-type');
-        if (!contentType || !contentType.includes('application/json')) {
+        const sanitizedContentType = sanitizeInput(contentType);
+        if (!sanitizedContentType || !sanitizedContentType.includes('application/json')) {
             return new Response(JSON.stringify({ error: getErrorMessage('CONTENT_TYPE_ERROR') }), {
                 status: 400,
                 headers: { 'Content-Type': 'application/json' }
@@ -55,15 +56,20 @@ export async function handleCreateMemo(request, env) {
 
         const { encryptedMessage, expiryTime, cfTurnstileResponse } = requestData;
         
+        // Sanitize all user inputs
+        const sanitizedEncryptedMessage = sanitizeInput(encryptedMessage);
+        const sanitizedExpiryTime = sanitizeInput(expiryTime);
+        const sanitizedTurnstileResponse = sanitizeInput(cfTurnstileResponse);
+        
         // Validate inputs
-        if (!validateEncryptedMessage(encryptedMessage)) {
+        if (!validateEncryptedMessage(sanitizedEncryptedMessage)) {
             return new Response(JSON.stringify({ error: getErrorMessage('INVALID_MESSAGE_FORMAT') }), {
                 status: 400,
                 headers: { 'Content-Type': 'application/json' }
             });
         }
         
-        if (!validateExpiryTime(expiryTime)) {
+        if (!validateExpiryTime(sanitizedExpiryTime)) {
             return new Response(JSON.stringify({ error: getErrorMessage('INVALID_EXPIRY_TIME') }), {
                 status: 400,
                 headers: { 'Content-Type': 'application/json' }
@@ -71,7 +77,7 @@ export async function handleCreateMemo(request, env) {
         }
         
         // Verify Turnstile token
-        if (!cfTurnstileResponse) {
+        if (!sanitizedTurnstileResponse) {
             return new Response(JSON.stringify({ error: getErrorMessage('MISSING_TURNSTILE') }), {
                 status: 400,
                 headers: { 'Content-Type': 'application/json' }
@@ -87,7 +93,7 @@ export async function handleCreateMemo(request, env) {
                 },
                 body: new URLSearchParams({
                     secret: env.TURNSTILE_SECRET,
-                    response: cfTurnstileResponse,
+                    response: sanitizedTurnstileResponse,
                 }),
             });
 
@@ -123,7 +129,7 @@ export async function handleCreateMemo(request, env) {
                 VALUES (?, ?, ?)
             `);
             
-            await stmt.bind(memoId, encryptedMessage, expiryTime).run();
+            await stmt.bind(memoId, sanitizedEncryptedMessage, sanitizedExpiryTime).run();
         } catch (dbError) {
             return new Response(JSON.stringify({ error: getErrorMessage('DATABASE_ERROR') }), {
                 status: 500,
@@ -164,7 +170,8 @@ export async function handleReadMemo(request, env) {
         
         // Validate content type
         const contentType = request.headers.get('content-type');
-        if (!contentType || !contentType.includes('application/json')) {
+        const sanitizedContentType = sanitizeInput(contentType);
+        if (!sanitizedContentType || !sanitizedContentType.includes('application/json')) {
             return new Response(JSON.stringify({ error: getErrorMessage('CONTENT_TYPE_ERROR') }), {
                 status: 400,
                 headers: { 'Content-Type': 'application/json' }
@@ -184,8 +191,11 @@ export async function handleReadMemo(request, env) {
 
         const { cfTurnstileResponse } = requestData;
         
+        // Sanitize user inputs
+        const sanitizedTurnstileResponse = sanitizeInput(cfTurnstileResponse);
+        
         // Verify Turnstile token
-        if (!cfTurnstileResponse) {
+        if (!sanitizedTurnstileResponse) {
             return new Response(JSON.stringify({ error: getErrorMessage('MISSING_TURNSTILE') }), {
                 status: 400,
                 headers: { 'Content-Type': 'application/json' }
@@ -201,7 +211,7 @@ export async function handleReadMemo(request, env) {
                 },
                 body: new URLSearchParams({
                     secret: env.TURNSTILE_SECRET,
-                    response: cfTurnstileResponse,
+                    response: sanitizedTurnstileResponse,
                 }),
             });
 
@@ -230,8 +240,11 @@ export async function handleReadMemo(request, env) {
         const url = new URL(request.url);
         const memoId = url.searchParams.get('id');
         
+        // Sanitize memo ID from URL
+        const sanitizedMemoId = sanitizeInput(memoId);
+        
         // Validate memo ID
-        if (!memoId || !validateMemoId(memoId)) {
+        if (!sanitizedMemoId || !validateMemoId(sanitizedMemoId)) {
             return new Response(JSON.stringify({ error: getErrorMessage('INVALID_MEMO_ID') }), {
                 status: 400,
                 headers: { 'Content-Type': 'application/json' }
@@ -247,7 +260,7 @@ export async function handleReadMemo(request, env) {
                 WHERE memo_id = ?
             `);
             
-            memo = await stmt.bind(memoId).first();
+            memo = await stmt.bind(sanitizedMemoId).first();
         } catch (dbError) {
             return new Response(JSON.stringify({ error: getErrorMessage('DATABASE_READ_ERROR') }), {
                 status: 500,
@@ -278,7 +291,7 @@ export async function handleReadMemo(request, env) {
             if (now > expiryTime) {
                 // Delete expired memo
                 const deleteStmt = env.DB.prepare('DELETE FROM memos WHERE memo_id = ?');
-                await deleteStmt.bind(memoId).run();
+                await deleteStmt.bind(sanitizedMemoId).run();
                 
                 return new Response(JSON.stringify({ error: getErrorMessage('MEMO_EXPIRED') }), {
                     status: 404,
@@ -289,7 +302,7 @@ export async function handleReadMemo(request, env) {
         
         // Delete memo after reading
         const deleteStmt = env.DB.prepare('DELETE FROM memos WHERE memo_id = ?');
-        await deleteStmt.bind(memoId).run();
+        await deleteStmt.bind(sanitizedMemoId).run();
         
         
         return new Response(JSON.stringify({ 
