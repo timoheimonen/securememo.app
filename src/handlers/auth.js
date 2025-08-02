@@ -36,14 +36,22 @@ function calculateExpiryTime(expiryHours) {
     return expiryTime.toISOString();
 }
 
-// Generate random 32-char memo ID
+// Generate cryptographically secure random 32-char memo ID
 function generateMemoId() {
-    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    // Use a larger character set for better entropy
+    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_';
     const array = new Uint8Array(32);
     crypto.getRandomValues(array);
     let result = '';
+    
+    // Use rejection sampling to avoid modulo bias
     for (let i = 0; i < 32; i++) {
-        result += chars[array[i] % chars.length];
+        let randomIndex;
+        do {
+            randomIndex = array[i] % chars.length;
+        } while (randomIndex >= chars.length - (256 % chars.length)); // Reject biased values
+        
+        result += chars[randomIndex];
     }
     return result;
 }
@@ -182,7 +190,12 @@ export async function handleCreateMemo(request, env) {
             memoId: memoId 
         }), {
             status: 200,
-            headers: { 'Content-Type': 'application/json' }
+            headers: { 
+                'Content-Type': 'application/json',
+                'X-Content-Type-Options': 'nosniff',
+                'X-Frame-Options': 'DENY',
+                'X-XSS-Protection': '1; mode=block'
+            }
         });
         
             } catch (error) {
@@ -360,7 +373,12 @@ export async function handleReadMemo(request, env) {
             encryptedMessage: memo.encrypted_message 
         }), {
             status: 200,
-            headers: { 'Content-Type': 'application/json' }
+            headers: { 
+                'Content-Type': 'application/json',
+                'X-Content-Type-Options': 'nosniff',
+                'X-Frame-Options': 'DENY',
+                'X-XSS-Protection': '1; mode=block'
+            }
         });
         
     } catch (error) {

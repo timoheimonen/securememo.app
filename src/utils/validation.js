@@ -17,12 +17,12 @@ export function sanitizeInput(input) {
 }
 
 /**
- * Validate memo ID format (16 or 32 alphanumeric chars for backward compatibility)
+ * Validate memo ID format (16 or 32 chars with alphanumeric, hyphens, underscores for backward compatibility)
  * @param {string} memoId - The memo ID to validate
  * @returns {boolean} - Whether the memo ID is valid
  */
 export function validateMemoId(memoId) {
-  return /^[A-Za-z0-9]{16}$|^[A-Za-z0-9]{32}$/.test(memoId);
+  return /^[A-Za-z0-9\-_]{16}$|^[A-Za-z0-9\-_]{32}$/.test(memoId);
 }
 
 /**
