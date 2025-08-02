@@ -79,11 +79,7 @@ function generatePassword() {
 const SECURITY_CONFIG = {
     // PBKDF2 iterations - OWASP 2025 recommendation: 310,000+ for SHA-256
     // Current: 310,000 (meets 2025 recommendations)
-    // Previous: 100,000 (backward compatibility for existing memos)
     PBKDF2_ITERATIONS: 310000,
-    
-    // Legacy iterations for backward compatibility with existing memos
-    LEGACY_ITERATIONS: 100000,
     
     // Salt length in bytes (16 bytes = 128 bits)
     SALT_LENGTH: 16,
@@ -92,32 +88,10 @@ const SECURITY_CONFIG = {
     IV_LENGTH: 12,
     
     // Key length for AES-256-GCM
-    KEY_LENGTH: 256,
-    
-    // Future: Argon2id configuration (when WebAssembly support is widespread)
-    // ARGON2ID_CONFIG: {
-    //     timeCost: 3,        // Number of iterations
-    //     memoryCost: 65536,  // Memory usage in KiB (64 MiB)
-    //     parallelism: 4,     // Degree of parallelism
-    //     hashLength: 32      // Output hash length in bytes
-    // }
+    KEY_LENGTH: 256
 };
 
-// Future-proofing: Function to detect if Argon2id is available
-// This can be used to automatically upgrade to Argon2id when available
-async function isArgon2idAvailable() {
-    // Check if WebAssembly is available and Argon2id implementation exists
-    // This is a placeholder for future implementation
-    return false; // Currently not available in browsers
-}
 
-// Future-proofing: Function to derive key using Argon2id (when available)
-// This would replace PBKDF2 for new encryptions when Argon2id is supported
-async function deriveKeyWithArgon2id(password, salt) {
-    // Placeholder for future Argon2id implementation
-    // Would use WebAssembly polyfill or native browser support
-    throw new Error('Argon2id not yet available in browsers');
-}
 
 // AES-256-GCM encryption with PBKDF2 key derivation
 async function encryptMessage(message, password) {
@@ -341,11 +315,7 @@ const ERROR_MESSAGES = {
 const SECURITY_CONFIG = {
     // PBKDF2 iterations - OWASP 2025 recommendation: 310,000+ for SHA-256
     // Current: 310,000 (meets 2025 recommendations)
-    // Previous: 100,000 (backward compatibility for existing memos)
     PBKDF2_ITERATIONS: 310000,
-    
-    // Legacy iterations for backward compatibility with existing memos
-    LEGACY_ITERATIONS: 100000,
     
     // Salt length in bytes (16 bytes = 128 bits)
     SALT_LENGTH: 16,
@@ -401,7 +371,7 @@ function getPasswordFromHash() {
     return window.location.hash.substring(1);
 }
 
-// AES-256-GCM decryption with PBKDF2 key derivation and backward compatibility
+// AES-256-GCM decryption with PBKDF2 key derivation
 async function decryptMessage(encryptedData, password) {
     const encoder = new TextEncoder();
     
@@ -415,49 +385,40 @@ async function decryptMessage(encryptedData, password) {
     const iv = encryptedBytes.slice(SECURITY_CONFIG.SALT_LENGTH, SECURITY_CONFIG.SALT_LENGTH + SECURITY_CONFIG.IV_LENGTH);
     const encrypted = encryptedBytes.slice(SECURITY_CONFIG.SALT_LENGTH + SECURITY_CONFIG.IV_LENGTH);
     
-    // Try decryption with current iterations first, then fallback to legacy
-    const iterationsToTry = [SECURITY_CONFIG.PBKDF2_ITERATIONS, SECURITY_CONFIG.LEGACY_ITERATIONS];
-    
-    for (const iterations of iterationsToTry) {
-        try {
-            // Derive key from password using PBKDF2
-            const keyMaterial = await crypto.subtle.importKey(
-                'raw',
-                encoder.encode(password),
-                { name: 'PBKDF2' },
-                false,
-                ['deriveBits', 'deriveKey']
-            );
-            
-            const key = await crypto.subtle.deriveKey(
-                {
-                    name: 'PBKDF2',
-                    salt: salt,
-                    iterations: iterations,
-                    hash: 'SHA-256'
-                },
-                keyMaterial,
-                { name: 'AES-GCM', length: SECURITY_CONFIG.KEY_LENGTH },
-                false,
-                ['decrypt']
-            );
-            
-            // Decrypt data
-            const decrypted = await crypto.subtle.decrypt(
-                { name: 'AES-GCM', iv: iv },
-                key,
-                encrypted
-            );
-            
-            return new TextDecoder().decode(decrypted);
-        } catch (error) {
-            // Continue to next iteration count if this one fails
-            continue;
-        }
+    try {
+        // Derive key from password using PBKDF2
+        const keyMaterial = await crypto.subtle.importKey(
+            'raw',
+            encoder.encode(password),
+            { name: 'PBKDF2' },
+            false,
+            ['deriveBits', 'deriveKey']
+        );
+        
+        const key = await crypto.subtle.deriveKey(
+            {
+                name: 'PBKDF2',
+                salt: salt,
+                iterations: SECURITY_CONFIG.PBKDF2_ITERATIONS,
+                hash: 'SHA-256'
+            },
+            keyMaterial,
+            { name: 'AES-GCM', length: SECURITY_CONFIG.KEY_LENGTH },
+            false,
+            ['decrypt']
+        );
+        
+        // Decrypt data
+        const decrypted = await crypto.subtle.decrypt(
+            { name: 'AES-GCM', iv: iv },
+            key,
+            encrypted
+        );
+        
+        return new TextDecoder().decode(decrypted);
+    } catch (error) {
+        throw new Error('Failed to decrypt message. Invalid password or corrupted data.');
     }
-    
-    // If all iteration counts fail, throw error
-    throw new Error('Failed to decrypt message. Invalid password or corrupted data.');
 }
 
 // Init page state
