@@ -7,13 +7,13 @@ import {
 } from '../utils/validation.js';
 import { getErrorMessage, getSecurityErrorMessage } from '../utils/errorMessages.js';
 
-// Generate random 16-char memo ID
+// Generate random 32-char memo ID
 function generateMemoId() {
     const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    const array = new Uint8Array(16);
+    const array = new Uint8Array(32);
     crypto.getRandomValues(array);
     let result = '';
-    for (let i = 0; i < 16; i++) {
+    for (let i = 0; i < 32; i++) {
         result += chars[array[i] % chars.length];
     }
     return result;
