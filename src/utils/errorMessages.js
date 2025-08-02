@@ -30,6 +30,7 @@ export const errorMessages = {
   'REQUEST_TOO_LARGE': 'The request is too large. Please reduce the message size.',
   'CONTENT_TYPE_ERROR': 'Invalid request format. Please try again.',
   'METHOD_NOT_ALLOWED': 'This endpoint does not support the requested HTTP method.',
+  'FORBIDDEN': 'Access denied. Please check your request and try again.',
   'GENERAL_ERROR': 'An unexpected error occurred. Please try again.',
   
   // Decryption errors
@@ -73,7 +74,8 @@ export function getSecurityErrorMessage(event) {
     'MEMO_EXPIRED': 'This memo is no longer available. It may have been read, expired, or never existed.',
     'DATABASE_READ_ERROR': 'Unable to read the memo.',
     'MEMO_READ_ERROR': 'An error occurred while reading the memo.',
-    'METHOD_NOT_ALLOWED': 'This endpoint does not support the requested HTTP method.'
+    'METHOD_NOT_ALLOWED': 'This endpoint does not support the requested HTTP method.',
+    'FORBIDDEN': 'Access denied. Please check your request and try again.'
   };
   
   return securityErrorMap[event] || 'An error occurred. Please try again.';

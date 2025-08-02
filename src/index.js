@@ -35,19 +35,27 @@ const baseSecurityHeaders = {
   'Strict-Transport-Security': 'max-age=31536000; includeSubDomains; preload',
   'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
   'Access-Control-Allow-Headers': 'Content-Type',
-  'Access-Control-Max-Age': '86400'
+  'Access-Control-Max-Age': '86400',
+  'Vary': 'Origin'
 };
 
-// Function to get security headers with proper CORS origin
+// Function to validate origin and get security headers with proper CORS origin
 function getSecurityHeaders(request) {
   const origin = request.headers.get('origin');
   const headers = { ...baseSecurityHeaders };
   
-  if (allowedOrigins.includes(origin)) {
+  // Only set CORS headers if origin is in allowed list
+  if (origin && allowedOrigins.includes(origin)) {
     headers['Access-Control-Allow-Origin'] = origin;
   }
   
   return headers;
+}
+
+// Function to validate origin for CORS requests
+function isValidOrigin(request) {
+  const origin = request.headers.get('origin');
+  return origin && allowedOrigins.includes(origin);
 }
 
 export default {
@@ -74,8 +82,15 @@ export default {
 
       const pathname = url.pathname;
 
-      // Handle CORS preflight
+      // Handle CORS preflight with proper origin validation
       if (request.method === 'OPTIONS') {
+        // Only allow preflight for valid origins
+        if (!isValidOrigin(request)) {
+          return new Response(null, {
+            status: 403,
+            headers: { 'Vary': 'Origin' }
+          });
+        }
         return new Response(null, {
           status: 200,
           headers: getSecurityHeaders(request)
@@ -85,6 +100,18 @@ export default {
       // Route API requests
       if (pathname.startsWith('/api/')) {
         const apiPath = pathname.substring(5);
+        
+        // Validate origin for API requests
+        if (!isValidOrigin(request)) {
+          return new Response(JSON.stringify({ error: getErrorMessage('FORBIDDEN') }), {
+            status: 403,
+            headers: { 
+              'Content-Type': 'application/json',
+              'Vary': 'Origin',
+              ...getSecurityHeaders(request)
+            }
+          });
+        }
         
         // Validate request method for API endpoints
         if (apiPath === 'create-memo' && request.method !== 'POST') {
