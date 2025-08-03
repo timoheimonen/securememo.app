@@ -36,24 +36,44 @@ function calculateExpiryTime(expiryHours) {
     return expiryTime.toISOString();
 }
 
-// Generate cryptographically secure random 32-char memo ID
-function generateMemoId() {
-    // Use a larger character set for better entropy
+// Generate cryptographically secure random 32-char memo ID with collision detection
+async function generateMemoId(env, maxRetries = 10) {
     const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_';
-    const array = new Uint8Array(32);
-    crypto.getRandomValues(array);
-    let result = '';
     
-    // Use rejection sampling to avoid modulo bias
-    for (let i = 0; i < 32; i++) {
-        let randomIndex;
-        do {
-            randomIndex = array[i] % chars.length;
-        } while (randomIndex >= chars.length - (256 % chars.length)); // Reject biased values
+    for (let attempt = 0; attempt < maxRetries; attempt++) {
+        // Generate 32 random bytes
+        const array = new Uint8Array(32);
+        crypto.getRandomValues(array);
+        let result = '';
         
-        result += chars[randomIndex];
+        // Use rejection sampling to avoid modulo bias
+        for (let i = 0; i < 32; i++) {
+            let randomIndex;
+            do {
+                randomIndex = array[i] % chars.length;
+            } while (randomIndex >= chars.length - (256 % chars.length)); // Reject biased values
+            
+            result += chars[randomIndex];
+        }
+        
+        // Check if this memo_id already exists in the database
+        try {
+            const checkStmt = env.DB.prepare('SELECT 1 FROM memos WHERE memo_id = ? LIMIT 1');
+            const existing = await checkStmt.bind(result).first();
+            
+            if (!existing) {
+                return result; // This memo_id is unique
+            }
+            // If we get here, there was a collision, try again
+        } catch (dbError) {
+            // If database check fails, return the generated ID anyway
+            // The database UNIQUE constraint will handle any collision
+            return result;
+        }
     }
-    return result;
+    
+    // If we've exhausted all retries, throw an error
+    throw new Error('Failed to generate unique memo_id after maximum retries');
 }
 
 // Create new memo with validation and Turnstile verification
@@ -166,8 +186,16 @@ export async function handleCreateMemo(request, env) {
             });
         }
         
-        // Generate unique memo ID
-        const memoId = generateMemoId();
+        // Generate unique memo ID with collision detection
+        let memoId;
+        try {
+            memoId = await generateMemoId(env);
+        } catch (generateError) {
+            return new Response(JSON.stringify({ error: getErrorMessage('MEMO_ID_GENERATION_ERROR') }), {
+                status: 500,
+                headers: { 'Content-Type': 'application/json' }
+            });
+        }
         
         // Insert memo into DB
         try {
@@ -178,6 +206,16 @@ export async function handleCreateMemo(request, env) {
             
             await stmt.bind(memoId, sanitizedEncryptedMessage, calculatedExpiryTime).run();
         } catch (dbError) {
+            // Check if this is a UNIQUE constraint violation
+            if (dbError.message && dbError.message.includes('UNIQUE constraint failed')) {
+                // This should be extremely rare with our collision detection
+                // but handle it gracefully by returning an error
+                return new Response(JSON.stringify({ error: getErrorMessage('MEMO_ID_COLLISION_ERROR') }), {
+                    status: 500,
+                    headers: { 'Content-Type': 'application/json' }
+                });
+            }
+            
             return new Response(JSON.stringify({ error: getErrorMessage('DATABASE_ERROR') }), {
                 status: 500,
                 headers: { 'Content-Type': 'application/json' }

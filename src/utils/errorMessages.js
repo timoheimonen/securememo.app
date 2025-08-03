@@ -6,40 +6,42 @@
  */
 export const errorMessages = {
   // Memo creation errors
-  'INVALID_MESSAGE_FORMAT': 'The message format is invalid or the message is too large. Please try again.',
-  'INVALID_EXPIRY_TIME': 'The expiry time is invalid. Please select a valid time period.',
-  'MISSING_TURNSTILE': 'Please complete the security verification to create your memo.',
+  'INVALID_MESSAGE_FORMAT': 'Invalid request. Please check your input and try again.',
+  'INVALID_EXPIRY_TIME': 'Invalid request. Please check your input and try again.',
+  'MISSING_TURNSTILE': 'Security verification required. Please try again.',
   'TURNSTILE_FAILED': 'Security verification failed. Please try again.',
-  'TURNSTILE_API_ERROR': 'Security verification is temporarily unavailable. Please try again later.',
-  'TURNSTILE_VERIFICATION_ERROR': 'Security verification encountered an error. Please try again.',
-  'DATABASE_ERROR': 'Unable to save your memo. Please try again.',
-  'MEMO_CREATION_ERROR': 'An error occurred while creating your memo. Please try again.',
+  'TURNSTILE_API_ERROR': 'Service temporarily unavailable. Please try again later.',
+  'TURNSTILE_VERIFICATION_ERROR': 'Security verification failed. Please try again.',
+  'DATABASE_ERROR': 'Service temporarily unavailable. Please try again.',
+  'MEMO_ID_GENERATION_ERROR': 'Service temporarily unavailable. Please try again.',
+  'MEMO_ID_COLLISION_ERROR': 'Service temporarily unavailable. Please try again.',
+  'MEMO_CREATION_ERROR': 'Unable to process your request. Please try again.',
   
   // Memo reading errors - SECURITY: Use generic messages to prevent enumeration attacks
-  'INVALID_MEMO_ID': 'The memo link appears to be invalid or corrupted.',
-  'MISSING_MEMO_ID': 'Missing memo ID. Please check the URL you received.',
-  'MEMO_ACCESS_DENIED': 'This memo is no longer available. It may have been read, expired, or never existed.',
-  'MEMO_NOT_FOUND': 'This memo is no longer available. It may have been read, expired, or never existed.',
-  'MEMO_ALREADY_READ': 'This memo is no longer available. It may have been read, expired, or never existed.',
-  'MEMO_EXPIRED': 'This memo is no longer available. It may have been read, expired, or never existed.',
-  'DATABASE_READ_ERROR': 'Unable to read the memo. Please try again.',
-  'MEMO_READ_ERROR': 'An error occurred while reading the memo.',
+  'INVALID_MEMO_ID': 'Invalid request. Please check your input and try again.',
+  'MISSING_MEMO_ID': 'Invalid request. Please check your input and try again.',
+  'MEMO_ACCESS_DENIED': 'This memo is no longer available.',
+  'MEMO_NOT_FOUND': 'This memo is no longer available.',
+  'MEMO_ALREADY_READ': 'This memo is no longer available.',
+  'MEMO_EXPIRED': 'This memo is no longer available.',
+  'DATABASE_READ_ERROR': 'Service temporarily unavailable. Please try again.',
+  'MEMO_READ_ERROR': 'Unable to process your request. Please try again.',
   
   // General errors
-  'INVALID_JSON': 'The request format is invalid. Please try again.',
-  'REQUEST_TOO_LARGE': 'The request is too large. Please reduce the message size.',
-  'CONTENT_TYPE_ERROR': 'Invalid request format. Please try again.',
-  'METHOD_NOT_ALLOWED': 'This endpoint does not support the requested HTTP method.',
-  'FORBIDDEN': 'Access denied. Please check your request and try again.',
-  'GENERAL_ERROR': 'An unexpected error occurred. Please try again.',
+  'INVALID_JSON': 'Invalid request. Please check your input and try again.',
+  'REQUEST_TOO_LARGE': 'Request too large. Please try again.',
+  'CONTENT_TYPE_ERROR': 'Invalid request. Please check your input and try again.',
+  'METHOD_NOT_ALLOWED': 'Invalid request method.',
+  'FORBIDDEN': 'Access denied.',
+  'GENERAL_ERROR': 'Service temporarily unavailable. Please try again.',
   
   // Decryption errors
-  'DECRYPTION_FAILED': 'Unable to decrypt the message. Please check the password and try again.',
-  'INVALID_PASSWORD': 'The password appears to be incorrect. Please check the URL and try again.',
+  'DECRYPTION_FAILED': 'Invalid request. Please check your input and try again.',
+  'INVALID_PASSWORD': 'Invalid request. Please check your input and try again.',
   
   // Network errors
-  'NETWORK_ERROR': 'Network connection error. Please check your internet connection and try again.',
-  'SERVICE_UNAVAILABLE': 'The service is temporarily unavailable. Please try again later.'
+  'NETWORK_ERROR': 'Service temporarily unavailable. Please try again.',
+  'SERVICE_UNAVAILABLE': 'Service temporarily unavailable. Please try again later.'
 };
 
 /**
@@ -59,23 +61,25 @@ export function getErrorMessage(errorCode, fallback = 'An error occurred. Please
  */
 export function getSecurityErrorMessage(event) {
   const securityErrorMap = {
-    'INVALID_MESSAGE_FORMAT': 'The message format is invalid or the message is too large.',
-    'INVALID_EXPIRY_TIME': 'The expiry time is invalid.',
-    'MISSING_TURNSTILE': 'Please complete the security verification.',
+    'INVALID_MESSAGE_FORMAT': 'Invalid request.',
+    'INVALID_EXPIRY_TIME': 'Invalid request.',
+    'MISSING_TURNSTILE': 'Security verification required.',
     'TURNSTILE_FAILED': 'Security verification failed.',
-    'TURNSTILE_API_ERROR': 'Security verification is temporarily unavailable.',
-    'TURNSTILE_VERIFICATION_ERROR': 'Security verification encountered an error.',
-    'DATABASE_ERROR': 'Unable to save your memo.',
-    'MEMO_CREATION_ERROR': 'An error occurred while creating your memo.',
-    'INVALID_MEMO_ID': 'The memo link appears to be invalid.',
-    'MISSING_MEMO_ID': 'Missing memo ID. Please check the URL you received.',
-    'MEMO_NOT_FOUND': 'This memo is no longer available. It may have been read, expired, or never existed.',
-    'MEMO_ALREADY_READ': 'This memo is no longer available. It may have been read, expired, or never existed.',
-    'MEMO_EXPIRED': 'This memo is no longer available. It may have been read, expired, or never existed.',
-    'DATABASE_READ_ERROR': 'Unable to read the memo.',
-    'MEMO_READ_ERROR': 'An error occurred while reading the memo.',
-    'METHOD_NOT_ALLOWED': 'This endpoint does not support the requested HTTP method.',
-    'FORBIDDEN': 'Access denied. Please check your request and try again.'
+    'TURNSTILE_API_ERROR': 'Service temporarily unavailable.',
+    'TURNSTILE_VERIFICATION_ERROR': 'Security verification failed.',
+    'DATABASE_ERROR': 'Service temporarily unavailable.',
+    'MEMO_ID_GENERATION_ERROR': 'Service temporarily unavailable.',
+    'MEMO_ID_COLLISION_ERROR': 'Service temporarily unavailable.',
+    'MEMO_CREATION_ERROR': 'Unable to process your request.',
+    'INVALID_MEMO_ID': 'Invalid request.',
+    'MISSING_MEMO_ID': 'Invalid request.',
+    'MEMO_NOT_FOUND': 'This memo is no longer available.',
+    'MEMO_ALREADY_READ': 'This memo is no longer available.',
+    'MEMO_EXPIRED': 'This memo is no longer available.',
+    'DATABASE_READ_ERROR': 'Service temporarily unavailable.',
+    'MEMO_READ_ERROR': 'Unable to process your request.',
+    'METHOD_NOT_ALLOWED': 'Invalid request method.',
+    'FORBIDDEN': 'Access denied.'
   };
   
   return securityErrorMap[event] || 'An error occurred. Please try again.';

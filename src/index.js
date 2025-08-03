@@ -180,6 +180,7 @@ export default {
         return new Response(getStyles(), {
           headers: { 
             'Content-Type': 'text/css',
+            'Cache-Control': 'public, max-age=3600',
             ...getSecurityHeaders(request)
           }
         });
@@ -200,6 +201,7 @@ export default {
         return new Response(jsContent, {
           headers: { 
             'Content-Type': 'application/javascript',
+            'Cache-Control': 'public, max-age=3600',
             ...getSecurityHeaders(request)
           }
         });
@@ -221,6 +223,7 @@ export default {
         return new Response(jsContent, {
           headers: { 
             'Content-Type': 'application/javascript',
+            'Cache-Control': 'public, max-age=3600',
             ...getSecurityHeaders(request)
           }
         });
@@ -239,6 +242,7 @@ export default {
         return new Response(getCommonJS(), {
           headers: { 
             'Content-Type': 'application/javascript',
+            'Cache-Control': 'public, max-age=3600',
             ...getSecurityHeaders(request)
           }
         });
