@@ -1,10 +1,14 @@
 import { 
   validateMemoId, 
   validateEncryptedMessage, 
+  validateAndSanitizeEncryptedMessage,
   validateExpiryTime,
   validateExpiryHours,
   validatePassword,
-  sanitizeInput 
+  sanitizeInput,
+  sanitizeForDatabase,
+  sanitizeForJSON,
+  sanitizeForURL
 } from '../utils/validation.js';
 import { getErrorMessage, getSecurityErrorMessage, getMemoAccessDeniedMessage } from '../utils/errorMessages.js';
 
@@ -113,18 +117,18 @@ export async function handleCreateMemo(request, env) {
 
         const { encryptedMessage, expiryHours, cfTurnstileResponse } = requestData;
         
-        // Sanitize all user inputs
-        const sanitizedEncryptedMessage = sanitizeInput(encryptedMessage);
-        const sanitizedExpiryHours = String(expiryHours); // Convert to string for validation
-        const sanitizedTurnstileResponse = sanitizeInput(cfTurnstileResponse);
-        
-        // Validate inputs
-        if (!validateEncryptedMessage(sanitizedEncryptedMessage)) {
+        // Comprehensive validation and sanitization of encrypted message
+        const messageValidation = validateAndSanitizeEncryptedMessage(encryptedMessage);
+        if (!messageValidation.isValid) {
             return new Response(JSON.stringify({ error: getErrorMessage('INVALID_MESSAGE_FORMAT') }), {
                 status: 400,
                 headers: { 'Content-Type': 'application/json' }
             });
         }
+        
+        const sanitizedEncryptedMessage = messageValidation.sanitizedMessage;
+        const sanitizedExpiryHours = String(expiryHours); // Convert to string for validation
+        const sanitizedTurnstileResponse = sanitizeInput(cfTurnstileResponse);
         
         // Validate expiry hours
         if (!validateExpiryHours(sanitizedExpiryHours)) {
@@ -339,8 +343,8 @@ export async function handleReadMemo(request, env) {
         const url = new URL(request.url);
         const memoId = url.searchParams.get('id');
         
-        // Sanitize memo ID from URL
-        const sanitizedMemoId = sanitizeInput(memoId);
+        // Sanitize memo ID from URL parameters
+        const sanitizedMemoId = sanitizeForURL(memoId);
         
         // Validate memo ID
         if (!sanitizedMemoId || !validateMemoId(sanitizedMemoId)) {
@@ -394,10 +398,13 @@ export async function handleReadMemo(request, env) {
             // This prevents timing attacks from delete operation failures
         }
         
+        // Sanitize encrypted message for JSON response to prevent injection
+        const sanitizedResponseMessage = sanitizeForJSON(memo.encrypted_message);
+        
         // Return the memo data
         return new Response(JSON.stringify({ 
             success: true, 
-            encryptedMessage: memo.encrypted_message 
+            encryptedMessage: sanitizedResponseMessage 
         }), {
             status: 200,
             headers: { 

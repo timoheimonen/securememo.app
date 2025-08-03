@@ -1,11 +1,11 @@
 // Input validation and sanitization utilities
 
 /**
- * Sanitize user input to prevent XSS attacks
+ * Sanitize user input for HTML context (prevents XSS)
  * @param {string} input - The input to sanitize
- * @returns {string} - Sanitized input
+ * @returns {string} - Sanitized input safe for HTML
  */
-export function sanitizeInput(input) {
+export function sanitizeForHTML(input) {
   if (typeof input !== 'string') return '';
   
   // First decode HTML entities to catch encoded malicious content
@@ -42,6 +42,65 @@ export function sanitizeInput(input) {
 }
 
 /**
+ * Sanitize input for JSON context (prevents JSON injection and control character issues)
+ * @param {string} input - The input to sanitize
+ * @returns {string} - Sanitized input safe for JSON
+ */
+export function sanitizeForJSON(input) {
+  if (typeof input !== 'string') return '';
+  
+  // Remove or escape control characters that could break JSON parsing
+  return input
+    .replace(/[\x00-\x1F\x7F]/g, '') // Remove control characters except newlines/tabs
+    .replace(/\n/g, '\\n') // Escape newlines
+    .replace(/\r/g, '\\r') // Escape carriage returns
+    .replace(/\t/g, '\\t') // Escape tabs
+    .replace(/\\/g, '\\\\') // Escape backslashes
+    .replace(/"/g, '\\"') // Escape quotes
+    .trim();
+}
+
+/**
+ * Sanitize input for database storage (prevents SQL injection and ensures safe storage)
+ * @param {string} input - The input to sanitize
+ * @returns {string} - Sanitized input safe for database storage
+ */
+export function sanitizeForDatabase(input) {
+  if (typeof input !== 'string') return '';
+  
+  // Remove null bytes and other problematic characters for database storage
+  return input
+    .replace(/\x00/g, '') // Remove null bytes
+    .replace(/[\x01-\x08\x0B\x0C\x0E-\x1F\x7F]/g, '') // Remove control characters
+    .trim();
+}
+
+/**
+ * Sanitize input for URL parameters (prevents URL injection)
+ * @param {string} input - The input to sanitize
+ * @returns {string} - Sanitized input safe for URL parameters
+ */
+export function sanitizeForURL(input) {
+  if (typeof input !== 'string') return '';
+  
+  // Remove characters that could be used for URL injection
+  return input
+    .replace(/[<>\"'%]/g, '') // Remove potentially dangerous characters
+    .replace(/\s+/g, '') // Remove whitespace
+    .trim();
+}
+
+/**
+ * Legacy function for backward compatibility - now delegates to HTML sanitization
+ * @param {string} input - The input to sanitize
+ * @returns {string} - Sanitized input
+ * @deprecated Use context-specific sanitization functions instead
+ */
+export function sanitizeInput(input) {
+  return sanitizeForHTML(input);
+}
+
+/**
  * Validate memo ID format (32 chars with alphanumeric, hyphens, underscores)
  * @param {string} memoId - The memo ID to validate
  * @returns {boolean} - Whether the memo ID is valid
@@ -56,10 +115,21 @@ export function validateMemoId(memoId) {
  * @returns {boolean} - Whether the message is valid
  */
 export function validateEncryptedMessage(message) {
-  return message && 
-         typeof message === 'string' && 
-         message.length > 0 && 
-         message.length <= 50000;
+  if (!message || typeof message !== 'string' || message.length === 0 || message.length > 50000) {
+    return false;
+  }
+  
+  // Check for null bytes and other control characters that could cause issues
+  if (/\x00/.test(message)) {
+    return false; // Null bytes are not allowed
+  }
+  
+  // Check for other problematic control characters (except newlines, tabs, carriage returns)
+  if (/[\x01-\x08\x0B\x0C\x0E-\x1F\x7F]/.test(message)) {
+    return false;
+  }
+  
+  return true;
 }
 
 /**
@@ -106,4 +176,27 @@ export function validatePassword(password) {
          password.length >= 32 && 
          password.length <= 64 &&
          /^[A-Za-z0-9]+$/.test(password);
+}
+
+/**
+ * Comprehensive validation and sanitization for encrypted messages
+ * This function validates the message and returns a sanitized version safe for all contexts
+ * @param {string} message - The encrypted message to validate and sanitize
+ * @returns {object} - Object with isValid boolean and sanitized message
+ */
+export function validateAndSanitizeEncryptedMessage(message) {
+  // First validate the message
+  if (!validateEncryptedMessage(message)) {
+    return { isValid: false, sanitizedMessage: null };
+  }
+  
+  // Sanitize for database storage (removes problematic characters)
+  const sanitizedForDB = sanitizeForDatabase(message);
+  
+  // Additional validation after sanitization
+  if (sanitizedForDB.length === 0) {
+    return { isValid: false, sanitizedMessage: null };
+  }
+  
+  return { isValid: true, sanitizedMessage: sanitizedForDB };
 } 
