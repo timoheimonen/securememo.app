@@ -15,7 +15,7 @@ import { getErrorMessage, getSecurityErrorMessage, getMemoAccessDeniedMessage } 
 /**
  * Calculate expiry time based on expiry hours
  * @param {string|number} expiryHours - The expiry hours value from client (0, 8, 24, 48)
- * @returns {string|null} - ISO string of calculated expiry time or null if invalid
+ * @returns {number|null} - UNIX timestamp (seconds since epoch) or null if invalid
  */
 function calculateExpiryTime(expiryHours) {
     // Parse expiry hours as integer
@@ -37,7 +37,8 @@ function calculateExpiryTime(expiryHours) {
         expiryTime = new Date(now.getTime() + hours * 60 * 60 * 1000);
     }
     
-    return expiryTime.toISOString();
+    // Return UNIX timestamp (seconds since epoch)
+    return Math.floor(expiryTime.getTime() / 1000);
 }
 
 // Generate cryptographically secure random 32-char memo ID with collision detection
@@ -363,7 +364,7 @@ export async function handleReadMemo(request, env) {
                 FROM memos 
                 WHERE memo_id = ? 
                 AND is_read = 0 
-                AND (expiry_time IS NULL OR expiry_time > datetime('now'))
+                AND (expiry_time IS NULL OR expiry_time > unixepoch('now'))
             `);
             
             memo = await stmt.bind(sanitizedMemoId).first();
@@ -389,7 +390,7 @@ export async function handleReadMemo(request, env) {
                 DELETE FROM memos 
                 WHERE memo_id = ? 
                 AND is_read = 0 
-                AND (expiry_time IS NULL OR expiry_time > datetime('now'))
+                AND (expiry_time IS NULL OR expiry_time > unixepoch('now'))
             `);
             
             await deleteStmt.bind(sanitizedMemoId).run();
@@ -429,7 +430,7 @@ export async function handleCleanupMemos(env) {
         const stmt = env.DB.prepare(`
             DELETE FROM memos 
             WHERE expiry_time IS NOT NULL 
-            AND expiry_time < datetime('now')
+            AND expiry_time < unixepoch('now')
         `);
         
         const result = await stmt.run();
