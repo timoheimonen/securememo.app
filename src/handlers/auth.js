@@ -5,7 +5,7 @@ import {
   validateExpiryTime,
   validateExpiryHours,
   validatePassword,
-  sanitizeInput,
+  sanitizeForHTML,
   sanitizeForDatabase,
   sanitizeForJSON,
   sanitizeForURL
@@ -97,7 +97,7 @@ export async function handleCreateMemo(request, env) {
         
         // Validate content type
         const contentType = request.headers.get('content-type');
-        const sanitizedContentType = sanitizeInput(contentType);
+        const sanitizedContentType = sanitizeForHTML(contentType);
         if (!sanitizedContentType || !sanitizedContentType.includes('application/json')) {
             return new Response(JSON.stringify({ error: getErrorMessage('CONTENT_TYPE_ERROR') }), {
                 status: 400,
@@ -129,7 +129,7 @@ export async function handleCreateMemo(request, env) {
         
         const sanitizedEncryptedMessage = messageValidation.sanitizedMessage;
         const sanitizedExpiryHours = String(expiryHours); // Convert to string for validation
-        const sanitizedTurnstileResponse = sanitizeInput(cfTurnstileResponse);
+        const sanitizedTurnstileResponse = sanitizeForJSON(cfTurnstileResponse);
         
         // Validate expiry hours
         if (!validateExpiryHours(sanitizedExpiryHours)) {
@@ -274,7 +274,7 @@ export async function handleReadMemo(request, env) {
         
         // Validate content type
         const contentType = request.headers.get('content-type');
-        const sanitizedContentType = sanitizeInput(contentType);
+        const sanitizedContentType = sanitizeForHTML(contentType);
         if (!sanitizedContentType || !sanitizedContentType.includes('application/json')) {
             return new Response(JSON.stringify({ error: getErrorMessage('CONTENT_TYPE_ERROR') }), {
                 status: 400,
@@ -296,7 +296,7 @@ export async function handleReadMemo(request, env) {
         const { cfTurnstileResponse } = requestData;
         
         // Sanitize user inputs
-        const sanitizedTurnstileResponse = sanitizeInput(cfTurnstileResponse);
+        const sanitizedTurnstileResponse = sanitizeForJSON(cfTurnstileResponse);
         
         // Verify Turnstile token
         if (!sanitizedTurnstileResponse) {

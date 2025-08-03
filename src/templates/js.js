@@ -366,10 +366,7 @@ function getMemoId() {
     return urlParams.get('id');
 }
 
-// Extract password from URL hashtag
-function getPasswordFromHash() {
-    return window.location.hash.substring(1);
-}
+
 
 // AES-256-GCM decryption with PBKDF2 key derivation
 async function decryptMessage(encryptedData, password) {

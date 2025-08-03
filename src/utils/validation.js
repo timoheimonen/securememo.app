@@ -90,15 +90,7 @@ export function sanitizeForURL(input) {
     .trim();
 }
 
-/**
- * Legacy function for backward compatibility - now delegates to HTML sanitization
- * @param {string} input - The input to sanitize
- * @returns {string} - Sanitized input
- * @deprecated Use context-specific sanitization functions instead
- */
-export function sanitizeInput(input) {
-  return sanitizeForHTML(input);
-}
+
 
 /**
  * Validate memo ID format (32 chars with alphanumeric, hyphens, underscores)

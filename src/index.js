@@ -128,12 +128,12 @@ export default {
 
         
         // Check allowed methods for read-memo endpoint
-        if (apiPath === 'read-memo' && request.method !== 'GET' && request.method !== 'POST') {
+        if (apiPath === 'read-memo' && request.method !== 'POST') {
           return new Response(JSON.stringify({ error: getErrorMessage('METHOD_NOT_ALLOWED') }), {
             status: 405,
             headers: { 
               'Content-Type': 'application/json',
-              'Allow': 'GET, POST',
+              'Allow': 'POST',
               ...getSecurityHeaders(request)
             }
           });
