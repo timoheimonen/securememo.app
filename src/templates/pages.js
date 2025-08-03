@@ -224,7 +224,7 @@ export async function getCreateMemoHTML() {
                     </div>
                     
                     <div class="form-group">
-                        <label for="expiryHours">Expiry Time (Optional)</label>
+                        <label for="expiryHours">Expiry Time</label>
                         <select id="expiryHours" name="expiryHours">
                             <option value="0">Delete on read or 30 days</option>
                             <option value="8">Delete on read or 8 hours</option>
