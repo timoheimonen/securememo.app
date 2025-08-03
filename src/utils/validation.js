@@ -1,4 +1,5 @@
 // Input validation and sanitization utilities
+import { addArtificialDelay, constantTimeCompare } from './timingSecurity.js';
 
 /**
  * Sanitize user input for HTML context (prevents XSS)
@@ -102,6 +103,22 @@ export function validateMemoId(memoId) {
 }
 
 /**
+ * Secure memo ID validation with artificial delay for error paths
+ * @param {string} memoId - The memo ID to validate
+ * @returns {Promise<boolean>} - Whether the memo ID is valid
+ */
+export async function validateMemoIdSecure(memoId) {
+  const result = validateMemoId(memoId);
+  
+  // Add artificial delay if validation fails
+  if (!result) {
+    await addArtificialDelay();
+  }
+  
+  return result;
+}
+
+/**
  * Validate encrypted message format and size (max 50KB)
  * @param {string} message - The encrypted message to validate
  * @returns {boolean} - Whether the message is valid
@@ -122,6 +139,22 @@ export function validateEncryptedMessage(message) {
   }
   
   return true;
+}
+
+/**
+ * Secure encrypted message validation with artificial delay for error paths
+ * @param {string} message - The encrypted message to validate
+ * @returns {Promise<boolean>} - Whether the message is valid
+ */
+export async function validateEncryptedMessageSecure(message) {
+  const result = validateEncryptedMessage(message);
+  
+  // Add artificial delay if validation fails
+  if (!result) {
+    await addArtificialDelay();
+  }
+  
+  return result;
 }
 
 /**
@@ -171,6 +204,22 @@ export function validatePassword(password) {
 }
 
 /**
+ * Secure password validation with artificial delay for error paths
+ * @param {string} password - The password to validate
+ * @returns {Promise<boolean>} - Whether the password is valid
+ */
+export async function validatePasswordSecure(password) {
+  const result = validatePassword(password);
+  
+  // Add artificial delay if validation fails
+  if (!result) {
+    await addArtificialDelay();
+  }
+  
+  return result;
+}
+
+/**
  * Comprehensive validation and sanitization for encrypted messages
  * This function validates the message and returns a sanitized version safe for all contexts
  * @param {string} message - The encrypted message to validate and sanitize
@@ -187,6 +236,31 @@ export function validateAndSanitizeEncryptedMessage(message) {
   
   // Additional validation after sanitization
   if (sanitizedForDB.length === 0) {
+    return { isValid: false, sanitizedMessage: null };
+  }
+  
+  return { isValid: true, sanitizedMessage: sanitizedForDB };
+}
+
+/**
+ * Secure comprehensive validation and sanitization for encrypted messages with artificial delay
+ * This function validates the message and returns a sanitized version safe for all contexts
+ * @param {string} message - The encrypted message to validate and sanitize
+ * @returns {Promise<object>} - Object with isValid boolean and sanitized message
+ */
+export async function validateAndSanitizeEncryptedMessageSecure(message) {
+  // First validate the message
+  if (!validateEncryptedMessage(message)) {
+    await addArtificialDelay();
+    return { isValid: false, sanitizedMessage: null };
+  }
+  
+  // Sanitize for database storage (removes problematic characters)
+  const sanitizedForDB = sanitizeForDatabase(message);
+  
+  // Additional validation after sanitization
+  if (sanitizedForDB.length === 0) {
+    await addArtificialDelay();
     return { isValid: false, sanitizedMessage: null };
   }
   

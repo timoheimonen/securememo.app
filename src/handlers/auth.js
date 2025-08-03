@@ -1,16 +1,21 @@
 import { 
   validateMemoId, 
+  validateMemoIdSecure,
   validateEncryptedMessage, 
+  validateEncryptedMessageSecure,
   validateAndSanitizeEncryptedMessage,
+  validateAndSanitizeEncryptedMessageSecure,
   validateExpiryTime,
   validateExpiryHours,
   validatePassword,
+  validatePasswordSecure,
   sanitizeForHTML,
   sanitizeForDatabase,
   sanitizeForJSON,
   sanitizeForURL
 } from '../utils/validation.js';
 import { getErrorMessage, getSecurityErrorMessage, getMemoAccessDeniedMessage } from '../utils/errorMessages.js';
+import { addArtificialDelay, constantTimeCompare } from '../utils/timingSecurity.js';
 
 /**
  * Calculate expiry time based on expiry hours
@@ -119,8 +124,10 @@ export async function handleCreateMemo(request, env) {
         const { encryptedMessage, expiryHours, cfTurnstileResponse } = requestData;
         
         // Comprehensive validation and sanitization of encrypted message
-        const messageValidation = validateAndSanitizeEncryptedMessage(encryptedMessage);
+        const messageValidation = await validateAndSanitizeEncryptedMessageSecure(encryptedMessage);
         if (!messageValidation.isValid) {
+            // Add additional artificial delay for security
+            await addArtificialDelay();
             return new Response(JSON.stringify({ error: getErrorMessage('INVALID_MESSAGE_FORMAT') }), {
                 status: 400,
                 headers: { 'Content-Type': 'application/json' }
@@ -133,6 +140,8 @@ export async function handleCreateMemo(request, env) {
         
         // Validate expiry hours
         if (!validateExpiryHours(sanitizedExpiryHours)) {
+            // Add artificial delay for security
+            await addArtificialDelay();
             return new Response(JSON.stringify({ error: getErrorMessage('INVALID_EXPIRY_TIME') }), {
                 status: 400,
                 headers: { 'Content-Type': 'application/json' }
@@ -196,6 +205,8 @@ export async function handleCreateMemo(request, env) {
         try {
             memoId = await generateMemoId(env);
         } catch (generateError) {
+            // Add artificial delay for security
+            await addArtificialDelay();
             return new Response(JSON.stringify({ error: getErrorMessage('MEMO_ID_GENERATION_ERROR') }), {
                 status: 500,
                 headers: { 'Content-Type': 'application/json' }
@@ -215,12 +226,16 @@ export async function handleCreateMemo(request, env) {
             if (dbError.message && dbError.message.includes('UNIQUE constraint failed')) {
                 // This should be extremely rare with our collision detection
                 // but handle it gracefully by returning an error
+                // Add artificial delay for security
+                await addArtificialDelay();
                 return new Response(JSON.stringify({ error: getErrorMessage('MEMO_ID_COLLISION_ERROR') }), {
                     status: 500,
                     headers: { 'Content-Type': 'application/json' }
                 });
             }
             
+            // Add artificial delay for security
+            await addArtificialDelay();
             return new Response(JSON.stringify({ error: getErrorMessage('DATABASE_ERROR') }), {
                 status: 500,
                 headers: { 'Content-Type': 'application/json' }
@@ -242,6 +257,8 @@ export async function handleCreateMemo(request, env) {
         });
         
             } catch (error) {
+            // Add artificial delay for security
+            await addArtificialDelay();
             return new Response(JSON.stringify({ error: getErrorMessage('MEMO_CREATION_ERROR') }), {
                 status: 500,
                 headers: { 'Content-Type': 'application/json' }
@@ -347,8 +364,10 @@ export async function handleReadMemo(request, env) {
         // Sanitize memo ID from URL parameters
         const sanitizedMemoId = sanitizeForURL(memoId);
         
-        // Validate memo ID
-        if (!sanitizedMemoId || !validateMemoId(sanitizedMemoId)) {
+        // Validate memo ID with secure validation
+        if (!sanitizedMemoId || !(await validateMemoIdSecure(sanitizedMemoId))) {
+            // Add additional artificial delay for security
+            await addArtificialDelay();
             return new Response(JSON.stringify({ error: getErrorMessage('INVALID_MEMO_ID') }), {
                 status: 400,
                 headers: { 'Content-Type': 'application/json' }
@@ -369,6 +388,8 @@ export async function handleReadMemo(request, env) {
             
             memo = await stmt.bind(sanitizedMemoId).first();
         } catch (dbError) {
+            // Add artificial delay for security
+            await addArtificialDelay();
             return new Response(JSON.stringify({ error: getErrorMessage('DATABASE_READ_ERROR') }), {
                 status: 500,
                 headers: { 'Content-Type': 'application/json' }
@@ -378,6 +399,8 @@ export async function handleReadMemo(request, env) {
         // SECURITY: Use consistent error handling to prevent enumeration attacks
         // Single check ensures constant-time failure regardless of memo state
         if (!memo) {
+            // Add artificial delay for security to normalize response times
+            await addArtificialDelay();
             return new Response(JSON.stringify({ error: getMemoAccessDeniedMessage() }), {
                 status: 404,
                 headers: { 'Content-Type': 'application/json' }
@@ -417,6 +440,8 @@ export async function handleReadMemo(request, env) {
         });
         
     } catch (error) {
+        // Add artificial delay for security
+        await addArtificialDelay();
         return new Response(JSON.stringify({ error: getErrorMessage('MEMO_READ_ERROR') }), {
             status: 500,
             headers: { 'Content-Type': 'application/json' }
@@ -444,6 +469,8 @@ export async function handleCleanupMemos(env) {
         });
         
     } catch (error) {
+        // Add artificial delay for security
+        await addArtificialDelay();
         return new Response(JSON.stringify({ error: getErrorMessage('DATABASE_ERROR') }), {
             status: 500,
             headers: { 'Content-Type': 'application/json' }
