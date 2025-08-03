@@ -443,7 +443,7 @@ export async function handleCleanupMemos(env) {
         });
         
     } catch (error) {
-        return new Response(JSON.stringify({ error: 'Failed to cleanup memos' }), {
+        return new Response(JSON.stringify({ error: getErrorMessage('DATABASE_ERROR') }), {
             status: 500,
             headers: { 'Content-Type': 'application/json' }
         });
