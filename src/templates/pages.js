@@ -350,7 +350,7 @@ export async function getReadMemoHTML() {
                         <p id="decryptedMessage"></p>
                     </div>
                     <div class="memo-info">
-                        <p><strong>Status:</strong> <span id="memoStatus">Memo has been read and deleted</span></p>
+                        <p><strong>Status:</strong> <span id="memoStatus">Memo decrypted successfully</span></p>
                     </div>
                     <div class="memo-actions">
                         <a href="/create-memo.html" class="btn btn-primary">Create New Memo</a>

@@ -535,6 +535,13 @@ window.addEventListener('load', () => {
                             body: JSON.stringify(confirmRequestBody)
                         });
                         
+                        // Update status message after successful deletion
+                        if (confirmResponse.ok) {
+                            const memoStatus = document.getElementById('memoStatus');
+                            if (memoStatus) {
+                                memoStatus.textContent = 'Memo has been read and deleted';
+                            }
+                        }
                         // Note: We don't need to handle the response here since the memo is already displayed
                         // The deletion is just for cleanup purposes
                     } catch (confirmError) {
