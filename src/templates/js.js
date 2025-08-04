@@ -167,6 +167,13 @@ document.getElementById('memoForm').addEventListener('submit', async (e) => {
         return;
     }
     
+    // Show loading indicator and disable button immediately
+    const submitButton = document.getElementById('submitButton');
+    const loadingIndicator = document.getElementById('loadingIndicator');
+    submitButton.disabled = true;
+    submitButton.textContent = 'Encrypting...';
+    loadingIndicator.style.display = 'block';
+    
     try {
         // Generate password
         const password = generatePassword();
@@ -213,6 +220,11 @@ document.getElementById('memoForm').addEventListener('submit', async (e) => {
     } catch (error) {
         showMessage('An error occurred while creating the memo', 'error');
         // Don't reset Turnstile on error to avoid refreshing the widget
+    } finally {
+        // Always hide loading indicator and re-enable button in finally block
+        submitButton.disabled = false;
+        submitButton.textContent = 'Create Secure Memo';
+        loadingIndicator.style.display = 'none';
     }
 });
 

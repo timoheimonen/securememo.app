@@ -239,7 +239,13 @@ export async function getCreateMemoHTML() {
                         <small class="form-help">Please complete the security challenge to create your memo</small>
                     </div>
                     
-                    <button type="submit" class="btn btn-primary">Create Secure Memo</button>
+                    <button type="submit" class="btn btn-primary" id="submitButton">Create Secure Memo</button>
+                    
+                    <!-- Loading indicator (hidden by default) -->
+                    <div id="loadingIndicator" class="loading-spinner" style="display: none;">
+                        <div class="spinner"></div>
+                        <p>Encrypting your message securely... This may take a moment on older devices.</p>
+                    </div>
                 </form>
                 
                 <div id="result" class="result-section" style="display: none;">
