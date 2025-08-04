@@ -231,7 +231,6 @@ export async function getCreateMemoHTML() {
                             <option value="24">Delete on read or 1 day</option>
                             <option value="48">Delete on read or 2 days</option>
                         </select>
-                        <small class="form-help">Delete on read: Memo will be deleted when read OR after 30 days, whichever comes first</small>
                     </div>
                     
                     <div class="form-group">
