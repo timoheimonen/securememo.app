@@ -7,7 +7,8 @@
     "dev": "wrangler dev",
     "deploy": "wrangler deploy",
     "db:create": "wrangler d1 create my-database",
-    "db:migrate": "wrangler d1 execute my-database --file=./db/schema.sql"
+    "db:migrate": "wrangler d1 execute my-database --file=./db/schema.sql",
+    "audit": "npm audit"
   },
   "devDependencies": {
     "wrangler": "^4.22.0"
