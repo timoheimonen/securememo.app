@@ -690,6 +690,7 @@ body {
 
 /* Loading Spinner */
 .loading-spinner {
+  display: none;
   text-align: center;
   margin-top: 20px;
   padding: 15px;
