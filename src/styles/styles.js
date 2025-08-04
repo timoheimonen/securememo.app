@@ -104,7 +104,7 @@ body {
   font-size: 1.2rem;
   margin-bottom: 40px;
   opacity: 0;
-  animation: fadeInDescription 0.8s ease-out 1.5s forwards;
+  animation: fadeInDescription 0.8s ease-out 0.5s forwards;
 }
 
 /* Animation keyframes */
