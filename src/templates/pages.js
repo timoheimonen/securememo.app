@@ -26,7 +26,7 @@ export async function getIndexHTML() {
     <main class="main-content">
         <div class="hero-section">
             <h1>securememo.app</h1>
-            <p>Create encrypted memos that self-destruct after being read or expired. Your secrets stay safe.</p>
+            <p><span>Create</span> <span>encrypted</span> <span>memos</span> <span>that</span> <span>self-destruct</span> <span>after</span> <span>being</span> <span>read</span> <span>or</span> <span>expired.</span> <span>Your</span> <span>secrets</span> <span>stay</span> <span>safe.</span></p>
             <div class="cta-buttons">
                 <a href="/create-memo.html" class="btn btn-primary">Create Secure Memo</a>
                 <a href="/about.html" class="btn btn-secondary">Learn More</a>
