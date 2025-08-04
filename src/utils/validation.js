@@ -177,7 +177,7 @@ export function validateExpiryTime(expiryTime) {
 }
 
 /**
- * Validate expiry hours (must be valid option: 0, 8, 24, 48)
+ * Validate expiry hours (must be valid option: 8, 24, 48, 168, 720)
  * @param {string|number} expiryHours - The expiry hours to validate
  * @returns {boolean} - Whether the expiry hours is valid
  */
@@ -185,7 +185,7 @@ export function validateExpiryHours(expiryHours) {
   if (expiryHours === null || expiryHours === undefined) return false;
   
   const hours = parseInt(expiryHours);
-  const validOptions = [0, 8, 24, 48]; // 0 (delete on read), 8h, 24h, 48h
+  const validOptions = [8, 24, 48, 168, 720]; // 8h, 24h (1 day), 48h (2 days), 168h (1 week), 720h (30 days)
   
   return !isNaN(hours) && validOptions.includes(hours);
 }

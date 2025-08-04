@@ -19,7 +19,7 @@ import { addArtificialDelay, constantTimeCompare } from '../utils/timingSecurity
 
 /**
  * Calculate expiry time based on expiry hours
- * @param {string|number} expiryHours - The expiry hours value from client (0, 8, 24, 48)
+ * @param {string|number} expiryHours - The expiry hours value from client (8, 24, 48, 168, 720)
  * @returns {number|null} - UNIX timestamp (seconds since epoch) or null if invalid
  */
 function calculateExpiryTime(expiryHours) {
@@ -32,15 +32,8 @@ function calculateExpiryTime(expiryHours) {
     }
     
     const now = new Date();
-    let expiryTime;
-    
-    if (hours === 0) {
-        // Delete on read: set to 30 days maximum
-        expiryTime = new Date(now.getTime() + 30 * 24 * 60 * 60 * 1000);
-    } else {
-        // Specific expiry: calculate based on hours
-        expiryTime = new Date(now.getTime() + hours * 60 * 60 * 1000);
-    }
+    // Calculate expiry time based on hours (all options now use hours)
+    const expiryTime = new Date(now.getTime() + hours * 60 * 60 * 1000);
     
     // Return UNIX timestamp (seconds since epoch)
     return Math.floor(expiryTime.getTime() / 1000);

@@ -7,9 +7,9 @@
 ## Features
 
 - **True end-to-end encryption** in your browser — nothing stored in plain text
+- **Password protection** — encryption password is not send or stored to server
 - **One-time readable notes** — they self-destruct automatically after being read or when the time limit expires
-- **Multiple expiry options** — delete on read, 8 hours, 1 day, 2 days, or 30 days
-- **Password protection** — password for security
+- **Multiple expiry options** — delete on read, 8 hours, 1 day, 2 days, 1 week or 30 days
 - **Runs on Cloudflare Workers** — fast, lightweight, and globally distributed
 - **D1 Database** — SQLite-based database for reliable storage
 - **Turnstile CAPTCHA** — blocks bots and spam without compromising privacy
@@ -38,6 +38,7 @@ cloudflare/
 │   │   └── js.js          # JavaScript templates
 │   ├── utils/             # Utility functions
 │   │   ├── errorMessages.js # Centralized error handling
+│   │   ├── timingSecurity.js # Timing attack protection utilities
 │   │   └── validation.js  # Input validation and sanitization
 │   ├── styles/            # CSS styling
 │   │   └── styles.js      # Dynamic styles
@@ -60,6 +61,7 @@ cloudflare/
 - **Turnstile CAPTCHA** — Stops bots from misusing the service without tracking users
 - **Security headers** — Strict CSP, HSTS, and other security policies
 - **Request validation** — Size limits, method validation, and input sanitization
+- **Timing attack protection** — Artificial delays and constant-time comparisons prevent timing-based attacks
 - **Automatic cleanup** — Expired memos are permanently deleted
 
 ---
