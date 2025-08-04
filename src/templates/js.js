@@ -522,7 +522,25 @@ window.addEventListener('load', () => {
                     // Reset Turnstile only on success
                     resetTurnstile();
                     
-                    // Memo is automatically deleted by server after reading
+                    // Confirm successful reading and delete memo
+                    try {
+                        // Make confirmation request without Turnstile
+                        const confirmRequestBody = {};
+                        
+                        const confirmResponse = await fetch('/api/confirm-memo-read?id=' + memoId, {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify(confirmRequestBody)
+                        });
+                        
+                        // Note: We don't need to handle the response here since the memo is already displayed
+                        // The deletion is just for cleanup purposes
+                    } catch (confirmError) {
+                        // Silently handle confirmation errors - memo is already displayed
+                        // The memo will be cleaned up by the expiry mechanism if deletion fails
+                    }
                 } else {
                     if (result.error === 'Memo not found') {
                         showError('This memo has already been read and deleted, or it has expired.');

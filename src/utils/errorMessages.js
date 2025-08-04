@@ -26,6 +26,7 @@ export const errorMessages = {
   'MEMO_EXPIRED': 'This memo is no longer available.',
   'DATABASE_READ_ERROR': 'Service temporarily unavailable. Please try again.',
   'MEMO_READ_ERROR': 'Unable to process your request. Please try again.',
+  'MEMO_DELETION_ERROR': 'Service temporarily unavailable. Please try again.',
   
   // General errors
   'INVALID_JSON': 'Invalid request. Please check your input and try again.',
