@@ -1,6 +1,6 @@
 {
   "name": "cloudflare-workers-d1",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Cloudflare Workers with D1 database project",
   "main": "src/index.js",
   "scripts": {
@@ -11,7 +11,7 @@
     "audit": "npm audit"
   },
   "devDependencies": {
-    "wrangler": "^4.22.0"
+    "wrangler": "^4.28.0"
   },
   "keywords": [
     "cloudflare",
