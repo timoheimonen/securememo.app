@@ -4,7 +4,8 @@ import {
   getAboutHTML, 
   getCreateMemoHTML,
   getReadMemoHTML,
-  getToSHTML
+  getToSHTML,
+  getPrivacyHTML
 } from './templates/pages.js';
 import {
   getCreateMemoJS,
@@ -292,6 +293,9 @@ export default {
           break;
         case '/tos.html':
           response = await getToSHTML();
+          break;
+        case '/privacy.html':
+          response = await getPrivacyHTML();
           break;
         default:
           return new Response('Not Found', { 

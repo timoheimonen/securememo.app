@@ -292,6 +292,46 @@ body {
   color: #667eea;
 }
 
+/* List styling for content areas */
+.features-detail ul, .usage-section ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 20px 0;
+}
+
+.features-detail li, .usage-section li {
+  padding: 8px 0;
+  margin-bottom: 8px;
+  line-height: 1.6;
+  color: #666;
+  position: relative;
+  padding-left: 20px;
+}
+
+.features-detail li:before, .usage-section li:before {
+  content: "•";
+  color: #667eea;
+  font-weight: bold;
+  position: absolute;
+  left: 0;
+  top: 8px;
+}
+
+.features-detail li ul, .usage-section li ul {
+  margin: 10px 0 0 0;
+  padding-left: 20px;
+}
+
+.features-detail li li, .usage-section li li {
+  padding-left: 15px;
+  margin-bottom: 5px;
+}
+
+.features-detail li li:before, .usage-section li li:before {
+  content: "◦";
+  left: -15px;
+}
+
 .tech-stack ul {
   list-style: none;
   padding: 0;
