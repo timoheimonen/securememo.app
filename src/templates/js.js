@@ -320,7 +320,18 @@ const TURNSTILE_SITE_KEY = '{{TURNSTILE_SITE_KEY}}';
 
 // Error messages - injected by server
 const ERROR_MESSAGES = {
-    MISSING_MEMO_ID: '{{MISSING_MEMO_ID_ERROR}}'
+    MISSING_MEMO_ID: '{{MISSING_MEMO_ID_ERROR}}',
+    MISSING_PASSWORD: '{{MISSING_PASSWORD_ERROR}}',
+    INVALID_MEMO_URL: '{{INVALID_MEMO_URL_ERROR}}',
+    MISSING_SECURITY_CHALLENGE: '{{MISSING_SECURITY_CHALLENGE_ERROR}}',
+    SECURITY_VERIFICATION_FAILED: '{{SECURITY_VERIFICATION_FAILED}}',
+    CONFIRMATION_DELETION_WARNING: '{{CONFIRMATION_DELETION_WARNING}}',
+    CONFIRMATION_DELETION_ERROR: '{{CONFIRMATION_DELETION_ERROR}}',
+    MEMO_ALREADY_READ_DELETED: '{{MEMO_ALREADY_READ_DELETED_ERROR}}',
+    MEMO_EXPIRED_DELETED: '{{MEMO_EXPIRED_DELETED_ERROR}}',
+    INVALID_PASSWORD_CHECK: '{{INVALID_PASSWORD_CHECK_ERROR}}',
+    READ_MEMO_ERROR: '{{READ_MEMO_ERROR}}',
+    DECRYPTION_ERROR: '{{DECRYPTION_ERROR}}'
 };
 
 // Security configuration - easily updatable for future-proofing
@@ -353,7 +364,12 @@ function highlightCurrentPage() {
 
 // Init Turnstile widget
 function initTurnstile() {
-    // Turnstile widget auto-initialized with data-sitekey attribute
+    // Explicitly render Turnstile widget for initial form
+    if (typeof turnstile !== 'undefined') {
+        turnstile.render('.cf-turnstile', {
+            sitekey: TURNSTILE_SITE_KEY
+        });
+    }
 }
 
 // Get Turnstile response safely
@@ -370,6 +386,50 @@ function resetTurnstile() {
     if (typeof turnstile !== 'undefined' && turnstile.reset) {
         turnstile.reset();
     }
+}
+
+// Explicitly render Turnstile for confirmation with callbacks
+function renderConfirmationTurnstile(memoId) {
+    // Remove existing widget if needed
+    if (typeof turnstile !== 'undefined' && turnstile.remove) {
+        turnstile.remove();
+    }
+    
+    // Render new widget with explicit callbacks
+    const widgetId = turnstile.render('.cf-turnstile', {
+        sitekey: TURNSTILE_SITE_KEY,
+        callback: async function(token) {
+            // Now we have a fresh token—proceed with confirmation
+            const confirmRequestBody = {
+                cfTurnstileResponse: token
+            };
+
+            try {
+                const confirmResponse = await fetch('/api/confirm-memo-read?id=' + memoId, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(confirmRequestBody)
+                });
+
+                if (confirmResponse.ok) {
+                    const memoStatus = document.getElementById('memoStatus');
+                    if (memoStatus) {
+                        memoStatus.textContent = 'Memo has been read and deleted';
+                    }
+                } else {
+                    showMessage(ERROR_MESSAGES.CONFIRMATION_DELETION_WARNING, 'warning');
+                }
+            } catch (confirmError) {
+                showMessage(ERROR_MESSAGES.CONFIRMATION_DELETION_ERROR, 'error');
+            }
+        },
+        'error-callback': function(errorCode) {
+            showError(ERROR_MESSAGES.SECURITY_VERIFICATION_FAILED);
+        }
+    });
+
+    // Trigger reset to force new challenge (explicit mode handles it via render)
+    turnstile.reset(widgetId);
 }
 
 // Extract memo ID from URL params
@@ -426,7 +486,7 @@ async function decryptMessage(encryptedData, password) {
         
         return new TextDecoder().decode(decrypted);
     } catch (error) {
-        throw new Error('{{DECRYPTION_ERROR}}');
+        throw new Error(ERROR_MESSAGES.DECRYPTION_ERROR);
     }
 }
 
@@ -470,12 +530,12 @@ window.addEventListener('load', () => {
             const memoId = getMemoId();
             
             if (!password) {
-                showError('{{MISSING_PASSWORD_ERROR}}');
+                showError(ERROR_MESSAGES.MISSING_PASSWORD);
                 return;
             }
             
             if (!memoId) {
-                showError('{{INVALID_MEMO_URL_ERROR}}');
+                showError(ERROR_MESSAGES.INVALID_MEMO_URL);
                 return;
             }
             
@@ -483,7 +543,7 @@ window.addEventListener('load', () => {
             const turnstileResponse = getTurnstileResponse();
             
             if (!turnstileResponse) {
-                showError('{{MISSING_SECURITY_CHALLENGE_ERROR}}');
+                showError(ERROR_MESSAGES.MISSING_SECURITY_CHALLENGE);
                 return;
             }
             
@@ -519,50 +579,23 @@ window.addEventListener('load', () => {
                     if (errorContent) errorContent.style.display = 'none';
                     if (statusMessage) statusMessage.style.display = 'none';
                     
-                    // Reset Turnstile only on success
-                    resetTurnstile();
-                    
-                    // Confirm successful reading and delete memo
-                    try {
-                        // Make confirmation request without Turnstile
-                        const confirmRequestBody = {};
-                        
-                        const confirmResponse = await fetch('/api/confirm-memo-read?id=' + memoId, {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json'
-                            },
-                            body: JSON.stringify(confirmRequestBody)
-                        });
-                        
-                        // Update status message after successful deletion
-                        if (confirmResponse.ok) {
-                            const memoStatus = document.getElementById('memoStatus');
-                            if (memoStatus) {
-                                memoStatus.textContent = 'Memo has been read and deleted';
-                            }
-                        }
-                        // Note: We don't need to handle the response here since the memo is already displayed
-                        // The deletion is just for cleanup purposes
-                    } catch (confirmError) {
-                        // Silently handle confirmation errors - memo is already displayed
-                        // The memo will be cleaned up by the expiry mechanism if deletion fails
-                    }
+                    // Explicitly render Turnstile for confirmation with callbacks
+                    renderConfirmationTurnstile(memoId);
                 } else {
                     if (result.error === 'Memo not found') {
-                        showError('{{MEMO_ALREADY_READ_DELETED_ERROR}}');
+                        showError(ERROR_MESSAGES.MEMO_ALREADY_READ_DELETED);
                     } else if (result.error === 'Memo expired') {
-                        showError('{{MEMO_EXPIRED_DELETED_ERROR}}');
+                        showError(ERROR_MESSAGES.MEMO_EXPIRED_DELETED);
                     } else {
-                        showError(result.error || '{{READ_MEMO_ERROR}}');
+                        showError(result.error || ERROR_MESSAGES.READ_MEMO_ERROR);
                     }
                     // Don't reset Turnstile on error to avoid refreshing the widget
                 }
             } catch (error) {
                 if (error.message.includes('Failed to decrypt')) {
-                    showError('{{INVALID_PASSWORD_CHECK_ERROR}}');
+                    showError(ERROR_MESSAGES.INVALID_PASSWORD_CHECK);
                 } else {
-                    showError('{{READ_MEMO_ERROR}}');
+                    showError(ERROR_MESSAGES.READ_MEMO_ERROR);
                 }
                 // Don't reset Turnstile on error to avoid refreshing the widget
             }

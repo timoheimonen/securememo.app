@@ -474,41 +474,47 @@ export async function handleConfirmMemoRead(request, env) {
         // Sanitize user inputs
         const sanitizedTurnstileResponse = sanitizeForJSON(cfTurnstileResponse);
         
-        // Verify Turnstile token if provided (optional for confirmation)
-        if (sanitizedTurnstileResponse) {
-            try {
-                const turnstileResponse = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded',
-                    },
-                    body: new URLSearchParams({
-                        secret: env.TURNSTILE_SECRET,
-                        response: sanitizedTurnstileResponse,
-                    }),
-                });
+        // Verify Turnstile token (mandatory for confirmation)
+        if (!sanitizedTurnstileResponse) {
+            return new Response(JSON.stringify({ error: getErrorMessage('MISSING_TURNSTILE') }), {
+                status: 400,
+                headers: { 'Content-Type': 'application/json' }
+            });
+        }
 
-                if (!turnstileResponse.ok) {
-                    return new Response(JSON.stringify({ error: getErrorMessage('TURNSTILE_API_ERROR') }), {
-                        status: 500,
-                        headers: { 'Content-Type': 'application/json' }
-                    });
-                }
+        // Verify Turnstile with Cloudflare API
+        try {
+            const turnstileResponse = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: new URLSearchParams({
+                    secret: env.TURNSTILE_SECRET,
+                    response: sanitizedTurnstileResponse,
+                }),
+            });
 
-                const turnstileResult = await turnstileResponse.json();
-                
-                if (!turnstileResult.success) {
-                    return new Response(JSON.stringify({ error: getErrorMessage('TURNSTILE_FAILED') }), {
-                        status: 400,
-                        headers: { 'Content-Type': 'application/json' }
-                    });
-                }
-            } catch (turnstileError) {
-                return new Response(JSON.stringify({ error: getErrorMessage('TURNSTILE_VERIFICATION_ERROR') }), {
+            if (!turnstileResponse.ok) {
+                return new Response(JSON.stringify({ error: getErrorMessage('TURNSTILE_API_ERROR') }), {
                     status: 500,
                     headers: { 'Content-Type': 'application/json' }
                 });
             }
+
+            const turnstileResult = await turnstileResponse.json();
+            
+            if (!turnstileResult.success) {
+                return new Response(JSON.stringify({ error: getErrorMessage('TURNSTILE_FAILED') }), {
+                    status: 400,
+                    headers: { 'Content-Type': 'application/json' }
+                });
+            }
+        } catch (turnstileError) {
+            return new Response(JSON.stringify({ error: getErrorMessage('TURNSTILE_VERIFICATION_ERROR') }), {
+                status: 500,
+                headers: { 'Content-Type': 'application/json' }
+            });
         }
         
         const url = new URL(request.url);

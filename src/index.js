@@ -244,13 +244,17 @@ export default {
         const jsContent = getReadMemoJS()
           .replace('{{TURNSTILE_SITE_KEY}}', env.TURNSTILE_SITE_KEY)
           .replace('{{MISSING_MEMO_ID_ERROR}}', getErrorMessage('MISSING_MEMO_ID'))
-          .replace('{{MISSING_PASSWORD_ERROR}}', getErrorMessage('MISSING_PASSWORD'))
-          .replace('{{INVALID_MEMO_URL_ERROR}}', getErrorMessage('INVALID_MEMO_URL'))
-          .replace('{{MISSING_SECURITY_CHALLENGE_ERROR}}', getErrorMessage('MISSING_SECURITY_CHALLENGE'))
-          .replace('{{MEMO_ALREADY_READ_DELETED_ERROR}}', getErrorMessage('MEMO_ALREADY_READ_DELETED'))
-          .replace('{{MEMO_EXPIRED_DELETED_ERROR}}', getErrorMessage('MEMO_EXPIRED_DELETED'))
-          .replace('{{INVALID_PASSWORD_CHECK_ERROR}}', getErrorMessage('INVALID_PASSWORD_CHECK'))
-          .replace('{{READ_MEMO_ERROR}}', getErrorMessage('READ_MEMO_ERROR'));
+          .replace('{{MISSING_PASSWORD_ERROR}}', getErrorMessage('MISSING_PASSWORD_ERROR'))
+          .replace('{{INVALID_MEMO_URL_ERROR}}', getErrorMessage('INVALID_MEMO_URL_ERROR'))
+          .replace('{{MISSING_SECURITY_CHALLENGE_ERROR}}', getErrorMessage('MISSING_SECURITY_CHALLENGE_ERROR'))
+          .replace('{{SECURITY_VERIFICATION_FAILED}}', getErrorMessage('SECURITY_VERIFICATION_FAILED'))
+          .replace('{{CONFIRMATION_DELETION_WARNING}}', getErrorMessage('CONFIRMATION_DELETION_WARNING'))
+          .replace('{{CONFIRMATION_DELETION_ERROR}}', getErrorMessage('CONFIRMATION_DELETION_ERROR'))
+          .replace('{{MEMO_ALREADY_READ_DELETED_ERROR}}', getErrorMessage('MEMO_ALREADY_READ_DELETED_ERROR'))
+          .replace('{{MEMO_EXPIRED_DELETED_ERROR}}', getErrorMessage('MEMO_EXPIRED_DELETED_ERROR'))
+          .replace('{{INVALID_PASSWORD_CHECK_ERROR}}', getErrorMessage('INVALID_PASSWORD_CHECK_ERROR'))
+          .replace('{{READ_MEMO_ERROR}}', getErrorMessage('READ_MEMO_ERROR'))
+          .replace('{{DECRYPTION_ERROR}}', getErrorMessage('DECRYPTION_ERROR'));
         return new Response(jsContent, {
           headers: { 
             'Content-Type': 'application/javascript',

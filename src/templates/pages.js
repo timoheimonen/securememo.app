@@ -337,7 +337,7 @@ export async function getReadMemoHTML() {
                             <small class="form-help">The password should have been shared with you separately from the memo URL</small>
                         </div>
                         <div class="form-group">
-                            <div class="cf-turnstile" data-sitekey="{{TURNSTILE_SITE_KEY}}"></div>
+                            <div class="cf-turnstile"></div>
                             <small class="form-help">Please complete the security challenge to decrypt your memo</small>
                         </div>
                         <button type="submit" class="btn btn-primary">Decrypt Memo</button>
