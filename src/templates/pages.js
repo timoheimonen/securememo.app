@@ -37,16 +37,16 @@ export async function getIndexHTML() {
             <h2>How It Works</h2>
             <div class="features-grid">
                 <div class="feature-card">
-                    <h3>🔐 Encrypt</h3>
-                    <p>Your message is encrypted in your browser before being sent to our servers</p>
+                    <h3>🔐 Encrypt in Browser</h3>
+                    <p>Type your message. It gets encrypted right in your browser using strong AES-256 encryption before ever touching our servers.</p>
                 </div>
                 <div class="feature-card">
-                    <h3>🔗 Share</h3>
-                    <p>Get a secure URL and separate encryption password to share with your recipient</p>
+                    <h3>🔗 Share Securely</h3>
+                    <p>Get a unique URL and a separate random password, and share them through different channels for extra security.</p>
                 </div>
                 <div class="feature-card">
-                    <h3>💥 Self-Destruct</h3>
-                    <p>Once read or expired, the memo is permanently deleted from our database</p>
+                    <h3>💥 Auto-Destruct</h3>
+                    <p>The memo deletes itself permanently after it's read or the time limit expires (from 8 hours to 30 days).</p>
                 </div>
             </div>
         </div>
@@ -55,16 +55,16 @@ export async function getIndexHTML() {
             <h2>Security Features</h2>
             <div class="features-grid">
                 <div class="feature-card">
-                    <h3>🔒 Client-Side Encryption</h3>
-                    <p>Your message is encrypted in your browser using AES-256 before transmission</p>
+                    <h3>🔒 True Client-Side Encryption</h3>
+                    <p>Your message is encrypted in-browser with AES-256-GCM and a strong key derivation (600,000+ iterations). We never see the plaintext.</p>
                 </div>
                 <div class="feature-card">
-                    <h3>🗑️ Auto-Delete</h3>
-                    <p>Memos are automatically deleted after being read or expired</p>
+                    <h3>🗑️ Reliable Auto-Delete</h3>
+                    <p>Memos vanish forever after reading or expiration, with automatic cleanup every hour. No backups or recovery possible.</p>
                 </div>
                 <div class="feature-card">
-                    <h3>🌐 No Password Storage</h3>
-                    <p>Encryption passwords are never stored on our servers</p>
+                    <h3>🌐 Zero Password Knowledge</h3>
+                    <p>We generate and handle passwords entirely in your browser. They're never sent to or stored on our servers.</p>
                 </div>
             </div>
         </div>
