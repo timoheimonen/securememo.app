@@ -76,7 +76,7 @@ async function generateMemoId(env, maxRetries = 10) {
     }
     
     // If we've exhausted all retries, throw an error
-    throw new Error('Failed to generate unique memo_id after maximum retries');
+    throw new Error(getErrorMessage('MEMO_ID_GENERATION_MAX_RETRIES'));
 }
 
 // Create new memo with validation and Turnstile verification

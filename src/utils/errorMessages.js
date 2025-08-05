@@ -42,7 +42,28 @@ export const errorMessages = {
   
   // Network errors
   'NETWORK_ERROR': 'Service temporarily unavailable. Please try again.',
-  'SERVICE_UNAVAILABLE': 'Service temporarily unavailable. Please try again later.'
+  'SERVICE_UNAVAILABLE': 'Service temporarily unavailable. Please try again later.',
+  
+  // Client-side validation errors
+  'MISSING_MESSAGE': 'Please enter a message',
+  'MESSAGE_TOO_LONG': 'Message is too long (max 10,000 characters)',
+  'MISSING_SECURITY_CHALLENGE': 'Please complete the security challenge',
+  'CREATE_MEMO_FAILED': 'Failed to create memo',
+  'CREATE_MEMO_ERROR': 'An error occurred while creating the memo',
+  'READ_MEMO_ERROR': 'An error occurred while reading the memo',
+  'DECRYPTION_ERROR': 'Failed to decrypt message. Invalid password or corrupted data.',
+  'MEMO_ID_GENERATION_MAX_RETRIES': 'Failed to generate unique memo_id after maximum retries',
+  'MISSING_PASSWORD': 'Please enter the encryption password',
+  'INVALID_MEMO_URL': 'Invalid memo URL',
+  'MEMO_ALREADY_READ_DELETED': 'This memo has already been read and deleted, or it has expired.',
+  'MEMO_EXPIRED_DELETED': 'This memo has expired and has been deleted.',
+  'INVALID_PASSWORD_CHECK': 'Invalid password. Please check the password you received separately.',
+  
+  // HTTP status errors
+  'INTERNAL_SERVER_ERROR': 'Internal Server Error',
+  'NOT_FOUND': 'Not Found',
+  'METHOD_NOT_ALLOWED': 'Method Not Allowed',
+  'CLEANUP_FAILED': 'Cleanup failed'
 };
 
 /**

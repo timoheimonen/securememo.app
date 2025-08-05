@@ -150,12 +150,12 @@ document.getElementById('memoForm').addEventListener('submit', async (e) => {
     const expiryHours = parseInt(document.getElementById('expiryHours').value);
     
     if (!message) {
-        showMessage('Please enter a message', 'error');
+        showMessage('{{MISSING_MESSAGE_ERROR}}', 'error');
         return;
     }
     
     if (message.length > 10000) {
-        showMessage('Message is too long (max 10,000 characters)', 'error');
+        showMessage('{{MESSAGE_TOO_LONG_ERROR}}', 'error');
         return;
     }
     
@@ -163,7 +163,7 @@ document.getElementById('memoForm').addEventListener('submit', async (e) => {
     const turnstileResponse = getTurnstileResponse();
     
     if (!turnstileResponse) {
-        showMessage('Please complete the security challenge', 'error');
+        showMessage('{{MISSING_SECURITY_CHALLENGE_ERROR}}', 'error');
         return;
     }
     
@@ -214,11 +214,11 @@ document.getElementById('memoForm').addEventListener('submit', async (e) => {
             // Reset Turnstile only on success
             resetTurnstile();
         } else {
-            showMessage(result.error || 'Failed to create memo', 'error');
+            showMessage(result.error || '{{CREATE_MEMO_FAILED_ERROR}}', 'error');
             // Don't reset Turnstile on error to avoid refreshing the widget
         }
     } catch (error) {
-        showMessage('An error occurred while creating the memo', 'error');
+        showMessage('{{CREATE_MEMO_ERROR}}', 'error');
         // Don't reset Turnstile on error to avoid refreshing the widget
     } finally {
         // Always hide loading indicator and re-enable button in finally block
@@ -426,7 +426,7 @@ async function decryptMessage(encryptedData, password) {
         
         return new TextDecoder().decode(decrypted);
     } catch (error) {
-        throw new Error('Failed to decrypt message. Invalid password or corrupted data.');
+        throw new Error('{{DECRYPTION_ERROR}}');
     }
 }
 
@@ -470,12 +470,12 @@ window.addEventListener('load', () => {
             const memoId = getMemoId();
             
             if (!password) {
-                showError('Please enter the encryption password');
+                showError('{{MISSING_PASSWORD_ERROR}}');
                 return;
             }
             
             if (!memoId) {
-                showError('Invalid memo URL');
+                showError('{{INVALID_MEMO_URL_ERROR}}');
                 return;
             }
             
@@ -483,7 +483,7 @@ window.addEventListener('load', () => {
             const turnstileResponse = getTurnstileResponse();
             
             if (!turnstileResponse) {
-                showError('Please complete the security challenge');
+                showError('{{MISSING_SECURITY_CHALLENGE_ERROR}}');
                 return;
             }
             
@@ -550,19 +550,19 @@ window.addEventListener('load', () => {
                     }
                 } else {
                     if (result.error === 'Memo not found') {
-                        showError('This memo has already been read and deleted, or it has expired.');
+                        showError('{{MEMO_ALREADY_READ_DELETED_ERROR}}');
                     } else if (result.error === 'Memo expired') {
-                        showError('This memo has expired and has been deleted.');
+                        showError('{{MEMO_EXPIRED_DELETED_ERROR}}');
                     } else {
-                        showError(result.error || 'Failed to read memo');
+                        showError(result.error || '{{READ_MEMO_ERROR}}');
                     }
                     // Don't reset Turnstile on error to avoid refreshing the widget
                 }
             } catch (error) {
                 if (error.message.includes('Failed to decrypt')) {
-                    showError('Invalid password. Please check the password you received separately.');
+                    showError('{{INVALID_PASSWORD_CHECK_ERROR}}');
                 } else {
-                    showError('An error occurred while reading the memo');
+                    showError('{{READ_MEMO_ERROR}}');
                 }
                 // Don't reset Turnstile on error to avoid refreshing the widget
             }

@@ -185,7 +185,7 @@ export default {
       // Serve static assets
       if (pathname === '/styles.css') {
         if (request.method !== 'GET') {
-          return new Response('Method Not Allowed', {
+          return new Response(getErrorMessage('METHOD_NOT_ALLOWED'), {
             status: 405,
             headers: { 
               'Allow': 'GET',
@@ -205,7 +205,7 @@ export default {
       // Serve JS files with dynamic content injection
       if (pathname === '/js/create-memo.js') {
         if (request.method !== 'GET') {
-          return new Response('Method Not Allowed', {
+          return new Response(getErrorMessage('METHOD_NOT_ALLOWED'), {
             status: 405,
             headers: { 
               'Allow': 'GET',
@@ -213,7 +213,15 @@ export default {
             }
           });
         }
-        const jsContent = getCreateMemoJS().replace('{{TURNSTILE_SITE_KEY}}', env.TURNSTILE_SITE_KEY);
+        const jsContent = getCreateMemoJS()
+          .replace('{{TURNSTILE_SITE_KEY}}', env.TURNSTILE_SITE_KEY)
+          .replace('{{MISSING_MESSAGE_ERROR}}', getErrorMessage('MISSING_MESSAGE'))
+          .replace('{{MESSAGE_TOO_LONG_ERROR}}', getErrorMessage('MESSAGE_TOO_LONG'))
+          .replace('{{MISSING_SECURITY_CHALLENGE_ERROR}}', getErrorMessage('MISSING_SECURITY_CHALLENGE'))
+          .replace('{{CREATE_MEMO_FAILED_ERROR}}', getErrorMessage('CREATE_MEMO_FAILED'))
+          .replace('{{CREATE_MEMO_ERROR}}', getErrorMessage('CREATE_MEMO_ERROR'))
+          .replace('{{DECRYPTION_ERROR}}', getErrorMessage('DECRYPTION_ERROR'))
+          .replace('{{READ_MEMO_ERROR}}', getErrorMessage('READ_MEMO_ERROR'));
         return new Response(jsContent, {
           headers: { 
             'Content-Type': 'application/javascript',
@@ -225,7 +233,7 @@ export default {
       
       if (pathname === '/js/read-memo.js') {
         if (request.method !== 'GET') {
-          return new Response('Method Not Allowed', {
+          return new Response(getErrorMessage('METHOD_NOT_ALLOWED'), {
             status: 405,
             headers: { 
               'Allow': 'GET',
@@ -235,7 +243,14 @@ export default {
         }
         const jsContent = getReadMemoJS()
           .replace('{{TURNSTILE_SITE_KEY}}', env.TURNSTILE_SITE_KEY)
-          .replace('{{MISSING_MEMO_ID_ERROR}}', getErrorMessage('MISSING_MEMO_ID'));
+          .replace('{{MISSING_MEMO_ID_ERROR}}', getErrorMessage('MISSING_MEMO_ID'))
+          .replace('{{MISSING_PASSWORD_ERROR}}', getErrorMessage('MISSING_PASSWORD'))
+          .replace('{{INVALID_MEMO_URL_ERROR}}', getErrorMessage('INVALID_MEMO_URL'))
+          .replace('{{MISSING_SECURITY_CHALLENGE_ERROR}}', getErrorMessage('MISSING_SECURITY_CHALLENGE'))
+          .replace('{{MEMO_ALREADY_READ_DELETED_ERROR}}', getErrorMessage('MEMO_ALREADY_READ_DELETED'))
+          .replace('{{MEMO_EXPIRED_DELETED_ERROR}}', getErrorMessage('MEMO_EXPIRED_DELETED'))
+          .replace('{{INVALID_PASSWORD_CHECK_ERROR}}', getErrorMessage('INVALID_PASSWORD_CHECK'))
+          .replace('{{READ_MEMO_ERROR}}', getErrorMessage('READ_MEMO_ERROR'));
         return new Response(jsContent, {
           headers: { 
             'Content-Type': 'application/javascript',
@@ -247,7 +262,7 @@ export default {
       
       if (pathname === '/js/common.js') {
         if (request.method !== 'GET') {
-          return new Response('Method Not Allowed', {
+          return new Response(getErrorMessage('METHOD_NOT_ALLOWED'), {
             status: 405,
             headers: { 
               'Allow': 'GET',
@@ -266,7 +281,7 @@ export default {
 
       // Route page requests
       if (request.method !== 'GET') {
-        return new Response('Method Not Allowed', {
+        return new Response(getErrorMessage('METHOD_NOT_ALLOWED'), {
           status: 405,
           headers: { 
             'Allow': 'GET',
@@ -298,7 +313,7 @@ export default {
           response = await getPrivacyHTML();
           break;
         default:
-          return new Response('Not Found', { 
+          return new Response(getErrorMessage('NOT_FOUND'), { 
             status: 404,
             headers: getSecurityHeaders(request)
           });
@@ -311,7 +326,7 @@ export default {
         }
       });
     } catch (error) {
-      return new Response('Internal Server Error', { 
+      return new Response(getErrorMessage('INTERNAL_SERVER_ERROR'), { 
         status: 500,
         headers: getSecurityHeaders(request)
       });
@@ -324,7 +339,7 @@ export default {
       const result = await handleCleanupMemos(env);
       return result;
     } catch (error) {
-      return new Response('Cleanup failed', { status: 500 });
+      return new Response(getErrorMessage('CLEANUP_FAILED'), { status: 500 });
     }
   }
 }; 
