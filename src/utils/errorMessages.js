@@ -62,7 +62,7 @@ export const errorMessages = {
   // HTTP status errors
   'INTERNAL_SERVER_ERROR': 'Internal Server Error',
   'NOT_FOUND': 'Not Found',
-  'METHOD_NOT_ALLOWED': 'Method Not Allowed',
+  'BAD_REQUEST': 'Bad Request',
   'CLEANUP_FAILED': 'Cleanup failed'
 };
 

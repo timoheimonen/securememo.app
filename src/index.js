@@ -65,7 +65,7 @@ export default {
     try {
       // Check DB availability
       if (!env.DB) {
-        return new Response('Service Unavailable', { 
+        return new Response(getErrorMessage('SERVICE_UNAVAILABLE'), { 
           status: 503,
           headers: getSecurityHeaders(request)
         });
@@ -76,7 +76,7 @@ export default {
       try {
         url = new URL(request.url);
       } catch (urlError) {
-        return new Response('Bad Request', { 
+        return new Response(getErrorMessage('BAD_REQUEST'), { 
           status: 400,
           headers: getSecurityHeaders(request)
         });
@@ -175,7 +175,7 @@ export default {
           case 'confirm-memo-read':
             return await handleConfirmMemoRead(request, env);
           default:
-            return new Response('Not Found', { 
+            return new Response(getErrorMessage('NOT_FOUND'), { 
               status: 404,
               headers: getSecurityHeaders(request)
             });
