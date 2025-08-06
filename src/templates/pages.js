@@ -372,6 +372,10 @@ export async function getReadMemoHTML() {
                             <p>Deleting memo securely...</p>
                         </div>
                     </div>
+                    <div class="form-group" style="margin-top: 1rem;">
+                        <div class="cf-turnstile-confirmation"></div>
+                        <small class="form-help">Please complete the security challenge to confirm memo deletion</small>
+                    </div>
                     <div class="memo-actions">
                         <a href="/create-memo.html" class="btn btn-primary">Create New Memo</a>
                         <a href="/" class="btn btn-secondary">Go Home</a>

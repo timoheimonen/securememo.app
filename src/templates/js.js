@@ -411,17 +411,25 @@ function renderConfirmationTurnstile(memoId) {
         turnstile.remove();
     }
     
-    // Add timeout to prevent spinner from staying visible indefinitely
+    // Ensure the Turnstile container is visible
+    const turnstileContainer = document.querySelector('.cf-turnstile-confirmation');
+    if (turnstileContainer) {
+        turnstileContainer.style.display = 'block';
+        turnstileContainer.style.visibility = 'visible';
+        turnstileContainer.style.opacity = '1';
+    }
+    
+    // Add timeout to prevent spinner from staying visible indefinitely (increased to 30s)
     const renderTimeout = setTimeout(() => {
         const deletionSpinner = document.getElementById('deletionSpinner');
         if (deletionSpinner) {
             deletionSpinner.style.display = 'none';
         }
         showMessage(ERROR_MESSAGES.CONFIRMATION_DELETION_WARNING, 'warning');
-    }, 10000);
+    }, 30000);
     
     // Render new widget with explicit callbacks
-    const widgetId = turnstile.render('.cf-turnstile', {
+    const widgetId = turnstile.render('.cf-turnstile-confirmation', {
         sitekey: TURNSTILE_SITE_KEY,
         callback: async function(token) {
             // Clear timeout since callback fired successfully
@@ -442,11 +450,18 @@ function renderConfirmationTurnstile(memoId) {
                 if (confirmResponse.ok) {
                     const memoStatus = document.getElementById('memoStatus');
                     const deletionSpinner = document.getElementById('deletionSpinner');
+                    const securityChallengeTexts = document.querySelectorAll('.form-help');
+                    const targetText = Array.from(securityChallengeTexts).find(el => 
+                        el.textContent.includes('Please complete the security challenge to confirm memo deletion')
+                    );
                     if (memoStatus) {
                         memoStatus.textContent = 'Memo confirmed as read and permanently deleted.';
                     }
                     if (deletionSpinner) {
                         deletionSpinner.style.display = 'none';
+                    }
+                    if (targetText) {
+                        targetText.style.display = 'none';
                     }
                 } else {
                     showMessage(ERROR_MESSAGES.CONFIRMATION_DELETION_WARNING, 'warning');
