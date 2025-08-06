@@ -413,8 +413,12 @@ function renderConfirmationTurnstile(memoId) {
 
                 if (confirmResponse.ok) {
                     const memoStatus = document.getElementById('memoStatus');
+                    const deletionSpinner = document.getElementById('deletionSpinner');
                     if (memoStatus) {
-                        memoStatus.textContent = 'Memo has been read and deleted';
+                        memoStatus.textContent = 'Memo confirmed as read and permanently deleted.';
+                    }
+                    if (deletionSpinner) {
+                        deletionSpinner.style.display = 'none';
                     }
                 } else {
                     showMessage(ERROR_MESSAGES.CONFIRMATION_DELETION_WARNING, 'warning');
@@ -571,6 +575,16 @@ window.addEventListener('load', () => {
                     document.getElementById('decryptedMessage').textContent = decryptedMessage;
                     document.getElementById('memoContent').style.display = 'block';
                     document.getElementById('passwordForm').style.display = 'none';
+                    
+                    // Update status and show deletion spinner
+                    const memoStatus = document.getElementById('memoStatus');
+                    const deletionSpinner = document.getElementById('deletionSpinner');
+                    if (memoStatus) {
+                        memoStatus.textContent = 'Memo decrypted. Deleting in progress... Please wait.';
+                    }
+                    if (deletionSpinner) {
+                        deletionSpinner.style.display = 'block';
+                    }
                     
                     // Clear password field
                     document.getElementById('password').value = '';
