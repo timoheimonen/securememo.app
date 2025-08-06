@@ -404,6 +404,53 @@ function resetTurnstile() {
     }
 }
 
+// Client-side retry function for confirmation with exponential backoff
+async function confirmDeletionWithRetry(memoId, widgetId, initialToken, maxRetries = 3) {
+    let attempts = 0;
+    let currentToken = initialToken; // Use callback token first
+    while (attempts < maxRetries) {
+        try {
+            // Try to get a fresh token if current one is null
+            if (!currentToken) {
+                // Reset widget to generate new token
+                if (typeof turnstile !== 'undefined' && turnstile.reset) {
+                    turnstile.reset(widgetId);
+                }
+                // Wait a bit for the widget to re-render
+                await new Promise(resolve => setTimeout(resolve, 1000));
+                currentToken = getTurnstileResponse();
+                
+                // If still no token after reset, then throw error
+                if (!currentToken) {
+                    throw new Error('No token available after reset');
+                }
+            }
+            
+            const response = await fetch('/api/confirm-memo-read?id=' + memoId, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ cfTurnstileResponse: currentToken })
+            });
+            if (response.ok) {
+                return true;
+            }
+            throw new Error('Confirmation failed: ' + response.status);
+        } catch (error) {
+            attempts++;
+            if (attempts === maxRetries) {
+                showMessage(ERROR_MESSAGES.CONFIRMATION_DELETION_WARNING, 'warning');
+                return false;
+            }
+            // Reset widget for new token on failure
+            if (typeof turnstile !== 'undefined' && turnstile.reset) {
+                turnstile.reset(widgetId); // Generates new challenge/token
+            }
+            await new Promise(resolve => setTimeout(resolve, Math.pow(2, attempts) * 1000)); // Backoff
+            currentToken = getTurnstileResponse(); // Get fresh token after reset
+        }
+    }
+}
+
 // Explicitly render Turnstile for confirmation with callbacks
 function renderConfirmationTurnstile(memoId) {
     // Remove existing widget if needed
@@ -419,55 +466,42 @@ function renderConfirmationTurnstile(memoId) {
         turnstileContainer.style.opacity = '1';
     }
     
-    // Add timeout to prevent spinner from staying visible indefinitely (increased to 30s)
+    // Add timeout to prevent spinner from staying visible indefinitely (60s to account for retries)
     const renderTimeout = setTimeout(() => {
         const deletionSpinner = document.getElementById('deletionSpinner');
         if (deletionSpinner) {
             deletionSpinner.style.display = 'none';
         }
         showMessage(ERROR_MESSAGES.CONFIRMATION_DELETION_WARNING, 'warning');
-    }, 30000);
+    }, 60000);
     
     // Render new widget with explicit callbacks
     const widgetId = turnstile.render('.cf-turnstile-confirmation', {
         sitekey: TURNSTILE_SITE_KEY,
+        retry: 'never', // Prevent auto-retries conflicting with our logic
         callback: async function(token) {
             // Clear timeout since callback fired successfully
             clearTimeout(renderTimeout);
             
-            // Now we have a fresh token—proceed with confirmation
-            const confirmRequestBody = {
-                cfTurnstileResponse: token
-            };
-
-            try {
-                const confirmResponse = await fetch('/api/confirm-memo-read?id=' + memoId, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(confirmRequestBody)
-                });
-
-                if (confirmResponse.ok) {
-                    const memoStatus = document.getElementById('memoStatus');
-                    const deletionSpinner = document.getElementById('deletionSpinner');
-                    const securityChallengeTexts = document.querySelectorAll('.form-help');
-                    const targetText = Array.from(securityChallengeTexts).find(el => 
-                        el.textContent.includes('Please complete the security challenge to confirm memo deletion')
-                    );
-                    if (memoStatus) {
-                        memoStatus.textContent = 'Memo confirmed as read and permanently deleted.';
-                    }
-                    if (deletionSpinner) {
-                        deletionSpinner.style.display = 'none';
-                    }
-                    if (targetText) {
-                        targetText.style.display = 'none';
-                    }
-                } else {
-                    showMessage(ERROR_MESSAGES.CONFIRMATION_DELETION_WARNING, 'warning');
+            // Now we have a fresh token—proceed with confirmation using retry mechanism
+            const success = await confirmDeletionWithRetry(memoId, widgetId, token);
+            
+            if (success) {
+                const memoStatus = document.getElementById('memoStatus');
+                const deletionSpinner = document.getElementById('deletionSpinner');
+                const securityChallengeTexts = document.querySelectorAll('.form-help');
+                const targetText = Array.from(securityChallengeTexts).find(el => 
+                    el.textContent.includes('Please complete the security challenge to confirm memo deletion')
+                );
+                if (memoStatus) {
+                    memoStatus.textContent = 'Memo confirmed as read and permanently deleted.';
                 }
-            } catch (confirmError) {
-                showMessage(ERROR_MESSAGES.CONFIRMATION_DELETION_ERROR, 'error');
+                if (deletionSpinner) {
+                    deletionSpinner.style.display = 'none';
+                }
+                if (targetText) {
+                    targetText.style.display = 'none';
+                }
             }
         },
         'error-callback': function(errorCode) {
