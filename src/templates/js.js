@@ -264,6 +264,22 @@ document.getElementById('copyUrl').addEventListener('click', async () => {
     }
 });
 
+// Toggle password visibility
+document.getElementById('togglePassword').addEventListener('click', () => {
+    const passwordInput = document.getElementById('memoPassword');
+    const toggleBtn = document.getElementById('togglePassword');
+    
+    if (passwordInput.type === 'password') {
+        passwordInput.type = 'text';
+        toggleBtn.textContent = 'Hide';
+        toggleBtn.style.backgroundColor = '#007bff';
+    } else {
+        passwordInput.type = 'password';
+        toggleBtn.textContent = 'Show';
+        toggleBtn.style.backgroundColor = '#007bff';
+    }
+});
+
 // Copy password to clipboard using modern Clipboard API
 document.getElementById('copyPassword').addEventListener('click', async () => {
     const passwordInput = document.getElementById('memoPassword');

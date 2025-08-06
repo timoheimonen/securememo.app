@@ -275,7 +275,8 @@ export async function getCreateMemoHTML() {
                     <div class="memo-password-section">
                         <label for="memoPassword">Encryption Password (share this separately):</label>
                         <div class="url-copy-container">
-                            <input type="text" id="memoPassword" readonly onclick="this.select(); document.execCommand('copy'); showMessage('Password copied to clipboard!', 'success');">
+                            <input type="password" id="memoPassword" readonly onclick="this.select(); document.execCommand('copy'); showMessage('Password copied to clipboard!', 'success');">
+                            <button type="button" id="togglePassword" class="btn btn-primary" style="margin-right: 8px;">Show</button>
                             <button type="button" id="copyPassword" class="btn btn-primary">Copy Password</button>
                         </div>
                         <small class="form-help">This is the encryption password. Share this separately from the URL for enhanced security. This is not saved on our servers, recovery not possible after leaving this page.</small>
