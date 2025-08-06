@@ -571,7 +571,7 @@ body {
   margin-bottom: 20px;
 }
 
-/* Messages */
+/* Memo Messages */
 .message {
   padding: 12px 16px;
   border-radius: 8px;

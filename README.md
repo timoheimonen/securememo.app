@@ -1,6 +1,6 @@
 # securememo.app
 
-**securememo.app** is a simple, private memo service for sharing sensitive messages. Everything is encrypted right in your browser with AES-256 — and each note disappears forever once it's read or when the time limit expires.
+**securememo.app** is a simple, private memo service for sharing sensitive memos. Everything is encrypted right in your browser with AES-256 — and each memo disappears forever once it's read or when the time limit expires.
 
 ---
 
@@ -8,7 +8,7 @@
 
 - **True end-to-end encryption** in your browser — nothing stored in plain text
 - **Password protection** — encryption password is not send or stored to server
-- **One-time readable notes** — they self-destruct automatically after being read or when the time limit expires
+- **One-time readable memos** — they self-destruct automatically after being read or when the time limit expires
 - **Multiple expiry options** — delete on read, expire in 8 hours, 1 day, 2 days, 1 week or 30 days
 - **Runs on Cloudflare Workers** — fast, lightweight, and globally distributed
 - **D1 Database** — SQLite-based database for reliable storage

@@ -110,7 +110,7 @@ export async function getAboutHTML() {
     <main class="main-content">
         <div class="about-section">
             <h1>About securememo.app</h1>
-            <p>securememo.app is a privacy-focused application that allows you to create encrypted messages that self-destruct after being read or expired. Built with security and privacy as the top priorities. Source code available on GitHub.</p>
+            <p>securememo.app is a privacy-focused application that allows you to create encrypted memos that self-destruct after being read or expired. Built with security and privacy as the top priorities. Source code available on GitHub.</p>
             
             <div class="tech-stack">
                 <h2>Technology Stack</h2>
@@ -135,7 +135,7 @@ export async function getAboutHTML() {
                         <p>The encryption password is generated separately from the URL and should be shared through a different channel for enhanced security.</p>
                     </div>
                     <div class="feature-item">
-                        <h3>💥 Self-Destructing Messages</h3>
+                        <h3>💥 Self-Destructing Memos</h3>
                         <p>Once a memo is read or expired, it's immediately and permanently deleted from our database. No traces remain.</p>
                     </div>
                     <div class="feature-item">
@@ -168,6 +168,15 @@ export async function getAboutHTML() {
                         <h3>3. Self-Destruct</h3>
                         <p>When the recipient opens the link and enters the password separately, the memo will be decrypted and then permanently deleted if read, or deleted automatically if expired. Expired memos are automatically cleaned up every 1 hours.</p>
                     </div>
+                </div>
+            </div>
+
+            <div class="cta-section">
+                <h2>Ready to Get Started?</h2>
+                <p>Create your first secure memo now and experience true end-to-end encryption.</p>
+                <div class="cta-buttons">
+                    <a href="/create-memo.html" class="btn btn-primary">Create Secure Memo</a>
+                    <a href="/" class="btn btn-secondary">Back to Home</a>
                 </div>
             </div>
         </div>
