@@ -375,7 +375,6 @@ export async function handleReadMemo(request, env) {
                 SELECT encrypted_message
                 FROM memos 
                 WHERE memo_id = ? 
-                AND is_read = 0 
                 AND (expiry_time IS NULL OR expiry_time > unixepoch('now'))
             `);
             
@@ -538,7 +537,6 @@ export async function handleConfirmMemoRead(request, env) {
             const deleteStmt = env.DB.prepare(`
                 DELETE FROM memos 
                 WHERE memo_id = ? 
-                AND is_read = 0 
                 AND (expiry_time IS NULL OR expiry_time > unixepoch('now'))
             `);
             
