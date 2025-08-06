@@ -411,10 +411,22 @@ function renderConfirmationTurnstile(memoId) {
         turnstile.remove();
     }
     
+    // Add timeout to prevent spinner from staying visible indefinitely
+    const renderTimeout = setTimeout(() => {
+        const deletionSpinner = document.getElementById('deletionSpinner');
+        if (deletionSpinner) {
+            deletionSpinner.style.display = 'none';
+        }
+        showMessage(ERROR_MESSAGES.CONFIRMATION_DELETION_WARNING, 'warning');
+    }, 10000);
+    
     // Render new widget with explicit callbacks
     const widgetId = turnstile.render('.cf-turnstile', {
         sitekey: TURNSTILE_SITE_KEY,
         callback: async function(token) {
+            // Clear timeout since callback fired successfully
+            clearTimeout(renderTimeout);
+            
             // Now we have a fresh token—proceed with confirmation
             const confirmRequestBody = {
                 cfTurnstileResponse: token
@@ -444,6 +456,8 @@ function renderConfirmationTurnstile(memoId) {
             }
         },
         'error-callback': function(errorCode) {
+            // Clear timeout since error callback fired
+            clearTimeout(renderTimeout);
             showError(ERROR_MESSAGES.SECURITY_VERIFICATION_FAILED);
         }
     });
