@@ -75,3 +75,10 @@ This project is open source under the [MIT License](LICENSE).
 ## Author
 
 Timo Heimonen (timo.heimonen@gmail.com)
+
+## Tags
+- #privacy
+- #encryption
+- #security
+- #cloudflare
+- #memos
