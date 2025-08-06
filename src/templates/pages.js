@@ -39,7 +39,7 @@ export async function getIndexHTML() {
             <div class="features-grid">
                 <div class="feature-card">
                     <h3>🔐 Encrypt in Browser</h3>
-                    <p>Type your message. It gets encrypted right in your browser using strong AES-256 encryption before ever touching our servers.</p>
+                    <p>Type your memo. It gets encrypted right in your browser using strong AES-256 encryption before ever touching our servers.</p>
                 </div>
                 <div class="feature-card">
                     <h3>🔗 Share Securely</h3>
@@ -57,7 +57,7 @@ export async function getIndexHTML() {
             <div class="features-grid">
                 <div class="feature-card">
                     <h3>🔒 True Client-Side Encryption</h3>
-                    <p>Your message is encrypted in-browser with AES-256-GCM and a strong key derivation (600,000+ iterations). We never see the plaintext.</p>
+                    <p>Your memo is encrypted in-browser with AES-256-GCM and a strong key derivation (600,000+ iterations). We never see the plaintext.</p>
                 </div>
                 <div class="feature-card">
                     <h3>🗑️ Reliable Auto-Delete</h3>
@@ -128,7 +128,7 @@ export async function getAboutHTML() {
                 <div class="feature-list">
                     <div class="feature-item">
                         <h3>🔐 Client-Side Encryption</h3>
-                        <p>All encryption happens in your browser using the Web Crypto API. Your message is encrypted with AES-256 before being sent to our servers.</p>
+                        <p>All encryption happens in your browser using the Web Crypto API. Your memo is encrypted with AES-256 before being sent to our servers.</p>
                     </div>
                     <div class="feature-item">
                         <h3>🔑 Separate Password Sharing</h3>
@@ -158,7 +158,7 @@ export async function getAboutHTML() {
                 <div class="feature-list">
                     <div class="feature-item">
                         <h3>1. Create a Memo</h3>
-                        <p>Go to "Create Secure Memo” and type your message. Choose an expiry time (8h, 1d, 2d, 1 week or a maximum of 30 days). Memos are deleted when read or expired. The system will generate a random encryption password.</p>
+                        <p>Go to "Create Secure Memo” and type your memo. Choose an expiry time (8h, 1d, 2d, 1 week or a maximum of 30 days). Memos are deleted when read or expired. The system will generate a random encryption password.</p>
                     </div>
                     <div class="feature-item">
                         <h3>2. Share the Link and Password</h3>
@@ -224,13 +224,13 @@ export async function getCreateMemoHTML() {
         <div class="memo-container">
             <div class="memo-card">
                 <h1>Create Secure Memo</h1>
-                <p class="memo-description">Your message will be encrypted in your browser and self-destruct after being read or expired.</p>
+                <p class="memo-description">Your memo will be encrypted in your browser and self-destruct after being read or expired.</p>
                 
                 <form id="memoForm" class="memo-form">
                     <div class="form-group">
-                        <label for="message">Your Message</label>
+                        <label for="message">Your Memo</label>
                         <textarea id="message" name="message" required 
-                                  placeholder="Type your secret message here..." 
+                                  placeholder="Type your secret memo here..." 
                                   rows="8" maxlength="10000"></textarea>
                         <small class="form-help">Maximum 10,000 characters</small>
                     </div>
@@ -256,7 +256,7 @@ export async function getCreateMemoHTML() {
                     <!-- Loading indicator (hidden by default) -->
                     <div id="loadingIndicator" class="loading-spinner" style="display: none;">
                         <div class="spinner"></div>
-                        <p>Encrypting your message securely... This may take a moment on older devices.</p>
+                        <p>Encrypting your memo securely... This may take a moment on older devices.</p>
                     </div>
                 </form>
                 

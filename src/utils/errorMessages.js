@@ -45,8 +45,8 @@ export const errorMessages = {
   'SERVICE_UNAVAILABLE': 'Service temporarily unavailable. Please try again later.',
   
   // Client-side validation errors
-  'MISSING_MESSAGE': 'Please enter a message',
-  'MESSAGE_TOO_LONG': 'Message is too long (max 10,000 characters)',
+  'MISSING_MESSAGE': 'Please enter a memo',
+  'MESSAGE_TOO_LONG': 'Memo is too long (max 10,000 characters)',
   'MISSING_SECURITY_CHALLENGE': 'Please complete the security challenge',
   'CREATE_MEMO_FAILED': 'Failed to create memo',
   'CREATE_MEMO_ERROR': 'An error occurred while creating the memo',
