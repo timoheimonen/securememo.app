@@ -638,6 +638,66 @@ function highlightCurrentPage() {
     });
 }
 
+function initMobileNav() {
+    const hamburger = document.getElementById('hamburger');
+    const navMenu = document.getElementById('navMenu');
+    
+    if (hamburger && navMenu) {
+        // Remove existing event listeners to prevent duplicates
+        hamburger.removeEventListener('click', toggleMenu);
+        document.removeEventListener('click', closeMenuOnOutsideClick);
+        
+        // Add event listeners
+        hamburger.addEventListener('click', toggleMenu);
+        
+        // Close menu when clicking on a link
+        const navLinks = navMenu.querySelectorAll('.nav-link');
+        navLinks.forEach(link => {
+            link.removeEventListener('click', closeMenuOnLinkClick);
+            link.addEventListener('click', closeMenuOnLinkClick);
+        });
+        
+        // Close menu when clicking outside
+        document.addEventListener('click', closeMenuOnOutsideClick);
+    }
+}
+
+function toggleMenu() {
+    const navMenu = document.getElementById('navMenu');
+    const hamburger = document.getElementById('hamburger');
+    if (navMenu && hamburger) {
+        const isExpanded = navMenu.classList.toggle('active');
+        hamburger.setAttribute('aria-expanded', isExpanded);
+    }
+}
+
+function closeMenuOnLinkClick() {
+    const navMenu = document.getElementById('navMenu');
+    const hamburger = document.getElementById('hamburger');
+    if (navMenu && hamburger) {
+        navMenu.classList.remove('active');
+        hamburger.setAttribute('aria-expanded', 'false');
+    }
+}
+
+function closeMenuOnOutsideClick(event) {
+    const hamburger = document.getElementById('hamburger');
+    const navMenu = document.getElementById('navMenu');
+    
+    if (hamburger && navMenu && !hamburger.contains(event.target) && !navMenu.contains(event.target)) {
+        navMenu.classList.remove('active');
+        hamburger.setAttribute('aria-expanded', 'false');
+    }
+}
+
+// Always initialize mobile navigation
+initMobileNav();
+
+// Re-initialize on window resize to handle dynamic content changes
+window.addEventListener('resize', () => {
+    initMobileNav();
+});
+
 highlightCurrentPage();
 `;
 } 

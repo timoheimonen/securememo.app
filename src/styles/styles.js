@@ -605,18 +605,105 @@ body {
   margin-top: 60px;
 }
 
+/* Touch-friendly elements */
+.btn, input[type="submit"], .nav-link {
+  min-width: 44px;
+  min-height: 44px;
+  touch-action: manipulation;
+}
+
+input, textarea, select {
+  touch-action: pan-y;
+}
+
+/* Hamburger styles */
+.hamburger {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 1.8rem;
+  cursor: pointer;
+  color: #333;
+  transition: color 0.3s ease;
+}
+
+.hamburger:hover {
+  color: #667eea;
+}
+
 /* Responsive design */
+@media (max-width: 480px) {
+  .hero-section h1 {
+    font-size: 2rem;
+  }
+  
+  .btn {
+    padding: 10px 20px;
+    font-size: 0.9rem;
+  }
+  
+  .form-group input {
+    font-size: 1rem;
+  }
+  
+  .nav-container {
+    padding: 15px;
+  }
+  
+  .main-content {
+    padding: 20px 15px;
+  }
+  
+  .memo-card {
+    padding: 15px;
+  }
+  
+  .about-section {
+    padding: 15px;
+  }
+  
+  .feature-card {
+    padding: 20px;
+  }
+}
+
 @media (max-width: 768px) {
   .nav-container {
-    flex-direction: column;
+    position: relative;
+    flex-wrap: wrap;
     height: auto;
-    padding: 20px;
+  }
+
+  .hamburger {
+    display: block;
+    order: 3;
   }
 
   .nav-menu {
+    display: none;
     flex-direction: column;
     gap: 15px;
-    margin-top: 20px;
+    position: absolute;
+    top: 70px;
+    left: 0;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    z-index: 999;
+    transition: opacity 0.3s ease;
+    opacity: 0;
+  }
+
+  .nav-menu.active {
+    display: flex;
+    opacity: 1;
+  }
+
+  .nav-link {
+    padding: 12px 0;
+    text-align: center;
   }
 
   .auth-links, .user-links {
@@ -656,6 +743,20 @@ body {
 
   .memo-actions {
     flex-direction: column;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .features-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .hero-section h1 {
+    font-size: 3rem;
+  }
+  
+  .main-content {
+    padding: 30px 20px;
   }
 }
 

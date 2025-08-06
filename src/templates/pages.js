@@ -20,6 +20,7 @@ export async function getIndexHTML() {
                 <li><a href="/about.html" class="nav-link">About</a></li>
                 <li><a href="/create-memo.html" class="nav-link">Create Secure Memo</a></li>
             </ul>
+            <button class="hamburger" id="hamburger" aria-label="Toggle navigation menu" aria-expanded="false">☰</button>
         </div>
     </nav>
 
@@ -102,6 +103,7 @@ export async function getAboutHTML() {
                 <li><a href="/about.html" class="nav-link active">About</a></li>
                 <li><a href="/create-memo.html" class="nav-link">Create Secure Memo</a></li>
             </ul>
+            <button class="hamburger" id="hamburger" aria-label="Toggle navigation menu" aria-expanded="false">☰</button>
         </div>
     </nav>
 
@@ -205,6 +207,7 @@ export async function getCreateMemoHTML() {
                 <li><a href="/about.html" class="nav-link">About</a></li>
                 <li><a href="/create-memo.html" class="nav-link active">Create Secure Memo</a></li>
             </ul>
+            <button class="hamburger" id="hamburger" aria-label="Toggle navigation menu" aria-expanded="false">☰</button>
         </div>
     </nav>
 
@@ -404,6 +407,7 @@ export async function getToSHTML() {
                 <li><a href="/about.html" class="nav-link">About</a></li>
                 <li><a href="/create-memo.html" class="nav-link">Create Secure Memo</a></li>
             </ul>
+            <button class="hamburger" id="hamburger" aria-label="Toggle navigation menu" aria-expanded="false">☰</button>
         </div>
     </nav>
 
@@ -557,6 +561,7 @@ export async function getPrivacyHTML() {
                 <li><a href="/about.html" class="nav-link">About</a></li>
                 <li><a href="/create-memo.html" class="nav-link">Create Secure Memo</a></li>
             </ul>
+            <button class="hamburger" id="hamburger" aria-label="Toggle navigation menu" aria-expanded="false">☰</button>
         </div>
     </nav>
 
