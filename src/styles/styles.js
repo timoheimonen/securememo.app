@@ -737,7 +737,8 @@ input, textarea, select {
   }
 
   .url-copy-container,
-  .password-copy-container {
+  .password-copy-container,
+  .password-input-container {
     flex-direction: column;
   }
 
@@ -867,13 +868,15 @@ input, textarea, select {
 }
 
 /* Copy button improvements */
-.url-copy-container {
+.url-copy-container,
+.password-input-container {
   display: flex;
   gap: 10px;
   align-items: center;
 }
 
-.url-copy-container input {
+.url-copy-container input,
+.password-input-container input {
   flex: 1;
   padding: 12px;
   border: 2px solid #e1e5e9;
@@ -883,19 +886,22 @@ input, textarea, select {
   cursor: text;
 }
 
-.url-copy-container input:focus {
+.url-copy-container input:focus,
+.password-input-container input:focus {
   outline: none;
   border-color: #667eea;
   background: white;
 }
 
-.url-copy-container .btn {
+.url-copy-container .btn,
+.password-input-container .btn {
   white-space: nowrap;
   min-width: 80px;
   transition: all 0.3s ease;
 }
 
-.url-copy-container .btn:hover {
+.url-copy-container .btn:hover,
+.password-input-container .btn:hover {
   transform: translateY(-1px);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }

@@ -345,8 +345,11 @@ export async function getReadMemoHTML() {
                     <form id="decryptForm">
                         <div class="form-group">
                             <label for="password">Encryption Password</label>
-                            <input type="text" id="password" name="password" required 
-                                   placeholder="Enter the encryption password shared with you separately">
+                            <div class="password-input-container">
+                                <input type="password" id="password" name="password" required 
+                                       placeholder="Enter the encryption password shared with you separately">
+                                <button type="button" id="toggleReadPassword" class="btn btn-primary">Show</button>
+                            </div>
                             <small class="form-help">The password should have been shared with you separately from the memo URL</small>
                         </div>
                         <div class="form-group">

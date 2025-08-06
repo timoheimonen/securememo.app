@@ -645,6 +645,25 @@ window.addEventListener('load', () => {
             }
         });
     }
+    
+    // Add toggle password functionality
+    const toggleReadPasswordBtn = document.getElementById('toggleReadPassword');
+    if (toggleReadPasswordBtn) {
+        toggleReadPasswordBtn.addEventListener('click', () => {
+            const passwordInput = document.getElementById('password');
+            const toggleBtn = document.getElementById('toggleReadPassword');
+            
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                toggleBtn.textContent = 'Hide';
+                toggleBtn.style.backgroundColor = '#007bff';
+            } else {
+                passwordInput.type = 'password';
+                toggleBtn.textContent = 'Show';
+                toggleBtn.style.backgroundColor = '#007bff';
+            }
+        });
+    }
 });
 
 function showError(message) {
