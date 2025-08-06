@@ -399,9 +399,6 @@ export async function handleReadMemo(request, env) {
             });
         }
         
-        // SECURITY: Do NOT delete memo here - deletion happens only after successful decryption
-        // This prevents memo loss if user provides wrong password
-        
         // Sanitize encrypted message for JSON response to prevent injection
         const sanitizedResponseMessage = sanitizeForJSON(memo.encrypted_message);
         
