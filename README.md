@@ -1,82 +1,75 @@
 # securememo.app
 
-**securememo.app** is a simple, private memo service for sharing sensitive memos. Everything is encrypted right in your browser with AES-256 — and each memo disappears forever once it's read or when the time limit expires.
-
----
+securememo.app is a simple, privacy-focused service for sharing sensitive memos securely. All encryption occurs client-side in your browser using AES-256-GCM with PBKDF2 key derivation—ensuring that plaintext is never transmitted or stored on the server. Each memo self-destructs permanently after being read or upon expiration.
 
 ## Features
 
-- **True end-to-end encryption** in your browser — nothing stored in plain text
-- **Password protection** — encryption password is not send or stored to server
-- **One-time readable memos** — they self-destruct automatically after being read or when the time limit expires
-- **Multiple expiry options** — delete on read, expire in 8 hours, 1 day, 2 days, 1 week or 30 days
-- **Runs on Cloudflare Workers** — fast, lightweight, and globally distributed
-- **D1 Database** — SQLite-based database for reliable storage
-- **Turnstile CAPTCHA** — blocks bots and spam without compromising privacy
-- **Strong security headers** — comprehensive CSP and security policies
-- **Automatic cleanup** — expired memos are automatically removed via cron jobs
-
----
+- **True end-to-end encryption**: Performed entirely in the browser; servers handle only encrypted data.
+- **Password protection**: Random passwords are generated client-side and never sent to or stored on the server.
+- **One-time access**: Memos automatically delete after being read or when the selected time limit expires.
+- **Flexible expiry options**: Choose from delete-on-read with timeouts of 8 hours, 1 day, 2 days, 1 week, or 30 days.
+- **Powered by Cloudflare Workers**: Ensures fast, scalable, and globally distributed performance.
+- **D1 Database**: Utilizes SQLite-compatible storage for reliable, encrypted memo persistence.
+- **Turnstile CAPTCHA**: Prevents bot abuse and spam while maintaining user privacy (no tracking).
+- **Robust security headers**: Includes strict CSP, HSTS, and other policies to mitigate common web vulnerabilities.
+- **Automated cleanup**: Expired or read memos are permanently removed via scheduled cron jobs.
 
 ## Architecture
 
 ### Tech Stack
-- **Runtime**: Cloudflare Workers
-- **Database**: Cloudflare D1 (SQLite)
-- **Frontend**: Vanilla JavaScript with modern ES6+ features
-- **Security**: Turnstile CAPTCHA, CSP headers, input sanitization
-- **Encryption**: AES-256 client-side encryption
+
+- **Runtime**: Cloudflare Workers for serverless execution.
+- **Database**: Cloudflare D1 (SQLite-based) for secure, efficient storage.
+- **Frontend**: Vanilla JavaScript with ES6+ features for a lightweight, no-framework experience.
+- **Security**: Cloudflare Turnstile CAPTCHA, Content Security Policy (CSP) headers, and comprehensive input sanitization.
+- **Encryption**: Client-side AES-256-GCM with PBKDF2 (600,000+ iterations) for key derivation.
 
 ### Project Structure
+
 ```
 cloudflare/
 ├── src/
 │   ├── handlers/          # API request handlers
-│   │   └── auth.js        # Memo creation, reading, and cleanup
+│   │   └── auth.js        # Handles memo creation, reading, confirmation, and cleanup
 │   ├── templates/         # HTML and JavaScript templates
-│   │   ├── pages.js       # HTML page templates
-│   │   └── js.js          # JavaScript templates
+│   │   ├── pages.js       # HTML page templates (e.g., index, about, create/read memo)
+│   │   └── js.js          # JavaScript templates (e.g., create/read memo logic)
 │   ├── utils/             # Utility functions
-│   │   ├── errorMessages.js # Centralized error handling
-│   │   ├── timingSecurity.js # Timing attack protection utilities
-│   │   └── validation.js  # Input validation and sanitization
+│   │   ├── errorMessages.js # Centralized error handling with generic messages
+│   │   ├── timingSecurity.js # Timing attack protections (e.g., constant-time comparisons, artificial delays)
+│   │   └── validation.js  # Input validation, sanitization, and secure checks
 │   ├── styles/            # CSS styling
-│   │   └── styles.js      # Dynamic styles
-│   └── index.js           # Main Worker entry point
+│   │   └── styles.js      # Dynamic CSS generation
+│   └── index.js           # Main Worker entry point (routing, security headers, cron jobs)
 ├── db/
-│   └── schema.sql         # Database schema
+│   └── schema.sql         # Database schema definition
 ├── public/                # Static assets
 │   ├── favicon.ico
 │   ├── apple-touch-icon.png
 │   └── android-chrome-*.png
-└── package.json           # Project configuration
+└── package.json           # Project dependencies and configuration
 ```
-
----
 
 ## Security
 
-- **Client-side encryption** — All encryption happens in the browser, so your message is never visible to the server
-- **Input sanitization** — Comprehensive XSS protection with HTML entity encoding
-- **Turnstile CAPTCHA** — Stops bots from misusing the service without tracking users
-- **Security headers** — Strict CSP, HSTS, and other security policies
-- **Request validation** — Size limits, method validation, and input sanitization
-- **Timing attack protection** — Artificial delays and constant-time comparisons prevent timing-based attacks
-- **Automatic cleanup** — Expired memos are permanently deleted
-
----
+- **Client-side encryption**: Memos are encrypted in-browser using AES-256-GCM; servers receive only ciphertext.
+- **Input sanitization**: Multi-context protection (HTML, JSON, database, URL) with entity encoding to prevent XSS and injection attacks.
+- **Turnstile CAPTCHA**: Blocks automated abuse without user tracking or cookies.
+- **Security headers**: Enforces strict CSP, HSTS, X-Frame-Options, and Permissions-Policy to defend against common threats.
+- **Request validation**: Includes size limits (e.g., 100KB max), method checks, and secure origin validation for CORS.
+- **Timing attack protection**: Implements constant-time comparisons, artificial delays, and secure validation to prevent information leakage.
+- **Automatic cleanup**: Memos are deleted immediately after reading (via confirmation) or expiration, with no recovery possible.
 
 ## License
 
-This project is open source under the [MIT License](LICENSE).
-
----
+This project is open source under the MIT License.
 
 ## Author
 
 Timo Heimonen (timo.heimonen@gmail.com)
 
 ## Tags
+
 - #privacy
 - #encryption
 - #security
