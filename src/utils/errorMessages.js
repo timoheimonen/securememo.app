@@ -66,9 +66,7 @@ export const errorMessages = {
   'MEMO_EXPIRED_DELETED_ERROR': 'This memo has expired and has been deleted.',
   'INVALID_PASSWORD_CHECK_ERROR': 'Invalid password. Please check the password you received separately.',
   'MISSING_SECURITY_CHALLENGE_ERROR': 'Please complete the security challenge',
-  'SECURITY_VERIFICATION_FAILED': 'Security verification failed. Please refresh and try again.',
-  'CONFIRMATION_DELETION_WARNING': 'Unable to confirm deletion, but memo will expire automatically.',
-  'CONFIRMATION_DELETION_ERROR': 'Error confirming deletion. The memo will be cleaned up automatically.',
+
   
   // HTTP status errors
   'INTERNAL_SERVER_ERROR': 'Internal Server Error',

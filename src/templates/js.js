@@ -353,9 +353,6 @@ const ERROR_MESSAGES = {
     MISSING_PASSWORD: '{{MISSING_PASSWORD_ERROR}}',
     INVALID_MEMO_URL: '{{INVALID_MEMO_URL_ERROR}}',
     MISSING_SECURITY_CHALLENGE: '{{MISSING_SECURITY_CHALLENGE_ERROR}}',
-    SECURITY_VERIFICATION_FAILED: '{{SECURITY_VERIFICATION_FAILED}}',
-    CONFIRMATION_DELETION_WARNING: '{{CONFIRMATION_DELETION_WARNING}}',
-    CONFIRMATION_DELETION_ERROR: '{{CONFIRMATION_DELETION_ERROR}}',
     MEMO_ALREADY_READ_DELETED: '{{MEMO_ALREADY_READ_DELETED_ERROR}}',
     MEMO_EXPIRED_DELETED: '{{MEMO_EXPIRED_DELETED_ERROR}}',
     INVALID_PASSWORD_CHECK: '{{INVALID_PASSWORD_CHECK_ERROR}}',
@@ -417,116 +414,7 @@ function resetTurnstile() {
     }
 }
 
-// Client-side retry function for confirmation with exponential backoff
-async function confirmDeletionWithRetry(memoId, widgetId, initialToken, maxRetries = 3) {
-    let attempts = 0;
-    let currentToken = initialToken; // Use callback token first
-    while (attempts < maxRetries) {
-        try {
-            // Try to get a fresh token if current one is null
-            if (!currentToken) {
-                // Reset widget to generate new token
-                if (typeof turnstile !== 'undefined' && turnstile.reset) {
-                    turnstile.reset(widgetId);
-                }
-                // Wait a bit for the widget to re-render
-                await new Promise(resolve => setTimeout(resolve, 1000));
-                currentToken = getTurnstileResponse();
-                
-                // If still no token after reset, then throw error
-                if (!currentToken) {
-                    throw new Error('No token available after reset');
-                }
-            }
-            
-            const response = await fetch('/api/confirm-delete', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ memoId: memoId, cfTurnstileResponse: currentToken })
-            });
-            if (response.ok) {
-                return true;
-            }
-            throw new Error('Confirmation failed: ' + response.status);
-        } catch (error) {
-            attempts++;
-            if (attempts === maxRetries) {
-                showMessage(ERROR_MESSAGES.CONFIRMATION_DELETION_WARNING, 'warning');
-                return false;
-            }
-            // Reset widget for new token on failure
-            if (typeof turnstile !== 'undefined' && turnstile.reset) {
-                turnstile.reset(widgetId); // Generates new challenge/token
-            }
-            await new Promise(resolve => setTimeout(resolve, Math.pow(2, attempts) * 1000)); // Backoff
-            currentToken = getTurnstileResponse(); // Get fresh token after reset
-        }
-    }
-}
 
-// Explicitly render Turnstile for confirmation with callbacks
-function renderConfirmationTurnstile(memoId) {
-    // Remove existing widget if needed
-    if (typeof turnstile !== 'undefined' && turnstile.remove) {
-        turnstile.remove();
-    }
-    
-    // Ensure the Turnstile container is visible
-    const turnstileContainer = document.querySelector('.cf-turnstile-confirmation');
-    if (turnstileContainer) {
-        turnstileContainer.style.display = 'block';
-        turnstileContainer.style.visibility = 'visible';
-        turnstileContainer.style.opacity = '1';
-    }
-    
-    // Add timeout to prevent spinner from staying visible indefinitely (60s to account for retries)
-    const renderTimeout = setTimeout(() => {
-        const deletionSpinner = document.getElementById('deletionSpinner');
-        if (deletionSpinner) {
-            deletionSpinner.style.display = 'none';
-        }
-        showMessage(ERROR_MESSAGES.CONFIRMATION_DELETION_WARNING, 'warning');
-    }, 60000);
-    
-    // Render new widget with explicit callbacks
-    const widgetId = turnstile.render('.cf-turnstile-confirmation', {
-        sitekey: TURNSTILE_SITE_KEY,
-        retry: 'never', // Prevent auto-retries conflicting with our logic
-        callback: async function(token) {
-            // Clear timeout since callback fired successfully
-            clearTimeout(renderTimeout);
-            
-            // Now we have a fresh token—proceed with confirmation using retry mechanism
-            const success = await confirmDeletionWithRetry(memoId, widgetId, token);
-            
-            if (success) {
-                const memoStatus = document.getElementById('memoStatus');
-                const deletionSpinner = document.getElementById('deletionSpinner');
-                const securityChallengeTexts = document.querySelectorAll('.form-help');
-                const targetText = Array.from(securityChallengeTexts).find(el => 
-                    el.textContent.includes('Please complete the security challenge to confirm memo deletion')
-                );
-                if (memoStatus) {
-                    memoStatus.textContent = 'Memo confirmed as read and permanently deleted.';
-                }
-                if (deletionSpinner) {
-                    deletionSpinner.style.display = 'none';
-                }
-                if (targetText) {
-                    targetText.style.display = 'none';
-                }
-            }
-        },
-        'error-callback': function(errorCode) {
-            // Clear timeout since error callback fired
-            clearTimeout(renderTimeout);
-            showError(ERROR_MESSAGES.SECURITY_VERIFICATION_FAILED);
-        }
-    });
-
-    // Trigger reset to force new challenge (explicit mode handles it via render)
-    turnstile.reset(widgetId);
-}
 
 // Extract memo ID from URL params
 function getMemoId() {
@@ -697,27 +585,12 @@ window.addEventListener('load', () => {
                     if (errorContent) errorContent.style.display = 'none';
                     if (statusMessage) statusMessage.style.display = 'none';
                     
-                    // Handle deletion confirmation based on memo type
+                    // Handle deletion confirmation with deletion token
                     const deleteBody = {};
-                    if (result.requiresDeletionToken) {
-                        if (!decryptedPayload.deletionToken) {
-                            throw new Error('Missing deletion token in payload');
-                        }
-                        deleteBody.deletionToken = decryptedPayload.deletionToken;
-                        
-                        // Hide security challenge text for deletion token memos (no Turnstile needed)
-                        const securityChallengeTexts = document.querySelectorAll('.form-help');
-                        const targetText = Array.from(securityChallengeTexts).find(el => 
-                            el.textContent.includes('Please complete the security challenge to confirm memo deletion')
-                        );
-                        if (targetText) {
-                            targetText.style.display = 'none';
-                        }
-                    } else {
-                        // Render Turnstile for old memos
-                        renderConfirmationTurnstile(memoId);
-                        return; // Exit early, Turnstile callback will handle deletion
+                    if (!decryptedPayload.deletionToken) {
+                        throw new Error('Missing deletion token in payload');
                     }
+                    deleteBody.deletionToken = decryptedPayload.deletionToken;
                     deleteBody.memoId = memoId;
 
                     // Send deletion request

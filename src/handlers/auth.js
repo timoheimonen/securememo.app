@@ -435,8 +435,7 @@ export async function handleReadMemo(request, env) {
         // Return the memo data without deleting it
         return new Response(JSON.stringify({ 
             success: true, 
-            encryptedMessage: sanitizedResponseMessage,
-            requiresDeletionToken: !!memo.deletion_token_hash
+            encryptedMessage: sanitizedResponseMessage
         }), {
             status: 200,
             headers: { 
@@ -496,7 +495,7 @@ export async function handleConfirmDelete(request, env) {
             });
         }
 
-        const { memoId, deletionToken, cfTurnstileResponse } = requestData;
+        const { memoId, deletionToken } = requestData;
         
         // Sanitize user inputs
         const sanitizedMemoId = sanitizeForURL(memoId);
@@ -520,44 +519,22 @@ export async function handleConfirmDelete(request, env) {
             return new Response(JSON.stringify({ error: getMemoAccessDeniedMessage() }), { status: 404 });
         }
 
-        const hasTokenHash = !!row.deletion_token_hash;
-
-        if (hasTokenHash) {
-            // New memo: Require and validate token (no Turnstile)
-            if (!deletionToken) {
-                await addArtificialDelay();
-                return new Response(JSON.stringify({ error: getErrorMessage('MISSING_DELETION_TOKEN') }), { status: 400 });
-            }
-            const sanitizedToken = sanitizeForDatabase(deletionToken);
-            if (!validatePassword(sanitizedToken)) {  // Reuse validator for token format
-                await addArtificialDelay();
-                return new Response(JSON.stringify({ error: getMemoAccessDeniedMessage() }), { status: 403 });
-            }
-            const computedHash = await hashDeletionToken(sanitizedToken);
-            if (!constantTimeCompare(computedHash, row.deletion_token_hash)) {
-                await addArtificialDelay();
-                return new Response(JSON.stringify({ error: getMemoAccessDeniedMessage() }), { status: 403 });
-            }
-        } else {
-            // Old memo (NULL hash): Fall back to Turnstile validation
-            const sanitizedTurnstile = sanitizeForJSON(cfTurnstileResponse);
-            if (!sanitizedTurnstile) {
-                return new Response(JSON.stringify({ error: getErrorMessage('MISSING_TURNSTILE') }), { status: 400 });
-            }
-            // Verify Turnstile
-            try {
-                const turnstileResponse = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                    body: new URLSearchParams({ secret: env.TURNSTILE_SECRET, response: sanitizedTurnstile })
-                });
-                const turnstileResult = await turnstileResponse.json();
-                if (!turnstileResult.success) {
-                    return new Response(JSON.stringify({ error: getErrorMessage('TURNSTILE_FAILED') }), { status: 400 });
-                }
-            } catch (error) {
-                return new Response(JSON.stringify({ error: getErrorMessage('TURNSTILE_VERIFICATION_ERROR') }), { status: 500 });
-            }
+        // Require deletion token
+        if (!deletionToken) {
+            await addArtificialDelay();
+            return new Response(JSON.stringify({ error: getErrorMessage('MISSING_DELETION_TOKEN') }), { status: 400 });
+        }
+        
+        const sanitizedToken = sanitizeForDatabase(deletionToken);
+        if (!validatePassword(sanitizedToken)) {  // Reuse validator for token format
+            await addArtificialDelay();
+            return new Response(JSON.stringify({ error: getMemoAccessDeniedMessage() }), { status: 403 });
+        }
+        
+        const computedHash = await hashDeletionToken(sanitizedToken);
+        if (!constantTimeCompare(computedHash, row.deletion_token_hash)) {
+            await addArtificialDelay();
+            return new Response(JSON.stringify({ error: getMemoAccessDeniedMessage() }), { status: 403 });
         }
 
         // Delete if validation passes (common for both cases)
