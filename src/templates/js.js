@@ -1,7 +1,7 @@
 // Client-side JS templates for memo operations
 
 export function getCreateMemoJS() {
-  return `
+    return `
 // Turnstile site key - injected by server
 const TURNSTILE_SITE_KEY = '{{TURNSTILE_SITE_KEY}}';
 
@@ -343,7 +343,7 @@ function showMessage(message, type) {
 }
 
 export function getReadMemoJS() {
-  return `
+    return `
 // Turnstile site key - injected by server
 const TURNSTILE_SITE_KEY = '{{TURNSTILE_SITE_KEY}}';
 
@@ -675,7 +675,7 @@ highlightCurrentPage();
 }
 
 export function getCommonJS() {
-  return `
+    return `
 function highlightCurrentPage() {
     const currentPath = window.location.pathname;
     const navLinks = document.querySelectorAll('.nav-link');

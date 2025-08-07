@@ -292,12 +292,16 @@ export default {
       }
       
       let response;
+      let cacheHeaders = {};
+      
       switch (pathname) {
         case '/':
           response = await getIndexHTML();
+          cacheHeaders = { 'Cache-Control': 'public, max-age=604800' };
           break;
         case '/about.html':
           response = await getAboutHTML();
+          cacheHeaders = { 'Cache-Control': 'public, max-age=604800' };
           break;
         case '/create-memo.html':
           const siteKey = env.TURNSTILE_SITE_KEY || 'MISSING_SITE_KEY';
@@ -323,6 +327,7 @@ export default {
       return new Response(response, {
         headers: { 
           'Content-Type': 'text/html',
+          ...cacheHeaders,
           ...getSecurityHeaders(request)
         }
       });
