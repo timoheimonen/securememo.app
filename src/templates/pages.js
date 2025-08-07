@@ -486,7 +486,7 @@ export async function getToSHTML() {
                 <h2>4. Service Limitations</h2>
                 <ul>
                     <li><strong>Message Size:</strong> Maximum 10,000 characters per memo</li>
-                    <li><strong>Expiry Times:</strong> 8 hours, 24 hours, 48 hours, or delete on read (max 30 days)</li>
+                    <li><strong>Expiry Times:</strong> 8 hours, 24 hours, 48 hours, 1 week, or delete on read (max 30 days)</li>
                     <li><strong>Availability:</strong> Service provided "as is" without guarantees of availability</li>
                     <li><strong>No Delivery Guarantee:</strong> We cannot guarantee that memos will be delivered or read</li>
                 </ul>
