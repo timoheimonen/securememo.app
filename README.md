@@ -23,7 +23,7 @@ securememo.app will run the latest main version of this repo.
 - **Database**: Cloudflare D1 (SQLite-based) for secure, efficient storage.
 - **Frontend**: Vanilla JavaScript with ES6+ features for a lightweight, no-framework experience.
 - **Security**: Cloudflare Turnstile CAPTCHA, Content Security Policy (CSP) headers, and comprehensive input sanitization.
-- **Encryption**: Client-side AES-256-GCM with PBKDF2 (600,000+ iterations) for key derivation.
+- **Encryption**: Client-side AES-256-GCM with PBKDF2 (1,200,000+ iterations) for key derivation.
 
 ### Project Structure
 

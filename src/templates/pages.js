@@ -57,7 +57,7 @@ export async function getIndexHTML() {
             <div class="features-grid">
                 <div class="feature-card">
                     <h3>🔒 True Client-Side Encryption</h3>
-                    <p>Your memo is encrypted in-browser with AES-256-GCM and a strong key derivation (600,000+ iterations). We never see the plaintext.</p>
+                    <p>Your memo is encrypted in-browser with AES-256-GCM and a strong key derivation (1,200,000+ iterations). We never see the plaintext.</p>
                 </div>
                 <div class="feature-card">
                     <h3>🗑️ Reliable Auto-Delete</h3>
@@ -649,7 +649,7 @@ export async function getPrivacyHTML() {
             <div class="features-detail" id="data-security">
                 <h2>4. Data Security</h2>
                 <ul>
-                    <li><strong>Encryption:</strong> All memos are encrypted client-side using AES-256 with PBKDF2 key derivation (600,000 iterations). We store only encrypted data and cannot decrypt it.</li>
+                    <li><strong>Encryption:</strong> All memos are encrypted client-side using AES-256 with PBKDF2 key derivation (1,200,000 iterations). We store only encrypted data and cannot decrypt it.</li>
                     <li><strong>Deletion:</strong> Memos are permanently deleted after reading or expiration via automated cron jobs.</li>
                     <li><strong>Security Measures:</strong> We implement strong security headers (e.g., CSP, HSTS), input sanitization, timing attack protections, and CAPTCHA to prevent abuse.</li>
                     <li><strong>No Recovery:</strong> Once deleted, memos cannot be recovered—even by us.</li>

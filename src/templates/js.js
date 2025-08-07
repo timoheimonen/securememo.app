@@ -86,9 +86,8 @@ async function hashDeletionToken(token) {
 
 // Security configuration - easily updatable for future-proofing
 const SECURITY_CONFIG = {
-    // PBKDF2 iterations - OWASP 2025 recommendation: 600,000+ for SHA-256
-    // Current: 600,000 (meets 2025 recommendations)
-    PBKDF2_ITERATIONS: 600000,
+    // PBKDF2 iterations - Increased to 1,200,000 for enhanced security
+    PBKDF2_ITERATIONS: 1200000,
     
     // Salt length in bytes (16 bytes = 128 bits)
     SALT_LENGTH: 16,
@@ -360,11 +359,14 @@ const ERROR_MESSAGES = {
     DECRYPTION_ERROR: '{{DECRYPTION_ERROR}}'
 };
 
-// Security configuration - easily updatable for future-proofing
+// Security configuration constants
+const NEW_PBKDF2_ITERATIONS = 1200000;  // Current iterations to use
+const OLD_PBKDF2_ITERATIONS = 600000;   // Fallback for existing memos
+
+// Security configuration - easily updatable for future-proofing, even currently it exeeds OWASP 2025 recommendations with 1.2M iterations.
 const SECURITY_CONFIG = {
-    // PBKDF2 iterations - OWASP 2025 recommendation: 600,000+ for SHA-256
-    // Current: 600,000 (meets 2025 recommendations)
-    PBKDF2_ITERATIONS: 600000,
+    // Use new iterations by default for future-proofing, but fallback handled below
+    PBKDF2_ITERATIONS: NEW_PBKDF2_ITERATIONS,
     
     // Salt length in bytes (16 bytes = 128 bits)
     SALT_LENGTH: 16,
@@ -424,51 +426,66 @@ function getMemoId() {
 
 
 
-// AES-256-GCM decryption with PBKDF2 key derivation
+// AES-256-GCM decryption with PBKDF2 key derivation and iteration fallback
 async function decryptMessage(encryptedData, password) {
-    const encoder = new TextEncoder();
-    
-    // Decode base64 encrypted data
-    const encryptedBytes = new Uint8Array(
-        atob(encryptedData).split('').map(char => char.charCodeAt(0))
-    );
-    
-    // Extract salt (16 bytes), IV (12 bytes), and encrypted data
-    const salt = encryptedBytes.slice(0, SECURITY_CONFIG.SALT_LENGTH);
-    const iv = encryptedBytes.slice(SECURITY_CONFIG.SALT_LENGTH, SECURITY_CONFIG.SALT_LENGTH + SECURITY_CONFIG.IV_LENGTH);
-    const encrypted = encryptedBytes.slice(SECURITY_CONFIG.SALT_LENGTH + SECURITY_CONFIG.IV_LENGTH);
-    
     try {
-        // Derive key from password using PBKDF2
-        const keyMaterial = await crypto.subtle.importKey(
-            'raw',
-            encoder.encode(password),
-            { name: 'PBKDF2' },
-            false,
-            ['deriveBits', 'deriveKey']
-        );
+        const encryptedBytes = Uint8Array.from(atob(encryptedData), c => c.charCodeAt(0));
         
-        const key = await crypto.subtle.deriveKey(
-            {
-                name: 'PBKDF2',
-                salt: salt,
-                iterations: SECURITY_CONFIG.PBKDF2_ITERATIONS,
-                hash: 'SHA-256'
-            },
-            keyMaterial,
-            { name: 'AES-GCM', length: SECURITY_CONFIG.KEY_LENGTH },
-            false,
-            ['decrypt']
-        );
+        // Extract salt (first 16 bytes) and IV (next 12 bytes)
+        const salt = encryptedBytes.slice(0, SECURITY_CONFIG.SALT_LENGTH);
+        const iv = encryptedBytes.slice(SECURITY_CONFIG.SALT_LENGTH, SECURITY_CONFIG.SALT_LENGTH + SECURITY_CONFIG.IV_LENGTH);
+        const encrypted = encryptedBytes.slice(SECURITY_CONFIG.SALT_LENGTH + SECURITY_CONFIG.IV_LENGTH);
         
-        // Decrypt data
-        const decrypted = await crypto.subtle.decrypt(
-            { name: 'AES-GCM', iv: iv },
-            key,
-            encrypted
-        );
+        // Define iteration attempts: try new first, then old if fails
+        const attempts = [
+            { iterations: NEW_PBKDF2_ITERATIONS },
+            { iterations: OLD_PBKDF2_ITERATIONS }
+        ];
         
-        return new TextDecoder().decode(decrypted);
+        for (const attempt of attempts) {
+            try {
+                const encoder = new TextEncoder();
+                
+                // Derive key from password using PBKDF2 with current attempt's iterations
+                const keyMaterial = await crypto.subtle.importKey(
+                    'raw',
+                    encoder.encode(password),
+                    { name: 'PBKDF2' },
+                    false,
+                    ['deriveBits', 'deriveKey']
+                );
+                
+                const key = await crypto.subtle.deriveKey(
+                    {
+                        name: 'PBKDF2',
+                        salt: salt,
+                        iterations: attempt.iterations,
+                        hash: 'SHA-256'
+                    },
+                    keyMaterial,
+                    { name: 'AES-GCM', length: SECURITY_CONFIG.KEY_LENGTH },
+                    false,
+                    ['decrypt']
+                );
+                
+                // Attempt decryption
+                const decrypted = await crypto.subtle.decrypt(
+                    { name: 'AES-GCM', iv: iv },
+                    key,
+                    encrypted
+                );
+                
+                // If successful, return the decrypted data
+                return new TextDecoder().decode(decrypted);
+            } catch (innerError) {
+                // If not the last attempt, continue to next (fallback)
+                if (attempt !== attempts[attempts.length - 1]) {
+                    continue;
+                }
+                // On final failure, rethrow
+                throw innerError;
+            }
+        }
     } catch (error) {
         throw new Error(ERROR_MESSAGES.DECRYPTION_ERROR);
     }
