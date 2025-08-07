@@ -313,9 +313,11 @@ export default {
           break;
         case '/tos.html':
           response = await getToSHTML();
+          cacheHeaders = { 'Cache-Control': 'public, max-age=604800' };
           break;
         case '/privacy.html':
           response = await getPrivacyHTML();
+          cacheHeaders = { 'Cache-Control': 'public, max-age=604800' };
           break;
         default:
           return new Response(getErrorMessage('NOT_FOUND'), { 
