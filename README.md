@@ -68,6 +68,8 @@ This project is open source under the MIT License.
 ## Contributing
 You are welcome to contribute to the project in any way you can. This includes reporting bugs, auditing, suggesting features, or submitting pull requests via GitHub. Please ensure your contributions respect the project's security focus and follow standard open-source practices.
 
+For detailed contribution guidelines, please see [CONTRIBUTING.md](CONTRIBUTING.md).
+
 ## Author
 
 Timo Heimonen (timo.heimonen@gmail.com)
