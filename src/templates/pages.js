@@ -140,7 +140,7 @@ export async function getAboutHTML() {
                     </div>
                     <div class="feature-item">
                         <h3>🌐 No Password Storage</h3>
-                        <p>We never store encryption passwords on our servers. They exist only in the URL and your browser's memory.</p>
+                        <p>We never store encryption passwords on our servers. They exist only in your browser's memory.</p>
                     </div>
                     <div class="feature-item">
                         <h3>⚡ Global Performance</h3>
