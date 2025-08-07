@@ -66,7 +66,7 @@ cloudflare/
 This project is open source under the MIT License.
 
 ## Contributing
-You are welcome to contribute to the project in any way you can. This includes reporting bugs, suggesting features, or submitting pull requests via GitHub. Please ensure your contributions respect the project's security focus and follow standard open-source practices.
+You are welcome to contribute to the project in any way you can. This includes reporting bugs, auditing, suggesting features, or submitting pull requests via GitHub. Please ensure your contributions respect the project's security focus and follow standard open-source practices.
 
 ## Author
 
