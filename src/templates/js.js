@@ -75,6 +75,15 @@ function generatePassword() {
     return password;
 }
 
+// Hash function for deletion token
+async function hashDeletionToken(token) {
+    const encoder = new TextEncoder();
+    const data = encoder.encode(token);
+    const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+    const hashArray = Array.from(new Uint8Array(hashBuffer));
+    return btoa(String.fromCharCode(...hashArray));
+}
+
 // Security configuration - easily updatable for future-proofing
 const SECURITY_CONFIG = {
     // PBKDF2 iterations - OWASP 2025 recommendation: 600,000+ for SHA-256
@@ -94,9 +103,9 @@ const SECURITY_CONFIG = {
 
 
 // AES-256-GCM encryption with PBKDF2 key derivation
-async function encryptMessage(message, password) {
+async function encryptMessage(payload, password) {
     const encoder = new TextEncoder();
-    const data = encoder.encode(message);
+    const data = encoder.encode(JSON.stringify(payload)); // Change to encode JSON
     
     // Generate random salt
     const salt = crypto.getRandomValues(new Uint8Array(SECURITY_CONFIG.SALT_LENGTH));
@@ -175,17 +184,21 @@ document.getElementById('memoForm').addEventListener('submit', async (e) => {
     loadingIndicator.style.display = 'block';
     
     try {
-        // Generate password
+        // Generate password and deletion token
         const password = generatePassword();
+        const deletionToken = generatePassword(); // Reuse function for 32-char token
         
-        // Encrypt message
-        const encryptedMessage = await encryptMessage(message, password);
+        // Create payload with message and deletion token
+        const payload = { message: message, deletionToken: deletionToken };
+        const encryptedMessage = await encryptMessage(payload, password);
+        const tokenHash = await hashDeletionToken(deletionToken);
         
         // Send to API
         const requestBody = {
             encryptedMessage,
             expiryHours,
-            cfTurnstileResponse: turnstileResponse
+            cfTurnstileResponse: turnstileResponse,
+            deletionTokenHash: tokenHash  // New
         };
         
         const response = await fetch('/api/create-memo', {
@@ -426,10 +439,10 @@ async function confirmDeletionWithRetry(memoId, widgetId, initialToken, maxRetri
                 }
             }
             
-            const response = await fetch('/api/confirm-memo-read?id=' + memoId, {
+            const response = await fetch('/api/confirm-delete', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ cfTurnstileResponse: currentToken })
+                body: JSON.stringify({ memoId: memoId, cfTurnstileResponse: currentToken })
             });
             if (response.ok) {
                 return true;
@@ -650,8 +663,20 @@ window.addEventListener('load', () => {
                     // Decrypt message
                     const decryptedMessage = await decryptMessage(result.encryptedMessage, password);
                     
+                    // Parse decrypted payload
+                    let decryptedPayload;
+                    try {
+                        decryptedPayload = JSON.parse(decryptedMessage);
+                        if (typeof decryptedPayload.message !== 'string' || (result.requiresDeletionToken && !decryptedPayload.deletionToken)) {
+                            throw new Error();
+                        }
+                    } catch {
+                        // Old memo: Treat as plain message
+                        decryptedPayload = { message: decryptedMessage };
+                    }
+                    
                     // Display message
-                    document.getElementById('decryptedMessage').textContent = decryptedMessage;
+                    document.getElementById('decryptedMessage').textContent = decryptedPayload.message;
                     document.getElementById('memoContent').style.display = 'block';
                     document.getElementById('passwordForm').style.display = 'none';
                     
@@ -672,8 +697,48 @@ window.addEventListener('load', () => {
                     if (errorContent) errorContent.style.display = 'none';
                     if (statusMessage) statusMessage.style.display = 'none';
                     
-                    // Explicitly render Turnstile for confirmation with callbacks
-                    renderConfirmationTurnstile(memoId);
+                    // Handle deletion confirmation based on memo type
+                    const deleteBody = {};
+                    if (result.requiresDeletionToken) {
+                        if (!decryptedPayload.deletionToken) {
+                            throw new Error('Missing deletion token in payload');
+                        }
+                        deleteBody.deletionToken = decryptedPayload.deletionToken;
+                        
+                        // Hide security challenge text for deletion token memos (no Turnstile needed)
+                        const securityChallengeTexts = document.querySelectorAll('.form-help');
+                        const targetText = Array.from(securityChallengeTexts).find(el => 
+                            el.textContent.includes('Please complete the security challenge to confirm memo deletion')
+                        );
+                        if (targetText) {
+                            targetText.style.display = 'none';
+                        }
+                    } else {
+                        // Render Turnstile for old memos
+                        renderConfirmationTurnstile(memoId);
+                        return; // Exit early, Turnstile callback will handle deletion
+                    }
+                    deleteBody.memoId = memoId;
+
+                    // Send deletion request
+                    const deleteResponse = await fetch('/api/confirm-delete', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(deleteBody)
+                    });
+                    
+                    if (deleteResponse.ok) {
+                        const memoStatus = document.getElementById('memoStatus');
+                        const deletionSpinner = document.getElementById('deletionSpinner');
+                        if (memoStatus) {
+                            memoStatus.textContent = 'Memo confirmed as read and permanently deleted.';
+                        }
+                        if (deletionSpinner) {
+                            deletionSpinner.style.display = 'none';
+                        }
+                    } else {
+                        showMessage('Error confirming deletion. The memo will be cleaned up automatically.', 'warning');
+                    }
                 } else {
                     if (result.error === 'Memo not found') {
                         showError(ERROR_MESSAGES.MEMO_ALREADY_READ_DELETED);

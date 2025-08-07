@@ -16,6 +16,8 @@ export const errorMessages = {
   'MEMO_ID_GENERATION_ERROR': 'Service temporarily unavailable. Please try again.',
   'MEMO_ID_COLLISION_ERROR': 'Service temporarily unavailable. Please try again.',
   'MEMO_CREATION_ERROR': 'Unable to process your request. Please try again.',
+  'MISSING_DELETION_TOKEN': 'Deletion token required.',
+  'INVALID_DELETION_TOKEN_HASH': 'Invalid deletion token hash.',
   
   // Memo reading errors - SECURITY: Use generic messages to prevent enumeration attacks
   'INVALID_MEMO_ID': 'Invalid request. Please check your input and try again.',

@@ -15,7 +15,7 @@ import {
 import {
   handleCreateMemo,
   handleReadMemo,
-  handleConfirmMemoRead,
+  handleConfirmDelete,
   handleCleanupMemos
 } from './handlers/auth.js';
 import { getErrorMessage } from './utils/errorMessages.js';
@@ -141,16 +141,16 @@ export default {
           });
         }
         
-        // Check allowed methods for confirm-memo-read endpoint
-        if (apiPath === 'confirm-memo-read' && request.method !== 'POST') {
-          return new Response(JSON.stringify({ error: getErrorMessage('METHOD_NOT_ALLOWED') }), {
-            status: 405,
-            headers: { 
-              'Content-Type': 'application/json',
-              'Allow': 'POST',
-              ...getSecurityHeaders(request)
-            }
-          });
+                // Check allowed methods for confirm-delete endpoint
+        if (apiPath === 'confirm-delete' && request.method !== 'POST') {
+            return new Response(JSON.stringify({ error: getErrorMessage('METHOD_NOT_ALLOWED') }), {
+                status: 405,
+                headers: { 
+                    'Content-Type': 'application/json',
+                    'Allow': 'POST',
+                    ...getSecurityHeaders(request)
+                }
+            });
         }
         
         // Check request size limit (100KB) for POST requests
@@ -172,8 +172,8 @@ export default {
             return await handleCreateMemo(request, env);
           case 'read-memo':
             return await handleReadMemo(request, env);
-          case 'confirm-memo-read':
-            return await handleConfirmMemoRead(request, env);
+          case 'confirm-delete':
+            return await handleConfirmDelete(request, env);
           default:
             return new Response(getErrorMessage('NOT_FOUND'), { 
               status: 404,

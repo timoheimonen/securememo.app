@@ -17,6 +17,27 @@ import {
 import { getErrorMessage, getSecurityErrorMessage, getMemoAccessDeniedMessage } from '../utils/errorMessages.js';
 import { addArtificialDelay, constantTimeCompare } from '../utils/timingSecurity.js';
 
+// Generate secure 32-char token
+function generateDeletionToken() {
+    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    const array = new Uint8Array(32);
+    crypto.getRandomValues(array);
+    let token = '';
+    for (let i = 0; i < 32; i++) {
+        token += chars[array[i] % chars.length];
+    }
+    return token;
+}
+
+// Hash token (SHA-256 base64)
+async function hashDeletionToken(token) {
+    const encoder = new TextEncoder();
+    const data = encoder.encode(token);
+    const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+    const hashArray = Array.from(new Uint8Array(hashBuffer));
+    return btoa(String.fromCharCode(...hashArray));
+}
+
 /**
  * Calculate expiry time based on expiry hours
  * @param {string|number} expiryHours - The expiry hours value from client (8, 24, 48, 168, 720)
@@ -114,7 +135,7 @@ export async function handleCreateMemo(request, env) {
             });
         }
 
-        const { encryptedMessage, expiryHours, cfTurnstileResponse } = requestData;
+        const { encryptedMessage, expiryHours, cfTurnstileResponse, deletionTokenHash } = requestData;
         
         // Comprehensive validation and sanitization of encrypted message
         const messageValidation = await validateAndSanitizeEncryptedMessageSecure(encryptedMessage);
@@ -130,6 +151,15 @@ export async function handleCreateMemo(request, env) {
         const sanitizedEncryptedMessage = messageValidation.sanitizedMessage;
         const sanitizedExpiryHours = String(expiryHours); // Convert to string for validation
         const sanitizedTurnstileResponse = sanitizeForJSON(cfTurnstileResponse);
+        
+        // Validate deletionTokenHash (base64, ~44 chars for SHA-256)
+        if (!deletionTokenHash || typeof deletionTokenHash !== 'string' || deletionTokenHash.length !== 44 || !/^[A-Za-z0-9+/=]+$/.test(deletionTokenHash)) {
+            await addArtificialDelay();
+            return new Response(JSON.stringify({ error: getErrorMessage('INVALID_DELETION_TOKEN_HASH') }), {
+                status: 400,
+                headers: { 'Content-Type': 'application/json' }
+            });
+        }
         
         // Validate expiry hours
         if (!validateExpiryHours(sanitizedExpiryHours)) {
@@ -209,11 +239,11 @@ export async function handleCreateMemo(request, env) {
         // Insert memo into DB
         try {
             const stmt = env.DB.prepare(`
-                INSERT INTO memos (memo_id, encrypted_message, expiry_time)
-                VALUES (?, ?, ?)
+                INSERT INTO memos (memo_id, encrypted_message, expiry_time, deletion_token_hash)
+                VALUES (?, ?, ?, ?)
             `);
             
-            await stmt.bind(memoId, sanitizedEncryptedMessage, calculatedExpiryTime).run();
+            await stmt.bind(memoId, sanitizedEncryptedMessage, calculatedExpiryTime, deletionTokenHash).run();
         } catch (dbError) {
             // Check if this is a UNIQUE constraint violation
             if (dbError.message && dbError.message.includes('UNIQUE constraint failed')) {
@@ -372,7 +402,7 @@ export async function handleReadMemo(request, env) {
         let memo;
         try {
             const stmt = env.DB.prepare(`
-                SELECT encrypted_message
+                SELECT encrypted_message, deletion_token_hash
                 FROM memos 
                 WHERE memo_id = ? 
                 AND (expiry_time IS NULL OR expiry_time > unixepoch('now'))
@@ -405,7 +435,8 @@ export async function handleReadMemo(request, env) {
         // Return the memo data without deleting it
         return new Response(JSON.stringify({ 
             success: true, 
-            encryptedMessage: sanitizedResponseMessage 
+            encryptedMessage: sanitizedResponseMessage,
+            requiresDeletionToken: !!memo.deletion_token_hash
         }), {
             status: 200,
             headers: { 
@@ -431,7 +462,7 @@ export async function handleReadMemo(request, env) {
  * Handle memo deletion after successful decryption
  * This endpoint is called only after the user successfully decrypts the memo
  */
-export async function handleConfirmMemoRead(request, env) {
+export async function handleConfirmDelete(request, env) {
     try {
         // Validate request method
         if (request.method !== 'POST') {
@@ -465,58 +496,9 @@ export async function handleConfirmMemoRead(request, env) {
             });
         }
 
-        const { cfTurnstileResponse } = requestData;
+        const { memoId, deletionToken, cfTurnstileResponse } = requestData;
         
         // Sanitize user inputs
-        const sanitizedTurnstileResponse = sanitizeForJSON(cfTurnstileResponse);
-        
-        // Verify Turnstile token (mandatory for confirmation)
-        if (!sanitizedTurnstileResponse) {
-            return new Response(JSON.stringify({ error: getErrorMessage('MISSING_TURNSTILE') }), {
-                status: 400,
-                headers: { 'Content-Type': 'application/json' }
-            });
-        }
-
-        // Verify Turnstile with Cloudflare API
-        try {
-            const turnstileResponse = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                },
-                body: new URLSearchParams({
-                    secret: env.TURNSTILE_SECRET,
-                    response: sanitizedTurnstileResponse,
-                }),
-            });
-
-            if (!turnstileResponse.ok) {
-                return new Response(JSON.stringify({ error: getErrorMessage('TURNSTILE_API_ERROR') }), {
-                    status: 500,
-                    headers: { 'Content-Type': 'application/json' }
-                });
-            }
-
-            const turnstileResult = await turnstileResponse.json();
-            
-            if (!turnstileResult.success) {
-                return new Response(JSON.stringify({ error: getErrorMessage('TURNSTILE_FAILED') }), {
-                    status: 400,
-                    headers: { 'Content-Type': 'application/json' }
-                });
-            }
-        } catch (turnstileError) {
-            return new Response(JSON.stringify({ error: getErrorMessage('TURNSTILE_VERIFICATION_ERROR') }), {
-                status: 500,
-                headers: { 'Content-Type': 'application/json' }
-            });
-        }
-        
-        const url = new URL(request.url);
-        const memoId = url.searchParams.get('id');
-        
-        // Sanitize memo ID from URL parameters
         const sanitizedMemoId = sanitizeForURL(memoId);
         
         // Validate memo ID with secure validation
@@ -529,32 +511,61 @@ export async function handleConfirmMemoRead(request, env) {
             });
         }
         
-        // Delete the memo after successful decryption (atomic operation)
-        try {
-            const deleteStmt = env.DB.prepare(`
-                DELETE FROM memos 
-                WHERE memo_id = ? 
-                AND (expiry_time IS NULL OR expiry_time > unixepoch('now'))
-            `);
-            
-            const result = await deleteStmt.bind(sanitizedMemoId).run();
-            
-            // Check if memo was actually deleted
-            if (result.changes === 0) {
-                // Memo was already deleted or doesn't exist
-                await addArtificialDelay();
-                return new Response(JSON.stringify({ error: getMemoAccessDeniedMessage() }), {
-                    status: 404,
-                    headers: { 'Content-Type': 'application/json' }
-                });
-            }
-        } catch (deleteError) {
-            // Add artificial delay for security
+        // Fetch memo details
+        const fetchStmt = env.DB.prepare('SELECT deletion_token_hash FROM memos WHERE memo_id = ? AND (expiry_time IS NULL OR expiry_time > unixepoch(\'now\'))');
+        const row = await fetchStmt.bind(sanitizedMemoId).first();
+
+        if (!row) {
             await addArtificialDelay();
-            return new Response(JSON.stringify({ error: getErrorMessage('DATABASE_ERROR') }), {
-                status: 500,
-                headers: { 'Content-Type': 'application/json' }
-            });
+            return new Response(JSON.stringify({ error: getMemoAccessDeniedMessage() }), { status: 404 });
+        }
+
+        const hasTokenHash = !!row.deletion_token_hash;
+
+        if (hasTokenHash) {
+            // New memo: Require and validate token (no Turnstile)
+            if (!deletionToken) {
+                await addArtificialDelay();
+                return new Response(JSON.stringify({ error: getErrorMessage('MISSING_DELETION_TOKEN') }), { status: 400 });
+            }
+            const sanitizedToken = sanitizeForDatabase(deletionToken);
+            if (!validatePassword(sanitizedToken)) {  // Reuse validator for token format
+                await addArtificialDelay();
+                return new Response(JSON.stringify({ error: getMemoAccessDeniedMessage() }), { status: 403 });
+            }
+            const computedHash = await hashDeletionToken(sanitizedToken);
+            if (!constantTimeCompare(computedHash, row.deletion_token_hash)) {
+                await addArtificialDelay();
+                return new Response(JSON.stringify({ error: getMemoAccessDeniedMessage() }), { status: 403 });
+            }
+        } else {
+            // Old memo (NULL hash): Fall back to Turnstile validation
+            const sanitizedTurnstile = sanitizeForJSON(cfTurnstileResponse);
+            if (!sanitizedTurnstile) {
+                return new Response(JSON.stringify({ error: getErrorMessage('MISSING_TURNSTILE') }), { status: 400 });
+            }
+            // Verify Turnstile
+            try {
+                const turnstileResponse = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    body: new URLSearchParams({ secret: env.TURNSTILE_SECRET, response: sanitizedTurnstile })
+                });
+                const turnstileResult = await turnstileResponse.json();
+                if (!turnstileResult.success) {
+                    return new Response(JSON.stringify({ error: getErrorMessage('TURNSTILE_FAILED') }), { status: 400 });
+                }
+            } catch (error) {
+                return new Response(JSON.stringify({ error: getErrorMessage('TURNSTILE_VERIFICATION_ERROR') }), { status: 500 });
+            }
+        }
+
+        // Delete if validation passes (common for both cases)
+        const deleteStmt = env.DB.prepare('DELETE FROM memos WHERE memo_id = ?');
+        const result = await deleteStmt.bind(sanitizedMemoId).run();
+        if (result.changes === 0) {
+            await addArtificialDelay();
+            return new Response(JSON.stringify({ error: getMemoAccessDeniedMessage() }), { status: 404 });
         }
         
         // Return success confirmation

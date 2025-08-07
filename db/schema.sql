@@ -5,6 +5,7 @@ CREATE TABLE IF NOT EXISTS memos (
     encrypted_message TEXT NOT NULL,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
     expiry_time INTEGER,
+    deletion_token_hash TEXT
 );
 
 -- Index on memo_id for fast lookups
