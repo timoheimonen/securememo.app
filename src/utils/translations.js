@@ -329,7 +329,7 @@ export const TRANSLATIONS = {
     
     // Create memo page content
     'create.hero.title': 'Create Secure Memo',
-    'create.hero.description': 'Create encrypted memos that self-destruct after reading. Client-side AES-256 encryption ensures your secrets stay private. No tracking, instant sharing.',
+    'create.hero.description': 'Your memo will be encrypted in your browser and self-destruct after being read or expired.',
     'create.hero.ogDescription': 'Create encrypted memos with client-side AES-256 encryption. Memos self-destruct after reading for maximum privacy.',
     'create.hero.twitterDescription': 'Create encrypted memos with client-side encryption.',
     'create.schema.description': 'Create encrypted memos that self-destruct after reading. Client-side AES-256 encryption ensures your secrets stay private.',
@@ -337,9 +337,9 @@ export const TRANSLATIONS = {
     
     // Read memo page content  
     'read.hero.title': 'Read Secure Memo',
-    'read.hero.description': 'Decrypt and read your secure memo. Memos are automatically deleted after reading for maximum privacy and security.',
-    'read.hero.ogDescription': 'Securely decrypt and read encrypted memos with automatic deletion after viewing.',
-    'read.hero.twitterDescription': 'Decrypt and read secure memos with automatic deletion.',
-    'read.schema.description': 'Decrypt and read secure memos with automatic deletion after viewing for maximum privacy.'
+    'read.hero.description': 'Enter the password to decrypt and read the memo. The password should have been shared with you separately from the URL. The memo will be deleted after being read or expired.',
+    'read.hero.ogDescription': 'Decrypt and read your secure memo. Memos self-destruct after reading for maximum privacy.',
+    'read.hero.twitterDescription': 'Decrypt and read your secure memo with client-side decryption.',
+    'read.schema.description': 'Decrypt and read your secure memo with the password. Memos self-destruct after reading for maximum privacy. Client-side AES-256 decryption.'
   }
 };

@@ -130,8 +130,8 @@ export async function getIndexHTML(locale = 'en', origin = 'https://securememo.a
     </main>
 
     <footer class="footer">
-        <p><a href="https://github.com/timoheimonen/securememo.app" target="_blank" rel="noopener noreferrer">View source code at GitHub</a> | <a href="/${locale}/tos.html">Terms of Service</a> | <a href="/${locale}/privacy.html">Privacy Notice</a></p>
-        <p style="font-size: 0.8em; margin-top: 0.5em; opacity: 0.8;">No tracking, no ads, no nonsense.</p>
+        <p><a href="https://github.com/timoheimonen/securememo.app" target="_blank" rel="noopener noreferrer">${t('footer.sourceCode', locale)}</a> | <a href="/${locale}/tos.html">${t('footer.tos', locale)}</a> | <a href="/${locale}/privacy.html">${t('footer.privacy', locale)}</a></p>
+        <p style="font-size: 0.8em; margin-top: 0.5em; opacity: 0.8;">${t('footer.tagline', locale)}</p>
     </footer>
 
     <script src="/js/common.js" defer></script>
@@ -146,19 +146,19 @@ export async function getAboutHTML(locale = 'en', origin = 'https://securememo.a
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About securememo.app - Privacy-Focused Encrypted Notes | securememo.app</title>
-    <meta name="description" content="Learn about securememo.app's privacy-first approach to encrypted messaging. Built with client-side AES-256 encryption, self-destructing messages, and zero-knowledge architecture.">
-    <meta name="keywords" content="about secure memo, privacy-focused messaging, client-side encryption, AES-256, self-destructing messages, zero-knowledge, secure note sharing">
+    <title>${t('page.about.title', locale)} | securememo.app</title>
+    <meta name="description" content="${t('page.about.description', locale)}">
+    <meta name="keywords" content="${t('page.about.keywords', locale)}">
     <!-- Open Graph for social sharing -->
-    <meta property="og:title" content="About securememo.app - Privacy-Focused Encrypted Notes">
-    <meta property="og:description" content="Discover how securememo.app protects your privacy with client-side encryption and self-destructing messages.">
+    <meta property="og:title" content="${t('page.about.ogTitle', locale)}">
+    <meta property="og:description" content="${t('page.about.ogDescription', locale)}">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://securememo.app/about.html">
+    <meta property="og:url" content="https://securememo.app/${locale}/about.html">
     <meta property="og:image" content="https://securememo.app/android-chrome-512x512.png">
     <!-- Twitter Cards -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="About securememo.app - Privacy-Focused Encrypted Notes">
-    <meta name="twitter:description" content="Privacy-first encrypted messaging with client-side encryption.">
+    <meta name="twitter:title" content="${t('page.about.ogTitle', locale)}">
+    <meta name="twitter:description" content="${t('page.about.twitterDescription', locale)}">
     <!-- Structured Data -->
     <script type="application/ld+json">
     {
@@ -228,18 +228,18 @@ export async function getAboutHTML(locale = 'en', origin = 'https://securememo.a
         <div class="nav-container">
             <a href="/${locale}" class="nav-logo">securememo.app</a>
             <ul class="nav-menu" id="navMenu">
-                <li><a href="/${locale}" class="nav-link">Home</a></li>
-                <li><a href="/${locale}/about.html" class="nav-link active">About</a></li>
-                <li><a href="/${locale}/create-memo.html" class="nav-link">Create Secure Memo</a></li>
+                <li><a href="/${locale}" class="nav-link">${t('nav.home', locale)}</a></li>
+                <li><a href="/${locale}/about.html" class="nav-link active">${t('nav.about', locale)}</a></li>
+                <li><a href="/${locale}/create-memo.html" class="nav-link">${t('nav.create', locale)}</a></li>
             </ul>
-            <button class="hamburger" id="hamburger" aria-label="Toggle navigation menu" aria-expanded="false">☰</button>
+            <button class="hamburger" id="hamburger" aria-label="${t('ui.toggleNav', locale)}" aria-expanded="false">☰</button>
         </div>
     </nav>
 
     <main class="main-content">
         <div class="about-section">
-            <h1>About securememo.app</h1>
-            <p>securememo.app is a privacy-focused application that allows you to create encrypted memos that self-destruct after being read or expired. Built with security and privacy as the top priorities. Source code available on GitHub.</p>
+            <h1>${t('about.hero.title', locale)}</h1>
+            <p>${t('about.hero.subtitle', locale)}</p>
             
             <div class="tech-stack">
                 <h2>${t('about.tech.title', locale)}</h2>
@@ -253,67 +253,67 @@ export async function getAboutHTML(locale = 'en', origin = 'https://securememo.a
             </div>
 
             <div class="features-detail">
-                <h2>Security Features</h2>
+                <h2>${t('about.features.title', locale)}</h2>
                 <div class="feature-list">
                     <div class="feature-item">
-                        <h3>🔐 Client-Side Encryption</h3>
-                        <p>All encryption happens in your browser using the Web Crypto API. Your memo is encrypted with AES-256 before being sent to our servers.</p>
+                        <h3>${t('about.features.clientEncryption.title', locale)}</h3>
+                        <p>${t('about.features.clientEncryption.description', locale)}</p>
                     </div>
                     <div class="feature-item">
-                        <h3>🔑 Separate Password Sharing</h3>
-                        <p>The encryption password is generated separately from the URL and should be shared through a different channel for enhanced security.</p>
+                        <h3>${t('about.features.passwordSharing.title', locale)}</h3>
+                        <p>${t('about.features.passwordSharing.description', locale)}</p>
                     </div>
                     <div class="feature-item">
-                        <h3>💥 Self-Destructing Memos</h3>
-                        <p>Once a memo is read or expired, it's immediately and permanently deleted from our database. No traces remain.</p>
+                        <h3>${t('about.features.selfDestruct.title', locale)}</h3>
+                        <p>${t('about.features.selfDestruct.description', locale)}</p>
                     </div>
                     <div class="feature-item">
-                        <h3>🌐 No Password Storage</h3>
-                        <p>We never store encryption passwords on our servers. They exist only in your browser's memory.</p>
+                        <h3>${t('about.features.noStorage.title', locale)}</h3>
+                        <p>${t('about.features.noStorage.description', locale)}</p>
                     </div>
                     <div class="feature-item">
-                        <h3>⚡ Global Performance</h3>
-                        <p>Built on Cloudflare's global network for lightning-fast access from anywhere in the world.</p>
+                        <h3>${t('about.features.global.title', locale)}</h3>
+                        <p>${t('about.features.global.description', locale)}</p>
                     </div>
                     <div class="feature-item">
-                        <h3>🔒 Privacy First</h3>
-                        <p>No user accounts required. No tracking. No analytics. Your privacy is our priority.</p>
+                        <h3>${t('about.features.privacy.title', locale)}</h3>
+                        <p>${t('about.features.privacy.description', locale)}</p>
                     </div>
                 </div>
             </div>
 
             <div class="usage-section">
-                <h2>How to Use</h2>
+                <h2>${t('about.usage.title', locale)}</h2>
                 <div class="feature-list">
                     <div class="feature-item">
-                        <h3>1. Create a Memo</h3>
-                        <p>Go to "Create Secure Memo” and type your memo. Choose an expiry time (8h, 1d, 2d, 1 week or a maximum of 30 days). Memos are deleted when read or expired. The system will generate a random encryption password.</p>
+                        <h3>${t('about.usage.create.title', locale)}</h3>
+                        <p>${t('about.usage.create.description', locale)}</p>
                     </div>
                     <div class="feature-item">
-                        <h3>2. Share the Link and Password</h3>
-                        <p>Copy the generated URL and password, then share them with your recipient through separate channels for enhanced security.</p>
+                        <h3>${t('about.usage.share.title', locale)}</h3>
+                        <p>${t('about.usage.share.description', locale)}</p>
                     </div>
                     <div class="feature-item">
-                        <h3>3. Self-Destruct</h3>
-                        <p>When the recipient opens the link and enters the password separately, the memo will be decrypted and then permanently deleted if read, or deleted automatically if expired. Expired memos are automatically cleaned up every 1 hours.</p>
+                        <h3>${t('about.usage.destruct.title', locale)}</h3>
+                        <p>${t('about.usage.destruct.description', locale)}</p>
                     </div>
                 </div>
             </div>
 
             <div class="cta-section">
-                <h2>Ready to Get Started?</h2>
-                <p>Create your first secure memo now and experience true end-to-end encryption.</p>
+                <h2>${t('about.cta.title', locale)}</h2>
+                <p>${t('about.cta.subtitle', locale)}</p>
                 <div class="cta-buttons">
-                    <a href="/${locale}/create-memo.html" class="btn btn-primary">Create Secure Memo</a>
-                    <a href="/${locale}" class="btn btn-secondary">Back to Home</a>
+                    <a href="/${locale}/create-memo.html" class="btn btn-primary">${t('about.cta.createBtn', locale)}</a>
+                    <a href="/${locale}" class="btn btn-secondary">${t('about.cta.homeBtn', locale)}</a>
                 </div>
             </div>
         </div>
     </main>
 
     <footer class="footer">
-        <p><a href="https://github.com/timoheimonen/securememo.app" target="_blank" rel="noopener noreferrer">View source code at GitHub</a> | <a href="/${locale}/tos.html">Terms of Service</a> | <a href="/${locale}/privacy.html">Privacy Notice</a></p>
-        <p style="font-size: 0.8em; margin-top: 0.5em; opacity: 0.8;">No tracking, no ads, no nonsense.</p>
+        <p><a href="https://github.com/timoheimonen/securememo.app" target="_blank" rel="noopener noreferrer">${t('footer.sourceCode', locale)}</a> | <a href="/${locale}/tos.html">${t('footer.tos', locale)}</a> | <a href="/${locale}/privacy.html">${t('footer.privacy', locale)}</a></p>
+        <p style="font-size: 0.8em; margin-top: 0.5em; opacity: 0.8;">${t('footer.tagline', locale)}</p>
     </footer>
 
     <script src="/js/common.js" defer></script>
@@ -328,50 +328,50 @@ export async function getCreateMemoHTML(locale = 'en', origin = 'https://securem
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create Secure Memo - Encrypted Self-Destructing Memo | securememo.app</title>
-    <meta name="description" content="Create encrypted memos that self-destruct after reading. Client-side AES-256 encryption ensures your secrets stay private. No tracking, instant sharing.">
+    <title>${t('page.create.title', locale)} | securememo.app</title>
+    <meta name="description" content="${t('create.hero.description', locale)}">
     <meta name="keywords" content="create secure memo, encrypted memo, self-destructing note, AES-256 encryption, private memo sharing, secure note creation">
     <!-- Open Graph for social sharing -->
-    <meta property="og:title" content="Create Secure Memo - Encrypted Self-Destructing Memo">
-    <meta property="og:description" content="Create encrypted memos with client-side AES-256 encryption. Memos self-destruct after reading for maximum privacy.">
+    <meta property="og:title" content="${t('page.create.title', locale)}">
+    <meta property="og:description" content="${t('create.hero.ogDescription', locale)}">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://securememo.app/create-memo.html">
+    <meta property="og:url" content="https://securememo.app/${locale}/create-memo.html">
     <meta property="og:image" content="https://securememo.app/android-chrome-512x512.png">
     <!-- Twitter Cards -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Create Secure Memo - Encrypted Self-Destructing Memo">
-    <meta name="twitter:description" content="Create encrypted memos with client-side encryption.">
+    <meta name="twitter:title" content="${t('page.create.title', locale)}">
+    <meta name="twitter:description" content="${t('create.hero.twitterDescription', locale)}">
     <!-- Structured Data -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "WebPage",
-      "name": "Create Secure Memo",
-      "description": "Create encrypted memos that self-destruct after reading. Client-side AES-256 encryption ensures your secrets stay private.",
-      "url": "https://securememo.app/create-memo.html",
+      "name": "${t('create.hero.title', locale)}",
+      "description": "${t('create.schema.description', locale)}",
+      "url": "https://securememo.app/${locale}/create-memo.html",
       "breadcrumb": {
         "@type": "BreadcrumbList",
         "itemListElement": [
           {
             "@type": "ListItem",
             "position": 1,
-            "name": "Home",
-            "item": "https://securememo.app/"
+            "name": "${t('nav.home', locale)}",
+            "item": "https://securememo.app/${locale}/"
           },
           {
             "@type": "ListItem",
             "position": 2,
-            "name": "Create Secure Memo",
-            "item": "https://securememo.app/create-memo.html"
+            "name": "${t('nav.create', locale)}",
+            "item": "https://securememo.app/${locale}/create-memo.html"
           }
         ]
       },
       "mainEntity": {
         "@type": "SoftwareApplication",
-        "name": "Secure Memo Creator",
+        "name": "${t('create.hero.title', locale)}",
         "applicationCategory": "SecurityApplication",
         "operatingSystem": "Web Browser",
-        "description": "Create encrypted memos with client-side AES-256 encryption and automatic self-destruction",
+        "description": "${t('create.schema.actionDescription', locale)}",
         "featureList": [
           "Client-side encryption",
           "Self-destructing memos",
@@ -396,31 +396,31 @@ export async function getCreateMemoHTML(locale = 'en', origin = 'https://securem
         <div class="nav-container">
             <a href="/${locale}" class="nav-logo">securememo.app</a>
             <ul class="nav-menu" id="navMenu">
-                <li><a href="/${locale}" class="nav-link">Home</a></li>
-                <li><a href="/${locale}/about.html" class="nav-link">About</a></li>
-                <li><a href="/${locale}/create-memo.html" class="nav-link active">Create Secure Memo</a></li>
+                <li><a href="/${locale}" class="nav-link">${t('nav.home', locale)}</a></li>
+                <li><a href="/${locale}/about.html" class="nav-link">${t('nav.about', locale)}</a></li>
+                <li><a href="/${locale}/create-memo.html" class="nav-link active">${t('nav.create', locale)}</a></li>
             </ul>
-            <button class="hamburger" id="hamburger" aria-label="Toggle navigation menu" aria-expanded="false">☰</button>
+            <button class="hamburger" id="hamburger" aria-label="${t('ui.toggleNav', locale)}" aria-expanded="false">☰</button>
         </div>
     </nav>
 
     <main class="main-content">
         <div class="memo-container">
             <div class="memo-card">
-                <h1>Create Secure Memo</h1>
-                <p class="memo-description">Your memo will be encrypted in your browser and self-destruct after being read or expired.</p>
+                <h1>${t('create.hero.title', locale)}</h1>
+                <p class="memo-description">${t('create.hero.description', locale)}</p>
                 
                 <form id="memoForm" class="memo-form">
                     <div class="form-group">
-                        <label for="message">Your Memo</label>
+                        <label for="message">${t('form.message.label', locale)}</label>
                         <textarea id="message" name="message" required 
-                                  placeholder="Type your secret memo here..." 
+                                  placeholder="${t('form.message.placeholder', locale)}" 
                                   rows="8" maxlength="10000"></textarea>
-                        <small class="form-help">Maximum 10,000 characters</small>
+                        <small class="form-help">${t('form.message.help', locale)}</small>
                     </div>
                     
                     <div class="form-group">
-                        <label for="expiryHours">Expiry Time</label>
+                        <label for="expiryHours">${t('form.expiry.label', locale)}</label>
                         <select id="expiryHours" name="expiryHours">
                             <option value="8">Delete on read or 8 hours</option>
                             <option value="24">Delete on read or 1 day</option>
@@ -432,10 +432,10 @@ export async function getCreateMemoHTML(locale = 'en', origin = 'https://securem
                     
                     <div class="form-group">
                         <div class="cf-turnstile" data-sitekey="{{TURNSTILE_SITE_KEY}}"></div>
-                        <small class="form-help">Please complete the security challenge to create your memo</small>
+                        <small class="form-help">${t('form.security.help', locale)}</small>
                     </div>
                     
-                    <button type="submit" class="btn btn-primary" id="submitButton">Create Secure Memo</button>
+                    <button type="submit" class="btn btn-primary" id="submitButton">${t('btn.create', locale)}</button>
                     
                     <!-- Loading indicator (hidden by default) -->
                     <div id="loadingIndicator" class="loading-spinner" style="display: none;">
@@ -445,13 +445,13 @@ export async function getCreateMemoHTML(locale = 'en', origin = 'https://securem
                 </form>
                 
                 <div id="result" class="result-section" style="display: none;">
-                    <h3>✅ Memo Created Successfully!</h3>
+                    <h3>${t('msg.memoCreated', locale)}</h3>
                     
                     <div class="memo-url-section">
                         <label for="memoUrl">Memo URL (share this with your recipient):</label>
                         <div class="url-copy-container">
-                            <input type="text" id="memoUrl" readonly onclick="this.select(); document.execCommand('copy'); showMessage('Memo URL copied to clipboard!', 'success');">
-                            <button type="button" id="copyUrl" class="btn btn-primary">Copy URL</button>
+                            <input type="text" id="memoUrl" readonly onclick="this.select(); document.execCommand('copy'); showMessage('${t('msg.urlCopied', locale)}', 'success');">
+                            <button type="button" id="copyUrl" class="btn btn-primary">${t('btn.copy', locale)} URL</button>
                         </div>
                         <small class="form-help">This is the secure link to your memo. Share this URL with your recipient.</small>
                     </div>
@@ -459,9 +459,9 @@ export async function getCreateMemoHTML(locale = 'en', origin = 'https://securem
                     <div class="memo-password-section">
                         <label for="memoPassword">Encryption Password (share this separately):</label>
                         <div class="url-copy-container">
-                            <input type="password" id="memoPassword" readonly onclick="this.select(); document.execCommand('copy'); showMessage('Password copied to clipboard!', 'success');">
-                            <button type="button" id="togglePassword" class="btn btn-primary" style="margin-right: 8px;">Show</button>
-                            <button type="button" id="copyPassword" class="btn btn-primary">Copy Password</button>
+                            <input type="password" id="memoPassword" readonly onclick="this.select(); document.execCommand('copy'); showMessage('${t('msg.passwordCopied', locale)}', 'success');">
+                            <button type="button" id="togglePassword" class="btn btn-primary" style="margin-right: 8px;">${t('btn.show', locale)}</button>
+                            <button type="button" id="copyPassword" class="btn btn-primary">${t('btn.copy', locale)} Password</button>
                         </div>
                         <small class="form-help">This is the encryption password. Share this separately from the URL for enhanced security. This is not saved on our servers, recovery not possible after leaving this page.</small>
                     </div>
@@ -483,8 +483,8 @@ export async function getCreateMemoHTML(locale = 'en', origin = 'https://securem
     </main>
 
     <footer class="footer">
-        <p><a href="https://github.com/timoheimonen/securememo.app" target="_blank" rel="noopener noreferrer">View source code at GitHub</a> | <a href="/${locale}/tos.html">Terms of Service</a> | <a href="/${locale}/privacy.html">Privacy Notice</a></p>
-        <p style="font-size: 0.8em; margin-top: 0.5em; opacity: 0.8;">No tracking, no ads, no nonsense.</p>
+        <p><a href="https://github.com/timoheimonen/securememo.app" target="_blank" rel="noopener noreferrer">${t('footer.sourceCode', locale)}</a> | <a href="/${locale}/tos.html">${t('footer.tos', locale)}</a> | <a href="/${locale}/privacy.html">${t('footer.privacy', locale)}</a></p>
+        <p style="font-size: 0.8em; margin-top: 0.5em; opacity: 0.8;">${t('footer.tagline', locale)}</p>
     </footer>
 
     <script src="/js/common.js" defer></script>
@@ -499,50 +499,50 @@ export async function getReadMemoHTML(locale = 'en', origin = 'https://securemem
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Read Secure Memo - Decrypt Encrypted Memo | securememo.app</title>
-    <meta name="description" content="Decrypt and read your secure memo with the password. Memos self-destruct after reading for maximum privacy. Client-side AES-256 decryption.">
+    <title>${t('page.read.title', locale)} | securememo.app</title>
+    <meta name="description" content="${t('read.hero.description', locale)}">
     <meta name="keywords" content="read secure memo, decrypt memo, encrypted note reading, AES-256 decryption, private memo access">
     <!-- Open Graph for social sharing -->
-    <meta property="og:title" content="Read Secure Memo - Decrypt Encrypted Memo">
-    <meta property="og:description" content="Decrypt and read your secure memo. Memos self-destruct after reading for maximum privacy.">
+    <meta property="og:title" content="${t('page.read.title', locale)}">
+    <meta property="og:description" content="${t('read.hero.ogDescription', locale)}">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://securememo.app/read-memo.html">
+    <meta property="og:url" content="https://securememo.app/${locale}/read-memo.html">
     <meta property="og:image" content="https://securememo.app/android-chrome-512x512.png">
     <!-- Twitter Cards -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Read Secure Memo - Decrypt Encrypted Memo">
-    <meta name="twitter:description" content="Decrypt and read your secure memo with client-side decryption.">
+    <meta name="twitter:title" content="${t('page.read.title', locale)}">
+    <meta name="twitter:description" content="${t('read.hero.twitterDescription', locale)}">
     <!-- Structured Data -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "WebPage",
-      "name": "Read Secure Memo",
-      "description": "Decrypt and read your secure memo with the password. Memos self-destruct after reading for maximum privacy.",
-      "url": "https://securememo.app/read-memo.html",
+      "name": "${t('read.hero.title', locale)}",
+      "description": "${t('read.schema.description', locale)}",
+      "url": "https://securememo.app/${locale}/read-memo.html",
       "breadcrumb": {
         "@type": "BreadcrumbList",
         "itemListElement": [
           {
             "@type": "ListItem",
             "position": 1,
-            "name": "Home",
-            "item": "https://securememo.app/"
+            "name": "${t('nav.home', locale)}",
+            "item": "https://securememo.app/${locale}/"
           },
           {
             "@type": "ListItem",
             "position": 2,
-            "name": "Read Secure Memo",
-            "item": "https://securememo.app/read-memo.html"
+            "name": "${t('read.hero.title', locale)}",
+            "item": "https://securememo.app/${locale}/read-memo.html"
           }
         ]
       },
       "mainEntity": {
         "@type": "SoftwareApplication",
-        "name": "Secure Memo Reader",
+        "name": "${t('read.hero.title', locale)}",
         "applicationCategory": "SecurityApplication",
         "operatingSystem": "Web Browser",
-        "description": "Decrypt and read encrypted memos with client-side AES-256 decryption",
+        "description": "${t('read.schema.description', locale)}",
         "featureList": [
           "Client-side decryption",
           "Password-protected access",
@@ -567,9 +567,9 @@ export async function getReadMemoHTML(locale = 'en', origin = 'https://securemem
         <div class="nav-container">
             <a href="/${locale}" class="nav-logo">securememo.app</a>
             <ul class="nav-menu" id="navMenu">
-                <li><a href="/${locale}" class="nav-link">Home</a></li>
-                <li><a href="/${locale}/about.html" class="nav-link">About</a></li>
-                <li><a href="/${locale}/create-memo.html" class="nav-link">Create Secure Memo</a></li>
+                <li><a href="/${locale}" class="nav-link">${t('nav.home', locale)}</a></li>
+                <li><a href="/${locale}/about.html" class="nav-link">${t('nav.about', locale)}</a></li>
+                <li><a href="/${locale}/create-memo.html" class="nav-link">${t('nav.create', locale)}</a></li>
             </ul>
         </div>
     </nav>
@@ -577,25 +577,25 @@ export async function getReadMemoHTML(locale = 'en', origin = 'https://securemem
     <main class="main-content">
         <div class="memo-container">
             <div class="memo-card">
-                <h1>Read Secure Memo</h1>
-                <p class="memo-description">Enter the password to decrypt and read the memo. The password should have been shared with you separately from the URL. The memo will be deleted after being read or expired.</p>
+                <h1>${t('read.hero.title', locale)}</h1>
+                <p class="memo-description">${t('read.hero.description', locale)}</p>
                 
                 <div id="passwordForm" class="memo-form">
                     <form id="decryptForm">
                         <div class="form-group">
-                            <label for="password">Encryption Password</label>
+                            <label for="password">${t('form.password.label', locale)}</label>
                             <div class="password-input-container">
                                 <input type="password" id="password" name="password" required 
-                                       placeholder="Enter the encryption password shared with you separately">
-                                <button type="button" id="toggleReadPassword" class="btn btn-primary">Show</button>
+                                       placeholder="${t('form.password.placeholder', locale)}">
+                                <button type="button" id="toggleReadPassword" class="btn btn-primary">${t('btn.show', locale)}</button>
                             </div>
-                            <small class="form-help">The password should have been shared with you separately from the memo URL</small>
+                            <small class="form-help">${t('form.password.help', locale)}</small>
                         </div>
                         <div class="form-group">
                             <div class="cf-turnstile"></div>
-                            <small class="form-help">Please complete the security challenge to decrypt your memo</small>
+                            <small class="form-help">${t('form.security.help', locale)}</small>
                         </div>
-                        <button type="submit" class="btn btn-primary">Decrypt Memo</button>
+                        <button type="submit" class="btn btn-primary">${t('btn.decrypt', locale)}</button>
                     </form>
                 </div>
                 
@@ -605,24 +605,24 @@ export async function getReadMemoHTML(locale = 'en', origin = 'https://securemem
                         <p id="decryptedMessage"></p>
                     </div>
                     <div class="memo-info">
-                        <p><strong>Status:</strong> <span id="memoStatus">Memo decrypted. Deleting in progress... Please wait.</span></p>
+                        <p><strong>Status:</strong> <span id="memoStatus">${t('msg.memoDecrypted', locale)}</span></p>
                         <div id="deletionSpinner" class="loading-spinner" style="display: none;">
                             <div class="spinner"></div>
                             <p>Deleting memo securely...</p>
                         </div>
                     </div>
                     <div class="memo-actions">
-                        <a href="/${locale}/create-memo.html" class="btn btn-primary">Create New Memo</a>
-                        <a href="/${locale}" class="btn btn-secondary">Go Home</a>
+                        <a href="/${locale}/create-memo.html" class="btn btn-primary">${t('btn.createNew', locale)}</a>
+                        <a href="/${locale}" class="btn btn-secondary">${t('btn.goHome', locale)}</a>
                     </div>
                 </div>
                 
                 <div id="errorContent" class="error-content" style="display: none;">
-                    <h3>❌ Error</h3>
+                    <h3>❌ ${t('common.error', locale)}</h3>
                     <p id="errorMessage"></p>
                     <div class="memo-actions">
-                        <a href="/${locale}/create-memo.html" class="btn btn-primary">Create New Memo</a>
-                        <a href="/${locale}" class="btn btn-secondary">Go Home</a>
+                        <a href="/${locale}/create-memo.html" class="btn btn-primary">${t('btn.createNew', locale)}</a>
+                        <a href="/${locale}" class="btn btn-secondary">${t('btn.goHome', locale)}</a>
                     </div>
                 </div>
                 
@@ -632,8 +632,8 @@ export async function getReadMemoHTML(locale = 'en', origin = 'https://securemem
     </main>
 
     <footer class="footer">
-        <p><a href="https://github.com/timoheimonen/securememo.app" target="_blank" rel="noopener noreferrer">View source code at GitHub</a> | <a href="/${locale}/tos.html">Terms of Service</a> | <a href="/${locale}/privacy.html">Privacy Notice</a></p>
-        <p style="font-size: 0.8em; margin-top: 0.5em; opacity: 0.8;">No tracking, no ads, no nonsense.</p>
+        <p><a href="https://github.com/timoheimonen/securememo.app" target="_blank" rel="noopener noreferrer">${t('footer.sourceCode', locale)}</a> | <a href="/${locale}/tos.html">${t('footer.tos', locale)}</a> | <a href="/${locale}/privacy.html">${t('footer.privacy', locale)}</a></p>
+        <p style="font-size: 0.8em; margin-top: 0.5em; opacity: 0.8;">${t('footer.tagline', locale)}</p>
     </footer>
 
     <script src="/js/common.js" defer></script>
@@ -648,19 +648,19 @@ export async function getToSHTML(locale = 'en', origin = 'https://securememo.app
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Terms of Service - securememo.app Legal Terms | securememo.app</title>
-    <meta name="description" content="Terms of Service for securememo.app - encrypted memo sharing service. Learn about acceptable use, privacy, security, and legal terms for our secure memo sharing platform.">
-    <meta name="keywords" content="terms of service, secure memo legal, encrypted memo terms, privacy policy, acceptable use policy, secure note sharing terms">
+    <title>${t('page.tos.title', locale)}</title>
+    <meta name="description" content="${t('page.tos.description', locale)}">
+    <meta name="keywords" content="${t('page.tos.keywords', locale)}">
     <!-- Open Graph for social sharing -->
-    <meta property="og:title" content="Terms of Service - securememo.app Legal Terms">
-    <meta property="og:description" content="Legal terms and conditions for securememo.app encrypted memo sharing service.">
+    <meta property="og:title" content="${t('page.tos.ogTitle', locale)}">
+    <meta property="og:description" content="${t('page.tos.ogDescription', locale)}">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://securememo.app/tos.html">
     <meta property="og:image" content="https://securememo.app/android-chrome-512x512.png">
     <!-- Twitter Cards -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Terms of Service - securememo.app Legal Terms">
-    <meta name="twitter:description" content="Legal terms for securememo.app encrypted memo sharing service.">
+    <meta name="twitter:title" content="${t('page.tos.ogTitle', locale)}">
+    <meta name="twitter:description" content="${t('page.tos.twitterDescription', locale)}">
     <!-- Structured Data -->
     <script type="application/ld+json">
     {
@@ -708,137 +708,137 @@ export async function getToSHTML(locale = 'en', origin = 'https://securememo.app
 <body>
     <nav class="navbar">
         <div class="nav-container">
-            <a href="/" class="nav-logo">securememo.app</a>
+            <a href="/${locale}" class="nav-logo">securememo.app</a>
             <ul class="nav-menu" id="navMenu">
-                <li><a href="/" class="nav-link">Home</a></li>
-                <li><a href="/about.html" class="nav-link">About</a></li>
-                <li><a href="/create-memo.html" class="nav-link">Create Secure Memo</a></li>
+                <li><a href="/${locale}" class="nav-link">${t('nav.home', locale)}</a></li>
+                <li><a href="/${locale}/about.html" class="nav-link">${t('nav.about', locale)}</a></li>
+                <li><a href="/${locale}/create-memo.html" class="nav-link">${t('nav.create', locale)}</a></li>
             </ul>
-            <button class="hamburger" id="hamburger" aria-label="Toggle navigation menu" aria-expanded="false">☰</button>
+            <button class="hamburger" id="hamburger" aria-label="${t('ui.toggleNav', locale)}" aria-expanded="false">☰</button>
         </div>
     </nav>
 
     <main class="main-content">
         <div class="about-section">
-            <h1>Terms of Service</h1>
-            <p><strong>Last updated:</strong> August 05, 2025</p>
+            <h1>${t('tos.hero.title', locale)}</h1>
+            <p><strong>${t('tos.lastUpdated', locale)}</strong></p>
             
             <div class="tech-stack">
-                <h2>Table of Contents</h2>
+                <h2>${t('tos.tableOfContents.title', locale)}</h2>
                 <ol>
-                    <li><a href="#service-description">Service Description</a></li>
-                    <li><a href="#acceptable-use">Acceptable Use</a></li>
-                    <li><a href="#privacy-data">Privacy & Data Handling</a></li>
-                    <li><a href="#service-limitations">Service Limitations</a></li>
-                    <li><a href="#security-disclaimers">Security & Disclaimers</a></li>
-                    <li><a href="#intellectual-property">Intellectual Property</a></li>
-                    <li><a href="#indemnification">Indemnification</a></li>
-                    <li><a href="#termination">Termination</a></li>
-                    <li><a href="#changes-terms">Changes to Terms</a></li>
-                    <li><a href="#governing-law">Governing Law & Jurisdiction</a></li>
-                    <li><a href="#miscellaneous">Miscellaneous</a></li>
-                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="#service-description">${t('tos.tableOfContents.serviceDescription', locale)}</a></li>
+                    <li><a href="#acceptable-use">${t('tos.tableOfContents.acceptableUse', locale)}</a></li>
+                    <li><a href="#privacy-data">${t('tos.tableOfContents.privacyData', locale)}</a></li>
+                    <li><a href="#service-limitations">${t('tos.tableOfContents.serviceLimitations', locale)}</a></li>
+                    <li><a href="#security-disclaimers">${t('tos.tableOfContents.securityDisclaimers', locale)}</a></li>
+                    <li><a href="#intellectual-property">${t('tos.tableOfContents.intellectualProperty', locale)}</a></li>
+                    <li><a href="#indemnification">${t('tos.tableOfContents.indemnification', locale)}</a></li>
+                    <li><a href="#termination">${t('tos.tableOfContents.termination', locale)}</a></li>
+                    <li><a href="#changes-terms">${t('tos.tableOfContents.changesTerms', locale)}</a></li>
+                    <li><a href="#governing-law">${t('tos.tableOfContents.governingLaw', locale)}</a></li>
+                    <li><a href="#miscellaneous">${t('tos.tableOfContents.miscellaneous', locale)}</a></li>
+                    <li><a href="#contact">${t('tos.tableOfContents.contact', locale)}</a></li>
                 </ol>
             </div>
 
             <div class="features-detail" id="service-description">
-                <h2>1. Service Description</h2>
-                <p>securememo.app is a secure memo sharing service that allows users to create encrypted memos that self-destruct after being read or expired. The service uses client-side encryption to ensure that memo content is never accessible to our servers.</p>
+                <h2>${t('tos.serviceDescription.title', locale)}</h2>
+                <p>${t('tos.serviceDescription.content', locale)}</p>
             </div>
 
             <div class="usage-section" id="acceptable-use">
-                <h2>2. Acceptable Use</h2>
-                <p>You agree to use this service only for lawful purposes and in accordance with these Terms. You agree not to:</p>
+                <h2>${t('tos.acceptableUse.title', locale)}</h2>
+                <p>${t('tos.acceptableUse.intro', locale)}</p>
                 <ul>
-                    <li>Use the service to transmit illegal, harmful, threatening, abusive, or defamatory content</li>
-                    <li>Attempt to bypass security measures or CAPTCHA protection</li>
-                    <li>Use automated tools or scripts to create memos</li>
-                    <li>Share memos containing malware, phishing links, or other harmful content</li>
-                    <li>Use the service for spam or mass unsolicited memo sharing</li>
-                    <li>Attempt to reverse engineer or compromise the service</li>
+                    <li>${t('tos.acceptableUse.illegal', locale)}</li>
+                    <li>${t('tos.acceptableUse.bypass', locale)}</li>
+                    <li>${t('tos.acceptableUse.automated', locale)}</li>
+                    <li>${t('tos.acceptableUse.malware', locale)}</li>
+                    <li>${t('tos.acceptableUse.spam', locale)}</li>
+                    <li>${t('tos.acceptableUse.reverse', locale)}</li>
                 </ul>
             </div>
 
             <div class="features-detail" id="privacy-data">
-                <h2>3. Privacy & Data Handling</h2>
+                <h2>${t('tos.privacyData.title', locale)}</h2>
                 <ul>
-                    <li><strong>No Content Access:</strong> We cannot access, read, or recover your memo content. All encryption happens in your browser.</li>
-                    <li><strong>No Personal Data:</strong> We do not collect personal information or require user accounts.</li>
-                    <li><strong>Security Logging:</strong> We temporarily log IP addresses and security-related metadata strictly for abuse mitigation and to protect service integrity. These logs are never used for tracking or profiling.</li>
-                    <li><strong>Automatic Deletion:</strong> Memos are automatically deleted after being read or when they expire.</li>
-                    <li><strong>No Recovery:</strong> Once a memo is deleted, it cannot be recovered.</li>
-                    <li><strong>GDPR Compliance:</strong> This service does not collect personal data as defined under the EU GDPR.</li>
+                    <li><strong>${t('tos.privacyData.noAccess', locale)}</strong></li>
+                    <li><strong>${t('tos.privacyData.noPersonal', locale)}</strong></li>
+                    <li><strong>${t('tos.privacyData.securityLogging', locale)}</strong></li>
+                    <li><strong>${t('tos.privacyData.automaticDeletion', locale)}</strong></li>
+                    <li><strong>${t('tos.privacyData.noRecovery', locale)}</strong></li>
+                    <li><strong>${t('tos.privacyData.gdpr', locale)}</strong></li>
                 </ul>
-                <p>For more details, please review our <a href="/privacy.html">Privacy Notice</a>.</p>
+                <p>${t('tos.privacyData.moreDetails', locale)} <a href="/${locale}/privacy.html">${t('tos.privacyData.privacyNotice', locale)}</a>.</p>
             </div>
 
             <div class="usage-section" id="service-limitations">
-                <h2>4. Service Limitations</h2>
+                <h2>${t('tos.serviceLimitations.title', locale)}</h2>
                 <ul>
-                    <li><strong>Message Size:</strong> Maximum 10,000 characters per memo</li>
-                    <li><strong>Expiry Times:</strong> 8 hours, 24 hours, 48 hours, 1 week, or delete on read (max 30 days)</li>
-                    <li><strong>Availability:</strong> Service provided "as is" without guarantees of availability</li>
-                    <li><strong>No Delivery Guarantee:</strong> We cannot guarantee that memos will be delivered or read</li>
+                    <li><strong>${t('tos.serviceLimitations.messageSize', locale)}</strong></li>
+                    <li><strong>${t('tos.serviceLimitations.expiryTimes', locale)}</strong></li>
+                    <li><strong>${t('tos.serviceLimitations.availability', locale)}</strong></li>
+                    <li><strong>${t('tos.serviceLimitations.noDelivery', locale)}</strong></li>
                 </ul>
             </div>
 
             <div class="features-detail" id="security-disclaimers">
-                <h2>5. Security & Disclaimers</h2>
+                <h2>${t('tos.securityDisclaimers.title', locale)}</h2>
                 <ul>
-                    <li><strong>User Responsibility:</strong> You are responsible for securely sharing memo URLs and protecting the passwords. If passwords are lost, memos cannot be recovered.</li>
-                    <li><strong>No Warranty:</strong> The service is provided without warranties of any kind. Our encryption services are provided on an "as-is" and "as-available" basis. We do not warrant that the encryption will be uninterrupted, error-free, or secure from all potential threats.</li>
-                    <li><strong>Limitation of Liability:</strong> We are not liable for any damages arising from use of the service. You acknowledge that no method of electronic transmission or storage is 100% secure, and we are not responsible for any unauthorized access or interception of your memos. Use of our encryption services is at your own risk.</li>
-                    <li><strong>Security Measures:</strong> While we implement security measures, no system is 100% secure.</li>
-                    <li><strong>Export Controls:</strong> You agree not to use the service in violation of any export control laws, including those restricting use in sanctioned countries.</li>
+                    <li><strong>${t('tos.securityDisclaimers.userResponsibility', locale)}</strong></li>
+                    <li><strong>${t('tos.securityDisclaimers.noWarranty', locale)}</strong></li>
+                    <li><strong>${t('tos.securityDisclaimers.limitation', locale)}</strong></li>
+                    <li><strong>${t('tos.securityDisclaimers.securityMeasures', locale)}</strong></li>
+                    <li><strong>${t('tos.securityDisclaimers.exportControls', locale)}</strong></li>
                 </ul>
             </div>
 
             <div class="usage-section" id="intellectual-property">
-                <h2>6. Intellectual Property</h2>
-                <p>The Service and all materials provided through it, including but not limited to text, graphics, logos, and software, are the property of securememo.app or its licensors and are protected by copyright, trademark, and other intellectual property laws. You agree not to modify, reproduce, distribute, or create derivative works based on our content without explicit permission, except for personal, non-commercial use within the Service.</p>
-                <p><strong>Copyright & DMCA Policy:</strong> If you believe your copyright has been infringed, please contact us at timo.heimonen@gmail.com with the required information under the DMCA (e.g., identification of the work, your contact details, and a statement of good faith belief).</p>
+                <h2>${t('tos.intellectualProperty.title', locale)}</h2>
+                <p>${t('tos.intellectualProperty.content', locale)}</p>
+                <p><strong>${t('tos.intellectualProperty.copyright', locale)}</strong></p>
             </div>
 
             <div class="features-detail" id="indemnification">
-                <h2>7. Indemnification</h2>
-                <p>You agree to defend, indemnify, and hold harmless securememo.app and its affiliates, officers, directors, employees, and agents from and against any claims, liabilities, damages, losses, and expenses, including reasonable attorneys' fees, arising out of or in any way connected with your access to or use of our Services, including any violation of these Terms by you.</p>
+                <h2>${t('tos.indemnification.title', locale)}</h2>
+                <p>${t('tos.indemnification.content', locale)}</p>
             </div>
 
             <div class="usage-section" id="termination">
-                <h2>8. Termination</h2>
-                <p>We reserve the right to terminate or suspend access to the service for violations of these terms or for any other reason at our discretion.</p>
+                <h2>${t('tos.termination.title', locale)}</h2>
+                <p>${t('tos.termination.content', locale)}</p>
             </div>
 
             <div class="features-detail" id="changes-terms">
-                <h2>9. Changes to Terms</h2>
-                <p>We may update these terms at any time. Continued use of the service constitutes acceptance of updated terms.</p>
+                <h2>${t('tos.changesTerms.title', locale)}</h2>
+                <p>${t('tos.changesTerms.content', locale)}</p>
             </div>
 
             <div class="usage-section" id="governing-law">
-                <h2>10. Governing Law & Jurisdiction</h2>
-                <p>These Terms of Service and any separate agreements whereby we provide you Services shall be governed by and construed in accordance with the laws of Finland, without regard to its conflict of law principles. Any disputes shall be resolved in the courts of Helsinki, Finland.</p>
+                <h2>${t('tos.governingLaw.title', locale)}</h2>
+                <p>${t('tos.governingLaw.content', locale)}</p>
             </div>
 
             <div class="features-detail" id="miscellaneous">
-                <h2>11. Miscellaneous</h2>
+                <h2>${t('tos.miscellaneous.title', locale)}</h2>
                 <ul>
-                    <li><strong>Severability:</strong> If any provision of these Terms is found to be invalid or unenforceable by a court of competent jurisdiction, such provision shall be severed from the Terms, and the remaining provisions will remain in full force and effect.</li>
-                    <li><strong>Assignment:</strong> You may not assign or transfer these Terms, by operation of law or otherwise, without our prior written consent. We may assign these Terms at our sole discretion without notice to you.</li>
-                    <li><strong>Waiver:</strong> No waiver of any term shall be deemed a further or continuing waiver unless in writing.</li>
-                    <li><strong>Children's Privacy:</strong> Our service is not intended for children under 13 (or 16 in some jurisdictions). We do not knowingly collect data from children. If we become aware of such data, we will delete it immediately.</li>
+                    <li><strong>${t('tos.miscellaneous.severability', locale)}</strong></li>
+                    <li><strong>${t('tos.miscellaneous.assignment', locale)}</strong></li>
+                    <li><strong>${t('tos.miscellaneous.waiver', locale)}</strong></li>
+                    <li><strong>${t('tos.miscellaneous.children', locale)}</strong></li>
                 </ul>
             </div>
 
             <div class="usage-section" id="contact">
-                <h2>12. Contact</h2>
-                <p>For questions about these terms, please visit our <a href="https://github.com/timoheimonen/securememo.app" target="_blank" rel="noopener noreferrer">GitHub repository</a> or email timo.heimonen@gmail.com.</p>
+                <h2>${t('tos.contact.title', locale)}</h2>
+                <p>${t('tos.contact.content', locale)} <a href="https://github.com/timoheimonen/securememo.app" target="_blank" rel="noopener noreferrer">${t('tos.contact.github', locale)}</a> ${t('tos.contact.email', locale)}</p>
             </div>
         </div>
     </main>
 
     <footer class="footer">
-        <p><a href="https://github.com/timoheimonen/securememo.app" target="_blank" rel="noopener noreferrer">View source code at GitHub</a> | <a href="/${locale}/tos.html">Terms of Service</a> | <a href="/${locale}/privacy.html">Privacy Notice</a></p>
-        <p style="font-size: 0.8em; margin-top: 0.5em; opacity: 0.8;">No tracking, no ads, no nonsense.</p>
+        <p><a href="https://github.com/timoheimonen/securememo.app" target="_blank" rel="noopener noreferrer">${t('footer.sourceCode', locale)}</a> | <a href="/${locale}/tos.html">${t('footer.tos', locale)}</a> | <a href="/${locale}/privacy.html">${t('footer.privacy', locale)}</a></p>
+        <p style="font-size: 0.8em; margin-top: 0.5em; opacity: 0.8;">${t('footer.tagline', locale)}</p>
     </footer>
 
     <script src="/js/common.js" defer></script>
@@ -853,19 +853,19 @@ export async function getPrivacyHTML(locale = 'en', origin = 'https://securememo
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Privacy Notice - securememo.app Data Protection | securememo.app</title>
-    <meta name="description" content="Privacy Notice for securememo.app - learn how we protect your data with client-side encryption, zero-knowledge architecture, and minimal data collection for secure memo sharing.">
-    <meta name="keywords" content="privacy notice, secure memo privacy, data protection, GDPR compliance, client-side encryption, zero-knowledge, secure memo sharing privacy">
+    <title>${t('page.privacy.title', locale)}</title>
+    <meta name="description" content="${t('page.privacy.description', locale)}">
+    <meta name="keywords" content="${t('page.privacy.keywords', locale)}">
     <!-- Open Graph for social sharing -->
-    <meta property="og:title" content="Privacy Notice - securememo.app Data Protection">
-    <meta property="og:description" content="How securememo.app protects your privacy with client-side encryption and minimal data collection.">
+    <meta property="og:title" content="${t('page.privacy.ogTitle', locale)}">
+    <meta property="og:description" content="${t('page.privacy.ogDescription', locale)}">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://securememo.app/privacy.html">
     <meta property="og:image" content="https://securememo.app/android-chrome-512x512.png">
     <!-- Twitter Cards -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Privacy Notice - securememo.app Data Protection">
-    <meta name="twitter:description" content="Privacy protection with client-side encryption and zero-knowledge architecture.">
+    <meta name="twitter:title" content="${t('page.privacy.ogTitle', locale)}">
+    <meta name="twitter:description" content="${t('page.privacy.twitterDescription', locale)}">
     <!-- Structured Data -->
     <script type="application/ld+json">
     {
@@ -913,136 +913,136 @@ export async function getPrivacyHTML(locale = 'en', origin = 'https://securememo
 <body>
     <nav class="navbar">
         <div class="nav-container">
-            <a href="/" class="nav-logo">securememo.app</a>
+            <a href="/${locale}" class="nav-logo">securememo.app</a>
             <ul class="nav-menu" id="navMenu">
-                <li><a href="/" class="nav-link">Home</a></li>
-                <li><a href="/about.html" class="nav-link">About</a></li>
-                <li><a href="/create-memo.html" class="nav-link">Create Secure Memo</a></li>
+                <li><a href="/${locale}" class="nav-link">${t('nav.home', locale)}</a></li>
+                <li><a href="/${locale}/about.html" class="nav-link">${t('nav.about', locale)}</a></li>
+                <li><a href="/${locale}/create-memo.html" class="nav-link">${t('nav.create', locale)}</a></li>
             </ul>
-            <button class="hamburger" id="hamburger" aria-label="Toggle navigation menu" aria-expanded="false">☰</button>
+            <button class="hamburger" id="hamburger" aria-label="${t('ui.toggleNav', locale)}" aria-expanded="false">☰</button>
         </div>
     </nav>
 
     <main class="main-content">
         <div class="about-section">
-            <h1>Privacy Notice for securememo.app</h1>
-            <p><strong>Last updated:</strong> August 05, 2025</p>
+            <h1>${t('privacy.hero.title', locale)}</h1>
+            <p><strong>${t('privacy.lastUpdated', locale)}</strong></p>
             
             <div class="tech-stack">
-                <h2>Table of Contents</h2>
+                <h2>${t('privacy.tableOfContents.title', locale)}</h2>
                 <ol>
-                    <li><a href="#information-collected">Information We Collect</a></li>
-                    <li><a href="#how-we-use">How We Use Information</a></li>
-                    <li><a href="#data-sharing">Data Sharing and Disclosure</a></li>
-                    <li><a href="#data-security">Data Security</a></li>
-                    <li><a href="#data-retention">Data Retention</a></li>
-                    <li><a href="#your-rights">Your Rights and Choices</a></li>
-                    <li><a href="#children-privacy">Children's Privacy</a></li>
-                    <li><a href="#international-transfers">International Data Transfers</a></li>
-                    <li><a href="#changes-notice">Changes to This Privacy Notice</a></li>
-                    <li><a href="#contact">Contact Us</a></li>
+                    <li><a href="#information-collected">${t('privacy.tableOfContents.informationCollected', locale)}</a></li>
+                    <li><a href="#how-we-use">${t('privacy.tableOfContents.howWeUse', locale)}</a></li>
+                    <li><a href="#data-sharing">${t('privacy.tableOfContents.dataSharing', locale)}</a></li>
+                    <li><a href="#data-security">${t('privacy.tableOfContents.dataSecurity', locale)}</a></li>
+                    <li><a href="#data-retention">${t('privacy.tableOfContents.dataRetention', locale)}</a></li>
+                    <li><a href="#your-rights">${t('privacy.tableOfContents.yourRights', locale)}</a></li>
+                    <li><a href="#children-privacy">${t('privacy.tableOfContents.childrenPrivacy', locale)}</a></li>
+                    <li><a href="#international-transfers">${t('privacy.tableOfContents.internationalTransfers', locale)}</a></li>
+                    <li><a href="#changes-notice">${t('privacy.tableOfContents.changesNotice', locale)}</a></li>
+                    <li><a href="#contact">${t('privacy.tableOfContents.contact', locale)}</a></li>
                 </ol>
             </div>
 
             <div class="features-detail">
-                <p>securememo.app ("we," "us," or "our") is committed to protecting your privacy. This Privacy Notice explains how we handle information in connection with our service, which allows users to create and share encrypted memos that self-destruct after being read or expired. Our service is designed with privacy at its core: all encryption occurs client-side in your browser, and we do not have access to your memo content.</p>
-                <p>By using securememo.app, you agree to the practices described in this Privacy Notice. If you do not agree, please do not use our service.</p>
+                <p>${t('privacy.intro.p1', locale)}</p>
+                <p>${t('privacy.intro.p2', locale)}</p>
             </div>
 
             <div class="usage-section" id="information-collected">
-                <h2>1. Information We Collect</h2>
-                <p>We collect minimal information to operate the service securely and efficiently. Specifically:</p>
+                <h2>${t('privacy.informationCollected.title', locale)}</h2>
+                <p>${t('privacy.informationCollected.intro', locale)}</p>
                 <ul>
-                    <li><strong>Memo Data:</strong> When you create a memo, we store only the encrypted version of your message on our servers (using Cloudflare Workers and D1 Database). The encryption key (password) is generated and handled entirely in your browser and is never sent to or stored by us. Memos are automatically deleted after being read or when they expire (options: 8 hours, 1 day, 2 days, 1 week, or 30 days).</li>
-                    <li><strong>No Personal Information:</strong> We do not require user accounts, email addresses, names, or any other personal identifiers. We do not collect or store any data that could directly identify you.</li>
-                    <li><strong>Security-Related Data:</strong> For abuse prevention and service integrity:
+                    <li><strong>${t('privacy.informationCollected.memoData', locale)}</strong></li>
+                    <li><strong>${t('privacy.informationCollected.noPersonal', locale)}</strong></li>
+                    <li><strong>${t('privacy.informationCollected.securityData', locale)}</strong>
                         <ul>
-                            <li>We temporarily log IP addresses and request metadata (e.g., timestamps) to detect and mitigate spam, bots, or malicious activity.</li>
-                            <li>We use Cloudflare Turnstile CAPTCHA to prevent automated abuse. Turnstile is designed to protect privacy and does not track users across sites.</li>
+                            <li>${t('privacy.informationCollected.ipLogs', locale)}</li>
+                            <li>${t('privacy.informationCollected.turnstile', locale)}</li>
                         </ul>
                     </li>
                 </ul>
-                <p><strong>No Analytics or Tracking:</strong> We do not use cookies, tracking pixels, third-party analytics, or advertising tools. There is no user profiling, behavioral tracking, or data collection for marketing purposes.</p>
-                <p>We do not collect sensitive personal data, location information, or device identifiers beyond what is necessary for basic service operation.</p>
+                <p><strong>${t('privacy.informationCollected.noAnalytics', locale)}</strong></p>
+                <p>${t('privacy.informationCollected.noSensitive', locale)}</p>
             </div>
 
             <div class="features-detail" id="how-we-use">
-                <h2>2. How We Use Information</h2>
-                <p>The limited information we collect is used solely to:</p>
+                <h2>${t('privacy.howWeUse.title', locale)}</h2>
+                <p>${t('privacy.howWeUse.intro', locale)}</p>
                 <ul>
-                    <li><strong>Provide the core service:</strong> Store encrypted memos temporarily and facilitate their secure retrieval and deletion.</li>
-                    <li><strong>Maintain security:</strong> Detect and prevent abuse, such as spam or denial-of-service attacks, using IP logs and CAPTCHA.</li>
-                    <li><strong>Comply with legal obligations:</strong> In rare cases, we may use logs to respond to valid legal requests (e.g., subpoenas).</li>
+                    <li><strong>${t('privacy.howWeUse.coreService', locale)}</strong></li>
+                    <li><strong>${t('privacy.howWeUse.security', locale)}</strong></li>
+                    <li><strong>${t('privacy.howWeUse.legal', locale)}</strong></li>
                 </ul>
-                <p>We do not use any data for advertising, selling to third parties, or any purpose unrelated to operating securememo.app.</p>
+                <p>${t('privacy.howWeUse.noOther', locale)}</p>
             </div>
 
             <div class="usage-section" id="data-sharing">
-                <h2>3. Data Sharing and Disclosure</h2>
-                <p>We do not sell, rent, or share your data with third parties, except in the following limited circumstances:</p>
+                <h2>${t('privacy.dataSharing.title', locale)}</h2>
+                <p>${t('privacy.dataSharing.intro', locale)}</p>
                 <ul>
-                    <li><strong>Service Providers:</strong> We use Cloudflare for hosting, database storage (D1), and CAPTCHA (Turnstile). These providers process data on our behalf under strict confidentiality and do not access memo content.</li>
-                    <li><strong>Legal Requirements:</strong> We may disclose information if required by law, such as in response to a court order or government request.</li>
-                    <li><strong>Business Transfers:</strong> If securememo.app is acquired or merged, data may be transferred as part of the transaction, but it would remain subject to this Privacy Notice.</li>
+                    <li><strong>${t('privacy.dataSharing.serviceProviders', locale)}</strong></li>
+                    <li><strong>${t('privacy.dataSharing.legal', locale)}</strong></li>
+                    <li><strong>${t('privacy.dataSharing.business', locale)}</strong></li>
                 </ul>
             </div>
 
             <div class="features-detail" id="data-security">
-                <h2>4. Data Security</h2>
+                <h2>${t('privacy.dataSecurity.title', locale)}</h2>
                 <ul>
-                    <li><strong>Encryption:</strong> All memos are encrypted client-side using AES-256 with PBKDF2 key derivation (1,200,000 iterations). We store only encrypted data and cannot decrypt it.</li>
-                    <li><strong>Deletion:</strong> Memos are permanently deleted after reading or expiration via automated cron jobs.</li>
-                    <li><strong>Security Measures:</strong> We implement strong security headers (e.g., CSP, HSTS), input sanitization, timing attack protections, and CAPTCHA to prevent abuse.</li>
-                    <li><strong>No Recovery:</strong> Once deleted, memos cannot be recovered—even by us.</li>
+                    <li><strong>${t('privacy.dataSecurity.encryption', locale)}</strong></li>
+                    <li><strong>${t('privacy.dataSecurity.deletion', locale)}</strong></li>
+                    <li><strong>${t('privacy.dataSecurity.securityMeasures', locale)}</strong></li>
+                    <li><strong>${t('privacy.dataSecurity.noRecovery', locale)}</strong></li>
                 </ul>
-                <p>While we take reasonable steps to secure our systems, no service is completely immune to risks. You are responsible for securely sharing URLs and passwords.</p>
+                <p>${t('privacy.dataSecurity.disclaimer', locale)}</p>
             </div>
 
             <div class="usage-section" id="data-retention">
-                <h2>5. Data Retention</h2>
+                <h2>${t('privacy.dataRetention.title', locale)}</h2>
                 <ul>
-                    <li>Encrypted memos are retained only until read or expired (up to 30 days maximum).</li>
-                    <li>Security logs (e.g., IP addresses) are retained temporarily for abuse prevention and deleted automatically after a short period (typically within days).</li>
-                    <li>We do not retain any data longer than necessary for the service's operation.</li>
+                    <li>${t('privacy.dataRetention.memos', locale)}</li>
+                    <li>${t('privacy.dataRetention.logs', locale)}</li>
+                    <li>${t('privacy.dataRetention.minimal', locale)}</li>
                 </ul>
             </div>
 
             <div class="features-detail" id="your-rights">
-                <h2>6. Your Rights and Choices</h2>
-                <p>Since we collect no personal data:</p>
+                <h2>${t('privacy.yourRights.title', locale)}</h2>
+                <p>${t('privacy.yourRights.intro', locale)}</p>
                 <ul>
-                    <li>There are no user accounts to manage.</li>
-                    <li>You cannot request data access, correction, or deletion beyond the automatic self-destruction of memos.</li>
+                    <li>${t('privacy.yourRights.noAccounts', locale)}</li>
+                    <li>${t('privacy.yourRights.noRequests', locale)}</li>
                 </ul>
-                <p>If you believe we hold any information about you (e.g., from logs), contact us (see below) to inquire about your rights under applicable laws like GDPR or CCPA. We comply with data protection regulations and process requests where feasible.</p>
+                <p>${t('privacy.yourRights.contact', locale)}</p>
             </div>
 
             <div class="usage-section" id="children-privacy">
-                <h2>7. Children's Privacy</h2>
-                <p>Our service is not intended for children under 13 (or 16 in some jurisdictions). We do not knowingly collect data from children. If we become aware of such data, we will delete it.</p>
+                <h2>${t('privacy.childrenPrivacy.title', locale)}</h2>
+                <p>${t('privacy.childrenPrivacy.content', locale)}</p>
             </div>
 
             <div class="features-detail" id="international-transfers">
-                <h2>8. International Data Transfers</h2>
-                <p>securememo.app is hosted on Cloudflare's global network. Data may be processed in various countries, but we ensure equivalent privacy protections through our minimal collection practices.</p>
+                <h2>${t('privacy.internationalTransfers.title', locale)}</h2>
+                <p>${t('privacy.internationalTransfers.content', locale)}</p>
             </div>
 
             <div class="usage-section" id="changes-notice">
-                <h2>9. Changes to This Privacy Notice</h2>
-                <p>We may update this Notice periodically. Changes will be posted here with an updated "Last updated" date. Continued use of the service after changes constitutes acceptance.</p>
+                <h2>${t('privacy.changesNotice.title', locale)}</h2>
+                <p>${t('privacy.changesNotice.content', locale)}</p>
             </div>
 
             <div class="features-detail" id="contact">
-                <h2>10. Contact Us</h2>
-                <p>For questions about this Privacy Notice or our practices, please visit our <a href="https://github.com/timoheimonen/securememo.app" target="_blank" rel="noopener noreferrer">GitHub repository</a> or email timo.heimonen@gmail.com.</p>
-                <p>This Privacy Notice applies only to securememo.app and not to any third-party sites linked from our service.</p>
+                <h2>${t('privacy.contact.title', locale)}</h2>
+                <p>${t('privacy.contact.intro', locale)} <a href="https://github.com/timoheimonen/securememo.app" target="_blank" rel="noopener noreferrer">${t('privacy.contact.github', locale)}</a> ${t('privacy.contact.email', locale)}</p>
+                <p>${t('privacy.contact.disclaimer', locale)}</p>
             </div>
         </div>
     </main>
 
     <footer class="footer">
-        <p><a href="https://github.com/timoheimonen/securememo.app" target="_blank" rel="noopener noreferrer">View source code at GitHub</a> | <a href="/${locale}/tos.html">Terms of Service</a> | <a href="/${locale}/privacy.html">Privacy Notice</a></p>
-        <p style="font-size: 0.8em; margin-top: 0.5em; opacity: 0.8;">No tracking, no ads, no nonsense.</p>
+        <p><a href="https://github.com/timoheimonen/securememo.app" target="_blank" rel="noopener noreferrer">${t('footer.sourceCode', locale)}</a> | <a href="/${locale}/tos.html">${t('footer.tos', locale)}</a> | <a href="/${locale}/privacy.html">${t('footer.privacy', locale)}</a></p>
+        <p style="font-size: 0.8em; margin-top: 0.5em; opacity: 0.8;">${t('footer.tagline', locale)}</p>
     </footer>
 
     <script src="/js/common.js" defer></script>
