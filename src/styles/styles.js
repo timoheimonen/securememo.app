@@ -73,6 +73,24 @@ body {
   background: rgba(102, 126, 234, 0.1);
 }
 
+.language-links {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.language-separator {
+  color: #999;
+  font-weight: 300;
+  user-select: none;
+}
+
+.language-links .nav-link {
+  padding: 6px 12px;
+  font-size: 0.9rem;
+  min-width: auto;
+}
+
 .auth-links, .user-links {
   display: flex;
   gap: 15px;
@@ -704,6 +722,11 @@ input, textarea, select {
   .nav-link {
     padding: 12px 0;
     text-align: center;
+  }
+
+  .language-links {
+    justify-content: center;
+    margin-top: 10px;
   }
 
   .auth-links, .user-links {
