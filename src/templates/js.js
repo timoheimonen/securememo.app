@@ -211,8 +211,9 @@ document.getElementById('memoForm').addEventListener('submit', async (e) => {
         const result = await response.json();
         
         if (response.ok) {
-            // Generate URL without password
-            const memoUrl = window.location.origin + '/read-memo.html?id=' + result.memoId;
+            // Generate locale-aware URL without password  
+            const currentLocale = window.location.pathname.split('/')[1] || 'en';
+            const memoUrl = window.location.origin + '/' + currentLocale + '/read-memo.html?id=' + result.memoId;
             
             // Show result
             document.getElementById('memoUrl').value = memoUrl;
@@ -693,6 +694,13 @@ highlightCurrentPage();
 
 export function getCommonJS() {
     return `
+// Import client-side localization utility
+import { initLocalization, getCurrentLocale, t, localizeUrl } from '/js/clientLocalization.js';
+
+// Initialize localization when page loads
+document.addEventListener('DOMContentLoaded', () => {
+    initLocalization();
+});
 function highlightCurrentPage() {
     const currentPath = window.location.pathname;
     const navLinks = document.querySelectorAll('.nav-link');

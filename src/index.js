@@ -19,6 +19,13 @@ import {
   handleCleanupMemos
 } from './handlers/auth.js';
 import { getErrorMessage } from './utils/errorMessages.js';
+import { 
+  extractLocaleFromPath, 
+  getLocaleRedirectPath,
+  getCanonicalUrl,
+  buildLocalizedPath
+} from './utils/localization.js';
+import { getClientLocalizationJS } from './utils/clientLocalization.js';
 
 // Allowed origins for CORS
 const allowedOrigins = [
@@ -84,6 +91,15 @@ export default {
       }
 
       const pathname = url.pathname;
+
+      // Handle locale-based routing with /en prefix
+      const { locale, pathWithoutLocale } = extractLocaleFromPath(pathname);
+      
+      // Check if redirect to localized path is needed (add /en prefix to non-localized URLs)
+      const redirectPath = getLocaleRedirectPath(pathname);
+      if (redirectPath && redirectPath !== pathname) {
+        return Response.redirect(url.origin + redirectPath, 301);
+      }
 
       // Handle CORS preflight with proper origin validation
       if (request.method === 'OPTIONS') {
@@ -197,31 +213,31 @@ export default {
         const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://securememo.app/</loc>
+    <loc>https://securememo.app/en</loc>
     <lastmod>2025-08-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://securememo.app/about.html</loc>
+    <loc>https://securememo.app/en/about.html</loc>
     <lastmod>2025-08-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://securememo.app/create-memo.html</loc>
+    <loc>https://securememo.app/en/create-memo.html</loc>
     <lastmod>2025-08-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://securememo.app/tos.html</loc>
+    <loc>https://securememo.app/en/tos.html</loc>
     <lastmod>2025-08-05</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
-    <loc>https://securememo.app/privacy.html</loc>
+    <loc>https://securememo.app/en/privacy.html</loc>
     <lastmod>2025-08-05</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
@@ -335,6 +351,27 @@ export default {
           }
         });
       }
+      
+      if (pathname === '/js/clientLocalization.js') {
+        if (request.method !== 'GET') {
+          return new Response(getErrorMessage('METHOD_NOT_ALLOWED'), {
+            status: 405,
+            headers: { 
+              'Allow': 'GET',
+              ...getSecurityHeaders(request)
+            }
+          });
+        }
+        
+        // Serve the client localization utility
+        return new Response(getClientLocalizationJS(), {
+          headers: { 
+            'Content-Type': 'application/javascript',
+            'Cache-Control': 'public, max-age=3600',
+            ...getSecurityHeaders(request)
+          }
+        });
+      }
 
       // Route page requests
       if (request.method !== 'GET') {
@@ -350,29 +387,30 @@ export default {
       let response;
       let cacheHeaders = {};
       
-      switch (pathname) {
+      // Use pathWithoutLocale for route matching to support localized URLs
+      switch (pathWithoutLocale) {
         case '/':
-          response = await getIndexHTML();
+          response = await getIndexHTML(locale, url.origin);
           cacheHeaders = { 'Cache-Control': 'public, max-age=604800' };
           break;
         case '/about.html':
-          response = await getAboutHTML();
+          response = await getAboutHTML(locale, url.origin);
           cacheHeaders = { 'Cache-Control': 'public, max-age=604800' };
           break;
         case '/create-memo.html':
           const siteKey = env.TURNSTILE_SITE_KEY || 'MISSING_SITE_KEY';
-          response = (await getCreateMemoHTML()).replace('{{TURNSTILE_SITE_KEY}}', siteKey);
+          response = (await getCreateMemoHTML(locale, url.origin)).replace('{{TURNSTILE_SITE_KEY}}', siteKey);
           break;
         case '/read-memo.html':
           const readSiteKey = env.TURNSTILE_SITE_KEY || 'MISSING_SITE_KEY';
-          response = (await getReadMemoHTML()).replace('{{TURNSTILE_SITE_KEY}}', readSiteKey);
+          response = (await getReadMemoHTML(locale, url.origin)).replace('{{TURNSTILE_SITE_KEY}}', readSiteKey);
           break;
         case '/tos.html':
-          response = await getToSHTML();
+          response = await getToSHTML(locale, url.origin);
           cacheHeaders = { 'Cache-Control': 'public, max-age=604800' };
           break;
         case '/privacy.html':
-          response = await getPrivacyHTML();
+          response = await getPrivacyHTML(locale, url.origin);
           cacheHeaders = { 'Cache-Control': 'public, max-age=604800' };
           break;
         default:

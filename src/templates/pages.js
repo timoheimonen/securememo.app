@@ -1,6 +1,7 @@
-export async function getIndexHTML() {
+export async function getIndexHTML(locale = 'en', origin = 'https://securememo.app') {
+  const canonicalUrl = `${origin}/${locale}`;
   return `<!DOCTYPE html>
-<html lang="en">
+<html lang="${locale}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -22,7 +23,7 @@ export async function getIndexHTML() {
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png">
     <link rel="icon" type="image/png" sizes="512x512" href="/android-chrome-512x512.png">
-    <link rel="canonical" href="https://securememo.app/">
+    <link rel="canonical" href="${canonicalUrl}">
     <!-- Structured Data -->
     <script type="application/ld+json">
     {
@@ -69,11 +70,11 @@ export async function getIndexHTML() {
 <body>
     <nav class="navbar">
         <div class="nav-container">
-            <a href="/" class="nav-logo">securememo.app</a>
+            <a href="/${locale}" class="nav-logo">securememo.app</a>
             <ul class="nav-menu" id="navMenu">
-                <li><a href="/" class="nav-link active">Home</a></li>
-                <li><a href="/about.html" class="nav-link">About</a></li>
-                <li><a href="/create-memo.html" class="nav-link">Create Secure Memo</a></li>
+                <li><a href="/${locale}" class="nav-link active">Home</a></li>
+                <li><a href="/${locale}/about.html" class="nav-link">About</a></li>
+                <li><a href="/${locale}/create-memo.html" class="nav-link">Create Secure Memo</a></li>
             </ul>
             <button class="hamburger" id="hamburger" aria-label="Toggle navigation menu" aria-expanded="false">☰</button>
         </div>
@@ -84,8 +85,8 @@ export async function getIndexHTML() {
             <h1>securememo.app</h1>
             <p><span>Create</span> <span>encrypted</span> <span>memos</span> <span>that</span> <span>self-destruct</span> <span>after</span> <span>being</span> <span>read</span> <span>or</span> <span>expired.</span> <span>Your</span> <span>secrets</span> <span>stay</span> <span>safe.</span></p>
             <div class="cta-buttons">
-                <a href="/create-memo.html" class="btn btn-primary">Create Secure Memo</a>
-                <a href="/about.html" class="btn btn-secondary">Learn More</a>
+                <a href="/${locale}/create-memo.html" class="btn btn-primary">Create Secure Memo</a>
+                <a href="/${locale}/about.html" class="btn btn-secondary">Learn More</a>
             </div>
         </div>
 
@@ -127,7 +128,7 @@ export async function getIndexHTML() {
     </main>
 
     <footer class="footer">
-        <p><a href="https://github.com/timoheimonen/securememo.app" target="_blank" rel="noopener noreferrer">View source code at GitHub</a> | <a href="/tos.html">Terms of Service</a> | <a href="/privacy.html">Privacy Notice</a></p>
+        <p><a href="https://github.com/timoheimonen/securememo.app" target="_blank" rel="noopener noreferrer">View source code at GitHub</a> | <a href="/${locale}/tos.html">Terms of Service</a> | <a href="/${locale}/privacy.html">Privacy Notice</a></p>
         <p style="font-size: 0.8em; margin-top: 0.5em; opacity: 0.8;">No tracking, no ads, no nonsense.</p>
     </footer>
 
@@ -136,9 +137,10 @@ export async function getIndexHTML() {
 </html>`;
 }
 
-export async function getAboutHTML() {
+export async function getAboutHTML(locale = 'en', origin = 'https://securememo.app') {
+  const canonicalUrl = `${origin}/${locale}/about.html`;
   return `<!DOCTYPE html>
-<html lang="en">
+<html lang="${locale}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -217,16 +219,16 @@ export async function getAboutHTML() {
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png">
     <link rel="icon" type="image/png" sizes="512x512" href="/android-chrome-512x512.png">
-    <link rel="canonical" href="https://securememo.app/about.html">
+    <link rel="canonical" href="${canonicalUrl}">
 </head>
 <body>
     <nav class="navbar">
         <div class="nav-container">
-            <a href="/" class="nav-logo">securememo.app</a>
+            <a href="/${locale}" class="nav-logo">securememo.app</a>
             <ul class="nav-menu" id="navMenu">
-                <li><a href="/" class="nav-link">Home</a></li>
-                <li><a href="/about.html" class="nav-link active">About</a></li>
-                <li><a href="/create-memo.html" class="nav-link">Create Secure Memo</a></li>
+                <li><a href="/${locale}" class="nav-link">Home</a></li>
+                <li><a href="/${locale}/about.html" class="nav-link active">About</a></li>
+                <li><a href="/${locale}/create-memo.html" class="nav-link">Create Secure Memo</a></li>
             </ul>
             <button class="hamburger" id="hamburger" aria-label="Toggle navigation menu" aria-expanded="false">☰</button>
         </div>
@@ -300,15 +302,15 @@ export async function getAboutHTML() {
                 <h2>Ready to Get Started?</h2>
                 <p>Create your first secure memo now and experience true end-to-end encryption.</p>
                 <div class="cta-buttons">
-                    <a href="/create-memo.html" class="btn btn-primary">Create Secure Memo</a>
-                    <a href="/" class="btn btn-secondary">Back to Home</a>
+                    <a href="/${locale}/create-memo.html" class="btn btn-primary">Create Secure Memo</a>
+                    <a href="/${locale}" class="btn btn-secondary">Back to Home</a>
                 </div>
             </div>
         </div>
     </main>
 
     <footer class="footer">
-        <p><a href="https://github.com/timoheimonen/securememo.app" target="_blank" rel="noopener noreferrer">View source code at GitHub</a> | <a href="/tos.html">Terms of Service</a> | <a href="/privacy.html">Privacy Notice</a></p>
+        <p><a href="https://github.com/timoheimonen/securememo.app" target="_blank" rel="noopener noreferrer">View source code at GitHub</a> | <a href="/${locale}/tos.html">Terms of Service</a> | <a href="/${locale}/privacy.html">Privacy Notice</a></p>
         <p style="font-size: 0.8em; margin-top: 0.5em; opacity: 0.8;">No tracking, no ads, no nonsense.</p>
     </footer>
 
@@ -317,9 +319,10 @@ export async function getAboutHTML() {
 </html>`;
 }
 
-export async function getCreateMemoHTML() {
+export async function getCreateMemoHTML(locale = 'en', origin = 'https://securememo.app') {
+  const canonicalUrl = `${origin}/${locale}/create-memo.html`;
   return `<!DOCTYPE html>
-<html lang="en">
+<html lang="${locale}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -382,18 +385,18 @@ export async function getCreateMemoHTML() {
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png">
     <link rel="icon" type="image/png" sizes="512x512" href="/android-chrome-512x512.png">
-    <link rel="canonical" href="https://securememo.app/create-memo.html">
+    <link rel="canonical" href="${canonicalUrl}">
     <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" integrity="sha384-8tTMUpBXDOsQTxlbB/LdlISG/7nPjF1RWr/rNDxPsh5quEpybtbFHO/flV79t6uO" crossorigin="anonymous" async defer></script>
     <script src="/js/create-memo.js" defer></script>
 </head>
 <body>
     <nav class="navbar">
         <div class="nav-container">
-            <a href="/" class="nav-logo">securememo.app</a>
+            <a href="/${locale}" class="nav-logo">securememo.app</a>
             <ul class="nav-menu" id="navMenu">
-                <li><a href="/" class="nav-link">Home</a></li>
-                <li><a href="/about.html" class="nav-link">About</a></li>
-                <li><a href="/create-memo.html" class="nav-link active">Create Secure Memo</a></li>
+                <li><a href="/${locale}" class="nav-link">Home</a></li>
+                <li><a href="/${locale}/about.html" class="nav-link">About</a></li>
+                <li><a href="/${locale}/create-memo.html" class="nav-link active">Create Secure Memo</a></li>
             </ul>
             <button class="hamburger" id="hamburger" aria-label="Toggle navigation menu" aria-expanded="false">☰</button>
         </div>
@@ -478,7 +481,7 @@ export async function getCreateMemoHTML() {
     </main>
 
     <footer class="footer">
-        <p><a href="https://github.com/timoheimonen/securememo.app" target="_blank" rel="noopener noreferrer">View source code at GitHub</a> | <a href="/tos.html">Terms of Service</a> | <a href="/privacy.html">Privacy Notice</a></p>
+        <p><a href="https://github.com/timoheimonen/securememo.app" target="_blank" rel="noopener noreferrer">View source code at GitHub</a> | <a href="/${locale}/tos.html">Terms of Service</a> | <a href="/${locale}/privacy.html">Privacy Notice</a></p>
         <p style="font-size: 0.8em; margin-top: 0.5em; opacity: 0.8;">No tracking, no ads, no nonsense.</p>
     </footer>
 
@@ -487,9 +490,10 @@ export async function getCreateMemoHTML() {
 </html>`;
 }
 
-export async function getReadMemoHTML() {
+export async function getReadMemoHTML(locale = 'en', origin = 'https://securememo.app') {
+  const canonicalUrl = `${origin}/${locale}/read-memo.html`;
   return `<!DOCTYPE html>
-<html lang="en">
+<html lang="${locale}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -552,18 +556,18 @@ export async function getReadMemoHTML() {
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png">
     <link rel="icon" type="image/png" sizes="512x512" href="/android-chrome-512x512.png">
-    <link rel="canonical" href="https://securememo.app/read-memo.html">
+    <link rel="canonical" href="${canonicalUrl}">
     <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" integrity="sha384-8tTMUpBXDOsQTxlbB/LdlISG/7nPjF1RWr/rNDxPsh5quEpybtbFHO/flV79t6uO" crossorigin="anonymous" async defer></script>
     <script src="/js/read-memo.js" defer></script>
 </head>
 <body>
     <nav class="navbar">
         <div class="nav-container">
-            <a href="/" class="nav-logo">securememo.app</a>
+            <a href="/${locale}" class="nav-logo">securememo.app</a>
             <ul class="nav-menu" id="navMenu">
-                <li><a href="/" class="nav-link">Home</a></li>
-                <li><a href="/about.html" class="nav-link">About</a></li>
-                <li><a href="/create-memo.html" class="nav-link">Create Secure Memo</a></li>
+                <li><a href="/${locale}" class="nav-link">Home</a></li>
+                <li><a href="/${locale}/about.html" class="nav-link">About</a></li>
+                <li><a href="/${locale}/create-memo.html" class="nav-link">Create Secure Memo</a></li>
             </ul>
         </div>
     </nav>
@@ -606,8 +610,8 @@ export async function getReadMemoHTML() {
                         </div>
                     </div>
                     <div class="memo-actions">
-                        <a href="/create-memo.html" class="btn btn-primary">Create New Memo</a>
-                        <a href="/" class="btn btn-secondary">Go Home</a>
+                        <a href="/${locale}/create-memo.html" class="btn btn-primary">Create New Memo</a>
+                        <a href="/${locale}" class="btn btn-secondary">Go Home</a>
                     </div>
                 </div>
                 
@@ -615,8 +619,8 @@ export async function getReadMemoHTML() {
                     <h3>❌ Error</h3>
                     <p id="errorMessage"></p>
                     <div class="memo-actions">
-                        <a href="/create-memo.html" class="btn btn-primary">Create New Memo</a>
-                        <a href="/" class="btn btn-secondary">Go Home</a>
+                        <a href="/${locale}/create-memo.html" class="btn btn-primary">Create New Memo</a>
+                        <a href="/${locale}" class="btn btn-secondary">Go Home</a>
                     </div>
                 </div>
                 
@@ -626,7 +630,7 @@ export async function getReadMemoHTML() {
     </main>
 
     <footer class="footer">
-        <p><a href="https://github.com/timoheimonen/securememo.app" target="_blank" rel="noopener noreferrer">View source code at GitHub</a> | <a href="/tos.html">Terms of Service</a> | <a href="/privacy.html">Privacy Notice</a></p>
+        <p><a href="https://github.com/timoheimonen/securememo.app" target="_blank" rel="noopener noreferrer">View source code at GitHub</a> | <a href="/${locale}/tos.html">Terms of Service</a> | <a href="/${locale}/privacy.html">Privacy Notice</a></p>
         <p style="font-size: 0.8em; margin-top: 0.5em; opacity: 0.8;">No tracking, no ads, no nonsense.</p>
     </footer>
 
@@ -635,9 +639,10 @@ export async function getReadMemoHTML() {
 </html>`;
 }
 
-export async function getToSHTML() {
+export async function getToSHTML(locale = 'en', origin = 'https://securememo.app') {
+  const canonicalUrl = `${origin}/${locale}/tos.html`;
   return `<!DOCTYPE html>
-<html lang="en">
+<html lang="${locale}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -696,7 +701,7 @@ export async function getToSHTML() {
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png">
     <link rel="icon" type="image/png" sizes="512x512" href="/android-chrome-512x512.png">
-    <link rel="canonical" href="https://securememo.app/tos.html">
+    <link rel="canonical" href="${canonicalUrl}">
 </head>
 <body>
     <nav class="navbar">
@@ -830,7 +835,7 @@ export async function getToSHTML() {
     </main>
 
     <footer class="footer">
-        <p><a href="https://github.com/timoheimonen/securememo.app" target="_blank" rel="noopener noreferrer">View source code at GitHub</a> | <a href="/tos.html">Terms of Service</a> | <a href="/privacy.html">Privacy Notice</a></p>
+        <p><a href="https://github.com/timoheimonen/securememo.app" target="_blank" rel="noopener noreferrer">View source code at GitHub</a> | <a href="/${locale}/tos.html">Terms of Service</a> | <a href="/${locale}/privacy.html">Privacy Notice</a></p>
         <p style="font-size: 0.8em; margin-top: 0.5em; opacity: 0.8;">No tracking, no ads, no nonsense.</p>
     </footer>
 
@@ -839,9 +844,10 @@ export async function getToSHTML() {
 </html>`;
 }
 
-export async function getPrivacyHTML() {
+export async function getPrivacyHTML(locale = 'en', origin = 'https://securememo.app') {
+  const canonicalUrl = `${origin}/${locale}/privacy.html`;
   return `<!DOCTYPE html>
-<html lang="en">
+<html lang="${locale}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -900,7 +906,7 @@ export async function getPrivacyHTML() {
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png">
     <link rel="icon" type="image/png" sizes="512x512" href="/android-chrome-512x512.png">
-    <link rel="canonical" href="https://securememo.app/privacy.html">
+    <link rel="canonical" href="${canonicalUrl}">
 </head>
 <body>
     <nav class="navbar">
@@ -1033,7 +1039,7 @@ export async function getPrivacyHTML() {
     </main>
 
     <footer class="footer">
-        <p><a href="https://github.com/timoheimonen/securememo.app" target="_blank" rel="noopener noreferrer">View source code at GitHub</a> | <a href="/tos.html">Terms of Service</a> | <a href="/privacy.html">Privacy Notice</a></p>
+        <p><a href="https://github.com/timoheimonen/securememo.app" target="_blank" rel="noopener noreferrer">View source code at GitHub</a> | <a href="/${locale}/tos.html">Terms of Service</a> | <a href="/${locale}/privacy.html">Privacy Notice</a></p>
         <p style="font-size: 0.8em; margin-top: 0.5em; opacity: 0.8;">No tracking, no ads, no nonsense.</p>
     </footer>
 
