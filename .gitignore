@@ -123,3 +123,4 @@ pages/android-chrome-512x512.png
 pages/apple-touch-icon.png
 pages/favicon.ico
 pages/build.js
+deploy.sh
