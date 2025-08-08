@@ -4,12 +4,67 @@ export async function getIndexHTML() {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>securememo.app - Encrypted Memos</title>
+    <title>securememo.app - Encrypted Self-Destructing Memos | securememo.app</title>
+    <meta name="description" content="Create encrypted memos that self-destruct after reading. End-to-end encryption, privacy-focused, and secure note sharing with AES-256. No tracking, no ads.">
+    <meta name="keywords" content="secure memo, encrypted memo, self-destructing memo, private note sharing, end-to-end encryption, AES-256, privacy, secure memo sharing">
+    <!-- Open Graph for social sharing -->
+    <meta property="og:title" content="securememo.app - Encrypted Self-Destructing Memos">
+    <meta property="og:description" content="Share sensitive information securely with memos that delete after one view or expiration. Powered by client-side AES-256 encryption.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://securememo.app/">
+    <meta property="og:image" content="https://securememo.app/android-chrome-512x512.png">
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="securememo.app - Encrypted Self-Destructing Memos">
+    <meta name="twitter:description" content="Privacy-first app for secure, self-destructing memos.">
     <link rel="stylesheet" href="/styles.css">
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png">
     <link rel="icon" type="image/png" sizes="512x512" href="/android-chrome-512x512.png">
+    <link rel="canonical" href="https://securememo.app/">
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "securememo.app",
+      "description": "Create encrypted memos that self-destruct after reading. End-to-end encryption, privacy-focused, and secure note sharing with AES-256. No tracking, no ads.",
+      "url": "https://securememo.app/",
+      "applicationCategory": "SecurityApplication",
+      "operatingSystem": "Web Browser",
+      "browserRequirements": "Requires JavaScript. Requires HTML5.",
+      "author": {
+        "@type": "Person",
+        "name": "Timo Heimonen",
+        "url": "https://github.com/timoheimonen"
+      },
+      "creator": {
+        "@type": "Person",
+        "name": "Timo Heimonen",
+        "url": "https://github.com/timoheimonen"
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "featureList": [
+        "Client-side AES-256 encryption",
+        "Self-destructing memos",
+        "Zero-knowledge architecture",
+        "No user accounts required",
+        "Global performance via Cloudflare",
+        "Privacy-first design"
+      ],
+      "screenshot": "https://securememo.app/android-chrome-512x512.png",
+      "softwareVersion": "1.0",
+      "datePublished": "2025-01-01",
+      "dateModified": "2025-08-05",
+      "license": "https://github.com/timoheimonen/securememo.app/blob/main/LICENSE",
+      "codeRepository": "https://github.com/timoheimonen/securememo.app"
+    }
+    </script>
 </head>
 <body>
     <nav class="navbar">
@@ -87,12 +142,82 @@ export async function getAboutHTML() {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About - securememo.app</title>
+    <title>About securememo.app - Privacy-Focused Encrypted Notes | securememo.app</title>
+    <meta name="description" content="Learn about securememo.app's privacy-first approach to encrypted messaging. Built with client-side AES-256 encryption, self-destructing messages, and zero-knowledge architecture.">
+    <meta name="keywords" content="about secure memo, privacy-focused messaging, client-side encryption, AES-256, self-destructing messages, zero-knowledge, secure note sharing">
+    <!-- Open Graph for social sharing -->
+    <meta property="og:title" content="About securememo.app - Privacy-Focused Encrypted Notes">
+    <meta property="og:description" content="Discover how securememo.app protects your privacy with client-side encryption and self-destructing messages.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://securememo.app/about.html">
+    <meta property="og:image" content="https://securememo.app/android-chrome-512x512.png">
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="About securememo.app - Privacy-Focused Encrypted Notes">
+    <meta name="twitter:description" content="Privacy-first encrypted messaging with client-side encryption.">
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How does securememo.app protect my privacy?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "securememo.app uses client-side AES-256 encryption, meaning your memo is encrypted in your browser before being sent to our servers. We never see the plaintext content. Memos self-destruct after being read or expired, and we don't require user accounts or collect personal information."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What encryption does securememo.app use?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We use AES-256-GCM encryption with PBKDF2 key derivation (1,200,000+ iterations). All encryption happens client-side in your browser using the Web Crypto API. The encryption password is generated separately and never stored on our servers."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How long do memos last?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Memos can be set to expire after 8 hours, 1 day, 2 days, 1 week, or 30 days maximum. They are also deleted immediately after being read. Expired memos are automatically cleaned up every hour."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I recover a deleted memo?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No, once a memo is deleted (either after being read or when expired), it cannot be recovered. This is by design for maximum privacy and security."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is securememo.app free to use?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, securememo.app is completely free to use. There are no hidden fees, no premium features, and no tracking or advertising."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What technology does securememo.app use?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "securememo.app is built on Cloudflare Workers for serverless compute, D1 Database for storage, Web Crypto API for client-side encryption, and modern HTML/CSS/JavaScript. The source code is open source and available on GitHub."
+          }
+        }
+      ]
+    }
+    </script>
     <link rel="stylesheet" href="/styles.css">
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png">
     <link rel="icon" type="image/png" sizes="512x512" href="/android-chrome-512x512.png">
+    <link rel="canonical" href="https://securememo.app/about.html">
 </head>
 <body>
     <nav class="navbar">
@@ -198,12 +323,66 @@ export async function getCreateMemoHTML() {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create Secure Memo - securememo.app</title>
+    <title>Create Secure Memo - Encrypted Self-Destructing Memo | securememo.app</title>
+    <meta name="description" content="Create encrypted memos that self-destruct after reading. Client-side AES-256 encryption ensures your secrets stay private. No tracking, instant sharing.">
+    <meta name="keywords" content="create secure memo, encrypted memo, self-destructing note, AES-256 encryption, private memo sharing, secure note creation">
+    <!-- Open Graph for social sharing -->
+    <meta property="og:title" content="Create Secure Memo - Encrypted Self-Destructing Memo">
+    <meta property="og:description" content="Create encrypted memos with client-side AES-256 encryption. Memos self-destruct after reading for maximum privacy.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://securememo.app/create-memo.html">
+    <meta property="og:image" content="https://securememo.app/android-chrome-512x512.png">
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Create Secure Memo - Encrypted Self-Destructing Memo">
+    <meta name="twitter:description" content="Create encrypted memos with client-side encryption.">
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": "Create Secure Memo",
+      "description": "Create encrypted memos that self-destruct after reading. Client-side AES-256 encryption ensures your secrets stay private.",
+      "url": "https://securememo.app/create-memo.html",
+      "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://securememo.app/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Create Secure Memo",
+            "item": "https://securememo.app/create-memo.html"
+          }
+        ]
+      },
+      "mainEntity": {
+        "@type": "SoftwareApplication",
+        "name": "Secure Memo Creator",
+        "applicationCategory": "SecurityApplication",
+        "operatingSystem": "Web Browser",
+        "description": "Create encrypted memos with client-side AES-256 encryption and automatic self-destruction",
+        "featureList": [
+          "Client-side encryption",
+          "Self-destructing memos",
+          "Multiple expiry options",
+          "No user accounts required",
+          "Maximum 10,000 characters"
+        ]
+      }
+    }
+    </script>
     <link rel="stylesheet" href="/styles.css">
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png">
     <link rel="icon" type="image/png" sizes="512x512" href="/android-chrome-512x512.png">
+    <link rel="canonical" href="https://securememo.app/create-memo.html">
     <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" integrity="sha384-8tTMUpBXDOsQTxlbB/LdlISG/7nPjF1RWr/rNDxPsh5quEpybtbFHO/flV79t6uO" crossorigin="anonymous" async defer></script>
     <script src="/js/create-memo.js" defer></script>
 </head>
@@ -314,12 +493,66 @@ export async function getReadMemoHTML() {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Read Secure Memo - securememo.app</title>
+    <title>Read Secure Memo - Decrypt Encrypted Memo | securememo.app</title>
+    <meta name="description" content="Decrypt and read your secure memo with the password. Memos self-destruct after reading for maximum privacy. Client-side AES-256 decryption.">
+    <meta name="keywords" content="read secure memo, decrypt memo, encrypted note reading, AES-256 decryption, private memo access">
+    <!-- Open Graph for social sharing -->
+    <meta property="og:title" content="Read Secure Memo - Decrypt Encrypted Memo">
+    <meta property="og:description" content="Decrypt and read your secure memo. Memos self-destruct after reading for maximum privacy.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://securememo.app/read-memo.html">
+    <meta property="og:image" content="https://securememo.app/android-chrome-512x512.png">
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Read Secure Memo - Decrypt Encrypted Memo">
+    <meta name="twitter:description" content="Decrypt and read your secure memo with client-side decryption.">
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": "Read Secure Memo",
+      "description": "Decrypt and read your secure memo with the password. Memos self-destruct after reading for maximum privacy.",
+      "url": "https://securememo.app/read-memo.html",
+      "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://securememo.app/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Read Secure Memo",
+            "item": "https://securememo.app/read-memo.html"
+          }
+        ]
+      },
+      "mainEntity": {
+        "@type": "SoftwareApplication",
+        "name": "Secure Memo Reader",
+        "applicationCategory": "SecurityApplication",
+        "operatingSystem": "Web Browser",
+        "description": "Decrypt and read encrypted memos with client-side AES-256 decryption",
+        "featureList": [
+          "Client-side decryption",
+          "Password-protected access",
+          "Automatic memo deletion",
+          "No data retention",
+          "Privacy-focused design"
+        ]
+      }
+    }
+    </script>
     <link rel="stylesheet" href="/styles.css">
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png">
     <link rel="icon" type="image/png" sizes="512x512" href="/android-chrome-512x512.png">
+    <link rel="canonical" href="https://securememo.app/read-memo.html">
     <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" integrity="sha384-8tTMUpBXDOsQTxlbB/LdlISG/7nPjF1RWr/rNDxPsh5quEpybtbFHO/flV79t6uO" crossorigin="anonymous" async defer></script>
     <script src="/js/read-memo.js" defer></script>
 </head>
@@ -408,12 +641,62 @@ export async function getToSHTML() {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Terms of Service - securememo.app</title>
+    <title>Terms of Service - securememo.app Legal Terms | securememo.app</title>
+    <meta name="description" content="Terms of Service for securememo.app - encrypted memo sharing service. Learn about acceptable use, privacy, security, and legal terms for our secure memo sharing platform.">
+    <meta name="keywords" content="terms of service, secure memo legal, encrypted memo terms, privacy policy, acceptable use policy, secure note sharing terms">
+    <!-- Open Graph for social sharing -->
+    <meta property="og:title" content="Terms of Service - securememo.app Legal Terms">
+    <meta property="og:description" content="Legal terms and conditions for securememo.app encrypted memo sharing service.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://securememo.app/tos.html">
+    <meta property="og:image" content="https://securememo.app/android-chrome-512x512.png">
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Terms of Service - securememo.app Legal Terms">
+    <meta name="twitter:description" content="Legal terms for securememo.app encrypted memo sharing service.">
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": "Terms of Service",
+      "description": "Terms of Service for securememo.app - encrypted memo sharing service. Learn about acceptable use, privacy, security, and legal terms.",
+      "url": "https://securememo.app/tos.html",
+      "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://securememo.app/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Terms of Service",
+            "item": "https://securememo.app/tos.html"
+          }
+        ]
+      },
+      "mainEntity": {
+        "@type": "CreativeWork",
+        "name": "Terms of Service",
+        "author": {
+          "@type": "Organization",
+          "name": "securememo.app"
+        },
+        "dateModified": "2025-08-05",
+        "description": "Legal terms and conditions for securememo.app encrypted memo sharing service"
+      }
+    }
+    </script>
     <link rel="stylesheet" href="/styles.css">
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png">
     <link rel="icon" type="image/png" sizes="512x512" href="/android-chrome-512x512.png">
+    <link rel="canonical" href="https://securememo.app/tos.html">
 </head>
 <body>
     <nav class="navbar">
@@ -453,7 +736,7 @@ export async function getToSHTML() {
 
             <div class="features-detail" id="service-description">
                 <h2>1. Service Description</h2>
-                <p>securememo.app is a secure messaging service that allows users to create encrypted memos that self-destruct after being read or expired. The service uses client-side encryption to ensure that memo content is never accessible to our servers.</p>
+                <p>securememo.app is a secure memo sharing service that allows users to create encrypted memos that self-destruct after being read or expired. The service uses client-side encryption to ensure that memo content is never accessible to our servers.</p>
             </div>
 
             <div class="usage-section" id="acceptable-use">
@@ -464,7 +747,7 @@ export async function getToSHTML() {
                     <li>Attempt to bypass security measures or CAPTCHA protection</li>
                     <li>Use automated tools or scripts to create memos</li>
                     <li>Share memos containing malware, phishing links, or other harmful content</li>
-                    <li>Use the service for spam or mass unsolicited messaging</li>
+                    <li>Use the service for spam or mass unsolicited memo sharing</li>
                     <li>Attempt to reverse engineer or compromise the service</li>
                 </ul>
             </div>
@@ -562,12 +845,62 @@ export async function getPrivacyHTML() {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Privacy Notice - securememo.app</title>
+    <title>Privacy Notice - securememo.app Data Protection | securememo.app</title>
+    <meta name="description" content="Privacy Notice for securememo.app - learn how we protect your data with client-side encryption, zero-knowledge architecture, and minimal data collection for secure memo sharing.">
+    <meta name="keywords" content="privacy notice, secure memo privacy, data protection, GDPR compliance, client-side encryption, zero-knowledge, secure memo sharing privacy">
+    <!-- Open Graph for social sharing -->
+    <meta property="og:title" content="Privacy Notice - securememo.app Data Protection">
+    <meta property="og:description" content="How securememo.app protects your privacy with client-side encryption and minimal data collection.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://securememo.app/privacy.html">
+    <meta property="og:image" content="https://securememo.app/android-chrome-512x512.png">
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Privacy Notice - securememo.app Data Protection">
+    <meta name="twitter:description" content="Privacy protection with client-side encryption and zero-knowledge architecture.">
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": "Privacy Notice",
+      "description": "Privacy Notice for securememo.app - learn how we protect your data with client-side encryption, zero-knowledge architecture, and minimal data collection.",
+      "url": "https://securememo.app/privacy.html",
+      "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://securememo.app/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Privacy Notice",
+            "item": "https://securememo.app/privacy.html"
+          }
+        ]
+      },
+      "mainEntity": {
+        "@type": "CreativeWork",
+        "name": "Privacy Notice",
+        "author": {
+          "@type": "Organization",
+          "name": "securememo.app"
+        },
+        "dateModified": "2025-08-05",
+        "description": "How securememo.app protects your privacy with client-side encryption and minimal data collection"
+      }
+    }
+    </script>
     <link rel="stylesheet" href="/styles.css">
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png">
     <link rel="icon" type="image/png" sizes="512x512" href="/android-chrome-512x512.png">
+    <link rel="canonical" href="https://securememo.app/privacy.html">
 </head>
 <body>
     <nav class="navbar">
