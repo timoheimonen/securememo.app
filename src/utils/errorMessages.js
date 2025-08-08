@@ -1,8 +1,12 @@
 // Centralized error message mapping for consistent UX
 // SECURITY: Generic error messages prevent information leakage and enumeration attacks
+// LOCALIZATION: Integrated with localization system - error messages now support multiple locales
+
+import { t } from './localization.js';
 
 /**
  * Error message mapping by error code
+ * @deprecated Use getErrorMessage() with locale parameter instead
  */
 export const errorMessages = {
   // Memo creation errors
@@ -78,19 +82,52 @@ export const errorMessages = {
 /**
  * Get user-friendly error message by error code
  * @param {string} errorCode - The error code
+ * @param {string} locale - Locale code (defaults to 'en')
  * @param {string} fallback - Fallback message if code not found
  * @returns {string} - User-friendly error message
  */
-export function getErrorMessage(errorCode, fallback = 'An error occurred. Please try again.') {
+export function getErrorMessage(errorCode, locale = 'en', fallback) {
+  // Handle backward compatibility - if second parameter is a string but not a known locale, treat it as fallback
+  if (typeof locale === 'string' && locale.length > 3 && !fallback) {
+    fallback = locale;
+    locale = 'en';
+  }
+  
+  // Use localized fallback if no custom fallback provided
+  if (!fallback) {
+    fallback = t('error.DEFAULT_FALLBACK', locale);
+  }
+  
+  // Try to get localized error message
+  const translationKey = `error.${errorCode}`;
+  const localizedMessage = t(translationKey, locale);
+  
+  // If translation exists (key doesn't equal returned value), use it
+  if (localizedMessage !== translationKey) {
+    return localizedMessage;
+  }
+  
+  // Fallback to hardcoded errorMessages for backward compatibility
   return errorMessages[errorCode] || fallback;
 }
 
 /**
  * Get error message for security events
  * @param {string} event - The security event
+ * @param {string} locale - Locale code (defaults to 'en')
  * @returns {string} - User-friendly error message
  */
-export function getSecurityErrorMessage(event) {
+export function getSecurityErrorMessage(event, locale = 'en') {
+  // Try to get localized security error message
+  const translationKey = `error.security.${event}`;
+  const localizedMessage = t(translationKey, locale);
+  
+  // If translation exists (key doesn't equal returned value), use it
+  if (localizedMessage !== translationKey) {
+    return localizedMessage;
+  }
+  
+  // Fallback to hardcoded securityErrorMap for backward compatibility
   const securityErrorMap = {
     'INVALID_MESSAGE_FORMAT': 'Invalid request.',
     'INVALID_EXPIRY_TIME': 'Invalid request.',
@@ -113,15 +150,16 @@ export function getSecurityErrorMessage(event) {
     'FORBIDDEN': 'Access denied.'
   };
   
-  return securityErrorMap[event] || 'An error occurred. Please try again.';
+  return securityErrorMap[event] || t('error.security.DEFAULT_FALLBACK', locale);
 }
 
 /**
  * Get a generic memo access error message to prevent enumeration attacks
  * This function returns the same message regardless of the specific failure reason
  * to avoid leaking information about memo states through error messages or timing
+ * @param {string} locale - Locale code (defaults to 'en')
  * @returns {string} - Generic memo access denied message
  */
-export function getMemoAccessDeniedMessage() {
-  return getErrorMessage('MEMO_ACCESS_DENIED');
+export function getMemoAccessDeniedMessage(locale = 'en') {
+  return getErrorMessage('MEMO_ACCESS_DENIED', locale);
 } 

@@ -57,7 +57,9 @@ export const TRANSLATIONS = {
     'page.about.ogDescription': 'Discover how securememo.app protects your privacy with client-side encryption and self-destructing messages.',
     'page.about.twitterDescription': 'Privacy-first encrypted messaging with client-side encryption.',
     'page.create.title': 'Create Secure Memo - Encrypted Self-Destructing Memo',
+    'page.create.keywords': 'create secure memo, encrypted memo, self-destructing note, AES-256 encryption, private memo sharing, secure note creation',
     'page.read.title': 'Read Secure Memo - Decrypt Encrypted Memo',
+    'page.read.keywords': 'read secure memo, decrypt memo, encrypted note reading, AES-256 decryption, private memo access',
     'page.tos.title': 'Terms of Service - securememo.app Legal Terms',
     'page.tos.description': 'Terms of Service for securememo.app - encrypted memo sharing service. Learn about acceptable use, privacy, security, and legal terms for our secure memo sharing platform.',
     'page.tos.keywords': 'terms of service, secure memo legal, encrypted memo terms, privacy policy, acceptable use policy, secure note sharing terms',
@@ -340,6 +342,157 @@ export const TRANSLATIONS = {
     'read.hero.description': 'Enter the password to decrypt and read the memo. The password should have been shared with you separately from the URL. The memo will be deleted after being read or expired.',
     'read.hero.ogDescription': 'Decrypt and read your secure memo. Memos self-destruct after reading for maximum privacy.',
     'read.hero.twitterDescription': 'Decrypt and read your secure memo with client-side decryption.',
-    'read.schema.description': 'Decrypt and read your secure memo with the password. Memos self-destruct after reading for maximum privacy. Client-side AES-256 decryption.'
+    'read.schema.description': 'Decrypt and read your secure memo with the password. Memos self-destruct after reading for maximum privacy. Client-side AES-256 decryption.',
+    
+    // Hardcoded text that needs localization
+    'home.hero.subtitle': 'Create encrypted memos that self-destruct after being read or expired. Your secrets stay safe.',
+    
+    // Form options
+    'form.expiry.option.8h': 'Delete on read or 8 hours',
+    'form.expiry.option.1d': 'Delete on read or 1 day',
+    'form.expiry.option.2d': 'Delete on read or 2 days',
+    'form.expiry.option.1w': 'Delete on read or 1 week',
+    'form.expiry.option.30d': 'Delete on read or 30 days',
+    
+    // Loading and status messages
+    'msg.encrypting': 'Encrypting your memo securely... This may take a moment on older devices.',
+    'msg.deletingSecurely': 'Deleting memo securely...',
+    'msg.yourSecureMemo': '📝 Your Secure Memo',
+    'msg.status': 'Status:',
+    
+    // Labels and help text
+    'form.memoUrl.label': 'Memo URL (share this with your recipient):',
+    'form.memoUrl.help': 'This is the secure link to your memo. Share this URL with your recipient.',
+    'form.memoPassword.label': 'Encryption Password (share this separately):',
+    'form.memoPassword.help': 'This is the encryption password. Share this separately from the URL for enhanced security. This is not saved on our servers, recovery not possible after leaving this page.',
+    
+    // Warning messages
+    'warning.important': 'Important:',
+    'warning.memoDeleted': 'The memo will be deleted after being read or when the expiry time is reached',
+    'warning.shareSecurely': 'Share the URL and password separately for maximum security',
+    'warning.needBoth': 'The recipient needs both the URL and password to access the memo',
+    'warning.pageCleared': 'This page will be cleared when you navigate away',
+    
+    // Structured data texts
+    'schema.tos.name': 'Terms of Service',
+    'schema.tos.description': 'Terms of Service for securememo.app - encrypted memo sharing service. Learn about acceptable use, privacy, security, and legal terms.',
+    'schema.tos.breadcrumb.home': 'Home',
+    'schema.tos.breadcrumb.tos': 'Terms of Service',
+    'schema.tos.mainEntity.name': 'Terms of Service',
+    'schema.tos.mainEntity.description': 'Legal terms and conditions for securememo.app encrypted memo sharing service',
+    
+    'schema.privacy.name': 'Privacy Notice',
+    'schema.privacy.description': 'Privacy Notice for securememo.app - learn how we protect your data with client-side encryption, zero-knowledge architecture, and minimal data collection.',
+    'schema.privacy.breadcrumb.home': 'Home',
+    'schema.privacy.breadcrumb.privacy': 'Privacy Notice',
+    'schema.privacy.mainEntity.name': 'Privacy Notice',
+    'schema.privacy.mainEntity.description': 'How securememo.app protects your privacy with client-side encryption and minimal data collection',
+    
+    // Create memo featureList in structured data
+    'schema.create.featureList.clientSide': 'Client-side encryption',
+    'schema.create.featureList.selfDestruct': 'Self-destructing memos',
+    'schema.create.featureList.multiExpiry': 'Multiple expiry options',
+    'schema.create.featureList.noAccounts': 'No user accounts required',
+    'schema.create.featureList.maxChars': 'Maximum 10,000 characters',
+    
+    // Read memo featureList in structured data
+    'schema.read.featureList.clientDecryption': 'Client-side decryption',
+    'schema.read.featureList.passwordProtected': 'Password-protected access',
+    'schema.read.featureList.autoDeletion': 'Automatic memo deletion',
+    'schema.read.featureList.noDataRetention': 'No data retention',
+    'schema.read.featureList.privacyFocused': 'Privacy-focused design',
+    
+    // Error messages - memo creation errors
+    'error.INVALID_MESSAGE_FORMAT': 'Invalid request. Please check your input and try again.',
+    'error.INVALID_EXPIRY_TIME': 'Invalid request. Please check your input and try again.',
+    'error.MISSING_TURNSTILE': 'Security verification required. Please try again.',
+    'error.TURNSTILE_FAILED': 'Security verification failed. Please try again.',
+    'error.TURNSTILE_API_ERROR': 'Service temporarily unavailable. Please try again later.',
+    'error.TURNSTILE_VERIFICATION_ERROR': 'Security verification failed. Please try again.',
+    'error.DATABASE_ERROR': 'Service temporarily unavailable. Please try again.',
+    'error.MEMO_ID_GENERATION_ERROR': 'Service temporarily unavailable. Please try again.',
+    'error.MEMO_ID_COLLISION_ERROR': 'Service temporarily unavailable. Please try again.',
+    'error.MEMO_CREATION_ERROR': 'Unable to process your request. Please try again.',
+    'error.MISSING_DELETION_TOKEN': 'Deletion token required.',
+    'error.INVALID_DELETION_TOKEN_HASH': 'Invalid deletion token hash.',
+    
+    // Error messages - memo reading errors (security: generic messages to prevent enumeration attacks)
+    'error.INVALID_MEMO_ID': 'Invalid request. Please check your input and try again.',
+    'error.MISSING_MEMO_ID': 'Invalid request. Please check your input and try again.',
+    'error.MEMO_ACCESS_DENIED': 'This memo is no longer available.',
+    'error.MEMO_NOT_FOUND': 'This memo is no longer available.',
+    'error.MEMO_ALREADY_READ': 'This memo is no longer available.',
+    'error.MEMO_EXPIRED': 'This memo is no longer available.',
+    'error.DATABASE_READ_ERROR': 'Service temporarily unavailable. Please try again.',
+    'error.MEMO_READ_ERROR': 'Unable to process your request. Please try again.',
+    'error.MEMO_DELETION_ERROR': 'Service temporarily unavailable. Please try again.',
+    
+    // Error messages - general errors
+    'error.INVALID_JSON': 'Invalid request. Please check your input and try again.',
+    'error.REQUEST_TOO_LARGE': 'Request too large. Please try again.',
+    'error.CONTENT_TYPE_ERROR': 'Invalid request. Please check your input and try again.',
+    'error.METHOD_NOT_ALLOWED': 'Invalid request method.',
+    'error.FORBIDDEN': 'Access denied.',
+    'error.GENERAL_ERROR': 'Service temporarily unavailable. Please try again.',
+    
+    // Error messages - decryption errors
+    'error.DECRYPTION_FAILED': 'Invalid request. Please check your input and try again.',
+    'error.INVALID_PASSWORD': 'Invalid request. Please check your input and try again.',
+    
+    // Error messages - network errors
+    'error.NETWORK_ERROR': 'Service temporarily unavailable. Please try again.',
+    'error.SERVICE_UNAVAILABLE': 'Service temporarily unavailable. Please try again later.',
+    
+    // Error messages - client-side validation errors
+    'error.MISSING_MESSAGE': 'Please enter a memo',
+    'error.MESSAGE_TOO_LONG': 'Memo is too long (max 10,000 characters)',
+    'error.MISSING_SECURITY_CHALLENGE': 'Please complete the security challenge',
+    'error.CREATE_MEMO_FAILED': 'Failed to create memo',
+    'error.CREATE_MEMO_ERROR': 'An error occurred while creating the memo',
+    'error.READ_MEMO_ERROR': 'An error occurred while reading the memo',
+    'error.DECRYPTION_ERROR': 'Failed to decrypt message. Invalid password or corrupted data.',
+    'error.MEMO_ID_GENERATION_MAX_RETRIES': 'Failed to generate unique memo_id after maximum retries',
+    'error.MISSING_PASSWORD': 'Please enter the encryption password',
+    'error.INVALID_MEMO_URL': 'Invalid memo URL',
+    'error.MEMO_ALREADY_READ_DELETED': 'This memo has already been read and deleted, or it has expired.',
+    'error.MEMO_EXPIRED_DELETED': 'This memo has expired and has been deleted.',
+    'error.INVALID_PASSWORD_CHECK': 'Invalid password. Please check the password you received separately.',
+    'error.MISSING_PASSWORD_ERROR': 'Please enter the encryption password',
+    'error.INVALID_MEMO_URL_ERROR': 'Invalid memo URL',
+    'error.MEMO_ALREADY_READ_DELETED_ERROR': 'This memo has already been read and deleted, or it has expired.',
+    'error.MEMO_EXPIRED_DELETED_ERROR': 'This memo has expired and has been deleted.',
+    'error.INVALID_PASSWORD_CHECK_ERROR': 'Invalid password. Please check the password you received separately.',
+    'error.MISSING_SECURITY_CHALLENGE_ERROR': 'Please complete the security challenge',
+    
+    // Error messages - HTTP status errors
+    'error.INTERNAL_SERVER_ERROR': 'Internal Server Error',
+    'error.NOT_FOUND': 'Not Found',
+    'error.BAD_REQUEST': 'Bad Request',
+    'error.CLEANUP_FAILED': 'Cleanup failed',
+    
+    // Error messages - default fallback
+    'error.DEFAULT_FALLBACK': 'An error occurred. Please try again.',
+    
+    // Security error messages (shorter versions for security events)
+    'error.security.INVALID_MESSAGE_FORMAT': 'Invalid request.',
+    'error.security.INVALID_EXPIRY_TIME': 'Invalid request.',
+    'error.security.MISSING_TURNSTILE': 'Security verification required.',
+    'error.security.TURNSTILE_FAILED': 'Security verification failed.',
+    'error.security.TURNSTILE_API_ERROR': 'Service temporarily unavailable.',
+    'error.security.TURNSTILE_VERIFICATION_ERROR': 'Security verification failed.',
+    'error.security.DATABASE_ERROR': 'Service temporarily unavailable.',
+    'error.security.MEMO_ID_GENERATION_ERROR': 'Service temporarily unavailable.',
+    'error.security.MEMO_ID_COLLISION_ERROR': 'Service temporarily unavailable.',
+    'error.security.MEMO_CREATION_ERROR': 'Unable to process your request.',
+    'error.security.INVALID_MEMO_ID': 'Invalid request.',
+    'error.security.MISSING_MEMO_ID': 'Invalid request.',
+    'error.security.MEMO_NOT_FOUND': 'This memo is no longer available.',
+    'error.security.MEMO_ALREADY_READ': 'This memo is no longer available.',
+    'error.security.MEMO_EXPIRED': 'This memo is no longer available.',
+    'error.security.DATABASE_READ_ERROR': 'Service temporarily unavailable.',
+    'error.security.MEMO_READ_ERROR': 'Unable to process your request.',
+    'error.security.METHOD_NOT_ALLOWED': 'Invalid request method.',
+    'error.security.FORBIDDEN': 'Access denied.',
+    'error.security.DEFAULT_FALLBACK': 'An error occurred. Please try again.'
   }
 };

@@ -85,7 +85,7 @@ export async function getIndexHTML(locale = 'en', origin = 'https://securememo.a
     <main class="main-content">
         <div class="hero-section">
             <h1>${t('home.hero.title', locale)}</h1>
-            <p><span>Create</span> <span>encrypted</span> <span>memos</span> <span>that</span> <span>self-destruct</span> <span>after</span> <span>being</span> <span>read</span> <span>or</span> <span>expired.</span> <span>Your</span> <span>secrets</span> <span>stay</span> <span>safe.</span></p>
+            <p>${t('home.hero.subtitle', locale)}</p>
             <div class="cta-buttons">
                 <a href="/${locale}/create-memo.html" class="btn btn-primary">${t('home.hero.btnPrimary', locale)}</a>
                 <a href="/${locale}/about.html" class="btn btn-secondary">${t('home.hero.btnSecondary', locale)}</a>
@@ -330,7 +330,7 @@ export async function getCreateMemoHTML(locale = 'en', origin = 'https://securem
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>${t('page.create.title', locale)} | securememo.app</title>
     <meta name="description" content="${t('create.hero.description', locale)}">
-    <meta name="keywords" content="create secure memo, encrypted memo, self-destructing note, AES-256 encryption, private memo sharing, secure note creation">
+    <meta name="keywords" content="${t('page.create.keywords', locale)}">
     <!-- Open Graph for social sharing -->
     <meta property="og:title" content="${t('page.create.title', locale)}">
     <meta property="og:description" content="${t('create.hero.ogDescription', locale)}">
@@ -373,11 +373,11 @@ export async function getCreateMemoHTML(locale = 'en', origin = 'https://securem
         "operatingSystem": "Web Browser",
         "description": "${t('create.schema.actionDescription', locale)}",
         "featureList": [
-          "Client-side encryption",
-          "Self-destructing memos",
-          "Multiple expiry options",
-          "No user accounts required",
-          "Maximum 10,000 characters"
+          "${t('schema.create.featureList.clientSide', locale)}",
+          "${t('schema.create.featureList.selfDestruct', locale)}",
+          "${t('schema.create.featureList.multiExpiry', locale)}",
+          "${t('schema.create.featureList.noAccounts', locale)}",
+          "${t('schema.create.featureList.maxChars', locale)}"
         ]
       }
     }
@@ -422,11 +422,11 @@ export async function getCreateMemoHTML(locale = 'en', origin = 'https://securem
                     <div class="form-group">
                         <label for="expiryHours">${t('form.expiry.label', locale)}</label>
                         <select id="expiryHours" name="expiryHours">
-                            <option value="8">Delete on read or 8 hours</option>
-                            <option value="24">Delete on read or 1 day</option>
-                            <option value="48">Delete on read or 2 days</option>
-                            <option value="168">Delete on read or 1 week</option>
-                            <option value="720">Delete on read or 30 days</option>
+                            <option value="8">${t('form.expiry.option.8h', locale)}</option>
+                            <option value="24">${t('form.expiry.option.1d', locale)}</option>
+                            <option value="48">${t('form.expiry.option.2d', locale)}</option>
+                            <option value="168">${t('form.expiry.option.1w', locale)}</option>
+                            <option value="720">${t('form.expiry.option.30d', locale)}</option>
                         </select>
                     </div>
                     
@@ -440,7 +440,7 @@ export async function getCreateMemoHTML(locale = 'en', origin = 'https://securem
                     <!-- Loading indicator (hidden by default) -->
                     <div id="loadingIndicator" class="loading-spinner" style="display: none;">
                         <div class="spinner"></div>
-                        <p>Encrypting your memo securely... This may take a moment on older devices.</p>
+                        <p>${t('msg.encrypting', locale)}</p>
                     </div>
                 </form>
                 
@@ -448,31 +448,31 @@ export async function getCreateMemoHTML(locale = 'en', origin = 'https://securem
                     <h3>${t('msg.memoCreated', locale)}</h3>
                     
                     <div class="memo-url-section">
-                        <label for="memoUrl">Memo URL (share this with your recipient):</label>
+                        <label for="memoUrl">${t('form.memoUrl.label', locale)}</label>
                         <div class="url-copy-container">
                             <input type="text" id="memoUrl" readonly onclick="this.select(); document.execCommand('copy'); showMessage('${t('msg.urlCopied', locale)}', 'success');">
                             <button type="button" id="copyUrl" class="btn btn-primary">${t('btn.copy', locale)} URL</button>
                         </div>
-                        <small class="form-help">This is the secure link to your memo. Share this URL with your recipient.</small>
+                        <small class="form-help">${t('form.memoUrl.help', locale)}</small>
                     </div>
                     
                     <div class="memo-password-section">
-                        <label for="memoPassword">Encryption Password (share this separately):</label>
+                        <label for="memoPassword">${t('form.memoPassword.label', locale)}</label>
                         <div class="url-copy-container">
                             <input type="password" id="memoPassword" readonly onclick="this.select(); document.execCommand('copy'); showMessage('${t('msg.passwordCopied', locale)}', 'success');">
                             <button type="button" id="togglePassword" class="btn btn-primary" style="margin-right: 8px;">${t('btn.show', locale)}</button>
                             <button type="button" id="copyPassword" class="btn btn-primary">${t('btn.copy', locale)} Password</button>
                         </div>
-                        <small class="form-help">This is the encryption password. Share this separately from the URL for enhanced security. This is not saved on our servers, recovery not possible after leaving this page.</small>
+                        <small class="form-help">${t('form.memoPassword.help', locale)}</small>
                     </div>
                     
                     <div class="memo-warning">
-                        <p><strong>Important:</strong></p>
+                        <p><strong>${t('warning.important', locale)}</strong></p>
                         <ul>
-                            <li>The memo will be deleted after being read or when the expiry time is reached</li>
-                            <li>Share the URL and password separately for maximum security</li>
-                            <li>The recipient needs both the URL and password to access the memo</li>
-                            <li>This page will be cleared when you navigate away</li>
+                            <li>${t('warning.memoDeleted', locale)}</li>
+                            <li>${t('warning.shareSecurely', locale)}</li>
+                            <li>${t('warning.needBoth', locale)}</li>
+                            <li>${t('warning.pageCleared', locale)}</li>
                         </ul>
                     </div>
                 </div>
@@ -501,7 +501,7 @@ export async function getReadMemoHTML(locale = 'en', origin = 'https://securemem
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>${t('page.read.title', locale)} | securememo.app</title>
     <meta name="description" content="${t('read.hero.description', locale)}">
-    <meta name="keywords" content="read secure memo, decrypt memo, encrypted note reading, AES-256 decryption, private memo access">
+    <meta name="keywords" content="${t('page.read.keywords', locale)}">
     <!-- Open Graph for social sharing -->
     <meta property="og:title" content="${t('page.read.title', locale)}">
     <meta property="og:description" content="${t('read.hero.ogDescription', locale)}">
@@ -544,11 +544,11 @@ export async function getReadMemoHTML(locale = 'en', origin = 'https://securemem
         "operatingSystem": "Web Browser",
         "description": "${t('read.schema.description', locale)}",
         "featureList": [
-          "Client-side decryption",
-          "Password-protected access",
-          "Automatic memo deletion",
-          "No data retention",
-          "Privacy-focused design"
+          "${t('schema.read.featureList.clientDecryption', locale)}",
+          "${t('schema.read.featureList.passwordProtected', locale)}",
+          "${t('schema.read.featureList.autoDeletion', locale)}",
+          "${t('schema.read.featureList.noDataRetention', locale)}",
+          "${t('schema.read.featureList.privacyFocused', locale)}"
         ]
       }
     }
@@ -600,15 +600,15 @@ export async function getReadMemoHTML(locale = 'en', origin = 'https://securemem
                 </div>
                 
                 <div id="memoContent" class="memo-content" style="display: none;">
-                    <h3>📝 Your Secure Memo</h3>
+                    <h3>${t('msg.yourSecureMemo', locale)}</h3>
                     <div class="memo-message">
                         <p id="decryptedMessage"></p>
                     </div>
                     <div class="memo-info">
-                        <p><strong>Status:</strong> <span id="memoStatus">${t('msg.memoDecrypted', locale)}</span></p>
+                        <p><strong>${t('msg.status', locale)}</strong> <span id="memoStatus">${t('msg.memoDecrypted', locale)}</span></p>
                         <div id="deletionSpinner" class="loading-spinner" style="display: none;">
                             <div class="spinner"></div>
-                            <p>Deleting memo securely...</p>
+                            <p>${t('msg.deletingSecurely', locale)}</p>
                         </div>
                     </div>
                     <div class="memo-actions">
@@ -666,8 +666,8 @@ export async function getToSHTML(locale = 'en', origin = 'https://securememo.app
     {
       "@context": "https://schema.org",
       "@type": "WebPage",
-      "name": "Terms of Service",
-      "description": "Terms of Service for securememo.app - encrypted memo sharing service. Learn about acceptable use, privacy, security, and legal terms.",
+      "name": "${t('schema.tos.name', locale)}",
+      "description": "${t('schema.tos.description', locale)}",
       "url": "https://securememo.app/tos.html",
       "breadcrumb": {
         "@type": "BreadcrumbList",
@@ -675,26 +675,26 @@ export async function getToSHTML(locale = 'en', origin = 'https://securememo.app
           {
             "@type": "ListItem",
             "position": 1,
-            "name": "Home",
+            "name": "${t('schema.tos.breadcrumb.home', locale)}",
             "item": "https://securememo.app/"
           },
           {
             "@type": "ListItem",
             "position": 2,
-            "name": "Terms of Service",
+            "name": "${t('schema.tos.breadcrumb.tos', locale)}",
             "item": "https://securememo.app/tos.html"
           }
         ]
       },
       "mainEntity": {
         "@type": "CreativeWork",
-        "name": "Terms of Service",
+        "name": "${t('schema.tos.mainEntity.name', locale)}",
         "author": {
           "@type": "Organization",
           "name": "securememo.app"
         },
         "dateModified": "2025-08-05",
-        "description": "Legal terms and conditions for securememo.app encrypted memo sharing service"
+        "description": "${t('schema.tos.mainEntity.description', locale)}"
       }
     }
     </script>
@@ -871,8 +871,8 @@ export async function getPrivacyHTML(locale = 'en', origin = 'https://securememo
     {
       "@context": "https://schema.org",
       "@type": "WebPage",
-      "name": "Privacy Notice",
-      "description": "Privacy Notice for securememo.app - learn how we protect your data with client-side encryption, zero-knowledge architecture, and minimal data collection.",
+      "name": "${t('schema.privacy.name', locale)}",
+      "description": "${t('schema.privacy.description', locale)}",
       "url": "https://securememo.app/privacy.html",
       "breadcrumb": {
         "@type": "BreadcrumbList",
@@ -880,26 +880,26 @@ export async function getPrivacyHTML(locale = 'en', origin = 'https://securememo
           {
             "@type": "ListItem",
             "position": 1,
-            "name": "Home",
+            "name": "${t('schema.privacy.breadcrumb.home', locale)}",
             "item": "https://securememo.app/"
           },
           {
             "@type": "ListItem",
             "position": 2,
-            "name": "Privacy Notice",
+            "name": "${t('schema.privacy.breadcrumb.privacy', locale)}",
             "item": "https://securememo.app/privacy.html"
           }
         ]
       },
       "mainEntity": {
         "@type": "CreativeWork",
-        "name": "Privacy Notice",
+        "name": "${t('schema.privacy.mainEntity.name', locale)}",
         "author": {
           "@type": "Organization",
           "name": "securememo.app"
         },
         "dateModified": "2025-08-05",
-        "description": "How securememo.app protects your privacy with client-side encryption and minimal data collection"
+        "description": "${t('schema.privacy.mainEntity.description', locale)}"
       }
     }
     </script>
