@@ -63,7 +63,7 @@ export async function getIndexHTML(locale = 'en', origin = 'https://securememo.a
       "screenshot": "https://securememo.app/android-chrome-512x512.png",
       "softwareVersion": "1.0",
       "datePublished": "2025-01-01",
-      "dateModified": "2025-08-05",
+      "dateModified": "2025-08-09",
       "license": "${t('schema.app.license', locale)}",
       "codeRepository": "${t('schema.app.repository', locale)}"
     }
@@ -713,7 +713,7 @@ export async function getToSHTML(locale = 'en', origin = 'https://securememo.app
           "@type": "Organization",
           "name": "securememo.app"
         },
-        "dateModified": "2025-08-05",
+        "dateModified": "2025-08-09",
         "description": "${t('schema.tos.mainEntity.description', locale)}"
       }
     }
@@ -929,7 +929,7 @@ export async function getPrivacyHTML(locale = 'en', origin = 'https://securememo
           "@type": "Organization",
           "name": "securememo.app"
         },
-        "dateModified": "2025-08-05",
+        "dateModified": "2025-08-09",
         "description": "${t('schema.privacy.mainEntity.description', locale)}"
       }
     }

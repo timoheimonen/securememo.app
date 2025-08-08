@@ -141,7 +141,7 @@ export const TRANSLATIONS = {
     
     // Terms of Service page content
     'tos.hero.title': 'Terms of Service',
-    'tos.lastUpdated': 'Last updated: August 05, 2025',
+    'tos.lastUpdated': 'Last updated: August 9, 2025',
     'tos.tableOfContents.title': 'Table of Contents',
     'tos.tableOfContents.serviceDescription': 'Service Description',
     'tos.tableOfContents.acceptableUse': 'Acceptable Use',
@@ -224,7 +224,7 @@ export const TRANSLATIONS = {
     
     // Privacy Notice page content
     'privacy.hero.title': 'Privacy Notice for securememo.app',
-    'privacy.lastUpdated': 'Last updated: August 05, 2025',
+    'privacy.lastUpdated': 'Last updated: August 9, 2025',
     'privacy.tableOfContents.title': 'Table of Contents',
     'privacy.tableOfContents.informationCollected': 'Information We Collect',
     'privacy.tableOfContents.howWeUse': 'How We Use Information',
@@ -636,7 +636,7 @@ export const TRANSLATIONS = {
     
     // Terms of Service page content
     'tos.hero.title': 'Términos de Servicio',
-    'tos.lastUpdated': 'Última actualización: 5 de agosto de 2025',
+    'tos.lastUpdated': 'Última actualización: 9 de agosto de 2025',
     'tos.tableOfContents.title': 'Tabla de Contenidos',
     'tos.tableOfContents.serviceDescription': 'Descripción del Servicio',
     'tos.tableOfContents.acceptableUse': 'Uso Aceptable',
@@ -719,7 +719,7 @@ export const TRANSLATIONS = {
     
     // Privacy Notice page content
     'privacy.hero.title': 'Aviso de Privacidad para securememo.app',
-    'privacy.lastUpdated': 'Última actualización: 5 de agosto de 2025',
+    'privacy.lastUpdated': 'Última actualización: 9 de agosto de 2025',
     'privacy.tableOfContents.title': 'Tabla de Contenidos',
     'privacy.tableOfContents.informationCollected': 'Información que Recolectamos',
     'privacy.tableOfContents.howWeUse': 'Cómo Usamos la Información',
