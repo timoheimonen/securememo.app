@@ -6,6 +6,8 @@
   "scripts": {
     "dev": "wrangler dev",
     "deploy": "wrangler deploy",
+    "deploy:dev": "wrangler deploy --env dev",
+    "deploy:prod": "wrangler deploy",
     "db:create": "wrangler d1 create my-database",
     "db:migrate": "wrangler d1 execute my-database --file=./db/schema.sql",
     "audit": "npm audit"

@@ -23,7 +23,8 @@ import { getErrorMessage } from './utils/errorMessages.js';
 // Allowed origins for CORS
 const allowedOrigins = [
   'https://securememo.app',
-  'https://www.securememo.app'
+  'https://www.securememo.app',
+  'https://securememo-dev.timo-heimonen.workers.dev'
 ];
 
 // Security headers with CSP for XSS protection (without CORS origin)
