@@ -738,6 +738,7 @@ export async function getToSHTML(locale = 'en', origin = 'https://securememo.app
                     <li><a href="#governing-law">${t('tos.tableOfContents.governingLaw', locale)}</a></li>
                     <li><a href="#miscellaneous">${t('tos.tableOfContents.miscellaneous', locale)}</a></li>
                     <li><a href="#contact">${t('tos.tableOfContents.contact', locale)}</a></li>
+                    <li><a href="#language-disclaimer">${t('tos.tableOfContents.languageDisclaimer', locale)}</a></li>
                 </ol>
             </div>
 
@@ -762,12 +763,12 @@ export async function getToSHTML(locale = 'en', origin = 'https://securememo.app
             <div class="features-detail" id="privacy-data">
                 <h2>${t('tos.privacyData.title', locale)}</h2>
                 <ul>
-                    <li><strong>${t('tos.privacyData.noAccess', locale)}</strong></li>
-                    <li><strong>${t('tos.privacyData.noPersonal', locale)}</strong></li>
-                    <li><strong>${t('tos.privacyData.securityLogging', locale)}</strong></li>
-                    <li><strong>${t('tos.privacyData.automaticDeletion', locale)}</strong></li>
-                    <li><strong>${t('tos.privacyData.noRecovery', locale)}</strong></li>
-                    <li><strong>${t('tos.privacyData.gdpr', locale)}</strong></li>
+                    <li>${t('tos.privacyData.noAccess', locale)}</li>
+                    <li>${t('tos.privacyData.noPersonal', locale)}</li>
+                    <li>${t('tos.privacyData.securityLogging', locale)}</li>
+                    <li>${t('tos.privacyData.automaticDeletion', locale)}</li>
+                    <li>${t('tos.privacyData.noRecovery', locale)}</li>
+                    <li>${t('tos.privacyData.gdpr', locale)}</li>
                 </ul>
                 <p>${t('tos.privacyData.moreDetails', locale)} <a href="/${locale}/privacy.html">${t('tos.privacyData.privacyNotice', locale)}</a>.</p>
             </div>
@@ -775,28 +776,28 @@ export async function getToSHTML(locale = 'en', origin = 'https://securememo.app
             <div class="usage-section" id="service-limitations">
                 <h2>${t('tos.serviceLimitations.title', locale)}</h2>
                 <ul>
-                    <li><strong>${t('tos.serviceLimitations.messageSize', locale)}</strong></li>
-                    <li><strong>${t('tos.serviceLimitations.expiryTimes', locale)}</strong></li>
-                    <li><strong>${t('tos.serviceLimitations.availability', locale)}</strong></li>
-                    <li><strong>${t('tos.serviceLimitations.noDelivery', locale)}</strong></li>
+                    <li>${t('tos.serviceLimitations.messageSize', locale)}</li>
+                    <li>${t('tos.serviceLimitations.expiryTimes', locale)}</li>
+                    <li>${t('tos.serviceLimitations.availability', locale)}</li>
+                    <li>${t('tos.serviceLimitations.noDelivery', locale)}</li>
                 </ul>
             </div>
 
             <div class="features-detail" id="security-disclaimers">
                 <h2>${t('tos.securityDisclaimers.title', locale)}</h2>
                 <ul>
-                    <li><strong>${t('tos.securityDisclaimers.userResponsibility', locale)}</strong></li>
-                    <li><strong>${t('tos.securityDisclaimers.noWarranty', locale)}</strong></li>
-                    <li><strong>${t('tos.securityDisclaimers.limitation', locale)}</strong></li>
-                    <li><strong>${t('tos.securityDisclaimers.securityMeasures', locale)}</strong></li>
-                    <li><strong>${t('tos.securityDisclaimers.exportControls', locale)}</strong></li>
+                    <li>${t('tos.securityDisclaimers.userResponsibility', locale)}</li>
+                    <li>${t('tos.securityDisclaimers.noWarranty', locale)}</li>
+                    <li>${t('tos.securityDisclaimers.limitation', locale)}</li>
+                    <li>${t('tos.securityDisclaimers.securityMeasures', locale)}</li>
+                    <li>${t('tos.securityDisclaimers.exportControls', locale)}</li>
                 </ul>
             </div>
 
             <div class="usage-section" id="intellectual-property">
                 <h2>${t('tos.intellectualProperty.title', locale)}</h2>
                 <p>${t('tos.intellectualProperty.content', locale)}</p>
-                <p><strong>${t('tos.intellectualProperty.copyright', locale)}</strong></p>
+                <p>${t('tos.intellectualProperty.copyright', locale)}</p>
             </div>
 
             <div class="features-detail" id="indemnification">
@@ -822,16 +823,21 @@ export async function getToSHTML(locale = 'en', origin = 'https://securememo.app
             <div class="features-detail" id="miscellaneous">
                 <h2>${t('tos.miscellaneous.title', locale)}</h2>
                 <ul>
-                    <li><strong>${t('tos.miscellaneous.severability', locale)}</strong></li>
-                    <li><strong>${t('tos.miscellaneous.assignment', locale)}</strong></li>
-                    <li><strong>${t('tos.miscellaneous.waiver', locale)}</strong></li>
-                    <li><strong>${t('tos.miscellaneous.children', locale)}</strong></li>
+                    <li>${t('tos.miscellaneous.severability', locale)}</li>
+                    <li>${t('tos.miscellaneous.assignment', locale)}</li>
+                    <li>${t('tos.miscellaneous.waiver', locale)}</li>
+                    <li>${t('tos.miscellaneous.children', locale)}</li>
                 </ul>
             </div>
 
             <div class="usage-section" id="contact">
                 <h2>${t('tos.contact.title', locale)}</h2>
                 <p>${t('tos.contact.content', locale)} <a href="https://github.com/timoheimonen/securememo.app" target="_blank" rel="noopener noreferrer">${t('tos.contact.github', locale)}</a> ${t('tos.contact.email', locale)}</p>
+            </div>
+
+            <div class="features-detail" id="language-disclaimer">
+                <h2>${t('tos.languageDisclaimer.title', locale)}</h2>
+                <p>${t('tos.languageDisclaimer.content', locale)}</p>
             </div>
         </div>
     </main>
@@ -953,16 +959,16 @@ export async function getPrivacyHTML(locale = 'en', origin = 'https://securememo
                 <h2>${t('privacy.informationCollected.title', locale)}</h2>
                 <p>${t('privacy.informationCollected.intro', locale)}</p>
                 <ul>
-                    <li><strong>${t('privacy.informationCollected.memoData', locale)}</strong></li>
-                    <li><strong>${t('privacy.informationCollected.noPersonal', locale)}</strong></li>
-                    <li><strong>${t('privacy.informationCollected.securityData', locale)}</strong>
+                    <li>${t('privacy.informationCollected.memoData', locale)}</li>
+                    <li>${t('privacy.informationCollected.noPersonal', locale)}</li>
+                    <li>${t('privacy.informationCollected.securityData', locale)}
                         <ul>
                             <li>${t('privacy.informationCollected.ipLogs', locale)}</li>
                             <li>${t('privacy.informationCollected.turnstile', locale)}</li>
                         </ul>
                     </li>
                 </ul>
-                <p><strong>${t('privacy.informationCollected.noAnalytics', locale)}</strong></p>
+                <p>${t('privacy.informationCollected.noAnalytics', locale)}</p>
                 <p>${t('privacy.informationCollected.noSensitive', locale)}</p>
             </div>
 
@@ -970,9 +976,9 @@ export async function getPrivacyHTML(locale = 'en', origin = 'https://securememo
                 <h2>${t('privacy.howWeUse.title', locale)}</h2>
                 <p>${t('privacy.howWeUse.intro', locale)}</p>
                 <ul>
-                    <li><strong>${t('privacy.howWeUse.coreService', locale)}</strong></li>
-                    <li><strong>${t('privacy.howWeUse.security', locale)}</strong></li>
-                    <li><strong>${t('privacy.howWeUse.legal', locale)}</strong></li>
+                    <li>${t('privacy.howWeUse.coreService', locale)}</li>
+                    <li>${t('privacy.howWeUse.security', locale)}</li>
+                    <li>${t('privacy.howWeUse.legal', locale)}</li>
                 </ul>
                 <p>${t('privacy.howWeUse.noOther', locale)}</p>
             </div>
@@ -981,19 +987,19 @@ export async function getPrivacyHTML(locale = 'en', origin = 'https://securememo
                 <h2>${t('privacy.dataSharing.title', locale)}</h2>
                 <p>${t('privacy.dataSharing.intro', locale)}</p>
                 <ul>
-                    <li><strong>${t('privacy.dataSharing.serviceProviders', locale)}</strong></li>
-                    <li><strong>${t('privacy.dataSharing.legal', locale)}</strong></li>
-                    <li><strong>${t('privacy.dataSharing.business', locale)}</strong></li>
+                    <li>${t('privacy.dataSharing.serviceProviders', locale)}</li>
+                    <li>${t('privacy.dataSharing.legal', locale)}</li>
+                    <li>${t('privacy.dataSharing.business', locale)}</li>
                 </ul>
             </div>
 
             <div class="features-detail" id="data-security">
                 <h2>${t('privacy.dataSecurity.title', locale)}</h2>
                 <ul>
-                    <li><strong>${t('privacy.dataSecurity.encryption', locale)}</strong></li>
-                    <li><strong>${t('privacy.dataSecurity.deletion', locale)}</strong></li>
-                    <li><strong>${t('privacy.dataSecurity.securityMeasures', locale)}</strong></li>
-                    <li><strong>${t('privacy.dataSecurity.noRecovery', locale)}</strong></li>
+                    <li>${t('privacy.dataSecurity.encryption', locale)}</li>
+                    <li>${t('privacy.dataSecurity.deletion', locale)}</li>
+                    <li>${t('privacy.dataSecurity.securityMeasures', locale)}</li>
+                    <li>${t('privacy.dataSecurity.noRecovery', locale)}</li>
                 </ul>
                 <p>${t('privacy.dataSecurity.disclaimer', locale)}</p>
             </div>
