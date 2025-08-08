@@ -2,8 +2,12 @@
 // Supports privacy-first localization using only URL paths
 // Default locale: /en, no cookies or browser storage used
 
+import { TRANSLATIONS } from './translations.js';
+
 const SUPPORTED_LOCALES = ['en'];
 const DEFAULT_LOCALE = 'en';
+
+
 
 /**
  * Extract locale from URL pathname
@@ -103,4 +107,24 @@ export function getDefaultLocale() {
  */
 export function isLocaleSupported(locale) {
   return SUPPORTED_LOCALES.includes(locale);
+}
+
+/**
+ * Server-side translation function
+ * @param {string} key - Translation key (e.g., 'nav.home')
+ * @param {string} locale - Locale code 
+ * @returns {string} Translated text or key if translation not found
+ */
+export function t(key, locale = DEFAULT_LOCALE) {
+  if (TRANSLATIONS[locale] && TRANSLATIONS[locale][key]) {
+    return TRANSLATIONS[locale][key];
+  }
+  
+  // Fallback to default locale
+  if (locale !== DEFAULT_LOCALE && TRANSLATIONS[DEFAULT_LOCALE] && TRANSLATIONS[DEFAULT_LOCALE][key]) {
+    return TRANSLATIONS[DEFAULT_LOCALE][key];
+  }
+  
+  // Return key if no translation found
+  return key;
 }

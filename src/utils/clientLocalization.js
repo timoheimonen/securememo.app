@@ -2,62 +2,10 @@
 // Privacy-first approach: uses only URL-based locale detection
 // No cookies, localStorage, or browser storage used
 
+import { TRANSLATIONS } from './translations.js';
+
 const SUPPORTED_LOCALES = ['en'];
 const DEFAULT_LOCALE = 'en';
-
-// Translation strings for different locales
-// Currently only English, ready for expansion
-const TRANSLATIONS = {
-  en: {
-    // Navigation
-    'nav.home': 'Home',
-    'nav.about': 'About',
-    'nav.create': 'Create Secure Memo',
-    
-    // Common elements
-    'common.loading': 'Loading...',
-    'common.error': 'Error',
-    'common.success': 'Success',
-    'common.warning': 'Warning',
-    
-    // Buttons
-    'btn.copy': 'Copy',
-    'btn.copied': 'Copied!',
-    'btn.show': 'Show',
-    'btn.hide': 'Hide',
-    'btn.create': 'Create Secure Memo',
-    'btn.decrypt': 'Decrypt Memo',
-    'btn.goHome': 'Go Home',
-    'btn.createNew': 'Create New Memo',
-    
-    // Form labels and placeholders
-    'form.message.label': 'Your Memo',
-    'form.message.placeholder': 'Type your secret memo here...',
-    'form.message.help': 'Maximum 10,000 characters',
-    'form.expiry.label': 'Expiry Time',
-    'form.password.label': 'Encryption Password',
-    'form.password.placeholder': 'Enter the encryption password shared with you separately',
-    'form.password.help': 'The password should have been shared with you separately from the memo URL',
-    'form.security.help': 'Please complete the security challenge',
-    
-    // Messages and notifications
-    'msg.urlCopied': '✅ URL copied to clipboard!',
-    'msg.passwordCopied': '✅ Password copied to clipboard!',
-    'msg.copyManual': '⚠️ Please copy manually (Ctrl+C / Cmd+C)',
-    'msg.memoCreated': '✅ Memo Created Successfully!',
-    'msg.memoDecrypted': 'Memo decrypted. Deleting in progress... Please wait.',
-    'msg.memoDeleted': 'Memo confirmed as read and permanently deleted.',
-    'msg.deletionError': 'Error confirming deletion. The memo will be cleaned up automatically.',
-    
-    // Page titles and descriptions
-    'page.home.title': 'securememo.app - Encrypted Self-Destructing Memos',
-    'page.about.title': 'About securememo.app - Privacy-Focused Encrypted Notes',
-    'page.create.title': 'Create Secure Memo - Encrypted Self-Destructing Memo',
-    'page.read.title': 'Read Secure Memo - Decrypt Encrypted Memo',
-    'page.tos.title': 'Terms of Service - securememo.app Legal Terms',
-    'page.privacy.title': 'Privacy Notice - securememo.app Data Protection'
-  }
-};
 
 /**
  * Get current locale from URL
@@ -204,6 +152,9 @@ export function isLocaleSupported(locale) {
  * @returns {string} JavaScript code for client-side localization
  */
 export function getClientLocalizationJS() {
+  // Use the same TRANSLATIONS object but format as string for serving
+  const translationsString = JSON.stringify(TRANSLATIONS, null, 2);
+  
   return `// Client-side localization utility for securememo.app
 // Privacy-first approach: uses only URL-based locale detection
 // No cookies, localStorage, or browser storage used
@@ -213,57 +164,7 @@ const DEFAULT_LOCALE = 'en';
 
 // Translation strings for different locales
 // Currently only English, ready for expansion
-const TRANSLATIONS = {
-  en: {
-    // Navigation
-    'nav.home': 'Home',
-    'nav.about': 'About',
-    'nav.create': 'Create Secure Memo',
-    
-    // Common elements
-    'common.loading': 'Loading...',
-    'common.error': 'Error',
-    'common.success': 'Success',
-    'common.warning': 'Warning',
-    
-    // Buttons
-    'btn.copy': 'Copy',
-    'btn.copied': 'Copied!',
-    'btn.show': 'Show',
-    'btn.hide': 'Hide',
-    'btn.create': 'Create Secure Memo',
-    'btn.decrypt': 'Decrypt Memo',
-    'btn.goHome': 'Go Home',
-    'btn.createNew': 'Create New Memo',
-    
-    // Form labels and placeholders
-    'form.message.label': 'Your Memo',
-    'form.message.placeholder': 'Type your secret memo here...',
-    'form.message.help': 'Maximum 10,000 characters',
-    'form.expiry.label': 'Expiry Time',
-    'form.password.label': 'Encryption Password',
-    'form.password.placeholder': 'Enter the encryption password shared with you separately',
-    'form.password.help': 'The password should have been shared with you separately from the memo URL',
-    'form.security.help': 'Please complete the security challenge',
-    
-    // Messages and notifications
-    'msg.urlCopied': '✅ URL copied to clipboard!',
-    'msg.passwordCopied': '✅ Password copied to clipboard!',
-    'msg.copyManual': '⚠️ Please copy manually (Ctrl+C / Cmd+C)',
-    'msg.memoCreated': '✅ Memo Created Successfully!',
-    'msg.memoDecrypted': 'Memo decrypted. Deleting in progress... Please wait.',
-    'msg.memoDeleted': 'Memo confirmed as read and permanently deleted.',
-    'msg.deletionError': 'Error confirming deletion. The memo will be cleaned up automatically.',
-    
-    // Page titles and descriptions
-    'page.home.title': 'securememo.app - Encrypted Self-Destructing Memos',
-    'page.about.title': 'About securememo.app - Privacy-Focused Encrypted Notes',
-    'page.create.title': 'Create Secure Memo - Encrypted Self-Destructing Memo',
-    'page.read.title': 'Read Secure Memo - Decrypt Encrypted Memo',
-    'page.tos.title': 'Terms of Service - securememo.app Legal Terms',
-    'page.privacy.title': 'Privacy Notice - securememo.app Data Protection'
-  }
-};
+const TRANSLATIONS = ${translationsString};
 
 /**
  * Get current locale from URL

@@ -92,13 +92,29 @@ export default {
 
       const pathname = url.pathname;
 
-      // Handle locale-based routing with /en prefix
-      const { locale, pathWithoutLocale } = extractLocaleFromPath(pathname);
+      // Skip locale handling for static assets and API routes
+      const isStaticAsset = pathname.startsWith('/styles.css') || 
+                           pathname.startsWith('/js/') || 
+                           pathname.startsWith('/api/') ||
+                           pathname === '/sitemap.xml' ||
+                           pathname.startsWith('/favicon') ||
+                           pathname.includes('.png') ||
+                           pathname.includes('.ico');
+
+      // Handle locale-based routing with /en prefix (only for HTML pages)
+      let locale = 'en';
+      let pathWithoutLocale = pathname;
       
-      // Check if redirect to localized path is needed (add /en prefix to non-localized URLs)
-      const redirectPath = getLocaleRedirectPath(pathname);
-      if (redirectPath && redirectPath !== pathname) {
-        return Response.redirect(url.origin + redirectPath, 301);
+      if (!isStaticAsset) {
+        const localeResult = extractLocaleFromPath(pathname);
+        locale = localeResult.locale;
+        pathWithoutLocale = localeResult.pathWithoutLocale;
+        
+        // Check if redirect to localized path is needed (add /en prefix to non-localized URLs)
+        const redirectPath = getLocaleRedirectPath(pathname);
+        if (redirectPath && redirectPath !== pathname) {
+          return Response.redirect(url.origin + redirectPath, 301);
+        }
       }
 
       // Handle CORS preflight with proper origin validation
@@ -254,7 +270,7 @@ export default {
         });
       }
 
-      // Serve static assets
+      // Serve static assets (use pathname for non-localized assets)
       if (pathname === '/styles.css') {
         if (request.method !== 'GET') {
           return new Response(getErrorMessage('METHOD_NOT_ALLOWED'), {

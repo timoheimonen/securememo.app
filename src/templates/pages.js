@@ -1,3 +1,5 @@
+import { t } from '../utils/localization.js';
+
 export async function getIndexHTML(locale = 'en', origin = 'https://securememo.app') {
   const canonicalUrl = `${origin}/${locale}`;
   return `<!DOCTYPE html>
@@ -5,19 +7,19 @@ export async function getIndexHTML(locale = 'en', origin = 'https://securememo.a
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>securememo.app - Encrypted Self-Destructing Memos | securememo.app</title>
-    <meta name="description" content="Create encrypted memos that self-destruct after reading. End-to-end encryption, privacy-focused, and secure note sharing with AES-256. No tracking, no ads.">
-    <meta name="keywords" content="secure memo, encrypted memo, self-destructing memo, private note sharing, end-to-end encryption, AES-256, privacy, secure memo sharing">
+    <title>${t('page.home.title', locale)} | securememo.app</title>
+    <meta name="description" content="${t('page.home.description', locale)}">
+    <meta name="keywords" content="${t('page.home.keywords', locale)}">
     <!-- Open Graph for social sharing -->
-    <meta property="og:title" content="securememo.app - Encrypted Self-Destructing Memos">
-    <meta property="og:description" content="Share sensitive information securely with memos that delete after one view or expiration. Powered by client-side AES-256 encryption.">
+    <meta property="og:title" content="${t('page.home.ogTitle', locale)}">
+    <meta property="og:description" content="${t('page.home.ogDescription', locale)}">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://securememo.app/">
     <meta property="og:image" content="https://securememo.app/android-chrome-512x512.png">
     <!-- Twitter Cards -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="securememo.app - Encrypted Self-Destructing Memos">
-    <meta name="twitter:description" content="Privacy-first app for secure, self-destructing memos.">
+    <meta name="twitter:title" content="${t('page.home.ogTitle', locale)}">
+    <meta name="twitter:description" content="${t('page.home.twitterDescription', locale)}">
     <link rel="stylesheet" href="/styles.css">
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
@@ -30,40 +32,40 @@ export async function getIndexHTML(locale = 'en', origin = 'https://securememo.a
       "@context": "https://schema.org",
       "@type": "WebApplication",
       "name": "securememo.app",
-      "description": "Create encrypted memos that self-destruct after reading. End-to-end encryption, privacy-focused, and secure note sharing with AES-256. No tracking, no ads.",
+      "description": "${t('schema.app.description', locale)}",
       "url": "https://securememo.app/",
-      "applicationCategory": "SecurityApplication",
-      "operatingSystem": "Web Browser",
-      "browserRequirements": "Requires JavaScript. Requires HTML5.",
+      "applicationCategory": "${t('schema.app.category', locale)}",
+      "operatingSystem": "${t('schema.app.os', locale)}",
+      "browserRequirements": "${t('schema.app.requirements', locale)}",
       "author": {
         "@type": "Person",
-        "name": "Timo Heimonen",
+        "name": "${t('schema.app.author', locale)}",
         "url": "https://github.com/timoheimonen"
       },
       "creator": {
         "@type": "Person",
-        "name": "Timo Heimonen",
+        "name": "${t('schema.app.author', locale)}",
         "url": "https://github.com/timoheimonen"
       },
       "offers": {
         "@type": "Offer",
-        "price": "0",
-        "priceCurrency": "USD"
+        "price": "${t('schema.app.price', locale)}",
+        "priceCurrency": "${t('schema.app.currency', locale)}"
       },
       "featureList": [
-        "Client-side AES-256 encryption",
-        "Self-destructing memos",
-        "Zero-knowledge architecture",
-        "No user accounts required",
-        "Global performance via Cloudflare",
-        "Privacy-first design"
+        "${t('schema.app.features.encryption', locale)}",
+        "${t('schema.app.features.selfDestruct', locale)}",
+        "${t('schema.app.features.zeroKnowledge', locale)}",
+        "${t('schema.app.features.noAccounts', locale)}",
+        "${t('schema.app.features.globalPerformance', locale)}",
+        "${t('schema.app.features.privacyFirst', locale)}"
       ],
       "screenshot": "https://securememo.app/android-chrome-512x512.png",
       "softwareVersion": "1.0",
       "datePublished": "2025-01-01",
       "dateModified": "2025-08-05",
-      "license": "https://github.com/timoheimonen/securememo.app/blob/main/LICENSE",
-      "codeRepository": "https://github.com/timoheimonen/securememo.app"
+      "license": "${t('schema.app.license', locale)}",
+      "codeRepository": "${t('schema.app.repository', locale)}"
     }
     </script>
 </head>
@@ -72,56 +74,56 @@ export async function getIndexHTML(locale = 'en', origin = 'https://securememo.a
         <div class="nav-container">
             <a href="/${locale}" class="nav-logo">securememo.app</a>
             <ul class="nav-menu" id="navMenu">
-                <li><a href="/${locale}" class="nav-link active">Home</a></li>
-                <li><a href="/${locale}/about.html" class="nav-link">About</a></li>
-                <li><a href="/${locale}/create-memo.html" class="nav-link">Create Secure Memo</a></li>
+                <li><a href="/${locale}" class="nav-link active">${t('nav.home', locale)}</a></li>
+                <li><a href="/${locale}/about.html" class="nav-link">${t('nav.about', locale)}</a></li>
+                <li><a href="/${locale}/create-memo.html" class="nav-link">${t('nav.create', locale)}</a></li>
             </ul>
-            <button class="hamburger" id="hamburger" aria-label="Toggle navigation menu" aria-expanded="false">☰</button>
+            <button class="hamburger" id="hamburger" aria-label="${t('ui.toggleNav', locale)}" aria-expanded="false">☰</button>
         </div>
     </nav>
 
     <main class="main-content">
         <div class="hero-section">
-            <h1>securememo.app</h1>
+            <h1>${t('home.hero.title', locale)}</h1>
             <p><span>Create</span> <span>encrypted</span> <span>memos</span> <span>that</span> <span>self-destruct</span> <span>after</span> <span>being</span> <span>read</span> <span>or</span> <span>expired.</span> <span>Your</span> <span>secrets</span> <span>stay</span> <span>safe.</span></p>
             <div class="cta-buttons">
-                <a href="/${locale}/create-memo.html" class="btn btn-primary">Create Secure Memo</a>
-                <a href="/${locale}/about.html" class="btn btn-secondary">Learn More</a>
+                <a href="/${locale}/create-memo.html" class="btn btn-primary">${t('home.hero.btnPrimary', locale)}</a>
+                <a href="/${locale}/about.html" class="btn btn-secondary">${t('home.hero.btnSecondary', locale)}</a>
             </div>
         </div>
 
         <div class="features-section">
-            <h2>How It Works</h2>
+            <h2>${t('home.features.title', locale)}</h2>
             <div class="features-grid">
                 <div class="feature-card">
-                    <h3>🔐 Encrypt in Browser</h3>
-                    <p>Type your memo. It gets encrypted right in your browser using strong AES-256 encryption before ever touching our servers.</p>
+                    <h3>${t('home.features.encrypt.title', locale)}</h3>
+                    <p>${t('home.features.encrypt.description', locale)}</p>
                 </div>
                 <div class="feature-card">
-                    <h3>🔗 Share Securely</h3>
-                    <p>Get a unique URL and a separate random password, and share them through different channels for extra security.</p>
+                    <h3>${t('home.features.share.title', locale)}</h3>
+                    <p>${t('home.features.share.description', locale)}</p>
                 </div>
                 <div class="feature-card">
-                    <h3>💥 Auto-Destruct</h3>
-                    <p>The memo deletes itself permanently after it's read or the time limit expires (from 8 hours to 30 days).</p>
+                    <h3>${t('home.features.destruct.title', locale)}</h3>
+                    <p>${t('home.features.destruct.description', locale)}</p>
                 </div>
             </div>
         </div>
 
         <div class="security-section">
-            <h2>Security Features</h2>
+            <h2>${t('home.security.title', locale)}</h2>
             <div class="features-grid">
                 <div class="feature-card">
-                    <h3>🔒 True Client-Side Encryption</h3>
-                    <p>Your memo is encrypted in-browser with AES-256-GCM and a strong key derivation (1,200,000+ iterations). We never see the plaintext.</p>
+                    <h3>${t('home.security.encryption.title', locale)}</h3>
+                    <p>${t('home.security.encryption.description', locale)}</p>
                 </div>
                 <div class="feature-card">
-                    <h3>🗑️ Reliable Auto-Delete</h3>
-                    <p>Memos vanish forever after reading or expiration, with automatic cleanup every hour. No backups or recovery possible.</p>
+                    <h3>${t('home.security.delete.title', locale)}</h3>
+                    <p>${t('home.security.delete.description', locale)}</p>
                 </div>
                 <div class="feature-card">
-                    <h3>🌐 Zero Password Knowledge</h3>
-                    <p>We generate and handle passwords entirely in your browser. They're never sent to or stored on our servers.</p>
+                    <h3>${t('home.security.password.title', locale)}</h3>
+                    <p>${t('home.security.password.description', locale)}</p>
                 </div>
             </div>
         </div>
@@ -165,50 +167,50 @@ export async function getAboutHTML(locale = 'en', origin = 'https://securememo.a
       "mainEntity": [
         {
           "@type": "Question",
-          "name": "How does securememo.app protect my privacy?",
+          "name": "${t('faq.privacy.question', locale)}",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "securememo.app uses client-side AES-256 encryption, meaning your memo is encrypted in your browser before being sent to our servers. We never see the plaintext content. Memos self-destruct after being read or expired, and we don't require user accounts or collect personal information."
+            "text": "${t('faq.privacy.answer', locale)}"
           }
         },
         {
           "@type": "Question",
-          "name": "What encryption does securememo.app use?",
+          "name": "${t('faq.encryption.question', locale)}",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "We use AES-256-GCM encryption with PBKDF2 key derivation (1,200,000+ iterations). All encryption happens client-side in your browser using the Web Crypto API. The encryption password is generated separately and never stored on our servers."
+            "text": "${t('faq.encryption.answer', locale)}"
           }
         },
         {
           "@type": "Question",
-          "name": "How long do memos last?",
+          "name": "${t('faq.duration.question', locale)}",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Memos can be set to expire after 8 hours, 1 day, 2 days, 1 week, or 30 days maximum. They are also deleted immediately after being read. Expired memos are automatically cleaned up every hour."
+            "text": "${t('faq.duration.answer', locale)}"
           }
         },
         {
           "@type": "Question",
-          "name": "Can I recover a deleted memo?",
+          "name": "${t('faq.recovery.question', locale)}",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "No, once a memo is deleted (either after being read or when expired), it cannot be recovered. This is by design for maximum privacy and security."
+            "text": "${t('faq.recovery.answer', locale)}"
           }
         },
         {
           "@type": "Question",
-          "name": "Is securememo.app free to use?",
+          "name": "${t('faq.cost.question', locale)}",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Yes, securememo.app is completely free to use. There are no hidden fees, no premium features, and no tracking or advertising."
+            "text": "${t('faq.cost.answer', locale)}"
           }
         },
         {
           "@type": "Question",
-          "name": "What technology does securememo.app use?",
+          "name": "${t('faq.technology.question', locale)}",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "securememo.app is built on Cloudflare Workers for serverless compute, D1 Database for storage, Web Crypto API for client-side encryption, and modern HTML/CSS/JavaScript. The source code is open source and available on GitHub."
+            "text": "${t('faq.technology.answer', locale)}"
           }
         }
       ]
@@ -240,13 +242,13 @@ export async function getAboutHTML(locale = 'en', origin = 'https://securememo.a
             <p>securememo.app is a privacy-focused application that allows you to create encrypted memos that self-destruct after being read or expired. Built with security and privacy as the top priorities. Source code available on GitHub.</p>
             
             <div class="tech-stack">
-                <h2>Technology Stack</h2>
+                <h2>${t('about.tech.title', locale)}</h2>
                 <ul>
-                    <li><strong>Cloudflare Workers:</strong> Serverless compute platform for global performance</li>
-                    <li><strong>D1 Database:</strong> SQLite-powered database for secure storage</li>
-                    <li><strong>Web Crypto API:</strong> Client-side AES-256 encryption</li>
-                    <li><strong>HTML/CSS/JavaScript:</strong> Modern, responsive web interface</li>
-                    <li><strong>Source code available on GitHub:</strong> <a href="https://github.com/timoheimonen/securememo.app" target="_blank" rel="noopener noreferrer">View source code on GitHub</a></li>
+                    <li><strong>Cloudflare Workers:</strong> ${t('about.tech.cloudflare', locale)}</li>
+                    <li><strong>D1 Database:</strong> ${t('about.tech.d1', locale)}</li>
+                    <li><strong>Web Crypto API:</strong> ${t('about.tech.webcrypto', locale)}</li>
+                    <li><strong>HTML/CSS/JavaScript:</strong> ${t('about.tech.frontend', locale)}</li>
+                    <li><strong>${t('about.tech.github', locale)}</strong> <a href="https://github.com/timoheimonen/securememo.app" target="_blank" rel="noopener noreferrer">${t('about.tech.githubLink', locale)}</a></li>
                 </ul>
             </div>
 
