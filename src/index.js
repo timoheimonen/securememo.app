@@ -227,39 +227,40 @@ export default {
             }
           });
         }
+        
+        // Generate multilingual sitemap for all supported languages
+        const supportedLocales = ['en', 'es', 'fr', 'de', 'hi', 'zh', 'ptPT', 'ptBR'];
+        const pages = [
+          { path: '', priority: '1.0', changefreq: 'weekly' },
+          { path: '/about.html', priority: '0.8', changefreq: 'monthly' },
+          { path: '/create-memo.html', priority: '0.9', changefreq: 'monthly' },
+          { path: '/tos.html', priority: '0.3', changefreq: 'yearly' },
+          { path: '/privacy.html', priority: '0.3', changefreq: 'yearly' }
+        ];
+        
+        let sitemapUrls = '';
+        pages.forEach(page => {
+          supportedLocales.forEach(lang => {
+            const url = `https://securememo.app/${lang}${page.path}`;
+            const hreflangs = supportedLocales.map(hreflang => 
+              `    <xhtml:link rel="alternate" hreflang="${hreflang}" href="https://securememo.app/${hreflang}${page.path}"/>`
+            ).join('\n');
+            
+            sitemapUrls += `  <url>
+    <loc>${url}</loc>
+    <lastmod>2025-08-09</lastmod>
+    <changefreq>${page.changefreq}</changefreq>
+    <priority>${page.priority}</priority>
+${hreflangs}
+  </url>
+`;
+          });
+        });
+        
         const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://securememo.app/en</loc>
-    <lastmod>2025-08-09</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>1.0</priority>
-  </url>
-  <url>
-    <loc>https://securememo.app/en/about.html</loc>
-    <lastmod>2025-08-09</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://securememo.app/en/create-memo.html</loc>
-    <lastmod>2025-08-09</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://securememo.app/en/tos.html</loc>
-    <lastmod>2025-08-09</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
-  </url>
-  <url>
-    <loc>https://securememo.app/en/privacy.html</loc>
-    <lastmod>2025-08-09</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
-  </url>
-</urlset>`;
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+${sitemapUrls}</urlset>`;
         return new Response(sitemap, {
           headers: { 
             'Content-Type': 'application/xml',
