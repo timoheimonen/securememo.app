@@ -179,7 +179,7 @@ document.getElementById('memoForm').addEventListener('submit', async (e) => {
     const submitButton = document.getElementById('submitButton');
     const loadingIndicator = document.getElementById('loadingIndicator');
     submitButton.disabled = true;
-    submitButton.textContent = 'Encrypting...';
+    submitButton.textContent = '{{MSG_ENCRYPTING}}';
     loadingIndicator.style.display = 'block';
     
     try {
@@ -236,7 +236,7 @@ document.getElementById('memoForm').addEventListener('submit', async (e) => {
     } finally {
         // Always hide loading indicator and re-enable button in finally block
         submitButton.disabled = false;
-        submitButton.textContent = 'Create Secure Memo';
+        submitButton.textContent = '{{BTN_CREATE}}';
         loadingIndicator.style.display = 'none';
     }
 });
@@ -255,7 +255,7 @@ document.getElementById('copyUrl').addEventListener('click', async () => {
             // Visual feedback - briefly change button text
             const copyBtn = document.getElementById('copyUrl');
             const originalText = copyBtn.textContent;
-            copyBtn.textContent = 'Copied!';
+            copyBtn.textContent = '{{BTN_COPIED}}';
             copyBtn.style.backgroundColor = '#28a745';
             
             setTimeout(() => {
@@ -284,11 +284,11 @@ document.getElementById('togglePassword').addEventListener('click', () => {
     
     if (passwordInput.type === 'password') {
         passwordInput.type = 'text';
-        toggleBtn.textContent = 'Hide';
+        toggleBtn.textContent = '{{BTN_HIDE}}';
         toggleBtn.style.backgroundColor = '#007bff';
     } else {
         passwordInput.type = 'password';
-        toggleBtn.textContent = 'Show';
+        toggleBtn.textContent = '{{BTN_SHOW}}';
         toggleBtn.style.backgroundColor = '#007bff';
     }
 });
@@ -307,7 +307,7 @@ document.getElementById('copyPassword').addEventListener('click', async () => {
             // Visual feedback - briefly change button text
             const copyBtn = document.getElementById('copyPassword');
             const originalText = copyBtn.textContent;
-            copyBtn.textContent = 'Copied!';
+            copyBtn.textContent = '{{BTN_COPIED}}';
             copyBtn.style.backgroundColor = '#28a745';
             
             setTimeout(() => {
@@ -590,7 +590,7 @@ window.addEventListener('load', () => {
                     const memoStatus = document.getElementById('memoStatus');
                     const deletionSpinner = document.getElementById('deletionSpinner');
                     if (memoStatus) {
-                        memoStatus.textContent = 'Memo decrypted. Deleting in progress... Please wait.';
+                        memoStatus.textContent = '{{MEMO_DECRYPTED_MESSAGE}}';
                     }
                     if (deletionSpinner) {
                         deletionSpinner.style.display = 'block';
@@ -622,13 +622,13 @@ window.addEventListener('load', () => {
                         const memoStatus = document.getElementById('memoStatus');
                         const deletionSpinner = document.getElementById('deletionSpinner');
                         if (memoStatus) {
-                            memoStatus.textContent = 'Memo confirmed as read and permanently deleted.';
+                            memoStatus.textContent = '{{MEMO_DELETED_MESSAGE}}';
                         }
                         if (deletionSpinner) {
                             deletionSpinner.style.display = 'none';
                         }
                     } else {
-                        showMessage('Error confirming deletion. The memo will be cleaned up automatically.', 'warning');
+                        showMessage('{{DELETION_ERROR_MESSAGE}}', 'warning');
                     }
                 } else {
                     if (result.error === 'Memo not found') {
@@ -660,11 +660,11 @@ window.addEventListener('load', () => {
             
             if (passwordInput.type === 'password') {
                 passwordInput.type = 'text';
-                toggleBtn.textContent = 'Hide';
+                toggleBtn.textContent = '{{BTN_HIDE}}';
                 toggleBtn.style.backgroundColor = '#007bff';
             } else {
                 passwordInput.type = 'password';
-                toggleBtn.textContent = 'Show';
+                toggleBtn.textContent = '{{BTN_SHOW}}';
                 toggleBtn.style.backgroundColor = '#007bff';
             }
         });

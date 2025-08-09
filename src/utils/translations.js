@@ -27,6 +27,8 @@ export const TRANSLATIONS = {
     // Buttons
     'btn.copy': 'Copy',
     'btn.copied': 'Copied!',
+    'btn.copyUrl': 'Copy URL',
+    'btn.copyPassword': 'Copy Password',
     'btn.show': 'Show',
     'btn.hide': 'Hide',
     'btn.create': 'Create Secure Memo',
@@ -531,6 +533,8 @@ export const TRANSLATIONS = {
     // Buttons
     'btn.copy': 'Copiar',
     'btn.copied': '¡Copiado!',
+    'btn.copyUrl': 'Copiar URL',
+    'btn.copyPassword': 'Copiar Contraseña',
     'btn.show': 'Mostrar',
     'btn.hide': 'Ocultar',
     'btn.create': 'Crear Memo Seguro',
@@ -1035,6 +1039,8 @@ export const TRANSLATIONS = {
     // Buttons
     'btn.copy': 'Kopieren',
     'btn.copied': 'Kopiert!',
+    'btn.copyUrl': 'URL kopieren',
+    'btn.copyPassword': 'Passwort kopieren',
     'btn.show': 'Anzeigen',
     'btn.hide': 'Verstecken',
     'btn.create': 'Sichere Notiz erstellen',
@@ -1510,6 +1516,8 @@ export const TRANSLATIONS = {
     // Buttons
     'btn.copy': 'Copier',
     'btn.copied': 'Copié !',
+    'btn.copyUrl': 'Copier l\'URL',
+    'btn.copyPassword': 'Copier le Mot de Passe',
     'btn.show': 'Afficher',
     'btn.hide': 'Masquer',
     'btn.create': 'Créer un Mémo Sécurisé',
@@ -2014,6 +2022,8 @@ export const TRANSLATIONS = {
     // Buttons
     'btn.copy': 'कॉपी करें',
     'btn.copied': 'कॉपी हो गया!',
+    'btn.copyUrl': 'URL कॉपी करें',
+    'btn.copyPassword': 'पासवर्ड कॉपी करें',
     'btn.show': 'दिखाएं',
     'btn.hide': 'छुपाएं',
     'btn.create': 'सुरक्षित मेमो बनाएं',
@@ -2052,6 +2062,8 @@ export const TRANSLATIONS = {
     'msg.memoDecrypted': 'मेमो डिक्रिप्ट किया गया। डिलीट की प्रक्रिया चल रही है... कृपया प्रतीक्षा करें।',
     'msg.memoDeleted': 'मेमो पढ़ने की पुष्टि हुई और स्थायी रूप से हटा दिया गया।',
     'msg.deletionError': 'डिलीशन पुष्टि में त्रुटि। मेमो स्वचालित रूप से साफ कर दिया जाएगा।',
+    'msg.yourSecureMemo': '📝 आपका सुरक्षित मेमो',
+    'msg.encrypting': 'आपका मेमो सुरक्षित रूप से एन्क्रिप्ट हो रहा है... पुराने उपकरणों पर इसमें कुछ समय लग सकता है।',
     
     // Page titles and descriptions
     'page.home.title': 'securememo.app - एन्क्रिप्टेड स्व-विनाशकारी मेमो',
@@ -2531,6 +2543,8 @@ export const TRANSLATIONS = {
     // Buttons
     'btn.copy': '复制',
     'btn.copied': '已复制！',
+    'btn.copyUrl': '复制网址',
+    'btn.copyPassword': '复制密码',
     'btn.show': '显示',
     'btn.hide': '隐藏',
     'btn.create': '创建安全备忘录',

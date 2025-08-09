@@ -437,7 +437,7 @@ export async function getCreateMemoHTML(locale = 'en', origin = 'https://securem
     <link rel="icon" type="image/png" sizes="512x512" href="/android-chrome-512x512.png">
     <link rel="canonical" href="${canonicalUrl}">
     <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" integrity="sha384-8tTMUpBXDOsQTxlbB/LdlISG/7nPjF1RWr/rNDxPsh5quEpybtbFHO/flV79t6uO" crossorigin="anonymous" async defer></script>
-    <script src="/js/create-memo.js" defer></script>
+    <script src="/js/create-memo.js?locale=${locale}" defer></script>
 </head>
 <body>
     <nav class="navbar">
@@ -523,7 +523,7 @@ export async function getCreateMemoHTML(locale = 'en', origin = 'https://securem
                         <label for="memoUrl">${t('form.memoUrl.label', locale)}</label>
                         <div class="url-copy-container">
                             <input type="text" id="memoUrl" readonly onclick="this.select(); document.execCommand('copy'); showMessage('${t('msg.urlCopied', locale)}', '${t('common.success', locale)}');">
-                            <button type="button" id="copyUrl" class="btn btn-primary">${t('btn.copy', locale)} URL</button>
+                            <button type="button" id="copyUrl" class="btn btn-primary">${t('btn.copyUrl', locale)}</button>
                         </div>
                         <small class="form-help">${t('form.memoUrl.help', locale)}</small>
                     </div>
@@ -533,7 +533,7 @@ export async function getCreateMemoHTML(locale = 'en', origin = 'https://securem
                         <div class="url-copy-container">
                             <input type="password" id="memoPassword" readonly onclick="this.select(); document.execCommand('copy'); showMessage('${t('msg.passwordCopied', locale)}', '${t('common.success', locale)}');">
                             <button type="button" id="togglePassword" class="btn btn-primary" style="margin-right: 8px;">${t('btn.show', locale)}</button>
-                            <button type="button" id="copyPassword" class="btn btn-primary">${t('btn.copy', locale)}</button>
+                            <button type="button" id="copyPassword" class="btn btn-primary">${t('btn.copyPassword', locale)}</button>
                         </div>
                         <small class="form-help">${t('form.memoPassword.help', locale)}</small>
                     </div>
@@ -632,7 +632,7 @@ export async function getReadMemoHTML(locale = 'en', origin = 'https://securemem
     <link rel="icon" type="image/png" sizes="512x512" href="/android-chrome-512x512.png">
     <link rel="canonical" href="${canonicalUrl}">
     <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" integrity="sha384-8tTMUpBXDOsQTxlbB/LdlISG/7nPjF1RWr/rNDxPsh5quEpybtbFHO/flV79t6uO" crossorigin="anonymous" async defer></script>
-    <script src="/js/read-memo.js" defer></script>
+    <script src="/js/read-memo.js?locale=${locale}" defer></script>
 </head>
 <body>
     <nav class="navbar">
