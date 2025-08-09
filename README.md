@@ -47,6 +47,8 @@ securememo/
 │   │   ├── es_translations.js  # Spanish translations
 │   │   ├── fr_translations.js  # French translations
 │   │   ├── hi_translations.js  # Hindi translations
+│   │   ├── ptPT_translations.js # Portuguese (Portugal) translations
+│   │   ├── ptBR_translations.js # Portuguese (Brazil) translations
 │   │   └── zh_translations.js  # Chinese translations
 │   ├── styles/                 # CSS styling
 │   │   └── styles.js           # Dynamic CSS generation
