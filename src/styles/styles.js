@@ -642,11 +642,29 @@ input, textarea, select {
   font-size: 1.8rem;
   cursor: pointer;
   color: #333;
-  transition: color 0.3s ease;
+  transition: all 0.3s ease;
+  padding: 8px;
+  border-radius: 4px;
+  min-width: 44px;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .hamburger:hover {
   color: #667eea;
+  background: rgba(102, 126, 234, 0.1);
+}
+
+.hamburger:focus {
+  outline: 2px solid #667eea;
+  outline-offset: 2px;
+}
+
+.hamburger[aria-expanded="true"] {
+  color: #667eea;
+  background: rgba(102, 126, 234, 0.1);
 }
 
 /* Responsive design */
@@ -693,12 +711,11 @@ input, textarea, select {
   }
 
   .hamburger {
-    display: block;
+    display: flex;
     order: 3;
   }
 
   .nav-menu {
-    display: none;
     flex-direction: column;
     gap: 15px;
     position: absolute;
@@ -710,13 +727,18 @@ input, textarea, select {
     padding: 20px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     z-index: 999;
-    transition: opacity 0.3s ease;
+    transform: translateY(-10px);
     opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    pointer-events: none;
   }
 
   .nav-menu.active {
-    display: flex;
+    transform: translateY(0);
     opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
   }
 
   .nav-link {

@@ -4,7 +4,7 @@
 
 import { TRANSLATIONS } from './translations.js';
 
-const SUPPORTED_LOCALES = ['en', 'es', 'fr'];
+const SUPPORTED_LOCALES = ['en', 'es', 'fr', 'de'];
 const DEFAULT_LOCALE = 'en';
 
 
