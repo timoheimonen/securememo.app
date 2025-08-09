@@ -75,7 +75,7 @@ export async function getIndexHTML(locale = 'en', origin = 'https://securememo.a
             <a href="/${locale}" class="nav-logo">securememo.app</a>
             
             <!-- Hamburger Menu Button -->
-            <button class="hamburger" type="button" aria-label="Toggle navigation menu" aria-expanded="false">
+            <button class="hamburger" type="button" aria-label="${t('nav.toggleMenu', locale)}" aria-expanded="false">
                 <span class="hamburger-line"></span>
                 <span class="hamburger-line"></span>
                 <span class="hamburger-line"></span>
@@ -87,17 +87,17 @@ export async function getIndexHTML(locale = 'en', origin = 'https://securememo.a
                 <li><a href="/${locale}/about.html" class="nav-link">${t('nav.about', locale)}</a></li>
                 <li><a href="/${locale}/create-memo.html" class="nav-link">${t('nav.create', locale)}</a></li>
                 <li class="language-links">
-                    <a href="/en" class="nav-link ${locale === 'en' ? 'active' : ''}" title="English">EN</a>
+                    <a href="/en" class="nav-link ${locale === 'en' ? 'active' : ''}" title="${t('language.english', locale)}">EN</a>
                     <span class="language-separator">|</span>
-                    <a href="/es" class="nav-link ${locale === 'es' ? 'active' : ''}" title="Español">ES</a>
+                    <a href="/es" class="nav-link ${locale === 'es' ? 'active' : ''}" title="${t('language.spanish', locale)}">ES</a>
                     <span class="language-separator">|</span>
-                    <a href="/fr" class="nav-link ${locale === 'fr' ? 'active' : ''}" title="Français">FR</a>
+                    <a href="/fr" class="nav-link ${locale === 'fr' ? 'active' : ''}" title="${t('language.french', locale)}">FR</a>
                     <span class="language-separator">|</span>
-                    <a href="/de" class="nav-link ${locale === 'de' ? 'active' : ''}" title="Deutsch">DE</a>
+                    <a href="/de" class="nav-link ${locale === 'de' ? 'active' : ''}" title="${t('language.german', locale)}">DE</a>
                     <span class="language-separator">|</span>
-                    <a href="/hi" class="nav-link ${locale === 'hi' ? 'active' : ''}" title="हिन्दी">हिन्दी</a>
+                    <a href="/hi" class="nav-link ${locale === 'hi' ? 'active' : ''}" title="${t('language.hindi', locale)}">हिन्दी</a>
                     <span class="language-separator">|</span>
-                    <a href="/zh" class="nav-link ${locale === 'zh' ? 'active' : ''}" title="中文">中文</a>
+                    <a href="/zh" class="nav-link ${locale === 'zh' ? 'active' : ''}" title="${t('language.chinese', locale)}">中文</a>
                 </li>
             </ul>
             
@@ -253,7 +253,7 @@ export async function getAboutHTML(locale = 'en', origin = 'https://securememo.a
             <a href="/${locale}" class="nav-logo">securememo.app</a>
             
             <!-- Hamburger Menu Button -->
-            <button class="hamburger" type="button" aria-label="Toggle navigation menu" aria-expanded="false">
+            <button class="hamburger" type="button" aria-label="${t('nav.toggleMenu', locale)}" aria-expanded="false">
                 <span class="hamburger-line"></span>
                 <span class="hamburger-line"></span>
                 <span class="hamburger-line"></span>
@@ -265,17 +265,17 @@ export async function getAboutHTML(locale = 'en', origin = 'https://securememo.a
                 <li><a href="/${locale}/about.html" class="nav-link active">${t('nav.about', locale)}</a></li>
                 <li><a href="/${locale}/create-memo.html" class="nav-link">${t('nav.create', locale)}</a></li>
                 <li class="language-links">
-                    <a href="/en/about.html" class="nav-link ${locale === 'en' ? 'active' : ''}" title="English">EN</a>
+                    <a href="/en/about.html" class="nav-link ${locale === 'en' ? 'active' : ''}" title="${t('language.english', locale)}">EN</a>
                     <span class="language-separator">|</span>
-                    <a href="/es/about.html" class="nav-link ${locale === 'es' ? 'active' : ''}" title="Español">ES</a>
+                    <a href="/es/about.html" class="nav-link ${locale === 'es' ? 'active' : ''}" title="${t('language.spanish', locale)}">ES</a>
                     <span class="language-separator">|</span>
-                    <a href="/fr/about.html" class="nav-link ${locale === 'fr' ? 'active' : ''}" title="Français">FR</a>
+                    <a href="/fr/about.html" class="nav-link ${locale === 'fr' ? 'active' : ''}" title="${t('language.french', locale)}">FR</a>
                     <span class="language-separator">|</span>
-                    <a href="/de/about.html" class="nav-link ${locale === 'de' ? 'active' : ''}" title="Deutsch">DE</a>
+                    <a href="/de/about.html" class="nav-link ${locale === 'de' ? 'active' : ''}" title="${t('language.german', locale)}">DE</a>
                     <span class="language-separator">|</span>
-                    <a href="/hi/about.html" class="nav-link ${locale === 'hi' ? 'active' : ''}" title="हिन्दी">हिन्दी</a>
+                    <a href="/hi/about.html" class="nav-link ${locale === 'hi' ? 'active' : ''}" title="${t('language.hindi', locale)}">हिन्दी</a>
                     <span class="language-separator">|</span>
-                    <a href="/zh/about.html" class="nav-link ${locale === 'zh' ? 'active' : ''}" title="中文">中文</a>
+                    <a href="/zh/about.html" class="nav-link ${locale === 'zh' ? 'active' : ''}" title="${t('language.chinese', locale)}">中文</a>
                 </li>
             </ul>
             
@@ -445,7 +445,7 @@ export async function getCreateMemoHTML(locale = 'en', origin = 'https://securem
             <a href="/${locale}" class="nav-logo">securememo.app</a>
             
             <!-- Hamburger Menu Button -->
-            <button class="hamburger" type="button" aria-label="Toggle navigation menu" aria-expanded="false">
+            <button class="hamburger" type="button" aria-label="${t('nav.toggleMenu', locale)}" aria-expanded="false">
                 <span class="hamburger-line"></span>
                 <span class="hamburger-line"></span>
                 <span class="hamburger-line"></span>
@@ -457,17 +457,17 @@ export async function getCreateMemoHTML(locale = 'en', origin = 'https://securem
                 <li><a href="/${locale}/about.html" class="nav-link">${t('nav.about', locale)}</a></li>
                 <li><a href="/${locale}/create-memo.html" class="nav-link active">${t('nav.create', locale)}</a></li>
                 <li class="language-links">
-                    <a href="/en/create-memo.html" class="nav-link ${locale === 'en' ? 'active' : ''}" title="English">EN</a>
+                    <a href="/en/create-memo.html" class="nav-link ${locale === 'en' ? 'active' : ''}" title="${t('language.english', locale)}">EN</a>
                     <span class="language-separator">|</span>
-                    <a href="/es/create-memo.html" class="nav-link ${locale === 'es' ? 'active' : ''}" title="Español">ES</a>
+                    <a href="/es/create-memo.html" class="nav-link ${locale === 'es' ? 'active' : ''}" title="${t('language.spanish', locale)}">ES</a>
                     <span class="language-separator">|</span>
-                    <a href="/fr/create-memo.html" class="nav-link ${locale === 'fr' ? 'active' : ''}" title="Français">FR</a>
+                    <a href="/fr/create-memo.html" class="nav-link ${locale === 'fr' ? 'active' : ''}" title="${t('language.french', locale)}">FR</a>
                     <span class="language-separator">|</span>
-                    <a href="/de/create-memo.html" class="nav-link ${locale === 'de' ? 'active' : ''}" title="Deutsch">DE</a>
+                    <a href="/de/create-memo.html" class="nav-link ${locale === 'de' ? 'active' : ''}" title="${t('language.german', locale)}">DE</a>
                     <span class="language-separator">|</span>
-                    <a href="/hi/create-memo.html" class="nav-link ${locale === 'hi' ? 'active' : ''}" title="हिन्दी">हिन्दी</a>
+                    <a href="/hi/create-memo.html" class="nav-link ${locale === 'hi' ? 'active' : ''}" title="${t('language.hindi', locale)}">हिन्दी</a>
                     <span class="language-separator">|</span>
-                    <a href="/zh/create-memo.html" class="nav-link ${locale === 'zh' ? 'active' : ''}" title="中文">中文</a>
+                    <a href="/zh/create-memo.html" class="nav-link ${locale === 'zh' ? 'active' : ''}" title="${t('language.chinese', locale)}">中文</a>
                 </li>
             </ul>
             
@@ -522,7 +522,7 @@ export async function getCreateMemoHTML(locale = 'en', origin = 'https://securem
                     <div class="memo-url-section">
                         <label for="memoUrl">${t('form.memoUrl.label', locale)}</label>
                         <div class="url-copy-container">
-                            <input type="text" id="memoUrl" readonly onclick="this.select(); document.execCommand('copy'); showMessage('${t('msg.urlCopied', locale)}', 'success');">
+                            <input type="text" id="memoUrl" readonly onclick="this.select(); document.execCommand('copy'); showMessage('${t('msg.urlCopied', locale)}', '${t('common.success', locale)}');">
                             <button type="button" id="copyUrl" class="btn btn-primary">${t('btn.copy', locale)} URL</button>
                         </div>
                         <small class="form-help">${t('form.memoUrl.help', locale)}</small>
@@ -531,9 +531,9 @@ export async function getCreateMemoHTML(locale = 'en', origin = 'https://securem
                     <div class="memo-password-section">
                         <label for="memoPassword">${t('form.memoPassword.label', locale)}</label>
                         <div class="url-copy-container">
-                            <input type="password" id="memoPassword" readonly onclick="this.select(); document.execCommand('copy'); showMessage('${t('msg.passwordCopied', locale)}', 'success');">
+                            <input type="password" id="memoPassword" readonly onclick="this.select(); document.execCommand('copy'); showMessage('${t('msg.passwordCopied', locale)}', '${t('common.success', locale)}');">
                             <button type="button" id="togglePassword" class="btn btn-primary" style="margin-right: 8px;">${t('btn.show', locale)}</button>
-                            <button type="button" id="copyPassword" class="btn btn-primary">${t('btn.copy', locale)} Password</button>
+                            <button type="button" id="copyPassword" class="btn btn-primary">${t('btn.copy', locale)}</button>
                         </div>
                         <small class="form-help">${t('form.memoPassword.help', locale)}</small>
                     </div>
@@ -640,7 +640,7 @@ export async function getReadMemoHTML(locale = 'en', origin = 'https://securemem
             <a href="/${locale}" class="nav-logo">securememo.app</a>
             
             <!-- Hamburger Menu Button -->
-            <button class="hamburger" type="button" aria-label="Toggle navigation menu" aria-expanded="false">
+            <button class="hamburger" type="button" aria-label="${t('nav.toggleMenu', locale)}" aria-expanded="false">
                 <span class="hamburger-line"></span>
                 <span class="hamburger-line"></span>
                 <span class="hamburger-line"></span>
@@ -652,17 +652,17 @@ export async function getReadMemoHTML(locale = 'en', origin = 'https://securemem
                 <li><a href="/${locale}/about.html" class="nav-link">${t('nav.about', locale)}</a></li>
                 <li><a href="/${locale}/create-memo.html" class="nav-link">${t('nav.create', locale)}</a></li>
                 <li class="language-links">
-                    <a href="/en/read-memo.html" class="nav-link ${locale === 'en' ? 'active' : ''}" title="English">EN</a>
+                    <a href="/en/read-memo.html" class="nav-link ${locale === 'en' ? 'active' : ''}" title="${t('language.english', locale)}">EN</a>
                     <span class="language-separator">|</span>
-                    <a href="/es/read-memo.html" class="nav-link ${locale === 'es' ? 'active' : ''}" title="Español">ES</a>
+                    <a href="/es/read-memo.html" class="nav-link ${locale === 'es' ? 'active' : ''}" title="${t('language.spanish', locale)}">ES</a>
                     <span class="language-separator">|</span>
-                    <a href="/fr/read-memo.html" class="nav-link ${locale === 'fr' ? 'active' : ''}" title="Français">FR</a>
+                    <a href="/fr/read-memo.html" class="nav-link ${locale === 'fr' ? 'active' : ''}" title="${t('language.french', locale)}">FR</a>
                     <span class="language-separator">|</span>
-                    <a href="/de/read-memo.html" class="nav-link ${locale === 'de' ? 'active' : ''}" title="Deutsch">DE</a>
+                    <a href="/de/read-memo.html" class="nav-link ${locale === 'de' ? 'active' : ''}" title="${t('language.german', locale)}">DE</a>
                     <span class="language-separator">|</span>
-                    <a href="/hi/read-memo.html" class="nav-link ${locale === 'hi' ? 'active' : ''}" title="हिन्दी">हिन्दी</a>
+                    <a href="/hi/read-memo.html" class="nav-link ${locale === 'hi' ? 'active' : ''}" title="${t('language.hindi', locale)}">हिन्दी</a>
                     <span class="language-separator">|</span>
-                    <a href="/zh/read-memo.html" class="nav-link ${locale === 'zh' ? 'active' : ''}" title="中文">中文</a>
+                    <a href="/zh/read-memo.html" class="nav-link ${locale === 'zh' ? 'active' : ''}" title="${t('language.chinese', locale)}">中文</a>
                 </li>
             </ul>
             
@@ -808,7 +808,7 @@ export async function getToSHTML(locale = 'en', origin = 'https://securememo.app
             <a href="/${locale}" class="nav-logo">securememo.app</a>
             
             <!-- Hamburger Menu Button -->
-            <button class="hamburger" type="button" aria-label="Toggle navigation menu" aria-expanded="false">
+            <button class="hamburger" type="button" aria-label="${t('nav.toggleMenu', locale)}" aria-expanded="false">
                 <span class="hamburger-line"></span>
                 <span class="hamburger-line"></span>
                 <span class="hamburger-line"></span>
@@ -820,17 +820,17 @@ export async function getToSHTML(locale = 'en', origin = 'https://securememo.app
                 <li><a href="/${locale}/about.html" class="nav-link">${t('nav.about', locale)}</a></li>
                 <li><a href="/${locale}/create-memo.html" class="nav-link">${t('nav.create', locale)}</a></li>
                 <li class="language-links">
-                    <a href="/en/tos.html" class="nav-link ${locale === 'en' ? 'active' : ''}" title="English">EN</a>
+                    <a href="/en/tos.html" class="nav-link ${locale === 'en' ? 'active' : ''}" title="${t('language.english', locale)}">EN</a>
                     <span class="language-separator">|</span>
-                    <a href="/es/tos.html" class="nav-link ${locale === 'es' ? 'active' : ''}" title="Español">ES</a>
+                    <a href="/es/tos.html" class="nav-link ${locale === 'es' ? 'active' : ''}" title="${t('language.spanish', locale)}">ES</a>
                     <span class="language-separator">|</span>
-                    <a href="/fr/tos.html" class="nav-link ${locale === 'fr' ? 'active' : ''}" title="Français">FR</a>
+                    <a href="/fr/tos.html" class="nav-link ${locale === 'fr' ? 'active' : ''}" title="${t('language.french', locale)}">FR</a>
                     <span class="language-separator">|</span>
-                    <a href="/de/tos.html" class="nav-link ${locale === 'de' ? 'active' : ''}" title="Deutsch">DE</a>
+                    <a href="/de/tos.html" class="nav-link ${locale === 'de' ? 'active' : ''}" title="${t('language.german', locale)}">DE</a>
                     <span class="language-separator">|</span>
-                    <a href="/hi/tos.html" class="nav-link ${locale === 'hi' ? 'active' : ''}" title="हिन्दी">हिन्दी</a>
+                    <a href="/hi/tos.html" class="nav-link ${locale === 'hi' ? 'active' : ''}" title="${t('language.hindi', locale)}">हिन्दी</a>
                     <span class="language-separator">|</span>
-                    <a href="/zh/tos.html" class="nav-link ${locale === 'zh' ? 'active' : ''}" title="中文">中文</a>
+                    <a href="/zh/tos.html" class="nav-link ${locale === 'zh' ? 'active' : ''}" title="${t('language.chinese', locale)}">中文</a>
                 </li>
             </ul>
             
@@ -1043,7 +1043,7 @@ export async function getPrivacyHTML(locale = 'en', origin = 'https://securememo
             <a href="/${locale}" class="nav-logo">securememo.app</a>
             
             <!-- Hamburger Menu Button -->
-            <button class="hamburger" type="button" aria-label="Toggle navigation menu" aria-expanded="false">
+            <button class="hamburger" type="button" aria-label="${t('nav.toggleMenu', locale)}" aria-expanded="false">
                 <span class="hamburger-line"></span>
                 <span class="hamburger-line"></span>
                 <span class="hamburger-line"></span>
@@ -1055,17 +1055,17 @@ export async function getPrivacyHTML(locale = 'en', origin = 'https://securememo
                 <li><a href="/${locale}/about.html" class="nav-link">${t('nav.about', locale)}</a></li>
                 <li><a href="/${locale}/create-memo.html" class="nav-link">${t('nav.create', locale)}</a></li>
                 <li class="language-links">
-                    <a href="/en/privacy.html" class="nav-link ${locale === 'en' ? 'active' : ''}" title="English">EN</a>
+                    <a href="/en/privacy.html" class="nav-link ${locale === 'en' ? 'active' : ''}" title="${t('language.english', locale)}">EN</a>
                     <span class="language-separator">|</span>
-                    <a href="/es/privacy.html" class="nav-link ${locale === 'es' ? 'active' : ''}" title="Español">ES</a>
+                    <a href="/es/privacy.html" class="nav-link ${locale === 'es' ? 'active' : ''}" title="${t('language.spanish', locale)}">ES</a>
                     <span class="language-separator">|</span>
-                    <a href="/fr/privacy.html" class="nav-link ${locale === 'fr' ? 'active' : ''}" title="Français">FR</a>
+                    <a href="/fr/privacy.html" class="nav-link ${locale === 'fr' ? 'active' : ''}" title="${t('language.french', locale)}">FR</a>
                     <span class="language-separator">|</span>
-                    <a href="/de/privacy.html" class="nav-link ${locale === 'de' ? 'active' : ''}" title="Deutsch">DE</a>
+                    <a href="/de/privacy.html" class="nav-link ${locale === 'de' ? 'active' : ''}" title="${t('language.german', locale)}">DE</a>
                     <span class="language-separator">|</span>
-                    <a href="/hi/privacy.html" class="nav-link ${locale === 'hi' ? 'active' : ''}" title="हिन्दी">हिन्दी</a>
+                    <a href="/hi/privacy.html" class="nav-link ${locale === 'hi' ? 'active' : ''}" title="${t('language.hindi', locale)}">हिन्दी</a>
                     <span class="language-separator">|</span>
-                    <a href="/zh/privacy.html" class="nav-link ${locale === 'zh' ? 'active' : ''}" title="中文">中文</a>
+                    <a href="/zh/privacy.html" class="nav-link ${locale === 'zh' ? 'active' : ''}" title="${t('language.chinese', locale)}">中文</a>
                 </li>
             </ul>
             

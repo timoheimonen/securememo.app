@@ -23,7 +23,8 @@ import {
   extractLocaleFromPath, 
   getLocaleRedirectPath,
   getCanonicalUrl,
-  buildLocalizedPath
+  buildLocalizedPath,
+  t
 } from './utils/localization.js';
 import { getClientLocalizationJS } from './utils/clientLocalization.js';
 
@@ -309,7 +310,10 @@ export default {
           .replace('{{CREATE_MEMO_FAILED_ERROR}}', getErrorMessage('CREATE_MEMO_FAILED', locale))
           .replace('{{CREATE_MEMO_ERROR}}', getErrorMessage('CREATE_MEMO_ERROR', locale))
           .replace('{{DECRYPTION_ERROR}}', getErrorMessage('DECRYPTION_ERROR', locale))
-          .replace('{{READ_MEMO_ERROR}}', getErrorMessage('READ_MEMO_ERROR', locale));
+          .replace('{{READ_MEMO_ERROR}}', getErrorMessage('READ_MEMO_ERROR', locale))
+          .replace('{{PASSWORD_COPIED_MESSAGE}}', t('msg.passwordCopied', locale))
+          .replace('{{URL_COPIED_MESSAGE}}', t('msg.urlCopied', locale))
+          .replace('{{COPY_MANUAL_MESSAGE}}', t('msg.copyManual', locale));
         return new Response(jsContent, {
           headers: { 
             'Content-Type': 'application/javascript',

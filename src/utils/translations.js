@@ -8,12 +8,21 @@ export const TRANSLATIONS = {
     'nav.home': 'Home',
     'nav.about': 'About',
     'nav.create': 'Create Secure Memo',
+    'nav.toggleMenu': 'Toggle navigation menu',
     
     // Common elements
     'common.loading': 'Loading...',
     'common.error': 'Error',
     'common.success': 'Success',
     'common.warning': 'Warning',
+    
+    // Language names
+    'language.english': 'English',
+    'language.spanish': 'Español',
+    'language.french': 'Français',
+    'language.german': 'Deutsch',
+    'language.hindi': 'हिन्दी',
+    'language.chinese': '中文',
     
     // Buttons
     'btn.copy': 'Copy',
@@ -503,12 +512,21 @@ export const TRANSLATIONS = {
     'nav.home': 'Inicio',
     'nav.about': 'Acerca de',
     'nav.create': 'Crear Memo Seguro',
+    'nav.toggleMenu': 'Alternar menú de navegación',
     
     // Common elements
     'common.loading': 'Cargando...',
     'common.error': 'Error',
     'common.success': 'Éxito',
     'common.warning': 'Advertencia',
+    
+    // Language names
+    'language.english': 'English',
+    'language.spanish': 'Español',
+    'language.french': 'Français',
+    'language.german': 'Deutsch',
+    'language.hindi': 'हिन्दी',
+    'language.chinese': '中文',
     
     // Buttons
     'btn.copy': 'Copiar',
@@ -998,12 +1016,21 @@ export const TRANSLATIONS = {
     'nav.home': 'Start',
     'nav.about': 'Über uns',
     'nav.create': 'Sichere Notiz erstellen',
+    'nav.toggleMenu': 'Navigationsmenü umschalten',
     
     // Common elements
     'common.loading': 'Laden...',
     'common.error': 'Fehler',
     'common.success': 'Erfolgreich',
     'common.warning': 'Warnung',
+    
+    // Language names
+    'language.english': 'English',
+    'language.spanish': 'Español',
+    'language.french': 'Français',
+    'language.german': 'Deutsch',
+    'language.hindi': 'हिन्दी',
+    'language.chinese': '中文',
     
     // Buttons
     'btn.copy': 'Kopieren',
@@ -1025,6 +1052,13 @@ export const TRANSLATIONS = {
     'form.password.help': 'Das Passwort sollte separat von der Notiz-URL mit Ihnen geteilt worden sein',
     'form.security.help': 'Bitte vervollständigen Sie die Sicherheitsherausforderung',
     
+    // Form options
+    'form.expiry.option.8h': 'Beim Lesen oder in 8 Stunden löschen',
+    'form.expiry.option.1d': 'Beim Lesen oder in 1 Tag löschen',
+    'form.expiry.option.2d': 'Beim Lesen oder in 2 Tagen löschen',
+    'form.expiry.option.1w': 'Beim Lesen oder in 1 Woche löschen',
+    'form.expiry.option.30d': 'Beim Lesen oder in 30 Tagen löschen',
+    
     // Messages and notifications
     'msg.urlCopied': '✅ URL in Zwischenablage kopiert!',
     'msg.passwordCopied': '✅ Passwort in Zwischenablage kopiert!',
@@ -1033,6 +1067,25 @@ export const TRANSLATIONS = {
     'msg.memoDecrypted': 'Notiz entschlüsselt. Löschung läuft... Bitte warten.',
     'msg.memoDeleted': 'Notiz als gelesen bestätigt und dauerhaft gelöscht.',
     'msg.deletionError': 'Fehler beim Bestätigen der Löschung. Die Notiz wird automatisch bereinigt.',
+    
+    // Loading and status messages
+    'msg.encrypting': 'Ihre Notiz wird sicher verschlüsselt... Dies kann auf älteren Geräten einen Moment dauern.',
+    'msg.deletingSecurely': 'Notiz wird sicher gelöscht...',
+    'msg.yourSecureMemo': '📝 Ihre sichere Notiz',
+    'msg.status': 'Status:',
+    
+    // Labels and help text
+    'form.memoUrl.label': 'Notiz-URL (teilen Sie diese mit Ihrem Empfänger):',
+    'form.memoUrl.help': 'Dies ist der sichere Link zu Ihrer Notiz. Teilen Sie diese URL mit Ihrem Empfänger.',
+    'form.memoPassword.label': 'Verschlüsselungspasswort (separat teilen):',
+    'form.memoPassword.help': 'Dies ist das Verschlüsselungspasswort. Teilen Sie dies separat von der URL für erhöhte Sicherheit. Dies wird nicht auf unseren Servern gespeichert, eine Wiederherstellung ist nach dem Verlassen dieser Seite nicht möglich.',
+    
+    // Warning messages
+    'warning.important': 'Wichtig:',
+    'warning.memoDeleted': 'Die Notiz wird nach dem Lesen oder wenn die Ablaufzeit erreicht ist gelöscht',
+    'warning.shareSecurely': 'Teilen Sie die URL und das Passwort separat für maximale Sicherheit',
+    'warning.needBoth': 'Der Empfänger benötigt sowohl die URL als auch das Passwort, um auf die Notiz zuzugreifen',
+    'warning.pageCleared': 'Diese Seite wird geleert, wenn Sie wegnavigieren',
     
     // Page titles and descriptions
     'page.home.title': 'securememo.app - Verschlüsselte sich selbst zerstörende Notizen',
@@ -1319,6 +1372,7 @@ export const TRANSLATIONS = {
     
     // Create memo page content
     'create.hero.title': 'Sichere Notiz erstellen',
+    'create.hero.description': 'Ihre Notiz wird in Ihrem Browser verschlüsselt und zerstört sich nach dem Lesen oder Ablauf selbst.',
     'create.hero.subtitle': 'Ihre Notiz wird in Ihrem Browser verschlüsselt, bevor sie an unsere Server gesendet wird. Wir können den Inhalt niemals sehen.',
     
     'create.form.expiryTime.8h': '8 Stunden',
@@ -1339,12 +1393,21 @@ export const TRANSLATIONS = {
     
     // Read memo page content
     'read.hero.title': 'Sichere Notiz lesen',
+    'read.hero.description': 'Geben Sie das Passwort ein, um die Notiz zu entschlüsseln und zu lesen. Das Passwort sollte Ihnen separat von der URL mitgeteilt worden sein. Die Notiz wird nach dem Lesen oder Ablauf gelöscht.',
+    'read.hero.ogDescription': 'Entschlüsseln und lesen Sie Ihre sichere Notiz. Notizen zerstören sich nach dem Lesen für maximale Privatsphäre selbst.',
+    'read.hero.twitterDescription': 'Entschlüsseln und lesen Sie Ihre sichere Notiz mit clientseitiger Entschlüsselung.',
     'read.hero.subtitle': 'Geben Sie das Verschlüsselungspasswort ein, um diese Notiz zu entschlüsseln. Die Notiz wird dauerhaft gelöscht, nachdem sie entschlüsselt wurde.',
+    'read.schema.description': 'Entschlüsseln und lesen Sie Ihre sichere Notiz mit dem Passwort. Notizen zerstören sich nach dem Lesen für maximale Privatsphäre selbst. Clientseitige AES-256-Entschlüsselung.',
     
+    'read.form.title': 'Notiz-Entschlüsselung',
     'read.form.passwordRequired': 'Verschlüsselungspasswort ist erforderlich',
+    'read.warning': '⚠️ Warnung: Diese Notiz wird nach dem Lesen DAUERHAFT gelöscht!',
     
     'read.success.title': 'Notiz entschlüsselt',
     'read.success.subtitle': 'Ihre Notiz wurde erfolgreich entschlüsselt und wird nun dauerhaft gelöscht.',
+    
+    'read.result.title': 'Entschlüsselte Notiz:',
+    'read.result.deleteConfirmation': 'Diese Notiz wurde gelesen und dauerhaft gelöscht.',
     
     'read.error.notFound.title': 'Notiz nicht gefunden',
     'read.error.notFound.subtitle': 'Diese Notiz existiert nicht mehr. Sie wurde möglicherweise bereits gelesen oder ist abgelaufen.',
@@ -1428,12 +1491,21 @@ export const TRANSLATIONS = {
     'nav.home': 'Accueil',
     'nav.about': 'À propos',
     'nav.create': 'Créer un Mémo Sécurisé',
+    'nav.toggleMenu': 'Basculer le menu de navigation',
     
     // Common elements
     'common.loading': 'Chargement...',
     'common.error': 'Erreur',
     'common.success': 'Succès',
     'common.warning': 'Avertissement',
+    
+    // Language names
+    'language.english': 'English',
+    'language.spanish': 'Español',
+    'language.french': 'Français',
+    'language.german': 'Deutsch',
+    'language.hindi': 'हिन्दी',
+    'language.chinese': '中文',
     
     // Buttons
     'btn.copy': 'Copier',
@@ -1923,12 +1995,21 @@ export const TRANSLATIONS = {
     'nav.home': 'होम',
     'nav.about': 'हमारे बारे में',
     'nav.create': 'सुरक्षित मेमो बनाएं',
+    'nav.toggleMenu': 'नेवीगेशन मेनू टॉगल करें',
     
     // Common elements
     'common.loading': 'लोड हो रहा है...',
     'common.error': 'त्रुटि',
     'common.success': 'सफलता',
     'common.warning': 'चेतावनी',
+    
+    // Language names
+    'language.english': 'English',
+    'language.spanish': 'Español',
+    'language.french': 'Français',
+    'language.german': 'Deutsch',
+    'language.hindi': 'हिन्दी',
+    'language.chinese': '中文',
     
     // Buttons
     'btn.copy': 'कॉपी करें',
@@ -1949,6 +2030,19 @@ export const TRANSLATIONS = {
     'form.password.placeholder': 'वह एन्क्रिप्शन पासवर्ड दर्ज करें जो आपके साथ अलग से साझा किया गया था',
     'form.password.help': 'पासवर्ड मेमो URL से अलग आपके साथ साझा किया जाना चाहिए था',
     'form.security.help': 'कृपया सुरक्षा चुनौती पूरी करें',
+    
+    // Labels and help text
+    'form.memoUrl.label': 'मेमो URL (इसे अपने प्राप्तकर्ता के साथ साझा करें):',
+    'form.memoUrl.help': 'यह आपके मेमो का सुरक्षित लिंक है। इस URL को अपने प्राप्तकर्ता के साथ साझा करें।',
+    'form.memoPassword.label': 'एन्क्रिप्शन पासवर्ड (इसे अलग से साझा करें):',
+    'form.memoPassword.help': 'यह एन्क्रिप्शन पासवर्ड है। बेहतर सुरक्षा के लिए इसे URL से अलग साझा करें। यह हमारे सर्वर पर सहेजा नहीं गया है, इस पृष्ठ को छोड़ने के बाद रिकवरी संभव नहीं है।',
+    
+    // Warning messages
+    'warning.important': 'महत्वपूर्ण:',
+    'warning.memoDeleted': 'मेमो पढ़ने के बाद या समाप्ति समय पहुंचने पर हटा दिया जाएगा',
+    'warning.shareSecurely': 'अधिकतम सुरक्षा के लिए URL और पासवर्ड को अलग-अलग साझा करें',
+    'warning.needBoth': 'प्राप्तकर्ता को मेमो तक पहुंचने के लिए URL और पासवर्ड दोनों की आवश्यकता है',
+    'warning.pageCleared': 'जब आप दूसरी जगह नेविगेट करेंगे तो यह पृष्ठ साफ हो जाएगा',
     
     // Messages and notifications
     'msg.urlCopied': '✅ URL क्लिपबोर्ड में कॉपी हो गया!',
@@ -2018,7 +2112,42 @@ export const TRANSLATIONS = {
     
     // About page content
     'about.hero.title': 'securememo.app के बारे में',
-    'about.hero.subtitle': 'एक गोपनीयता-केंद्रित, ओपन-सोर्स टूल सुरक्षित, स्व-विनाशकारी मेमो बनाने के लिए',
+    'about.hero.subtitle': 'एक गोपनीयता-केंद्रित एप्लिकेशन जो आपको एन्क्रिप्टेड मेमो बनाने की अनुमति देता है जो पढ़ने या समाप्त होने के बाद स्वयं नष्ट हो जाते हैं। सुरक्षा और गोपनीयता को सर्वोच्च प्राथमिकता के रूप में बनाया गया। स्रोत कोड GitHub पर उपलब्ध है।',
+    
+    'about.tech.title': 'तकनीकी स्टैक',
+    'about.tech.cloudflare': 'Cloudflare Workers: वैश्विक प्रदर्शन के लिए सर्वरलेस कंप्यूट प्लेटफॉर्म',
+    'about.tech.d1': 'D1 डेटाबेस: सुरक्षित भंडारण के लिए SQLite-संचालित डेटाबेस',
+    'about.tech.webcrypto': 'Web Crypto API: क्लाइंट-साइड AES-256 एन्क्रिप्शन',
+    'about.tech.frontend': 'HTML/CSS/JavaScript: आधुनिक, रेस्पॉन्सिव वेब इंटरफेस',
+    'about.tech.github': 'स्रोत कोड GitHub पर उपलब्ध है:',
+    'about.tech.githubLink': 'GitHub पर स्रोत कोड देखें',
+    
+    'about.features.title': 'सुरक्षा सुविधाएं',
+    'about.features.clientEncryption.title': '🔐 क्लाइंट-साइड एन्क्रिप्शन',
+    'about.features.clientEncryption.description': 'सभी एन्क्रिप्शन Web Crypto API का उपयोग करके आपके ब्राउज़र में होता है। आपका मेमो हमारे सर्वर पर भेजे जाने से पहले AES-256 से एन्क्रिप्ट किया जाता है।',
+    'about.features.passwordSharing.title': '🔑 अलग पासवर्ड साझाकरण',
+    'about.features.passwordSharing.description': 'एन्क्रिप्शन पासवर्ड URL से अलग जेनरेट किया जाता है और बेहतर सुरक्षा के लिए इसे अलग चैनल के माध्यम से साझा किया जाना चाहिए।',
+    'about.features.selfDestruct.title': '💥 स्व-विनाशकारी मेमो',
+    'about.features.selfDestruct.description': 'एक बार मेमो पढ़ा जाने या समाप्त होने पर, यह तुरंत और स्थायी रूप से हमारे डेटाबेस से हटा दिया जाता है। कोई निशान नहीं बचता।',
+    'about.features.noStorage.title': '🌐 कोई पासवर्ड भंडारण नहीं',
+    'about.features.noStorage.description': 'हम कभी भी अपने सर्वर पर एन्क्रिप्शन पासवर्ड स्टोर नहीं करते। वे केवल आपके ब्राउज़र की मेमोरी में मौजूद रहते हैं।',
+    'about.features.global.title': '⚡ वैश्विक प्रदर्शन',
+    'about.features.global.description': 'दुनिया में कहीं से भी बिजली की तेज़ पहुंच के लिए Cloudflare के वैश्विक नेटवर्क पर निर्मित।',
+    'about.features.privacy.title': '🔒 गोपनीयता प्राथमिकता',
+    'about.features.privacy.description': 'कोई उपयोगकर्ता खाते की आवश्यकता नहीं। कोई ट्रैकिंग नहीं। कोई एनालिटिक्स नहीं। आपकी गोपनीयता हमारी प्राथमिकता है।',
+    
+    'about.usage.title': 'उपयोग कैसे करें',
+    'about.usage.create.title': '1. एक मेमो बनाएं',
+    'about.usage.create.description': '"सुरक्षित मेमो बनाएं" पर जाएं और अपना मेमो टाइप करें। एक समाप्ति समय चुनें (8घं, 1दि, 2दि, 1 सप्ताह या अधिकतम 30 दिन)। मेमो पढ़ने या समाप्त होने पर हटा दिए जाते हैं। सिस्टम एक यादृच्छिक एन्क्रिप्शन पासवर्ड जेनरेट करेगा।',
+    'about.usage.share.title': '2. लिंक और पासवर्ड साझा करें',
+    'about.usage.share.description': 'जेनरेट किए गए URL और पासवर्ड को कॉपी करें, फिर बेहतर सुरक्षा के लिए उन्हें अपने प्राप्तकर्ता के साथ अलग चैनलों के माध्यम से साझा करें।',
+    'about.usage.destruct.title': '3. स्व-विनाश',
+    'about.usage.destruct.description': 'जब प्राप्तकर्ता लिंक खोलता है और अलग से पासवर्ड दर्ज करता है, तो मेमो डिक्रिप्ट किया जाएगा और फिर पढ़ने पर स्थायी रूप से हटा दिया जाएगा, या समाप्त होने पर स्वचालित रूप से हटा दिया जाएगा। समाप्त हो चुके मेमो प्रत्येक 1 घंटे में स्वचालित रूप से साफ़ कर दिए जाते हैं।',
+    
+    'about.cta.title': 'शुरू करने के लिए तैयार हैं?',
+    'about.cta.subtitle': 'अब अपना पहला सुरक्षित मेमो बनाएं और सच्चे एंड-टू-एंड एन्क्रिप्शन का अनुभव करें।',
+    'about.cta.createBtn': 'सुरक्षित मेमो बनाएं',
+    'about.cta.homeBtn': 'होम जाएं',
     
     'about.mission.title': 'हमारा मिशन',
     'about.mission.description': 'securememo.app संवेदनशील जानकारी को डिजिटल रूप से साझा करने के लिए एक निजी और सुरक्षित तरीका प्रदान करता है। हमारा उद्देश्य उपयोगकर्ता की गोपनीयता को प्राथमिकता देना और यह सुनिश्चित करना है कि आपके संदेश केवल उन लोगों द्वारा देखे जाएं जिनके लिए वे हैं।',
@@ -2030,16 +2159,7 @@ export const TRANSLATIONS = {
     'about.howItWorks.step2.description': 'एक अनोखा URL और पासवर्ड जेनरेट होता है। सर्वोत्तम सुरक्षा के लिए, URL और पासवर्ड को अलग चैनलों के माध्यम से साझा करें।',
     'about.howItWorks.step3.title': '3. पढ़ें और नष्ट करें',
     'about.howItWorks.step3.description': 'प्राप्तकर्ता के मेमो पढ़ने के बाद, यह हमारे सर्वर से तुरंत और स्थायी रूप से हटा दिया जाता है।',
-    
-    'about.features.title': 'मुख्य विशेषताएं',
-    'about.features.encryption.title': '🔐 सच्ची क्लाइंट-साइड एन्क्रिप्शन',
-    'about.features.encryption.description': 'सभी एन्क्रिप्शन आपके ब्राउज़र में होती है। हम कभी भी आपका सादा पाठ नहीं देखते या इसे संग्रहीत नहीं करते।',
-    'about.features.destruct.title': '💥 स्वचालित स्व-विनाश',
-    'about.features.destruct.description': 'मेमो पढ़ने के बाद या आपकी चुनी गई समय सीमा के बाद स्थायी रूप से हटा दिए जाते हैं।',
-    'about.features.privacy.title': '🛡️ कोई ट्रैकिंग नहीं',
-    'about.features.privacy.description': 'कोई कुकीज़, कोई विश्लेषिकी, कोई उपयोगकर्ता खाते नहीं। आपकी गोपनीयता हमारी सर्वोच्च प्राथमिकता है।',
-    'about.features.openSource.title': '📖 ओपन सोर्स',
-    'about.features.openSource.description': 'पूरी तरह से ओपन सोर्स और GitHub पर उपलब्ध। कोड की समीक्षा करें, योगदान दें, या अपना स्वयं का इंस्टेंस होस्ट करें।',
+
     
     'about.faq.title': 'अक्सर पूछे जाने वाले प्रश्न',
     
@@ -2050,6 +2170,7 @@ export const TRANSLATIONS = {
     
     // Create memo page content
     'create.hero.title': 'सुरक्षित मेमो बनाएं',
+    'create.hero.description': 'आपका मेमो आपके ब्राउज़र में एन्क्रिप्ट किया जाएगा और पढ़ने या समाप्त होने के बाद स्वयं नष्ट हो जाएगा।',
     'create.hero.subtitle': 'आपका संदेश आपके ब्राउज़र में एन्क्रिप्ट किया जाएगा और पढ़ने के बाद स्वचालित रूप से नष्ट हो जाएगा',
     
     'create.form.title': 'मेमो विवरण',
@@ -2068,6 +2189,7 @@ export const TRANSLATIONS = {
     
     // Read memo page content
     'read.hero.title': 'सुरक्षित मेमो पढ़ें',
+    'read.hero.description': 'मेमो को डिक्रिप्ट करने और पढ़ने के लिए पासवर्ड दर्ज करें। पासवर्ड आपके साथ URL से अलग साझा किया गया होना चाहिए था। मेमो पढ़ने के बाद या समाप्ति पर हटा दिया जाएगा।',
     'read.hero.subtitle': 'मेमो डिक्रिप्ट करने और पढ़ने के लिए एन्क्रिप्शन पासवर्ड दर्ज करें',
     
     'read.form.title': 'मेमो डिक्रिप्शन',
@@ -2075,6 +2197,13 @@ export const TRANSLATIONS = {
     
     'read.result.title': 'डिक्रिप्टेड मेमो:',
     'read.result.deleteConfirmation': 'यह मेमो पढ़ा जा चुका है और स्थायी रूप से हटा दिया गया है।',
+    
+    // Form options
+    'form.expiry.option.8h': 'पढ़ने पर या 8 घंटे में हटाएं',
+    'form.expiry.option.1d': 'पढ़ने पर या 1 दिन में हटाएं',
+    'form.expiry.option.2d': 'पढ़ने पर या 2 दिन में हटाएं',
+    'form.expiry.option.1w': 'पढ़ने पर या 1 सप्ताह में हटाएं',
+    'form.expiry.option.30d': 'पढ़ने पर या 30 दिन में हटाएं',
     
     // FAQ content
     'faq.privacy.question': 'मेरी गोपनीयता कैसे सुरक्षित है?',
@@ -2383,12 +2512,21 @@ export const TRANSLATIONS = {
     'nav.home': '首页',
     'nav.about': '关于',
     'nav.create': '创建安全备忘录',
+    'nav.toggleMenu': '切换导航菜单',
     
     // Common elements
     'common.loading': '加载中...',
     'common.error': '错误',
     'common.success': '成功',
     'common.warning': '警告',
+    
+    // Language names
+    'language.english': 'English',
+    'language.spanish': 'Español',
+    'language.french': 'Français',
+    'language.german': 'Deutsch',
+    'language.hindi': 'हिन्दी',
+    'language.chinese': '中文',
     
     // Buttons
     'btn.copy': '复制',

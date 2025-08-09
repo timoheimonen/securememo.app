@@ -793,21 +793,191 @@ input, textarea, select {
     top: 0;
     right: -100%;
     width: 300px;
-    height: 100vh;
+    /* Better iOS-compatible height calculation */
+    /* Use window.innerHeight via CSS custom property fallback approach */
+    height: 100vh; /* Base fallback */
+    height: calc(var(--vh, 1vh) * 100); /* Dynamic height from JS */
+    max-height: 100vh;
+    max-height: calc(var(--vh, 1vh) * 100);
+    /* Minimum height ensures content is always accessible */
+    min-height: 500px; /* Reduced minimum to ensure it fits on small screens */
     background: rgba(255, 255, 255, 0.98);
     backdrop-filter: blur(20px);
+    /* Use flexbox with proper scroll container setup */
+    display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: stretch;
-    padding: 80px 0 20px 0;
+    /* Remove padding to fix scroll container */
+    padding: 0;
     box-shadow: -5px 0 20px rgba(0, 0, 0, 0.1);
     transition: right 0.3s ease, opacity 0.3s ease, visibility 0.3s ease;
     z-index: 1001;
+    /* Enhanced scrolling configuration for the menu content */
     overflow-y: auto;
-    /* Ensure it's hidden by default */
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch; /* Smooth momentum scrolling on iOS */
+    overscroll-behavior: contain; /* Prevent background scroll chaining */
+    overscroll-behavior-y: contain; /* Specific Y-axis control */
+    touch-action: pan-y; /* Explicitly allow vertical panning */
+    /* Force hardware acceleration for smoother scrolling */
+    transform: translateZ(0);
+    will-change: scroll-position;
+    /* Improved scrollbar styling */
+    scrollbar-width: thin;
+    scrollbar-color: rgba(102, 126, 234, 0.3) transparent;
+    /* Ensure proper scroll behavior */
+    scroll-behavior: smooth;
+    /* Better touch responsiveness */
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+  
+  /* Create spacing using pseudo-elements */
+  .nav-menu::before {
+    content: '';
+    flex: 0 0 70px; /* Top spacing for navbar height */
+    min-height: 70px;
+  }
+  
+  .nav-menu::after {
+    content: '';
+    flex: 0 0 20px; /* Bottom spacing */
+    min-height: 20px;
+  }
+  
+  /* Make the main nav items flexible but don't grow excessively */
+  .nav-menu > li,
+  .nav-menu > .language-links {
+    flex: 0 0 auto; /* Don't grow/shrink, maintain natural size */
+  }
+  
+  /* Webkit scrollbar styling for mobile menu */
+  .nav-menu::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+  .nav-menu::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  
+  .nav-menu::-webkit-scrollbar-thumb {
+    background: rgba(102, 126, 234, 0.3);
+    border-radius: 3px;
+  }
+  
+  .nav-menu::-webkit-scrollbar-thumb:hover {
+    background: rgba(102, 126, 234, 0.5);
+  }
+  
+  /* Additional mobile menu height constraints for small screens */
+  @media (max-height: 600px) {
+    .nav-menu::before {
+      flex: 0 0 55px; /* Reduce top spacing on short screens */
+      min-height: 55px;
+    }
+  }
+  
+  @media (max-height: 500px) {
+    .nav-menu::before {
+      flex: 0 0 45px; /* Even less spacing on very short screens */
+      min-height: 45px;
+    }
+    
+    .nav-link {
+      padding: 12px 24px; /* Reduce nav link padding */
+      font-size: 0.95rem; /* Slightly smaller font */
+    }
+    
+    .language-links {
+      margin-top: 12px; /* Reduce margin */
+      padding-top: 12px;
+    }
+    
+    .language-links .nav-link {
+      padding: 8px 16px; /* Smaller language links */
+      font-size: 0.85rem;
+    }
+  }
+  
+  /* iOS-specific fixes for address bar behavior */
+  @supports (-webkit-touch-callout: none) {
+    /* This targets iOS Safari specifically */
+    .nav-menu {
+      /* Ensure menu always has space for content even with address bar */
+      min-height: 450px;
+      /* Better handling of iOS viewport units */
+      height: calc(var(--vh, 1vh) * 100);
+      max-height: calc(var(--vh, 1vh) * 100);
+    }
+    
+    /* Ensure language links are always visible on iOS */
+    .language-links {
+      /* Add extra bottom padding to ensure visibility */
+      padding-bottom: 24px;
+      margin-bottom: 16px;
+    }
+    
+    /* More compact layout for iOS when needed */
+    @media (max-height: 550px) {
+      .nav-link {
+        padding: 14px 24px; /* Slightly reduce padding */
+        min-height: 50px; /* Reduce minimum height */
+      }
+      
+      .language-links .nav-link {
+        padding: 12px 16px;
+        min-height: 44px;
+      }
+      
+      .nav-menu::before {
+        flex: 0 0 50px; /* Reduce top spacing for iOS */
+        min-height: 50px;
+      }
+    }
+  }
+  
+  /* Ensure menu items are always accessible even on landscape phones */
+  @media (max-height: 400px) and (orientation: landscape) {
+    .nav-menu::before {
+      flex: 0 0 35px; /* Minimal top spacing */
+      min-height: 35px;
+    }
+    
+    .nav-menu::after {
+      flex: 0 0 15px; /* Minimal bottom spacing */
+      min-height: 15px;
+    }
+    
+    .nav-link {
+      padding: 10px 24px; /* Compact nav links */
+      font-size: 0.9rem;
+      min-height: 45px; /* Maintain touch target size */
+    }
+    
+    .language-links {
+      margin-top: 8px;
+      padding-top: 8px;
+    }
+    
+    .language-links .nav-link {
+      padding: 6px 16px; /* Compact language links */
+      font-size: 0.8rem;
+      min-height: 40px; /* Maintain touch target size */
+    }
+  }
+  
+  /* Additional scroll optimization for very tall content */
+  @media (max-height: 600px) {
+    .nav-menu {
+      /* Force scroll container to be more aggressive about scrolling */
+      overflow-y: scroll !important;
+      -webkit-overflow-scrolling: touch !important;
+    }
   }
   
   .nav-menu.active {
@@ -823,16 +993,24 @@ input, textarea, select {
   }
   
   .nav-link {
-    display: block;
+    display: flex; /* Use flex for better alignment */
+    align-items: center;
     width: 100%;
-    padding: 20px 30px;
+    padding: 20px 24px; /* Increase padding to make menu items larger */
     text-align: left;
     border-radius: 0;
-    font-size: 1.1rem;
-    font-weight: 600;
+    font-size: 1.1rem; /* Slightly larger font */
+    font-weight: 500;
     color: #333;
     transition: all 0.3s ease;
     border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    min-height: 60px; /* Ensure minimum height for touch targets */
+    /* Improve touch responsiveness */
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+    outline: none;
+    /* Ensure proper flex behavior for touch */
+    flex-shrink: 0;
   }
   
   .nav-link:hover,
@@ -843,22 +1021,29 @@ input, textarea, select {
   }
   
   .language-links {
+    display: flex; /* Ensure it's a flex container */
     flex-direction: column;
     gap: 0;
-    margin-top: 20px;
-    padding: 20px 30px 0 30px;
+    margin-top: 16px;
+    padding: 16px 24px 16px 24px; /* Add bottom padding for better spacing */
     border-top: 2px solid rgba(0, 0, 0, 0.1);
+    flex: 0 0 auto; /* Don't grow/shrink */
   }
   
   .language-links .nav-link {
-    padding: 12px 20px;
-    margin: 2px 0;
-    border-radius: 8px;
-    font-size: 1rem;
+    padding: 16px 16px; /* Increase padding for better touch targets */
+    margin: 4px 0; /* Increase margin for better spacing */
+    border-radius: 6px;
+    font-size: 1rem; /* Increase font size */
     font-weight: 500;
     text-align: center;
+    justify-content: center; /* Center content in flex container */
     border-bottom: none;
     background: rgba(102, 126, 234, 0.05);
+    min-height: 50px; /* Ensure good touch target size */
+    /* Ensure flex behavior for language links */
+    flex-shrink: 0;
+    touch-action: manipulation;
   }
   
   .language-links .nav-link:hover,

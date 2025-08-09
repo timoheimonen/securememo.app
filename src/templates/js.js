@@ -250,7 +250,7 @@ document.getElementById('copyUrl').addEventListener('click', async () => {
         // Use modern Clipboard API if available
         if (navigator.clipboard && window.isSecureContext) {
             await navigator.clipboard.writeText(url);
-            showMessage('✅ URL copied to clipboard!', 'success');
+            showMessage('{{URL_COPIED_MESSAGE}}', 'success');
             
             // Visual feedback - briefly change button text
             const copyBtn = document.getElementById('copyUrl');
@@ -267,13 +267,13 @@ document.getElementById('copyUrl').addEventListener('click', async () => {
             urlInput.select();
             urlInput.setSelectionRange(0, 99999); // For mobile devices
             document.execCommand('copy');
-            showMessage('✅ URL copied to clipboard!', 'success');
+            showMessage('{{URL_COPIED_MESSAGE}}', 'success');
         }
     } catch (err) {
         // Final fallback - show the URL and ask user to copy manually
         urlInput.select();
         urlInput.setSelectionRange(0, 99999);
-        showMessage('⚠️ Please copy the URL manually (Ctrl+C / Cmd+C)', 'warning');
+        showMessage('{{COPY_MANUAL_MESSAGE}}', 'warning');
     }
 });
 
@@ -302,7 +302,7 @@ document.getElementById('copyPassword').addEventListener('click', async () => {
         // Use modern Clipboard API if available
         if (navigator.clipboard && window.isSecureContext) {
             await navigator.clipboard.writeText(password);
-            showMessage('✅ Password copied to clipboard!', 'success');
+            showMessage('{{PASSWORD_COPIED_MESSAGE}}', 'success');
             
             // Visual feedback - briefly change button text
             const copyBtn = document.getElementById('copyPassword');
@@ -319,13 +319,13 @@ document.getElementById('copyPassword').addEventListener('click', async () => {
             passwordInput.select();
             passwordInput.setSelectionRange(0, 99999); // For mobile devices
             document.execCommand('copy');
-            showMessage('✅ Password copied to clipboard!', 'success');
+            showMessage('{{PASSWORD_COPIED_MESSAGE}}', 'success');
         }
     } catch (err) {
         // Final fallback - show the password and ask user to copy manually
         passwordInput.select();
         passwordInput.setSelectionRange(0, 99999);
-        showMessage('⚠️ Please copy the password manually (Ctrl+C / Cmd+C)', 'warning');
+        showMessage('{{COPY_MANUAL_MESSAGE}}', 'warning');
     }
 });
 
@@ -754,6 +754,47 @@ function initMobileMenu() {
         return;
     }
     
+    // Set CSS custom property for viewport height (iOS Safari fix)
+    function setViewportHeight() {
+        const vh = window.innerHeight * 0.01;
+        document.documentElement.style.setProperty('--vh', vh + 'px');
+    }
+    
+    // Set initial viewport height
+    setViewportHeight();
+    
+    // Update on resize (handles iOS address bar changes)
+    window.addEventListener('resize', setViewportHeight);
+    window.addEventListener('orientationchange', () => {
+        // Delay to ensure proper height calculation after orientation change
+        setTimeout(setViewportHeight, 100);
+    });
+    
+    // Function to check if menu content fits and ensure scrolling is available
+    function ensureMenuScrollability() {
+        if (!navMenu.classList.contains('active')) return;
+        
+        const menuHeight = navMenu.offsetHeight;
+        const menuScrollHeight = navMenu.scrollHeight;
+        
+        // If content is taller than container, ensure scrolling works
+        if (menuScrollHeight > menuHeight) {
+            // Force scroll container behavior
+            navMenu.style.overflowY = 'scroll';
+            navMenu.style.webkitOverflowScrolling = 'touch';
+            
+            // Ensure the last item (Chinese language) is accessible
+            const lastLanguageLink = navMenu.querySelector('.language-links .nav-link:last-child');
+            if (lastLanguageLink) {
+                // Add bottom margin to ensure it's accessible
+                const languageLinks = navMenu.querySelector('.language-links');
+                if (languageLinks) {
+                    languageLinks.style.marginBottom = '40px';
+                }
+            }
+        }
+    }
+    
     // Define menu functions first
     function closeMenu() {
         hamburger.classList.remove('active');
@@ -769,6 +810,11 @@ function initMobileMenu() {
         if (navOverlay) navOverlay.classList.add('active');
         document.body.style.overflow = 'hidden'; // Prevent background scrolling
         hamburger.setAttribute('aria-expanded', 'true');
+        
+        // Check and ensure menu scrollability after menu is shown
+        setTimeout(() => {
+            ensureMenuScrollability();
+        }, 50);
         
         // Focus management for accessibility
         const firstNavLink = navMenu.querySelector('.nav-link');
