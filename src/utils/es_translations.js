@@ -18,6 +18,8 @@ export const es = {
     'language.german': 'Deutsch',
     'language.hindi': 'हिन्दी',
     'language.chinese': '中文',
+    'language.portuguesePT': 'Português (Portugal)',
+    'language.portugueseBR': 'Português (Brasil)',
     
     // Buttons
     'btn.copy': 'Copiar',

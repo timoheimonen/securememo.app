@@ -16,8 +16,10 @@ export const fr = {
     'language.spanish': 'Español',
     'language.french': 'Français',
     'language.german': 'Deutsch',
-    'language.hindi': 'हिन्दी',
+    'language.hindi': 'हिन्दĠ',
     'language.chinese': '中文',
+    'language.portuguesePT': 'Português (Portugal)',
+    'language.portugueseBR': 'Português (Brasil)',
     
     // Buttons
     'btn.copy': 'Copier',
