@@ -1,5 +1,6 @@
 // Shared translation data for securememo.app
 // Used by both server-side and client-side localization
+// Translations are auto translated. Errors are possible.
 
 export const TRANSLATIONS = {
   en: {
@@ -2375,5 +2376,499 @@ export const TRANSLATIONS = {
     'error.security.METHOD_NOT_ALLOWED': 'अमान्य अनुरोध विधि।',
     'error.security.FORBIDDEN': 'पहुंच अस्वीकृत।',
     'error.security.DEFAULT_FALLBACK': 'एक त्रुटि हुई। कृपया पुनः प्रयास करें।'
+  },
+
+  zh: {
+    // Navigation
+    'nav.home': '首页',
+    'nav.about': '关于',
+    'nav.create': '创建安全备忘录',
+    
+    // Common elements
+    'common.loading': '加载中...',
+    'common.error': '错误',
+    'common.success': '成功',
+    'common.warning': '警告',
+    
+    // Buttons
+    'btn.copy': '复制',
+    'btn.copied': '已复制！',
+    'btn.show': '显示',
+    'btn.hide': '隐藏',
+    'btn.create': '创建安全备忘录',
+    'btn.decrypt': '解密备忘录',
+    'btn.goHome': '返回首页',
+    'btn.createNew': '创建新备忘录',
+    
+    // Form labels and placeholders
+    'form.message.label': '您的备忘录',
+    'form.message.placeholder': '在此输入您的机密备忘录...',
+    'form.message.help': '最多10,000个字符',
+    'form.expiry.label': '过期时间',
+    'form.password.label': '加密密码',
+    'form.password.placeholder': '输入单独分享给您的加密密码',
+    'form.password.help': '密码应该与备忘录URL分开单独分享给您',
+    'form.security.help': '请完成安全验证',
+    
+    // Messages and notifications
+    'msg.urlCopied': '✅ URL已复制到剪贴板！',
+    'msg.passwordCopied': '✅ 密码已复制到剪贴板！',
+    'msg.copyManual': '⚠️ 请手动复制 (Ctrl+C / Cmd+C)',
+    'msg.memoCreated': '✅ 备忘录创建成功！',
+    'msg.memoDecrypted': '备忘录已解密。正在删除...请稍候。',
+    'msg.memoDeleted': '备忘录已确认阅读并永久删除。',
+    'msg.deletionError': '确认删除时出错。备忘录将自动清理。',
+    
+    // Page titles and descriptions
+    'page.home.title': 'securememo.app - 加密自毁备忘录',
+    'page.home.description': '创建阅读后自毁的加密备忘录。端到端加密，注重隐私，使用AES-256的安全笔记分享。无跟踪，无广告。',
+    'page.home.keywords': '安全备忘录，加密备忘录，自毁备忘录，私密笔记分享，端到端加密，AES-256，隐私，安全备忘录分享',
+    'page.home.ogTitle': 'securememo.app - 加密自毁备忘录',
+    'page.home.ogDescription': '安全分享敏感信息，备忘录在查看一次或过期后删除。由客户端AES-256加密驱动。',
+    'page.home.twitterDescription': '隐私优先的安全自毁备忘录应用。',
+    'page.about.title': '关于securememo.app - 注重隐私的加密笔记',
+    'page.about.description': '了解securememo.app的隐私优先加密消息传递方法。采用客户端AES-256加密、自毁消息和零知识架构构建。',
+    'page.about.keywords': '关于安全备忘录，注重隐私的消息传递，客户端加密，AES-256，自毁消息，零知识，安全笔记分享',
+    'page.about.ogTitle': '关于securememo.app - 注重隐私的加密笔记',
+    'page.about.ogDescription': '了解securememo.app如何通过客户端加密和自毁消息保护您的隐私。',
+    'page.about.twitterDescription': '隐私优先的客户端加密消息传递。',
+    'page.create.title': '创建安全备忘录 - 加密自毁备忘录',
+    'page.create.keywords': '创建安全备忘录，加密备忘录，自毁笔记，AES-256加密，私密备忘录分享，安全笔记创建',
+    'page.read.title': '阅读安全备忘录 - 解密加密备忘录',
+    'page.read.keywords': '阅读安全备忘录，解密备忘录，加密笔记阅读，AES-256解密，私密备忘录访问',
+    'page.tos.title': '服务条款 - securememo.app法律条款',
+    'page.tos.description': 'securememo.app的服务条款 - 加密备忘录分享服务。了解我们安全备忘录分享平台的可接受使用、隐私、安全和法律条款。',
+    'page.tos.keywords': '服务条款，安全备忘录法律，加密备忘录条款，隐私政策，可接受使用政策，安全笔记分享条款',
+    'page.tos.ogTitle': '服务条款 - securememo.app法律条款',
+    'page.tos.ogDescription': 'securememo.app加密备忘录分享服务的法律条款和条件。',
+    'page.tos.twitterDescription': 'securememo.app加密备忘录分享服务的法律条款。',
+    'page.privacy.title': '隐私声明 - securememo.app数据保护',
+    'page.privacy.description': 'securememo.app的隐私声明 - 了解我们如何通过客户端加密、零知识架构和最少数据收集来保护您的数据，用于安全备忘录分享。',
+    'page.privacy.keywords': '隐私声明，安全备忘录隐私，数据保护，GDPR合规，客户端加密，零知识，安全备忘录分享隐私',
+    'page.privacy.ogTitle': '隐私声明 - securememo.app数据保护',
+    'page.privacy.ogDescription': 'securememo.app如何通过客户端加密和最少数据收集保护您的隐私。',
+    'page.privacy.twitterDescription': '通过客户端加密和零知识架构保护隐私。',
+    
+    // Main page content
+    'home.hero.title': 'securememo.app',
+    'home.hero.subtitle': '创建阅读后或过期后自毁的加密备忘录。您的秘密保持安全。',
+    'home.hero.btnPrimary': '创建安全备忘录',
+    'home.hero.btnSecondary': '了解更多',
+    
+    'home.features.title': '工作原理',
+    'home.features.encrypt.title': '🔐 浏览器内加密',
+    'home.features.encrypt.description': '输入您的备忘录。在接触我们的服务器之前，它会在您的浏览器中使用强大的AES-256加密进行加密。',
+    'home.features.share.title': '🔗 安全分享',
+    'home.features.share.description': '获取唯一的URL和单独的随机密码，并通过不同渠道分享它们以增强安全性。',
+    'home.features.destruct.title': '💥 自动销毁',
+    'home.features.destruct.description': '备忘录在阅读后或时间限制到期后（从8小时到30天）会永久自我删除。',
+    
+    'home.security.title': '安全功能',
+    'home.security.encryption.title': '🔒 真正的客户端加密',
+    'home.security.encryption.description': '您的备忘录在浏览器中使用AES-256-GCM和强密钥派生（120万次以上迭代）进行加密。我们从不看到明文。',
+    'home.security.delete.title': '🗑️ 可靠的自动删除',
+    'home.security.delete.description': '备忘录在阅读或过期后永远消失，每小时自动清理。无法备份或恢复。',
+    'home.security.password.title': '🌐 零密码知识',
+    'home.security.password.description': '我们完全在您的浏览器中生成和处理密码。它们从不发送到我们的服务器或存储在我们的服务器上。',
+    
+    'footer.sourceCode': '在GitHub查看源代码',
+    'footer.tos': '服务条款',
+    'footer.privacy': '隐私声明',
+    'footer.tagline': '无跟踪，无广告，无废话。',
+    
+    // About page content
+    'about.hero.title': '关于securememo.app',
+    'about.hero.subtitle': 'securememo.app是一个注重隐私的应用程序，允许您创建阅读后或过期后自毁的加密备忘录。以安全和隐私为最高优先级构建。源代码在GitHub上可用。',
+    
+    'about.tech.title': '技术栈',
+    'about.tech.cloudflare': 'Cloudflare Workers：用于全球性能的无服务器计算平台',
+    'about.tech.d1': 'D1数据库：SQLite驱动的安全存储数据库',
+    'about.tech.webcrypto': 'Web Crypto API：客户端AES-256加密',
+    'about.tech.frontend': 'HTML/CSS/JavaScript：现代响应式Web界面',
+    'about.tech.github': '源代码在GitHub上可用：',
+    'about.tech.githubLink': '在GitHub上查看源代码',
+    
+    'about.features.title': '安全功能',
+    'about.features.clientEncryption.title': '🔐 客户端加密',
+    'about.features.clientEncryption.description': '所有加密都在您的浏览器中使用Web Crypto API进行。您的备忘录在发送到我们的服务器之前使用AES-256加密。',
+    'about.features.passwordSharing.title': '🔑 单独密码分享',
+    'about.features.passwordSharing.description': '加密密码与URL分开生成，应该通过不同渠道分享以增强安全性。',
+    'about.features.selfDestruct.title': '💥 自毁备忘录',
+    'about.features.selfDestruct.description': '一旦备忘录被阅读或过期，它会立即从我们的数据库中永久删除。不留任何痕迹。',
+    'about.features.noStorage.title': '🌐 不存储密码',
+    'about.features.noStorage.description': '我们从不在服务器上存储加密密码。它们只存在于您浏览器的内存中。',
+    'about.features.global.title': '⚡ 全球性能',
+    'about.features.global.description': '构建在Cloudflare的全球网络上，从世界任何地方都能闪电般快速访问。',
+    'about.features.privacy.title': '🔒 隐私优先',
+    'about.features.privacy.description': '无需用户账户。无跟踪。无分析。您的隐私是我们的优先考虑。',
+    
+    'about.usage.title': '使用方法',
+    'about.usage.create.title': '1. 创建备忘录',
+    'about.usage.create.description': '转到"创建安全备忘录"并输入您的备忘录。选择过期时间（8小时、1天、2天、1周或最多30天）。备忘录在阅读或过期时删除。系统将生成随机加密密码。',
+    'about.usage.share.title': '2. 分享链接和密码',
+    'about.usage.share.description': '复制生成的URL和密码，然后通过不同渠道与收件人分享以增强安全性。',
+    'about.usage.destruct.title': '3. 自毁',
+    'about.usage.destruct.description': '当收件人打开链接并单独输入密码时，备忘录将被解密，然后在阅读后永久删除，或在过期时自动删除。过期的备忘录每1小时自动清理一次。',
+    
+    'about.cta.title': '准备开始了吗？',
+    'about.cta.subtitle': '立即创建您的第一个安全备忘录，体验真正的端到端加密。',
+    'about.cta.createBtn': '创建安全备忘录',
+    'about.cta.homeBtn': '返回首页',
+    
+    // Terms of Service page content
+    'tos.hero.title': '服务条款',
+    'tos.lastUpdated': '最后更新：2025年8月9日',
+    'tos.tableOfContents.title': '目录',
+    'tos.tableOfContents.serviceDescription': '服务描述',
+    'tos.tableOfContents.acceptableUse': '可接受使用',
+    'tos.tableOfContents.privacyData': '隐私和数据处理',
+    'tos.tableOfContents.serviceLimitations': '服务限制',
+    'tos.tableOfContents.securityDisclaimers': '安全和免责声明',
+    'tos.tableOfContents.intellectualProperty': '知识产权',
+    'tos.tableOfContents.indemnification': '赔偿',
+    'tos.tableOfContents.termination': '终止',
+    'tos.tableOfContents.changesTerms': '条款变更',
+    'tos.tableOfContents.governingLaw': '管辖法律和司法管辖权',
+    'tos.tableOfContents.miscellaneous': '杂项',
+    'tos.tableOfContents.contact': '联系方式',
+    'tos.tableOfContents.languageDisclaimer': '语言和翻译',
+    
+    'tos.serviceDescription.title': '1. 服务描述',
+    'tos.serviceDescription.content': 'securememo.app是一个安全的备忘录分享服务，允许用户创建阅读后或过期后自毁的加密备忘录。该服务使用客户端加密确保备忘录内容永远不会被我们的服务器访问。',
+    
+    'tos.acceptableUse.title': '2. 可接受使用',
+    'tos.acceptableUse.intro': '您同意仅将此服务用于合法目的并符合这些条款。您同意不：',
+    'tos.acceptableUse.illegal': '使用服务传输非法、有害、威胁、辱骂或诽谤内容',
+    'tos.acceptableUse.bypass': '尝试绕过安全措施或验证码保护',
+    'tos.acceptableUse.automated': '使用自动化工具或脚本创建备忘录',
+    'tos.acceptableUse.malware': '分享包含恶意软件、钓鱼链接或其他有害内容的备忘录',
+    'tos.acceptableUse.spam': '将服务用于垃圾邮件或大量未经请求的备忘录分享',
+    'tos.acceptableUse.reverse': '尝试逆向工程或破坏服务',
+    
+    'tos.privacyData.title': '3. 隐私和数据处理',
+    'tos.privacyData.noAccess': '无内容访问：我们无法访问、阅读或恢复您的备忘录内容。所有加密都在您的浏览器中进行。',
+    'tos.privacyData.noPersonal': '无个人数据：我们不收集个人信息或要求用户账户。',
+    'tos.privacyData.securityLogging': '安全日志：我们临时记录IP地址和安全相关元数据，严格用于滥用缓解和保护服务完整性。这些日志从不用于跟踪或分析。',
+    'tos.privacyData.automaticDeletion': '自动删除：备忘录在阅读后或过期时自动删除。',
+    'tos.privacyData.noRecovery': '无恢复：一旦备忘录被删除，就无法恢复。',
+    'tos.privacyData.gdpr': 'GDPR合规：此服务不收集欧盟GDPR定义的个人数据。',
+    'tos.privacyData.moreDetails': '更多详情，请查看我们的',
+    'tos.privacyData.privacyNotice': '隐私声明',
+    
+    'tos.serviceLimitations.title': '4. 服务限制',
+    'tos.serviceLimitations.messageSize': '消息大小：每个备忘录最多10,000个字符',
+    'tos.serviceLimitations.expiryTimes': '过期时间：8小时、24小时、48小时、1周或阅读时删除（最多30天）',
+    'tos.serviceLimitations.availability': '可用性：服务按"原样"提供，不保证可用性',
+    'tos.serviceLimitations.noDelivery': '无交付保证：我们无法保证备忘录会被交付或阅读',
+    
+    'tos.securityDisclaimers.title': '5. 安全和免责声明',
+    'tos.securityDisclaimers.userResponsibility': '用户责任：您有责任安全分享备忘录URL和保护密码。如果密码丢失，备忘录无法恢复。',
+    'tos.securityDisclaimers.noWarranty': '无保证：服务按"原样"提供，不提供任何形式的保证。我们的加密服务按"原样"和"可用"基础提供。我们不保证加密将不间断、无错误或免受所有潜在威胁。',
+    'tos.securityDisclaimers.limitation': '责任限制：我们对使用服务产生的任何损害不承担责任。您承认没有电子传输或存储方法是100%安全的，我们不对您备忘录的任何未经授权访问或拦截负责。使用我们的加密服务风险自负。',
+    'tos.securityDisclaimers.securityMeasures': '安全措施：虽然我们实施安全措施，但没有系统是100%安全的。',
+    'tos.securityDisclaimers.exportControls': '出口管制：您同意不违反任何出口管制法律使用服务，包括限制在受制裁国家使用的法律。',
+    
+    'tos.intellectualProperty.title': '6. 知识产权',
+    'tos.intellectualProperty.content': '服务及通过它提供的所有材料，包括但不限于文本、图形、标志和软件，是securememo.app或其许可方的财产，受版权、商标和其他知识产权法保护。您同意不修改、复制、分发或基于我们的内容创建衍生作品，除非获得明确许可，除了在服务内的个人非商业使用。',
+    'tos.intellectualProperty.copyright': '版权和DMCA政策：如果您认为您的版权受到侵犯，请通过timo.heimonen@gmail.com联系我们，并提供DMCA要求的信息（如作品识别、您的联系详情和善意信念声明）。',
+    
+    'tos.indemnification.title': '7. 赔偿',
+    'tos.indemnification.content': '您同意为securememo.app及其附属公司、高级职员、董事、员工和代理人辩护、赔偿并使其免受因您访问或使用我们的服务或违反这些条款而引起的任何索赔、责任、损害、损失和费用（包括合理的律师费）的损害。',
+    
+    'tos.termination.title': '8. 终止',
+    'tos.termination.content': '我们保留因违反这些条款或出于任何其他原因自行决定终止或暂停对服务的访问的权利。',
+    
+    'tos.changesTerms.title': '9. 条款变更',
+    'tos.changesTerms.content': '我们可以随时更新这些条款。继续使用服务即表示接受更新的条款。',
+    
+    'tos.governingLaw.title': '10. 管辖法律和司法管辖权',
+    'tos.governingLaw.content': '这些服务条款以及我们为您提供服务的任何单独协议应受芬兰法律管辖并据此解释，不考虑其法律冲突原则。任何争议应在芬兰赫尔辛基的法院解决。',
+    
+    'tos.miscellaneous.title': '11. 杂项',
+    'tos.miscellaneous.severability': '可分割性：如果有管辖权的法院认定这些条款的任何条款无效或不可执行，该条款应从条款中分离出来，其余条款将继续完全有效。',
+    'tos.miscellaneous.assignment': '转让：未经我们事先书面同意，您不得通过法律操作或其他方式转让或转移这些条款。我们可以自行决定转让这些条款，无需通知您。',
+    'tos.miscellaneous.waiver': '豁免：任何条款的豁免不得视为进一步或继续豁免，除非书面形式。',
+    'tos.miscellaneous.children': '儿童隐私：我们的服务不适用于13岁以下的儿童（某些司法管辖区为16岁以下）。我们不故意收集儿童数据。如果我们发现此类数据，将立即删除。',
+    
+    'tos.contact.title': '12. 联系方式',
+    'tos.contact.content': '有关这些条款的问题，请访问我们的',
+    'tos.contact.github': 'GitHub存储库',
+    'tos.contact.email': '或发送邮件至timo.heimonen@gmail.com。',
+    
+    'tos.languageDisclaimer.title': '13. 语言和翻译',
+    'tos.languageDisclaimer.content': '为了您的方便，这些服务条款可能被翻译成其他语言。如果英文版本与翻译版本之间有任何差异或冲突，以英文版本为准。',
+    
+    // Privacy Notice page content
+    'privacy.hero.title': 'securememo.app隐私声明',
+    'privacy.lastUpdated': '最后更新：2025年8月9日',
+    'privacy.tableOfContents.title': '目录',
+    'privacy.tableOfContents.informationCollected': '我们收集的信息',
+    'privacy.tableOfContents.howWeUse': '我们如何使用信息',
+    'privacy.tableOfContents.dataSharing': '数据共享和披露',
+    'privacy.tableOfContents.dataSecurity': '数据安全',
+    'privacy.tableOfContents.dataRetention': '数据保留',
+    'privacy.tableOfContents.yourRights': '您的权利和选择',
+    'privacy.tableOfContents.childrenPrivacy': '儿童隐私',
+    'privacy.tableOfContents.internationalTransfers': '国际数据传输',
+    'privacy.tableOfContents.changesNotice': '本隐私声明的变更',
+    'privacy.tableOfContents.contact': '联系我们',
+    
+    'privacy.intro.p1': 'securememo.app（"我们"、"我们的"或"我们"）致力于保护您的隐私。本隐私声明解释了我们如何处理与我们服务相关的信息，该服务允许用户创建和分享阅读后或过期后自毁的加密备忘录。我们的服务在设计时将隐私作为核心：所有加密都在您的浏览器中进行客户端操作，我们无法访问您的备忘录内容。',
+    'privacy.intro.p2': '通过使用securememo.app，您同意本隐私声明中描述的做法。如果您不同意，请不要使用我们的服务。',
+    
+    'privacy.informationCollected.title': '1. 我们收集的信息',
+    'privacy.informationCollected.intro': '我们收集最少的信息来安全高效地运营服务。具体来说：',
+    'privacy.informationCollected.memoData': '备忘录数据：当您创建备忘录时，我们只在服务器上存储您消息的加密版本（使用Cloudflare Workers和D1数据库）。加密密钥（密码）完全在您的浏览器中生成和处理，从不发送给我们或由我们存储。备忘录在阅读后或过期时自动删除（选项：8小时、1天、2天、1周或30天）。',
+    'privacy.informationCollected.noPersonal': '无个人信息：我们不需要用户账户、电子邮件地址、姓名或任何其他个人标识符。我们不收集或存储任何可以直接识别您身份的数据。',
+    'privacy.informationCollected.securityData': '安全相关数据：为防止滥用和服务完整性：',
+    'privacy.informationCollected.ipLogs': '我们临时记录IP地址和请求元数据（如时间戳）以检测和缓解垃圾邮件、机器人或恶意活动。',
+    'privacy.informationCollected.turnstile': '我们使用Cloudflare Turnstile验证码来防止自动化滥用。Turnstile设计用于保护隐私，不跨站点跟踪用户。',
+    'privacy.informationCollected.noAnalytics': '无分析或跟踪：我们不使用cookie、跟踪像素、第三方分析或广告工具。没有用户分析、行为跟踪或营销目的的数据收集。',
+    'privacy.informationCollected.noSensitive': '我们不收集敏感个人数据、位置信息或设备标识符，除了基本服务操作所必需的。',
+    
+    'privacy.howWeUse.title': '2. 我们如何使用信息',
+    'privacy.howWeUse.intro': '我们收集的有限信息仅用于：',
+    'privacy.howWeUse.coreService': '提供核心服务：临时存储加密备忘录并促进其安全检索和删除。',
+    'privacy.howWeUse.security': '维护安全：使用IP日志和验证码检测和防止滥用，如垃圾邮件或拒绝服务攻击。',
+    'privacy.howWeUse.legal': '遵守法律义务：在极少数情况下，我们可能使用日志来响应有效的法律请求（如传票）。',
+    'privacy.howWeUse.noOther': '我们不将任何数据用于广告、出售给第三方或任何与运营securememo.app无关的目的。',
+    
+    'privacy.dataSharing.title': '3. 数据共享和披露',
+    'privacy.dataSharing.intro': '我们不出售、出租或与第三方共享您的数据，除非在以下有限情况下：',
+    'privacy.dataSharing.serviceProviders': '服务提供商：我们使用Cloudflare进行托管、数据库存储（D1）和验证码（Turnstile）。这些提供商代表我们在严格保密下处理数据，不访问备忘录内容。',
+    'privacy.dataSharing.legal': '法律要求：如果法律要求，我们可能披露信息，如响应法院命令或政府请求。',
+    'privacy.dataSharing.business': '业务转让：如果securememo.app被收购或合并，数据可能作为交易的一部分被转让，但仍受本隐私声明约束。',
+    
+    'privacy.dataSecurity.title': '4. 数据安全',
+    'privacy.dataSecurity.encryption': '加密：所有备忘录使用AES-256和PBKDF2密钥派生（120万次迭代）在客户端加密。我们只存储加密数据，无法解密。',
+    'privacy.dataSecurity.deletion': '删除：备忘录在阅读或过期后通过自动定时任务永久删除。',
+    'privacy.dataSecurity.securityMeasures': '安全措施：我们实施强安全标头（如CSP、HSTS）、输入清理、时序攻击保护和验证码来防止滥用。',
+    'privacy.dataSecurity.noRecovery': '无恢复：一旦删除，备忘录无法恢复——即使是我们也不能。',
+    'privacy.dataSecurity.disclaimer': '虽然我们采取合理措施保护我们的系统，但没有服务完全免疫风险。您有责任安全分享URL和密码。',
+    
+    'privacy.dataRetention.title': '5. 数据保留',
+    'privacy.dataRetention.memos': '加密备忘录仅保留到阅读或过期（最多30天）。',
+    'privacy.dataRetention.logs': '安全日志（如IP地址）临时保留用于防止滥用，并在短时间后自动删除（通常在几天内）。',
+    'privacy.dataRetention.minimal': '我们不保留任何超出服务运营所需的数据。',
+    
+    'privacy.yourRights.title': '6. 您的权利和选择',
+    'privacy.yourRights.intro': '由于我们不收集个人数据：',
+    'privacy.yourRights.noAccounts': '没有用户账户需要管理。',
+    'privacy.yourRights.noRequests': '除了备忘录的自动自毁外，您无法请求数据访问、更正或删除。',
+    'privacy.yourRights.contact': '如果您认为我们持有您的任何信息（如来自日志），请联系我们（见下文）了解您在GDPR或CCPA等适用法律下的权利。我们遵守数据保护法规，并在可行的情况下处理请求。',
+    
+    'privacy.childrenPrivacy.title': '7. 儿童隐私',
+    'privacy.childrenPrivacy.content': '我们的服务不适用于13岁以下的儿童（某些司法管辖区为16岁以下）。我们不故意收集儿童数据。如果我们发现此类数据，将删除它。',
+    
+    'privacy.internationalTransfers.title': '8. 国际数据传输',
+    'privacy.internationalTransfers.content': 'securememo.app托管在Cloudflare的全球网络上。数据可能在各个国家处理，但我们通过最少收集做法确保同等的隐私保护。',
+    
+    'privacy.changesNotice.title': '9. 本隐私声明的变更',
+    'privacy.changesNotice.content': '我们可能定期更新本声明。变更将在此处发布，并更新"最后更新"日期。变更后继续使用服务即表示接受。',
+    
+    'privacy.contact.title': '10. 联系我们',
+    'privacy.contact.intro': '有关本隐私声明或我们做法的问题，请访问我们的',
+    'privacy.contact.github': 'GitHub存储库',
+    'privacy.contact.email': '或发送邮件至timo.heimonen@gmail.com。',
+    'privacy.contact.disclaimer': '本隐私声明仅适用于securememo.app，不适用于我们服务链接的任何第三方网站。',
+    
+    // Schema.org structured data
+    'schema.app.description': '创建阅读后自毁的加密备忘录。端到端加密，注重隐私，使用AES-256的安全笔记分享。无跟踪，无广告。',
+    'schema.app.category': '安全应用程序',
+    'schema.app.os': '网络浏览器',
+    'schema.app.requirements': '需要JavaScript。需要HTML5。',
+    'schema.app.author': 'Timo Heimonen',
+    'schema.app.price': '0',
+    'schema.app.currency': 'USD',
+    'schema.app.features.encryption': '客户端AES-256加密',
+    'schema.app.features.selfDestruct': '自毁备忘录',
+    'schema.app.features.zeroKnowledge': '零知识架构',
+    'schema.app.features.noAccounts': '无需用户账户',
+    'schema.app.features.globalPerformance': '通过Cloudflare的全球性能',
+    'schema.app.features.privacyFirst': '隐私优先设计',
+    'schema.app.license': 'https://github.com/timoheimonen/securememo.app/blob/main/LICENSE',
+    'schema.app.repository': 'https://github.com/timoheimonen/securememo.app',
+    
+    // FAQ structured data
+    'faq.privacy.question': 'securememo.app如何保护我的隐私？',
+    'faq.privacy.answer': 'securememo.app使用客户端AES-256加密，这意味着您的备忘录在发送到我们的服务器之前在您的浏览器中加密。我们从不看到明文内容。备忘录在阅读或过期后自毁，我们不需要用户账户或收集个人信息。',
+    'faq.encryption.question': 'securememo.app使用什么加密？',
+    'faq.encryption.answer': '我们使用AES-256-GCM加密和PBKDF2密钥派生（120万次以上迭代）。所有加密都在您的浏览器中使用Web Crypto API进行客户端操作。加密密码单独生成，从不存储在我们的服务器上。',
+    'faq.duration.question': '备忘录能持续多长时间？',
+    'faq.duration.answer': '备忘录可以设置为在8小时、1天、2天、1周或最多30天后过期。它们也会在阅读后立即删除。过期的备忘录每小时自动清理一次。',
+    'faq.recovery.question': '我能恢复已删除的备忘录吗？',
+    'faq.recovery.answer': '不能，一旦备忘录被删除（无论是阅读后还是过期时），就无法恢复。这是为了最大隐私和安全性而设计的。',
+    'faq.cost.question': 'securememo.app免费使用吗？',
+    'faq.cost.answer': '是的，securememo.app完全免费使用。没有隐藏费用、高级功能或跟踪或广告。',
+    'faq.technology.question': 'securememo.app使用什么技术？',
+    'faq.technology.answer': 'securememo.app基于Cloudflare Workers进行无服务器计算，D1数据库进行存储，Web Crypto API进行客户端加密，以及现代HTML/CSS/JavaScript。源代码是开源的，在GitHub上可用。',
+    
+    // Accessibility and UI
+    'ui.breadcrumb.home': '首页',
+    'ui.breadcrumb.tos': '服务条款',
+    'ui.breadcrumb.privacy': '隐私声明',
+    
+    // Create memo page content
+    'create.hero.title': '创建安全备忘录',
+    'create.hero.description': '您的备忘录将在您的浏览器中加密，并在阅读或过期后自毁。',
+    'create.hero.ogDescription': '使用客户端AES-256加密创建加密备忘录。备忘录在阅读后自毁以实现最大隐私。',
+    'create.hero.twitterDescription': '使用客户端加密创建加密备忘录。',
+    'create.schema.description': '创建阅读后自毁的加密备忘录。客户端AES-256加密确保您的秘密保持私密。',
+    'create.schema.actionDescription': '使用客户端AES-256加密和自动自毁创建加密备忘录',
+    
+    // Read memo page content  
+    'read.hero.title': '阅读安全备忘录',
+    'read.hero.description': '输入密码解密并阅读备忘录。密码应该与URL分开单独分享给您。备忘录将在阅读或过期后删除。',
+    'read.hero.ogDescription': '解密并阅读您的安全备忘录。备忘录在阅读后自毁以实现最大隐私。',
+    'read.hero.twitterDescription': '使用客户端解密解密并阅读您的安全备忘录。',
+    'read.schema.description': '使用密码解密并阅读您的安全备忘录。备忘录在阅读后自毁以实现最大隐私。客户端AES-256解密。',
+    
+    // Form options
+    'form.expiry.option.8h': '阅读时删除或8小时',
+    'form.expiry.option.1d': '阅读时删除或1天',
+    'form.expiry.option.2d': '阅读时删除或2天',
+    'form.expiry.option.1w': '阅读时删除或1周',
+    'form.expiry.option.30d': '阅读时删除或30天',
+    
+    // Loading and status messages
+    'msg.encrypting': '正在安全加密您的备忘录...在较旧设备上可能需要一些时间。',
+    'msg.deletingSecurely': '正在安全删除备忘录...',
+    'msg.yourSecureMemo': '📝 您的安全备忘录',
+    'msg.status': '状态：',
+    
+    // Labels and help text
+    'form.memoUrl.label': '备忘录URL（与收件人分享）：',
+    'form.memoUrl.help': '这是您备忘录的安全链接。将此URL与收件人分享。',
+    'form.memoPassword.label': '加密密码（单独分享）：',
+    'form.memoPassword.help': '这是加密密码。为了增强安全性，请与URL分开分享。此密码不保存在我们的服务器上，离开此页面后无法恢复。',
+    
+    // Warning messages
+    'warning.important': '重要：',
+    'warning.memoDeleted': '备忘录将在阅读后或达到过期时间时删除',
+    'warning.shareSecurely': '为了最大安全性，请分别分享URL和密码',
+    'warning.needBoth': '收件人需要URL和密码才能访问备忘录',
+    'warning.pageCleared': '当您离开时，此页面将被清除',
+    
+    // Structured data texts
+    'schema.tos.name': '服务条款',
+    'schema.tos.description': 'securememo.app的服务条款 - 加密备忘录分享服务。了解可接受使用、隐私、安全和法律条款。',
+    'schema.tos.breadcrumb.home': '首页',
+    'schema.tos.breadcrumb.tos': '服务条款',
+    'schema.tos.mainEntity.name': '服务条款',
+    'schema.tos.mainEntity.description': 'securememo.app加密备忘录分享服务的法律条款和条件',
+    
+    'schema.privacy.name': '隐私声明',
+    'schema.privacy.description': 'securememo.app的隐私声明 - 了解我们如何通过客户端加密、零知识架构和最少数据收集保护您的数据。',
+    'schema.privacy.breadcrumb.home': '首页',
+    'schema.privacy.breadcrumb.privacy': '隐私声明',
+    'schema.privacy.mainEntity.name': '隐私声明',
+    'schema.privacy.mainEntity.description': 'securememo.app如何通过客户端加密和最少数据收集保护您的隐私',
+    
+    // Create memo featureList in structured data
+    'schema.create.featureList.clientSide': '客户端加密',
+    'schema.create.featureList.selfDestruct': '自毁备忘录',
+    'schema.create.featureList.multiExpiry': '多种过期选项',
+    'schema.create.featureList.noAccounts': '无需用户账户',
+    'schema.create.featureList.maxChars': '最多10,000个字符',
+    
+    // Read memo featureList in structured data
+    'schema.read.featureList.clientDecryption': '客户端解密',
+    'schema.read.featureList.passwordProtected': '密码保护访问',
+    'schema.read.featureList.autoDeletion': '自动备忘录删除',
+    'schema.read.featureList.noDataRetention': '无数据保留',
+    'schema.read.featureList.privacyFocused': '注重隐私的设计',
+    
+    // Error messages - memo creation errors
+    'error.INVALID_MESSAGE_FORMAT': '无效请求。请检查您的输入并重试。',
+    'error.INVALID_EXPIRY_TIME': '无效请求。请检查您的输入并重试。',
+    'error.MISSING_TURNSTILE': '需要安全验证。请重试。',
+    'error.TURNSTILE_FAILED': '安全验证失败。请重试。',
+    'error.TURNSTILE_API_ERROR': '服务临时不可用。请稍后重试。',
+    'error.TURNSTILE_VERIFICATION_ERROR': '安全验证失败。请重试。',
+    'error.DATABASE_ERROR': '服务临时不可用。请重试。',
+    'error.MEMO_ID_GENERATION_ERROR': '服务临时不可用。请重试。',
+    'error.MEMO_ID_COLLISION_ERROR': '服务临时不可用。请重试。',
+    'error.MEMO_CREATION_ERROR': '无法处理您的请求。请重试。',
+    'error.MISSING_DELETION_TOKEN': '需要删除令牌。',
+    'error.INVALID_DELETION_TOKEN_HASH': '无效的删除令牌哈希。',
+    
+    // Error messages - memo reading errors (security: generic messages to prevent enumeration attacks)
+    'error.INVALID_MEMO_ID': '无效请求。请检查您的输入并重试。',
+    'error.MISSING_MEMO_ID': '无效请求。请检查您的输入并重试。',
+    'error.MEMO_ACCESS_DENIED': '此备忘录不再可用。',
+    'error.MEMO_NOT_FOUND': '此备忘录不再可用。',
+    'error.MEMO_ALREADY_READ': '此备忘录不再可用。',
+    'error.MEMO_EXPIRED': '此备忘录不再可用。',
+    'error.DATABASE_READ_ERROR': '服务临时不可用。请重试。',
+    'error.MEMO_READ_ERROR': '无法处理您的请求。请重试。',
+    'error.MEMO_DELETION_ERROR': '服务临时不可用。请重试。',
+    
+    // Error messages - general errors
+    'error.INVALID_JSON': '无效请求。请检查您的输入并重试。',
+    'error.REQUEST_TOO_LARGE': '请求过大。请重试。',
+    'error.CONTENT_TYPE_ERROR': '无效请求。请检查您的输入并重试。',
+    'error.METHOD_NOT_ALLOWED': '无效请求方法。',
+    'error.FORBIDDEN': '访问被拒绝。',
+    'error.GENERAL_ERROR': '服务临时不可用。请重试。',
+    
+    // Error messages - decryption errors
+    'error.DECRYPTION_FAILED': '无效请求。请检查您的输入并重试。',
+    'error.INVALID_PASSWORD': '无效请求。请检查您的输入并重试。',
+    
+    // Error messages - network errors
+    'error.NETWORK_ERROR': '服务临时不可用。请重试。',
+    'error.SERVICE_UNAVAILABLE': '服务临时不可用。请稍后重试。',
+    
+    // Error messages - client-side validation errors
+    'error.MISSING_MESSAGE': '请输入备忘录',
+    'error.MESSAGE_TOO_LONG': '备忘录过长（最多10,000个字符）',
+    'error.MISSING_SECURITY_CHALLENGE': '请完成安全验证',
+    'error.CREATE_MEMO_FAILED': '创建备忘录失败',
+    'error.CREATE_MEMO_ERROR': '创建备忘录时发生错误',
+    'error.READ_MEMO_ERROR': '阅读备忘录时发生错误',
+    'error.DECRYPTION_ERROR': '解密消息失败。密码无效或数据损坏。',
+    'error.MEMO_ID_GENERATION_MAX_RETRIES': '在最大重试次数后生成唯一memo_id失败',
+    'error.MISSING_PASSWORD': '请输入加密密码',
+    'error.INVALID_MEMO_URL': '无效的备忘录URL',
+    'error.MEMO_ALREADY_READ_DELETED': '此备忘录已被阅读并删除，或已过期。',
+    'error.MEMO_EXPIRED_DELETED': '此备忘录已过期并已删除。',
+    'error.INVALID_PASSWORD_CHECK': '密码无效。请检查您单独收到的密码。',
+    'error.MISSING_PASSWORD_ERROR': '请输入加密密码',
+    'error.INVALID_MEMO_URL_ERROR': '无效的备忘录URL',
+    'error.MEMO_ALREADY_READ_DELETED_ERROR': '此备忘录已被阅读并删除，或已过期。',
+    'error.MEMO_EXPIRED_DELETED_ERROR': '此备忘录已过期并已删除。',
+    'error.INVALID_PASSWORD_CHECK_ERROR': '密码无效。请检查您单独收到的密码。',
+    'error.MISSING_SECURITY_CHALLENGE_ERROR': '请完成安全验证',
+    
+    // Error messages - HTTP status errors
+    'error.INTERNAL_SERVER_ERROR': '内部服务器错误',
+    'error.NOT_FOUND': '未找到',
+    'error.BAD_REQUEST': '错误请求',
+    'error.CLEANUP_FAILED': '清理失败',
+    
+    // Error messages - default fallback
+    'error.DEFAULT_FALLBACK': '发生错误。请重试。',
+    
+    // Security error messages (shorter versions for security events)
+    'error.security.INVALID_MESSAGE_FORMAT': '无效请求。',
+    'error.security.INVALID_EXPIRY_TIME': '无效请求。',
+    'error.security.MISSING_TURNSTILE': '需要安全验证。',
+    'error.security.TURNSTILE_FAILED': '安全验证失败。',
+    'error.security.TURNSTILE_API_ERROR': '服务临时不可用。',
+    'error.security.TURNSTILE_VERIFICATION_ERROR': '安全验证失败。',
+    'error.security.DATABASE_ERROR': '服务临时不可用。',
+    'error.security.MEMO_ID_GENERATION_ERROR': '服务临时不可用。',
+    'error.security.MEMO_ID_COLLISION_ERROR': '服务临时不可用。',
+    'error.security.MEMO_CREATION_ERROR': '无法处理您的请求。',
+    'error.security.INVALID_MEMO_ID': '无效请求。',
+    'error.security.MISSING_MEMO_ID': '无效请求。',
+    'error.security.MEMO_NOT_FOUND': '此备忘录不再可用。',
+    'error.security.MEMO_ALREADY_READ': '此备忘录不再可用。',
+    'error.security.MEMO_EXPIRED': '此备忘录不再可用。',
+    'error.security.DATABASE_READ_ERROR': '服务临时不可用。',
+    'error.security.MEMO_READ_ERROR': '无法处理您的请求。',
+    'error.security.METHOD_NOT_ALLOWED': '无效请求方法。',
+    'error.security.FORBIDDEN': '访问被拒绝。',
+    'error.security.DEFAULT_FALLBACK': '发生错误。请重试。'
   }
 };
