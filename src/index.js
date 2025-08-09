@@ -305,23 +305,23 @@ export default {
           });
         }
         const jsContent = getCreateMemoJS()
-          .replace('{{TURNSTILE_SITE_KEY}}', env.TURNSTILE_SITE_KEY)
-          .replace('{{MISSING_MESSAGE_ERROR}}', getErrorMessage('MISSING_MESSAGE', jsLocale))
-          .replace('{{MESSAGE_TOO_LONG_ERROR}}', getErrorMessage('MESSAGE_TOO_LONG', jsLocale))
-          .replace('{{MISSING_SECURITY_CHALLENGE_ERROR}}', getErrorMessage('MISSING_SECURITY_CHALLENGE', jsLocale))
-          .replace('{{CREATE_MEMO_FAILED_ERROR}}', getErrorMessage('CREATE_MEMO_FAILED', jsLocale))
-          .replace('{{CREATE_MEMO_ERROR}}', getErrorMessage('CREATE_MEMO_ERROR', jsLocale))
-          .replace('{{DECRYPTION_ERROR}}', getErrorMessage('DECRYPTION_ERROR', jsLocale))
-          .replace('{{READ_MEMO_ERROR}}', getErrorMessage('READ_MEMO_ERROR', jsLocale))
-          .replace('{{PASSWORD_COPIED_MESSAGE}}', t('msg.passwordCopied', jsLocale))
-          .replace('{{URL_COPIED_MESSAGE}}', t('msg.urlCopied', jsLocale))
-          .replace('{{COPY_MANUAL_MESSAGE}}', t('msg.copyManual', jsLocale))
-          .replace('{{MSG_ENCRYPTING}}', t('msg.encrypting', jsLocale))
-          .replace('{{BTN_CREATE}}', t('btn.create', jsLocale))
-          .replace('{{BTN_COPIED}}', t('btn.copied', jsLocale))
-          .replace('{{BTN_SHOW}}', t('btn.show', jsLocale))
-          .replace('{{BTN_HIDE}}', t('btn.hide', jsLocale))
-          .replace('{{BTN_COPY}}', t('btn.copy', jsLocale));
+          .replace(/{{TURNSTILE_SITE_KEY}}/g, env.TURNSTILE_SITE_KEY)
+          .replace(/{{MISSING_MESSAGE_ERROR}}/g, getErrorMessage('MISSING_MESSAGE', jsLocale))
+          .replace(/{{MESSAGE_TOO_LONG_ERROR}}/g, getErrorMessage('MESSAGE_TOO_LONG', jsLocale))
+          .replace(/{{MISSING_SECURITY_CHALLENGE_ERROR}}/g, getErrorMessage('MISSING_SECURITY_CHALLENGE', jsLocale))
+          .replace(/{{CREATE_MEMO_FAILED_ERROR}}/g, getErrorMessage('CREATE_MEMO_FAILED', jsLocale))
+          .replace(/{{CREATE_MEMO_ERROR}}/g, getErrorMessage('CREATE_MEMO_ERROR', jsLocale))
+          .replace(/{{DECRYPTION_ERROR}}/g, getErrorMessage('DECRYPTION_ERROR', jsLocale))
+          .replace(/{{READ_MEMO_ERROR}}/g, getErrorMessage('READ_MEMO_ERROR', jsLocale))
+          .replace(/{{PASSWORD_COPIED_MESSAGE}}/g, t('msg.passwordCopied', jsLocale))
+          .replace(/{{URL_COPIED_MESSAGE}}/g, t('msg.urlCopied', jsLocale))
+          .replace(/{{COPY_MANUAL_MESSAGE}}/g, t('msg.copyManual', jsLocale))
+          .replace(/{{MSG_ENCRYPTING}}/g, t('msg.encrypting', jsLocale))
+          .replace(/{{BTN_CREATE}}/g, t('btn.create', jsLocale))
+          .replace(/{{BTN_COPIED}}/g, t('btn.copied', jsLocale))
+          .replace(/{{BTN_SHOW}}/g, t('btn.show', jsLocale))
+          .replace(/{{BTN_HIDE}}/g, t('btn.hide', jsLocale))
+          .replace(/{{BTN_COPY}}/g, t('btn.copy', jsLocale));
         return new Response(jsContent, {
           headers: { 
             'Content-Type': 'application/javascript',
@@ -344,22 +344,22 @@ export default {
           });
         }
         const jsContent = getReadMemoJS()
-          .replace('{{TURNSTILE_SITE_KEY}}', env.TURNSTILE_SITE_KEY)
-          .replace('{{MISSING_MEMO_ID_ERROR}}', getErrorMessage('MISSING_MEMO_ID', jsLocale))
-          .replace('{{MISSING_PASSWORD_ERROR}}', getErrorMessage('MISSING_PASSWORD_ERROR', jsLocale))
-          .replace('{{INVALID_MEMO_URL_ERROR}}', getErrorMessage('INVALID_MEMO_URL_ERROR', jsLocale))
-          .replace('{{MISSING_SECURITY_CHALLENGE_ERROR}}', getErrorMessage('MISSING_SECURITY_CHALLENGE_ERROR', jsLocale))
-          .replace('{{MEMO_ALREADY_READ_DELETED_ERROR}}', getErrorMessage('MEMO_ALREADY_READ_DELETED_ERROR', jsLocale))
-          .replace('{{MEMO_EXPIRED_DELETED_ERROR}}', getErrorMessage('MEMO_EXPIRED_DELETED_ERROR', jsLocale))
-          .replace('{{INVALID_PASSWORD_CHECK_ERROR}}', getErrorMessage('INVALID_PASSWORD_CHECK_ERROR', jsLocale))
-          .replace('{{READ_MEMO_ERROR}}', getErrorMessage('READ_MEMO_ERROR', jsLocale))
-          .replace('{{DECRYPTION_ERROR}}', getErrorMessage('DECRYPTION_ERROR', jsLocale))
-          .replace('{{MEMO_DECRYPTED_MESSAGE}}', t('msg.memoDecrypted', jsLocale))
-          .replace('{{MEMO_DELETED_MESSAGE}}', t('msg.memoDeleted', jsLocale))
-          .replace('{{BTN_SHOW}}', t('btn.show', jsLocale))
-          .replace('{{BTN_HIDE}}', t('btn.hide', jsLocale))
-          .replace('{{BTN_COPIED}}', t('btn.copied', jsLocale))
-          .replace('{{DELETION_ERROR_MESSAGE}}', t('msg.deletionError', jsLocale));
+          .replace(/{{TURNSTILE_SITE_KEY}}/g, env.TURNSTILE_SITE_KEY)
+          .replace(/{{MISSING_MEMO_ID_ERROR}}/g, getErrorMessage('MISSING_MEMO_ID', jsLocale))
+          .replace(/{{MISSING_PASSWORD_ERROR}}/g, getErrorMessage('MISSING_PASSWORD_ERROR', jsLocale))
+          .replace(/{{INVALID_MEMO_URL_ERROR}}/g, getErrorMessage('INVALID_MEMO_URL_ERROR', jsLocale))
+          .replace(/{{MISSING_SECURITY_CHALLENGE_ERROR}}/g, getErrorMessage('MISSING_SECURITY_CHALLENGE_ERROR', jsLocale))
+          .replace(/{{MEMO_ALREADY_READ_DELETED_ERROR}}/g, getErrorMessage('MEMO_ALREADY_READ_DELETED_ERROR', jsLocale))
+          .replace(/{{MEMO_EXPIRED_DELETED_ERROR}}/g, getErrorMessage('MEMO_EXPIRED_DELETED_ERROR', jsLocale))
+          .replace(/{{INVALID_PASSWORD_CHECK_ERROR}}/g, getErrorMessage('INVALID_PASSWORD_CHECK_ERROR', jsLocale))
+          .replace(/{{READ_MEMO_ERROR}}/g, getErrorMessage('READ_MEMO_ERROR', jsLocale))
+          .replace(/{{DECRYPTION_ERROR}}/g, getErrorMessage('DECRYPTION_ERROR', jsLocale))
+          .replace(/{{MEMO_DECRYPTED_MESSAGE}}/g, t('msg.memoDecrypted', jsLocale))
+          .replace(/{{MEMO_DELETED_MESSAGE}}/g, t('msg.memoDeleted', jsLocale))
+          .replace(/{{BTN_SHOW}}/g, t('btn.show', jsLocale))
+          .replace(/{{BTN_HIDE}}/g, t('btn.hide', jsLocale))
+          .replace(/{{BTN_COPIED}}/g, t('btn.copied', jsLocale))
+          .replace(/{{DELETION_ERROR_MESSAGE}}/g, t('msg.deletionError', jsLocale));
         return new Response(jsContent, {
           headers: { 
             'Content-Type': 'application/javascript',
