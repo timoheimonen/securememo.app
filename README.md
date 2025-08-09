@@ -28,27 +28,45 @@ securememo.app will run the latest main version of this repo.
 ### Project Structure
 
 ```
-cloudflare/
+securememo/
 ├── src/
-│   ├── handlers/          # API request handlers
-│   │   └── auth.js        # Handles memo creation, reading, confirmation, and cleanup
-│   ├── templates/         # HTML and JavaScript templates
-│   │   ├── pages.js       # HTML page templates (e.g., index, about, create/read memo)
-│   │   └── js.js          # JavaScript templates (e.g., create/read memo logic)
-│   ├── utils/             # Utility functions
-│   │   ├── errorMessages.js # Centralized error handling with generic messages
-│   │   ├── timingSecurity.js # Timing attack protections (e.g., constant-time comparisons, artificial delays)
-│   │   └── validation.js  # Input validation, sanitization, and secure checks
-│   ├── styles/            # CSS styling
-│   │   └── styles.js      # Dynamic CSS generation
-│   └── index.js           # Main Worker entry point (routing, security headers, cron jobs)
+│   ├── handlers/               # API request handlers
+│   │   └── auth.js             # Handles memo creation, reading, confirmation, and cleanup
+│   ├── templates/              # HTML and JavaScript templates
+│   │   ├── pages.js            # HTML page templates (e.g., index, about, create/read memo)
+│   │   └── js.js               # JavaScript templates (e.g., create/read memo logic)
+│   ├── utils/                  # Utility functions
+│   │   ├── errorMessages.js    # Centralized error handling with generic messages
+│   │   ├── timingSecurity.js   # Timing attack protections (e.g., constant-time comparisons, artificial delays)
+│   │   ├── validation.js       # Input validation, sanitization, and secure checks
+│   │   ├── localization.js     # Server-side localization utilities
+│   │   ├── clientLocalization.js # Client-side localization utilities
+│   │   ├── translations.js     # Translation registry
+│   │   ├── en_translations.js  # English translations
+│   │   ├── de_translations.js  # German translations
+│   │   ├── es_translations.js  # Spanish translations
+│   │   ├── fr_translations.js  # French translations
+│   │   ├── hi_translations.js  # Hindi translations
+│   │   └── zh_translations.js  # Chinese translations
+│   ├── styles/                 # CSS styling
+│   │   └── styles.js           # Dynamic CSS generation
+│   └── index.js                # Main Worker entry point (routing, security headers, cron jobs)
 ├── db/
-│   └── schema.sql         # Database schema definition
-├── public/                # Static assets
+│   └── schema.sql              # Database schema definition
+├── public/                     # Static assets
 │   ├── favicon.ico
 │   ├── apple-touch-icon.png
-│   └── android-chrome-*.png
-└── package.json           # Project dependencies and configuration
+│   ├── android-chrome-192x192.png
+│   └── android-chrome-512x512.png
+├── package.json                # Project dependencies and configuration
+├── package-lock.json           # Dependency lock file
+├── wrangler.toml               # Cloudflare Workers configuration
+├── deploy.sh                   # Deployment script
+├── README.md                   # Project documentation
+├── LICENSE                     # MIT License
+├── SECURITY.md                 # Security policy and vulnerability reporting
+├── CODE_OF_CONDUCT.md          # Community guidelines
+└── CONTRIBUTING.md             # Contribution guidelines
 ```
 
 ## Security
