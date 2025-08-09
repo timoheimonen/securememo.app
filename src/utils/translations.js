@@ -328,7 +328,7 @@ export const TRANSLATIONS = {
     'faq.technology.answer': 'securememo.app is built on Cloudflare Workers for serverless compute, D1 Database for storage, Web Crypto API for client-side encryption, and modern HTML/CSS/JavaScript. The source code is open source and available on GitHub.',
     
     // Accessibility and UI
-    'ui.toggleNav': 'Toggle navigation menu',
+
     'ui.breadcrumb.home': 'Home',
     'ui.breadcrumb.tos': 'Terms of Service',
     'ui.breadcrumb.privacy': 'Privacy Notice',
@@ -823,7 +823,7 @@ export const TRANSLATIONS = {
     'faq.technology.answer': 'securememo.app está construido en Cloudflare Workers para computación sin servidor, Base de Datos D1 para almacenamiento, Web Crypto API para cifrado del lado del cliente, y HTML/CSS/JavaScript moderno. El código fuente es de código abierto y está disponible en GitHub.',
     
     // Accessibility and UI
-    'ui.toggleNav': 'Alternar menú de navegación',
+
     'ui.breadcrumb.home': 'Inicio',
     'ui.breadcrumb.tos': 'Términos de Servicio',
     'ui.breadcrumb.privacy': 'Aviso de Privacidad',
@@ -1355,7 +1355,7 @@ export const TRANSLATIONS = {
     'read.error.deleted.subtitle': 'Diese Notiz wurde bereits gelesen und dauerhaft gelöscht.',
     
     // UI elements
-    'ui.toggleNav': 'Navigation umschalten',
+
     'ui.expandSection': 'Abschnitt erweitern',
     'ui.collapseSection': 'Abschnitt einklappen',
     'ui.backToTop': 'Nach oben',
@@ -1748,7 +1748,7 @@ export const TRANSLATIONS = {
     'faq.technology.answer': 'securememo.app est construit sur Cloudflare Workers pour le calcul sans serveur, Base de Données D1 pour le stockage, API Web Crypto pour le chiffrement côté client, et HTML/CSS/JavaScript moderne. Le code source est open source et disponible sur GitHub.',
     
     // Accessibility and UI
-    'ui.toggleNav': 'Basculer le menu de navigation',
+
     'ui.breadcrumb.home': 'Accueil',
     'ui.breadcrumb.tos': 'Conditions d\'Utilisation',
     'ui.breadcrumb.privacy': 'Avis de Confidentialité',

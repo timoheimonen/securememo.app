@@ -13,6 +13,7 @@ body {
   color: #333;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   min-height: 100vh;
+  padding-top: 70px; /* Account for fixed navbar height */
 }
 
 /* Navigation */
@@ -20,9 +21,17 @@ body {
   background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(10px);
   box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
-  position: sticky;
+  position: fixed;
   top: 0;
+  left: 0;
+  right: 0;
   z-index: 1000;
+  transform: translateY(0);
+  transition: transform 0.3s ease-in-out;
+}
+
+.navbar.hidden {
+  transform: translateY(-100%);
 }
 
 .nav-container {
@@ -634,38 +643,7 @@ input, textarea, select {
   touch-action: pan-y;
 }
 
-/* Hamburger styles */
-.hamburger {
-  display: none;
-  background: none;
-  border: none;
-  font-size: 1.8rem;
-  cursor: pointer;
-  color: #333;
-  transition: all 0.3s ease;
-  padding: 8px;
-  border-radius: 4px;
-  min-width: 44px;
-  min-height: 44px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
 
-.hamburger:hover {
-  color: #667eea;
-  background: rgba(102, 126, 234, 0.1);
-}
-
-.hamburger:focus {
-  outline: 2px solid #667eea;
-  outline-offset: 2px;
-}
-
-.hamburger[aria-expanded="true"] {
-  color: #667eea;
-  background: rgba(102, 126, 234, 0.1);
-}
 
 /* Responsive design */
 @media (max-width: 480px) {
@@ -710,34 +688,21 @@ input, textarea, select {
     height: auto;
   }
 
-  .hamburger {
-    display: flex;
-    order: 3;
-  }
+
 
   .nav-menu {
     flex-direction: column;
     gap: 15px;
-    position: absolute;
-    top: 70px;
-    left: 0;
+    position: static;
     width: 100%;
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(10px);
-    padding: 20px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    z-index: 999;
-    transform: translateY(-10px);
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.3s ease;
-    pointer-events: none;
-  }
-
-  .nav-menu.active {
-    transform: translateY(0);
+    background: transparent;
+    padding: 0;
+    box-shadow: none;
+    z-index: auto;
+    transform: none;
     opacity: 1;
     visibility: visible;
+    transition: none;
     pointer-events: auto;
   }
 

@@ -700,7 +700,7 @@ import { initLocalization, getCurrentLocale, t, localizeUrl } from '/js/clientLo
 // Initialize localization when page loads
 document.addEventListener('DOMContentLoaded', () => {
     initLocalization();
-    initMobileNav();
+    initMobileNav(); // Initialize mobile navigation auto-hide
 });
 
 function highlightCurrentPage() {
@@ -715,90 +715,85 @@ function highlightCurrentPage() {
     });
 }
 
-function toggleMenu(event) {
-    event.preventDefault();
-    event.stopPropagation();
-    
-    const navMenu = document.getElementById('navMenu');
-    const hamburger = document.getElementById('hamburger');
-    
-    if (navMenu && hamburger) {
-        const isCurrentlyActive = navMenu.classList.contains('active');
-        
-        if (isCurrentlyActive) {
-            navMenu.classList.remove('active');
-            hamburger.setAttribute('aria-expanded', 'false');
-        } else {
-            navMenu.classList.add('active');
-            hamburger.setAttribute('aria-expanded', 'true');
-        }
-    }
-}
 
-function closeMenuOnLinkClick() {
-    const navMenu = document.getElementById('navMenu');
-    const hamburger = document.getElementById('hamburger');
-    if (navMenu && hamburger && navMenu.classList.contains('active')) {
-        navMenu.classList.remove('active');
-        hamburger.setAttribute('aria-expanded', 'false');
-    }
-}
 
-function closeMenuOnOutsideClick(event) {
-    const hamburger = document.getElementById('hamburger');
-    const navMenu = document.getElementById('navMenu');
-    
-    if (hamburger && navMenu && navMenu.classList.contains('active')) {
-        if (!hamburger.contains(event.target) && !navMenu.contains(event.target)) {
-            navMenu.classList.remove('active');
-            hamburger.setAttribute('aria-expanded', 'false');
-        }
-    }
-}
+
+
+
 
 function initMobileNav() {
-    const hamburger = document.getElementById('hamburger');
-    const navMenu = document.getElementById('navMenu');
-    
-    if (hamburger && navMenu) {
-        // Ensure initial state
-        navMenu.classList.remove('active');
-        hamburger.setAttribute('aria-expanded', 'false');
-        
-        // Add click event to hamburger
-        hamburger.addEventListener('click', toggleMenu);
-        
-        // Close menu when clicking on nav links
-        const navLinks = navMenu.querySelectorAll('.nav-link');
-        navLinks.forEach(link => {
-            link.addEventListener('click', closeMenuOnLinkClick);
-        });
-        
-        // Close menu when clicking outside
-        document.addEventListener('click', closeMenuOnOutsideClick);
-        
-        // Close menu on escape key
-        document.addEventListener('keydown', (event) => {
-            if (event.key === 'Escape' && navMenu.classList.contains('active')) {
-                navMenu.classList.remove('active');
-                hamburger.setAttribute('aria-expanded', 'false');
-            }
-        });
+    // Initialize auto-hide functionality on mobile devices only
+    if (isMobileDevice()) {
+        initNavbarAutoHide();
     }
 }
 
-// Re-initialize on window resize to handle dynamic content changes
-window.addEventListener('resize', () => {
-    const navMenu = document.getElementById('navMenu');
-    if (navMenu && window.innerWidth > 768) {
-        // Close mobile menu on desktop
-        navMenu.classList.remove('active');
-        const hamburger = document.getElementById('hamburger');
-        if (hamburger) {
-            hamburger.setAttribute('aria-expanded', 'false');
+// Simple mobile device detection
+function isMobileDevice() {
+    return window.matchMedia('(max-width: 768px)').matches || 
+           /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+}
+
+// Navbar auto-hide functionality
+let lastScrollY = 0;
+let scrollTimeout = null;
+let isNavbarVisible = true;
+const scrollThreshold = 5; // Minimum scroll distance to trigger hide/show
+
+function initNavbarAutoHide() {
+    const navbar = document.querySelector('.navbar');
+    if (!navbar) return;
+    
+    // Throttled scroll handler for better performance
+    function handleScroll() {
+        if (scrollTimeout) {
+            clearTimeout(scrollTimeout);
         }
+        
+        scrollTimeout = setTimeout(() => {
+            const currentScrollY = window.scrollY;
+            const scrollDifference = Math.abs(currentScrollY - lastScrollY);
+            
+            // Only trigger if scroll difference exceeds threshold
+            if (scrollDifference < scrollThreshold) {
+                return;
+            }
+            
+            // Don't hide navbar when at the very top of the page
+            if (currentScrollY <= 10) {
+                showNavbar(navbar);
+                lastScrollY = currentScrollY;
+                return;
+            }
+            
+
+            
+            if (currentScrollY > lastScrollY && isNavbarVisible) {
+                // Scrolling down - hide navbar
+                hideNavbar(navbar);
+            } else if (currentScrollY < lastScrollY && !isNavbarVisible) {
+                // Scrolling up - show navbar
+                showNavbar(navbar);
+            }
+            
+            lastScrollY = currentScrollY;
+        }, 10); // Small delay for throttling
     }
-});
+    
+    window.addEventListener('scroll', handleScroll, { passive: true });
+}
+
+function hideNavbar(navbar) {
+    navbar.classList.add('hidden');
+    isNavbarVisible = false;
+}
+
+function showNavbar(navbar) {
+    navbar.classList.remove('hidden');
+    isNavbarVisible = true;
+}
+
+
 
 highlightCurrentPage();
 `;
