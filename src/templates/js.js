@@ -766,8 +766,6 @@ function initNavbarAutoHide() {
                 return;
             }
             
-
-            
             if (currentScrollY > lastScrollY && isNavbarVisible) {
                 // Scrolling down - hide navbar
                 hideNavbar(navbar);

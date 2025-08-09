@@ -85,6 +85,8 @@ export async function getIndexHTML(locale = 'en', origin = 'https://securememo.a
                     <a href="/fr" class="nav-link ${locale === 'fr' ? 'active' : ''}" title="Français">FR</a>
                     <span class="language-separator">|</span>
                     <a href="/de" class="nav-link ${locale === 'de' ? 'active' : ''}" title="Deutsch">DE</a>
+                    <span class="language-separator">|</span>
+                    <a href="/hi" class="nav-link ${locale === 'hi' ? 'active' : ''}" title="हिन्दी">HI</a>
                 </li>
             </ul>
 
@@ -248,6 +250,8 @@ export async function getAboutHTML(locale = 'en', origin = 'https://securememo.a
                     <a href="/fr/about.html" class="nav-link ${locale === 'fr' ? 'active' : ''}" title="Français">FR</a>
                     <span class="language-separator">|</span>
                     <a href="/de/about.html" class="nav-link ${locale === 'de' ? 'active' : ''}" title="Deutsch">DE</a>
+                    <span class="language-separator">|</span>
+                    <a href="/hi/about.html" class="nav-link ${locale === 'hi' ? 'active' : ''}" title="हिन्दी">HI</a>
                 </li>
             </ul>
 
@@ -425,6 +429,8 @@ export async function getCreateMemoHTML(locale = 'en', origin = 'https://securem
                     <a href="/fr/create-memo.html" class="nav-link ${locale === 'fr' ? 'active' : ''}" title="Français">FR</a>
                     <span class="language-separator">|</span>
                     <a href="/de/create-memo.html" class="nav-link ${locale === 'de' ? 'active' : ''}" title="Deutsch">DE</a>
+                    <span class="language-separator">|</span>
+                    <a href="/hi/create-memo.html" class="nav-link ${locale === 'hi' ? 'active' : ''}" title="हिन्दी">HI</a>
                 </li>
             </ul>
 
@@ -605,6 +611,8 @@ export async function getReadMemoHTML(locale = 'en', origin = 'https://securemem
                     <a href="/fr/read-memo.html" class="nav-link ${locale === 'fr' ? 'active' : ''}" title="Français">FR</a>
                     <span class="language-separator">|</span>
                     <a href="/de/read-memo.html" class="nav-link ${locale === 'de' ? 'active' : ''}" title="Deutsch">DE</a>
+                    <span class="language-separator">|</span>
+                    <a href="/hi/read-memo.html" class="nav-link ${locale === 'hi' ? 'active' : ''}" title="हिन्दी">HI</a>
                 </li>
             </ul>
 
@@ -758,6 +766,8 @@ export async function getToSHTML(locale = 'en', origin = 'https://securememo.app
                     <a href="/fr/tos.html" class="nav-link ${locale === 'fr' ? 'active' : ''}" title="Français">FR</a>
                     <span class="language-separator">|</span>
                     <a href="/de/tos.html" class="nav-link ${locale === 'de' ? 'active' : ''}" title="Deutsch">DE</a>
+                    <span class="language-separator">|</span>
+                    <a href="/hi/tos.html" class="nav-link ${locale === 'hi' ? 'active' : ''}" title="हिन्दी">HI</a>
                 </li>
             </ul>
 
@@ -978,6 +988,8 @@ export async function getPrivacyHTML(locale = 'en', origin = 'https://securememo
                     <a href="/fr/privacy.html" class="nav-link ${locale === 'fr' ? 'active' : ''}" title="Français">FR</a>
                     <span class="language-separator">|</span>
                     <a href="/de/privacy.html" class="nav-link ${locale === 'de' ? 'active' : ''}" title="Deutsch">DE</a>
+                    <span class="language-separator">|</span>
+                    <a href="/hi/privacy.html" class="nav-link ${locale === 'hi' ? 'active' : ''}" title="हिन्दी">HI</a>
                 </li>
             </ul>
 
