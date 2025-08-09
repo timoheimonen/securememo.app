@@ -19,6 +19,14 @@ import {
   handleCleanupMemos
 } from './handlers/auth.js';
 import { getErrorMessage } from './utils/errorMessages.js';
+import { 
+  extractLocaleFromPath, 
+  getLocaleRedirectPath,
+  getCanonicalUrl,
+  buildLocalizedPath,
+  t
+} from './utils/localization.js';
+import { getClientLocalizationJS } from './utils/clientLocalization.js';
 
 // Allowed origins for CORS
 const allowedOrigins = [
@@ -66,7 +74,7 @@ export default {
     try {
       // Check DB availability
       if (!env.DB) {
-        return new Response(getErrorMessage('SERVICE_UNAVAILABLE'), { 
+        return new Response(getErrorMessage('SERVICE_UNAVAILABLE', 'en'), { 
           status: 503,
           headers: getSecurityHeaders(request)
         });
@@ -77,13 +85,38 @@ export default {
       try {
         url = new URL(request.url);
       } catch (urlError) {
-        return new Response(getErrorMessage('BAD_REQUEST'), { 
+        return new Response(getErrorMessage('BAD_REQUEST', 'en'), { 
           status: 400,
           headers: getSecurityHeaders(request)
         });
       }
 
       const pathname = url.pathname;
+
+      // Skip locale handling for static assets and API routes
+      const isStaticAsset = pathname.startsWith('/styles.css') || 
+                           pathname.startsWith('/js/') || 
+                           pathname.startsWith('/api/') ||
+                           pathname === '/sitemap.xml' ||
+                           pathname.startsWith('/favicon') ||
+                           pathname.includes('.png') ||
+                           pathname.includes('.ico');
+
+      // Handle locale-based routing with /en prefix (only for HTML pages)
+      let locale = 'en';
+      let pathWithoutLocale = pathname;
+      
+      if (!isStaticAsset) {
+        const localeResult = extractLocaleFromPath(pathname);
+        locale = localeResult.locale;
+        pathWithoutLocale = localeResult.pathWithoutLocale;
+        
+        // Check if redirect to localized path is needed (add /en prefix to non-localized URLs)
+        const redirectPath = getLocaleRedirectPath(pathname);
+        if (redirectPath && redirectPath !== pathname) {
+          return Response.redirect(url.origin + redirectPath, 301);
+        }
+      }
 
       // Handle CORS preflight with proper origin validation
       if (request.method === 'OPTIONS') {
@@ -106,7 +139,7 @@ export default {
         
         // Validate origin for API requests
         if (!isValidOrigin(request)) {
-          return new Response(JSON.stringify({ error: getErrorMessage('FORBIDDEN') }), {
+          return new Response(JSON.stringify({ error: getErrorMessage('FORBIDDEN', locale) }), {
             status: 403,
             headers: { 
               'Content-Type': 'application/json',
@@ -118,7 +151,7 @@ export default {
         
         // Validate request method for API endpoints
         if (apiPath === 'create-memo' && request.method !== 'POST') {
-          return new Response(JSON.stringify({ error: getErrorMessage('METHOD_NOT_ALLOWED') }), {
+          return new Response(JSON.stringify({ error: getErrorMessage('METHOD_NOT_ALLOWED', locale) }), {
             status: 405,
             headers: { 
               'Content-Type': 'application/json',
@@ -132,7 +165,7 @@ export default {
         
         // Check allowed methods for read-memo endpoint
         if (apiPath === 'read-memo' && request.method !== 'POST') {
-          return new Response(JSON.stringify({ error: getErrorMessage('METHOD_NOT_ALLOWED') }), {
+          return new Response(JSON.stringify({ error: getErrorMessage('METHOD_NOT_ALLOWED', locale) }), {
             status: 405,
             headers: { 
               'Content-Type': 'application/json',
@@ -144,7 +177,7 @@ export default {
         
                 // Check allowed methods for confirm-delete endpoint
         if (apiPath === 'confirm-delete' && request.method !== 'POST') {
-            return new Response(JSON.stringify({ error: getErrorMessage('METHOD_NOT_ALLOWED') }), {
+            return new Response(JSON.stringify({ error: getErrorMessage('METHOD_NOT_ALLOWED', locale) }), {
                 status: 405,
                 headers: { 
                     'Content-Type': 'application/json',
@@ -158,7 +191,7 @@ export default {
         if (request.method === 'POST') {
           const contentLength = request.headers.get('content-length');
           if (contentLength && parseInt(contentLength) > 100000) {
-            return new Response(JSON.stringify({ error: getErrorMessage('REQUEST_TOO_LARGE') }), {
+            return new Response(JSON.stringify({ error: getErrorMessage('REQUEST_TOO_LARGE', locale) }), {
               status: 413,
               headers: { 
                 'Content-Type': 'application/json',
@@ -170,13 +203,13 @@ export default {
         
         switch (apiPath) {
           case 'create-memo':
-            return await handleCreateMemo(request, env);
+            return await handleCreateMemo(request, env, locale);
           case 'read-memo':
-            return await handleReadMemo(request, env);
+            return await handleReadMemo(request, env, locale);
           case 'confirm-delete':
-            return await handleConfirmDelete(request, env);
+            return await handleConfirmDelete(request, env, locale);
           default:
-            return new Response(getErrorMessage('NOT_FOUND'), { 
+            return new Response(getErrorMessage('NOT_FOUND', locale), { 
               status: 404,
               headers: getSecurityHeaders(request)
             });
@@ -186,7 +219,7 @@ export default {
       // Serve sitemap.xml
       if (pathname === '/sitemap.xml') {
         if (request.method !== 'GET') {
-          return new Response(getErrorMessage('METHOD_NOT_ALLOWED'), {
+          return new Response(getErrorMessage('METHOD_NOT_ALLOWED', locale), {
             status: 405,
             headers: { 
               'Allow': 'GET',
@@ -197,32 +230,32 @@ export default {
         const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://securememo.app/</loc>
-    <lastmod>2025-08-05</lastmod>
+    <loc>https://securememo.app/en</loc>
+    <lastmod>2025-08-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://securememo.app/about.html</loc>
-    <lastmod>2025-08-05</lastmod>
+    <loc>https://securememo.app/en/about.html</loc>
+    <lastmod>2025-08-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://securememo.app/create-memo.html</loc>
-    <lastmod>2025-08-05</lastmod>
+    <loc>https://securememo.app/en/create-memo.html</loc>
+    <lastmod>2025-08-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://securememo.app/tos.html</loc>
-    <lastmod>2025-08-05</lastmod>
+    <loc>https://securememo.app/en/tos.html</loc>
+    <lastmod>2025-08-09</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
-    <loc>https://securememo.app/privacy.html</loc>
-    <lastmod>2025-08-05</lastmod>
+    <loc>https://securememo.app/en/privacy.html</loc>
+    <lastmod>2025-08-09</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
@@ -238,10 +271,10 @@ export default {
         });
       }
 
-      // Serve static assets
+      // Serve static assets (use pathname for non-localized assets)
       if (pathname === '/styles.css') {
         if (request.method !== 'GET') {
-          return new Response(getErrorMessage('METHOD_NOT_ALLOWED'), {
+          return new Response(getErrorMessage('METHOD_NOT_ALLOWED', locale), {
             status: 405,
             headers: { 
               'Allow': 'GET',
@@ -260,8 +293,10 @@ export default {
 
       // Serve JS files with dynamic content injection
       if (pathname === '/js/create-memo.js') {
+        // Extract locale from query parameter for JavaScript files
+        const jsLocale = url.searchParams.get('locale') || 'en';
         if (request.method !== 'GET') {
-          return new Response(getErrorMessage('METHOD_NOT_ALLOWED'), {
+          return new Response(getErrorMessage('METHOD_NOT_ALLOWED', locale), {
             status: 405,
             headers: { 
               'Allow': 'GET',
@@ -270,14 +305,23 @@ export default {
           });
         }
         const jsContent = getCreateMemoJS()
-          .replace('{{TURNSTILE_SITE_KEY}}', env.TURNSTILE_SITE_KEY)
-          .replace('{{MISSING_MESSAGE_ERROR}}', getErrorMessage('MISSING_MESSAGE'))
-          .replace('{{MESSAGE_TOO_LONG_ERROR}}', getErrorMessage('MESSAGE_TOO_LONG'))
-          .replace('{{MISSING_SECURITY_CHALLENGE_ERROR}}', getErrorMessage('MISSING_SECURITY_CHALLENGE'))
-          .replace('{{CREATE_MEMO_FAILED_ERROR}}', getErrorMessage('CREATE_MEMO_FAILED'))
-          .replace('{{CREATE_MEMO_ERROR}}', getErrorMessage('CREATE_MEMO_ERROR'))
-          .replace('{{DECRYPTION_ERROR}}', getErrorMessage('DECRYPTION_ERROR'))
-          .replace('{{READ_MEMO_ERROR}}', getErrorMessage('READ_MEMO_ERROR'));
+          .replace(/{{TURNSTILE_SITE_KEY}}/g, env.TURNSTILE_SITE_KEY)
+          .replace(/{{MISSING_MESSAGE_ERROR}}/g, getErrorMessage('MISSING_MESSAGE', jsLocale))
+          .replace(/{{MESSAGE_TOO_LONG_ERROR}}/g, getErrorMessage('MESSAGE_TOO_LONG', jsLocale))
+          .replace(/{{MISSING_SECURITY_CHALLENGE_ERROR}}/g, getErrorMessage('MISSING_SECURITY_CHALLENGE', jsLocale))
+          .replace(/{{CREATE_MEMO_FAILED_ERROR}}/g, getErrorMessage('CREATE_MEMO_FAILED', jsLocale))
+          .replace(/{{CREATE_MEMO_ERROR}}/g, getErrorMessage('CREATE_MEMO_ERROR', jsLocale))
+          .replace(/{{DECRYPTION_ERROR}}/g, getErrorMessage('DECRYPTION_ERROR', jsLocale))
+          .replace(/{{READ_MEMO_ERROR}}/g, getErrorMessage('READ_MEMO_ERROR', jsLocale))
+          .replace(/{{PASSWORD_COPIED_MESSAGE}}/g, t('msg.passwordCopied', jsLocale))
+          .replace(/{{URL_COPIED_MESSAGE}}/g, t('msg.urlCopied', jsLocale))
+          .replace(/{{COPY_MANUAL_MESSAGE}}/g, t('msg.copyManual', jsLocale))
+          .replace(/{{MSG_ENCRYPTING}}/g, t('msg.encrypting', jsLocale))
+          .replace(/{{BTN_CREATE}}/g, t('btn.create', jsLocale))
+          .replace(/{{BTN_COPIED}}/g, t('btn.copied', jsLocale))
+          .replace(/{{BTN_SHOW}}/g, t('btn.show', jsLocale))
+          .replace(/{{BTN_HIDE}}/g, t('btn.hide', jsLocale))
+          .replace(/{{BTN_COPY}}/g, t('btn.copy', jsLocale));
         return new Response(jsContent, {
           headers: { 
             'Content-Type': 'application/javascript',
@@ -288,8 +332,10 @@ export default {
       }
       
       if (pathname === '/js/read-memo.js') {
+        // Extract locale from query parameter for JavaScript files
+        const jsLocale = url.searchParams.get('locale') || 'en';
         if (request.method !== 'GET') {
-          return new Response(getErrorMessage('METHOD_NOT_ALLOWED'), {
+          return new Response(getErrorMessage('METHOD_NOT_ALLOWED', locale), {
             status: 405,
             headers: { 
               'Allow': 'GET',
@@ -298,16 +344,22 @@ export default {
           });
         }
         const jsContent = getReadMemoJS()
-          .replace('{{TURNSTILE_SITE_KEY}}', env.TURNSTILE_SITE_KEY)
-          .replace('{{MISSING_MEMO_ID_ERROR}}', getErrorMessage('MISSING_MEMO_ID'))
-          .replace('{{MISSING_PASSWORD_ERROR}}', getErrorMessage('MISSING_PASSWORD_ERROR'))
-          .replace('{{INVALID_MEMO_URL_ERROR}}', getErrorMessage('INVALID_MEMO_URL_ERROR'))
-          .replace('{{MISSING_SECURITY_CHALLENGE_ERROR}}', getErrorMessage('MISSING_SECURITY_CHALLENGE_ERROR'))
-          .replace('{{MEMO_ALREADY_READ_DELETED_ERROR}}', getErrorMessage('MEMO_ALREADY_READ_DELETED_ERROR'))
-          .replace('{{MEMO_EXPIRED_DELETED_ERROR}}', getErrorMessage('MEMO_EXPIRED_DELETED_ERROR'))
-          .replace('{{INVALID_PASSWORD_CHECK_ERROR}}', getErrorMessage('INVALID_PASSWORD_CHECK_ERROR'))
-          .replace('{{READ_MEMO_ERROR}}', getErrorMessage('READ_MEMO_ERROR'))
-          .replace('{{DECRYPTION_ERROR}}', getErrorMessage('DECRYPTION_ERROR'));
+          .replace(/{{TURNSTILE_SITE_KEY}}/g, env.TURNSTILE_SITE_KEY)
+          .replace(/{{MISSING_MEMO_ID_ERROR}}/g, getErrorMessage('MISSING_MEMO_ID', jsLocale))
+          .replace(/{{MISSING_PASSWORD_ERROR}}/g, getErrorMessage('MISSING_PASSWORD_ERROR', jsLocale))
+          .replace(/{{INVALID_MEMO_URL_ERROR}}/g, getErrorMessage('INVALID_MEMO_URL_ERROR', jsLocale))
+          .replace(/{{MISSING_SECURITY_CHALLENGE_ERROR}}/g, getErrorMessage('MISSING_SECURITY_CHALLENGE_ERROR', jsLocale))
+          .replace(/{{MEMO_ALREADY_READ_DELETED_ERROR}}/g, getErrorMessage('MEMO_ALREADY_READ_DELETED_ERROR', jsLocale))
+          .replace(/{{MEMO_EXPIRED_DELETED_ERROR}}/g, getErrorMessage('MEMO_EXPIRED_DELETED_ERROR', jsLocale))
+          .replace(/{{INVALID_PASSWORD_CHECK_ERROR}}/g, getErrorMessage('INVALID_PASSWORD_CHECK_ERROR', jsLocale))
+          .replace(/{{READ_MEMO_ERROR}}/g, getErrorMessage('READ_MEMO_ERROR', jsLocale))
+          .replace(/{{DECRYPTION_ERROR}}/g, getErrorMessage('DECRYPTION_ERROR', jsLocale))
+          .replace(/{{MEMO_DECRYPTED_MESSAGE}}/g, t('msg.memoDecrypted', jsLocale))
+          .replace(/{{MEMO_DELETED_MESSAGE}}/g, t('msg.memoDeleted', jsLocale))
+          .replace(/{{BTN_SHOW}}/g, t('btn.show', jsLocale))
+          .replace(/{{BTN_HIDE}}/g, t('btn.hide', jsLocale))
+          .replace(/{{BTN_COPIED}}/g, t('btn.copied', jsLocale))
+          .replace(/{{DELETION_ERROR_MESSAGE}}/g, t('msg.deletionError', jsLocale));
         return new Response(jsContent, {
           headers: { 
             'Content-Type': 'application/javascript',
@@ -319,7 +371,7 @@ export default {
       
       if (pathname === '/js/common.js') {
         if (request.method !== 'GET') {
-          return new Response(getErrorMessage('METHOD_NOT_ALLOWED'), {
+          return new Response(getErrorMessage('METHOD_NOT_ALLOWED', locale), {
             status: 405,
             headers: { 
               'Allow': 'GET',
@@ -335,10 +387,31 @@ export default {
           }
         });
       }
+      
+      if (pathname === '/js/clientLocalization.js') {
+        if (request.method !== 'GET') {
+          return new Response(getErrorMessage('METHOD_NOT_ALLOWED', locale), {
+            status: 405,
+            headers: { 
+              'Allow': 'GET',
+              ...getSecurityHeaders(request)
+            }
+          });
+        }
+        
+        // Serve the client localization utility
+        return new Response(getClientLocalizationJS(), {
+          headers: { 
+            'Content-Type': 'application/javascript',
+            'Cache-Control': 'public, max-age=3600',
+            ...getSecurityHeaders(request)
+          }
+        });
+      }
 
       // Route page requests
       if (request.method !== 'GET') {
-        return new Response(getErrorMessage('METHOD_NOT_ALLOWED'), {
+        return new Response(getErrorMessage('METHOD_NOT_ALLOWED', locale), {
           status: 405,
           headers: { 
             'Allow': 'GET',
@@ -350,33 +423,34 @@ export default {
       let response;
       let cacheHeaders = {};
       
-      switch (pathname) {
+      // Use pathWithoutLocale for route matching to support localized URLs
+      switch (pathWithoutLocale) {
         case '/':
-          response = await getIndexHTML();
+          response = await getIndexHTML(locale, url.origin);
           cacheHeaders = { 'Cache-Control': 'public, max-age=604800' };
           break;
         case '/about.html':
-          response = await getAboutHTML();
+          response = await getAboutHTML(locale, url.origin);
           cacheHeaders = { 'Cache-Control': 'public, max-age=604800' };
           break;
         case '/create-memo.html':
           const siteKey = env.TURNSTILE_SITE_KEY || 'MISSING_SITE_KEY';
-          response = (await getCreateMemoHTML()).replace('{{TURNSTILE_SITE_KEY}}', siteKey);
+          response = (await getCreateMemoHTML(locale, url.origin)).replace('{{TURNSTILE_SITE_KEY}}', siteKey);
           break;
         case '/read-memo.html':
           const readSiteKey = env.TURNSTILE_SITE_KEY || 'MISSING_SITE_KEY';
-          response = (await getReadMemoHTML()).replace('{{TURNSTILE_SITE_KEY}}', readSiteKey);
+          response = (await getReadMemoHTML(locale, url.origin)).replace('{{TURNSTILE_SITE_KEY}}', readSiteKey);
           break;
         case '/tos.html':
-          response = await getToSHTML();
+          response = await getToSHTML(locale, url.origin);
           cacheHeaders = { 'Cache-Control': 'public, max-age=604800' };
           break;
         case '/privacy.html':
-          response = await getPrivacyHTML();
+          response = await getPrivacyHTML(locale, url.origin);
           cacheHeaders = { 'Cache-Control': 'public, max-age=604800' };
           break;
         default:
-          return new Response(getErrorMessage('NOT_FOUND'), { 
+          return new Response(getErrorMessage('NOT_FOUND', locale), { 
             status: 404,
             headers: getSecurityHeaders(request)
           });
@@ -390,7 +464,7 @@ export default {
         }
       });
     } catch (error) {
-      return new Response(getErrorMessage('INTERNAL_SERVER_ERROR'), { 
+      return new Response(getErrorMessage('INTERNAL_SERVER_ERROR', locale), { 
         status: 500,
         headers: getSecurityHeaders(request)
       });
@@ -403,7 +477,7 @@ export default {
       const result = await handleCleanupMemos(env);
       return result;
     } catch (error) {
-      return new Response(getErrorMessage('CLEANUP_FAILED'), { status: 500 });
+      return new Response(getErrorMessage('CLEANUP_FAILED', 'en'), { status: 500 });
     }
   }
 }; 

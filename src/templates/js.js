@@ -179,7 +179,7 @@ document.getElementById('memoForm').addEventListener('submit', async (e) => {
     const submitButton = document.getElementById('submitButton');
     const loadingIndicator = document.getElementById('loadingIndicator');
     submitButton.disabled = true;
-    submitButton.textContent = 'Encrypting...';
+    submitButton.textContent = '{{MSG_ENCRYPTING}}';
     loadingIndicator.style.display = 'block';
     
     try {
@@ -211,8 +211,9 @@ document.getElementById('memoForm').addEventListener('submit', async (e) => {
         const result = await response.json();
         
         if (response.ok) {
-            // Generate URL without password
-            const memoUrl = window.location.origin + '/read-memo.html?id=' + result.memoId;
+            // Generate locale-aware URL without password  
+            const currentLocale = window.location.pathname.split('/')[1] || 'en';
+            const memoUrl = window.location.origin + '/' + currentLocale + '/read-memo.html?id=' + result.memoId;
             
             // Show result
             document.getElementById('memoUrl').value = memoUrl;
@@ -235,7 +236,7 @@ document.getElementById('memoForm').addEventListener('submit', async (e) => {
     } finally {
         // Always hide loading indicator and re-enable button in finally block
         submitButton.disabled = false;
-        submitButton.textContent = 'Create Secure Memo';
+        submitButton.textContent = '{{BTN_CREATE}}';
         loadingIndicator.style.display = 'none';
     }
 });
@@ -249,12 +250,12 @@ document.getElementById('copyUrl').addEventListener('click', async () => {
         // Use modern Clipboard API if available
         if (navigator.clipboard && window.isSecureContext) {
             await navigator.clipboard.writeText(url);
-            showMessage('✅ URL copied to clipboard!', 'success');
+            showMessage('{{URL_COPIED_MESSAGE}}', 'success');
             
             // Visual feedback - briefly change button text
             const copyBtn = document.getElementById('copyUrl');
             const originalText = copyBtn.textContent;
-            copyBtn.textContent = 'Copied!';
+            copyBtn.textContent = '{{BTN_COPIED}}';
             copyBtn.style.backgroundColor = '#28a745';
             
             setTimeout(() => {
@@ -266,13 +267,13 @@ document.getElementById('copyUrl').addEventListener('click', async () => {
             urlInput.select();
             urlInput.setSelectionRange(0, 99999); // For mobile devices
             document.execCommand('copy');
-            showMessage('✅ URL copied to clipboard!', 'success');
+            showMessage('{{URL_COPIED_MESSAGE}}', 'success');
         }
     } catch (err) {
         // Final fallback - show the URL and ask user to copy manually
         urlInput.select();
         urlInput.setSelectionRange(0, 99999);
-        showMessage('⚠️ Please copy the URL manually (Ctrl+C / Cmd+C)', 'warning');
+        showMessage('{{COPY_MANUAL_MESSAGE}}', 'warning');
     }
 });
 
@@ -283,11 +284,11 @@ document.getElementById('togglePassword').addEventListener('click', () => {
     
     if (passwordInput.type === 'password') {
         passwordInput.type = 'text';
-        toggleBtn.textContent = 'Hide';
+        toggleBtn.textContent = '{{BTN_HIDE}}';
         toggleBtn.style.backgroundColor = '#007bff';
     } else {
         passwordInput.type = 'password';
-        toggleBtn.textContent = 'Show';
+        toggleBtn.textContent = '{{BTN_SHOW}}';
         toggleBtn.style.backgroundColor = '#007bff';
     }
 });
@@ -301,12 +302,12 @@ document.getElementById('copyPassword').addEventListener('click', async () => {
         // Use modern Clipboard API if available
         if (navigator.clipboard && window.isSecureContext) {
             await navigator.clipboard.writeText(password);
-            showMessage('✅ Password copied to clipboard!', 'success');
+            showMessage('{{PASSWORD_COPIED_MESSAGE}}', 'success');
             
             // Visual feedback - briefly change button text
             const copyBtn = document.getElementById('copyPassword');
             const originalText = copyBtn.textContent;
-            copyBtn.textContent = 'Copied!';
+            copyBtn.textContent = '{{BTN_COPIED}}';
             copyBtn.style.backgroundColor = '#28a745';
             
             setTimeout(() => {
@@ -318,13 +319,13 @@ document.getElementById('copyPassword').addEventListener('click', async () => {
             passwordInput.select();
             passwordInput.setSelectionRange(0, 99999); // For mobile devices
             document.execCommand('copy');
-            showMessage('✅ Password copied to clipboard!', 'success');
+            showMessage('{{PASSWORD_COPIED_MESSAGE}}', 'success');
         }
     } catch (err) {
         // Final fallback - show the password and ask user to copy manually
         passwordInput.select();
         passwordInput.setSelectionRange(0, 99999);
-        showMessage('⚠️ Please copy the password manually (Ctrl+C / Cmd+C)', 'warning');
+        showMessage('{{COPY_MANUAL_MESSAGE}}', 'warning');
     }
 });
 
@@ -589,7 +590,7 @@ window.addEventListener('load', () => {
                     const memoStatus = document.getElementById('memoStatus');
                     const deletionSpinner = document.getElementById('deletionSpinner');
                     if (memoStatus) {
-                        memoStatus.textContent = 'Memo decrypted. Deleting in progress... Please wait.';
+                        memoStatus.textContent = '{{MEMO_DECRYPTED_MESSAGE}}';
                     }
                     if (deletionSpinner) {
                         deletionSpinner.style.display = 'block';
@@ -621,13 +622,13 @@ window.addEventListener('load', () => {
                         const memoStatus = document.getElementById('memoStatus');
                         const deletionSpinner = document.getElementById('deletionSpinner');
                         if (memoStatus) {
-                            memoStatus.textContent = 'Memo confirmed as read and permanently deleted.';
+                            memoStatus.textContent = '{{MEMO_DELETED_MESSAGE}}';
                         }
                         if (deletionSpinner) {
                             deletionSpinner.style.display = 'none';
                         }
                     } else {
-                        showMessage('Error confirming deletion. The memo will be cleaned up automatically.', 'warning');
+                        showMessage('{{DELETION_ERROR_MESSAGE}}', 'warning');
                     }
                 } else {
                     if (result.error === 'Memo not found') {
@@ -659,11 +660,11 @@ window.addEventListener('load', () => {
             
             if (passwordInput.type === 'password') {
                 passwordInput.type = 'text';
-                toggleBtn.textContent = 'Hide';
+                toggleBtn.textContent = '{{BTN_HIDE}}';
                 toggleBtn.style.backgroundColor = '#007bff';
             } else {
                 passwordInput.type = 'password';
-                toggleBtn.textContent = 'Show';
+                toggleBtn.textContent = '{{BTN_SHOW}}';
                 toggleBtn.style.backgroundColor = '#007bff';
             }
         });
@@ -693,6 +694,29 @@ highlightCurrentPage();
 
 export function getCommonJS() {
     return `
+// Initialize when DOM is ready (handles both cases)
+async function initializeApp() {
+    // Load localization lazily so nav always initializes even if it fails
+    try {
+        const localizationModule = await import('/js/clientLocalization.js');
+        if (localizationModule && typeof localizationModule.initLocalization === 'function') {
+            localizationModule.initLocalization();
+        }
+    } catch (e) {
+        // Ignore localization errors to not block navigation setup
+    }
+    initMobileNav(); // Initialize mobile navigation
+}
+
+// Check if DOM is already loaded
+if (document.readyState === 'loading') {
+    // DOM is still loading, wait for DOMContentLoaded
+    document.addEventListener('DOMContentLoaded', initializeApp);
+} else {
+    // DOM already loaded, initialize immediately
+    initializeApp();
+}
+
 function highlightCurrentPage() {
     const currentPath = window.location.pathname;
     const navLinks = document.querySelectorAll('.nav-link');
@@ -705,65 +729,175 @@ function highlightCurrentPage() {
     });
 }
 
+
+
+
+
+
+
 function initMobileNav() {
-    const hamburger = document.getElementById('hamburger');
-    const navMenu = document.getElementById('navMenu');
+    // Initialize modern mobile menu
+    initMobileMenu();
+}
+
+// Initialize mobile hamburger menu
+function initMobileMenu() {
+    const hamburger = document.querySelector('.hamburger');
+    const navMenu = document.querySelector('.nav-menu');
+    const navOverlay = document.querySelector('.nav-overlay');
     
-    if (hamburger && navMenu) {
-        // Remove existing event listeners to prevent duplicates
-        hamburger.removeEventListener('click', toggleMenu);
-        document.removeEventListener('click', closeMenuOnOutsideClick);
-        
-        // Add event listeners
-        hamburger.addEventListener('click', toggleMenu);
-        
-        // Close menu when clicking on a link
-        const navLinks = navMenu.querySelectorAll('.nav-link');
-        navLinks.forEach(link => {
-            link.removeEventListener('click', closeMenuOnLinkClick);
-            link.addEventListener('click', closeMenuOnLinkClick);
-        });
-        
-        // Close menu when clicking outside
-        document.addEventListener('click', closeMenuOnOutsideClick);
+    // Check if elements exist
+    if (!hamburger) {
+        return;
     }
-}
-
-function toggleMenu() {
-    const navMenu = document.getElementById('navMenu');
-    const hamburger = document.getElementById('hamburger');
-    if (navMenu && hamburger) {
-        const isExpanded = navMenu.classList.toggle('active');
-        hamburger.setAttribute('aria-expanded', isExpanded);
+    if (!navMenu) {
+        return;
     }
-}
-
-function closeMenuOnLinkClick() {
-    const navMenu = document.getElementById('navMenu');
-    const hamburger = document.getElementById('hamburger');
-    if (navMenu && hamburger) {
+    
+    // Set CSS custom property for viewport height (iOS Safari fix)
+    function setViewportHeight() {
+        const vh = window.innerHeight * 0.01;
+        document.documentElement.style.setProperty('--vh', vh + 'px');
+    }
+    
+    // Set initial viewport height
+    setViewportHeight();
+    
+    // Update on resize (handles iOS address bar changes)
+    window.addEventListener('resize', setViewportHeight);
+    window.addEventListener('orientationchange', () => {
+        // Delay to ensure proper height calculation after orientation change
+        setTimeout(setViewportHeight, 100);
+    });
+    
+    // Function to check if menu content fits and ensure scrolling is available
+    function ensureMenuScrollability() {
+        if (!navMenu.classList.contains('active')) return;
+        
+        const menuHeight = navMenu.offsetHeight;
+        const menuScrollHeight = navMenu.scrollHeight;
+        
+        // If content is taller than container, ensure scrolling works
+        if (menuScrollHeight > menuHeight) {
+            // Force scroll container behavior
+            navMenu.style.overflowY = 'scroll';
+            navMenu.style.webkitOverflowScrolling = 'touch';
+            
+            // Ensure the last item (Chinese language) is accessible
+            const lastLanguageLink = navMenu.querySelector('.language-links .nav-link:last-child');
+            if (lastLanguageLink) {
+                // Add bottom margin to ensure it's accessible
+                const languageLinks = navMenu.querySelector('.language-links');
+                if (languageLinks) {
+                    languageLinks.style.marginBottom = '40px';
+                }
+            }
+        }
+    }
+    
+    // Define menu functions first
+    function closeMenu() {
+        hamburger.classList.remove('active');
         navMenu.classList.remove('active');
+        if (navOverlay) navOverlay.classList.remove('active');
+        document.body.style.overflow = ''; // Restore scrolling
         hamburger.setAttribute('aria-expanded', 'false');
     }
-}
-
-function closeMenuOnOutsideClick(event) {
-    const hamburger = document.getElementById('hamburger');
-    const navMenu = document.getElementById('navMenu');
     
-    if (hamburger && navMenu && !hamburger.contains(event.target) && !navMenu.contains(event.target)) {
-        navMenu.classList.remove('active');
-        hamburger.setAttribute('aria-expanded', 'false');
+    function openMenu() {
+        hamburger.classList.add('active');
+        navMenu.classList.add('active');
+        if (navOverlay) navOverlay.classList.add('active');
+        document.body.style.overflow = 'hidden'; // Prevent background scrolling
+        hamburger.setAttribute('aria-expanded', 'true');
+        
+        // Check and ensure menu scrollability after menu is shown
+        setTimeout(() => {
+            ensureMenuScrollability();
+        }, 50);
+        
+        // Focus management for accessibility
+        const firstNavLink = navMenu.querySelector('.nav-link');
+        if (firstNavLink) {
+            setTimeout(() => firstNavLink.focus(), 100);
+        }
     }
+    
+    // Toggle menu function
+    function toggleMenu() {
+        const isOpen = hamburger.classList.contains('active');
+        
+        if (isOpen) {
+            closeMenu();
+        } else {
+            openMenu();
+        }
+    }
+    
+    // Force close menu on initialization to ensure clean state
+    closeMenu();
+    
+    // Event listeners
+    hamburger.addEventListener('click', toggleMenu);
+    
+    // Close menu when clicking on overlay
+    if (navOverlay) {
+        navOverlay.addEventListener('click', closeMenu);
+    }
+    
+    // Close menu when clicking on navigation links
+    const navLinks = navMenu.querySelectorAll('.nav-link');
+    navLinks.forEach(link => {
+        link.addEventListener('click', closeMenu);
+    });
+    
+    // Close menu on escape key and handle focus trapping
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && hamburger.classList.contains('active')) {
+            closeMenu();
+            hamburger.focus(); // Return focus to hamburger button
+        }
+        
+        // Simple focus trap when menu is open
+        if (hamburger.classList.contains('active') && e.key === 'Tab') {
+            const focusableElements = navMenu.querySelectorAll('.nav-link');
+            const firstElement = focusableElements[0];
+            const lastElement = focusableElements[focusableElements.length - 1];
+            
+            if (e.shiftKey) {
+                // Shift + Tab
+                if (document.activeElement === firstElement) {
+                    e.preventDefault();
+                    lastElement.focus();
+                }
+            } else {
+                // Tab
+                if (document.activeElement === lastElement) {
+                    e.preventDefault();
+                    firstElement.focus();
+                }
+            }
+        }
+    });
+    
+    // Close menu on window resize if it gets too wide
+    window.addEventListener('resize', () => {
+        if (window.innerWidth > 768 && hamburger.classList.contains('active')) {
+            closeMenu();
+        }
+    });
+    
+    // Add backup close functionality if menu gets stuck
+    document.addEventListener('click', (e) => {
+        if (hamburger.classList.contains('active') && 
+            !navMenu.contains(e.target) && 
+            !hamburger.contains(e.target)) {
+            closeMenu();
+        }
+    });
 }
 
-// Always initialize mobile navigation
-initMobileNav();
 
-// Re-initialize on window resize to handle dynamic content changes
-window.addEventListener('resize', () => {
-    initMobileNav();
-});
 
 highlightCurrentPage();
 `;
