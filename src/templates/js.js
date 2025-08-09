@@ -694,14 +694,28 @@ highlightCurrentPage();
 
 export function getCommonJS() {
     return `
-// Import client-side localization utility
-import { initLocalization, getCurrentLocale, t, localizeUrl } from '/js/clientLocalization.js';
+// Initialize when DOM is ready (handles both cases)
+async function initializeApp() {
+    // Load localization lazily so nav always initializes even if it fails
+    try {
+        const localizationModule = await import('/js/clientLocalization.js');
+        if (localizationModule && typeof localizationModule.initLocalization === 'function') {
+            localizationModule.initLocalization();
+        }
+    } catch (e) {
+        // Ignore localization errors to not block navigation setup
+    }
+    initMobileNav(); // Initialize mobile navigation
+}
 
-// Initialize localization when page loads
-document.addEventListener('DOMContentLoaded', () => {
-    initLocalization();
-    initMobileNav(); // Initialize mobile navigation auto-hide
-});
+// Check if DOM is already loaded
+if (document.readyState === 'loading') {
+    // DOM is still loading, wait for DOMContentLoaded
+    document.addEventListener('DOMContentLoaded', initializeApp);
+} else {
+    // DOM already loaded, initialize immediately
+    initializeApp();
+}
 
 function highlightCurrentPage() {
     const currentPath = window.location.pathname;
@@ -722,73 +736,119 @@ function highlightCurrentPage() {
 
 
 function initMobileNav() {
-    // Initialize auto-hide functionality on mobile devices only
-    if (isMobileDevice()) {
-        initNavbarAutoHide();
-    }
+    // Initialize modern mobile menu
+    initMobileMenu();
 }
 
-// Simple mobile device detection
-function isMobileDevice() {
-    return window.matchMedia('(max-width: 768px)').matches || 
-           /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-}
-
-// Navbar auto-hide functionality
-let lastScrollY = 0;
-let scrollTimeout = null;
-let isNavbarVisible = true;
-const scrollThreshold = 5; // Minimum scroll distance to trigger hide/show
-
-function initNavbarAutoHide() {
-    const navbar = document.querySelector('.navbar');
-    if (!navbar) return;
+// Initialize mobile hamburger menu
+function initMobileMenu() {
+    const hamburger = document.querySelector('.hamburger');
+    const navMenu = document.querySelector('.nav-menu');
+    const navOverlay = document.querySelector('.nav-overlay');
     
-    // Throttled scroll handler for better performance
-    function handleScroll() {
-        if (scrollTimeout) {
-            clearTimeout(scrollTimeout);
+    // Check if elements exist
+    if (!hamburger) {
+        return;
+    }
+    if (!navMenu) {
+        return;
+    }
+    
+    // Define menu functions first
+    function closeMenu() {
+        hamburger.classList.remove('active');
+        navMenu.classList.remove('active');
+        if (navOverlay) navOverlay.classList.remove('active');
+        document.body.style.overflow = ''; // Restore scrolling
+        hamburger.setAttribute('aria-expanded', 'false');
+    }
+    
+    function openMenu() {
+        hamburger.classList.add('active');
+        navMenu.classList.add('active');
+        if (navOverlay) navOverlay.classList.add('active');
+        document.body.style.overflow = 'hidden'; // Prevent background scrolling
+        hamburger.setAttribute('aria-expanded', 'true');
+        
+        // Focus management for accessibility
+        const firstNavLink = navMenu.querySelector('.nav-link');
+        if (firstNavLink) {
+            setTimeout(() => firstNavLink.focus(), 100);
+        }
+    }
+    
+    // Toggle menu function
+    function toggleMenu() {
+        const isOpen = hamburger.classList.contains('active');
+        
+        if (isOpen) {
+            closeMenu();
+        } else {
+            openMenu();
+        }
+    }
+    
+    // Force close menu on initialization to ensure clean state
+    closeMenu();
+    
+    // Event listeners
+    hamburger.addEventListener('click', toggleMenu);
+    
+    // Close menu when clicking on overlay
+    if (navOverlay) {
+        navOverlay.addEventListener('click', closeMenu);
+    }
+    
+    // Close menu when clicking on navigation links
+    const navLinks = navMenu.querySelectorAll('.nav-link');
+    navLinks.forEach(link => {
+        link.addEventListener('click', closeMenu);
+    });
+    
+    // Close menu on escape key and handle focus trapping
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && hamburger.classList.contains('active')) {
+            closeMenu();
+            hamburger.focus(); // Return focus to hamburger button
         }
         
-        scrollTimeout = setTimeout(() => {
-            const currentScrollY = window.scrollY;
-            const scrollDifference = Math.abs(currentScrollY - lastScrollY);
+        // Simple focus trap when menu is open
+        if (hamburger.classList.contains('active') && e.key === 'Tab') {
+            const focusableElements = navMenu.querySelectorAll('.nav-link');
+            const firstElement = focusableElements[0];
+            const lastElement = focusableElements[focusableElements.length - 1];
             
-            // Only trigger if scroll difference exceeds threshold
-            if (scrollDifference < scrollThreshold) {
-                return;
+            if (e.shiftKey) {
+                // Shift + Tab
+                if (document.activeElement === firstElement) {
+                    e.preventDefault();
+                    lastElement.focus();
+                }
+            } else {
+                // Tab
+                if (document.activeElement === lastElement) {
+                    e.preventDefault();
+                    firstElement.focus();
+                }
             }
-            
-            // Don't hide navbar when at the very top of the page
-            if (currentScrollY <= 10) {
-                showNavbar(navbar);
-                lastScrollY = currentScrollY;
-                return;
-            }
-            
-            if (currentScrollY > lastScrollY && isNavbarVisible) {
-                // Scrolling down - hide navbar
-                hideNavbar(navbar);
-            } else if (currentScrollY < lastScrollY && !isNavbarVisible) {
-                // Scrolling up - show navbar
-                showNavbar(navbar);
-            }
-            
-            lastScrollY = currentScrollY;
-        }, 10); // Small delay for throttling
-    }
+        }
+    });
     
-    window.addEventListener('scroll', handleScroll, { passive: true });
-}
-
-function hideNavbar(navbar) {
-    navbar.classList.add('hidden');
-    isNavbarVisible = false;
-}
-
-function showNavbar(navbar) {
-    navbar.classList.remove('hidden');
-    isNavbarVisible = true;
+    // Close menu on window resize if it gets too wide
+    window.addEventListener('resize', () => {
+        if (window.innerWidth > 768 && hamburger.classList.contains('active')) {
+            closeMenu();
+        }
+    });
+    
+    // Add backup close functionality if menu gets stuck
+    document.addEventListener('click', (e) => {
+        if (hamburger.classList.contains('active') && 
+            !navMenu.contains(e.target) && 
+            !hamburger.contains(e.target)) {
+            closeMenu();
+        }
+    });
 }
 
 

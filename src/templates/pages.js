@@ -73,6 +73,15 @@ export async function getIndexHTML(locale = 'en', origin = 'https://securememo.a
     <nav class="navbar">
         <div class="nav-container">
             <a href="/${locale}" class="nav-logo">securememo.app</a>
+            
+            <!-- Hamburger Menu Button -->
+            <button class="hamburger" type="button" aria-label="Toggle navigation menu" aria-expanded="false">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+            
+            <!-- Navigation Menu -->
             <ul class="nav-menu" id="navMenu">
                 <li><a href="/${locale}" class="nav-link active">${t('nav.home', locale)}</a></li>
                 <li><a href="/${locale}/about.html" class="nav-link">${t('nav.about', locale)}</a></li>
@@ -91,7 +100,9 @@ export async function getIndexHTML(locale = 'en', origin = 'https://securememo.a
                     <a href="/zh" class="nav-link ${locale === 'zh' ? 'active' : ''}" title="中文">中文</a>
                 </li>
             </ul>
-
+            
+            <!-- Mobile Menu Overlay -->
+            <div class="nav-overlay"></div>
         </div>
     </nav>
 
@@ -147,7 +158,7 @@ export async function getIndexHTML(locale = 'en', origin = 'https://securememo.a
         <p style="font-size: 0.8em; margin-top: 0.5em; opacity: 0.8;">${t('footer.tagline', locale)}</p>
     </footer>
 
-    <script src="/js/common.js" defer></script>
+    <script src="/js/common.js" type="module" defer></script>
 </body>
 </html>`;
 }
@@ -240,6 +251,15 @@ export async function getAboutHTML(locale = 'en', origin = 'https://securememo.a
     <nav class="navbar">
         <div class="nav-container">
             <a href="/${locale}" class="nav-logo">securememo.app</a>
+            
+            <!-- Hamburger Menu Button -->
+            <button class="hamburger" type="button" aria-label="Toggle navigation menu" aria-expanded="false">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+            
+            <!-- Navigation Menu -->
             <ul class="nav-menu" id="navMenu">
                 <li><a href="/${locale}" class="nav-link">${t('nav.home', locale)}</a></li>
                 <li><a href="/${locale}/about.html" class="nav-link active">${t('nav.about', locale)}</a></li>
@@ -258,7 +278,9 @@ export async function getAboutHTML(locale = 'en', origin = 'https://securememo.a
                     <a href="/zh/about.html" class="nav-link ${locale === 'zh' ? 'active' : ''}" title="中文">中文</a>
                 </li>
             </ul>
-
+            
+            <!-- Mobile Menu Overlay -->
+            <div class="nav-overlay"></div>
         </div>
     </nav>
 
@@ -342,7 +364,7 @@ export async function getAboutHTML(locale = 'en', origin = 'https://securememo.a
         <p style="font-size: 0.8em; margin-top: 0.5em; opacity: 0.8;">${t('footer.tagline', locale)}</p>
     </footer>
 
-    <script src="/js/common.js" defer></script>
+    <script src="/js/common.js" type="module" defer></script>
 </body>
 </html>`;
 }
@@ -421,6 +443,15 @@ export async function getCreateMemoHTML(locale = 'en', origin = 'https://securem
     <nav class="navbar">
         <div class="nav-container">
             <a href="/${locale}" class="nav-logo">securememo.app</a>
+            
+            <!-- Hamburger Menu Button -->
+            <button class="hamburger" type="button" aria-label="Toggle navigation menu" aria-expanded="false">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+            
+            <!-- Navigation Menu -->
             <ul class="nav-menu" id="navMenu">
                 <li><a href="/${locale}" class="nav-link">${t('nav.home', locale)}</a></li>
                 <li><a href="/${locale}/about.html" class="nav-link">${t('nav.about', locale)}</a></li>
@@ -439,7 +470,9 @@ export async function getCreateMemoHTML(locale = 'en', origin = 'https://securem
                     <a href="/zh/create-memo.html" class="nav-link ${locale === 'zh' ? 'active' : ''}" title="中文">中文</a>
                 </li>
             </ul>
-
+            
+            <!-- Mobile Menu Overlay -->
+            <div class="nav-overlay"></div>
         </div>
     </nav>
 
@@ -526,7 +559,7 @@ export async function getCreateMemoHTML(locale = 'en', origin = 'https://securem
         <p style="font-size: 0.8em; margin-top: 0.5em; opacity: 0.8;">${t('footer.tagline', locale)}</p>
     </footer>
 
-    <script src="/js/common.js" defer></script>
+    <script src="/js/common.js" type="module" defer></script>
 </body>
 </html>`;
 }
@@ -605,6 +638,15 @@ export async function getReadMemoHTML(locale = 'en', origin = 'https://securemem
     <nav class="navbar">
         <div class="nav-container">
             <a href="/${locale}" class="nav-logo">securememo.app</a>
+            
+            <!-- Hamburger Menu Button -->
+            <button class="hamburger" type="button" aria-label="Toggle navigation menu" aria-expanded="false">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+            
+            <!-- Navigation Menu -->
             <ul class="nav-menu" id="navMenu">
                 <li><a href="/${locale}" class="nav-link">${t('nav.home', locale)}</a></li>
                 <li><a href="/${locale}/about.html" class="nav-link">${t('nav.about', locale)}</a></li>
@@ -623,7 +665,9 @@ export async function getReadMemoHTML(locale = 'en', origin = 'https://securemem
                     <a href="/zh/read-memo.html" class="nav-link ${locale === 'zh' ? 'active' : ''}" title="中文">中文</a>
                 </li>
             </ul>
-
+            
+            <!-- Mobile Menu Overlay -->
+            <div class="nav-overlay"></div>
         </div>
     </nav>
 
@@ -689,7 +733,7 @@ export async function getReadMemoHTML(locale = 'en', origin = 'https://securemem
         <p style="font-size: 0.8em; margin-top: 0.5em; opacity: 0.8;">${t('footer.tagline', locale)}</p>
     </footer>
 
-    <script src="/js/common.js" defer></script>
+    <script src="/js/common.js" type="module" defer></script>
 </body>
 </html>`;
 }
@@ -762,6 +806,15 @@ export async function getToSHTML(locale = 'en', origin = 'https://securememo.app
     <nav class="navbar">
         <div class="nav-container">
             <a href="/${locale}" class="nav-logo">securememo.app</a>
+            
+            <!-- Hamburger Menu Button -->
+            <button class="hamburger" type="button" aria-label="Toggle navigation menu" aria-expanded="false">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+            
+            <!-- Navigation Menu -->
             <ul class="nav-menu" id="navMenu">
                 <li><a href="/${locale}" class="nav-link">${t('nav.home', locale)}</a></li>
                 <li><a href="/${locale}/about.html" class="nav-link">${t('nav.about', locale)}</a></li>
@@ -780,7 +833,9 @@ export async function getToSHTML(locale = 'en', origin = 'https://securememo.app
                     <a href="/zh/tos.html" class="nav-link ${locale === 'zh' ? 'active' : ''}" title="中文">中文</a>
                 </li>
             </ul>
-
+            
+            <!-- Mobile Menu Overlay -->
+            <div class="nav-overlay"></div>
         </div>
     </nav>
 
@@ -913,7 +968,7 @@ export async function getToSHTML(locale = 'en', origin = 'https://securememo.app
         <p style="font-size: 0.8em; margin-top: 0.5em; opacity: 0.8;">${t('footer.tagline', locale)}</p>
     </footer>
 
-    <script src="/js/common.js" defer></script>
+    <script src="/js/common.js" type="module" defer></script>
 </body>
 </html>`;
 }
@@ -986,6 +1041,15 @@ export async function getPrivacyHTML(locale = 'en', origin = 'https://securememo
     <nav class="navbar">
         <div class="nav-container">
             <a href="/${locale}" class="nav-logo">securememo.app</a>
+            
+            <!-- Hamburger Menu Button -->
+            <button class="hamburger" type="button" aria-label="Toggle navigation menu" aria-expanded="false">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+            
+            <!-- Navigation Menu -->
             <ul class="nav-menu" id="navMenu">
                 <li><a href="/${locale}" class="nav-link">${t('nav.home', locale)}</a></li>
                 <li><a href="/${locale}/about.html" class="nav-link">${t('nav.about', locale)}</a></li>
@@ -1004,7 +1068,9 @@ export async function getPrivacyHTML(locale = 'en', origin = 'https://securememo
                     <a href="/zh/privacy.html" class="nav-link ${locale === 'zh' ? 'active' : ''}" title="中文">中文</a>
                 </li>
             </ul>
-
+            
+            <!-- Mobile Menu Overlay -->
+            <div class="nav-overlay"></div>
         </div>
     </nav>
 
@@ -1130,7 +1196,7 @@ export async function getPrivacyHTML(locale = 'en', origin = 'https://securememo
         <p style="font-size: 0.8em; margin-top: 0.5em; opacity: 0.8;">${t('footer.tagline', locale)}</p>
     </footer>
 
-    <script src="/js/common.js" defer></script>
+    <script src="/js/common.js" type="module" defer></script>
 </body>
 </html>`;
 } 
