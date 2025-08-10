@@ -11,7 +11,7 @@ import { ptBR } from './ptBR_translations.js';
 import { hi } from './hi_translations.js';
 import { zh } from './zh_translations.js';
 import { ja } from './ja_translations.js';
-
+import { ko } from './ko_translations.js';
 export const TRANSLATIONS = {
   en,
   de,
@@ -21,5 +21,6 @@ export const TRANSLATIONS = {
   ptBR,
   hi,
   zh,
-  ja
+  ja,
+  ko
 };

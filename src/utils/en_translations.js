@@ -21,6 +21,7 @@ export const en = {
     'language.portuguesePT': 'Português (Portugal)',
     'language.portugueseBR': 'Português (Brasil)',
     'language.japanese': '日本語',
+    'language.korean': '한국어',
     
     // Buttons
     'btn.copy': 'Copy',

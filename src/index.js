@@ -229,7 +229,7 @@ export default {
         }
         
         // Generate multilingual sitemap for all supported languages
-        const supportedLocales = ['en', 'es', 'fr', 'de', 'hi', 'zh', 'ptPT', 'ptBR', 'ja'];
+        const supportedLocales = ['en', 'es', 'fr', 'de', 'hi', 'zh', 'ptPT', 'ptBR', 'ja', 'ko'];
         const pages = [
           { path: '', priority: '1.0', changefreq: 'weekly' },
           { path: '/about.html', priority: '0.8', changefreq: 'monthly' },

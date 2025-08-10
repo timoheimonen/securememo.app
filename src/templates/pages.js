@@ -104,6 +104,8 @@ export async function getIndexHTML(locale = 'en', origin = 'https://securememo.a
                     <a href="/zh" class="nav-link ${locale === 'zh' ? 'active' : ''}" title="${t('language.chinese', locale)}">中文</a>
                     <span class="language-separator">|</span>
                     <a href="/ja" class="nav-link ${locale === 'ja' ? 'active' : ''}" title="${t('language.japanese', locale)}">日本語</a>
+                    <span class="language-separator">|</span>
+                    <a href="/ko" class="nav-link ${locale === 'ko' ? 'active' : ''}" title="${t('language.korean', locale)}">한국어</a>
                 </li>
             </ul>
             
@@ -288,6 +290,8 @@ export async function getAboutHTML(locale = 'en', origin = 'https://securememo.a
                     <a href="/zh/about.html" class="nav-link ${locale === 'zh' ? 'active' : ''}" title="${t('language.chinese', locale)}">中文</a>
                     <span class="language-separator">|</span>
                     <a href="/ja/about.html" class="nav-link ${locale === 'ja' ? 'active' : ''}" title="${t('language.japanese', locale)}">日本語</a>
+                    <span class="language-separator">|</span>
+                    <a href="/ko/about.html" class="nav-link ${locale === 'ko' ? 'active' : ''}" title="${t('language.korean', locale)}">한국어</a>
                 </li>
             </ul>
             
@@ -486,6 +490,8 @@ export async function getCreateMemoHTML(locale = 'en', origin = 'https://securem
                     <a href="/zh/create-memo.html" class="nav-link ${locale === 'zh' ? 'active' : ''}" title="${t('language.chinese', locale)}">中文</a>
                     <span class="language-separator">|</span>
                     <a href="/ja/create-memo.html" class="nav-link ${locale === 'ja' ? 'active' : ''}" title="${t('language.japanese', locale)}">日本語</a>
+                    <span class="language-separator">|</span>
+                    <a href="/ko/create-memo.html" class="nav-link ${locale === 'ko' ? 'active' : ''}" title="${t('language.korean', locale)}">한국어</a>
                 </li>
             </ul>
             
@@ -687,6 +693,8 @@ export async function getReadMemoHTML(locale = 'en', origin = 'https://securemem
                     <a href="/zh/read-memo.html" class="nav-link ${locale === 'zh' ? 'active' : ''}" title="${t('language.chinese', locale)}">中文</a>
                     <span class="language-separator">|</span>
                     <a href="/ja/read-memo.html" class="nav-link ${locale === 'ja' ? 'active' : ''}" title="${t('language.japanese', locale)}">日本語</a>
+                    <span class="language-separator">|</span>
+                    <a href="/ko/read-memo.html" class="nav-link ${locale === 'ko' ? 'active' : ''}" title="${t('language.korean', locale)}">한국어</a>
                 </li>
             </ul>
             
@@ -861,6 +869,8 @@ export async function getToSHTML(locale = 'en', origin = 'https://securememo.app
                     <a href="/zh/tos.html" class="nav-link ${locale === 'zh' ? 'active' : ''}" title="${t('language.chinese', locale)}">中文</a>
                     <span class="language-separator">|</span>
                     <a href="/ja/tos.html" class="nav-link ${locale === 'ja' ? 'active' : ''}" title="${t('language.japanese', locale)}">日本語</a>
+                    <span class="language-separator">|</span>
+                    <a href="/ko/tos.html" class="nav-link ${locale === 'ko' ? 'active' : ''}" title="${t('language.korean', locale)}">한국어</a>
                 </li>
             </ul>
             
@@ -1102,6 +1112,8 @@ export async function getPrivacyHTML(locale = 'en', origin = 'https://securememo
                     <a href="/zh/privacy.html" class="nav-link ${locale === 'zh' ? 'active' : ''}" title="${t('language.chinese', locale)}">中文</a>
                     <span class="language-separator">|</span>
                     <a href="/ja/privacy.html" class="nav-link ${locale === 'ja' ? 'active' : ''}" title="${t('language.japanese', locale)}">日本語</a>
+                    <span class="language-separator">|</span>
+                    <a href="/ko/privacy.html" class="nav-link ${locale === 'ko' ? 'active' : ''}" title="${t('language.korean', locale)}">한국어</a>
                 </li>
             </ul>
             
