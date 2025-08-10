@@ -51,7 +51,9 @@ securememo/
 │   │   ├── ptBR_translations.js # Portuguese (Brazil) translations
 │   │   ├── zh_translations.js  # Chinese translations
 │   │   ├── ko_translations.js  # Korean translations
-│   │   └── ja_translations.js  # Japanese translations
+│   │   ├── ja_translations.js  # Japanese translations
+│   │   ├── it_translations.js  # Italian translations
+│   │   └── id_translations.js  # Indonesian translations
 │   ├── screenshots/            # Screenshots
 │   │   └──  screenshot_001.png # Screenshot 001
 │   ├── styles/                 # CSS styling
