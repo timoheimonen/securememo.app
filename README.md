@@ -65,7 +65,7 @@ securememo/
 ├── wrangler.toml               # Cloudflare Workers configuration
 ├── deploy.sh                   # Deployment script
 ├── README.md                   # Project documentation
-├── LICENSE                     # MIT License
+├── LICENSE                     # License
 ├── SECURITY.md                 # Security policy and vulnerability reporting
 ├── CODE_OF_CONDUCT.md          # Community guidelines
 └── CONTRIBUTING.md             # Contribution guidelines
