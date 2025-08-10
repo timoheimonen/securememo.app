@@ -3,8 +3,8 @@
 // No cookies, localStorage, or browser storage used
 
 import { TRANSLATIONS } from './translations.js';
+import { getSupportedLocales, getDefaultLocale, isLocaleSupported } from './localization.js';
 
-const SUPPORTED_LOCALES = ['en', 'es', 'fr', 'de', 'hi', 'zh', 'ptPT', 'ptBR', 'ja', 'ko', 'it', 'id'];
 const DEFAULT_LOCALE = 'en';
 
 /**
@@ -15,7 +15,7 @@ export function getCurrentLocale() {
   const pathname = window.location.pathname;
   const segments = pathname.replace(/^\/+/, '').split('/');
   
-  if (segments.length > 0 && SUPPORTED_LOCALES.includes(segments[0])) {
+  if (segments.length > 0 && isLocaleSupported(segments[0])) {
     return segments[0];
   }
   
@@ -130,22 +130,8 @@ export function initLocalization() {
   document.documentElement.setAttribute('lang', getCurrentLocale());
 }
 
-/**
- * Get supported locales
- * @returns {Array<string>} Array of supported locale codes
- */
-export function getSupportedLocales() {
-  return [...SUPPORTED_LOCALES];
-}
-
-/**
- * Check if locale is supported
- * @param {string} locale - Locale code to check
- * @returns {boolean} True if supported
- */
-export function isLocaleSupported(locale) {
-  return SUPPORTED_LOCALES.includes(locale);
-}
+// Re-export functions from localization.js for consistency
+export { getSupportedLocales, isLocaleSupported } from './localization.js';
 
 /**
  * Get the client localization code as a string for serving as a JS file
@@ -154,12 +140,13 @@ export function isLocaleSupported(locale) {
 export function getClientLocalizationJS() {
   // Use the same TRANSLATIONS object but format as string for serving
   const translationsString = JSON.stringify(TRANSLATIONS, null, 2);
+  const supportedLocalesString = JSON.stringify(getSupportedLocales());
   
   return `// Client-side localization utility for securememo.app
 // Privacy-first approach: uses only URL-based locale detection
 // No cookies, localStorage, or browser storage used
 
-const SUPPORTED_LOCALES = ['en', 'es', 'fr', 'de', 'hi', 'zh', 'ptPT', 'ptBR', 'ja', 'ko', 'it', 'id'];
+const SUPPORTED_LOCALES = ${supportedLocalesString};
 const DEFAULT_LOCALE = 'en';
 
 // Translation strings for different locales
@@ -174,7 +161,7 @@ export function getCurrentLocale() {
   const pathname = window.location.pathname;
   const segments = pathname.replace(/^\/+/, '').split('/');
   
-  if (segments.length > 0 && SUPPORTED_LOCALES.includes(segments[0])) {
+  if (segments.length > 0 && isLocaleSupported(segments[0])) {
     return segments[0];
   }
   
@@ -289,20 +276,5 @@ export function initLocalization() {
   document.documentElement.setAttribute('lang', getCurrentLocale());
 }
 
-/**
- * Get supported locales
- * @returns {Array<string>} Array of supported locale codes
- */
-export function getSupportedLocales() {
-  return [...SUPPORTED_LOCALES];
-}
-
-/**
- * Check if locale is supported
- * @param {string} locale - Locale code to check
- * @returns {boolean} True if supported
- */
-export function isLocaleSupported(locale) {
-  return SUPPORTED_LOCALES.includes(locale);
-}`;
+`;
 }

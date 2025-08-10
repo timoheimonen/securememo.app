@@ -1,4 +1,5 @@
 import { getStyles } from './styles/styles.js';
+import { getSupportedLocales } from './utils/localization.js';
 
 /**
  * Escape a string for safe injection into JavaScript string literals
@@ -247,7 +248,7 @@ export default {
         }
         
         // Generate multilingual sitemap for all supported languages
-        const supportedLocales = ['en', 'es', 'fr', 'de', 'hi', 'zh', 'ptPT', 'ptBR', 'ja', 'ko'];
+        const supportedLocales = getSupportedLocales();
         const pages = [
           { path: '', priority: '1.0', changefreq: 'weekly' },
           { path: '/about.html', priority: '0.8', changefreq: 'monthly' },
