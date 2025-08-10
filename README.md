@@ -49,7 +49,8 @@ securememo/
 │   │   ├── hi_translations.js  # Hindi translations
 │   │   ├── ptPT_translations.js # Portuguese (Portugal) translations
 │   │   ├── ptBR_translations.js # Portuguese (Brazil) translations
-│   │   └── zh_translations.js  # Chinese translations
+│   │   ├── zh_translations.js  # Chinese translations
+│   │   ├── ko_translations.js  # Korean translations
 │   │   └── ja_translations.js  # Japanese translations
 │   ├── screenshots/            # Screenshots
 │   │   └──  screenshot_001.png # Screenshot 001
