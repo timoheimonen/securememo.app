@@ -141,6 +141,103 @@ body {
   min-width: auto;
 }
 
+/* Language Dropdown Styles */
+.language-dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.language-toggle {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-family: inherit;
+  font-size: 0.95rem;
+  font-weight: 500;
+  padding: 8px 12px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  color: #333;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.language-toggle:hover,
+.language-toggle:focus,
+.language-toggle.active {
+  color: #667eea;
+  background: rgba(102, 126, 234, 0.1);
+  outline: none;
+}
+
+.language-toggle::after {
+  content: '▼';
+  font-size: 0.7rem;
+  margin-left: 4px;
+  transition: transform 0.3s ease;
+}
+
+.language-toggle[aria-expanded="true"]::after {
+  transform: rotate(180deg);
+}
+
+.language-menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background: white;
+  border: 1px solid #e1e5e9;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  min-width: 200px;
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.language-dropdown.active .language-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.language-item {
+  display: block;
+  padding: 12px 16px;
+  color: #333;
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.language-item:last-child {
+  border-bottom: none;
+}
+
+.language-item:hover {
+  background: rgba(102, 126, 234, 0.1);
+  color: #667eea;
+}
+
+.language-item.active {
+  background: #667eea;
+  color: white;
+  font-weight: 600;
+}
+
+.language-item.active:hover {
+  background: #5a6fd8;
+}
+
 .auth-links, .user-links {
   display: flex;
   gap: 15px;
@@ -1051,6 +1148,62 @@ input, textarea, select {
     padding: 16px 24px 16px 24px; /* Add bottom padding for better spacing */
     border-top: 2px solid rgba(0, 0, 0, 0.1);
     flex: 0 0 auto; /* Don't grow/shrink */
+  }
+  
+  /* Keep language links on mobile, but convert dropdown to list on mobile */
+  .language-dropdown {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin-top: 16px;
+    padding: 16px 24px 16px 24px;
+    border-top: 2px solid rgba(0, 0, 0, 0.1);
+    flex: 0 0 auto;
+  }
+  
+  .language-toggle {
+    display: none; /* Hide dropdown toggle on mobile */
+  }
+  
+  .language-menu {
+    position: static !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+    max-height: none !important;
+    overflow-y: visible !important;
+    min-width: auto !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 4px !important;
+  }
+  
+  .language-item {
+    padding: 16px 16px;
+    margin: 4px 0;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: 500;
+    text-align: center;
+    justify-content: center;
+    border-bottom: none !important;
+    background: rgba(102, 126, 234, 0.05);
+    min-height: 50px;
+    flex-shrink: 0;
+    touch-action: manipulation;
+    display: flex;
+    align-items: center;
+  }
+  
+  .language-item:hover,
+  .language-item.active {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    transform: translateX(0) scale(1.05);
   }
   
   .language-links .nav-link {

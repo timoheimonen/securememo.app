@@ -1,5 +1,24 @@
 import { t } from '../utils/localization.js';
 
+// Helper function to get native language name
+function getLanguageDisplayName(locale) {
+  const languageNames = {
+    'en': 'English',
+    'es': 'Español',
+    'fr': 'Français',
+    'de': 'Deutsch',
+    'it': 'Italiano',
+    'id': 'Indonesia',
+    'ptPT': 'Português',
+    'ptBR': 'Português (BR)',
+    'hi': 'हिन्दी',
+    'zh': '中文',
+    'ja': '日本語',
+    'ko': '한국어'
+  };
+  return languageNames[locale] || locale.toUpperCase();
+}
+
 export async function getIndexHTML(locale = 'en', origin = 'https://securememo.app') {
   const canonicalUrl = `${origin}/${locale}`;
   return `<!DOCTYPE html>
@@ -86,30 +105,24 @@ export async function getIndexHTML(locale = 'en', origin = 'https://securememo.a
                 <li><a href="/${locale}" class="nav-link active">${t('nav.home', locale)}</a></li>
                 <li><a href="/${locale}/about.html" class="nav-link">${t('nav.about', locale)}</a></li>
                 <li><a href="/${locale}/create-memo.html" class="nav-link">${t('nav.create', locale)}</a></li>
-                <li class="language-links">
-                    <a href="/en" class="nav-link ${locale === 'en' ? 'active' : ''}" title="${t('language.english', locale)}">EN</a>
-                    <span class="language-separator">|</span>
-                    <a href="/es" class="nav-link ${locale === 'es' ? 'active' : ''}" title="${t('language.spanish', locale)}">ES</a>
-                    <span class="language-separator">|</span>
-                    <a href="/fr" class="nav-link ${locale === 'fr' ? 'active' : ''}" title="${t('language.french', locale)}">FR</a>
-                    <span class="language-separator">|</span>
-                    <a href="/de" class="nav-link ${locale === 'de' ? 'active' : ''}" title="${t('language.german', locale)}">DE</a>
-                    <span class="language-separator">|</span>
-                    <a href="/it" class="nav-link ${locale === 'it' ? 'active' : ''}" title="${t('language.italian', locale)}">IT</a>
-                    <span class="language-separator">|</span>
-                    <a href="/id" class="nav-link ${locale === 'id' ? 'active' : ''}" title="${t('language.indonesian', locale)}">ID</a>
-                    <span class="language-separator">|</span>
-                    <a href="/ptPT" class="nav-link ${locale === 'ptPT' ? 'active' : ''}" title="${t('language.portuguesePT', locale)}">PT</a>
-                    <span class="language-separator">|</span>
-                    <a href="/ptBR" class="nav-link ${locale === 'ptBR' ? 'active' : ''}" title="${t('language.portugueseBR', locale)}">PT-BR</a>
-                    <span class="language-separator">|</span>
-                    <a href="/hi" class="nav-link ${locale === 'hi' ? 'active' : ''}" title="${t('language.hindi', locale)}">हिन्दी</a>
-                    <span class="language-separator">|</span>
-                    <a href="/zh" class="nav-link ${locale === 'zh' ? 'active' : ''}" title="${t('language.chinese', locale)}">中文</a>
-                    <span class="language-separator">|</span>
-                    <a href="/ja" class="nav-link ${locale === 'ja' ? 'active' : ''}" title="${t('language.japanese', locale)}">日本語</a>
-                    <span class="language-separator">|</span>
-                    <a href="/ko" class="nav-link ${locale === 'ko' ? 'active' : ''}" title="${t('language.korean', locale)}">한국어</a>
+                <li class="language-dropdown">
+                    <button class="language-toggle nav-link" aria-expanded="false" aria-haspopup="true">
+                        🌐 ${getLanguageDisplayName(locale)}
+                    </button>
+                    <div class="language-menu">
+                        <a href="/en" class="language-item ${locale === 'en' ? 'active' : ''}" title="${t('language.english', locale)}">EN - English</a>
+                        <a href="/es" class="language-item ${locale === 'es' ? 'active' : ''}" title="${t('language.spanish', locale)}">ES - Español</a>
+                        <a href="/fr" class="language-item ${locale === 'fr' ? 'active' : ''}" title="${t('language.french', locale)}">FR - Français</a>
+                        <a href="/de" class="language-item ${locale === 'de' ? 'active' : ''}" title="${t('language.german', locale)}">DE - Deutsch</a>
+                        <a href="/it" class="language-item ${locale === 'it' ? 'active' : ''}" title="${t('language.italian', locale)}">IT - Italiano</a>
+                        <a href="/id" class="language-item ${locale === 'id' ? 'active' : ''}" title="${t('language.indonesian', locale)}">ID - Indonesia</a>
+                        <a href="/ptPT" class="language-item ${locale === 'ptPT' ? 'active' : ''}" title="${t('language.portuguesePT', locale)}">PT - Português</a>
+                        <a href="/ptBR" class="language-item ${locale === 'ptBR' ? 'active' : ''}" title="${t('language.portugueseBR', locale)}">PT-BR - Português (Brasil)</a>
+                        <a href="/hi" class="language-item ${locale === 'hi' ? 'active' : ''}" title="${t('language.hindi', locale)}">HI - हिन्दी</a>
+                        <a href="/zh" class="language-item ${locale === 'zh' ? 'active' : ''}" title="${t('language.chinese', locale)}">ZH - 中文</a>
+                        <a href="/ja" class="language-item ${locale === 'ja' ? 'active' : ''}" title="${t('language.japanese', locale)}">JA - 日本語</a>
+                        <a href="/ko" class="language-item ${locale === 'ko' ? 'active' : ''}" title="${t('language.korean', locale)}">KO - 한국어</a>
+                    </div>
                 </li>
             </ul>
             
@@ -276,30 +289,24 @@ export async function getAboutHTML(locale = 'en', origin = 'https://securememo.a
                 <li><a href="/${locale}" class="nav-link">${t('nav.home', locale)}</a></li>
                 <li><a href="/${locale}/about.html" class="nav-link active">${t('nav.about', locale)}</a></li>
                 <li><a href="/${locale}/create-memo.html" class="nav-link">${t('nav.create', locale)}</a></li>
-                <li class="language-links">
-                    <a href="/en/about.html" class="nav-link ${locale === 'en' ? 'active' : ''}" title="${t('language.english', locale)}">EN</a>
-                    <span class="language-separator">|</span>
-                    <a href="/es/about.html" class="nav-link ${locale === 'es' ? 'active' : ''}" title="${t('language.spanish', locale)}">ES</a>
-                    <span class="language-separator">|</span>
-                    <a href="/fr/about.html" class="nav-link ${locale === 'fr' ? 'active' : ''}" title="${t('language.french', locale)}">FR</a>
-                    <span class="language-separator">|</span>
-                    <a href="/de/about.html" class="nav-link ${locale === 'de' ? 'active' : ''}" title="${t('language.german', locale)}">DE</a>
-                    <span class="language-separator">|</span>
-                    <a href="/it/about.html" class="nav-link ${locale === 'it' ? 'active' : ''}" title="${t('language.italian', locale)}">IT</a>
-                    <span class="language-separator">|</span>
-                    <a href="/id/about.html" class="nav-link ${locale === 'id' ? 'active' : ''}" title="${t('language.indonesian', locale)}">ID</a>
-                    <span class="language-separator">|</span>
-                    <a href="/ptPT/about.html" class="nav-link ${locale === 'ptPT' ? 'active' : ''}" title="${t('language.portuguesePT', locale)}">PT</a>
-                    <span class="language-separator">|</span>
-                    <a href="/ptBR/about.html" class="nav-link ${locale === 'ptBR' ? 'active' : ''}" title="${t('language.portugueseBR', locale)}">PT-BR</a>
-                    <span class="language-separator">|</span>
-                    <a href="/hi/about.html" class="nav-link ${locale === 'hi' ? 'active' : ''}" title="${t('language.hindi', locale)}">हिन्दी</a>
-                    <span class="language-separator">|</span>
-                    <a href="/zh/about.html" class="nav-link ${locale === 'zh' ? 'active' : ''}" title="${t('language.chinese', locale)}">中文</a>
-                    <span class="language-separator">|</span>
-                    <a href="/ja/about.html" class="nav-link ${locale === 'ja' ? 'active' : ''}" title="${t('language.japanese', locale)}">日本語</a>
-                    <span class="language-separator">|</span>
-                    <a href="/ko/about.html" class="nav-link ${locale === 'ko' ? 'active' : ''}" title="${t('language.korean', locale)}">한국어</a>
+                <li class="language-dropdown">
+                    <button class="language-toggle nav-link" aria-expanded="false" aria-haspopup="true">
+                        🌐 ${getLanguageDisplayName(locale)}
+                    </button>
+                    <div class="language-menu">
+                        <a href="/en/about.html" class="language-item ${locale === 'en' ? 'active' : ''}" title="${t('language.english', locale)}">EN - English</a>
+                        <a href="/es/about.html" class="language-item ${locale === 'es' ? 'active' : ''}" title="${t('language.spanish', locale)}">ES - Español</a>
+                        <a href="/fr/about.html" class="language-item ${locale === 'fr' ? 'active' : ''}" title="${t('language.french', locale)}">FR - Français</a>
+                        <a href="/de/about.html" class="language-item ${locale === 'de' ? 'active' : ''}" title="${t('language.german', locale)}">DE - Deutsch</a>
+                        <a href="/it/about.html" class="language-item ${locale === 'it' ? 'active' : ''}" title="${t('language.italian', locale)}">IT - Italiano</a>
+                        <a href="/id/about.html" class="language-item ${locale === 'id' ? 'active' : ''}" title="${t('language.indonesian', locale)}">ID - Indonesia</a>
+                        <a href="/ptPT/about.html" class="language-item ${locale === 'ptPT' ? 'active' : ''}" title="${t('language.portuguesePT', locale)}">PT - Português</a>
+                        <a href="/ptBR/about.html" class="language-item ${locale === 'ptBR' ? 'active' : ''}" title="${t('language.portugueseBR', locale)}">PT-BR - Português (Brasil)</a>
+                        <a href="/hi/about.html" class="language-item ${locale === 'hi' ? 'active' : ''}" title="${t('language.hindi', locale)}">HI - हिन्दी</a>
+                        <a href="/zh/about.html" class="language-item ${locale === 'zh' ? 'active' : ''}" title="${t('language.chinese', locale)}">ZH - 中文</a>
+                        <a href="/ja/about.html" class="language-item ${locale === 'ja' ? 'active' : ''}" title="${t('language.japanese', locale)}">JA - 日本語</a>
+                        <a href="/ko/about.html" class="language-item ${locale === 'ko' ? 'active' : ''}" title="${t('language.korean', locale)}">KO - 한국어</a>
+                    </div>
                 </li>
             </ul>
             
@@ -480,30 +487,24 @@ export async function getCreateMemoHTML(locale = 'en', origin = 'https://securem
                 <li><a href="/${locale}" class="nav-link">${t('nav.home', locale)}</a></li>
                 <li><a href="/${locale}/about.html" class="nav-link">${t('nav.about', locale)}</a></li>
                 <li><a href="/${locale}/create-memo.html" class="nav-link active">${t('nav.create', locale)}</a></li>
-                <li class="language-links">
-                    <a href="/en/create-memo.html" class="nav-link ${locale === 'en' ? 'active' : ''}" title="${t('language.english', locale)}">EN</a>
-                    <span class="language-separator">|</span>
-                    <a href="/es/create-memo.html" class="nav-link ${locale === 'es' ? 'active' : ''}" title="${t('language.spanish', locale)}">ES</a>
-                    <span class="language-separator">|</span>
-                    <a href="/fr/create-memo.html" class="nav-link ${locale === 'fr' ? 'active' : ''}" title="${t('language.french', locale)}">FR</a>
-                    <span class="language-separator">|</span>
-                    <a href="/de/create-memo.html" class="nav-link ${locale === 'de' ? 'active' : ''}" title="${t('language.german', locale)}">DE</a>
-                    <span class="language-separator">|</span>
-                    <a href="/it/create-memo.html" class="nav-link ${locale === 'it' ? 'active' : ''}" title="${t('language.italian', locale)}">IT</a>
-                    <span class="language-separator">|</span>
-                    <a href="/id/create-memo.html" class="nav-link ${locale === 'id' ? 'active' : ''}" title="${t('language.indonesian', locale)}">ID</a>
-                    <span class="language-separator">|</span>
-                    <a href="/ptPT/create-memo.html" class="nav-link ${locale === 'ptPT' ? 'active' : ''}" title="${t('language.portuguesePT', locale)}">PT</a>
-                    <span class="language-separator">|</span>
-                    <a href="/ptBR/create-memo.html" class="nav-link ${locale === 'ptBR' ? 'active' : ''}" title="${t('language.portugueseBR', locale)}">PT-BR</a>
-                    <span class="language-separator">|</span>
-                    <a href="/hi/create-memo.html" class="nav-link ${locale === 'hi' ? 'active' : ''}" title="${t('language.hindi', locale)}">हिन्दी</a>
-                    <span class="language-separator">|</span>
-                    <a href="/zh/create-memo.html" class="nav-link ${locale === 'zh' ? 'active' : ''}" title="${t('language.chinese', locale)}">中文</a>
-                    <span class="language-separator">|</span>
-                    <a href="/ja/create-memo.html" class="nav-link ${locale === 'ja' ? 'active' : ''}" title="${t('language.japanese', locale)}">日本語</a>
-                    <span class="language-separator">|</span>
-                    <a href="/ko/create-memo.html" class="nav-link ${locale === 'ko' ? 'active' : ''}" title="${t('language.korean', locale)}">한국어</a>
+                <li class="language-dropdown">
+                    <button class="language-toggle nav-link" aria-expanded="false" aria-haspopup="true">
+                        🌐 ${getLanguageDisplayName(locale)}
+                    </button>
+                    <div class="language-menu">
+                        <a href="/en/create-memo.html" class="language-item ${locale === 'en' ? 'active' : ''}" title="${t('language.english', locale)}">EN - English</a>
+                        <a href="/es/create-memo.html" class="language-item ${locale === 'es' ? 'active' : ''}" title="${t('language.spanish', locale)}">ES - Español</a>
+                        <a href="/fr/create-memo.html" class="language-item ${locale === 'fr' ? 'active' : ''}" title="${t('language.french', locale)}">FR - Français</a>
+                        <a href="/de/create-memo.html" class="language-item ${locale === 'de' ? 'active' : ''}" title="${t('language.german', locale)}">DE - Deutsch</a>
+                        <a href="/it/create-memo.html" class="language-item ${locale === 'it' ? 'active' : ''}" title="${t('language.italian', locale)}">IT - Italiano</a>
+                        <a href="/id/create-memo.html" class="language-item ${locale === 'id' ? 'active' : ''}" title="${t('language.indonesian', locale)}">ID - Indonesia</a>
+                        <a href="/ptPT/create-memo.html" class="language-item ${locale === 'ptPT' ? 'active' : ''}" title="${t('language.portuguesePT', locale)}">PT - Português</a>
+                        <a href="/ptBR/create-memo.html" class="language-item ${locale === 'ptBR' ? 'active' : ''}" title="${t('language.portugueseBR', locale)}">PT-BR - Português (Brasil)</a>
+                        <a href="/hi/create-memo.html" class="language-item ${locale === 'hi' ? 'active' : ''}" title="${t('language.hindi', locale)}">HI - हिन्दी</a>
+                        <a href="/zh/create-memo.html" class="language-item ${locale === 'zh' ? 'active' : ''}" title="${t('language.chinese', locale)}">ZH - 中文</a>
+                        <a href="/ja/create-memo.html" class="language-item ${locale === 'ja' ? 'active' : ''}" title="${t('language.japanese', locale)}">JA - 日本語</a>
+                        <a href="/ko/create-memo.html" class="language-item ${locale === 'ko' ? 'active' : ''}" title="${t('language.korean', locale)}">KO - 한국어</a>
+                    </div>
                 </li>
             </ul>
             
@@ -687,30 +688,24 @@ export async function getReadMemoHTML(locale = 'en', origin = 'https://securemem
                 <li><a href="/${locale}" class="nav-link">${t('nav.home', locale)}</a></li>
                 <li><a href="/${locale}/about.html" class="nav-link">${t('nav.about', locale)}</a></li>
                 <li><a href="/${locale}/create-memo.html" class="nav-link">${t('nav.create', locale)}</a></li>
-                <li class="language-links">
-                    <a href="/en/read-memo.html" class="nav-link ${locale === 'en' ? 'active' : ''}" title="${t('language.english', locale)}">EN</a>
-                    <span class="language-separator">|</span>
-                    <a href="/es/read-memo.html" class="nav-link ${locale === 'es' ? 'active' : ''}" title="${t('language.spanish', locale)}">ES</a>
-                    <span class="language-separator">|</span>
-                    <a href="/fr/read-memo.html" class="nav-link ${locale === 'fr' ? 'active' : ''}" title="${t('language.french', locale)}">FR</a>
-                    <span class="language-separator">|</span>
-                    <a href="/de/read-memo.html" class="nav-link ${locale === 'de' ? 'active' : ''}" title="${t('language.german', locale)}">DE</a>
-                    <span class="language-separator">|</span>
-                    <a href="/it/read-memo.html" class="nav-link ${locale === 'it' ? 'active' : ''}" title="${t('language.italian', locale)}">IT</a>
-                    <span class="language-separator">|</span>
-                    <a href="/id/read-memo.html" class="nav-link ${locale === 'id' ? 'active' : ''}" title="${t('language.indonesian', locale)}">ID</a>
-                    <span class="language-separator">|</span>
-                    <a href="/ptPT/read-memo.html" class="nav-link ${locale === 'ptPT' ? 'active' : ''}" title="${t('language.portuguesePT', locale)}">PT</a>
-                    <span class="language-separator">|</span>
-                    <a href="/ptBR/read-memo.html" class="nav-link ${locale === 'ptBR' ? 'active' : ''}" title="${t('language.portugueseBR', locale)}">PT-BR</a>
-                    <span class="language-separator">|</span>
-                    <a href="/hi/read-memo.html" class="nav-link ${locale === 'hi' ? 'active' : ''}" title="${t('language.hindi', locale)}">हिन्दी</a>
-                    <span class="language-separator">|</span>
-                    <a href="/zh/read-memo.html" class="nav-link ${locale === 'zh' ? 'active' : ''}" title="${t('language.chinese', locale)}">中文</a>
-                    <span class="language-separator">|</span>
-                    <a href="/ja/read-memo.html" class="nav-link ${locale === 'ja' ? 'active' : ''}" title="${t('language.japanese', locale)}">日本語</a>
-                    <span class="language-separator">|</span>
-                    <a href="/ko/read-memo.html" class="nav-link ${locale === 'ko' ? 'active' : ''}" title="${t('language.korean', locale)}">한국어</a>
+                <li class="language-dropdown">
+                    <button class="language-toggle nav-link" aria-expanded="false" aria-haspopup="true">
+                        🌐 ${getLanguageDisplayName(locale)}
+                    </button>
+                    <div class="language-menu">
+                        <a href="/en/read-memo.html" class="language-item ${locale === 'en' ? 'active' : ''}" title="${t('language.english', locale)}">EN - English</a>
+                        <a href="/es/read-memo.html" class="language-item ${locale === 'es' ? 'active' : ''}" title="${t('language.spanish', locale)}">ES - Español</a>
+                        <a href="/fr/read-memo.html" class="language-item ${locale === 'fr' ? 'active' : ''}" title="${t('language.french', locale)}">FR - Français</a>
+                        <a href="/de/read-memo.html" class="language-item ${locale === 'de' ? 'active' : ''}" title="${t('language.german', locale)}">DE - Deutsch</a>
+                        <a href="/it/read-memo.html" class="language-item ${locale === 'it' ? 'active' : ''}" title="${t('language.italian', locale)}">IT - Italiano</a>
+                        <a href="/id/read-memo.html" class="language-item ${locale === 'id' ? 'active' : ''}" title="${t('language.indonesian', locale)}">ID - Indonesia</a>
+                        <a href="/ptPT/read-memo.html" class="language-item ${locale === 'ptPT' ? 'active' : ''}" title="${t('language.portuguesePT', locale)}">PT - Português</a>
+                        <a href="/ptBR/read-memo.html" class="language-item ${locale === 'ptBR' ? 'active' : ''}" title="${t('language.portugueseBR', locale)}">PT-BR - Português (Brasil)</a>
+                        <a href="/hi/read-memo.html" class="language-item ${locale === 'hi' ? 'active' : ''}" title="${t('language.hindi', locale)}">HI - हिन्दी</a>
+                        <a href="/zh/read-memo.html" class="language-item ${locale === 'zh' ? 'active' : ''}" title="${t('language.chinese', locale)}">ZH - 中文</a>
+                        <a href="/ja/read-memo.html" class="language-item ${locale === 'ja' ? 'active' : ''}" title="${t('language.japanese', locale)}">JA - 日本語</a>
+                        <a href="/ko/read-memo.html" class="language-item ${locale === 'ko' ? 'active' : ''}" title="${t('language.korean', locale)}">KO - 한국어</a>
+                    </div>
                 </li>
             </ul>
             
@@ -867,31 +862,24 @@ export async function getToSHTML(locale = 'en', origin = 'https://securememo.app
                 <li><a href="/${locale}" class="nav-link">${t('nav.home', locale)}</a></li>
                 <li><a href="/${locale}/about.html" class="nav-link">${t('nav.about', locale)}</a></li>
                 <li><a href="/${locale}/create-memo.html" class="nav-link">${t('nav.create', locale)}</a></li>
-                <li class="language-links">
-                    <a href="/en/tos.html" class="nav-link ${locale === 'en' ? 'active' : ''}" title="${t('language.english', locale)}">EN</a>
-                    <span class="language-separator">|</span>
-                    <a href="/es/tos.html" class="nav-link ${locale === 'es' ? 'active' : ''}" title="${t('language.spanish', locale)}">ES</a>
-                    <span class="language-separator">|</span>
-                    <a href="/fr/tos.html" class="nav-link ${locale === 'fr' ? 'active' : ''}" title="${t('language.french', locale)}">FR</a>
-                    <span class="language-separator">|</span>
-                    <a href="/de/tos.html" class="nav-link ${locale === 'de' ? 'active' : ''}" title="${t('language.german', locale)}">DE</a>
-                    <span class="language-separator">|</span>
-                    <a href="/it/tos.html" class="nav-link ${locale === 'it' ? 'active' : ''}" title="${t('language.italian', locale)}">IT</a>
-                    <span class="language-separator">|</span>
-                    <a href="/id/tos.html" class="nav-link ${locale === 'id' ? 'active' : ''}" title="${t('language.indonesian', locale)}">ID</a>
-                    <span class="language-separator">|</span>
-                    <a href="/ptPT/tos.html" class="nav-link ${locale === 'ptPT' ? 'active' : ''}" title="${t('language.portuguesePT', locale)}">PT</a>
-                    <span class="language-separator">|</span>
-                    <a href="/ptBR/tos.html" class="nav-link ${locale === 'ptBR' ? 'active' : ''}" title="${t('language.portugueseBR', locale)}">PT-BR</a>
-                    <span class="language-separator">|</span>
-                    <a href="/hi/tos.html" class="nav-link ${locale === 'hi' ? 'active' : ''}" title="${t('language.hindi', locale)}">हिन्दी</a>
-                    <span class="language-separator">|</span>
-                    <a href="/zh/tos.html" class="nav-link ${locale === 'zh' ? 'active' : ''}" title="${t('language.chinese', locale)}">中文</a>
-                    <span class="language-separator">|</span>
-                    <a href="/ja/tos.html" class="nav-link ${locale === 'ja' ? 'active' : ''}" title="${t('language.japanese', locale)}">日本語</a>
-                    <span class="language-separator">|</span>
-                    <a href="/ko/tos.html" class="nav-link ${locale === 'ko' ? 'active' : ''}" title="${t('language.korean', locale)}">한국어</a>
-
+                <li class="language-dropdown">
+                    <button class="language-toggle nav-link" aria-expanded="false" aria-haspopup="true">
+                        🌐 ${getLanguageDisplayName(locale)}
+                    </button>
+                    <div class="language-menu">
+                        <a href="/en/tos.html" class="language-item ${locale === 'en' ? 'active' : ''}" title="${t('language.english', locale)}">EN - English</a>
+                        <a href="/es/tos.html" class="language-item ${locale === 'es' ? 'active' : ''}" title="${t('language.spanish', locale)}">ES - Español</a>
+                        <a href="/fr/tos.html" class="language-item ${locale === 'fr' ? 'active' : ''}" title="${t('language.french', locale)}">FR - Français</a>
+                        <a href="/de/tos.html" class="language-item ${locale === 'de' ? 'active' : ''}" title="${t('language.german', locale)}">DE - Deutsch</a>
+                        <a href="/it/tos.html" class="language-item ${locale === 'it' ? 'active' : ''}" title="${t('language.italian', locale)}">IT - Italiano</a>
+                        <a href="/id/tos.html" class="language-item ${locale === 'id' ? 'active' : ''}" title="${t('language.indonesian', locale)}">ID - Indonesia</a>
+                        <a href="/ptPT/tos.html" class="language-item ${locale === 'ptPT' ? 'active' : ''}" title="${t('language.portuguesePT', locale)}">PT - Português</a>
+                        <a href="/ptBR/tos.html" class="language-item ${locale === 'ptBR' ? 'active' : ''}" title="${t('language.portugueseBR', locale)}">PT-BR - Português (Brasil)</a>
+                        <a href="/hi/tos.html" class="language-item ${locale === 'hi' ? 'active' : ''}" title="${t('language.hindi', locale)}">HI - हिन्दी</a>
+                        <a href="/zh/tos.html" class="language-item ${locale === 'zh' ? 'active' : ''}" title="${t('language.chinese', locale)}">ZH - 中文</a>
+                        <a href="/ja/tos.html" class="language-item ${locale === 'ja' ? 'active' : ''}" title="${t('language.japanese', locale)}">JA - 日本語</a>
+                        <a href="/ko/tos.html" class="language-item ${locale === 'ko' ? 'active' : ''}" title="${t('language.korean', locale)}">KO - 한국어</a>
+                    </div>
                 </li>
             </ul>
             
@@ -1115,30 +1103,24 @@ export async function getPrivacyHTML(locale = 'en', origin = 'https://securememo
                 <li><a href="/${locale}" class="nav-link">${t('nav.home', locale)}</a></li>
                 <li><a href="/${locale}/about.html" class="nav-link">${t('nav.about', locale)}</a></li>
                 <li><a href="/${locale}/create-memo.html" class="nav-link">${t('nav.create', locale)}</a></li>
-                <li class="language-links">
-                    <a href="/en/privacy.html" class="nav-link ${locale === 'en' ? 'active' : ''}" title="${t('language.english', locale)}">EN</a>
-                    <span class="language-separator">|</span>
-                    <a href="/es/privacy.html" class="nav-link ${locale === 'es' ? 'active' : ''}" title="${t('language.spanish', locale)}">ES</a>
-                    <span class="language-separator">|</span>
-                    <a href="/fr/privacy.html" class="nav-link ${locale === 'fr' ? 'active' : ''}" title="${t('language.french', locale)}">FR</a>
-                    <span class="language-separator">|</span>
-                    <a href="/de/privacy.html" class="nav-link ${locale === 'de' ? 'active' : ''}" title="${t('language.german', locale)}">DE</a>
-                    <span class="language-separator">|</span>
-                    <a href="/it/privacy.html" class="nav-link ${locale === 'it' ? 'active' : ''}" title="${t('language.italian', locale)}">IT</a>
-                    <span class="language-separator">|</span>
-                    <a href="/id/privacy.html" class="nav-link ${locale === 'id' ? 'active' : ''}" title="${t('language.indonesian', locale)}">ID</a>
-                    <span class="language-separator">|</span>
-                    <a href="/ptPT/privacy.html" class="nav-link ${locale === 'ptPT' ? 'active' : ''}" title="${t('language.portuguesePT', locale)}">PT</a>
-                    <span class="language-separator">|</span>
-                    <a href="/ptBR/privacy.html" class="nav-link ${locale === 'ptBR' ? 'active' : ''}" title="${t('language.portugueseBR', locale)}">PT-BR</a>
-                    <span class="language-separator">|</span>
-                    <a href="/hi/privacy.html" class="nav-link ${locale === 'hi' ? 'active' : ''}" title="${t('language.hindi', locale)}">हिन्दी</a>
-                    <span class="language-separator">|</span>
-                    <a href="/zh/privacy.html" class="nav-link ${locale === 'zh' ? 'active' : ''}" title="${t('language.chinese', locale)}">中文</a>
-                    <span class="language-separator">|</span>
-                    <a href="/ja/privacy.html" class="nav-link ${locale === 'ja' ? 'active' : ''}" title="${t('language.japanese', locale)}">日本語</a>
-                    <span class="language-separator">|</span>
-                    <a href="/ko/privacy.html" class="nav-link ${locale === 'ko' ? 'active' : ''}" title="${t('language.korean', locale)}">한국어</a>
+                <li class="language-dropdown">
+                    <button class="language-toggle nav-link" aria-expanded="false" aria-haspopup="true">
+                        🌐 ${getLanguageDisplayName(locale)}
+                    </button>
+                    <div class="language-menu">
+                        <a href="/en/privacy.html" class="language-item ${locale === 'en' ? 'active' : ''}" title="${t('language.english', locale)}">EN - English</a>
+                        <a href="/es/privacy.html" class="language-item ${locale === 'es' ? 'active' : ''}" title="${t('language.spanish', locale)}">ES - Español</a>
+                        <a href="/fr/privacy.html" class="language-item ${locale === 'fr' ? 'active' : ''}" title="${t('language.french', locale)}">FR - Français</a>
+                        <a href="/de/privacy.html" class="language-item ${locale === 'de' ? 'active' : ''}" title="${t('language.german', locale)}">DE - Deutsch</a>
+                        <a href="/it/privacy.html" class="language-item ${locale === 'it' ? 'active' : ''}" title="${t('language.italian', locale)}">IT - Italiano</a>
+                        <a href="/id/privacy.html" class="language-item ${locale === 'id' ? 'active' : ''}" title="${t('language.indonesian', locale)}">ID - Indonesia</a>
+                        <a href="/ptPT/privacy.html" class="language-item ${locale === 'ptPT' ? 'active' : ''}" title="${t('language.portuguesePT', locale)}">PT - Português</a>
+                        <a href="/ptBR/privacy.html" class="language-item ${locale === 'ptBR' ? 'active' : ''}" title="${t('language.portugueseBR', locale)}">PT-BR - Português (Brasil)</a>
+                        <a href="/hi/privacy.html" class="language-item ${locale === 'hi' ? 'active' : ''}" title="${t('language.hindi', locale)}">HI - हिन्दी</a>
+                        <a href="/zh/privacy.html" class="language-item ${locale === 'zh' ? 'active' : ''}" title="${t('language.chinese', locale)}">ZH - 中文</a>
+                        <a href="/ja/privacy.html" class="language-item ${locale === 'ja' ? 'active' : ''}" title="${t('language.japanese', locale)}">JA - 日本語</a>
+                        <a href="/ko/privacy.html" class="language-item ${locale === 'ko' ? 'active' : ''}" title="${t('language.korean', locale)}">KO - 한국어</a>
+                    </div>
                 </li>
             </ul>
             

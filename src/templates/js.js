@@ -738,6 +738,8 @@ function highlightCurrentPage() {
 function initMobileNav() {
     // Initialize modern mobile menu
     initMobileMenu();
+    // Initialize language dropdown
+    initLanguageDropdown();
 }
 
 // Initialize mobile hamburger menu
@@ -897,7 +899,95 @@ function initMobileMenu() {
     });
 }
 
-
+// Initialize language dropdown for desktop
+function initLanguageDropdown() {
+    const languageDropdown = document.querySelector('.language-dropdown');
+    const languageToggle = document.querySelector('.language-toggle');
+    const languageMenu = document.querySelector('.language-menu');
+    
+    if (!languageDropdown || !languageToggle || !languageMenu) {
+        return; // Elements not found, skip initialization
+    }
+    
+    // Close dropdown function
+    function closeDropdown() {
+        languageDropdown.classList.remove('active');
+        languageToggle.setAttribute('aria-expanded', 'false');
+        languageToggle.classList.remove('active');
+    }
+    
+    // Open dropdown function  
+    function openDropdown() {
+        languageDropdown.classList.add('active');
+        languageToggle.setAttribute('aria-expanded', 'true');
+        languageToggle.classList.add('active');
+    }
+    
+    // Toggle dropdown function
+    function toggleDropdown(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        
+        const isOpen = languageDropdown.classList.contains('active');
+        if (isOpen) {
+            closeDropdown();
+        } else {
+            openDropdown();
+        }
+    }
+    
+    // Add event listeners
+    languageToggle.addEventListener('click', toggleDropdown);
+    
+    // Close dropdown when clicking outside
+    document.addEventListener('click', (e) => {
+        if (!languageDropdown.contains(e.target)) {
+            closeDropdown();
+        }
+    });
+    
+    // Close dropdown on escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && languageDropdown.classList.contains('active')) {
+            closeDropdown();
+            languageToggle.focus();
+        }
+    });
+    
+    // Handle keyboard navigation within dropdown
+    languageMenu.addEventListener('keydown', (e) => {
+        const languageItems = languageMenu.querySelectorAll('.language-item');
+        const currentIndex = Array.from(languageItems).indexOf(document.activeElement);
+        
+        switch (e.key) {
+            case 'ArrowDown':
+                e.preventDefault();
+                const nextIndex = currentIndex < languageItems.length - 1 ? currentIndex + 1 : 0;
+                languageItems[nextIndex].focus();
+                break;
+            case 'ArrowUp':
+                e.preventDefault();
+                const prevIndex = currentIndex > 0 ? currentIndex - 1 : languageItems.length - 1;
+                languageItems[prevIndex].focus();
+                break;
+            case 'Enter':
+            case ' ':
+                e.preventDefault();
+                if (document.activeElement.classList.contains('language-item')) {
+                    document.activeElement.click();
+                }
+                break;
+        }
+    });
+    
+    // Close dropdown when selecting a language
+    const languageItems = languageMenu.querySelectorAll('.language-item');
+    languageItems.forEach(item => {
+        item.addEventListener('click', () => {
+            closeDropdown();
+        });
+    });
+}
 
 highlightCurrentPage();
 `;
