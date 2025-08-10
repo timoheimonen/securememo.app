@@ -4,7 +4,7 @@
 
 import { TRANSLATIONS } from './translations.js';
 
-const SUPPORTED_LOCALES = ['en', 'es', 'fr', 'de', 'hi', 'zh', 'ptPT', 'ptBR'];
+const SUPPORTED_LOCALES = ['en', 'es', 'fr', 'de', 'hi', 'zh', 'ptPT', 'ptBR', 'ja'];
 const DEFAULT_LOCALE = 'en';
 
 /**
@@ -159,7 +159,7 @@ export function getClientLocalizationJS() {
 // Privacy-first approach: uses only URL-based locale detection
 // No cookies, localStorage, or browser storage used
 
-const SUPPORTED_LOCALES = ['en', 'es', 'fr', 'de', 'hi', 'zh', 'ptPT', 'ptBR'];
+const SUPPORTED_LOCALES = ['en', 'es', 'fr', 'de', 'hi', 'zh', 'ptPT', 'ptBR', 'ja'];
 const DEFAULT_LOCALE = 'en';
 
 // Translation strings for different locales

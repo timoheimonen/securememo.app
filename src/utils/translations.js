@@ -10,6 +10,7 @@ import { ptPT } from './ptPT_translations.js';
 import { ptBR } from './ptBR_translations.js';
 import { hi } from './hi_translations.js';
 import { zh } from './zh_translations.js';
+import { ja } from './ja_translations.js';
 
 export const TRANSLATIONS = {
   en,
@@ -19,5 +20,6 @@ export const TRANSLATIONS = {
   ptPT,
   ptBR,
   hi,
-  zh
+  zh,
+  ja
 };

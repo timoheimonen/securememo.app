@@ -20,6 +20,7 @@ export const hi = {
     'language.chinese': '中文',
     'language.portuguesePT': 'Português (Portugal)',
     'language.portugueseBR': 'Português (Brasil)',
+    'language.japanese': '日本語',
     
     // Buttons
     'btn.copy': 'कॉपी करें',
