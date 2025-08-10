@@ -58,7 +58,8 @@ securememo/
 │   │   ├── it_translations.js  # Italian translations
 │   │   └── id_translations.js  # Indonesian translations
 │   ├── screenshots/            # Screenshots
-│   │   └──  screenshot_001.png # Screenshot 001
+│   │   ├──  screenshot_001.png # Screenshot 001
+│   │   └──  screenshot_002.png # Screenshot 002
 │   ├── styles/                 # CSS styling
 │   │   └── styles.js           # Dynamic CSS generation
 │   └── index.js                # Main Worker entry point (routing, security headers, cron jobs)
