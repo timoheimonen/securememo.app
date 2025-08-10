@@ -50,6 +50,9 @@ securememo/
 │   │   ├── ptPT_translations.js # Portuguese (Portugal) translations
 │   │   ├── ptBR_translations.js # Portuguese (Brazil) translations
 │   │   └── zh_translations.js  # Chinese translations
+│   │   └── ja_translations.js  # Japanese translations
+│   ├── screenshots/            # Screenshots
+│   │   └──  screenshot_001.png # Screenshot 001
 │   ├── styles/                 # CSS styling
 │   │   └── styles.js           # Dynamic CSS generation
 │   └── index.js                # Main Worker entry point (routing, security headers, cron jobs)
