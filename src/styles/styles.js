@@ -35,9 +35,9 @@ body {
 }
 
 .nav-container {
-  max-width: 1200px;
+  max-width: 1400px;
   margin: 0 auto;
-  padding: 0 20px;
+  padding: 0 15px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -60,7 +60,7 @@ body {
   display: flex;
   list-style: none;
   align-items: center;
-  gap: 30px;
+  gap: 25px;
 }
 
 /* Ensure nav menu is visible on desktop */
@@ -81,13 +81,36 @@ body {
   }
 }
 
+/* Tighter spacing for medium screens */
+@media (min-width: 769px) and (max-width: 1200px) {
+  .nav-menu {
+    gap: 20px;
+  }
+  
+  .nav-link {
+    padding: 8px 10px;
+    font-size: 0.9rem;
+  }
+  
+  .language-links {
+    gap: 3px;
+  }
+  
+  .language-links .nav-link {
+    padding: 6px 6px;
+    font-size: 0.8rem;
+  }
+}
+
 .nav-link {
   color: #333;
   text-decoration: none;
   font-weight: 500;
   transition: color 0.3s ease;
-  padding: 8px 16px;
+  padding: 8px 12px;
   border-radius: 8px;
+  white-space: nowrap;
+  font-size: 0.95rem;
 }
 
 .nav-link:hover {
@@ -103,7 +126,7 @@ body {
 .language-links {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 4px;
 }
 
 .language-separator {
@@ -113,8 +136,8 @@ body {
 }
 
 .language-links .nav-link {
-  padding: 6px 12px;
-  font-size: 0.9rem;
+  padding: 6px 8px;
+  font-size: 0.85rem;
   min-width: auto;
 }
 
