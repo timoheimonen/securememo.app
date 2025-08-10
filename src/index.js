@@ -1,4 +1,22 @@
 import { getStyles } from './styles/styles.js';
+
+/**
+ * Escape a string for safe injection into JavaScript string literals
+ * @param {string} str - The string to escape
+ * @returns {string} - Escaped string safe for JS
+ */
+function escapeJavaScript(str) {
+  if (typeof str !== 'string') return '';
+  return str
+    .replace(/\\/g, '\\\\')  // Escape backslashes
+    .replace(/'/g, "\\'")    // Escape single quotes
+    .replace(/"/g, '\\"')    // Escape double quotes
+    .replace(/\r/g, '\\r')   // Escape carriage returns
+    .replace(/\n/g, '\\n')   // Escape newlines
+    .replace(/\t/g, '\\t')   // Escape tabs
+    .replace(/\u2028/g, '\\u2028') // Escape line separator
+    .replace(/\u2029/g, '\\u2029'); // Escape paragraph separator
+}
 import { 
   getIndexHTML, 
   getAboutHTML, 
@@ -307,22 +325,22 @@ ${sitemapUrls}</urlset>`;
         }
         const jsContent = getCreateMemoJS()
           .replace(/{{TURNSTILE_SITE_KEY}}/g, env.TURNSTILE_SITE_KEY)
-          .replace(/{{MISSING_MESSAGE_ERROR}}/g, getErrorMessage('MISSING_MESSAGE', jsLocale))
-          .replace(/{{MESSAGE_TOO_LONG_ERROR}}/g, getErrorMessage('MESSAGE_TOO_LONG', jsLocale))
-          .replace(/{{MISSING_SECURITY_CHALLENGE_ERROR}}/g, getErrorMessage('MISSING_SECURITY_CHALLENGE', jsLocale))
-          .replace(/{{CREATE_MEMO_FAILED_ERROR}}/g, getErrorMessage('CREATE_MEMO_FAILED', jsLocale))
-          .replace(/{{CREATE_MEMO_ERROR}}/g, getErrorMessage('CREATE_MEMO_ERROR', jsLocale))
-          .replace(/{{DECRYPTION_ERROR}}/g, getErrorMessage('DECRYPTION_ERROR', jsLocale))
-          .replace(/{{READ_MEMO_ERROR}}/g, getErrorMessage('READ_MEMO_ERROR', jsLocale))
-          .replace(/{{PASSWORD_COPIED_MESSAGE}}/g, t('msg.passwordCopied', jsLocale))
-          .replace(/{{URL_COPIED_MESSAGE}}/g, t('msg.urlCopied', jsLocale))
-          .replace(/{{COPY_MANUAL_MESSAGE}}/g, t('msg.copyManual', jsLocale))
-          .replace(/{{MSG_ENCRYPTING}}/g, t('msg.encrypting', jsLocale))
-          .replace(/{{BTN_CREATE}}/g, t('btn.create', jsLocale))
-          .replace(/{{BTN_COPIED}}/g, t('btn.copied', jsLocale))
-          .replace(/{{BTN_SHOW}}/g, t('btn.show', jsLocale))
-          .replace(/{{BTN_HIDE}}/g, t('btn.hide', jsLocale))
-          .replace(/{{BTN_COPY}}/g, t('btn.copy', jsLocale));
+          .replace(/{{MISSING_MESSAGE_ERROR}}/g, escapeJavaScript(getErrorMessage('MISSING_MESSAGE', jsLocale)))
+          .replace(/{{MESSAGE_TOO_LONG_ERROR}}/g, escapeJavaScript(getErrorMessage('MESSAGE_TOO_LONG', jsLocale)))
+          .replace(/{{MISSING_SECURITY_CHALLENGE_ERROR}}/g, escapeJavaScript(getErrorMessage('MISSING_SECURITY_CHALLENGE', jsLocale)))
+          .replace(/{{CREATE_MEMO_FAILED_ERROR}}/g, escapeJavaScript(getErrorMessage('CREATE_MEMO_FAILED', jsLocale)))
+          .replace(/{{CREATE_MEMO_ERROR}}/g, escapeJavaScript(getErrorMessage('CREATE_MEMO_ERROR', jsLocale)))
+          .replace(/{{DECRYPTION_ERROR}}/g, escapeJavaScript(getErrorMessage('DECRYPTION_ERROR', jsLocale)))
+          .replace(/{{READ_MEMO_ERROR}}/g, escapeJavaScript(getErrorMessage('READ_MEMO_ERROR', jsLocale)))
+          .replace(/{{PASSWORD_COPIED_MESSAGE}}/g, escapeJavaScript(t('msg.passwordCopied', jsLocale)))
+          .replace(/{{URL_COPIED_MESSAGE}}/g, escapeJavaScript(t('msg.urlCopied', jsLocale)))
+          .replace(/{{COPY_MANUAL_MESSAGE}}/g, escapeJavaScript(t('msg.copyManual', jsLocale)))
+          .replace(/{{MSG_ENCRYPTING}}/g, escapeJavaScript(t('msg.encrypting', jsLocale)))
+          .replace(/{{BTN_CREATE}}/g, escapeJavaScript(t('btn.create', jsLocale)))
+          .replace(/{{BTN_COPIED}}/g, escapeJavaScript(t('btn.copied', jsLocale)))
+          .replace(/{{BTN_SHOW}}/g, escapeJavaScript(t('btn.show', jsLocale)))
+          .replace(/{{BTN_HIDE}}/g, escapeJavaScript(t('btn.hide', jsLocale)))
+          .replace(/{{BTN_COPY}}/g, escapeJavaScript(t('btn.copy', jsLocale)));
         return new Response(jsContent, {
           headers: { 
             'Content-Type': 'application/javascript',
@@ -346,21 +364,21 @@ ${sitemapUrls}</urlset>`;
         }
         const jsContent = getReadMemoJS()
           .replace(/{{TURNSTILE_SITE_KEY}}/g, env.TURNSTILE_SITE_KEY)
-          .replace(/{{MISSING_MEMO_ID_ERROR}}/g, getErrorMessage('MISSING_MEMO_ID', jsLocale))
-          .replace(/{{MISSING_PASSWORD_ERROR}}/g, getErrorMessage('MISSING_PASSWORD_ERROR', jsLocale))
-          .replace(/{{INVALID_MEMO_URL_ERROR}}/g, getErrorMessage('INVALID_MEMO_URL_ERROR', jsLocale))
-          .replace(/{{MISSING_SECURITY_CHALLENGE_ERROR}}/g, getErrorMessage('MISSING_SECURITY_CHALLENGE_ERROR', jsLocale))
-          .replace(/{{MEMO_ALREADY_READ_DELETED_ERROR}}/g, getErrorMessage('MEMO_ALREADY_READ_DELETED_ERROR', jsLocale))
-          .replace(/{{MEMO_EXPIRED_DELETED_ERROR}}/g, getErrorMessage('MEMO_EXPIRED_DELETED_ERROR', jsLocale))
-          .replace(/{{INVALID_PASSWORD_CHECK_ERROR}}/g, getErrorMessage('INVALID_PASSWORD_CHECK_ERROR', jsLocale))
-          .replace(/{{READ_MEMO_ERROR}}/g, getErrorMessage('READ_MEMO_ERROR', jsLocale))
-          .replace(/{{DECRYPTION_ERROR}}/g, getErrorMessage('DECRYPTION_ERROR', jsLocale))
-          .replace(/{{MEMO_DECRYPTED_MESSAGE}}/g, t('msg.memoDecrypted', jsLocale))
-          .replace(/{{MEMO_DELETED_MESSAGE}}/g, t('msg.memoDeleted', jsLocale))
-          .replace(/{{BTN_SHOW}}/g, t('btn.show', jsLocale))
-          .replace(/{{BTN_HIDE}}/g, t('btn.hide', jsLocale))
-          .replace(/{{BTN_COPIED}}/g, t('btn.copied', jsLocale))
-          .replace(/{{DELETION_ERROR_MESSAGE}}/g, t('msg.deletionError', jsLocale));
+          .replace(/{{MISSING_MEMO_ID_ERROR}}/g, escapeJavaScript(getErrorMessage('MISSING_MEMO_ID', jsLocale)))
+          .replace(/{{MISSING_PASSWORD_ERROR}}/g, escapeJavaScript(getErrorMessage('MISSING_PASSWORD_ERROR', jsLocale)))
+          .replace(/{{INVALID_MEMO_URL_ERROR}}/g, escapeJavaScript(getErrorMessage('INVALID_MEMO_URL_ERROR', jsLocale)))
+          .replace(/{{MISSING_SECURITY_CHALLENGE_ERROR}}/g, escapeJavaScript(getErrorMessage('MISSING_SECURITY_CHALLENGE_ERROR', jsLocale)))
+          .replace(/{{MEMO_ALREADY_READ_DELETED_ERROR}}/g, escapeJavaScript(getErrorMessage('MEMO_ALREADY_READ_DELETED_ERROR', jsLocale)))
+          .replace(/{{MEMO_EXPIRED_DELETED_ERROR}}/g, escapeJavaScript(getErrorMessage('MEMO_EXPIRED_DELETED_ERROR', jsLocale)))
+          .replace(/{{INVALID_PASSWORD_CHECK_ERROR}}/g, escapeJavaScript(getErrorMessage('INVALID_PASSWORD_CHECK_ERROR', jsLocale)))
+          .replace(/{{READ_MEMO_ERROR}}/g, escapeJavaScript(getErrorMessage('READ_MEMO_ERROR', jsLocale)))
+          .replace(/{{DECRYPTION_ERROR}}/g, escapeJavaScript(getErrorMessage('DECRYPTION_ERROR', jsLocale)))
+          .replace(/{{MEMO_DECRYPTED_MESSAGE}}/g, escapeJavaScript(t('msg.memoDecrypted', jsLocale)))
+          .replace(/{{MEMO_DELETED_MESSAGE}}/g, escapeJavaScript(t('msg.memoDeleted', jsLocale)))
+          .replace(/{{BTN_SHOW}}/g, escapeJavaScript(t('btn.show', jsLocale)))
+          .replace(/{{BTN_HIDE}}/g, escapeJavaScript(t('btn.hide', jsLocale)))
+          .replace(/{{BTN_COPIED}}/g, escapeJavaScript(t('btn.copied', jsLocale)))
+          .replace(/{{DELETION_ERROR_MESSAGE}}/g, escapeJavaScript(t('msg.deletionError', jsLocale)));
         return new Response(jsContent, {
           headers: { 
             'Content-Type': 'application/javascript',

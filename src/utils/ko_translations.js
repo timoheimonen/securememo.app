@@ -22,6 +22,8 @@ export const ko = {
     'language.portugueseBR': 'Português (Brasil)',
     'language.japanese': '日本語',
     'language.korean': '한국어',
+    'language.italian': 'Italiano',
+    'language.indonesian': 'Bahasa Indonesia',
     
     // Buttons
     'btn.copy': '복사',

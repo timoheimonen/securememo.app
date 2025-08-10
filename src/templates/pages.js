@@ -95,6 +95,10 @@ export async function getIndexHTML(locale = 'en', origin = 'https://securememo.a
                     <span class="language-separator">|</span>
                     <a href="/de" class="nav-link ${locale === 'de' ? 'active' : ''}" title="${t('language.german', locale)}">DE</a>
                     <span class="language-separator">|</span>
+                    <a href="/it" class="nav-link ${locale === 'it' ? 'active' : ''}" title="${t('language.italian', locale)}">IT</a>
+                    <span class="language-separator">|</span>
+                    <a href="/id" class="nav-link ${locale === 'id' ? 'active' : ''}" title="${t('language.indonesian', locale)}">ID</a>
+                    <span class="language-separator">|</span>
                     <a href="/ptPT" class="nav-link ${locale === 'ptPT' ? 'active' : ''}" title="${t('language.portuguesePT', locale)}">PT</a>
                     <span class="language-separator">|</span>
                     <a href="/ptBR" class="nav-link ${locale === 'ptBR' ? 'active' : ''}" title="${t('language.portugueseBR', locale)}">PT-BR</a>
@@ -280,6 +284,10 @@ export async function getAboutHTML(locale = 'en', origin = 'https://securememo.a
                     <a href="/fr/about.html" class="nav-link ${locale === 'fr' ? 'active' : ''}" title="${t('language.french', locale)}">FR</a>
                     <span class="language-separator">|</span>
                     <a href="/de/about.html" class="nav-link ${locale === 'de' ? 'active' : ''}" title="${t('language.german', locale)}">DE</a>
+                    <span class="language-separator">|</span>
+                    <a href="/it/about.html" class="nav-link ${locale === 'it' ? 'active' : ''}" title="${t('language.italian', locale)}">IT</a>
+                    <span class="language-separator">|</span>
+                    <a href="/id/about.html" class="nav-link ${locale === 'id' ? 'active' : ''}" title="${t('language.indonesian', locale)}">ID</a>
                     <span class="language-separator">|</span>
                     <a href="/ptPT/about.html" class="nav-link ${locale === 'ptPT' ? 'active' : ''}" title="${t('language.portuguesePT', locale)}">PT</a>
                     <span class="language-separator">|</span>
@@ -480,6 +488,10 @@ export async function getCreateMemoHTML(locale = 'en', origin = 'https://securem
                     <a href="/fr/create-memo.html" class="nav-link ${locale === 'fr' ? 'active' : ''}" title="${t('language.french', locale)}">FR</a>
                     <span class="language-separator">|</span>
                     <a href="/de/create-memo.html" class="nav-link ${locale === 'de' ? 'active' : ''}" title="${t('language.german', locale)}">DE</a>
+                    <span class="language-separator">|</span>
+                    <a href="/it/create-memo.html" class="nav-link ${locale === 'it' ? 'active' : ''}" title="${t('language.italian', locale)}">IT</a>
+                    <span class="language-separator">|</span>
+                    <a href="/id/create-memo.html" class="nav-link ${locale === 'id' ? 'active' : ''}" title="${t('language.indonesian', locale)}">ID</a>
                     <span class="language-separator">|</span>
                     <a href="/ptPT/create-memo.html" class="nav-link ${locale === 'ptPT' ? 'active' : ''}" title="${t('language.portuguesePT', locale)}">PT</a>
                     <span class="language-separator">|</span>
@@ -684,6 +696,10 @@ export async function getReadMemoHTML(locale = 'en', origin = 'https://securemem
                     <span class="language-separator">|</span>
                     <a href="/de/read-memo.html" class="nav-link ${locale === 'de' ? 'active' : ''}" title="${t('language.german', locale)}">DE</a>
                     <span class="language-separator">|</span>
+                    <a href="/it/read-memo.html" class="nav-link ${locale === 'it' ? 'active' : ''}" title="${t('language.italian', locale)}">IT</a>
+                    <span class="language-separator">|</span>
+                    <a href="/id/read-memo.html" class="nav-link ${locale === 'id' ? 'active' : ''}" title="${t('language.indonesian', locale)}">ID</a>
+                    <span class="language-separator">|</span>
                     <a href="/ptPT/read-memo.html" class="nav-link ${locale === 'ptPT' ? 'active' : ''}" title="${t('language.portuguesePT', locale)}">PT</a>
                     <span class="language-separator">|</span>
                     <a href="/ptBR/read-memo.html" class="nav-link ${locale === 'ptBR' ? 'active' : ''}" title="${t('language.portugueseBR', locale)}">PT-BR</a>
@@ -860,6 +876,10 @@ export async function getToSHTML(locale = 'en', origin = 'https://securememo.app
                     <span class="language-separator">|</span>
                     <a href="/de/tos.html" class="nav-link ${locale === 'de' ? 'active' : ''}" title="${t('language.german', locale)}">DE</a>
                     <span class="language-separator">|</span>
+                    <a href="/it/tos.html" class="nav-link ${locale === 'it' ? 'active' : ''}" title="${t('language.italian', locale)}">IT</a>
+                    <span class="language-separator">|</span>
+                    <a href="/id/tos.html" class="nav-link ${locale === 'id' ? 'active' : ''}" title="${t('language.indonesian', locale)}">ID</a>
+                    <span class="language-separator">|</span>
                     <a href="/ptPT/tos.html" class="nav-link ${locale === 'ptPT' ? 'active' : ''}" title="${t('language.portuguesePT', locale)}">PT</a>
                     <span class="language-separator">|</span>
                     <a href="/ptBR/tos.html" class="nav-link ${locale === 'ptBR' ? 'active' : ''}" title="${t('language.portugueseBR', locale)}">PT-BR</a>
@@ -871,6 +891,7 @@ export async function getToSHTML(locale = 'en', origin = 'https://securememo.app
                     <a href="/ja/tos.html" class="nav-link ${locale === 'ja' ? 'active' : ''}" title="${t('language.japanese', locale)}">日本語</a>
                     <span class="language-separator">|</span>
                     <a href="/ko/tos.html" class="nav-link ${locale === 'ko' ? 'active' : ''}" title="${t('language.korean', locale)}">한국어</a>
+
                 </li>
             </ul>
             
@@ -1102,6 +1123,10 @@ export async function getPrivacyHTML(locale = 'en', origin = 'https://securememo
                     <a href="/fr/privacy.html" class="nav-link ${locale === 'fr' ? 'active' : ''}" title="${t('language.french', locale)}">FR</a>
                     <span class="language-separator">|</span>
                     <a href="/de/privacy.html" class="nav-link ${locale === 'de' ? 'active' : ''}" title="${t('language.german', locale)}">DE</a>
+                    <span class="language-separator">|</span>
+                    <a href="/it/privacy.html" class="nav-link ${locale === 'it' ? 'active' : ''}" title="${t('language.italian', locale)}">IT</a>
+                    <span class="language-separator">|</span>
+                    <a href="/id/privacy.html" class="nav-link ${locale === 'id' ? 'active' : ''}" title="${t('language.indonesian', locale)}">ID</a>
                     <span class="language-separator">|</span>
                     <a href="/ptPT/privacy.html" class="nav-link ${locale === 'ptPT' ? 'active' : ''}" title="${t('language.portuguesePT', locale)}">PT</a>
                     <span class="language-separator">|</span>
