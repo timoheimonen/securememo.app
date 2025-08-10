@@ -83,7 +83,7 @@ securememo/
 
 ## License
 
-This project is open source under the MIT License.
+This project uses GPL-3.0 license.
 
 ## Contributing
 You are welcome to contribute to the project in any way you can. This includes reporting bugs, auditing, suggesting features, or submitting pull requests via GitHub. Please ensure your contributions respect the project's security focus and follow standard open-source practices.
