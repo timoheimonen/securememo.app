@@ -124,3 +124,4 @@ pages/apple-touch-icon.png
 pages/favicon.ico
 pages/build.js
 deploy.sh
+public/robots.txt
