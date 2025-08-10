@@ -62,7 +62,7 @@ Please report highly sensitive bugs/issues via email to [timo.heimonen@gmail.com
 
 ## License
 
-This project is licensed under the MIT License.  
+This project is licensed under the GPL-3.0 license.  
 By contributing, you agree that your contributions will be licensed under the same license.
 
 ## Author
