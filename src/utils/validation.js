@@ -94,12 +94,12 @@ export function sanitizeForURL(input) {
 
 
 /**
- * Validate memo ID format (32 chars with alphanumeric, hyphens, underscores)
+ * Validate memo ID format (32 or 40 chars with alphanumeric, hyphens, underscores)
  * @param {string} memoId - The memo ID to validate
  * @returns {boolean} - Whether the memo ID is valid
  */
 export function validateMemoId(memoId) {
-  return /^[A-Za-z0-9\-_]{32}$/.test(memoId);
+  return /^[A-Za-z0-9\-_]{32}$/.test(memoId) || /^[A-Za-z0-9\-_]{40}$/.test(memoId);
 }
 
 /**

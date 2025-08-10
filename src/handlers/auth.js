@@ -60,18 +60,18 @@ function calculateExpiryTime(expiryHours) {
     return Math.floor(expiryTime.getTime() / 1000);
 }
 
-// Generate cryptographically secure random 32-char memo ID with collision detection
+// Generate cryptographically secure random 40-char memo ID with collision detection
 async function generateMemoId(env, maxRetries = 10, locale = 'en') {
     const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_';
     
     for (let attempt = 0; attempt < maxRetries; attempt++) {
-        // Generate 32 random bytes
-        const array = new Uint8Array(32);
+        // Generate 40 random bytes
+        const array = new Uint8Array(40);
         crypto.getRandomValues(array);
         let result = '';
         
         // Use rejection sampling to avoid modulo bias
-        for (let i = 0; i < 32; i++) {
+        for (let i = 0; i < 40; i++) {
             let randomIndex;
             do {
                 randomIndex = array[i] % chars.length;
