@@ -96,6 +96,23 @@ You are welcome to contribute to the project in any way you can. This includes r
 
 For detailed contribution guidelines, please see [CONTRIBUTING.md](CONTRIBUTING.md).
 
+## Supported languages in the application
+The supported languages are:
+- English (en)
+- Spanish (es)
+- French (fr)
+- German (de)
+- Hindi (hi)
+- Chinese (zh)
+- Portuguese (Portugal) (pt-PT)
+- Portuguese (Brazil) (pt-BR)
+- Japanese (ja)
+- Korean (ko)
+- Italian (it)
+- Indonesian (id)
+
+These are auto-translated from english, errors may occur.
+
 ## Author
 
 Timo Heimonen (timo.heimonen@gmail.com)
