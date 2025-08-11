@@ -1,0 +1,53 @@
+name = "securememo"
+main = "src/index.js"
+compatibility_date = "2025-01-01"
+
+# Static assets
+[assets]
+directory = "./public"
+
+# Production environment
+[env.production]
+name = "securememo"
+
+# Production environment - enable cron triggers for cleanup
+[env.production.triggers]
+crons = ["0 */1 * * *"]  # Run cleanup every 1 hours
+
+# Production D1 database
+[[env.production.d1_databases]]
+binding = "DB"
+database_name = "my-database"
+database_id = "13dc8e43-a1bb-4414-9c52-f77296261b96"
+
+# Production environment variables
+[env.production.vars]
+LOG_LEVEL = "INFO"
+
+# Production routes for the Worker
+[[env.production.routes]]
+pattern = "securememo.app/*"
+zone_name = "securememo.app"
+
+# Logs are enabled
+[observability.logs]
+enabled = true
+
+# Development environment
+[env.dev]
+name = "securememo-dev"
+
+# Development environment variables
+[env.dev.vars]
+LOG_LEVEL = "DEBUG"
+
+# Development D1 database
+[[env.dev.d1_databases]]
+binding = "DB"
+database_name = "securememo-dev"
+database_id = "159356d9-9eee-4f53-99e6-1b252b0df8df"
+
+
+# Development environment - no cron triggers
+[env.dev.triggers]
+crons = []
