@@ -1,2 +1,2 @@
 # .gitattributes
-CODEOWNERS merge=ours
+.github/CODEOWNERS merge=ours
