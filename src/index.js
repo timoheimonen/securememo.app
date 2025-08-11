@@ -51,7 +51,7 @@ import { getClientLocalizationJS } from './utils/clientLocalization.js';
 const allowedOrigins = [
   'https://securememo.app',
   'https://www.securememo.app',
-  'https://devmachine.securememo.app'
+  'https://securememo-dev.timo-heimonen.workers.dev'
 ];
 
 // Security headers with CSP for XSS protection (without CORS origin)
