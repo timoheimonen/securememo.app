@@ -48,6 +48,6 @@ database_name = "securememo-dev"
 database_id = "159356d9-9eee-4f53-99e6-1b252b0df8df"
 
 
-# Development environment - no cron triggers
+# Development environment
 [env.dev.triggers]
 crons = []
