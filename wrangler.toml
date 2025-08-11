@@ -4,6 +4,9 @@
 # Deploy from Development branch > Cloudflare dev Worker
 #
 
+# Disable workers.dev by default (safety)
+workers_dev = false
+
 name = "securememo"
 main = "src/index.js"
 compatibility_date = "2025-01-01"
@@ -15,6 +18,7 @@ directory = "./public"
 # Production environment
 [env.production]
 name = "securememo"
+workers_dev = false
 
 # Production environment - enable cron triggers for cleanup
 [env.production.triggers]
@@ -42,6 +46,7 @@ enabled = true
 # Development environment
 [env.dev]
 name = "securememo-dev"
+workers_dev = false
 
 # Development environment variables
 [env.dev.vars]
