@@ -889,11 +889,11 @@ export async function getToSHTML(locale = 'en', origin = 'https://securememo.app
     </nav>
 
     <main class="main-content">
-        <div class="about-section">
+        <div class="legal-section">
             <h1>${t('tos.hero.title', locale)}</h1>
-            <p><strong>${t('tos.lastUpdated', locale)}</strong></p>
+            <p class="legal-meta"><strong>${t('tos.lastUpdated', locale)}</strong></p>
             
-            <div class="tech-stack">
+            <div class="legal-toc">
                 <h2>${t('tos.tableOfContents.title', locale)}</h2>
                 <ol>
                     <li><a href="#service-description">${t('tos.tableOfContents.serviceDescription', locale)}</a></li>
@@ -1130,11 +1130,11 @@ export async function getPrivacyHTML(locale = 'en', origin = 'https://securememo
     </nav>
 
     <main class="main-content">
-        <div class="about-section">
+        <div class="legal-section">
             <h1>${t('privacy.hero.title', locale)}</h1>
-            <p><strong>${t('privacy.lastUpdated', locale)}</strong></p>
+            <p class="legal-meta"><strong>${t('privacy.lastUpdated', locale)}</strong></p>
             
-            <div class="tech-stack">
+            <div class="legal-toc">
                 <h2>${t('privacy.tableOfContents.title', locale)}</h2>
                 <ol>
                     <li><a href="#information-collected">${t('privacy.tableOfContents.informationCollected', locale)}</a></li>
