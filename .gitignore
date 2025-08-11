@@ -112,10 +112,6 @@ Thumbs.db
 
 # Local development
 .local/ 
-public/android-chrome-192x192.png
-public/android-chrome-512x512.png
-public/apple-touch-icon.png
-public/favicon.ico
 pages/_routes.json
 pages/android-chrome-192x192.png
 pages/android-chrome-512x512.png
@@ -123,4 +119,3 @@ pages/apple-touch-icon.png
 pages/favicon.ico
 pages/build.js
 deploy.sh
-public/robots.txt
