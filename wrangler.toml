@@ -3,6 +3,7 @@
 # Deploy from Main branch > Cloudflare main Worker securememo.app
 # Deploy from Development branch > Cloudflare dev Worker devmachine.securememo.app
 #
+
 name = "securememo"
 main = "src/index.js"
 compatibility_date = "2025-01-01"
@@ -51,11 +52,6 @@ LOG_LEVEL = "DEBUG"
 binding = "DB"
 database_name = "securememo-dev"
 database_id = "159356d9-9eee-4f53-99e6-1b252b0df8df"
-
-# Development routes for the Worker
-[[env.dev.routes]]
-pattern = "devmachine.securememo.app/*"
-zone_name = "securememo.app"
 
 # Development environment
 [env.dev.triggers]
