@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+
+# Deny access to terms of service and privacy policy
+Disallow: /tos
+Disallow: /privacy
+
+# Sitemap location
+Sitemap: https://securememo.com/sitemap.xml
