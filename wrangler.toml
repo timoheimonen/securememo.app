@@ -1,3 +1,8 @@
+# securememo.app
+# Deploy from Main branch > Cloudflare main Worker securememo.app
+# Deploy from Development branch > Cloudflare dev Worker devmachine.securememo.app
+
+
 name = "securememo"
 main = "src/index.js"
 compatibility_date = "2025-01-01"
