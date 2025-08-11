@@ -433,6 +433,82 @@ body {
   backdrop-filter: blur(10px);
 }
 
+/* Legal pages (TOS / Privacy) */
+.legal-section {
+  background: rgba(255, 255, 255, 0.95);
+  padding: 40px;
+  border-radius: 15px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+}
+
+.legal-section h1 {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+  color: #333;
+  text-align: center;
+}
+
+.legal-meta {
+  text-align: center;
+  color: #666;
+  margin-bottom: 30px;
+  font-size: 1rem;
+}
+
+/* Improve in-page anchor navigation under fixed navbar */
+.legal-section h2 {
+  scroll-margin-top: 90px;
+}
+
+.legal-toc {
+  margin-bottom: 40px;
+  background: #f8f9fa;
+  border-radius: 12px;
+  border-left: 4px solid #667eea;
+  padding: 24px;
+}
+
+.legal-toc h2 {
+  font-size: 1.4rem;
+  margin-bottom: 12px;
+  color: #667eea;
+}
+
+.legal-toc ol {
+  counter-reset: section;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.legal-toc ol li {
+  position: relative;
+  padding-left: 34px;
+  margin: 10px 0;
+  color: #555;
+}
+
+.legal-toc ol li::before {
+  counter-increment: section;
+  content: counters(section, '.') '. ';
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: #667eea;
+  font-weight: 700;
+}
+
+.legal-toc a {
+  color: #333;
+  text-decoration: none;
+}
+
+.legal-toc a:hover {
+  text-decoration: underline;
+  color: #667eea;
+}
+
 .about-section h1 {
   font-size: 2.5rem;
   margin-bottom: 20px;
