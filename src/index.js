@@ -72,6 +72,42 @@ const baseSecurityHeaders = {
   'Vary': 'Origin'
 };
 
+// Generate a cryptographically strong nonce for allowing specific inline blocks (e.g., JSON-LD)
+function generateNonce() {
+  const bytes = new Uint8Array(16);
+  crypto.getRandomValues(bytes);
+  let binary = '';
+  for (const byte of bytes) binary += String.fromCharCode(byte);
+  return btoa(binary);
+}
+
+// Inject nonce attribute into all JSON-LD script tags
+function injectNonceIntoJsonLd(html, nonce) {
+  return html.replace(/<script\s+type=(['"])application\/ld\+json\1(\s*[^>]*)>/gi, (match, quote, attrs) => {
+    // Avoid duplicating nonce if already present (defensive)
+    if (/\bnonce\s*=\s*/i.test(attrs)) return match;
+    return `<script type=${quote}application/ld+json${quote}${attrs} nonce="${nonce}">`;
+  });
+}
+
+// Append a nonce to script-src directive in a CSP string
+function appendNonceToScriptSrc(csp, nonce) {
+  if (!csp || typeof csp !== 'string') return csp;
+  const directives = csp
+    .split(';')
+    .map(d => d.trim())
+    .filter(Boolean);
+  const updated = directives.map(d => {
+    if (/^script-src(\s|$)/i.test(d)) {
+      // Only append if not already present
+      if (new RegExp(`'nonce-${nonce.replace(/[-/\\^$*+?.()|[\]{}]/g, '\\$&')}'`).test(d)) return d;
+      return `${d} 'nonce-${nonce}'`;
+    }
+    return d;
+  });
+  return updated.join('; ') + ';';
+}
+
 // Function to validate origin and get security headers with proper CORS origin
 function getSecurityHeaders(request) {
   const origin = request.headers.get('origin');
@@ -469,6 +505,7 @@ ${sitemapUrls}</urlset>`;
       
       let response;
       let cacheHeaders = {};
+      let jsonLdNonce = null;
       
       // Use pathWithoutLocale for route matching to support localized URLs
       switch (pathWithoutLocale) {
@@ -503,11 +540,20 @@ ${sitemapUrls}</urlset>`;
           });
       }
 
+      // Optionally allow JSON-LD by attaching a nonce to ld+json script tags and CSP
+      let securityHeaders = getSecurityHeaders(request);
+      if (env && env.CSP_ALLOW_JSONLD && String(env.CSP_ALLOW_JSONLD).toLowerCase() !== 'false' && String(env.CSP_ALLOW_JSONLD) !== '0') {
+        jsonLdNonce = generateNonce();
+        response = injectNonceIntoJsonLd(response, jsonLdNonce);
+        const currentCsp = securityHeaders['Content-Security-Policy'];
+        securityHeaders['Content-Security-Policy'] = appendNonceToScriptSrc(currentCsp, jsonLdNonce);
+      }
+
       return new Response(response, {
         headers: { 
           'Content-Type': 'text/html',
           ...cacheHeaders,
-          ...getSecurityHeaders(request)
+          ...securityHeaders
         }
       });
     } catch (error) {
