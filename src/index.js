@@ -43,7 +43,9 @@ import {
   getLocaleRedirectPath,
   getCanonicalUrl,
   buildLocalizedPath,
-  t
+  t,
+  extractLocaleFromRequest,
+  getDefaultLocale
 } from './utils/localization.js';
 import { getClientLocalizationJS } from './utils/clientLocalization.js';
 
@@ -130,6 +132,14 @@ export default {
         locale = localeResult.locale;
         pathWithoutLocale = localeResult.pathWithoutLocale;
         
+        // Check for nested locale patterns and redirect to normalized path
+        if (localeResult.needsRedirect) {
+          // Redirect nested locale paths to proper single locale paths
+          // localeResult.pathWithoutLocale is already clean, just add default locale prefix
+          const normalizedPath = buildLocalizedPath(getDefaultLocale(), localeResult.pathWithoutLocale);
+          return Response.redirect(url.origin + normalizedPath, 301);
+        }
+        
         // Check if redirect to localized path is needed (add /en prefix to non-localized URLs)
         const redirectPath = getLocaleRedirectPath(pathname);
         if (redirectPath && redirectPath !== pathname) {
@@ -156,9 +166,12 @@ export default {
       if (pathname.startsWith('/api/')) {
         const apiPath = pathname.substring(5);
         
+        // Extract locale for API calls from headers/query params instead of URL path
+        const apiLocale = extractLocaleFromRequest(request);
+        
         // Validate origin for API requests
         if (!isValidOrigin(request)) {
-          return new Response(JSON.stringify({ error: getErrorMessage('FORBIDDEN', locale) }), {
+          return new Response(JSON.stringify({ error: getErrorMessage('FORBIDDEN', apiLocale) }), {
             status: 403,
             headers: { 
               'Content-Type': 'application/json',
@@ -170,7 +183,7 @@ export default {
         
         // Validate request method for API endpoints
         if (apiPath === 'create-memo' && request.method !== 'POST') {
-          return new Response(JSON.stringify({ error: getErrorMessage('METHOD_NOT_ALLOWED', locale) }), {
+          return new Response(JSON.stringify({ error: getErrorMessage('METHOD_NOT_ALLOWED', apiLocale) }), {
             status: 405,
             headers: { 
               'Content-Type': 'application/json',
@@ -184,7 +197,7 @@ export default {
         
         // Check allowed methods for read-memo endpoint
         if (apiPath === 'read-memo' && request.method !== 'POST') {
-          return new Response(JSON.stringify({ error: getErrorMessage('METHOD_NOT_ALLOWED', locale) }), {
+          return new Response(JSON.stringify({ error: getErrorMessage('METHOD_NOT_ALLOWED', apiLocale) }), {
             status: 405,
             headers: { 
               'Content-Type': 'application/json',
@@ -196,7 +209,7 @@ export default {
         
                 // Check allowed methods for confirm-delete endpoint
         if (apiPath === 'confirm-delete' && request.method !== 'POST') {
-            return new Response(JSON.stringify({ error: getErrorMessage('METHOD_NOT_ALLOWED', locale) }), {
+            return new Response(JSON.stringify({ error: getErrorMessage('METHOD_NOT_ALLOWED', apiLocale) }), {
                 status: 405,
                 headers: { 
                     'Content-Type': 'application/json',
@@ -210,7 +223,7 @@ export default {
         if (request.method === 'POST') {
           const contentLength = request.headers.get('content-length');
           if (contentLength && parseInt(contentLength) > 100000) {
-            return new Response(JSON.stringify({ error: getErrorMessage('REQUEST_TOO_LARGE', locale) }), {
+            return new Response(JSON.stringify({ error: getErrorMessage('REQUEST_TOO_LARGE', apiLocale) }), {
               status: 413,
               headers: { 
                 'Content-Type': 'application/json',
@@ -222,13 +235,13 @@ export default {
         
         switch (apiPath) {
           case 'create-memo':
-            return await handleCreateMemo(request, env, locale);
+            return await handleCreateMemo(request, env, apiLocale);
           case 'read-memo':
-            return await handleReadMemo(request, env, locale);
+            return await handleReadMemo(request, env, apiLocale);
           case 'confirm-delete':
-            return await handleConfirmDelete(request, env, locale);
+            return await handleConfirmDelete(request, env, apiLocale);
           default:
-            return new Response(getErrorMessage('NOT_FOUND', locale), { 
+            return new Response(getErrorMessage('NOT_FOUND', apiLocale), { 
               status: 404,
               headers: getSecurityHeaders(request)
             });

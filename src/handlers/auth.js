@@ -16,6 +16,7 @@ import {
 } from '../utils/validation.js';
 import { getErrorMessage, getSecurityErrorMessage, getMemoAccessDeniedMessage } from '../utils/errorMessages.js';
 import { addArtificialDelay, constantTimeCompare } from '../utils/timingSecurity.js';
+import { extractLocaleFromRequest } from '../utils/localization.js';
 
 // Generate secure 32-char token
 function generateDeletionToken() {
@@ -103,9 +104,12 @@ async function generateMemoId(env, maxRetries = 10, locale = 'en') {
 // Create new memo with validation and Turnstile verification
 export async function handleCreateMemo(request, env, locale = 'en') {
     try {
+        // Extract requestLocale from request headers/query for better UX
+        const requestLocale = extractLocaleFromRequest(request);
+        
         // Validate request method
         if (request.method !== 'POST') {
-            return new Response(JSON.stringify({ error: getErrorMessage('METHOD_NOT_ALLOWED', locale) }), {
+            return new Response(JSON.stringify({ error: getErrorMessage('METHOD_NOT_ALLOWED', requestLocale) }), {
                 status: 405,
                 headers: { 
                     'Content-Type': 'application/json',
@@ -118,7 +122,7 @@ export async function handleCreateMemo(request, env, locale = 'en') {
         const contentType = request.headers.get('content-type');
         const sanitizedContentType = sanitizeForHTML(contentType);
         if (!sanitizedContentType || !sanitizedContentType.includes('application/json')) {
-            return new Response(JSON.stringify({ error: getErrorMessage('CONTENT_TYPE_ERROR', locale) }), {
+            return new Response(JSON.stringify({ error: getErrorMessage('CONTENT_TYPE_ERROR', requestLocale) }), {
                 status: 400,
                 headers: { 'Content-Type': 'application/json' }
             });
@@ -129,7 +133,7 @@ export async function handleCreateMemo(request, env, locale = 'en') {
         try {
             requestData = await request.json();
         } catch (parseError) {
-            return new Response(JSON.stringify({ error: getErrorMessage('INVALID_JSON', locale) }), {
+            return new Response(JSON.stringify({ error: getErrorMessage('INVALID_JSON', requestLocale) }), {
                 status: 400,
                 headers: { 'Content-Type': 'application/json' }
             });
@@ -142,7 +146,7 @@ export async function handleCreateMemo(request, env, locale = 'en') {
         if (!messageValidation.isValid) {
             // Add additional artificial delay for security
             await addArtificialDelay();
-            return new Response(JSON.stringify({ error: getErrorMessage('INVALID_MESSAGE_FORMAT', locale) }), {
+            return new Response(JSON.stringify({ error: getErrorMessage('INVALID_MESSAGE_FORMAT', requestLocale) }), {
                 status: 400,
                 headers: { 'Content-Type': 'application/json' }
             });
@@ -155,7 +159,7 @@ export async function handleCreateMemo(request, env, locale = 'en') {
         // Validate deletionTokenHash (base64, ~44 chars for SHA-256)
         if (!deletionTokenHash || typeof deletionTokenHash !== 'string' || deletionTokenHash.length !== 44 || !/^[A-Za-z0-9+/=]+$/.test(deletionTokenHash)) {
             await addArtificialDelay();
-            return new Response(JSON.stringify({ error: getErrorMessage('INVALID_DELETION_TOKEN_HASH', locale) }), {
+            return new Response(JSON.stringify({ error: getErrorMessage('INVALID_DELETION_TOKEN_HASH', requestLocale) }), {
                 status: 400,
                 headers: { 'Content-Type': 'application/json' }
             });
@@ -165,7 +169,7 @@ export async function handleCreateMemo(request, env, locale = 'en') {
         if (!validateExpiryHours(sanitizedExpiryHours)) {
             // Add artificial delay for security
             await addArtificialDelay();
-            return new Response(JSON.stringify({ error: getErrorMessage('INVALID_EXPIRY_TIME', locale) }), {
+            return new Response(JSON.stringify({ error: getErrorMessage('INVALID_EXPIRY_TIME', requestLocale) }), {
                 status: 400,
                 headers: { 'Content-Type': 'application/json' }
             });
@@ -174,7 +178,7 @@ export async function handleCreateMemo(request, env, locale = 'en') {
         // Calculate expiry time server-side
         const calculatedExpiryTime = calculateExpiryTime(sanitizedExpiryHours);
         if (!calculatedExpiryTime) {
-            return new Response(JSON.stringify({ error: getErrorMessage('INVALID_EXPIRY_TIME', locale) }), {
+            return new Response(JSON.stringify({ error: getErrorMessage('INVALID_EXPIRY_TIME', requestLocale) }), {
                 status: 400,
                 headers: { 'Content-Type': 'application/json' }
             });
@@ -182,7 +186,7 @@ export async function handleCreateMemo(request, env, locale = 'en') {
         
         // Verify Turnstile token
         if (!sanitizedTurnstileResponse) {
-            return new Response(JSON.stringify({ error: getErrorMessage('MISSING_TURNSTILE', locale) }), {
+            return new Response(JSON.stringify({ error: getErrorMessage('MISSING_TURNSTILE', requestLocale) }), {
                 status: 400,
                 headers: { 'Content-Type': 'application/json' }
             });
@@ -202,7 +206,7 @@ export async function handleCreateMemo(request, env, locale = 'en') {
             });
 
             if (!turnstileResponse.ok) {
-                return new Response(JSON.stringify({ error: getErrorMessage('TURNSTILE_API_ERROR', locale) }), {
+                return new Response(JSON.stringify({ error: getErrorMessage('TURNSTILE_API_ERROR', requestLocale) }), {
                     status: 500,
                     headers: { 'Content-Type': 'application/json' }
                 });
@@ -211,13 +215,13 @@ export async function handleCreateMemo(request, env, locale = 'en') {
             const turnstileResult = await turnstileResponse.json();
             
             if (!turnstileResult.success) {
-                return new Response(JSON.stringify({ error: getErrorMessage('TURNSTILE_FAILED', locale) }), {
+                return new Response(JSON.stringify({ error: getErrorMessage('TURNSTILE_FAILED', requestLocale) }), {
                     status: 400,
                     headers: { 'Content-Type': 'application/json' }
                 });
             }
         } catch (turnstileError) {
-            return new Response(JSON.stringify({ error: getErrorMessage('TURNSTILE_VERIFICATION_ERROR', locale) }), {
+            return new Response(JSON.stringify({ error: getErrorMessage('TURNSTILE_VERIFICATION_ERROR', requestLocale) }), {
                 status: 500,
                 headers: { 'Content-Type': 'application/json' }
             });
@@ -226,11 +230,11 @@ export async function handleCreateMemo(request, env, locale = 'en') {
         // Generate unique memo ID with collision detection
         let memoId;
         try {
-            memoId = await generateMemoId(env, 10, locale);
+            memoId = await generateMemoId(env, 10, requestLocale);
         } catch (generateError) {
             // Add artificial delay for security
             await addArtificialDelay();
-            return new Response(JSON.stringify({ error: getErrorMessage('MEMO_ID_GENERATION_ERROR', locale) }), {
+            return new Response(JSON.stringify({ error: getErrorMessage('MEMO_ID_GENERATION_ERROR', requestLocale) }), {
                 status: 500,
                 headers: { 'Content-Type': 'application/json' }
             });
@@ -251,7 +255,7 @@ export async function handleCreateMemo(request, env, locale = 'en') {
                 // but handle it gracefully by returning an error
                 // Add artificial delay for security
                 await addArtificialDelay();
-                return new Response(JSON.stringify({ error: getErrorMessage('MEMO_ID_COLLISION_ERROR', locale) }), {
+                return new Response(JSON.stringify({ error: getErrorMessage('MEMO_ID_COLLISION_ERROR', requestLocale) }), {
                     status: 500,
                     headers: { 'Content-Type': 'application/json' }
                 });
@@ -259,7 +263,7 @@ export async function handleCreateMemo(request, env, locale = 'en') {
             
             // Add artificial delay for security
             await addArtificialDelay();
-            return new Response(JSON.stringify({ error: getErrorMessage('DATABASE_ERROR', locale) }), {
+            return new Response(JSON.stringify({ error: getErrorMessage('DATABASE_ERROR', requestLocale) }), {
                 status: 500,
                 headers: { 'Content-Type': 'application/json' }
             });
@@ -282,7 +286,7 @@ export async function handleCreateMemo(request, env, locale = 'en') {
             } catch (error) {
             // Add artificial delay for security
             await addArtificialDelay();
-            return new Response(JSON.stringify({ error: getErrorMessage('MEMO_CREATION_ERROR', locale) }), {
+            return new Response(JSON.stringify({ error: getErrorMessage('MEMO_CREATION_ERROR', requestLocale) }), {
                 status: 500,
                 headers: { 'Content-Type': 'application/json' }
             });
@@ -301,9 +305,12 @@ export async function handleCreateMemo(request, env, locale = 'en') {
  */
 export async function handleReadMemo(request, env, locale = 'en') {
     try {
+        // Extract requestLocale from request headers/query for better UX
+        const requestLocale = extractLocaleFromRequest(request);
+        
         // Validate request method
         if (request.method !== 'POST') {
-            return new Response(JSON.stringify({ error: getErrorMessage('METHOD_NOT_ALLOWED', locale) }), {
+            return new Response(JSON.stringify({ error: getErrorMessage('METHOD_NOT_ALLOWED', requestLocale) }), {
                 status: 405,
                 headers: { 
                     'Content-Type': 'application/json',
@@ -316,7 +323,7 @@ export async function handleReadMemo(request, env, locale = 'en') {
         const contentType = request.headers.get('content-type');
         const sanitizedContentType = sanitizeForHTML(contentType);
         if (!sanitizedContentType || !sanitizedContentType.includes('application/json')) {
-            return new Response(JSON.stringify({ error: getErrorMessage('CONTENT_TYPE_ERROR', locale) }), {
+            return new Response(JSON.stringify({ error: getErrorMessage('CONTENT_TYPE_ERROR', requestLocale) }), {
                 status: 400,
                 headers: { 'Content-Type': 'application/json' }
             });
@@ -327,7 +334,7 @@ export async function handleReadMemo(request, env, locale = 'en') {
         try {
             requestData = await request.json();
         } catch (parseError) {
-            return new Response(JSON.stringify({ error: getErrorMessage('INVALID_JSON', locale) }), {
+            return new Response(JSON.stringify({ error: getErrorMessage('INVALID_JSON', requestLocale) }), {
                 status: 400,
                 headers: { 'Content-Type': 'application/json' }
             });
@@ -340,7 +347,7 @@ export async function handleReadMemo(request, env, locale = 'en') {
         
         // Verify Turnstile token
         if (!sanitizedTurnstileResponse) {
-            return new Response(JSON.stringify({ error: getErrorMessage('MISSING_TURNSTILE', locale) }), {
+            return new Response(JSON.stringify({ error: getErrorMessage('MISSING_TURNSTILE', requestLocale) }), {
                 status: 400,
                 headers: { 'Content-Type': 'application/json' }
             });
@@ -360,7 +367,7 @@ export async function handleReadMemo(request, env, locale = 'en') {
             });
 
             if (!turnstileResponse.ok) {
-                return new Response(JSON.stringify({ error: getErrorMessage('TURNSTILE_API_ERROR', locale) }), {
+                return new Response(JSON.stringify({ error: getErrorMessage('TURNSTILE_API_ERROR', requestLocale) }), {
                     status: 500,
                     headers: { 'Content-Type': 'application/json' }
                 });
@@ -369,13 +376,13 @@ export async function handleReadMemo(request, env, locale = 'en') {
             const turnstileResult = await turnstileResponse.json();
             
             if (!turnstileResult.success) {
-                return new Response(JSON.stringify({ error: getErrorMessage('TURNSTILE_FAILED', locale) }), {
+                return new Response(JSON.stringify({ error: getErrorMessage('TURNSTILE_FAILED', requestLocale) }), {
                     status: 400,
                     headers: { 'Content-Type': 'application/json' }
                 });
             }
         } catch (turnstileError) {
-            return new Response(JSON.stringify({ error: getErrorMessage('TURNSTILE_VERIFICATION_ERROR', locale) }), {
+            return new Response(JSON.stringify({ error: getErrorMessage('TURNSTILE_VERIFICATION_ERROR', requestLocale) }), {
                 status: 500,
                 headers: { 'Content-Type': 'application/json' }
             });
@@ -391,7 +398,7 @@ export async function handleReadMemo(request, env, locale = 'en') {
         if (!sanitizedMemoId || !(await validateMemoIdSecure(sanitizedMemoId))) {
             // Add additional artificial delay for security
             await addArtificialDelay();
-            return new Response(JSON.stringify({ error: getErrorMessage('INVALID_MEMO_ID', locale) }), {
+            return new Response(JSON.stringify({ error: getErrorMessage('INVALID_MEMO_ID', requestLocale) }), {
                 status: 400,
                 headers: { 'Content-Type': 'application/json' }
             });
@@ -412,7 +419,7 @@ export async function handleReadMemo(request, env, locale = 'en') {
         } catch (dbError) {
             // Add artificial delay for security
             await addArtificialDelay();
-            return new Response(JSON.stringify({ error: getErrorMessage('DATABASE_READ_ERROR', locale) }), {
+            return new Response(JSON.stringify({ error: getErrorMessage('DATABASE_READ_ERROR', requestLocale) }), {
                 status: 500,
                 headers: { 'Content-Type': 'application/json' }
             });
@@ -449,7 +456,7 @@ export async function handleReadMemo(request, env, locale = 'en') {
     } catch (error) {
         // Add artificial delay for security
         await addArtificialDelay();
-        return new Response(JSON.stringify({ error: getErrorMessage('MEMO_READ_ERROR', locale) }), {
+        return new Response(JSON.stringify({ error: getErrorMessage('MEMO_READ_ERROR', requestLocale) }), {
             status: 500,
             headers: { 'Content-Type': 'application/json' }
         });
@@ -463,9 +470,12 @@ export async function handleReadMemo(request, env, locale = 'en') {
  */
 export async function handleConfirmDelete(request, env, locale = 'en') {
     try {
+        // Extract requestLocale from request headers/query for better UX
+        const requestLocale = extractLocaleFromRequest(request);
+        
         // Validate request method
         if (request.method !== 'POST') {
-            return new Response(JSON.stringify({ error: getErrorMessage('METHOD_NOT_ALLOWED', locale) }), {
+            return new Response(JSON.stringify({ error: getErrorMessage('METHOD_NOT_ALLOWED', requestLocale) }), {
                 status: 405,
                 headers: { 
                     'Content-Type': 'application/json',
@@ -478,7 +488,7 @@ export async function handleConfirmDelete(request, env, locale = 'en') {
         const contentType = request.headers.get('content-type');
         const sanitizedContentType = sanitizeForHTML(contentType);
         if (!sanitizedContentType || !sanitizedContentType.includes('application/json')) {
-            return new Response(JSON.stringify({ error: getErrorMessage('CONTENT_TYPE_ERROR', locale) }), {
+            return new Response(JSON.stringify({ error: getErrorMessage('CONTENT_TYPE_ERROR', requestLocale) }), {
                 status: 400,
                 headers: { 'Content-Type': 'application/json' }
             });
@@ -489,7 +499,7 @@ export async function handleConfirmDelete(request, env, locale = 'en') {
         try {
             requestData = await request.json();
         } catch (parseError) {
-            return new Response(JSON.stringify({ error: getErrorMessage('INVALID_JSON', locale) }), {
+            return new Response(JSON.stringify({ error: getErrorMessage('INVALID_JSON', requestLocale) }), {
                 status: 400,
                 headers: { 'Content-Type': 'application/json' }
             });
@@ -504,7 +514,7 @@ export async function handleConfirmDelete(request, env, locale = 'en') {
         if (!sanitizedMemoId || !(await validateMemoIdSecure(sanitizedMemoId))) {
             // Add additional artificial delay for security
             await addArtificialDelay();
-            return new Response(JSON.stringify({ error: getErrorMessage('INVALID_MEMO_ID', locale) }), {
+            return new Response(JSON.stringify({ error: getErrorMessage('INVALID_MEMO_ID', requestLocale) }), {
                 status: 400,
                 headers: { 'Content-Type': 'application/json' }
             });
@@ -522,7 +532,7 @@ export async function handleConfirmDelete(request, env, locale = 'en') {
         // Require deletion token
         if (!deletionToken) {
             await addArtificialDelay();
-            return new Response(JSON.stringify({ error: getErrorMessage('MISSING_DELETION_TOKEN', locale) }), { status: 400 });
+            return new Response(JSON.stringify({ error: getErrorMessage('MISSING_DELETION_TOKEN', requestLocale) }), { status: 400 });
         }
         
         const sanitizedToken = sanitizeForDatabase(deletionToken);
@@ -562,7 +572,7 @@ export async function handleConfirmDelete(request, env, locale = 'en') {
     } catch (error) {
         // Add artificial delay for security
         await addArtificialDelay();
-        return new Response(JSON.stringify({ error: getErrorMessage('MEMO_DELETION_ERROR', locale) }), {
+        return new Response(JSON.stringify({ error: getErrorMessage('MEMO_DELETION_ERROR', requestLocale) }), {
             status: 500,
             headers: { 'Content-Type': 'application/json' }
         });
@@ -591,7 +601,7 @@ export async function handleCleanupMemos(env) {
     } catch (error) {
         // Add artificial delay for security
         await addArtificialDelay();
-        return new Response(JSON.stringify({ error: getErrorMessage('DATABASE_ERROR', locale) }), {
+        return new Response(JSON.stringify({ error: getErrorMessage('DATABASE_ERROR', requestLocale) }), {
             status: 500,
             headers: { 'Content-Type': 'application/json' }
         });
