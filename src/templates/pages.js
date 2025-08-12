@@ -183,7 +183,7 @@ export async function getIndexHTML(locale = 'en', origin = 'https://securememo.a
         <p style="font-size: 0.8em; margin-top: 0.5em; opacity: 0.8;">${t('footer.tagline', locale)}</p>
     </footer>
 
-    <script src="/js/common.js" type="module" defer></script>
+    <script src="/js/common.js" type="module" nonce="{{CSP_NONCE}}" defer></script>
 </body>
 </html>`;
 }
@@ -395,7 +395,7 @@ export async function getAboutHTML(locale = 'en', origin = 'https://securememo.a
         <p style="font-size: 0.8em; margin-top: 0.5em; opacity: 0.8;">${t('footer.tagline', locale)}</p>
     </footer>
 
-    <script src="/js/common.js" type="module" defer></script>
+    <script src="/js/common.js" type="module" nonce="{{CSP_NONCE}}" defer></script>
 </body>
 </html>`;
 }
@@ -468,7 +468,7 @@ export async function getCreateMemoHTML(locale = 'en', origin = 'https://securem
     <link rel="icon" type="image/png" sizes="512x512" href="/android-chrome-512x512.png">
     <link rel="canonical" href="${canonicalUrl}">
     <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" nonce="{{CSP_NONCE}}" crossorigin="anonymous" async defer></script>
-    <script src="/js/create-memo.js?locale=${locale}" defer></script>
+    <script src="/js/create-memo.js?locale=${locale}" nonce="{{CSP_NONCE}}" defer></script>
 </head>
 <body>
     <nav class="navbar">
@@ -596,7 +596,7 @@ export async function getCreateMemoHTML(locale = 'en', origin = 'https://securem
         <p style="font-size: 0.8em; margin-top: 0.5em; opacity: 0.8;">${t('footer.tagline', locale)}</p>
     </footer>
 
-    <script src="/js/common.js" type="module" defer></script>
+    <script src="/js/common.js" type="module" nonce="{{CSP_NONCE}}" defer></script>
 </body>
 </html>`;
 }
@@ -669,7 +669,7 @@ export async function getReadMemoHTML(locale = 'en', origin = 'https://securemem
     <link rel="icon" type="image/png" sizes="512x512" href="/android-chrome-512x512.png">
     <link rel="canonical" href="${canonicalUrl}">
     <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" nonce="{{CSP_NONCE}}" crossorigin="anonymous" async defer></script>
-    <script src="/js/read-memo.js?locale=${locale}" defer></script>
+    <script src="/js/read-memo.js?locale=${locale}" nonce="{{CSP_NONCE}}" defer></script>
 </head>
 <body>
     <nav class="navbar">
@@ -776,7 +776,7 @@ export async function getReadMemoHTML(locale = 'en', origin = 'https://securemem
         <p style="font-size: 0.8em; margin-top: 0.5em; opacity: 0.8;">${t('footer.tagline', locale)}</p>
     </footer>
 
-    <script src="/js/common.js" type="module" defer></script>
+    <script src="/js/common.js" type="module" nonce="{{CSP_NONCE}}" defer></script>
 </body>
 </html>`;
 }
@@ -1017,7 +1017,7 @@ export async function getToSHTML(locale = 'en', origin = 'https://securememo.app
         <p style="font-size: 0.8em; margin-top: 0.5em; opacity: 0.8;">${t('footer.tagline', locale)}</p>
     </footer>
 
-    <script src="/js/common.js" type="module" defer></script>
+    <script src="/js/common.js" type="module" nonce="{{CSP_NONCE}}" defer></script>
 </body>
 </html>`;
 }
@@ -1251,7 +1251,7 @@ export async function getPrivacyHTML(locale = 'en', origin = 'https://securememo
         <p style="font-size: 0.8em; margin-top: 0.5em; opacity: 0.8;">${t('footer.tagline', locale)}</p>
     </footer>
 
-    <script src="/js/common.js" type="module" defer></script>
+    <script src="/js/common.js" type="module" nonce="{{CSP_NONCE}}" defer></script>
 </body>
 </html>`;
 } 

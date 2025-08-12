@@ -92,10 +92,10 @@ function buildContentSecurityPolicy(nonce) {
     "connect-src 'self' https://challenges.cloudflare.com",
     "frame-src https://challenges.cloudflare.com",
     "img-src 'self' https://challenges.cloudflare.com",
-    "style-src 'self'",
-    "worker-src 'self'",
+    "style-src 'self' 'unsafe-inline'",
+    "worker-src 'self' blob:",
     "object-src 'none'",
-    `script-src 'nonce-${nonce}' 'strict-dynamic' 'unsafe-inline' https:`,
+    `script-src 'nonce-${nonce}' 'strict-dynamic' blob: 'unsafe-inline' https:`,
     "require-trusted-types-for 'script'"
   ];
   return directives.join('; ') + ';';
