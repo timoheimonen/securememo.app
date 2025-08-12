@@ -61,7 +61,8 @@ const baseSecurityHeaders = {
   'X-Content-Type-Options': 'nosniff',
   'X-Frame-Options': 'DENY',
   'X-XSS-Protection': '1; mode=block',
-  'Content-Security-Policy': "default-src 'none'; script-src 'self' https://challenges.cloudflare.com 'sha384-8tTMUpBXDOsQTxlbB/LdlISG/7nPjF1RWr/rNDxPsh5quEpybtbFHO/flV79t6uO'; style-src 'self'; img-src 'self' https://challenges.cloudflare.com; frame-src https://challenges.cloudflare.com; connect-src 'self' https://challenges.cloudflare.com; worker-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self';",
+  // Remove SRI hash to avoid availability issues; add frame-ancestors and Trusted Types
+  'Content-Security-Policy': "default-src 'none'; script-src 'self' https://challenges.cloudflare.com; style-src 'self'; img-src 'self' https://challenges.cloudflare.com; frame-src https://challenges.cloudflare.com; connect-src 'self' https://challenges.cloudflare.com; worker-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; require-trusted-types-for 'script';",
   'Referrer-Policy': 'strict-origin-when-cross-origin',
   'Permissions-Policy': 'geolocation=(), microphone=(), camera=(), payment=(), usb=(), magnetometer=(), gyroscope=()',
   'Strict-Transport-Security': 'max-age=31536000; includeSubDomains; preload',
@@ -82,6 +83,13 @@ function getSecurityHeaders(request) {
   }
   
   return headers;
+}
+
+// Merge full security headers into an existing Response from handlers
+function mergeSecurityHeadersIntoResponse(response, request) {
+  const existingHeaders = Object.fromEntries(response.headers);
+  const mergedHeaders = { ...getSecurityHeaders(request), ...existingHeaders };
+  return new Response(response.body, { status: response.status, headers: mergedHeaders });
 }
 
 // Function to validate origin for CORS requests
@@ -234,12 +242,18 @@ export default {
         }
         
         switch (apiPath) {
-          case 'create-memo':
-            return await handleCreateMemo(request, env, apiLocale);
-          case 'read-memo':
-            return await handleReadMemo(request, env, apiLocale);
-          case 'confirm-delete':
-            return await handleConfirmDelete(request, env, apiLocale);
+          case 'create-memo': {
+            const res = await handleCreateMemo(request, env, apiLocale);
+            return mergeSecurityHeadersIntoResponse(res, request);
+          }
+          case 'read-memo': {
+            const res = await handleReadMemo(request, env, apiLocale);
+            return mergeSecurityHeadersIntoResponse(res, request);
+          }
+          case 'confirm-delete': {
+            const res = await handleConfirmDelete(request, env, apiLocale);
+            return mergeSecurityHeadersIntoResponse(res, request);
+          }
           default:
             return new Response(getErrorMessage('NOT_FOUND', apiLocale), { 
               status: 404,

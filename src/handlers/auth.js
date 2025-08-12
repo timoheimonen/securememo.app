@@ -18,14 +18,24 @@ import { getErrorMessage, getSecurityErrorMessage, getMemoAccessDeniedMessage } 
 import { addArtificialDelay, constantTimeCompare } from '../utils/timingSecurity.js';
 import { extractLocaleFromRequest } from '../utils/localization.js';
 
-// Generate secure 32-char token
+// Generate secure 32-char token with rejection sampling to avoid modulo bias
 function generateDeletionToken() {
     const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    const array = new Uint8Array(32);
+    const tokenLength = 32;
+    const array = new Uint8Array(tokenLength);
     crypto.getRandomValues(array);
     let token = '';
-    for (let i = 0; i < 32; i++) {
-        token += chars[array[i] % chars.length];
+    const biasThreshold = 256 - (256 % chars.length);
+    for (let i = 0; i < tokenLength; i++) {
+        let value = array[i];
+        // Rejection sampling to eliminate modulo bias
+        while (value >= biasThreshold) {
+            const refill = new Uint8Array(1);
+            crypto.getRandomValues(refill);
+            value = refill[0];
+        }
+        const idx = value % chars.length;
+        token += chars[idx];
     }
     return token;
 }

@@ -63,14 +63,22 @@ if (document.readyState === 'loading') {
     initializePage();
 }
 
-// Generate random 32-char password
+// Generate random 32-char password using rejection sampling to avoid modulo bias
 function generatePassword() {
     const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    const array = new Uint8Array(32);
+    const passwordLength = 32;
+    const array = new Uint8Array(passwordLength);
     crypto.getRandomValues(array);
     let password = '';
-    for (let i = 0; i < 32; i++) {
-        password += chars[array[i] % chars.length];
+    const biasThreshold = 256 - (256 % chars.length);
+    for (let i = 0; i < passwordLength; i++) {
+        let value = array[i];
+        while (value >= biasThreshold) {
+            const refill = new Uint8Array(1);
+            crypto.getRandomValues(refill);
+            value = refill[0];
+        }
+        password += chars[value % chars.length];
     }
     return password;
 }
