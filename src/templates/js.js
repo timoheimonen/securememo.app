@@ -46,13 +46,14 @@ function initializePage() {
     // Hide result section by default
     const resultSection = document.getElementById('result');
     if (resultSection) {
-        resultSection.style.display = 'none';
+        resultSection.classList.add('is-hidden');
     }
     
     // Show form by default
     const memoForm = document.getElementById('memoForm');
     if (memoForm) {
-        memoForm.style.display = 'block';
+        memoForm.classList.remove('is-hidden');
+        memoForm.classList.add('is-block');
     }
 }
 
@@ -188,7 +189,8 @@ document.getElementById('memoForm').addEventListener('submit', async (e) => {
     const loadingIndicator = document.getElementById('loadingIndicator');
     submitButton.disabled = true;
     submitButton.textContent = '{{MSG_ENCRYPTING}}';
-    loadingIndicator.style.display = 'block';
+    loadingIndicator.classList.remove('is-hidden');
+    loadingIndicator.classList.add('is-block');
     
     try {
         // Generate password and deletion token
@@ -226,8 +228,9 @@ document.getElementById('memoForm').addEventListener('submit', async (e) => {
             // Show result
             document.getElementById('memoUrl').value = memoUrl;
             document.getElementById('memoPassword').value = password;
-            document.getElementById('result').style.display = 'block';
-            document.getElementById('memoForm').style.display = 'none';
+            document.getElementById('result').classList.remove('is-hidden');
+            document.getElementById('result').classList.add('is-block');
+            document.getElementById('memoForm').classList.add('is-hidden');
             
             // Clear form
             document.getElementById('message').value = '';
@@ -245,7 +248,8 @@ document.getElementById('memoForm').addEventListener('submit', async (e) => {
         // Always hide loading indicator and re-enable button in finally block
         submitButton.disabled = false;
         submitButton.textContent = '{{BTN_CREATE}}';
-        loadingIndicator.style.display = 'none';
+        loadingIndicator.classList.add('is-hidden');
+        loadingIndicator.classList.remove('is-block');
     }
 });
 
@@ -264,11 +268,11 @@ document.getElementById('copyUrl').addEventListener('click', async () => {
             const copyBtn = document.getElementById('copyUrl');
             const originalText = copyBtn.textContent;
             copyBtn.textContent = '{{BTN_COPIED}}';
-            copyBtn.style.backgroundColor = '#28a745';
+            copyBtn.classList.add('btn-success');
             
             setTimeout(() => {
                 copyBtn.textContent = originalText;
-                copyBtn.style.backgroundColor = '';
+                copyBtn.classList.remove('btn-success');
             }, 2000);
         } else {
             // Fallback for older browsers or non-secure contexts
@@ -293,11 +297,9 @@ document.getElementById('togglePassword').addEventListener('click', () => {
     if (passwordInput.type === 'password') {
         passwordInput.type = 'text';
         toggleBtn.textContent = '{{BTN_HIDE}}';
-        toggleBtn.style.backgroundColor = '#007bff';
     } else {
         passwordInput.type = 'password';
         toggleBtn.textContent = '{{BTN_SHOW}}';
-        toggleBtn.style.backgroundColor = '#007bff';
     }
 });
 
@@ -316,11 +318,11 @@ document.getElementById('copyPassword').addEventListener('click', async () => {
             const copyBtn = document.getElementById('copyPassword');
             const originalText = copyBtn.textContent;
             copyBtn.textContent = '{{BTN_COPIED}}';
-            copyBtn.style.backgroundColor = '#28a745';
+            copyBtn.classList.add('btn-success');
             
             setTimeout(() => {
                 copyBtn.textContent = originalText;
-                copyBtn.style.backgroundColor = '';
+                copyBtn.classList.remove('btn-success');
             }, 2000);
         } else {
             // Fallback for older browsers or non-secure contexts
@@ -341,10 +343,12 @@ function showMessage(message, type) {
     const messageDiv = document.getElementById('statusMessage');
     messageDiv.className = 'message ' + type;
     messageDiv.textContent = message;
-    messageDiv.style.display = 'block';
+    messageDiv.classList.remove('is-hidden');
+    messageDiv.classList.add('is-block');
     
     setTimeout(() => {
-        messageDiv.style.display = 'none';
+        messageDiv.classList.add('is-hidden');
+        messageDiv.classList.remove('is-block');
     }, 5000);
 }
 `;
@@ -512,10 +516,13 @@ function initializePage() {
     const statusMessage = document.getElementById('statusMessage');
     
     // Set initial state
-    if (passwordForm) passwordForm.style.display = 'block';
-    if (memoContent) memoContent.style.display = 'none';
-    if (errorContent) errorContent.style.display = 'none';
-    if (statusMessage) statusMessage.style.display = 'none';
+    if (passwordForm) {
+        passwordForm.classList.remove('is-hidden');
+        passwordForm.classList.add('is-block');
+    }
+    if (memoContent) memoContent.classList.add('is-hidden');
+    if (errorContent) errorContent.classList.add('is-hidden');
+    if (statusMessage) statusMessage.classList.add('is-hidden');
 }
 
 // Auto-fill password from URL hashtag if available
@@ -591,8 +598,9 @@ window.addEventListener('load', () => {
                     
                     // Display message
                     document.getElementById('decryptedMessage').textContent = decryptedPayload.message;
-                    document.getElementById('memoContent').style.display = 'block';
-                    document.getElementById('passwordForm').style.display = 'none';
+                    document.getElementById('memoContent').classList.remove('is-hidden');
+                    document.getElementById('memoContent').classList.add('is-block');
+                    document.getElementById('passwordForm').classList.add('is-hidden');
                     
                     // Update status and show deletion spinner
                     const memoStatus = document.getElementById('memoStatus');
@@ -601,15 +609,16 @@ window.addEventListener('load', () => {
                         memoStatus.textContent = '{{MEMO_DECRYPTED_MESSAGE}}';
                     }
                     if (deletionSpinner) {
-                        deletionSpinner.style.display = 'block';
+                        deletionSpinner.classList.remove('is-hidden');
+                        deletionSpinner.classList.add('is-block');
                     }
                     
                     // Clear password field
                     document.getElementById('password').value = '';
                     
                     // Hide error messages
-                    if (errorContent) errorContent.style.display = 'none';
-                    if (statusMessage) statusMessage.style.display = 'none';
+                    if (errorContent) errorContent.classList.add('is-hidden');
+                    if (statusMessage) statusMessage.classList.add('is-hidden');
                     
                     // Handle deletion confirmation with deletion token
                     const deleteBody = {};
@@ -633,7 +642,8 @@ window.addEventListener('load', () => {
                             memoStatus.textContent = '{{MEMO_DELETED_MESSAGE}}';
                         }
                         if (deletionSpinner) {
-                            deletionSpinner.style.display = 'none';
+                            deletionSpinner.classList.add('is-hidden');
+                            deletionSpinner.classList.remove('is-block');
                         }
                     } else {
                         showMessage('{{DELETION_ERROR_MESSAGE}}', 'warning');
@@ -669,11 +679,9 @@ window.addEventListener('load', () => {
             if (passwordInput.type === 'password') {
                 passwordInput.type = 'text';
                 toggleBtn.textContent = '{{BTN_HIDE}}';
-                toggleBtn.style.backgroundColor = '#007bff';
             } else {
                 passwordInput.type = 'password';
                 toggleBtn.textContent = '{{BTN_SHOW}}';
-                toggleBtn.style.backgroundColor = '#007bff';
             }
         });
     }
@@ -681,18 +689,21 @@ window.addEventListener('load', () => {
 
 function showError(message) {
     document.getElementById('errorMessage').textContent = message;
-    document.getElementById('errorContent').style.display = 'block';
-    document.getElementById('passwordForm').style.display = 'none';
+    document.getElementById('errorContent').classList.remove('is-hidden');
+    document.getElementById('errorContent').classList.add('is-block');
+    document.getElementById('passwordForm').classList.add('is-hidden');
 }
 
 function showMessage(message, type) {
     const messageDiv = document.getElementById('statusMessage');
     messageDiv.className = 'message ' + type;
     messageDiv.textContent = message;
-    messageDiv.style.display = 'block';
+    messageDiv.classList.remove('is-hidden');
+    messageDiv.classList.add('is-block');
     
     setTimeout(() => {
-        messageDiv.style.display = 'none';
+        messageDiv.classList.add('is-hidden');
+        messageDiv.classList.remove('is-block');
     }, 5000);
 }
 

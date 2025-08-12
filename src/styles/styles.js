@@ -846,6 +846,12 @@ body {
   margin-top: 60px;
 }
 
+.footer-tagline {
+  font-size: 0.8em;
+  margin-top: 0.5em;
+  opacity: 0.8;
+}
+
 /* Touch-friendly elements */
 .btn, input[type="submit"], .nav-link {
   min-width: 44px;
@@ -1542,5 +1548,15 @@ input, textarea, select {
   cursor: not-allowed;
   opacity: 0.7;
 }
+
+/* CSP-safe visibility helpers and utilities */
+.is-hidden { display: none !important; }
+.is-block { display: block !important; }
+.is-flex { display: flex !important; }
+.btn-margin-right { margin-right: 8px; }
+.btn-success { background: #28a745 !important; }
+body.no-scroll { overflow: hidden !important; }
+.nav-menu.force-scroll { overflow-y: scroll !important; -webkit-overflow-scrolling: touch !important; }
+.mb-40 { margin-bottom: 40px !important; }
   `;
 } 

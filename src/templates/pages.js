@@ -180,7 +180,7 @@ export async function getIndexHTML(locale = 'en', origin = 'https://securememo.a
 
     <footer class="footer">
         <p><a href="https://github.com/timoheimonen/securememo.app" target="_blank" rel="noopener noreferrer">${t('footer.sourceCode', locale)}</a> | <a href="/${locale}/tos.html">${t('footer.tos', locale)}</a> | <a href="/${locale}/privacy.html">${t('footer.privacy', locale)}</a></p>
-        <p style="font-size: 0.8em; margin-top: 0.5em; opacity: 0.8;">${t('footer.tagline', locale)}</p>
+        <p class="footer-tagline">${t('footer.tagline', locale)}</p>
     </footer>
 
     <script src="/js/common.js" type="module" defer></script>
@@ -547,19 +547,19 @@ export async function getCreateMemoHTML(locale = 'en', origin = 'https://securem
                     <button type="submit" class="btn btn-primary" id="submitButton">${t('btn.create', locale)}</button>
                     
                     <!-- Loading indicator (hidden by default) -->
-                    <div id="loadingIndicator" class="loading-spinner" style="display: none;">
+                    <div id="loadingIndicator" class="loading-spinner is-hidden">
                         <div class="spinner"></div>
                         <p>${t('msg.encrypting', locale)}</p>
                     </div>
                 </form>
                 
-                <div id="result" class="result-section" style="display: none;">
+                <div id="result" class="result-section is-hidden">
                     <h3>${t('msg.memoCreated', locale)}</h3>
                     
                     <div class="memo-url-section">
                         <label for="memoUrl">${t('form.memoUrl.label', locale)}</label>
                         <div class="url-copy-container">
-                            <input type="text" id="memoUrl" readonly onclick="this.select(); document.execCommand('copy'); showMessage('${t('msg.urlCopied', locale)}', '${t('common.success', locale)}');">
+                            <input type="text" id="memoUrl" readonly>
                             <button type="button" id="copyUrl" class="btn btn-primary">${t('btn.copyUrl', locale)}</button>
                         </div>
                         <small class="form-help">${t('form.memoUrl.help', locale)}</small>
@@ -568,8 +568,8 @@ export async function getCreateMemoHTML(locale = 'en', origin = 'https://securem
                     <div class="memo-password-section">
                         <label for="memoPassword">${t('form.memoPassword.label', locale)}</label>
                         <div class="url-copy-container">
-                            <input type="password" id="memoPassword" readonly onclick="this.select(); document.execCommand('copy'); showMessage('${t('msg.passwordCopied', locale)}', '${t('common.success', locale)}');">
-                            <button type="button" id="togglePassword" class="btn btn-primary" style="margin-right: 8px;">${t('btn.show', locale)}</button>
+                            <input type="password" id="memoPassword" readonly>
+                            <button type="button" id="togglePassword" class="btn btn-primary btn-margin-right">${t('btn.show', locale)}</button>
                             <button type="button" id="copyPassword" class="btn btn-primary">${t('btn.copyPassword', locale)}</button>
                         </div>
                         <small class="form-help">${t('form.memoPassword.help', locale)}</small>
@@ -593,7 +593,7 @@ export async function getCreateMemoHTML(locale = 'en', origin = 'https://securem
 
     <footer class="footer">
         <p><a href="https://github.com/timoheimonen/securememo.app" target="_blank" rel="noopener noreferrer">${t('footer.sourceCode', locale)}</a> | <a href="/${locale}/tos.html">${t('footer.tos', locale)}</a> | <a href="/${locale}/privacy.html">${t('footer.privacy', locale)}</a></p>
-        <p style="font-size: 0.8em; margin-top: 0.5em; opacity: 0.8;">${t('footer.tagline', locale)}</p>
+        <p class="footer-tagline">${t('footer.tagline', locale)}</p>
     </footer>
 
     <script src="/js/common.js" type="module" defer></script>
@@ -739,14 +739,14 @@ export async function getReadMemoHTML(locale = 'en', origin = 'https://securemem
                     </form>
                 </div>
                 
-                <div id="memoContent" class="memo-content" style="display: none;">
+                <div id="memoContent" class="memo-content is-hidden">
                     <h3>${t('msg.yourSecureMemo', locale)}</h3>
                     <div class="memo-message">
                         <p id="decryptedMessage"></p>
                     </div>
                     <div class="memo-info">
                         <p><strong>${t('msg.status', locale)}</strong> <span id="memoStatus">${t('msg.memoDecrypted', locale)}</span></p>
-                        <div id="deletionSpinner" class="loading-spinner" style="display: none;">
+                        <div id="deletionSpinner" class="loading-spinner is-hidden">
                             <div class="spinner"></div>
                             <p>${t('msg.deletingSecurely', locale)}</p>
                         </div>
@@ -757,7 +757,7 @@ export async function getReadMemoHTML(locale = 'en', origin = 'https://securemem
                     </div>
                 </div>
                 
-                <div id="errorContent" class="error-content" style="display: none;">
+                <div id="errorContent" class="error-content is-hidden">
                     <h3>❌ ${t('common.error', locale)}</h3>
                     <p id="errorMessage"></p>
                     <div class="memo-actions">
@@ -773,7 +773,7 @@ export async function getReadMemoHTML(locale = 'en', origin = 'https://securemem
 
     <footer class="footer">
         <p><a href="https://github.com/timoheimonen/securememo.app" target="_blank" rel="noopener noreferrer">${t('footer.sourceCode', locale)}</a> | <a href="/${locale}/tos.html">${t('footer.tos', locale)}</a> | <a href="/${locale}/privacy.html">${t('footer.privacy', locale)}</a></p>
-        <p style="font-size: 0.8em; margin-top: 0.5em; opacity: 0.8;">${t('footer.tagline', locale)}</p>
+        <p class="footer-tagline">${t('footer.tagline', locale)}</p>
     </footer>
 
     <script src="/js/common.js" type="module" defer></script>
@@ -1014,7 +1014,7 @@ export async function getToSHTML(locale = 'en', origin = 'https://securememo.app
 
     <footer class="footer">
         <p><a href="https://github.com/timoheimonen/securememo.app" target="_blank" rel="noopener noreferrer">${t('footer.sourceCode', locale)}</a> | <a href="/${locale}/tos.html">${t('footer.tos', locale)}</a> | <a href="/${locale}/privacy.html">${t('footer.privacy', locale)}</a></p>
-        <p style="font-size: 0.8em; margin-top: 0.5em; opacity: 0.8;">${t('footer.tagline', locale)}</p>
+        <p class="footer-tagline">${t('footer.tagline', locale)}</p>
     </footer>
 
     <script src="/js/common.js" type="module" defer></script>
