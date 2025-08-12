@@ -2,7 +2,7 @@
 // SECURITY: Generic error messages prevent information leakage and enumeration attacks
 // LOCALIZATION: Integrated with localization system - error messages now support multiple locales
 
-import { t } from './localization.js';
+import { t, isLocaleSupported } from './localization.js';
 
 /**
  * Error message mapping by error code
@@ -87,8 +87,8 @@ export const errorMessages = {
  * @returns {string} - User-friendly error message
  */
 export function getErrorMessage(errorCode, locale = 'en', fallback) {
-  // Handle backward compatibility - if second parameter is a string but not a known locale, treat it as fallback
-  if (typeof locale === 'string' && locale.length > 3 && !fallback) {
+  // Handle backward compatibility - if second parameter is a string but not a supported locale, treat it as fallback
+  if (typeof locale === 'string' && !isLocaleSupported(locale) && !fallback) {
     fallback = locale;
     locale = 'en';
   }
