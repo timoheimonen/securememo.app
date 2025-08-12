@@ -60,10 +60,11 @@ const allowedOrigins = [
 const baseSecurityHeaders = {
   'X-Content-Type-Options': 'nosniff',
   'X-Frame-Options': 'DENY',
-  'X-XSS-Protection': '1; mode=block',
   'Referrer-Policy': 'strict-origin-when-cross-origin',
   'Permissions-Policy': 'geolocation=(), microphone=(), camera=(), payment=(), usb=(), magnetometer=(), gyroscope=()',
   'Strict-Transport-Security': 'max-age=31536000; includeSubDomains; preload',
+  'Cross-Origin-Opener-Policy': 'same-origin',
+  'Cross-Origin-Resource-Policy': 'same-origin',
   'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
   'Access-Control-Allow-Headers': 'Content-Type',
   'Access-Control-Max-Age': '86400',
@@ -96,7 +97,7 @@ function buildContentSecurityPolicy(nonce) {
     "style-src 'self' 'unsafe-inline'",
     "worker-src 'self' blob:",
     "object-src 'none'",
-    `script-src 'nonce-${nonce}' 'strict-dynamic' blob: 'unsafe-inline' https:`,
+    `script-src 'nonce-${nonce}' 'strict-dynamic' blob:`,
     "require-trusted-types-for 'script'"
   ];
   return directives.join('; ') + ';';
@@ -526,6 +527,7 @@ ${sitemapUrls}</urlset>`;
           response = (await getCreateMemoHTML(locale, url.origin))
             .replace('{{TURNSTILE_SITE_KEY}}', siteKey)
             .replace(/{{CSP_NONCE}}/g, cspNonce);
+          cacheHeaders = { 'Cache-Control': 'no-store' };
           break;
         case '/read-memo.html':
           const readSiteKey = env.TURNSTILE_SITE_KEY || 'MISSING_SITE_KEY';
@@ -533,6 +535,7 @@ ${sitemapUrls}</urlset>`;
           response = (await getReadMemoHTML(locale, url.origin))
             .replace('{{TURNSTILE_SITE_KEY}}', readSiteKey)
             .replace(/{{CSP_NONCE}}/g, cspNonce);
+          cacheHeaders = { 'Cache-Control': 'no-store' };
           break;
         case '/tos.html':
           cspNonce = cspNonce || generateNonce();

@@ -163,8 +163,9 @@ export async function handleCreateMemo(request, env, locale = 'en') {
         }
         
         const sanitizedEncryptedMessage = messageValidation.sanitizedMessage;
-        const sanitizedExpiryHours = String(expiryHours); // Convert to string for validation
-        const sanitizedTurnstileResponse = sanitizeForJSON(cfTurnstileResponse);
+        const sanitizedExpiryHours = String(expiryHours);
+        const turnstileToken = typeof cfTurnstileResponse === 'string' ? cfTurnstileResponse : '';
+        const isValidTurnstile = /^[A-Za-z0-9._-]{10,}$/.test(turnstileToken);
         
         // Validate deletionTokenHash (base64, ~44 chars for SHA-256)
         if (!deletionTokenHash || typeof deletionTokenHash !== 'string' || deletionTokenHash.length !== 44 || !/^[A-Za-z0-9+/=]+$/.test(deletionTokenHash)) {
@@ -195,7 +196,7 @@ export async function handleCreateMemo(request, env, locale = 'en') {
         }
         
         // Verify Turnstile token
-        if (!sanitizedTurnstileResponse) {
+        if (!isValidTurnstile) {
             return new Response(JSON.stringify({ error: getErrorMessage('MISSING_TURNSTILE', requestLocale) }), {
                 status: 400,
                 headers: { 'Content-Type': 'application/json' }
@@ -211,7 +212,7 @@ export async function handleCreateMemo(request, env, locale = 'en') {
                 },
                 body: new URLSearchParams({
                     secret: env.TURNSTILE_SECRET,
-                    response: sanitizedTurnstileResponse,
+                    response: turnstileToken,
                 }),
             });
 
@@ -288,8 +289,7 @@ export async function handleCreateMemo(request, env, locale = 'en') {
             headers: { 
                 'Content-Type': 'application/json',
                 'X-Content-Type-Options': 'nosniff',
-                'X-Frame-Options': 'DENY',
-                'X-XSS-Protection': '1; mode=block'
+                'X-Frame-Options': 'DENY'
             }
         });
         
@@ -353,10 +353,12 @@ export async function handleReadMemo(request, env, locale = 'en') {
         const { cfTurnstileResponse } = requestData;
         
         // Sanitize user inputs
-        const sanitizedTurnstileResponse = sanitizeForJSON(cfTurnstileResponse);
+        // Validate Turnstile response token by pattern, do not mutate it
+        const turnstileToken = typeof cfTurnstileResponse === 'string' ? cfTurnstileResponse : '';
+        const isValidTurnstile = /^[A-Za-z0-9._-]{10,}$/.test(turnstileToken);
         
         // Verify Turnstile token
-        if (!sanitizedTurnstileResponse) {
+        if (!isValidTurnstile) {
             return new Response(JSON.stringify({ error: getErrorMessage('MISSING_TURNSTILE', requestLocale) }), {
                 status: 400,
                 headers: { 'Content-Type': 'application/json' }
@@ -372,7 +374,7 @@ export async function handleReadMemo(request, env, locale = 'en') {
                 },
                 body: new URLSearchParams({
                     secret: env.TURNSTILE_SECRET,
-                    response: sanitizedTurnstileResponse,
+                    response: turnstileToken,
                 }),
             });
 
@@ -458,8 +460,7 @@ export async function handleReadMemo(request, env, locale = 'en') {
             headers: { 
                 'Content-Type': 'application/json',
                 'X-Content-Type-Options': 'nosniff',
-                'X-Frame-Options': 'DENY',
-                'X-XSS-Protection': '1; mode=block'
+                'X-Frame-Options': 'DENY'
             }
         });
         
@@ -574,8 +575,7 @@ export async function handleConfirmDelete(request, env, locale = 'en') {
             headers: { 
                 'Content-Type': 'application/json',
                 'X-Content-Type-Options': 'nosniff',
-                'X-Frame-Options': 'DENY',
-                'X-XSS-Protection': '1; mode=block'
+                'X-Frame-Options': 'DENY'
             }
         });
         
