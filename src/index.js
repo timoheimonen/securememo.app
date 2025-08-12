@@ -56,13 +56,11 @@ const allowedOrigins = [
   'https://securememo-dev.timo-heimonen.workers.dev'
 ];
 
-// Security headers with CSP for XSS protection (without CORS origin)
+// Security headers base (CSP is added dynamically per-response to include a nonce)
 const baseSecurityHeaders = {
   'X-Content-Type-Options': 'nosniff',
   'X-Frame-Options': 'DENY',
   'X-XSS-Protection': '1; mode=block',
-  // Remove SRI hash to avoid availability issues; add frame-ancestors and Trusted Types
-  'Content-Security-Policy': "default-src 'none'; script-src 'self' https://challenges.cloudflare.com; style-src 'self'; img-src 'self' https://challenges.cloudflare.com; frame-src https://challenges.cloudflare.com; connect-src 'self' https://challenges.cloudflare.com; worker-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; require-trusted-types-for 'script';",
   'Referrer-Policy': 'strict-origin-when-cross-origin',
   'Permissions-Policy': 'geolocation=(), microphone=(), camera=(), payment=(), usb=(), magnetometer=(), gyroscope=()',
   'Strict-Transport-Security': 'max-age=31536000; includeSubDomains; preload',
@@ -72,10 +70,48 @@ const baseSecurityHeaders = {
   'Vary': 'Origin'
 };
 
+// Generate a cryptographically strong base64 nonce
+function generateNonce() {
+  const bytes = new Uint8Array(16);
+  crypto.getRandomValues(bytes);
+  // base64 encode
+  let binary = '';
+  for (let i = 0; i < bytes.length; i++) {
+    binary += String.fromCharCode(bytes[i]);
+  }
+  return btoa(binary);
+}
+
+// Build CSP header string with provided nonce
+function buildContentSecurityPolicy(nonce) {
+  const directives = [
+    "default-src 'none'",
+    "base-uri 'self'",
+    "form-action 'self'",
+    "frame-ancestors 'none'",
+    "connect-src 'self' https://challenges.cloudflare.com",
+    "frame-src https://challenges.cloudflare.com blob:",
+    "child-src https://challenges.cloudflare.com blob:",
+    "img-src 'self' https://challenges.cloudflare.com",
+    "style-src 'self' 'unsafe-inline'",
+    "worker-src 'self' blob:",
+    "object-src 'none'",
+    `script-src 'nonce-${nonce}' 'strict-dynamic' blob: 'unsafe-inline' https:`,
+    "require-trusted-types-for 'script'"
+  ];
+  return directives.join('; ') + ';';
+}
+
 // Function to validate origin and get security headers with proper CORS origin
-function getSecurityHeaders(request) {
+function getSecurityHeaders(request, nonce) {
   const origin = request.headers.get('origin');
   const headers = { ...baseSecurityHeaders };
+  if (nonce) {
+    headers['Content-Security-Policy'] = buildContentSecurityPolicy(nonce);
+  } else {
+    // Generate a nonce even for non-HTML responses; harmless and consistent
+    headers['Content-Security-Policy'] = buildContentSecurityPolicy(generateNonce());
+  }
   
   // Only set CORS headers if origin is in allowed list
   if (origin && allowedOrigins.includes(origin)) {
@@ -468,32 +504,44 @@ ${sitemapUrls}</urlset>`;
       }
       
       let response;
+      // Nonce for HTML responses (injected into CSP and script tags)
+      let cspNonce = null;
       let cacheHeaders = {};
       
       // Use pathWithoutLocale for route matching to support localized URLs
       switch (pathWithoutLocale) {
         case '/':
-          response = await getIndexHTML(locale, url.origin);
+          cspNonce = generateNonce();
+          response = (await getIndexHTML(locale, url.origin)).replace(/{{CSP_NONCE}}/g, cspNonce);
           cacheHeaders = { 'Cache-Control': 'public, max-age=604800' };
           break;
         case '/about.html':
-          response = await getAboutHTML(locale, url.origin);
+          cspNonce = cspNonce || generateNonce();
+          response = (await getAboutHTML(locale, url.origin)).replace(/{{CSP_NONCE}}/g, cspNonce);
           cacheHeaders = { 'Cache-Control': 'public, max-age=604800' };
           break;
         case '/create-memo.html':
           const siteKey = env.TURNSTILE_SITE_KEY || 'MISSING_SITE_KEY';
-          response = (await getCreateMemoHTML(locale, url.origin)).replace('{{TURNSTILE_SITE_KEY}}', siteKey);
+          cspNonce = cspNonce || generateNonce();
+          response = (await getCreateMemoHTML(locale, url.origin))
+            .replace('{{TURNSTILE_SITE_KEY}}', siteKey)
+            .replace(/{{CSP_NONCE}}/g, cspNonce);
           break;
         case '/read-memo.html':
           const readSiteKey = env.TURNSTILE_SITE_KEY || 'MISSING_SITE_KEY';
-          response = (await getReadMemoHTML(locale, url.origin)).replace('{{TURNSTILE_SITE_KEY}}', readSiteKey);
+          cspNonce = cspNonce || generateNonce();
+          response = (await getReadMemoHTML(locale, url.origin))
+            .replace('{{TURNSTILE_SITE_KEY}}', readSiteKey)
+            .replace(/{{CSP_NONCE}}/g, cspNonce);
           break;
         case '/tos.html':
-          response = await getToSHTML(locale, url.origin);
+          cspNonce = cspNonce || generateNonce();
+          response = (await getToSHTML(locale, url.origin)).replace(/{{CSP_NONCE}}/g, cspNonce);
           cacheHeaders = { 'Cache-Control': 'public, max-age=604800' };
           break;
         case '/privacy.html':
-          response = await getPrivacyHTML(locale, url.origin);
+          cspNonce = cspNonce || generateNonce();
+          response = (await getPrivacyHTML(locale, url.origin)).replace(/{{CSP_NONCE}}/g, cspNonce);
           cacheHeaders = { 'Cache-Control': 'public, max-age=604800' };
           break;
         default:
@@ -507,7 +555,7 @@ ${sitemapUrls}</urlset>`;
         headers: { 
           'Content-Type': 'text/html',
           ...cacheHeaders,
-          ...getSecurityHeaders(request)
+          ...getSecurityHeaders(request, cspNonce || generateNonce())
         }
       });
     } catch (error) {
