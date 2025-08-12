@@ -84,8 +84,6 @@ function generateNonce() {
 
 // Build CSP header string with provided nonce
 function buildContentSecurityPolicy(nonce) {
-  // Keep Cloudflare Turnstile endpoints for non-script fetches (img, frame, connect)
-  // Use nonce + 'strict-dynamic' for scripts per CSP3 guidance
   const directives = [
     "default-src 'none'",
     "base-uri 'self'",
@@ -97,8 +95,7 @@ function buildContentSecurityPolicy(nonce) {
     "style-src 'self'",
     "worker-src 'self'",
     "object-src 'none'",
-    // Include 'self' to allow first-party scripts; add nonce and strict-dynamic
-    `script-src 'nonce-${nonce}' 'strict-dynamic' 'self' https://challenges.cloudflare.com`,
+    `script-src 'nonce-${nonce}' 'strict-dynamic' 'unsafe-inline' https:`,
     "require-trusted-types-for 'script'"
   ];
   return directives.join('; ') + ';';
