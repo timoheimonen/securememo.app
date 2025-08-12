@@ -17,10 +17,8 @@ function highlightCurrentPage() {
     });
 }
 
-// Init Turnstile widget
-function initTurnstile() {
-    // Turnstile widget auto-initialized with data-sitekey attribute
-}
+// Turnstile implicit mode is auto-initialized via the API script
+function initTurnstile() {}
 
 // Get Turnstile response safely
 function getTurnstileResponse() {

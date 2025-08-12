@@ -467,8 +467,6 @@ export async function getCreateMemoHTML(locale = 'en', origin = 'https://securem
     <link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png">
     <link rel="icon" type="image/png" sizes="512x512" href="/android-chrome-512x512.png">
     <link rel="canonical" href="${canonicalUrl}">
-    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" crossorigin="anonymous" async defer></script>
-    <script src="/js/create-memo.js?locale=${locale}" defer></script>
 </head>
 <body>
     <nav class="navbar">
@@ -596,7 +594,9 @@ export async function getCreateMemoHTML(locale = 'en', origin = 'https://securem
         <p class="footer-tagline">${t('footer.tagline', locale)}</p>
     </footer>
 
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
     <script src="/js/common.js" type="module" defer></script>
+    <script src="/js/create-memo.js?locale=${locale}" defer></script>
 </body>
 </html>`;
 }
@@ -668,8 +668,6 @@ export async function getReadMemoHTML(locale = 'en', origin = 'https://securemem
     <link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png">
     <link rel="icon" type="image/png" sizes="512x512" href="/android-chrome-512x512.png">
     <link rel="canonical" href="${canonicalUrl}">
-    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" crossorigin="anonymous" async defer></script>
-    <script src="/js/read-memo.js?locale=${locale}" defer></script>
 </head>
 <body>
     <nav class="navbar">
@@ -776,7 +774,9 @@ export async function getReadMemoHTML(locale = 'en', origin = 'https://securemem
         <p class="footer-tagline">${t('footer.tagline', locale)}</p>
     </footer>
 
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
     <script src="/js/common.js" type="module" defer></script>
+    <script src="/js/read-memo.js?locale=${locale}" defer></script>
 </body>
 </html>`;
 }
