@@ -41,7 +41,6 @@ import { getErrorMessage } from './utils/errorMessages.js';
 import { 
   extractLocaleFromPath, 
   getLocaleRedirectPath,
-  getCanonicalUrl,
   buildLocalizedPath,
   t,
   extractLocaleFromRequest,
