@@ -58,6 +58,8 @@ export function sanitizeForJSON(input) {
     .replace(/\t/g, '\\t') // Escape tabs
     .replace(/\\/g, '\\\\') // Escape backslashes
     .replace(/"/g, '\\"') // Escape quotes
+    .replace(/\u2028/g, '\\u2028') // Escape line separator (prevents JSON injection)
+    .replace(/\u2029/g, '\\u2029') // Escape paragraph separator (prevents JSON injection)
     .trim();
 }
 
