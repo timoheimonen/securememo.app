@@ -277,7 +277,7 @@ export const ja = {
     'privacy.dataSharing.business': '事業譲渡: securememo.appが買収または合併された場合、データは取引の一部として転送される可能性がありますが、このプライバシー通知の対象であり続けます。',
     
     'privacy.dataSecurity.title': '4. データセキュリティ',
-    'privacy.dataSecurity.encryption': '暗号化: すべてのメモはPBKDF2キー導出（1,200,000回の反復）を伴うAES-256を使用してクライアントサイドで暗号化されます。私たちは暗号化されたデータのみを保存し、それを復号化することはできません。',
+    'privacy.dataSecurity.encryption': '暗号化: すべてのメモはPBKDF2キー導出（2,200,000回の反復）を伴うAES-256を使用してクライアントサイドで暗号化されます。私たちは暗号化されたデータのみを保存し、それを復号化することはできません。',
     'privacy.dataSecurity.deletion': '削除: メモは読み取りまたは有効期限切れ後、自動化されたcronジョブによって永久に削除されます。',
     'privacy.dataSecurity.securityMeasures': 'セキュリティ対策: 私たちは強力なセキュリティヘッダー（CSP、HSTSなど）、入力のサニタイゼーション、タイミング攻撃保護、および乱用防止のためのCAPTCHAを実装しています。',
     'privacy.dataSecurity.noRecovery': '復旧不可: 一度削除されたメモは、私たちでも復旧できません。',
@@ -330,7 +330,7 @@ export const ja = {
     'faq.privacy.question': 'securememo.appはどのように私のプライバシーを保護しますか？',
     'faq.privacy.answer': 'securememo.appはクライアントサイドAES-256暗号化を使用しており、あなたのメモは私たちのサーバーに送信される前にあなたのブラウザで暗号化されます。私たちは平文の内容を見ることはありません。メモは読み取りまたは期限切れ後に自己破壊し、私たちはユーザーアカウントを必要とせず、個人情報を収集しません。',
     'faq.encryption.question': 'securememo.appはどのような暗号化を使用しますか？',
-    'faq.encryption.answer': '私たちはPBKDF2キー導出（1,200,000回以上の反復）を伴うAES-256-GCM暗号化を使用しています。すべての暗号化はWeb Crypto APIを使用してあなたのブラウザでクライアントサイドで行われます。暗号化パスワードは別途生成され、私たちのサーバーに保存されることはありません。',
+    'faq.encryption.answer': '私たちはPBKDF2キー導出（2,200,000回以上の反復）を伴うAES-256-GCM暗号化を使用しています。すべての暗号化はWeb Crypto APIを使用してあなたのブラウザでクライアントサイドで行われます。暗号化パスワードは別途生成され、私たちのサーバーに保存されることはありません。',
     'faq.duration.question': 'メモはどのくらい持続しますか？',
     'faq.duration.answer': 'メモは8時間1日2日1週間、または最大30日後に期限切れに設定できます。また、読み取り後にも直ちに削除されます。期限切れのメモは1時間ごとに自動的にクリーンアップされます。',
     'faq.recovery.question': '削除されたメモを復旧できますか？',
