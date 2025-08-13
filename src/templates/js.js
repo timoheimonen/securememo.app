@@ -95,7 +95,7 @@ async function hashDeletionToken(token) {
 // Security configuration - easily updatable for future-proofing
 const SECURITY_CONFIG = {
     // PBKDF2 iterations - Increased to 1,200,000 for enhanced security
-    PBKDF2_ITERATIONS: 1200000,
+    PBKDF2_ITERATIONS: 2200000,
     
     // Salt length in bytes (16 bytes = 128 bits)
     SALT_LENGTH: 16,
