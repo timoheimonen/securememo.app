@@ -8,11 +8,11 @@ export function getStyles() {
 }
 
 :root {
-  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.06);
-  --shadow-sm: 0 2px 10px rgba(0, 0, 0, 0.08);
-  --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.12);
-  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.14);
-  --shadow-inset: inset 0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow-xs: 0 1px 3px rgba(0, 0, 0, 0.12);
+  --shadow-sm: 0 4px 14px rgba(0, 0, 0, 0.16);
+  --shadow-md: 0 8px 30px rgba(0, 0, 0, 0.20);
+  --shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.24);
+  --shadow-inset: inset 0 1px 3px rgba(0, 0, 0, 0.08);
 }
 
 body {
