@@ -137,12 +137,6 @@ body {
   gap: 4px;
 }
 
-.language-separator {
-  color: #999;
-  font-weight: 300;
-  user-select: none;
-}
-
 .language-links .nav-link {
   padding: 6px 8px;
   font-size: 0.85rem;
@@ -246,10 +240,7 @@ body {
   background: #5a6fd8;
 }
 
-.auth-links, .user-links {
-  display: flex;
-  gap: 15px;
-}
+/* Removed unused selectors: .auth-links, .user-links */
 
 /* Main content */
 .main-content {
@@ -1373,100 +1364,7 @@ input, textarea, select {
   }
 }
 
-/* Form styles for login/register/profile */
-.form-container {
-  max-width: 400px;
-  margin: 0 auto;
-  background: rgba(255, 255, 255, 0.95);
-  padding: 2rem;
-  border-radius: 12px;
-  box-shadow: var(--shadow-lg);
-  backdrop-filter: blur(10px);
-}
-
-.form-container h1 {
-  text-align: center;
-  margin-bottom: 1.5rem;
-  color: #333;
-}
-
-.form-group {
-  margin-bottom: 1rem;
-}
-
-.form-group label {
-  display: block;
-  margin-bottom: 0.5rem;
-  font-weight: 500;
-  color: #333;
-}
-
-.form-group input {
-  width: 100%;
-  padding: 0.75rem;
-  border: 2px solid #e1e5e9;
-  border-radius: 6px;
-  font-size: 1rem;
-  transition: border-color 0.3s ease;
-}
-
-.form-group input:focus {
-  outline: none;
-  border-color: #667eea;
-}
-
-.form-group .form-help {
-  font-size: 0.875rem;
-  color: #666;
-  margin-top: 0.25rem;
-}
-
-.form-actions {
-  display: flex;
-  gap: 1rem;
-  margin-top: 1.5rem;
-}
-
-.form-actions .btn {
-  flex: 1;
-}
-
-.profile-info {
-  background: #f8f9fa;
-  padding: 1rem;
-  border-radius: 8px;
-  margin-bottom: 1rem;
-  box-shadow: var(--shadow-xs);
-}
-
-.profile-info p {
-  margin-bottom: 0.5rem;
-}
-
-.profile-info strong {
-  color: #667eea;
-}
-
-.danger-zone {
-  border: 2px solid #dc3545;
-  border-radius: 8px;
-  padding: 1rem;
-  margin-top: 2rem;
-}
-
-.danger-zone h3 {
-  color: #dc3545;
-  margin-bottom: 1rem;
-}
-
-.danger-zone .btn {
-  background: #dc3545;
-  color: white;
-}
-
-.danger-zone .btn:hover {
-  background: #c82333;
-}
+/* Removed unused forms/profile/danger zone styles */
 
 /* Turnstile widget styling */
 .cf-turnstile {
