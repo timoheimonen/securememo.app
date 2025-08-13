@@ -102,7 +102,7 @@ export const ja = {
 
     'home.security.title': 'セキュリティ機能',
     'home.security.encryption.title': '🔒 真のクライアントサイド暗号化',
-    'home.security.encryption.description': 'メモはAES-256-GCMと強力なキー導出（120万回以上の反復）でブラウザ内で暗号化されます。平文は一切見ることができません。',
+    'home.security.encryption.description': 'メモはAES-256-GCMと強力なキー導出（220万回以上の反復）でブラウザ内で暗号化されます。平文は一切見ることができません。',
     'home.security.delete.title': '🗑️ 確実な自動削除',
     'home.security.delete.description': 'メモは読み取りまたは期限切れ後に永久に消去され、1時間ごとに自動クリーンアップされます。バックアップや復旧は不可能です。',
     'home.security.password.title': '🌐 パスワード知識ゼロ',
