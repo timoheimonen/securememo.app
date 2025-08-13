@@ -102,7 +102,7 @@ export const zh = {
     
     'home.security.title': '安全功能',
     'home.security.encryption.title': '🔒 真正的客户端加密',
-    'home.security.encryption.description': '您的备忘录在浏览器中使用 AES-256-GCM 和强大的密钥派生（1,200,000+ 次迭代）进行加密。我们从不会看到明文。',
+    'home.security.encryption.description': '您的备忘录在浏览器中使用 AES-256-GCM 和强大的密钥派生（2,200,000+ 次迭代）进行加密。我们从不会看到明文。',
     'home.security.delete.title': '🗑️ 可靠的自动删除',
     'home.security.delete.description': '备忘录在阅读或过期后会永远消失，每小时自动清理。无法备份或恢复。',
     'home.security.password.title': '🌐 零密码知识',
@@ -277,7 +277,7 @@ export const zh = {
     'privacy.dataSharing.business': '业务转让：如果 securememo.app 被收购或合并，数据可能作为交易的一部分被转让，但仍受本隐私声明约束。',
     
     'privacy.dataSecurity.title': '4. 数据安全',
-    'privacy.dataSecurity.encryption': '加密：所有备忘录都使用 AES-256 和 PBKDF2 密钥派生（1,200,000 次迭代）在客户端加密。我们只存储加密数据且无法解密。',
+    'privacy.dataSecurity.encryption': '加密：所有备忘录都使用 AES-256 和 PBKDF2 密钥派生（2,200,000 次迭代）在客户端加密。我们只存储加密数据且无法解密。',
     'privacy.dataSecurity.deletion': '删除：备忘录通过自动定时任务在阅读或过期后永久删除。',
     'privacy.dataSecurity.securityMeasures': '安全措施：我们实施强安全标头（例如 CSP、HSTS）、输入清理、时序攻击保护和验证码来防止滥用。',
     'privacy.dataSecurity.noRecovery': '无法恢复：一旦删除，备忘录无法恢复——即使我们也无法恢复。',
@@ -330,7 +330,7 @@ export const zh = {
     'faq.privacy.question': 'securememo.app 如何保护我的隐私？',
     'faq.privacy.answer': 'securememo.app 使用客户端 AES-256 加密，意味着您的备忘录在发送到我们的服务器之前就在您的浏览器中加密。我们从不会看到明文内容。备忘录在阅读或过期后自毁，我们不需要用户账户或收集个人信息。',
     'faq.encryption.question': 'securememo.app 使用什么加密？',
-    'faq.encryption.answer': '我们使用 AES-256-GCM 加密和 PBKDF2 密钥派生（1,200,000+ 次迭代）。所有加密都在您的浏览器中使用 Web Crypto API 在客户端进行。加密密码单独生成，从不存储在我们的服务器上。',
+    'faq.encryption.answer': '我们使用 AES-256-GCM 加密和 PBKDF2 密钥派生（2,200,000+ 次迭代）。所有加密都在您的浏览器中使用 Web Crypto API 在客户端进行。加密密码单独生成，从不存储在我们的服务器上。',
     'faq.duration.question': '备忘录能持续多久？',
     'faq.duration.answer': '备忘录可以设置为在8小时、1天、2天、1周或最多30天后过期。它们也会在阅读后立即删除。过期的备忘录每小时自动清理。',
     'faq.recovery.question': '我可以恢复已删除的备忘录吗？',

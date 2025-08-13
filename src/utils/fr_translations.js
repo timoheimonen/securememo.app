@@ -102,7 +102,7 @@ export const fr = {
     
     'home.security.title': 'Fonctionnalités de Sécurité',
     'home.security.encryption.title': '🔒 Vrai Chiffrement Côté Client',
-    'home.security.encryption.description': 'Votre mémo est chiffré dans le navigateur avec AES-256-GCM et une dérivation de clé forte (1 200 000+ itérations). Nous ne voyons jamais le texte en clair.',
+    'home.security.encryption.description': 'Votre mémo est chiffré dans le navigateur avec AES-256-GCM et une dérivation de clé forte (2 200 000+ itérations). Nous ne voyons jamais le texte en clair.',
     'home.security.delete.title': '🗑️ Auto-Suppression Fiable',
     'home.security.delete.description': 'Les mémos disparaissent pour toujours après lecture ou expiration, avec nettoyage automatique toutes les heures. Aucune sauvegarde ou récupération possible.',
     'home.security.password.title': '🌐 Zéro Connaissance des Mots de Passe',
@@ -277,7 +277,7 @@ export const fr = {
     'privacy.dataSharing.business': 'Transferts d\'Entreprise : Si securememo.app est acquise ou fusionnée, les données peuvent être transférées dans le cadre de la transaction, mais elles resteraient soumises à cet Avis de Confidentialité.',
     
     'privacy.dataSecurity.title': '4. Sécurité des Données',
-    'privacy.dataSecurity.encryption': 'Chiffrement : Tous les mémos sont chiffrés côté client en utilisant AES-256 avec dérivation de clé PBKDF2 (1 200 000 itérations). Nous stockons seulement les données chiffrées et ne pouvons pas les déchiffrer.',
+    'privacy.dataSecurity.encryption': 'Chiffrement : Tous les mémos sont chiffrés côté client en utilisant AES-256 avec dérivation de clé PBKDF2 (2 200 000 itérations). Nous stockons seulement les données chiffrées et ne pouvons pas les déchiffrer.',
     'privacy.dataSecurity.deletion': 'Suppression : Les mémos sont définitivement supprimés après lecture ou expiration via des tâches cron automatisées.',
     'privacy.dataSecurity.securityMeasures': 'Mesures de Sécurité : Nous implémentons de forts en-têtes de sécurité (par exemple, CSP, HSTS), désinfection des entrées, protections contre les attaques temporelles et CAPTCHA pour prévenir les abus.',
     'privacy.dataSecurity.noRecovery': 'Aucune Récupération : Une fois supprimés, les mémos ne peuvent pas être récupérés—même par nous.',
@@ -330,7 +330,7 @@ export const fr = {
     'faq.privacy.question': 'Comment securememo.app protège-t-il ma confidentialité ?',
     'faq.privacy.answer': 'securememo.app utilise le chiffrement AES-256 côté client, ce qui signifie que votre mémo est chiffré dans votre navigateur avant d\'être envoyé à nos serveurs. Nous ne voyons jamais le contenu en texte clair. Les mémos s\'autodétruisent après avoir été lus ou expirés, et nous n\'exigeons pas de comptes utilisateur ni ne collectons d\'informations personnelles.',
     'faq.encryption.question': 'Quel chiffrement utilise securememo.app ?',
-    'faq.encryption.answer': 'Nous utilisons le chiffrement AES-256-GCM avec dérivation de clé PBKDF2 (1 200 000+ itérations). Tout le chiffrement se produit côté client dans votre navigateur en utilisant l\'API Web Crypto. Le mot de passe de chiffrement est généré séparément et jamais stocké sur nos serveurs.',
+    'faq.encryption.answer': 'Nous utilisons le chiffrement AES-256-GCM avec dérivation de clé PBKDF2 (2 200 000+ itérations). Tout le chiffrement se produit côté client dans votre navigateur en utilisant l\'API Web Crypto. Le mot de passe de chiffrement est généré séparément et jamais stocké sur nos serveurs.',
     'faq.duration.question': 'Combien de temps durent les mémos ?',
     'faq.duration.answer': 'Les mémos peuvent être configurés pour expirer après 8 heures, 1 jour, 2 jours, 1 semaine ou 30 jours maximum. Ils sont aussi supprimés immédiatement après avoir été lus. Les mémos expirés sont automatiquement nettoyés toutes les heures.',
     'faq.recovery.question': 'Puis-je récupérer un mémo supprimé ?',
