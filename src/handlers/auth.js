@@ -48,19 +48,19 @@ async function generateMemoId(env, maxRetries = 10, locale = 'en') {
     const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_';
     
     for (let attempt = 0; attempt < maxRetries; attempt++) {
-        // Generate 40 random bytes
-        const array = new Uint8Array(40);
-        crypto.getRandomValues(array);
         let result = '';
+        const biasThreshold = 256 - (256 % chars.length);
         
-        // Use rejection sampling to avoid modulo bias
+        // Use proper rejection sampling to avoid modulo bias
         for (let i = 0; i < 40; i++) {
-            let randomIndex;
+            let value;
             do {
-                randomIndex = array[i] % chars.length;
-            } while (randomIndex >= chars.length - (256 % chars.length)); // Reject biased values
+                const array = new Uint8Array(1);
+                crypto.getRandomValues(array);
+                value = array[0];
+            } while (value >= biasThreshold); // Reject biased values
             
-            result += chars[randomIndex];
+            result += chars[value % chars.length];
         }
         
         // Check if this memo_id already exists in the database
