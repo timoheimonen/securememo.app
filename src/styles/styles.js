@@ -7,6 +7,14 @@ export function getStyles() {
   box-sizing: border-box;
 }
 
+:root {
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.06);
+  --shadow-sm: 0 2px 10px rgba(0, 0, 0, 0.08);
+  --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.12);
+  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.14);
+  --shadow-inset: inset 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
 body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
   line-height: 1.6;
@@ -20,7 +28,7 @@ body {
 .navbar {
   background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(10px);
-  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--shadow-md);
   position: fixed;
   top: 0;
   left: 0;
@@ -191,7 +199,7 @@ body {
   background: white;
   border: 1px solid #e1e5e9;
   border-radius: 8px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  box-shadow: var(--shadow-md);
   min-width: 200px;
   z-index: 1000;
   opacity: 0;
@@ -404,7 +412,7 @@ body {
   background: rgba(255, 255, 255, 0.95);
   padding: 30px;
   border-radius: 15px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--shadow-lg);
   backdrop-filter: blur(10px);
   transition: transform 0.3s ease;
 }
@@ -429,7 +437,7 @@ body {
   background: rgba(255, 255, 255, 0.95);
   padding: 40px;
   border-radius: 15px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--shadow-lg);
   backdrop-filter: blur(10px);
 }
 
@@ -438,7 +446,7 @@ body {
   background: rgba(255, 255, 255, 0.95);
   padding: 40px;
   border-radius: 15px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--shadow-lg);
   backdrop-filter: blur(10px);
 }
 
@@ -467,6 +475,7 @@ body {
   border-radius: 12px;
   border-left: 4px solid #667eea;
   padding: 24px;
+  box-shadow: var(--shadow-sm);
 }
 
 .legal-toc h2 {
@@ -597,6 +606,7 @@ body {
   background: #f8f9fa;
   border-radius: 10px;
   border-left: 4px solid #667eea;
+  box-shadow: var(--shadow-sm);
 }
 
 .feature-item h3 {
@@ -616,7 +626,7 @@ body {
   background: rgba(255, 255, 255, 0.95);
   padding: 40px;
   border-radius: 15px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--shadow-lg);
   backdrop-filter: blur(10px);
   width: 100%;
   max-width: 600px;
@@ -687,6 +697,7 @@ body {
   padding: 25px;
   border-radius: 10px;
   border-left: 4px solid #28a745;
+  box-shadow: var(--shadow-sm);
 }
 
 .result-section h3 {
@@ -759,6 +770,7 @@ body {
   padding: 25px;
   border-radius: 10px;
   border-left: 4px solid #667eea;
+  box-shadow: var(--shadow-sm);
 }
 
 .memo-content h3 {
@@ -772,6 +784,7 @@ body {
   border-radius: 8px;
   border: 1px solid #e1e5e9;
   margin-bottom: 20px;
+  box-shadow: var(--shadow-xs);
 }
 
 .memo-message p {
@@ -800,6 +813,7 @@ body {
   padding: 25px;
   border-radius: 10px;
   border-left: 4px solid #dc3545;
+  box-shadow: var(--shadow-sm);
 }
 
 .error-content h3 {
@@ -1366,7 +1380,7 @@ input, textarea, select {
   background: rgba(255, 255, 255, 0.95);
   padding: 2rem;
   border-radius: 12px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--shadow-lg);
   backdrop-filter: blur(10px);
 }
 
@@ -1422,6 +1436,7 @@ input, textarea, select {
   padding: 1rem;
   border-radius: 8px;
   margin-bottom: 1rem;
+  box-shadow: var(--shadow-xs);
 }
 
 .profile-info p {
@@ -1482,6 +1497,7 @@ input, textarea, select {
   font-size: 14px;
   background: #f8f9fa;
   cursor: text;
+  box-shadow: var(--shadow-inset);
 }
 
 .url-copy-container input:focus,
@@ -1513,6 +1529,7 @@ input, textarea, select {
   background: rgba(255, 255, 255, 0.8);
   border-radius: 8px;
   border: 1px solid #e1e5e9;
+  box-shadow: var(--shadow-xs);
 }
 
 .loading-spinner p {
