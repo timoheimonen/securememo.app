@@ -369,8 +369,8 @@ const ERROR_MESSAGES = {
 };
 
 // Security configuration constants
-const NEW_PBKDF2_ITERATIONS = 1200000;  // Current iterations to use
-const OLD_PBKDF2_ITERATIONS = 600000;   // Fallback for existing memos
+const NEW_PBKDF2_ITERATIONS = 2200000;  // Current iterations to use
+const OLD_PBKDF2_ITERATIONS = 1200000;   // Fallback for existing memos
 
 // Security configuration - easily updatable for future-proofing, even currently it exeeds OWASP 2025 recommendations with 1.2M iterations.
 const SECURITY_CONFIG = {
