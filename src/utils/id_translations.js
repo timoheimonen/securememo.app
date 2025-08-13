@@ -102,7 +102,7 @@ export const id = {
     
     'home.security.title': 'Fitur Keamanan',
     'home.security.encryption.title': '🔒 Enkripsi Sisi Klien Sejati',
-    'home.security.encryption.description': 'Memo Anda dienkripsi di browser dengan AES-256-GCM dan derivasi kunci yang kuat (1.200.000+ iterasi). Kami tidak pernah melihat teks aslinya.',
+    'home.security.encryption.description': 'Memo Anda dienkripsi di browser dengan AES-256-GCM dan derivasi kunci yang kuat (2.200.000+ iterasi). Kami tidak pernah melihat teks aslinya.',
     'home.security.delete.title': '🗑️ Hapus Otomatis yang Andal',
     'home.security.delete.description': 'Memo menghilang selamanya setelah dibaca atau kedaluwarsa, dengan pembersihan otomatis setiap jam. Tidak ada cadangan atau pemulihan yang mungkin.',
     'home.security.password.title': '🌐 Tanpa Pengetahuan Kata Sandi',
@@ -277,7 +277,7 @@ export const id = {
     'privacy.dataSharing.business': 'Transfer Bisnis: Jika securememo.app diakuisisi atau digabung, data dapat ditransfer sebagai bagian dari transaksi, tetapi akan tetap tunduk pada Pemberitahuan Privasi ini.',
     
     'privacy.dataSecurity.title': '4. Keamanan Data',
-    'privacy.dataSecurity.encryption': 'Enkripsi: Semua memo dienkripsi di sisi klien menggunakan AES-256 dengan derivasi kunci PBKDF2 (1.200.000 iterasi). Kami hanya menyimpan data terenkripsi dan tidak dapat mendekripsinya.',
+    'privacy.dataSecurity.encryption': 'Enkripsi: Semua memo dienkripsi di sisi klien menggunakan AES-256 dengan derivasi kunci PBKDF2 (2.200.000 iterasi). Kami hanya menyimpan data terenkripsi dan tidak dapat mendekripsinya.',
     'privacy.dataSecurity.deletion': 'Penghapusan: Memo dihapus secara permanen setelah dibaca atau kedaluwarsa melalui tugas cron otomatis.',
     'privacy.dataSecurity.securityMeasures': 'Langkah Keamanan: Kami menerapkan header keamanan yang kuat (misalnya, CSP, HSTS), sanitasi input, perlindungan serangan timing, dan CAPTCHA untuk mencegah penyalahgunaan.',
     'privacy.dataSecurity.noRecovery': 'Tidak Ada Pemulihan: Setelah dihapus, memo tidak dapat dipulihkan—bahkan oleh kami.',
@@ -330,7 +330,7 @@ export const id = {
     'faq.privacy.question': 'Bagaimana securememo.app melindungi privasi saya?',
     'faq.privacy.answer': 'securememo.app menggunakan enkripsi AES-256 sisi klien, artinya memo Anda dienkripsi di browser Anda sebelum dikirim ke server kami. Kami tidak pernah melihat konten teks asli. Memo menghancurkan diri setelah dibaca atau kedaluwarsa, dan kami tidak memerlukan akun pengguna atau mengumpulkan informasi pribadi.',
     'faq.encryption.question': 'Enkripsi apa yang digunakan securememo.app?',
-    'faq.encryption.answer': 'Kami menggunakan enkripsi AES-256-GCM dengan derivasi kunci PBKDF2 (1.200.000+ iterasi). Semua enkripsi terjadi di sisi klien di browser Anda menggunakan Web Crypto API. Kata sandi enkripsi dihasilkan secara terpisah dan tidak pernah disimpan di server kami.',
+    'faq.encryption.answer': 'Kami menggunakan enkripsi AES-256-GCM dengan derivasi kunci PBKDF2 (2.200.000+ iterasi). Semua enkripsi terjadi di sisi klien di browser Anda menggunakan Web Crypto API. Kata sandi enkripsi dihasilkan secara terpisah dan tidak pernah disimpan di server kami.',
     'faq.duration.question': 'Berapa lama memo bertahan?',
     'faq.duration.answer': 'Memo dapat diatur untuk kedaluwarsa setelah 8 jam, 1 hari, 2 hari, 1 minggu, atau maksimal 30 hari. Memo juga dihapus segera setelah dibaca. Memo yang kedaluwarsa dibersihkan secara otomatis setiap jam.',
     'faq.recovery.question': 'Bisakah saya memulihkan memo yang dihapus?',

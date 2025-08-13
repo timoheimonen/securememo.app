@@ -102,7 +102,7 @@ export const de = {
    
    'home.security.title': 'Sicherheitsfeatures',
    'home.security.encryption.title': '🔒 Echte clientseitige Verschlüsselung',
-   'home.security.encryption.description': 'Ihre Notiz wird im Browser mit AES-256-GCM und einer starken Schlüsselableitung (1.200.000+ Iterationen) verschlüsselt. Wir sehen niemals den Klartext.',
+   'home.security.encryption.description': 'Ihre Notiz wird im Browser mit AES-256-GCM und einer starken Schlüsselableitung (2.200.000+ Iterationen) verschlüsselt. Wir sehen niemals den Klartext.',
    'home.security.delete.title': '🗑️ Zuverlässige automatische Löschung',
    'home.security.delete.description': 'Notizen verschwinden für immer nach dem Lesen oder Ablauf, mit automatischer Bereinigung jede Stunde. Keine Backups oder Wiederherstellung möglich.',
    'home.security.password.title': '🌐 Kein Passwort-Wissen',
@@ -277,7 +277,7 @@ export const de = {
    'privacy.dataSharing.business': 'Geschäftsübertragungen: Falls securememo.app erworben oder fusioniert wird, können Daten als Teil der Transaktion übertragen werden, bleiben aber diesem Datenschutzhinweis unterworfen.',
    
    'privacy.dataSecurity.title': '4. Datensicherheit',
-   'privacy.dataSecurity.encryption': 'Verschlüsselung: Alle Notizen werden clientseitig mit AES-256 und PBKDF2-Schlüsselableitung (1.200.000 Iterationen) verschlüsselt. Wir speichern nur verschlüsselte Daten und können sie nicht entschlüsseln.',
+   'privacy.dataSecurity.encryption': 'Verschlüsselung: Alle Notizen werden clientseitig mit AES-256 und PBKDF2-Schlüsselableitung (2.200.000 Iterationen) verschlüsselt. Wir speichern nur verschlüsselte Daten und können sie nicht entschlüsseln.',
    'privacy.dataSecurity.deletion': 'Löschung: Notizen werden nach dem Lesen oder Ablauf dauerhaft durch automatisierte Cron-Jobs gelöscht.',
    'privacy.dataSecurity.securityMeasures': 'Sicherheitsmaßnahmen: Wir implementieren starke Sicherheits-Header (z.B. CSP, HSTS), Eingabebereinigung, Timing-Angriffs-Schutz und CAPTCHA zur Missbrauchsprävention.',
    'privacy.dataSecurity.noRecovery': 'Keine Wiederherstellung: Einmal gelöscht, können Notizen nicht wiederhergestellt werden—auch nicht von uns.',
@@ -330,7 +330,7 @@ export const de = {
    'faq.privacy.question': 'Wie schützt securememo.app meine Privatsphäre?',
    'faq.privacy.answer': 'securememo.app nutzt clientseitige AES-256-Verschlüsselung, das bedeutet, dass Ihre Notiz in Ihrem Browser verschlüsselt wird, bevor sie an unsere Server gesendet wird. Wir sehen niemals den Klartext-Inhalt. Notizen zerstören sich selbst nach dem Lesen oder Ablauf, und wir benötigen keine Benutzerkonten oder sammeln persönliche Informationen.',
    'faq.encryption.question': 'Welche Verschlüsselung verwendet securememo.app?',
-   'faq.encryption.answer': 'Wir verwenden AES-256-GCM-Verschlüsselung mit PBKDF2-Schlüsselableitung (1.200.000+ Iterationen). Alle Verschlüsselung findet clientseitig in Ihrem Browser mit der Web Crypto API statt. Das Verschlüsselungspasswort wird separat generiert und niemals auf unseren Servern gespeichert.',
+   'faq.encryption.answer': 'Wir verwenden AES-256-GCM-Verschlüsselung mit PBKDF2-Schlüsselableitung (2.200.000+ Iterationen). Alle Verschlüsselung findet clientseitig in Ihrem Browser mit der Web Crypto API statt. Das Verschlüsselungspasswort wird separat generiert und niemals auf unseren Servern gespeichert.',
    'faq.duration.question': 'Wie lange halten Notizen?',
    'faq.duration.answer': 'Notizen können so eingestellt werden, dass sie nach 8 Stunden, 1 Tag, 2 Tagen, 1 Woche oder maximal 30 Tagen ablaufen. Sie werden auch sofort nach dem Lesen gelöscht. Abgelaufene Notizen werden automatisch jede Stunde bereinigt.',
    'faq.recovery.question': 'Kann ich eine gelöschte Notiz wiederherstellen?',
