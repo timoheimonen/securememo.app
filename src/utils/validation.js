@@ -93,8 +93,6 @@ export function sanitizeForURL(input) {
     .trim();
 }
 
-
-
 /**
  * Validate memo ID format (32 or 40 chars with alphanumeric, hyphens, underscores)
  * @param {string} memoId - The memo ID to validate
@@ -144,41 +142,6 @@ export function validateEncryptedMessage(message) {
 }
 
 /**
- * Secure encrypted message validation with artificial delay for error paths
- * @param {string} message - The encrypted message to validate
- * @returns {Promise<boolean>} - Whether the message is valid
- */
-export async function validateEncryptedMessageSecure(message) {
-  const result = validateEncryptedMessage(message);
-  
-  // Add artificial delay if validation fails
-  if (!result) {
-    await addArtificialDelay();
-  }
-  
-  return result;
-}
-
-/**
- * Validate expiry time (must be future date, max 30 days)
- * @param {string} expiryTime - The expiry time to validate
- * @returns {boolean} - Whether the expiry time is valid
- */
-export function validateExpiryTime(expiryTime) {
-  if (!expiryTime) return false;
-  
-  try {
-    const expiry = new Date(expiryTime);
-    const now = new Date();
-    const maxExpiry = new Date(now.getTime() + 30 * 24 * 60 * 60 * 1000); // 30 days max
-    
-    return expiry > now && expiry <= maxExpiry;
-  } catch (error) {
-    return false;
-  }
-}
-
-/**
  * Validate expiry hours (must be valid option: 8, 24, 48, 168, 720)
  * @param {string|number} expiryHours - The expiry hours to validate
  * @returns {boolean} - Whether the expiry hours is valid
@@ -203,45 +166,6 @@ export function validatePassword(password) {
          password.length >= 32 && 
          password.length <= 64 &&
          /^[A-Za-z0-9]+$/.test(password);
-}
-
-/**
- * Secure password validation with artificial delay for error paths
- * @param {string} password - The password to validate
- * @returns {Promise<boolean>} - Whether the password is valid
- */
-export async function validatePasswordSecure(password) {
-  const result = validatePassword(password);
-  
-  // Add artificial delay if validation fails
-  if (!result) {
-    await addArtificialDelay();
-  }
-  
-  return result;
-}
-
-/**
- * Comprehensive validation and sanitization for encrypted messages
- * This function validates the message and returns a sanitized version safe for all contexts
- * @param {string} message - The encrypted message to validate and sanitize
- * @returns {object} - Object with isValid boolean and sanitized message
- */
-export function validateAndSanitizeEncryptedMessage(message) {
-  // First validate the message
-  if (!validateEncryptedMessage(message)) {
-    return { isValid: false, sanitizedMessage: null };
-  }
-  
-  // Sanitize for database storage (removes problematic characters)
-  const sanitizedForDB = sanitizeForDatabase(message);
-  
-  // Additional validation after sanitization
-  if (sanitizedForDB.length === 0) {
-    return { isValid: false, sanitizedMessage: null };
-  }
-  
-  return { isValid: true, sanitizedMessage: sanitizedForDB };
 }
 
 /**

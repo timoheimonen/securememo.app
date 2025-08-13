@@ -1,44 +1,16 @@
 import { 
-  validateMemoId, 
   validateMemoIdSecure,
-  validateEncryptedMessage, 
-  validateEncryptedMessageSecure,
-  validateAndSanitizeEncryptedMessage,
   validateAndSanitizeEncryptedMessageSecure,
-  validateExpiryTime,
   validateExpiryHours,
   validatePassword,
-  validatePasswordSecure,
   sanitizeForHTML,
   sanitizeForDatabase,
   sanitizeForJSON,
   sanitizeForURL
 } from '../utils/validation.js';
-import { getErrorMessage, getSecurityErrorMessage, getMemoAccessDeniedMessage } from '../utils/errorMessages.js';
+import { getErrorMessage, getMemoAccessDeniedMessage } from '../utils/errorMessages.js';
 import { addArtificialDelay, constantTimeCompare } from '../utils/timingSecurity.js';
 import { extractLocaleFromRequest } from '../utils/localization.js';
-
-// Generate secure 32-char token with rejection sampling to avoid modulo bias
-function generateDeletionToken() {
-    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    const tokenLength = 32;
-    const array = new Uint8Array(tokenLength);
-    crypto.getRandomValues(array);
-    let token = '';
-    const biasThreshold = 256 - (256 % chars.length);
-    for (let i = 0; i < tokenLength; i++) {
-        let value = array[i];
-        // Rejection sampling to eliminate modulo bias
-        while (value >= biasThreshold) {
-            const refill = new Uint8Array(1);
-            crypto.getRandomValues(refill);
-            value = refill[0];
-        }
-        const idx = value % chars.length;
-        token += chars[idx];
-    }
-    return token;
-}
 
 // Hash token (SHA-256 base64)
 async function hashDeletionToken(token) {
