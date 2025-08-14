@@ -370,6 +370,7 @@ export const ko = {
     
     // Loading and status messages
     'msg.encrypting': '메모를 안전하게 암호화하는 중... 오래된 기기에서는 시간이 걸릴 수 있습니다.',
+    'msg.decrypting': '메모를 복호화하는 중... 오래된 기기에서는 시간이 걸릴 수 있습니다.',
     'msg.deletingSecurely': '메모를 안전하게 삭제하는 중...',
     'msg.yourSecureMemo': '📝 당신의 보안 메모',
     'msg.status': '상태:',

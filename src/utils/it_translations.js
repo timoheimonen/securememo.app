@@ -370,6 +370,7 @@ export const it = {
     
     // Loading and status messages
     'msg.encrypting': 'Crittografia sicura della tua memo... Potrebbe richiedere un momento su dispositivi più vecchi.',
+    'msg.decrypting': 'Decrittografia della tua memo... Potrebbe richiedere un momento su dispositivi più vecchi.',
     'msg.deletingSecurely': 'Eliminazione sicura memo...',
     'msg.yourSecureMemo': '📝 La Tua Memo Sicura',
     'msg.status': 'Stato:',

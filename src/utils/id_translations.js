@@ -370,6 +370,7 @@ export const id = {
     
     // Loading and status messages
     'msg.encrypting': 'Mengenkripsi memo Anda dengan aman... Ini mungkin memerlukan waktu sebentar di perangkat lama.',
+    'msg.decrypting': 'Mendekripsi memo Anda... Ini mungkin memerlukan waktu sebentar di perangkat lama.',
     'msg.deletingSecurely': 'Menghapus memo dengan aman...',
     'msg.yourSecureMemo': '📝 Memo Aman Anda',
     'msg.status': 'Status:',

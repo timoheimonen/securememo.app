@@ -735,7 +735,13 @@ export async function getReadMemoHTML(locale = 'en', origin = 'https://securemem
                             <div class="cf-turnstile"></div>
                             <small class="form-help">${t('form.security.help', locale)}</small>
                         </div>
-                        <button type="submit" class="btn btn-primary">${t('btn.decrypt', locale)}</button>
+                        <button type="submit" class="btn btn-primary" id="decryptButton">${t('btn.decrypt', locale)}</button>
+                        
+                        <!-- Decrypt loading indicator (hidden by default) -->
+                        <div id="decryptLoadingIndicator" class="loading-spinner" style="display: none;">
+                            <div class="spinner"></div>
+                            <p>${t('msg.decrypting', locale)}</p>
+                        </div>
                     </form>
                 </div>
                 
