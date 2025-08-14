@@ -456,6 +456,7 @@ export const hi = {
     // Error messages - network errors
     'error.NETWORK_ERROR': 'सेवा अस्थायी रूप से अनुपलब्ध। कृपया फिर से कोशिश करें।',
     'error.SERVICE_UNAVAILABLE': 'सेवा अस्थायी रूप से अनुपलब्ध। कृपया बाद में फिर से कोशिश करें।',
+    'error.RATE_LIMITED': 'बहुत सारे अनुरोध। कृपया एक क्षण प्रतीक्षा करें और फिर से कोशिश करें।',
     
     // Error messages - client-side validation errors
     'error.MISSING_MESSAGE': 'कृपया एक मेमो दर्ज करें',

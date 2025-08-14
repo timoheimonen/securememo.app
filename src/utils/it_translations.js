@@ -456,6 +456,7 @@ export const it = {
     // Error messages - network errors
     'error.NETWORK_ERROR': 'Servizio temporaneamente non disponibile. Riprova.',
     'error.SERVICE_UNAVAILABLE': 'Servizio temporaneamente non disponibile. Riprova più tardi.',
+    'error.RATE_LIMITED': 'Troppe richieste. Attendere un momento e riprovare.',
     
     // Error messages - client-side validation errors
     'error.MISSING_MESSAGE': 'Inserisci una memo',

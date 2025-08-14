@@ -454,10 +454,11 @@ export const de = {
    'error.INVALID_PASSWORD': 'Ungültige Anfrage. Bitte überprüfen Sie Ihre Eingabe und versuchen Sie es erneut.',
    
    // Error messages - network errors
-   'error.NETWORK_ERROR': 'Service vorübergehend nicht verfügbar. Bitte versuchen Sie es erneut.',
-   'error.SERVICE_UNAVAILABLE': 'Service vorübergehend nicht verfügbar. Bitte versuchen Sie es später erneut.',
-   
-   // Error messages - client-side validation errors
+    'error.NETWORK_ERROR': 'Service vorübergehend nicht verfügbar. Bitte versuchen Sie es erneut.',
+    'error.SERVICE_UNAVAILABLE': 'Service vorübergehend nicht verfügbar. Bitte versuchen Sie es später erneut.',
+    'error.RATE_LIMITED': 'Zu viele Anfragen. Bitte warten Sie einen Moment und versuchen Sie es erneut.',
+    
+    // Error messages - client-side validation errors
    'error.MISSING_MESSAGE': 'Bitte geben Sie eine Notiz ein',
    'error.MESSAGE_TOO_LONG': 'Notiz ist zu lang (max. 10.000 Zeichen)',
    'error.MISSING_SECURITY_CHALLENGE': 'Bitte vervollständigen Sie die Sicherheitsüberprüfung',

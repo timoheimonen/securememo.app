@@ -456,6 +456,7 @@ export const ko = {
     // Error messages - network errors
     'error.NETWORK_ERROR': '서비스가 일시적으로 사용할 수 없습니다. 다시 시도하세요.',
     'error.SERVICE_UNAVAILABLE': '서비스가 일시적으로 사용할 수 없습니다. 나중에 다시 시도하세요.',
+    'error.RATE_LIMITED': '요청이 너무 많습니다. 잔시 기다린 후 다시 시도하세요.',
     
     // Error messages - client-side validation errors
     'error.MISSING_MESSAGE': '메모를 입력해 주세요',
