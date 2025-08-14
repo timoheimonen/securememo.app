@@ -33,7 +33,9 @@ export const en = {
     'btn.show': 'Show',
     'btn.hide': 'Hide',
     'btn.create': 'Create Secure Memo',
+    'btn.creating': 'Encrypting...',
     'btn.decrypt': 'Decrypt Memo',
+    'btn.decrypting': 'Decrypting...',
     'btn.goHome': 'Go Home',
     'btn.createNew': 'Create New Memo',
     

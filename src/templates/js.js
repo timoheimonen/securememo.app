@@ -187,7 +187,7 @@ document.getElementById('memoForm').addEventListener('submit', async (e) => {
     const submitButton = document.getElementById('submitButton');
     const loadingIndicator = document.getElementById('loadingIndicator');
     submitButton.disabled = true;
-    submitButton.textContent = '{{MSG_ENCRYPTING}}';
+    submitButton.textContent = '{{BTN_CREATING}}';
     loadingIndicator.style.display = 'block';
     
     try {
@@ -567,7 +567,7 @@ window.addEventListener('load', () => {
             const decryptLoadingIndicator = document.getElementById('decryptLoadingIndicator');
             if (decryptButton) {
                 decryptButton.disabled = true;
-                decryptButton.textContent = '{{MSG_DECRYPTING}}';
+                decryptButton.textContent = '{{BTN_DECRYPTING}}';
             }
             if (decryptLoadingIndicator) {
                 decryptLoadingIndicator.style.display = 'block';

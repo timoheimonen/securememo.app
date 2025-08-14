@@ -33,7 +33,9 @@ export const it = {
     'btn.show': 'Mostra',
     'btn.hide': 'Nascondi',
     'btn.create': 'Crea Memo Sicura',
+    'btn.creating': 'Crittografia...',
     'btn.decrypt': 'Decripta Memo',
+    'btn.decrypting': 'Decrittografia...',
     'btn.goHome': 'Vai alla Home',
     'btn.createNew': 'Crea Nuova Memo',
     

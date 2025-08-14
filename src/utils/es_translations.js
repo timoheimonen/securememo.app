@@ -33,7 +33,9 @@ export const es = {
     'btn.show': 'Mostrar',
     'btn.hide': 'Ocultar',
     'btn.create': 'Crear Memo Seguro',
+    'btn.creating': 'Cifrando...',
     'btn.decrypt': 'Descifrar Memo',
+    'btn.decrypting': 'Descifrando...',
     'btn.goHome': 'Ir al Inicio',
     'btn.createNew': 'Crear Nuevo Memo',
     

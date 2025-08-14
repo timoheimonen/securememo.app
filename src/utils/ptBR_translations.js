@@ -33,7 +33,9 @@ export const ptBR = {
     'btn.show': 'Mostrar',
     'btn.hide': 'Ocultar',
     'btn.create': 'Criar Memo Seguro',
+    'btn.creating': 'Criptografando...',
     'btn.decrypt': 'Descriptografar Memo',
+    'btn.decrypting': 'Descriptografando...',
     'btn.goHome': 'Ir para Início',
     'btn.createNew': 'Criar Novo Memo',
     

@@ -33,7 +33,9 @@ export const ko = {
     'btn.show': '보기',
     'btn.hide': '숨기기',
     'btn.create': '보안 메모 작성',
+    'btn.creating': '암호화 중...',
     'btn.decrypt': '메모 복호화',
+    'btn.decrypting': '복호화 중...',
     'btn.goHome': '홈으로 가기',
     'btn.createNew': '새 메모 작성',
     

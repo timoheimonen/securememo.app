@@ -33,7 +33,9 @@ export const hi = {
     'btn.show': 'दिखाएं',
     'btn.hide': 'छुपाएं',
     'btn.create': 'सुरक्षित मेमो बनाएं',
+    'btn.creating': 'एन्क्रिप्ट कर रहे हैं...',
     'btn.decrypt': 'मेमो डिक्रिप्ट करें',
+    'btn.decrypting': 'डिक्रिप्ट कर रहे हैं...',
     'btn.goHome': 'होम जाएं',
     'btn.createNew': 'नया मेमो बनाएं',
     

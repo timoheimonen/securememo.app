@@ -33,7 +33,9 @@ export const de = {
    'btn.show': 'Anzeigen',
    'btn.hide': 'Verbergen',
    'btn.create': 'Sichere Notiz erstellen',
+   'btn.creating': 'Verschlüsseln...',
    'btn.decrypt': 'Notiz entschlüsseln',
+   'btn.decrypting': 'Entschlüsseln...',
    'btn.goHome': 'Zur Startseite',
    'btn.createNew': 'Neue Notiz erstellen',
    
