@@ -216,6 +216,11 @@ document.getElementById('memoForm').addEventListener('submit', async (e) => {
             body: JSON.stringify(requestBody)
         });
         
+        // Handle rate limit early to avoid JSON parse of CF HTML body
+        if (response.status === 429) {
+            showMessage('{{RATE_LIMITED_ERROR}}', 'error');
+            return;
+        }
         const result = await response.json();
         
         if (response.ok) {
@@ -587,6 +592,10 @@ window.addEventListener('load', () => {
                     body: JSON.stringify(requestBody)
                 });
                 
+                if (response.status === 429) {
+                    showError('{{RATE_LIMITED_ERROR}}');
+                    return;
+                }
                 const result = await response.json();
                 
                 if (response.ok) {
@@ -642,7 +651,9 @@ window.addEventListener('load', () => {
                         body: JSON.stringify(deleteBody)
                     });
                     
-                    if (deleteResponse.ok) {
+                    if (deleteResponse.status === 429) {
+                        showMessage('{{RATE_LIMITED_ERROR}}', 'error');
+                    } else if (deleteResponse.ok) {
                         const memoStatus = document.getElementById('memoStatus');
                         const deletionSpinner = document.getElementById('deletionSpinner');
                         if (memoStatus) {
@@ -652,12 +663,7 @@ window.addEventListener('load', () => {
                             deletionSpinner.style.display = 'none';
                         }
                     } else {
-                        // Handle rate limiting for deletion specifically
-                        if (deleteResponse.status === 429) {
-                            showMessage('{{RATE_LIMITED_ERROR}}', 'error');
-                        } else {
-                            showMessage('{{DELETION_ERROR_MESSAGE}}', 'warning');
-                        }
+                        showMessage('{{DELETION_ERROR_MESSAGE}}', 'warning');
                     }
                 } else {
                     // Handle rate limiting specifically  
