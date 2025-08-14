@@ -370,6 +370,7 @@ export const de = {
    
    // Loading and status messages
    'msg.encrypting': 'Ihre Notiz wird sicher verschlüsselt... Dies kann auf älteren Geräten einen Moment dauern.',
+   'msg.decrypting': 'Ihre Notiz wird entschlüsselt... Dies kann auf älteren Geräten einen Moment dauern.',
    'msg.deletingSecurely': 'Notiz wird sicher gelöscht...',
    'msg.yourSecureMemo': '📝 Ihre sichere Notiz',
    'msg.status': 'Status:',

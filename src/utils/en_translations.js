@@ -370,6 +370,7 @@ export const en = {
     
     // Loading and status messages
     'msg.encrypting': 'Encrypting your memo securely... This may take a moment on older devices.',
+    'msg.decrypting': 'Decrypting your memo... This may take a moment on older devices.',
     'msg.deletingSecurely': 'Deleting memo securely...',
     'msg.yourSecureMemo': '📝 Your Secure Memo',
     'msg.status': 'Status:',

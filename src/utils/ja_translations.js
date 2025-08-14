@@ -370,6 +370,7 @@ export const ja = {
     
     // Loading and status messages
     'msg.encrypting': 'メモを安全に暗号化中...古いデバイスでは少し時間がかかる場合があります。',
+    'msg.decrypting': 'メモを復号中...古いデバイスでは少し時間がかかる場合があります。',
     'msg.deletingSecurely': 'メモを安全に削除中...',
     'msg.yourSecureMemo': '📝 あなたのセキュアメモ',
     'msg.status': 'ステータス:',

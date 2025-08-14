@@ -370,6 +370,7 @@ export const fr = {
     
     // Loading and status messages
     'msg.encrypting': 'Chiffrement de votre mémo en toute sécurité... Cela peut prendre un moment sur les appareils plus anciens.',
+    'msg.decrypting': 'Déchiffrement de votre mémo... Cela peut prendre un moment sur les appareils plus anciens.',
     'msg.deletingSecurely': 'Suppression sécurisée du mémo...',
     'msg.yourSecureMemo': '📝 Votre Mémo Sécurisé',
     'msg.status': 'Statut :',

@@ -562,6 +562,17 @@ window.addEventListener('load', () => {
                 return;
             }
             
+            // Show loading spinner and disable button immediately
+            const decryptButton = document.getElementById('decryptButton');
+            const decryptLoadingIndicator = document.getElementById('decryptLoadingIndicator');
+            if (decryptButton) {
+                decryptButton.disabled = true;
+                decryptButton.textContent = '{{MSG_DECRYPTING}}';
+            }
+            if (decryptLoadingIndicator) {
+                decryptLoadingIndicator.style.display = 'block';
+            }
+            
             try {
                 // Send request with Turnstile token
                 const requestBody = {
@@ -668,6 +679,17 @@ window.addEventListener('load', () => {
                     showError(ERROR_MESSAGES.READ_MEMO_ERROR);
                 }
                 // Don't reset Turnstile on error to avoid refreshing the widget
+            } finally {
+                // Always hide loading indicator and re-enable button
+                const decryptButton = document.getElementById('decryptButton');
+                const decryptLoadingIndicator = document.getElementById('decryptLoadingIndicator');
+                if (decryptButton) {
+                    decryptButton.disabled = false;
+                    decryptButton.textContent = '{{BTN_DECRYPT}}';
+                }
+                if (decryptLoadingIndicator) {
+                    decryptLoadingIndicator.style.display = 'none';
+                }
             }
         });
     }

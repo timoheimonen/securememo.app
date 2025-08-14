@@ -370,6 +370,7 @@ export const ptBR = {
     
     // Loading and status messages
     'msg.encrypting': 'Criptografando seu memo com segurança... Isso pode levar um momento em dispositivos mais antigos.',
+    'msg.decrypting': 'Descriptografando seu memo... Isso pode levar um momento em dispositivos mais antigos.',
     'msg.deletingSecurely': 'Excluindo memo com segurança...',
     'msg.yourSecureMemo': '📝 Seu Memo Seguro',
     'msg.status': 'Status:',
