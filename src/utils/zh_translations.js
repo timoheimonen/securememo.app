@@ -33,7 +33,9 @@ export const zh = {
     'btn.show': '显示',
     'btn.hide': '隐藏',
     'btn.create': '创建安全备忘录',
+    'btn.creating': '加密中...',
     'btn.decrypt': '解密备忘录',
+    'btn.decrypting': '解密中...',
     'btn.goHome': '返回首页',
     'btn.createNew': '创建新备忘录',
     

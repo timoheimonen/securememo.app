@@ -33,7 +33,9 @@ export const id = {
     'btn.show': 'Tampilkan',
     'btn.hide': 'Sembunyikan',
     'btn.create': 'Buat Memo Aman',
+    'btn.creating': 'Mengenkripsi...',
     'btn.decrypt': 'Dekripsi Memo',
+    'btn.decrypting': 'Mendekripsi...',
     'btn.goHome': 'Ke Beranda',
     'btn.createNew': 'Buat Memo Baru',
     

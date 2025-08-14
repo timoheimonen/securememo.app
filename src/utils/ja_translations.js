@@ -33,7 +33,9 @@ export const ja = {
     'btn.show': '表示',
     'btn.hide': '非表示',
     'btn.create': 'セキュアメモを作成',
+    'btn.creating': '暗号化中...',
     'btn.decrypt': 'メモを復号化',
+    'btn.decrypting': '復号化中...',
     'btn.goHome': 'ホームに戻る',
     'btn.createNew': '新しいメモを作成',
     
