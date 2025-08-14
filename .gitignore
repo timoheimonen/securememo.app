@@ -119,3 +119,8 @@ pages/apple-touch-icon.png
 pages/favicon.ico
 pages/build.js
 deploy.sh
+api-chema.yaml
+api-create-memo-chema.yaml
+api-delete-memo-chema.yaml
+.gitignore
+api-read-memo-chema.yaml

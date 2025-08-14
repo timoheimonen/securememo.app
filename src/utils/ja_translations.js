@@ -33,7 +33,9 @@ export const ja = {
     'btn.show': '表示',
     'btn.hide': '非表示',
     'btn.create': 'セキュアメモを作成',
+    'btn.creating': '暗号化中...',
     'btn.decrypt': 'メモを復号化',
+    'btn.decrypting': '復号化中...',
     'btn.goHome': 'ホームに戻る',
     'btn.createNew': '新しいメモを作成',
     
@@ -370,6 +372,7 @@ export const ja = {
     
     // Loading and status messages
     'msg.encrypting': 'メモを安全に暗号化中...古いデバイスでは少し時間がかかる場合があります。',
+    'msg.decrypting': 'メモを復号中...古いデバイスでは少し時間がかかる場合があります。',
     'msg.deletingSecurely': 'メモを安全に削除中...',
     'msg.yourSecureMemo': '📝 あなたのセキュアメモ',
     'msg.status': 'ステータス:',
@@ -456,6 +459,7 @@ export const ja = {
     // Error messages - network errors
     'error.NETWORK_ERROR': 'サービスが一時的に利用できません。再試行してください。',
     'error.SERVICE_UNAVAILABLE': 'サービスが一時的に利用できません。しばらくしてから再試行してください。',
+    'error.RATE_LIMITED': 'リクエストが多すぎます。少しお待ちいただいてから再度お試しください。',
     
     // Error messages - client-side validation errors
     'error.MISSING_MESSAGE': 'メモを入力してください',

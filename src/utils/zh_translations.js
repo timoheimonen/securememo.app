@@ -33,7 +33,9 @@ export const zh = {
     'btn.show': '显示',
     'btn.hide': '隐藏',
     'btn.create': '创建安全备忘录',
+    'btn.creating': '加密中...',
     'btn.decrypt': '解密备忘录',
+    'btn.decrypting': '解密中...',
     'btn.goHome': '返回首页',
     'btn.createNew': '创建新备忘录',
     
@@ -370,6 +372,7 @@ export const zh = {
     
     // Loading and status messages
     'msg.encrypting': '正在安全加密您的备忘录...在较旧的设备上可能需要一些时间。',
+    'msg.decrypting': '正在解密您的备忘录...在较旧的设备上可能需要一些时间。',
     'msg.deletingSecurely': '正在安全删除备忘录...',
     'msg.yourSecureMemo': '📝 您的安全备忘录',
     'msg.status': '状态：',
@@ -456,6 +459,7 @@ export const zh = {
     // Error messages - network errors
     'error.NETWORK_ERROR': '服务暂时不可用。请重试。',
     'error.SERVICE_UNAVAILABLE': '服务暂时不可用。请稍后重试。',
+    'error.RATE_LIMITED': '请求过多。请稍等片刻后重试。',
     
     // Error messages - client-side validation errors
     'error.MISSING_MESSAGE': '请输入备忘录',

@@ -33,7 +33,9 @@ export const id = {
     'btn.show': 'Tampilkan',
     'btn.hide': 'Sembunyikan',
     'btn.create': 'Buat Memo Aman',
+    'btn.creating': 'Mengenkripsi...',
     'btn.decrypt': 'Dekripsi Memo',
+    'btn.decrypting': 'Mendekripsi...',
     'btn.goHome': 'Ke Beranda',
     'btn.createNew': 'Buat Memo Baru',
     
@@ -370,6 +372,7 @@ export const id = {
     
     // Loading and status messages
     'msg.encrypting': 'Mengenkripsi memo Anda dengan aman... Ini mungkin memerlukan waktu sebentar di perangkat lama.',
+    'msg.decrypting': 'Mendekripsi memo Anda... Ini mungkin memerlukan waktu sebentar di perangkat lama.',
     'msg.deletingSecurely': 'Menghapus memo dengan aman...',
     'msg.yourSecureMemo': '📝 Memo Aman Anda',
     'msg.status': 'Status:',
@@ -456,6 +459,7 @@ export const id = {
     // Error messages - network errors
     'error.NETWORK_ERROR': 'Layanan sementara tidak tersedia. Silakan coba lagi.',
     'error.SERVICE_UNAVAILABLE': 'Layanan sementara tidak tersedia. Silakan coba lagi nanti.',
+    'error.RATE_LIMITED': 'Terlalu banyak permintaan. Silakan tunggu sejenak dan coba lagi.',
     
     // Error messages - client-side validation errors
     'error.MISSING_MESSAGE': 'Silakan masukkan memo',

@@ -33,7 +33,9 @@ export const it = {
     'btn.show': 'Mostra',
     'btn.hide': 'Nascondi',
     'btn.create': 'Crea Memo Sicura',
+    'btn.creating': 'Crittografia...',
     'btn.decrypt': 'Decripta Memo',
+    'btn.decrypting': 'Decrittografia...',
     'btn.goHome': 'Vai alla Home',
     'btn.createNew': 'Crea Nuova Memo',
     
@@ -370,6 +372,7 @@ export const it = {
     
     // Loading and status messages
     'msg.encrypting': 'Crittografia sicura della tua memo... Potrebbe richiedere un momento su dispositivi più vecchi.',
+    'msg.decrypting': 'Decrittografia della tua memo... Potrebbe richiedere un momento su dispositivi più vecchi.',
     'msg.deletingSecurely': 'Eliminazione sicura memo...',
     'msg.yourSecureMemo': '📝 La Tua Memo Sicura',
     'msg.status': 'Stato:',
@@ -456,6 +459,7 @@ export const it = {
     // Error messages - network errors
     'error.NETWORK_ERROR': 'Servizio temporaneamente non disponibile. Riprova.',
     'error.SERVICE_UNAVAILABLE': 'Servizio temporaneamente non disponibile. Riprova più tardi.',
+    'error.RATE_LIMITED': 'Troppe richieste. Attendere un momento e riprovare.',
     
     // Error messages - client-side validation errors
     'error.MISSING_MESSAGE': 'Inserisci una memo',

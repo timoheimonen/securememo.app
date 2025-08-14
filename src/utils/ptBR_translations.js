@@ -33,7 +33,9 @@ export const ptBR = {
     'btn.show': 'Mostrar',
     'btn.hide': 'Ocultar',
     'btn.create': 'Criar Memo Seguro',
+    'btn.creating': 'Criptografando...',
     'btn.decrypt': 'Descriptografar Memo',
+    'btn.decrypting': 'Descriptografando...',
     'btn.goHome': 'Ir para Início',
     'btn.createNew': 'Criar Novo Memo',
     
@@ -370,6 +372,7 @@ export const ptBR = {
     
     // Loading and status messages
     'msg.encrypting': 'Criptografando seu memo com segurança... Isso pode levar um momento em dispositivos mais antigos.',
+    'msg.decrypting': 'Descriptografando seu memo... Isso pode levar um momento em dispositivos mais antigos.',
     'msg.deletingSecurely': 'Excluindo memo com segurança...',
     'msg.yourSecureMemo': '📝 Seu Memo Seguro',
     'msg.status': 'Status:',
@@ -456,6 +459,7 @@ export const ptBR = {
     // Error messages - network errors
     'error.NETWORK_ERROR': 'Serviço temporariamente indisponível. Por favor, tente novamente.',
     'error.SERVICE_UNAVAILABLE': 'Serviço temporariamente indisponível. Por favor, tente novamente mais tarde.',
+    'error.RATE_LIMITED': 'Muitas solicitações. Por favor, aguarde um momento e tente novamente.',
     
     // Error messages - client-side validation errors
     'error.MISSING_MESSAGE': 'Por favor, digite um memo',

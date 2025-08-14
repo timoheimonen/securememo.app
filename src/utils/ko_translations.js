@@ -33,7 +33,9 @@ export const ko = {
     'btn.show': '보기',
     'btn.hide': '숨기기',
     'btn.create': '보안 메모 작성',
+    'btn.creating': '암호화 중...',
     'btn.decrypt': '메모 복호화',
+    'btn.decrypting': '복호화 중...',
     'btn.goHome': '홈으로 가기',
     'btn.createNew': '새 메모 작성',
     
@@ -370,6 +372,7 @@ export const ko = {
     
     // Loading and status messages
     'msg.encrypting': '메모를 안전하게 암호화하는 중... 오래된 기기에서는 시간이 걸릴 수 있습니다.',
+    'msg.decrypting': '메모를 복호화하는 중... 오래된 기기에서는 시간이 걸릴 수 있습니다.',
     'msg.deletingSecurely': '메모를 안전하게 삭제하는 중...',
     'msg.yourSecureMemo': '📝 당신의 보안 메모',
     'msg.status': '상태:',
@@ -456,6 +459,7 @@ export const ko = {
     // Error messages - network errors
     'error.NETWORK_ERROR': '서비스가 일시적으로 사용할 수 없습니다. 다시 시도하세요.',
     'error.SERVICE_UNAVAILABLE': '서비스가 일시적으로 사용할 수 없습니다. 나중에 다시 시도하세요.',
+    'error.RATE_LIMITED': '요청이 너무 많습니다. 잔시 기다린 후 다시 시도하세요.',
     
     // Error messages - client-side validation errors
     'error.MISSING_MESSAGE': '메모를 입력해 주세요',

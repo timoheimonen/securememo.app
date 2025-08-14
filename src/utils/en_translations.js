@@ -33,7 +33,9 @@ export const en = {
     'btn.show': 'Show',
     'btn.hide': 'Hide',
     'btn.create': 'Create Secure Memo',
+    'btn.creating': 'Encrypting...',
     'btn.decrypt': 'Decrypt Memo',
+    'btn.decrypting': 'Decrypting...',
     'btn.goHome': 'Go Home',
     'btn.createNew': 'Create New Memo',
     
@@ -370,6 +372,7 @@ export const en = {
     
     // Loading and status messages
     'msg.encrypting': 'Encrypting your memo securely... This may take a moment on older devices.',
+    'msg.decrypting': 'Decrypting your memo... This may take a moment on older devices.',
     'msg.deletingSecurely': 'Deleting memo securely...',
     'msg.yourSecureMemo': '📝 Your Secure Memo',
     'msg.status': 'Status:',
@@ -456,6 +459,7 @@ export const en = {
     // Error messages - network errors
     'error.NETWORK_ERROR': 'Service temporarily unavailable. Please try again.',
     'error.SERVICE_UNAVAILABLE': 'Service temporarily unavailable. Please try again later.',
+    'error.RATE_LIMITED': 'Too many requests. Please wait a moment and try again.',
     
     // Error messages - client-side validation errors
     'error.MISSING_MESSAGE': 'Please enter a memo',

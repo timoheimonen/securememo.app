@@ -33,7 +33,9 @@ export const fr = {
     'btn.show': 'Afficher',
     'btn.hide': 'Masquer',
     'btn.create': 'Créer un Mémo Sécurisé',
+    'btn.creating': 'Chiffrement...',
     'btn.decrypt': 'Déchiffrer le Mémo',
+    'btn.decrypting': 'Déchiffrement...',
     'btn.goHome': 'Retour à l\'Accueil',
     'btn.createNew': 'Créer un Nouveau Mémo',
     
@@ -370,6 +372,7 @@ export const fr = {
     
     // Loading and status messages
     'msg.encrypting': 'Chiffrement de votre mémo en toute sécurité... Cela peut prendre un moment sur les appareils plus anciens.',
+    'msg.decrypting': 'Déchiffrement de votre mémo... Cela peut prendre un moment sur les appareils plus anciens.',
     'msg.deletingSecurely': 'Suppression sécurisée du mémo...',
     'msg.yourSecureMemo': '📝 Votre Mémo Sécurisé',
     'msg.status': 'Statut :',
@@ -456,6 +459,7 @@ export const fr = {
     // Error messages - network errors
     'error.NETWORK_ERROR': 'Service temporairement indisponible. Veuillez réessayer.',
     'error.SERVICE_UNAVAILABLE': 'Service temporairement indisponible. Veuillez réessayer plus tard.',
+    'error.RATE_LIMITED': 'Trop de demandes. Veuillez attendre un moment et réessayer.',
     
     // Error messages - client-side validation errors
     'error.MISSING_MESSAGE': 'Veuillez entrer un mémo',

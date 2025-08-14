@@ -187,7 +187,7 @@ document.getElementById('memoForm').addEventListener('submit', async (e) => {
     const submitButton = document.getElementById('submitButton');
     const loadingIndicator = document.getElementById('loadingIndicator');
     submitButton.disabled = true;
-    submitButton.textContent = '{{MSG_ENCRYPTING}}';
+    submitButton.textContent = '{{BTN_CREATING}}';
     loadingIndicator.style.display = 'block';
     
     try {
@@ -235,7 +235,12 @@ document.getElementById('memoForm').addEventListener('submit', async (e) => {
             // Reset Turnstile only on success
             resetTurnstile();
         } else {
-            showMessage(result.error || '{{CREATE_MEMO_FAILED_ERROR}}', 'error');
+            // Handle rate limiting specifically
+            if (response.status === 429) {
+                showMessage('{{RATE_LIMITED_ERROR}}', 'error');
+            } else {
+                showMessage(result.error || '{{CREATE_MEMO_FAILED_ERROR}}', 'error');
+            }
             // Don't reset Turnstile on error to avoid refreshing the widget
         }
     } catch (error) {
@@ -557,6 +562,17 @@ window.addEventListener('load', () => {
                 return;
             }
             
+            // Show loading spinner and disable button immediately
+            const decryptButton = document.getElementById('decryptButton');
+            const decryptLoadingIndicator = document.getElementById('decryptLoadingIndicator');
+            if (decryptButton) {
+                decryptButton.disabled = true;
+                decryptButton.textContent = '{{BTN_DECRYPTING}}';
+            }
+            if (decryptLoadingIndicator) {
+                decryptLoadingIndicator.style.display = 'block';
+            }
+            
             try {
                 // Send request with Turnstile token
                 const requestBody = {
@@ -636,10 +652,18 @@ window.addEventListener('load', () => {
                             deletionSpinner.style.display = 'none';
                         }
                     } else {
-                        showMessage('{{DELETION_ERROR_MESSAGE}}', 'warning');
+                        // Handle rate limiting for deletion specifically
+                        if (deleteResponse.status === 429) {
+                            showMessage('{{RATE_LIMITED_ERROR}}', 'error');
+                        } else {
+                            showMessage('{{DELETION_ERROR_MESSAGE}}', 'warning');
+                        }
                     }
                 } else {
-                    if (result.error === 'Memo not found') {
+                    // Handle rate limiting specifically  
+                    if (response.status === 429) {
+                        showError('{{RATE_LIMITED_ERROR}}');
+                    } else if (result.error === 'Memo not found') {
                         showError(ERROR_MESSAGES.MEMO_ALREADY_READ_DELETED);
                     } else if (result.error === 'Memo expired') {
                         showError(ERROR_MESSAGES.MEMO_EXPIRED_DELETED);
@@ -655,6 +679,17 @@ window.addEventListener('load', () => {
                     showError(ERROR_MESSAGES.READ_MEMO_ERROR);
                 }
                 // Don't reset Turnstile on error to avoid refreshing the widget
+            } finally {
+                // Always hide loading indicator and re-enable button
+                const decryptButton = document.getElementById('decryptButton');
+                const decryptLoadingIndicator = document.getElementById('decryptLoadingIndicator');
+                if (decryptButton) {
+                    decryptButton.disabled = false;
+                    decryptButton.textContent = '{{BTN_DECRYPT}}';
+                }
+                if (decryptLoadingIndicator) {
+                    decryptLoadingIndicator.style.display = 'none';
+                }
             }
         });
     }
