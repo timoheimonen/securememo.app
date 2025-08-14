@@ -456,6 +456,7 @@ export const ja = {
     // Error messages - network errors
     'error.NETWORK_ERROR': 'サービスが一時的に利用できません。再試行してください。',
     'error.SERVICE_UNAVAILABLE': 'サービスが一時的に利用できません。しばらくしてから再試行してください。',
+    'error.RATE_LIMITED': 'リクエストが多すぎます。少しお待ちいただいてから再度お試しください。',
     
     // Error messages - client-side validation errors
     'error.MISSING_MESSAGE': 'メモを入力してください',

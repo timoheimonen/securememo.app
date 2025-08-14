@@ -456,6 +456,7 @@ export const fr = {
     // Error messages - network errors
     'error.NETWORK_ERROR': 'Service temporairement indisponible. Veuillez réessayer.',
     'error.SERVICE_UNAVAILABLE': 'Service temporairement indisponible. Veuillez réessayer plus tard.',
+    'error.RATE_LIMITED': 'Trop de demandes. Veuillez attendre un moment et réessayer.',
     
     // Error messages - client-side validation errors
     'error.MISSING_MESSAGE': 'Veuillez entrer un mémo',

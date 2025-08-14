@@ -456,6 +456,7 @@ export const id = {
     // Error messages - network errors
     'error.NETWORK_ERROR': 'Layanan sementara tidak tersedia. Silakan coba lagi.',
     'error.SERVICE_UNAVAILABLE': 'Layanan sementara tidak tersedia. Silakan coba lagi nanti.',
+    'error.RATE_LIMITED': 'Terlalu banyak permintaan. Silakan tunggu sejenak dan coba lagi.',
     
     // Error messages - client-side validation errors
     'error.MISSING_MESSAGE': 'Silakan masukkan memo',

@@ -456,6 +456,7 @@ export const zh = {
     // Error messages - network errors
     'error.NETWORK_ERROR': '服务暂时不可用。请重试。',
     'error.SERVICE_UNAVAILABLE': '服务暂时不可用。请稍后重试。',
+    'error.RATE_LIMITED': '请求过多。请稍等片刻后重试。',
     
     // Error messages - client-side validation errors
     'error.MISSING_MESSAGE': '请输入备忘录',

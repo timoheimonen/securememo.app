@@ -456,6 +456,7 @@ export const en = {
     // Error messages - network errors
     'error.NETWORK_ERROR': 'Service temporarily unavailable. Please try again.',
     'error.SERVICE_UNAVAILABLE': 'Service temporarily unavailable. Please try again later.',
+    'error.RATE_LIMITED': 'Too many requests. Please wait a moment and try again.',
     
     // Error messages - client-side validation errors
     'error.MISSING_MESSAGE': 'Please enter a memo',

@@ -49,6 +49,7 @@ export const errorMessages = {
   // Network errors
   'NETWORK_ERROR': 'Service temporarily unavailable. Please try again.',
   'SERVICE_UNAVAILABLE': 'Service temporarily unavailable. Please try again later.',
+  'RATE_LIMITED': 'Too many requests. Please wait a moment and try again.',
   
   // Client-side validation errors
   'MISSING_MESSAGE': 'Please enter a memo',
