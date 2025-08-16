@@ -14,7 +14,9 @@ function getLanguageDisplayName(locale) {
     'hi': 'हिन्दी',
     'zh': '中文',
     'ja': '日本語',
-    'ko': '한국어'
+    'ko': '한국어',
+    'vi': 'Tiếng Việt',
+    'sv': 'Svenska'
   };
   return languageNames[locale] || locale.toUpperCase();
 }
