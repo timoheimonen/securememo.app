@@ -16,7 +16,8 @@ function getLanguageDisplayName(locale) {
     'ja': '日本語',
     'ko': '한국어',
     'vi': 'Tiếng Việt',
-    'sv': 'Svenska'
+    'sv': 'Svenska',
+    'pl': 'Polski'
   };
   return languageNames[locale] || locale.toUpperCase();
 }
@@ -118,6 +119,7 @@ export async function getIndexHTML(locale = 'en', origin = 'https://securememo.a
                         <a href="/de" class="language-item ${locale === 'de' ? 'active' : ''}" title="${t('language.german', locale)}">DE - Deutsch</a>
                         <a href="/sv" class="language-item ${locale === 'sv' ? 'active' : ''}" title="${t('language.swedish', locale)}">SV - Svenska</a>
                         <a href="/it" class="language-item ${locale === 'it' ? 'active' : ''}" title="${t('language.italian', locale)}">IT - Italiano</a>
+                        <a href="/pl" class="language-item ${locale === 'pl' ? 'active' : ''}" title="${t('language.polish', locale)}">PL - Polski</a>
                         <a href="/id" class="language-item ${locale === 'id' ? 'active' : ''}" title="${t('language.indonesian', locale)}">ID - Indonesia</a>
                         <a href="/ptPT" class="language-item ${locale === 'ptPT' ? 'active' : ''}" title="${t('language.portuguesePT', locale)}">PT - Português</a>
                         <a href="/ptBR" class="language-item ${locale === 'ptBR' ? 'active' : ''}" title="${t('language.portugueseBR', locale)}">PT-BR - Português (Brasil)</a>
@@ -304,6 +306,7 @@ export async function getAboutHTML(locale = 'en', origin = 'https://securememo.a
                         <a href="/de/about.html" class="language-item ${locale === 'de' ? 'active' : ''}" title="${t('language.german', locale)}">DE - Deutsch</a>
                         <a href="/sv/about.html" class="language-item ${locale === 'sv' ? 'active' : ''}" title="${t('language.swedish', locale)}">SV - Svenska</a>
                         <a href="/it/about.html" class="language-item ${locale === 'it' ? 'active' : ''}" title="${t('language.italian', locale)}">IT - Italiano</a>
+                        <a href="/pl/about.html" class="language-item ${locale === 'pl' ? 'active' : ''}" title="${t('language.polish', locale)}">PL - Polski</a>
                         <a href="/id/about.html" class="language-item ${locale === 'id' ? 'active' : ''}" title="${t('language.indonesian', locale)}">ID - Indonesia</a>
                         <a href="/ptPT/about.html" class="language-item ${locale === 'ptPT' ? 'active' : ''}" title="${t('language.portuguesePT', locale)}">PT - Português</a>
                         <a href="/ptBR/about.html" class="language-item ${locale === 'ptBR' ? 'active' : ''}" title="${t('language.portugueseBR', locale)}">PT-BR - Português (Brasil)</a>
@@ -504,6 +507,7 @@ export async function getCreateMemoHTML(locale = 'en', origin = 'https://securem
                         <a href="/de/create-memo.html" class="language-item ${locale === 'de' ? 'active' : ''}" title="${t('language.german', locale)}">DE - Deutsch</a>
                         <a href="/sv/create-memo.html" class="language-item ${locale === 'sv' ? 'active' : ''}" title="${t('language.swedish', locale)}">SV - Svenska</a>
                         <a href="/it/create-memo.html" class="language-item ${locale === 'it' ? 'active' : ''}" title="${t('language.italian', locale)}">IT - Italiano</a>
+                        <a href="/pl/create-memo.html" class="language-item ${locale === 'pl' ? 'active' : ''}" title="${t('language.polish', locale)}">PL - Polski</a>
                         <a href="/id/create-memo.html" class="language-item ${locale === 'id' ? 'active' : ''}" title="${t('language.indonesian', locale)}">ID - Indonesia</a>
                         <a href="/ptPT/create-memo.html" class="language-item ${locale === 'ptPT' ? 'active' : ''}" title="${t('language.portuguesePT', locale)}">PT - Português</a>
                         <a href="/ptBR/create-memo.html" class="language-item ${locale === 'ptBR' ? 'active' : ''}" title="${t('language.portugueseBR', locale)}">PT-BR - Português (Brasil)</a>
@@ -707,6 +711,7 @@ export async function getReadMemoHTML(locale = 'en', origin = 'https://securemem
                         <a href="/de/read-memo.html" class="language-item ${locale === 'de' ? 'active' : ''}" title="${t('language.german', locale)}">DE - Deutsch</a>
                         <a href="/sv/read-memo.html" class="language-item ${locale === 'sv' ? 'active' : ''}" title="${t('language.swedish', locale)}">SV - Svenska</a>
                         <a href="/it/read-memo.html" class="language-item ${locale === 'it' ? 'active' : ''}" title="${t('language.italian', locale)}">IT - Italiano</a>
+                        <a href="/pl/read-memo.html" class="language-item ${locale === 'pl' ? 'active' : ''}" title="${t('language.polish', locale)}">PL - Polski</a>
                         <a href="/id/read-memo.html" class="language-item ${locale === 'id' ? 'active' : ''}" title="${t('language.indonesian', locale)}">ID - Indonesia</a>
                         <a href="/ptPT/read-memo.html" class="language-item ${locale === 'ptPT' ? 'active' : ''}" title="${t('language.portuguesePT', locale)}">PT - Português</a>
                         <a href="/ptBR/read-memo.html" class="language-item ${locale === 'ptBR' ? 'active' : ''}" title="${t('language.portugueseBR', locale)}">PT-BR - Português (Brasil)</a>
@@ -889,6 +894,7 @@ export async function getToSHTML(locale = 'en', origin = 'https://securememo.app
                         <a href="/de/tos.html" class="language-item ${locale === 'de' ? 'active' : ''}" title="${t('language.german', locale)}">DE - Deutsch</a>
                         <a href="/sv/tos.html" class="language-item ${locale === 'sv' ? 'active' : ''}" title="${t('language.swedish', locale)}">SV - Svenska</a>
                         <a href="/it/tos.html" class="language-item ${locale === 'it' ? 'active' : ''}" title="${t('language.italian', locale)}">IT - Italiano</a>
+                        <a href="/pl/tos.html" class="language-item ${locale === 'pl' ? 'active' : ''}" title="${t('language.polish', locale)}">PL - Polski</a>
                         <a href="/id/tos.html" class="language-item ${locale === 'id' ? 'active' : ''}" title="${t('language.indonesian', locale)}">ID - Indonesia</a>
                         <a href="/ptPT/tos.html" class="language-item ${locale === 'ptPT' ? 'active' : ''}" title="${t('language.portuguesePT', locale)}">PT - Português</a>
                         <a href="/ptBR/tos.html" class="language-item ${locale === 'ptBR' ? 'active' : ''}" title="${t('language.portugueseBR', locale)}">PT-BR - Português (Brasil)</a>
@@ -1132,6 +1138,7 @@ export async function getPrivacyHTML(locale = 'en', origin = 'https://securememo
                         <a href="/de/privacy.html" class="language-item ${locale === 'de' ? 'active' : ''}" title="${t('language.german', locale)}">DE - Deutsch</a>
                         <a href="/sv/privacy.html" class="language-item ${locale === 'sv' ? 'active' : ''}" title="${t('language.swedish', locale)}">SV - Svenska</a>
                         <a href="/it/privacy.html" class="language-item ${locale === 'it' ? 'active' : ''}" title="${t('language.italian', locale)}">IT - Italiano</a>
+                        <a href="/pl/privacy.html" class="language-item ${locale === 'pl' ? 'active' : ''}" title="${t('language.polish', locale)}">PL - Polski</a>
                         <a href="/id/privacy.html" class="language-item ${locale === 'id' ? 'active' : ''}" title="${t('language.indonesian', locale)}">ID - Indonesia</a>
                         <a href="/ptPT/privacy.html" class="language-item ${locale === 'ptPT' ? 'active' : ''}" title="${t('language.portuguesePT', locale)}">PT - Português</a>
                         <a href="/ptBR/privacy.html" class="language-item ${locale === 'ptBR' ? 'active' : ''}" title="${t('language.portugueseBR', locale)}">PT-BR - Português (Brasil)</a>
