@@ -4,13 +4,13 @@ export const ja = {
     'nav.about': 'について',
     'nav.create': 'セキュアメモを作成',
     'nav.toggleMenu': 'ナビゲーションメニューを切り替える',
-    
+
     // Common elements
     'common.loading': '読み込み中...',
     'common.error': 'エラー',
     'common.success': '成功',
     'common.warning': '警告',
-    
+
     // Language names
     'language.english': 'English',
     'language.spanish': 'Español',
@@ -24,7 +24,9 @@ export const ja = {
     'language.korean': '한국어',
     'language.italian': 'Italiano',
     'language.indonesian': 'Bahasa Indonesia',
-    
+    'language.vietnamese': 'Tiếng Việt',
+    'language.swedish': 'Svenska',
+
     // Buttons
     'btn.copy': 'コピー',
     'btn.copied': 'コピーしました！',
@@ -38,7 +40,7 @@ export const ja = {
     'btn.decrypting': '復号化中...',
     'btn.goHome': 'ホームに戻る',
     'btn.createNew': '新しいメモを作成',
-    
+
     // Form labels and placeholders
     'form.message.label': 'あなたのメモ',
     'form.message.placeholder': 'ここに秘密のメモを入力してください...',
@@ -48,7 +50,7 @@ export const ja = {
     'form.password.placeholder': '別途共有された暗号化パスワードを入力してください',
     'form.password.help': 'パスワードはメモのURLとは別に共有されているはずです',
     'form.security.help': 'セキュリティチャレンジを完了してください',
-    
+
     // Messages and notifications
     'msg.urlCopied': '✅ URLをクリップボードにコピーしました！',
     'msg.passwordCopied': '✅ パスワードをクリップボードにコピーしました！',
@@ -57,7 +59,7 @@ export const ja = {
     'msg.memoDecrypted': 'メモが復号化されました。削除中です...お待ちください。',
     'msg.memoDeleted': 'メモが読まれたことが確認され、完全に削除されました。',
     'msg.deletionError': '削除の確認中にエラーが発生しました。メモは自動的にクリーンアップされます。',
-    
+
     // Page titles and descriptions
     'page.home.title': 'securememo.app - 暗号化自己破壊メモ',
     'page.home.description': '読み取り後に自己破壊する暗号化メモを作成します。エンドツーエンド暗号化、プライバシー重視、AES-256による安全なメモ共有。追跡なし、広告なし。',
@@ -87,8 +89,8 @@ export const ja = {
     'page.privacy.ogTitle': 'プライバシー通知 - securememo.app データ保護',
     'page.privacy.ogDescription': 'securememo.appがクライアントサイド暗号化と最小限のデータ収集でプライバシーを保護する方法。',
     'page.privacy.twitterDescription': 'クライアントサイド暗号化とゼロ知識アーキテクチャによるプライバシー保護。',
-    
-        // Main page content
+
+    // Main page content
     'home.hero.title': 'securememo.app',
     'home.hero.subtitle': '読み取りまたは期限切れ後に自己破壊する暗号化メモを作成します。あなたの秘密は安全に保たれます。',
     'home.hero.btnPrimary': 'セキュアメモを作成',
@@ -109,13 +111,13 @@ export const ja = {
     'home.security.delete.description': 'メモは読み取りまたは期限切れ後に永久に消去され、1時間ごとに自動クリーンアップされます。バックアップや復旧は不可能です。',
     'home.security.password.title': '🌐 パスワード知識ゼロ',
     'home.security.password.description': 'パスワードの生成と処理は完全にブラウザ内で行われ、サーバーに送信されたり保存されたりすることはありません。',
-    
+
     'footer.sourceCode': 'GitHubでソースコードを見る',
     'footer.tos': '利用規約',
     'footer.privacy': 'プライバシー通知',
     'footer.tagline': '追跡なし、広告なし、無駄なし。',
-    
-        // About page content
+
+    // About page content
     'about.hero.title': 'securememo.appについて',
     'about.hero.subtitle': 'securememo.appは、読み取りまたは期限切れ後に自己破壊する暗号化メモを作成できるプライバシー重視のアプリケーションです。セキュリティとプライバシーを最優先に構築されています。ソースコードはGitHubで利用可能です。',
 
@@ -126,7 +128,7 @@ export const ja = {
     'about.tech.frontend': 'HTML/CSS/JavaScript: モダンでレスポンシブなWebインターフェース',
     'about.tech.github': 'ソースコードはGitHubで利用可能:',
     'about.tech.githubLink': 'GitHubでソースコードを見る',
-    
+
     'about.features.title': 'セキュリティ機能',
     'about.features.clientEncryption.title': '🔐 クライアントサイド暗号化',
     'about.features.clientEncryption.description': 'すべての暗号化はWeb Crypto APIを使用してブラウザで行われます。メモはサーバーに送信される前にAES-256で暗号化されます。',
@@ -140,8 +142,8 @@ export const ja = {
     'about.features.global.description': '世界中のどこからでも超高速アクセスを実現するCloudflareのグローバルネットワーク上に構築。',
     'about.features.privacy.title': '🔒 プライバシー第一',
     'about.features.privacy.description': 'ユーザーアカウント不要。追跡なし。アナリティクスなし。あなたのプライバシーが私たちの優先事項です。',
-    
-        'about.usage.title': '使用方法',
+
+    'about.usage.title': '使用方法',
     'about.usage.create.title': '1. メモを作成',
     'about.usage.create.description': '「セキュアメモを作成」に移動してメモを入力します。有効期限（8時間、1日、2日、1週間、または最大30日）を選択します。メモは読み取られるか期限切れになると削除されます。システムがランダムな暗号化パスワードを生成します。',
     'about.usage.share.title': '2. リンクとパスワードを共有',
@@ -153,7 +155,7 @@ export const ja = {
     'about.cta.subtitle': '今すぐ最初のセキュアメモを作成して、真のエンドツーエンド暗号化を体験してください。',
     'about.cta.createBtn': 'セキュアメモを作成',
     'about.cta.homeBtn': 'ホームに戻る',
-    
+
     // Terms of Service page content
     'tos.hero.title': '利用規約',
     'tos.lastUpdated': '最終更新日: 2025年8月9日',
@@ -171,10 +173,10 @@ export const ja = {
     'tos.tableOfContents.miscellaneous': 'その他',
     'tos.tableOfContents.contact': '連絡先',
     'tos.tableOfContents.languageDisclaimer': '言語と翻訳',
-    
+
     'tos.serviceDescription.title': '1. サービス説明',
     'tos.serviceDescription.content': 'securememo.appは、ユーザーが読み取りまたは期限切れ後に自己破壊する暗号化メモを作成できるセキュアメモ共有サービスです。サービスはクライアントサイド暗号化を使用して、メモコンテンツが絶対にサーバーにアクセスできないようにしています。',
-    
+
     'tos.acceptableUse.title': '2. 利用可能な使用',
     'tos.acceptableUse.intro': 'あなたは本サービスを合法的な目的でのみ、これらの利用規約に従って使用することに同意します。以下の行為を行わないことに同意します：',
     'tos.acceptableUse.illegal': '違法、有害、脅迫的、虐待的、または誹謗中傷的なコンテンツを送信するためのサービス使用',
@@ -183,7 +185,7 @@ export const ja = {
     'tos.acceptableUse.malware': 'マルウェア、フィッシングリンク、またはその他の有害なコンテンツを含むメモの共有',
     'tos.acceptableUse.spam': 'スパムや大量の迷惑メモ共有のためのサービス使用',
     'tos.acceptableUse.reverse': 'サービスのリバースエンジニアリングや侵害を試みる行為',
-    
+
     'tos.privacyData.title': '3. プライバシーとデータ処理',
     'tos.privacyData.noAccess': 'コンテンツアクセス不可: 私たちはあなたのメモコンテンツにアクセス、読み取り、または復旧することはできません。すべての暗号化はあなたのブラウザで行われます。',
     'tos.privacyData.noPersonal': '個人データなし: 私たちは個人情報を収集したり、ユーザーアカウントを要求したりしません。',
@@ -193,50 +195,50 @@ export const ja = {
     'tos.privacyData.gdpr': 'GDPR遵守: 本サービスはEU GDPRで定義された個人データを収集しません。',
     'tos.privacyData.moreDetails': '詳細については、私たちの',
     'tos.privacyData.privacyNotice': 'プライバシー通知',
-    
+
     'tos.serviceLimitations.title': '4. サービス制限',
     'tos.serviceLimitations.messageSize': 'メッセージサイズ: メモあたり最大10,000文字',
     'tos.serviceLimitations.expiryTimes': '有効期限: 8時間、24時間、48時間、1週間、または読み取り時削除（最大30日）',
     'tos.serviceLimitations.availability': '可用性: サービスは「現状のまま」提供され、可用性の保証はありません',
     'tos.serviceLimitations.noDelivery': '配信保証なし: メモが配信されるか読み取られるかを保証することはできません',
-    
+
     'tos.securityDisclaimers.title': '5. セキュリティと免責事項',
     'tos.securityDisclaimers.userResponsibility': 'ユーザーの責任: あなたはメモのURLを安全に共有し、パスワードを保護する責任があります。パスワードを紛失した場合、メモを復旧することはできません。',
     'tos.securityDisclaimers.noWarranty': '保証なし: サービスはいかなる種類の保証もなく提供されます。私たちの暗号化サービスは「現状のまま」および「利用可能な状況で」の基準で提供されます。私たちは暗号化が中断されることなく、エラーフリー、またはすべての潜在的な脅威から安全であることを保証しません。',
     'tos.securityDisclaimers.limitation': '責任の制限: 私たちはサービスの使用から生じるいかなる損害についても責任を負いません。あなたは電子送信や保存の方法が100%安全ではないことを認識し、私たちはあなたのメモへの不正アクセスや傍受について責任を負いません。私たちの暗号化サービスの使用は自己責任で行ってください。',
     'tos.securityDisclaimers.securityMeasures': 'セキュリティ対策: 私たちはセキュリティ対策を実装していますが、100%安全なシステムは存在しません。',
     'tos.securityDisclaimers.exportControls': '輸出管理: あなたは制裁国での使用を制限するものを含む、いかなる輸出管理法に違反してサービスを使用しないことに同意します。',
-    
+
     'tos.intellectualProperty.title': '6. 知的財産',
     'tos.intellectualProperty.content': 'サービスおよびそれを通じて提供されるすべての資料（テキスト、グラフィック、ロゴ、ソフトウェアを含むがこれらに限定されない）は、securememo.appまたはそのライセンサーの財産であり、著作権、商標、その他の知的財産法によって保護されています。サービス内での個人的、非商業的使用を除き、明示的な許可なしに私たちのコンテンツを変更、複製、配布、または派生作品を作成しないことに同意します。',
     'tos.intellectualProperty.copyright': '著作権・DMCA方針: あなたの著作権が侵害されたと思われる場合は、DMCA に基づく必要な情報（作品の識別、連絡先詳細、誠実な信念の陳述など）を添えて timo.heimonen@gmail.com までご連絡ください。',
-    
+
     'tos.indemnification.title': '7. 補償',
     'tos.indemnification.content': 'あなたは、あなたによる私たちのサービスへのアクセスや使用、またはあなたによるこれらの利用規約の違反から生じる、またはそれに関連するすべての請求、責任、損害、損失、および合理的な弁護士費用を含む費用について、securememo.app およびその関連会社、役員、取締役、従業員、代理人を弁護し、補償し、無害に保つことに同意します。',
-    
+
     'tos.termination.title': '8. 終了',
     'tos.termination.content': '私たちは、これらの利用規約の違反またはその他の理由により、私たちの裁量でサービスへのアクセスを終了または停止する権利を留保します。',
-    
+
     'tos.changesTerms.title': '9. 利用規約の変更',
     'tos.changesTerms.content': '私たちはいつでもこれらの利用規約を更新することがあります。サービスの継続的な使用は、更新された利用規約の受諾を構成します。',
-    
+
     'tos.governingLaw.title': '10. 準拠法と管轄',
     'tos.governingLaw.content': 'これらの利用規約および私たちがあなたにサービスを提供する個別の合意は、法の抵触原則にかかわらず、フィンランドの法律に準拠し、それに従って解釈されるものとします。すべての紛争は、フィンランドのヘルシンキの裁判所で解決されるものとします。',
-    
+
     'tos.miscellaneous.title': '11. その他',
     'tos.miscellaneous.severability': '分離可能性: 管轄権を有する裁判所によってこれらの利用規約のいずれかの規定が無効または強制力がないと判断された場合、そのような規定は利用規約から分離され、残りの規定は完全に有効であり続けます。',
     'tos.miscellaneous.assignment': '譲渡: あなたは、法の運用またはその他の方法により、私たちの事前の書面での同意なしにこれらの利用規約を譲渡または移転することはできません。私たちはあなたへの通知なしに、自分の裁量でこれらの利用規約を譲渡することがあります。',
     'tos.miscellaneous.waiver': '权利の放棄: 書面でない限り、いかなる用語の权利放棄もさらなるまたは継続的な权利放棄とみなされることはありません。',
     'tos.miscellaneous.children': '児童のプライバシー: 私たちのサービスは13歳未満（一部の管轄区域では16歳未満）の児童を対象としていません。私たちは意図的に児童からデータを収集することはありません。そのようなデータを知った場合、私たちは直ちに削除します。',
-    
+
     'tos.contact.title': '12. お問い合わせ',
     'tos.contact.content': 'これらの利用規約に関するご質問は、私たちの',
     'tos.contact.github': 'GitHubリポジトリ',
     'tos.contact.email': 'をご覧いただくか、timo.heimonen@gmail.com までメールでお問い合わせください。',
-    
+
     'tos.languageDisclaimer.title': '13. 言語と翻訳',
     'tos.languageDisclaimer.content': 'これらの利用規約は、あなたの便宜のために他の言語に翻訳されることがあります。英語版と翻訳版の間に不一致または矛盾がある場合、英語版が優先されます。',
-    
+
     // Privacy Notice page content
     'privacy.hero.title': 'securememo.appのプライバシー通知',
     'privacy.lastUpdated': '最終更新日: 2025年8月9日',
@@ -251,10 +253,10 @@ export const ja = {
     'privacy.tableOfContents.internationalTransfers': '国際データ転送',
     'privacy.tableOfContents.changesNotice': 'このプライバシー通知の変更',
     'privacy.tableOfContents.contact': 'お問い合わせ',
-    
+
     'privacy.intro.p1': 'securememo.app（「私たち」、「私たち」、または「私たちの」）はあなたのプライバシーを保護することを約束しています。このプライバシー通知は、ユーザーが読み取りまたは期限切れ後に自己破壊する暗号化メモを作成し、共有できる私たちのサービスに関連して、私たちが情報をどのように取り扱うかを説明しています。私たちのサービスはプライバシーを中核として設計されています:すべての暗号化はあなたのブラウザでクライアントサイドで行われ、私たちはあなたのメモの内容にアクセスすることはありません。',
     'privacy.intro.p2': 'securememo.appを使用することで、あなたはこのプライバシー通知に記載された実務に同意します。同意しない場合は、私たちのサービスを使用しないでください。',
-    
+
     'privacy.informationCollected.title': '1. 私たちが収集する情報',
     'privacy.informationCollected.intro': '私たちはサービスを安全かつ効率的に運営するために最小限の情報を収集します。具体的には:',
     'privacy.informationCollected.memoData': 'メモデータ: メモを作成すると、私たちはあなたのメッセージの暗号化版のみを私たちのサーバー（Cloudflare WorkersとD1データベースを使用）に保存します。暗号化キー（パスワード）はあなたのブラウザで完全に生成および処理され、私たちに送信されたり保存されたりすることはありません。メモは読み取り後または有効期限切れ時（オプション: 8時間、1日、2日、1週間、または30日）に自動的に削除されます。',
@@ -264,53 +266,53 @@ export const ja = {
     'privacy.informationCollected.turnstile': '自動化された乱用を防止するためにCloudflare Turnstile CAPTCHAを使用しています。Turnstileはプライバシーを保護するように設計されており、サイト間でユーザーを追跡することはありません。',
     'privacy.informationCollected.noAnalytics': 'アナリティクスや追跡なし: 私たちはクッキー、追跡ピクセル、サードパーティアナリティクス、または広告ツールを使用しません。ユーザープロファイリング、行動追跡、またはマーケティング目的のデータ収集は行いません。',
     'privacy.informationCollected.noSensitive': '私たちは基本的なサービス運営に必要なものを超えて、機密な個人データ、位置情報、またはデバイス識別子を収集することはありません。',
-    
+
     'privacy.howWeUse.title': '2. 情報の使用方法',
     'privacy.howWeUse.intro': '私たちが収集する限られた情報は、以下の目的でのみ使用されます:',
     'privacy.howWeUse.coreService': 'コアサービスの提供: 暗号化メモを一時的に保存し、その安全な取得と削除を促進します。',
     'privacy.howWeUse.security': 'セキュリティの維持: IPログとCAPTCHAを使用して、スパムやサービス拒否攻撃などの乱用を検出および防止します。',
     'privacy.howWeUse.legal': '法的義務の遵守: 稀なケースで、有効な法的要求（召喚状など）に応じるためにログを使用することがあります。',
     'privacy.howWeUse.noOther': '私たちは広告、第三者への売却、またはsecurememo.appの運営と無関係な目的にデータを使用することはありません。',
-    
+
     'privacy.dataSharing.title': '3. データの共有と開示',
     'privacy.dataSharing.intro': '私たちは、以下の限定的な状況を除き、あなたのデータを第三者に売却、賃貸、または共有することはありません:',
     'privacy.dataSharing.serviceProviders': 'サービスプロバイダー: 私たちはホスティング、データベースストレージ（D1）、およびCAPTCHA（Turnstile）にCloudflareを使用しています。これらのプロバイダーは私たちの代理で厳しい機密保持の下でデータを処理し、メモの内容にアクセスすることはありません。',
     'privacy.dataSharing.legal': '法的要求: 裁判所の命令や政府の要求など、法律で義務付けられた場合、情報を開示することがあります。',
     'privacy.dataSharing.business': '事業譲渡: securememo.appが買収または合併された場合、データは取引の一部として転送される可能性がありますが、このプライバシー通知の対象であり続けます。',
-    
+
     'privacy.dataSecurity.title': '4. データセキュリティ',
     'privacy.dataSecurity.encryption': '暗号化: すべてのメモはPBKDF2キー導出（2,200,000回の反復）を伴うAES-256を使用してクライアントサイドで暗号化されます。私たちは暗号化されたデータのみを保存し、それを復号化することはできません。',
     'privacy.dataSecurity.deletion': '削除: メモは読み取りまたは有効期限切れ後、自動化されたcronジョブによって永久に削除されます。',
     'privacy.dataSecurity.securityMeasures': 'セキュリティ対策: 私たちは強力なセキュリティヘッダー（CSP、HSTSなど）、入力のサニタイゼーション、タイミング攻撃保護、および乱用防止のためのCAPTCHAを実装しています。',
     'privacy.dataSecurity.noRecovery': '復旧不可: 一度削除されたメモは、私たちでも復旧できません。',
     'privacy.dataSecurity.disclaimer': '私たちはシステムを保護するために合理的な手順を踏んでいますが、どのサービスもリスクに完全に免疫ではありません。あなたはURLとパスワードを安全に共有する責任があります。',
-    
+
     'privacy.dataRetention.title': '5. データ保存',
     'privacy.dataRetention.memos': '暗号化メモは読み取りまたは有効期限切れまでのみ保存されます（最大30日まで）。',
     'privacy.dataRetention.logs': 'セキュリティログ（IPアドレスなど）は乱用防止のために一時的に保存され、短期間（通常数日以内）後に自動的に削除されます。',
     'privacy.dataRetention.minimal': '私たちはサービスの運営に必要な期間よりも長くデータを保存することはありません。',
-    
+
     'privacy.yourRights.title': '6. あなたの権利と選択',
     'privacy.yourRights.intro': '私たちは個人データを収集しないため:',
     'privacy.yourRights.noAccounts': '管理するユーザーアカウントはありません。',
     'privacy.yourRights.noRequests': 'メモの自動自己破壊を超えて、データアクセス、修正、または削除を要求することはできません。',
     'privacy.yourRights.contact': '私たちがあなたに関する情報（ログなど）を保持していると信じる場合は、私たちにお問い合わせ（以下を参照）いただき、GDPRやCCPAなどの適用法の下でのあなたの権利についてお尋ねください。私たちはデータ保護規則を遵守し、実行可能な範囲で要求を処理します。',
-    
+
     'privacy.childrenPrivacy.title': '7. 児童のプライバシー',
     'privacy.childrenPrivacy.content': '私たちのサービスは13歳未満（一部の管轄区域では16歳未満）の児童を対象としていません。私たちは意図的に児童からデータを収集することはありません。そのようなデータを知った場合、私たちはそれを削除します。',
-    
+
     'privacy.internationalTransfers.title': '8. 国際データ転送',
     'privacy.internationalTransfers.content': 'securememo.appはCloudflareのグローバルネットワークでホストされています。データはさまざまな国で処理される可能性がありますが、私たちの最小限の収集実務を通じて同等のプライバシー保護を確保しています。',
-    
+
     'privacy.changesNotice.title': '9. このプライバシー通知の変更',
     'privacy.changesNotice.content': '私たちはこの通知を定期的に更新することがあります。変更は「最終更新」日付とともにここに投稿されます。変更後のサービスの継続的な使用は受諾を構成します。',
-    
+
     'privacy.contact.title': '10. お問い合わせ',
     'privacy.contact.intro': 'このプライバシー通知や私たちの実務に関するご質問は、私たちの',
     'privacy.contact.github': 'GitHubリポジトリ',
     'privacy.contact.email': 'をご覧いただくか、timo.heimonen@gmail.com までメールでお問い合わせください。',
     'privacy.contact.disclaimer': 'このプライバシー通知はsecurememo.appのみに適用され、私たちのサービスからリンクされた第三者のサイトには適用されません。',
-    
+
     // Schema.org structured data
     'schema.app.description': '読み取り後に自己破壊する暗号化メモを作成します。エンドツーエンド暗号化、プライバシー重視、AES-256での安全なノート共有。追跡なし、広告なし。',
     'schema.app.category': 'SecurityApplication',
@@ -327,7 +329,7 @@ export const ja = {
     'schema.app.features.privacyFirst': 'プライバシー第一のデザイン',
     'schema.app.license': 'https://github.com/timoheimonen/securememo.app/blob/main/LICENSE',
     'schema.app.repository': 'https://github.com/timoheimonen/securememo.app',
-    
+
     // FAQ structured data
     'faq.privacy.question': 'securememo.appはどのように私のプライバシーを保護しますか？',
     'faq.privacy.answer': 'securememo.appはクライアントサイドAES-256暗号化を使用しており、あなたのメモは私たちのサーバーに送信される前にあなたのブラウザで暗号化されます。私たちは平文の内容を見ることはありません。メモは読み取りまたは期限切れ後に自己破壊し、私たちはユーザーアカウントを必要とせず、個人情報を収集しません。',
@@ -341,13 +343,13 @@ export const ja = {
     'faq.cost.answer': 'はい、securememo.appは完全に無料で使用できます。隠れた料金、プレミアム機能、追跡、広告はありません。',
     'faq.technology.question': 'securememo.appはどのような技術を使用していますか？',
     'faq.technology.answer': 'securememo.appはサーバーレスコンピュートのCloudflare Workers、ストレージのD1データベース、クライアントサイド暗号化のWeb Crypto API、およびモダンなHTML/CSS/JavaScriptで構築されています。ソースコードはオープンソースでGitHubで利用可能です。',
-    
+
     // Accessibility and UI
 
     'ui.breadcrumb.home': 'ホーム',
     'ui.breadcrumb.tos': '利用規約',
     'ui.breadcrumb.privacy': 'プライバシー通知',
-    
+
     // Create memo page content
     'create.hero.title': 'セキュアメモ作成',
     'create.hero.description': 'メモはブラウザで暗号化され、読み取りまたは期限切れ後に自己破壊します。',
@@ -355,41 +357,41 @@ export const ja = {
     'create.hero.twitterDescription': 'クライアントサイド暗号化で暗号化メモを作成。',
     'create.schema.description': '読み取り後に自己破壊する暗号化メモを作成します。クライアントサイドAES-256暗号化があなたの秘密をプライベートに保ちます。',
     'create.schema.actionDescription': 'クライアントサイドAES-256暗号化と自動自己破壊で暗号化メモを作成',
-    
+
     // Read memo page content  
     'read.hero.title': 'セキュアメモを読む',
     'read.hero.description': 'メモを復号化して読むためにパスワードを入力してください。パスワードはURLとは別に共有されているはずです。メモは読み取りまたは期限切れ後に削除されます。',
     'read.hero.ogDescription': 'セキュアメモを復号化して読んでください。最大のプライバシーのために読み取り後にメモが自己破壊。',
     'read.hero.twitterDescription': 'クライアントサイド復号化でセキュアメモを復号化して読んでください。',
     'read.schema.description': 'パスワードでセキュアメモを復号化して読んでください。最大のプライバシーのために読み取り後にメモが自己破壊。クライアントサイドAES-256復号化。',
-    
+
     // Form options
     'form.expiry.option.8h': '読み取り時または8時間で削除',
     'form.expiry.option.1d': '読み取り時または1日で削除',
     'form.expiry.option.2d': '読み取り時または2日で削除',
     'form.expiry.option.1w': '読み取り時または1週間で削除',
     'form.expiry.option.30d': '読み取り時または30日で削除',
-    
+
     // Loading and status messages
     'msg.encrypting': 'メモを安全に暗号化中...古いデバイスでは少し時間がかかる場合があります。',
     'msg.decrypting': 'メモを復号中...古いデバイスでは少し時間がかかる場合があります。',
     'msg.deletingSecurely': 'メモを安全に削除中...',
     'msg.yourSecureMemo': '📝 あなたのセキュアメモ',
     'msg.status': 'ステータス:',
-    
+
     // Labels and help text
     'form.memoUrl.label': 'メモURL（受信者と共有してください）:',
     'form.memoUrl.help': 'これはメモへのセキュアリンクです。このURLを受信者と共有してください。',
     'form.memoPassword.label': '暗号化パスワード（別々に共有してください）:',
     'form.memoPassword.help': 'これは暗号化パスワードです。セキュリティ強化のためURLとは別々に共有してください。これはサーバーに保存されず、このページを離れると復旧不可能です。',
-    
+
     // Warning messages
     'warning.important': '重要:',
     'warning.memoDeleted': 'メモは読み取り時または有効期限に達した時に削除されます',
     'warning.shareSecurely': '最大のセキュリティのためURLとパスワードを別々に共有してください',
     'warning.needBoth': '受信者はメモにアクセスするためにURLとパスワードの両方が必要です',
     'warning.pageCleared': 'このページから移動するとページがクリアされます',
-    
+
     // Structured data texts
     'schema.tos.name': '利用規約',
     'schema.tos.description': 'securememo.appの利用規約 - 暗号化メモ共有サービス。許可される使用、プライバシー、セキュリティ、法的用語について学びましょう。',
@@ -397,28 +399,28 @@ export const ja = {
     'schema.tos.breadcrumb.tos': '利用規約',
     'schema.tos.mainEntity.name': '利用規約',
     'schema.tos.mainEntity.description': 'securememo.app暗号化メモ共有サービスの法的条件',
-    
+
     'schema.privacy.name': 'プライバシー通知',
     'schema.privacy.description': 'securememo.appのプライバシー通知 - クライアントサイド暗号化、ゼロナレッジアーキテクチャ、最小限のデータ収集であなたのデータを保護する方法を学びましょう。',
     'schema.privacy.breadcrumb.home': 'ホーム',
     'schema.privacy.breadcrumb.privacy': 'プライバシー通知',
     'schema.privacy.mainEntity.name': 'プライバシー通知',
     'schema.privacy.mainEntity.description': 'securememo.appがクライアントサイド暗号化と最小限のデータ収集でプライバシーを保護する方法',
-    
+
     // Create memo featureList in structured data
     'schema.create.featureList.clientSide': 'クライアントサイド暗号化',
     'schema.create.featureList.selfDestruct': '自己破壊メモ',
     'schema.create.featureList.multiExpiry': '複数の有効期限オプション',
     'schema.create.featureList.noAccounts': 'ユーザーアカウント不要',
     'schema.create.featureList.maxChars': '最大10,000文字',
-    
+
     // Read memo featureList in structured data
     'schema.read.featureList.clientDecryption': 'クライアントサイド復号化',
     'schema.read.featureList.passwordProtected': 'パスワード保護アクセス',
     'schema.read.featureList.autoDeletion': '自動メモ削除',
     'schema.read.featureList.noDataRetention': 'データ保存なし',
     'schema.read.featureList.privacyFocused': 'プライバシー重視のデザイン',
-    
+
     // Error messages - memo creation errors
     'error.INVALID_MESSAGE_FORMAT': '無効なリクエストです。入力内容を確認して再試行してください。',
     'error.INVALID_EXPIRY_TIME': '無効なリクエストです。入力内容を確認して再試行してください。',
@@ -432,7 +434,7 @@ export const ja = {
     'error.MEMO_CREATION_ERROR': 'リクエストを処理できませんでした。再試行してください。',
     'error.MISSING_DELETION_TOKEN': '削除トークンが必要です。',
     'error.INVALID_DELETION_TOKEN_HASH': '無効な削除トークンハッシュです。',
-    
+
     // Error messages - memo reading errors (security: generic messages to prevent enumeration attacks)
     'error.INVALID_MEMO_ID': '無効なリクエストです。入力内容を確認して再試行してください。',
     'error.MISSING_MEMO_ID': '無効なリクエストです。入力内容を確認して再試行してください。',
@@ -443,7 +445,7 @@ export const ja = {
     'error.DATABASE_READ_ERROR': 'サービスが一時的に利用できません。再試行してください。',
     'error.MEMO_READ_ERROR': 'リクエストを処理できませんでした。再試行してください。',
     'error.MEMO_DELETION_ERROR': 'サービスが一時的に利用できません。再試行してください。',
-    
+
     // Error messages - general errors
     'error.INVALID_JSON': '無効なリクエストです。入力内容を確認して再試行してください。',
     'error.REQUEST_TOO_LARGE': 'リクエストのサイズが大きすぎます。再試行してください。',
@@ -451,16 +453,16 @@ export const ja = {
     'error.METHOD_NOT_ALLOWED': '無効なリクエストメソッドです。',
     'error.FORBIDDEN': 'アクセスが拒否されました。',
     'error.GENERAL_ERROR': 'サービスが一時的に利用できません。再試行してください。',
-    
+
     // Error messages - decryption errors
     'error.DECRYPTION_FAILED': '無効なリクエストです。入力内容を確認して再試行してください。',
     'error.INVALID_PASSWORD': '無効なリクエストです。入力内容を確認して再試行してください。',
-    
+
     // Error messages - network errors
     'error.NETWORK_ERROR': 'サービスが一時的に利用できません。再試行してください。',
     'error.SERVICE_UNAVAILABLE': 'サービスが一時的に利用できません。しばらくしてから再試行してください。',
     'error.RATE_LIMITED': 'リクエストが多すぎます。少しお待ちいただいてから再度お試しください。',
-    
+
     // Error messages - client-side validation errors
     'error.MISSING_MESSAGE': 'メモを入力してください',
     'error.MESSAGE_TOO_LONG': 'メモが長すぎます（最大10,000文字）',
@@ -481,16 +483,16 @@ export const ja = {
     'error.MEMO_EXPIRED_DELETED_ERROR': 'このメモは期限切れで削除されました。',
     'error.INVALID_PASSWORD_CHECK_ERROR': '無効なパスワードです。別途受け取ったパスワードを確認してください。',
     'error.MISSING_SECURITY_CHALLENGE_ERROR': 'セキュリティチャレンジを完了してください',
-    
+
     // Error messages - HTTP status errors
     'error.INTERNAL_SERVER_ERROR': '内部サーバーエラー',
     'error.NOT_FOUND': '見つかりません',
     'error.BAD_REQUEST': '不正なリクエスト',
     'error.CLEANUP_FAILED': 'クリーンアップに失敗しました',
-    
+
     // Error messages - default fallback
     'error.DEFAULT_FALLBACK': 'エラーが発生しました。もう一度お試しください。',
-    
+
     // Security error messages (shorter versions for security events)
     'error.security.INVALID_MESSAGE_FORMAT': '無効なリクエストです。',
     'error.security.INVALID_EXPIRY_TIME': '無効なリクエストです。',
@@ -512,4 +514,4 @@ export const ja = {
     'error.security.METHOD_NOT_ALLOWED': '無効なリクエストメソッドです。',
     'error.security.FORBIDDEN': 'アクセスが拒否されました。',
     'error.security.DEFAULT_FALLBACK': 'エラーが発生しました。もう一度お試しください。'
-  }
+}

@@ -14,6 +14,8 @@ import { ja } from './ja_translations.js';
 import { ko } from './ko_translations.js';
 import { it } from './it_translations.js';
 import { id } from './id_translations.js';
+import { vi } from './vi_translations.js';
+import { sv } from './sv_translations.js';
 export const TRANSLATIONS = {
   en,
   de,
@@ -26,5 +28,7 @@ export const TRANSLATIONS = {
   ja,
   ko,
   it,
-  id
+  id,
+  vi,
+  sv
 };
