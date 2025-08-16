@@ -18,6 +18,7 @@ import { vi } from './vi_translations.js';
 import { sv } from './sv_translations.js';
 import { pl } from './pl_translations.js';
 import { hu } from './hu_translations.js';
+import { fi } from './fi_translations.js';
 export const TRANSLATIONS = {
   en,
   de,
@@ -34,5 +35,6 @@ export const TRANSLATIONS = {
   vi,
   sv,
   pl,
-  hu
+  hu,
+  fi
 };
