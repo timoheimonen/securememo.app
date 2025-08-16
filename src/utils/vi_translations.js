@@ -27,6 +27,7 @@ export const vi = {
   'language.vietnamese': 'Tiếng Việt',
   'language.swedish': 'Svenska',
   'language.polish': 'Polski',
+  'language.hungarian': 'Magyar',
 
   // Buttons
   'btn.copy': 'Sao chép',
