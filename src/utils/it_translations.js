@@ -28,6 +28,7 @@ export const it = {
   'language.swedish': 'Svenska',
   'language.polish': 'Polski',
   'language.hungarian': 'Magyar',
+  'language.finnish': 'Suomi',
 
   // Buttons
   'btn.copy': 'Copia',
