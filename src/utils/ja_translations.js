@@ -26,6 +26,7 @@ export const ja = {
     'language.indonesian': 'Bahasa Indonesia',
     'language.vietnamese': 'Tiếng Việt',
     'language.swedish': 'Svenska',
+    'language.polish': 'Polski',
 
     // Buttons
     'btn.copy': 'コピー',
