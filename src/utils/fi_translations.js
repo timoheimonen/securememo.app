@@ -239,8 +239,8 @@ export const fi = {
   'tos.contact.github': 'GitHub-repositoriossamme',
   'tos.contact.email': 'tai sähköpostitse timo.heimonen@gmail.com.',
 
-  'tos.languageDisclaimer.title': '13. Language and Translation',
-  'tos.languageDisclaimer.content': 'These Terms of Service may be translated into other languages for your convenience. In the event of any discrepancy or conflict between the English version and a translated version, the English version shall prevail.',
+  'tos.languageDisclaimer.title': '13. Kieli ja käännös',
+  'tos.languageDisclaimer.content': 'Nämä käyttöehdot voidaan kääntää muille kielille käyttömukavuuden vuoksi. Jos englanninkielisen ja käännetyn version välillä on ristiriita, englanninkielinen versio on ensisijainen.',
 
   // Privacy Notice page content
   'privacy.hero.title': 'Tietosuojailmoitus securememo.appille',
