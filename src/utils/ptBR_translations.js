@@ -27,6 +27,7 @@ export const ptBR = {
   'language.vietnamese': 'Tiếng Việt',
   'language.swedish': 'Svenska',
   'language.polish': 'Polski',
+  'language.hungarian': 'Magyar',
 
   // Buttons
   'btn.copy': 'Copiar',

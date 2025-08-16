@@ -14,7 +14,7 @@ securememo.app will run the latest main version of this repo.
 - **Turnstile CAPTCHA**: Prevents bot abuse and spam while maintaining user privacy (no tracking).
 - **Robust security headers**: Includes strict CSP, HSTS, and other policies to mitigate common web vulnerabilities.
 - **Automated cleanup**: Expired or read memos are permanently removed via scheduled cron jobs.
-- **15 languages**: English, Spanish, French, German, Hindi, Chinese, Portuguese (Portugal), Portuguese (Brazil), Japanese, Korean, Italian, Indonesian, Swedish, Polish and Vietnamese.
+- **15 languages**: English, Spanish, French, German, Hindi, Chinese, Portuguese (Portugal), Portuguese (Brazil), Japanese, Korean, Italian, Indonesian, Swedish, Polish, Hungary and Vietnamese.
 
 
 
@@ -61,6 +61,7 @@ securememo/
 │   │   ├── vi_translations.js  # Vietnamese translations
 │   │   ├── sv_translations.js  # Swedish translations
 │   │   ├── pl_translations.js  # Polish translations
+│   │   ├── hu_translations.js  # Hungarian translations
 │   │   └── id_translations.js  # Indonesian translations
 │   ├── screenshots/            # Screenshots
 │   │   ├──  screenshot_001.png # Screenshot 001
@@ -122,6 +123,7 @@ The supported languages are:
 - Swedish (sv)
 - Vietnamese (vi)
 - Polish (pl)
+- Hungary (hu)
 
 These are auto-translated from english, errors may occur.
 
