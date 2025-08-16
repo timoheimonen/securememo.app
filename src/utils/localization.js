@@ -4,7 +4,7 @@
 
 import { TRANSLATIONS } from './translations.js';
 
-const SUPPORTED_LOCALES = ['en', 'es', 'fr', 'de', 'hi', 'zh', 'ptPT', 'ptBR', 'ja', 'ko', 'it', 'id'];
+const SUPPORTED_LOCALES = ['en', 'es', 'fr', 'de', 'hi', 'zh', 'ptPT', 'ptBR', 'ja', 'ko', 'it', 'id', 'vi'];
 const DEFAULT_LOCALE = 'en';
 
 
@@ -155,7 +155,8 @@ function normalizeLocale(locale) {
   
   // Chinese regional mapping
   if (lang === 'zh') {
-    // Default to simplified Chinese
+    // Map all Chinese variants (zh-CN, zh-TW, zh-HK, zh-SG, etc.) to 'zh'
+    // since we only support one Chinese translation (simplified Chinese)
     return 'zh';
   }
   

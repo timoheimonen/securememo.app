@@ -24,6 +24,7 @@ export const de = {
    'language.korean': '한국어',
    'language.italian': 'Italiano',
    'language.indonesian': 'Bahasa Indonesia',
+   'language.vietnamese': 'Tiếng Việt',
    
    // Buttons
    'btn.copy': 'Kopieren',

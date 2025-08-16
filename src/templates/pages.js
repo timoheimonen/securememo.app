@@ -122,6 +122,7 @@ export async function getIndexHTML(locale = 'en', origin = 'https://securememo.a
                         <a href="/zh" class="language-item ${locale === 'zh' ? 'active' : ''}" title="${t('language.chinese', locale)}">ZH - 中文</a>
                         <a href="/ja" class="language-item ${locale === 'ja' ? 'active' : ''}" title="${t('language.japanese', locale)}">JA - 日本語</a>
                         <a href="/ko" class="language-item ${locale === 'ko' ? 'active' : ''}" title="${t('language.korean', locale)}">KO - 한국어</a>
+                        <a href="/vi" class="language-item ${locale === 'vi' ? 'active' : ''}" title="${t('language.vietnamese', locale)}">VI - Tiếng Việt</a>
                     </div>
                 </li>
             </ul>
@@ -306,6 +307,7 @@ export async function getAboutHTML(locale = 'en', origin = 'https://securememo.a
                         <a href="/zh/about.html" class="language-item ${locale === 'zh' ? 'active' : ''}" title="${t('language.chinese', locale)}">ZH - 中文</a>
                         <a href="/ja/about.html" class="language-item ${locale === 'ja' ? 'active' : ''}" title="${t('language.japanese', locale)}">JA - 日本語</a>
                         <a href="/ko/about.html" class="language-item ${locale === 'ko' ? 'active' : ''}" title="${t('language.korean', locale)}">KO - 한국어</a>
+                        <a href="/vi/about.html" class="language-item ${locale === 'vi' ? 'active' : ''}" title="${t('language.vietnamese', locale)}">VI - Tiếng Việt</a>
                     </div>
                 </li>
             </ul>
@@ -504,6 +506,7 @@ export async function getCreateMemoHTML(locale = 'en', origin = 'https://securem
                         <a href="/zh/create-memo.html" class="language-item ${locale === 'zh' ? 'active' : ''}" title="${t('language.chinese', locale)}">ZH - 中文</a>
                         <a href="/ja/create-memo.html" class="language-item ${locale === 'ja' ? 'active' : ''}" title="${t('language.japanese', locale)}">JA - 日本語</a>
                         <a href="/ko/create-memo.html" class="language-item ${locale === 'ko' ? 'active' : ''}" title="${t('language.korean', locale)}">KO - 한국어</a>
+                        <a href="/vi/create-memo.html" class="language-item ${locale === 'vi' ? 'active' : ''}" title="${t('language.vietnamese', locale)}">VI - Tiếng Việt</a>
                     </div>
                 </li>
             </ul>
@@ -705,6 +708,7 @@ export async function getReadMemoHTML(locale = 'en', origin = 'https://securemem
                         <a href="/zh/read-memo.html" class="language-item ${locale === 'zh' ? 'active' : ''}" title="${t('language.chinese', locale)}">ZH - 中文</a>
                         <a href="/ja/read-memo.html" class="language-item ${locale === 'ja' ? 'active' : ''}" title="${t('language.japanese', locale)}">JA - 日本語</a>
                         <a href="/ko/read-memo.html" class="language-item ${locale === 'ko' ? 'active' : ''}" title="${t('language.korean', locale)}">KO - 한국어</a>
+                        <a href="/vi/read-memo.html" class="language-item ${locale === 'vi' ? 'active' : ''}" title="${t('language.vietnamese', locale)}">VI - Tiếng Việt</a>
                     </div>
                 </li>
             </ul>
@@ -885,6 +889,7 @@ export async function getToSHTML(locale = 'en', origin = 'https://securememo.app
                         <a href="/zh/tos.html" class="language-item ${locale === 'zh' ? 'active' : ''}" title="${t('language.chinese', locale)}">ZH - 中文</a>
                         <a href="/ja/tos.html" class="language-item ${locale === 'ja' ? 'active' : ''}" title="${t('language.japanese', locale)}">JA - 日本語</a>
                         <a href="/ko/tos.html" class="language-item ${locale === 'ko' ? 'active' : ''}" title="${t('language.korean', locale)}">KO - 한국어</a>
+                        <a href="/vi/tos.html" class="language-item ${locale === 'vi' ? 'active' : ''}" title="${t('language.vietnamese', locale)}">VI - Tiếng Việt</a>
                     </div>
                 </li>
             </ul>
@@ -1126,6 +1131,7 @@ export async function getPrivacyHTML(locale = 'en', origin = 'https://securememo
                         <a href="/zh/privacy.html" class="language-item ${locale === 'zh' ? 'active' : ''}" title="${t('language.chinese', locale)}">ZH - 中文</a>
                         <a href="/ja/privacy.html" class="language-item ${locale === 'ja' ? 'active' : ''}" title="${t('language.japanese', locale)}">JA - 日本語</a>
                         <a href="/ko/privacy.html" class="language-item ${locale === 'ko' ? 'active' : ''}" title="${t('language.korean', locale)}">KO - 한국어</a>
+                        <a href="/vi/privacy.html" class="language-item ${locale === 'vi' ? 'active' : ''}" title="${t('language.vietnamese', locale)}">VI - Tiếng Việt</a>
                     </div>
                 </li>
             </ul>
