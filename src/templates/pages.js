@@ -8,7 +8,7 @@ function getLanguageDisplayName(locale) {
     'fr': 'Français',
     'de': 'Deutsch',
     'it': 'Italiano',
-    'id': 'Indonesia',
+    'id': 'Bahasa Indonesia',
     'ptPT': 'Português',
     'ptBR': 'Português (BR)',
     'hi': 'हिन्दी',
