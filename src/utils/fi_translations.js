@@ -110,8 +110,8 @@ export const fi = {
   'home.security.title': 'Turvaominaisuudet',
   'home.security.encryption.title': '🔒 Aidosti Selaimessa Salattu',
   'home.security.encryption.description': 'Muistiosi salataan selaimessa AES-256-GCM:lla ja vahvalla avainjohdannalla (yli 2 200 000 kierrosta). Emme koskaan näe selväkielistä sisältöä.',
-  'home.security.delete.title': '🗑️ Luotettava Itsepoisto',
-  'home.security.delete.description': 'Muistiot katoavat lopullisesti lukemisen tai vanhentumisen jälkeen, automaattinen siivous tunnin välein. Ei varmuuskopioita tai palautusmahdollisuutta.',
+  'home.security.delete.title': '🗑️ Itsepoistuvat muistiot',
+  'home.security.delete.description': 'Muistiot poistetaan lukemisen tai vanhentumisen jälkeen, automaattinen siivous tunnin välein. Ei varmuuskopioita tai palautusmahdollisuutta.',
   'home.security.password.title': '🌐 Salasanat eivät koskaan poistu selaimestasi',
   'home.security.password.description': 'Salasanat luodaan ja käsitellään kokonaan selaimessasi. Niitä ei koskaan lähetetä tai tallenneta palvelimille.',
 

@@ -878,7 +878,7 @@ input, textarea, select {
   }
   
   .btn {
-    padding: 10px 20px;
+  padding: 10px 18px;
     font-size: 0.9rem;
   }
   
@@ -886,24 +886,26 @@ input, textarea, select {
     font-size: 1rem;
   }
   
+  /* Reduce outer container side padding to give more usable width on very narrow phones */
   .nav-container {
-    padding: 15px;
+    padding: 8px 10px;
   }
   
+  /* Reduce main content side padding so text has more horizontal space */
   .main-content {
-    padding: 20px 15px;
+    padding: 12px 10px;
   }
   
   .memo-card {
-    padding: 15px;
+    padding: 12px;
   }
   
   .about-section {
-    padding: 15px;
+    padding: 12px;
   }
   
   .feature-card {
-    padding: 20px;
+    padding: 16px;
   }
 }
 
