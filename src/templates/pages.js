@@ -395,8 +395,8 @@ export async function getAboutHTML(locale = 'en', origin = 'https://securememo.a
             </div>
             <div class="video-embed" style="max-width:900px;margin:1.5rem auto;">
                 <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;">
-                    <iframe src="https://www.youtube.com/embed/V0vEHLLdDKk"
-                            title="How to use securememo.app"
+            <iframe src="https://www.youtube-nocookie.com/embed/V0vEHLLdDKk"
+                title="How to use securememo.app"
                             frameborder="0"
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                             allowfullscreen
@@ -405,10 +405,10 @@ export async function getAboutHTML(locale = 'en', origin = 'https://securememo.a
                     </iframe>
                 </div>
                 <p style="font-size:0.9rem;text-align:center;margin-top:0.5rem;">
-                    <a href="https://www.youtube.com/watch?v=V0vEHLLdDKk" target="_blank" rel="noopener noreferrer">Watch on YouTube</a>
+                    <a href="https://www.youtube-nocookie.com/watch?v=V0vEHLLdDKk" target="_blank" rel="noopener noreferrer">Watch on YouTube</a>
                 </p>
                 <noscript>
-                    <p style="text-align:center;"><a href="https://www.youtube.com/watch?v=V0vEHLLdDKk" target="_blank" rel="noopener noreferrer">Watch the video (JavaScript disabled)</a></p>
+                    <p style="text-align:center;"><a href="https://www.youtube-nocookie.com/watch?v=V0vEHLLdDKk" target="_blank" rel="noopener noreferrer">Watch the video (JavaScript disabled)</a></p>
                 </noscript>
             </div>
             <div class="cta-section">

@@ -18,9 +18,9 @@ function escapeJavaScript(str) {
     .replace(/\u2028/g, '\\u2028') // Escape line separator
     .replace(/\u2029/g, '\\u2029'); // Escape paragraph separator
 }
-import { 
-  getIndexHTML, 
-  getAboutHTML, 
+import {
+  getIndexHTML,
+  getAboutHTML,
   getCreateMemoHTML,
   getReadMemoHTML,
   getToSHTML,
@@ -38,8 +38,8 @@ import {
   handleCleanupMemos
 } from './handlers/auth.js';
 import { getErrorMessage } from './utils/errorMessages.js';
-import { 
-  extractLocaleFromPath, 
+import {
+  extractLocaleFromPath,
   getLocaleRedirectPath,
   buildLocalizedPath,
   t,
@@ -89,10 +89,10 @@ function buildContentSecurityPolicy(nonce) {
     "base-uri 'self'",
     "form-action 'self'",
     "frame-ancestors 'none'",
-    "connect-src 'self' https://challenges.cloudflare.com",
-    "frame-src https://challenges.cloudflare.com blob:",
-    "child-src https://challenges.cloudflare.com blob:",
-    "img-src 'self' https://challenges.cloudflare.com",
+    "connect-src 'self' https://challenges.cloudflare.com https://www.youtube-nocookie.com https://youtube.googleapis.com https://s.ytimg.com",
+    "frame-src https://challenges.cloudflare.com https://www.youtube.com https://www.youtube-nocookie.com blob:",
+    "child-src https://challenges.cloudflare.com https://www.youtube.com https://www.youtube-nocookie.com blob:",
+    "img-src 'self' https://challenges.cloudflare.com https://s.ytimg.com data:",
     "style-src 'self' 'unsafe-inline'",
     "worker-src 'self' blob:",
     "object-src 'none'",
@@ -112,12 +112,12 @@ function getSecurityHeaders(request, nonce) {
     // Generate a nonce even for non-HTML responses; harmless and consistent
     headers['Content-Security-Policy'] = buildContentSecurityPolicy(generateNonce());
   }
-  
+
   // Only set CORS headers if origin is in allowed list
   if (origin && allowedOrigins.includes(origin)) {
     headers['Access-Control-Allow-Origin'] = origin;
   }
-  
+
   return headers;
 }
 
@@ -139,7 +139,7 @@ export default {
     try {
       // Check DB availability
       if (!env.DB) {
-        return new Response(getErrorMessage('SERVICE_UNAVAILABLE', 'en'), { 
+        return new Response(getErrorMessage('SERVICE_UNAVAILABLE', 'en'), {
           status: 503,
           headers: getSecurityHeaders(request)
         });
@@ -150,7 +150,7 @@ export default {
       try {
         url = new URL(request.url);
       } catch (urlError) {
-        return new Response(getErrorMessage('BAD_REQUEST', 'en'), { 
+        return new Response(getErrorMessage('BAD_REQUEST', 'en'), {
           status: 400,
           headers: getSecurityHeaders(request)
         });
@@ -159,23 +159,23 @@ export default {
       const pathname = url.pathname;
 
       // Skip locale handling for static assets and API routes
-      const isStaticAsset = pathname.startsWith('/styles.css') || 
-                           pathname.startsWith('/js/') || 
-                           pathname.startsWith('/api/') ||
-                           pathname === '/sitemap.xml' ||
-                           pathname.startsWith('/favicon') ||
-                           pathname.includes('.png') ||
-                           pathname.includes('.ico');
+      const isStaticAsset = pathname.startsWith('/styles.css') ||
+        pathname.startsWith('/js/') ||
+        pathname.startsWith('/api/') ||
+        pathname === '/sitemap.xml' ||
+        pathname.startsWith('/favicon') ||
+        pathname.includes('.png') ||
+        pathname.includes('.ico');
 
       // Handle locale-based routing with /en prefix (only for HTML pages)
       let locale = 'en';
       let pathWithoutLocale = pathname;
-      
+
       if (!isStaticAsset) {
         const localeResult = extractLocaleFromPath(pathname);
         locale = localeResult.locale;
         pathWithoutLocale = localeResult.pathWithoutLocale;
-        
+
         // Check for nested locale patterns and redirect to normalized path
         if (localeResult.needsRedirect) {
           // Redirect nested locale paths to proper single locale paths
@@ -183,7 +183,7 @@ export default {
           const normalizedPath = buildLocalizedPath(getDefaultLocale(), localeResult.pathWithoutLocale);
           return Response.redirect(url.origin + normalizedPath, 301);
         }
-        
+
         // Check if redirect to localized path is needed (add /en prefix to non-localized URLs)
         const redirectPath = getLocaleRedirectPath(pathname);
         if (redirectPath && redirectPath !== pathname) {
@@ -209,74 +209,74 @@ export default {
       // Route API requests
       if (pathname.startsWith('/api/')) {
         const apiPath = pathname.substring(5);
-        
+
         // Extract locale for API calls from headers/query params instead of URL path
         const apiLocale = extractLocaleFromRequest(request);
-        
+
         // Validate origin for API requests
         if (!isValidOrigin(request)) {
           return new Response(JSON.stringify({ error: getErrorMessage('FORBIDDEN', apiLocale) }), {
             status: 403,
-            headers: { 
+            headers: {
               'Content-Type': 'application/json',
               'Vary': 'Origin',
               ...getSecurityHeaders(request)
             }
           });
         }
-        
+
         // Validate request method for API endpoints
         if (apiPath === 'create-memo' && request.method !== 'POST') {
           return new Response(JSON.stringify({ error: getErrorMessage('METHOD_NOT_ALLOWED', apiLocale) }), {
             status: 405,
-            headers: { 
+            headers: {
               'Content-Type': 'application/json',
               'Allow': 'POST',
               ...getSecurityHeaders(request)
             }
           });
         }
-        
 
-        
+
+
         // Check allowed methods for read-memo endpoint
         if (apiPath === 'read-memo' && request.method !== 'POST') {
           return new Response(JSON.stringify({ error: getErrorMessage('METHOD_NOT_ALLOWED', apiLocale) }), {
             status: 405,
-            headers: { 
+            headers: {
               'Content-Type': 'application/json',
               'Allow': 'POST',
               ...getSecurityHeaders(request)
             }
           });
         }
-        
-                // Check allowed methods for confirm-delete endpoint
+
+        // Check allowed methods for confirm-delete endpoint
         if (apiPath === 'confirm-delete' && request.method !== 'POST') {
-            return new Response(JSON.stringify({ error: getErrorMessage('METHOD_NOT_ALLOWED', apiLocale) }), {
-                status: 405,
-                headers: { 
-                    'Content-Type': 'application/json',
-                    'Allow': 'POST',
-                    ...getSecurityHeaders(request)
-                }
-            });
+          return new Response(JSON.stringify({ error: getErrorMessage('METHOD_NOT_ALLOWED', apiLocale) }), {
+            status: 405,
+            headers: {
+              'Content-Type': 'application/json',
+              'Allow': 'POST',
+              ...getSecurityHeaders(request)
+            }
+          });
         }
-        
+
         // Check request size limit (100KB) for POST requests
         if (request.method === 'POST') {
           const contentLength = request.headers.get('content-length');
           if (contentLength && parseInt(contentLength) > 100000) {
             return new Response(JSON.stringify({ error: getErrorMessage('REQUEST_TOO_LARGE', apiLocale) }), {
               status: 413,
-              headers: { 
+              headers: {
                 'Content-Type': 'application/json',
                 ...getSecurityHeaders(request)
               }
             });
           }
         }
-        
+
         switch (apiPath) {
           case 'create-memo': {
             const res = await handleCreateMemo(request, env, apiLocale);
@@ -291,7 +291,7 @@ export default {
             return mergeSecurityHeadersIntoResponse(res, request);
           }
           default:
-            return new Response(getErrorMessage('NOT_FOUND', apiLocale), { 
+            return new Response(getErrorMessage('NOT_FOUND', apiLocale), {
               status: 404,
               headers: getSecurityHeaders(request)
             });
@@ -303,13 +303,13 @@ export default {
         if (request.method !== 'GET') {
           return new Response(getErrorMessage('METHOD_NOT_ALLOWED', locale), {
             status: 405,
-            headers: { 
+            headers: {
               'Allow': 'GET',
               ...getSecurityHeaders(request)
             }
           });
         }
-        
+
         // Generate multilingual sitemap for all supported languages
         const supportedLocales = getSupportedLocales();
         const pages = [
@@ -319,15 +319,15 @@ export default {
           { path: '/tos.html', priority: '0.3', changefreq: 'yearly' },
           { path: '/privacy.html', priority: '0.3', changefreq: 'yearly' }
         ];
-        
+
         let sitemapUrls = '';
         pages.forEach(page => {
           supportedLocales.forEach(lang => {
             const url = `https://securememo.app/${lang}${page.path}`;
-            const hreflangs = supportedLocales.map(hreflang => 
+            const hreflangs = supportedLocales.map(hreflang =>
               `    <xhtml:link rel="alternate" hreflang="${hreflang}" href="https://securememo.app/${hreflang}${page.path}"/>`
             ).join('\n');
-            
+
             sitemapUrls += `  <url>
     <loc>${url}</loc>
     <lastmod>2025-08-09</lastmod>
@@ -338,13 +338,13 @@ ${hreflangs}
 `;
           });
         });
-        
+
         const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:xhtml="http://www.w3.org/1999/xhtml">
 ${sitemapUrls}</urlset>`;
         return new Response(sitemap, {
-          headers: { 
+          headers: {
             'Content-Type': 'application/xml',
             'Cache-Control': 'public, max-age=86400, s-maxage=86400, stale-while-revalidate=604800',
             'ETag': '"sitemap-v1"',
@@ -359,14 +359,14 @@ ${sitemapUrls}</urlset>`;
         if (request.method !== 'GET') {
           return new Response(getErrorMessage('METHOD_NOT_ALLOWED', locale), {
             status: 405,
-            headers: { 
+            headers: {
               'Allow': 'GET',
               ...getSecurityHeaders(request)
             }
           });
         }
         return new Response(getStyles(), {
-          headers: { 
+          headers: {
             'Content-Type': 'text/css',
             'Cache-Control': 'public, max-age=3600',
             ...getSecurityHeaders(request)
@@ -381,7 +381,7 @@ ${sitemapUrls}</urlset>`;
         if (request.method !== 'GET') {
           return new Response(getErrorMessage('METHOD_NOT_ALLOWED', locale), {
             status: 405,
-            headers: { 
+            headers: {
               'Allow': 'GET',
               ...getSecurityHeaders(request)
             }
@@ -408,21 +408,21 @@ ${sitemapUrls}</urlset>`;
           .replace(/{{BTN_HIDE}}/g, escapeJavaScript(t('btn.hide', jsLocale)))
           .replace(/{{BTN_COPY}}/g, escapeJavaScript(t('btn.copy', jsLocale)));
         return new Response(jsContent, {
-          headers: { 
+          headers: {
             'Content-Type': 'application/javascript',
             'Cache-Control': 'public, max-age=3600',
             ...getSecurityHeaders(request)
           }
         });
       }
-      
+
       if (pathname === '/js/read-memo.js') {
         // Extract locale from query parameter for JavaScript files
         const jsLocale = url.searchParams.get('locale') || 'en';
         if (request.method !== 'GET') {
           return new Response(getErrorMessage('METHOD_NOT_ALLOWED', locale), {
             status: 405,
-            headers: { 
+            headers: {
               'Allow': 'GET',
               ...getSecurityHeaders(request)
             }
@@ -449,47 +449,47 @@ ${sitemapUrls}</urlset>`;
           .replace(/{{BTN_COPIED}}/g, escapeJavaScript(t('btn.copied', jsLocale)))
           .replace(/{{DELETION_ERROR_MESSAGE}}/g, escapeJavaScript(t('msg.deletionError', jsLocale)));
         return new Response(jsContent, {
-          headers: { 
+          headers: {
             'Content-Type': 'application/javascript',
             'Cache-Control': 'public, max-age=3600',
             ...getSecurityHeaders(request)
           }
         });
       }
-      
+
       if (pathname === '/js/common.js') {
         if (request.method !== 'GET') {
           return new Response(getErrorMessage('METHOD_NOT_ALLOWED', locale), {
             status: 405,
-            headers: { 
+            headers: {
               'Allow': 'GET',
               ...getSecurityHeaders(request)
             }
           });
         }
         return new Response(getCommonJS(), {
-          headers: { 
+          headers: {
             'Content-Type': 'application/javascript',
             'Cache-Control': 'public, max-age=3600',
             ...getSecurityHeaders(request)
           }
         });
       }
-      
+
       if (pathname === '/js/clientLocalization.js') {
         if (request.method !== 'GET') {
           return new Response(getErrorMessage('METHOD_NOT_ALLOWED', locale), {
             status: 405,
-            headers: { 
+            headers: {
               'Allow': 'GET',
               ...getSecurityHeaders(request)
             }
           });
         }
-        
+
         // Serve the client localization utility
         return new Response(getClientLocalizationJS(), {
-          headers: { 
+          headers: {
             'Content-Type': 'application/javascript',
             'Cache-Control': 'public, max-age=3600',
             ...getSecurityHeaders(request)
@@ -501,18 +501,18 @@ ${sitemapUrls}</urlset>`;
       if (request.method !== 'GET') {
         return new Response(getErrorMessage('METHOD_NOT_ALLOWED', locale), {
           status: 405,
-          headers: { 
+          headers: {
             'Allow': 'GET',
             ...getSecurityHeaders(request)
           }
         });
       }
-      
+
       let response;
       // Nonce for HTML responses (injected into CSP and script tags)
       let cspNonce = null;
       let cacheHeaders = {};
-      
+
       // Use pathWithoutLocale for route matching to support localized URLs
       switch (pathWithoutLocale) {
         case '/':
@@ -552,21 +552,21 @@ ${sitemapUrls}</urlset>`;
           cacheHeaders = { 'Cache-Control': 'public, max-age=604800' };
           break;
         default:
-          return new Response(getErrorMessage('NOT_FOUND', locale), { 
+          return new Response(getErrorMessage('NOT_FOUND', locale), {
             status: 404,
             headers: getSecurityHeaders(request)
           });
       }
 
       return new Response(response, {
-        headers: { 
+        headers: {
           'Content-Type': 'text/html',
           ...cacheHeaders,
           ...getSecurityHeaders(request, cspNonce || generateNonce())
         }
       });
     } catch (error) {
-      return new Response(getErrorMessage('INTERNAL_SERVER_ERROR', locale), { 
+      return new Response(getErrorMessage('INTERNAL_SERVER_ERROR', locale), {
         status: 500,
         headers: getSecurityHeaders(request)
       });
