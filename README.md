@@ -3,9 +3,11 @@
 securememo.app is a simple, privacy-focused service for sharing sensitive memos securely. All encryption occurs client-side in your browser using AES-256-GCM with PBKDF2 key derivation—ensuring that plaintext is never transmitted or stored on the server. Each memo self-destructs permanently after being read or upon expiration.
 securememo.app will run the latest main version of this repo.
 
-https://img.shields.io/github/license/timoheimonen/securememo.app https://img.shields.io/github/stars/timoheimonen/securememo.app https://img.shields.io/github/watchers/timoheimonen/securememo.app
-https://img.shields.io/github/forks/timoheimonen/securememo.app https://img.shields.io/github/contributors/timoheimonen/securememo.app https://img.shields.io/github/commit-activity/m/timoheimonen/securememo.app
- 
+[![License](https://img.shields.io/github/license/timoheimonen/securememo.app)](https://github.com/timoheimonen/securememo.app/blob/main/LICENSE)
+[![Stars](https://img.shields.io/github/stars/timoheimonen/securememo.app)](https://github.com/timoheimonen/securememo.app/stargazers)
+[![Watchers](https://img.shields.io/github/watchers/timoheimonen/securememo.app)](https://github.com/timoheimonen/securememo.app/watchers)
+[![Forks](https://img.shields.io/github/forks/timoheimonen/securememo.app)](https://github.com/timoheimonen/securememo.app/network/members)
+[![Contributors](https://img.shields.io/github/contributors/timoheimonen/securememo.app)](https://github.com/timoheimonen/securememo.app/graphs/contributors)
 
 
 ## Features
