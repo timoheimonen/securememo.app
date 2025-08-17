@@ -487,12 +487,28 @@ ${sitemapUrls}</urlset>`;
           });
         }
 
-        // Serve the client localization utility
-        return new Response(getClientLocalizationJS(), {
+        // Extract locale from Referer header (e.g., https://securememo.app/en/about.html -> 'en')
+        let jsLocale = 'en';
+        const referer = request.headers.get('referer');
+        if (referer) {
+          try {
+            const refererUrl = new URL(referer);
+            const refererLocaleInfo = extractLocaleFromPath(refererUrl.pathname);
+            if (refererLocaleInfo.locale && getSupportedLocales().includes(refererLocaleInfo.locale)) {
+              jsLocale = refererLocaleInfo.locale;
+            }
+          } catch {}
+        }
+
+        // Serve the optimized client localization utility with only the relevant translations
+        const secHeaders = getSecurityHeaders(request);
+        // Ensure caches vary on Referer since content depends on it
+        secHeaders['Vary'] = 'Origin, Referer';
+        return new Response(getClientLocalizationJS(jsLocale), {
           headers: {
             'Content-Type': 'application/javascript',
             'Cache-Control': 'public, max-age=3600',
-            ...getSecurityHeaders(request)
+            ...secHeaders
           }
         });
       }

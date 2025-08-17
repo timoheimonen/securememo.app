@@ -3,7 +3,7 @@
 // No cookies, localStorage, or browser storage used
 
 import { TRANSLATIONS } from './translations.js';
-import { getSupportedLocales, getDefaultLocale, isLocaleSupported } from './localization.js';
+import { getSupportedLocales, isLocaleSupported } from './localization.js';
 
 const DEFAULT_LOCALE = 'en';
 
@@ -135,11 +135,21 @@ export { getSupportedLocales, isLocaleSupported } from './localization.js';
 
 /**
  * Get the client localization code as a string for serving as a JS file
- * @returns {string} JavaScript code for client-side localization
+ * @param {string} [locale='en'] - The locale to include translations for
+ * @returns {string} JavaScript code for client-side localization with only relevant translations
  */
-export function getClientLocalizationJS() {
-  // Use the same TRANSLATIONS object but format as string for serving
-  const translationsString = JSON.stringify(TRANSLATIONS, null, 2);
+export function getClientLocalizationJS(locale = 'en') {
+  // Normalize to a supported locale
+  locale = isLocaleSupported(locale) ? locale : 'en';
+
+  // Include only the requested locale and 'en' fallback if needed
+  const relevantTranslations = {};
+  relevantTranslations[locale] = TRANSLATIONS[locale] || TRANSLATIONS['en'];
+  if (locale !== 'en') {
+    relevantTranslations['en'] = TRANSLATIONS['en'];
+  }
+
+  const translationsString = JSON.stringify(relevantTranslations, null, 2);
   const supportedLocalesString = JSON.stringify(getSupportedLocales());
   
   return `// Client-side localization utility for securememo.app
@@ -149,10 +159,13 @@ export function getClientLocalizationJS() {
 const SUPPORTED_LOCALES = ${supportedLocalesString};
 const DEFAULT_LOCALE = 'en';
 
-// Translation strings for different locales
-// English, Spanish, French, German, Hindi, and Chinese support
+// Translation strings for the current locale (and fallback)
 const TRANSLATIONS = ${translationsString};
 
+function isLocaleSupported(locale) {
+  return SUPPORTED_LOCALES.includes(locale);
+}
+  
 /**
  * Get current locale from URL
  * @returns {string} Current locale code
