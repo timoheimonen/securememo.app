@@ -48,6 +48,30 @@ import {
 } from './utils/localization.js';
 import { getClientLocalizationJS } from './utils/clientLocalization.js';
 
+// Tiny, safe JS minifier for generated strings (removes comments and trims/collapses intra-line whitespace)
+function minifyJS(code) {
+  try {
+    return code
+  // Remove line comments that start at line-begin
+      .replace(/^\s*\/\/.*$/gm, '')
+  // Remove block comments that start at line-begin or after whitespace
+  // This avoids stripping sequences inside regex literals like /\/\* foo \*\//
+  .replace(/(^|\s)\/\*[\s\S]*?\*\//g, '$1')
+  // Process per line to preserve newlines (avoid ASI issues)
+  .split('\n')
+  // Collapse multiple spaces/tabs within a line and trim ends
+  .map(line => line.replace(/[ \t]+/g, ' ').trim())
+  // Drop empty lines
+      .filter(Boolean)
+  // Keep newlines to avoid ASI pitfalls
+      .join('\n')
+      .trim();
+  } catch (_) {
+    // In case of any unexpected issue, return original code
+    return code;
+  }
+}
+
 // Allowed origins for CORS
 const allowedOrigins = [
   'https://securememo.app',
@@ -387,7 +411,7 @@ ${sitemapUrls}</urlset>`;
             }
           });
         }
-        const jsContent = getCreateMemoJS()
+  const jsContent = getCreateMemoJS()
           .replace(/{{TURNSTILE_SITE_KEY}}/g, env.TURNSTILE_SITE_KEY)
           .replace(/{{MISSING_MESSAGE_ERROR}}/g, escapeJavaScript(getErrorMessage('MISSING_MESSAGE', jsLocale)))
           .replace(/{{MESSAGE_TOO_LONG_ERROR}}/g, escapeJavaScript(getErrorMessage('MESSAGE_TOO_LONG', jsLocale)))
@@ -407,7 +431,7 @@ ${sitemapUrls}</urlset>`;
           .replace(/{{BTN_SHOW}}/g, escapeJavaScript(t('btn.show', jsLocale)))
           .replace(/{{BTN_HIDE}}/g, escapeJavaScript(t('btn.hide', jsLocale)))
           .replace(/{{BTN_COPY}}/g, escapeJavaScript(t('btn.copy', jsLocale)));
-        return new Response(jsContent, {
+  return new Response(minifyJS(jsContent), {
           headers: {
             'Content-Type': 'application/javascript',
             'Cache-Control': 'public, max-age=3600',
@@ -428,7 +452,7 @@ ${sitemapUrls}</urlset>`;
             }
           });
         }
-        const jsContent = getReadMemoJS()
+  const jsContent = getReadMemoJS()
           .replace(/{{TURNSTILE_SITE_KEY}}/g, env.TURNSTILE_SITE_KEY)
           .replace(/{{MISSING_MEMO_ID_ERROR}}/g, escapeJavaScript(getErrorMessage('MISSING_MEMO_ID', jsLocale)))
           .replace(/{{MISSING_PASSWORD_ERROR}}/g, escapeJavaScript(getErrorMessage('MISSING_PASSWORD_ERROR', jsLocale)))
@@ -448,7 +472,7 @@ ${sitemapUrls}</urlset>`;
           .replace(/{{BTN_HIDE}}/g, escapeJavaScript(t('btn.hide', jsLocale)))
           .replace(/{{BTN_COPIED}}/g, escapeJavaScript(t('btn.copied', jsLocale)))
           .replace(/{{DELETION_ERROR_MESSAGE}}/g, escapeJavaScript(t('msg.deletionError', jsLocale)));
-        return new Response(jsContent, {
+  return new Response(minifyJS(jsContent), {
           headers: {
             'Content-Type': 'application/javascript',
             'Cache-Control': 'public, max-age=3600',
@@ -467,7 +491,7 @@ ${sitemapUrls}</urlset>`;
             }
           });
         }
-        return new Response(getCommonJS(), {
+  return new Response(minifyJS(getCommonJS()), {
           headers: {
             'Content-Type': 'application/javascript',
             'Cache-Control': 'public, max-age=3600',
@@ -504,7 +528,7 @@ ${sitemapUrls}</urlset>`;
         const secHeaders = getSecurityHeaders(request);
         // Ensure caches vary on Referer since content depends on it
         secHeaders['Vary'] = 'Origin, Referer';
-        return new Response(getClientLocalizationJS(jsLocale), {
+  return new Response(minifyJS(getClientLocalizationJS(jsLocale)), {
           headers: {
             'Content-Type': 'application/javascript',
             'Cache-Control': 'public, max-age=3600',
