@@ -161,7 +161,7 @@ export const fr = {
 
   // Terms of Service page content
   'tos.hero.title': 'Conditions d\'Utilisation',
-  'tos.lastUpdated': 'Dernière mise à jour : 9 août 2025',
+  'tos.lastUpdated': 'Dernière mise à jour : 17 août 2025',
   'tos.tableOfContents.title': 'Table des Matières',
   'tos.tableOfContents.serviceDescription': 'Description du Service',
   'tos.tableOfContents.acceptableUse': 'Utilisation Acceptable',
@@ -203,7 +203,7 @@ export const fr = {
   'tos.serviceLimitations.messageSize': 'Taille du Message : Maximum 10 000 caractères par mémo',
   'tos.serviceLimitations.expiryTimes': 'Temps d\'Expiration : 8 heures, 24 heures, 48 heures, 1 semaine, ou suppression à la lecture (max 30 jours)',
   'tos.serviceLimitations.availability': 'Disponibilité : Service fourni "tel quel" sans garanties de disponibilité',
-  'tos.serviceLimitations.noDelivery': 'Aucune Garantie de Livraison : Nous ne pouvons pas garantir que les mémos seront livrés ou lus',
+  'tos.serviceLimitations.noDelivery': 'Aucune garantie de livraison : Nous ne pouvons pas garantir que les mémos seront livrés, lus ou supprimés à temps.',
 
   'tos.securityDisclaimers.title': '5. Sécurité et Avis de Non-Responsabilité',
   'tos.securityDisclaimers.userResponsibility': 'Responsabilité de l\'Utilisateur : Vous êtes responsable du partage sécurisé des URLs de mémos et de la protection des mots de passe. Si les mots de passe sont perdus, les mémos ne peuvent pas être récupérés.',

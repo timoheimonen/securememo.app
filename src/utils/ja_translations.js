@@ -161,7 +161,7 @@ export const ja = {
 
     // Terms of Service page content
     'tos.hero.title': '利用規約',
-    'tos.lastUpdated': '最終更新日: 2025年8月9日',
+    'tos.lastUpdated': '最終更新日: 2025年8月17日',
     'tos.tableOfContents.title': '目次',
     'tos.tableOfContents.serviceDescription': 'サービス説明',
     'tos.tableOfContents.acceptableUse': '利用可能な使用',
@@ -203,7 +203,7 @@ export const ja = {
     'tos.serviceLimitations.messageSize': 'メッセージサイズ: メモあたり最大10,000文字',
     'tos.serviceLimitations.expiryTimes': '有効期限: 8時間、24時間、48時間、1週間、または読み取り時削除（最大30日）',
     'tos.serviceLimitations.availability': '可用性: サービスは「現状のまま」提供され、可用性の保証はありません',
-    'tos.serviceLimitations.noDelivery': '配信保証なし: メモが配信されるか読み取られるかを保証することはできません',
+    'tos.serviceLimitations.noDelivery': '配信保証なし: メモが配信されること、読まれること、または期限通りに削除されることを保証することはできません。',
 
     'tos.securityDisclaimers.title': '5. セキュリティと免責事項',
     'tos.securityDisclaimers.userResponsibility': 'ユーザーの責任: あなたはメモのURLを安全に共有し、パスワードを保護する責任があります。パスワードを紛失した場合、メモを復旧することはできません。',

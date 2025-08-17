@@ -161,7 +161,7 @@ export const zh = {
 
   // Terms of Service page content
   'tos.hero.title': '服务条款',
-  'tos.lastUpdated': '最后更新：2025年8月9日',
+  'tos.lastUpdated': '最后更新：2025年8月17日',
   'tos.tableOfContents.title': '目录',
   'tos.tableOfContents.serviceDescription': '服务描述',
   'tos.tableOfContents.acceptableUse': '可接受的使用',
@@ -203,7 +203,7 @@ export const zh = {
   'tos.serviceLimitations.messageSize': '消息大小：每个备忘录最多 10,000 个字符',
   'tos.serviceLimitations.expiryTimes': '过期时间：8 小时、24 小时、48 小时、1 周，或阅读后删除（最多 30 天）',
   'tos.serviceLimitations.availability': '可用性：服务按"现状"提供，不保证可用性',
-  'tos.serviceLimitations.noDelivery': '无传递保证：我们无法保证备忘录会被传递或阅读',
+  'tos.serviceLimitations.noDelivery': '无传递保证：我们无法保证备忘录会被及时传递、阅读或删除。',
 
   'tos.securityDisclaimers.title': '5. 安全和免责声明',
   'tos.securityDisclaimers.userResponsibility': '用户责任：您有责任安全地分享备忘录 URL 和保护密码。如果密码丢失，备忘录无法恢复。',

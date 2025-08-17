@@ -161,7 +161,7 @@ export const id = {
 
     // Terms of Service page content
     'tos.hero.title': 'Syarat Layanan',
-    'tos.lastUpdated': 'Terakhir diperbarui: 9 Agustus 2025',
+    'tos.lastUpdated': 'Terakhir diperbarui: 17 Agustus 2025',
     'tos.tableOfContents.title': 'Daftar Isi',
     'tos.tableOfContents.serviceDescription': 'Deskripsi Layanan',
     'tos.tableOfContents.acceptableUse': 'Penggunaan yang Dapat Diterima',
@@ -203,7 +203,7 @@ export const id = {
     'tos.serviceLimitations.messageSize': 'Ukuran Pesan: Maksimum 10.000 karakter per memo',
     'tos.serviceLimitations.expiryTimes': 'Waktu Kedaluwarsa: 8 jam, 24 jam, 48 jam, 1 minggu, atau hapus saat dibaca (maks 30 hari)',
     'tos.serviceLimitations.availability': 'Ketersediaan: Layanan disediakan "apa adanya" tanpa jaminan ketersediaan',
-    'tos.serviceLimitations.noDelivery': 'Tidak Ada Jaminan Pengiriman: Kami tidak dapat menjamin bahwa memo akan dikirim atau dibaca',
+    'tos.serviceLimitations.noDelivery': 'Tidak Ada Jaminan Pengiriman: Kami tidak dapat menjamin bahwa memo akan dikirim, dibaca, atau dihapus tepat waktu.',
 
     'tos.securityDisclaimers.title': '5. Keamanan & Penafian',
     'tos.securityDisclaimers.userResponsibility': 'Tanggung Jawab Pengguna: Anda bertanggung jawab untuk berbagi URL memo dengan aman dan melindungi kata sandi. Jika kata sandi hilang, memo tidak dapat dipulihkan.',

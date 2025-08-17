@@ -161,7 +161,7 @@ export const hu = {
 
   // Terms of Service page content
   'tos.hero.title': 'Felhasználási feltételek',
-  'tos.lastUpdated': 'Utolsó frissítés: 2025. augusztus 9.',
+  'tos.lastUpdated': 'Utolsó frissítés: 2025. augusztus 17.',
   'tos.tableOfContents.title': 'Tartalomjegyzék',
   'tos.tableOfContents.serviceDescription': 'Szolgáltatás leírása',
   'tos.tableOfContents.acceptableUse': 'Megengedett használat',
@@ -203,7 +203,7 @@ export const hu = {
   'tos.serviceLimitations.messageSize': 'Üzenet mérete: Maximum 10 000 karakter jegyzetenként',
   'tos.serviceLimitations.expiryTimes': 'Lejárati idők: 8 óra, 24 óra, 48 óra, 1 hét vagy olvasás után törlés (max. 30 nap)',
   'tos.serviceLimitations.availability': 'Elérhetőség: A szolgáltatás "ahogy van" állapotban érhető el, garancia nélkül',
-  'tos.serviceLimitations.noDelivery': 'Nincs kézbesítési garancia: Nem tudjuk garantálni, hogy a jegyzeteket kézbesítik vagy elolvassák',
+  'tos.serviceLimitations.noDelivery': 'Nincs kézbesítési garancia: Nem tudjuk garantálni, hogy a jegyzeteket kézbesítik, elolvassák vagy időben törlik.',
 
   'tos.securityDisclaimers.title': '5. Biztonság és jogi nyilatkozatok',
   'tos.securityDisclaimers.userResponsibility': 'Felhasználói felelősség: Ön felelős a jegyzet URL-ek biztonságos megosztásáért és a jelszavak védelméért. Ha a jelszavak elvesznek, a jegyzetek nem állíthatók vissza.',

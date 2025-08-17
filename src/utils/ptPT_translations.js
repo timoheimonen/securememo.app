@@ -161,7 +161,7 @@ export const ptPT = {
 
   // Terms of Service page content
   'tos.hero.title': 'Termos de Serviço',
-  'tos.lastUpdated': 'Última atualização: 9 de agosto de 2025',
+  'tos.lastUpdated': 'Última atualização: 17 de agosto de 2025',
   'tos.tableOfContents.title': 'Índice',
   'tos.tableOfContents.serviceDescription': 'Descrição do Serviço',
   'tos.tableOfContents.acceptableUse': 'Uso Aceitável',
@@ -203,7 +203,7 @@ export const ptPT = {
   'tos.serviceLimitations.messageSize': 'Tamanho da Mensagem: Máximo de 10.000 caracteres por memo',
   'tos.serviceLimitations.expiryTimes': 'Tempos de Expiração: 8 horas, 24 horas, 48 horas, 1 semana, ou excluir ao ler (máx 30 dias)',
   'tos.serviceLimitations.availability': 'Disponibilidade: Serviço fornecido "como está" sem garantias de disponibilidade',
-  'tos.serviceLimitations.noDelivery': 'Nenhuma Garantia de Entrega: Não podemos garantir que memos serão entregues ou lidos',
+  'tos.serviceLimitations.noDelivery': 'Nenhuma Garantia de Entrega: Não podemos garantir que memos serão entregues, lidos ou excluídos dentro do prazo.',
 
   'tos.securityDisclaimers.title': '5. Segurança e Isenções de Responsabilidade',
   'tos.securityDisclaimers.userResponsibility': 'Responsabilidade do Utilizador: É responsável por partilhar com segurança URLs de memo e proteger as palavras-passe. Se as palavras-passe forem perdidas, os memos não podem ser recuperados.',
