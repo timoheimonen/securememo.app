@@ -110,8 +110,8 @@ export const fi = {
   'home.security.title': 'Turvaominaisuudet',
   'home.security.encryption.title': '🔒 Aidosti Selaimessa Salattu',
   'home.security.encryption.description': 'Muistiosi salataan selaimessa AES-256-GCM:lla ja vahvalla avainjohdannalla (yli 2 200 000 kierrosta). Emme koskaan näe selväkielistä sisältöä.',
-  'home.security.delete.title': '🗑️ Luotettava Itsepoisto',
-  'home.security.delete.description': 'Muistiot katoavat lopullisesti lukemisen tai vanhentumisen jälkeen, automaattinen siivous tunnin välein. Ei varmuuskopioita tai palautusmahdollisuutta.',
+  'home.security.delete.title': '🗑️ Itsepoistuvat muistiot',
+  'home.security.delete.description': 'Muistiot poistetaan lukemisen tai vanhentumisen jälkeen, automaattinen siivous tunnin välein. Ei varmuuskopioita tai palautusmahdollisuutta.',
   'home.security.password.title': '🌐 Salasanat eivät koskaan poistu selaimestasi',
   'home.security.password.description': 'Salasanat luodaan ja käsitellään kokonaan selaimessasi. Niitä ei koskaan lähetetä tai tallenneta palvelimille.',
 
@@ -121,7 +121,7 @@ export const fi = {
   'footer.tagline': 'Ei seurantaa, ei mainoksia, ei turhaa.',
 
   // About page content
-  'about.hero.title': 'Tietoa securememo.appista',
+  'about.hero.title': 'Tietoa securememo.app',
   'about.hero.subtitle': 'securememo.app on yksityisyyteen keskittyvä sovellus, jonka avulla voit luoda salattuja muistiota, jotka tuhoutuvat itsestään lukemisen tai vanhentumisen jälkeen. Rakennettu turvallisuus ja yksityisyys etusijalla. Lähdekoodi saatavilla GitHubissa.',
 
   'about.tech.title': 'Teknologiakokonaisuus',

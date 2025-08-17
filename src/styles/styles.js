@@ -15,6 +15,13 @@ export function getStyles() {
   --shadow-inset: inset 0 1px 3px rgba(0, 0, 0, 0.08);
 }
 
+/* Default wrapping behavior: avoid forcing mid-word breaks or hyphenation */
+html, body, .nav-logo, .nav-link, .language-item, p, h1, h2, h3, .memo-message p, .footer, .feature-card p, .feature-item, .memo-card, .url-copy-container input {
+  overflow-wrap: normal;
+  word-break: normal;
+  hyphens: none;
+}
+
 body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
   line-height: 1.6;
@@ -117,7 +124,7 @@ body {
   transition: color 0.3s ease;
   padding: 8px 12px;
   border-radius: 8px;
-  white-space: nowrap;
+  white-space: normal;
   font-size: 0.95rem;
 }
 
@@ -164,7 +171,7 @@ body {
   transition: all 0.3s ease;
   color: #333;
   text-decoration: none;
-  white-space: nowrap;
+  white-space: normal;
 }
 
 .language-toggle:hover,
@@ -729,7 +736,7 @@ body {
 .url-copy-container .btn,
 .password-copy-container .btn {
   padding: 10px 16px;
-  white-space: nowrap;
+  white-space: normal;
 }
 
 .memo-warning {
@@ -880,23 +887,23 @@ input, textarea, select {
   }
   
   .nav-container {
-    padding: 15px;
+  padding: 8px 10px;
   }
   
   .main-content {
-    padding: 20px 15px;
+  padding: 12px 10px;
   }
   
   .memo-card {
-    padding: 15px;
+  padding: 12px;
   }
   
   .about-section {
-    padding: 15px;
+  padding: 12px;
   }
   
   .feature-card {
-    padding: 20px;
+  padding: 16px;
   }
 }
 
@@ -993,7 +1000,8 @@ input, textarea, select {
     position: fixed;
     top: 0;
     right: -100%;
-    width: 300px;
+  width: 100%;
+  max-width: 340px;
     /* Better iOS-compatible height calculation */
     /* Use window.innerHeight via CSS custom property fallback approach */
     height: 100vh; /* Base fallback */
@@ -1001,7 +1009,7 @@ input, textarea, select {
     max-height: 100vh;
     max-height: calc(var(--vh, 1vh) * 100);
     /* Minimum height ensures content is always accessible */
-    min-height: 500px; /* Reduced minimum to ensure it fits on small screens */
+  min-height: 420px; /* Reduced minimum to ensure it fits on small screens */
     background: rgba(255, 255, 255, 0.98);
     backdrop-filter: blur(20px);
     /* Use flexbox with proper scroll container setup */
@@ -1197,7 +1205,8 @@ input, textarea, select {
     display: flex; /* Use flex for better alignment */
     align-items: center;
     width: 100%;
-    padding: 20px 24px; /* Increase padding to make menu items larger */
+    padding: 20px 24px;
+  white-space: normal;
     text-align: left;
     border-radius: 0;
     font-size: 1.1rem; /* Slightly larger font */
@@ -1205,7 +1214,7 @@ input, textarea, select {
     color: #333;
     transition: all 0.3s ease;
     border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-    min-height: 60px; /* Ensure minimum height for touch targets */
+  min-height: 50px; /* Ensure minimum height for touch targets */
     /* Improve touch responsiveness */
     touch-action: manipulation;
     -webkit-tap-highlight-color: transparent;
@@ -1244,6 +1253,7 @@ input, textarea, select {
   
   .language-toggle {
     display: none; /* Hide dropdown toggle on mobile */
+  white-space: normal;
   }
   
   .language-menu {
