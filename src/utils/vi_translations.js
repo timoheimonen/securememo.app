@@ -161,7 +161,7 @@ export const vi = {
 
   // Terms of Service page content
   'tos.hero.title': 'Điều khoản dịch vụ',
-  'tos.lastUpdated': 'Cập nhật lần cuối: 9 tháng 8, 2025',
+  'tos.lastUpdated': 'Cập nhật lần cuối: 17 tháng 8, 2025',
   'tos.tableOfContents.title': 'Mục lục',
   'tos.tableOfContents.serviceDescription': 'Mô tả dịch vụ',
   'tos.tableOfContents.acceptableUse': 'Sử dụng hợp lệ',
@@ -203,7 +203,7 @@ export const vi = {
   'tos.serviceLimitations.messageSize': 'Kích thước ghi chú: Tối đa 10.000 ký tự mỗi ghi chú',
   'tos.serviceLimitations.expiryTimes': 'Thời gian hết hạn: 8 giờ, 24 giờ, 48 giờ, 1 tuần hoặc xóa sau khi đọc (tối đa 30 ngày)',
   'tos.serviceLimitations.availability': 'Khả dụng: Dịch vụ được cung cấp "nguyên trạng" không đảm bảo về khả năng hoạt động',
-  'tos.serviceLimitations.noDelivery': 'Không đảm bảo giao nhận: Chúng tôi không đảm bảo ghi chú sẽ được gửi hoặc đọc',
+  'tos.serviceLimitations.noDelivery': 'Không đảm bảo giao nhận: Chúng tôi không đảm bảo ghi chú sẽ được gửi, đọc hoặc xóa đúng hạn.',
 
   'tos.securityDisclaimers.title': '5. Bảo mật & Miễn trừ trách nhiệm',
   'tos.securityDisclaimers.userResponsibility': 'Trách nhiệm người dùng: Bạn chịu trách nhiệm chia sẻ URL ghi chú và bảo vệ mật khẩu một cách an toàn. Nếu mất mật khẩu, ghi chú không thể khôi phục.',

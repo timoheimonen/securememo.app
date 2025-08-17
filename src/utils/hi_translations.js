@@ -161,7 +161,7 @@ export const hi = {
 
   // Terms of Service page content
   'tos.hero.title': 'सेवा की शर्तें',
-  'tos.lastUpdated': 'अंतिम अपडेट: 9 अगस्त, 2025',
+  'tos.lastUpdated': 'अंतिम अपडेट: 17 अगस्त, 2025',
   'tos.tableOfContents.title': 'विषय सूची',
   'tos.tableOfContents.serviceDescription': 'सेवा विवरण',
   'tos.tableOfContents.acceptableUse': 'स्वीकार्य उपयोग',
@@ -203,7 +203,7 @@ export const hi = {
   'tos.serviceLimitations.messageSize': 'संदेश आकार: प्रति मेमो अधिकतम 10,000 अक्षर',
   'tos.serviceLimitations.expiryTimes': 'समाप्ति समय: 8 घंटे, 24 घंटे, 48 घंटे, 1 सप्ताह, या पढ़ने पर डिलीट (अधिकतम 30 दिन)',
   'tos.serviceLimitations.availability': 'उपलब्धता: सेवा "जैसी है" उपलब्धता की गारंटी के बिना प्रदान की जाती है',
-  'tos.serviceLimitations.noDelivery': 'कोई डिलीवरी गारंटी नहीं: हम गारंटी नहीं दे सकते कि मेमो डिलीवर होंगे या पढ़े जाएंगे',
+  'tos.serviceLimitations.noDelivery': 'कोई डिलीवरी गारंटी नहीं: हम गारंटी नहीं दे सकते कि मेमो डिलीवर होंगे, पढ़े जाएंगे या समय पर डिलीट किए जाएंगे।',
 
   'tos.securityDisclaimers.title': '5. सुरक्षा और अस्वीकरण',
   'tos.securityDisclaimers.userResponsibility': 'यूजर जिम्मेदारी: आप मेमो URL को सुरक्षित रूप से साझा करने और पासवर्ड की सुरक्षा के लिए जिम्मेदार हैं। यदि पासवर्ड खो जाते हैं, तो मेमो पुनर्प्राप्त नहीं किए जा सकते।',

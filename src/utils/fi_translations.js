@@ -161,7 +161,7 @@ export const fi = {
 
   // Terms of Service page content
   'tos.hero.title': 'Käyttöehdot',
-  'tos.lastUpdated': 'Viimeksi päivitetty: 9. elokuuta 2025',
+  'tos.lastUpdated': 'Viimeksi päivitetty: 17. elokuuta 2025',
   'tos.tableOfContents.title': 'Sisällysluettelo',
   'tos.tableOfContents.serviceDescription': 'Palvelun kuvaus',
   'tos.tableOfContents.acceptableUse': 'Hyväksyttävä käyttö',
@@ -203,7 +203,7 @@ export const fi = {
   'tos.serviceLimitations.messageSize': 'Viestin koko: Enintään 10 000 merkkiä per muistio',
   'tos.serviceLimitations.expiryTimes': 'Vanhentumisajat: 8 tuntia, 24 tuntia, 48 tuntia, 1 viikko tai poisto lukemisen jälkeen (max 30 päivää)',
   'tos.serviceLimitations.availability': 'Saatavuus: Palvelu tarjotaan sellaisenaan ilman saatavuustakuuta',
-  'tos.serviceLimitations.noDelivery': 'Ei toimitustakuuta: Emme voi taata, että muistiot toimitetaan tai luetaan',
+  'tos.serviceLimitations.noDelivery': 'Ei toimitustakuuta: Emme voi taata, että muistiot toimitetaan, on luettavissa tai tuhotaan ajallaan',
 
   'tos.securityDisclaimers.title': '5. Turvallisuus ja vastuuvapaus',
   'tos.securityDisclaimers.userResponsibility': 'Käyttäjän vastuu: Olet itse vastuussa muistion URL-osoitteiden ja salasanojen turvallisesta jakamisesta ja suojaamisesta. Jos salasana katoaa, muistioita ei voida palauttaa.',
