@@ -3,6 +3,11 @@
 securememo.app is a simple, privacy-focused service for sharing sensitive memos securely. All encryption occurs client-side in your browser using AES-256-GCM with PBKDF2 key derivation—ensuring that plaintext is never transmitted or stored on the server. Each memo self-destructs permanently after being read or upon expiration.
 securememo.app will run the latest main version of this repo.
 
+https://img.shields.io/github/license/timoheimonen/securememo.app https://img.shields.io/github/stars/timoheimonen/securememo.app https://img.shields.io/github/watchers/timoheimonen/securememo.app
+https://img.shields.io/github/forks/timoheimonen/securememo.app https://img.shields.io/github/contributors/timoheimonen/securememo.app https://img.shields.io/github/commit-activity/m/timoheimonen/securememo.app
+ 
+
+
 ## Features
 
 - **True end-to-end encryption**: Performed entirely in the browser; servers handle only encrypted data.
@@ -15,7 +20,6 @@ securememo.app will run the latest main version of this repo.
 - **Robust security headers**: Includes strict CSP, HSTS, and other policies to mitigate common web vulnerabilities.
 - **Automated cleanup**: Expired or read memos are permanently removed via scheduled cron jobs.
 - **17 languages**: English, Spanish, Finnish, French, German, Hindi, Chinese, Portuguese (Portugal), Portuguese (Brazil), Japanese, Korean, Italian, Indonesian, Swedish, Polish, Hungary and Vietnamese.
-
 
 
 
@@ -131,7 +135,7 @@ These are auto-translated from english, errors may occur.
 
 ## Author
 
-Timo Heimonen (timo.heimonen@gmail.com)
+🇫🇮 Timo Heimonen (timo.heimonen@gmail.com) 
 
 ## Tags
 
