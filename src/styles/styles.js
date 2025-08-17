@@ -28,8 +28,6 @@ body {
   color: #333;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   min-height: 100vh;
-  /* Allow the page to expand horizontally to fit long words */
-  min-width: max-content;
   padding-top: 70px; /* Account for fixed navbar height */
 }
 
