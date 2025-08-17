@@ -161,7 +161,7 @@ export const en = {
 
   // Terms of Service page content
   'tos.hero.title': 'Terms of Service',
-  'tos.lastUpdated': 'Last updated: August 9, 2025',
+  'tos.lastUpdated': 'Last updated: August 17, 2025',
   'tos.tableOfContents.title': 'Table of Contents',
   'tos.tableOfContents.serviceDescription': 'Service Description',
   'tos.tableOfContents.acceptableUse': 'Acceptable Use',
@@ -203,7 +203,7 @@ export const en = {
   'tos.serviceLimitations.messageSize': 'Message Size: Maximum 10,000 characters per memo',
   'tos.serviceLimitations.expiryTimes': 'Expiry Times: 8 hours, 24 hours, 48 hours, 1 week, or delete on read (max 30 days)',
   'tos.serviceLimitations.availability': 'Availability: Service provided "as is" without guarantees of availability',
-  'tos.serviceLimitations.noDelivery': 'No Delivery Guarantee: We cannot guarantee that memos will be delivered or read',
+  'tos.serviceLimitations.noDelivery': 'No Delivery Guarantee: We cannot guarantee that memos will be delivered, read or deleted on time.',
 
   'tos.securityDisclaimers.title': '5. Security & Disclaimers',
   'tos.securityDisclaimers.userResponsibility': 'User Responsibility: You are responsible for securely sharing memo URLs and protecting the passwords. If passwords are lost, memos cannot be recovered.',

@@ -161,7 +161,7 @@ export const pl = {
 
   // Terms of Service page content
   'tos.hero.title': 'Regulamin',
-  'tos.lastUpdated': 'Ostatnia aktualizacja: 9 sierpnia 2025',
+  'tos.lastUpdated': 'Ostatnia aktualizacja: 17 sierpnia 2025',
   'tos.tableOfContents.title': 'Spis treści',
   'tos.tableOfContents.serviceDescription': 'Opis usługi',
   'tos.tableOfContents.acceptableUse': 'Akceptowalne użycie',
@@ -203,7 +203,7 @@ export const pl = {
   'tos.serviceLimitations.messageSize': 'Rozmiar wiadomości: Maksymalnie 10 000 znaków na notatkę',
   'tos.serviceLimitations.expiryTimes': 'Czasy wygaśnięcia: 8 godzin, 24 godziny, 48 godzin, 1 tydzień lub usunięcie po odczytaniu (maksymalnie 30 dni)',
   'tos.serviceLimitations.availability': 'Dostępność: Usługa świadczona jest „tak jak jest”, bez gwarancji dostępności',
-  'tos.serviceLimitations.noDelivery': 'Brak gwarancji dostarczenia: Nie możemy zagwarantować, że notatki zostaną dostarczone lub odczytane',
+  'tos.serviceLimitations.noDelivery': 'Brak gwarancji dostarczenia: Nie możemy zagwarantować, że notatki zostaną dostarczone, odczytane lub usunięte na czas.',
 
   'tos.securityDisclaimers.title': '5. Bezpieczeństwo i zastrzeżenia',
   'tos.securityDisclaimers.userResponsibility': 'Odpowiedzialność użytkownika: Jesteś odpowiedzialny za bezpieczne udostępnianie adresów URL notatek i ochronę haseł. W przypadku utraty haseł nie ma możliwości odzyskania notatek.',

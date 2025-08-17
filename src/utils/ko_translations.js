@@ -161,7 +161,7 @@ export const ko = {
 
     // Terms of Service page content
     'tos.hero.title': '서비스 약관',
-    'tos.lastUpdated': '최종 업데이트: 2025년 8월 9일',
+    'tos.lastUpdated': '최종 업데이트: 2025년 8월 17일',
     'tos.tableOfContents.title': '목차',
     'tos.tableOfContents.serviceDescription': '서비스 설명',
     'tos.tableOfContents.acceptableUse': '허용 가능한 사용',
@@ -203,7 +203,7 @@ export const ko = {
     'tos.serviceLimitations.messageSize': '메시지 크기: 메모당 최대 10,000자',
     'tos.serviceLimitations.expiryTimes': '만료 시간: 8시간, 24시간, 48시간, 1주일 또는 읽음 시 삭제(최대 30일)',
     'tos.serviceLimitations.availability': '가용성: 서비스는 가용성 보장 없이 "현상 그대로" 제공됩니다',
-    'tos.serviceLimitations.noDelivery': '전달 보장 없음: 메모가 전달되거나 읽힐 것을 보장할 수 없습니다',
+    'tos.serviceLimitations.noDelivery': '전달 보장 없음: 메모가 전달되거나 읽히거나 제때 삭제될 것을 보장할 수 없습니다.',
 
     'tos.securityDisclaimers.title': '5. 보안 및 면책사항',
     'tos.securityDisclaimers.userResponsibility': '사용자 책임: 메모 URL을 안전하게 공유하고 비밀번호를 보호할 책임이 있습니다. 비밀번호가 분실되면 메모를 복구할 수 없습니다.',

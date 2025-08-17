@@ -161,7 +161,7 @@ export const sv = {
 
   // Terms of Service page content
   'tos.hero.title': 'Användarvillkor',
-  'tos.lastUpdated': 'Senast uppdaterad: 9 augusti 2025',
+  'tos.lastUpdated': 'Senast uppdaterad: 17 augusti 2025',
   'tos.tableOfContents.title': 'Innehållsförteckning',
   'tos.tableOfContents.serviceDescription': 'Tjänstebeskrivning',
   'tos.tableOfContents.acceptableUse': 'Godtagbar användning',
@@ -203,7 +203,7 @@ export const sv = {
   'tos.serviceLimitations.messageSize': 'Meddelandestorlek: Max 10 000 tecken per memo',
   'tos.serviceLimitations.expiryTimes': 'Utgångstider: 8 timmar, 24 timmar, 48 timmar, 1 vecka eller radering vid läsning (max 30 dagar)',
   'tos.serviceLimitations.availability': 'Tillgänglighet: Tjänsten tillhandahålls "i befintligt skick" utan garanti för tillgänglighet',
-  'tos.serviceLimitations.noDelivery': 'Ingen leveransgaranti: Vi kan inte garantera att memos levereras eller läses',
+  'tos.serviceLimitations.noDelivery': 'Ingen leveransgaranti: Vi kan inte garantera att memos levereras, läses eller raderas i tid.',
 
   'tos.securityDisclaimers.title': '5. Säkerhet & Ansvarsfriskrivningar',
   'tos.securityDisclaimers.userResponsibility': 'Användaransvar: Du är ansvarig för att dela memo-URL:er och lösenord på ett säkert sätt. Om lösenordet förloras kan memot inte återställas.',

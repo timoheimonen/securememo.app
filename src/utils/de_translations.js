@@ -161,7 +161,7 @@ export const de = {
 
   // Terms of Service page content
   'tos.hero.title': 'Nutzungsbedingungen',
-  'tos.lastUpdated': 'Zuletzt aktualisiert: 9. August 2025',
+  'tos.lastUpdated': 'Zuletzt aktualisiert: 17. August 2025',
   'tos.tableOfContents.title': 'Inhaltsverzeichnis',
   'tos.tableOfContents.serviceDescription': 'Service-Beschreibung',
   'tos.tableOfContents.acceptableUse': 'Akzeptable Nutzung',
@@ -203,7 +203,7 @@ export const de = {
   'tos.serviceLimitations.messageSize': 'Nachrichtengröße: Maximal 10.000 Zeichen pro Notiz',
   'tos.serviceLimitations.expiryTimes': 'Ablaufzeiten: 8 Stunden, 24 Stunden, 48 Stunden, 1 Woche oder Löschung beim Lesen (max. 30 Tage)',
   'tos.serviceLimitations.availability': 'Verfügbarkeit: Service wird "wie er ist" ohne Verfügbarkeitsgarantien bereitgestellt',
-  'tos.serviceLimitations.noDelivery': 'Keine Zustellungsgarantie: Wir können nicht garantieren, dass Notizen zugestellt oder gelesen werden',
+  'tos.serviceLimitations.noDelivery': 'Keine Zustellungsgarantie: Wir können nicht garantieren, dass Notizen zugestellt, gelesen oder rechtzeitig gelöscht werden.',
 
   'tos.securityDisclaimers.title': '5. Sicherheit & Haftungsausschlüsse',
   'tos.securityDisclaimers.userResponsibility': 'Benutzerverantwortung: Sie sind verantwortlich für das sichere Teilen von Notiz-URLs und den Schutz der Passwörter. Bei verloren gegangenen Passwörtern können Notizen nicht wiederhergestellt werden.',
