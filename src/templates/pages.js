@@ -85,9 +85,9 @@ export async function getIndexHTML(locale = 'en', origin = 'https://securememo.a
         "${t('schema.app.features.privacyFirst', locale)}"
       ],
       "screenshot": "https://securememo.app/android-chrome-512x512.png",
-      "softwareVersion": "1.0",
-      "datePublished": "2025-01-01",
-      "dateModified": "2025-08-09",
+      "softwareVersion": "1.0.3",
+      "datePublished": "2025-07-01",
+      "dateModified": "2025-08-17",
       "license": "${t('schema.app.license', locale)}",
       "codeRepository": "${t('schema.app.repository', locale)}"
     }
