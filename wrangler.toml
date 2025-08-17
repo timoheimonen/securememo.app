@@ -46,7 +46,7 @@ enabled = true
 # Development environment
 [env.dev]
 name = "securememo-dev"
-workers_dev = false
+workers_dev = true # enable on deploy, behind Cloudflare Zero Trust
 
 # Development environment variables
 [env.dev.vars]
