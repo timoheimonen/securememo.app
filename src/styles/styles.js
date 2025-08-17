@@ -15,11 +15,11 @@ export function getStyles() {
   --shadow-inset: inset 0 1px 3px rgba(0, 0, 0, 0.08);
 }
 
-/* Improve long-word handling to prevent horizontal overflow on narrow screens */
+/* Default wrapping behavior: avoid forcing mid-word breaks or hyphenation */
 html, body, .nav-logo, .nav-link, .language-item, p, h1, h2, h3, .memo-message p, .footer, .feature-card p, .feature-item, .memo-card, .url-copy-container input {
-  overflow-wrap: anywhere;
-  word-break: break-word;
-  hyphens: auto;
+  overflow-wrap: normal;
+  word-break: normal;
+  hyphens: none;
 }
 
 body {
@@ -28,6 +28,8 @@ body {
   color: #333;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   min-height: 100vh;
+  /* Allow the page to expand horizontally to fit long words */
+  min-width: max-content;
   padding-top: 70px; /* Account for fixed navbar height */
 }
 
@@ -124,7 +126,7 @@ body {
   transition: color 0.3s ease;
   padding: 8px 12px;
   border-radius: 8px;
-  white-space: nowrap;
+  white-space: normal;
   font-size: 0.95rem;
 }
 
@@ -171,7 +173,7 @@ body {
   transition: all 0.3s ease;
   color: #333;
   text-decoration: none;
-  white-space: nowrap;
+  white-space: normal;
 }
 
 .language-toggle:hover,
@@ -736,7 +738,7 @@ body {
 .url-copy-container .btn,
 .password-copy-container .btn {
   padding: 10px 16px;
-  white-space: nowrap;
+  white-space: normal;
 }
 
 .memo-warning {

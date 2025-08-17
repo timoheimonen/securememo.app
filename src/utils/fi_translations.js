@@ -121,7 +121,7 @@ export const fi = {
   'footer.tagline': 'Ei seurantaa, ei mainoksia, ei turhaa.',
 
   // About page content
-  'about.hero.title': 'Tietoa securememo.appista',
+  'about.hero.title': 'Tietoa securememo.app',
   'about.hero.subtitle': 'securememo.app on yksityisyyteen keskittyvä sovellus, jonka avulla voit luoda salattuja muistiota, jotka tuhoutuvat itsestään lukemisen tai vanhentumisen jälkeen. Rakennettu turvallisuus ja yksityisyys etusijalla. Lähdekoodi saatavilla GitHubissa.',
 
   'about.tech.title': 'Teknologiakokonaisuus',
