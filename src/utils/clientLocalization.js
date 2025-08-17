@@ -162,6 +162,10 @@ const DEFAULT_LOCALE = 'en';
 // Translation strings for the current locale (and fallback)
 const TRANSLATIONS = ${translationsString};
 
+function isLocaleSupported(locale) {
+  return SUPPORTED_LOCALES.includes(locale);
+}
+  
 /**
  * Get current locale from URL
  * @returns {string} Current locale code
@@ -283,10 +287,6 @@ export function initLocalization() {
   
   // Set document language attribute
   document.documentElement.setAttribute('lang', getCurrentLocale());
-}
-
-function isLocaleSupported(locale) {
-  return SUPPORTED_LOCALES.includes(locale);
 }
 
 `;
