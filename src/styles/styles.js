@@ -15,6 +15,13 @@ export function getStyles() {
   --shadow-inset: inset 0 1px 3px rgba(0, 0, 0, 0.08);
 }
 
+/* Improve long-word handling to prevent horizontal overflow on narrow screens */
+html, body, .nav-logo, .nav-link, .language-item, p, h1, h2, h3, .memo-message p, .footer, .feature-card p, .feature-item, .memo-card, .url-copy-container input {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  hyphens: auto;
+}
+
 body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
   line-height: 1.6;
@@ -1197,7 +1204,8 @@ input, textarea, select {
     display: flex; /* Use flex for better alignment */
     align-items: center;
     width: 100%;
-    padding: 20px 24px; /* Increase padding to make menu items larger */
+    padding: 20px 24px;
+  white-space: normal;
     text-align: left;
     border-radius: 0;
     font-size: 1.1rem; /* Slightly larger font */
@@ -1244,6 +1252,7 @@ input, textarea, select {
   
   .language-toggle {
     display: none; /* Hide dropdown toggle on mobile */
+  white-space: normal;
   }
   
   .language-menu {
