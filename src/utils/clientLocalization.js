@@ -149,7 +149,8 @@ export function getClientLocalizationJS(locale = 'en') {
     relevantTranslations['en'] = TRANSLATIONS['en'];
   }
 
-  const translationsString = JSON.stringify(relevantTranslations, null, 2);
+  // Compact JSON to minimize payload size
+  const translationsString = JSON.stringify(relevantTranslations);
   const supportedLocalesString = JSON.stringify(getSupportedLocales());
   
   return `// Client-side localization utility for securememo.app
@@ -165,7 +166,7 @@ const TRANSLATIONS = ${translationsString};
 function isLocaleSupported(locale) {
   return SUPPORTED_LOCALES.includes(locale);
 }
-  
+
 /**
  * Get current locale from URL
  * @returns {string} Current locale code
