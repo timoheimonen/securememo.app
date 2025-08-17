@@ -878,7 +878,7 @@ input, textarea, select {
   }
   
   .btn {
-  padding: 10px 18px;
+    padding: 10px 20px;
     font-size: 0.9rem;
   }
   
@@ -886,26 +886,24 @@ input, textarea, select {
     font-size: 1rem;
   }
   
-  /* Reduce outer container side padding to give more usable width on very narrow phones */
   .nav-container {
-    padding: 8px 10px;
+  padding: 8px 10px;
   }
   
-  /* Reduce main content side padding so text has more horizontal space */
   .main-content {
-    padding: 12px 10px;
+  padding: 12px 10px;
   }
   
   .memo-card {
-    padding: 12px;
+  padding: 12px;
   }
   
   .about-section {
-    padding: 12px;
+  padding: 12px;
   }
   
   .feature-card {
-    padding: 16px;
+  padding: 16px;
   }
 }
 
@@ -1002,7 +1000,8 @@ input, textarea, select {
     position: fixed;
     top: 0;
     right: -100%;
-    width: 300px;
+  width: 100%;
+  max-width: 340px;
     /* Better iOS-compatible height calculation */
     /* Use window.innerHeight via CSS custom property fallback approach */
     height: 100vh; /* Base fallback */
@@ -1010,7 +1009,7 @@ input, textarea, select {
     max-height: 100vh;
     max-height: calc(var(--vh, 1vh) * 100);
     /* Minimum height ensures content is always accessible */
-    min-height: 500px; /* Reduced minimum to ensure it fits on small screens */
+  min-height: 420px; /* Reduced minimum to ensure it fits on small screens */
     background: rgba(255, 255, 255, 0.98);
     backdrop-filter: blur(20px);
     /* Use flexbox with proper scroll container setup */
@@ -1215,7 +1214,7 @@ input, textarea, select {
     color: #333;
     transition: all 0.3s ease;
     border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-    min-height: 60px; /* Ensure minimum height for touch targets */
+  min-height: 50px; /* Ensure minimum height for touch targets */
     /* Improve touch responsiveness */
     touch-action: manipulation;
     -webkit-tap-highlight-color: transparent;
