@@ -97,7 +97,7 @@ function minifyCSS(css) {
 // Version asset URLs in generated HTML without touching templates
 function versionAssetUrls(html) {
   try {
-    return html
+    const withAssets = html
       // styles.css
       .replace(/\/(styles\.css)(\b)/g, `/styles.css?v=${ASSET_VERSION}$2`)
       // common.js
@@ -106,6 +106,14 @@ function versionAssetUrls(html) {
       .replace(/\/js\/create-memo\.js\?locale=([A-Za-z-_.]+)/g, `/js/create-memo.js?locale=$1&v=${ASSET_VERSION}`)
       // read-memo.js?locale=xx
       .replace(/\/js\/read-memo\.js\?locale=([A-Za-z-_.]+)/g, `/js/read-memo.js?locale=$1&v=${ASSET_VERSION}`);
+
+    // Add version to internal HTML links in <a href="/..."> only (avoid <link rel="canonical">, icons, etc.)
+    const locales = '(en|es|fr|de|hi|zh|ptPT|ptBR|ja|ko|it|id|vi|sv|pl|hu|fi)';
+    // Root page links: href="/en"
+    const withRootLinks = withAssets.replace(new RegExp(`(<a[^>]*href=\"\/${locales})(\")`, 'g'), `$1?v=${ASSET_VERSION}$2`);
+    // *.html links without existing query/hash: href="/en/about.html"
+    const withHtmlLinks = withRootLinks.replace(new RegExp(`(<a[^>]*href=\"\/${locales}\/[^\"?#]+\\.html)(\")`, 'g'), `$1?v=${ASSET_VERSION}$2`);
+    return withHtmlLinks;
   } catch (_) {
     return html;
   }
@@ -241,16 +249,30 @@ export default {
 
         // Check for nested locale patterns and redirect to normalized path
         if (localeResult.needsRedirect) {
-          // Redirect nested locale paths to proper single locale paths
-          // localeResult.pathWithoutLocale is already clean, just add default locale prefix
           const normalizedPath = buildLocalizedPath(getDefaultLocale(), localeResult.pathWithoutLocale);
-          return Response.redirect(url.origin + normalizedPath, 301);
+          const location = url.origin + normalizedPath;
+          return new Response(null, {
+            status: 301,
+            headers: {
+              Location: location,
+              'Cache-Control': 'public, max-age=300',
+              ...getSecurityHeaders(request)
+            }
+          });
         }
 
         // Check if redirect to localized path is needed (add /en prefix to non-localized URLs)
         const redirectPath = getLocaleRedirectPath(pathname);
         if (redirectPath && redirectPath !== pathname) {
-          return Response.redirect(url.origin + redirectPath, 301);
+          const location = url.origin + redirectPath;
+          return new Response(null, {
+            status: 301,
+            headers: {
+              Location: location,
+              'Cache-Control': 'public, max-age=300',
+              ...getSecurityHeaders(request)
+            }
+          });
         }
       }
 
@@ -660,12 +682,12 @@ ${sitemapUrls}</urlset>`;
         case '/':
           cspNonce = generateNonce();
           response = versionAssetUrls((await getIndexHTML(locale, url.origin)).replace(/{{CSP_NONCE}}/g, cspNonce));
-          cacheHeaders = { 'Cache-Control': 'public, max-age=604800' };
+          cacheHeaders = { 'Cache-Control': 'public, max-age=3600, s-maxage=604800' };
           break;
         case '/about.html':
           cspNonce = cspNonce || generateNonce();
           response = versionAssetUrls((await getAboutHTML(locale, url.origin)).replace(/{{CSP_NONCE}}/g, cspNonce));
-          cacheHeaders = { 'Cache-Control': 'public, max-age=604800' };
+          cacheHeaders = { 'Cache-Control': 'public, max-age=3600, s-maxage=604800' };
           break;
         case '/create-memo.html':
           const siteKey = env.TURNSTILE_SITE_KEY || 'MISSING_SITE_KEY';
@@ -686,12 +708,12 @@ ${sitemapUrls}</urlset>`;
         case '/tos.html':
           cspNonce = cspNonce || generateNonce();
           response = versionAssetUrls((await getToSHTML(locale, url.origin)).replace(/{{CSP_NONCE}}/g, cspNonce));
-          cacheHeaders = { 'Cache-Control': 'public, max-age=604800' };
+          cacheHeaders = { 'Cache-Control': 'public, max-age=3600, s-maxage=604800' };
           break;
         case '/privacy.html':
           cspNonce = cspNonce || generateNonce();
           response = versionAssetUrls((await getPrivacyHTML(locale, url.origin)).replace(/{{CSP_NONCE}}/g, cspNonce));
-          cacheHeaders = { 'Cache-Control': 'public, max-age=604800' };
+          cacheHeaders = { 'Cache-Control': 'public, max-age=3600, s-maxage=604800' };
           break;
         default:
           return new Response(getErrorMessage('NOT_FOUND', locale), {
