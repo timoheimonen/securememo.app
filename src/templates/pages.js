@@ -2,26 +2,26 @@ import { t } from '../utils/localization.js';
 
 // Helper function to get native language name
 function getLanguageDisplayName(locale) {
-  const languageNames = {
-    'en': 'English',
-    'es': 'Español',
-    'fr': 'Français',
-    'de': 'Deutsch',
-    'it': 'Italiano',
-    'id': 'Bahasa Indonesia',
-    'ptPT': 'Português',
-    'ptBR': 'Português (BR)',
-    'hi': 'हिन्दी',
-    'zh': '中文',
-    'ja': '日本語',
-    'ko': '한국어',
-    'vi': 'Tiếng Việt',
-    'sv': 'Svenska',
-    'pl': 'Polski',
-    'hu': 'Magyar',
-    'fi': 'Suomi',
-    'ru': 'Русский'
-  };
+    const languageNames = {
+        'de': 'Deutsch',
+        'en': 'English',
+        'es': 'Español',
+        'fi': 'Suomi',
+        'fr': 'Français',
+        'hi': 'हिन्दी',
+        'hu': 'Magyar',
+        'id': 'Bahasa Indonesia',
+        'it': 'Italiano',
+        'ja': '日本語',
+        'ko': '한국어',
+        'pl': 'Polski',
+        'ptPT': 'Português',
+        'ptBR': 'Português (BR)',
+        'ru': 'Русский',
+        'sv': 'Svenska',
+        'vi': 'Tiếng Việt',
+        'zh': '中文'
+    };
   return languageNames[locale] || locale.toUpperCase();
 }
 
@@ -116,24 +116,24 @@ export async function getIndexHTML(locale = 'en', origin = 'https://securememo.a
                         🌐 ${getLanguageDisplayName(locale)}
                     </button>
                     <div class="language-menu">
+                        <a href="/de" class="language-item ${locale === 'de' ? 'active' : ''}" title="${t('language.german', locale)}">DE - Deutsch</a>
                         <a href="/en" class="language-item ${locale === 'en' ? 'active' : ''}" title="${t('language.english', locale)}">EN - English</a>
                         <a href="/es" class="language-item ${locale === 'es' ? 'active' : ''}" title="${t('language.spanish', locale)}">ES - Español</a>
                         <a href="/fi" class="language-item ${locale === 'fi' ? 'active' : ''}" title="${t('language.finnish', locale)}">FI - Suomi</a>
                         <a href="/fr" class="language-item ${locale === 'fr' ? 'active' : ''}" title="${t('language.french', locale)}">FR - Français</a>
-                        <a href="/de" class="language-item ${locale === 'de' ? 'active' : ''}" title="${t('language.german', locale)}">DE - Deutsch</a>
-                        <a href="/hu" class="language-item ${locale === 'hu' ? 'active' : ''}" title="${t('language.hungarian', locale)}">HU - Magyar</a>
-                        <a href="/sv" class="language-item ${locale === 'sv' ? 'active' : ''}" title="${t('language.swedish', locale)}">SV - Svenska</a>
-                        <a href="/it" class="language-item ${locale === 'it' ? 'active' : ''}" title="${t('language.italian', locale)}">IT - Italiano</a>
-                        <a href="/pl" class="language-item ${locale === 'pl' ? 'active' : ''}" title="${t('language.polish', locale)}">PL - Polski</a>
-                        <a href="/id" class="language-item ${locale === 'id' ? 'active' : ''}" title="${t('language.indonesian', locale)}">ID - Bahasa Indonesia</a>
-                        <a href="/ptPT" class="language-item ${locale === 'ptPT' ? 'active' : ''}" title="${t('language.portuguesePT', locale)}">PT - Português</a>
-                        <a href="/ptBR" class="language-item ${locale === 'ptBR' ? 'active' : ''}" title="${t('language.portugueseBR', locale)}">PT-BR - Português (Brasil)</a>
                         <a href="/hi" class="language-item ${locale === 'hi' ? 'active' : ''}" title="${t('language.hindi', locale)}">HI - हिन्दी</a>
-                        <a href="/zh" class="language-item ${locale === 'zh' ? 'active' : ''}" title="${t('language.chinese', locale)}">ZH - 中文</a>
+                        <a href="/hu" class="language-item ${locale === 'hu' ? 'active' : ''}" title="${t('language.hungarian', locale)}">HU - Magyar</a>
+                        <a href="/id" class="language-item ${locale === 'id' ? 'active' : ''}" title="${t('language.indonesian', locale)}">ID - Bahasa Indonesia</a>
+                        <a href="/it" class="language-item ${locale === 'it' ? 'active' : ''}" title="${t('language.italian', locale)}">IT - Italiano</a>
                         <a href="/ja" class="language-item ${locale === 'ja' ? 'active' : ''}" title="${t('language.japanese', locale)}">JA - 日本語</a>
                         <a href="/ko" class="language-item ${locale === 'ko' ? 'active' : ''}" title="${t('language.korean', locale)}">KO - 한국어</a>
-                        <a href="/vi" class="language-item ${locale === 'vi' ? 'active' : ''}" title="${t('language.vietnamese', locale)}">VI - Tiếng Việt</a>
+                        <a href="/pl" class="language-item ${locale === 'pl' ? 'active' : ''}" title="${t('language.polish', locale)}">PL - Polski</a>
+                        <a href="/ptPT" class="language-item ${locale === 'ptPT' ? 'active' : ''}" title="${t('language.portuguesePT', locale)}">PT - Português</a>
+                        <a href="/ptBR" class="language-item ${locale === 'ptBR' ? 'active' : ''}" title="${t('language.portugueseBR', locale)}">PT-BR - Português (Brasil)</a>
                         <a href="/ru" class="language-item ${locale === 'ru' ? 'active' : ''}" title="${t('language.russian', locale)}">RU - Русский</a>
+                        <a href="/sv" class="language-item ${locale === 'sv' ? 'active' : ''}" title="${t('language.swedish', locale)}">SV - Svenska</a>
+                        <a href="/vi" class="language-item ${locale === 'vi' ? 'active' : ''}" title="${t('language.vietnamese', locale)}">VI - Tiếng Việt</a>
+                        <a href="/zh" class="language-item ${locale === 'zh' ? 'active' : ''}" title="${t('language.chinese', locale)}">ZH - 中文</a>
                     </div>
                 </li>
             </ul>
@@ -306,24 +306,24 @@ export async function getAboutHTML(locale = 'en', origin = 'https://securememo.a
                         🌐 ${getLanguageDisplayName(locale)}
                     </button>
                     <div class="language-menu">
+                        <a href="/de/about.html" class="language-item ${locale === 'de' ? 'active' : ''}" title="${t('language.german', locale)}">DE - Deutsch</a>
                         <a href="/en/about.html" class="language-item ${locale === 'en' ? 'active' : ''}" title="${t('language.english', locale)}">EN - English</a>
                         <a href="/es/about.html" class="language-item ${locale === 'es' ? 'active' : ''}" title="${t('language.spanish', locale)}">ES - Español</a>
                         <a href="/fi/about.html" class="language-item ${locale === 'fi' ? 'active' : ''}" title="${t('language.finnish', locale)}">FI - Suomi</a>
                         <a href="/fr/about.html" class="language-item ${locale === 'fr' ? 'active' : ''}" title="${t('language.french', locale)}">FR - Français</a>
-                        <a href="/de/about.html" class="language-item ${locale === 'de' ? 'active' : ''}" title="${t('language.german', locale)}">DE - Deutsch</a>
-                        <a href="/hu/about.html" class="language-item ${locale === 'hu' ? 'active' : ''}" title="${t('language.hungarian', locale)}">HU - Magyar</a>
-                        <a href="/sv/about.html" class="language-item ${locale === 'sv' ? 'active' : ''}" title="${t('language.swedish', locale)}">SV - Svenska</a>
-                        <a href="/it/about.html" class="language-item ${locale === 'it' ? 'active' : ''}" title="${t('language.italian', locale)}">IT - Italiano</a>
-                        <a href="/pl/about.html" class="language-item ${locale === 'pl' ? 'active' : ''}" title="${t('language.polish', locale)}">PL - Polski</a>
-                        <a href="/id/about.html" class="language-item ${locale === 'id' ? 'active' : ''}" title="${t('language.indonesian', locale)}">ID - Bahasa Indonesia</a>
-                        <a href="/ptPT/about.html" class="language-item ${locale === 'ptPT' ? 'active' : ''}" title="${t('language.portuguesePT', locale)}">PT - Português</a>
-                        <a href="/ptBR/about.html" class="language-item ${locale === 'ptBR' ? 'active' : ''}" title="${t('language.portugueseBR', locale)}">PT-BR - Português (Brasil)</a>
                         <a href="/hi/about.html" class="language-item ${locale === 'hi' ? 'active' : ''}" title="${t('language.hindi', locale)}">HI - हिन्दी</a>
-                        <a href="/zh/about.html" class="language-item ${locale === 'zh' ? 'active' : ''}" title="${t('language.chinese', locale)}">ZH - 中文</a>
+                        <a href="/hu/about.html" class="language-item ${locale === 'hu' ? 'active' : ''}" title="${t('language.hungarian', locale)}">HU - Magyar</a>
+                        <a href="/id/about.html" class="language-item ${locale === 'id' ? 'active' : ''}" title="${t('language.indonesian', locale)}">ID - Bahasa Indonesia</a>
+                        <a href="/it/about.html" class="language-item ${locale === 'it' ? 'active' : ''}" title="${t('language.italian', locale)}">IT - Italiano</a>
                         <a href="/ja/about.html" class="language-item ${locale === 'ja' ? 'active' : ''}" title="${t('language.japanese', locale)}">JA - 日本語</a>
                         <a href="/ko/about.html" class="language-item ${locale === 'ko' ? 'active' : ''}" title="${t('language.korean', locale)}">KO - 한국어</a>
-                        <a href="/vi/about.html" class="language-item ${locale === 'vi' ? 'active' : ''}" title="${t('language.vietnamese', locale)}">VI - Tiếng Việt</a>
+                        <a href="/pl/about.html" class="language-item ${locale === 'pl' ? 'active' : ''}" title="${t('language.polish', locale)}">PL - Polski</a>
+                        <a href="/ptPT/about.html" class="language-item ${locale === 'ptPT' ? 'active' : ''}" title="${t('language.portuguesePT', locale)}">PT - Português</a>
+                        <a href="/ptBR/about.html" class="language-item ${locale === 'ptBR' ? 'active' : ''}" title="${t('language.portugueseBR', locale)}">PT-BR - Português (Brasil)</a>
                         <a href="/ru/about.html" class="language-item ${locale === 'ru' ? 'active' : ''}" title="${t('language.russian', locale)}">RU - Русский</a>
+                        <a href="/sv/about.html" class="language-item ${locale === 'sv' ? 'active' : ''}" title="${t('language.swedish', locale)}">SV - Svenska</a>
+                        <a href="/vi/about.html" class="language-item ${locale === 'vi' ? 'active' : ''}" title="${t('language.vietnamese', locale)}">VI - Tiếng Việt</a>
+                        <a href="/zh/about.html" class="language-item ${locale === 'zh' ? 'active' : ''}" title="${t('language.chinese', locale)}">ZH - 中文</a>
                     </div>
                 </li>
             </ul>
@@ -527,24 +527,24 @@ export async function getCreateMemoHTML(locale = 'en', origin = 'https://securem
                         🌐 ${getLanguageDisplayName(locale)}
                     </button>
                     <div class="language-menu">
+                        <a href="/de/create-memo.html" class="language-item ${locale === 'de' ? 'active' : ''}" title="${t('language.german', locale)}">DE - Deutsch</a>
                         <a href="/en/create-memo.html" class="language-item ${locale === 'en' ? 'active' : ''}" title="${t('language.english', locale)}">EN - English</a>
                         <a href="/es/create-memo.html" class="language-item ${locale === 'es' ? 'active' : ''}" title="${t('language.spanish', locale)}">ES - Español</a>
                         <a href="/fi/create-memo.html" class="language-item ${locale === 'fi' ? 'active' : ''}" title="${t('language.finnish', locale)}">FI - Suomi</a>
                         <a href="/fr/create-memo.html" class="language-item ${locale === 'fr' ? 'active' : ''}" title="${t('language.french', locale)}">FR - Français</a>
-                        <a href="/de/create-memo.html" class="language-item ${locale === 'de' ? 'active' : ''}" title="${t('language.german', locale)}">DE - Deutsch</a>
-                        <a href="/hu/create-memo.html" class="language-item ${locale === 'hu' ? 'active' : ''}" title="${t('language.hungarian', locale)}">HU - Magyar</a>
-                        <a href="/sv/create-memo.html" class="language-item ${locale === 'sv' ? 'active' : ''}" title="${t('language.swedish', locale)}">SV - Svenska</a>
-                        <a href="/it/create-memo.html" class="language-item ${locale === 'it' ? 'active' : ''}" title="${t('language.italian', locale)}">IT - Italiano</a>
-                        <a href="/pl/create-memo.html" class="language-item ${locale === 'pl' ? 'active' : ''}" title="${t('language.polish', locale)}">PL - Polski</a>
-                        <a href="/id/create-memo.html" class="language-item ${locale === 'id' ? 'active' : ''}" title="${t('language.indonesian', locale)}">ID - Bahasa Indonesia</a>
-                        <a href="/ptPT/create-memo.html" class="language-item ${locale === 'ptPT' ? 'active' : ''}" title="${t('language.portuguesePT', locale)}">PT - Português</a>
-                        <a href="/ptBR/create-memo.html" class="language-item ${locale === 'ptBR' ? 'active' : ''}" title="${t('language.portugueseBR', locale)}">PT-BR - Português (Brasil)</a>
                         <a href="/hi/create-memo.html" class="language-item ${locale === 'hi' ? 'active' : ''}" title="${t('language.hindi', locale)}">HI - हिन्दी</a>
-                        <a href="/zh/create-memo.html" class="language-item ${locale === 'zh' ? 'active' : ''}" title="${t('language.chinese', locale)}">ZH - 中文</a>
+                        <a href="/hu/create-memo.html" class="language-item ${locale === 'hu' ? 'active' : ''}" title="${t('language.hungarian', locale)}">HU - Magyar</a>
+                        <a href="/id/create-memo.html" class="language-item ${locale === 'id' ? 'active' : ''}" title="${t('language.indonesian', locale)}">ID - Bahasa Indonesia</a>
+                        <a href="/it/create-memo.html" class="language-item ${locale === 'it' ? 'active' : ''}" title="${t('language.italian', locale)}">IT - Italiano</a>
                         <a href="/ja/create-memo.html" class="language-item ${locale === 'ja' ? 'active' : ''}" title="${t('language.japanese', locale)}">JA - 日本語</a>
                         <a href="/ko/create-memo.html" class="language-item ${locale === 'ko' ? 'active' : ''}" title="${t('language.korean', locale)}">KO - 한국어</a>
-                        <a href="/vi/create-memo.html" class="language-item ${locale === 'vi' ? 'active' : ''}" title="${t('language.vietnamese', locale)}">VI - Tiếng Việt</a>
+                        <a href="/pl/create-memo.html" class="language-item ${locale === 'pl' ? 'active' : ''}" title="${t('language.polish', locale)}">PL - Polski</a>
+                        <a href="/ptPT/create-memo.html" class="language-item ${locale === 'ptPT' ? 'active' : ''}" title="${t('language.portuguesePT', locale)}">PT - Português</a>
+                        <a href="/ptBR/create-memo.html" class="language-item ${locale === 'ptBR' ? 'active' : ''}" title="${t('language.portugueseBR', locale)}">PT-BR - Português (Brasil)</a>
                         <a href="/ru/create-memo.html" class="language-item ${locale === 'ru' ? 'active' : ''}" title="${t('language.russian', locale)}">RU - Русский</a>
+                        <a href="/sv/create-memo.html" class="language-item ${locale === 'sv' ? 'active' : ''}" title="${t('language.swedish', locale)}">SV - Svenska</a>
+                        <a href="/vi/create-memo.html" class="language-item ${locale === 'vi' ? 'active' : ''}" title="${t('language.vietnamese', locale)}">VI - Tiếng Việt</a>
+                        <a href="/zh/create-memo.html" class="language-item ${locale === 'zh' ? 'active' : ''}" title="${t('language.chinese', locale)}">ZH - 中文</a>
                     </div>
                 </li>
             </ul>
@@ -734,24 +734,24 @@ export async function getReadMemoHTML(locale = 'en', origin = 'https://securemem
                         🌐 ${getLanguageDisplayName(locale)}
                     </button>
                     <div class="language-menu">
+                        <a href="/de/read-memo.html" class="language-item ${locale === 'de' ? 'active' : ''}" title="${t('language.german', locale)}">DE - Deutsch</a>
                         <a href="/en/read-memo.html" class="language-item ${locale === 'en' ? 'active' : ''}" title="${t('language.english', locale)}">EN - English</a>
                         <a href="/es/read-memo.html" class="language-item ${locale === 'es' ? 'active' : ''}" title="${t('language.spanish', locale)}">ES - Español</a>
                         <a href="/fi/read-memo.html" class="language-item ${locale === 'fi' ? 'active' : ''}" title="${t('language.finnish', locale)}">FI - Suomi</a>
                         <a href="/fr/read-memo.html" class="language-item ${locale === 'fr' ? 'active' : ''}" title="${t('language.french', locale)}">FR - Français</a>
-                        <a href="/de/read-memo.html" class="language-item ${locale === 'de' ? 'active' : ''}" title="${t('language.german', locale)}">DE - Deutsch</a>
-                        <a href="/hu/read-memo.html" class="language-item ${locale === 'hu' ? 'active' : ''}" title="${t('language.hungarian', locale)}">HU - Magyar</a>
-                        <a href="/sv/read-memo.html" class="language-item ${locale === 'sv' ? 'active' : ''}" title="${t('language.swedish', locale)}">SV - Svenska</a>
-                        <a href="/it/read-memo.html" class="language-item ${locale === 'it' ? 'active' : ''}" title="${t('language.italian', locale)}">IT - Italiano</a>
-                        <a href="/pl/read-memo.html" class="language-item ${locale === 'pl' ? 'active' : ''}" title="${t('language.polish', locale)}">PL - Polski</a>
-                        <a href="/id/read-memo.html" class="language-item ${locale === 'id' ? 'active' : ''}" title="${t('language.indonesian', locale)}">ID - Bahasa Indonesia</a>
-                        <a href="/ptPT/read-memo.html" class="language-item ${locale === 'ptPT' ? 'active' : ''}" title="${t('language.portuguesePT', locale)}">PT - Português</a>
-                        <a href="/ptBR/read-memo.html" class="language-item ${locale === 'ptBR' ? 'active' : ''}" title="${t('language.portugueseBR', locale)}">PT-BR - Português (Brasil)</a>
                         <a href="/hi/read-memo.html" class="language-item ${locale === 'hi' ? 'active' : ''}" title="${t('language.hindi', locale)}">HI - हिन्दी</a>
-                        <a href="/zh/read-memo.html" class="language-item ${locale === 'zh' ? 'active' : ''}" title="${t('language.chinese', locale)}">ZH - 中文</a>
+                        <a href="/hu/read-memo.html" class="language-item ${locale === 'hu' ? 'active' : ''}" title="${t('language.hungarian', locale)}">HU - Magyar</a>
+                        <a href="/id/read-memo.html" class="language-item ${locale === 'id' ? 'active' : ''}" title="${t('language.indonesian', locale)}">ID - Bahasa Indonesia</a>
+                        <a href="/it/read-memo.html" class="language-item ${locale === 'it' ? 'active' : ''}" title="${t('language.italian', locale)}">IT - Italiano</a>
                         <a href="/ja/read-memo.html" class="language-item ${locale === 'ja' ? 'active' : ''}" title="${t('language.japanese', locale)}">JA - 日本語</a>
                         <a href="/ko/read-memo.html" class="language-item ${locale === 'ko' ? 'active' : ''}" title="${t('language.korean', locale)}">KO - 한국어</a>
-                        <a href="/vi/read-memo.html" class="language-item ${locale === 'vi' ? 'active' : ''}" title="${t('language.vietnamese', locale)}">VI - Tiếng Việt</a>
+                        <a href="/pl/read-memo.html" class="language-item ${locale === 'pl' ? 'active' : ''}" title="${t('language.polish', locale)}">PL - Polski</a>
+                        <a href="/ptPT/read-memo.html" class="language-item ${locale === 'ptPT' ? 'active' : ''}" title="${t('language.portuguesePT', locale)}">PT - Português</a>
+                        <a href="/ptBR/read-memo.html" class="language-item ${locale === 'ptBR' ? 'active' : ''}" title="${t('language.portugueseBR', locale)}">PT-BR - Português (Brasil)</a>
                         <a href="/ru/read-memo.html" class="language-item ${locale === 'ru' ? 'active' : ''}" title="${t('language.russian', locale)}">RU - Русский</a>
+                        <a href="/sv/read-memo.html" class="language-item ${locale === 'sv' ? 'active' : ''}" title="${t('language.swedish', locale)}">SV - Svenska</a>
+                        <a href="/vi/read-memo.html" class="language-item ${locale === 'vi' ? 'active' : ''}" title="${t('language.vietnamese', locale)}">VI - Tiếng Việt</a>
+                        <a href="/zh/read-memo.html" class="language-item ${locale === 'zh' ? 'active' : ''}" title="${t('language.chinese', locale)}">ZH - 中文</a>
                     </div>
                 </li>
             </ul>
@@ -920,24 +920,24 @@ export async function getToSHTML(locale = 'en', origin = 'https://securememo.app
                         🌐 ${getLanguageDisplayName(locale)}
                     </button>
                     <div class="language-menu">
+                        <a href="/de/tos.html" class="language-item ${locale === 'de' ? 'active' : ''}" title="${t('language.german', locale)}">DE - Deutsch</a>
                         <a href="/en/tos.html" class="language-item ${locale === 'en' ? 'active' : ''}" title="${t('language.english', locale)}">EN - English</a>
                         <a href="/es/tos.html" class="language-item ${locale === 'es' ? 'active' : ''}" title="${t('language.spanish', locale)}">ES - Español</a>
                         <a href="/fi/tos.html" class="language-item ${locale === 'fi' ? 'active' : ''}" title="${t('language.finnish', locale)}">FI - Suomi</a>
                         <a href="/fr/tos.html" class="language-item ${locale === 'fr' ? 'active' : ''}" title="${t('language.french', locale)}">FR - Français</a>
-                        <a href="/de/tos.html" class="language-item ${locale === 'de' ? 'active' : ''}" title="${t('language.german', locale)}">DE - Deutsch</a>
-                        <a href="/hu/tos.html" class="language-item ${locale === 'hu' ? 'active' : ''}" title="${t('language.hungarian', locale)}">HU - Magyar</a>
-                        <a href="/sv/tos.html" class="language-item ${locale === 'sv' ? 'active' : ''}" title="${t('language.swedish', locale)}">SV - Svenska</a>
-                        <a href="/it/tos.html" class="language-item ${locale === 'it' ? 'active' : ''}" title="${t('language.italian', locale)}">IT - Italiano</a>
-                        <a href="/pl/tos.html" class="language-item ${locale === 'pl' ? 'active' : ''}" title="${t('language.polish', locale)}">PL - Polski</a>
-                        <a href="/id/tos.html" class="language-item ${locale === 'id' ? 'active' : ''}" title="${t('language.indonesian', locale)}">ID - Bahasa Indonesia</a>
-                        <a href="/ptPT/tos.html" class="language-item ${locale === 'ptPT' ? 'active' : ''}" title="${t('language.portuguesePT', locale)}">PT - Português</a>
-                        <a href="/ptBR/tos.html" class="language-item ${locale === 'ptBR' ? 'active' : ''}" title="${t('language.portugueseBR', locale)}">PT-BR - Português (Brasil)</a>
                         <a href="/hi/tos.html" class="language-item ${locale === 'hi' ? 'active' : ''}" title="${t('language.hindi', locale)}">HI - हिन्दी</a>
-                        <a href="/zh/tos.html" class="language-item ${locale === 'zh' ? 'active' : ''}" title="${t('language.chinese', locale)}">ZH - 中文</a>
+                        <a href="/hu/tos.html" class="language-item ${locale === 'hu' ? 'active' : ''}" title="${t('language.hungarian', locale)}">HU - Magyar</a>
+                        <a href="/id/tos.html" class="language-item ${locale === 'id' ? 'active' : ''}" title="${t('language.indonesian', locale)}">ID - Bahasa Indonesia</a>
+                        <a href="/it/tos.html" class="language-item ${locale === 'it' ? 'active' : ''}" title="${t('language.italian', locale)}">IT - Italiano</a>
                         <a href="/ja/tos.html" class="language-item ${locale === 'ja' ? 'active' : ''}" title="${t('language.japanese', locale)}">JA - 日本語</a>
                         <a href="/ko/tos.html" class="language-item ${locale === 'ko' ? 'active' : ''}" title="${t('language.korean', locale)}">KO - 한국어</a>
-                        <a href="/vi/tos.html" class="language-item ${locale === 'vi' ? 'active' : ''}" title="${t('language.vietnamese', locale)}">VI - Tiếng Việt</a>
+                        <a href="/pl/tos.html" class="language-item ${locale === 'pl' ? 'active' : ''}" title="${t('language.polish', locale)}">PL - Polski</a>
+                        <a href="/ptPT/tos.html" class="language-item ${locale === 'ptPT' ? 'active' : ''}" title="${t('language.portuguesePT', locale)}">PT - Português</a>
+                        <a href="/ptBR/tos.html" class="language-item ${locale === 'ptBR' ? 'active' : ''}" title="${t('language.portugueseBR', locale)}">PT-BR - Português (Brasil)</a>
                         <a href="/ru/tos.html" class="language-item ${locale === 'ru' ? 'active' : ''}" title="${t('language.russian', locale)}">RU - Русский</a>
+                        <a href="/sv/tos.html" class="language-item ${locale === 'sv' ? 'active' : ''}" title="${t('language.swedish', locale)}">SV - Svenska</a>
+                        <a href="/vi/tos.html" class="language-item ${locale === 'vi' ? 'active' : ''}" title="${t('language.vietnamese', locale)}">VI - Tiếng Việt</a>
+                        <a href="/zh/tos.html" class="language-item ${locale === 'zh' ? 'active' : ''}" title="${t('language.chinese', locale)}">ZH - 中文</a>
                     </div>
                 </li>
             </ul>
@@ -1167,24 +1167,24 @@ export async function getPrivacyHTML(locale = 'en', origin = 'https://securememo
                         🌐 ${getLanguageDisplayName(locale)}
                     </button>
                     <div class="language-menu">
+                        <a href="/de/privacy.html" class="language-item ${locale === 'de' ? 'active' : ''}" title="${t('language.german', locale)}">DE - Deutsch</a>
                         <a href="/en/privacy.html" class="language-item ${locale === 'en' ? 'active' : ''}" title="${t('language.english', locale)}">EN - English</a>
                         <a href="/es/privacy.html" class="language-item ${locale === 'es' ? 'active' : ''}" title="${t('language.spanish', locale)}">ES - Español</a>
                         <a href="/fi/privacy.html" class="language-item ${locale === 'fi' ? 'active' : ''}" title="${t('language.finnish', locale)}">FI - Suomi</a>
                         <a href="/fr/privacy.html" class="language-item ${locale === 'fr' ? 'active' : ''}" title="${t('language.french', locale)}">FR - Français</a>
-                        <a href="/de/privacy.html" class="language-item ${locale === 'de' ? 'active' : ''}" title="${t('language.german', locale)}">DE - Deutsch</a>
-                        <a href="/hu/privacy.html" class="language-item ${locale === 'hu' ? 'active' : ''}" title="${t('language.hungarian', locale)}">HU - Magyar</a>
-                        <a href="/sv/privacy.html" class="language-item ${locale === 'sv' ? 'active' : ''}" title="${t('language.swedish', locale)}">SV - Svenska</a>
-                        <a href="/it/privacy.html" class="language-item ${locale === 'it' ? 'active' : ''}" title="${t('language.italian', locale)}">IT - Italiano</a>
-                        <a href="/pl/privacy.html" class="language-item ${locale === 'pl' ? 'active' : ''}" title="${t('language.polish', locale)}">PL - Polski</a>
-                        <a href="/id/privacy.html" class="language-item ${locale === 'id' ? 'active' : ''}" title="${t('language.indonesian', locale)}">ID - Bahasa Indonesia</a>
-                        <a href="/ptPT/privacy.html" class="language-item ${locale === 'ptPT' ? 'active' : ''}" title="${t('language.portuguesePT', locale)}">PT - Português</a>
-                        <a href="/ptBR/privacy.html" class="language-item ${locale === 'ptBR' ? 'active' : ''}" title="${t('language.portugueseBR', locale)}">PT-BR - Português (Brasil)</a>
                         <a href="/hi/privacy.html" class="language-item ${locale === 'hi' ? 'active' : ''}" title="${t('language.hindi', locale)}">HI - हिन्दी</a>
-                        <a href="/zh/privacy.html" class="language-item ${locale === 'zh' ? 'active' : ''}" title="${t('language.chinese', locale)}">ZH - 中文</a>
+                        <a href="/hu/privacy.html" class="language-item ${locale === 'hu' ? 'active' : ''}" title="${t('language.hungarian', locale)}">HU - Magyar</a>
+                        <a href="/id/privacy.html" class="language-item ${locale === 'id' ? 'active' : ''}" title="${t('language.indonesian', locale)}">ID - Bahasa Indonesia</a>
+                        <a href="/it/privacy.html" class="language-item ${locale === 'it' ? 'active' : ''}" title="${t('language.italian', locale)}">IT - Italiano</a>
                         <a href="/ja/privacy.html" class="language-item ${locale === 'ja' ? 'active' : ''}" title="${t('language.japanese', locale)}">JA - 日本語</a>
                         <a href="/ko/privacy.html" class="language-item ${locale === 'ko' ? 'active' : ''}" title="${t('language.korean', locale)}">KO - 한국어</a>
-                        <a href="/vi/privacy.html" class="language-item ${locale === 'vi' ? 'active' : ''}" title="${t('language.vietnamese', locale)}">VI - Tiếng Việt</a>
+                        <a href="/pl/privacy.html" class="language-item ${locale === 'pl' ? 'active' : ''}" title="${t('language.polish', locale)}">PL - Polski</a>
+                        <a href="/ptPT/privacy.html" class="language-item ${locale === 'ptPT' ? 'active' : ''}" title="${t('language.portuguesePT', locale)}">PT - Português</a>
+                        <a href="/ptBR/privacy.html" class="language-item ${locale === 'ptBR' ? 'active' : ''}" title="${t('language.portugueseBR', locale)}">PT-BR - Português (Brasil)</a>
                         <a href="/ru/privacy.html" class="language-item ${locale === 'ru' ? 'active' : ''}" title="${t('language.russian', locale)}">RU - Русский</a>
+                        <a href="/sv/privacy.html" class="language-item ${locale === 'sv' ? 'active' : ''}" title="${t('language.swedish', locale)}">SV - Svenska</a>
+                        <a href="/vi/privacy.html" class="language-item ${locale === 'vi' ? 'active' : ''}" title="${t('language.vietnamese', locale)}">VI - Tiếng Việt</a>
+                        <a href="/zh/privacy.html" class="language-item ${locale === 'zh' ? 'active' : ''}" title="${t('language.chinese', locale)}">ZH - 中文</a>
                     </div>
                 </li>
             </ul>
