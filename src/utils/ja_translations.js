@@ -29,6 +29,7 @@ export const ja = {
     'language.polish': 'Polski',
     'language.hungarian': 'Magyar',
     'language.finnish': 'Suomi',
+    'language.russian': 'Русский',
 
     // Buttons
     'btn.copy': 'コピー',
