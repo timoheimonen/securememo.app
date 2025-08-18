@@ -70,6 +70,8 @@ export function updateNavigationLinks() {
   
   navLinks.forEach(link => {
     const href = link.getAttribute('href');
+    // Skip language dropdown items explicitly
+    if (link.closest('.language-dropdown')) return;
     
     // Skip external links and already localized links
     if (href.startsWith('http') || href.startsWith(`/${getCurrentLocale()}`)) {
@@ -100,6 +102,8 @@ export function updateInternalLinks() {
   
   links.forEach(link => {
     const href = link.getAttribute('href');
+  // Skip language dropdown items explicitly
+  if (link.closest('.language-dropdown')) return;
     
     // Skip already localized links and special paths
     if (href.startsWith(`/${getCurrentLocale()}`) || 

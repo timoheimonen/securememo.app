@@ -8,12 +8,14 @@ const TURNSTILE_SITE_KEY = '{{TURNSTILE_SITE_KEY}}';
 function highlightCurrentPage() {
     const currentPath = window.location.pathname;
     const navLinks = document.querySelectorAll('.nav-link');
-    
     navLinks.forEach(link => {
         link.classList.remove('active');
-        if (link.getAttribute('href') === currentPath) {
-            link.classList.add('active');
-        }
+        try {
+            const linkPath = new URL(link.getAttribute('href'), window.location.origin).pathname;
+            if (linkPath === currentPath) {
+                link.classList.add('active');
+            }
+        } catch {}
     });
 }
 
@@ -400,12 +402,14 @@ const SECURITY_CONFIG = {
 function highlightCurrentPage() {
     const currentPath = window.location.pathname;
     const navLinks = document.querySelectorAll('.nav-link');
-    
     navLinks.forEach(link => {
         link.classList.remove('active');
-        if (link.getAttribute('href') === currentPath) {
-            link.classList.add('active');
-        }
+        try {
+            const linkPath = new URL(link.getAttribute('href'), window.location.origin).pathname;
+            if (linkPath === currentPath) {
+                link.classList.add('active');
+            }
+        } catch {}
     });
 }
 
@@ -769,12 +773,14 @@ if (document.readyState === 'loading') {
 function highlightCurrentPage() {
     const currentPath = window.location.pathname;
     const navLinks = document.querySelectorAll('.nav-link');
-    
     navLinks.forEach(link => {
         link.classList.remove('active');
-        if (link.getAttribute('href') === currentPath) {
-            link.classList.add('active');
-        }
+        try {
+            const linkPath = new URL(link.getAttribute('href'), window.location.origin).pathname;
+            if (linkPath === currentPath) {
+                link.classList.add('active');
+            }
+        } catch {}
     });
 }
 
