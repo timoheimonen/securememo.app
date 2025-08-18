@@ -48,6 +48,9 @@ import {
 } from './utils/localization.js';
 import { getClientLocalizationJS } from './utils/clientLocalization.js';
 
+// Immutable asset version for cache-busting (bump on asset changes)
+const ASSET_VERSION = '20250818';
+
 // Tiny, safe JS minifier for generated strings (removes comments and trims/collapses intra-line whitespace)
 function minifyJS(code) {
   try {
@@ -69,6 +72,42 @@ function minifyJS(code) {
   } catch (_) {
     // In case of any unexpected issue, return original code
     return code;
+  }
+}
+
+// Tiny CSS minifier: strips comments, collapses whitespace safely between tokens
+function minifyCSS(css) {
+  try {
+    return css
+      // Remove block comments
+      .replace(/\/\*[\s\S]*?\*\//g, '')
+      // Collapse whitespace
+      .replace(/[\t\r\n]+/g, ' ')
+      .replace(/\s{2,}/g, ' ')
+      // Trim around punctuation
+      .replace(/\s*([{}:;,>])\s*/g, '$1')
+      // Preserve spaces in calc() and similar by re-adding a single space where double removal could break
+      .replace(/calc\(([^)]*)\)/g, (m, inner) => `calc(${inner.replace(/\s{2,}/g, ' ')})`)
+      .trim();
+  } catch (_) {
+    return css;
+  }
+}
+
+// Version asset URLs in generated HTML without touching templates
+function versionAssetUrls(html) {
+  try {
+    return html
+      // styles.css
+      .replace(/\/(styles\.css)(\b)/g, `/styles.css?v=${ASSET_VERSION}$2`)
+      // common.js
+      .replace(/\/(js\/common\.js)(\b)/g, `/js/common.js?v=${ASSET_VERSION}$2`)
+      // create-memo.js?locale=xx
+      .replace(/\/js\/create-memo\.js\?locale=([A-Za-z-_.]+)/g, `/js/create-memo.js?locale=$1&v=${ASSET_VERSION}`)
+      // read-memo.js?locale=xx
+      .replace(/\/js\/read-memo\.js\?locale=([A-Za-z-_.]+)/g, `/js/read-memo.js?locale=$1&v=${ASSET_VERSION}`);
+  } catch (_) {
+    return html;
   }
 }
 
@@ -389,13 +428,32 @@ ${sitemapUrls}</urlset>`;
             }
           });
         }
-        return new Response(getStyles(), {
+        // Cache versioned CSS aggressively at the edge
+        const isVersioned = url.searchParams.has('v');
+        if (isVersioned) {
+          const cached = await caches.default.match(request);
+          if (cached) return cached;
+        }
+        const css = minifyCSS(getStyles());
+        const cssEtag = `"styles-${ASSET_VERSION}"`;
+        if (request.headers.get('if-none-match') === cssEtag) {
+          return new Response(null, { status: 304, headers: { ...getSecurityHeaders(request), ETag: cssEtag } });
+        }
+        const cssResp = new Response(css, {
           headers: {
             'Content-Type': 'text/css',
-            'Cache-Control': 'public, max-age=3600',
+            // Versioned -> immutable long cache; Unversioned -> short cache
+            'Cache-Control': isVersioned
+              ? 'public, max-age=31536000, immutable'
+              : 'public, max-age=3600',
+            'ETag': cssEtag,
             ...getSecurityHeaders(request)
           }
         });
+        if (isVersioned) {
+          ctx.waitUntil(caches.default.put(request, cssResp.clone()));
+        }
+        return cssResp;
       }
 
       // Serve JS files with dynamic content injection
@@ -411,6 +469,9 @@ ${sitemapUrls}</urlset>`;
             }
           });
         }
+  // Edge cache per-locale + version
+  const cached = await caches.default.match(request);
+  if (cached) return cached;
   const jsContent = getCreateMemoJS()
           .replace(/{{TURNSTILE_SITE_KEY}}/g, env.TURNSTILE_SITE_KEY)
           .replace(/{{MISSING_MESSAGE_ERROR}}/g, escapeJavaScript(getErrorMessage('MISSING_MESSAGE', jsLocale)))
@@ -431,13 +492,20 @@ ${sitemapUrls}</urlset>`;
           .replace(/{{BTN_SHOW}}/g, escapeJavaScript(t('btn.show', jsLocale)))
           .replace(/{{BTN_HIDE}}/g, escapeJavaScript(t('btn.hide', jsLocale)))
           .replace(/{{BTN_COPY}}/g, escapeJavaScript(t('btn.copy', jsLocale)));
-  return new Response(minifyJS(jsContent), {
+  const jsEtag = `"create-${ASSET_VERSION}-${jsLocale}"`;
+  if (request.headers.get('if-none-match') === jsEtag) {
+    return new Response(null, { status: 304, headers: { ...getSecurityHeaders(request), ETag: jsEtag } });
+  }
+  const jsResp = new Response(minifyJS(jsContent), {
           headers: {
             'Content-Type': 'application/javascript',
-            'Cache-Control': 'public, max-age=3600',
+            'Cache-Control': 'public, max-age=31536000, immutable',
+            'ETag': jsEtag,
             ...getSecurityHeaders(request)
           }
         });
+        ctx.waitUntil(caches.default.put(request, jsResp.clone()));
+        return jsResp;
       }
 
       if (pathname === '/js/read-memo.js') {
@@ -452,6 +520,9 @@ ${sitemapUrls}</urlset>`;
             }
           });
         }
+  // Edge cache per-locale + version
+  const cached = await caches.default.match(request);
+  if (cached) return cached;
   const jsContent = getReadMemoJS()
           .replace(/{{TURNSTILE_SITE_KEY}}/g, env.TURNSTILE_SITE_KEY)
           .replace(/{{MISSING_MEMO_ID_ERROR}}/g, escapeJavaScript(getErrorMessage('MISSING_MEMO_ID', jsLocale)))
@@ -472,13 +543,20 @@ ${sitemapUrls}</urlset>`;
           .replace(/{{BTN_HIDE}}/g, escapeJavaScript(t('btn.hide', jsLocale)))
           .replace(/{{BTN_COPIED}}/g, escapeJavaScript(t('btn.copied', jsLocale)))
           .replace(/{{DELETION_ERROR_MESSAGE}}/g, escapeJavaScript(t('msg.deletionError', jsLocale)));
-  return new Response(minifyJS(jsContent), {
+  const jsEtag = `"read-${ASSET_VERSION}-${jsLocale}"`;
+  if (request.headers.get('if-none-match') === jsEtag) {
+    return new Response(null, { status: 304, headers: { ...getSecurityHeaders(request), ETag: jsEtag } });
+  }
+  const jsResp = new Response(minifyJS(jsContent), {
           headers: {
             'Content-Type': 'application/javascript',
-            'Cache-Control': 'public, max-age=3600',
+            'Cache-Control': 'public, max-age=31536000, immutable',
+            'ETag': jsEtag,
             ...getSecurityHeaders(request)
           }
         });
+        ctx.waitUntil(caches.default.put(request, jsResp.clone()));
+        return jsResp;
       }
 
       if (pathname === '/js/common.js') {
@@ -491,13 +569,22 @@ ${sitemapUrls}</urlset>`;
             }
           });
         }
-  return new Response(minifyJS(getCommonJS()), {
+        const cached = await caches.default.match(request);
+        if (cached) return cached;
+        const cmnEtag = `"common-${ASSET_VERSION}"`;
+        if (request.headers.get('if-none-match') === cmnEtag) {
+          return new Response(null, { status: 304, headers: { ...getSecurityHeaders(request), ETag: cmnEtag } });
+        }
+  const commonResp = new Response(minifyJS(getCommonJS()), {
           headers: {
             'Content-Type': 'application/javascript',
-            'Cache-Control': 'public, max-age=3600',
+      'Cache-Control': 'public, max-age=31536000, immutable',
+            'ETag': cmnEtag,
             ...getSecurityHeaders(request)
           }
-        });
+    });
+    ctx.waitUntil(caches.default.put(request, commonResp.clone()));
+    return commonResp;
       }
 
       if (pathname === '/js/clientLocalization.js') {
@@ -524,17 +611,32 @@ ${sitemapUrls}</urlset>`;
           } catch {}
         }
 
-        // Serve the optimized client localization utility with only the relevant translations
-        const secHeaders = getSecurityHeaders(request);
-        // Ensure caches vary on Referer since content depends on it
-        secHeaders['Vary'] = 'Origin, Referer';
-  return new Response(minifyJS(getClientLocalizationJS(jsLocale)), {
+    // Serve the optimized client localization utility with only the relevant translations
+    const secHeaders = getSecurityHeaders(request);
+    // Ensure caches vary on Referer since content depends on it (header-based for browsers)
+    secHeaders['Vary'] = 'Origin, Referer';
+
+    // Edge cache by synthetic key including locale + version
+    const cacheKeyUrl = new URL('/js/clientLocalization.js', url.origin);
+    cacheKeyUrl.searchParams.set('locale', jsLocale);
+    cacheKeyUrl.searchParams.set('v', ASSET_VERSION);
+    const cacheMatch = await caches.default.match(cacheKeyUrl.toString());
+    if (cacheMatch) return cacheMatch;
+
+        const locEtag = `"clientloc-${ASSET_VERSION}-${jsLocale}"`;
+        if (request.headers.get('if-none-match') === locEtag) {
+          return new Response(null, { status: 304, headers: { ...secHeaders, ETag: locEtag } });
+        }
+        const locResp = new Response(minifyJS(getClientLocalizationJS(jsLocale)), {
           headers: {
             'Content-Type': 'application/javascript',
-            'Cache-Control': 'public, max-age=3600',
+      'Cache-Control': 'public, max-age=31536000, immutable',
+            'ETag': locEtag,
             ...secHeaders
           }
-        });
+    });
+    ctx.waitUntil(caches.default.put(cacheKeyUrl.toString(), locResp.clone()));
+    return locResp;
       }
 
       // Route page requests
@@ -557,38 +659,38 @@ ${sitemapUrls}</urlset>`;
       switch (pathWithoutLocale) {
         case '/':
           cspNonce = generateNonce();
-          response = (await getIndexHTML(locale, url.origin)).replace(/{{CSP_NONCE}}/g, cspNonce);
+          response = versionAssetUrls((await getIndexHTML(locale, url.origin)).replace(/{{CSP_NONCE}}/g, cspNonce));
           cacheHeaders = { 'Cache-Control': 'public, max-age=604800' };
           break;
         case '/about.html':
           cspNonce = cspNonce || generateNonce();
-          response = (await getAboutHTML(locale, url.origin)).replace(/{{CSP_NONCE}}/g, cspNonce);
+          response = versionAssetUrls((await getAboutHTML(locale, url.origin)).replace(/{{CSP_NONCE}}/g, cspNonce));
           cacheHeaders = { 'Cache-Control': 'public, max-age=604800' };
           break;
         case '/create-memo.html':
           const siteKey = env.TURNSTILE_SITE_KEY || 'MISSING_SITE_KEY';
           cspNonce = cspNonce || generateNonce();
-          response = (await getCreateMemoHTML(locale, url.origin))
+          response = versionAssetUrls((await getCreateMemoHTML(locale, url.origin))
             .replace('{{TURNSTILE_SITE_KEY}}', siteKey)
-            .replace(/{{CSP_NONCE}}/g, cspNonce);
+            .replace(/{{CSP_NONCE}}/g, cspNonce));
           cacheHeaders = { 'Cache-Control': 'no-store' };
           break;
         case '/read-memo.html':
           const readSiteKey = env.TURNSTILE_SITE_KEY || 'MISSING_SITE_KEY';
           cspNonce = cspNonce || generateNonce();
-          response = (await getReadMemoHTML(locale, url.origin))
+          response = versionAssetUrls((await getReadMemoHTML(locale, url.origin))
             .replace('{{TURNSTILE_SITE_KEY}}', readSiteKey)
-            .replace(/{{CSP_NONCE}}/g, cspNonce);
+            .replace(/{{CSP_NONCE}}/g, cspNonce));
           cacheHeaders = { 'Cache-Control': 'no-store' };
           break;
         case '/tos.html':
           cspNonce = cspNonce || generateNonce();
-          response = (await getToSHTML(locale, url.origin)).replace(/{{CSP_NONCE}}/g, cspNonce);
+          response = versionAssetUrls((await getToSHTML(locale, url.origin)).replace(/{{CSP_NONCE}}/g, cspNonce));
           cacheHeaders = { 'Cache-Control': 'public, max-age=604800' };
           break;
         case '/privacy.html':
           cspNonce = cspNonce || generateNonce();
-          response = (await getPrivacyHTML(locale, url.origin)).replace(/{{CSP_NONCE}}/g, cspNonce);
+          response = versionAssetUrls((await getPrivacyHTML(locale, url.origin)).replace(/{{CSP_NONCE}}/g, cspNonce));
           cacheHeaders = { 'Cache-Control': 'public, max-age=604800' };
           break;
         default:
@@ -598,15 +700,16 @@ ${sitemapUrls}</urlset>`;
           });
       }
 
-      return new Response(response, {
+  const htmlResp = new Response(response, {
         headers: {
           'Content-Type': 'text/html',
           ...cacheHeaders,
           ...getSecurityHeaders(request, cspNonce || generateNonce())
         }
       });
+      return htmlResp;
     } catch (error) {
-      return new Response(getErrorMessage('INTERNAL_SERVER_ERROR', locale), {
+  return new Response(getErrorMessage('INTERNAL_SERVER_ERROR', 'en'), {
         status: 500,
         headers: getSecurityHeaders(request)
       });
