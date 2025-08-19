@@ -30,6 +30,7 @@ export const pl = {
   'language.polish': 'Polski',
   'language.hungarian': 'Magyar',
   'language.finnish': 'Suomi',
+  'language.greek': 'Ελληνικά',
   'language.russian': 'Русский',
 
   // Buttons
