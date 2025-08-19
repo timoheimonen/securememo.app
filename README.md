@@ -21,7 +21,7 @@ securememo.app will run the main version of this repo.
 - **Turnstile CAPTCHA**: Prevents bot abuse and spam while maintaining user privacy (no tracking).
 - **Robust security headers**: Includes strict CSP, HSTS, and other policies to mitigate common web vulnerabilities.
 - **Automated cleanup**: Expired or read memos are permanently removed via scheduled cron jobs.
-- **Localization**: Ukrainian, English, Spanish, Finnish, French, German, Hindi, Chinese, Portuguese (Portugal), Portuguese (Brazil), Japanese, Korean, Italian, Indonesian, Swedish, Polish, Hungary, Vietnamese and Russian.
+- **Localization**: Ukrainian, English, Spanish, Dutch, Finnish, French, German, Greek, Hindi, Chinese, Portuguese (Portugal), Portuguese (Brazil), Japanese, Korean, Italian, Indonesian, Swedish, Polish, Hungary, Vietnamese and Russian.
 
 
 
@@ -54,8 +54,10 @@ securememo/
 │   │   ├── clientLocalization.js # Client-side localization utilities
 │   │   ├── translations.js     # Translation registry
 │   │   ├── uk_translations.js  # Ukrainian translations
+│   │   ├── el_translations.js  # Greek translations
 │   │   ├── en_translations.js  # English translations
 │   │   ├── de_translations.js  # German translations
+│   │   ├── nl_translations.js  # Dutch translations
 │   │   ├── es_translations.js  # Spanish translations
 │   │   ├── fr_translations.js  # French translations
 │   │   ├── fi_translations.js  # Finnish translations
@@ -119,9 +121,11 @@ For detailed contribution guidelines, please see [CONTRIBUTING.md](CONTRIBUTING.
 The supported languages are:
 - Ukrainian (uk)
 - English (en)
+- Greek (el)
 - Spanish (es)
 - Finnish (fi)
 - French (fr)
+- Dutch (nl)
 - German (de)
 - Hindi (hi)
 - Chinese (zh)
@@ -150,3 +154,5 @@ These are auto-translated from english, errors may occur.
 - #security
 - #cloudflare
 - #memos
+- #note
+- #secure
