@@ -104,8 +104,13 @@ function versionAssetUrls(html) {
       .replace(/\/(js\/common\.js)(\b)/g, `/js/common.js?v=${ASSET_VERSION}$2`)
       // create-memo.js?locale=xx
       .replace(/\/js\/create-memo\.js\?locale=([A-Za-z-_.]+)/g, `/js/create-memo.js?locale=$1&v=${ASSET_VERSION}`)
-      // read-memo.js?locale=xx
-      .replace(/\/js\/read-memo\.js\?locale=([A-Za-z-_.]+)/g, `/js/read-memo.js?locale=$1&v=${ASSET_VERSION}`);
+  // read-memo.js?locale=xx
+  .replace(/\/(js\/read-memo\.js)\?locale=([A-Za-z-_.]+)/g, `/js/read-memo.js?locale=$2&v=${ASSET_VERSION}`)
+  // version icons to enable immutable caching on clients/CDN
+  .replace(/\/(favicon\.ico)(\b)/g, `/favicon.ico?v=${ASSET_VERSION}$2`)
+  .replace(/\/(apple-touch-icon\.png)(\b)/g, `/apple-touch-icon.png?v=${ASSET_VERSION}$2`)
+  .replace(/\/(android-chrome-192x192\.png)(\b)/g, `/android-chrome-192x192.png?v=${ASSET_VERSION}$2`)
+  .replace(/\/(android-chrome-512x512\.png)(\b)/g, `/android-chrome-512x512.png?v=${ASSET_VERSION}$2`);
   } catch (_) {
     return html;
   }
@@ -655,6 +660,23 @@ ${sitemapUrls}</urlset>`;
       let cspNonce = null;
       let cacheHeaders = {};
 
+      // Edge cache static HTML pages (locale-aware) to improve hit ratio
+      const isCacheablePage = ['/', '/about.html', '/tos.html', '/privacy.html'].includes(pathWithoutLocale);
+      if (isCacheablePage) {
+        // Support browser revalidation via strong ETag
+        const pageKeyEarly = pathWithoutLocale === '/' ? 'home' : pathWithoutLocale.replace(/^\//, '').replace(/\W+/g, '-');
+        const expectedETag = `"html-${ASSET_VERSION}-${locale}-${pageKeyEarly}"`;
+        if (request.headers.get('if-none-match') === expectedETag) {
+          return new Response(null, { status: 304, headers: { ...getSecurityHeaders(request), ETag: expectedETag } });
+        }
+        const cacheKeyUrl = new URL(pathname, url.origin);
+        cacheKeyUrl.searchParams.set('v', ASSET_VERSION);
+        const cachedHtml = await caches.default.match(cacheKeyUrl.toString());
+        if (cachedHtml) {
+          return cachedHtml;
+        }
+      }
+
       // Use pathWithoutLocale for route matching to support localized URLs
       switch (pathWithoutLocale) {
         case '/':
@@ -707,6 +729,20 @@ ${sitemapUrls}</urlset>`;
           ...getSecurityHeaders(request, cspNonce || generateNonce())
         }
       });
+
+      // Store cacheable HTML at edge with versioned key; skip create/read pages
+      if (isCacheablePage) {
+        const cacheKeyUrl = new URL(pathname, url.origin);
+        cacheKeyUrl.searchParams.set('v', ASSET_VERSION);
+        // Add a simple ETag so browsers can revalidate too
+        const pageKey = pathWithoutLocale === '/' ? 'home' : pathWithoutLocale.replace(/^\//, '').replace(/\W+/g, '-');
+        htmlResp.headers.set('ETag', `"html-${ASSET_VERSION}-${locale}-${pageKey}"`);
+        // Helpful for intermediaries (even though Worker cache uses explicit put)
+        if (cacheHeaders['Cache-Control'] && cacheHeaders['Cache-Control'] !== 'no-store') {
+          htmlResp.headers.set('Cache-Control', `${cacheHeaders['Cache-Control']}, stale-while-revalidate=604800`);
+        }
+        ctx.waitUntil(caches.default.put(cacheKeyUrl.toString(), htmlResp.clone()));
+      }
       return htmlResp;
     } catch (error) {
   return new Response(getErrorMessage('INTERNAL_SERVER_ERROR', 'en'), {
