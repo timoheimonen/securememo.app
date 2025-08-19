@@ -12,6 +12,7 @@ export const fi = {
   'common.warning': 'Varoitus',
 
   // Language names
+  'language.ukrainian': 'Українська',
   'language.english': 'English',
   'language.spanish': 'Español',
   'language.french': 'Français',
