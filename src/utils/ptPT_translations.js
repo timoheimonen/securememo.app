@@ -31,6 +31,7 @@ export const ptPT = {
   'language.hungarian': 'Magyar',
   'language.finnish': 'Suomi',
   'language.greek': 'Ελληνικά',
+  'language.dutch': 'Nederlands',
   'language.russian': 'Русский',
 
   // Buttons
