@@ -21,7 +21,7 @@ securememo.app will run the main version of this repo.
 - **Turnstile CAPTCHA**: Prevents bot abuse and spam while maintaining user privacy (no tracking).
 - **Robust security headers**: Includes strict CSP, HSTS, and other policies to mitigate common web vulnerabilities.
 - **Automated cleanup**: Expired or read memos are permanently removed via scheduled cron jobs.
-- **18 languages**: Ukrainian, English, Spanish, Finnish, French, German, Hindi, Chinese, Portuguese (Portugal), Portuguese (Brazil), Japanese, Korean, Italian, Indonesian, Swedish, Polish, Hungary, Vietnamese and Russian.
+- **Localization**: Ukrainian, English, Spanish, Finnish, French, German, Hindi, Chinese, Portuguese (Portugal), Portuguese (Brazil), Japanese, Korean, Italian, Indonesian, Swedish, Polish, Hungary, Vietnamese and Russian.
 
 
 
