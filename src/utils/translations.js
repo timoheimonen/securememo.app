@@ -2,6 +2,7 @@
 // Used by both server-side and client-side localization
 // Translations are auto translated. Errors are possible.
 
+import { uk } from './uk_translations.js';
 import { en } from './en_translations.js';
 import { de } from './de_translations.js';
 import { es } from './es_translations.js';
@@ -21,6 +22,7 @@ import { hu } from './hu_translations.js';
 import { fi } from './fi_translations.js';
 import { ru } from './ru_translations.js';
 export const TRANSLATIONS = {
+  uk,
   en,
   de,
   es,

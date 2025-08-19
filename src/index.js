@@ -416,7 +416,7 @@ ${sitemapUrls}</urlset>`;
             'Content-Type': 'application/xml',
             'Cache-Control': 'public, max-age=86400, s-maxage=86400, stale-while-revalidate=604800',
             'ETag': '"sitemap-v1"',
-            'Last-Modified': 'Mon, 05 Aug 2025 00:00:00 GMT',
+            'Last-Modified': 'Tue, 19 Aug 2025 16:15:00 GMT',
             ...getSecurityHeaders(request)
           }
         });
