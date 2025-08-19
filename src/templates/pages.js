@@ -3,6 +3,7 @@ import { t } from '../utils/localization.js';
 // Helper function to get native language name
 function getLanguageDisplayName(locale) {
     const languageNames = {
+        'uk': 'Українська',
         'de': 'Deutsch',
         'en': 'English',
         'es': 'Español',
@@ -116,6 +117,7 @@ export async function getIndexHTML(locale = 'en', origin = 'https://securememo.a
                         🌐 ${getLanguageDisplayName(locale)}
                     </button>
                     <div class="language-menu">
+                        <a href="/uk" class="language-item ${locale === 'uk' ? 'active' : ''}" title="${t('language.ukrainian', locale)}">UK - Українська</a>
                         <a href="/de" class="language-item ${locale === 'de' ? 'active' : ''}" title="${t('language.german', locale)}">DE - Deutsch</a>
                         <a href="/en" class="language-item ${locale === 'en' ? 'active' : ''}" title="${t('language.english', locale)}">EN - English</a>
                         <a href="/es" class="language-item ${locale === 'es' ? 'active' : ''}" title="${t('language.spanish', locale)}">ES - Español</a>
@@ -306,6 +308,7 @@ export async function getAboutHTML(locale = 'en', origin = 'https://securememo.a
                         🌐 ${getLanguageDisplayName(locale)}
                     </button>
                     <div class="language-menu">
+                        <a href="/uk/about.html" class="language-item ${locale === 'uk' ? 'active' : ''}" title="${t('language.ukrainian', locale)}">UK - Українська</a>
                         <a href="/de/about.html" class="language-item ${locale === 'de' ? 'active' : ''}" title="${t('language.german', locale)}">DE - Deutsch</a>
                         <a href="/en/about.html" class="language-item ${locale === 'en' ? 'active' : ''}" title="${t('language.english', locale)}">EN - English</a>
                         <a href="/es/about.html" class="language-item ${locale === 'es' ? 'active' : ''}" title="${t('language.spanish', locale)}">ES - Español</a>
@@ -527,6 +530,7 @@ export async function getCreateMemoHTML(locale = 'en', origin = 'https://securem
                         🌐 ${getLanguageDisplayName(locale)}
                     </button>
                     <div class="language-menu">
+                        <a href="/uk/create-memo.html" class="language-item ${locale === 'uk' ? 'active' : ''}" title="${t('language.ukrainian', locale)}">UK - Українська</a>
                         <a href="/de/create-memo.html" class="language-item ${locale === 'de' ? 'active' : ''}" title="${t('language.german', locale)}">DE - Deutsch</a>
                         <a href="/en/create-memo.html" class="language-item ${locale === 'en' ? 'active' : ''}" title="${t('language.english', locale)}">EN - English</a>
                         <a href="/es/create-memo.html" class="language-item ${locale === 'es' ? 'active' : ''}" title="${t('language.spanish', locale)}">ES - Español</a>
@@ -734,6 +738,7 @@ export async function getReadMemoHTML(locale = 'en', origin = 'https://securemem
                         🌐 ${getLanguageDisplayName(locale)}
                     </button>
                     <div class="language-menu">
+                        <a href="/uk/read-memo.html" class="language-item ${locale === 'uk' ? 'active' : ''}" title="${t('language.ukrainian', locale)}">UK - Українська</a>
                         <a href="/de/read-memo.html" class="language-item ${locale === 'de' ? 'active' : ''}" title="${t('language.german', locale)}">DE - Deutsch</a>
                         <a href="/en/read-memo.html" class="language-item ${locale === 'en' ? 'active' : ''}" title="${t('language.english', locale)}">EN - English</a>
                         <a href="/es/read-memo.html" class="language-item ${locale === 'es' ? 'active' : ''}" title="${t('language.spanish', locale)}">ES - Español</a>
@@ -920,6 +925,7 @@ export async function getToSHTML(locale = 'en', origin = 'https://securememo.app
                         🌐 ${getLanguageDisplayName(locale)}
                     </button>
                     <div class="language-menu">
+                        <a href="/uk/tos.html" class="language-item ${locale === 'uk' ? 'active' : ''}" title="${t('language.ukrainian', locale)}">UK - Українська</a>
                         <a href="/de/tos.html" class="language-item ${locale === 'de' ? 'active' : ''}" title="${t('language.german', locale)}">DE - Deutsch</a>
                         <a href="/en/tos.html" class="language-item ${locale === 'en' ? 'active' : ''}" title="${t('language.english', locale)}">EN - English</a>
                         <a href="/es/tos.html" class="language-item ${locale === 'es' ? 'active' : ''}" title="${t('language.spanish', locale)}">ES - Español</a>
@@ -1167,6 +1173,7 @@ export async function getPrivacyHTML(locale = 'en', origin = 'https://securememo
                         🌐 ${getLanguageDisplayName(locale)}
                     </button>
                     <div class="language-menu">
+                        <a href="/uk/privacy.html" class="language-item ${locale === 'uk' ? 'active' : ''}" title="${t('language.ukrainian', locale)}">UK - Українська</a>
                         <a href="/de/privacy.html" class="language-item ${locale === 'de' ? 'active' : ''}" title="${t('language.german', locale)}">DE - Deutsch</a>
                         <a href="/en/privacy.html" class="language-item ${locale === 'en' ? 'active' : ''}" title="${t('language.english', locale)}">EN - English</a>
                         <a href="/es/privacy.html" class="language-item ${locale === 'es' ? 'active' : ''}" title="${t('language.spanish', locale)}">ES - Español</a>

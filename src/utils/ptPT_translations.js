@@ -12,6 +12,7 @@ export const ptPT = {
   'common.warning': 'Aviso',
 
   // Language names
+  'language.ukrainian': 'Українська',
   'language.english': 'English',
   'language.spanish': 'Español',
   'language.french': 'Français',

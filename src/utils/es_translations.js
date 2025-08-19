@@ -12,6 +12,7 @@ export const es = {
   'common.warning': 'Advertencia',
 
   // Language names
+  'language.ukrainian': 'Українська',
   'language.english': 'English',
   'language.spanish': 'Español',
   'language.french': 'Français',

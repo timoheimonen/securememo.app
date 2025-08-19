@@ -12,6 +12,7 @@ export const ko = {
     'common.warning': '경고',
 
     // Language names
+    'language.ukrainian': 'Українська',
     'language.english': 'English',
     'language.spanish': 'Español',
     'language.french': 'Français',

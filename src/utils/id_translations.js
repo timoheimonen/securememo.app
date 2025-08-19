@@ -12,6 +12,7 @@ export const id = {
     'common.warning': 'Peringatan',
 
     // Language names
+    'language.ukrainian': 'Українська',
     'language.english': 'English',
     'language.spanish': 'Español',
     'language.french': 'Français',
