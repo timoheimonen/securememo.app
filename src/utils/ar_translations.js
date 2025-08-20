@@ -340,7 +340,7 @@ export const ar = {
   'schema.app.repository': 'https://github.com/timoheimonen/securememo.app',
 
   // FAQ structured data
-  'faq.privacy.question': 'How does securememo.app protect my privacy?',
+  'faq.privacy.question': 'كيف يحمي securememo.app خصوصيتي؟',
   'faq.privacy.answer': 'يستخدم securememo.app التشفير من جهة العميل بمعيار AES-256، أي أن مذكرتك تُشفّر في متصفحك قبل إرسالها إلى خوادمنا. لا نرى محتوى المذكرة الأصلي أبدًا. تُحذف المذكرات تلقائيًا بعد قراءتها أو انتهاء صلاحيتها، ولا نطلب حسابات مستخدمين أو نجمع معلومات شخصية.',
   'faq.encryption.question': 'ما نوع التشفير الذي يستخدمه securememo.app؟',
   'faq.encryption.answer': 'نستخدم تشفير AES-256-GCM مع اشتقاق مفتاح PBKDF2 (أكثر من 2,200,000 دورة). يتم كل التشفير في متصفحك باستخدام Web Crypto API. كلمة مرور التشفير تُنشأ بشكل منفصل ولا يتم تخزينها على خوادمنا.',
