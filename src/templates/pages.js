@@ -4,6 +4,7 @@ import { t } from '../utils/localization.js';
 function getLanguageDisplayName(locale) {
     const languageNames = {
         'uk': 'Українська',
+        'ar': 'العربية',
         'de': 'Deutsch',
         'en': 'English',
         'el': 'Ελληνικά',
@@ -121,6 +122,7 @@ export async function getIndexHTML(locale = 'en', origin = 'https://securememo.a
                     </button>
                     <div class="language-menu">
                         <a href="/uk" class="language-item ${locale === 'uk' ? 'active' : ''}" title="${t('language.ukrainian', locale)}">UK - Українська</a>
+                        <a href="/ar" class="language-item ${locale === 'ar' ? 'active' : ''}" title="${t('language.arabic', locale)}">AR - العربية</a>
                         <a href="/de" class="language-item ${locale === 'de' ? 'active' : ''}" title="${t('language.german', locale)}">DE - Deutsch</a>
                         <a href="/el" class="language-item ${locale === 'el' ? 'active' : ''}" title="${t('language.greek', locale)}">EL - Ελληνικά</a>
                         <a href="/en" class="language-item ${locale === 'en' ? 'active' : ''}" title="${t('language.english', locale)}">EN - English</a>
@@ -315,6 +317,7 @@ export async function getAboutHTML(locale = 'en', origin = 'https://securememo.a
                     </button>
                     <div class="language-menu">
                         <a href="/uk/about.html" class="language-item ${locale === 'uk' ? 'active' : ''}" title="${t('language.ukrainian', locale)}">UK - Українська</a>
+                        <a href="/ar/about.html" class="language-item ${locale === 'ar' ? 'active' : ''}" title="${t('language.arabic', locale)}">AR - العربية</a>
                         <a href="/de/about.html" class="language-item ${locale === 'de' ? 'active' : ''}" title="${t('language.german', locale)}">DE - Deutsch</a>
                         <a href="/el/about.html" class="language-item ${locale === 'el' ? 'active' : ''}" title="${t('language.greek', locale)}">EL - Ελληνικά</a>
                         <a href="/en/about.html" class="language-item ${locale === 'en' ? 'active' : ''}" title="${t('language.english', locale)}">EN - English</a>
@@ -540,6 +543,7 @@ export async function getCreateMemoHTML(locale = 'en', origin = 'https://securem
                     </button>
                     <div class="language-menu">
                         <a href="/uk/create-memo.html" class="language-item ${locale === 'uk' ? 'active' : ''}" title="${t('language.ukrainian', locale)}">UK - Українська</a>
+                        <a href="/ar/create-memo.html" class="language-item ${locale === 'ar' ? 'active' : ''}" title="${t('language.arabic', locale)}">AR - العربية</a>
                         <a href="/de/create-memo.html" class="language-item ${locale === 'de' ? 'active' : ''}" title="${t('language.german', locale)}">DE - Deutsch</a>
                         <a href="/el/create-memo.html" class="language-item ${locale === 'el' ? 'active' : ''}" title="${t('language.greek', locale)}">EL - Ελληνικά</a>
                         <a href="/en/create-memo.html" class="language-item ${locale === 'en' ? 'active' : ''}" title="${t('language.english', locale)}">EN - English</a>
@@ -751,6 +755,7 @@ export async function getReadMemoHTML(locale = 'en', origin = 'https://securemem
                     </button>
                     <div class="language-menu">
                         <a href="/uk/read-memo.html" class="language-item ${locale === 'uk' ? 'active' : ''}" title="${t('language.ukrainian', locale)}">UK - Українська</a>
+                        <a href="/ar/read-memo.html" class="language-item ${locale === 'ar' ? 'active' : ''}" title="${t('language.arabic', locale)}">AR - العربية</a>
                         <a href="/de/read-memo.html" class="language-item ${locale === 'de' ? 'active' : ''}" title="${t('language.german', locale)}">DE - Deutsch</a>
                         <a href="/el/read-memo.html" class="language-item ${locale === 'el' ? 'active' : ''}" title="${t('language.greek', locale)}">EL - Ελληνικά</a>
                         <a href="/en/read-memo.html" class="language-item ${locale === 'en' ? 'active' : ''}" title="${t('language.english', locale)}">EN - English</a>
@@ -941,6 +946,7 @@ export async function getToSHTML(locale = 'en', origin = 'https://securememo.app
                     </button>
                     <div class="language-menu">
                         <a href="/uk/tos.html" class="language-item ${locale === 'uk' ? 'active' : ''}" title="${t('language.ukrainian', locale)}">UK - Українська</a>
+                        <a href="/ar/tos.html" class="language-item ${locale === 'ar' ? 'active' : ''}" title="${t('language.arabic', locale)}">AR - العربية</a>
                         <a href="/de/tos.html" class="language-item ${locale === 'de' ? 'active' : ''}" title="${t('language.german', locale)}">DE - Deutsch</a>
                         <a href="/el/tos.html" class="language-item ${locale === 'el' ? 'active' : ''}" title="${t('language.greek', locale)}">EL - Ελληνικά</a>
                         <a href="/en/tos.html" class="language-item ${locale === 'en' ? 'active' : ''}" title="${t('language.english', locale)}">EN - English</a>
@@ -1192,6 +1198,7 @@ export async function getPrivacyHTML(locale = 'en', origin = 'https://securememo
                     </button>
                     <div class="language-menu">
                         <a href="/uk/privacy.html" class="language-item ${locale === 'uk' ? 'active' : ''}" title="${t('language.ukrainian', locale)}">UK - Українська</a>
+                        <a href="/ar/privacy.html" class="language-item ${locale === 'ar' ? 'active' : ''}" title="${t('language.arabic', locale)}">AR - العربية</a>
                         <a href="/de/privacy.html" class="language-item ${locale === 'de' ? 'active' : ''}" title="${t('language.german', locale)}">DE - Deutsch</a>
                         <a href="/el/privacy.html" class="language-item ${locale === 'el' ? 'active' : ''}" title="${t('language.greek', locale)}">EL - Ελληνικά</a>
                         <a href="/en/privacy.html" class="language-item ${locale === 'en' ? 'active' : ''}" title="${t('language.english', locale)}">EN - English</a>
