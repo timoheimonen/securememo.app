@@ -21,7 +21,7 @@ securememo.app will run the main version of this repo.
 - **Turnstile CAPTCHA**: Prevents bot abuse and spam while maintaining user privacy (no tracking).
 - **Robust security headers**: Includes strict CSP, HSTS, and other policies to mitigate common web vulnerabilities.
 - **Automated cleanup**: Expired or read memos are permanently removed via scheduled cron jobs.
-- **Localization**: Ukrainian, English, Spanish, Dutch, Finnish, French, German, Greek, Hindi, Chinese, Portuguese (Portugal), Portuguese (Brazil), Japanese, Korean, Italian, Indonesian, Swedish, Polish, Hungary, Vietnamese and Russian.
+- **Localization**: Ukrainian, Arabic, English, Spanish, Dutch, Finnish, French, German, Greek, Hindi, Chinese, Portuguese (Portugal), Portuguese (Brazil), Japanese, Korean, Italian, Indonesian, Swedish, Polish, Hungary, Turkish, Vietnamese and Russian.
 
 
 
@@ -54,6 +54,7 @@ securememo/
 │   │   ├── clientLocalization.js # Client-side localization utilities
 │   │   ├── translations.js     # Translation registry
 │   │   ├── uk_translations.js  # Ukrainian translations
+│   │   ├── ar_translations.js  # Arabic translations
 │   │   ├── el_translations.js  # Greek translations
 │   │   ├── en_translations.js  # English translations
 │   │   ├── de_translations.js  # German translations
@@ -69,6 +70,7 @@ securememo/
 │   │   ├── ja_translations.js  # Japanese translations
 │   │   ├── it_translations.js  # Italian translations
 │   │   ├── vi_translations.js  # Vietnamese translations
+│   │   ├── tr_translations.js  # Turkish translations
 │   │   ├── sv_translations.js  # Swedish translations
 │   │   ├── pl_translations.js  # Polish translations
 │   │   ├── hu_translations.js  # Hungarian translations
@@ -120,6 +122,7 @@ For detailed contribution guidelines, please see [CONTRIBUTING.md](CONTRIBUTING.
 ## Supported languages in the application
 The supported languages are:
 - Ukrainian (uk)
+- Arabic (ar)
 - English (en)
 - Greek (el)
 - Spanish (es)
@@ -139,6 +142,7 @@ The supported languages are:
 - Vietnamese (vi)
 - Polish (pl)
 - Hungary (hu)
+- Turkish (tr)
 - Russian (ru)
 
 These are auto-translated from english, errors may occur.

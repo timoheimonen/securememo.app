@@ -32,6 +32,8 @@ export const ja = {
     'language.finnish': 'Suomi',
     'language.greek': 'Ελληνικά',
     'language.dutch': 'Nederlands',
+    'language.turkish': 'Türkçe',
+    'language.arabic': 'العربية',
     'language.russian': 'Русский',
 
     // Buttons
