@@ -15,6 +15,7 @@ function getLanguageDisplayName(locale) {
         'hu': 'Magyar',
         'id': 'Bahasa Indonesia',
         'it': 'Italiano',
+        'tr': 'Türkçe',
         'ja': '日本語',
         'ko': '한국어',
         'pl': 'Polski',
@@ -138,6 +139,7 @@ export async function getIndexHTML(locale = 'en', origin = 'https://securememo.a
                         <a href="/ptBR" class="language-item ${locale === 'ptBR' ? 'active' : ''}" title="${t('language.portugueseBR', locale)}">PT-BR - Português (Brasil)</a>
                         <a href="/ru" class="language-item ${locale === 'ru' ? 'active' : ''}" title="${t('language.russian', locale)}">RU - Русский</a>
                         <a href="/sv" class="language-item ${locale === 'sv' ? 'active' : ''}" title="${t('language.swedish', locale)}">SV - Svenska</a>
+                        <a href="/tr" class="language-item ${locale === 'tr' ? 'active' : ''}" title="${t('language.turkish', locale)}">TR - Türkçe</a>
                         <a href="/vi" class="language-item ${locale === 'vi' ? 'active' : ''}" title="${t('language.vietnamese', locale)}">VI - Tiếng Việt</a>
                         <a href="/zh" class="language-item ${locale === 'zh' ? 'active' : ''}" title="${t('language.chinese', locale)}">ZH - 中文</a>
                     </div>
@@ -331,6 +333,7 @@ export async function getAboutHTML(locale = 'en', origin = 'https://securememo.a
                         <a href="/ptBR/about.html" class="language-item ${locale === 'ptBR' ? 'active' : ''}" title="${t('language.portugueseBR', locale)}">PT-BR - Português (Brasil)</a>
                         <a href="/ru/about.html" class="language-item ${locale === 'ru' ? 'active' : ''}" title="${t('language.russian', locale)}">RU - Русский</a>
                         <a href="/sv/about.html" class="language-item ${locale === 'sv' ? 'active' : ''}" title="${t('language.swedish', locale)}">SV - Svenska</a>
+                        <a href="/tr/about.html" class="language-item ${locale === 'tr' ? 'active' : ''}" title="${t('language.turkish', locale)}">TR - Türkçe</a>
                         <a href="/vi/about.html" class="language-item ${locale === 'vi' ? 'active' : ''}" title="${t('language.vietnamese', locale)}">VI - Tiếng Việt</a>
                         <a href="/zh/about.html" class="language-item ${locale === 'zh' ? 'active' : ''}" title="${t('language.chinese', locale)}">ZH - 中文</a>
                     </div>
@@ -555,6 +558,7 @@ export async function getCreateMemoHTML(locale = 'en', origin = 'https://securem
                         <a href="/ptBR/create-memo.html" class="language-item ${locale === 'ptBR' ? 'active' : ''}" title="${t('language.portugueseBR', locale)}">PT-BR - Português (Brasil)</a>
                         <a href="/ru/create-memo.html" class="language-item ${locale === 'ru' ? 'active' : ''}" title="${t('language.russian', locale)}">RU - Русский</a>
                         <a href="/sv/create-memo.html" class="language-item ${locale === 'sv' ? 'active' : ''}" title="${t('language.swedish', locale)}">SV - Svenska</a>
+                        <a href="/tr/create-memo.html" class="language-item ${locale === 'tr' ? 'active' : ''}" title="${t('language.turkish', locale)}">TR - Türkçe</a>
                         <a href="/vi/create-memo.html" class="language-item ${locale === 'vi' ? 'active' : ''}" title="${t('language.vietnamese', locale)}">VI - Tiếng Việt</a>
                         <a href="/zh/create-memo.html" class="language-item ${locale === 'zh' ? 'active' : ''}" title="${t('language.chinese', locale)}">ZH - 中文</a>
                     </div>
@@ -765,6 +769,7 @@ export async function getReadMemoHTML(locale = 'en', origin = 'https://securemem
                         <a href="/ptBR/read-memo.html" class="language-item ${locale === 'ptBR' ? 'active' : ''}" title="${t('language.portugueseBR', locale)}">PT-BR - Português (Brasil)</a>
                         <a href="/ru/read-memo.html" class="language-item ${locale === 'ru' ? 'active' : ''}" title="${t('language.russian', locale)}">RU - Русский</a>
                         <a href="/sv/read-memo.html" class="language-item ${locale === 'sv' ? 'active' : ''}" title="${t('language.swedish', locale)}">SV - Svenska</a>
+                        <a href="/tr/read-memo.html" class="language-item ${locale === 'tr' ? 'active' : ''}" title="${t('language.turkish', locale)}">TR - Türkçe</a>
                         <a href="/vi/read-memo.html" class="language-item ${locale === 'vi' ? 'active' : ''}" title="${t('language.vietnamese', locale)}">VI - Tiếng Việt</a>
                         <a href="/zh/read-memo.html" class="language-item ${locale === 'zh' ? 'active' : ''}" title="${t('language.chinese', locale)}">ZH - 中文</a>
                     </div>
@@ -954,6 +959,7 @@ export async function getToSHTML(locale = 'en', origin = 'https://securememo.app
                         <a href="/ptBR/tos.html" class="language-item ${locale === 'ptBR' ? 'active' : ''}" title="${t('language.portugueseBR', locale)}">PT-BR - Português (Brasil)</a>
                         <a href="/ru/tos.html" class="language-item ${locale === 'ru' ? 'active' : ''}" title="${t('language.russian', locale)}">RU - Русский</a>
                         <a href="/sv/tos.html" class="language-item ${locale === 'sv' ? 'active' : ''}" title="${t('language.swedish', locale)}">SV - Svenska</a>
+                        <a href="/tr/tos.html" class="language-item ${locale === 'tr' ? 'active' : ''}" title="${t('language.turkish', locale)}">TR - Türkçe</a>
                         <a href="/vi/tos.html" class="language-item ${locale === 'vi' ? 'active' : ''}" title="${t('language.vietnamese', locale)}">VI - Tiếng Việt</a>
                         <a href="/zh/tos.html" class="language-item ${locale === 'zh' ? 'active' : ''}" title="${t('language.chinese', locale)}">ZH - 中文</a>
                     </div>
@@ -1204,6 +1210,7 @@ export async function getPrivacyHTML(locale = 'en', origin = 'https://securememo
                         <a href="/ptBR/privacy.html" class="language-item ${locale === 'ptBR' ? 'active' : ''}" title="${t('language.portugueseBR', locale)}">PT-BR - Português (Brasil)</a>
                         <a href="/ru/privacy.html" class="language-item ${locale === 'ru' ? 'active' : ''}" title="${t('language.russian', locale)}">RU - Русский</a>
                         <a href="/sv/privacy.html" class="language-item ${locale === 'sv' ? 'active' : ''}" title="${t('language.swedish', locale)}">SV - Svenska</a>
+                        <a href="/tr/privacy.html" class="language-item ${locale === 'tr' ? 'active' : ''}" title="${t('language.turkish', locale)}">TR - Türkçe</a>
                         <a href="/vi/privacy.html" class="language-item ${locale === 'vi' ? 'active' : ''}" title="${t('language.vietnamese', locale)}">VI - Tiếng Việt</a>
                         <a href="/zh/privacy.html" class="language-item ${locale === 'zh' ? 'active' : ''}" title="${t('language.chinese', locale)}">ZH - 中文</a>
                     </div>

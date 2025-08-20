@@ -22,6 +22,7 @@ import { hu } from './hu_translations.js';
 import { fi } from './fi_translations.js';
 import { el } from './el_translations.js';
 import { nl } from './nl_translations.js';
+import { tr } from './tr_translations.js';
 import { ru } from './ru_translations.js';
 export const TRANSLATIONS = {
   uk,
@@ -44,5 +45,6 @@ export const TRANSLATIONS = {
   hu,
   fi,
   nl,
+  tr,
   ru
 };

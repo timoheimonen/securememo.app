@@ -32,6 +32,7 @@ export const uk = {
   'language.finnish': 'Suomi',
   'language.greek': 'Ελληνικά',
   'language.dutch': 'Nederlands',
+  'language.turkish': 'Türkçe',
   'language.russian': 'Русский',
 
   // Buttons
