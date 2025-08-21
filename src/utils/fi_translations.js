@@ -195,7 +195,7 @@ export const fi = {
 
   'tos.intellectualProperty.title': '6. Immateriaalioikeudet',
   'tos.intellectualProperty.content': 'Palvelu ja kaikki sen kautta tarjottavat materiaalit, mukaan lukien tekstit, grafiikat, logot ja ohjelmistot, ovat securememo.appin tai sen lisenssinantajien omaisuutta ja suojattu tekijänoikeudella, tavaramerkillä ja muilla immateriaalioikeuslaeilla. Sitoudut olemaan muokkaamatta, kopioimatta, jakamatta tai luomatta johdannaisteoksia sisällöstämme ilman erillistä lupaa, paitsi henkilökohtaiseen, ei-kaupalliseen käyttöön palvelun sisällä.',
-  'tos.intellectualProperty.copyright': 'Tekijänoikeus & DMCA-käytäntö: Jos uskot, että tekijänoikeuttasi on loukattu, ota yhteyttä osoitteeseen timo.heimonen@gmail.com ja toimita DMCA:n edellyttämät tiedot (esim. teoksen tunnistus, yhteystietosi ja vilpitön uskomus loukkauksesta).',
+  'tos.intellectualProperty.copyright': 'Tekijänoikeus & DMCA-käytäntö: Jos uskot, että tekijänoikeuttasi on loukattu, ota yhteyttä osoitteeseen timo.heimonen@proton.me ja toimita DMCA:n edellyttämät tiedot (esim. teoksen tunnistus, yhteystietosi ja vilpitön uskomus loukkauksesta).',
 
   'tos.indemnification.title': '7. Vastuunvapautus',
   'tos.indemnification.content': 'Sitoudut puolustamaan, korvaamaan ja pitämään securememo.appin ja sen tytäryhtiöt, toimihenkilöt, johtajat, työntekijät ja edustajat vahingoittumattomina kaikista vaatimuksista, vastuista, vahingoista, menetyksistä ja kuluista, mukaan lukien kohtuulliset asianajopalkkiot, jotka johtuvat palvelun käytöstäsi tai näiden ehtojen rikkomisesta.',
@@ -218,7 +218,7 @@ export const fi = {
   'tos.contact.title': '12. Yhteystiedot',
   'tos.contact.content': 'Kysymyksiä näistä ehdoista voit esittää',
   'tos.contact.github': 'GitHub-repositoriossamme',
-  'tos.contact.email': 'tai sähköpostitse timo.heimonen@gmail.com.',
+  'tos.contact.email': 'tai sähköpostitse timo.heimonen@proton.me.',
 
   'tos.languageDisclaimer.title': '13. Kieli ja käännös',
   'tos.languageDisclaimer.content': 'Nämä käyttöehdot voidaan kääntää muille kielille käyttömukavuuden vuoksi. Jos englanninkielisen ja käännetyn version välillä on ristiriita, englanninkielinen versio on ensisijainen.',
@@ -294,7 +294,7 @@ export const fi = {
   'privacy.contact.title': '10. Yhteystiedot',
   'privacy.contact.intro': 'Kysymyksiä tästä tietosuojailmoituksesta tai käytännöistämme voit esittää',
   'privacy.contact.github': 'GitHub-repositoriossamme',
-  'privacy.contact.email': 'tai sähköpostitse timo.heimonen@gmail.com.',
+  'privacy.contact.email': 'tai sähköpostitse timo.heimonen@proton.me.',
   'privacy.contact.disclaimer': 'Tämä tietosuojailmoitus koskee vain securememo.appia, ei kolmansien osapuolten sivustoja, joihin palvelusta on linkkejä.',
 
   // Schema.org structured data

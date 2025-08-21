@@ -195,7 +195,7 @@ export const fr = {
 
   'tos.intellectualProperty.title': '6. Propriété Intellectuelle',
   'tos.intellectualProperty.content': 'Le Service et tous les matériaux fournis à travers lui, y compris mais sans s\'y limiter le texte, les graphiques, les logos et les logiciels, sont la propriété de securememo.app ou de ses concédants de licence et sont protégés par le droit d\'auteur, les marques de commerce et d\'autres lois de propriété intellectuelle. Vous acceptez de ne pas modifier, reproduire, distribuer ou créer des œuvres dérivées basées sur notre contenu sans permission explicite, sauf pour un usage personnel et non commercial dans le cadre du Service.',
-  'tos.intellectualProperty.copyright': 'Politique de Droit d\'Auteur et DMCA : Si vous croyez que vos droits d\'auteur ont été violés, veuillez nous contacter à timo.heimonen@gmail.com avec les informations requises sous la DMCA (par exemple, identification de l\'œuvre, vos coordonnées et une déclaration de bonne foi).',
+  'tos.intellectualProperty.copyright': 'Politique de Droit d\'Auteur et DMCA : Si vous croyez que vos droits d\'auteur ont été violés, veuillez nous contacter à timo.heimonen@proton.me avec les informations requises sous la DMCA (par exemple, identification de l\'œuvre, vos coordonnées et une déclaration de bonne foi).',
 
   'tos.indemnification.title': '7. Indemnisation',
   'tos.indemnification.content': 'Vous acceptez de défendre, indemniser et tenir indemne securememo.app et ses affiliés, dirigeants, administrateurs, employés et agents de et contre toute réclamation, responsabilité, dommage, perte et dépense, y compris les honoraires d\'avocat raisonnables, découlant de ou liés de quelque manière que ce soit à votre accès ou utilisation de nos Services, y compris toute violation de ces Conditions par vous.',
@@ -218,7 +218,7 @@ export const fr = {
   'tos.contact.title': '12. Contact',
   'tos.contact.content': 'Pour des questions concernant ces conditions, veuillez visiter notre',
   'tos.contact.github': 'dépôt GitHub',
-  'tos.contact.email': 'ou envoyez un courriel à timo.heimonen@gmail.com.',
+  'tos.contact.email': 'ou envoyez un courriel à timo.heimonen@proton.me.',
 
   'tos.languageDisclaimer.title': '13. Langue et Traduction',
   'tos.languageDisclaimer.content': 'Ces Conditions d\'Utilisation peuvent être traduites dans d\'autres langues pour votre commodité. En cas de divergence ou de conflit entre la version anglaise et une version traduite, la version anglaise prévaudra.',
@@ -294,7 +294,7 @@ export const fr = {
   'privacy.contact.title': '10. Nous Contacter',
   'privacy.contact.intro': 'Pour des questions concernant cet Avis de Confidentialité ou nos pratiques, veuillez visiter notre',
   'privacy.contact.github': 'dépôt GitHub',
-  'privacy.contact.email': 'ou envoyez un courriel à timo.heimonen@gmail.com.',
+  'privacy.contact.email': 'ou envoyez un courriel à timo.heimonen@proton.me.',
   'privacy.contact.disclaimer': 'Cet Avis de Confidentialité s\'applique uniquement à securememo.app et non à tout site tiers lié depuis notre service.',
 
   // Schema.org structured data

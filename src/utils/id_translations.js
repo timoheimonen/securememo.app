@@ -195,7 +195,7 @@ export const id = {
 
     'tos.intellectualProperty.title': '6. Kekayaan Intelektual',
     'tos.intellectualProperty.content': 'Layanan dan semua materi yang disediakan melaluinya, termasuk namun tidak terbatas pada teks, grafik, logo, dan perangkat lunak, adalah milik securememo.app atau pemberi lisensinya dan dilindungi oleh hak cipta, merek dagang, dan hukum kekayaan intelektual lainnya. Anda setuju untuk tidak memodifikasi, mereproduksi, mendistribusikan, atau membuat karya turunan berdasarkan konten kami tanpa izin eksplisit, kecuali untuk penggunaan pribadi, non-komersial dalam Layanan.',
-    'tos.intellectualProperty.copyright': 'Kebijakan Hak Cipta & DMCA: Jika Anda yakin hak cipta Anda telah dilanggar, silakan hubungi kami di timo.heimonen@gmail.com dengan informasi yang diperlukan di bawah DMCA (misalnya, identifikasi karya, detail kontak Anda, dan pernyataan keyakinan itikad baik).',
+    'tos.intellectualProperty.copyright': 'Kebijakan Hak Cipta & DMCA: Jika Anda yakin hak cipta Anda telah dilanggar, silakan hubungi kami di timo.heimonen@proton.me dengan informasi yang diperlukan di bawah DMCA (misalnya, identifikasi karya, detail kontak Anda, dan pernyataan keyakinan itikad baik).',
 
     'tos.indemnification.title': '7. Ganti Rugi',
     'tos.indemnification.content': 'Anda setuju untuk membela, mengganti rugi, dan membebaskan securememo.app dan afiliasinya, pejabat, direktur, karyawan, dan agen dari dan terhadap segala klaim, kewajiban, kerusakan, kerugian, dan biaya, termasuk biaya pengacara yang wajar, yang timbul dari atau dengan cara apa pun terkait dengan akses atau penggunaan Layanan kami oleh Anda, termasuk pelanggaran Syarat ini oleh Anda.',
@@ -218,7 +218,7 @@ export const id = {
     'tos.contact.title': '12. Kontak',
     'tos.contact.content': 'Untuk pertanyaan tentang syarat ini, silakan kunjungi',
     'tos.contact.github': 'repositori GitHub',
-    'tos.contact.email': 'kami atau email timo.heimonen@gmail.com.',
+    'tos.contact.email': 'kami atau email timo.heimonen@proton.me.',
 
     'tos.languageDisclaimer.title': '13. Bahasa dan Terjemahan',
     'tos.languageDisclaimer.content': 'Syarat Layanan ini dapat diterjemahkan ke bahasa lain untuk kemudahan Anda. Jika terjadi perbedaan atau konflik antara versi bahasa Inggris dan versi terjemahan, versi bahasa Inggris akan berlaku.',
@@ -294,7 +294,7 @@ export const id = {
     'privacy.contact.title': '10. Hubungi Kami',
     'privacy.contact.intro': 'Untuk pertanyaan tentang Pemberitahuan Privasi ini atau praktik kami, silakan kunjungi',
     'privacy.contact.github': 'repositori GitHub',
-    'privacy.contact.email': 'kami atau email timo.heimonen@gmail.com.',
+    'privacy.contact.email': 'kami atau email timo.heimonen@proton.me.',
     'privacy.contact.disclaimer': 'Pemberitahuan Privasi ini hanya berlaku untuk securememo.app dan tidak untuk situs pihak ketiga yang ditautkan dari layanan kami.',
 
     // Schema.org structured data

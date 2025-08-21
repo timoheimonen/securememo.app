@@ -195,7 +195,7 @@ export const cs = {
 
   'tos.intellectualProperty.title': '6. Duševní vlastnictví',
   'tos.intellectualProperty.content': 'Služba a veškeré materiály poskytované prostřednictvím ní, včetně, mimo jiné, textů, grafiky, log a softwaru, jsou majetkem securememo.app nebo jeho poskytovatelů licencí a jsou chráněny autorským právem, ochrannými známkami a dalšími právními předpisy o duševním vlastnictví. Souhlasíte, že nebudete náš obsah upravovat, reprodukovat, distribuovat ani vytvářet odvozená díla bez výslovného souhlasu, s výjimkou osobního nekomerčního použití v rámci Služby.',
-  'tos.intellectualProperty.copyright': 'Autorská práva a politika DMCA: Pokud se domníváte, že došlo k porušení vašich autorských práv, kontaktujte nás na timo.heimonen@gmail.com s požadovanými informacemi dle DMCA (např. identifikace díla, vaše kontaktní údaje a prohlášení o dobré víře).',
+  'tos.intellectualProperty.copyright': 'Autorská práva a politika DMCA: Pokud se domníváte, že došlo k porušení vašich autorských práv, kontaktujte nás na timo.heimonen@proton.me s požadovanými informacemi dle DMCA (např. identifikace díla, vaše kontaktní údaje a prohlášení o dobré víře).',
 
   'tos.indemnification.title': '7. Odškodnění',
   'tos.indemnification.content': 'Souhlasíte, že budete bránit, odškodníte a zprostíte odpovědnosti securememo.app a jeho přidružené osoby, vedoucí pracovníky, ředitele, zaměstnance a zástupce od jakýchkoli nároků, závazků, škod, ztrát a nákladů, včetně přiměřených nákladů na právní zastoupení, vzniklých v souvislosti s vaším přístupem nebo používáním našich Služeb, včetně jakéhokoli porušení těchto Podmínek z vaší strany.',
@@ -218,7 +218,7 @@ export const cs = {
   'tos.contact.title': '12. Kontakt',
   'tos.contact.content': 'V případě dotazů k těmto podmínkám navštivte náš',
   'tos.contact.github': 'repozitář na GitHubu',
-  'tos.contact.email': 'nebo napište na timo.heimonen@gmail.com.',
+  'tos.contact.email': 'nebo napište na timo.heimonen@proton.me.',
 
   'tos.languageDisclaimer.title': '13. Jazyk a překlad',
   'tos.languageDisclaimer.content': 'Tyto Podmínky služby mohou být pro vaše pohodlí přeloženy do jiných jazyků. V případě nesrovnalostí nebo rozporu mezi anglickou verzí a překladem má přednost anglická verze.',
@@ -294,7 +294,7 @@ export const cs = {
   'privacy.contact.title': '10. Kontaktujte nás',
   'privacy.contact.intro': 'V případě dotazů k tomuto Oznámení o ochraně soukromí nebo našim postupům navštivte náš',
   'privacy.contact.github': 'repozitář na GitHubu',
-  'privacy.contact.email': 'nebo napište na timo.heimonen@gmail.com.',
+  'privacy.contact.email': 'nebo napište na timo.heimonen@proton.me.',
   'privacy.contact.disclaimer': 'Toto Oznámení o ochraně soukromí platí pouze pro securememo.app a nikoli pro weby třetích stran odkazované z naší služby.',
 
   // Schema.org structured data
