@@ -6,7 +6,7 @@ If you discover a security vulnerability in securememo.app, please report it res
 
 ## How to Report
 
-- **Email**: Send details to timo.heimonen@gmail.com. Use a descriptive subject line like "Security Vulnerability Report".
+- **Email**: Send details to timo.heimonen@proton.me. Use a descriptive subject line like "Security Vulnerability Report".
 - **GitHub Issues**: For non-sensitive issues, open a private issue in the repository if available, or use the email method.
 - **Response Time**: I aim to acknowledge reports as soon as possible and provide updates on progress.
 
