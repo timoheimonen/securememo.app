@@ -6,7 +6,7 @@ export const ar = {
   'nav.toggleMenu': 'تبديل قائمة التنقل',
 
   // Common elements
-  'common.loading': 'جارٍ التحميل...',
+  'common.loading': 'جاري التحميل...',
   'common.error': 'خطأ',
   'common.success': 'نجاح',
   'common.warning': 'تحذير',
@@ -117,7 +117,7 @@ export const ar = {
 
   'home.security.title': 'ميزات الأمان',
   'home.security.encryption.title': '🔒 تشفير حقيقي من جهة العميل',
-  'home.security.encryption.description': 'يتم تشفير مذكرتك في المتصفح باستخدام AES-256-GCM ومفتاح قوي (أكثر من 2,200,000 دورة). لا نرى النص الأصلي أبداً.',
+  'home.security.encryption.description': 'يتم تشفير مذكرتك في المتصفح باستخدام AES-256-GCM ومفتاح قوي (أكثر من ٢٬٢٠٠٬٠٠٠ دورة). لا نرى النص الأصلي أبداً.',
   'home.security.delete.title': '🗑️ حذف تلقائي موثوق',
   'home.security.delete.description': 'تختفي المذكرات نهائيًا بعد قراءتها أو انتهاء صلاحيتها، مع تنظيف تلقائي كل ساعة. لا نسخ احتياطي أو استرجاع ممكن.',
   'home.security.password.title': '🌐 عدم معرفة كلمة المرور',
@@ -326,12 +326,12 @@ export const ar = {
 
   // Schema.org structured data
   'schema.app.description': 'أنشئ مذكرات مشفرة يتم تدميرها ذاتياً بعد قراءتها. تشفير شامل من طرف إلى طرف، تركيز على الخصوصية، ومشاركة آمنة للملاحظات باستخدام AES-256. بدون تتبع أو إعلانات.',
-  'schema.app.category': 'تطبيق أمني',
-  'schema.app.os': 'متصفح الويب',
-  'schema.app.requirements': 'يتطلب JavaScript وHTML5.',
+  'schema.app.category': 'SecurityApplication',
+  'schema.app.os': 'Web Browser',
+  'schema.app.requirements': 'Requires JavaScript. Requires HTML5.',
   'schema.app.author': 'تيمو هايمونين',
-  'schema.app.price': '٠',
-  'schema.app.currency': 'دولار أمريكي',
+  'schema.app.price': '0',
+  'schema.app.currency': 'USD',
   'schema.app.features.encryption': 'تشفير AES-256 من جهة العميل',
   'schema.app.features.selfDestruct': 'مذكرات ذاتية التدمير',
   'schema.app.features.zeroKnowledge': 'هيكلية معرفة صفرية',
@@ -466,8 +466,8 @@ export const ar = {
   'error.GENERAL_ERROR': 'الخدمة غير متوفرة مؤقتًا. يرجى المحاولة مرة أخرى.',
 
   // Error messages - decryption errors
-  'error.DECRYPTION_FAILED': 'فشل فك التشفير. كلمة المرور غير صحيحة أو البيانات تالفة.',
-  'error.INVALID_PASSWORD': 'كلمة المرور غير صحيحة. يرجى التحقق من كلمة المرور التي تلقيتها بشكل منفصل.',
+  'error.DECRYPTION_FAILED': 'طلب غير صالح. يرجى التحقق من البيانات والمحاولة مرة أخرى.',
+  'error.INVALID_PASSWORD': 'طلب غير صالح. يرجى التحقق من البيانات والمحاولة مرة أخرى.',
 
   // Error messages - network errors
   'error.NETWORK_ERROR': 'الخدمة غير متوفرة مؤقتًا. يرجى المحاولة مرة أخرى.',
@@ -522,7 +522,7 @@ export const ar = {
   'error.security.MEMO_EXPIRED': 'هذه المذكرة لم تعد متوفرة.',
   'error.security.DATABASE_READ_ERROR': 'الخدمة غير متوفرة مؤقتًا.',
   'error.security.MEMO_READ_ERROR': 'تعذر معالجة طلبك.',
-  'error.security.METHOD_NOT_ALLOWED': 'طريقة الطلب غير صالحة.',
+  'error.security.METHOD_NOT_ALLOWED': 'طريقة الطلب غير مسموحة.',
   'error.security.FORBIDDEN': 'تم رفض الوصول.',
   'error.security.DEFAULT_FALLBACK': 'حدث خطأ. يرجى المحاولة مرة أخرى.'
 }
