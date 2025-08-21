@@ -2,7 +2,7 @@ export const da = {
   // Navigation
   'nav.home': 'Hjem',
   'nav.about': 'Om',
-  'nav.create': 'Opret Sikker Memo',
+  'nav.create': 'Opret Sikkert Notat',
   'nav.toggleMenu': 'Skift navigationsmenu',
 
   // Common elements
@@ -45,49 +45,49 @@ export const da = {
   'btn.copyPassword': 'Kopiér adgangskode',
   'btn.show': 'Vis',
   'btn.hide': 'Skjul',
-  'btn.create': 'Opret Sikker Memo',
+  'btn.create': 'Opret Sikkert Notat',
   'btn.creating': 'Krypterer...',
-  'btn.decrypt': 'Dekrypter Memo',
+  'btn.decrypt': 'Dekrypter Notat',
   'btn.decrypting': 'Dekrypterer...',
   'btn.goHome': 'Gå til Hjem',
-  'btn.createNew': 'Opret Ny Memo',
+  'btn.createNew': 'Opret Nyt Notat',
 
   // Form labels and placeholders
-  'form.message.label': 'Din Memo',
-  'form.message.placeholder': 'Skriv din hemmelige memo her...',
+  'form.message.label': 'Dit Notat',
+  'form.message.placeholder': 'Skriv dit hemmelige notat her...',
   'form.message.help': 'Maksimum 10.000 tegn',
   'form.expiry.label': 'Udløbstid',
   'form.password.label': 'Krypteringsadgangskode',
   'form.password.placeholder': 'Indtast krypteringsadgangskoden, som er delt med dig separat',
-  'form.password.help': 'Adgangskoden skal være delt med dig separat fra memo-URLen',
+  'form.password.help': 'Adgangskoden skal være delt med dig separat fra Notat-URLen',
   'form.security.help': 'Udfyld venligst sikkerhedsudfordringen',
 
   // Messages and notifications
   'msg.urlCopied': '✅ URL kopieret til udklipsholder!',
   'msg.passwordCopied': '✅ Adgangskode kopieret til udklipsholder!',
   'msg.copyManual': '⚠️ Kopiér venligst manuelt (Ctrl+C / Cmd+C)',
-  'msg.memoCreated': '✅ Memo oprettet!',
-  'msg.memoDecrypted': 'Memo dekrypteret. Sletning i gang... Vent venligst.',
-  'msg.memoDeleted': 'Memo bekræftet som læst og permanent slettet.',
-  'msg.deletionError': 'Fejl ved bekræftelse af sletning. Memoen vil blive ryddet op automatisk.',
+    'msg.memoCreated': '✅ Notat oprettet!',
+    'msg.memoDecrypted': 'Notat dekrypteret. Sletning i gang... Vent venligst.',
+    'msg.memoDeleted': 'Notat bekræftet som læst og permanent slettet.',
+    'msg.deletionError': 'Fejl ved bekræftelse af sletning. Notatet vil blive ryddet op automatisk.',
 
   // Page titles and descriptions
-  'page.home.title': 'securememo.app - Krypterede Selvdestruerende Memoer',
-  'page.home.description': 'Opret krypterede memoer, der selvdestruerer efter læsning. Ende-til-ende kryptering, fokus på privatliv og sikker deling af noter med AES-256. Ingen sporing, ingen reklamer.',
-  'page.home.keywords': 'sikker memo, krypteret memo, selvdestruerende memo, privat notatdeling, ende-til-ende kryptering, AES-256, privatliv, sikker memo-deling',
-  'page.home.ogTitle': 'securememo.app - Krypterede Selvdestruerende Memoer',
-  'page.home.ogDescription': 'Del følsomme oplysninger sikkert med memoer, der slettes efter én visning eller udløb. Drevet af klientbaseret AES-256 kryptering.',
-  'page.home.twitterDescription': 'Privatlivsførste app til sikre, selvdestruerende memoer.',
-  'page.about.title': 'Om securememo.app - Privatlivsfokuserede Krypterede Noter',
+  'page.home.title': 'securememo.app - Krypterede Selvdestruerende Notater',
+  'page.home.description': 'Opret krypterede notater, der selvdestruerer efter læsning. Ende-til-ende kryptering, fokus på privatliv og sikker deling af notater med AES-256. Ingen sporing, ingen reklamer.',
+  'page.home.keywords': 'sikker notat, krypteret notat, selvdestruerende notat, privat notatdeling, ende-til-ende kryptering, AES-256, privatliv, sikker notat-deling',
+  'page.home.ogTitle': 'securememo.app - Krypterede Selvdestruerende Notater',
+  'page.home.ogDescription': 'Del følsomme oplysninger sikkert med notater, der slettes efter én visning eller udløb. Drevet af klientbaseret AES-256 kryptering.',
+  'page.home.twitterDescription': 'Privatlivsførste app til sikre, selvdestruerende notater.',
+  'page.about.title': 'Om securememo.app - Privatlivsfokuserede Krypterede Notater',
   'page.about.description': 'Lær om securememo.apps privatlivsførste tilgang til krypteret beskedudveksling. Bygget med klientbaseret AES-256 kryptering, selvdestruerende beskeder og zero-knowledge arkitektur.',
-  'page.about.keywords': 'om sikker memo, privatlivsfokuseret besked, klientbaseret kryptering, AES-256, selvdestruerende beskeder, zero-knowledge, sikker notatdeling',
-  'page.about.ogTitle': 'Om securememo.app - Privatlivsfokuserede Krypterede Noter',
+  'page.about.keywords': 'om sikker notat, privatlivsfokuseret besked, klientbaseret kryptering, AES-256, selvdestruerende beskeder, zero-knowledge, sikker notatdeling',
+  'page.about.ogTitle': 'Om securememo.app - Privatlivsfokuserede Krypterede Notater',
   'page.about.ogDescription': 'Opdag hvordan securememo.app beskytter dit privatliv med klientbaseret kryptering og selvdestruerende beskeder.',
   'page.about.twitterDescription': 'Privatlivsførste krypteret beskedudveksling med klientbaseret kryptering.',
-  'page.create.title': 'Opret Sikker Memo - Krypteret Selvdestruerende Memo',
-  'page.create.keywords': 'opret sikker memo, krypteret memo, selvdestruerende notat, AES-256 kryptering, privat memo-deling, sikker notatoprettelse',
-  'page.read.title': 'Læs Sikker Memo - Dekrypter Krypteret Memo',
-  'page.read.keywords': 'læs sikker memo, dekrypter memo, krypteret notatlæsning, AES-256 dekryptering, privat memo-adgang',
+  'page.create.title': 'Opret Sikkert Notat - Krypteret Selvdestruerende Notat',
+  'page.create.keywords': 'opret sikkert notat, krypteret notat, selvdestruerende notat, AES-256 kryptering, privat notat-deling, sikker notatoprettelse',
+  'page.read.title': 'Læs Sikkert Notat - Dekrypter Krypteret Notat',
+  'page.read.keywords': 'læs sikkert notat, dekrypter notat, krypteret notatlæsning, AES-256 dekryptering, privat notat-adgang',
   'page.tos.title': 'Vilkår for Brug - securememo.app Juridiske Vilkår',
   'page.tos.description': 'Vilkår for brug for securememo.app - krypteret memo-delingstjeneste. Lær om acceptabel brug, privatliv, sikkerhed og juridiske vilkår for vores sikre memo-deling platform.',
   'page.tos.keywords': 'vilkår for brug, sikker memo juridisk, krypteret memo vilkår, privatlivspolitik, acceptabel brugspolitik, sikker notatdeling vilkår',
@@ -103,23 +103,23 @@ export const da = {
 
   // Main page content
   'home.hero.title': 'securememo.app',
-  'home.hero.subtitle': 'Opret krypterede memoer, der selvdestruerer efter de er læst eller udløbet. Dine hemmeligheder forbliver sikre.',
-  'home.hero.btnPrimary': 'Opret Sikker Memo',
+  'home.hero.subtitle': 'Opret krypterede notater, der selvdestruerer efter de er læst eller udløbet. Dine hemmeligheder forbliver sikre.',
+  'home.hero.btnPrimary': 'Opret Sikkert Notat',
   'home.hero.btnSecondary': 'Læs Mere',
 
   'home.features.title': 'Sådan virker det',
   'home.features.encrypt.title': '🔐 Krypter i browseren',
-  'home.features.encrypt.description': 'Skriv din memo. Den krypteres direkte i din browser med stærk AES-256 kryptering, før den når vores servere.',
+  'home.features.encrypt.description': 'Skriv dit notat. Det krypteres direkte i din browser med stærk AES-256 kryptering, før det når vores servere.',
   'home.features.share.title': '🔗 Del sikkert',
   'home.features.share.description': 'Få en unik URL og en separat tilfældig adgangskode, og del dem via forskellige kanaler for ekstra sikkerhed.',
   'home.features.destruct.title': '💥 Selvdestruktion',
-  'home.features.destruct.description': 'Memoen slettes permanent efter den er læst eller når tidsgrænsen udløber (fra 8 timer til 30 dage).',
+  'home.features.destruct.description': 'Notatet slettes permanent efter det er læst eller når tidsgrænsen udløber (fra 8 timer til 30 dage).',
 
   'home.security.title': 'Sikkerhedsfunktioner',
   'home.security.encryption.title': '🔒 Ægte klientbaseret kryptering',
-  'home.security.encryption.description': 'Din memo krypteres i browseren med AES-256-GCM og stærk nøgleafledning (2.200.000+ iterationer). Vi ser aldrig klarteksten.',
+  'home.security.encryption.description': 'Dit notat krypteres i browseren med AES-256-GCM og stærk nøgleafledning (2.200.000+ iterationer). Vi ser aldrig klarteksten.',
   'home.security.delete.title': '🗑️ Pålidelig automatisk sletning',
-  'home.security.delete.description': 'Memoer forsvinder for altid efter læsning eller udløb, med automatisk oprydning hver time. Ingen backup eller gendannelse mulig.',
+  'home.security.delete.description': 'Notater forsvinder for altid efter læsning eller udløb, med automatisk oprydning hver time. Ingen backup eller gendannelse mulig.',
   'home.security.password.title': '🌐 Ingen adgangskode-viden',
   'home.security.password.description': 'Vi genererer og håndterer adgangskoder udelukkende i din browser. De sendes eller gemmes aldrig på vores servere.',
 
@@ -130,7 +130,7 @@ export const da = {
 
   // About page content
   'about.hero.title': 'Om securememo.app',
-  'about.hero.subtitle': 'securememo.app er en privatlivsfokuseret applikation, der lader dig oprette krypterede memoer, som selvdestruerer efter de er læst eller udløbet. Bygget med sikkerhed og privatliv som højeste prioritet. Kildekoden er tilgængelig på GitHub.',
+  'about.hero.subtitle': 'securememo.app er en privatlivsfokuseret applikation, der lader dig oprette krypterede notater, som selvdestruerer efter de er læst eller udløbet. Bygget med sikkerhed og privatliv som højeste prioritet. Kildekoden er tilgængelig på GitHub.',
 
   'about.tech.title': 'Teknologisk Fundament',
   'about.tech.cloudflare': 'Cloudflare Workers: Serverløs platform for global ydeevne',
@@ -142,11 +142,11 @@ export const da = {
 
   'about.features.title': 'Sikkerhedsfunktioner',
   'about.features.clientEncryption.title': '🔐 Klientbaseret kryptering',
-  'about.features.clientEncryption.description': 'Al kryptering sker i din browser via Web Crypto API. Din memo krypteres med AES-256 før den sendes til vores servere.',
+  'about.features.clientEncryption.description': 'Al kryptering sker i din browser via Web Crypto API. Dit notat krypteres med AES-256 før det sendes til vores servere.',
   'about.features.passwordSharing.title': '🔑 Separat adgangskodedeling',
   'about.features.passwordSharing.description': 'Krypteringsadgangskoden genereres separat fra URLen og bør deles via en anden kanal for øget sikkerhed.',
-  'about.features.selfDestruct.title': '💥 Selvdestruerende memoer',
-  'about.features.selfDestruct.description': 'Når en memo er læst eller udløbet, slettes den straks og permanent fra vores database. Ingen spor tilbage.',
+  'about.features.selfDestruct.title': '💥 Selvdestruerende notater',
+  'about.features.selfDestruct.description': 'Når et notat er læst eller udløbet, slettes det straks og permanent fra vores database. Ingen spor tilbage.',
   'about.features.noStorage.title': '🌐 Ingen adgangskodelagring',
   'about.features.noStorage.description': 'Vi gemmer aldrig krypteringsadgangskoder på vores servere. De eksisterer kun i din browsers hukommelse.',
   'about.features.global.title': '⚡ Global ydeevne',
@@ -155,16 +155,16 @@ export const da = {
   'about.features.privacy.description': 'Ingen brugeroprettelse krævet. Ingen sporing. Ingen analyse. Dit privatliv er vores prioritet.',
 
   'about.usage.title': 'Sådan bruges',
-  'about.usage.create.title': '1. Opret en memo',
-  'about.usage.create.description': 'Gå til "Opret Sikker Memo" og skriv din memo. Vælg en udløbstid (8t, 1d, 2d, 1 uge eller maks. 30 dage). Memoer slettes når de er læst eller udløbet. Systemet genererer en tilfældig krypteringsadgangskode.',
+  'about.usage.create.title': '1. Opret et notat',
+  'about.usage.create.description': 'Gå til "Opret Sikkert Notat" og skriv dit notat. Vælg en udløbstid (8t, 1d, 2d, 1 uge eller maks. 30 dage). Notater slettes når de er læst eller udløbet. Systemet genererer en tilfældig krypteringsadgangskode.',
   'about.usage.share.title': '2. Del link og adgangskode',
   'about.usage.share.description': 'Kopiér den genererede URL og adgangskode, og del dem med din modtager via separate kanaler for øget sikkerhed.',
   'about.usage.destruct.title': '3. Selvdestruktion',
-  'about.usage.destruct.description': 'Når modtageren åbner linket og indtaster adgangskoden separat, dekrypteres memoen og slettes derefter permanent, hvis den er læst, eller slettes automatisk, hvis den er udløbet. Udløbne memoer ryddes automatisk op hver time.',
+  'about.usage.destruct.description': 'Når modtageren åbner linket og indtaster adgangskoden separat, dekrypteres notatet og slettes derefter permanent, hvis det er læst, eller slettes automatisk, hvis det er udløbet. Udløbne notater ryddes automatisk op hver time.',
 
   'about.cta.title': 'Klar til at komme i gang?',
-  'about.cta.subtitle': 'Opret din første sikre memo nu og oplev ægte ende-til-ende kryptering.',
-  'about.cta.createBtn': 'Opret Sikker Memo',
+  'about.cta.subtitle': 'Opret din første sikre notat nu og oplev ægte ende-til-ende kryptering.',
+  'about.cta.createBtn': 'Opret Sikkert Notat',
   'about.cta.homeBtn': 'Gå til Hjem',
 
   // Terms of Service page content
@@ -362,19 +362,19 @@ export const da = {
   'ui.breadcrumb.privacy': 'Privatlivsmeddelelse',
 
   // Create memo page content
-  'create.hero.title': 'Opret Sikker Memo',
-  'create.hero.description': 'Din memo krypteres i din browser og selvdestruerer efter den er læst eller udløbet.',
-  'create.hero.ogDescription': 'Opret krypterede memoer med klientbaseret AES-256 kryptering. Memoer selvdestruerer efter læsning for maksimal privatliv.',
-  'create.hero.twitterDescription': 'Opret krypterede memoer med klientbaseret kryptering.',
-  'create.schema.description': 'Opret krypterede memoer, der selvdestruerer efter læsning. Klientbaseret AES-256 kryptering sikrer, at dine hemmeligheder forbliver private.',
-  'create.schema.actionDescription': 'Opret krypterede memoer med klientbaseret AES-256 kryptering og automatisk selvdestruktion',
+  'create.hero.title': 'Opret Sikkert Notat',
+  'create.hero.description': 'Dit notat krypteres i din browser og selvdestruerer efter det er læst eller udløbet.',
+  'create.hero.ogDescription': 'Opret krypterede notater med klientbaseret AES-256 kryptering. Notater selvdestruerer efter læsning for maksimal privatliv.',
+  'create.hero.twitterDescription': 'Opret krypterede notater med klientbaseret kryptering.',
+  'create.schema.description': 'Opret krypterede notater, der selvdestruerer efter læsning. Klientbaseret AES-256 kryptering sikrer, at dine hemmeligheder forbliver private.',
+  'create.schema.actionDescription': 'Opret krypterede notater med klientbaseret AES-256 kryptering og automatisk selvdestruktion',
 
   // Read memo page content  
-  'read.hero.title': 'Læs Sikker Memo',
-  'read.hero.description': 'Indtast adgangskoden for at dekryptere og læse memoen. Adgangskoden skal være delt med dig separat fra URLen. Memoen slettes efter den er læst eller udløbet.',
-  'read.hero.ogDescription': 'Dekrypter og læs din sikre memo. Memoer selvdestruerer efter læsning for maksimal privatliv.',
-  'read.hero.twitterDescription': 'Dekrypter og læs din sikre memo med klientbaseret dekryptering.',
-  'read.schema.description': 'Dekrypter og læs din sikre memo med adgangskoden. Memoer selvdestruerer efter læsning for maksimal privatliv. Klientbaseret AES-256 dekryptering.',
+  'read.hero.title': 'Læs Sikkert Notat',
+  'read.hero.description': 'Indtast adgangskoden for at dekryptere og læse notatet. Adgangskoden skal være delt med dig separat fra URLen. Notatet slettes efter det er læst eller udløbet.',
+  'read.hero.ogDescription': 'Dekrypter og læs dit sikre notat. Notater selvdestruerer efter læsning for maksimal privatliv.',
+  'read.hero.twitterDescription': 'Dekrypter og læs dit sikre notat med klientbaseret dekryptering.',
+  'read.schema.description': 'Dekrypter og læs dit sikre notat med adgangskoden. Notater selvdestruerer efter læsning for maksimal privatliv. Klientbaseret AES-256 dekryptering.',
 
   // Form options
   'form.expiry.option.8h': 'Slet ved læsning eller efter 8 timer',
@@ -384,23 +384,23 @@ export const da = {
   'form.expiry.option.30d': 'Slet ved læsning eller efter 30 dage',
 
   // Loading and status messages
-  'msg.encrypting': 'Krypterer din memo sikkert... Dette kan tage et øjeblik på ældre enheder.',
-  'msg.decrypting': 'Dekrypterer din memo... Dette kan tage et øjeblik på ældre enheder.',
-  'msg.deletingSecurely': 'Sletter memo sikkert...',
-  'msg.yourSecureMemo': '📝 Din Sikker Memo',
+  'msg.encrypting': 'Krypterer dit notat sikkert... Dette kan tage et øjeblik på ældre enheder.',
+  'msg.decrypting': 'Dekrypterer dit notat... Dette kan tage et øjeblik på ældre enheder.',
+  'msg.deletingSecurely': 'Sletter notat sikkert...',
+  'msg.yourSecureMemo': '📝 Dit Sikkert Notat',
   'msg.status': 'Status:',
 
   // Labels and help text
-  'form.memoUrl.label': 'Memo URL (del denne med din modtager):',
-  'form.memoUrl.help': 'Dette er det sikre link til din memo. Del denne URL med din modtager.',
+  'form.memoUrl.label': 'Notat-URL (del denne med din modtager):',
+  'form.memoUrl.help': 'Dette er det sikre link til dit notat. Del denne URL med din modtager.',
   'form.memoPassword.label': 'Krypteringsadgangskode (del denne separat):',
   'form.memoPassword.help': 'Dette er krypteringsadgangskoden. Del denne separat fra URLen for øget sikkerhed. Den gemmes ikke på vores servere, og kan ikke gendannes efter du forlader denne side.',
 
   // Warning messages
   'warning.important': 'Vigtigt:',
-  'warning.memoDeleted': 'Memoen vil blive slettet efter den er læst eller når udløbstiden er nået',
+  'warning.memoDeleted': 'Notatet vil blive slettet efter det er læst eller når udløbstiden er nået',
   'warning.shareSecurely': 'Del URL og adgangskode separat for maksimal sikkerhed',
-  'warning.needBoth': 'Modtageren skal bruge både URL og adgangskode for at få adgang til memoen',
+  'warning.needBoth': 'Modtageren skal bruge både URL og adgangskode for at få adgang til notatet',
   'warning.pageCleared': 'Denne side vil blive ryddet når du forlader den',
 
   // Structured data texts
@@ -463,66 +463,5 @@ export const da = {
   'error.CONTENT_TYPE_ERROR': 'Ugyldig anmodning. Tjek venligst dine indtastninger og prøv igen.',
   'error.METHOD_NOT_ALLOWED': 'Ugyldig anmodningsmetode.',
   'error.FORBIDDEN': 'Adgang nægtet.',
-  'error.GENERAL_ERROR': 'Tjenesten er midlertidigt utilgængelig. Prøv igen.',
-
-  // Error messages - decryption errors
-  'error.DECRYPTION_FAILED': 'Ugyldig anmodning. Tjek venligst dine indtastninger og prøv igen.',
-  'error.INVALID_PASSWORD': 'Ugyldig anmodning. Tjek venligst dine indtastninger og prøv igen.',
-
-  // Error messages - network errors
-  'error.NETWORK_ERROR': 'Tjenesten er midlertidigt utilgængelig. Prøv igen.',
-  'error.SERVICE_UNAVAILABLE': 'Tjenesten er midlertidigt utilgængelig. Prøv igen senere.',
-  'error.RATE_LIMITED': 'For mange anmodninger. Vent venligst et øjeblik og prøv igen.',
-
-  // Error messages - client-side validation errors
-  'error.MISSING_MESSAGE': 'Indtast venligst en memo',
-  'error.MESSAGE_TOO_LONG': 'Memoen er for lang (maks. 10.000 tegn)',
-  'error.MISSING_SECURITY_CHALLENGE': 'Udfyld venligst sikkerhedsudfordringen',
-  'error.CREATE_MEMO_FAILED': 'Kunne ikke oprette memo',
-  'error.CREATE_MEMO_ERROR': 'Der opstod en fejl under oprettelse af memoen',
-  'error.READ_MEMO_ERROR': 'Der opstod en fejl under læsning af memoen',
-  'error.DECRYPTION_ERROR': 'Kunne ikke dekryptere beskeden. Ugyldig adgangskode eller beskadigede data.',
-  'error.MEMO_ID_GENERATION_MAX_RETRIES': 'Kunne ikke generere unik memo_id efter maksimalt antal forsøg',
-  'error.MISSING_PASSWORD': 'Indtast venligst krypteringsadgangskoden',
-  'error.INVALID_MEMO_URL': 'Ugyldig memo-URL',
-  'error.MEMO_ALREADY_READ_DELETED': 'Denne memo er allerede blevet læst og slettet, eller den er udløbet.',
-  'error.MEMO_EXPIRED_DELETED': 'Denne memo er udløbet og er blevet slettet.',
-  'error.INVALID_PASSWORD_CHECK': 'Ugyldig adgangskode. Tjek venligst den adgangskode, du har modtaget separat.',
-  'error.MISSING_PASSWORD_ERROR': 'Indtast venligst krypteringsadgangskoden',
-  'error.INVALID_MEMO_URL_ERROR': 'Ugyldig memo-URL',
-  'error.MEMO_ALREADY_READ_DELETED_ERROR': 'Denne memo er allerede blevet læst og slettet, eller den er udløbet.',
-  'error.MEMO_EXPIRED_DELETED_ERROR': 'Denne memo er udløbet og er blevet slettet.',
-  'error.INVALID_PASSWORD_CHECK_ERROR': 'Ugyldig adgangskode. Tjek venligst den adgangskode, du har modtaget separat.',
-  'error.MISSING_SECURITY_CHALLENGE_ERROR': 'Udfyld venligst sikkerhedsudfordringen',
-
-  // Error messages - HTTP status errors
-  'error.INTERNAL_SERVER_ERROR': 'Intern serverfejl',
-  'error.NOT_FOUND': 'Ikke fundet',
-  'error.BAD_REQUEST': 'Ugyldig anmodning',
-  'error.CLEANUP_FAILED': 'Oprydning mislykkedes',
-
-  // Error messages - default fallback
-  'error.DEFAULT_FALLBACK': 'Der opstod en fejl. Prøv venligst igen.',
-
-  // Security error messages (shorter versions for security events)
-  'error.security.INVALID_MESSAGE_FORMAT': 'Ugyldig anmodning.',
-  'error.security.INVALID_EXPIRY_TIME': 'Ugyldig anmodning.',
-  'error.security.MISSING_TURNSTILE': 'Sikkerhedsverificering kræves.',
-  'error.security.TURNSTILE_FAILED': 'Sikkerhedsverificering mislykkedes.',
-  'error.security.TURNSTILE_API_ERROR': 'Tjenesten er midlertidigt utilgængelig.',
-  'error.security.TURNSTILE_VERIFICATION_ERROR': 'Sikkerhedsverificering mislykkedes.',
-  'error.security.DATABASE_ERROR': 'Tjenesten er midlertidigt utilgængelig.',
-  'error.security.MEMO_ID_GENERATION_ERROR': 'Tjenesten er midlertidigt utilgængelig.',
-  'error.security.MEMO_ID_COLLISION_ERROR': 'Tjenesten er midlertidigt utilgængelig.',
-  'error.security.MEMO_CREATION_ERROR': 'Kunne ikke behandle din anmodning.',
-  'error.security.INVALID_MEMO_ID': 'Ugyldig anmodning.',
-  'error.security.MISSING_MEMO_ID': 'Ugyldig anmodning.',
-  'error.security.MEMO_NOT_FOUND': 'Denne memo er ikke længere tilgængelig.',
-  'error.security.MEMO_ALREADY_READ': 'Denne memo er ikke længere tilgængelig.',
-  'error.security.MEMO_EXPIRED': 'Denne memo er ikke længere tilgængelig.',
-  'error.security.DATABASE_READ_ERROR': 'Tjenesten er midlertidigt utilgængelig.',
-  'error.security.MEMO_READ_ERROR': 'Kunne ikke behandle din anmodning.',
-  'error.security.METHOD_NOT_ALLOWED': 'Ugyldig anmodningsmetode.',
-  'error.security.FORBIDDEN': 'Adgang nægtet.',
-  'error.security.DEFAULT_FALLBACK': 'Der opstod en fejl. Prøv venligst igen.'
+  'error.GENERAL_ERROR': 'Tjenesten er midlertidigt utilgængelig. Prøv igen.'
 }
