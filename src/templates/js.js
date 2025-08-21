@@ -644,16 +644,37 @@ window.addEventListener('load', () => {
                     deleteBody.deletionToken = decryptedPayload.deletionToken;
                     deleteBody.memoId = memoId;
 
-                    // Send deletion request
-                    const deleteResponse = await fetch('/api/confirm-delete', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(deleteBody)
-                    });
-                    
-                    if (deleteResponse.status === 429) {
+                    // Send deletion request with client-side retry (max 3 attempts, 3s delay)
+                    const maxAttempts = 3;
+                    const delayMs = 3000;
+                    let deleteResponse;
+                    for (let attempt = 1; attempt <= maxAttempts; attempt++) {
+                        try {
+                            deleteResponse = await fetch('/api/confirm-delete', {
+                                method: 'POST',
+                                headers: { 'Content-Type': 'application/json' },
+                                body: JSON.stringify(deleteBody)
+                            });
+
+                            // Do not retry for these statuses
+                            if (deleteResponse.ok || [429, 403, 404].includes(deleteResponse.status)) {
+                                break;
+                            }
+                        } catch (e) {
+                            // Network error, proceed to retry
+                        }
+                        if (attempt < maxAttempts) {
+                            await new Promise(res => setTimeout(res, delayMs));
+                        }
+                    }
+
+                    if (deleteResponse && deleteResponse.status === 429) {
                         showMessage('{{RATE_LIMITED_ERROR}}', 'error');
-                    } else if (deleteResponse.ok) {
+                        const deletionSpinner = document.getElementById('deletionSpinner');
+                        if (deletionSpinner) {
+                            deletionSpinner.style.display = 'none';
+                        }
+                    } else if (deleteResponse && deleteResponse.ok) {
                         const memoStatus = document.getElementById('memoStatus');
                         const deletionSpinner = document.getElementById('deletionSpinner');
                         if (memoStatus) {
@@ -664,6 +685,10 @@ window.addEventListener('load', () => {
                         }
                     } else {
                         showMessage('{{DELETION_ERROR_MESSAGE}}', 'warning');
+                        const deletionSpinner = document.getElementById('deletionSpinner');
+                        if (deletionSpinner) {
+                            deletionSpinner.style.display = 'none';
+                        }
                     }
                 } else {
                     // Handle rate limiting specifically  
