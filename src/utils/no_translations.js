@@ -1,15 +1,15 @@
 export const no = {
   // Navigation
-    'nav.home': 'Hjem',
-    'nav.about': 'Om',
+  'nav.home': 'Hjem',
+  'nav.about': 'Om',
   'nav.create': 'Opprett sikkert notat',
-    'nav.toggleMenu': 'Vis/skjul navigasjonsmeny',
+  'nav.toggleMenu': 'Vis/skjul navigasjonsmeny',
 
   // Common elements
-    'common.loading': 'Laster...',
-    'common.error': 'Feil',
-    'common.success': 'Vellykket',
-    'common.warning': 'Advarsel',
+  'common.loading': 'Laster...',
+  'common.error': 'Feil',
+  'common.success': 'Vellykket',
+  'common.warning': 'Advarsel',
 
   // Language names
   'language.arabic': 'العربية',
@@ -39,37 +39,37 @@ export const no = {
   'language.vietnamese': 'Tiếng Việt',
 
   // Buttons
-    'btn.copy': 'Kopier',
-    'btn.copied': 'Kopiert!',
-    'btn.copyUrl': 'Kopier URL',
-    'btn.copyPassword': 'Kopier passord',
-    'btn.show': 'Vis',
-    'btn.hide': 'Skjul',
+  'btn.copy': 'Kopier',
+  'btn.copied': 'Kopiert!',
+  'btn.copyUrl': 'Kopier URL',
+  'btn.copyPassword': 'Kopier passord',
+  'btn.show': 'Vis',
+  'btn.hide': 'Skjul',
   'btn.create': 'Opprett sikkert notat',
-    'btn.creating': 'Krypterer...',
+  'btn.creating': 'Krypterer...',
   'btn.decrypt': 'Dekrypter notatet',
-    'btn.decrypting': 'Dekrypterer...',
+  'btn.decrypting': 'Dekrypterer...',
   'btn.goHome': 'Gå til forsiden',
-    'btn.createNew': 'Opprett nytt notat',
+  'btn.createNew': 'Opprett nytt notat',
 
   // Form labels and placeholders
-    'form.message.label': 'Ditt notat',
-    'form.message.placeholder': 'Skriv ditt hemmelige notat her...',
-    'form.message.help': 'Maksimalt 10 000 tegn',
-    'form.expiry.label': 'Utløpstid',
-    'form.password.label': 'Krypteringspassord',
-    'form.password.placeholder': 'Skriv inn krypteringspassordet som er delt med deg separat',
-    'form.password.help': 'Passordet skal ha blitt delt med deg separat fra notatets URL',
-    'form.security.help': 'Vennligst fullfør sikkerhetsutfordringen',
+  'form.message.label': 'Ditt notat',
+  'form.message.placeholder': 'Skriv ditt hemmelige notat her...',
+  'form.message.help': 'Maksimalt 10 000 tegn',
+  'form.expiry.label': 'Utløpstid',
+  'form.password.label': 'Krypteringspassord',
+  'form.password.placeholder': 'Skriv inn krypteringspassordet som er delt med deg separat',
+  'form.password.help': 'Passordet skal ha blitt delt med deg separat fra notatets URL',
+  'form.security.help': 'Vennligst fullfør sikkerhetsutfordringen',
 
   // Messages and notifications
-    'msg.urlCopied': '✅ URL kopiert til utklippstavlen!',
-    'msg.passwordCopied': '✅ Passord kopiert til utklippstavlen!',
-    'msg.copyManual': '⚠️ Vennligst kopier manuelt (Ctrl+C / Cmd+C)',
-    'msg.memoCreated': '✅ Notat opprettet!',
+  'msg.urlCopied': '✅ URL kopiert til utklippstavlen!',
+  'msg.passwordCopied': '✅ Passord kopiert til utklippstavlen!',
+  'msg.copyManual': '⚠️ Vennligst kopier manuelt (Ctrl+C / Cmd+C)',
+  'msg.memoCreated': '✅ Notat opprettet!',
   'msg.memoDecrypted': 'Notatet er dekryptert. Sletter... Vennligst vent.',
-    'msg.memoDeleted': 'Notatet er bekreftet lest og permanent slettet.',
-    'msg.deletionError': 'Feil ved bekreftelse av sletting. Notatet vil bli ryddet opp automatisk.',
+  'msg.memoDeleted': 'Notatet er bekreftet lest og permanent slettet.',
+  'msg.deletionError': 'Feil ved bekreftelse av sletting. Notatet vil bli ryddet opp automatisk.',
 
   // Page titles and descriptions
   'page.home.title': 'securememo.app - Krypterte selvdestruerende notater',

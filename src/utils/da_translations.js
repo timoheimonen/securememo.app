@@ -66,10 +66,10 @@ export const da = {
   'msg.urlCopied': '✅ URL kopieret til udklipsholder!',
   'msg.passwordCopied': '✅ Adgangskode kopieret til udklipsholder!',
   'msg.copyManual': '⚠️ Kopiér venligst manuelt (Ctrl+C / Cmd+C)',
-    'msg.memoCreated': '✅ Notat oprettet!',
-    'msg.memoDecrypted': 'Notat dekrypteret. Sletning i gang... Vent venligst.',
-    'msg.memoDeleted': 'Notat bekræftet som læst og permanent slettet.',
-    'msg.deletionError': 'Fejl ved bekræftelse af sletning. Notatet vil blive ryddet op automatisk.',
+  'msg.memoCreated': '✅ Notat oprettet!',
+  'msg.memoDecrypted': 'Notat dekrypteret. Sletning i gang... Vent venligst.',
+  'msg.memoDeleted': 'Notat bekræftet som læst og permanent slettet.',
+  'msg.deletionError': 'Fejl ved bekræftelse af sletning. Notatet vil blive ryddet op automatisk.',
 
   // Page titles and descriptions
   'page.home.title': 'securememo.app - Krypterede Selvdestruerende Notater',
