@@ -4,7 +4,6 @@ import {
   validateExpiryHours,
   validatePassword,
   sanitizeForHTML,
-  sanitizeForDatabase,
   sanitizeForJSON,
   sanitizeForURL
 } from '../utils/validation.js';
@@ -169,6 +168,7 @@ export async function handleCreateMemo(request, env, locale = 'en') {
         
         // Verify Turnstile token
         if (!isValidTurnstile) {
+            await addArtificialDelay();
             return new Response(JSON.stringify({ error: getErrorMessage('MISSING_TURNSTILE', requestLocale) }), {
                 status: 400,
                 headers: { 'Content-Type': 'application/json' }
@@ -189,6 +189,7 @@ export async function handleCreateMemo(request, env, locale = 'en') {
             });
 
             if (!turnstileResponse.ok) {
+                await addArtificialDelay();
                 return new Response(JSON.stringify({ error: getErrorMessage('TURNSTILE_API_ERROR', requestLocale) }), {
                     status: 500,
                     headers: { 'Content-Type': 'application/json' }
@@ -198,12 +199,14 @@ export async function handleCreateMemo(request, env, locale = 'en') {
             const turnstileResult = await turnstileResponse.json();
             
             if (!turnstileResult.success) {
+                await addArtificialDelay();
                 return new Response(JSON.stringify({ error: getErrorMessage('TURNSTILE_FAILED', requestLocale) }), {
                     status: 400,
                     headers: { 'Content-Type': 'application/json' }
                 });
             }
         } catch (turnstileError) {
+            await addArtificialDelay();
             return new Response(JSON.stringify({ error: getErrorMessage('TURNSTILE_VERIFICATION_ERROR', requestLocale) }), {
                 status: 500,
                 headers: { 'Content-Type': 'application/json' }
@@ -331,6 +334,7 @@ export async function handleReadMemo(request, env, locale = 'en') {
         
         // Verify Turnstile token
         if (!isValidTurnstile) {
+            await addArtificialDelay();
             return new Response(JSON.stringify({ error: getErrorMessage('MISSING_TURNSTILE', requestLocale) }), {
                 status: 400,
                 headers: { 'Content-Type': 'application/json' }
@@ -351,6 +355,7 @@ export async function handleReadMemo(request, env, locale = 'en') {
             });
 
             if (!turnstileResponse.ok) {
+                await addArtificialDelay();
                 return new Response(JSON.stringify({ error: getErrorMessage('TURNSTILE_API_ERROR', requestLocale) }), {
                     status: 500,
                     headers: { 'Content-Type': 'application/json' }
@@ -360,12 +365,14 @@ export async function handleReadMemo(request, env, locale = 'en') {
             const turnstileResult = await turnstileResponse.json();
             
             if (!turnstileResult.success) {
+                await addArtificialDelay();
                 return new Response(JSON.stringify({ error: getErrorMessage('TURNSTILE_FAILED', requestLocale) }), {
                     status: 400,
                     headers: { 'Content-Type': 'application/json' }
                 });
             }
         } catch (turnstileError) {
+            await addArtificialDelay();
             return new Response(JSON.stringify({ error: getErrorMessage('TURNSTILE_VERIFICATION_ERROR', requestLocale) }), {
                 status: 500,
                 headers: { 'Content-Type': 'application/json' }
@@ -382,8 +389,8 @@ export async function handleReadMemo(request, env, locale = 'en') {
         if (!sanitizedMemoId || !(await validateMemoIdSecure(sanitizedMemoId))) {
             // Add additional artificial delay for security
             await addArtificialDelay();
-            return new Response(JSON.stringify({ error: getErrorMessage('INVALID_MEMO_ID', requestLocale) }), {
-                status: 400,
+            return new Response(JSON.stringify({ error: getMemoAccessDeniedMessage() }), {
+                status: 404,
                 headers: { 'Content-Type': 'application/json' }
             });
         }
@@ -515,19 +522,20 @@ export async function handleConfirmDelete(request, env, locale = 'en') {
         // Require deletion token
         if (!deletionToken) {
             await addArtificialDelay();
-            return new Response(JSON.stringify({ error: getErrorMessage('MISSING_DELETION_TOKEN', requestLocale) }), { status: 400 });
+            return new Response(JSON.stringify({ error: getMemoAccessDeniedMessage() }), { status: 404 });
         }
-        
-        const sanitizedToken = sanitizeForDatabase(deletionToken);
-        if (!validatePassword(sanitizedToken)) {  // Reuse validator for token format
+
+        // Validate format using existing password validator without altering the token value
+        if (!validatePassword(deletionToken)) {  // Reuse validator for token format
             await addArtificialDelay();
-            return new Response(JSON.stringify({ error: getMemoAccessDeniedMessage() }), { status: 403 });
+            return new Response(JSON.stringify({ error: getMemoAccessDeniedMessage() }), { status: 404 });
         }
-        
-        const computedHash = await hashDeletionToken(sanitizedToken);
+
+        // Compute hash over the exact provided token (no sanitization) to match stored hash
+        const computedHash = await hashDeletionToken(deletionToken);
         if (!constantTimeCompare(computedHash, row.deletion_token_hash)) {
             await addArtificialDelay();
-            return new Response(JSON.stringify({ error: getMemoAccessDeniedMessage() }), { status: 403 });
+            return new Response(JSON.stringify({ error: getMemoAccessDeniedMessage() }), { status: 404 });
         }
 
         // Delete if validation passes (common for both cases)
@@ -583,7 +591,7 @@ export async function handleCleanupMemos(env) {
     } catch (error) {
         // Add artificial delay for security
         await addArtificialDelay();
-        return new Response(JSON.stringify({ error: getErrorMessage('DATABASE_ERROR', requestLocale) }), {
+    return new Response(JSON.stringify({ error: getErrorMessage('DATABASE_ERROR', 'en') }), {
             status: 500,
             headers: { 'Content-Type': 'application/json' }
         });
