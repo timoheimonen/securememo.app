@@ -4,6 +4,7 @@
 export const LANGUAGE_NAMES = {
   'language.arabic': 'العربية',
   'language.chinese': '中文',
+  'language.czech': 'Čeština',
   'language.danish': 'Dansk',
   'language.dutch': 'Nederlands',
   'language.english': 'English',
@@ -24,7 +25,7 @@ export const LANGUAGE_NAMES = {
   'language.russian': 'Русский',
   'language.spanish': 'Español',
   'language.swedish': 'Svenska',
-  'language.czech': 'Čeština',
+  'language.thai': 'ไทย',
   'language.turkish': 'Türkçe',
   'language.ukrainian': 'Українська',
   'language.vietnamese': 'Tiếng Việt'
