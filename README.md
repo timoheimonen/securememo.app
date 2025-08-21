@@ -21,7 +21,7 @@ securememo.app will run the main version of this repo.
 - **Turnstile CAPTCHA**: Prevents bot abuse and spam while maintaining user privacy (no tracking).
 - **Robust security headers**: Includes strict CSP, HSTS, and other policies to mitigate common web vulnerabilities.
 - **Automated cleanup**: Expired or read memos are permanently removed via scheduled cron jobs.
-- **Localization**: Currently supports 25 different languages.
+- **Localization**: Currently supports 26 different languages.
 
 
 
@@ -74,6 +74,7 @@ securememo/
 │   │   ├── pl_translations.js  # Polish translations
 │   │   ├── hu_translations.js  # Hungarian translations
 │   │   ├── id_translations.js  # Indonesian translations
+│   │   ├── cs_translations.js  # Czech translations
 │   │   └── ru_translations.js  # Russian translations
 │   ├── screenshots/            # Screenshots
 │   │   ├──  screenshot_001.png # Screenshot 001
@@ -119,32 +120,33 @@ You are welcome to contribute to the project in any way you can. This includes r
 For detailed contribution guidelines, please see [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## Supported languages in the application
-The supported languages are:
- Arabic (ar)
- Chinese (zh)
- Danish (da)
- Dutch (nl)
- English (en)
- Finnish (fi)
- French (fr)
- German (de)
- Greek (el)
- Hindi (hi)
- Hungarian (hu)
- Indonesian (id)
- Italian (it)
- Japanese (ja)
- Korean (ko)
- Norwegian (no)
- Polish (pl)
- Portuguese (Brazil) (pt-BR)
- Portuguese (Portugal) (pt-PT)
- Russian (ru)
- Spanish (es)
- Swedish (sv)
- Turkish (tr)
- Ukrainian (uk)
- Vietnamese (vi)
+The supported languages are:  
+ - Arabic (ar)
+ - Chinese (zh)
+ - Danish (da)
+ - Dutch (nl)
+ - English (en)  
+ - Finnish (fi)
+ - French (fr)
+ - German (de)
+ - Greek (el)
+ - Hindi (hi)
+ - Hungarian (hu)
+ - Indonesian (id)
+ - Italian (it)
+ - Japanese (ja)
+ - Korean (ko)
+ - Norwegian (no)
+ - Polish (pl)
+ - Portuguese (Brazil) (pt-BR)
+ - Portuguese (Portugal) (pt-PT)
+ - Russian (ru)
+ - Spanish (es)
+ - Swedish (sv)
+ - Turkish (tr)
+ - Ukrainian (uk)
+ - Vietnamese (vi)
+ - Czech (cs)
 
 These are auto-translated from english, errors may occur.
 
