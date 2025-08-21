@@ -152,7 +152,7 @@ These are auto-translated from english, errors may occur.
 
 ## Author
 
-🇫🇮 Timo Heimonen (timo.heimonen@gmail.com) 
+🇫🇮 Timo Heimonen (timo.heimonen@proton.me) 
 
 ## Tags
 

@@ -195,7 +195,7 @@ export const vi = {
 
   'tos.intellectualProperty.title': '6. Sở hữu trí tuệ',
   'tos.intellectualProperty.content': 'Dịch vụ và tất cả tài liệu cung cấp qua dịch vụ, bao gồm nhưng không giới hạn ở văn bản, đồ họa, logo và phần mềm, là tài sản của securememo.app hoặc các bên cấp phép và được bảo vệ bởi luật bản quyền, nhãn hiệu và các luật sở hữu trí tuệ khác. Bạn đồng ý không sửa đổi, sao chép, phân phối hoặc tạo các sản phẩm phái sinh dựa trên nội dung của chúng tôi nếu không có sự cho phép rõ ràng, ngoại trừ sử dụng cá nhân, phi thương mại trong dịch vụ.',
-  'tos.intellectualProperty.copyright': 'Chính sách bản quyền & DMCA: Nếu bạn tin rằng bản quyền của mình bị xâm phạm, vui lòng liên hệ timo.heimonen@gmail.com với thông tin yêu cầu theo DMCA (ví dụ: xác định tác phẩm, thông tin liên hệ của bạn và tuyên bố thiện chí).',
+  'tos.intellectualProperty.copyright': 'Chính sách bản quyền & DMCA: Nếu bạn tin rằng bản quyền của mình bị xâm phạm, vui lòng liên hệ timo.heimonen@proton.me với thông tin yêu cầu theo DMCA (ví dụ: xác định tác phẩm, thông tin liên hệ của bạn và tuyên bố thiện chí).',
 
   'tos.indemnification.title': '7. Bồi thường',
   'tos.indemnification.content': 'Bạn đồng ý bảo vệ, bồi thường và giữ cho securememo.app cùng các công ty liên kết, cán bộ, giám đốc, nhân viên và đại lý không bị ảnh hưởng bởi bất kỳ khiếu nại, trách nhiệm, thiệt hại, tổn thất và chi phí nào, bao gồm phí luật sư hợp lý, phát sinh từ hoặc liên quan đến việc bạn truy cập hoặc sử dụng dịch vụ của chúng tôi, bao gồm cả việc bạn vi phạm các Điều khoản này.',
@@ -218,7 +218,7 @@ export const vi = {
   'tos.contact.title': '12. Liên hệ',
   'tos.contact.content': 'Nếu có câu hỏi về các điều khoản này, vui lòng truy cập',
   'tos.contact.github': 'Kho GitHub',
-  'tos.contact.email': 'hoặc email timo.heimonen@gmail.com.',
+  'tos.contact.email': 'hoặc email timo.heimonen@proton.me.',
 
   'tos.languageDisclaimer.title': '13. Ngôn ngữ và dịch thuật',
   'tos.languageDisclaimer.content': 'Các Điều khoản Dịch vụ này có thể được dịch sang các ngôn ngữ khác để thuận tiện cho bạn. Nếu có bất kỳ sự khác biệt hoặc xung đột nào giữa phiên bản tiếng Anh và phiên bản dịch, phiên bản tiếng Anh sẽ được ưu tiên.',
@@ -294,7 +294,7 @@ export const vi = {
   'privacy.contact.title': '10. Liên hệ',
   'privacy.contact.intro': 'Nếu có câu hỏi về thông báo quyền riêng tư này hoặc thực tiễn của chúng tôi, vui lòng truy cập',
   'privacy.contact.github': 'Kho GitHub',
-  'privacy.contact.email': 'hoặc email timo.heimonen@gmail.com.',
+  'privacy.contact.email': 'hoặc email timo.heimonen@proton.me.',
   'privacy.contact.disclaimer': 'Thông báo quyền riêng tư này chỉ áp dụng cho securememo.app và không áp dụng cho bất kỳ trang web bên thứ ba nào được liên kết từ dịch vụ của chúng tôi.',
 
   // Schema.org structured data

@@ -195,7 +195,7 @@ export const ptPT = {
 
   'tos.intellectualProperty.title': '6. Propriedade Intelectual',
   'tos.intellectualProperty.content': 'O Serviço e todos os materiais fornecidos através dele, incluindo mas não limitado a texto, gráficos, logotipos e software, são propriedade do securememo.app ou seus licenciadores e são protegidos por leis de direitos autorais, marcas registradas e outras leis de propriedade intelectual. Você concorda em não modificar, reproduzir, distribuir ou criar trabalhos derivados baseados em nosso conteúdo sem permissão explícita, exceto para uso pessoal e não comercial dentro do Serviço.',
-  'tos.intellectualProperty.copyright': 'Política de Direitos Autorais e DMCA: Se você acredita que seus direitos autorais foram violados, por favor entre em contato conosco em timo.heimonen@gmail.com com as informações necessárias sob o DMCA (por exemplo, identificação do trabalho, seus detalhes de contato e uma declaração de crença de boa fé).',
+  'tos.intellectualProperty.copyright': 'Política de Direitos Autorais e DMCA: Se você acredita que seus direitos autorais foram violados, por favor entre em contato conosco em timo.heimonen@proton.me com as informações necessárias sob o DMCA (por exemplo, identificação do trabalho, seus detalhes de contato e uma declaração de crença de boa fé).',
 
   'tos.indemnification.title': '7. Indenização',
   'tos.indemnification.content': 'Você concorda em defender, indenizar e isentar o securememo.app e suas afiliadas, oficiais, diretores, funcionários e agentes de e contra quaisquer reivindicações, responsabilidades, danos, perdas e despesas, incluindo honorários razoáveis de advogados, decorrentes de ou de qualquer forma conectados com seu acesso ou uso de nossos Serviços, incluindo qualquer violação destes Termos por você.',
@@ -218,7 +218,7 @@ export const ptPT = {
   'tos.contact.title': '12. Contato',
   'tos.contact.content': 'Para perguntas sobre estes termos, por favor visite nosso',
   'tos.contact.github': 'repositório GitHub',
-  'tos.contact.email': 'ou envie email para timo.heimonen@gmail.com.',
+  'tos.contact.email': 'ou envie email para timo.heimonen@proton.me.',
 
   'tos.languageDisclaimer.title': '13. Idioma e Tradução',
   'tos.languageDisclaimer.content': 'Estes Termos de Serviço podem ser traduzidos para outros idiomas para a sua conveniência. No caso de qualquer discrepância ou conflito entre a versão em inglês e uma versão traduzida, a versão em inglês prevalecerá.',
@@ -294,7 +294,7 @@ export const ptPT = {
   'privacy.contact.title': '10. Entre em Contato',
   'privacy.contact.intro': 'Para perguntas sobre este Aviso de Privacidade ou nossas práticas, por favor visite nosso',
   'privacy.contact.github': 'repositório GitHub',
-  'privacy.contact.email': 'ou envie email para timo.heimonen@gmail.com.',
+  'privacy.contact.email': 'ou envie email para timo.heimonen@proton.me.',
   'privacy.contact.disclaimer': 'Este Aviso de Privacidade se aplica apenas ao securememo.app e não a quaisquer sites de terceiros vinculados do nosso serviço.',
 
   // Schema.org structured data

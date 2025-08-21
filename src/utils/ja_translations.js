@@ -195,7 +195,7 @@ export const ja = {
 
     'tos.intellectualProperty.title': '6. 知的財産',
     'tos.intellectualProperty.content': 'サービスおよびそれを通じて提供されるすべての資料（テキスト、グラフィック、ロゴ、ソフトウェアを含むがこれらに限定されない）は、securememo.appまたはそのライセンサーの財産であり、著作権、商標、その他の知的財産法によって保護されています。サービス内での個人的、非商業的使用を除き、明示的な許可なしに私たちのコンテンツを変更、複製、配布、または派生作品を作成しないことに同意します。',
-    'tos.intellectualProperty.copyright': '著作権・DMCA方針: あなたの著作権が侵害されたと思われる場合は、DMCA に基づく必要な情報（作品の識別、連絡先詳細、誠実な信念の陳述など）を添えて timo.heimonen@gmail.com までご連絡ください。',
+    'tos.intellectualProperty.copyright': '著作権・DMCA方針: あなたの著作権が侵害されたと思われる場合は、DMCA に基づく必要な情報（作品の識別、連絡先詳細、誠実な信念の陳述など）を添えて timo.heimonen@proton.me までご連絡ください。',
 
     'tos.indemnification.title': '7. 補償',
     'tos.indemnification.content': 'あなたは、あなたによる私たちのサービスへのアクセスや使用、またはあなたによるこれらの利用規約の違反から生じる、またはそれに関連するすべての請求、責任、損害、損失、および合理的な弁護士費用を含む費用について、securememo.app およびその関連会社、役員、取締役、従業員、代理人を弁護し、補償し、無害に保つことに同意します。',
@@ -218,7 +218,7 @@ export const ja = {
     'tos.contact.title': '12. お問い合わせ',
     'tos.contact.content': 'これらの利用規約に関するご質問は、私たちの',
     'tos.contact.github': 'GitHubリポジトリ',
-    'tos.contact.email': 'をご覧いただくか、timo.heimonen@gmail.com までメールでお問い合わせください。',
+    'tos.contact.email': 'をご覧いただくか、timo.heimonen@proton.me までメールでお問い合わせください。',
 
     'tos.languageDisclaimer.title': '13. 言語と翻訳',
     'tos.languageDisclaimer.content': 'これらの利用規約は、あなたの便宜のために他の言語に翻訳されることがあります。英語版と翻訳版の間に不一致または矛盾がある場合、英語版が優先されます。',
@@ -294,7 +294,7 @@ export const ja = {
     'privacy.contact.title': '10. お問い合わせ',
     'privacy.contact.intro': 'このプライバシー通知や私たちの実務に関するご質問は、私たちの',
     'privacy.contact.github': 'GitHubリポジトリ',
-    'privacy.contact.email': 'をご覧いただくか、timo.heimonen@gmail.com までメールでお問い合わせください。',
+    'privacy.contact.email': 'をご覧いただくか、timo.heimonen@proton.me までメールでお問い合わせください。',
     'privacy.contact.disclaimer': 'このプライバシー通知はsecurememo.appのみに適用され、私たちのサービスからリンクされた第三者のサイトには適用されません。',
 
     // Schema.org structured data
