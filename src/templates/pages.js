@@ -38,12 +38,12 @@ function getLanguageDisplayName(locale) {
 // function to get a flag emoji for the selected locale
 function getFlagEmoji(locale) {
     const flags = {
-        ar: '🇸🇦',
+        ar: '🌐',
         cs: '🇨🇿',
         da: '🇩🇰',
         de: '🇩🇪',
         el: '🇬🇷',
-        en: '🇺🇸',
+        en: '🇬🇧',
         es: '🇪🇸',
         fi: '🇫🇮',
         fr: '🇫🇷',
@@ -65,7 +65,7 @@ function getFlagEmoji(locale) {
         tr: '🇹🇷',
         uk: '🇺🇦',
         vi: '🇻🇳',
-        zh: '🇨🇳',
+        zh: '🈶',
     };
     return flags[locale] || '🌐';
 }
