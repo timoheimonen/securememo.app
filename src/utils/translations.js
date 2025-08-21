@@ -3,6 +3,7 @@
 // Translations are auto translated. Errors are possible.
 
 import { ar } from './ar_translations.js';
+import { cs } from './cs_translations.js';
 import { da } from './da_translations.js';
 import { de } from './de_translations.js';
 import { el } from './el_translations.js';
@@ -27,30 +28,36 @@ import { tr } from './tr_translations.js';
 import { uk } from './uk_translations.js';
 import { vi } from './vi_translations.js';
 import { zh } from './zh_translations.js';
+import { LANGUAGE_NAMES } from './language_names.js';
+function withLanguageNames(localeMap) {
+  return { ...localeMap, ...LANGUAGE_NAMES };
+}
+
 export const TRANSLATIONS = {
-  ar,
-  da,
-  de,
-  el,
-  en,
-  es,
-  fi,
-  fr,
-  hi,
-  hu,
-  id,
-  it,
-  ja,
-  ko,
-  nl,
-  no,
-  pl,
-  ptBR,
-  ptPT,
-  ru,
-  sv,
-  tr,
-  uk,
-  vi,
-  zh
+  ar: withLanguageNames(ar),
+  cs: withLanguageNames(cs),
+  da: withLanguageNames(da),
+  de: withLanguageNames(de),
+  el: withLanguageNames(el),
+  en: withLanguageNames(en),
+  es: withLanguageNames(es),
+  fi: withLanguageNames(fi),
+  fr: withLanguageNames(fr),
+  hi: withLanguageNames(hi),
+  hu: withLanguageNames(hu),
+  id: withLanguageNames(id),
+  it: withLanguageNames(it),
+  ja: withLanguageNames(ja),
+  ko: withLanguageNames(ko),
+  nl: withLanguageNames(nl),
+  no: withLanguageNames(no),
+  pl: withLanguageNames(pl),
+  ptBR: withLanguageNames(ptBR),
+  ptPT: withLanguageNames(ptPT),
+  ru: withLanguageNames(ru),
+  sv: withLanguageNames(sv),
+  tr: withLanguageNames(tr),
+  uk: withLanguageNames(uk),
+  vi: withLanguageNames(vi),
+  zh: withLanguageNames(zh)
 };
