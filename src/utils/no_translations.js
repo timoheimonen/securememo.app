@@ -2,7 +2,7 @@ export const no = {
   // Navigation
     'nav.home': 'Hjem',
     'nav.about': 'Om',
-    'nav.create': 'Opprett sikker notat',
+  'nav.create': 'Opprett sikkert notat',
     'nav.toggleMenu': 'Vis/skjul navigasjonsmeny',
 
   // Common elements
@@ -45,11 +45,11 @@ export const no = {
     'btn.copyPassword': 'Kopier passord',
     'btn.show': 'Vis',
     'btn.hide': 'Skjul',
-    'btn.create': 'Opprett sikker notat',
+  'btn.create': 'Opprett sikkert notat',
     'btn.creating': 'Krypterer...',
-    'btn.decrypt': 'Dekrypter notat',
+  'btn.decrypt': 'Dekrypter notatet',
     'btn.decrypting': 'Dekrypterer...',
-    'btn.goHome': 'Gå til hjem',
+  'btn.goHome': 'Gå til forsiden',
     'btn.createNew': 'Opprett nytt notat',
 
   // Form labels and placeholders
@@ -67,36 +67,36 @@ export const no = {
     'msg.passwordCopied': '✅ Passord kopiert til utklippstavlen!',
     'msg.copyManual': '⚠️ Vennligst kopier manuelt (Ctrl+C / Cmd+C)',
     'msg.memoCreated': '✅ Notat opprettet!',
-    'msg.memoDecrypted': 'Notat dekryptert. Sletter... Vennligst vent.',
+  'msg.memoDecrypted': 'Notatet er dekryptert. Sletter... Vennligst vent.',
     'msg.memoDeleted': 'Notatet er bekreftet lest og permanent slettet.',
     'msg.deletionError': 'Feil ved bekreftelse av sletting. Notatet vil bli ryddet opp automatisk.',
 
   // Page titles and descriptions
   'page.home.title': 'securememo.app - Krypterte selvdestruerende notater',
   'page.home.description': 'Opprett krypterte notater som selvdestruerer etter at de er lest. Ende-til-ende-kryptering, personvernfokusert og sikker deling av notater med AES-256. Ingen sporing, ingen annonser.',
-  'page.home.keywords': 'sikkert notat, kryptert notat, selvdestruerende notat, privat deling av notater, ende-til-ende-kryptering, AES-256, personvern, sikker notatdeling',
+  'page.home.keywords': 'sikkert notat, kryptert notat, selvdestruerende notat, privat deling av notater, ende-til-ende-kryptering, AES-256, personvern, sikker deling av notater',
   'page.home.ogTitle': 'securememo.app - Krypterte selvdestruerende notater',
   'page.home.ogDescription': 'Del sensitiv informasjon sikkert med notater som slettes etter én visning eller utløp. Drevet av klientbasert AES-256-kryptering.',
   'page.home.twitterDescription': 'Personvern først – app for sikre, selvdestruerende notater.',
   'page.about.title': 'Om securememo.app - Personvernfokuserte krypterte notater',
   'page.about.description': 'Lær om securememo.apps personvernfokuserte tilnærming til kryptert meldingsutveksling. Bygget med klientbasert AES-256-kryptering, selvdestruerende meldinger og nullkunnskapsarkitektur.',
-  'page.about.keywords': 'om sikkert notat, personvernfokusert meldingsutveksling, klientbasert kryptering, AES-256, selvdestruerende meldinger, nullkunnskap, sikker deling av notater',
+  'page.about.keywords': 'om sikre notater, personvernfokusert meldingsutveksling, klientbasert kryptering, AES-256, selvdestruerende meldinger, nullkunnskap, sikker deling av notater',
   'page.about.ogTitle': 'Om securememo.app - Personvernfokuserte krypterte notater',
   'page.about.ogDescription': 'Oppdag hvordan securememo.app beskytter ditt personvern med klientbasert kryptering og selvdestruerende meldinger.',
   'page.about.twitterDescription': 'Personvern først – kryptert meldingsutveksling med klientbasert kryptering.',
-  'page.create.title': 'Opprett sikker notat - Kryptert selvdestruerende notat',
+  'page.create.title': 'Opprett sikkert notat - Kryptert selvdestruerende notat',
   'page.create.keywords': 'opprett sikkert notat, kryptert notat, selvdestruerende notat, AES-256-kryptering, privat deling av notater, opprettelse av sikre notater',
-  'page.read.title': 'Les sikker notat - Dekrypter kryptert notat',
+  'page.read.title': 'Les sikkert notat - Dekrypter notatet',
   'page.read.keywords': 'les sikkert notat, dekrypter notat, lesing av kryptert notat, AES-256-dekryptering, privat tilgang til notat',
   'page.tos.title': 'Vilkår for bruk - securememo.app juridiske vilkår',
   'page.tos.description': 'Vilkår for bruk for securememo.app - kryptert deling av notater. Lær om akseptabel bruk, personvern, sikkerhet og juridiske vilkår for vår sikre notatdelingsplattform.',
-  'page.tos.keywords': 'vilkår for bruk, sikker notat juridisk, krypterte notatvilkår, personvernerklæring, akseptabel bruk, vilkår for sikker deling av notater',
+  'page.tos.keywords': 'vilkår for bruk, juridiske vilkår for sikre notater, vilkår for krypterte notater, personvernerklæring, akseptabel bruk, vilkår for sikker deling av notater',
   'page.tos.ogTitle': 'Vilkår for bruk - securememo.app juridiske vilkår',
   'page.tos.ogDescription': 'Juridiske vilkår og betingelser for securememo.app kryptert deling av notater.',
   'page.tos.twitterDescription': 'Juridiske vilkår for securememo.app kryptert deling av notater.',
   'page.privacy.title': 'Personvernerklæring - securememo.app databeskyttelse',
   'page.privacy.description': 'Personvernerklæring for securememo.app - lær hvordan vi beskytter dine data med klientbasert kryptering, nullkunnskapsarkitektur og minimal datainnsamling for sikker deling av notater.',
-  'page.privacy.keywords': 'personvernerklæring, sikker notat personvern, databeskyttelse, GDPR-samsvar, klientbasert kryptering, nullkunnskap, personvern ved deling av notater',
+  'page.privacy.keywords': 'personvernerklæring, personvern for sikre notater, databeskyttelse, GDPR-samsvar, klientbasert kryptering, nullkunnskap, personvern ved deling av notater',
   'page.privacy.ogTitle': 'Personvernerklæring - securememo.app databeskyttelse',
   'page.privacy.ogDescription': 'Hvordan securememo.app beskytter ditt personvern med klientbasert kryptering og minimal datainnsamling.',
   'page.privacy.twitterDescription': 'Personvern med klientbasert kryptering og nullkunnskapsarkitektur.',
@@ -104,7 +104,7 @@ export const no = {
   // Main page content
   'home.hero.title': 'securememo.app',
   'home.hero.subtitle': 'Opprett krypterte notater som selvdestruerer etter at de er lest eller utløpt. Dine hemmeligheter forblir trygge.',
-  'home.hero.btnPrimary': 'Opprett sikker notat',
+  'home.hero.btnPrimary': 'Opprett sikkert notat',
   'home.hero.btnSecondary': 'Les mer',
 
   'home.features.title': 'Slik fungerer det',
@@ -120,7 +120,7 @@ export const no = {
   'home.security.encryption.description': 'Notatet ditt krypteres i nettleseren med AES-256-GCM og sterk nøkkelavledning (over 2 200 000 iterasjoner). Vi ser aldri klartekst.',
   'home.security.delete.title': '🗑️ Pålitelig automatisk sletting',
   'home.security.delete.description': 'Notater forsvinner for alltid etter lesing eller utløp, med automatisk opprydding hver time. Ingen sikkerhetskopier eller gjenoppretting mulig.',
-  'home.security.password.title': '🌐 Null passordkunnskap',
+  'home.security.password.title': '🌐 Nullkunnskap om passord',
   'home.security.password.description': 'Vi genererer og håndterer passord kun i nettleseren din. De sendes aldri til eller lagres på våre servere.',
 
   'footer.sourceCode': 'Se kildekode på GitHub',
@@ -156,7 +156,7 @@ export const no = {
 
   'about.usage.title': 'Slik bruker du tjenesten',
   'about.usage.create.title': '1. Opprett et notat',
-  'about.usage.create.description': 'Gå til "Opprett sikker notat" og skriv inn notatet ditt. Velg en utløpstid (8t, 1d, 2d, 1 uke eller maks 30 dager). Notater slettes når de er lest eller utløpt. Systemet genererer et tilfeldig krypteringspassord.',
+  'about.usage.create.description': 'Gå til "Opprett sikkert notat" og skriv inn notatet ditt. Velg en utløpstid (8t, 1d, 2d, 1 uke eller maks 30 dager). Notater slettes når de er lest eller utløpt. Systemet genererer et tilfeldig krypteringspassord.',
   'about.usage.share.title': '2. Del lenken og passordet',
   'about.usage.share.description': 'Kopier den genererte URL-en og passordet, og del dem med mottakeren via separate kanaler for økt sikkerhet.',
   'about.usage.destruct.title': '3. Selvdestruksjon',
@@ -164,8 +164,8 @@ export const no = {
 
   'about.cta.title': 'Klar til å komme i gang?',
   'about.cta.subtitle': 'Opprett ditt første sikre notat nå og opplev ekte ende-til-ende-kryptering.',
-  'about.cta.createBtn': 'Opprett sikker notat',
-  'about.cta.homeBtn': 'Gå til hjem',
+  'about.cta.createBtn': 'Opprett sikkert notat',
+  'about.cta.homeBtn': 'Gå til forsiden',
 
   // Terms of Service page content
   'tos.hero.title': 'Vilkår for bruk',
@@ -217,7 +217,7 @@ export const no = {
   'tos.securityDisclaimers.userResponsibility': 'Brukeransvar: Du er ansvarlig for å dele notat-URL-er sikkert og beskytte passordene. Hvis passord går tapt, kan notater ikke gjenopprettes.',
   'tos.securityDisclaimers.noWarranty': 'Ingen garanti: Tjenesten leveres uten noen form for garanti. Våre krypteringstjenester leveres "som de er" og "som tilgjengelig". Vi garanterer ikke at krypteringen vil være uavbrutt, feilfri eller sikker mot alle potensielle trusler.',
   'tos.securityDisclaimers.limitation': 'Ansvarsbegrensning: Vi er ikke ansvarlige for skader som oppstår ved bruk av tjenesten. Du erkjenner at ingen metode for elektronisk overføring eller lagring er 100 % sikker, og vi er ikke ansvarlige for uautorisert tilgang eller avlytting av dine notater. Bruk av våre krypteringstjenester skjer på eget ansvar.',
-  'tos.securityDisclaimers.securityMeasures': 'Sikkerhetstiltak: Selv om vi implementerer sikkerhetstiltak, er ingen system 100 % sikkert.',
+  'tos.securityDisclaimers.securityMeasures': 'Sikkerhetstiltak: Selv om vi implementerer sikkerhetstiltak, er inget system 100 % sikkert.',
   'tos.securityDisclaimers.exportControls': 'Eksportkontroll: Du samtykker i å ikke bruke tjenesten i strid med eksportkontrollovgivning, inkludert restriksjoner for bruk i sanksjonerte land.',
 
   'tos.intellectualProperty.title': '6. Immaterielle rettigheter',
@@ -349,7 +349,7 @@ export const no = {
   'faq.duration.question': 'Hvor lenge varer notater?',
   'faq.duration.answer': 'Notater kan settes til å utløpe etter 8 timer, 1 dag, 2 dager, 1 uke eller maks 30 dager. De slettes også umiddelbart etter at de er lest. Utløpte notater ryddes automatisk hver time.',
   'faq.recovery.question': 'Kan jeg gjenopprette et slettet notat?',
-  'faq.recovery.answer': 'Nei, når et notat er slettet (enten etter at det er lest eller utløpt), kan det ikke gjenopprettes. Dette er designet for maksimal personvern og sikkerhet.',
+  'faq.recovery.answer': 'Nei, når et notat er slettet (enten etter at det er lest eller utløpt), kan det ikke gjenopprettes. Dette er designet for maksimalt personvern og sikkerhet.',
   'faq.cost.question': 'Er securememo.app gratis å bruke?',
   'faq.cost.answer': 'Ja, securememo.app er helt gratis å bruke. Det er ingen skjulte avgifter, ingen premium-funksjoner og ingen sporing eller annonser.',
   'faq.technology.question': 'Hvilken teknologi bruker securememo.app?',
@@ -362,19 +362,19 @@ export const no = {
   'ui.breadcrumb.privacy': 'Personvernerklæring',
 
   // Create memo page content
-  'create.hero.title': 'Opprett sikker notat',
+  'create.hero.title': 'Opprett sikkert notat',
   'create.hero.description': 'Notatet ditt vil bli kryptert i nettleseren og selvdestrueres etter at det er lest eller utløpt.',
-  'create.hero.ogDescription': 'Opprett krypterte notater med klientbasert AES-256-kryptering. Notater selvdestruerer etter lesing for maksimal personvern.',
+  'create.hero.ogDescription': 'Opprett krypterte notater med klientbasert AES-256-kryptering. Notater selvdestruerer etter lesing for maksimalt personvern.',
   'create.hero.twitterDescription': 'Opprett krypterte notater med klientbasert kryptering.',
   'create.schema.description': 'Opprett krypterte notater som selvdestruerer etter lesing. Klientbasert AES-256-kryptering sikrer at hemmelighetene dine forblir private.',
   'create.schema.actionDescription': 'Opprett krypterte notater med klientbasert AES-256-kryptering og automatisk selvdestruksjon',
 
   // Read memo page content  
-  'read.hero.title': 'Les sikker notat',
+  'read.hero.title': 'Les sikkert notat',
   'read.hero.description': 'Skriv inn passordet for å dekryptere og lese notatet. Passordet skal ha blitt delt med deg separat fra URL-en. Notatet vil bli slettet etter at det er lest eller utløpt.',
-  'read.hero.ogDescription': 'Dekrypter og les ditt sikre notat. Notater selvdestruerer etter lesing for maksimal personvern.',
+  'read.hero.ogDescription': 'Dekrypter og les ditt sikre notat. Notater selvdestruerer etter lesing for maksimalt personvern.',
   'read.hero.twitterDescription': 'Dekrypter og les ditt sikre notat med klientbasert dekryptering.',
-  'read.schema.description': 'Dekrypter og les ditt sikre notat med passordet. Notater selvdestruerer etter lesing for maksimal personvern. Klientbasert AES-256-dekryptering.',
+  'read.schema.description': 'Dekrypter og les ditt sikre notat med passordet. Notater selvdestruerer etter lesing for maksimalt personvern. Klientbasert AES-256-dekryptering.',
 
   // Form options
   'form.expiry.option.8h': 'Slett ved lesing eller etter 8 timer',
