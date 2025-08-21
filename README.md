@@ -1,7 +1,7 @@
 # securememo.app
 
 securememo.app is a simple, privacy-focused service for sharing sensitive memos securely. All encryption occurs client-side in your browser using AES-256-GCM with PBKDF2 key derivation—ensuring that plaintext is never transmitted or stored on the server. Each memo self-destructs permanently after being read or upon expiration.
-securememo.app will run the main version of this repo.
+securememo.app will run the main branch of this repo.
 
 [![License](https://img.shields.io/github/license/timoheimonen/securememo.app)](https://github.com/timoheimonen/securememo.app/blob/main/LICENSE)
 [![Stars](https://img.shields.io/github/stars/timoheimonen/securememo.app)](https://github.com/timoheimonen/securememo.app/stargazers)
@@ -21,7 +21,7 @@ securememo.app will run the main version of this repo.
 - **Turnstile CAPTCHA**: Prevents bot abuse and spam while maintaining user privacy (no tracking).
 - **Robust security headers**: Includes strict CSP, HSTS, and other policies to mitigate common web vulnerabilities.
 - **Automated cleanup**: Expired or read memos are permanently removed via scheduled cron jobs.
-- **Localization**: Currently supports 27 different languages.
+- **Localization**: Currently supports 28 languages.
 
 
 
@@ -52,31 +52,34 @@ securememo/
 │   │   ├── localization.js     # Server-side localization utilities
 │   │   ├── clientLocalization.js # Client-side localization utilities
 │   │   ├── translations.js     # Translation registry
-│   │   ├── uk_translations.js  # Ukrainian translations
 │   │   ├── ar_translations.js  # Arabic translations
+│   │   ├── cs_translations.js  # Czech translations
+│   │   ├── da_translations.js  # Danish translations
+│   │   ├── de_translations.js  # German translations
 │   │   ├── el_translations.js  # Greek translations
 │   │   ├── en_translations.js  # English translations
-│   │   ├── de_translations.js  # German translations
-│   │   ├── nl_translations.js  # Dutch translations
 │   │   ├── es_translations.js  # Spanish translations
-│   │   ├── fr_translations.js  # French translations
 │   │   ├── fi_translations.js  # Finnish translations
+│   │   ├── fr_translations.js  # French translations
 │   │   ├── hi_translations.js  # Hindi translations
-│   │   ├── ptPT_translations.js # Portuguese (Portugal) translations
-│   │   ├── ptBR_translations.js # Portuguese (Brazil) translations
-│   │   ├── zh_translations.js  # Chinese translations
-│   │   ├── ko_translations.js  # Korean translations
-│   │   ├── ja_translations.js  # Japanese translations
-│   │   ├── it_translations.js  # Italian translations
-│   │   ├── vi_translations.js  # Vietnamese translations
-│   │   ├── tr_translations.js  # Turkish translations
-│   │   ├── sv_translations.js  # Swedish translations
-│   │   ├── pl_translations.js  # Polish translations
 │   │   ├── hu_translations.js  # Hungarian translations
 │   │   ├── id_translations.js  # Indonesian translations
+│   │   ├── it_translations.js  # Italian translations
+│   │   ├── ja_translations.js  # Japanese translations
+│   │   ├── ko_translations.js  # Korean translations
+│   │   ├── no_translations.js  # Norwegian translations
+│   │   ├── nl_translations.js  # Dutch translations
+│   │   ├── pl_translations.js  # Polish translations
+│   │   ├── ptBR_translations.js # Portuguese (Brazil) translations
+│   │   ├── ptPT_translations.js # Portuguese (Portugal) translations
+│   │   ├── ro_translations.js  # Romanian translations
+│   │   ├── ru_translations.js  # Russian translations
+│   │   ├── sv_translations.js  # Swedish translations
 │   │   ├── th_translations.js  # Thai translations
-│   │   ├── cs_translations.js  # Czech translations
-│   │   └── ru_translations.js  # Russian translations
+│   │   ├── tr_translations.js  # Turkish translations
+│   │   ├── uk_translations.js  # Ukrainian translations
+│   │   ├── vi_translations.js  # Vietnamese translations
+│   │   └── zh_translations.js  # Chinese translations
 │   ├── screenshots/            # Screenshots
 │   │   ├──  screenshot_001.png # Screenshot 001
 │   │   └──  screenshot_002.png # Screenshot 002
@@ -142,6 +145,7 @@ The supported languages are:
  - Portuguese (Brazil) (pt-BR)
  - Portuguese (Portugal) (pt-PT)
  - Russian (ru)
+ - Romanian (ro)
  - Spanish (es)
  - Swedish (sv)
  - Thai (th)
