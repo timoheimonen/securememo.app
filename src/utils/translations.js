@@ -31,7 +31,6 @@ import { uk } from './uk_translations.js';
 import { vi } from './vi_translations.js';
 import { zh } from './zh_translations.js';
 import { LANGUAGE_NAMES } from './language_names.js';
-import { ro } from './ro_translations.js';
 function withLanguageNames(localeMap) {
   return { ...localeMap, ...LANGUAGE_NAMES };
 }
