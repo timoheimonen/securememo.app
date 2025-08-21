@@ -3,7 +3,7 @@ export const ko = {
     'nav.home': '홈',
     'nav.about': '소개',
     'nav.create': '보안 메모 작성',
-    'nav.toggleMenu': '내비게이션 메뉴 토글',
+  'nav.toggleMenu': '메뉴 열기/닫기',
 
     // Common elements
     'common.loading': '로딩 중...',
@@ -53,13 +53,13 @@ export const ko = {
     'btn.createNew': '새 메모 작성',
 
     // Form labels and placeholders
-    'form.message.label': '당신의 메모',
+  'form.message.label': '메모 내용',
     'form.message.placeholder': '여기에 비밀 메모를 입력하세요...',
     'form.message.help': '최대 10,000자',
     'form.expiry.label': '만료 시간',
     'form.password.label': '암호화 비밀번호',
     'form.password.placeholder': '별도로 공유받은 암호화 비밀번호를 입력하세요',
-    'form.password.help': '비밀번호는 메모 URL과 별도로 공유받았을 것입니다',
+  'form.password.help': '비밀번호는 메모 URL과 별도로 공유됩니다',
     'form.security.help': '보안 인증을 완료해 주세요',
 
     // Messages and notifications
@@ -103,7 +103,7 @@ export const ko = {
 
     // Main page content
     'home.hero.title': 'securememo.app',
-    'home.hero.subtitle': '읽거나 만료된 후 자체 삭제되는 암호화된 메모를 만드세요. 당신의 비밀은 안전하게 유지됩니다.',
+  'home.hero.subtitle': '읽거나 만료된 후 자체 삭제되는 암호화된 메모를 만드세요. 비밀은 안전하게 보호됩니다.',
     'home.hero.btnPrimary': '보안 메모 작성',
     'home.hero.btnSecondary': '더 알아보기',
 
@@ -120,13 +120,13 @@ export const ko = {
     'home.security.encryption.description': '메모는 AES-256-GCM과 강력한 키 유도(2,200,000회 이상 반복)로 브라우저 내에서 암호화됩니다. 저희는 평문을 절대 볼 수 없습니다.',
     'home.security.delete.title': '🗑️ 신뢰할 수 있는 자동 삭제',
     'home.security.delete.description': '메모는 읽거나 만료된 후 매시간 자동 정리로 영원히 사라집니다. 백업이나 복구는 불가능합니다.',
-    'home.security.password.title': '🌐 무지식 비밀번호',
+  'home.security.password.title': '🌐 비밀번호 무지식 원칙',
     'home.security.password.description': '브라우저에서 완전히 비밀번호를 생성하고 처리합니다. 서버로 전송되거나 저장되지 않습니다.',
 
     'footer.sourceCode': 'GitHub에서 소스 코드 보기',
     'footer.tos': '서비스 약관',
     'footer.privacy': '개인정보 보호 고지',
-    'footer.tagline': '추적 없음, 광고 없음, 헛소리 없음.',
+  'footer.tagline': '추적 없음, 광고 없음, 군더더기 없음.',
 
     // About page content
     'about.hero.title': 'securememo.app 소개',
@@ -147,7 +147,7 @@ export const ko = {
     'about.features.passwordSharing.description': '암호화 비밀번호는 URL과 별도로 생성되며 보안 강화를 위해 다른 채널을 통해 공유되어야 합니다.',
     'about.features.selfDestruct.title': '💥 자체 삭제 메모',
     'about.features.selfDestruct.description': '메모가 읽히거나 만료되면 데이터베이스에서 즉시 영구적으로 삭제됩니다. 흔적이 남지 않습니다.',
-    'about.features.noStorage.title': '🌐 비밀번호 저장 안함',
+  'about.features.noStorage.title': '🌐 비밀번호를 저장하지 않음',
     'about.features.noStorage.description': '서버에 암호화 비밀번호를 저장하지 않습니다. 브라우저 메모리에만 존재합니다.',
     'about.features.global.title': '⚡ 글로벌 성능',
     'about.features.global.description': '전 세계 어디서나 초고속 접근을 위해 Cloudflare의 글로벌 네트워크에 구축되었습니다.',
@@ -193,7 +193,7 @@ export const ko = {
     'tos.acceptableUse.illegal': '불법적이거나 해로우거나 위협적이거나 학대적이거나 명예훼손적인 콘텐츠를 전송하기 위해 서비스 사용',
     'tos.acceptableUse.bypass': '보안 조치나 CAPTCHA 보호를 우회하려고 시도',
     'tos.acceptableUse.automated': '자동화된 도구나 스크립트를 사용하여 메모 생성',
-    'tos.acceptableUse.malware': '메웨어, 피싱 링크 또는 기타 해로운 콘텐츠가 포함된 메모 공유',
+  'tos.acceptableUse.malware': '악성코드, 피싱 링크 또는 기타 해로운 콘텐츠가 포함된 메모 공유',
     'tos.acceptableUse.spam': '스팸 또는 대량 불요 메모 공유를 위해 서비스 사용',
     'tos.acceptableUse.reverse': '서비스를 역공학하거나 손상시키려고 시도',
 
@@ -238,7 +238,7 @@ export const ko = {
 
     'tos.miscellaneous.title': '11. 기타',
     'tos.miscellaneous.severability': '분리 가능성: 관할 법원에서 이 약관의 어떤 조항이 무효하거나 집행 불가능하다고 판단되는 경우, 해당 조항은 약관에서 분리되며 나머지 조항들은 여전히 완전한 효력을 가집니다.',
-    'tos.miscellaneous.assignment': '양도: 사전 서면 동의 없이는 법원의 작용 또는 기타 방법으로 이 약관을 양도하거나 이전할 수 없습니다. 저희는 고지 없이 단독 재량에 따라 이 약관을 양도할 수 있습니다.',
+  'tos.miscellaneous.assignment': '양도: 사전 서면 동의 없이는 법률상 또는 기타 방법으로 이 약관을 양도하거나 이전할 수 없습니다. 저희는 고지 없이 단독 재량에 따라 이 약관을 양도할 수 있습니다.',
     'tos.miscellaneous.waiver': '포기: 서면이 아닌 이상 어떤 조항의 포기도 추가 또는 지속적인 포기로 간주되지 않습니다.',
     'tos.miscellaneous.children': '아동 개인정보 보호: 저희 서비스는 13세 미만(일부 관할권에서는 16세 미만) 아동을 대상으로 하지 않습니다. 아동으로부터 데이터를 고의로 수집하지 않습니다. 그러한 데이터를 인지하게 되면 즉시 삭제합니다.',
 
@@ -294,7 +294,7 @@ export const ko = {
     'privacy.dataSecurity.title': '4. 데이터 보안',
     'privacy.dataSecurity.encryption': '암호화: 모든 메모는 PBKDF2 키 유도(2,200,000회 반복)와 함께 AES-256을 사용하여 클라이언트 측에서 암호화됩니다. 암호화된 데이터만 저장하며 복호화할 수 없습니다.',
     'privacy.dataSecurity.deletion': '삭제: 메모는 읽거나 만료된 후 자동화된 크론 작업을 통해 영구적으로 삭제됩니다.',
-    'privacy.dataSecurity.securityMeasures': '보안 조치: 강력한 보안 헤더(CSP, HSTS 등), 입력 살균, 타이밍 공격 보호 및 남용 방지를 위한 CAPTCHA를 구현합니다.',
+  'privacy.dataSecurity.securityMeasures': '보안 조치: 강력한 보안 헤더(CSP, HSTS 등), 입력 검증, 타이밍 공격 보호 및 남용 방지를 위한 CAPTCHA를 구현합니다.',
     'privacy.dataSecurity.noRecovery': '복구 불가: 삭제된 메모는 저희도 복구할 수 없습니다.',
     'privacy.dataSecurity.disclaimer': '시스템 보안을 위해 합리적인 조치를 취하지만 어떤 서비스도 위험에 완전히 면역은 아닙니다. URL과 비밀번호를 안전하게 공유할 책임이 있습니다.',
 
@@ -327,8 +327,8 @@ export const ko = {
     // Schema.org structured data
     'schema.app.description': '읽은 후 자체 삭제되는 암호화된 메모를 만드세요. 종단간 암호화, 개인정보 보호 중심, AES-256으로 안전한 메모 공유. 추적 없음, 광고 없음.',
     'schema.app.category': 'SecurityApplication',
-    'schema.app.os': 'Web Browser',
-    'schema.app.requirements': 'Requires JavaScript. Requires HTML5.',
+  'schema.app.os': '웹 브라우저',
+  'schema.app.requirements': 'JavaScript 필요. HTML5 필요.',
     'schema.app.author': 'Timo Heimonen',
     'schema.app.price': '0',
     'schema.app.currency': 'USD',
@@ -371,7 +371,7 @@ export const ko = {
 
     // Read memo page content  
     'read.hero.title': '보안 메모 읽기',
-    'read.hero.description': '비밀번호를 입력하여 메모를 복호화하고 읽으세요. 비밀번호는 URL과 별도로 공유받았을 것입니다. 메모는 읽거나 만료된 후 삭제됩니다.',
+  'read.hero.description': '비밀번호를 입력하여 메모를 복호화하고 읽으세요. 비밀번호는 URL과 별도로 공유됩니다. 메모는 읽거나 만료된 후 삭제됩니다.',
     'read.hero.ogDescription': '보안 메모를 복호화하고 읽으세요. 최대 개인정보 보호를 위해 읽은 후 메모가 자체 삭제됩니다.',
     'read.hero.twitterDescription': '클라이언트 측 복호화로 보안 메모를 복호화하고 읽으세요.',
     'read.schema.description': '비밀번호로 보안 메모를 복호화하고 읽으세요. 최대 개인정보 보호를 위해 읽은 후 메모가 자체 삭제됩니다. 클라이언트 측 AES-256 복호화.',
@@ -387,7 +387,7 @@ export const ko = {
     'msg.encrypting': '메모를 안전하게 암호화하는 중... 오래된 기기에서는 시간이 걸릴 수 있습니다.',
     'msg.decrypting': '메모를 복호화하는 중... 오래된 기기에서는 시간이 걸릴 수 있습니다.',
     'msg.deletingSecurely': '메모를 안전하게 삭제하는 중...',
-    'msg.yourSecureMemo': '📝 당신의 보안 메모',
+  'msg.yourSecureMemo': '📝 내 보안 메모',
     'msg.status': '상태:',
 
     // Labels and help text
@@ -472,7 +472,7 @@ export const ko = {
     // Error messages - network errors
     'error.NETWORK_ERROR': '서비스가 일시적으로 사용할 수 없습니다. 다시 시도하세요.',
     'error.SERVICE_UNAVAILABLE': '서비스가 일시적으로 사용할 수 없습니다. 나중에 다시 시도하세요.',
-    'error.RATE_LIMITED': '요청이 너무 많습니다. 잔시 기다린 후 다시 시도하세요.',
+  'error.RATE_LIMITED': '요청이 너무 많습니다. 잠시 기다린 후 다시 시도하세요.',
 
     // Error messages - client-side validation errors
     'error.MISSING_MESSAGE': '메모를 입력해 주세요',
@@ -519,7 +519,7 @@ export const ko = {
     'error.security.MISSING_MEMO_ID': '잘못된 요청입니다.',
     'error.security.MEMO_NOT_FOUND': '이 메모는 더 이상 사용할 수 없습니다.',
     'error.security.MEMO_ALREADY_READ': '이 메모는 더 이상 사용할 수 없습니다.',
-    'error.security.MEMO_EXPIRED': '이 멤모는 더 이상 사용할 수 없습니다.',
+  'error.security.MEMO_EXPIRED': '이 메모는 더 이상 사용할 수 없습니다.',
     'error.security.DATABASE_READ_ERROR': '서비스가 일시적으로 사용할 수 없습니다.',
     'error.security.MEMO_READ_ERROR': '요청을 처리할 수 없습니다.',
     'error.security.METHOD_NOT_ALLOWED': '잘못된 요청 방법입니다.',
