@@ -168,6 +168,7 @@ export async function handleCreateMemo(request, env, locale = 'en') {
         
         // Verify Turnstile token
         if (!isValidTurnstile) {
+            await addArtificialDelay();
             return new Response(JSON.stringify({ error: getErrorMessage('MISSING_TURNSTILE', requestLocale) }), {
                 status: 400,
                 headers: { 'Content-Type': 'application/json' }
@@ -188,6 +189,7 @@ export async function handleCreateMemo(request, env, locale = 'en') {
             });
 
             if (!turnstileResponse.ok) {
+                await addArtificialDelay();
                 return new Response(JSON.stringify({ error: getErrorMessage('TURNSTILE_API_ERROR', requestLocale) }), {
                     status: 500,
                     headers: { 'Content-Type': 'application/json' }
@@ -197,12 +199,14 @@ export async function handleCreateMemo(request, env, locale = 'en') {
             const turnstileResult = await turnstileResponse.json();
             
             if (!turnstileResult.success) {
+                await addArtificialDelay();
                 return new Response(JSON.stringify({ error: getErrorMessage('TURNSTILE_FAILED', requestLocale) }), {
                     status: 400,
                     headers: { 'Content-Type': 'application/json' }
                 });
             }
         } catch (turnstileError) {
+            await addArtificialDelay();
             return new Response(JSON.stringify({ error: getErrorMessage('TURNSTILE_VERIFICATION_ERROR', requestLocale) }), {
                 status: 500,
                 headers: { 'Content-Type': 'application/json' }
@@ -330,6 +334,7 @@ export async function handleReadMemo(request, env, locale = 'en') {
         
         // Verify Turnstile token
         if (!isValidTurnstile) {
+            await addArtificialDelay();
             return new Response(JSON.stringify({ error: getErrorMessage('MISSING_TURNSTILE', requestLocale) }), {
                 status: 400,
                 headers: { 'Content-Type': 'application/json' }
@@ -350,6 +355,7 @@ export async function handleReadMemo(request, env, locale = 'en') {
             });
 
             if (!turnstileResponse.ok) {
+                await addArtificialDelay();
                 return new Response(JSON.stringify({ error: getErrorMessage('TURNSTILE_API_ERROR', requestLocale) }), {
                     status: 500,
                     headers: { 'Content-Type': 'application/json' }
@@ -359,12 +365,14 @@ export async function handleReadMemo(request, env, locale = 'en') {
             const turnstileResult = await turnstileResponse.json();
             
             if (!turnstileResult.success) {
+                await addArtificialDelay();
                 return new Response(JSON.stringify({ error: getErrorMessage('TURNSTILE_FAILED', requestLocale) }), {
                     status: 400,
                     headers: { 'Content-Type': 'application/json' }
                 });
             }
         } catch (turnstileError) {
+            await addArtificialDelay();
             return new Response(JSON.stringify({ error: getErrorMessage('TURNSTILE_VERIFICATION_ERROR', requestLocale) }), {
                 status: 500,
                 headers: { 'Content-Type': 'application/json' }
