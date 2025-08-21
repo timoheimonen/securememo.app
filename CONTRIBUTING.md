@@ -52,7 +52,7 @@ Be respectful and considerate in all interactions. See [CODE_OF_CONDUCT.md](CODE
 ## Reporting Issues
 
 If you find a bug or want to request a feature, please [open an issue](../../issues/new) with as much detail as possible.
-Please report highly sensitive bugs/issues via email to [timo.heimonen@gmail.com](mailto:timo.heimonen@gmail.com)
+Please report highly sensitive bugs/issues via email to [timo.heimonen@proton.me](mailto:timo.heimonen@proton.me)
 
 ## Style Guide
 
@@ -68,7 +68,7 @@ By contributing, you agree that your contributions will be licensed under the sa
 ## Author
 
 Timo Heimonen  
-[timo.heimonen@gmail.com](mailto:timo.heimonen@gmail.com)
+[timo.heimonen@proton.me](mailto:timo.heimonen@proton.me)
 
 ---
 
