@@ -17,9 +17,23 @@ function highlightCurrentPage() {
     });
 }
 
-// Init Turnstile widget
-function initTurnstile() {
-    // Turnstile widget auto-initialized with data-sitekey attribute
+// Track Turnstile render state
+let turnstileRendered = false;
+
+// Lazy render Turnstile widget when needed
+function renderTurnstileIfNeeded() {
+    if (turnstileRendered) return;
+    const container = document.getElementById('turnstile-container');
+    if (!container) return;
+    container.style.display = 'block';
+    if (typeof turnstile !== 'undefined' && turnstile.render) {
+        try {
+            turnstile.render('#turnstile-container', { sitekey: TURNSTILE_SITE_KEY });
+            turnstileRendered = true;
+        } catch(e) {
+            // Silent – widget script might not be ready yet
+        }
+    }
 }
 
 // Get Turnstile response safely
@@ -41,7 +55,6 @@ function resetTurnstile() {
 // Init page state
 function initializePage() {
     highlightCurrentPage();
-    initTurnstile();
     
     // Hide result section by default
     const resultSection = document.getElementById('result');
@@ -176,11 +189,14 @@ document.getElementById('memoForm').addEventListener('submit', async (e) => {
     }
     
     // Validate Turnstile completion
-    const turnstileResponse = getTurnstileResponse();
-    
+    let turnstileResponse = getTurnstileResponse();
     if (!turnstileResponse) {
-        showMessage('{{MISSING_SECURITY_CHALLENGE_ERROR}}', 'error');
-        return;
+        renderTurnstileIfNeeded();
+        turnstileResponse = getTurnstileResponse();
+        if (!turnstileResponse) {
+            showMessage('{{MISSING_SECURITY_CHALLENGE_ERROR}}', 'error');
+            return;
+        }
     }
     
     // Show loading indicator and disable button immediately
@@ -409,13 +425,22 @@ function highlightCurrentPage() {
     });
 }
 
-// Init Turnstile widget
-function initTurnstile() {
-    // Explicitly render Turnstile widget for initial form
-    if (typeof turnstile !== 'undefined') {
-        turnstile.render('.cf-turnstile', {
-            sitekey: TURNSTILE_SITE_KEY
-        });
+// Track Turnstile render state
+let turnstileRendered = false;
+
+// Render Turnstile widget
+function renderTurnstileIfNeeded() {
+    if (turnstileRendered) return;
+    const container = document.getElementById('turnstile-container');
+    if (!container) return;
+    container.style.display = 'block';
+    if (typeof turnstile !== 'undefined' && turnstile.render) {
+        try {
+            turnstile.render('#turnstile-container', { sitekey: TURNSTILE_SITE_KEY });
+            turnstileRendered = true;
+        } catch(e) {
+            // Ignore until script loaded
+        }
     }
 }
 
@@ -513,7 +538,6 @@ async function decryptMessage(encryptedData, password) {
 // Init page state
 function initializePage() {
     highlightCurrentPage();
-    initTurnstile();
     
     // Init page sections
     const passwordForm = document.getElementById('passwordForm');
@@ -560,11 +584,14 @@ window.addEventListener('load', () => {
             }
             
             // Validate Turnstile completion
-            const turnstileResponse = getTurnstileResponse();
-            
+            let turnstileResponse = getTurnstileResponse();
             if (!turnstileResponse) {
-                showError(ERROR_MESSAGES.MISSING_SECURITY_CHALLENGE);
-                return;
+                renderTurnstileIfNeeded();
+                turnstileResponse = getTurnstileResponse();
+                if (!turnstileResponse) {
+                    showError(ERROR_MESSAGES.MISSING_SECURITY_CHALLENGE);
+                    return;
+                }
             }
             
             // Show loading spinner and disable button immediately

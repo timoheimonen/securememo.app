@@ -656,7 +656,7 @@ export async function getCreateMemoHTML(locale = 'en', origin = 'https://securem
                     </div>
                     
                     <div class="form-group">
-                        <div class="cf-turnstile" data-sitekey="{{TURNSTILE_SITE_KEY}}"></div>
+                        <div id="turnstile-container" class="cf-turnstile" data-sitekey="{{TURNSTILE_SITE_KEY}}" style="display:none;"></div>
                         <small class="form-help">${t('form.security.help', locale)}</small>
                     </div>
                     
@@ -864,7 +864,7 @@ export async function getReadMemoHTML(locale = 'en', origin = 'https://securemem
                             <small class="form-help">${t('form.password.help', locale)}</small>
                         </div>
                         <div class="form-group">
-                            <div class="cf-turnstile"></div>
+                            <div id="turnstile-container" class="cf-turnstile" style="display:none;"></div>
                             <small class="form-help">${t('form.security.help', locale)}</small>
                         </div>
                         <button type="submit" class="btn btn-primary" id="decryptButton">${t('btn.decrypt', locale)}</button>
