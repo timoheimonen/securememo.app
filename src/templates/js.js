@@ -975,6 +975,11 @@ function initMobileMenu() {
             hamburger.setAttribute('aria-expanded', 'false');
             // Remove any inline styles added for mobile scroll adjustments
             navMenu.removeAttribute('style');
+            ['overflow','overflowY','overflowX','height','maxHeight','position','right','top','width','maxWidth','padding','transform','opacity','visibility','scrollBehavior','webkitOverflowScrolling'].forEach(p => {
+                try { navMenu.style[p] = ''; } catch(_) {}
+            });
+            navMenu.scrollTop = 0;
+            void navMenu.offsetHeight;
             // Ensure language dropdown starts closed (desktop uses toggle)
             const languageDropdown = document.querySelector('.language-dropdown');
             if (languageDropdown) {
