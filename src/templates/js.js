@@ -973,12 +973,16 @@ function initMobileMenu() {
             if (navOverlay) navOverlay.classList.remove('active');
             document.body.style.overflow = '';
             hamburger.setAttribute('aria-expanded', 'false');
+            // Remove any inline styles added for mobile scroll adjustments
+            navMenu.removeAttribute('style');
             // Ensure language dropdown starts closed (desktop uses toggle)
             const languageDropdown = document.querySelector('.language-dropdown');
             if (languageDropdown) {
                 languageDropdown.classList.remove('active');
                 const languageToggle = languageDropdown.querySelector('.language-toggle');
                 if (languageToggle) languageToggle.setAttribute('aria-expanded', 'false');
+                const languageMenu = languageDropdown.querySelector('.language-menu');
+                if (languageMenu) languageMenu.removeAttribute('style');
             }
         } else {
             // Entering mobile: ensure any desktop dropdown state doesn't leave body locked
@@ -988,6 +992,8 @@ function initMobileMenu() {
                 languageDropdown.classList.remove('active');
                 const languageToggle = languageDropdown.querySelector('.language-toggle');
                 if (languageToggle) languageToggle.setAttribute('aria-expanded', 'false');
+                const languageMenu = languageDropdown.querySelector('.language-menu');
+                if (languageMenu) languageMenu.removeAttribute('style');
             }
         }
     }
