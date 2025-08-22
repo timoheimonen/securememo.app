@@ -962,6 +962,42 @@ function initMobileMenu() {
             closeMenu();
         }
     });
+
+    // Menu sync between mobile and desktop
+    const desktopMQ = window.matchMedia('(min-width: 769px)');
+    function handleDesktopChange(e) {
+        if (e.matches) {
+            // Entering desktop: force close mobile menu & restore scrolling
+            hamburger.classList.remove('active');
+            navMenu.classList.remove('active');
+            if (navOverlay) navOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+            hamburger.setAttribute('aria-expanded', 'false');
+            // Ensure language dropdown starts closed (desktop uses toggle)
+            const languageDropdown = document.querySelector('.language-dropdown');
+            if (languageDropdown) {
+                languageDropdown.classList.remove('active');
+                const languageToggle = languageDropdown.querySelector('.language-toggle');
+                if (languageToggle) languageToggle.setAttribute('aria-expanded', 'false');
+            }
+        } else {
+            // Entering mobile: ensure any desktop dropdown state doesn't leave body locked
+            document.body.style.overflow = '';
+            const languageDropdown = document.querySelector('.language-dropdown');
+            if (languageDropdown) {
+                languageDropdown.classList.remove('active');
+                const languageToggle = languageDropdown.querySelector('.language-toggle');
+                if (languageToggle) languageToggle.setAttribute('aria-expanded', 'false');
+            }
+        }
+    }
+    // Initial sync & listener (use addEventListener if supported, else fallback)
+    if (desktopMQ.addEventListener) {
+        desktopMQ.addEventListener('change', handleDesktopChange);
+    } else if (desktopMQ.addListener) { // Safari <14 fallback
+        desktopMQ.addListener(handleDesktopChange);
+    }
+    handleDesktopChange(desktopMQ);
     
     // Add backup close functionality if menu gets stuck
     document.addEventListener('click', (e) => {
