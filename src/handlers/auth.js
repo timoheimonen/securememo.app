@@ -12,6 +12,44 @@ import { addArtificialDelay, constantTimeCompare } from '../utils/timingSecurity
 import { extractLocaleFromRequest } from '../utils/localization.js';
 // import { checkRateLimit } from '../utils/rateLimiter.js'; //Ratelimiting disabled for now in here, enabled in WAF.
 
+// Maximum allowed JSON request body size in bytes (defense-in-depth against large payload DoS)
+const MAX_REQUEST_BYTES = 64 * 1024; // 64 KB
+
+/**
+ * Safely parse JSON with size limit enforcement.
+ * Uses content-length header (if present) and actual decoded byte length.
+ * Returns null on error; caller handles uniform error response.
+ * @param {Request} request
+ * @param {number} limitBytes
+ * @returns {Promise<object|null>}
+ */
+async function safeParseJson(request, limitBytes) {
+    try {
+        const contentLengthHeader = request.headers.get('content-length');
+        if (contentLengthHeader) {
+            const declared = parseInt(contentLengthHeader, 10);
+            if (!Number.isNaN(declared) && declared > limitBytes) {
+                return { error: 'SIZE_LIMIT' };
+            }
+        }
+        // Read raw text once (can't reuse body afterwards)
+        const text = await request.text();
+        // Compute actual UTF-8 byte length
+        const byteLen = new TextEncoder().encode(text).length;
+        if (byteLen > limitBytes) {
+            return { error: 'SIZE_LIMIT' };
+        }
+        try {
+            const data = JSON.parse(text);
+            return { data };
+        } catch (e) {
+            return { error: 'PARSE' };
+        }
+    } catch (e) {
+        return { error: 'PARSE' };
+    }
+}
+
 // Hash token (SHA-256 base64)
 async function hashDeletionToken(token) {
     const encoder = new TextEncoder();
@@ -123,16 +161,22 @@ export async function handleCreateMemo(request, env, locale = 'en') {
             });
         }
 
-        // Parse request body
-        let requestData;
-        try {
-            requestData = await request.json();
-        } catch (parseError) {
+        // Parse request body with size limit
+        const parsedCreate = await safeParseJson(request, MAX_REQUEST_BYTES);
+        if (parsedCreate?.error) {
+            if (parsedCreate.error === 'SIZE_LIMIT') {
+                await addArtificialDelay();
+                return new Response(JSON.stringify({ error: getErrorMessage('REQUEST_TOO_LARGE', requestLocale) }), {
+                    status: 413,
+                    headers: { 'Content-Type': 'application/json' }
+                });
+            }
             return new Response(JSON.stringify({ error: getErrorMessage('INVALID_JSON', requestLocale) }), {
                 status: 400,
                 headers: { 'Content-Type': 'application/json' }
             });
         }
+        const requestData = parsedCreate.data;
 
         const { encryptedMessage, expiryHours, cfTurnstileResponse, deletionTokenHash } = requestData;
         
@@ -341,16 +385,22 @@ export async function handleReadMemo(request, env, locale = 'en') {
             });
         }
 
-        // Parse request body
-        let requestData;
-        try {
-            requestData = await request.json();
-        } catch (parseError) {
+        // Parse request body with size limit
+        const parsedRead = await safeParseJson(request, MAX_REQUEST_BYTES);
+        if (parsedRead?.error) {
+            if (parsedRead.error === 'SIZE_LIMIT') {
+                await addArtificialDelay();
+                return new Response(JSON.stringify({ error: getErrorMessage('REQUEST_TOO_LARGE', requestLocale) }), {
+                    status: 413,
+                    headers: { 'Content-Type': 'application/json' }
+                });
+            }
             return new Response(JSON.stringify({ error: getErrorMessage('INVALID_JSON', requestLocale) }), {
                 status: 400,
                 headers: { 'Content-Type': 'application/json' }
             });
         }
+        const requestData = parsedRead.data;
 
         const { cfTurnstileResponse } = requestData;
         
@@ -524,30 +574,32 @@ export async function handleConfirmDelete(request, env, locale = 'en') {
             });
         }
 
-        // Parse request body
-        let requestData;
-        try {
-            requestData = await request.json();
-        } catch (parseError) {
+        // Parse request body with size limit
+        const parsedDelete = await safeParseJson(request, MAX_REQUEST_BYTES);
+        if (parsedDelete?.error) {
+            if (parsedDelete.error === 'SIZE_LIMIT') {
+                await addArtificialDelay();
+                return new Response(JSON.stringify({ error: getErrorMessage('REQUEST_TOO_LARGE', requestLocale) }), {
+                    status: 413,
+                    headers: { 'Content-Type': 'application/json' }
+                });
+            }
             return new Response(JSON.stringify({ error: getErrorMessage('INVALID_JSON', requestLocale) }), {
                 status: 400,
                 headers: { 'Content-Type': 'application/json' }
             });
         }
+        const requestData = parsedDelete.data;
 
         const { memoId, deletionToken } = requestData;
         
         // Sanitize user inputs
         const sanitizedMemoId = sanitizeForURL(memoId);
         
-        // Validate memo ID with secure validation
+        // Validate memo ID with secure validation (uniform generic response to prevent enumeration)
         if (!sanitizedMemoId || !(await validateMemoIdSecure(sanitizedMemoId))) {
-            // Add additional artificial delay for security
             await addArtificialDelay();
-            return new Response(JSON.stringify({ error: getErrorMessage('INVALID_MEMO_ID', requestLocale) }), {
-                status: 400,
-                headers: { 'Content-Type': 'application/json' }
-            });
+            return new Response(JSON.stringify({ error: getMemoAccessDeniedMessage(requestLocale) }), { status: 404 });
         }
         
         // Fetch memo details
