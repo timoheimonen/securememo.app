@@ -193,6 +193,11 @@ function getSecurityHeaders(request, nonce) {
 function mergeSecurityHeadersIntoResponse(response, request) {
   const existingHeaders = Object.fromEntries(response.headers);
   const mergedHeaders = { ...getSecurityHeaders(request), ...existingHeaders };
+  // Ensure sensitive API JSON responses are never cached
+  const ct = mergedHeaders['Content-Type'] || mergedHeaders['content-type'] || '';
+  if (ct.startsWith('application/json')) {
+    mergedHeaders['Cache-Control'] = 'no-store';
+  }
   return new Response(response.body, { status: response.status, headers: mergedHeaders });
 }
 
@@ -287,6 +292,7 @@ export default {
             status: 403,
             headers: {
               'Content-Type': 'application/json',
+              'Cache-Control': 'no-store',
               'Vary': 'Origin',
               ...getSecurityHeaders(request)
             }
@@ -300,6 +306,7 @@ export default {
             headers: {
               'Content-Type': 'application/json',
               'Allow': 'POST',
+              'Cache-Control': 'no-store',
               ...getSecurityHeaders(request)
             }
           });
@@ -314,6 +321,7 @@ export default {
             headers: {
               'Content-Type': 'application/json',
               'Allow': 'POST',
+              'Cache-Control': 'no-store',
               ...getSecurityHeaders(request)
             }
           });
@@ -326,6 +334,7 @@ export default {
             headers: {
               'Content-Type': 'application/json',
               'Allow': 'POST',
+              'Cache-Control': 'no-store',
               ...getSecurityHeaders(request)
             }
           });
@@ -339,6 +348,7 @@ export default {
               status: 413,
               headers: {
                 'Content-Type': 'application/json',
+                'Cache-Control': 'no-store',
                 ...getSecurityHeaders(request)
               }
             });
@@ -361,7 +371,7 @@ export default {
           default:
             return new Response(getErrorMessage('NOT_FOUND', apiLocale), {
               status: 404,
-              headers: getSecurityHeaders(request)
+              headers: { ...getSecurityHeaders(request), 'Cache-Control': 'no-store' }
             });
         }
       }
