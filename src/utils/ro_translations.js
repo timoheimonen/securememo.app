@@ -195,7 +195,7 @@ export const ro = {
 
   'tos.intellectualProperty.title': '6. Proprietate intelectuală',
   'tos.intellectualProperty.content': 'Serviciul și toate materialele furnizate prin intermediul acestuia, inclusiv, dar fără a se limita la text, grafică, logo-uri și software, sunt proprietatea securememo.app sau a licențiatorilor săi și sunt protejate de drepturi de autor, mărci comerciale și alte legi privind proprietatea intelectuală. Ești de acord să nu modifici, reproduci, distribui sau să creezi opere derivate pe baza conținutului nostru fără permisiune explicită, cu excepția utilizării personale, necomerciale în cadrul Serviciului.',
-  'tos.intellectualProperty.copyright': 'Drepturi de autor și politica DMCA: Dacă consideri că drepturile tale de autor au fost încălcate, te rugăm să ne contactezi la timo.heimonen@proton.me cu informațiile necesare conform DMCA (de exemplu, identificarea operei, datele tale de contact și o declarație de bună-credință).',
+  'tos.intellectualProperty.copyright': 'Drepturi de autor și politica DMCA: Dacă consideri că drepturile tale de autor au fost încălcate, te rugăm să ne contactezi la contact@securememo.app cu informațiile necesare conform DMCA (de exemplu, identificarea operei, datele tale de contact și o declarație de bună-credință).',
 
   'tos.indemnification.title': '7. Despăgubire',
   'tos.indemnification.content': 'Ești de acord să aperi, să despăgubești și să ții în afara oricărei răspunderi securememo.app și afiliații, directorii, angajații și agenții săi împotriva oricăror pretenții, răspunderi, daune, pierderi și cheltuieli, inclusiv onorarii rezonabile ale avocaților, care decurg din sau au legătură cu accesul tău la sau utilizarea Serviciilor noastre, inclusiv orice încălcare a acestor Termeni de către tine.',
@@ -218,7 +218,7 @@ export const ro = {
   'tos.contact.title': '12. Contact',
   'tos.contact.content': 'Pentru întrebări despre acești termeni, te rugăm să vizitezi',
   'tos.contact.github': 'repository-ul GitHub',
-  'tos.contact.email': 'sau trimite un e-mail la timo.heimonen@proton.me.',
+  'tos.contact.email': 'sau trimite un e-mail la contact@securememo.app.',
 
   'tos.languageDisclaimer.title': '13. Limba și traducerea',
   'tos.languageDisclaimer.content': 'Acești Termeni de utilizare pot fi traduși în alte limbi pentru comoditatea ta. În caz de discrepanță sau conflict între versiunea în limba engleză și o versiune tradusă, versiunea în limba engleză va prevala.',
@@ -294,7 +294,7 @@ export const ro = {
   'privacy.contact.title': '10. Contactează-ne',
   'privacy.contact.intro': 'Pentru întrebări despre această Notificare de confidențialitate sau practicile noastre, te rugăm să vizitezi',
   'privacy.contact.github': 'repository-ul GitHub',
-  'privacy.contact.email': 'sau trimite un e-mail la timo.heimonen@proton.me.',
+  'privacy.contact.email': 'sau trimite un e-mail la contact@securememo.app.',
   'privacy.contact.disclaimer': 'Această Notificare de confidențialitate se aplică doar pentru securememo.app și nu pentru site-uri terțe la care se face trimitere din serviciul nostru.',
 
   // Schema.org structured data

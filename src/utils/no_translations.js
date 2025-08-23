@@ -195,7 +195,7 @@ export const no = {
 
   'tos.intellectualProperty.title': '6. Immaterielle rettigheter',
   'tos.intellectualProperty.content': 'Tjenesten og alt materiale som leveres gjennom den, inkludert men ikke begrenset til tekst, grafikk, logoer og programvare, tilhører securememo.app eller dets lisensgivere og er beskyttet av opphavsrett, varemerke og andre immaterielle rettigheter. Du samtykker i å ikke endre, reprodusere, distribuere eller lage avledede verk basert på vårt innhold uten eksplisitt tillatelse, bortsett fra personlig, ikke-kommersiell bruk innenfor tjenesten.',
-  'tos.intellectualProperty.copyright': 'Opphavsrett og DMCA-policy: Hvis du mener at din opphavsrett er krenket, vennligst kontakt oss på timo.heimonen@proton.me med nødvendig informasjon i henhold til DMCA (f.eks. identifikasjon av verket, dine kontaktopplysninger og en erklæring om god tro).',
+  'tos.intellectualProperty.copyright': 'Opphavsrett og DMCA-policy: Hvis du mener at din opphavsrett er krenket, vennligst kontakt oss på contact@securememo.app med nødvendig informasjon i henhold til DMCA (f.eks. identifikasjon av verket, dine kontaktopplysninger og en erklæring om god tro).',
 
   'tos.indemnification.title': '7. Skadesløsholdelse',
   'tos.indemnification.content': 'Du samtykker i å forsvare, holde skadesløs og fri for ansvar securememo.app og dets tilknyttede selskaper, ledere, styremedlemmer, ansatte og agenter fra og mot alle krav, ansvar, skader, tap og utgifter, inkludert rimelige advokathonorarer, som oppstår fra eller på noen måte er knyttet til din tilgang til eller bruk av våre tjenester, inkludert ethvert brudd på disse vilkårene fra din side.',
@@ -218,7 +218,7 @@ export const no = {
   'tos.contact.title': '12. Kontakt',
   'tos.contact.content': 'For spørsmål om disse vilkårene, vennligst besøk vår',
   'tos.contact.github': 'GitHub-repositorium',
-  'tos.contact.email': 'eller send e-post til timo.heimonen@proton.me.',
+  'tos.contact.email': 'eller send e-post til contact@securememo.app.',
 
   'tos.languageDisclaimer.title': '13. Språk og oversettelse',
   'tos.languageDisclaimer.content': 'Disse vilkårene for bruk kan oversettes til andre språk for din bekvemmelighet. Ved eventuelle avvik eller konflikt mellom den engelske versjonen og en oversatt versjon, skal den engelske versjonen ha forrang.',
@@ -294,7 +294,7 @@ export const no = {
   'privacy.contact.title': '10. Kontakt oss',
   'privacy.contact.intro': 'For spørsmål om denne personvernerklæringen eller våre rutiner, vennligst besøk vår',
   'privacy.contact.github': 'GitHub-repositorium',
-  'privacy.contact.email': 'eller send e-post til timo.heimonen@proton.me.',
+  'privacy.contact.email': 'eller send e-post til contact@securememo.app.',
   'privacy.contact.disclaimer': 'Denne personvernerklæringen gjelder kun for securememo.app og ikke for tredjepartsnettsteder som er lenket fra vår tjeneste.',
 
   // Schema.org structured data
