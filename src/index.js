@@ -202,7 +202,13 @@ function mergeSecurityHeadersIntoResponse(response, request) {
 // Function to validate origin for CORS requests
 function isValidOrigin(request) {
   const origin = request.headers.get('origin');
-  return origin && allowedOrigins.includes(origin);
+  if (origin) return allowedOrigins.includes(origin);
+  try {
+    const selfOrigin = new URL(request.url).origin;
+    return allowedOrigins.includes(selfOrigin);
+  } catch {
+    return false;
+  }
 }
 
 export default {
