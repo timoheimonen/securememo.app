@@ -195,7 +195,7 @@ export const nl = {
 
   'tos.intellectualProperty.title': '6. Intellectueel eigendom',
   'tos.intellectualProperty.content': 'De dienst en alle materialen die via de dienst worden aangeboden, waaronder maar niet beperkt tot tekst, afbeeldingen, logo\'s en software, zijn eigendom van securememo.app of haar licentiegevers en zijn beschermd door auteursrecht, handelsmerk en andere intellectuele eigendomsrechten. U stemt ermee in onze inhoud niet te wijzigen, reproduceren, verspreiden of afgeleide werken te maken zonder expliciete toestemming, behalve voor persoonlijk, niet-commercieel gebruik binnen de dienst.',
-  'tos.intellectualProperty.copyright': 'Auteursrecht & DMCA-beleid: Als u denkt dat uw auteursrecht is geschonden, neem dan contact op via timo.heimonen@proton.me met de vereiste informatie volgens de DMCA (bijv. identificatie van het werk, uw contactgegevens en een verklaring van goede trouw).',
+  'tos.intellectualProperty.copyright': 'Auteursrecht & DMCA-beleid: Als u denkt dat uw auteursrecht is geschonden, neem dan contact op via contact@securememo.app met de vereiste informatie volgens de DMCA (bijv. identificatie van het werk, uw contactgegevens en een verklaring van goede trouw).',
 
   'tos.indemnification.title': '7. Schadeloosstelling',
   'tos.indemnification.content': 'U stemt ermee in securememo.app en haar gelieerde ondernemingen, bestuurders, medewerkers en agenten te verdedigen, schadeloos te stellen en te vrijwaren van alle claims, aansprakelijkheden, schade, verliezen en kosten, inclusief redelijke advocaatkosten, die voortvloeien uit of op enige wijze verband houden met uw toegang tot of gebruik van onze diensten, inclusief elke schending van deze voorwaarden door u.',
@@ -218,7 +218,7 @@ export const nl = {
   'tos.contact.title': '12. Contact',
   'tos.contact.content': 'Voor vragen over deze voorwaarden, bezoek onze',
   'tos.contact.github': 'GitHub-repository',
-  'tos.contact.email': 'of e-mail timo.heimonen@proton.me.',
+  'tos.contact.email': 'of e-mail contact@securememo.app.',
 
   'tos.languageDisclaimer.title': '13. Taal en vertaling',
   'tos.languageDisclaimer.content': 'Deze gebruiksvoorwaarden kunnen voor uw gemak in andere talen worden vertaald. In geval van discrepantie of conflict tussen de Engelse versie en een vertaalde versie, prevaleert de Engelse versie.',
@@ -294,7 +294,7 @@ export const nl = {
   'privacy.contact.title': '10. Contact',
   'privacy.contact.intro': 'Voor vragen over deze privacyverklaring of onze werkwijze, bezoek onze',
   'privacy.contact.github': 'GitHub-repository',
-  'privacy.contact.email': 'of e-mail timo.heimonen@proton.me.',
+  'privacy.contact.email': 'of e-mail contact@securememo.app.',
   'privacy.contact.disclaimer': 'Deze privacyverklaring is alleen van toepassing op securememo.app en niet op externe websites die vanaf onze dienst worden gelinkt.',
 
   // Schema.org structured data

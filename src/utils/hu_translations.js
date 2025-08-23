@@ -195,7 +195,7 @@ export const hu = {
 
   'tos.intellectualProperty.title': '6. Szellemi tulajdon',
   'tos.intellectualProperty.content': 'A szolgáltatás és minden hozzá kapcsolódó anyag, beleértve a szöveget, grafikákat, logókat és szoftvert, a securememo.app vagy licencadóinak tulajdona, és szerzői jog, védjegy és egyéb szellemi tulajdonjogi törvények védik. Ön vállalja, hogy nem módosítja, nem sokszorosítja, nem terjeszti és nem hoz létre származékos műveket a tartalmunk alapján kifejezett engedély nélkül, kivéve a személyes, nem kereskedelmi használatot a szolgáltatáson belül.',
-  'tos.intellectualProperty.copyright': 'Szerzői jog és DMCA irányelv: Ha úgy gondolja, hogy megsértették a szerzői jogát, kérjük, vegye fel velünk a kapcsolatot a timo.heimonen@proton.me címen a DMCA szerinti szükséges információkkal (pl. a mű azonosítása, elérhetőségei és jóhiszemű nyilatkozat).',
+  'tos.intellectualProperty.copyright': 'Szerzői jog és DMCA irányelv: Ha úgy gondolja, hogy megsértették a szerzői jogát, kérjük, vegye fel velünk a kapcsolatot a contact@securememo.app címen a DMCA szerinti szükséges információkkal (pl. a mű azonosítása, elérhetőségei és jóhiszemű nyilatkozat).',
 
   'tos.indemnification.title': '7. Kártalanítás',
   'tos.indemnification.content': 'Ön vállalja, hogy megvédi, kártalanítja és mentesíti a securememo.app-ot és annak leányvállalatait, tisztségviselőit, igazgatóit, alkalmazottait és ügynökeit minden olyan követeléssel, felelősséggel, kár, veszteség és költség alól, beleértve az ésszerű ügyvédi díjakat is, amelyek a szolgáltatásainkhoz való hozzáféréséből vagy használatából, illetve a jelen feltételek megsértéséből erednek.',
@@ -218,7 +218,7 @@ export const hu = {
   'tos.contact.title': '12. Contact',
   'tos.contact.content': 'A feltételekkel kapcsolatos kérdésekért látogassa meg',
   'tos.contact.github': 'GitHub tárházunkat',
-  'tos.contact.email': 'vagy írjon a timo.heimonen@proton.me címre.',
+  'tos.contact.email': 'vagy írjon a contact@securememo.app címre.',
 
   'tos.languageDisclaimer.title': '13. Language and Translation',
   'tos.languageDisclaimer.content': 'A jelen Felhasználási feltételek más nyelvekre is lefordíthatók az Ön kényelme érdekében. Eltérés vagy ellentmondás esetén az angol nyelvű változat az irányadó.',
@@ -294,7 +294,7 @@ export const hu = {
   'privacy.contact.title': '10. Kapcsolat',
   'privacy.contact.intro': 'Az adatvédelmi tájékoztatóval vagy gyakorlatunkkal kapcsolatos kérdésekért látogassa meg',
   'privacy.contact.github': 'GitHub tárházunkat',
-  'privacy.contact.email': 'vagy írjon a timo.heimonen@proton.me címre.',
+  'privacy.contact.email': 'vagy írjon a contact@securememo.app címre.',
   'privacy.contact.disclaimer': 'Ez az adatvédelmi tájékoztató csak a securememo.app-ra vonatkozik, nem pedig a szolgáltatásunkból hivatkozott harmadik fél webhelyekre.',
 
   // Schema.org structured data
