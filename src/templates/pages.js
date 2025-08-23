@@ -246,7 +246,7 @@ export async function getIndexHTML(locale = 'en', origin = 'https://securememo.a
     </main>
 
     <footer class="footer">
-        <p><a href="https://github.com/timoheimonen/securememo.app" target="_blank" rel="noopener noreferrer">${t('footer.sourceCode', locale)}</a> | <a href="/${locale}/tos.html">${t('footer.tos', locale)}</a> | <a href="/${locale}/privacy.html">${t('footer.privacy', locale)}</a></p>
+        <p><a href="https://github.com/timoheimonen/securememo.app" target="_blank" rel="noopener noreferrer">${t('footer.sourceCode', locale)}</a> | <a href="/${locale}/tos.html">${t('footer.tos', locale)}</a> | <a href="/${locale}/privacy.html">${t('footer.privacy', locale)}</a> | <a href="mailto:contact@securememo.app">contact@securememo.app</a> | <a href="mailto:contact@securememo.app">contact@securememo.app</a></p>
         <p style="font-size: 0.8em; margin-top: 0.5em; opacity: 0.8;">${t('footer.tagline', locale)}</p>
     </footer>
 
@@ -491,7 +491,7 @@ export async function getAboutHTML(locale = 'en', origin = 'https://securememo.a
     </main>
 
     <footer class="footer">
-        <p><a href="https://github.com/timoheimonen/securememo.app" target="_blank" rel="noopener noreferrer">${t('footer.sourceCode', locale)}</a> | <a href="/${locale}/tos.html">${t('footer.tos', locale)}</a> | <a href="/${locale}/privacy.html">${t('footer.privacy', locale)}</a></p>
+        <p><a href="https://github.com/timoheimonen/securememo.app" target="_blank" rel="noopener noreferrer">${t('footer.sourceCode', locale)}</a> | <a href="/${locale}/tos.html">${t('footer.tos', locale)}</a> | <a href="/${locale}/privacy.html">${t('footer.privacy', locale)}</a> | <a href="mailto:contact@securememo.app">contact@securememo.app</a></p>
         <p style="font-size: 0.8em; margin-top: 0.5em; opacity: 0.8;">${t('footer.tagline', locale)}</p>
     </footer>
 
@@ -708,7 +708,7 @@ export async function getCreateMemoHTML(locale = 'en', origin = 'https://securem
     </main>
 
     <footer class="footer">
-        <p><a href="https://github.com/timoheimonen/securememo.app" target="_blank" rel="noopener noreferrer">${t('footer.sourceCode', locale)}</a> | <a href="/${locale}/tos.html">${t('footer.tos', locale)}</a> | <a href="/${locale}/privacy.html">${t('footer.privacy', locale)}</a></p>
+        <p><a href="https://github.com/timoheimonen/securememo.app" target="_blank" rel="noopener noreferrer">${t('footer.sourceCode', locale)}</a> | <a href="/${locale}/tos.html">${t('footer.tos', locale)}</a> | <a href="/${locale}/privacy.html">${t('footer.privacy', locale)}</a> | <a href="mailto:contact@securememo.app">contact@securememo.app</a></p>
         <p style="font-size: 0.8em; margin-top: 0.5em; opacity: 0.8;">${t('footer.tagline', locale)}</p>
     </footer>
 
@@ -910,7 +910,7 @@ export async function getReadMemoHTML(locale = 'en', origin = 'https://securemem
     </main>
 
     <footer class="footer">
-        <p><a href="https://github.com/timoheimonen/securememo.app" target="_blank" rel="noopener noreferrer">${t('footer.sourceCode', locale)}</a> | <a href="/${locale}/tos.html">${t('footer.tos', locale)}</a> | <a href="/${locale}/privacy.html">${t('footer.privacy', locale)}</a></p>
+        <p><a href="https://github.com/timoheimonen/securememo.app" target="_blank" rel="noopener noreferrer">${t('footer.sourceCode', locale)}</a> | <a href="/${locale}/tos.html">${t('footer.tos', locale)}</a> | <a href="/${locale}/privacy.html">${t('footer.privacy', locale)}</a> | <a href="mailto:contact@securememo.app">contact@securememo.app</a></p>
         <p style="font-size: 0.8em; margin-top: 0.5em; opacity: 0.8;">${t('footer.tagline', locale)}</p>
     </footer>
 
@@ -1167,7 +1167,7 @@ export async function getToSHTML(locale = 'en', origin = 'https://securememo.app
     </main>
 
     <footer class="footer">
-        <p><a href="https://github.com/timoheimonen/securememo.app" target="_blank" rel="noopener noreferrer">${t('footer.sourceCode', locale)}</a> | <a href="/${locale}/tos.html">${t('footer.tos', locale)}</a> | <a href="/${locale}/privacy.html">${t('footer.privacy', locale)}</a></p>
+        <p><a href="https://github.com/timoheimonen/securememo.app" target="_blank" rel="noopener noreferrer">${t('footer.sourceCode', locale)}</a> | <a href="/${locale}/tos.html">${t('footer.tos', locale)}</a> | <a href="/${locale}/privacy.html">${t('footer.privacy', locale)}</a> | <a href="mailto:contact@securememo.app">contact@securememo.app</a></p>
         <p style="font-size: 0.8em; margin-top: 0.5em; opacity: 0.8;">${t('footer.tagline', locale)}</p>
     </footer>
 
@@ -1417,7 +1417,7 @@ export async function getPrivacyHTML(locale = 'en', origin = 'https://securememo
     </main>
 
     <footer class="footer">
-        <p><a href="https://github.com/timoheimonen/securememo.app" target="_blank" rel="noopener noreferrer">${t('footer.sourceCode', locale)}</a> | <a href="/${locale}/tos.html">${t('footer.tos', locale)}</a> | <a href="/${locale}/privacy.html">${t('footer.privacy', locale)}</a></p>
+        <p><a href="https://github.com/timoheimonen/securememo.app" target="_blank" rel="noopener noreferrer">${t('footer.sourceCode', locale)}</a> | <a href="/${locale}/tos.html">${t('footer.tos', locale)}</a> | <a href="/${locale}/privacy.html">${t('footer.privacy', locale)}</a> | <a href="mailto:contact@securememo.app">contact@securememo.app</a></p>
         <p style="font-size: 0.8em; margin-top: 0.5em; opacity: 0.8;">${t('footer.tagline', locale)}</p>
     </footer>
 
