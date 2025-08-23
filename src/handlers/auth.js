@@ -364,7 +364,31 @@ export async function generateApiKey(env, days = 30) {
 }
 
 // Admin list API keys (KV list). Returns up to 100 keys.
-export async function adminListApiKeys(env) {
+// Shared Turnstile verification for admin endpoints (header: X-Turnstile-Token)
+async function verifyTurnstileAdmin(request, env) {
+    try {
+        const token = request.headers.get('X-Turnstile-Token') || '';
+        if (!/^[A-Za-z0-9._-]{10,}$/.test(token)) return { ok: false, code: 'MISSING_TURNSTILE' };
+        const resp = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: new URLSearchParams({
+                secret: env.TURNSTILE_SECRET,
+                response: token
+            })
+        });
+        if (!resp.ok) return { ok: false, code: 'TURNSTILE_API_ERROR' };
+        const data = await resp.json();
+        if (!data.success) return { ok: false, code: 'TURNSTILE_FAILED' };
+        return { ok: true };
+    } catch (_) {
+        return { ok: false, code: 'TURNSTILE_VERIFICATION_ERROR' };
+    }
+}
+
+export async function adminListApiKeys(request, env) {
+    const vt = await verifyTurnstileAdmin(request, env);
+    if (!vt.ok) return new Response(JSON.stringify({ error: vt.code }), { status: 400, headers: { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' } });
     if (!env.KV) return new Response(JSON.stringify({ error: 'KV_UNAVAILABLE' }), { status: 500 });
     try {
         const list = await env.KV.list({ limit: 100 });
@@ -380,14 +404,16 @@ export async function adminListApiKeys(env) {
             } catch { }
             return { apiKey: k.name, expire, usage, ttl: expire ? Math.max(0, expire - now) : null };
         }));
-    return new Response(JSON.stringify({ success: true, keys, now }), { status: 200, headers: { 'Content-Type': 'application/json', 'Cache-Control': 'no-store, no-cache, must-revalidate' } });
+        return new Response(JSON.stringify({ success: true, keys, now }), { status: 200, headers: { 'Content-Type': 'application/json', 'Cache-Control': 'no-store, no-cache, must-revalidate' } });
     } catch (e) {
-    return new Response(JSON.stringify({ error: 'LIST_FAILED' }), { status: 500, headers: { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' } });
+        return new Response(JSON.stringify({ error: 'LIST_FAILED' }), { status: 500, headers: { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' } });
     }
 }
 
 // Admin create API key
 export async function adminCreateApiKey(request, env) {
+    const vt = await verifyTurnstileAdmin(request, env);
+    if (!vt.ok) return new Response(JSON.stringify({ error: vt.code }), { status: 400, headers: { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' } });
     try {
         let days = 30;
         if (request.headers.get('content-type')?.includes('application/json')) {
@@ -398,14 +424,16 @@ export async function adminCreateApiKey(request, env) {
             }
         }
         const { apiKey, expire, usage } = await generateApiKey(env, days);
-    return new Response(JSON.stringify({ success: true, apiKey, expire, usage }), { status: 200, headers: { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' } });
+        return new Response(JSON.stringify({ success: true, apiKey, expire, usage }), { status: 200, headers: { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' } });
     } catch (e) {
-    return new Response(JSON.stringify({ error: 'CREATE_FAILED' }), { status: 500, headers: { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' } });
+        return new Response(JSON.stringify({ error: 'CREATE_FAILED' }), { status: 500, headers: { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' } });
     }
 }
 
 // Admin delete API key (body { apiKey })
 export async function adminDeleteApiKey(request, env) {
+    const vt = await verifyTurnstileAdmin(request, env);
+    if (!vt.ok) return new Response(JSON.stringify({ error: vt.code }), { status: 400, headers: { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' } });
     try {
         if (!request.headers.get('content-type')?.includes('application/json')) {
             return new Response(JSON.stringify({ error: 'CONTENT_TYPE_ERROR' }), { status: 400, headers: { 'Content-Type': 'application/json' } });
@@ -419,9 +447,9 @@ export async function adminDeleteApiKey(request, env) {
             return new Response(JSON.stringify({ error: 'INVALID_KEY_FORMAT' }), { status: 400, headers: { 'Content-Type': 'application/json' } });
         }
         await env.KV.delete(key);
-    return new Response(JSON.stringify({ success: true }), { status: 200, headers: { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' } });
+        return new Response(JSON.stringify({ success: true }), { status: 200, headers: { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' } });
     } catch (e) {
-    return new Response(JSON.stringify({ error: 'DELETE_FAILED' }), { status: 500, headers: { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' } });
+        return new Response(JSON.stringify({ error: 'DELETE_FAILED' }), { status: 500, headers: { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' } });
     }
 }
 

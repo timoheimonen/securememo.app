@@ -357,7 +357,7 @@ export default {
 
         // Admin API endpoints (behind Cloudflare Zero Trust – no extra auth here)
         if (apiPath === 'admin/api-keys' && request.method === 'GET') {
-          const res = await adminListApiKeys(env);
+          const res = await adminListApiKeys(request, env);
           return mergeSecurityHeadersIntoResponse(res, request);
         }
         if (apiPath === 'admin/api-keys' && request.method === 'POST') {
@@ -674,7 +674,7 @@ ${sitemapUrls}</urlset>`;
           return new Response('Method Not Allowed', { status: 405, headers: { 'Allow': 'GET', ...getSecurityHeaders(request) } });
         }
         const adminNonce = generateNonce();
-        const html = `<!DOCTYPE html><html><head><meta charset="utf-8"><title>Admin</title><meta name="viewport" content="width=device-width,initial-scale=1"><style>
+        const html = `<!DOCTYPE html><html><head><meta charset="utf-8"><title>Admin</title><meta name="viewport" content="width=device-width,initial-scale=1"><script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script><style>
           :root { font-family: system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,sans-serif; color-scheme: light dark; }
           body { margin: 1.5rem; }
           h1 { margin-top: 0; }
@@ -696,6 +696,10 @@ ${sitemapUrls}</urlset>`;
           @keyframes fade { from { opacity:0; transform: translateY(-2px);} to { opacity:1; transform: none;} }
           #loadingRow td { text-align:center; font-style: italic; }
         </style></head><body><h1>API Key Admin</h1>
+        <div style="margin-bottom:1rem">
+          <div id="ts-container" class="cf-turnstile" data-sitekey="${env.TURNSTILE_SITE_KEY}" data-callback="onTsSuccess" data-error-callback="onTsError" data-expired-callback="onTsExpired"></div>
+          <div id="ts-status" class="muted" aria-live="polite"></div>
+        </div>
         <section>
           <form id="createForm" onsubmit="return false;">
             <fieldset><legend>Create Key</legend>
@@ -725,6 +729,11 @@ ${sitemapUrls}</urlset>`;
         <script nonce="${adminNonce}">(function(){
           // Debug log to verify script executes
           try { console.log('[admin] script start'); } catch(_){ }
+          var turnstileToken = '';
+          window.onTsSuccess = function(token){ turnstileToken = token; var el=document.getElementById('ts-status'); if(el) el.textContent='Challenge passed'; };
+          window.onTsError = function(){ turnstileToken=''; var el=document.getElementById('ts-status'); if(el) el.textContent='Challenge error – retrying'; try { if(window.turnstile) turnstile.reset(); } catch(_){ } };
+          window.onTsExpired = function(){ turnstileToken=''; var el=document.getElementById('ts-status'); if(el) el.textContent='Challenge expired – please complete'; };
+          function authHeaders(h){ h = h || {}; if(turnstileToken) h['X-Turnstile-Token']=turnstileToken; return h; }
           // Escape helper (avoid inline object literal complexities for Safari)
           var ESC_AMP = '&amp;'; var ESC_LT = '&lt;'; var ESC_GT='&gt;'; var ESC_QUOT='&quot;';
           function esc(s){
@@ -765,7 +774,7 @@ ${sitemapUrls}</urlset>`;
               if(refreshInFlight) return; refreshInFlight=1; setStatus(null); els('lastRefreshed').textContent='';
               keysTbody.innerHTML='<tr id="loadingRow"><td colspan="5">Loading…</td></tr>';
               try {
-                var r = await fetch('/api/admin/api-keys?t=' + Date.now(), {cache:'no-store'});
+                var r = await fetch('/api/admin/api-keys?t=' + Date.now(), {cache:'no-store', headers: authHeaders()});
                 var j = await r.json();
                 if(!j.success){ setStatus(j); currentKeys=[]; renderKeys(); }
                 else { currentKeys = j.keys.sort(function(a,b){ return (a.expire||0)-(b.expire||0); }); renderKeys(); els('lastRefreshed').textContent='Updated '+ new Date().toLocaleTimeString(); }
@@ -787,7 +796,7 @@ ${sitemapUrls}</urlset>`;
                 if(!confirm('Delete this key?')) return;
                 btn.disabled=true; btn.textContent='…';
                 try {
-                  var rDel = await fetch('/api/admin/api-keys/delete',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({apiKey:key}),cache:'no-store'});
+                  var rDel = await fetch('/api/admin/api-keys/delete',{method:'POST',headers:authHeaders({'Content-Type':'application/json'}),body:JSON.stringify({apiKey:key}),cache:'no-store'});
                   var jDel = await rDel.json();
                   if(jDel.success){ currentKeys = currentKeys.filter(function(k){return k.apiKey!==key;}); renderKeys(); setStatus({deleted:key}); }
                   else { setStatus(jDel); }
@@ -802,7 +811,7 @@ ${sitemapUrls}</urlset>`;
               els('createResult').style.display='block';
               els('createResult').textContent='Creating…';
               try {
-                var rC = await fetch('/api/admin/api-keys',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({days:days}),cache:'no-store'});
+                var rC = await fetch('/api/admin/api-keys',{method:'POST',headers:authHeaders({'Content-Type':'application/json'}),body:JSON.stringify({days:days}),cache:'no-store'});
                 var jC = await rC.json();
                 if(jC.success){
                   els('createResult').textContent = JSON.stringify(jC,null,2);
