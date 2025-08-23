@@ -374,9 +374,9 @@ export async function adminListApiKeys(env) {
             try { expire = JSON.parse(v || '{}').expire || null; } catch { }
             return { apiKey: k.name, expire, ttl: expire ? Math.max(0, expire - now) : null };
         }));
-        return new Response(JSON.stringify({ success: true, keys }), { status: 200, headers: { 'Content-Type': 'application/json' } });
+    return new Response(JSON.stringify({ success: true, keys, now }), { status: 200, headers: { 'Content-Type': 'application/json', 'Cache-Control': 'no-store, no-cache, must-revalidate' } });
     } catch (e) {
-        return new Response(JSON.stringify({ error: 'LIST_FAILED' }), { status: 500, headers: { 'Content-Type': 'application/json' } });
+    return new Response(JSON.stringify({ error: 'LIST_FAILED' }), { status: 500, headers: { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' } });
     }
 }
 
@@ -392,9 +392,9 @@ export async function adminCreateApiKey(request, env) {
             }
         }
         const { apiKey, expire } = await generateApiKey(env, days);
-        return new Response(JSON.stringify({ success: true, apiKey, expire }), { status: 200, headers: { 'Content-Type': 'application/json' } });
+    return new Response(JSON.stringify({ success: true, apiKey, expire }), { status: 200, headers: { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' } });
     } catch (e) {
-        return new Response(JSON.stringify({ error: 'CREATE_FAILED' }), { status: 500, headers: { 'Content-Type': 'application/json' } });
+    return new Response(JSON.stringify({ error: 'CREATE_FAILED' }), { status: 500, headers: { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' } });
     }
 }
 
@@ -413,9 +413,9 @@ export async function adminDeleteApiKey(request, env) {
             return new Response(JSON.stringify({ error: 'INVALID_KEY_FORMAT' }), { status: 400, headers: { 'Content-Type': 'application/json' } });
         }
         await env.KV.delete(key);
-        return new Response(JSON.stringify({ success: true }), { status: 200, headers: { 'Content-Type': 'application/json' } });
+    return new Response(JSON.stringify({ success: true }), { status: 200, headers: { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' } });
     } catch (e) {
-        return new Response(JSON.stringify({ error: 'DELETE_FAILED' }), { status: 500, headers: { 'Content-Type': 'application/json' } });
+    return new Response(JSON.stringify({ error: 'DELETE_FAILED' }), { status: 500, headers: { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' } });
     }
 }
 

@@ -58,18 +58,18 @@ const ASSET_VERSION = '20250818';
 function minifyJS(code) {
   try {
     return code
-  // Remove line comments that start at line-begin
+      // Remove line comments that start at line-begin
       .replace(/^\s*\/\/.*$/gm, '')
-  // Remove block comments that start at line-begin or after whitespace
-  // This avoids stripping sequences inside regex literals like /\/\* foo \*\//
-  .replace(/(^|\s)\/\*[\s\S]*?\*\//g, '$1')
-  // Process per line to preserve newlines (avoid ASI issues)
-  .split('\n')
-  // Collapse multiple spaces/tabs within a line and trim ends
-  .map(line => line.replace(/[ \t]+/g, ' ').trim())
-  // Drop empty lines
+      // Remove block comments that start at line-begin or after whitespace
+      // This avoids stripping sequences inside regex literals like /\/\* foo \*\//
+      .replace(/(^|\s)\/\*[\s\S]*?\*\//g, '$1')
+      // Process per line to preserve newlines (avoid ASI issues)
+      .split('\n')
+      // Collapse multiple spaces/tabs within a line and trim ends
+      .map(line => line.replace(/[ \t]+/g, ' ').trim())
+      // Drop empty lines
       .filter(Boolean)
-  // Keep newlines to avoid ASI pitfalls
+      // Keep newlines to avoid ASI pitfalls
       .join('\n')
       .trim();
   } catch (_) {
@@ -107,13 +107,13 @@ function versionAssetUrls(html) {
       .replace(/\/(js\/common\.js)(\b)/g, `/js/common.js?v=${ASSET_VERSION}$2`)
       // create-memo.js?locale=xx
       .replace(/\/js\/create-memo\.js\?locale=([A-Za-z-_.]+)/g, `/js/create-memo.js?locale=$1&v=${ASSET_VERSION}`)
-  // read-memo.js?locale=xx
-  .replace(/\/(js\/read-memo\.js)\?locale=([A-Za-z-_.]+)/g, `/js/read-memo.js?locale=$2&v=${ASSET_VERSION}`)
-  // version icons to enable immutable caching on clients/CDN
-  .replace(/\/(favicon\.ico)(\b)/g, `/favicon.ico?v=${ASSET_VERSION}$2`)
-  .replace(/\/(apple-touch-icon\.png)(\b)/g, `/apple-touch-icon.png?v=${ASSET_VERSION}$2`)
-  .replace(/\/(android-chrome-192x192\.png)(\b)/g, `/android-chrome-192x192.png?v=${ASSET_VERSION}$2`)
-  .replace(/\/(android-chrome-512x512\.png)(\b)/g, `/android-chrome-512x512.png?v=${ASSET_VERSION}$2`);
+      // read-memo.js?locale=xx
+      .replace(/\/(js\/read-memo\.js)\?locale=([A-Za-z-_.]+)/g, `/js/read-memo.js?locale=$2&v=${ASSET_VERSION}`)
+      // version icons to enable immutable caching on clients/CDN
+      .replace(/\/(favicon\.ico)(\b)/g, `/favicon.ico?v=${ASSET_VERSION}$2`)
+      .replace(/\/(apple-touch-icon\.png)(\b)/g, `/apple-touch-icon.png?v=${ASSET_VERSION}$2`)
+      .replace(/\/(android-chrome-192x192\.png)(\b)/g, `/android-chrome-192x192.png?v=${ASSET_VERSION}$2`)
+      .replace(/\/(android-chrome-512x512\.png)(\b)/g, `/android-chrome-512x512.png?v=${ASSET_VERSION}$2`);
   } catch (_) {
     return html;
   }
@@ -285,7 +285,7 @@ export default {
       }
 
       // Route API requests
-  if (pathname.startsWith('/api/')) {
+      if (pathname.startsWith('/api/')) {
         const apiPath = pathname.substring(5);
 
         // Extract locale for API calls from headers/query params instead of URL path
@@ -498,10 +498,10 @@ ${sitemapUrls}</urlset>`;
             }
           });
         }
-  // Edge cache per-locale + version
-  const cached = await caches.default.match(request);
-  if (cached) return cached;
-  const jsContent = getCreateMemoJS()
+        // Edge cache per-locale + version
+        const cached = await caches.default.match(request);
+        if (cached) return cached;
+        const jsContent = getCreateMemoJS()
           .replace(/{{TURNSTILE_SITE_KEY}}/g, env.TURNSTILE_SITE_KEY)
           .replace(/{{MISSING_MESSAGE_ERROR}}/g, escapeJavaScript(getErrorMessage('MISSING_MESSAGE', jsLocale)))
           .replace(/{{MESSAGE_TOO_LONG_ERROR}}/g, escapeJavaScript(getErrorMessage('MESSAGE_TOO_LONG', jsLocale)))
@@ -521,11 +521,11 @@ ${sitemapUrls}</urlset>`;
           .replace(/{{BTN_SHOW}}/g, escapeJavaScript(t('btn.show', jsLocale)))
           .replace(/{{BTN_HIDE}}/g, escapeJavaScript(t('btn.hide', jsLocale)))
           .replace(/{{BTN_COPY}}/g, escapeJavaScript(t('btn.copy', jsLocale)));
-  const jsEtag = `"create-${ASSET_VERSION}-${jsLocale}"`;
-  if (request.headers.get('if-none-match') === jsEtag) {
-    return new Response(null, { status: 304, headers: { ...getSecurityHeaders(request), ETag: jsEtag } });
-  }
-  const jsResp = new Response(minifyJS(jsContent), {
+        const jsEtag = `"create-${ASSET_VERSION}-${jsLocale}"`;
+        if (request.headers.get('if-none-match') === jsEtag) {
+          return new Response(null, { status: 304, headers: { ...getSecurityHeaders(request), ETag: jsEtag } });
+        }
+        const jsResp = new Response(minifyJS(jsContent), {
           headers: {
             'Content-Type': 'application/javascript',
             'Cache-Control': 'public, max-age=31536000, immutable',
@@ -549,10 +549,10 @@ ${sitemapUrls}</urlset>`;
             }
           });
         }
-  // Edge cache per-locale + version
-  const cached = await caches.default.match(request);
-  if (cached) return cached;
-  const jsContent = getReadMemoJS()
+        // Edge cache per-locale + version
+        const cached = await caches.default.match(request);
+        if (cached) return cached;
+        const jsContent = getReadMemoJS()
           .replace(/{{TURNSTILE_SITE_KEY}}/g, env.TURNSTILE_SITE_KEY)
           .replace(/{{MISSING_MEMO_ID_ERROR}}/g, escapeJavaScript(getErrorMessage('MISSING_MEMO_ID', jsLocale)))
           .replace(/{{MISSING_PASSWORD_ERROR}}/g, escapeJavaScript(getErrorMessage('MISSING_PASSWORD_ERROR', jsLocale)))
@@ -572,11 +572,11 @@ ${sitemapUrls}</urlset>`;
           .replace(/{{BTN_HIDE}}/g, escapeJavaScript(t('btn.hide', jsLocale)))
           .replace(/{{BTN_COPIED}}/g, escapeJavaScript(t('btn.copied', jsLocale)))
           .replace(/{{DELETION_ERROR_MESSAGE}}/g, escapeJavaScript(t('msg.deletionError', jsLocale)));
-  const jsEtag = `"read-${ASSET_VERSION}-${jsLocale}"`;
-  if (request.headers.get('if-none-match') === jsEtag) {
-    return new Response(null, { status: 304, headers: { ...getSecurityHeaders(request), ETag: jsEtag } });
-  }
-  const jsResp = new Response(minifyJS(jsContent), {
+        const jsEtag = `"read-${ASSET_VERSION}-${jsLocale}"`;
+        if (request.headers.get('if-none-match') === jsEtag) {
+          return new Response(null, { status: 304, headers: { ...getSecurityHeaders(request), ETag: jsEtag } });
+        }
+        const jsResp = new Response(minifyJS(jsContent), {
           headers: {
             'Content-Type': 'application/javascript',
             'Cache-Control': 'public, max-age=31536000, immutable',
@@ -604,16 +604,16 @@ ${sitemapUrls}</urlset>`;
         if (request.headers.get('if-none-match') === cmnEtag) {
           return new Response(null, { status: 304, headers: { ...getSecurityHeaders(request), ETag: cmnEtag } });
         }
-  const commonResp = new Response(minifyJS(getCommonJS()), {
+        const commonResp = new Response(minifyJS(getCommonJS()), {
           headers: {
             'Content-Type': 'application/javascript',
-      'Cache-Control': 'public, max-age=31536000, immutable',
+            'Cache-Control': 'public, max-age=31536000, immutable',
             'ETag': cmnEtag,
             ...getSecurityHeaders(request)
           }
-    });
-    ctx.waitUntil(caches.default.put(request, commonResp.clone()));
-    return commonResp;
+        });
+        ctx.waitUntil(caches.default.put(request, commonResp.clone()));
+        return commonResp;
       }
 
       if (pathname === '/js/clientLocalization.js') {
@@ -637,20 +637,20 @@ ${sitemapUrls}</urlset>`;
             if (refererLocaleInfo.locale && getSupportedLocales().includes(refererLocaleInfo.locale)) {
               jsLocale = refererLocaleInfo.locale;
             }
-          } catch {}
+          } catch { }
         }
 
-    // Serve the optimized client localization utility with only the relevant translations
-    const secHeaders = getSecurityHeaders(request);
-    // Ensure caches vary on Referer since content depends on it (header-based for browsers)
-    secHeaders['Vary'] = 'Origin, Referer';
+        // Serve the optimized client localization utility with only the relevant translations
+        const secHeaders = getSecurityHeaders(request);
+        // Ensure caches vary on Referer since content depends on it (header-based for browsers)
+        secHeaders['Vary'] = 'Origin, Referer';
 
-    // Edge cache by synthetic key including locale + version
-    const cacheKeyUrl = new URL('/js/clientLocalization.js', url.origin);
-    cacheKeyUrl.searchParams.set('locale', jsLocale);
-    cacheKeyUrl.searchParams.set('v', ASSET_VERSION);
-    const cacheMatch = await caches.default.match(cacheKeyUrl.toString());
-    if (cacheMatch) return cacheMatch;
+        // Edge cache by synthetic key including locale + version
+        const cacheKeyUrl = new URL('/js/clientLocalization.js', url.origin);
+        cacheKeyUrl.searchParams.set('locale', jsLocale);
+        cacheKeyUrl.searchParams.set('v', ASSET_VERSION);
+        const cacheMatch = await caches.default.match(cacheKeyUrl.toString());
+        if (cacheMatch) return cacheMatch;
 
         const locEtag = `"clientloc-${ASSET_VERSION}-${jsLocale}"`;
         if (request.headers.get('if-none-match') === locEtag) {
@@ -659,13 +659,13 @@ ${sitemapUrls}</urlset>`;
         const locResp = new Response(minifyJS(getClientLocalizationJS(jsLocale)), {
           headers: {
             'Content-Type': 'application/javascript',
-      'Cache-Control': 'public, max-age=31536000, immutable',
+            'Cache-Control': 'public, max-age=31536000, immutable',
             'ETag': locEtag,
             ...secHeaders
           }
-    });
-    ctx.waitUntil(caches.default.put(cacheKeyUrl.toString(), locResp.clone()));
-    return locResp;
+        });
+        ctx.waitUntil(caches.default.put(cacheKeyUrl.toString(), locResp.clone()));
+        return locResp;
       }
 
       // Admin page (simple HTML)
@@ -673,8 +673,8 @@ ${sitemapUrls}</urlset>`;
         if (request.method !== 'GET') {
           return new Response('Method Not Allowed', { status: 405, headers: { 'Allow': 'GET', ...getSecurityHeaders(request) } });
         }
-  const adminNonce = generateNonce();
-  const html = `<!DOCTYPE html><html><head><meta charset="utf-8"><title>Admin</title></head><body><h1>API Key Admin</h1><section><h2>Create Key</h2><label>Days (1-30): <input id=\"days\" type=\"number\" min=\"1\" max=\"30\" value=\"30\"></label><button id=\"create\">Create</button><pre id=\"createResult\"></pre></section><section><h2>Existing Keys</h2><button id=\"refresh\">Refresh</button><table border=\"1\" cellspacing=\"0\" cellpadding=\"4\"><thead><tr><th>Key</th><th>Expires (unix)</th><th>TTL</th><th>Delete</th></tr></thead><tbody id=\"keys\"></tbody></table><pre id=\"msg\"></pre></section><script nonce="${adminNonce}">(function(){function esc(s){return (s==null?'':String(s)).replace(/["&<>]/g,function(ch){switch(ch){case '&':return '&amp;';case '<':return '&lt;';case '>':return '&gt;';case '"':return '&quot;';}return ch;});}async function refresh(){try{const r=await fetch('/api/admin/api-keys');const j=await r.json();const tb=document.getElementById('keys');tb.innerHTML='';if(!j.success){document.getElementById('msg').textContent=JSON.stringify(j);return;}for(var i=0;i<j.keys.length;i++){var k=j.keys[i];var tr=document.createElement('tr');tr.innerHTML='<td>'+esc(k.apiKey)+'</td><td>'+esc(k.expire||'')+'</td><td>'+esc(k.ttl||'')+'</td><td><button data-k="'+esc(k.apiKey)+'">Delete</button></td>';tb.appendChild(tr);} }catch(e){document.getElementById('msg').textContent='ERR:'+e;} }document.getElementById('refresh').onclick=refresh;document.getElementById('keys').onclick=async function(e){if(e.target.tagName==='BUTTON'){const key=e.target.getAttribute('data-k');const r=await fetch('/api/admin/api-keys/delete',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({apiKey:key})});const j=await r.json();document.getElementById('msg').textContent=JSON.stringify(j);refresh();}};document.getElementById('create').onclick=async function(){const days=parseInt(document.getElementById('days').value,10);const r=await fetch('/api/admin/api-keys',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({days:days})});const j=await r.json();document.getElementById('createResult').textContent=JSON.stringify(j,null,2);refresh();};refresh();})();</script></body></html>`;
+        const adminNonce = generateNonce();
+        const html = `<!DOCTYPE html><html><head><meta charset="utf-8"><title>Admin</title></head><body><h1>API Key Admin</h1><section><h2>Create Key</h2><label>Days (1-30): <input id=\"days\" type=\"number\" min=\"1\" max=\"30\" value=\"30\"></label><button id=\"create\">Create</button><pre id=\"createResult\"></pre></section><section><h2>Existing Keys</h2><button id=\"refresh\">Refresh</button><table border=\"1\" cellspacing=\"0\" cellpadding=\"4\"><thead><tr><th>Key</th><th>Expires (unix)</th><th>TTL</th><th>Delete</th></tr></thead><tbody id=\"keys\"></tbody></table><pre id=\"msg\"></pre></section><script nonce="${adminNonce}">(function(){function esc(s){return (s==null?'':String(s)).replace(/["&<>]/g,function(ch){switch(ch){case '&':return '&amp;';case '<':return '&lt;';case '>':return '&gt;';case '"':return '&quot;';}return ch;});}let refreshSeq=0;async function refresh(){const mySeq=++refreshSeq;try{const r=await fetch('/api/admin/api-keys?t='+Date.now(),{cache:'no-store'});const j=await r.json();if(mySeq!==refreshSeq)return;const tb=document.getElementById('keys');tb.innerHTML='';if(!j.success){document.getElementById('msg').textContent=JSON.stringify(j);return;}for(var i=0;i<j.keys.length;i++){var k=j.keys[i];var tr=document.createElement('tr');tr.innerHTML='<td>'+esc(k.apiKey)+'</td><td>'+esc(k.expire||'')+'</td><td>'+esc(k.ttl||'')+'</td><td><button data-k="'+esc(k.apiKey)+'">Delete</button></td>';tb.appendChild(tr);} }catch(e){if(mySeq!==refreshSeq)return;document.getElementById('msg').textContent='ERR:'+e;} }document.getElementById('refresh').onclick=refresh;document.getElementById('keys').onclick=async function(e){if(e.target.tagName==='BUTTON'){const key=e.target.getAttribute('data-k');const r=await fetch('/api/admin/api-keys/delete',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({apiKey:key}),cache:'no-store'});const j=await r.json();document.getElementById('msg').textContent=JSON.stringify(j);refresh();}};document.getElementById('create').onclick=async function(){const days=parseInt(document.getElementById('days').value,10);const r=await fetch('/api/admin/api-keys',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({days:days}),cache:'no-store'});const j=await r.json();document.getElementById('createResult').textContent=JSON.stringify(j,null,2);refresh();};refresh();})();</script></body></html>`;
         return new Response(html, { status: 200, headers: { 'Content-Type': 'text/html', ...getSecurityHeaders(request, adminNonce) } });
       }
 
@@ -756,7 +756,7 @@ ${sitemapUrls}</urlset>`;
           });
       }
 
-  const htmlResp = new Response(response, {
+      const htmlResp = new Response(response, {
         headers: {
           'Content-Type': 'text/html',
           ...cacheHeaders,
@@ -779,7 +779,7 @@ ${sitemapUrls}</urlset>`;
       }
       return htmlResp;
     } catch (error) {
-  return new Response(getErrorMessage('INTERNAL_SERVER_ERROR', 'en'), {
+      return new Response(getErrorMessage('INTERNAL_SERVER_ERROR', 'en'), {
         status: 500,
         headers: getSecurityHeaders(request)
       });
