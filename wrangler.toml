@@ -37,6 +37,11 @@ binding = "DB"
 database_name = "my-database"
 database_id = "13dc8e43-a1bb-4414-9c52-f77296261b96"
 
+#Production KV namespace for API keys
+[[env.production.kv_namespaces]]
+binding = "KV"
+id = "aeacc6cf5bd0478096fabe28f8bf6898"
+
 # Production environment variables
 [env.production.vars]
 LOG_LEVEL = "INFO"
@@ -54,6 +59,11 @@ enabled = true
 [env.dev]
 name = "securememo-dev"
 workers_dev = true # enable on deploy, behind Cloudflare Zero Trust
+
+# Development KV namespaces for API keys
+[[env.dev.kv_namespaces]]
+binding = "KV" 
+id = "59860d0b311840c289a21e455623417a"
 
 # Development environment variables
 [env.dev.vars]

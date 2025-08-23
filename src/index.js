@@ -35,7 +35,10 @@ import {
   handleCreateMemo,
   handleReadMemo,
   handleConfirmDelete,
-  handleCleanupMemos
+  handleCleanupMemos,
+  adminListApiKeys,
+  adminCreateApiKey,
+  adminDeleteApiKey
 } from './handlers/auth.js';
 import { getErrorMessage } from './utils/errorMessages.js';
 import {
@@ -226,10 +229,11 @@ export default {
 
       const pathname = url.pathname;
 
-      // Skip locale handling for static assets and API routes
+      // Skip locale handling for static assets and API routes (also admin path)
       const isStaticAsset = pathname.startsWith('/styles.css') ||
         pathname.startsWith('/js/') ||
         pathname.startsWith('/api/') ||
+        pathname.startsWith('/admin') ||
         pathname === '/sitemap.xml' ||
         pathname.startsWith('/favicon') ||
         pathname.includes('.png') ||
@@ -275,7 +279,7 @@ export default {
       }
 
       // Route API requests
-      if (pathname.startsWith('/api/')) {
+  if (pathname.startsWith('/api/')) {
         const apiPath = pathname.substring(5);
 
         // Extract locale for API calls from headers/query params instead of URL path
@@ -343,6 +347,20 @@ export default {
               }
             });
           }
+        }
+
+        // Admin API endpoints (behind Cloudflare Zero Trust – no extra auth here)
+        if (apiPath === 'admin/api-keys' && request.method === 'GET') {
+          const res = await adminListApiKeys(env);
+          return mergeSecurityHeadersIntoResponse(res, request);
+        }
+        if (apiPath === 'admin/api-keys' && request.method === 'POST') {
+          const res = await adminCreateApiKey(request, env);
+          return mergeSecurityHeadersIntoResponse(res, request);
+        }
+        if (apiPath === 'admin/api-keys/delete' && request.method === 'POST') {
+          const res = await adminDeleteApiKey(request, env);
+          return mergeSecurityHeadersIntoResponse(res, request);
         }
 
         switch (apiPath) {
@@ -642,6 +660,16 @@ ${sitemapUrls}</urlset>`;
     });
     ctx.waitUntil(caches.default.put(cacheKeyUrl.toString(), locResp.clone()));
     return locResp;
+      }
+
+      // Admin page (simple HTML)
+      if (pathname === '/admin') {
+        if (request.method !== 'GET') {
+          return new Response('Method Not Allowed', { status: 405, headers: { 'Allow': 'GET', ...getSecurityHeaders(request) } });
+        }
+  const adminNonce = generateNonce();
+  const html = `<!DOCTYPE html><html><head><meta charset="utf-8"><title>Admin</title></head><body><h1>API Key Admin</h1><section><h2>Create Key</h2><label>Days (1-30): <input id=\"days\" type=\"number\" min=\"1\" max=\"30\" value=\"30\"></label><button id=\"create\">Create</button><pre id=\"createResult\"></pre></section><section><h2>Existing Keys</h2><button id=\"refresh\">Refresh</button><table border=\"1\" cellspacing=\"0\" cellpadding=\"4\"><thead><tr><th>Key</th><th>Expires (unix)</th><th>TTL</th><th>Delete</th></tr></thead><tbody id=\"keys\"></tbody></table><pre id=\"msg\"></pre></section><script nonce="${adminNonce}">function esc(s){return (s||'').toString().replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;"}[c]));}async function refresh(){const r=await fetch('/api/admin/api-keys');const j=await r.json();const tb=document.getElementById('keys');tb.innerHTML='';if(!j.success){document.getElementById('msg').textContent=JSON.stringify(j);return;}j.keys.forEach(k=>{const tr=document.createElement('tr');tr.innerHTML='<td>'+esc(k.apiKey)+'</td><td>'+(k.expire||'')+'</td><td>'+(k.ttl??'')+'</td><td><button data-k="'+esc(k.apiKey)+'">Delete</button></td>';tb.appendChild(tr);});}document.getElementById('refresh').onclick=refresh;document.getElementById('keys').onclick=async e=>{if(e.target.tagName==='BUTTON'){const key=e.target.getAttribute('data-k');const r=await fetch('/api/admin/api-keys/delete',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({apiKey:key})});const j=await r.json();document.getElementById('msg').textContent=JSON.stringify(j);refresh();}};document.getElementById('create').onclick=async()=>{const days=parseInt(document.getElementById('days').value,10);const r=await fetch('/api/admin/api-keys',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({days})});const j=await r.json();document.getElementById('createResult').textContent=JSON.stringify(j,null,2);refresh();};refresh();</script></body></html>`;
+        return new Response(html, { status: 200, headers: { 'Content-Type': 'text/html', ...getSecurityHeaders(request) } });
       }
 
       // Route page requests
