@@ -195,7 +195,7 @@ export const tr = {
 
   'tos.intellectualProperty.title': '6. Fikri Mülkiyet',
   'tos.intellectualProperty.content': 'Hizmet ve sunulan tüm materyaller (metin, grafik, logo ve yazılım dahil ancak bunlarla sınırlı olmamak üzere) securememo.app veya lisans verenlerine aittir ve telif hakkı, marka ve diğer fikri mülkiyet yasaları ile korunmaktadır. İçeriğimizi açık izin olmadan değiştirmemeyi, çoğaltmamayı, dağıtmamayı veya türev çalışmalar oluşturmamayı kabul ediyorsunuz; yalnızca hizmet içinde kişisel ve ticari olmayan kullanım için izin verilir.',
-  'tos.intellectualProperty.copyright': 'Telif Hakkı ve DMCA Politikası: Telif hakkınızın ihlal edildiğini düşünüyorsanız, lütfen DMCA kapsamında gerekli bilgilerle (eserin tanımı, iletişim bilgileriniz ve iyi niyet beyanı) timo.heimonen@proton.me adresinden bize ulaşın.',
+  'tos.intellectualProperty.copyright': 'Telif Hakkı ve DMCA Politikası: Telif hakkınızın ihlal edildiğini düşünüyorsanız, lütfen DMCA kapsamında gerekli bilgilerle (eserin tanımı, iletişim bilgileriniz ve iyi niyet beyanı) contact@securememo.app adresinden bize ulaşın.',
 
   'tos.indemnification.title': '7. Tazminat',
   'tos.indemnification.content': 'securememo.app ve bağlı kuruluşlarını, yöneticilerini, çalışanlarını ve temsilcilerini, hizmetlerimize erişiminiz veya kullanımınızla bağlantılı olarak ortaya çıkan her türlü iddia, sorumluluk, zarar, kayıp ve makul avukatlık ücretleri dahil olmak üzere masraflardan korumayı ve tazmin etmeyi kabul ediyorsunuz; bu, bu Şartların ihlali durumunu da kapsar.',
@@ -218,7 +218,7 @@ export const tr = {
   'tos.contact.title': '12. İletişim',
   'tos.contact.content': 'Bu şartlarla ilgili sorularınız için lütfen',
   'tos.contact.github': 'GitHub deposunu',
-  'tos.contact.email': 'veya timo.heimonen@proton.me adresine e-posta gönderin.',
+  'tos.contact.email': 'veya contact@securememo.app adresine e-posta gönderin.',
 
   'tos.languageDisclaimer.title': '13. Dil ve Çeviri',
   'tos.languageDisclaimer.content': 'Bu Kullanım Şartları, kolaylık sağlaması için diğer dillere çevrilebilir. İngilizce sürüm ile çeviri arasında herhangi bir tutarsızlık veya uyuşmazlık olması durumunda, İngilizce sürüm geçerli olacaktır.',
@@ -294,7 +294,7 @@ export const tr = {
   'privacy.contact.title': '10. İletişim',
   'privacy.contact.intro': 'Bu Gizlilik Bildirimi veya uygulamalarımız hakkında sorularınız için lütfen',
   'privacy.contact.github': 'GitHub deposunu',
-  'privacy.contact.email': 'veya timo.heimonen@proton.me adresine e-posta gönderin.',
+  'privacy.contact.email': 'veya contact@securememo.app adresine e-posta gönderin.',
   'privacy.contact.disclaimer': 'Bu Gizlilik Bildirimi yalnızca securememo.app için geçerlidir; hizmetimizden bağlantı verilen üçüncü taraf siteler için geçerli değildir.',
 
   // Schema.org structured data

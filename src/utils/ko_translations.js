@@ -195,7 +195,7 @@ export const ko = {
 
     'tos.intellectualProperty.title': '6. 지적 재산권',
     'tos.intellectualProperty.content': '서비스와 이를 통해 제공되는 모든 자료(텍스트, 그래픽, 로고, 소프트웨어 포함하나 이에 국한되지 않음)는 securememo.app 또는 그 라이선스 제공업체의 재산이며 저작권, 상표권 및 기타 지적 재산권법으로 보호받습니다. 서비스 내에서 개인적, 비상업적 사용을 제외하고는 명시적 허가 없이 저희 콘텐츠를 수정, 복제, 배포 또는 파생 작품을 만들지 않는 데 동의합니다.',
-    'tos.intellectualProperty.copyright': '저작권 및 DMCA 정책: 저작권이 침해되었다고 생각되시면 DMCA에서 요구하는 정보(예: 작품 식별, 연락처 세부 사항 및 선의의 믿음에 대한 진술)와 함께 timo.heimonen@proton.me으로 연락해 주세요.',
+    'tos.intellectualProperty.copyright': '저작권 및 DMCA 정책: 저작권이 침해되었다고 생각되시면 DMCA에서 요구하는 정보(예: 작품 식별, 연락처 세부 사항 및 선의의 믿음에 대한 진술)와 함께 contact@securememo.app으로 연락해 주세요.',
 
     'tos.indemnification.title': '7. 면책',
     'tos.indemnification.content': '서비스에 대한 접근 또는 사용과 관련되거나 연결된 모든 클레임, 책임, 손해, 손실 및 비용(합리적인 변호사 비용 포함)으로부터 securememo.app과 그 계열사, 임원, 이사, 직원 및 에이전트를 보호하고 면책시키는 데 동의합니다.',
@@ -218,7 +218,7 @@ export const ko = {
     'tos.contact.title': '12. 연락처',
     'tos.contact.content': '이 약관에 대한 질문이 있으시면 저희의',
     'tos.contact.github': 'GitHub 리포지토리',
-    'tos.contact.email': '를 방문하거나 timo.heimonen@proton.me으로 이메일을 보내주세요.',
+    'tos.contact.email': '를 방문하거나 contact@securememo.app으로 이메일을 보내주세요.',
 
     'tos.languageDisclaimer.title': '13. 언어 및 번역',
     'tos.languageDisclaimer.content': '이 서비스 약관은 편의를 위해 다른 언어로 번역될 수 있습니다. 영어 버전과 번역 버전 간에 불일치나 충돌이 있는 경우 영어 버전이 우선합니다.',
@@ -294,7 +294,7 @@ export const ko = {
     'privacy.contact.title': '10. 연락처',
     'privacy.contact.intro': '이 개인정보 보호 고지나 저희의 관행에 대한 질문이 있으시면 저희의',
     'privacy.contact.github': 'GitHub 리포지토리',
-    'privacy.contact.email': '를 방문하거나 timo.heimonen@proton.me으로 이메일을 보내주세요.',
+    'privacy.contact.email': '를 방문하거나 contact@securememo.app으로 이메일을 보내주세요.',
     'privacy.contact.disclaimer': '이 개인정보 보호 고지는 securememo.app에만 적용되며 저희 서비스에서 링크된 제3자 사이트에는 적용되지 않습니다.',
 
     // Schema.org structured data

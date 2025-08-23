@@ -195,7 +195,7 @@ export const th = {
 
   'tos.intellectualProperty.title': '6. ทรัพย์สินทางปัญญา',
   'tos.intellectualProperty.content': 'บริการและสื่อทั้งหมดที่ให้ผ่านบริการ รวมถึงแต่ไม่จำกัดเพียง ข้อความ กราฟิก โลโก้ และซอฟต์แวร์ เป็นทรัพย์สินของ securememo.app หรือผู้อนุญาต และได้รับการคุ้มครองโดยกฎหมายลิขสิทธิ์ เครื่องหมายการค้า และทรัพย์สินทางปัญญาอื่น ๆ คุณตกลงว่าจะไม่ดัดแปลง ทำซ้ำ แจกจ่าย หรือสร้างงานดัดแปลงจากเนื้อหาของเราโดยไม่ได้รับอนุญาต ยกเว้นเพื่อการใช้งานส่วนบุคคลที่ไม่ใช่เชิงพาณิชย์ภายในบริการ',
-  'tos.intellectualProperty.copyright': 'Copyright & DMCA Policy: If you believe your copyright has been infringed, please contact us at timo.heimonen@proton.me with the required information under the DMCA (e.g., identification of the work, your contact details, and a statement of good faith belief).',
+  'tos.intellectualProperty.copyright': 'Copyright & DMCA Policy: If you believe your copyright has been infringed, please contact us at contact@securememo.app with the required information under the DMCA (e.g., identification of the work, your contact details, and a statement of good faith belief).',
 
   'tos.indemnification.title': '7. การชดใช้ค่าเสียหาย',
   'tos.indemnification.content': 'คุณตกลงที่จะป้องกัน ชดใช้ และทำให้ securememo.app และบริษัทในเครือ ผู้บริหาร กรรมการ พนักงาน และตัวแทน ปลอดจากการเรียกร้อง ความรับผิด ความเสียหาย การสูญเสีย และค่าใช้จ่าย รวมถึงค่าทนายความอันสมเหตุสมผล ที่เกิดจากหรือเกี่ยวข้องกับการเข้าถึงหรือการใช้บริการของคุณ รวมถึงการละเมิดข้อกำหนดเหล่านี้โดยคุณ',
@@ -218,7 +218,7 @@ export const th = {
   'tos.contact.title': '12. ติดต่อ',
   'tos.contact.content': 'หากมีคำถามเกี่ยวกับข้อกำหนดเหล่านี้ โปรดเยี่ยมชม',
   'tos.contact.github': 'ที่เก็บ GitHub',
-  'tos.contact.email': 'หรืออีเมล timo.heimonen@proton.me.',
+  'tos.contact.email': 'หรืออีเมล contact@securememo.app.',
 
   'tos.languageDisclaimer.title': '13. ภาษาและการแปล',
   'tos.languageDisclaimer.content': 'ข้อกำหนดการให้บริการนี้อาจถูกแปลเป็นภาษาอื่นเพื่อความสะดวกของคุณ หากมีความแตกต่างหรือความขัดแย้งระหว่างฉบับภาษาอังกฤษกับฉบับแปล ให้ยึดฉบับภาษาอังกฤษเป็นหลัก',
@@ -294,7 +294,7 @@ export const th = {
   'privacy.contact.title': '10. ติดต่อเรา',
   'privacy.contact.intro': 'หากมีคำถามเกี่ยวกับประกาศความเป็นส่วนตัวนี้หรือแนวปฏิบัติของเรา โปรดเยี่ยมชม',
   'privacy.contact.github': 'ที่เก็บ GitHub',
-  'privacy.contact.email': 'หรืออีเมล timo.heimonen@proton.me.',
+  'privacy.contact.email': 'หรืออีเมล contact@securememo.app.',
   'privacy.contact.disclaimer': 'ประกาศความเป็นส่วนตัวนี้ใช้กับ securememo.app เท่านั้น และไม่ครอบคลุมเว็บไซต์ของบุคคลที่สามที่ลิงก์จากบริการของเรา',
 
   // Schema.org structured data

@@ -195,7 +195,7 @@ export const zh = {
 
   'tos.intellectualProperty.title': '6. 知识产权',
   'tos.intellectualProperty.content': '服务及通过其提供的所有材料，包括但不限于文本、图形、徽标和软件，均为 securememo.app 或其许可方的财产，受版权、商标和其他知识产权法保护。您同意不修改、复制、分发或基于我们的内容创建衍生作品，除非获得明确许可，用于服务内的个人、非商业用途除外。',
-  'tos.intellectualProperty.copyright': '版权和 DMCA 政策：如果您认为您的版权受到侵犯，请使用 DMCA 规定的必要信息联系我们 timo.heimonen@proton.me（例如，作品识别、您的联系方式和善意声明）。',
+  'tos.intellectualProperty.copyright': '版权和 DMCA 政策：如果您认为您的版权受到侵犯，请使用 DMCA 规定的必要信息联系我们 contact@securememo.app（例如，作品识别、您的联系方式和善意声明）。',
 
   'tos.indemnification.title': '7. 赔偿',
   'tos.indemnification.content': '您同意为 securememo.app 及其关联公司、高级职员、董事、员工和代理人进行辩护、赔偿并使其免受因您访问或使用我们的服务（包括您违反这些条款）而产生或以任何方式相关的任何索赔、责任、损害、损失和费用（包括合理的律师费）的损害。',
@@ -218,7 +218,7 @@ export const zh = {
   'tos.contact.title': '12. 联系方式',
   'tos.contact.content': '如对这些条款有疑问，请访问我们的',
   'tos.contact.github': 'GitHub 仓库',
-  'tos.contact.email': '或发送邮件至 timo.heimonen@proton.me。',
+  'tos.contact.email': '或发送邮件至 contact@securememo.app。',
 
   'tos.languageDisclaimer.title': '13. 语言和翻译',
   'tos.languageDisclaimer.content': '为了您的方便，这些服务条款可能会被翻译成其他语言。如果英文版本和翻译版本之间存在任何差异或冲突，以英文版本为准。',
@@ -294,7 +294,7 @@ export const zh = {
   'privacy.contact.title': '10. 联系我们',
   'privacy.contact.intro': '如对本隐私声明或我们的做法有疑问，请访问我们的',
   'privacy.contact.github': 'GitHub 仓库',
-  'privacy.contact.email': '或发送邮件至 timo.heimonen@proton.me。',
+  'privacy.contact.email': '或发送邮件至 contact@securememo.app。',
   'privacy.contact.disclaimer': '本隐私声明仅适用于 securememo.app，不适用于我们服务链接的任何第三方网站。',
 
   // Schema.org structured data
