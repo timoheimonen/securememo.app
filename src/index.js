@@ -674,7 +674,138 @@ ${sitemapUrls}</urlset>`;
           return new Response('Method Not Allowed', { status: 405, headers: { 'Allow': 'GET', ...getSecurityHeaders(request) } });
         }
         const adminNonce = generateNonce();
-        const html = `<!DOCTYPE html><html><head><meta charset="utf-8"><title>Admin</title></head><body><h1>API Key Admin</h1><section><h2>Create Key</h2><label>Days (1-30): <input id=\"days\" type=\"number\" min=\"1\" max=\"30\" value=\"30\"></label><button id=\"create\">Create</button><pre id=\"createResult\"></pre></section><section><h2>Existing Keys</h2><button id=\"refresh\">Refresh</button><table border=\"1\" cellspacing=\"0\" cellpadding=\"4\"><thead><tr><th>Key</th><th>Expires (unix)</th><th>TTL</th><th>Delete</th></tr></thead><tbody id=\"keys\"></tbody></table><pre id=\"msg\"></pre></section><script nonce="${adminNonce}">(function(){function esc(s){return (s==null?'':String(s)).replace(/["&<>]/g,function(ch){switch(ch){case '&':return '&amp;';case '<':return '&lt;';case '>':return '&gt;';case '"':return '&quot;';}return ch;});}let refreshSeq=0;async function refresh(){const mySeq=++refreshSeq;try{const r=await fetch('/api/admin/api-keys?t='+Date.now(),{cache:'no-store'});const j=await r.json();if(mySeq!==refreshSeq)return;const tb=document.getElementById('keys');tb.innerHTML='';if(!j.success){document.getElementById('msg').textContent=JSON.stringify(j);return;}for(var i=0;i<j.keys.length;i++){var k=j.keys[i];var tr=document.createElement('tr');tr.innerHTML='<td>'+esc(k.apiKey)+'</td><td>'+esc(k.expire||'')+'</td><td>'+esc(k.ttl||'')+'</td><td><button data-k="'+esc(k.apiKey)+'">Delete</button></td>';tb.appendChild(tr);} }catch(e){if(mySeq!==refreshSeq)return;document.getElementById('msg').textContent='ERR:'+e;} }document.getElementById('refresh').onclick=refresh;document.getElementById('keys').onclick=async function(e){if(e.target.tagName==='BUTTON'){const key=e.target.getAttribute('data-k');const row=e.target.closest('tr');if(row){row.style.opacity='0.5';row.style.textDecoration='line-through';}const r=await fetch('/api/admin/api-keys/delete',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({apiKey:key}),cache:'no-store'});const j=await r.json();document.getElementById('msg').textContent=JSON.stringify(j);if(j.success&&row){row.remove();}else if(row){row.style.opacity='1';row.style.textDecoration='';}refresh();}};document.getElementById('create').onclick=async function(){const days=parseInt(document.getElementById('days').value,10);const r=await fetch('/api/admin/api-keys',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({days:days}),cache:'no-store'});const j=await r.json();document.getElementById('createResult').textContent=JSON.stringify(j,null,2);refresh();};refresh();})();</script></body></html>`;
+        const html = `<!DOCTYPE html><html><head><meta charset="utf-8"><title>Admin</title><meta name="viewport" content="width=device-width,initial-scale=1"><style>
+          :root { font-family: system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,sans-serif; color-scheme: light dark; }
+          body { margin: 1.5rem; }
+          h1 { margin-top: 0; }
+          section { margin-bottom: 2.5rem; }
+          fieldset { border: 1px solid #8884; border-radius: 8px; padding: 1rem 1.25rem; }
+          legend { padding: 0 .5rem; font-weight: 600; }
+          button { cursor: pointer; }
+          table { width: 100%; border-collapse: collapse; margin-top: .75rem; font-size: .9rem; }
+          thead { background: #00000008; position: sticky; top: 0; }
+          th, td { padding: .5rem .6rem; text-align: left; border-bottom: 1px solid #ddd6; vertical-align: middle; }
+          tbody tr:hover { background: #f5f5f580; }
+          .muted { opacity: .65; font-size: .75rem; }
+          .actions { display: flex; gap: .4rem; }
+          .status { white-space: pre-wrap; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; background: #00000008; padding: .5rem .75rem; border-radius: 6px; max-height: 220px; overflow: auto; }
+          .pill { display: inline-block; padding: 2px 6px; border-radius: 999px; background:#4441; font-size:.65rem; letter-spacing:.5px; }
+          .danger { background:#b0002015; color:#b00020; }
+          .keyCell { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .75rem; }
+          .fade { animation: fade .25s ease-in; }
+          @keyframes fade { from { opacity:0; transform: translateY(-2px);} to { opacity:1; transform: none;} }
+          #loadingRow td { text-align:center; font-style: italic; }
+        </style></head><body><h1>API Key Admin</h1>
+        <section>
+          <form id="createForm" onsubmit="return false;">
+            <fieldset><legend>Create Key</legend>
+              <label>Validity (days 1-30): <input id="days" type="number" min="1" max="30" value="30" style="width:4rem"></label>
+              <button id="create" type="button">Create</button>
+              <button id="resetCreate" type="button" style="display:none">Clear</button>
+              <div class="status" id="createResult" style="display:none;margin-top:.75rem"></div>
+            </fieldset>
+          </form>
+        </section>
+        <section>
+          <fieldset><legend>Existing Keys</legend>
+            <div style="display:flex;gap:.5rem;align-items:center;flex-wrap:wrap;margin-bottom:.5rem">
+              <button id="refresh" type="button">Refresh</button>
+              <span class="muted" id="lastRefreshed"></span>
+              <span class="muted" id="keyCount"></span>
+            </div>
+            <div style="overflow:auto;max-height:60vh;border:1px solid #8884;border-radius:6px;">
+              <table aria-label="API keys list">
+                <thead><tr><th style="width:38%">Key</th><th>Expires</th><th>TTL</th><th>Usage</th><th style="width:150px">Actions</th></tr></thead>
+                <tbody id="keys"><tr id="loadingRow"><td colspan="5">Loading…</td></tr></tbody>
+              </table>
+            </div>
+            <div id="msg" class="status" style="display:none;margin-top:.75rem"></div>
+          </fieldset>
+        </section>
+        <script nonce="${adminNonce}">(function(){
+          const esc = function(s){return (s==null?'':String(s)).replace(/["&<>]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;"}[c]||c;});};
+          const fmtTTL = function(ttl){ if(ttl==null) return '-'; if(ttl<=0) return 'expired'; var d=Math.floor(ttl/86400); var h=Math.floor((ttl%86400)/3600); var m=Math.floor((ttl%3600)/60); if(d>0) return d+'d '+h+'h'; if(h>0) return h+'h '+m+'m'; return m+'m'; };
+            const fmtExpire = function(unix){ return unix ? new Date(unix*1000).toISOString().replace('T',' ').replace(/:\\d+\\.\\d+Z$/,' UTC') : '-'; };
+            var currentKeys = [];
+            var refreshInFlight = 0;
+            var els = function(id){ return document.getElementById(id); };
+            var keysTbody = els('keys');
+            var msgBox = els('msg');
+            function setStatus(obj, box){ if(!box) box=msgBox; if(!obj){ box.style.display='none'; box.textContent=''; return;} box.style.display='block'; box.textContent = (typeof obj === 'string') ? obj : JSON.stringify(obj,null,2); }
+            function renderKeys(){
+              keysTbody.innerHTML='';
+              if(!currentKeys.length){ var trEmpty=document.createElement('tr'); trEmpty.innerHTML='<td colspan="5" style="text-align:center;font-style:italic">No keys</td>'; keysTbody.appendChild(trEmpty); }
+              for(var i=0;i<currentKeys.length;i++){
+                var k = currentKeys[i];
+                var tr=document.createElement('tr');
+                tr.className='fade';
+                tr.setAttribute('data-key', k.apiKey);
+                tr.innerHTML = '<td class="keyCell"><span title="Click to copy" data-copy="'+esc(k.apiKey)+'">'+esc(k.apiKey)+'</span></td>'+
+                               '<td>'+esc(fmtExpire(k.expire))+'</td>'+
+                               '<td>'+esc(fmtTTL(k.ttl))+'</td>'+
+                               '<td>'+(k.usage!=null? esc(k.usage):'0')+'</td>'+
+                               '<td><div class="actions">'+
+                                 '<button data-act="copy" data-k="'+esc(k.apiKey)+'">Copy</button>'+
+                                 '<button data-act="delete" data-k="'+esc(k.apiKey)+'" class="danger">Delete</button>'+
+                               '</div></td>';
+                keysTbody.appendChild(tr);
+              }
+              els('keyCount').textContent = currentKeys.length ? (currentKeys.length+' key'+(currentKeys.length===1?'':'s')) : '';
+            }
+            async function refresh(){
+              if(refreshInFlight) return; refreshInFlight=1; setStatus(null); els('lastRefreshed').textContent='';
+              keysTbody.innerHTML='<tr id="loadingRow"><td colspan="5">Loading…</td></tr>';
+              try {
+                var r = await fetch('/api/admin/api-keys?t=' + Date.now(), {cache:'no-store'});
+                var j = await r.json();
+                if(!j.success){ setStatus(j); currentKeys=[]; renderKeys(); }
+                else { currentKeys = j.keys.sort(function(a,b){ return (a.expire||0)-(b.expire||0); }); renderKeys(); els('lastRefreshed').textContent='Updated '+ new Date().toLocaleTimeString(); }
+              } catch(e){ setStatus('ERR: '+ e); }
+              finally { refreshInFlight=0; }
+            }
+            keysTbody.addEventListener('click', async function(e){
+              var btn = e.target.closest('button');
+              if(!btn) return;
+              var act = btn.getAttribute('data-act');
+              var key = btn.getAttribute('data-k');
+              if(!key) return;
+              if(act==='copy'){
+                try { await navigator.clipboard.writeText(key); btn.textContent='Copied'; setTimeout(function(){ btn.textContent='Copy'; }, 1200); }
+                catch(_){ setStatus('Clipboard copy failed'); }
+                return;
+              }
+              if(act==='delete'){
+                if(!confirm('Delete this key?')) return;
+                btn.disabled=true; btn.textContent='…';
+                try {
+                  var rDel = await fetch('/api/admin/api-keys/delete',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({apiKey:key}),cache:'no-store'});
+                  var jDel = await rDel.json();
+                  if(jDel.success){ currentKeys = currentKeys.filter(function(k){return k.apiKey!==key;}); renderKeys(); setStatus({deleted:key}); }
+                  else { setStatus(jDel); }
+                } catch(eDel){ setStatus('ERR: '+ eDel); }
+              }
+            });
+            els('refresh').onclick=function(){ refresh(); };
+            els('create').onclick=async function(){
+              var days=parseInt(els('days').value,10);
+              if(!Number.isFinite(days)||days<1||days>30){ setStatus('Invalid days value', els('createResult')); return; }
+              setStatus(null, els('createResult'));
+              els('createResult').style.display='block';
+              els('createResult').textContent='Creating…';
+              try {
+                var rC = await fetch('/api/admin/api-keys',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({days:days}),cache:'no-store'});
+                var jC = await rC.json();
+                if(jC.success){
+                  els('createResult').textContent = JSON.stringify(jC,null,2);
+                  els('resetCreate').style.display='inline-block';
+                  currentKeys.push({apiKey:jC.apiKey, expire:jC.expire, usage:jC.usage||0, ttl:(jC.expire? Math.max(0, jC.expire - Math.floor(Date.now()/1000)) : null)});
+                  renderKeys();
+                } else { els('createResult').textContent = JSON.stringify(jC,null,2); }
+              } catch(eC){ els('createResult').textContent='ERR: '+ eC; }
+            };
+            els('resetCreate').onclick=function(){ els('createResult').textContent=''; els('createResult').style.display='none'; els('resetCreate').style.display='none'; };
+            refresh();
+        })();</script></body></html>`;
         return new Response(html, { status: 200, headers: { 'Content-Type': 'text/html', ...getSecurityHeaders(request, adminNonce) } });
       }
 

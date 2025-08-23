@@ -358,8 +358,9 @@ export async function generateApiKey(env, days = 30) {
         for (let i = 0; i < raw.length; i++) binary += String.fromCharCode(raw[i]);
         apiKey = btoa(binary).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
     }
-    await env.KV.put(apiKey, JSON.stringify({ expire }), { expiration: expire });
-    return { apiKey, expire };
+    // Initialize with usage counter (future increments when key used)
+    await env.KV.put(apiKey, JSON.stringify({ expire, usage: 0 }), { expiration: expire });
+    return { apiKey, expire, usage: 0 };
 }
 
 // Admin list API keys (KV list). Returns up to 100 keys.
@@ -371,8 +372,13 @@ export async function adminListApiKeys(env) {
         const keys = await Promise.all(list.keys.map(async k => {
             const v = await env.KV.get(k.name);
             let expire = null;
-            try { expire = JSON.parse(v || '{}').expire || null; } catch { }
-            return { apiKey: k.name, expire, ttl: expire ? Math.max(0, expire - now) : null };
+            let usage = 0;
+            try {
+                const parsed = JSON.parse(v || '{}');
+                expire = parsed.expire || null;
+                if (Number.isFinite(parsed.usage)) usage = parsed.usage;
+            } catch { }
+            return { apiKey: k.name, expire, usage, ttl: expire ? Math.max(0, expire - now) : null };
         }));
     return new Response(JSON.stringify({ success: true, keys, now }), { status: 200, headers: { 'Content-Type': 'application/json', 'Cache-Control': 'no-store, no-cache, must-revalidate' } });
     } catch (e) {
@@ -391,8 +397,8 @@ export async function adminCreateApiKey(request, env) {
                 if (!Number.isNaN(n) && n >= 1 && n <= 30) days = n;
             }
         }
-        const { apiKey, expire } = await generateApiKey(env, days);
-    return new Response(JSON.stringify({ success: true, apiKey, expire }), { status: 200, headers: { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' } });
+        const { apiKey, expire, usage } = await generateApiKey(env, days);
+    return new Response(JSON.stringify({ success: true, apiKey, expire, usage }), { status: 200, headers: { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' } });
     } catch (e) {
     return new Response(JSON.stringify({ error: 'CREATE_FAILED' }), { status: 500, headers: { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' } });
     }
