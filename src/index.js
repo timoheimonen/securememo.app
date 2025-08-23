@@ -49,7 +49,8 @@ import {
 import { getClientLocalizationJS } from './utils/clientLocalization.js';
 
 // Immutable asset version for cache-busting (bump on asset changes)
-const ASSET_VERSION = '20250818';
+// Bumped to invalidate cached JS after Turnstile duplicate fix
+const ASSET_VERSION = '20250823a';
 
 // Tiny, safe JS minifier for generated strings (removes comments and trims/collapses intra-line whitespace)
 function minifyJS(code) {
