@@ -723,7 +723,16 @@ ${sitemapUrls}</urlset>`;
           </fieldset>
         </section>
         <script nonce="${adminNonce}">(function(){
-          const esc = function(s){return (s==null?'':String(s)).replace(/["&<>]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;"}[c]||c;});};
+          // Debug log to verify script executes
+          try { console.log('[admin] script start'); } catch(_){ }
+          // Escape helper (avoid inline object literal complexities for Safari)
+          var ESC_AMP = '&amp;'; var ESC_LT = '&lt;'; var ESC_GT='&gt;'; var ESC_QUOT='&quot;';
+          function esc(s){
+            if(s==null) return '';
+            return String(s).replace(/["&<>]/g,function(c){
+              if(c==='&') return ESC_AMP; if(c==='<' ) return ESC_LT; if(c==='>') return ESC_GT; if(c==='"') return ESC_QUOT; return c;
+            });
+          }
           const fmtTTL = function(ttl){ if(ttl==null) return '-'; if(ttl<=0) return 'expired'; var d=Math.floor(ttl/86400); var h=Math.floor((ttl%86400)/3600); var m=Math.floor((ttl%3600)/60); if(d>0) return d+'d '+h+'h'; if(h>0) return h+'h '+m+'m'; return m+'m'; };
             const fmtExpire = function(unix){ return unix ? new Date(unix*1000).toISOString().replace('T',' ').replace(/:\\d+\\.\\d+Z$/,' UTC') : '-'; };
             var currentKeys = [];
