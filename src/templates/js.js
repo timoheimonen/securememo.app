@@ -411,12 +411,7 @@ function highlightCurrentPage() {
 
 // Init Turnstile widget
 function initTurnstile() {
-    // Explicitly render Turnstile widget for initial form
-    if (typeof turnstile !== 'undefined') {
-        turnstile.render('.cf-turnstile', {
-            sitekey: TURNSTILE_SITE_KEY
-        });
-    }
+    // Auto-init via data-sitekey attribute (explicit render removed to avoid duplicate widget)
 }
 
 // Get Turnstile response safely
