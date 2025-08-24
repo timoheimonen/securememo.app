@@ -3,6 +3,7 @@
 // Translations are auto translated. Errors are possible.
 
 import { ar } from './ar_translations.js';
+import { bn } from './bn_translations.js';
 import { cs } from './cs_translations.js';
 import { da } from './da_translations.js';
 import { de } from './de_translations.js';
@@ -25,6 +26,7 @@ import { ptPT } from './ptPT_translations.js';
 import { ru } from './ru_translations.js';
 import { ro } from './ro_translations.js';
 import { sv } from './sv_translations.js';
+import { tl } from './tl_translations.js';
 import { th } from './th_translations.js';
 import { tr } from './tr_translations.js';
 import { uk } from './uk_translations.js';
@@ -37,6 +39,7 @@ function withLanguageNames(localeMap) {
 
 export const TRANSLATIONS = {
   ar: withLanguageNames(ar),
+  bn: withLanguageNames(bn),
   cs: withLanguageNames(cs),
   da: withLanguageNames(da),
   de: withLanguageNames(de),
@@ -59,6 +62,7 @@ export const TRANSLATIONS = {
   ru: withLanguageNames(ru),
   ro: withLanguageNames(ro),
   sv: withLanguageNames(sv),
+  tl: withLanguageNames(tl),
   th: withLanguageNames(th),
   tr: withLanguageNames(tr),
   uk: withLanguageNames(uk),
