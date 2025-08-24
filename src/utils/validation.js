@@ -1,5 +1,5 @@
 // Input validation and sanitization utilities
-import { addArtificialDelay, constantTimeCompare } from './timingSecurity.js';
+import { uniformResponseDelay} from './timingSecurity.js';
 
 /**
  * Sanitize user input for HTML context (prevents XSS)
@@ -43,24 +43,18 @@ export function sanitizeForHTML(input) {
 }
 
 /**
- * Sanitize input for JSON context (prevents JSON injection and control character issues)
- * @param {string} input - The input to sanitize
- * @returns {string} - Sanitized input safe for JSON
+ * Normalize ciphertext for JSON transport without altering legitimate characters.
+ * We only strip disallowed control characters that could break JSON framing or
+ * terminal displays. We DO NOT escape quotes, backslashes, or unicode separators
+ * here, letting JSON.stringify handle necessary escaping so the ciphertext
+ * round-trips exactly for decryption.
+ * @param {string} input - Ciphertext string
+ * @returns {string}
  */
-export function sanitizeForJSON(input) {
+export function normalizeCiphertextForResponse(input) {
   if (typeof input !== 'string') return '';
-  
-  // Remove or escape control characters that could break JSON parsing
-  return input
-    .replace(/[\x00-\x1F\x7F]/g, '') // Remove control characters except newlines/tabs
-    .replace(/\n/g, '\\n') // Escape newlines
-    .replace(/\r/g, '\\r') // Escape carriage returns
-    .replace(/\t/g, '\\t') // Escape tabs
-    .replace(/\\/g, '\\\\') // Escape backslashes
-    .replace(/"/g, '\\"') // Escape quotes
-    .replace(/\u2028/g, '\\u2028') // Escape line separator (prevents JSON injection)
-    .replace(/\u2029/g, '\\u2029') // Escape paragraph separator (prevents JSON injection)
-    .trim();
+  // Remove null byte and other non-printable control chars except \n, \r, \t
+  return input.replace(/[\x00-\x08\x0B\x0C\x0E-\x1F\x7F]/g, '');
 }
 
 /**
@@ -78,20 +72,7 @@ export function sanitizeForDatabase(input) {
     .trim();
 }
 
-/**
- * Sanitize input for URL parameters (prevents URL injection)
- * @param {string} input - The input to sanitize
- * @returns {string} - Sanitized input safe for URL parameters
- */
-export function sanitizeForURL(input) {
-  if (typeof input !== 'string') return '';
-  
-  // Remove characters that could be used for URL injection
-  return input
-    .replace(/[<>\"'%]/g, '') // Remove potentially dangerous characters
-    .replace(/\s+/g, '') // Remove whitespace
-    .trim();
-}
+// sanitizeForURL removed (identifier inputs are strictly validated instead of transformed)
 
 /**
  * Validate memo ID format (32 or 40 chars with alphanumeric, hyphens, underscores)
@@ -112,7 +93,7 @@ export async function validateMemoIdSecure(memoId) {
   
   // Add artificial delay if validation fails
   if (!result) {
-    await addArtificialDelay();
+  await uniformResponseDelay();
   }
   
   return result;
@@ -177,7 +158,7 @@ export function validatePassword(password) {
 export async function validateAndSanitizeEncryptedMessageSecure(message) {
   // First validate the message
   if (!validateEncryptedMessage(message)) {
-    await addArtificialDelay();
+  await uniformResponseDelay();
     return { isValid: false, sanitizedMessage: null };
   }
   
@@ -185,8 +166,8 @@ export async function validateAndSanitizeEncryptedMessageSecure(message) {
   const sanitizedForDB = sanitizeForDatabase(message);
   
   // Additional validation after sanitization
-  if (sanitizedForDB.length === 0) {
-    await addArtificialDelay();
+  if (sanitizedForDB.length === 0 || sanitizedForDB.length > 50000) {
+  await uniformResponseDelay();
     return { isValid: false, sanitizedMessage: null };
   }
   
