@@ -142,7 +142,7 @@ export const da = {
 
   // Terms of Service page content
   'tos.hero.title': 'Vilkår for Brug',
-  'tos.lastUpdated': 'Sidst opdateret: 17. august 2025',
+  'tos.lastUpdated': 'Sidst opdateret: 24. august 2025',
   'tos.tableOfContents.title': 'Indholdsfortegnelse',
   'tos.tableOfContents.serviceDescription': 'Servicebeskrivelse',
   'tos.tableOfContents.acceptableUse': 'Acceptabel brug',
@@ -172,11 +172,11 @@ export const da = {
 
   'tos.privacyData.title': '3. Privatliv & Datahåndtering',
   'tos.privacyData.noAccess': 'Ingen adgang til indhold: Vi kan ikke tilgå, læse eller gendanne dit notatindhold. Al kryptering sker i din browser.',
-  'tos.privacyData.noPersonal': 'Ingen persondata: Vi indsamler ikke personlige oplysninger og kræver ikke brugeroprettelse.',
+  'tos.privacyData.noPersonal': 'Minimal indsamling af data: Vi kræver ikke brugerkonti og indsamler ikke personoplysninger for, at du kan bruge tjenesten. De eneste persondata vi muligvis indsamler er, hvis du frivilligt kontakter os for support. Hvis du kontakter os via e‑mail, indsamler vi din e‑mailadresse og indholdet af din besked for at kunne besvare din henvendelse. Vi bruger ikke disse oplysninger til andre formål og deler dem ikke med tredjeparter uden dit samtykke.',
   'tos.privacyData.securityLogging': 'Sikkerhedslogning: Vi logger midlertidigt IP-adresser og sikkerhedsrelaterede metadata udelukkende for at forhindre misbrug og beskytte tjenestens integritet. Disse logs bruges aldrig til sporing eller profilering.',
   'tos.privacyData.automaticDeletion': 'Automatisk sletning: Notater slettes automatisk efter de er læst eller udløbet.',
   'tos.privacyData.noRecovery': 'Ingen gendannelse: Når et notat er slettet, kan det ikke gendannes.',
-  'tos.privacyData.gdpr': 'GDPR-overholdelse: Denne tjeneste indsamler ikke persondata som defineret under EU GDPR.',
+  'tos.privacyData.gdpr': 'GDPR-overholdelse: Vi følger GDPR‑principperne. Vi minimerer indsamling af data og behandler kun nødvendige data, såsom midlertidige sikkerhedslogs, på grundlag af legitim interesse for at beskytte tjenesten.',
   'tos.privacyData.moreDetails': 'For flere detaljer, se venligst vores',
   'tos.privacyData.privacyNotice': 'Privatlivsmeddelelse',
 
@@ -225,7 +225,7 @@ export const da = {
 
   // Privacy Notice page content
   'privacy.hero.title': 'Privatlivsmeddelelse for securememo.app',
-  'privacy.lastUpdated': 'Sidst opdateret: 9. august 2025',
+  'privacy.lastUpdated': 'Sidst opdateret: 24. august 2025',
   'privacy.tableOfContents.title': 'Indholdsfortegnelse',
   'privacy.tableOfContents.informationCollected': 'Oplysninger vi indsamler',
   'privacy.tableOfContents.howWeUse': 'Sådan bruger vi oplysninger',
@@ -244,7 +244,7 @@ export const da = {
   'privacy.informationCollected.title': '1. Oplysninger vi indsamler',
   'privacy.informationCollected.intro': 'Vi indsamler minimale oplysninger for at drive tjenesten sikkert og effektivt. Konkret:',
   'privacy.informationCollected.memoData': 'Notat-data: Når du opretter et notat, gemmer vi kun den krypterede version af din besked på vores servere (via Cloudflare Workers og D1 Database). Krypteringsnøglen (adgangskoden) genereres og håndteres udelukkende i din browser og sendes eller gemmes aldrig hos os. Notater slettes automatisk efter de er læst eller udløbet (muligheder: 8 timer, 1 dag, 2 dage, 1 uge eller 30 dage).',
-  'privacy.informationCollected.noPersonal': 'Ingen personlige oplysninger: Vi kræver ikke brugeroprettelse, e-mailadresser, navne eller andre personlige identifikatorer. Vi indsamler eller gemmer ikke data, der direkte kan identificere dig.',
+  'privacy.informationCollected.noPersonal': 'Minimal indsamling af data: Vi kræver ikke brugerkonti og indsamler ikke personoplysninger for, at du kan bruge tjenesten. De eneste persondata vi muligvis indsamler er, hvis du frivilligt kontakter os for support. Hvis du kontakter os via e‑mail, indsamler vi din e‑mailadresse og indholdet af din besked for at kunne besvare din henvendelse. Vi bruger ikke disse oplysninger til andre formål og deler dem ikke med tredjeparter uden dit samtykke.',
   'privacy.informationCollected.securityData': 'Sikkerhedsrelaterede data: For at forhindre misbrug og beskytte tjenestens integritet:',
   'privacy.informationCollected.ipLogs': 'Vi logger midlertidigt IP-adresser og anmodningsmetadata (f.eks. tidsstempler) for at opdage og begrænse spam, bots eller skadelig aktivitet.',
   'privacy.informationCollected.turnstile': 'Vi bruger Cloudflare Turnstile CAPTCHA for at forhindre automatiseret misbrug. Turnstile er designet til at beskytte privatliv og sporer ikke brugere på tværs af sider.',

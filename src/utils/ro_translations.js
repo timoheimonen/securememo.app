@@ -142,7 +142,7 @@ export const ro = {
 
   // Terms of Service page content
   'tos.hero.title': 'Termeni de utilizare',
-  'tos.lastUpdated': 'Ultima actualizare: 17 august 2025',
+  'tos.lastUpdated': 'Ultima actualizare: 24 august 2025',
   'tos.tableOfContents.title': 'Cuprins',
   'tos.tableOfContents.serviceDescription': 'Descrierea serviciului',
   'tos.tableOfContents.acceptableUse': 'Utilizare acceptabilă',
@@ -172,11 +172,11 @@ export const ro = {
 
   'tos.privacyData.title': '3. Confidențialitate și gestionarea datelor',
   'tos.privacyData.noAccess': 'Fără acces la conținut: Nu putem accesa, citi sau recupera conținutul memoului tău. Toată criptarea are loc în browserul tău.',
-  'tos.privacyData.noPersonal': 'Fără date personale: Nu colectăm informații personale și nu solicităm conturi de utilizator.',
+  'tos.privacyData.noPersonal': 'Colectare minimă de date: Nu solicităm conturi de utilizator și nu colectăm informații personale pentru a folosi serviciul. Singurele date personale pe care le-am putea colecta sunt dacă ne contactezi voluntar pentru suport. Dacă ne contactezi prin email, colectăm adresa ta de email și conținutul mesajului pentru a răspunde solicitării. Nu folosim aceste informații în alte scopuri și nu le partajăm cu terți fără consimțământul tău.',
   'tos.privacyData.securityLogging': 'Jurnalizare de securitate: Jurnalizăm temporar adrese IP și metadate legate de securitate strict pentru atenuarea abuzurilor și protejarea integrității serviciului. Aceste jurnale nu sunt folosite niciodată pentru urmărire sau profilare.',
   'tos.privacyData.automaticDeletion': 'Ștergere automată: Memo-urile sunt șterse automat după ce sunt citite sau când expiră.',
   'tos.privacyData.noRecovery': 'Fără recuperare: Odată ce un memo este șters, nu mai poate fi recuperat.',
-  'tos.privacyData.gdpr': 'Conformitate GDPR: Acest serviciu nu colectează date personale așa cum sunt definite de GDPR al UE.',
+  'tos.privacyData.gdpr': 'Conformitate GDPR: Suntem angajați față de principiile GDPR. Minimizăm colectarea de date și procesăm doar datele necesare, cum ar fi jurnalele temporare de securitate, pe baza interesului legitim pentru a proteja serviciul.',
   'tos.privacyData.moreDetails': 'Pentru mai multe detalii, te rugăm să consulți',
   'tos.privacyData.privacyNotice': 'Notificare de confidențialitate',
 
@@ -225,7 +225,7 @@ export const ro = {
 
   // Privacy Notice page content
   'privacy.hero.title': 'Notificare de confidențialitate pentru securememo.app',
-  'privacy.lastUpdated': 'Ultima actualizare: 9 august 2025',
+  'privacy.lastUpdated': 'Ultima actualizare: 24 august 2025',
   'privacy.tableOfContents.title': 'Cuprins',
   'privacy.tableOfContents.informationCollected': 'Informațiile pe care le colectăm',
   'privacy.tableOfContents.howWeUse': 'Cum folosim informațiile',
@@ -244,7 +244,7 @@ export const ro = {
   'privacy.informationCollected.title': '1. Informațiile pe care le colectăm',
   'privacy.informationCollected.intro': 'Colectăm informații minime pentru a opera serviciul în siguranță și eficient. Mai exact:',
   'privacy.informationCollected.memoData': 'Date despre memo: Când creezi un memo, stocăm doar versiunea criptată a mesajului tău pe serverele noastre (folosind Cloudflare Workers și baza de date D1). Cheia de criptare (parola) este generată și gestionată în întregime în browserul tău și nu este niciodată trimisă sau stocată de noi. Memo-urile sunt șterse automat după ce sunt citite sau când expiră (opțiuni: 8 ore, 1 zi, 2 zile, 1 săptămână sau 30 de zile).',
-  'privacy.informationCollected.noPersonal': 'Fără informații personale: Nu solicităm conturi de utilizator, adrese de e-mail, nume sau alți identificatori personali. Nu colectăm și nu stocăm date care te-ar putea identifica direct.',
+  'privacy.informationCollected.noPersonal': 'Colectare minimă de date: Nu solicităm conturi de utilizator și nu colectăm informații personale pentru a folosi serviciul. Singurele date personale pe care le-am putea colecta sunt dacă ne contactezi voluntar pentru suport. Dacă ne contactezi prin email, colectăm adresa ta de email și conținutul mesajului pentru a răspunde solicitării. Nu folosim aceste informații în alte scopuri și nu le partajăm cu terți fără consimțământul tău.',
   'privacy.informationCollected.securityData': 'Date legate de securitate: Pentru prevenirea abuzurilor și integritatea serviciului:',
   'privacy.informationCollected.ipLogs': 'Jurnalizăm temporar adrese IP și metadate ale cererilor (de ex., marcaje de timp) pentru a detecta și a atenua spamul, boții sau activitatea malițioasă.',
   'privacy.informationCollected.turnstile': 'Folosim Cloudflare Turnstile CAPTCHA pentru a preveni abuzul automatizat. Turnstile este conceput să protejeze confidențialitatea și nu urmărește utilizatorii între site-uri.',

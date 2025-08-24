@@ -142,7 +142,7 @@ export const nl = {
 
   // Terms of Service page content
   'tos.hero.title': 'Gebruiksvoorwaarden',
-  'tos.lastUpdated': 'Laatst bijgewerkt: 17 augustus 2025',
+  'tos.lastUpdated': 'Laatst bijgewerkt: 24 augustus 2025',
   'tos.tableOfContents.title': 'Inhoudsopgave',
   'tos.tableOfContents.serviceDescription': 'Beschrijving van de dienst',
   'tos.tableOfContents.acceptableUse': 'Toegestaan gebruik',
@@ -172,11 +172,11 @@ export const nl = {
 
   'tos.privacyData.title': '3. Privacy & Gegevensverwerking',
   'tos.privacyData.noAccess': 'Geen toegang tot inhoud: Wij kunnen uw memo-inhoud niet openen, lezen of herstellen. Alle encryptie gebeurt in uw browser.',
-  'tos.privacyData.noPersonal': 'Geen persoonsgegevens: Wij verzamelen geen persoonlijke informatie en vereisen geen gebruikersaccounts.',
+  'tos.privacyData.noPersonal': 'Minimale gegevensverzameling: Wij vereisen geen gebruikersaccounts en verzamelen geen persoonlijke informatie voor het gebruik van de dienst. De enige persoonsgegevens die wij mogelijk verzamelen zijn wanneer u ons vrijwillig contacteert voor ondersteuning. Wanneer u ons via e-mail contacteert, verzamelen wij uw e-mailadres en de inhoud van uw bericht om op uw vraag te reageren. Wij gebruiken deze informatie voor geen enkel ander doel en delen deze niet met derden zonder uw toestemming.',
   'tos.privacyData.securityLogging': 'Beveiligingslogboeken: Wij loggen tijdelijk IP-adressen en beveiligingsgerelateerde metadata uitsluitend voor het voorkomen van misbruik en het beschermen van de integriteit van de dienst. Deze logboeken worden nooit gebruikt voor tracking of profilering.',
   'tos.privacyData.automaticDeletion': 'Automatische verwijdering: Memo\'s worden automatisch verwijderd na het lezen of wanneer ze verlopen.',
   'tos.privacyData.noRecovery': 'Geen herstel: Zodra een memo is verwijderd, kan deze niet worden hersteld.',
-  'tos.privacyData.gdpr': 'AVG-naleving: Deze dienst verzamelt geen persoonsgegevens zoals gedefinieerd onder de EU AVG.',
+  'tos.privacyData.gdpr': 'AVG-naleving: Wij zetten ons in voor de principes van de AVG. Wij minimaliseren de gegevensverzameling en verwerken alleen noodzakelijke gegevens, zoals tijdelijke beveiligingslogboeken, op basis van gerechtvaardigd belang om de dienst te beschermen.',
   'tos.privacyData.moreDetails': 'Voor meer details, bekijk onze',
   'tos.privacyData.privacyNotice': 'Privacyverklaring',
 
@@ -225,7 +225,7 @@ export const nl = {
 
   // Privacy Notice page content
   'privacy.hero.title': 'Privacyverklaring voor securememo.app',
-  'privacy.lastUpdated': 'Laatst bijgewerkt: 9 augustus 2025',
+  'privacy.lastUpdated': 'Laatst bijgewerkt: 24 augustus 2025',
   'privacy.tableOfContents.title': 'Inhoudsopgave',
   'privacy.tableOfContents.informationCollected': 'Welke informatie verzamelen wij',
   'privacy.tableOfContents.howWeUse': 'Hoe gebruiken wij informatie',
@@ -244,7 +244,7 @@ export const nl = {
   'privacy.informationCollected.title': '1. Welke informatie verzamelen wij',
   'privacy.informationCollected.intro': 'Wij verzamelen minimale informatie om de dienst veilig en efficiënt te laten werken. Concreet:',
   'privacy.informationCollected.memoData': 'Memo-gegevens: Wanneer u een memo maakt, slaan wij alleen de versleutelde versie van uw bericht op onze servers op (via Cloudflare Workers en D1 Database). De encryptiesleutel (wachtwoord) wordt volledig in uw browser gegenereerd en verwerkt, en wordt nooit naar ons verzonden of door ons opgeslagen. Memo\'s worden automatisch verwijderd na het lezen of verlopen (opties: 8 uur, 1 dag, 2 dagen, 1 week of 30 dagen).',
-  'privacy.informationCollected.noPersonal': 'Geen persoonsgegevens: Wij vereisen geen gebruikersaccounts, e-mailadressen, namen of andere persoonlijke identificatie. Wij verzamelen of bewaren geen gegevens die u direct kunnen identificeren.',
+  'privacy.informationCollected.noPersonal': 'Minimale gegevensverzameling: Wij vereisen geen gebruikersaccounts en verzamelen geen persoonlijke informatie voor het gebruik van de dienst. De enige persoonsgegevens die wij mogelijk verzamelen zijn wanneer u ons vrijwillig contacteert voor ondersteuning. Wanneer u ons via e-mail contacteert, verzamelen wij uw e-mailadres en de inhoud van uw bericht om op uw vraag te reageren. Wij gebruiken deze informatie voor geen enkel ander doel en delen deze niet met derden zonder uw toestemming.',
   'privacy.informationCollected.securityData': 'Beveiligingsgerelateerde gegevens: Voor het voorkomen van misbruik en het waarborgen van de integriteit van de dienst:',
   'privacy.informationCollected.ipLogs': 'Wij loggen tijdelijk IP-adressen en verzoekmetadata (zoals tijdstempels) om spam, bots of kwaadaardige activiteiten te detecteren en te beperken.',
   'privacy.informationCollected.turnstile': 'Wij gebruiken Cloudflare Turnstile CAPTCHA om geautomatiseerd misbruik te voorkomen. Turnstile is ontworpen met privacybescherming en volgt gebruikers niet over verschillende sites.',

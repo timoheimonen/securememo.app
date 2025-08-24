@@ -142,7 +142,7 @@ export const en = {
 
   // Terms of Service page content
   'tos.hero.title': 'Terms of Service',
-  'tos.lastUpdated': 'Last updated: August 17, 2025',
+  'tos.lastUpdated': 'Last updated: August 24, 2025',
   'tos.tableOfContents.title': 'Table of Contents',
   'tos.tableOfContents.serviceDescription': 'Service Description',
   'tos.tableOfContents.acceptableUse': 'Acceptable Use',
@@ -172,11 +172,11 @@ export const en = {
 
   'tos.privacyData.title': '3. Privacy & Data Handling',
   'tos.privacyData.noAccess': 'No Content Access: We cannot access, read, or recover your memo content. All encryption happens in your browser.',
-  'tos.privacyData.noPersonal': 'No Personal Data: We do not collect personal information or require user accounts.',
+  'tos.privacyData.noPersonal': 'Minimal Data Collection: We do not require user accounts or collect personal information for you to use the service. The only personal data we may collect is if you voluntarily contact us for support. If you contact us via email, we collect your email address and message content to respond to your inquiry. We do not use this information for any other purposes and do not share it with third parties without your consent.',
   'tos.privacyData.securityLogging': 'Security Logging: We temporarily log IP addresses and security-related metadata strictly for abuse mitigation and to protect service integrity. These logs are never used for tracking or profiling.',
   'tos.privacyData.automaticDeletion': 'Automatic Deletion: Memos are automatically deleted after being read or when they expire.',
   'tos.privacyData.noRecovery': 'No Recovery: Once a memo is deleted, it cannot be recovered.',
-  'tos.privacyData.gdpr': 'GDPR Compliance: This service does not collect personal data as defined under the EU GDPR.',
+  'tos.privacyData.gdpr': 'GDPR Compliance: We are committed to GDPR principles. We minimize data collection and process necessary data, such as temporary security logs, under the basis of legitimate interest to protect the service.',
   'tos.privacyData.moreDetails': 'For more details, please review our',
   'tos.privacyData.privacyNotice': 'Privacy Notice',
 
@@ -225,7 +225,7 @@ export const en = {
 
   // Privacy Notice page content
   'privacy.hero.title': 'Privacy Notice for securememo.app',
-  'privacy.lastUpdated': 'Last updated: August 9, 2025',
+  'privacy.lastUpdated': 'Last updated: August 24, 2025',
   'privacy.tableOfContents.title': 'Table of Contents',
   'privacy.tableOfContents.informationCollected': 'Information We Collect',
   'privacy.tableOfContents.howWeUse': 'How We Use Information',
@@ -244,7 +244,7 @@ export const en = {
   'privacy.informationCollected.title': '1. Information We Collect',
   'privacy.informationCollected.intro': 'We collect minimal information to operate the service securely and efficiently. Specifically:',
   'privacy.informationCollected.memoData': 'Memo Data: When you create a memo, we store only the encrypted version of your message on our servers (using Cloudflare Workers and D1 Database). The encryption key (password) is generated and handled entirely in your browser and is never sent to or stored by us. Memos are automatically deleted after being read or when they expire (options: 8 hours, 1 day, 2 days, 1 week, or 30 days).',
-  'privacy.informationCollected.noPersonal': 'No Personal Information: We do not require user accounts, email addresses, names, or any other personal identifiers. We do not collect or store any data that could directly identify you.',
+  'privacy.informationCollected.noPersonal': 'Minimal Data Collection: We do not require user accounts or collect personal information for you to use the service. The only personal data we may collect is if you voluntarily contact us for support. If you contact us via email, we collect your email address and message content to respond to your inquiry. We do not use this information for any other purposes and do not share it with third parties without your consent.',
   'privacy.informationCollected.securityData': 'Security-Related Data: For abuse prevention and service integrity:',
   'privacy.informationCollected.ipLogs': 'We temporarily log IP addresses and request metadata (e.g., timestamps) to detect and mitigate spam, bots, or malicious activity.',
   'privacy.informationCollected.turnstile': 'We use Cloudflare Turnstile CAPTCHA to prevent automated abuse. Turnstile is designed to protect privacy and does not track users across sites.',

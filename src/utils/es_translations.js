@@ -142,7 +142,7 @@ export const es = {
 
   // Terms of Service page content
   'tos.hero.title': 'Términos de Servicio',
-  'tos.lastUpdated': 'Última actualización: 17 de agosto de 2025',
+  'tos.lastUpdated': 'Última actualización: 24 de agosto de 2025',
   'tos.tableOfContents.title': 'Tabla de Contenidos',
   'tos.tableOfContents.serviceDescription': 'Descripción del Servicio',
   'tos.tableOfContents.acceptableUse': 'Uso Aceptable',
@@ -172,11 +172,11 @@ export const es = {
 
   'tos.privacyData.title': '3. Privacidad y Manejo de Datos',
   'tos.privacyData.noAccess': 'Sin Acceso al Contenido: No podemos acceder, leer o recuperar el contenido de tu memo. Todo el cifrado ocurre en tu navegador.',
-  'tos.privacyData.noPersonal': 'Sin Datos Personales: No recolectamos información personal ni requerimos cuentas de usuario.',
+  'tos.privacyData.noPersonal': 'Recolección Mínima de Datos: No requerimos cuentas de usuario ni recopilamos información personal para que puedas usar el servicio. Los únicos datos personales que podemos recopilar son si nos contactas voluntariamente para soporte. Si nos contactas por email, recopilamos tu dirección de correo electrónico y el contenido del mensaje para responder a tu consulta. No usamos esta información para ningún otro propósito ni la compartimos con terceros sin tu consentimiento.',
   'tos.privacyData.securityLogging': 'Registro de Seguridad: Registramos temporalmente direcciones IP y metadatos relacionados con seguridad estrictamente para mitigación de abuso y proteger la integridad del servicio. Estos registros nunca se usan para rastreo o perfilado.',
   'tos.privacyData.automaticDeletion': 'Eliminación Automática: Los memos se eliminan automáticamente después de ser leídos o cuando expiran.',
   'tos.privacyData.noRecovery': 'Sin Recuperación: Una vez que un memo se elimina, no puede recuperarse.',
-  'tos.privacyData.gdpr': 'Cumplimiento GDPR: Este servicio no recolecta datos personales como se define bajo el GDPR de la UE.',
+  'tos.privacyData.gdpr': 'Cumplimiento GDPR: Estamos comprometidos con los principios del GDPR. Minimizamos la recolección de datos y procesamos los datos necesarios, como registros temporales de seguridad, sobre la base de interés legítimo para proteger el servicio.',
   'tos.privacyData.moreDetails': 'Para más detalles, por favor revisa nuestro',
   'tos.privacyData.privacyNotice': 'Aviso de Privacidad',
 
@@ -225,7 +225,7 @@ export const es = {
 
   // Privacy Notice page content
   'privacy.hero.title': 'Aviso de Privacidad para securememo.app',
-  'privacy.lastUpdated': 'Última actualización: 9 de agosto de 2025',
+  'privacy.lastUpdated': 'Última actualización: 24 de agosto de 2025',
   'privacy.tableOfContents.title': 'Tabla de Contenidos',
   'privacy.tableOfContents.informationCollected': 'Información que Recolectamos',
   'privacy.tableOfContents.howWeUse': 'Cómo Usamos la Información',
@@ -244,7 +244,7 @@ export const es = {
   'privacy.informationCollected.title': '1. Información que Recolectamos',
   'privacy.informationCollected.intro': 'Recolectamos información mínima para operar el servicio de manera segura y eficiente. Específicamente:',
   'privacy.informationCollected.memoData': 'Datos del Memo: Cuando creas un memo, almacenamos solo la versión cifrada de tu mensaje en nuestros servidores (usando Cloudflare Workers y Base de Datos D1). La clave de cifrado (contraseña) se genera y maneja completamente en tu navegador y nunca se envía o almacena por nosotros. Los memos se eliminan automáticamente después de ser leídos o cuando expiran (opciones: 8 horas, 1 día, 2 días, 1 semana o 30 días).',
-  'privacy.informationCollected.noPersonal': 'Sin Información Personal: No requerimos cuentas de usuario, direcciones de email, nombres u otros identificadores personales. No recolectamos ni almacenamos ningún dato que pueda identificarte directamente.',
+  'privacy.informationCollected.noPersonal': 'Recolección Mínima de Datos: No requerimos cuentas de usuario ni recopilamos información personal para que puedas usar el servicio. Los únicos datos personales que podemos recopilar son si nos contactas voluntariamente para soporte. Si nos contactas por email, recopilamos tu dirección de correo electrónico y el contenido del mensaje para responder a tu consulta. No usamos esta información para ningún otro propósito ni la compartimos con terceros sin tu consentimiento.',
   'privacy.informationCollected.securityData': 'Datos Relacionados con Seguridad: Para prevención de abuso e integridad del servicio:',
   'privacy.informationCollected.ipLogs': 'Registramos temporalmente direcciones IP y metadatos de solicitud (por ejemplo, marcas de tiempo) para detectar y mitigar spam, bots o actividad maliciosa.',
   'privacy.informationCollected.turnstile': 'Usamos Cloudflare Turnstile CAPTCHA para prevenir abuso automatizado. Turnstile está diseñado para proteger la privacidad y no rastrea usuarios a través de sitios.',

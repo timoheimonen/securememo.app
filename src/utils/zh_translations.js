@@ -142,7 +142,7 @@ export const zh = {
 
   // Terms of Service page content
   'tos.hero.title': '服务条款',
-  'tos.lastUpdated': '最后更新：2025年8月17日',
+  'tos.lastUpdated': '最后更新：2025年8月24日',
   'tos.tableOfContents.title': '目录',
   'tos.tableOfContents.serviceDescription': '服务描述',
   'tos.tableOfContents.acceptableUse': '可接受的使用规范',
@@ -172,11 +172,11 @@ export const zh = {
 
   'tos.privacyData.title': '3. 隐私与数据处理',
   'tos.privacyData.noAccess': '无内容访问权限：我们无法访问、阅读或恢复您的备忘录内容。所有加密都在您的浏览器中进行。',
-  'tos.privacyData.noPersonal': '无个人数据：我们不收集个人信息或要求用户账户。',
+  'tos.privacyData.noPersonal': '最小化数据收集：我们不要求用户账户，也不收集您使用本服务所需的个人信息。我们唯一可能收集的个人数据是在您主动联系我们寻求支持时。如果您通过电子邮件联系我们，我们会收集您的邮箱地址和消息内容以便回复。我们不会将这些信息用于其他目的，亦不会在未经您同意的情况下与第三方分享。',
   'tos.privacyData.securityLogging': '安全日志记录：我们临时记录 IP 地址和安全相关元数据，严格用于滥用缓解和保护服务完整性。这些日志从不用于跟踪或分析。',
   'tos.privacyData.automaticDeletion': '自动删除：备忘录在阅读或过期后会自动删除。',
   'tos.privacyData.noRecovery': '无法恢复：一旦备忘录被删除，就无法恢复。',
-  'tos.privacyData.gdpr': 'GDPR 合规：此服务不收集欧盟 GDPR 定义的个人数据。',
+  'tos.privacyData.gdpr': 'GDPR 合规：我们遵循 GDPR 原则。我们将数据收集降至最低，并基于合法利益仅处理为保护服务所必需的数据（例如临时安全日志）。',
   'tos.privacyData.moreDetails': '有关更多详细信息，请查看我们的',
   'tos.privacyData.privacyNotice': '隐私声明',
 
@@ -225,7 +225,7 @@ export const zh = {
 
   // Privacy Notice page content
   'privacy.hero.title': 'securememo.app 隐私声明',
-  'privacy.lastUpdated': '最后更新：2025年8月9日',
+  'privacy.lastUpdated': '最后更新：2025年8月24日',
   'privacy.tableOfContents.title': '目录',
   'privacy.tableOfContents.informationCollected': '我们收集的信息',
   'privacy.tableOfContents.howWeUse': '我们如何使用信息',
@@ -244,7 +244,7 @@ export const zh = {
   'privacy.informationCollected.title': '1. 我们收集的信息',
   'privacy.informationCollected.intro': '我们收集最少的信息以安全高效地运营服务。具体来说：',
   'privacy.informationCollected.memoData': '备忘录数据：当您创建备忘录时，我们仅在服务器上存储您消息的加密版本（使用 Cloudflare Workers 和 D1 数据库）。加密密钥（密码）完全在您的浏览器中生成和处理，从不发送到我们的服务器或由我们存储。备忘录在阅读或过期后会自动删除（选项：8 小时、1 天、2 天、1 周或 30 天）。',
-  'privacy.informationCollected.noPersonal': '无个人信息：我们不需要用户账户、电子邮件地址、姓名或任何其他个人标识符。我们不收集或存储任何可能直接识别您身份的数据。',
+  'privacy.informationCollected.noPersonal': '最小化数据收集：我们不要求用户账户，也不收集您使用本服务所需的个人信息。我们唯一可能获得的个人数据是在您主动联系支持时。如果您通过电子邮件联系我们，我们会收集您的邮箱地址和消息内容以回复您的询问。我们不会将这些信息用于其他目的，亦不会在未经您同意的情况下与第三方分享。',
   'privacy.informationCollected.securityData': '与安全相关的数据：为了防止滥用和服务完整性：',
   'privacy.informationCollected.ipLogs': '我们临时记录 IP 地址和请求元数据（例如时间戳）以检测和缓解垃圾邮件、机器人或恶意活动。',
   'privacy.informationCollected.turnstile': '我们使用 Cloudflare Turnstile 验证码来防止自动化滥用。Turnstile 旨在保护隐私，不会跨站点跟踪用户。',

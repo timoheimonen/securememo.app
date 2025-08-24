@@ -142,7 +142,7 @@ export const fi = {
 
   // Terms of Service page content
   'tos.hero.title': 'Käyttöehdot',
-  'tos.lastUpdated': 'Viimeksi päivitetty: 17. elokuuta 2025',
+  'tos.lastUpdated': 'Viimeksi päivitetty: 24. elokuuta 2025',
   'tos.tableOfContents.title': 'Sisällysluettelo',
   'tos.tableOfContents.serviceDescription': 'Palvelun kuvaus',
   'tos.tableOfContents.acceptableUse': 'Hyväksyttävä käyttö',
@@ -172,11 +172,11 @@ export const fi = {
 
   'tos.privacyData.title': '3. Yksityisyys ja tietojen käsittely',
   'tos.privacyData.noAccess': 'Ei sisällön pääsyä: Emme voi nähdä, lukea tai palauttaa muistiosi sisältöä. Kaikki salaus tapahtuu selaimessasi.',
-  'tos.privacyData.noPersonal': 'Ei henkilötietoja: Emme kerää henkilötietoja emmekä vaadi käyttäjätilejä.',
+  'tos.privacyData.noPersonal': 'Minimaalinen tietojen keruu: Emme vaadi käyttäjätilejä tai kerää henkilötietoja palvelun käyttämistä varten. Ainoa mahdollinen henkilötieto, jonka voimme saada, on jos otat meihin vapaaehtoisesti yhteyttä tuen saamiseksi. Jos lähetät meille sähköpostia, keräämme sähköpostiosoitteesi ja viestin sisällön vastataksemme kyselyysi. Emme käytä näitä tietoja muihin tarkoituksiin emmekä jaa niitä kolmansille osapuolille ilman suostumustasi.',
   'tos.privacyData.securityLogging': 'Turvallisuuslokitus: IP-osoitteet ja turvallisuuteen liittyvä metadata kirjataan tilapäisesti vain väärinkäytösten estämiseksi ja palvelun eheyden suojaamiseksi. Näitä lokitietoja ei käytetä seurantaan tai profilointiin.',
   'tos.privacyData.automaticDeletion': 'Automaattinen poisto: Muistiot poistetaan automaattisesti lukemisen jälkeen tai kun ne vanhentuvat.',
   'tos.privacyData.noRecovery': 'Ei palautusta: Kun muistio on poistettu, sitä ei voi palauttaa.',
-  'tos.privacyData.gdpr': 'GDPR-yhteensopivuus: Palvelu ei kerää henkilötietoja EU:n GDPR:n määritelmän mukaisesti.',
+  'tos.privacyData.gdpr': 'GDPR-yhteensopivuus: Olemme sitoutuneet GDPR:n periaatteisiin. Minimioimme tietojen keruun ja käsittelemme vain välttämättömiä tietoja, kuten väliaikaisia turvallisuuslokeja, oikeutetun edun perusteella palvelun suojaamiseksi.',
   'tos.privacyData.moreDetails': 'Lisätietoja saat lukemalla',
   'tos.privacyData.privacyNotice': 'Tietosuojailmoituksen',
 
@@ -225,7 +225,7 @@ export const fi = {
 
   // Privacy Notice page content
   'privacy.hero.title': 'Tietosuojailmoitus securememo.appille',
-  'privacy.lastUpdated': 'Viimeksi päivitetty: 9. elokuuta 2025',
+  'privacy.lastUpdated': 'Viimeksi päivitetty: 24. elokuuta 2025',
   'privacy.tableOfContents.title': 'Sisällysluettelo',
   'privacy.tableOfContents.informationCollected': 'Kerättävät tiedot',
   'privacy.tableOfContents.howWeUse': 'Tietojen käyttö',
@@ -244,7 +244,7 @@ export const fi = {
   'privacy.informationCollected.title': '1. Kerättävät tiedot',
   'privacy.informationCollected.intro': 'Keräämme vain välttämättömät tiedot palvelun turvalliseen ja tehokkaaseen toimintaan. Tarkemmin:',
   'privacy.informationCollected.memoData': 'Muistiotiedot: Kun luot muistion, tallennamme vain viestisi salatun version palvelimillemme (Cloudflare Workers ja D1-tietokanta). Salausavain (salasana) luodaan ja käsitellään kokonaan selaimessasi, eikä sitä koskaan lähetetä tai tallenneta meille. Muistiot poistetaan automaattisesti lukemisen jälkeen tai kun ne vanhentuvat (vaihtoehdot: 8 tuntia, 1 päivä, 2 päivää, 1 viikko tai 30 päivää).',
-  'privacy.informationCollected.noPersonal': 'Ei henkilötietoja: Emme vaadi käyttäjätilejä, sähköpostiosoitteita, nimiä tai muita henkilötunnisteita. Emme kerää tai tallenna mitään tietoja, joista sinut voisi tunnistaa.',
+  'privacy.informationCollected.noPersonal': 'Minimaalinen tietojen keruu: Emme vaadi käyttäjätilejä tai kerää henkilötietoja palvelun käyttämistä varten. Ainoa mahdollinen henkilötieto, jonka voimme saada, on jos otat meihin vapaaehtoisesti yhteyttä tuen saamiseksi. Jos lähetät meille sähköpostia, keräämme sähköpostiosoitteesi ja viestin sisällön vastataksemme kyselyysi. Emme käytä näitä tietoja muihin tarkoituksiin emmekä jaa niitä kolmansille osapuolille ilman suostumustasi.',
   'privacy.informationCollected.securityData': 'Turvallisuuteen liittyvät tiedot: Väärinkäytösten estoon ja palvelun eheyden suojaamiseen:',
   'privacy.informationCollected.ipLogs': 'Kirjaamme tilapäisesti IP-osoitteita ja pyyntöjen metadataa (esim. aikaleimat) roskapostin, bottien tai haitallisen toiminnan havaitsemiseksi ja estämiseksi.',
   'privacy.informationCollected.turnstile': 'Käytämme Cloudflare Turnstile CAPTCHAa automaattisen väärinkäytön estämiseksi. Turnstile on suunniteltu yksityisyyttä kunnioittaen, eikä se seuraa käyttäjiä sivustojen välillä.',

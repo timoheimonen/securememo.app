@@ -142,7 +142,7 @@ export const ko = {
 
     // Terms of Service page content
     'tos.hero.title': '서비스 약관',
-    'tos.lastUpdated': '최종 업데이트: 2025년 8월 17일',
+  'tos.lastUpdated': '최종 업데이트: 2025년 8월 24일',
     'tos.tableOfContents.title': '목차',
     'tos.tableOfContents.serviceDescription': '서비스 설명',
     'tos.tableOfContents.acceptableUse': '허용 가능한 사용',
@@ -172,11 +172,11 @@ export const ko = {
 
     'tos.privacyData.title': '3. 개인정보 보호 및 데이터 처리',
     'tos.privacyData.noAccess': '콘텐츠 접근 불가: 저희는 메모 콘텐츠에 접근, 읽기 또는 복구할 수 없습니다. 모든 암호화는 브라우저에서 발생합니다.',
-    'tos.privacyData.noPersonal': '개인 데이터 없음: 개인 정보를 수집하거나 사용자 계정을 요구하지 않습니다.',
+  'tos.privacyData.noPersonal': '최소한의 데이터 수집: 서비스 이용을 위해 사용자 계정을 요구하거나 개인 정보를 수집하지 않습니다. 우리가 개인 데이터를 수집할 수 있는 유일한 경우는 귀하가 지원 목적을 위해 자발적으로 우리에게 연락한 경우입니다. 이메일로 문의하는 경우, 문의에 응답하기 위해 귀하의 이메일 주소와 메시지 내용을 수집합니다. 우리는 이 정보를 다른 목적으로 사용하지 않으며 귀하의 동의 없이 제3자와 공유하지 않습니다.',
     'tos.privacyData.securityLogging': '보안 로깅: 남용 방지와 서비스 무결성 보호를 위해 IP 주소와 보안 관련 메타데이터를 일시적으로 기록합니다. 이러한 로그는 추적이나 프로파일링에 사용되지 않습니다.',
     'tos.privacyData.automaticDeletion': '자동 삭제: 메모는 읽힌 후 또는 만료되면 자동으로 삭제됩니다.',
     'tos.privacyData.noRecovery': '복구 불가: 메모가 삭제되면 복구할 수 없습니다.',
-    'tos.privacyData.gdpr': 'GDPR 준수: 이 서비스는 EU GDPR에서 정의한 개인 데이터를 수집하지 않습니다.',
+  'tos.privacyData.gdpr': 'GDPR 준수: 우리는 GDPR 원칙을 준수하기 위해 노력합니다. 서비스 보호를 위한 정당한 이익(legitimate interest)에 근거하여 일시적인 보안 로그와 같은 필요한 데이터만 최소한으로 수집·처리합니다.',
     'tos.privacyData.moreDetails': '자세한 내용은 저희의',
     'tos.privacyData.privacyNotice': '개인정보 보호 고지',
 
@@ -225,7 +225,7 @@ export const ko = {
 
     // Privacy Notice page content
     'privacy.hero.title': 'securememo.app 개인정보 보호 고지',
-    'privacy.lastUpdated': '최종 업데이트: 2025년 8월 9일',
+  'privacy.lastUpdated': '최종 업데이트: 2025년 8월 24일',
     'privacy.tableOfContents.title': '목차',
     'privacy.tableOfContents.informationCollected': '수집하는 정보',
     'privacy.tableOfContents.howWeUse': '정보 사용 방법',
@@ -244,7 +244,7 @@ export const ko = {
     'privacy.informationCollected.title': '1. 수집하는 정보',
     'privacy.informationCollected.intro': '서비스를 안전하고 효율적으로 운영하기 위해 최소한의 정보를 수집합니다. 구체적으로:',
     'privacy.informationCollected.memoData': '메모 데이터: 메모를 생성할 때 서버(Cloudflare Workers 및 D1 데이터베이스 사용)에 메시지의 암호화된 버전만 저장합니다. 암호화 키(비밀번호)는 브라우저에서 완전히 생성되고 처리되며 저희에게 전송되거나 저장되지 않습니다. 메모는 읽거나 만료되면 자동으로 삭제됩니다(옵션: 8시간, 1일, 2일, 1주일 또는 30일).',
-    'privacy.informationCollected.noPersonal': '개인 정보 없음: 사용자 계정, 이메일 주소, 이름 또는 기타 개인 식별자를 요구하지 않습니다. 귀하를 직접 식별할 수 있는 데이터를 수집하거나 저장하지 않습니다.',
+  'privacy.informationCollected.noPersonal': '최소한의 데이터 수집: 서비스 이용을 위해 사용자 계정을 요구하거나 개인 정보를 수집하지 않습니다. 우리가 개인 데이터를 수집할 수 있는 유일한 경우는 귀하가 지원 목적을 위해 자발적으로 우리에게 연락한 경우입니다. 이메일로 문의하는 경우, 문의에 응답하기 위해 귀하의 이메일 주소와 메시지 내용을 수집합니다. 우리는 이 정보를 다른 목적으로 사용하지 않으며 귀하의 동의 없이 제3자와 공유하지 않습니다.',
     'privacy.informationCollected.securityData': '보안 관련 데이터: 남용 방지와 서비스 무결성을 위해:',
     'privacy.informationCollected.ipLogs': '스팸, 봇 또는 악성 활동을 감지하고 완화하기 위해 IP 주소와 요청 메타데이터(예: 타임스탬프)를 일시적으로 기록합니다.',
     'privacy.informationCollected.turnstile': '자동화된 남용을 방지하기 위해 Cloudflare Turnstile CAPTCHA를 사용합니다. Turnstile은 개인정보 보호를 위해 설계되었으며 사이트 간 사용자를 추적하지 않습니다.',
