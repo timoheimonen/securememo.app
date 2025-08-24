@@ -116,6 +116,37 @@ export function updateInternalLinks() {
   });
 }
 
+// Helper to get the current path without the locale prefix
+function getPathWithoutLocale() {
+  const pathname = window.location.pathname;
+  const segments = pathname.replace(/^\/+/, '').split('/');
+  if (segments.length > 0 && isLocaleSupported(segments[0])) {
+    return '/' + segments.slice(1).join('/');
+  }
+  return pathname;
+}
+
+// Update language switcher links to preserve current path, search, and hash
+function updateLanguageLinks() {
+  const languageItems = document.querySelectorAll('.language-item');
+  const currentPath = getPathWithoutLocale();
+  const currentSearch = window.location.search;
+  const currentHash = window.location.hash;
+
+  languageItems.forEach(item => {
+    const targetLocale = item.getAttribute('lang');
+    if (targetLocale && isLocaleSupported(targetLocale)) {
+  // Start with target locale root
+  let newHref = '/' + targetLocale;
+      if (currentPath !== '/') {
+        newHref += currentPath;
+      }
+      newHref += currentSearch + currentHash;
+      item.setAttribute('href', newHref);
+    }
+  });
+}
+
 /**
  * Initialize client-side localization
  * This should be called when the page loads
@@ -125,6 +156,7 @@ export function initLocalization() {
   updateNavigationLinks();
   updateLogoLink();
   updateInternalLinks();
+  updateLanguageLinks();
   
   // Set document language attribute
   document.documentElement.setAttribute('lang', getCurrentLocale());
@@ -276,6 +308,37 @@ export function updateInternalLinks() {
   });
 }
 
+// Helper to get the current path without the locale prefix
+function getPathWithoutLocale() {
+  const pathname = window.location.pathname;
+  const segments = pathname.replace(/^\/+/, '').split('/');
+  if (segments.length > 0 && isLocaleSupported(segments[0])) {
+    return '/' + segments.slice(1).join('/');
+  }
+  return pathname;
+}
+
+// Update language switcher links to preserve current path, search, and hash
+function updateLanguageLinks() {
+  const languageItems = document.querySelectorAll('.language-item');
+  const currentPath = getPathWithoutLocale();
+  const currentSearch = window.location.search;
+  const currentHash = window.location.hash;
+
+  languageItems.forEach(item => {
+    const targetLocale = item.getAttribute('lang');
+    if (targetLocale && isLocaleSupported(targetLocale)) {
+  // Start with target locale root
+  let newHref = '/' + targetLocale;
+      if (currentPath !== '/') {
+        newHref += currentPath;
+      }
+      newHref += currentSearch + currentHash;
+      item.setAttribute('href', newHref);
+    }
+  });
+}
+
 /**
  * Initialize client-side localization
  * This should be called when the page loads
@@ -285,6 +348,7 @@ export function initLocalization() {
   updateNavigationLinks();
   updateLogoLink();
   updateInternalLinks();
+  updateLanguageLinks();
   
   // Set document language attribute
   document.documentElement.setAttribute('lang', getCurrentLocale());
