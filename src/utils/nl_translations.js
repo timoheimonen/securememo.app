@@ -90,7 +90,7 @@ export const nl = {
 
   'home.security.title': 'Beveiligingsfuncties',
   'home.security.encryption.title': '🔒 Echte client-side encryptie',
-  'home.security.encryption.description': 'Uw memo wordt in de browser versleuteld met AES-256-GCM en een sterke sleutelafleiding (2.200.000+ iteraties). Wij zien nooit de platte tekst.',
+  'home.security.encryption.description': 'Uw memo wordt in de browser versleuteld met AES-256-GCM en een sterke sleutelafleiding. Wij zien nooit de platte tekst.',
   'home.security.delete.title': '🗑️ Betrouwbare automatische verwijdering',
   'home.security.delete.description': 'Memo\'s verdwijnen voorgoed na het lezen of verlopen, met automatische opruiming elk uur. Geen back-ups of herstel mogelijk.',
   'home.security.password.title': '🌐 Geen wachtwoordkennis',
@@ -265,7 +265,7 @@ export const nl = {
   'privacy.dataSharing.business': 'Bedrijfsoverdrachten: Als securememo.app wordt overgenomen of fuseert, kunnen gegevens worden overgedragen als onderdeel van de transactie, maar blijven ze onderworpen aan deze privacyverklaring.',
 
   'privacy.dataSecurity.title': '4. Gegevensbeveiliging',
-  'privacy.dataSecurity.encryption': 'Encryptie: Alle memo\'s worden client-side versleuteld met AES-256 en PBKDF2-sleutelafleiding (2.200.000 iteraties). Wij slaan alleen versleutelde gegevens op en kunnen deze niet ontsleutelen.',
+  'privacy.dataSecurity.encryption': 'Encryptie: Alle memo\'s worden client-side versleuteld met AES-256 met PBKDF2-sleutelafleiding. Wij slaan alleen versleutelde gegevens op en kunnen deze niet ontsleutelen.',
   'privacy.dataSecurity.deletion': 'Verwijdering: Memo\'s worden permanent verwijderd na lezen of verlopen via geautomatiseerde cronjobs.',
   'privacy.dataSecurity.securityMeasures': 'Beveiligingsmaatregelen: Wij implementeren sterke beveiligingsheaders (zoals CSP, HSTS), input-sanitatie, bescherming tegen timing-aanvallen en CAPTCHA om misbruik te voorkomen.',
   'privacy.dataSecurity.noRecovery': 'Geen herstel: Zodra memo\'s zijn verwijderd, kunnen ze niet worden hersteld—ook niet door ons.',
@@ -318,7 +318,7 @@ export const nl = {
   'faq.privacy.question': 'Hoe beschermt securememo.app mijn privacy?',
   'faq.privacy.answer': 'securememo.app gebruikt client-side AES-256 encryptie, wat betekent dat uw memo in uw browser wordt versleuteld voordat deze naar onze servers wordt gestuurd. Wij zien nooit de platte tekst. Memo\'s vernietigen zichzelf na lezen of verlopen, en wij vereisen geen gebruikersaccounts of verzamelen persoonlijke informatie.',
   'faq.encryption.question': 'Welke encryptie gebruikt securememo.app?',
-  'faq.encryption.answer': 'Wij gebruiken AES-256-GCM encryptie met PBKDF2-sleutelafleiding (2.200.000+ iteraties). Alle encryptie gebeurt client-side in uw browser via de Web Crypto API. Het encryptiewachtwoord wordt apart gegenereerd en nooit op onze servers opgeslagen.',
+  'faq.encryption.answer': 'Wij gebruiken AES-256-GCM-encryptie met PBKDF2-sleutelafleiding. Alle encryptie gebeurt client-side in uw browser via de Web Crypto API. Het encryptiewachtwoord wordt apart gegenereerd en nooit op onze servers opgeslagen.',
   'faq.duration.question': 'Hoe lang blijven memo\'s bewaard?',
   'faq.duration.answer': 'Memo\'s kunnen worden ingesteld om te verlopen na 8 uur, 1 dag, 2 dagen, 1 week of maximaal 30 dagen. Ze worden ook direct verwijderd na het lezen. Verlopen memo\'s worden elk uur automatisch opgeruimd.',
   'faq.recovery.question': 'Kan ik een verwijderde memo herstellen?',

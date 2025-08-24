@@ -90,7 +90,7 @@ export const sv = {
 
   'home.security.title': 'Säkerhetsfunktioner',
   'home.security.encryption.title': '🔒 Äkta klientbaserad kryptering',
-  'home.security.encryption.description': 'Din memo krypteras i webbläsaren med AES-256-GCM och stark nyckelgenerering (2 200 000+ iterationer). Vi ser aldrig klartexten.',
+  'home.security.encryption.description': 'Din memo krypteras i webbläsaren med AES-256-GCM och en stark nyckelderivering. Vi ser aldrig klartexten.',
   'home.security.delete.title': '🗑️ Pålitlig automatisk radering',
   'home.security.delete.description': 'Memos försvinner för alltid efter läsning eller utgång, med automatisk rensning varje timme. Inga säkerhetskopior eller återställning möjlig.',
   'home.security.password.title': '🌐 Ingen lösenordskunskap',
@@ -265,7 +265,7 @@ export const sv = {
   'privacy.dataSharing.business': 'Företagsöverlåtelser: Om securememo.app förvärvas eller slås samman kan data överföras som en del av transaktionen, men den förblir skyddad av detta integritetsmeddelande.',
 
   'privacy.dataSecurity.title': '4. Datasäkerhet',
-  'privacy.dataSecurity.encryption': 'Kryptering: Alla memos krypteras klientbaserat med AES-256 och PBKDF2-nyckelgenerering (2 200 000 iterationer). Vi lagrar endast krypterad data och kan inte dekryptera den.',
+  'privacy.dataSecurity.encryption': 'Kryptering: Alla memos krypteras klientbaserat med AES-256 och PBKDF2-nyckelderivering. Vi lagrar endast krypterad data och kan inte dekryptera den.',
   'privacy.dataSecurity.deletion': 'Radering: Memos raderas permanent efter läsning eller utgång via automatiserade cron-jobb.',
   'privacy.dataSecurity.securityMeasures': 'Säkerhetsåtgärder: Vi implementerar starka säkerhetsrubriker (t.ex. CSP, HSTS), insatssanering, skydd mot timing-attacker och CAPTCHA för att förhindra missbruk.',
   'privacy.dataSecurity.noRecovery': 'Ingen återställning: När en memo har raderats kan den inte återställas – inte ens av oss.',
@@ -318,7 +318,7 @@ export const sv = {
   'faq.privacy.question': 'Hur skyddar securememo.app min integritet?',
   'faq.privacy.answer': 'securememo.app använder klientbaserad AES-256-kryptering, vilket innebär att din memo krypteras i din webbläsare innan den skickas till våra servrar. Vi ser aldrig klartexten. Memos självförstörs efter att de lästs eller gått ut, och vi kräver inga användarkonton eller samlar in personuppgifter.',
   'faq.encryption.question': 'Vilken kryptering använder securememo.app?',
-  'faq.encryption.answer': 'Vi använder AES-256-GCM-kryptering med PBKDF2-nyckelgenerering (2 200 000+ iterationer). All kryptering sker klientbaserat i din webbläsare med Web Crypto API. Krypteringslösenordet genereras separat och lagras aldrig på våra servrar.',
+  'faq.encryption.answer': 'Vi använder AES-256-GCM-kryptering med PBKDF2-nyckelderivering. All kryptering sker klientbaserat i din webbläsare med Web Crypto API. Krypteringslösenordet genereras separat och lagras aldrig på våra servrar.',
   'faq.duration.question': 'Hur länge sparas memos?',
   'faq.duration.answer': 'Memos kan ställas in att gå ut efter 8 timmar, 1 dag, 2 dagar, 1 vecka eller max 30 dagar. De raderas också omedelbart efter att de lästs. Utgångna memos rensas automatiskt varje timme.',
   'faq.recovery.question': 'Kan jag återställa en raderad memo?',

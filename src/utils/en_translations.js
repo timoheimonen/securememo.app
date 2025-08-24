@@ -90,7 +90,7 @@ export const en = {
 
   'home.security.title': 'Security Features',
   'home.security.encryption.title': '🔒 True Client-Side Encryption',
-  'home.security.encryption.description': 'Your memo is encrypted in-browser with AES-256-GCM and a strong key derivation (2,200,000+ iterations). We never see the plaintext.',
+  'home.security.encryption.description': 'Your memo is encrypted in-browser with AES-256-GCM and a strong key derivation. We never see the plaintext.',
   'home.security.delete.title': '🗑️ Reliable Auto-Delete',
   'home.security.delete.description': 'Memos vanish forever after reading or expiration, with automatic cleanup every hour. No backups or recovery possible.',
   'home.security.password.title': '🌐 Zero Password Knowledge',
@@ -265,7 +265,7 @@ export const en = {
   'privacy.dataSharing.business': 'Business Transfers: If securememo.app is acquired or merged, data may be transferred as part of the transaction, but it would remain subject to this Privacy Notice.',
 
   'privacy.dataSecurity.title': '4. Data Security',
-  'privacy.dataSecurity.encryption': 'Encryption: All memos are encrypted client-side using AES-256 with PBKDF2 key derivation (2,200,000 iterations). We store only encrypted data and cannot decrypt it.',
+  'privacy.dataSecurity.encryption': 'Encryption: All memos are encrypted client-side using AES-256 with PBKDF2 key derivation. We store only encrypted data and cannot decrypt it.',
   'privacy.dataSecurity.deletion': 'Deletion: Memos are permanently deleted after reading or expiration via automated cron jobs.',
   'privacy.dataSecurity.securityMeasures': 'Security Measures: We implement strong security headers (e.g., CSP, HSTS), input sanitization, timing attack protections, and CAPTCHA to prevent abuse.',
   'privacy.dataSecurity.noRecovery': 'No Recovery: Once deleted, memos cannot be recovered—even by us.',
@@ -318,7 +318,7 @@ export const en = {
   'faq.privacy.question': 'How does securememo.app protect my privacy?',
   'faq.privacy.answer': 'securememo.app uses client-side AES-256 encryption, meaning your memo is encrypted in your browser before being sent to our servers. We never see the plaintext content. Memos self-destruct after being read or expired, and we don\'t require user accounts or collect personal information.',
   'faq.encryption.question': 'What encryption does securememo.app use?',
-  'faq.encryption.answer': 'We use AES-256-GCM encryption with PBKDF2 key derivation (2,200,000+ iterations). All encryption happens client-side in your browser using the Web Crypto API. The encryption password is generated separately and never stored on our servers.',
+  'faq.encryption.answer': 'We use AES-256-GCM encryption with PBKDF2 key derivation. All encryption happens client-side in your browser using the Web Crypto API. The encryption password is generated separately and never stored on our servers.',
   'faq.duration.question': 'How long do memos last?',
   'faq.duration.answer': 'Memos can be set to expire after 8 hours, 1 day, 2 days, 1 week, or 30 days maximum. They are also deleted immediately after being read. Expired memos are automatically cleaned up every hour.',
   'faq.recovery.question': 'Can I recover a deleted memo?',

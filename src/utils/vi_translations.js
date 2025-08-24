@@ -90,7 +90,7 @@ export const vi = {
 
   'home.security.title': 'Tính năng bảo mật',
   'home.security.encryption.title': '🔒 Mã hóa phía khách hàng thực sự',
-  'home.security.encryption.description': 'Ghi chú của bạn được mã hóa trên trình duyệt với AES-256-GCM và thuật toán tạo khóa mạnh (hơn 2.200.000 lần lặp). Chúng tôi không bao giờ thấy nội dung gốc.',
+  'home.security.encryption.description': 'Ghi chú của bạn được mã hóa trong trình duyệt với AES-256-GCM và quy trình tạo khóa mạnh. Chúng tôi không bao giờ thấy nội dung thuần của bạn.',
   'home.security.delete.title': '🗑️ Tự động xóa đáng tin cậy',
   'home.security.delete.description': 'Ghi chú sẽ biến mất vĩnh viễn sau khi đọc hoặc hết hạn, với dọn dẹp tự động mỗi giờ. Không có sao lưu hoặc khôi phục.',
   'home.security.password.title': '🌐 Không lưu mật khẩu',
@@ -265,7 +265,7 @@ export const vi = {
   'privacy.dataSharing.business': 'Chuyển giao kinh doanh: Nếu securememo.app bị mua lại hoặc sáp nhập, dữ liệu có thể được chuyển giao như một phần của giao dịch, nhưng vẫn tuân thủ thông báo quyền riêng tư này.',
 
   'privacy.dataSecurity.title': '4. Bảo mật dữ liệu',
-  'privacy.dataSecurity.encryption': 'Mã hóa: Tất cả ghi chú được mã hóa phía khách hàng bằng AES-256 với PBKDF2 (2.200.000 lần lặp). Chúng tôi chỉ lưu dữ liệu đã mã hóa và không thể giải mã.',
+  'privacy.dataSecurity.encryption': 'Mã hóa: Tất cả ghi chú được mã hóa phía khách hàng bằng AES-256 với PBKDF2. Chúng tôi chỉ lưu dữ liệu đã mã hóa và không thể giải mã.',
   'privacy.dataSecurity.deletion': 'Xóa: Ghi chú sẽ bị xóa vĩnh viễn sau khi đọc hoặc hết hạn thông qua cron job tự động.',
   'privacy.dataSecurity.securityMeasures': 'Biện pháp bảo mật: Chúng tôi triển khai các header bảo mật mạnh (ví dụ: CSP, HSTS), kiểm tra đầu vào, bảo vệ chống tấn công thời gian và CAPTCHA để ngăn chặn lạm dụng.',
   'privacy.dataSecurity.noRecovery': 'Không khôi phục: Khi đã xóa, ghi chú không thể khôi phục—even bởi chúng tôi.',
@@ -318,7 +318,7 @@ export const vi = {
   'faq.privacy.question': 'securememo.app bảo vệ quyền riêng tư của tôi như thế nào?',
   'faq.privacy.answer': 'securememo.app sử dụng mã hóa AES-256 phía khách hàng, nghĩa là ghi chú của bạn được mã hóa ngay trên trình duyệt trước khi gửi lên máy chủ. Chúng tôi không bao giờ thấy nội dung gốc. Ghi chú sẽ tự hủy sau khi đọc hoặc hết hạn, và chúng tôi không yêu cầu tài khoản người dùng hoặc thu thập thông tin cá nhân.',
   'faq.encryption.question': 'securememo.app sử dụng loại mã hóa nào?',
-  'faq.encryption.answer': 'Chúng tôi sử dụng mã hóa AES-256-GCM với thuật toán tạo khóa PBKDF2 (hơn 2.200.000 lần lặp). Tất cả mã hóa diễn ra phía khách hàng trên trình duyệt bằng Web Crypto API. Mật khẩu mã hóa được tạo riêng biệt và không bao giờ lưu trên máy chủ.',
+  'faq.encryption.answer': 'Chúng tôi sử dụng mã hóa AES-256-GCM với PBKDF2 để tạo khóa. Tất cả mã hóa diễn ra phía khách hàng trên trình duyệt bằng Web Crypto API. Mật khẩu mã hóa được tạo riêng và không bao giờ lưu trên máy chủ.',
   'faq.duration.question': 'Ghi chú tồn tại trong bao lâu?',
   'faq.duration.answer': 'Ghi chú có thể được đặt hết hạn sau 8 giờ, 1 ngày, 2 ngày, 1 tuần hoặc tối đa 30 ngày. Ghi chú cũng sẽ bị xóa ngay sau khi đọc. Ghi chú hết hạn sẽ được dọn dẹp tự động mỗi giờ.',
   'faq.recovery.question': 'Tôi có thể khôi phục ghi chú đã bị xóa không?',

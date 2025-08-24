@@ -90,7 +90,7 @@ export const ja = {
 
     'home.security.title': 'セキュリティ機能',
     'home.security.encryption.title': '🔒 真のクライアントサイド暗号化',
-    'home.security.encryption.description': 'メモはAES-256-GCMと強力なキー導出（220万回以上の反復）でブラウザ内で暗号化されます。平文は一切見ることができません。',
+    'home.security.encryption.description': 'メモはブラウザ内でAES-256-GCMと強力なキー導出により暗号化されます。私たちが平文を見ることは一切ありません。',
     'home.security.delete.title': '🗑️ 確実な自動削除',
     'home.security.delete.description': 'メモは読み取りまたは期限切れ後に永久に消去され、1時間ごとに自動クリーンアップされます。バックアップや復旧は不可能です。',
     'home.security.password.title': '🌐 パスワード知識ゼロ',
@@ -265,7 +265,7 @@ export const ja = {
     'privacy.dataSharing.business': '事業譲渡: securememo.appが買収または合併された場合、データは取引の一部として転送される可能性がありますが、このプライバシー通知の対象であり続けます。',
 
     'privacy.dataSecurity.title': '4. データセキュリティ',
-    'privacy.dataSecurity.encryption': '暗号化: すべてのメモはPBKDF2キー導出（2,200,000回の反復）を伴うAES-256を使用してクライアントサイドで暗号化されます。私たちは暗号化されたデータのみを保存し、それを復号化することはできません。',
+    'privacy.dataSecurity.encryption': '暗号化: すべてのメモはクライアントサイドでAES-256とPBKDF2キー導出により暗号化されます。私たちは暗号化済みデータのみを保存し、復号することはできません。',
     'privacy.dataSecurity.deletion': '削除: メモは読み取りまたは有効期限切れ後、自動化されたcronジョブによって永久に削除されます。',
     'privacy.dataSecurity.securityMeasures': 'セキュリティ対策: 私たちは強力なセキュリティヘッダー（CSP、HSTSなど）、入力のサニタイゼーション、タイミング攻撃保護、および乱用防止のためのCAPTCHAを実装しています。',
     'privacy.dataSecurity.noRecovery': '復旧不可: 一度削除されたメモは、私たちでも復旧できません。',
@@ -318,7 +318,7 @@ export const ja = {
     'faq.privacy.question': 'securememo.appはどのように私のプライバシーを保護しますか？',
     'faq.privacy.answer': 'securememo.appはクライアントサイドAES-256暗号化を使用しており、あなたのメモは私たちのサーバーに送信される前にあなたのブラウザで暗号化されます。私たちは平文の内容を見ることはありません。メモは読み取りまたは期限切れ後に自己破壊し、私たちはユーザーアカウントを必要とせず、個人情報を収集しません。',
     'faq.encryption.question': 'securememo.appはどのような暗号化を使用しますか？',
-    'faq.encryption.answer': '私たちはPBKDF2キー導出（2,200,000回以上の反復）を伴うAES-256-GCM暗号化を使用しています。すべての暗号化はWeb Crypto APIを使用してあなたのブラウザでクライアントサイドで行われます。暗号化パスワードは別途生成され、私たちのサーバーに保存されることはありません。',
+    'faq.encryption.answer': '私たちはAES-256-GCM暗号化とPBKDF2キー導出を使用しています。すべての暗号化処理はWeb Crypto APIを用いてあなたのブラウザ内でクライアントサイドで行われます。暗号化パスワードは別途生成され、私たちのサーバーに保存されることは決してありません。',
     'faq.duration.question': 'メモはどのくらい持続しますか？',
     'faq.duration.answer': 'メモは8時間、1日、2日、1週間、または最大30日に設定できます。また、読み取り後には直ちに削除されます。期限切れのメモは1時間ごとに自動的にクリーンアップされます。',
     'faq.recovery.question': '削除されたメモを復旧できますか？',

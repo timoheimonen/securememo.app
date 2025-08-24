@@ -90,7 +90,7 @@ export const ro = {
 
   'home.security.title': 'Funcții de securitate',
   'home.security.encryption.title': '🔒 Adevărată criptare pe partea clientului',
-  'home.security.encryption.description': 'Memoul tău este criptat în browser cu AES-256-GCM și o derivare puternică a cheii (peste 2.200.000 de iterări). Nu vedem niciodată textul în clar.',
+  'home.security.encryption.description': 'Memoul tău este criptat în browser cu AES-256-GCM și o derivare puternică a cheii. Nu vedem niciodată textul în clar.',
   'home.security.delete.title': '🗑️ Ștergere automată fiabilă',
   'home.security.delete.description': 'Memo-urile dispar pentru totdeauna după citire sau la expirare, cu curățare automată la fiecare oră. Fără copii de rezervă sau posibilitate de recuperare.',
   'home.security.password.title': '🌐 Zero cunoaștere a parolei',
@@ -265,7 +265,7 @@ export const ro = {
   'privacy.dataSharing.business': 'Transferuri de afaceri: Dacă securememo.app este achiziționat sau fuzionează, datele pot fi transferate ca parte a tranzacției, dar vor rămâne supuse acestei Notificări de confidențialitate.',
 
   'privacy.dataSecurity.title': '4. Securitatea datelor',
-  'privacy.dataSecurity.encryption': 'Criptare: Toate memo-urile sunt criptate pe partea clientului folosind AES-256 cu derivarea cheii PBKDF2 (2.200.000 de iterări). Stocăm doar date criptate și nu le putem decripta.',
+  'privacy.dataSecurity.encryption': 'Criptare: Toate memo-urile sunt criptate pe partea clientului folosind AES-256 cu derivarea cheii PBKDF2. Stocăm doar date criptate și nu le putem decripta.',
   'privacy.dataSecurity.deletion': 'Ștergere: Memo-urile sunt șterse definitiv după citire sau expirare prin joburi cron automate.',
   'privacy.dataSecurity.securityMeasures': 'Măsuri de securitate: Implementăm antete de securitate puternice (de ex., CSP, HSTS), sanitizarea inputului, protecții împotriva atacurilor de temporizare și CAPTCHA pentru a preveni abuzurile.',
   'privacy.dataSecurity.noRecovery': 'Fără recuperare: Odată șterse, memo-urile nu pot fi recuperate — nici măcar de noi.',
@@ -318,7 +318,7 @@ export const ro = {
   'faq.privacy.question': 'Cum îmi protejează securememo.app confidențialitatea?',
   'faq.privacy.answer': 'securememo.app folosește criptare AES-256 pe partea clientului, ceea ce înseamnă că memoul tău este criptat în browser înainte de a fi trimis către serverele noastre. Nu vedem niciodată conținutul în clar. Memo-urile se autodistrug după ce sunt citite sau când expiră, iar noi nu solicităm conturi de utilizator și nu colectăm informații personale.',
   'faq.encryption.question': 'Ce criptare folosește securememo.app?',
-  'faq.encryption.answer': 'Folosim criptare AES-256-GCM cu derivarea cheii PBKDF2 (peste 2.200.000 de iterări). Toată criptarea are loc pe partea clientului, în browserul tău, folosind Web Crypto API. Parola de criptare este generată separat și nu este niciodată stocată pe serverele noastre.',
+  'faq.encryption.answer': 'Folosim criptare AES-256-GCM cu derivarea cheii PBKDF2. Toată criptarea are loc pe partea clientului, în browserul tău, folosind Web Crypto API. Parola de criptare este generată separat și nu este niciodată stocată pe serverele noastre.',
   'faq.duration.question': 'Cât timp rămân memo-urile?',
   'faq.duration.answer': 'Memo-urile pot fi setate să expire după 8 ore, 1 zi, 2 zile, 1 săptămână sau maximum 30 de zile. Sunt, de asemenea, șterse imediat după citire. Memo-urile expirate sunt curățate automat în fiecare oră.',
   'faq.recovery.question': 'Pot recupera un memo șters?',

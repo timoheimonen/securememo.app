@@ -90,7 +90,7 @@ export const pl = {
 
   'home.security.title': 'Funkcje bezpieczeństwa',
   'home.security.encryption.title': '🔒 Prawdziwe szyfrowanie po stronie klienta',
-  'home.security.encryption.description': 'Twoja notatka jest szyfrowana w przeglądarce za pomocą AES-256-GCM i silnej funkcji wyprowadzania klucza (ponad 2 200 000 iteracji). Nigdy nie widzimy tekstu jawnego.',
+  'home.security.encryption.description': 'Twoja notatka jest szyfrowana w przeglądarce za pomocą AES-256-GCM i silnego wyprowadzania klucza. Nigdy nie widzimy tekstu jawnego.',
   'home.security.delete.title': '🗑️ Niezawodne automatyczne usuwanie',
   'home.security.delete.description': 'Notatki znikają na zawsze po odczytaniu lub wygaśnięciu, z automatycznym czyszczeniem co godzinę. Brak kopii zapasowych i możliwości odzyskania.',
   'home.security.password.title': '🌐 Brak wiedzy o haśle',
@@ -265,7 +265,7 @@ export const pl = {
   'privacy.dataSharing.business': 'Przeniesienie działalności: Jeśli securememo.app zostanie przejęte lub połączone, dane mogą zostać przekazane w ramach transakcji, ale będą nadal objęte niniejszą Polityką prywatności.',
 
   'privacy.dataSecurity.title': '4. Bezpieczeństwo danych',
-  'privacy.dataSecurity.encryption': 'Szyfrowanie: Wszystkie notatki są szyfrowane po stronie klienta za pomocą AES-256 i PBKDF2 (2 200 000 iteracji). Przechowujemy wyłącznie zaszyfrowane dane i nie mamy możliwości ich odszyfrowania.',
+  'privacy.dataSecurity.encryption': 'Szyfrowanie: Wszystkie notatki są szyfrowane po stronie klienta przy użyciu AES-256 z wyprowadzaniem klucza PBKDF2. Przechowujemy wyłącznie zaszyfrowane dane i nie możemy ich odszyfrować.',
   'privacy.dataSecurity.deletion': 'Usuwanie: Notatki są trwale usuwane po odczytaniu lub wygaśnięciu przez automatyczne zadania cron.',
   'privacy.dataSecurity.securityMeasures': 'Środki bezpieczeństwa: Wdrażamy silne nagłówki bezpieczeństwa (np. CSP, HSTS), sanitizację danych wejściowych, ochronę przed atakami czasowymi oraz CAPTCHA, aby zapobiegać nadużyciom.',
   'privacy.dataSecurity.noRecovery': 'Brak możliwości odzyskania: Po usunięciu notatki nie można jej odzyskać — nawet przez nas.',
@@ -318,7 +318,7 @@ export const pl = {
   'faq.privacy.question': 'Jak securememo.app chroni moją prywatność?',
   'faq.privacy.answer': 'securememo.app używa szyfrowania AES-256 po stronie klienta, co oznacza, że Twoja notatka jest szyfrowana w przeglądarce przed wysłaniem na nasze serwery. Nigdy nie widzimy treści w postaci jawnej. Notatki niszczą się po odczytaniu lub wygaśnięciu, a my nie wymagamy kont użytkownika ani nie zbieramy danych osobowych.',
   'faq.encryption.question': 'Jakie szyfrowanie stosuje securememo.app?',
-  'faq.encryption.answer': 'Stosujemy szyfrowanie AES-256-GCM z wyprowadzaniem klucza PBKDF2 (ponad 2 200 000 iteracji). Całe szyfrowanie odbywa się po stronie klienta w Twojej przeglądarce za pomocą Web Crypto API. Hasło szyfrujące jest generowane osobno i nigdy nie jest przechowywane na naszych serwerach.',
+  'faq.encryption.answer': 'Używamy szyfrowania AES-256-GCM z wyprowadzaniem klucza PBKDF2. Całe szyfrowanie odbywa się po stronie klienta w Twojej przeglądarce przy użyciu Web Crypto API. Hasło szyfrujące jest generowane osobno i nigdy nie jest przechowywane na naszych serwerach.',
   'faq.duration.question': 'Jak długo przechowywane są notatki?',
   'faq.duration.answer': 'Notatki mogą wygasnąć po 8 godzinach, 1 dniu, 2 dniach, 1 tygodniu lub maksymalnie 30 dniach. Są także usuwane natychmiast po odczytaniu. Wygasłe notatki są automatycznie czyszczone co godzinę.',
   'faq.recovery.question': 'Czy mogę odzyskać usuniętą notatkę?',
