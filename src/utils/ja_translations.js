@@ -142,7 +142,7 @@ export const ja = {
 
     // Terms of Service page content
     'tos.hero.title': '利用規約',
-    'tos.lastUpdated': '最終更新日: 2025年8月17日',
+    'tos.lastUpdated': '最終更新日: 2025年8月24日',
     'tos.tableOfContents.title': '目次',
     'tos.tableOfContents.serviceDescription': 'サービス説明',
     'tos.tableOfContents.acceptableUse': '許容される利用',
@@ -172,11 +172,11 @@ export const ja = {
 
     'tos.privacyData.title': '3. プライバシーとデータ処理',
     'tos.privacyData.noAccess': 'コンテンツへのアクセス不可: メモの内容にサーバー側からアクセス・閲覧・復元することはできません。すべての暗号化はブラウザ内で行われます。',
-    'tos.privacyData.noPersonal': '個人データなし: 私たちは個人情報を収集したり、ユーザーアカウントを要求したりしません。',
+    'tos.privacyData.noPersonal': '最小限のデータ収集: 私たちはサービス利用のためにユーザーアカウントを要求したり個人情報を収集したりしません。個人データを収集する可能性があるのは、あなたがサポート目的で任意に私たちへ連絡した場合のみです。メールでお問い合わせいただいた場合、回答するためにあなたのメールアドレスとメッセージ内容を取得します。これらの情報を他の目的で使用せず、あなたの同意なく第三者と共有しません。',
     'tos.privacyData.securityLogging': 'セキュリティログ: 私たちは悪用の軽減とサービスの整合性保護のためにのみ、IPアドレスとセキュリティ関連のメタデータを一時的にログに記録します。これらのログは追跡やプロファイリングには使用されません。',
     'tos.privacyData.automaticDeletion': '自動削除: メモは読み取り後または期限切れ時に自動的に削除されます。',
     'tos.privacyData.noRecovery': '復旧不可: メモが削除されると、復旧することはできません。',
-    'tos.privacyData.gdpr': 'GDPR遵守: 本サービスはEU GDPRで定義された個人データを収集しません。',
+    'tos.privacyData.gdpr': 'GDPR遵守: 私たちはGDPRの原則を順守し、データ収集を最小化します。サービスを保護する正当な利益に基づき、一時的なセキュリティログなど必要最小限のデータのみを処理します。',
     'tos.privacyData.moreDetails': '詳細については、私たちの',
     'tos.privacyData.privacyNotice': 'プライバシー通知',
 
@@ -225,7 +225,7 @@ export const ja = {
 
     // Privacy Notice page content
     'privacy.hero.title': 'securememo.appのプライバシー通知',
-    'privacy.lastUpdated': '最終更新日: 2025年8月9日',
+    'privacy.lastUpdated': '最終更新日: 2025年8月24日',
     'privacy.tableOfContents.title': '目次',
     'privacy.tableOfContents.informationCollected': '私たちが収集する情報',
     'privacy.tableOfContents.howWeUse': '情報の使用方法',
@@ -244,7 +244,7 @@ export const ja = {
     'privacy.informationCollected.title': '1. 私たちが収集する情報',
     'privacy.informationCollected.intro': '私たちはサービスを安全かつ効率的に運営するために最小限の情報を収集します。具体的には:',
     'privacy.informationCollected.memoData': 'メモデータ: メモを作成すると、私たちはあなたのメッセージの暗号化版のみを私たちのサーバー（Cloudflare WorkersとD1データベースを使用）に保存します。暗号化キー（パスワード）はあなたのブラウザで完全に生成および処理され、私たちに送信されたり保存されたりすることはありません。メモは読み取り後または有効期限切れ時（オプション: 8時間、1日、2日、1週間、または30日）に自動的に削除されます。',
-    'privacy.informationCollected.noPersonal': '個人情報なし: 私たちはユーザーアカウント、メールアドレス、名前、またはその他の個人識別子を必要としません。私たちはあなたを直接特定できるデータを収集または保存することはありません。',
+    'privacy.informationCollected.noPersonal': '最小限のデータ収集: 私たちはサービス利用のためにユーザーアカウントを要求したり個人情報を収集したりしません。個人データを収集する可能性があるのは、あなたがサポート目的で任意に私たちへ連絡した場合のみです。メールでお問い合わせいただいた場合、回答するためにあなたのメールアドレスとメッセージ内容を取得します。これらの情報を他の目的で使用せず、あなたの同意なく第三者と共有しません。',
     'privacy.informationCollected.securityData': 'セキュリティ関連データ: 乱用防止とサービスの整合性のため:',
     'privacy.informationCollected.ipLogs': 'スパム、ボット、または悪意のある活動を検出および緩和するためにIPアドレスとリクエストメタデータ（タイムスタンプなど）を一時的にログに記録します。',
     'privacy.informationCollected.turnstile': '自動化された乱用を防止するためにCloudflare Turnstile CAPTCHAを使用しています。Turnstileはプライバシーを保護するように設計されており、サイト間でユーザーを追跡することはありません。',

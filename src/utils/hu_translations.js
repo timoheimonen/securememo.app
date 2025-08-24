@@ -142,7 +142,7 @@ export const hu = {
 
   // Terms of Service page content
   'tos.hero.title': 'Felhasználási feltételek',
-  'tos.lastUpdated': 'Utolsó frissítés: 2025. augusztus 17.',
+  'tos.lastUpdated': 'Utolsó frissítés: 2025. augusztus 24.',
   'tos.tableOfContents.title': 'Tartalomjegyzék',
   'tos.tableOfContents.serviceDescription': 'Szolgáltatás leírása',
   'tos.tableOfContents.acceptableUse': 'Megengedett használat',
@@ -172,11 +172,11 @@ export const hu = {
 
   'tos.privacyData.title': '3. Adatvédelem és adatkezelés',
   'tos.privacyData.noAccess': 'Nincs tartalomhozzáférés: Nem tudjuk elérni, olvasni vagy visszaállítani a jegyzeted tartalmát. Minden titkosítás a böngésződben történik.',
-  'tos.privacyData.noPersonal': 'Nincs személyes adat: Nem gyűjtünk személyes információkat és nem kérünk felhasználói fiókot.',
+  'tos.privacyData.noPersonal': 'Minimális adatgyűjtés: Nem kérünk felhasználói fiókot és nem gyűjtünk személyes adatokat a szolgáltatás használatához. Az egyetlen személyes adat, amit gyűjthetünk, ha Ön önkéntesen felveszi velünk a kapcsolatot támogatás céljából. Ha e-mailt küld nekünk, az e-mail címét és az üzenet tartalmát csak a megkeresés megválaszolására használjuk. Ezt az információt más célra nem használjuk, és harmadik felekkel nem osztjuk meg az Ön hozzájárulása nélkül.',
   'tos.privacyData.securityLogging': 'Biztonsági naplózás: Az IP-címeket és biztonsággal kapcsolatos metaadatokat ideiglenesen naplózzuk kizárólag visszaélés megelőzése és a szolgáltatás integritásának védelme érdekében. Ezeket a naplókat soha nem használjuk követésre vagy profilalkotásra.',
   'tos.privacyData.automaticDeletion': 'Automatikus törlés: A jegyzetek automatikusan törlődnek olvasás után vagy lejáratkor.',
   'tos.privacyData.noRecovery': 'Nincs visszaállítás: Ha egy jegyzet törlődik, nem lehet visszaállítani.',
-  'tos.privacyData.gdpr': 'GDPR megfelelés: A szolgáltatás nem gyűjt személyes adatokat az EU GDPR szerint.',
+  'tos.privacyData.gdpr': 'GDPR megfelelés: Elkötelezettek vagyunk a GDPR alapelvei mellett. Minimalizáljuk az adatgyűjtést és csak a szükséges adatokat dolgozzuk fel (például ideiglenes biztonsági naplókat) jogos érdek alapján a szolgáltatás védelme érdekében.',
   'tos.privacyData.moreDetails': 'További részletekért tekintse meg',
   'tos.privacyData.privacyNotice': 'Adatvédelmi tájékoztatónkat',
 
@@ -225,7 +225,7 @@ export const hu = {
 
   // Privacy Notice page content
   'privacy.hero.title': 'Privacy Notice for securememo.app',
-  'privacy.lastUpdated': 'Utolsó frissítés: 2025. augusztus 9.',
+  'privacy.lastUpdated': 'Utolsó frissítés: 2025. augusztus 24.',
   'privacy.tableOfContents.title': 'Tartalomjegyzék',
   'privacy.tableOfContents.informationCollected': 'Gyűjtött információk',
   'privacy.tableOfContents.howWeUse': 'Az információk felhasználása',
@@ -244,7 +244,7 @@ export const hu = {
   'privacy.informationCollected.title': '1. Milyen információkat gyűjtünk',
   'privacy.informationCollected.intro': 'Minimális információt gyűjtünk a szolgáltatás biztonságos és hatékony működtetéséhez. Konkrétan:',
   'privacy.informationCollected.memoData': 'Jegyzetadatok: Amikor jegyzetet hoz létre, csak az üzenet titkosított változatát tároljuk szervereinken (Cloudflare Workers és D1 adatbázis). A titkosítási kulcs (jelszó) teljes egészében a böngészőben generálódik és kezelődik, soha nem küldjük el vagy tároljuk. A jegyzetek automatikusan törlődnek elolvasás vagy lejárat után (opciók: 8 óra, 1 nap, 2 nap, 1 hét vagy 30 nap).',
-  'privacy.informationCollected.noPersonal': 'Nincs személyes adat: Nem kérünk felhasználói fiókot, e-mail címet, nevet vagy más személyes azonosítót. Nem gyűjtünk vagy tárolunk semmilyen adatot, amely közvetlenül azonosíthatná Önt.',
+  'privacy.informationCollected.noPersonal': 'Minimális személyes adatgyűjtés: Nem kérünk felhasználói fiókot, e-mail címet, nevet vagy más azonosítót a szolgáltatás használatához, és nem gyűjtünk olyan adatot, amely közvetlenül azonosíthatná Önt. Az egyetlen személyes adat, amit kaphatunk, ha Ön önkéntesen e-mailben megkeres minket támogatásért – ekkor az e-mail címet és az üzenet tartalmát a válasz megadásához használjuk. Ezt az információt más célra nem használjuk és az Ön hozzájárulása nélkül nem osztjuk meg.',
   'privacy.informationCollected.securityData': 'Biztonsággal kapcsolatos adatok: Visszaélés megelőzése és a szolgáltatás integritása érdekében:',
   'privacy.informationCollected.ipLogs': 'Ideiglenesen naplózzuk az IP-címeket és a kérések metaadatait (pl. időbélyegek), hogy felismerjük és megelőzzük a spamet, botokat vagy rosszindulatú tevékenységet.',
   'privacy.informationCollected.turnstile': 'Cloudflare Turnstile CAPTCHA-t használunk az automatizált visszaélések megelőzésére. A Turnstile az adatvédelem érdekében készült, és nem követi a felhasználókat webhelyek között.',

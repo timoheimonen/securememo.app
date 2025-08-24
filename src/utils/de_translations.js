@@ -142,7 +142,7 @@ export const de = {
 
   // Terms of Service page content
   'tos.hero.title': 'Nutzungsbedingungen',
-  'tos.lastUpdated': 'Zuletzt aktualisiert: 17. August 2025',
+  'tos.lastUpdated': 'Zuletzt aktualisiert: 24. August 2025',
   'tos.tableOfContents.title': 'Inhaltsverzeichnis',
   'tos.tableOfContents.serviceDescription': 'Service-Beschreibung',
   'tos.tableOfContents.acceptableUse': 'Akzeptable Nutzung',
@@ -172,11 +172,11 @@ export const de = {
 
   'tos.privacyData.title': '3. Datenschutz & Datenverarbeitung',
   'tos.privacyData.noAccess': 'Kein Inhaltszugriff: Wir können Ihre Notizinhalte nicht einsehen, lesen oder wiederherstellen. Alle Verschlüsselung findet in Ihrem Browser statt.',
-  'tos.privacyData.noPersonal': 'Keine persönlichen Daten: Wir sammeln keine persönlichen Informationen oder benötigen Benutzerkonten.',
+  'tos.privacyData.noPersonal': 'Minimale Datenerhebung: Wir benötigen keine Benutzerkonten und erheben keine personenbezogenen Daten, um den Dienst zu nutzen. Die einzigen personenbezogenen Daten, die wir möglicherweise erfassen, sind, wenn Sie uns freiwillig für Support kontaktieren. Wenn Sie uns per E‑Mail kontaktieren, erfassen wir Ihre E‑Mail-Adresse und den Inhalt Ihrer Nachricht, um auf Ihre Anfrage zu antworten. Wir verwenden diese Informationen nicht für andere Zwecke und geben sie ohne Ihre Zustimmung nicht an Dritte weiter.',
   'tos.privacyData.securityLogging': 'Sicherheitsprotokollierung: Wir protokollieren vorübergehend IP-Adressen und sicherheitsbezogene Metadaten ausschließlich zur Missbrauchsbekämpfung und zum Schutz der Service-Integrität. Diese Protokolle werden niemals für Tracking oder Profiling verwendet.',
   'tos.privacyData.automaticDeletion': 'Automatische Löschung: Notizen werden automatisch nach dem Lesen oder bei Ablauf gelöscht.',
   'tos.privacyData.noRecovery': 'Keine Wiederherstellung: Sobald eine Notiz gelöscht ist, kann sie nicht wiederhergestellt werden.',
-  'tos.privacyData.gdpr': 'DSGVO-Konformität: Dieser Service sammelt keine persönlichen Daten im Sinne der EU-DSGVO.',
+  'tos.privacyData.gdpr': 'DSGVO-Konformität: Wir verpflichten uns den Grundsätzen der DSGVO. Wir minimieren die Datenerhebung und verarbeiten nur notwendige Daten, wie z. B. temporäre Sicherheitsprotokolle, auf Grundlage berechtigten Interesses zum Schutz des Dienstes.',
   'tos.privacyData.moreDetails': 'Für weitere Details lesen Sie bitte unseren',
   'tos.privacyData.privacyNotice': 'Datenschutzhinweis',
 
@@ -225,7 +225,7 @@ export const de = {
 
   // Privacy Notice page content
   'privacy.hero.title': 'Datenschutzhinweis für securememo.app',
-  'privacy.lastUpdated': 'Zuletzt aktualisiert: 9. August 2025',
+  'privacy.lastUpdated': 'Zuletzt aktualisiert: 24. August 2025',
   'privacy.tableOfContents.title': 'Inhaltsverzeichnis',
   'privacy.tableOfContents.informationCollected': 'Informationen, die wir sammeln',
   'privacy.tableOfContents.howWeUse': 'Wie wir Informationen verwenden',
@@ -244,7 +244,7 @@ export const de = {
   'privacy.informationCollected.title': '1. Informationen, die wir sammeln',
   'privacy.informationCollected.intro': 'Wir sammeln minimale Informationen, um den Service sicher und effizient zu betreiben. Konkret:',
   'privacy.informationCollected.memoData': 'Notizdaten: Wenn Sie eine Notiz erstellen, speichern wir nur die verschlüsselte Version Ihrer Nachricht auf unseren Servern (mit Cloudflare Workers und D1-Datenbank). Der Verschlüsselungsschlüssel (Passwort) wird vollständig in Ihrem Browser generiert und verwaltet und niemals an uns gesendet oder von uns gespeichert. Notizen werden automatisch nach dem Lesen oder bei Ablauf gelöscht (Optionen: 8 Stunden, 1 Tag, 2 Tage, 1 Woche oder 30 Tage).',
-  'privacy.informationCollected.noPersonal': 'Keine persönlichen Informationen: Wir benötigen keine Benutzerkonten, E-Mail-Adressen, Namen oder andere persönliche Identifikatoren. Wir sammeln oder speichern keine Daten, die Sie direkt identifizieren könnten.',
+  'privacy.informationCollected.noPersonal': 'Minimale Datenerhebung: Wir benötigen keine Benutzerkonten und erheben keine personenbezogenen Daten, um den Dienst zu nutzen. Die einzigen personenbezogenen Daten, die wir möglicherweise erfassen, sind, wenn Sie uns freiwillig für Support kontaktieren. Wenn Sie uns per E‑Mail kontaktieren, erfassen wir Ihre E‑Mail-Adresse und den Inhalt Ihrer Nachricht, um auf Ihre Anfrage zu antworten. Wir verwenden diese Informationen nicht für andere Zwecke und geben sie ohne Ihre Zustimmung nicht an Dritte weiter.',
   'privacy.informationCollected.securityData': 'Sicherheitsbezogene Daten: Für Missbrauchsprävention und Service-Integrität:',
   'privacy.informationCollected.ipLogs': 'Wir protokollieren vorübergehend IP-Adressen und Anfrage-Metadaten (z.B. Zeitstempel), um Spam, Bots oder böswillige Aktivitäten zu erkennen und zu bekämpfen.',
   'privacy.informationCollected.turnstile': 'Wir verwenden Cloudflare Turnstile CAPTCHA, um automatisierten Missbrauch zu verhindern. Turnstile ist darauf ausgelegt, die Privatsphäre zu schützen und verfolgt Benutzer nicht über Websites hinweg.',

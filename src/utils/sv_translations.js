@@ -142,7 +142,7 @@ export const sv = {
 
   // Terms of Service page content
   'tos.hero.title': 'Användarvillkor',
-  'tos.lastUpdated': 'Senast uppdaterad: 17 augusti 2025',
+  'tos.lastUpdated': 'Senast uppdaterad: 24 augusti 2025',
   'tos.tableOfContents.title': 'Innehållsförteckning',
   'tos.tableOfContents.serviceDescription': 'Tjänstebeskrivning',
   'tos.tableOfContents.acceptableUse': 'Godtagbar användning',
@@ -172,11 +172,11 @@ export const sv = {
 
   'tos.privacyData.title': '3. Integritet & datahantering',
   'tos.privacyData.noAccess': 'Ingen åtkomst till innehåll: Vi kan inte komma åt, läsa eller återställa ditt memo-innehåll. All kryptering sker i din webbläsare.',
-  'tos.privacyData.noPersonal': 'Ingen personlig data: Vi samlar inte in personuppgifter eller kräver användarkonton.',
+  'tos.privacyData.noPersonal': 'Minimal datainsamling: Vi kräver inte användarkonton och samlar inte in personuppgifter för att du ska kunna använda tjänsten. De enda personuppgifter vi kan samla in är om du frivilligt kontaktar oss för support. Om du kontaktar oss via e-post samlar vi in din e-postadress och meddelandets innehåll för att kunna svara på din förfrågan. Vi använder inte denna information för några andra ändamål och delar den inte med tredje part utan ditt samtycke.',
   'tos.privacyData.securityLogging': 'Säkerhetsloggning: Vi loggar tillfälligt IP-adresser och säkerhetsrelaterad metadata strikt för att motverka missbruk och skydda tjänstens integritet. Dessa loggar används aldrig för spårning eller profilering.',
   'tos.privacyData.automaticDeletion': 'Automatisk radering: Memos raderas automatiskt efter att de lästs eller när de gått ut.',
   'tos.privacyData.noRecovery': 'Ingen återställning: När en memo har raderats kan den inte återställas.',
-  'tos.privacyData.gdpr': 'GDPR-efterlevnad: Denna tjänst samlar inte in personuppgifter enligt EU:s GDPR.',
+  'tos.privacyData.gdpr': 'GDPR-efterlevnad: Vi är engagerade i GDPR:s principer. Vi minimerar datainsamlingen och behandlar endast nödvändig data, såsom temporära säkerhetsloggar, med stöd av berättigat intresse för att skydda tjänsten.',
   'tos.privacyData.moreDetails': 'För mer information, se vår',
   'tos.privacyData.privacyNotice': 'Integritetsmeddelande',
 
@@ -225,7 +225,7 @@ export const sv = {
 
   // Privacy Notice page content
   'privacy.hero.title': 'Integritetsmeddelande för securememo.app',
-  'privacy.lastUpdated': 'Senast uppdaterad: 9 augusti 2025',
+  'privacy.lastUpdated': 'Senast uppdaterad: 24 augusti 2025',
   'privacy.tableOfContents.title': 'Innehållsförteckning',
   'privacy.tableOfContents.informationCollected': 'Information vi samlar in',
   'privacy.tableOfContents.howWeUse': 'Hur vi använder informationen',
@@ -244,7 +244,7 @@ export const sv = {
   'privacy.informationCollected.title': '1. Information vi samlar in',
   'privacy.informationCollected.intro': 'Vi samlar in minimal information för att driva tjänsten säkert och effektivt. Specifikt:',
   'privacy.informationCollected.memoData': 'Memo-data: När du skapar en memo lagrar vi endast den krypterade versionen av ditt meddelande på våra servrar (med Cloudflare Workers och D1-databasen). Krypteringsnyckeln (lösenordet) genereras och hanteras helt i din webbläsare och skickas aldrig till eller lagras av oss. Memos raderas automatiskt efter att de lästs eller när de gått ut (alternativ: 8 timmar, 1 dag, 2 dagar, 1 vecka eller 30 dagar).',
-  'privacy.informationCollected.noPersonal': 'Ingen personlig information: Vi kräver inte användarkonton, e-postadresser, namn eller andra personliga identifierare. Vi samlar inte in eller lagrar någon data som direkt kan identifiera dig.',
+  'privacy.informationCollected.noPersonal': 'Minimal datainsamling: Vi kräver inte användarkonton och samlar inte in personuppgifter för att du ska kunna använda tjänsten. De enda personuppgifter vi kan samla in är om du frivilligt kontaktar oss för support. Om du kontaktar oss via e-post samlar vi in din e-postadress och meddelandets innehåll för att kunna svara på din förfrågan. Vi använder inte denna information för några andra ändamål och delar den inte med tredje part utan ditt samtycke.',
   'privacy.informationCollected.securityData': 'Säkerhetsrelaterad data: För att förhindra missbruk och skydda tjänstens integritet:',
   'privacy.informationCollected.ipLogs': 'Vi loggar tillfälligt IP-adresser och begär metadata (t.ex. tidsstämplar) för att upptäcka och motverka spam, botar eller skadlig aktivitet.',
   'privacy.informationCollected.turnstile': 'Vi använder Cloudflare Turnstile CAPTCHA för att förhindra automatiserat missbruk. Turnstile är utformad för att skydda integriteten och spårar inte användare över olika webbplatser.',

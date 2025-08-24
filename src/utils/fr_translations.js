@@ -142,7 +142,7 @@ export const fr = {
 
   // Terms of Service page content
   'tos.hero.title': 'Conditions d\'Utilisation',
-  'tos.lastUpdated': 'Dernière mise à jour : 17 août 2025',
+  'tos.lastUpdated': 'Dernière mise à jour : 24 août 2025',
   'tos.tableOfContents.title': 'Table des Matières',
   'tos.tableOfContents.serviceDescription': 'Description du Service',
   'tos.tableOfContents.acceptableUse': 'Utilisation Acceptable',
@@ -172,11 +172,11 @@ export const fr = {
 
   'tos.privacyData.title': '3. Confidentialité et Traitement des Données',
   'tos.privacyData.noAccess': 'Aucun Accès au Contenu : Nous ne pouvons pas accéder, lire ou récupérer le contenu de votre mémo. Tout le chiffrement se produit dans votre navigateur.',
-  'tos.privacyData.noPersonal': 'Aucune Donnée Personnelle : Nous ne collectons pas d\'informations personnelles ni n\'exigeons de comptes utilisateur.',
+  'tos.privacyData.noPersonal': 'Collecte Minimale de Données : Nous n\'exigeons pas de comptes utilisateur ni ne collectons d\'informations personnelles pour que vous utilisiez le service. Les seules données personnelles que nous pouvons recueillir sont si vous nous contactez volontairement pour du support. Si vous nous contactez par courriel, nous collectons votre adresse courriel et le contenu du message afin de répondre à votre demande. Nous n\'utilisons pas ces informations à d\'autres fins et ne les partageons pas avec des tiers sans votre consentement.',
   'tos.privacyData.securityLogging': 'Journalisation de Sécurité : Nous enregistrons temporairement les adresses IP et les métadonnées liées à la sécurité strictement pour l\'atténuation des abus et pour protéger l\'intégrité du service. Ces journaux ne sont jamais utilisés pour le suivi ou le profilage.',
   'tos.privacyData.automaticDeletion': 'Suppression Automatique : Les mémos sont automatiquement supprimés après avoir été lus ou à leur expiration.',
   'tos.privacyData.noRecovery': 'Aucune Récupération : Une fois qu\'un mémo est supprimé, il ne peut pas être récupéré.',
-  'tos.privacyData.gdpr': 'Conformité RGPD : Ce service ne collecte pas de données personnelles telles que définies sous le RGPD de l\'UE.',
+  'tos.privacyData.gdpr': 'Conformité RGPD : Nous sommes engagés envers les principes du RGPD. Nous minimisons la collecte de données et traitons les données nécessaires, comme les journaux de sécurité temporaires, sur la base de l\'intérêt légitime afin de protéger le service.',
   'tos.privacyData.moreDetails': 'Pour plus de détails, veuillez consulter notre',
   'tos.privacyData.privacyNotice': 'Avis de Confidentialité',
 
@@ -225,7 +225,7 @@ export const fr = {
 
   // Privacy Notice page content
   'privacy.hero.title': 'Avis de Confidentialité pour securememo.app',
-  'privacy.lastUpdated': 'Dernière mise à jour : 9 août 2025',
+  'privacy.lastUpdated': 'Dernière mise à jour : 24 août 2025',
   'privacy.tableOfContents.title': 'Table des Matières',
   'privacy.tableOfContents.informationCollected': 'Informations que Nous Collectons',
   'privacy.tableOfContents.howWeUse': 'Comment Nous Utilisons les Informations',
@@ -244,7 +244,7 @@ export const fr = {
   'privacy.informationCollected.title': '1. Informations que Nous Collectons',
   'privacy.informationCollected.intro': 'Nous collectons un minimum d\'informations pour faire fonctionner le service de manière sécurisée et efficace. Spécifiquement :',
   'privacy.informationCollected.memoData': 'Données du Mémo : Quand vous créez un mémo, nous stockons seulement la version chiffrée de votre message sur nos serveurs (en utilisant Cloudflare Workers et Base de Données D1). La clé de chiffrement (mot de passe) est générée et gérée entièrement dans votre navigateur et n\'est jamais envoyée ou stockée par nous. Les mémos sont automatiquement supprimés après avoir été lus ou à leur expiration (options : 8 heures, 1 jour, 2 jours, 1 semaine ou 30 jours).',
-  'privacy.informationCollected.noPersonal': 'Aucune Information Personnelle : Nous n\'exigeons pas de comptes utilisateur, d\'adresses courriel, de noms ou d\'autres identifiants personnels. Nous ne collectons ni ne stockons aucune donnée qui pourrait vous identifier directement.',
+  'privacy.informationCollected.noPersonal': 'Collecte Minimale de Données : Nous n\'exigeons pas de comptes utilisateur ni ne collectons d\'informations personnelles pour que vous utilisiez le service. Les seules données personnelles que nous pouvons recueillir sont si vous nous contactez volontairement pour du support. Si vous nous contactez par courriel, nous collectons votre adresse courriel et le contenu du message afin de répondre à votre demande. Nous n\'utilisons pas ces informations à d\'autres fins et ne les partageons pas avec des tiers sans votre consentement.',
   'privacy.informationCollected.securityData': 'Données Liées à la Sécurité : Pour la prévention des abus et l\'intégrité du service :',
   'privacy.informationCollected.ipLogs': 'Nous enregistrons temporairement les adresses IP et les métadonnées de requête (par exemple, horodatages) pour détecter et atténuer le spam, les bots ou l\'activité malveillante.',
   'privacy.informationCollected.turnstile': 'Nous utilisons Cloudflare Turnstile CAPTCHA pour prévenir les abus automatisés. Turnstile est conçu pour protéger la confidentialité et ne suit pas les utilisateurs à travers les sites.',

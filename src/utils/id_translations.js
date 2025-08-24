@@ -142,7 +142,7 @@ export const id = {
 
     // Terms of Service page content
     'tos.hero.title': 'Syarat Layanan',
-    'tos.lastUpdated': 'Terakhir diperbarui: 17 Agustus 2025',
+    'tos.lastUpdated': 'Terakhir diperbarui: 24 Agustus 2025',
     'tos.tableOfContents.title': 'Daftar Isi',
     'tos.tableOfContents.serviceDescription': 'Deskripsi Layanan',
     'tos.tableOfContents.acceptableUse': 'Penggunaan yang Dapat Diterima',
@@ -172,11 +172,11 @@ export const id = {
 
     'tos.privacyData.title': '3. Privasi & Penanganan Data',
     'tos.privacyData.noAccess': 'Tidak Ada Akses Konten: Kami tidak dapat mengakses, membaca, atau memulihkan konten memo Anda. Semua enkripsi terjadi di browser Anda.',
-    'tos.privacyData.noPersonal': 'Tidak Ada Data Pribadi: Kami tidak mengumpulkan informasi pribadi atau memerlukan akun pengguna.',
+    'tos.privacyData.noPersonal': 'Pengumpulan Data Minimal: Kami tidak memerlukan akun pengguna atau mengumpulkan informasi pribadi agar Anda dapat menggunakan layanan. Satu-satunya data pribadi yang mungkin kami kumpulkan adalah jika Anda secara sukarela menghubungi kami untuk dukungan. Jika Anda menghubungi kami melalui email, kami mengumpulkan alamat email dan isi pesan Anda untuk menanggapi pertanyaan Anda. Kami tidak menggunakan informasi ini untuk tujuan lain dan tidak membagikannya kepada pihak ketiga tanpa persetujuan Anda.',
     'tos.privacyData.securityLogging': 'Log Keamanan: Kami untuk sementara mencatat alamat IP dan metadata terkait keamanan secara ketat untuk mitigasi penyalahgunaan dan melindungi integritas layanan. Log ini tidak pernah digunakan untuk pelacakan atau profil.',
     'tos.privacyData.automaticDeletion': 'Penghapusan Otomatis: Memo secara otomatis dihapus setelah dibaca atau saat kedaluwarsa.',
     'tos.privacyData.noRecovery': 'Tidak Ada Pemulihan: Setelah memo dihapus, memo tidak dapat dipulihkan.',
-    'tos.privacyData.gdpr': 'Kepatuhan GDPR: Layanan ini tidak mengumpulkan data pribadi sebagaimana didefinisikan dalam GDPR UE.',
+    'tos.privacyData.gdpr': 'Kepatuhan GDPR: Kami berkomitmen pada prinsip-prinsip GDPR. Kami meminimalkan pengumpulan data dan memproses data yang diperlukan, seperti log keamanan sementara, berdasarkan dasar kepentingan yang sah (legitimate interest) untuk melindungi layanan.',
     'tos.privacyData.moreDetails': 'Untuk detail lebih lanjut, silakan tinjau',
     'tos.privacyData.privacyNotice': 'Pemberitahuan Privasi',
 
@@ -225,7 +225,7 @@ export const id = {
 
     // Privacy Notice page content
     'privacy.hero.title': 'Pemberitahuan Privasi untuk securememo.app',
-    'privacy.lastUpdated': 'Terakhir diperbarui: 9 Agustus 2025',
+    'privacy.lastUpdated': 'Terakhir diperbarui: 24 Agustus 2025',
     'privacy.tableOfContents.title': 'Daftar Isi',
     'privacy.tableOfContents.informationCollected': 'Informasi yang Kami Kumpulkan',
     'privacy.tableOfContents.howWeUse': 'Bagaimana Kami Menggunakan Informasi',
@@ -244,7 +244,7 @@ export const id = {
     'privacy.informationCollected.title': '1. Informasi yang Kami Kumpulkan',
     'privacy.informationCollected.intro': 'Kami mengumpulkan informasi minimal untuk mengoperasikan layanan dengan aman dan efisien. Secara khusus:',
     'privacy.informationCollected.memoData': 'Data Memo: Saat Anda membuat memo, kami hanya menyimpan versi terenkripsi dari pesan Anda di server kami (menggunakan Cloudflare Workers dan D1 Database). Kunci enkripsi (kata sandi) dihasilkan dan ditangani sepenuhnya di browser Anda dan tidak pernah dikirim ke atau disimpan oleh kami. Memo secara otomatis dihapus setelah dibaca atau saat kedaluwarsa (opsi: 8 jam, 1 hari, 2 hari, 1 minggu, atau 30 hari).',
-    'privacy.informationCollected.noPersonal': 'Tidak Ada Informasi Pribadi: Kami tidak memerlukan akun pengguna, alamat email, nama, atau pengenal pribadi lainnya. Kami tidak mengumpulkan atau menyimpan data apa pun yang dapat mengidentifikasi Anda secara langsung.',
+    'privacy.informationCollected.noPersonal': 'Pengumpulan Data Pribadi Minimal: Kami tidak memerlukan akun pengguna, alamat email, nama, atau pengenal lainnya agar layanan dapat digunakan, dan kami tidak mengumpulkan data apa pun yang dapat mengidentifikasi Anda secara langsung. Satu-satunya data pribadi yang mungkin kami peroleh adalah jika Anda secara sukarela mengirim email kepada kami untuk dukungan—dalam hal ini kami menggunakan alamat email dan isi pesan hanya untuk membalas. Kami tidak menggunakan data ini untuk tujuan lain dan tidak membagikannya tanpa persetujuan Anda.',
     'privacy.informationCollected.securityData': 'Data Terkait Keamanan: Untuk pencegahan penyalahgunaan dan integritas layanan:',
     'privacy.informationCollected.ipLogs': 'Kami untuk sementara mencatat alamat IP dan metadata permintaan (misalnya, stempel waktu) untuk mendeteksi dan mengurangi spam, bot, atau aktivitas berbahaya.',
     'privacy.informationCollected.turnstile': 'Kami menggunakan Cloudflare Turnstile CAPTCHA untuk mencegah penyalahgunaan otomatis. Turnstile dirancang untuk melindungi privasi dan tidak melacak pengguna di seluruh situs.',

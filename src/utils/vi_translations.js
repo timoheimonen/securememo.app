@@ -142,7 +142,7 @@ export const vi = {
 
   // Terms of Service page content
   'tos.hero.title': 'Điều khoản dịch vụ',
-  'tos.lastUpdated': 'Cập nhật lần cuối: 17 tháng 8, 2025',
+  'tos.lastUpdated': 'Cập nhật lần cuối: 24 tháng 8, 2025',
   'tos.tableOfContents.title': 'Mục lục',
   'tos.tableOfContents.serviceDescription': 'Mô tả dịch vụ',
   'tos.tableOfContents.acceptableUse': 'Sử dụng hợp lệ',
@@ -172,11 +172,11 @@ export const vi = {
 
   'tos.privacyData.title': '3. Quyền riêng tư & Xử lý dữ liệu',
   'tos.privacyData.noAccess': 'Không truy cập nội dung: Chúng tôi không thể truy cập, đọc hoặc khôi phục nội dung ghi chú của bạn. Tất cả mã hóa diễn ra trên trình duyệt.',
-  'tos.privacyData.noPersonal': 'Không thu thập dữ liệu cá nhân: Chúng tôi không thu thập thông tin cá nhân hoặc yêu cầu tài khoản người dùng.',
+  'tos.privacyData.noPersonal': 'Thu thập dữ liệu tối thiểu: Chúng tôi không yêu cầu tài khoản người dùng hoặc thu thập thông tin cá nhân để bạn sử dụng dịch vụ. Dữ liệu cá nhân duy nhất chúng tôi có thể thu thập là khi bạn chủ động liên hệ hỗ trợ. Nếu bạn liên hệ qua email, chúng tôi lưu địa chỉ email và nội dung thông điệp để trả lời yêu cầu của bạn. Chúng tôi không dùng thông tin này cho mục đích khác và không chia sẻ với bên thứ ba nếu không có sự đồng ý của bạn.',
   'tos.privacyData.securityLogging': 'Ghi nhật ký bảo mật: Chúng tôi tạm thời ghi lại địa chỉ IP và metadata liên quan đến bảo mật chỉ để giảm thiểu lạm dụng và bảo vệ tính toàn vẹn dịch vụ. Các nhật ký này không bao giờ được sử dụng để theo dõi hoặc phân tích.',
   'tos.privacyData.automaticDeletion': 'Tự động xóa: Ghi chú sẽ tự động bị xóa sau khi đọc hoặc khi hết hạn.',
   'tos.privacyData.noRecovery': 'Không khôi phục: Khi ghi chú đã bị xóa, không thể khôi phục lại.',
-  'tos.privacyData.gdpr': 'Tuân thủ GDPR: Dịch vụ này không thu thập dữ liệu cá nhân theo định nghĩa của EU GDPR.',
+  'tos.privacyData.gdpr': 'Tuân thủ GDPR: Chúng tôi cam kết với các nguyên tắc của GDPR. Chúng tôi giảm thiểu việc thu thập dữ liệu và chỉ xử lý dữ liệu cần thiết, như nhật ký bảo mật tạm thời, trên cơ sở lợi ích hợp pháp nhằm bảo vệ dịch vụ.',
   'tos.privacyData.moreDetails': 'Để biết thêm chi tiết, vui lòng xem',
   'tos.privacyData.privacyNotice': 'Thông báo quyền riêng tư',
 
@@ -225,7 +225,7 @@ export const vi = {
 
   // Privacy Notice page content
   'privacy.hero.title': 'Thông báo quyền riêng tư cho securememo.app',
-  'privacy.lastUpdated': 'Cập nhật lần cuối: 9 tháng 8, 2025',
+  'privacy.lastUpdated': 'Cập nhật lần cuối: 24 tháng 8, 2025',
   'privacy.tableOfContents.title': 'Mục lục',
   'privacy.tableOfContents.informationCollected': 'Thông tin chúng tôi thu thập',
   'privacy.tableOfContents.howWeUse': 'Cách chúng tôi sử dụng thông tin',
@@ -244,7 +244,7 @@ export const vi = {
   'privacy.informationCollected.title': '1. Thông tin chúng tôi thu thập',
   'privacy.informationCollected.intro': 'Chúng tôi thu thập thông tin tối thiểu để vận hành dịch vụ một cách an toàn và hiệu quả. Cụ thể:',
   'privacy.informationCollected.memoData': 'Dữ liệu ghi chú: Khi bạn tạo ghi chú, chúng tôi chỉ lưu phiên bản đã mã hóa của tin nhắn trên máy chủ (sử dụng Cloudflare Workers và D1 Database). Khóa mã hóa (mật khẩu) được tạo và xử lý hoàn toàn trên trình duyệt của bạn và không bao giờ được gửi hoặc lưu bởi chúng tôi. Ghi chú sẽ tự động bị xóa sau khi đọc hoặc khi hết hạn (tùy chọn: 8 giờ, 1 ngày, 2 ngày, 1 tuần hoặc 30 ngày).',
-  'privacy.informationCollected.noPersonal': 'Không thu thập thông tin cá nhân: Chúng tôi không yêu cầu tài khoản người dùng, email, tên hoặc bất kỳ thông tin nhận dạng cá nhân nào khác. Chúng tôi không thu thập hoặc lưu trữ bất kỳ dữ liệu nào có thể nhận diện trực tiếp bạn.',
+  'privacy.informationCollected.noPersonal': 'Thu thập dữ liệu tối thiểu: Chúng tôi không yêu cầu tài khoản người dùng hoặc thu thập thông tin cá nhân để bạn sử dụng dịch vụ. Dữ liệu cá nhân duy nhất chúng tôi có thể có là khi bạn chủ động liên hệ hỗ trợ. Nếu bạn gửi email, chúng tôi lưu địa chỉ email và nội dung tin nhắn để phản hồi. Chúng tôi không sử dụng cho mục đích khác và không chia sẻ với bên thứ ba nếu không có sự đồng ý của bạn.',
   'privacy.informationCollected.securityData': 'Dữ liệu liên quan đến bảo mật: Để ngăn chặn lạm dụng và bảo vệ dịch vụ:',
   'privacy.informationCollected.ipLogs': 'Chúng tôi tạm thời ghi lại địa chỉ IP và metadata yêu cầu (ví dụ: thời gian) để phát hiện và giảm thiểu spam, bot hoặc hoạt động độc hại.',
   'privacy.informationCollected.turnstile': 'Chúng tôi sử dụng Cloudflare Turnstile CAPTCHA để ngăn chặn lạm dụng tự động. Turnstile được thiết kế bảo vệ quyền riêng tư và không theo dõi người dùng trên các trang web.',
