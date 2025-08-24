@@ -53,18 +53,18 @@ export const bn = {
   'page.home.twitterDescription': 'প্রাইভেসি-প্রথম নিরাপদ স্বয়ং-বিনষ্ট মেমো অ্যাপ।',
   'page.about.title': 'securememo.app সম্পর্কে - প্রাইভেসি-কেন্দ্রিক এনক্রিপ্টেড নোট',
   'page.about.description': 'securememo.app এর প্রাইভেসি-প্রথম এনক্রিপ্টেড মেসেজিং পদ্ধতি সম্পর্কে জানুন। ক্লায়েন্ট-সাইড AES-256 এনক্রিপশন, স্বয়ং-বিনষ্ট বার্তা এবং জিরো-নলেজ আর্কিটেকচারে নির্মিত।',
-  'page.about.keywords': 'about secure memo, প্রাইভেসি-কেন্দ্রিক মেসেজিং, ক্লায়েন্ট-সাইড এনক্রিপশন, AES-256, স্বয়ং-বিনষ্ট বার্তা, জিরো-নলেজ, নিরাপদ নোট শেয়ারিং',
+  'page.about.keywords': 'নিরাপদ মেমো সম্পর্কে, প্রাইভেসি-কেন্দ্রিক মেসেজিং, ক্লায়েন্ট-সাইড এনক্রিপশন, AES-256, স্বয়ং-বিনষ্ট বার্তা, জিরো-নলেজ, নিরাপদ নোট শেয়ারিং',
   'page.about.ogTitle': 'securememo.app সম্পর্কে - প্রাইভেসি-কেন্দ্রিক এনক্রিপ্টেড নোট',
   'page.about.ogDescription': 'ক্লায়েন্ট-সাইড এনক্রিপশন ও স্বয়ং-বিনষ্ট বার্তার মাধ্যমে securememo.app কিভাবে আপনার প্রাইভেসি রক্ষা করে তা আবিষ্কার করুন।',
   'page.about.twitterDescription': 'ক্লায়েন্ট-সাইড এনক্রিপশন সহ প্রাইভেসি-প্রথম এনক্রিপ্টেড মেসেজিং।',
   'page.create.title': 'নিরাপদ মেমো তৈরি করুন - এনক্রিপ্টেড স্বয়ং-বিনষ্ট মেমো',
-  'page.create.keywords': 'secure memo তৈরি, এনক্রিপ্টেড মেমো, স্বয়ং-বিনষ্ট নোট, AES-256 এনক্রিপশন, ব্যক্তিগত মেমো শেয়ারিং, নিরাপদ নোট তৈরি',
+  'page.create.keywords': 'নিরাপদ মেমো তৈরি, এনক্রিপ্টেড মেমো, স্বয়ং-বিনষ্ট নোট, AES-256 এনক্রিপশন, ব্যক্তিগত মেমো শেয়ারিং, নিরাপদ নোট তৈরি',
   'page.read.title': 'নিরাপদ মেমো পড়ুন - এনক্রিপ্টেড মেমো ডিক্রিপ্ট করুন',
-  'page.read.keywords': 'secure memo পড়ুন, মেমো ডিক্রিপ্ট, এনক্রিপ্টেড নোট পড়া, AES-256 ডিক্রিপশন, ব্যক্তিগত মেমো অ্যাক্সেস',
-  'page.tos.title': 'সার্ভিসের শর্তাবলী - securememo.app লিগ্যাল টার্মস',
+  'page.read.keywords': 'নিরাপদ মেমো পড়ুন, মেমো ডিক্রিপ্ট, এনক্রিপ্টেড নোট পড়া, AES-256 ডিক্রিপশন, ব্যক্তিগত মেমো অ্যাক্সেস',
+  'page.tos.title': 'সার্ভিসের শর্তাবলী - securememo.app আইনগত শর্তাবলী',
   'page.tos.description': 'securememo.app এর সার্ভিসের শর্তাবলী - এনক্রিপ্টেড মেমো শেয়ারিং সার্ভিস। গ্রহণযোগ্য ব্যবহার, প্রাইভেসি, নিরাপত্তা এবং লিগ্যাল শর্ত সম্পর্কে জানুন।',
-  'page.tos.keywords': 'terms of service, secure memo legal, এনক্রিপ্টেড মেমো শর্ত, প্রাইভেসি পলিসি, acceptable use policy, নিরাপদ নোট শেয়ারিং টার্মস',
-  'page.tos.ogTitle': 'সার্ভিসের শর্তাবলী - securememo.app লিগ্যাল টার্মস',
+  'page.tos.keywords': 'সার্ভিসের শর্তাবলী, নিরাপদ মেমো আইনগত শর্ত, এনক্রিপ্টেড মেমো শর্ত, প্রাইভেসি নীতি, গ্রহণযোগ্য ব্যবহারের নীতি, নিরাপদ নোট শেয়ারিং শর্তাবলী',
+  'page.tos.ogTitle': 'সার্ভিসের শর্তাবলী - securememo.app আইনগত শর্তাবলী',
   'page.tos.ogDescription': 'securememo.app এনক্রিপ্টেড মেমো শেয়ারিং সার্ভিসের আইনগত শর্ত ও শর্তাবলী।',
   'page.tos.twitterDescription': 'securememo.app এনক্রিপ্টেড মেমো শেয়ারিং সার্ভিসের আইনগত শর্তাবলী।',
   'page.privacy.title': 'প্রাইভেসি নোটিস - securememo.app ডেটা সুরক্ষা',
@@ -326,7 +326,7 @@ export const bn = {
   'faq.cost.question': 'securememo.app কি ব্যবহার করতে ফ্রি?',
   'faq.cost.answer': 'হ্যাঁ, securememo.app সম্পূর্ণ ফ্রি। লুকানো চার্জ নেই, প্রিমিয়াম ফিচার নেই, ট্র্যাকিং বা বিজ্ঞাপন নেই।',
   'faq.technology.question': 'securememo.app কোন প্রযুক্তি ব্যবহার করে?',
-  'faq.technology.answer': 'securememo.app তৈরি হয়েছে Cloudflare Workers (serverless compute), D1 Database (স্টোরেজ), Web Crypto API (ক্লায়েন্ট-সাইড এনক্রিপশন) এবং আধুনিক HTML/CSS/JavaScript দিয়ে। সোর্স কোড ওপেন সোর্স এবং GitHub এ উপলব্ধ।',
+  'faq.technology.answer': 'securememo.app তৈরি হয়েছে Cloudflare Workers (সার্ভারবিহীন কম্পিউট), D1 Database (স্টোরেজ), Web Crypto API (ক্লায়েন্ট-সাইড এনক্রিপশন) এবং আধুনিক HTML/CSS/JavaScript দিয়ে। সোর্স কোড ওপেন সোর্স এবং GitHub এ উপলব্ধ।',
 
   // Accessibility and UI
 
@@ -469,7 +469,7 @@ export const bn = {
   'error.MISSING_SECURITY_CHALLENGE_ERROR': 'অনুগ্রহ করে নিরাপত্তা চ্যালেঞ্জ সম্পূর্ণ করুন',
 
   // Error messages - HTTP status errors
-  'error.INTERNAL_SERVER_ERROR': 'আভ্যন্তরীণ সার্ভার ত্রুটি',
+  'error.INTERNAL_SERVER_ERROR': 'অভ্যন্তরীণ সার্ভার ত্রুটি',
   'error.NOT_FOUND': 'পাওয়া যায়নি',
   'error.BAD_REQUEST': 'খারাপ অনুরোধ',
   'error.CLEANUP_FAILED': 'ক্লিনআপ ব্যর্থ হয়েছে',

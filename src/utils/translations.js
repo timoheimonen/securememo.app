@@ -26,6 +26,7 @@ import { ptPT } from './ptPT_translations.js';
 import { ru } from './ru_translations.js';
 import { ro } from './ro_translations.js';
 import { sv } from './sv_translations.js';
+import { tl } from './tl_translations.js';
 import { th } from './th_translations.js';
 import { tr } from './tr_translations.js';
 import { uk } from './uk_translations.js';
@@ -61,6 +62,7 @@ export const TRANSLATIONS = {
   ru: withLanguageNames(ru),
   ro: withLanguageNames(ro),
   sv: withLanguageNames(sv),
+  tl: withLanguageNames(tl),
   th: withLanguageNames(th),
   tr: withLanguageNames(tr),
   uk: withLanguageNames(uk),

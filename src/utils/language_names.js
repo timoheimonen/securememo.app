@@ -25,6 +25,7 @@ export const LANGUAGE_NAMES = {
   'language.russian': 'Русский',
   'language.spanish': 'Español',
   'language.swedish': 'Svenska',
+  'language.tagalog': 'Tagalog',
   'language.thai': 'ไทย',
   'language.turkish': 'Türkçe',
   'language.ukrainian': 'Українська',
