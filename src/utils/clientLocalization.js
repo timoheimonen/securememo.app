@@ -14,11 +14,11 @@ const DEFAULT_LOCALE = 'en';
 export function getCurrentLocale() {
   const pathname = window.location.pathname;
   const segments = pathname.replace(/^\/+/, '').split('/');
-  
+
   if (segments.length > 0 && isLocaleSupported(segments[0])) {
     return segments[0];
   }
-  
+
   return DEFAULT_LOCALE;
 }
 
@@ -30,16 +30,16 @@ export function getCurrentLocale() {
  */
 export function t(key, locale = null) {
   const currentLocale = locale || getCurrentLocale();
-  
+
   if (TRANSLATIONS[currentLocale] && TRANSLATIONS[currentLocale][key]) {
     return TRANSLATIONS[currentLocale][key];
   }
-  
+
   // Fallback to default locale
   if (currentLocale !== DEFAULT_LOCALE && TRANSLATIONS[DEFAULT_LOCALE] && TRANSLATIONS[DEFAULT_LOCALE][key]) {
     return TRANSLATIONS[DEFAULT_LOCALE][key];
   }
-  
+
   // Return key if no translation found
   return key;
 }
@@ -53,12 +53,12 @@ export function t(key, locale = null) {
 export function localizeUrl(path, locale = null) {
   const currentLocale = locale || getCurrentLocale();
   const normalizedPath = path.startsWith('/') ? path : '/' + path;
-  
+
   // Handle root path
   if (normalizedPath === '/') {
     return `/${currentLocale}`;
   }
-  
+
   return `/${currentLocale}${normalizedPath}`;
 }
 
@@ -67,15 +67,15 @@ export function localizeUrl(path, locale = null) {
  */
 export function updateNavigationLinks() {
   const navLinks = document.querySelectorAll('.nav-link[href]');
-  
+
   navLinks.forEach(link => {
     const href = link.getAttribute('href');
-    
+
     // Skip external links and already localized links
     if (href.startsWith('http') || href.startsWith(`/${getCurrentLocale()}`)) {
       return;
     }
-    
+
     // Update href to include current locale
     const localizedHref = localizeUrl(href);
     link.setAttribute('href', localizedHref);
@@ -97,19 +97,19 @@ export function updateLogoLink() {
  */
 export function updateInternalLinks() {
   const links = document.querySelectorAll('a[href^="/"]');
-  
+
   links.forEach(link => {
     const href = link.getAttribute('href');
-    
+
     // Skip already localized links and special paths
-    if (href.startsWith(`/${getCurrentLocale()}`) || 
-        href.startsWith('/api/') || 
-        href.startsWith('/js/') || 
-        href.startsWith('/styles.css') || 
-        href.startsWith('/sitemap.xml')) {
+    if (href.startsWith(`/${getCurrentLocale()}`) ||
+      href.startsWith('/api/') ||
+      href.startsWith('/js/') ||
+      href.startsWith('/styles.css') ||
+      href.startsWith('/sitemap.xml')) {
       return;
     }
-    
+
     // Update href to include current locale
     const localizedHref = localizeUrl(href);
     link.setAttribute('href', localizedHref);
@@ -136,8 +136,8 @@ function updateLanguageLinks() {
   languageItems.forEach(item => {
     const targetLocale = item.getAttribute('lang');
     if (targetLocale && isLocaleSupported(targetLocale)) {
-  // Start with target locale root
-  let newHref = '/' + targetLocale;
+      // Start with target locale root
+      let newHref = '/' + targetLocale;
       if (currentPath !== '/') {
         newHref += currentPath;
       }
@@ -157,7 +157,7 @@ export function initLocalization() {
   updateLogoLink();
   updateInternalLinks();
   updateLanguageLinks();
-  
+
   // Set document language attribute
   document.documentElement.setAttribute('lang', getCurrentLocale());
 }
@@ -184,7 +184,7 @@ export function getClientLocalizationJS(locale = 'en') {
   // Compact JSON to minimize payload size
   const translationsString = JSON.stringify(relevantTranslations);
   const supportedLocalesString = JSON.stringify(getSupportedLocales());
-  
+
   return `// Client-side localization utility for securememo.app
 // Privacy-first approach: uses only URL-based locale detection
 // No cookies, localStorage, or browser storage used
