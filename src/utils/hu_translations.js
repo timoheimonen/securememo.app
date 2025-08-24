@@ -90,7 +90,7 @@ export const hu = {
 
   'home.security.title': 'Biztonsági funkciók',
   'home.security.encryption.title': '🔒 Valódi kliensoldali titkosítás',
-  'home.security.encryption.description': 'Jegyzete böngészőben titkosítva van AES-256-GCM-mel és erős kulcsszármaztatással (2 200 000+ iteráció). Soha nem látjuk a szöveget.',
+  'home.security.encryption.description': 'Jegyzete a böngészőben AES-256-GCM-mel és erős kulcsszármaztatással van titkosítva. Soha nem látjuk a tiszta szöveget.',
   'home.security.delete.title': '🗑️ Megbízható önmegsemmisítés',
   'home.security.delete.description': 'A jegyzetek örökre eltűnnek olvasás vagy lejárat után, automatikus törléssel minden órában. Nincs biztonsági mentés vagy visszaállítás.',
   'home.security.password.title': '🌐 Nulla jelszóismeret',
@@ -265,7 +265,7 @@ export const hu = {
   'privacy.dataSharing.business': 'Üzleti átruházás: Ha a securememo.app-ot felvásárolják vagy összeolvad, az adatok átadásra kerülhetnek az ügylet részeként, de továbbra is az adatvédelmi tájékoztató hatálya alá tartoznak.',
 
   'privacy.dataSecurity.title': '4. Adatbiztonság',
-  'privacy.dataSecurity.encryption': 'Titkosítás: Minden jegyzet kliensoldalon, AES-256-tal és PBKDF2 kulcsszármaztatással (2 200 000 iteráció) titkosítva van. Csak titkosított adatokat tárolunk, visszafejteni nem tudjuk.',
+  'privacy.dataSecurity.encryption': 'Titkosítás: Minden jegyzet kliensoldalon AES-256-tal PBKDF2 kulcsszármaztatással titkosítva van. Csak titkosított adatokat tárolunk, visszafejteni nem tudjuk.',
   'privacy.dataSecurity.deletion': 'Törlés: A jegyzetek véglegesen törlődnek elolvasás vagy lejárat után, automatikus időzített törléssel.',
   'privacy.dataSecurity.securityMeasures': 'Biztonsági intézkedések: Erős biztonsági fejléceket (pl. CSP, HSTS), bemeneti szűrést, időzítési támadások elleni védelmet és CAPTCHA-t alkalmazunk a visszaélések megelőzésére.',
   'privacy.dataSecurity.noRecovery': 'Nincs visszaállítás: A törölt jegyzetek nem állíthatók vissza – még általunk sem.',
@@ -318,7 +318,7 @@ export const hu = {
   'faq.privacy.question': 'Hogyan védi a securememo.app az adatvédelmemet?',
   'faq.privacy.answer': 'A securememo.app böngészőoldali AES-256 titkosítást használ, vagyis a jegyzeted a böngésződben titkosítva van, mielőtt eljutna a szervereinkhez. Soha nem látjuk a jegyzet szövegét. A jegyzetek elolvasás vagy lejárat után önmegsemmisülnek, és nem kérünk felhasználói fiókot vagy személyes adatokat.',
   'faq.encryption.question': 'Milyen titkosítást használ a securememo.app?',
-  'faq.encryption.answer': 'AES-256-GCM titkosítást használunk PBKDF2 kulcsszármaztatással (2 200 000+ iteráció). Minden titkosítás a böngészőben történik a Web Crypto API segítségével. A titkosítási jelszó külön generálódik, és soha nem tároljuk a szerveren.',
+  'faq.encryption.answer': 'AES-256-GCM titkosítást használunk PBKDF2 kulcsszármaztatással. Minden titkosítás kliensoldalon a böngészőben történik a Web Crypto API-val. A titkosítási jelszó külön generálódik, és soha nem tároljuk a szervereinken.',
   'faq.duration.question': 'Meddig maradnak meg a jegyzetek?',
   'faq.duration.answer': 'A jegyzetek beállíthatók, hogy 8 óra, 1 nap, 2 nap, 1 hét vagy maximum 30 nap után lejárjanak. Elolvasás után azonnal törlődnek. A lejárt jegyzetek automatikusan törlődnek minden órában.',
   'faq.recovery.question': 'Vissza lehet állítani egy törölt jegyzetet?',

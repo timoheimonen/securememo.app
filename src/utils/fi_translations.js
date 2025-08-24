@@ -90,7 +90,7 @@ export const fi = {
 
   'home.security.title': 'Turvaominaisuudet',
   'home.security.encryption.title': '🔒 Aidosti Selaimessa Salattu',
-  'home.security.encryption.description': 'Muistiosi salataan selaimessa AES-256-GCM:lla ja vahvalla avainjohdannalla (yli 2 200 000 kierrosta). Emme koskaan näe selväkielistä sisältöä.',
+  'home.security.encryption.description': 'Muistiosi salataan selaimessa AES-256-GCM:lla ja vahvalla avainjohdannalla. Emme koskaan näe selväkielistä sisältöä.',
   'home.security.delete.title': '🗑️ Itsepoistuvat muistiot',
   'home.security.delete.description': 'Muistiot poistetaan lukemisen tai vanhentumisen jälkeen, automaattinen siivous tunnin välein. Ei varmuuskopioita tai palautusmahdollisuutta.',
   'home.security.password.title': '🌐 Salasanat eivät koskaan poistu selaimestasi',
@@ -265,7 +265,7 @@ export const fi = {
   'privacy.dataSharing.business': 'Liiketoiminnan siirrot: Jos securememo.app myydään tai yhdistetään toiseen yritykseen, tiedot voidaan siirtää osana kauppaa, mutta ne pysyvät tämän tietosuojailmoituksen alaisina.',
 
   'privacy.dataSecurity.title': '4. Tietoturva',
-  'privacy.dataSecurity.encryption': 'Salaus: Kaikki muistiot salataan selaimessa AES-256:lla ja PBKDF2-avainjohdannalla (2 200 000 kierrosta). Tallennamme vain salattua dataa, emmekä voi purkaa sitä.',
+  'privacy.dataSecurity.encryption': 'Salaus: Kaikki muistiot salataan selaimessa AES-256:lla PBKDF2-avainjohdannalla. Tallennamme vain salattua dataa emmekä voi purkaa sitä.',
   'privacy.dataSecurity.deletion': 'Poisto: Muistiot poistetaan pysyvästi lukemisen tai vanhentumisen jälkeen automaattisten cron-ajojen avulla.',
   'privacy.dataSecurity.securityMeasures': 'Turvatoimet: Toteutamme vahvat suojausotsikot (esim. CSP, HSTS), syötteen puhdistuksen, ajoitushyökkäysten suojauksen ja CAPTCHA:n väärinkäytön estämiseksi.',
   'privacy.dataSecurity.noRecovery': 'Ei palautusta: Kun muistio on poistettu, sitä ei voi palauttaa – edes meiltä.',
@@ -318,7 +318,7 @@ export const fi = {
   'faq.privacy.question': 'Miten securememo.app suojaa yksityisyyteni?',
   'faq.privacy.answer': 'securememo.app käyttää selaimessa tapahtuvaa AES-256-salausta, eli muistiosi salataan selaimessasi ennen kuin se lähetetään palvelimille. Emme koskaan näe selväkielistä sisältöä. Muistiot tuhoutuvat lukemisen tai vanhentumisen jälkeen, eikä käyttäjätilejä tai henkilötietoja kerätä.',
   'faq.encryption.question': 'Mitä salausta securememo.app käyttää?',
-  'faq.encryption.answer': 'Käytämme AES-256-GCM-salausta ja PBKDF2-avainjohdantaa (yli 2 200 000 kierrosta). Kaikki salaus tapahtuu selaimessasi Web Crypto API:n avulla. Salaussalasana luodaan erikseen eikä sitä tallenneta palvelimille.',
+  'faq.encryption.answer': 'Käytämme AES-256-GCM-salausta ja PBKDF2-avainjohdantaa. Kaikki salaus tapahtuu selaimessasi Web Crypto API:n avulla. Salaussalasana luodaan erikseen eikä sitä tallenneta palvelimille.',
   'faq.duration.question': 'Kuinka kauan muistiot säilyvät?',
   'faq.duration.answer': 'Muistiot voidaan asettaa vanhentumaan 8 tunnin, 1 päivän, 2 päivän, 1 viikon tai enintään 30 päivän jälkeen. Ne poistetaan myös heti lukemisen jälkeen. Vanhentuneet muistiot siivotaan automaattisesti joka tunti.',
   'faq.recovery.question': 'Voinko palauttaa poistetun muistion?',

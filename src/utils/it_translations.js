@@ -90,7 +90,7 @@ export const it = {
 
   'home.security.title': 'Caratteristiche di Sicurezza',
   'home.security.encryption.title': '🔒 Vera Crittografia Lato Client',
-  'home.security.encryption.description': 'La tua memo è crittografata nel browser con AES-256-GCM e una forte derivazione di chiave (2.200.000+ iterazioni). Non vediamo mai il testo in chiaro.',
+  'home.security.encryption.description': 'La tua memo è crittografata nel browser con AES-256-GCM e una forte derivazione della chiave. Non vediamo mai il testo in chiaro.',
   'home.security.delete.title': '🗑️ Auto-Eliminazione Affidabile',
   'home.security.delete.description': 'Le memo svaniscono per sempre dopo la lettura o scadenza, con pulizia automatica ogni ora. Nessun backup o recupero possibile.',
   'home.security.password.title': '🌐 Zero Conoscenza Password',
@@ -265,7 +265,7 @@ export const it = {
   'privacy.dataSharing.business': 'Trasferimenti Aziendali: Se securememo.app viene acquisita o fusa, i dati potrebbero essere trasferiti come parte della transazione, ma rimarrebbero soggetti a questa Informativa sulla Privacy.',
 
   'privacy.dataSecurity.title': '4. Sicurezza dei Dati',
-  'privacy.dataSecurity.encryption': 'Crittografia: Tutti i memo sono crittografati lato client utilizzando AES-256 con derivazione della chiave PBKDF2 (2.200.000 iterazioni). Memorizziamo solo dati crittografati e non possiamo decrittografarli.',
+  'privacy.dataSecurity.encryption': 'Crittografia: Tutti i memo sono crittografati lato client utilizzando AES-256 con derivazione della chiave PBKDF2. Memorizziamo solo dati crittografati e non possiamo decrittografarli.',
   'privacy.dataSecurity.deletion': 'Eliminazione: I memo vengono eliminati permanentemente dopo la lettura o la scadenza tramite lavori cron automatizzati.',
   'privacy.dataSecurity.securityMeasures': 'Misure di Sicurezza: Implementiamo forti header di sicurezza (ad es. CSP, HSTS), sanificazione degli input, protezioni contro attacchi di timing e CAPTCHA per prevenire abusi.',
   'privacy.dataSecurity.noRecovery': 'Nessun Recupero: Una volta eliminati, i memo non possono essere recuperati—nemmeno da noi.',
@@ -318,7 +318,7 @@ export const it = {
   'faq.privacy.question': 'Come protegge la mia privacy securememo.app?',
   'faq.privacy.answer': 'securememo.app utilizza la crittografia AES-256 lato client, il che significa che il tuo memo viene crittografato nel tuo browser prima di essere inviato ai nostri server. Non vediamo mai il contenuto in chiaro. I memo si autodistruggono dopo essere stati letti o scaduti, e non richiediamo account utente né raccogliamo informazioni personali.',
   'faq.encryption.question': 'Quale crittografia utilizza securememo.app?',
-  'faq.encryption.answer': 'Utilizziamo la crittografia AES-256-GCM con derivazione della chiave PBKDF2 (oltre 2.200.000 iterazioni). Tutta la crittografia avviene lato client nel tuo browser utilizzando l\'API Web Crypto. La password di crittografia viene generata separatamente e non viene mai memorizzata sui nostri server.',
+  'faq.encryption.answer': 'Utilizziamo la crittografia AES-256-GCM con derivazione della chiave PBKDF2. Tutta la crittografia avviene lato client nel tuo browser utilizzando la Web Crypto API. La password di crittografia è generata separatamente e non viene mai memorizzata sui nostri server.',
   'faq.duration.question': 'Quanto durano i memo?',
   'faq.duration.answer': 'I memo possono essere impostati per scadere dopo 8 ore, 1 giorno, 2 giorni, 1 settimana o massimo 30 giorni. Vengono anche eliminati immediatamente dopo essere stati letti. I memo scaduti vengono automaticamente puliti ogni ora.',
   'faq.recovery.question': 'Posso recuperare un memo eliminato?',

@@ -90,7 +90,7 @@ export const tr = {
 
   'home.security.title': 'Güvenlik Özellikleri',
   'home.security.encryption.title': '🔒 Gerçek Tarayıcıda Şifreleme',
-  'home.security.encryption.description': 'Notunuz tarayıcıda AES-256-GCM ve güçlü anahtar türetme (2.200.000+ iterasyon) ile şifrelenir. Düz metni asla görmeyiz.',
+  'home.security.encryption.description': 'Notunuz tarayıcıda AES-256-GCM ve güçlü bir anahtar türetme ile şifrelenir. Düz metni asla görmeyiz.',
   'home.security.delete.title': '🗑️ Güvenilir Otomatik Silme',
   'home.security.delete.description': 'Notlar okunduktan veya süresi dolduktan sonra tamamen kaybolur, her saat otomatik olarak temizlenir. Yedekleme veya kurtarma yok.',
   'home.security.password.title': '🌐 Sıfır Şifre Bilgisi',
@@ -265,7 +265,7 @@ export const tr = {
   'privacy.dataSharing.business': 'İş Transferleri: securememo.app devralınır veya birleşirse, veriler işlemin bir parçası olarak aktarılabilir; ancak bu Gizlilik Bildirimi kapsamında kalır.',
 
   'privacy.dataSecurity.title': '4. Veri Güvenliği',
-  'privacy.dataSecurity.encryption': 'Şifreleme: Tüm notlar tarayıcıda AES-256 ve PBKDF2 anahtar türetme (2.200.000 iterasyon) ile şifrelenir. Yalnızca şifrelenmiş verileri saklarız ve bunları çözme imkanımız yoktur.',
+  'privacy.dataSecurity.encryption': 'Şifreleme: Tüm notlar istemci tarafında AES-256 ve PBKDF2 anahtar türetme kullanılarak şifrelenir. Yalnızca şifrelenmiş verileri saklarız ve bunları çözme imkanımız yoktur.',
   'privacy.dataSecurity.deletion': 'Silme: Notlar okunduktan veya süresi dolduktan sonra otomatik görevlerle kalıcı olarak silinir.',
   'privacy.dataSecurity.securityMeasures': 'Güvenlik Önlemleri: Güçlü güvenlik başlıkları (örn. CSP, HSTS), girdi doğrulama, zamanlama saldırısı korumaları ve CAPTCHA uygularız.',
   'privacy.dataSecurity.noRecovery': 'Geri Getirme Yok: Bir kez silinen notlar, bizim tarafımızdan bile geri getirilemez.',
@@ -318,7 +318,7 @@ export const tr = {
   'faq.privacy.question': 'securememo.app gizliliğimi nasıl korur?',
   'faq.privacy.answer': 'securememo.app, istemci tarafı AES-256 şifreleme kullanır; yani notunuz tarayıcınızda şifrelenir ve sunucularımıza gönderilmeden önce korunur. Düz metin içeriği asla görmeyiz. Notlar okunduktan veya süresi dolduktan sonra kendini yok eder. Kullanıcı hesabı gerektirmez ve kişisel bilgi toplamaz.',
   'faq.encryption.question': 'securememo.app hangi şifrelemeyi kullanıyor?',
-  'faq.encryption.answer': 'AES-256-GCM şifreleme ve PBKDF2 anahtar türetme (2.200.000+ iterasyon) kullanıyoruz. Tüm şifreleme tarayıcınızda Web Crypto API ile gerçekleşir. Şifreleme parolası ayrı olarak oluşturulur ve sunucularımızda asla saklanmaz.',
+  'faq.encryption.answer': 'AES-256-GCM şifreleme ve PBKDF2 anahtar türetme kullanıyoruz. Tüm şifreleme tarayıcınızda Web Crypto API kullanılarak istemci tarafında gerçekleşir. Şifreleme parolası ayrı olarak oluşturulur ve sunucularımızda asla saklanmaz.',
   'faq.duration.question': 'Notlar ne kadar süreyle saklanır?',
   'faq.duration.answer': 'Notlar, okunduktan sonra veya 8 saat, 1 gün, 2 gün, 1 hafta ya da maksimum 30 gün sonra silinecek şekilde ayarlanabilir. Okunduktan sonra hemen silinir. Süresi dolan notlar her saat otomatik olarak temizlenir.',
   'faq.recovery.question': 'Silinen bir notu geri getirebilir miyim?',

@@ -90,7 +90,7 @@ export const no = {
 
   'home.security.title': 'Sikkerhetsfunksjoner',
   'home.security.encryption.title': '🔒 Ekte klientbasert kryptering',
-  'home.security.encryption.description': 'Notatet ditt krypteres i nettleseren med AES-256-GCM og sterk nøkkelavledning (over 2 200 000 iterasjoner). Vi ser aldri klartekst.',
+  'home.security.encryption.description': 'Notatet ditt krypteres i nettleseren med AES-256-GCM og sterk nøkkelavledning. Vi ser aldri klartekst.',
   'home.security.delete.title': '🗑️ Pålitelig automatisk sletting',
   'home.security.delete.description': 'Notater forsvinner for alltid etter lesing eller utløp, med automatisk opprydding hver time. Ingen sikkerhetskopier eller gjenoppretting mulig.',
   'home.security.password.title': '🌐 Nullkunnskap om passord',
@@ -265,7 +265,7 @@ export const no = {
   'privacy.dataSharing.business': 'Virksomhetsoverdragelser: Hvis securememo.app blir kjøpt opp eller fusjonert, kan data overføres som en del av transaksjonen, men vil fortsatt være underlagt denne personvernerklæringen.',
 
   'privacy.dataSecurity.title': '4. Datasikkerhet',
-  'privacy.dataSecurity.encryption': 'Kryptering: Alle notater krypteres i nettleseren med AES-256 og PBKDF2 nøkkelavledning (2 200 000 iterasjoner). Vi lagrer kun kryptert data og kan ikke dekryptere den.',
+  'privacy.dataSecurity.encryption': 'Kryptering: Alle notater krypteres i nettleseren med AES-256 og PBKDF2 nøkkelavledning. Vi lagrer kun kryptert data og kan ikke dekryptere den.',
   'privacy.dataSecurity.deletion': 'Sletting: Notater slettes permanent etter lesing eller utløp via automatiserte cron-jobber.',
   'privacy.dataSecurity.securityMeasures': 'Sikkerhetstiltak: Vi implementerer sterke sikkerhetsoverskrifter (f.eks. CSP, HSTS), inndatavalidering, beskyttelse mot timing-angrep og CAPTCHA for å forhindre misbruk.',
   'privacy.dataSecurity.noRecovery': 'Ingen gjenoppretting: Når notater er slettet, kan de ikke gjenopprettes – heller ikke av oss.',
@@ -318,7 +318,7 @@ export const no = {
   'faq.privacy.question': 'Hvordan beskytter securememo.app mitt personvern?',
   'faq.privacy.answer': 'securememo.app bruker klientbasert AES-256-kryptering, noe som betyr at notatet ditt krypteres i nettleseren før det sendes til våre servere. Vi ser aldri klartekstinnholdet. Notater selvdestruerer etter at de er lest eller utløpt, og vi krever ikke brukerkonto eller samler inn personopplysninger.',
   'faq.encryption.question': 'Hvilken kryptering bruker securememo.app?',
-  'faq.encryption.answer': 'Vi bruker AES-256-GCM-kryptering med PBKDF2 nøkkelavledning (over 2 200 000 iterasjoner). All kryptering skjer klientbasert i nettleseren med Web Crypto API. Krypteringspassordet genereres separat og lagres aldri på våre servere.',
+  'faq.encryption.answer': 'Vi bruker AES-256-GCM-kryptering med PBKDF2 nøkkelavledning. All kryptering skjer klientbasert i nettleseren din med Web Crypto API. Krypteringspassordet genereres separat og lagres aldri på våre servere.',
   'faq.duration.question': 'Hvor lenge varer notater?',
   'faq.duration.answer': 'Notater kan settes til å utløpe etter 8 timer, 1 dag, 2 dager, 1 uke eller maks 30 dager. De slettes også umiddelbart etter at de er lest. Utløpte notater ryddes automatisk hver time.',
   'faq.recovery.question': 'Kan jeg gjenopprette et slettet notat?',
