@@ -22,6 +22,17 @@ export async function addArtificialDelay(minMs = 50, maxMs = 100) {
   return new Promise(resolve => setTimeout(resolve, delay));
 }
 
+// Standardized response delay window for security-sensitive paths (enumeration resistance)
+export const STANDARD_DELAY_WINDOW = { MIN: 70, MAX: 110 };
+
+/**
+ * Apply a standardized delay for all comparable success and failure response paths.
+ * Keeps jitter (randomness) while ensuring comparable distributions.
+ */
+export async function uniformResponseDelay() {
+  return addArtificialDelay(STANDARD_DELAY_WINDOW.MIN, STANDARD_DELAY_WINDOW.MAX);
+}
+
 /**
  * Constant-time string comparison to prevent timing attacks
  * @param {string} a - First string to compare
@@ -32,15 +43,15 @@ export function constantTimeCompare(a, b) {
   if (typeof a !== 'string' || typeof b !== 'string') {
     return false;
   }
-  
+
   if (a.length !== b.length) {
     return false;
   }
-  
+
   let result = 0;
   for (let i = 0; i < a.length; i++) {
     result |= a.charCodeAt(i) ^ b.charCodeAt(i);
   }
-  
+
   return result === 0;
-  }
+}
