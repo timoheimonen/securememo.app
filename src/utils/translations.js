@@ -3,6 +3,7 @@
 // Translations are auto translated. Errors are possible.
 
 import { ar } from './ar_translations.js';
+import { bn } from './bn_translations.js';
 import { cs } from './cs_translations.js';
 import { da } from './da_translations.js';
 import { de } from './de_translations.js';
@@ -37,6 +38,7 @@ function withLanguageNames(localeMap) {
 
 export const TRANSLATIONS = {
   ar: withLanguageNames(ar),
+  bn: withLanguageNames(bn),
   cs: withLanguageNames(cs),
   da: withLanguageNames(da),
   de: withLanguageNames(de),
