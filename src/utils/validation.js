@@ -1,5 +1,5 @@
 // Input validation and sanitization utilities
-import { uniformResponseDelay} from './timingSecurity.js';
+import { uniformResponseDelay } from './timingSecurity.js';
 
 /**
  * Sanitize user input for HTML context (prevents XSS)
@@ -8,7 +8,7 @@ import { uniformResponseDelay} from './timingSecurity.js';
  */
 export function sanitizeForHTML(input) {
   if (typeof input !== 'string') return '';
-  
+
   // First decode HTML entities to catch encoded malicious content
   let decoded = input
     .replace(/&lt;/g, '<')
@@ -19,11 +19,11 @@ export function sanitizeForHTML(input) {
     .replace(/&#x2F;/g, '/')
     .replace(/&#39;/g, "'")
     .replace(/&#47;/g, '/');
-  
+
   // Remove HTML tags and event handlers
   let sanitized = decoded
     .replace(/<[^>]*>/g, '') // Remove all tags
-    .replace(/javascript:/gi, '') 
+    .replace(/javascript:/gi, '')
     .replace(/on\w+=/gi, '')
     .replace(/vbscript:/gi, '')
     .replace(/data:/gi, '')
@@ -32,7 +32,7 @@ export function sanitizeForHTML(input) {
     .replace(/setTimeout\(/gi, '')
     .replace(/setInterval\(/gi, '')
     .trim();
-  
+
   // Re-encode any remaining < > & " ' to prevent XSS
   return sanitized
     .replace(/</g, '&lt;')
@@ -64,7 +64,7 @@ export function normalizeCiphertextForResponse(input) {
  */
 export function sanitizeForDatabase(input) {
   if (typeof input !== 'string') return '';
-  
+
   // Remove null bytes and other problematic characters for database storage
   return input
     .replace(/\x00/g, '') // Remove null bytes
@@ -90,12 +90,12 @@ export function validateMemoId(memoId) {
  */
 export async function validateMemoIdSecure(memoId) {
   const result = validateMemoId(memoId);
-  
+
   // Add artificial delay if validation fails
   if (!result) {
-  await uniformResponseDelay();
+    await uniformResponseDelay();
   }
-  
+
   return result;
 }
 
@@ -108,17 +108,17 @@ export function validateEncryptedMessage(message) {
   if (!message || typeof message !== 'string' || message.length === 0 || message.length > 50000) {
     return false;
   }
-  
+
   // Check for null bytes and other control characters that could cause issues
   if (/\x00/.test(message)) {
     return false; // Null bytes are not allowed
   }
-  
+
   // Check for other problematic control characters (except newlines, tabs, carriage returns)
   if (/[\x01-\x08\x0B\x0C\x0E-\x1F\x7F]/.test(message)) {
     return false;
   }
-  
+
   return true;
 }
 
@@ -129,10 +129,10 @@ export function validateEncryptedMessage(message) {
  */
 export function validateExpiryHours(expiryHours) {
   if (expiryHours === null || expiryHours === undefined) return false;
-  
+
   const hours = parseInt(expiryHours);
   const validOptions = [8, 24, 48, 168, 720]; // 8h, 24h (1 day), 48h (2 days), 168h (1 week), 720h (30 days)
-  
+
   return !isNaN(hours) && validOptions.includes(hours);
 }
 
@@ -142,11 +142,11 @@ export function validateExpiryHours(expiryHours) {
  * @returns {boolean} - Whether the password is valid
  */
 export function validatePassword(password) {
-  return password && 
-         typeof password === 'string' && 
-         password.length >= 32 && 
-         password.length <= 64 &&
-         /^[A-Za-z0-9]+$/.test(password);
+  return password &&
+    typeof password === 'string' &&
+    password.length >= 32 &&
+    password.length <= 64 &&
+    /^[A-Za-z0-9]+$/.test(password);
 }
 
 /**
@@ -158,18 +158,18 @@ export function validatePassword(password) {
 export async function validateAndSanitizeEncryptedMessageSecure(message) {
   // First validate the message
   if (!validateEncryptedMessage(message)) {
-  await uniformResponseDelay();
+    await uniformResponseDelay();
     return { isValid: false, sanitizedMessage: null };
   }
-  
+
   // Sanitize for database storage (removes problematic characters)
   const sanitizedForDB = sanitizeForDatabase(message);
-  
+
   // Additional validation after sanitization
   if (sanitizedForDB.length === 0 || sanitizedForDB.length > 50000) {
-  await uniformResponseDelay();
+    await uniformResponseDelay();
     return { isValid: false, sanitizedMessage: null };
   }
-  
+
   return { isValid: true, sanitizedMessage: sanitizedForDB };
 } 

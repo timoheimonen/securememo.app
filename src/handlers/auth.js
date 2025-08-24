@@ -1,4 +1,4 @@
-import { 
+import {
     validateMemoIdSecure,
     validateAndSanitizeEncryptedMessageSecure,
     validateExpiryHours,
@@ -75,16 +75,16 @@ async function hashDeletionToken(token) {
 function calculateExpiryTime(expiryHours) {
     // Parse expiry hours as integer
     const hours = parseInt(expiryHours);
-    
+
     // Validate that it's a valid option
     if (!validateExpiryHours(expiryHours)) {
         return null;
     }
-    
+
     const now = new Date();
     // Calculate expiry time based on hours (all options now use hours)
     const expiryTime = new Date(now.getTime() + hours * 60 * 60 * 1000);
-    
+
     // Return UNIX timestamp (seconds since epoch)
     return Math.floor(expiryTime.getTime() / 1000);
 }
@@ -92,11 +92,11 @@ function calculateExpiryTime(expiryHours) {
 // Generate cryptographically secure random 40-char memo ID with collision detection
 async function generateMemoId(env, maxRetries = 10, locale = 'en') {
     const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_';
-    
+
     for (let attempt = 0; attempt < maxRetries; attempt++) {
         let result = '';
         const biasThreshold = 256 - (256 % chars.length);
-        
+
         // Use proper rejection sampling to avoid modulo bias
         for (let i = 0; i < 40; i++) {
             let value;
@@ -105,15 +105,15 @@ async function generateMemoId(env, maxRetries = 10, locale = 'en') {
                 crypto.getRandomValues(array);
                 value = array[0];
             } while (value >= biasThreshold); // Reject biased values
-            
+
             result += chars[value % chars.length];
         }
-        
+
         // Check if this memo_id already exists in the database
         try {
             const checkStmt = env.DB.prepare('SELECT 1 FROM memos WHERE memo_id = ? LIMIT 1');
             const existing = await checkStmt.bind(result).first();
-            
+
             if (!existing) {
                 return result; // This memo_id is unique
             }
@@ -124,7 +124,7 @@ async function generateMemoId(env, maxRetries = 10, locale = 'en') {
             return result;
         }
     }
-    
+
     // If we've exhausted all retries, throw an error
     throw new Error(getErrorMessage('MEMO_ID_GENERATION_MAX_RETRIES', locale));
 }
@@ -147,12 +147,12 @@ export async function handleCreateMemo(request, env, locale = 'en') {
             });
         }
         */
-        
+
         // Validate request method
         if (request.method !== 'POST') {
             return delayedJsonError({ error: getErrorMessage('METHOD_NOT_ALLOWED', requestLocale) }, 405, { 'Allow': 'POST' });
         }
-        
+
         // Validate content type
         const contentType = request.headers.get('content-type');
         const sanitizedContentType = sanitizeForHTML(contentType);
@@ -175,7 +175,7 @@ export async function handleCreateMemo(request, env, locale = 'en') {
         const requestData = parsedCreate.data;
 
         const { encryptedMessage, expiryHours, cfTurnstileResponse, deletionTokenHash } = requestData;
-        
+
         // Comprehensive validation and sanitization of encrypted message
         const messageValidation = await validateAndSanitizeEncryptedMessageSecure(encryptedMessage);
         if (!messageValidation.isValid) {
@@ -186,12 +186,12 @@ export async function handleCreateMemo(request, env, locale = 'en') {
                 headers: { 'Content-Type': 'application/json' }
             });
         }
-        
+
         const sanitizedEncryptedMessage = messageValidation.sanitizedMessage;
         const sanitizedExpiryHours = String(expiryHours);
         const turnstileToken = typeof cfTurnstileResponse === 'string' ? cfTurnstileResponse : '';
         const isValidTurnstile = /^[A-Za-z0-9._-]{10,}$/.test(turnstileToken);
-        
+
         // Validate deletionTokenHash (base64, ~44 chars for SHA-256)
         if (!deletionTokenHash || typeof deletionTokenHash !== 'string' || deletionTokenHash.length !== 44 || !/^[A-Za-z0-9+/=]+$/.test(deletionTokenHash)) {
             await uniformResponseDelay();
@@ -200,7 +200,7 @@ export async function handleCreateMemo(request, env, locale = 'en') {
                 headers: { 'Content-Type': 'application/json' }
             });
         }
-        
+
         // Validate expiry hours
         if (!validateExpiryHours(sanitizedExpiryHours)) {
             // Add artificial delay for security
@@ -210,13 +210,13 @@ export async function handleCreateMemo(request, env, locale = 'en') {
                 headers: { 'Content-Type': 'application/json' }
             });
         }
-        
+
         // Calculate expiry time server-side
         const calculatedExpiryTime = calculateExpiryTime(sanitizedExpiryHours);
         if (!calculatedExpiryTime) {
             return delayedJsonError({ error: getErrorMessage('INVALID_EXPIRY_TIME', requestLocale) });
         }
-        
+
         // Verify Turnstile token
         if (!isValidTurnstile) {
             await uniformResponseDelay();
@@ -248,7 +248,7 @@ export async function handleCreateMemo(request, env, locale = 'en') {
             }
 
             const turnstileResult = await turnstileResponse.json();
-            
+
             if (!turnstileResult.success) {
                 await uniformResponseDelay();
                 return new Response(JSON.stringify({ error: getErrorMessage('TURNSTILE_FAILED', requestLocale) }), {
@@ -263,7 +263,7 @@ export async function handleCreateMemo(request, env, locale = 'en') {
                 headers: { 'Content-Type': 'application/json' }
             });
         }
-        
+
         // Generate unique memo ID with collision detection
         let memoId;
         try {
@@ -276,14 +276,14 @@ export async function handleCreateMemo(request, env, locale = 'en') {
                 headers: { 'Content-Type': 'application/json' }
             });
         }
-        
+
         // Insert memo into DB
         try {
             const stmt = env.DB.prepare(`
                 INSERT INTO memos (memo_id, encrypted_message, expiry_time, deletion_token_hash)
                 VALUES (?, ?, ?, ?)
             `);
-            
+
             await stmt.bind(memoId, sanitizedEncryptedMessage, calculatedExpiryTime, deletionTokenHash).run();
         } catch (dbError) {
             // Check if this is a UNIQUE constraint violation
@@ -297,7 +297,7 @@ export async function handleCreateMemo(request, env, locale = 'en') {
                     headers: { 'Content-Type': 'application/json' }
                 });
             }
-            
+
             // Add artificial delay for security
             await uniformResponseDelay();
             return new Response(JSON.stringify({ error: getErrorMessage('DATABASE_ERROR', requestLocale) }), {
@@ -305,30 +305,30 @@ export async function handleCreateMemo(request, env, locale = 'en') {
                 headers: { 'Content-Type': 'application/json' }
             });
         }
-        
-        
+
+
         // Success-path delay to reduce timing differential
-    await uniformResponseDelay();
-        return new Response(JSON.stringify({ 
-            success: true, 
-            memoId: memoId 
+        await uniformResponseDelay();
+        return new Response(JSON.stringify({
+            success: true,
+            memoId: memoId
         }), {
             status: 200,
-            headers: { 
+            headers: {
                 'Content-Type': 'application/json',
                 'X-Content-Type-Options': 'nosniff',
                 'X-Frame-Options': 'DENY'
             }
         });
-        
-            } catch (error) {
-            // Add artificial delay for security
-            await uniformResponseDelay();
-            return new Response(JSON.stringify({ error: getErrorMessage('MEMO_CREATION_ERROR', requestLocale) }), {
-                status: 500,
-                headers: { 'Content-Type': 'application/json' }
-            });
-        }
+
+    } catch (error) {
+        // Add artificial delay for security
+        await uniformResponseDelay();
+        return new Response(JSON.stringify({ error: getErrorMessage('MEMO_CREATION_ERROR', requestLocale) }), {
+            status: 500,
+            headers: { 'Content-Type': 'application/json' }
+        });
+    }
 }
 
 // Read memo and delete it after reading
@@ -358,12 +358,12 @@ export async function handleReadMemo(request, env, locale = 'en') {
             });
         }
         */
-        
+
         // Validate request method
         if (request.method !== 'POST') {
             return delayedJsonError({ error: getErrorMessage('METHOD_NOT_ALLOWED', requestLocale) }, 405, { 'Allow': 'POST' });
         }
-        
+
         // Validate content type
         const contentType = request.headers.get('content-type');
         const sanitizedContentType = sanitizeForHTML(contentType);
@@ -386,12 +386,12 @@ export async function handleReadMemo(request, env, locale = 'en') {
         const requestData = parsedRead.data;
 
         const { cfTurnstileResponse } = requestData;
-        
+
         // Sanitize user inputs
         // Validate Turnstile response token by pattern, do not mutate it
         const turnstileToken = typeof cfTurnstileResponse === 'string' ? cfTurnstileResponse : '';
         const isValidTurnstile = /^[A-Za-z0-9._-]{10,}$/.test(turnstileToken);
-        
+
         // Verify Turnstile token
         if (!isValidTurnstile) {
             await uniformResponseDelay();
@@ -423,7 +423,7 @@ export async function handleReadMemo(request, env, locale = 'en') {
             }
 
             const turnstileResult = await turnstileResponse.json();
-            
+
             if (!turnstileResult.success) {
                 await uniformResponseDelay();
                 return new Response(JSON.stringify({ error: getErrorMessage('TURNSTILE_FAILED', requestLocale) }), {
@@ -438,11 +438,11 @@ export async function handleReadMemo(request, env, locale = 'en') {
                 headers: { 'Content-Type': 'application/json' }
             });
         }
-        
-    const url = new URL(request.url);
-    const memoId = url.searchParams.get('id');
-    // Strict validation: do NOT mutate or sanitize the identifier; reject if it does not match expected pattern
-    if (typeof memoId !== 'string' || !(await validateMemoIdSecure(memoId))) {
+
+        const url = new URL(request.url);
+        const memoId = url.searchParams.get('id');
+        // Strict validation: do NOT mutate or sanitize the identifier; reject if it does not match expected pattern
+        if (typeof memoId !== 'string' || !(await validateMemoIdSecure(memoId))) {
             // Add additional artificial delay for security
             await uniformResponseDelay();
             return new Response(JSON.stringify({ error: getMemoAccessDeniedMessage() }), {
@@ -450,7 +450,7 @@ export async function handleReadMemo(request, env, locale = 'en') {
                 headers: { 'Content-Type': 'application/json' }
             });
         }
-        
+
         // SECURITY: Combine all access checks into a single atomic operation to prevent timing side-channels
         // This ensures constant-time failure paths regardless of memo state (non-existent, read, or expired)
         let memo;
@@ -461,7 +461,7 @@ export async function handleReadMemo(request, env, locale = 'en') {
                 WHERE memo_id = ? 
                 AND (expiry_time IS NULL OR expiry_time > unixepoch('now'))
             `);
-            
+
             memo = await stmt.bind(memoId).first();
         } catch (dbError) {
             // Add artificial delay for security
@@ -471,7 +471,7 @@ export async function handleReadMemo(request, env, locale = 'en') {
                 headers: { 'Content-Type': 'application/json' }
             });
         }
-        
+
         // SECURITY: Use consistent error handling to prevent enumeration attacks
         // Single check ensures constant-time failure regardless of memo state
         if (!memo) {
@@ -482,27 +482,27 @@ export async function handleReadMemo(request, env, locale = 'en') {
                 headers: { 'Content-Type': 'application/json' }
             });
         }
-        
+
         // Minimal normalization (no escaping) so ciphertext round-trips intact
-    const sanitizedResponseMessage = normalizeCiphertextForResponse(memo.encrypted_message);
-        
+        const sanitizedResponseMessage = normalizeCiphertextForResponse(memo.encrypted_message);
+
         // Success-path delay to align timing with failures
-    await uniformResponseDelay();
-        return new Response(JSON.stringify({ 
-            success: true, 
+        await uniformResponseDelay();
+        return new Response(JSON.stringify({
+            success: true,
             encryptedMessage: sanitizedResponseMessage
         }), {
             status: 200,
-            headers: { 
+            headers: {
                 'Content-Type': 'application/json',
                 'X-Content-Type-Options': 'nosniff',
                 'X-Frame-Options': 'DENY'
             }
         });
-        
+
     } catch (error) {
         // Add artificial delay for security
-    await uniformResponseDelay();
+        await uniformResponseDelay();
         return new Response(JSON.stringify({ error: getErrorMessage('MEMO_READ_ERROR', requestLocale) }), {
             status: 500,
             headers: { 'Content-Type': 'application/json' }
@@ -532,12 +532,12 @@ export async function handleConfirmDelete(request, env, locale = 'en') {
             });
         }
         */
-        
+
         // Validate request method
         if (request.method !== 'POST') {
             return delayedJsonError({ error: getErrorMessage('METHOD_NOT_ALLOWED', requestLocale) }, 405, { 'Allow': 'POST' });
         }
-        
+
         // Validate content type
         const contentType = request.headers.get('content-type');
         const sanitizedContentType = sanitizeForHTML(contentType);
@@ -559,16 +559,16 @@ export async function handleConfirmDelete(request, env, locale = 'en') {
         }
         const requestData = parsedDelete.data;
 
-    const { memoId, deletionToken } = requestData;
-    // Strict memoId validation: reject invalid instead of transforming
-    if (typeof memoId !== 'string' || !(await validateMemoIdSecure(memoId))) {
+        const { memoId, deletionToken } = requestData;
+        // Strict memoId validation: reject invalid instead of transforming
+        if (typeof memoId !== 'string' || !(await validateMemoIdSecure(memoId))) {
             await uniformResponseDelay();
             return new Response(JSON.stringify({ error: getMemoAccessDeniedMessage(requestLocale) }), { status: 404 });
         }
-        
+
         // Fetch memo details
-    const fetchStmt = env.DB.prepare('SELECT deletion_token_hash FROM memos WHERE memo_id = ? AND (expiry_time IS NULL OR expiry_time > unixepoch(\'now\'))');
-    const row = await fetchStmt.bind(memoId).first();
+        const fetchStmt = env.DB.prepare('SELECT deletion_token_hash FROM memos WHERE memo_id = ? AND (expiry_time IS NULL OR expiry_time > unixepoch(\'now\'))');
+        const row = await fetchStmt.bind(memoId).first();
 
         if (!row) {
             await uniformResponseDelay();
@@ -595,30 +595,30 @@ export async function handleConfirmDelete(request, env, locale = 'en') {
         }
 
         // Delete if validation passes (common for both cases)
-    const deleteStmt = env.DB.prepare('DELETE FROM memos WHERE memo_id = ?');
-    const result = await deleteStmt.bind(memoId).run();
+        const deleteStmt = env.DB.prepare('DELETE FROM memos WHERE memo_id = ?');
+        const result = await deleteStmt.bind(memoId).run();
         if (result.changes === 0) {
             await uniformResponseDelay();
             return new Response(JSON.stringify({ error: getMemoAccessDeniedMessage() }), { status: 404 });
         }
-        
+
         // Success-path delay to reduce timing differential
-    await uniformResponseDelay();
-        return new Response(JSON.stringify({ 
-            success: true, 
-            message: 'Memo deleted successfully' 
+        await uniformResponseDelay();
+        return new Response(JSON.stringify({
+            success: true,
+            message: 'Memo deleted successfully'
         }), {
             status: 200,
-            headers: { 
+            headers: {
                 'Content-Type': 'application/json',
                 'X-Content-Type-Options': 'nosniff',
                 'X-Frame-Options': 'DENY'
             }
         });
-        
+
     } catch (error) {
         // Add artificial delay for security
-    await uniformResponseDelay();
+        await uniformResponseDelay();
         return new Response(JSON.stringify({ error: getErrorMessage('MEMO_DELETION_ERROR', requestLocale) }), {
             status: 500,
             headers: { 'Content-Type': 'application/json' }
@@ -634,21 +634,21 @@ export async function handleCleanupMemos(env) {
             WHERE expiry_time IS NOT NULL 
             AND expiry_time < unixepoch('now')
         `);
-        
+
         const result = await stmt.run();
-        
-        return new Response(JSON.stringify({ 
-            success: true, 
-            cleanedUp: result.changes 
+
+        return new Response(JSON.stringify({
+            success: true,
+            cleanedUp: result.changes
         }), {
             status: 200,
             headers: { 'Content-Type': 'application/json' }
         });
-        
+
     } catch (error) {
         // Add artificial delay for security
-    await uniformResponseDelay();
-    return new Response(JSON.stringify({ error: getErrorMessage('DATABASE_ERROR', 'en') }), {
+        await uniformResponseDelay();
+        return new Response(JSON.stringify({ error: getErrorMessage('DATABASE_ERROR', 'en') }), {
             status: 500,
             headers: { 'Content-Type': 'application/json' }
         });
