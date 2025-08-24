@@ -21,7 +21,7 @@ export const tl = {
   'btn.create': 'Gumawa ng Ligtas na Memo',
   'btn.creating': 'Ini-encrypt...',
   'btn.decrypt': 'I-decrypt ang Memo',
-  'btn.decrypting': 'Dinedecrypt...',
+  'btn.decrypting': 'Dini-decrypt...',
   'btn.goHome': 'Bumalik sa Bahay',
   'btn.createNew': 'Gumawa ng Bagong Memo',
 
@@ -105,16 +105,16 @@ export const tl = {
   'about.hero.title': 'Tungkol sa securememo.app',
   'about.hero.subtitle': 'Ang securememo.app ay isang privacy-focused na aplikasyon na nagbibigay-daan sa iyong gumawa ng mga naka-encrypt na memo na kusang nabubura kapag nabasa o nag-expire. Binuo na inuuna ang seguridad at privacy. Bukas ang source code sa GitHub.',
 
-  'about.tech.title': 'Technology Stack',
+  'about.tech.title': 'Teknolohiyang Ginamit',
   'about.tech.cloudflare': 'Cloudflare Workers: Serverless compute platform para sa pandaigdigang performance',
   'about.tech.d1': 'D1 Database: SQLite-powered database para sa ligtas na imbakan',
   'about.tech.webcrypto': 'Web Crypto API: Client-side AES-256 encryption',
   'about.tech.frontend': 'HTML/CSS/JavaScript: Makabago at responsive na web interface',
-  'about.tech.github': 'Open source code sa GitHub:',
+  'about.tech.github': 'Bukás na source code sa GitHub:',
   'about.tech.githubLink': 'Tingnan ang source code sa GitHub',
 
   'about.features.title': 'Mga Tampok sa Seguridad',
-  'about.features.clientEncryption.title': '🔐 Client-Side Encryption',
+  'about.features.clientEncryption.title': '🔐 Pag-encrypt sa Browser',
   'about.features.clientEncryption.description': 'Lahat ng encryption ay nangyayari sa iyong browser gamit ang Web Crypto API. Ini-encrypt ang iyong memo gamit ang AES-256 bago ipadala sa aming mga server.',
   'about.features.passwordSharing.title': '🔑 Hiwalay na Pagbabahagi ng Password',
   'about.features.passwordSharing.description': 'Ang password para sa encryption ay ginagawa nang hiwalay sa URL at dapat ibahagi sa ibang channel para dagdag seguridad.',
@@ -159,7 +159,7 @@ export const tl = {
   'tos.tableOfContents.languageDisclaimer': 'Wika at Pagsasalin',
 
   'tos.serviceDescription.title': '1. Paglalarawan ng Serbisyo',
-  'tos.serviceDescription.content': 'Ang securememo.app ay isang ligtas na serbisyo sa pagbabahagi ng memo na nagbibigay-daan sa mga gumagamit na gumawa ng mga naka-encrypt na memo na kusang nabubura kapag nabasa o nag-expire. Gumagamit ang serbisyo ng client-side encryption upang matiyak na ang nilalaman ng memo ay hindi kailanman naa-access ng aming mga server.',
+  'tos.serviceDescription.content': 'Ang securememo.app ay isang ligtas na serbisyo sa pagbabahagi ng memo na nagbibigay-daan sa mga gumagamit na gumawa ng mga naka-encrypt na memo na kusang nabubura kapag nabasa o nag-expire. Gumagamit ang serbisyo ng client-side (browser) encryption upang matiyak na ang nilalaman ng memo ay hindi kailanman naa-access ng aming mga server.',
 
   'tos.acceptableUse.title': '2. Katanggap-tanggap na Paggamit',
   'tos.acceptableUse.intro': 'Sumasang-ayon kang gamitin ang serbisyong ito lamang para sa mga legal na layunin at ayon sa mga Tuntuning ito. Sumasang-ayon kang hindi:',
@@ -358,7 +358,7 @@ export const tl = {
 
   // Loading and status messages
   'msg.encrypting': 'Ini-encrypt nang ligtas ang iyong memo... Maaaring tumagal ito sa mas lumang device.',
-  'msg.decrypting': 'Dinedecrypt ang iyong memo... Maaaring tumagal ito sa mas lumang device.',
+  'msg.decrypting': 'Dini-decrypt ang iyong memo... Maaaring tumagal ito sa mas lumang device.',
   'msg.deletingSecurely': 'Ligtas na binubura ang memo...',
   'msg.yourSecureMemo': '📝 Iyong Ligtas na Memo',
   'msg.status': 'Katayuan:',
@@ -366,8 +366,8 @@ export const tl = {
   // Labels and help text
   'form.memoUrl.label': 'Memo URL (ibahagi ito sa tatanggap):',
   'form.memoUrl.help': 'Ito ang ligtas na link sa iyong memo. Ibahagi ang URL na ito sa iyong tatanggap.',
-  'form.memoPassword.label': 'Password ng Encryption (ibahagi ito nang hiwalay):',
-  'form.memoPassword.help': 'Ito ang password ng encryption. Ibahagi ito nang hiwalay sa URL para sa dagdag na seguridad. Hindi ito sine-save sa aming mga server, walang recovery kapag iniwan ang pahinang ito.',
+  'form.memoPassword.label': 'Password para sa Pag-encrypt (ibahagi ito nang hiwalay):',
+  'form.memoPassword.help': 'Ito ang password para sa pag-encrypt. Ibahagi ito nang hiwalay sa URL para sa dagdag na seguridad. Hindi ito sine-save sa aming mga server, walang recovery kapag iniwan ang pahinang ito.',
 
   // Warning messages
   'warning.important': 'Mahalaga:',
