@@ -142,7 +142,7 @@ export const tr = {
 
   // Terms of Service page content
   'tos.hero.title': 'Kullanım Şartları',
-  'tos.lastUpdated': 'Son güncelleme: 17 Ağustos 2025',
+  'tos.lastUpdated': 'Son güncelleme: 24 Ağustos 2025',
   'tos.tableOfContents.title': 'İçindekiler',
   'tos.tableOfContents.serviceDescription': 'Hizmet Açıklaması',
   'tos.tableOfContents.acceptableUse': 'Kabul Edilebilir Kullanım',
@@ -172,11 +172,11 @@ export const tr = {
 
   'tos.privacyData.title': '3. Gizlilik ve Veri İşleme',
   'tos.privacyData.noAccess': 'İçeriğe Erişim Yok: Not içeriğinize erişemeyiz, okuyamayız veya geri getiremeyiz. Tüm şifreleme tarayıcınızda gerçekleşir.',
-  'tos.privacyData.noPersonal': 'Kişisel Veri Yok: Kişisel bilgi toplamıyoruz veya kullanıcı hesabı gerektirmiyoruz.',
+  'tos.privacyData.noPersonal': 'Minimum Veri Toplama: Hizmeti kullanmanız için kullanıcı hesabı talep etmiyoruz ve kişisel bilgi toplamıyoruz. Tek toplayabileceğimiz kişisel veri, destek için bize kendi isteğinizle ulaşmanız durumundadır. Bize e-posta ile ulaşırsanız, sorunuza yanıt verebilmek için e-posta adresinizi ve mesaj içeriğinizi kaydederiz. Bu bilgileri başka hiçbir amaçla kullanmayız ve izniniz olmadan üçüncü taraflarla paylaşmayız.',
   'tos.privacyData.securityLogging': 'Güvenlik Kaydı: Kötüye kullanımı önlemek ve hizmet bütünlüğünü korumak için IP adreslerini ve güvenlikle ilgili meta verileri geçici olarak kaydederiz. Bu kayıtlar asla takip veya profil oluşturma için kullanılmaz.',
   'tos.privacyData.automaticDeletion': 'Otomatik Silme: Notlar okunduktan veya süresi dolduktan sonra otomatik olarak silinir.',
   'tos.privacyData.noRecovery': 'Geri Getirme Yok: Bir not silindikten sonra geri getirilemez.',
-  'tos.privacyData.gdpr': 'GDPR Uyumu: Bu hizmet, AB GDPR kapsamında tanımlanan kişisel verileri toplamaz.',
+  'tos.privacyData.gdpr': 'GDPR Uyumu: GDPR ilkelerine bağlıyız. Veri toplamayı en aza indirir ve hizmeti korumak için meşru menfaat dayanağıyla geçici güvenlik kayıtları gibi gerekli verileri işleriz.',
   'tos.privacyData.moreDetails': 'Daha fazla bilgi için lütfen',
   'tos.privacyData.privacyNotice': 'Gizlilik Bildirimi',
 
@@ -225,7 +225,7 @@ export const tr = {
 
   // Privacy Notice page content
   'privacy.hero.title': 'securememo.app için Gizlilik Bildirimi',
-  'privacy.lastUpdated': 'Son güncelleme: 9 Ağustos 2025',
+  'privacy.lastUpdated': 'Son güncelleme: 24 Ağustos 2025',
   'privacy.tableOfContents.title': 'İçindekiler',
   'privacy.tableOfContents.informationCollected': 'Topladığımız Bilgiler',
   'privacy.tableOfContents.howWeUse': 'Bilgileri Nasıl Kullanıyoruz',
@@ -244,7 +244,7 @@ export const tr = {
   'privacy.informationCollected.title': '1. Topladığımız Bilgiler',
   'privacy.informationCollected.intro': 'Hizmeti güvenli ve verimli bir şekilde işletmek için minimum düzeyde bilgi toplarız. Özellikle:',
   'privacy.informationCollected.memoData': 'Not Verisi: Bir not oluşturduğunuzda, mesajınızın yalnızca şifrelenmiş halini sunucularımızda (Cloudflare Workers ve D1 Veritabanı kullanılarak) saklarız. Şifreleme anahtarı (şifre) tamamen tarayıcınızda oluşturulur ve yönetilir, bize asla gönderilmez veya tarafımızca saklanmaz. Notlar okunduktan veya süresi dolduktan sonra otomatik olarak silinir (seçenekler: 8 saat, 1 gün, 2 gün, 1 hafta veya 30 gün).',
-  'privacy.informationCollected.noPersonal': 'Kişisel Bilgi Yok: Kullanıcı hesabı, e-posta adresi, isim veya başka bir kişisel tanımlayıcı gerektirmeyiz. Sizi doğrudan tanımlayabilecek hiçbir veriyi toplamaz veya saklamayız.',
+  'privacy.informationCollected.noPersonal': 'Minimum Veri Toplama: Hizmeti kullanmanız için kullanıcı hesabı veya kişisel bilgi talep etmiyoruz. Toplayabileceğimiz tek kişisel veri, destek amacıyla bize kendi isteğinizle ulaşmanız durumundadır. Bize e-posta ile ulaşırsanız, sorunuza yanıt vermek için e-posta adresinizi ve mesaj içeriğinizi kaydederiz. Bu bilgileri başka amaçlarla kullanmayız ve izniniz olmadan üçüncü taraflarla paylaşmayız.',
   'privacy.informationCollected.securityData': 'Güvenlikle İlgili Veri: Kötüye kullanımı önlemek ve hizmet bütünlüğünü sağlamak için:',
   'privacy.informationCollected.ipLogs': 'Spam, bot veya zararlı etkinliği tespit etmek ve önlemek için IP adreslerini ve istek meta verilerini (örn. zaman damgaları) geçici olarak kaydederiz.',
   'privacy.informationCollected.turnstile': 'Otomatik kötüye kullanımı önlemek için Cloudflare Turnstile CAPTCHA kullanırız. Turnstile gizliliği korumak için tasarlanmıştır ve kullanıcıları siteler arasında takip etmez.',

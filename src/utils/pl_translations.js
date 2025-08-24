@@ -142,7 +142,7 @@ export const pl = {
 
   // Terms of Service page content
   'tos.hero.title': 'Regulamin',
-  'tos.lastUpdated': 'Ostatnia aktualizacja: 17 sierpnia 2025',
+  'tos.lastUpdated': 'Ostatnia aktualizacja: 24 sierpnia 2025',
   'tos.tableOfContents.title': 'Spis treści',
   'tos.tableOfContents.serviceDescription': 'Opis usługi',
   'tos.tableOfContents.acceptableUse': 'Akceptowalne użycie',
@@ -172,11 +172,11 @@ export const pl = {
 
   'tos.privacyData.title': '3. Prywatność i przetwarzanie danych',
   'tos.privacyData.noAccess': 'Brak dostępu do treści: Nie mamy możliwości dostępu, odczytu ani odzyskania treści Twojej notatki. Całe szyfrowanie odbywa się w Twojej przeglądarce.',
-  'tos.privacyData.noPersonal': 'Brak danych osobowych: Nie zbieramy danych osobowych ani nie wymagamy zakładania kont użytkowników.',
+  'tos.privacyData.noPersonal': 'Minimalna zbiórka danych: Nie wymagamy zakładania kont użytkowników ani nie zbieramy danych osobowych do korzystania z usługi. Jedynymi danymi osobowymi, które możemy zebrać, są te, które dobrowolnie przekażesz kontaktując się z nami w celu uzyskania wsparcia. Jeśli skontaktujesz się z nami e‑mailem, zbierzemy Twój adres e‑mail oraz treść wiadomości, aby odpowiedzieć na zapytanie. Nie wykorzystujemy tych informacji do żadnych innych celów i nie udostępniamy ich podmiotom trzecim bez Twojej zgody.',
   'tos.privacyData.securityLogging': 'Logowanie bezpieczeństwa: Tymczasowo zapisujemy adresy IP i metadane związane z bezpieczeństwem wyłącznie w celu przeciwdziałania nadużyciom i ochrony integralności usługi. Logi te nigdy nie są wykorzystywane do śledzenia lub profilowania.',
   'tos.privacyData.automaticDeletion': 'Automatyczne usuwanie: Notatki są automatycznie usuwane po odczytaniu lub wygaśnięciu.',
   'tos.privacyData.noRecovery': 'Brak możliwości odzyskania: Po usunięciu notatki nie można jej odzyskać.',
-  'tos.privacyData.gdpr': 'Zgodność z RODO: Usługa nie zbiera danych osobowych w rozumieniu przepisów UE RODO.',
+  'tos.privacyData.gdpr': 'Zgodność z RODO: Przestrzegamy zasad RODO. Minimalizujemy zbieranie danych i przetwarzamy wyłącznie dane niezbędne, takie jak tymczasowe logi bezpieczeństwa, na podstawie prawnie uzasadnionego interesu w celu ochrony usługi.',
   'tos.privacyData.moreDetails': 'Więcej szczegółów znajdziesz w',
   'tos.privacyData.privacyNotice': 'Polityce prywatności',
 
@@ -225,7 +225,7 @@ export const pl = {
 
   // Privacy Notice page content
   'privacy.hero.title': 'Polityka prywatności dla securememo.app',
-  'privacy.lastUpdated': 'Ostatnia aktualizacja: 9 sierpnia 2025',
+  'privacy.lastUpdated': 'Ostatnia aktualizacja: 24 sierpnia 2025',
   'privacy.tableOfContents.title': 'Spis treści',
   'privacy.tableOfContents.informationCollected': 'Informacje, które zbieramy',
   'privacy.tableOfContents.howWeUse': 'Jak wykorzystujemy informacje',
@@ -244,7 +244,7 @@ export const pl = {
   'privacy.informationCollected.title': '1. Informacje, które zbieramy',
   'privacy.informationCollected.intro': 'Zbieramy minimalną ilość informacji, aby zapewnić bezpieczne i wydajne działanie usługi. W szczególności:',
   'privacy.informationCollected.memoData': 'Dane notatki: Gdy tworzysz notatkę, przechowujemy wyłącznie zaszyfrowaną wersję Twojej wiadomości na naszych serwerach (Cloudflare Workers i D1 Database). Klucz szyfrujący (hasło) jest generowany i obsługiwany wyłącznie w Twojej przeglądarce i nigdy nie jest do nas wysyłany ani przechowywany. Notatki są automatycznie usuwane po odczytaniu lub wygaśnięciu (opcje: 8 godzin, 1 dzień, 2 dni, 1 tydzień lub 30 dni).',
-  'privacy.informationCollected.noPersonal': 'Brak danych osobowych: Nie wymagamy zakładania kont użytkowników, podawania adresów e-mail, imion ani innych identyfikatorów osobistych. Nie zbieramy ani nie przechowujemy danych, które mogłyby bezpośrednio Cię zidentyfikować.',
+  'privacy.informationCollected.noPersonal': 'Minimalna zbiórka danych: Nie wymagamy zakładania kont użytkowników ani nie zbieramy danych osobowych do korzystania z usługi. Jedynymi danymi osobowymi, które możemy zebrać, są te, które dobrowolnie przekażesz kontaktując się z nami w celu uzyskania wsparcia. Jeśli skontaktujesz się z nami e‑mailem, zbierzemy Twój adres e‑mail oraz treść wiadomości, aby odpowiedzieć na zapytanie. Nie wykorzystujemy tych informacji do żadnych innych celów i nie udostępniamy ich podmiotom trzecim bez Twojej zgody.',
   'privacy.informationCollected.securityData': 'Dane związane z bezpieczeństwem: W celu zapobiegania nadużyciom i ochrony integralności usługi:',
   'privacy.informationCollected.ipLogs': 'Tymczasowo zapisujemy adresy IP i metadane żądań (np. znaczniki czasu), aby wykrywać i ograniczać spam, boty lub złośliwe działania.',
   'privacy.informationCollected.turnstile': 'Używamy Cloudflare Turnstile CAPTCHA, aby zapobiegać automatycznym nadużyciom. Turnstile chroni prywatność i nie śledzi użytkowników na innych stronach.',

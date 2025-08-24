@@ -142,7 +142,7 @@ export const cs = {
 
   // Terms of Service page content
   'tos.hero.title': 'Podmínky služby',
-  'tos.lastUpdated': 'Naposledy aktualizováno: 17. srpna 2025',
+  'tos.lastUpdated': 'Naposledy aktualizováno: 24. srpna 2025',
   'tos.tableOfContents.title': 'Obsah',
   'tos.tableOfContents.serviceDescription': 'Popis služby',
   'tos.tableOfContents.acceptableUse': 'Přijatelné použití',
@@ -172,11 +172,11 @@ export const cs = {
 
   'tos.privacyData.title': '3. Soukromí a práce s daty',
   'tos.privacyData.noAccess': 'Žádný přístup k obsahu: Nemáme přístup k obsahu vaší zprávy, nemůžeme jej číst ani obnovit. Veškeré šifrování probíhá ve vašem prohlížeči.',
-  'tos.privacyData.noPersonal': 'Žádné osobní údaje: Neshromažďujeme osobní informace a nevyžadujeme uživatelské účty.',
+  'tos.privacyData.noPersonal': 'Minimální sběr dat: Nevyžadujeme uživatelské účty ani neshromažďujeme osobní údaje pro používání služby. Jediná osobní data, která můžeme získat, jsou pokud nás dobrovolně kontaktujete s žádostí o podporu. Pokud nás kontaktujete e‑mailem, shromáždíme vaši e‑mailovou adresu a obsah zprávy, abychom mohli odpovědět na váš dotaz. Tato informace není používána k žádným jiným účelům ani sdílena s třetími stranami bez vašeho souhlasu.',
   'tos.privacyData.securityLogging': 'Bezpečnostní logování: Dočasně zapisujeme IP adresy a bezpečnostní metadata výhradně pro zmírnění zneužití a ochranu integrity služby. Tyto logy nikdy nepoužíváme ke sledování nebo profilování.',
   'tos.privacyData.automaticDeletion': 'Automatické mazání: Zprávy jsou automaticky smazány po přečtení nebo po vypršení platnosti.',
   'tos.privacyData.noRecovery': 'Bez obnovy: Jakmile je zpráva smazána, nelze ji obnovit.',
-  'tos.privacyData.gdpr': 'Soulad s GDPR: Tato služba neshromažďuje osobní údaje ve smyslu nařízení EU GDPR.',
+  'tos.privacyData.gdpr': 'Soulad s GDPR: Dodržujeme zásady GDPR. Minimalizujeme sběr dat a zpracováváme pouze nezbytná data, jako dočasné bezpečnostní logy, na základě oprávněného zájmu za účelem ochrany služby.',
   'tos.privacyData.moreDetails': 'Podrobnosti naleznete v našem',
   'tos.privacyData.privacyNotice': 'Oznámení o ochraně soukromí',
 
@@ -225,7 +225,7 @@ export const cs = {
 
   // Privacy Notice page content
   'privacy.hero.title': 'Oznámení o ochraně soukromí pro securememo.app',
-  'privacy.lastUpdated': 'Naposledy aktualizováno: 9. srpna 2025',
+  'privacy.lastUpdated': 'Naposledy aktualizováno: 24. srpna 2025',
   'privacy.tableOfContents.title': 'Obsah',
   'privacy.tableOfContents.informationCollected': 'Informace, které shromažďujeme',
   'privacy.tableOfContents.howWeUse': 'Jak informace používáme',
@@ -244,7 +244,7 @@ export const cs = {
   'privacy.informationCollected.title': '1. Informace, které shromažďujeme',
   'privacy.informationCollected.intro': 'Shromažďujeme jen minimum informací potřebných k bezpečnému a efektivnímu provozu služby. Konkrétně:',
   'privacy.informationCollected.memoData': 'Data zprávy: Když vytvoříte zprávu, ukládáme na naše servery pouze šifrovanou verzi vašeho sdělení (za použití Cloudflare Workers a databáze D1). Šifrovací klíč (heslo) je generován a zpracováván výhradně ve vašem prohlížeči a nikdy není odeslán ani uložen u nás. Zprávy jsou automaticky smazány po přečtení nebo po vypršení platnosti (možnosti: 8 hodin, 1 den, 2 dny, 1 týden nebo 30 dní).',
-  'privacy.informationCollected.noPersonal': 'Žádné osobní informace: Nevyžadujeme uživatelské účty, e‑mailové adresy, jména ani jiné osobní identifikátory. Neshromažďujeme ani neukládáme data, která by vás mohla přímo identifikovat.',
+  'privacy.informationCollected.noPersonal': 'Minimální sběr dat: Nevyžadujeme uživatelské účty ani neshromažďujeme osobní údaje pro používání služby. Jediná osobní data, která můžeme získat, jsou pokud nás dobrovolně kontaktujete s žádostí o podporu. Pokud nás kontaktujete e‑mailem, shromáždíme vaši e‑mailovou adresu a obsah zprávy, abychom mohli odpovědět na váš dotaz. Tato informace není používána k žádným jiným účelům ani sdílena s třetími stranami bez vašeho souhlasu.',
   'privacy.informationCollected.securityData': 'Data související se zabezpečením: Pro prevenci zneužití a zachování integrity služby:',
   'privacy.informationCollected.ipLogs': 'Dočasně zaznamenáváme IP adresy a metadata požadavků (např. časová razítka) k detekci a zmírnění spamu, botů či škodlivé aktivity.',
   'privacy.informationCollected.turnstile': 'Používáme Cloudflare Turnstile CAPTCHA k zabránění automatizovanému zneužití. Turnstile je navržen s ohledem na soukromí a nesleduje uživatele napříč weby.',
