@@ -57,18 +57,18 @@ const ASSET_VERSION = '20250825a';
 function minifyJS(code) {
   try {
     return code
-  // Remove line comments that start at line-begin
+      // Remove line comments that start at line-begin
       .replace(/^\s*\/\/.*$/gm, '')
-  // Remove block comments that start at line-begin or after whitespace
-  // This avoids stripping sequences inside regex literals like /\/\* foo \*\//
-  .replace(/(^|\s)\/\*[\s\S]*?\*\//g, '$1')
-  // Process per line to preserve newlines (avoid ASI issues)
-  .split('\n')
-  // Collapse multiple spaces/tabs within a line and trim ends
-  .map(line => line.replace(/[ \t]+/g, ' ').trim())
-  // Drop empty lines
+      // Remove block comments that start at line-begin or after whitespace
+      // This avoids stripping sequences inside regex literals like /\/\* foo \*\//
+      .replace(/(^|\s)\/\*[\s\S]*?\*\//g, '$1')
+      // Process per line to preserve newlines (avoid ASI issues)
+      .split('\n')
+      // Collapse multiple spaces/tabs within a line and trim ends
+      .map(line => line.replace(/[ \t]+/g, ' ').trim())
+      // Drop empty lines
       .filter(Boolean)
-  // Keep newlines to avoid ASI pitfalls
+      // Keep newlines to avoid ASI pitfalls
       .join('\n')
       .trim();
   } catch (_) {
@@ -106,13 +106,13 @@ function versionAssetUrls(html) {
       .replace(/\/(js\/common\.js)(\b)/g, `/js/common.js?v=${ASSET_VERSION}$2`)
       // create-memo.js?locale=xx
       .replace(/\/js\/create-memo\.js\?locale=([A-Za-z-_.]+)/g, `/js/create-memo.js?locale=$1&v=${ASSET_VERSION}`)
-  // read-memo.js?locale=xx
-  .replace(/\/(js\/read-memo\.js)\?locale=([A-Za-z-_.]+)/g, `/js/read-memo.js?locale=$2&v=${ASSET_VERSION}`)
-  // version icons to enable immutable caching on clients/CDN
-  .replace(/\/(favicon\.ico)(\b)/g, `/favicon.ico?v=${ASSET_VERSION}$2`)
-  .replace(/\/(apple-touch-icon\.png)(\b)/g, `/apple-touch-icon.png?v=${ASSET_VERSION}$2`)
-  .replace(/\/(android-chrome-192x192\.png)(\b)/g, `/android-chrome-192x192.png?v=${ASSET_VERSION}$2`)
-  .replace(/\/(android-chrome-512x512\.png)(\b)/g, `/android-chrome-512x512.png?v=${ASSET_VERSION}$2`);
+      // read-memo.js?locale=xx
+      .replace(/\/(js\/read-memo\.js)\?locale=([A-Za-z-_.]+)/g, `/js/read-memo.js?locale=$2&v=${ASSET_VERSION}`)
+      // version icons to enable immutable caching on clients/CDN
+      .replace(/\/(favicon\.ico)(\b)/g, `/favicon.ico?v=${ASSET_VERSION}$2`)
+      .replace(/\/(apple-touch-icon\.png)(\b)/g, `/apple-touch-icon.png?v=${ASSET_VERSION}$2`)
+      .replace(/\/(android-chrome-192x192\.png)(\b)/g, `/android-chrome-192x192.png?v=${ASSET_VERSION}$2`)
+      .replace(/\/(android-chrome-512x512\.png)(\b)/g, `/android-chrome-512x512.png?v=${ASSET_VERSION}$2`);
   } catch (_) {
     return html;
   }
@@ -148,7 +148,7 @@ function generateApiKey() {
   crypto.getRandomValues(bytes);
   let binary = '';
   for (let i = 0; i < bytes.length; i++) binary += String.fromCharCode(bytes[i]);
-  return btoa(binary).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/,'');
+  return btoa(binary).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
 }
 
 async function readJsonBody(request, maxBytes = 4096) {
@@ -156,7 +156,7 @@ async function readJsonBody(request, maxBytes = 4096) {
     const text = await request.text();
     if (new TextEncoder().encode(text).length > maxBytes) return { error: 'too_large' };
     return { data: JSON.parse(text || '{}') };
-  } catch(_) { return { error: 'invalid_json' }; }
+  } catch (_) { return { error: 'invalid_json' }; }
 }
 
 // Security headers base (CSP is added dynamically per-response to include a nonce)
@@ -407,7 +407,7 @@ export default {
           case 'admin/create-key': {
             // Admin only
             if (!isAdminAuthorized(request, env)) {
-              return new Response(JSON.stringify({ error: 'Unauthorized' }), { status: 401, headers: { 'Content-Type': 'application/json', ...getSecurityHeaders(request) } });
+              return new Response(JSON.stringify({ error: 'Unauthorized' }), { status: 401, headers: { 'Content-Type': 'application/json', 'WWW-Authenticate': 'Basic realm="Admin", charset="UTF-8"', ...getSecurityHeaders(request) } });
             }
             if (request.method !== 'POST') {
               return new Response(JSON.stringify({ error: 'Method Not Allowed' }), { status: 405, headers: { 'Allow': 'POST', 'Content-Type': 'application/json', ...getSecurityHeaders(request) } });
@@ -420,8 +420,8 @@ export default {
             if (Number.isNaN(days)) days = 30;
             if (days < 1) days = 1;
             if (days > 30) days = 30;
-            const nowSec = Math.floor(Date.now()/1000);
-            const expiresAt = nowSec + days*86400;
+            const nowSec = Math.floor(Date.now() / 1000);
+            const expiresAt = nowSec + days * 86400;
             const apiKey = generateApiKey();
             const value = JSON.stringify({ apikey: apiKey, expire: expiresAt, usage: 0 });
             try {
@@ -436,7 +436,7 @@ export default {
           }
           case 'admin/delete-key': {
             if (!isAdminAuthorized(request, env)) {
-              return new Response(JSON.stringify({ error: 'Unauthorized' }), { status: 401, headers: { 'Content-Type': 'application/json', ...getSecurityHeaders(request) } });
+              return new Response(JSON.stringify({ error: 'Unauthorized' }), { status: 401, headers: { 'Content-Type': 'application/json', 'WWW-Authenticate': 'Basic realm="Admin", charset="UTF-8"', ...getSecurityHeaders(request) } });
             }
             if (request.method !== 'POST') {
               return new Response(JSON.stringify({ error: 'Method Not Allowed' }), { status: 405, headers: { 'Allow': 'POST', 'Content-Type': 'application/json', ...getSecurityHeaders(request) } });
@@ -460,7 +460,7 @@ export default {
           }
           case 'admin/list-keys': {
             if (!isAdminAuthorized(request, env)) {
-              return new Response(JSON.stringify({ error: 'Unauthorized' }), { status: 401, headers: { 'Content-Type': 'application/json', ...getSecurityHeaders(request) } });
+              return new Response(JSON.stringify({ error: 'Unauthorized' }), { status: 401, headers: { 'Content-Type': 'application/json', 'WWW-Authenticate': 'Basic realm="Admin", charset="UTF-8"', ...getSecurityHeaders(request) } });
             }
             if (request.method !== 'GET') {
               return new Response(JSON.stringify({ error: 'Method Not Allowed' }), { status: 405, headers: { 'Allow': 'GET', 'Content-Type': 'application/json', ...getSecurityHeaders(request) } });
@@ -477,9 +477,9 @@ export default {
                   if (!raw) continue;
                   const obj = JSON.parse(raw);
                   if (obj && obj.apikey) {
-                    const now = Math.floor(Date.now()/1000);
-                    const expiresIn = (obj.expire||0) - now;
-                    results.push({ apiKey: obj.apikey, expiresAt: obj.expire||0, usage: obj.usage||0, expiresIn });
+                    const now = Math.floor(Date.now() / 1000);
+                    const expiresIn = (obj.expire || 0) - now;
+                    results.push({ apiKey: obj.apikey, expiresAt: obj.expire || 0, usage: obj.usage || 0, expiresIn });
                   }
                 } catch (_) { /* skip malformed */ }
               }
@@ -604,10 +604,10 @@ ${sitemapUrls}</urlset>`;
             }
           });
         }
-  // Edge cache per-locale + version
-  const cached = await caches.default.match(request);
-  if (cached) return cached;
-  const jsContent = getCreateMemoJS()
+        // Edge cache per-locale + version
+        const cached = await caches.default.match(request);
+        if (cached) return cached;
+        const jsContent = getCreateMemoJS()
           .replace(/{{TURNSTILE_SITE_KEY}}/g, env.TURNSTILE_SITE_KEY)
           .replace(/{{MISSING_MESSAGE_ERROR}}/g, escapeJavaScript(getErrorMessage('MISSING_MESSAGE', jsLocale)))
           .replace(/{{MESSAGE_TOO_LONG_ERROR}}/g, escapeJavaScript(getErrorMessage('MESSAGE_TOO_LONG', jsLocale)))
@@ -627,11 +627,11 @@ ${sitemapUrls}</urlset>`;
           .replace(/{{BTN_SHOW}}/g, escapeJavaScript(t('btn.show', jsLocale)))
           .replace(/{{BTN_HIDE}}/g, escapeJavaScript(t('btn.hide', jsLocale)))
           .replace(/{{BTN_COPY}}/g, escapeJavaScript(t('btn.copy', jsLocale)));
-  const jsEtag = `"create-${ASSET_VERSION}-${jsLocale}"`;
-  if (request.headers.get('if-none-match') === jsEtag) {
-    return new Response(null, { status: 304, headers: { ...getSecurityHeaders(request), ETag: jsEtag } });
-  }
-  const jsResp = new Response(minifyJS(jsContent), {
+        const jsEtag = `"create-${ASSET_VERSION}-${jsLocale}"`;
+        if (request.headers.get('if-none-match') === jsEtag) {
+          return new Response(null, { status: 304, headers: { ...getSecurityHeaders(request), ETag: jsEtag } });
+        }
+        const jsResp = new Response(minifyJS(jsContent), {
           headers: {
             'Content-Type': 'application/javascript',
             'Cache-Control': 'public, max-age=31536000, immutable',
@@ -655,10 +655,10 @@ ${sitemapUrls}</urlset>`;
             }
           });
         }
-  // Edge cache per-locale + version
-  const cached = await caches.default.match(request);
-  if (cached) return cached;
-  const jsContent = getReadMemoJS()
+        // Edge cache per-locale + version
+        const cached = await caches.default.match(request);
+        if (cached) return cached;
+        const jsContent = getReadMemoJS()
           .replace(/{{TURNSTILE_SITE_KEY}}/g, env.TURNSTILE_SITE_KEY)
           .replace(/{{MISSING_MEMO_ID_ERROR}}/g, escapeJavaScript(getErrorMessage('MISSING_MEMO_ID', jsLocale)))
           .replace(/{{MISSING_PASSWORD_ERROR}}/g, escapeJavaScript(getErrorMessage('MISSING_PASSWORD_ERROR', jsLocale)))
@@ -678,11 +678,11 @@ ${sitemapUrls}</urlset>`;
           .replace(/{{BTN_HIDE}}/g, escapeJavaScript(t('btn.hide', jsLocale)))
           .replace(/{{BTN_COPIED}}/g, escapeJavaScript(t('btn.copied', jsLocale)))
           .replace(/{{DELETION_ERROR_MESSAGE}}/g, escapeJavaScript(t('msg.deletionError', jsLocale)));
-  const jsEtag = `"read-${ASSET_VERSION}-${jsLocale}"`;
-  if (request.headers.get('if-none-match') === jsEtag) {
-    return new Response(null, { status: 304, headers: { ...getSecurityHeaders(request), ETag: jsEtag } });
-  }
-  const jsResp = new Response(minifyJS(jsContent), {
+        const jsEtag = `"read-${ASSET_VERSION}-${jsLocale}"`;
+        if (request.headers.get('if-none-match') === jsEtag) {
+          return new Response(null, { status: 304, headers: { ...getSecurityHeaders(request), ETag: jsEtag } });
+        }
+        const jsResp = new Response(minifyJS(jsContent), {
           headers: {
             'Content-Type': 'application/javascript',
             'Cache-Control': 'public, max-age=31536000, immutable',
@@ -710,16 +710,16 @@ ${sitemapUrls}</urlset>`;
         if (request.headers.get('if-none-match') === cmnEtag) {
           return new Response(null, { status: 304, headers: { ...getSecurityHeaders(request), ETag: cmnEtag } });
         }
-  const commonResp = new Response(minifyJS(getCommonJS()), {
+        const commonResp = new Response(minifyJS(getCommonJS()), {
           headers: {
             'Content-Type': 'application/javascript',
-      'Cache-Control': 'public, max-age=31536000, immutable',
+            'Cache-Control': 'public, max-age=31536000, immutable',
             'ETag': cmnEtag,
             ...getSecurityHeaders(request)
           }
-    });
-    ctx.waitUntil(caches.default.put(request, commonResp.clone()));
-    return commonResp;
+        });
+        ctx.waitUntil(caches.default.put(request, commonResp.clone()));
+        return commonResp;
       }
 
       if (pathname === '/js/clientLocalization.js') {
@@ -743,20 +743,20 @@ ${sitemapUrls}</urlset>`;
             if (refererLocaleInfo.locale && getSupportedLocales().includes(refererLocaleInfo.locale)) {
               jsLocale = refererLocaleInfo.locale;
             }
-          } catch {}
+          } catch { }
         }
 
-    // Serve the optimized client localization utility with only the relevant translations
-    const secHeaders = getSecurityHeaders(request);
-    // Ensure caches vary on Referer since content depends on it (header-based for browsers)
-    secHeaders['Vary'] = 'Origin, Referer';
+        // Serve the optimized client localization utility with only the relevant translations
+        const secHeaders = getSecurityHeaders(request);
+        // Ensure caches vary on Referer since content depends on it (header-based for browsers)
+        secHeaders['Vary'] = 'Origin, Referer';
 
-    // Edge cache by synthetic key including locale + version
-    const cacheKeyUrl = new URL('/js/clientLocalization.js', url.origin);
-    cacheKeyUrl.searchParams.set('locale', jsLocale);
-    cacheKeyUrl.searchParams.set('v', ASSET_VERSION);
-    const cacheMatch = await caches.default.match(cacheKeyUrl.toString());
-    if (cacheMatch) return cacheMatch;
+        // Edge cache by synthetic key including locale + version
+        const cacheKeyUrl = new URL('/js/clientLocalization.js', url.origin);
+        cacheKeyUrl.searchParams.set('locale', jsLocale);
+        cacheKeyUrl.searchParams.set('v', ASSET_VERSION);
+        const cacheMatch = await caches.default.match(cacheKeyUrl.toString());
+        if (cacheMatch) return cacheMatch;
 
         const locEtag = `"clientloc-${ASSET_VERSION}-${jsLocale}"`;
         if (request.headers.get('if-none-match') === locEtag) {
@@ -765,13 +765,13 @@ ${sitemapUrls}</urlset>`;
         const locResp = new Response(minifyJS(getClientLocalizationJS(jsLocale)), {
           headers: {
             'Content-Type': 'application/javascript',
-      'Cache-Control': 'public, max-age=31536000, immutable',
+            'Cache-Control': 'public, max-age=31536000, immutable',
             'ETag': locEtag,
             ...secHeaders
           }
-    });
-    ctx.waitUntil(caches.default.put(cacheKeyUrl.toString(), locResp.clone()));
-    return locResp;
+        });
+        ctx.waitUntil(caches.default.put(cacheKeyUrl.toString(), locResp.clone()));
+        return locResp;
       }
 
       // Route page requests
@@ -885,7 +885,7 @@ ${sitemapUrls}</urlset>`;
           });
       }
 
-  const htmlResp = new Response(response, {
+      const htmlResp = new Response(response, {
         headers: {
           'Content-Type': 'text/html',
           ...cacheHeaders,
@@ -908,7 +908,7 @@ ${sitemapUrls}</urlset>`;
       }
       return htmlResp;
     } catch (error) {
-  return new Response(getErrorMessage('INTERNAL_SERVER_ERROR', 'en'), {
+      return new Response(getErrorMessage('INTERNAL_SERVER_ERROR', 'en'), {
         status: 500,
         headers: getSecurityHeaders(request)
       });

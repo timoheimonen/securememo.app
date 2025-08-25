@@ -1442,7 +1442,7 @@ export async function getPrivacyHTML(locale = 'en', origin = 'https://securememo
 </html>`;
 } 
 
-// Minimal Admin Panel (protected via Basic Auth in index.js)
+// Minimal Admin Panel protected by admin credentials and Cloudflare Zero Trust
 export async function getAdminHTML(locale = 'en', origin = 'https://securememo.app') {
         // only english, not localized.
         return `<!DOCTYPE html>
