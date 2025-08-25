@@ -1441,3 +1441,37 @@ export async function getPrivacyHTML(locale = 'en', origin = 'https://securememo
 </body>
 </html>`;
 } 
+
+// Minimal Admin Panel (protected via Basic Auth in index.js)
+export async function getAdminHTML(locale = 'en', origin = 'https://securememo.app') {
+        // only english, not localized.
+        return `<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin | securememo.app</title>
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="/android-chrome-512x512.png">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="/en" class="nav-logo">securememo.app</a>
+        </div>
+    </nav>
+    <main class="main-content">
+        <h1 style="margin-top:1.5rem;">Admin Panel</h1>
+        <p>This protected area will host administrative tools. (Placeholder)</p>
+    </main>
+    <footer class="footer">
+        <p><a href="https://github.com/timoheimonen/securememo.app" target="_blank" rel="noopener noreferrer">Source</a></p>
+    </footer>
+    <script src="/js/common.js" type="module" nonce="{{CSP_NONCE}}" defer></script>
+</body>
+</html>`;
+}

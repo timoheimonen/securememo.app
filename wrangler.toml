@@ -1,5 +1,5 @@
 #
-# securememo.app
+# securememo.p
 # Deploy from Main branch > Cloudflare main
 # Deploy from Development branch > Cloudflare dev Worker
 #
@@ -31,6 +31,11 @@ workers_dev = false
 [env.production.triggers]
 crons = ["0 */1 * * *"]  # Run cleanup every 1 hours
 
+# Production KV namespaces for API-keys
+[[env.production.kv_namespaces]]
+binding = "KV"
+id = "9dcc03e011a1403ab46192fa5128b0a7"
+
 # Production D1 database
 [[env.production.d1_databases]]
 binding = "DB"
@@ -59,6 +64,11 @@ workers_dev = true # enable on deploy, behind Cloudflare Zero Trust
 [env.dev.vars]
 LOG_LEVEL = "DEBUG"
 
+# Development KV namespaces for API-keys
+[[env.dev.kv_namespaces]]
+binding = "KV"
+id = "91c6c7b3afa4486a88a7f2a52827fd6a"
+
 # Development D1 database
 [[env.dev.d1_databases]]
 binding = "DB"
@@ -68,7 +78,3 @@ database_id = "159356d9-9eee-4f53-99e6-1b252b0df8df"
 # Development environment
 [env.dev.triggers]
 crons = []
-
-# Disable previews
-[previews]
-enabled = false

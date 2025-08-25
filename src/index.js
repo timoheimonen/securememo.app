@@ -37,6 +37,8 @@ import {
   handleConfirmDelete,
   handleCleanupMemos
 } from './handlers/auth.js';
+import { constantTimeCompare } from './utils/timingSecurity.js';
+import { getAdminHTML } from './templates/pages.js';
 import { getErrorMessage } from './utils/errorMessages.js';
 import {
   extractLocaleFromPath,
@@ -725,6 +727,39 @@ ${sitemapUrls}</urlset>`;
           response = versionAssetUrls((await getPrivacyHTML(locale, url.origin)).replace(/{{CSP_NONCE}}/g, cspNonce));
           cacheHeaders = { 'Cache-Control': 'public, max-age=604800' };
           break;
+        case '/admin': {
+          // Protected with credential and Cloudflare Zero Trust
+          const authHeader = request.headers.get('authorization') || '';
+          let authorized = false;
+          if (env.ADMIN_USER && env.ADMIN_PASS && authHeader.startsWith('Basic ')) {
+            try {
+              const decoded = atob(authHeader.substring(6));
+              const sep = decoded.indexOf(':');
+              if (sep !== -1) {
+                const user = decoded.substring(0, sep);
+                const pass = decoded.substring(sep + 1);
+                if (constantTimeCompare(user, env.ADMIN_USER) && constantTimeCompare(pass, env.ADMIN_PASS)) {
+                  authorized = true;
+                }
+              }
+            } catch (_) {
+              // ignore decode errors to avoid leaking info
+            }
+          }
+          if (!authorized) {
+            return new Response('Authentication required', {
+              status: 401,
+              headers: {
+                'WWW-Authenticate': 'Basic realm="Admin", charset="UTF-8"',
+                ...getSecurityHeaders(request)
+              }
+            });
+          }
+          cspNonce = cspNonce || generateNonce();
+          response = versionAssetUrls((await getAdminHTML(locale, url.origin)).replace(/{{CSP_NONCE}}/g, cspNonce));
+          cacheHeaders = { 'Cache-Control': 'no-store' }; // never cache admin panel
+          break;
+        }
         default:
           return new Response(getErrorMessage('NOT_FOUND', locale), {
             status: 404,
