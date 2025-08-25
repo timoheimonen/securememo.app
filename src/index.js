@@ -130,8 +130,15 @@ async function isAdminAuthorized(request, env) {
   const authHeader = request.headers.get('authorization') || '';
   const clientIp = request.headers.get('cf-connecting-ip') || 'unknown';
   const MAX_ATTEMPTS = 3;          // attempts within window before temporary block
-  const WINDOW_SEC = 3600;          // 10 minute sliding window
-  const BLOCK_SECONDS = 3600;       // block duration (10 minutes)
+  const WINDOW_SEC = 3600;          // 1 hour sliding window
+  const BLOCK_SECONDS = 3600;       // block duration (1 hour)
+
+  // Early Zero Trust (Cloudflare Access) enforcement: require Access JWT assertion header
+  const accessJwt = request.headers.get('Cf-Access-Jwt-Assertion');
+  if (!accessJwt) {
+    await addArtificialDelay(200, 400);
+    return { authorized: false, reason: 'blocked' };
+  }
 
   // Namespace for storing attempt counters. Prefer dedicated ratelimit namespace if present.
   const kv = env.ADMIN_SECURITY || env.kv_ratelimit || env.API_KEYS || env.KV || null;
@@ -188,7 +195,7 @@ async function isAdminAuthorized(request, env) {
       record.blockedUntil = now + BLOCK_SECONDS;
     }
     if (kv) {
-      try { await kv.put(attemptsKey, JSON.stringify(record), { expiration: record.blockedUntil || (record.first + WINDOW_SEC) }); } catch (_) {}
+      try { await kv.put(attemptsKey, JSON.stringify(record), { expiration: record.blockedUntil || (record.first + WINDOW_SEC) }); } catch (_) { }
     }
     await addArtificialDelay(200, 400);
     return { authorized: false, reason: 'no_header' };
@@ -214,15 +221,15 @@ async function isAdminAuthorized(request, env) {
       record.blockedUntil = now + BLOCK_SECONDS;
     }
     if (kv) {
-      try { await kv.put(attemptsKey, JSON.stringify(record), { expiration: record.blockedUntil || (record.first + WINDOW_SEC) }); } catch (_) {}
+      try { await kv.put(attemptsKey, JSON.stringify(record), { expiration: record.blockedUntil || (record.first + WINDOW_SEC) }); } catch (_) { }
     }
-    await addArtificialDelay(500, 900);
+    await addArtificialDelay(200, 400);
     return { authorized: false, reason: record.blockedUntil ? 'blocked' : 'invalid' };
   }
 
   // Success: reset attempts
   if (kv) {
-    try { await kv.delete(attemptsKey); } catch (_) {}
+    try { await kv.delete(attemptsKey); } catch (_) { }
   }
   return { authorized: true };
 }
