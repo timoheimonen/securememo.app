@@ -151,6 +151,8 @@ function generateApiKey() {
   return btoa(binary).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
 }
 
+const API_KEY_PREFIX = 'key:';
+
 // Helper: resolve KV namespace for API keys (supports legacy binding "KV" as fallback)
 function getApiKeysNamespace(env) {
   return env.API_KEYS || env.KV || null;
@@ -442,7 +444,7 @@ export default {
               if (!kv) {
                 return new Response(JSON.stringify({ error: 'KV namespace missing (configure binding API_KEYS or KV)' }), { status: 500, headers: { 'Content-Type': 'application/json', ...getSecurityHeaders(request) } });
               }
-              await kv.put(`key:${apiKey}`, value, { expiration: expiresAt });
+              await kv.put(`${API_KEY_PREFIX}${apiKey}`, value, { expiration: expiresAt });
               return new Response(JSON.stringify({ success: true, apiKey, expiresAt }), { status: 200, headers: { 'Content-Type': 'application/json', ...getSecurityHeaders(request) } });
             } catch (e) {
               return new Response(JSON.stringify({ error: 'Failed to store key' }), { status: 500, headers: { 'Content-Type': 'application/json', ...getSecurityHeaders(request) } });
@@ -467,7 +469,7 @@ export default {
               if (!kv) {
                 return new Response(JSON.stringify({ error: 'KV namespace missing (configure binding API_KEYS or KV)' }), { status: 500, headers: { 'Content-Type': 'application/json', ...getSecurityHeaders(request) } });
               }
-              await kv.delete(`key:${apiKey}`);
+              await kv.delete(`${API_KEY_PREFIX}${apiKey}`);
               return new Response(JSON.stringify({ success: true }), { status: 200, headers: { 'Content-Type': 'application/json', ...getSecurityHeaders(request) } });
             } catch (e) {
               return new Response(JSON.stringify({ error: 'Deletion failed' }), { status: 500, headers: { 'Content-Type': 'application/json', ...getSecurityHeaders(request) } });
@@ -485,7 +487,9 @@ export default {
               if (!kv) {
                 return new Response(JSON.stringify({ error: 'KV namespace missing (configure binding API_KEYS or KV)' }), { status: 500, headers: { 'Content-Type': 'application/json', ...getSecurityHeaders(request) } });
               }
-              const list = await kv.list({ prefix: 'key:', limit: 200 });
+              // Allow optional ?all=1 to list raw keys for debugging when prefix yields empty results
+              const urlObj = new URL(request.url);
+              const list = await kv.list({ prefix: API_KEY_PREFIX, limit: 200 });
               const results = [];
               for (const k of list.keys) {
                 try {
@@ -493,11 +497,16 @@ export default {
                   if (!raw) continue;
                   const obj = JSON.parse(raw);
                   // Derive apiKey strictly from KV key name (format: key:<apiKey>)
-                  const derivedKey = k.name.startsWith('key:') ? k.name.substring(4) : k.name;
+                  const derivedKey = k.name.startsWith(API_KEY_PREFIX) ? k.name.substring(API_KEY_PREFIX.length) : k.name;
                   const now = Math.floor(Date.now()/1000);
                   const expiresIn = (obj.expire || 0) - now;
                   results.push({ apiKey: derivedKey, expiresAt: obj.expire || 0, usage: obj.usage || 0, expiresIn });
                 } catch (_) { /* skip malformed */ }
+              }
+              // If no results and all=1, return raw key list without prefix filtering for troubleshooting
+              if (results.length === 0 && urlObj.searchParams.get('all') === '1') {
+                const rawList = await kv.list({ limit: 200 });
+                return new Response(JSON.stringify({ success: true, keys: results, debugRawKeys: rawList.keys.map(k=>k.name) }), { status: 200, headers: { 'Content-Type': 'application/json', ...getSecurityHeaders(request) } });
               }
               return new Response(JSON.stringify({ success: true, keys: results }), { status: 200, headers: { 'Content-Type': 'application/json', ...getSecurityHeaders(request) } });
             } catch (e) {
