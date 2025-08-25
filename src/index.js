@@ -37,7 +37,7 @@ import {
   handleConfirmDelete,
   handleCleanupMemos
 } from './handlers/auth.js';
-import { constantTimeCompare } from './utils/timingSecurity.js';
+import { constantTimeCompare, addArtificialDelay } from './utils/timingSecurity.js';
 import { getAdminHTML } from './templates/pages.js';
 import { getErrorMessage } from './utils/errorMessages.js';
 import {
@@ -125,21 +125,106 @@ const allowedOrigins = [
   'https://securememo-dev.timo-heimonen.workers.dev'
 ];
 
-// Helper: admin Basic Auth check (defense-in-depth; panel also behind Zero Trust)
-function isAdminAuthorized(request, env) {
+// Helper: admin Basic Auth check with simple brute-force protection (defense-in-depth; panel also behind Zero Trust)
+async function isAdminAuthorized(request, env) {
   const authHeader = request.headers.get('authorization') || '';
-  if (!env.ADMIN_USER || !env.ADMIN_PASS) return false;
-  if (!authHeader.startsWith('Basic ')) return false;
+  const clientIp = request.headers.get('cf-connecting-ip') || 'unknown';
+  const MAX_ATTEMPTS = 3;          // attempts within window before temporary block
+  const WINDOW_SEC = 3600;          // 10 minute sliding window
+  const BLOCK_SECONDS = 3600;       // block duration (10 minutes)
+
+  // Namespace for storing attempt counters. Prefer dedicated ratelimit namespace if present.
+  const kv = env.ADMIN_SECURITY || env.kv_ratelimit || env.API_KEYS || env.KV || null;
+
+  // Hash IP to avoid storing raw address (privacy). Base64url of SHA-256.
+  async function hashIp(ip) {
+    try {
+      const data = new TextEncoder().encode(ip);
+      const digest = await crypto.subtle.digest('SHA-256', data);
+      const bytes = new Uint8Array(digest);
+      let bin = '';
+      for (let i = 0; i < bytes.length; i++) bin += String.fromCharCode(bytes[i]);
+      return btoa(bin).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+    } catch (_) { return 'iphash_error'; }
+  }
+
+  const ipHash = await hashIp(clientIp);
+  const attemptsKey = `admin_attempts:${ipHash}`;
+  let record = null;
+  const now = Math.floor(Date.now() / 1000);
+  if (kv) {
+    try {
+      const raw = await kv.get(attemptsKey);
+      if (raw) {
+        try { record = JSON.parse(raw); } catch (_) { record = null; }
+      }
+    } catch (_) { /* ignore */ }
+  }
+  if (!record) {
+    record = { count: 0, first: now, blockedUntil: 0 };
+  } else {
+    // Reset window if expired
+    if (record.first + WINDOW_SEC < now) {
+      record.count = 0;
+      record.first = now;
+      record.blockedUntil = 0;
+    }
+  }
+
+  // If currently blocked
+  if (record.blockedUntil && record.blockedUntil > now) {
+    await addArtificialDelay(200, 400); // consistent delay for blocked responses
+    return { authorized: false, reason: 'blocked' };
+  }
+
+  if (!env.ADMIN_USER || !env.ADMIN_PASS) {
+    await addArtificialDelay(200, 400);
+    return { authorized: false, reason: 'disabled' };
+  }
+  if (!authHeader.startsWith('Basic ')) {
+    // Count as failed attempt (missing header) to prevent enumeration
+    record.count++;
+    if (record.count >= MAX_ATTEMPTS) {
+      record.blockedUntil = now + BLOCK_SECONDS;
+    }
+    if (kv) {
+      try { await kv.put(attemptsKey, JSON.stringify(record), { expiration: record.blockedUntil || (record.first + WINDOW_SEC) }); } catch (_) {}
+    }
+    await addArtificialDelay(200, 400);
+    return { authorized: false, reason: 'no_header' };
+  }
+  let user = '', pass = '';
   try {
     const decoded = atob(authHeader.substring(6));
     const sep = decoded.indexOf(':');
-    if (sep === -1) return false;
-    const user = decoded.substring(0, sep);
-    const pass = decoded.substring(sep + 1);
-    return constantTimeCompare(user, env.ADMIN_USER) && constantTimeCompare(pass, env.ADMIN_PASS);
+    if (sep !== -1) {
+      user = decoded.substring(0, sep);
+      pass = decoded.substring(sep + 1);
+    }
   } catch (_) {
-    return false;
+    // malformed header counts as failure
+    user = '';
+    pass = '';
   }
+
+  const ok = constantTimeCompare(user, env.ADMIN_USER) && constantTimeCompare(pass, env.ADMIN_PASS);
+  if (!ok) {
+    record.count++;
+    if (record.count >= MAX_ATTEMPTS) {
+      record.blockedUntil = now + BLOCK_SECONDS;
+    }
+    if (kv) {
+      try { await kv.put(attemptsKey, JSON.stringify(record), { expiration: record.blockedUntil || (record.first + WINDOW_SEC) }); } catch (_) {}
+    }
+    await addArtificialDelay(500, 900);
+    return { authorized: false, reason: record.blockedUntil ? 'blocked' : 'invalid' };
+  }
+
+  // Success: reset attempts
+  if (kv) {
+    try { await kv.delete(attemptsKey); } catch (_) {}
+  }
+  return { authorized: true };
 }
 
 // Helper: secure API key generation (32 random bytes -> base64url, trimmed padding)
@@ -416,10 +501,12 @@ export default {
             const res = await handleConfirmDelete(request, env, apiLocale);
             return mergeSecurityHeadersIntoResponse(res, request);
           }
+          // Admin only, protected with credentials and Cloudflare Zero Trust
           case 'admin/create-key': {
-            // Admin only
-            if (!isAdminAuthorized(request, env)) {
-              return new Response(JSON.stringify({ error: 'Unauthorized' }), { status: 401, headers: { 'Content-Type': 'application/json', 'WWW-Authenticate': 'Basic realm="Admin", charset="UTF-8"', ...getSecurityHeaders(request) } });
+            const adminAuth = await isAdminAuthorized(request, env);
+            if (!adminAuth.authorized) {
+              const err = adminAuth.reason === 'blocked' ? 'Temporarily blocked' : 'Unauthorized';
+              return new Response(JSON.stringify({ error: err }), { status: 401, headers: { 'Content-Type': 'application/json', 'WWW-Authenticate': 'Basic realm="Admin", charset="UTF-8"', ...getSecurityHeaders(request) } });
             }
             if (request.method !== 'POST') {
               return new Response(JSON.stringify({ error: 'Method Not Allowed' }), { status: 405, headers: { 'Allow': 'POST', 'Content-Type': 'application/json', ...getSecurityHeaders(request) } });
@@ -448,9 +535,12 @@ export default {
               return new Response(JSON.stringify({ error: 'Failed to store key' }), { status: 500, headers: { 'Content-Type': 'application/json', ...getSecurityHeaders(request) } });
             }
           }
+          // Admin only panel, protected with credentials and Cloudflare Zero Trust
           case 'admin/delete-key': {
-            if (!isAdminAuthorized(request, env)) {
-              return new Response(JSON.stringify({ error: 'Unauthorized' }), { status: 401, headers: { 'Content-Type': 'application/json', 'WWW-Authenticate': 'Basic realm="Admin", charset="UTF-8"', ...getSecurityHeaders(request) } });
+            const adminAuth = await isAdminAuthorized(request, env);
+            if (!adminAuth.authorized) {
+              const err = adminAuth.reason === 'blocked' ? 'Temporarily blocked' : 'Unauthorized';
+              return new Response(JSON.stringify({ error: err }), { status: 401, headers: { 'Content-Type': 'application/json', 'WWW-Authenticate': 'Basic realm="Admin", charset="UTF-8"', ...getSecurityHeaders(request) } });
             }
             if (request.method !== 'POST') {
               return new Response(JSON.stringify({ error: 'Method Not Allowed' }), { status: 405, headers: { 'Allow': 'POST', 'Content-Type': 'application/json', ...getSecurityHeaders(request) } });
@@ -473,9 +563,12 @@ export default {
               return new Response(JSON.stringify({ error: 'Deletion failed' }), { status: 500, headers: { 'Content-Type': 'application/json', ...getSecurityHeaders(request) } });
             }
           }
+          // Admin only panel, protected with credentials and Cloudflare Zero Trust
           case 'admin/list-keys': {
-            if (!isAdminAuthorized(request, env)) {
-              return new Response(JSON.stringify({ error: 'Unauthorized' }), { status: 401, headers: { 'Content-Type': 'application/json', 'WWW-Authenticate': 'Basic realm="Admin", charset="UTF-8"', ...getSecurityHeaders(request) } });
+            const adminAuth = await isAdminAuthorized(request, env);
+            if (!adminAuth.authorized) {
+              const err = adminAuth.reason === 'blocked' ? 'Temporarily blocked' : 'Unauthorized';
+              return new Response(JSON.stringify({ error: err }), { status: 401, headers: { 'Content-Type': 'application/json', 'WWW-Authenticate': 'Basic realm="Admin", charset="UTF-8"', ...getSecurityHeaders(request) } });
             }
             if (request.method !== 'GET') {
               return new Response(JSON.stringify({ error: 'Method Not Allowed' }), { status: 405, headers: { 'Allow': 'GET', 'Content-Type': 'application/json', ...getSecurityHeaders(request) } });
@@ -861,25 +954,10 @@ ${sitemapUrls}</urlset>`;
           break;
         case '/admin': {
           // Protected with credential and Cloudflare Zero Trust
-          const authHeader = request.headers.get('authorization') || '';
-          let authorized = false;
-          if (env.ADMIN_USER && env.ADMIN_PASS && authHeader.startsWith('Basic ')) {
-            try {
-              const decoded = atob(authHeader.substring(6));
-              const sep = decoded.indexOf(':');
-              if (sep !== -1) {
-                const user = decoded.substring(0, sep);
-                const pass = decoded.substring(sep + 1);
-                if (constantTimeCompare(user, env.ADMIN_USER) && constantTimeCompare(pass, env.ADMIN_PASS)) {
-                  authorized = true;
-                }
-              }
-            } catch (_) {
-              // ignore decode errors to avoid leaking info
-            }
-          }
-          if (!authorized) {
-            return new Response('Authentication required', {
+          const adminAuth = await isAdminAuthorized(request, env);
+          if (!adminAuth.authorized) {
+            const msg = adminAuth.reason === 'blocked' ? 'Temporarily blocked due to failed attempts' : 'Authentication required';
+            return new Response(msg, {
               status: 401,
               headers: {
                 'WWW-Authenticate': 'Basic realm="Admin", charset="UTF-8"',
