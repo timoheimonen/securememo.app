@@ -164,7 +164,7 @@ function buildContentSecurityPolicy(nonce) {
     "style-src 'self' 'unsafe-inline'",
     "worker-src 'self' blob:",
     "object-src 'none'",
-    `script-src 'nonce-${nonce}' 'strict-dynamic' blob:`,
+  `script-src 'nonce-${nonce}' 'strict-dynamic' blob: 'wasm-unsafe-eval'`,
     "require-trusted-types-for 'script'"
   ];
   return directives.join('; ') + ';';
