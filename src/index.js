@@ -151,8 +151,6 @@ function generateApiKey() {
   return btoa(binary).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
 }
 
-const API_KEY_PREFIX = 'key:';
-
 // Helper: resolve KV namespace for API keys (supports legacy binding "KV" as fallback)
 function getApiKeysNamespace(env) {
   return env.API_KEYS || env.KV || null;
@@ -444,7 +442,7 @@ export default {
               if (!kv) {
                 return new Response(JSON.stringify({ error: 'KV namespace missing (configure binding API_KEYS or KV)' }), { status: 500, headers: { 'Content-Type': 'application/json', ...getSecurityHeaders(request) } });
               }
-              await kv.put(`${API_KEY_PREFIX}${apiKey}`, value, { expiration: expiresAt });
+              await kv.put(`${apiKey}`, value, { expiration: expiresAt });
               return new Response(JSON.stringify({ success: true, apiKey, expiresAt }), { status: 200, headers: { 'Content-Type': 'application/json', ...getSecurityHeaders(request) } });
             } catch (e) {
               return new Response(JSON.stringify({ error: 'Failed to store key' }), { status: 500, headers: { 'Content-Type': 'application/json', ...getSecurityHeaders(request) } });
@@ -469,7 +467,7 @@ export default {
               if (!kv) {
                 return new Response(JSON.stringify({ error: 'KV namespace missing (configure binding API_KEYS or KV)' }), { status: 500, headers: { 'Content-Type': 'application/json', ...getSecurityHeaders(request) } });
               }
-              await kv.delete(`${API_KEY_PREFIX}${apiKey}`);
+              await kv.delete(`${apiKey}`);
               return new Response(JSON.stringify({ success: true }), { status: 200, headers: { 'Content-Type': 'application/json', ...getSecurityHeaders(request) } });
             } catch (e) {
               return new Response(JSON.stringify({ error: 'Deletion failed' }), { status: 500, headers: { 'Content-Type': 'application/json', ...getSecurityHeaders(request) } });
