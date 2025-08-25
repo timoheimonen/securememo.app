@@ -1466,12 +1466,119 @@ export async function getAdminHTML(locale = 'en', origin = 'https://securememo.a
     </nav>
     <main class="main-content">
         <h1 style="margin-top:1.5rem;">Admin Panel</h1>
-        <p>This protected area will host administrative tools. (Placeholder)</p>
+                <section style="margin-top:2rem;">
+                        <h2>API Keys</h2>
+                        <p>Create or delete API keys (stored in KV). Each key expires automatically.</p>
+                        <div style="display:flex;gap:2rem;flex-wrap:wrap;">
+                                <div style="flex:1;min-width:260px;">
+                                        <h3>Create Key</h3>
+                                        <form id="createKeyForm">
+                                                <label for="days">Validity (days 1-30, default 30)</label>
+                                                <input type="number" id="days" name="days" min="1" max="30" value="30" style="width:120px;display:block;margin:.25rem 0 1rem;">
+                                                <button type="submit" class="btn btn-primary">Create Key</button>
+                                        </form>
+                                        <div id="createResult" style="margin-top:1rem;font-family:monospace;word-break:break-all;"></div>
+                                </div>
+                                <div style="flex:1;min-width:260px;">
+                                        <h3>Delete Key</h3>
+                                        <form id="deleteKeyForm">
+                                                <label for="apiKeyDel">API Key</label>
+                                                <input type="text" id="apiKeyDel" required placeholder="paste key" style="width:100%;margin:.25rem 0 1rem;">
+                                                <button type="submit" class="btn btn-danger">Delete Key</button>
+                                        </form>
+                                        <div id="deleteResult" style="margin-top:1rem;"></div>
+                                </div>
+                        </div>
+                                        <div style="margin-top:2rem;">
+                                            <h3>Existing Keys</h3>
+                                            <button id="refreshKeys" class="btn btn-secondary" style="margin-bottom:.75rem;">Refresh</button>
+                                            <div id="keysTableWrapper" style="overflow-x:auto;">
+                                                <table id="keysTable" style="width:100%;border-collapse:collapse;">
+                                                    <thead>
+                                                        <tr><th style="text-align:left;padding:.25rem .5rem;border-bottom:1px solid #ccc;">API Key</th><th style="text-align:left;padding:.25rem .5rem;border-bottom:1px solid #ccc;">Expires (UTC)</th><th style="text-align:left;padding:.25rem .5rem;border-bottom:1px solid #ccc;">In (h)</th><th style="text-align:left;padding:.25rem .5rem;border-bottom:1px solid #ccc;">Usage</th></tr>
+                                                    </thead>
+                                                    <tbody></tbody>
+                                                </table>
+                                            </div>
+                                            <div id="keysStatus" style="margin-top:.5rem;font-size:.9em;opacity:.8;"></div>
+                                        </div>
+                </section>
     </main>
     <footer class="footer">
         <p><a href="https://github.com/timoheimonen/securememo.app" target="_blank" rel="noopener noreferrer">Source</a></p>
     </footer>
-    <script src="/js/common.js" type="module" nonce="{{CSP_NONCE}}" defer></script>
+        <script src="/js/common.js" type="module" nonce="{{CSP_NONCE}}" defer></script>
+        <script nonce="{{CSP_NONCE}}">(function(){
+            async function postJson(path, data){
+                const res = await fetch(path, {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(data)});
+                let j=null; try{ j = await res.json(); }catch(_){ }
+                return { ok: res.ok, status: res.status, data: j };
+            }
+            const createForm = document.getElementById('createKeyForm');
+            createForm.addEventListener('submit', async e=>{
+                e.preventDefault();
+                const days = parseInt(document.getElementById('days').value,10)||30;
+                const out = document.getElementById('createResult');
+                out.textContent='Creating...';
+                try {
+                    const r = await postJson('/api/admin/create-key', { days });
+                    if(r.ok && r.data && r.data.apiKey){
+                        const exp = new Date(r.data.expiresAt*1000).toISOString();
+                        out.innerHTML = '<strong>Key:</strong> '+r.data.apiKey+'<br><strong>Expires:</strong> '+exp;
+                    } else {
+                        out.textContent='Error: '+(r.data && r.data.error || r.status);
+                    }
+                } catch(err){ out.textContent='Error creating key'; }
+            });
+            const delForm = document.getElementById('deleteKeyForm');
+            delForm.addEventListener('submit', async e=>{
+                e.preventDefault();
+                const key = document.getElementById('apiKeyDel').value.trim();
+                const out = document.getElementById('deleteResult');
+                if(!key){ out.textContent='Enter key'; return; }
+                out.textContent='Deleting...';
+                try {
+                    const r = await postJson('/api/admin/delete-key', { apiKey: key });
+                    if(r.ok){ out.textContent='Deleted (if existed).'; }
+                    else { out.textContent='Error: '+(r.data && r.data.error || r.status); }
+                } catch(err){ out.textContent='Error deleting key'; }
+            });
+                    async function loadKeys(){
+                        const status = document.getElementById('keysStatus');
+                        status.textContent='Loading...';
+                        const tbody = document.querySelector('#keysTable tbody');
+                        tbody.innerHTML='';
+                        try {
+                            const res = await fetch('/api/admin/list-keys',{headers:{'Accept':'application/json'}});
+                            const j = await res.json();
+                            if(!res.ok){ status.textContent='Error: '+(j && j.error || res.status); return; }
+                            if(!j.keys || j.keys.length===0){ status.textContent='No keys.'; return; }
+                            j.keys.sort((a,b)=>a.expiresAt-b.expiresAt);
+                                                        for(const k of j.keys){
+                                                                const tr = document.createElement('tr');
+                                                                const expISO = k.expiresAt? new Date(k.expiresAt*1000).toISOString().replace('T',' ').replace(/\.\d+Z$/,'Z'):'-';
+                                                                const hours = k.expiresIn? (k.expiresIn/3600).toFixed(1):'0';
+                                                                function makeCell(txt){
+                                                                    const td = document.createElement('td');
+                                                                    td.style.padding='.25rem .5rem';
+                                                                    td.style.borderBottom='1px solid #eee';
+                                                                    td.textContent=txt;
+                                                                    return td;
+                                                                }
+                                                                const keyCell = makeCell(k.apiKey);
+                                                                keyCell.style.fontFamily='monospace';
+                                                                tr.appendChild(keyCell);
+                                                                tr.appendChild(makeCell(expISO));
+                                                                tr.appendChild(makeCell(hours));
+                                                                tr.appendChild(makeCell(String(k.usage)));
+                                                                tbody.appendChild(tr);
+                                                        }
+                            status.textContent='Loaded '+j.keys.length+' key(s).';
+                        } catch(err){ status.textContent='Failed to load keys'; }
+                    }
+                    document.getElementById('refreshKeys').addEventListener('click', loadKeys);
+                    loadKeys();
+        })();</script>
 </body>
 </html>`;
 }

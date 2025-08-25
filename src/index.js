@@ -125,6 +125,40 @@ const allowedOrigins = [
   'https://securememo-dev.timo-heimonen.workers.dev'
 ];
 
+// Helper: admin Basic Auth check (defense-in-depth; panel also behind Zero Trust)
+function isAdminAuthorized(request, env) {
+  const authHeader = request.headers.get('authorization') || '';
+  if (!env.ADMIN_USER || !env.ADMIN_PASS) return false;
+  if (!authHeader.startsWith('Basic ')) return false;
+  try {
+    const decoded = atob(authHeader.substring(6));
+    const sep = decoded.indexOf(':');
+    if (sep === -1) return false;
+    const user = decoded.substring(0, sep);
+    const pass = decoded.substring(sep + 1);
+    return constantTimeCompare(user, env.ADMIN_USER) && constantTimeCompare(pass, env.ADMIN_PASS);
+  } catch (_) {
+    return false;
+  }
+}
+
+// Helper: secure API key generation (32 random bytes -> base64url, trimmed padding)
+function generateApiKey() {
+  const bytes = new Uint8Array(32); // 256-bit key
+  crypto.getRandomValues(bytes);
+  let binary = '';
+  for (let i = 0; i < bytes.length; i++) binary += String.fromCharCode(bytes[i]);
+  return btoa(binary).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/,'');
+}
+
+async function readJsonBody(request, maxBytes = 4096) {
+  try {
+    const text = await request.text();
+    if (new TextEncoder().encode(text).length > maxBytes) return { error: 'too_large' };
+    return { data: JSON.parse(text || '{}') };
+  } catch(_) { return { error: 'invalid_json' }; }
+}
+
 // Security headers base (CSP is added dynamically per-response to include a nonce)
 const baseSecurityHeaders = {
   'X-Content-Type-Options': 'nosniff',
@@ -369,6 +403,90 @@ export default {
           case 'confirm-delete': {
             const res = await handleConfirmDelete(request, env, apiLocale);
             return mergeSecurityHeadersIntoResponse(res, request);
+          }
+          case 'admin/create-key': {
+            // Admin only
+            if (!isAdminAuthorized(request, env)) {
+              return new Response(JSON.stringify({ error: 'Unauthorized' }), { status: 401, headers: { 'Content-Type': 'application/json', ...getSecurityHeaders(request) } });
+            }
+            if (request.method !== 'POST') {
+              return new Response(JSON.stringify({ error: 'Method Not Allowed' }), { status: 405, headers: { 'Allow': 'POST', 'Content-Type': 'application/json', ...getSecurityHeaders(request) } });
+            }
+            const body = await readJsonBody(request);
+            if (body.error === 'too_large') return new Response(JSON.stringify({ error: 'Request too large' }), { status: 413, headers: { 'Content-Type': 'application/json', ...getSecurityHeaders(request) } });
+            if (body.error) return new Response(JSON.stringify({ error: 'Invalid JSON' }), { status: 400, headers: { 'Content-Type': 'application/json', ...getSecurityHeaders(request) } });
+            const daysRaw = body.data.days;
+            let days = parseInt(daysRaw, 10);
+            if (Number.isNaN(days)) days = 30;
+            if (days < 1) days = 1;
+            if (days > 30) days = 30;
+            const nowSec = Math.floor(Date.now()/1000);
+            const expiresAt = nowSec + days*86400;
+            const apiKey = generateApiKey();
+            const value = JSON.stringify({ apikey: apiKey, expire: expiresAt, usage: 0 });
+            try {
+              if (!env.API_KEYS) {
+                return new Response(JSON.stringify({ error: 'KV namespace missing (API_KEYS)' }), { status: 500, headers: { 'Content-Type': 'application/json', ...getSecurityHeaders(request) } });
+              }
+              await env.API_KEYS.put(`key:${apiKey}`, value, { expiration: expiresAt });
+              return new Response(JSON.stringify({ success: true, apiKey, expiresAt }), { status: 200, headers: { 'Content-Type': 'application/json', ...getSecurityHeaders(request) } });
+            } catch (e) {
+              return new Response(JSON.stringify({ error: 'Failed to store key' }), { status: 500, headers: { 'Content-Type': 'application/json', ...getSecurityHeaders(request) } });
+            }
+          }
+          case 'admin/delete-key': {
+            if (!isAdminAuthorized(request, env)) {
+              return new Response(JSON.stringify({ error: 'Unauthorized' }), { status: 401, headers: { 'Content-Type': 'application/json', ...getSecurityHeaders(request) } });
+            }
+            if (request.method !== 'POST') {
+              return new Response(JSON.stringify({ error: 'Method Not Allowed' }), { status: 405, headers: { 'Allow': 'POST', 'Content-Type': 'application/json', ...getSecurityHeaders(request) } });
+            }
+            const body = await readJsonBody(request);
+            if (body.error === 'too_large') return new Response(JSON.stringify({ error: 'Request too large' }), { status: 413, headers: { 'Content-Type': 'application/json', ...getSecurityHeaders(request) } });
+            if (body.error) return new Response(JSON.stringify({ error: 'Invalid JSON' }), { status: 400, headers: { 'Content-Type': 'application/json', ...getSecurityHeaders(request) } });
+            const apiKey = (body.data.apiKey || '').trim();
+            if (!apiKey || !/^[A-Za-z0-9_-]{30,}$/i.test(apiKey)) {
+              return new Response(JSON.stringify({ error: 'Invalid apiKey format' }), { status: 400, headers: { 'Content-Type': 'application/json', ...getSecurityHeaders(request) } });
+            }
+            try {
+              if (!env.API_KEYS) {
+                return new Response(JSON.stringify({ error: 'KV namespace missing (API_KEYS)' }), { status: 500, headers: { 'Content-Type': 'application/json', ...getSecurityHeaders(request) } });
+              }
+              await env.API_KEYS.delete(`key:${apiKey}`);
+              return new Response(JSON.stringify({ success: true }), { status: 200, headers: { 'Content-Type': 'application/json', ...getSecurityHeaders(request) } });
+            } catch (e) {
+              return new Response(JSON.stringify({ error: 'Deletion failed' }), { status: 500, headers: { 'Content-Type': 'application/json', ...getSecurityHeaders(request) } });
+            }
+          }
+          case 'admin/list-keys': {
+            if (!isAdminAuthorized(request, env)) {
+              return new Response(JSON.stringify({ error: 'Unauthorized' }), { status: 401, headers: { 'Content-Type': 'application/json', ...getSecurityHeaders(request) } });
+            }
+            if (request.method !== 'GET') {
+              return new Response(JSON.stringify({ error: 'Method Not Allowed' }), { status: 405, headers: { 'Allow': 'GET', 'Content-Type': 'application/json', ...getSecurityHeaders(request) } });
+            }
+            try {
+              if (!env.API_KEYS) {
+                return new Response(JSON.stringify({ error: 'KV namespace missing (API_KEYS)' }), { status: 500, headers: { 'Content-Type': 'application/json', ...getSecurityHeaders(request) } });
+              }
+              const list = await env.API_KEYS.list({ prefix: 'key:', limit: 200 });
+              const results = [];
+              for (const k of list.keys) {
+                try {
+                  const raw = await env.API_KEYS.get(k.name);
+                  if (!raw) continue;
+                  const obj = JSON.parse(raw);
+                  if (obj && obj.apikey) {
+                    const now = Math.floor(Date.now()/1000);
+                    const expiresIn = (obj.expire||0) - now;
+                    results.push({ apiKey: obj.apikey, expiresAt: obj.expire||0, usage: obj.usage||0, expiresIn });
+                  }
+                } catch (_) { /* skip malformed */ }
+              }
+              return new Response(JSON.stringify({ success: true, keys: results }), { status: 200, headers: { 'Content-Type': 'application/json', ...getSecurityHeaders(request) } });
+            } catch (e) {
+              return new Response(JSON.stringify({ error: 'List failed' }), { status: 500, headers: { 'Content-Type': 'application/json', ...getSecurityHeaders(request) } });
+            }
           }
           default:
             return new Response(getErrorMessage('NOT_FOUND', apiLocale), {
