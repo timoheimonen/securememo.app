@@ -69,10 +69,10 @@ LOG_LEVEL = "DEBUG"
 binding = "KV"
 id = "91c6c7b3afa4486a88a7f2a52827fd6a"
 
-# Development KV namespaces for ratelimiting
-[[env.dev.kv_ratelimit_namespaces]]
+# Development KV namespace for ratelimiting
+[[env.dev.kv_namespaces]]
 binding = "kv_ratelimit"
-id="fab2c3480f8c47b19985df902070a577"
+id = "fab2c3480f8c47b19985df902070a577"
 
 # Development D1 database
 [[env.dev.d1_databases]]
