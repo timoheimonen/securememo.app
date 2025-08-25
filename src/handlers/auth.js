@@ -14,6 +14,37 @@ import { extractLocaleFromRequest } from '../utils/localization.js';
 // Maximum allowed JSON request body size in bytes (defense-in-depth against large payload DoS)
 const MAX_REQUEST_BYTES = 64 * 1024; // 64 KB
 
+// NOTE ON SECURE ERASURE IN JS/WORKER ENVIRONMENTS:
+// JavaScript strings are immutable and memory management is handled by the engine (GC), so
+// we cannot guarantee immediate or deterministic zeroization of sensitive string data.
+// We DO, however, aggressively:
+//  - Use Uint8Array for intermediate cryptographic material and overwrite it (fill(0)).
+//  - Overwrite mutable arrays holding derived data (like hash byte arrays).
+//  - Null out / reassign references in finally blocks to reduce lifetime & GC roots.
+// This is best-effort defense-in-depth; do not rely on it for strong secret confinement.
+
+function wipeUint8(array) {
+    if (array instanceof Uint8Array) {
+        try { array.fill(0); } catch (_) { /* ignore */ }
+    }
+}
+
+function wipeArray(arr) {
+    if (Array.isArray(arr)) {
+        for (let i = 0; i < arr.length; i++) arr[i] = 0;
+    }
+}
+
+function disposeRef(refObj, keys) {
+    // Helper to null out multiple keys on an object (best-effort)
+    if (!refObj || typeof refObj !== 'object') return;
+    for (const k of keys) {
+        if (k in refObj) {
+            try { refObj[k] = null; } catch (_) { /* ignore */ }
+        }
+    }
+}
+
 // Uniform delayed error helper to reduce timing side-channel variance
 async function delayedJsonError(bodyObj, status = 400, extraHeaders = {}) {
     await uniformResponseDelay();
@@ -60,11 +91,22 @@ async function safeParseJson(request, limitBytes) {
 
 // Hash token (SHA-256 base64)
 async function hashDeletionToken(token) {
+    // Use explicit zeroization of intermediate buffers
     const encoder = new TextEncoder();
-    const data = encoder.encode(token);
-    const hashBuffer = await crypto.subtle.digest('SHA-256', data);
-    const hashArray = Array.from(new Uint8Array(hashBuffer));
-    return btoa(String.fromCharCode(...hashArray));
+    const data = encoder.encode(token); // Uint8Array (mutable)
+    let hashArray = [];
+    try {
+        const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+        hashArray = Array.from(new Uint8Array(hashBuffer)); // regular Array (mutable)
+        const base64 = btoa(String.fromCharCode(...hashArray));
+        return base64;
+    } finally {
+        // Best-effort wipe of intermediate data
+        wipeUint8(data);
+        wipeArray(hashArray);
+        // Overwrite token reference (cannot modify original caller's reference, but reduces lifetime here)
+        token = '';
+    }
 }
 
 /**
@@ -131,6 +173,11 @@ async function generateMemoId(env, maxRetries = 10, locale = 'en') {
 
 // Create new memo with validation and Turnstile verification
 export async function handleCreateMemo(request, env, locale = 'en') {
+    // Keep references outside try for wiping in finally
+    let requestData = null;
+    let sanitizedEncryptedMessage = null;
+    let deletionTokenHash = null;
+    let memoId = null;
     try {
         // Extract requestLocale from request headers/query for better UX
         const requestLocale = extractLocaleFromRequest(request);
@@ -172,9 +219,10 @@ export async function handleCreateMemo(request, env, locale = 'en') {
             }
             return delayedJsonError({ error: getErrorMessage('INVALID_JSON', requestLocale) });
         }
-        const requestData = parsedCreate.data;
+        requestData = parsedCreate.data;
 
-        const { encryptedMessage, expiryHours, cfTurnstileResponse, deletionTokenHash } = requestData;
+        const { encryptedMessage, expiryHours, cfTurnstileResponse, deletionTokenHash: incomingDeletionTokenHash } = requestData;
+        deletionTokenHash = incomingDeletionTokenHash; // track for later nulling
 
         // Comprehensive validation and sanitization of encrypted message
         const messageValidation = await validateAndSanitizeEncryptedMessageSecure(encryptedMessage);
@@ -187,7 +235,7 @@ export async function handleCreateMemo(request, env, locale = 'en') {
             });
         }
 
-        const sanitizedEncryptedMessage = messageValidation.sanitizedMessage;
+        sanitizedEncryptedMessage = messageValidation.sanitizedMessage;
         const sanitizedExpiryHours = String(expiryHours);
         const turnstileToken = typeof cfTurnstileResponse === 'string' ? cfTurnstileResponse : '';
         const isValidTurnstile = /^[A-Za-z0-9._-]{10,}$/.test(turnstileToken);
@@ -265,7 +313,6 @@ export async function handleCreateMemo(request, env, locale = 'en') {
         }
 
         // Generate unique memo ID with collision detection
-        let memoId;
         try {
             memoId = await generateMemoId(env, 10, requestLocale);
         } catch (generateError) {
@@ -328,6 +375,16 @@ export async function handleCreateMemo(request, env, locale = 'en') {
             status: 500,
             headers: { 'Content-Type': 'application/json' }
         });
+    } finally {
+        // Best-effort wiping of sensitive data references
+        if (sanitizedEncryptedMessage && typeof sanitizedEncryptedMessage === 'string') {
+            // Attempt to shorten lifetime by overwriting local reference
+            sanitizedEncryptedMessage = null;
+        }
+        if (requestData) disposeRef(requestData, ['encryptedMessage', 'deletionTokenHash']);
+        deletionTokenHash = null;
+        memoId = null;
+        requestData = null;
     }
 }
 
@@ -516,6 +573,9 @@ export async function handleReadMemo(request, env, locale = 'en') {
  * This endpoint is called only after the user successfully decrypts the memo
  */
 export async function handleConfirmDelete(request, env, locale = 'en') {
+    let requestData = null;
+    let deletionToken = null;
+    let computedHash = null;
     try {
         // Extract requestLocale from request headers/query for better UX
         const requestLocale = extractLocaleFromRequest(request);
@@ -557,9 +617,10 @@ export async function handleConfirmDelete(request, env, locale = 'en') {
             }
             return delayedJsonError({ error: getErrorMessage('INVALID_JSON', requestLocale) });
         }
-        const requestData = parsedDelete.data;
+        requestData = parsedDelete.data;
 
-        const { memoId, deletionToken } = requestData;
+        const { memoId, deletionToken: incomingDeletionToken } = requestData;
+        deletionToken = incomingDeletionToken;
         // Strict memoId validation: reject invalid instead of transforming
         if (typeof memoId !== 'string' || !(await validateMemoIdSecure(memoId))) {
             await uniformResponseDelay();
@@ -588,7 +649,7 @@ export async function handleConfirmDelete(request, env, locale = 'en') {
         }
 
         // Compute hash over the exact provided token (no sanitization) to match stored hash
-        const computedHash = await hashDeletionToken(deletionToken);
+        computedHash = await hashDeletionToken(deletionToken);
         if (!constantTimeCompare(computedHash, row.deletion_token_hash)) {
             await uniformResponseDelay();
             return new Response(JSON.stringify({ error: getMemoAccessDeniedMessage() }), { status: 404 });
@@ -623,6 +684,12 @@ export async function handleConfirmDelete(request, env, locale = 'en') {
             status: 500,
             headers: { 'Content-Type': 'application/json' }
         });
+    } finally {
+        // Best-effort wiping
+        if (requestData) disposeRef(requestData, ['deletionToken']);
+        if (deletionToken && typeof deletionToken === 'string') deletionToken = '';
+        if (computedHash && typeof computedHash === 'string') computedHash = null;
+        requestData = null;
     }
 }
 
