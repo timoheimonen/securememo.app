@@ -131,6 +131,10 @@ async function generateMemoId(env, maxRetries = 10, locale = 'en') {
 
 // Create new memo with validation and Turnstile verification
 export async function handleCreateMemo(request, env, locale = 'en') {
+    // Best-effort memory wiping (limitations: GC & string immutability in JS)
+    let sanitizedEncryptedMessage; // declare up-front so we can wipe in finally
+    let deletionTokenHash; // shadow for wiping
+    let requestData; // for wiping fields post-use
     try {
         // Extract requestLocale from request headers/query for better UX
         const requestLocale = extractLocaleFromRequest(request);
@@ -172,9 +176,10 @@ export async function handleCreateMemo(request, env, locale = 'en') {
             }
             return delayedJsonError({ error: getErrorMessage('INVALID_JSON', requestLocale) });
         }
-        const requestData = parsedCreate.data;
+        requestData = parsedCreate.data;
 
-        const { encryptedMessage, expiryHours, cfTurnstileResponse, deletionTokenHash } = requestData;
+        const { encryptedMessage, expiryHours, cfTurnstileResponse } = requestData;
+        deletionTokenHash = requestData.deletionTokenHash; // capture explicitly for wiping
 
         // Comprehensive validation and sanitization of encrypted message
         const messageValidation = await validateAndSanitizeEncryptedMessageSecure(encryptedMessage);
@@ -187,7 +192,7 @@ export async function handleCreateMemo(request, env, locale = 'en') {
             });
         }
 
-        const sanitizedEncryptedMessage = messageValidation.sanitizedMessage;
+        sanitizedEncryptedMessage = messageValidation.sanitizedMessage;
         const sanitizedExpiryHours = String(expiryHours);
         const turnstileToken = typeof cfTurnstileResponse === 'string' ? cfTurnstileResponse : '';
         const isValidTurnstile = /^[A-Za-z0-9._-]{10,}$/.test(turnstileToken);
@@ -328,6 +333,23 @@ export async function handleCreateMemo(request, env, locale = 'en') {
             status: 500,
             headers: { 'Content-Type': 'application/json' }
         });
+    } finally {
+        // Best-effort erase of confidential data
+        if (sanitizedEncryptedMessage) {
+            try { sanitizedEncryptedMessage = ''.padEnd(sanitizedEncryptedMessage.length, '\u0000'); } catch (_) { }
+            sanitizedEncryptedMessage = null;
+        }
+        if (deletionTokenHash) {
+            try { deletionTokenHash = ''.padEnd(44, '\u0000'); } catch (_) { }
+            deletionTokenHash = null;
+        }
+        if (requestData) {
+            try {
+                if (requestData.encryptedMessage) requestData.encryptedMessage = null;
+                if (requestData.deletionTokenHash) requestData.deletionTokenHash = null;
+            } catch (_) { }
+            requestData = null;
+        }
     }
 }
 
@@ -516,6 +538,10 @@ export async function handleReadMemo(request, env, locale = 'en') {
  * This endpoint is called only after the user successfully decrypts the memo
  */
 export async function handleConfirmDelete(request, env, locale = 'en') {
+    let deletionToken; // capture for wipe
+    let computedHash; // capture for wipe
+    let memoId; // to wipe
+    let row; // db row ref
     try {
         // Extract requestLocale from request headers/query for better UX
         const requestLocale = extractLocaleFromRequest(request);
@@ -558,8 +584,7 @@ export async function handleConfirmDelete(request, env, locale = 'en') {
             return delayedJsonError({ error: getErrorMessage('INVALID_JSON', requestLocale) });
         }
         const requestData = parsedDelete.data;
-
-        const { memoId, deletionToken } = requestData;
+        ({ memoId, deletionToken } = requestData);
         // Strict memoId validation: reject invalid instead of transforming
         if (typeof memoId !== 'string' || !(await validateMemoIdSecure(memoId))) {
             await uniformResponseDelay();
@@ -568,7 +593,7 @@ export async function handleConfirmDelete(request, env, locale = 'en') {
 
         // Fetch memo details
         const fetchStmt = env.DB.prepare('SELECT deletion_token_hash FROM memos WHERE memo_id = ? AND (expiry_time IS NULL OR expiry_time > unixepoch(\'now\'))');
-        const row = await fetchStmt.bind(memoId).first();
+        row = await fetchStmt.bind(memoId).first();
 
         if (!row) {
             await uniformResponseDelay();
@@ -588,7 +613,7 @@ export async function handleConfirmDelete(request, env, locale = 'en') {
         }
 
         // Compute hash over the exact provided token (no sanitization) to match stored hash
-        const computedHash = await hashDeletionToken(deletionToken);
+        computedHash = await hashDeletionToken(deletionToken);
         if (!constantTimeCompare(computedHash, row.deletion_token_hash)) {
             await uniformResponseDelay();
             return new Response(JSON.stringify({ error: getMemoAccessDeniedMessage() }), { status: 404 });
@@ -623,6 +648,18 @@ export async function handleConfirmDelete(request, env, locale = 'en') {
             status: 500,
             headers: { 'Content-Type': 'application/json' }
         });
+    } finally {
+        // Best-effort wiping of sensitive variables
+        if (deletionToken) {
+            try { deletionToken = ''.padEnd(deletionToken.length, '\u0000'); } catch (_) { }
+            deletionToken = null;
+        }
+        if (computedHash) {
+            try { computedHash = ''.padEnd(44, '\u0000'); } catch (_) { }
+            computedHash = null;
+        }
+        if (memoId) { try { memoId = null; } catch (_) { } }
+        if (row) { try { row.deletion_token_hash = null; row = null; } catch (_) { } }
     }
 }
 
