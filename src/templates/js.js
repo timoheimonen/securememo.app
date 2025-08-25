@@ -97,47 +97,156 @@ const SECURITY_CONFIG = {
     // PBKDF2 iterations - // Current iterations to use. Remember update also in ReadMemoJS!
     PBKDF2_ITERATIONS: 2200000,
     
+    // Argon2 parameters (for new memos)
+    ARGON2_PARAMS: {
+        time: 10,         // Iterations (time cost)
+        mem: 65536,      // Memory in KiB (64 MB)
+        parallelism: 4,  // Threads
+        type: 2,         // 0=Argon2d, 1=Argon2i, 2=Argon2id (recommended)
+        hashLen: 32      // Output length for AES-256 key
+    },
+
     // Salt length in bytes (16 bytes = 128 bits)
     SALT_LENGTH: 16,
-    
     // IV length for AES-GCM (12 bytes = 96 bits)
     IV_LENGTH: 12,
-    
     // Key length for AES-256-GCM
-    KEY_LENGTH: 256
+    KEY_LENGTH: 256,
+    // Use Argon2 for new encryptions (0 for PBKDF2 legacy)
+    CIPHERTEXT_VERSION: 1
 };
 
+// Load Argon2 library dynamically (pinned version for security)
+async function loadArgon2() {
+    if (window.argon2) return window.argon2; // Already loaded
+    const script = document.createElement('script');
+    script.src = '/js/argon2.js';
+    document.head.appendChild(script);
+    return new Promise((resolve, reject) => {
+        script.onload = () => {
+            // Provide minimal wrapper if argon2.hash not exposed by bundled module
+            if (!window.argon2 && typeof Module !== 'undefined') {
+                try {
+                    const mod = Module;
+                    if (mod._argon2_hash && mod._argon2_encodedlen && mod._malloc && mod._free) {
+                        window.argon2 = {
+                            // Async interface for compatibility (internal work is synchronous)
+                            hash: async ({ pass, salt, time, mem, parallelism, type, hashLen }) => {
+                                const pwdBytes = typeof pass === 'string' ? new TextEncoder().encode(pass) : new Uint8Array(pass);
+                                const saltBytes = salt instanceof Uint8Array ? salt : new Uint8Array(salt);
+                                const pwdPtr = mod._malloc(pwdBytes.length);
+                                mod.HEAPU8.set(pwdBytes, pwdPtr);
+                                const saltPtr = mod._malloc(saltBytes.length);
+                                mod.HEAPU8.set(saltBytes, saltPtr);
+                                const hashPtr = mod._malloc(hashLen);
+                                const encodedLen = mod._argon2_encodedlen(time, mem, parallelism, saltBytes.length, hashLen, type);
+                                const encodedPtr = mod._malloc(encodedLen);
+                                const ARGON2_VERSION = 0x13; // 19 decimal
+                                const rc = mod._argon2_hash(
+                                    time,
+                                    mem,
+                                    parallelism,
+                                    pwdPtr,
+                                    pwdBytes.length,
+                                    saltPtr,
+                                    saltBytes.length,
+                                    hashPtr,
+                                    hashLen,
+                                    encodedPtr,
+                                    encodedLen,
+                                    type,
+                                    ARGON2_VERSION
+                                );
+                                if (rc !== 0) {
+                                    let errMsg = 'Argon2 error ' + rc;
+                                    if (mod._argon2_error_message) {
+                                        try {
+                                            const msgPtr = mod._argon2_error_message(rc);
+                                            if (msgPtr) errMsg = mod.UTF8ToString(msgPtr);
+                                        } catch (_) {}
+                                    }
+                                    mod._free(pwdPtr); mod._free(saltPtr); mod._free(hashPtr); mod._free(encodedPtr);
+                                    throw new Error(errMsg);
+                                }
+                                const hash = new Uint8Array(mod.HEAPU8.subarray(hashPtr, hashPtr + hashLen));
+                                const hashCopy = new Uint8Array(hash); // detach from WASM heap
+                                let encoded = '';
+                                if (mod.UTF8ToString) {
+                                    try { encoded = mod.UTF8ToString(encodedPtr); } catch (_) {}
+                                }
+                                // Free sensitive data
+                                mod._free(pwdPtr); mod._free(saltPtr); mod._free(hashPtr); mod._free(encodedPtr);
+                                try { pwdBytes.fill(0); } catch (_) {}
+                                return {
+                                    hash: hashCopy,
+                                    encoded,
+                                    hashHex: Array.from(hashCopy).map(b => b.toString(16).padStart(2, '0')).join('')
+                                };
+                            }
+                        };
+                    }
+                } catch (e) {
+                    // Ignore wrapper failure; caller will see undefined and can fallback
+                }
+            }
+            resolve(window.argon2);
+        };
+        script.onerror = () => reject(new Error('Failed to load Argon2 library'));
+    });
+}
 
-
-// AES-256-GCM encryption with PBKDF2 key derivation
+// AES-256-GCM encryption with Argon2 or PBKDF2 key derivation
 async function encryptMessage(payload, password) {
     const encoder = new TextEncoder();
-    const data = encoder.encode(JSON.stringify(payload)); // Change to encode JSON
+    const data = encoder.encode(JSON.stringify(payload));
+    
+    // Load Argon2 if using new version
+    if (SECURITY_CONFIG.CIPHERTEXT_VERSION === 1) {
+        await loadArgon2();  // Ensure library is loaded
+    }
     
     // Generate random salt
     const salt = crypto.getRandomValues(new Uint8Array(SECURITY_CONFIG.SALT_LENGTH));
     
-    // Derive key from password using PBKDF2
-    const keyMaterial = await crypto.subtle.importKey(
-        'raw',
-        encoder.encode(password),
-        { name: 'PBKDF2' },
-        false,
-        ['deriveBits', 'deriveKey']
-    );
-    
-    const key = await crypto.subtle.deriveKey(
-        {
-            name: 'PBKDF2',
+    let key;
+    if (SECURITY_CONFIG.CIPHERTEXT_VERSION === 1) {
+        // Argon2 key derivation
+        const derived = await argon2.hash({
+            pass: password,
             salt: salt,
-            iterations: SECURITY_CONFIG.PBKDF2_ITERATIONS,
-            hash: 'SHA-256'
-        },
-        keyMaterial,
-        { name: 'AES-GCM', length: SECURITY_CONFIG.KEY_LENGTH },
-        false,
-        ['encrypt']
-    );
+            ...SECURITY_CONFIG.ARGON2_PARAMS
+        });
+        const keyBytes = derived.hash;  // Uint8Array (32 bytes)
+        key = await crypto.subtle.importKey(
+            'raw',
+            keyBytes,
+            { name: 'AES-GCM' },
+            false,
+            ['encrypt']
+        );
+    try { keyBytes.fill(0); } catch (_) {}
+    } else {
+        // Legacy PBKDF2 (for testing)
+        const keyMaterial = await crypto.subtle.importKey(
+            'raw',
+            encoder.encode(password),
+            { name: 'PBKDF2' },
+            false,
+            ['deriveBits', 'deriveKey']
+        );
+        key = await crypto.subtle.deriveKey(
+            {
+                name: 'PBKDF2',
+                salt: salt,
+                iterations: SECURITY_CONFIG.PBKDF2_ITERATIONS,
+                hash: 'SHA-256'
+            },
+            keyMaterial,
+            { name: 'AES-GCM', length: SECURITY_CONFIG.KEY_LENGTH },
+            false,
+            ['encrypt']
+        );
+    }
     
     // Generate random IV
     const iv = crypto.getRandomValues(new Uint8Array(SECURITY_CONFIG.IV_LENGTH));
@@ -149,11 +258,13 @@ async function encryptMessage(payload, password) {
         data
     );
     
-    // Combine salt + iv + encrypted data
-    const result = new Uint8Array(salt.length + iv.length + encrypted.byteLength);
-    result.set(salt, 0);
-    result.set(iv, salt.length);
-    result.set(new Uint8Array(encrypted), salt.length + iv.length);
+    // Combine: version + salt + iv + encrypted
+    const versionByte = new Uint8Array([SECURITY_CONFIG.CIPHERTEXT_VERSION]);
+    const result = new Uint8Array(versionByte.length + salt.length + iv.length + encrypted.byteLength);
+    result.set(versionByte, 0);
+    result.set(salt, versionByte.length);
+    result.set(iv, versionByte.length + salt.length);
+    result.set(new Uint8Array(encrypted), versionByte.length + salt.length + iv.length);
     
     return btoa(String.fromCharCode(...result));
 }
@@ -378,24 +489,79 @@ const ERROR_MESSAGES = {
     DECRYPTION_ERROR: '{{DECRYPTION_ERROR}}'
 };
 
-// Security configuration constants
-const NEW_PBKDF2_ITERATIONS = 2200000;  // Current iterations to use, remember update also in CreateMemoJS!
-const OLD_PBKDF2_ITERATIONS = 1200000;   // Fallback for existing memos
-
-// Security configuration - easily updatable for future-proofing, even currently it exeeds OWASP 2025 recommendations with 1.2M iterations.
+// Security configuration
 const SECURITY_CONFIG = {
-    // Use new iterations by default for future-proofing, but fallback handled below
-    PBKDF2_ITERATIONS: NEW_PBKDF2_ITERATIONS,
+    PBKDF2_ITERATIONS: 2200000, // Update also in CreateMemoJS when changing
     
+    // Argon2 parameters (for new memos)
+    ARGON2_PARAMS: {
+        time: 10,         // Iterations (time cost)
+        mem: 65536,      // Memory in KiB (64 MB)
+        parallelism: 4,  // Threads
+        type: 2,         // 0=Argon2d, 1=Argon2i, 2=Argon2id (recommended)
+        hashLen: 32      // Output length for AES-256 key
+    },
+
     // Salt length in bytes (16 bytes = 128 bits)
     SALT_LENGTH: 16,
-    
     // IV length for AES-GCM (12 bytes = 96 bits)
     IV_LENGTH: 12,
-    
     // Key length for AES-256-GCM
-    KEY_LENGTH: 256
+    KEY_LENGTH: 256,
+    // Use Argon2 for new encryptions (0 for PBKDF2 legacy)
+    CIPHERTEXT_VERSION: 1
 };
+
+// Load Argon2 library dynamically (pinned version for security)
+async function loadArgon2() {
+    if (window.argon2) return window.argon2; // Already loaded
+    const script = document.createElement('script');
+    script.src = '/js/argon2.js';
+    document.head.appendChild(script);
+    return new Promise((resolve, reject) => {
+        script.onload = () => {
+            if (!window.argon2 && typeof Module !== 'undefined') {
+                try {
+                    const mod = Module;
+                    if (mod._argon2_hash && mod._argon2_encodedlen && mod._malloc && mod._free) {
+                        window.argon2 = {
+                            hash: async ({ pass, salt, time, mem, parallelism, type, hashLen }) => {
+                                const pwdBytes = typeof pass === 'string' ? new TextEncoder().encode(pass) : new Uint8Array(pass);
+                                const saltBytes = salt instanceof Uint8Array ? salt : new Uint8Array(salt);
+                                const pwdPtr = mod._malloc(pwdBytes.length);
+                                mod.HEAPU8.set(pwdBytes, pwdPtr);
+                                const saltPtr = mod._malloc(saltBytes.length);
+                                mod.HEAPU8.set(saltBytes, saltPtr);
+                                const hashPtr = mod._malloc(hashLen);
+                                const encodedLen = mod._argon2_encodedlen(time, mem, parallelism, saltBytes.length, hashLen, type);
+                                const encodedPtr = mod._malloc(encodedLen);
+                                const ARGON2_VERSION = 0x13;
+                                const rc = mod._argon2_hash(time, mem, parallelism, pwdPtr, pwdBytes.length, saltPtr, saltBytes.length, hashPtr, hashLen, encodedPtr, encodedLen, type, ARGON2_VERSION);
+                                if (rc !== 0) {
+                                    let errMsg = 'Argon2 error ' + rc;
+                                    if (mod._argon2_error_message) {
+                                        try { const msgPtr = mod._argon2_error_message(rc); if (msgPtr) errMsg = mod.UTF8ToString(msgPtr); } catch (_) {}
+                                    }
+                                    mod._free(pwdPtr); mod._free(saltPtr); mod._free(hashPtr); mod._free(encodedPtr);
+                                    throw new Error(errMsg);
+                                }
+                                const hash = new Uint8Array(mod.HEAPU8.subarray(hashPtr, hashPtr + hashLen));
+                                const hashCopy = new Uint8Array(hash);
+                                let encoded = '';
+                                if (mod.UTF8ToString) { try { encoded = mod.UTF8ToString(encodedPtr); } catch (_) {} }
+                                mod._free(pwdPtr); mod._free(saltPtr); mod._free(hashPtr); mod._free(encodedPtr);
+                                try { pwdBytes.fill(0); } catch (_) {}
+                                return { hash: hashCopy, encoded, hashHex: Array.from(hashCopy).map(b => b.toString(16).padStart(2, '0')).join('') };
+                            }
+                        };
+                    }
+                } catch (e) {}
+            }
+            resolve(window.argon2);
+        };
+        script.onerror = () => reject(new Error('Failed to load Argon2 library'));
+    });
+}
 
 function highlightCurrentPage() {
     const currentPath = window.location.pathname;
@@ -440,69 +606,78 @@ function getMemoId() {
 
 
 
-// AES-256-GCM decryption with PBKDF2 key derivation and iteration fallback
-async function decryptMessage(encryptedData, password) {
-    try {
-        const encryptedBytes = Uint8Array.from(atob(encryptedData), c => c.charCodeAt(0));
-        
-        // Extract salt (first 16 bytes) and IV (next 12 bytes)
-        const salt = encryptedBytes.slice(0, SECURITY_CONFIG.SALT_LENGTH);
-        const iv = encryptedBytes.slice(SECURITY_CONFIG.SALT_LENGTH, SECURITY_CONFIG.SALT_LENGTH + SECURITY_CONFIG.IV_LENGTH);
-        const encrypted = encryptedBytes.slice(SECURITY_CONFIG.SALT_LENGTH + SECURITY_CONFIG.IV_LENGTH);
-        
-        // Define iteration attempts: try new first, then old if fails
-        const attempts = [
-            { iterations: NEW_PBKDF2_ITERATIONS },
-            { iterations: OLD_PBKDF2_ITERATIONS }
-        ];
-        
-        for (const attempt of attempts) {
-            try {
-                const encoder = new TextEncoder();
-                
-                // Derive key from password using PBKDF2 with current attempt's iterations
-                const keyMaterial = await crypto.subtle.importKey(
-                    'raw',
-                    encoder.encode(password),
-                    { name: 'PBKDF2' },
-                    false,
-                    ['deriveBits', 'deriveKey']
-                );
-                
-                const key = await crypto.subtle.deriveKey(
-                    {
-                        name: 'PBKDF2',
-                        salt: salt,
-                        iterations: attempt.iterations,
-                        hash: 'SHA-256'
-                    },
-                    keyMaterial,
-                    { name: 'AES-GCM', length: SECURITY_CONFIG.KEY_LENGTH },
-                    false,
-                    ['decrypt']
-                );
-                
-                // Attempt decryption
-                const decrypted = await crypto.subtle.decrypt(
-                    { name: 'AES-GCM', iv: iv },
-                    key,
-                    encrypted
-                );
-                
-                // If successful, return the decrypted data
-                return new TextDecoder().decode(decrypted);
-            } catch (innerError) {
-                // If not the last attempt, continue to next (fallback)
-                if (attempt !== attempts[attempts.length - 1]) {
-                    continue;
-                }
-                // On final failure, rethrow
-                throw innerError;
-            }
-        }
-    } catch (error) {
-        throw new Error(ERROR_MESSAGES.DECRYPTION_ERROR);
+// AES-256-GCM decryption with Argon2 or PBKDF2 key derivation
+async function decryptMessage(encryptedBase64, password) {
+    const encryptedData = Uint8Array.from(atob(encryptedBase64), c => c.charCodeAt(0));
+    
+    // Extract version (first byte)
+    const version = encryptedData[0];
+    let offset = 1;  // After version
+    
+    // Extract salt, iv, encrypted
+    const salt = encryptedData.slice(offset, offset + SECURITY_CONFIG.SALT_LENGTH);
+    offset += SECURITY_CONFIG.SALT_LENGTH;
+    const iv = encryptedData.slice(offset, offset + SECURITY_CONFIG.IV_LENGTH);
+    offset += SECURITY_CONFIG.IV_LENGTH;
+    const encrypted = encryptedData.slice(offset);
+    
+    // Load Argon2 if version requires it
+    if (version === 1) {
+        await loadArgon2();
     }
+    
+    let key;
+    if (version === 1) {
+        // Argon2 key derivation
+        const derived = await argon2.hash({
+            pass: password,
+            salt: salt,
+            ...SECURITY_CONFIG.ARGON2_PARAMS
+        });
+        const keyBytes = derived.hash;
+        key = await crypto.subtle.importKey(
+            'raw',
+            keyBytes,
+            { name: 'AES-GCM' },
+            false,
+            ['decrypt']
+        );
+    try { keyBytes.fill(0); } catch (_) {}
+    } else if (version === 0) {
+        // Legacy PBKDF2
+        const encoder = new TextEncoder();
+        const keyMaterial = await crypto.subtle.importKey(
+            'raw',
+            encoder.encode(password),
+            { name: 'PBKDF2' },
+            false,
+            ['deriveBits', 'deriveKey']
+        );
+        key = await crypto.subtle.deriveKey(
+            {
+                name: 'PBKDF2',
+                salt: salt,
+                iterations: SECURITY_CONFIG.PBKDF2_ITERATIONS,
+                hash: 'SHA-256'
+            },
+            keyMaterial,
+            { name: 'AES-GCM', length: SECURITY_CONFIG.KEY_LENGTH },
+            false,
+            ['decrypt']
+        );
+    } else {
+        throw new Error('Unsupported ciphertext version');
+    }
+    
+    // Decrypt
+    const decrypted = await crypto.subtle.decrypt(
+        { name: 'AES-GCM', iv: iv },
+        key,
+        encrypted
+    );
+    
+    const decoder = new TextDecoder();
+    return decoder.decode(decrypted);
 }
 
 // Init page state
