@@ -487,26 +487,17 @@ export default {
               if (!kv) {
                 return new Response(JSON.stringify({ error: 'KV namespace missing (configure binding API_KEYS or KV)' }), { status: 500, headers: { 'Content-Type': 'application/json', ...getSecurityHeaders(request) } });
               }
-              // Allow optional ?all=1 to list raw keys for debugging when prefix yields empty results
-              const urlObj = new URL(request.url);
-              const list = await kv.list({ prefix: API_KEY_PREFIX, limit: 200 });
+              const list = await kv.list({ limit: 200 });
               const results = [];
               for (const k of list.keys) {
                 try {
                   const raw = await kv.get(k.name);
                   if (!raw) continue;
                   const obj = JSON.parse(raw);
-                  // Derive apiKey strictly from KV key name (format: key:<apiKey>)
-                  const derivedKey = k.name.startsWith(API_KEY_PREFIX) ? k.name.substring(API_KEY_PREFIX.length) : k.name;
-                  const now = Math.floor(Date.now()/1000);
+                  const now = Math.floor(Date.now() / 1000);
                   const expiresIn = (obj.expire || 0) - now;
-                  results.push({ apiKey: derivedKey, expiresAt: obj.expire || 0, usage: obj.usage || 0, expiresIn });
+                  results.push({ apiKey: k.name, expiresAt: obj.expire || 0, usage: obj.usage || 0, expiresIn });
                 } catch (_) { /* skip malformed */ }
-              }
-              // If no results and all=1, return raw key list without prefix filtering for troubleshooting
-              if (results.length === 0 && urlObj.searchParams.get('all') === '1') {
-                const rawList = await kv.list({ limit: 200 });
-                return new Response(JSON.stringify({ success: true, keys: results, debugRawKeys: rawList.keys.map(k=>k.name) }), { status: 200, headers: { 'Content-Type': 'application/json', ...getSecurityHeaders(request) } });
               }
               return new Response(JSON.stringify({ success: true, keys: results }), { status: 200, headers: { 'Content-Type': 'application/json', ...getSecurityHeaders(request) } });
             } catch (e) {
