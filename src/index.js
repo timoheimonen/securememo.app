@@ -245,7 +245,14 @@ function mergeSecurityHeadersIntoResponse(response, request) {
 // Function to validate origin for CORS requests
 function isValidOrigin(request) {
   const origin = request.headers.get('origin');
-  return origin && allowedOrigins.includes(origin);
+  if (origin) return allowedOrigins.includes(origin);
+  // Allow same-origin requests that omit the Origin header (typical for same-origin GET)
+  try {
+    const url = new URL(request.url);
+    return allowedOrigins.includes(url.origin);
+  } catch (_) {
+    return false;
+  }
 }
 
 export default {
@@ -428,7 +435,8 @@ export default {
             const nowSec = Math.floor(Date.now() / 1000);
             const expiresAt = nowSec + days * 86400;
             const apiKey = generateApiKey();
-            const value = JSON.stringify({ apikey: apiKey, expire: expiresAt, usage: 0 });
+            // Store minimal metadata (exclude the apiKey itself since it's already in the KV key name)
+            const value = JSON.stringify({ expire: expiresAt, usage: 0 });
             try {
               const kv = getApiKeysNamespace(env);
               if (!kv) {
@@ -484,11 +492,11 @@ export default {
                   const raw = await kv.get(k.name);
                   if (!raw) continue;
                   const obj = JSON.parse(raw);
-                  if (obj && obj.apikey) {
-                    const now = Math.floor(Date.now() / 1000);
-                    const expiresIn = (obj.expire || 0) - now;
-                    results.push({ apiKey: obj.apikey, expiresAt: obj.expire || 0, usage: obj.usage || 0, expiresIn });
-                  }
+                  // Derive apiKey strictly from KV key name (format: key:<apiKey>)
+                  const derivedKey = k.name.startsWith('key:') ? k.name.substring(4) : k.name;
+                  const now = Math.floor(Date.now()/1000);
+                  const expiresIn = (obj.expire || 0) - now;
+                  results.push({ apiKey: derivedKey, expiresAt: obj.expire || 0, usage: obj.usage || 0, expiresIn });
                 } catch (_) { /* skip malformed */ }
               }
               return new Response(JSON.stringify({ success: true, keys: results }), { status: 200, headers: { 'Content-Type': 'application/json', ...getSecurityHeaders(request) } });
