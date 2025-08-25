@@ -151,6 +151,11 @@ function generateApiKey() {
   return btoa(binary).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
 }
 
+// Helper: resolve KV namespace for API keys (supports legacy binding "KV" as fallback)
+function getApiKeysNamespace(env) {
+  return env.API_KEYS || env.KV || null;
+}
+
 async function readJsonBody(request, maxBytes = 4096) {
   try {
     const text = await request.text();
@@ -425,10 +430,11 @@ export default {
             const apiKey = generateApiKey();
             const value = JSON.stringify({ apikey: apiKey, expire: expiresAt, usage: 0 });
             try {
-              if (!env.API_KEYS) {
-                return new Response(JSON.stringify({ error: 'KV namespace missing (API_KEYS)' }), { status: 500, headers: { 'Content-Type': 'application/json', ...getSecurityHeaders(request) } });
+              const kv = getApiKeysNamespace(env);
+              if (!kv) {
+                return new Response(JSON.stringify({ error: 'KV namespace missing (configure binding API_KEYS or KV)' }), { status: 500, headers: { 'Content-Type': 'application/json', ...getSecurityHeaders(request) } });
               }
-              await env.API_KEYS.put(`key:${apiKey}`, value, { expiration: expiresAt });
+              await kv.put(`key:${apiKey}`, value, { expiration: expiresAt });
               return new Response(JSON.stringify({ success: true, apiKey, expiresAt }), { status: 200, headers: { 'Content-Type': 'application/json', ...getSecurityHeaders(request) } });
             } catch (e) {
               return new Response(JSON.stringify({ error: 'Failed to store key' }), { status: 500, headers: { 'Content-Type': 'application/json', ...getSecurityHeaders(request) } });
@@ -449,10 +455,11 @@ export default {
               return new Response(JSON.stringify({ error: 'Invalid apiKey format' }), { status: 400, headers: { 'Content-Type': 'application/json', ...getSecurityHeaders(request) } });
             }
             try {
-              if (!env.API_KEYS) {
-                return new Response(JSON.stringify({ error: 'KV namespace missing (API_KEYS)' }), { status: 500, headers: { 'Content-Type': 'application/json', ...getSecurityHeaders(request) } });
+              const kv = getApiKeysNamespace(env);
+              if (!kv) {
+                return new Response(JSON.stringify({ error: 'KV namespace missing (configure binding API_KEYS or KV)' }), { status: 500, headers: { 'Content-Type': 'application/json', ...getSecurityHeaders(request) } });
               }
-              await env.API_KEYS.delete(`key:${apiKey}`);
+              await kv.delete(`key:${apiKey}`);
               return new Response(JSON.stringify({ success: true }), { status: 200, headers: { 'Content-Type': 'application/json', ...getSecurityHeaders(request) } });
             } catch (e) {
               return new Response(JSON.stringify({ error: 'Deletion failed' }), { status: 500, headers: { 'Content-Type': 'application/json', ...getSecurityHeaders(request) } });
@@ -466,14 +473,15 @@ export default {
               return new Response(JSON.stringify({ error: 'Method Not Allowed' }), { status: 405, headers: { 'Allow': 'GET', 'Content-Type': 'application/json', ...getSecurityHeaders(request) } });
             }
             try {
-              if (!env.API_KEYS) {
-                return new Response(JSON.stringify({ error: 'KV namespace missing (API_KEYS)' }), { status: 500, headers: { 'Content-Type': 'application/json', ...getSecurityHeaders(request) } });
+              const kv = getApiKeysNamespace(env);
+              if (!kv) {
+                return new Response(JSON.stringify({ error: 'KV namespace missing (configure binding API_KEYS or KV)' }), { status: 500, headers: { 'Content-Type': 'application/json', ...getSecurityHeaders(request) } });
               }
-              const list = await env.API_KEYS.list({ prefix: 'key:', limit: 200 });
+              const list = await kv.list({ prefix: 'key:', limit: 200 });
               const results = [];
               for (const k of list.keys) {
                 try {
-                  const raw = await env.API_KEYS.get(k.name);
+                  const raw = await kv.get(k.name);
                   if (!raw) continue;
                   const obj = JSON.parse(raw);
                   if (obj && obj.apikey) {
