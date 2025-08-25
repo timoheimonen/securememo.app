@@ -627,7 +627,7 @@ body {
   box-shadow: var(--shadow-lg);
   backdrop-filter: blur(10px);
   width: 100%;
-  max-width: 900px;
+  max-width: 600px;
 }
 
 .memo-card h1 {
