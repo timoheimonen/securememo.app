@@ -1440,12 +1440,12 @@ export async function getPrivacyHTML(locale = 'en', origin = 'https://securememo
     <script src="/js/common.js" type="module" nonce="{{CSP_NONCE}}" defer></script>
 </body>
 </html>`;
-} 
+}
 
 // Minimal Admin Panel protected by admin credentials and Cloudflare Zero Trust
 export async function getAdminHTML(locale = 'en', origin = 'https://securememo.app') {
-        // only english, not localized.
-        return `<!DOCTYPE html>
+    // only english, not localized.
+    return `<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -1504,9 +1504,6 @@ export async function getAdminHTML(locale = 'en', origin = 'https://securememo.a
                                         </div>
                 </section>
     </main>
-    <footer class="footer">
-        <p><a href="https://github.com/timoheimonen/securememo.app" target="_blank" rel="noopener noreferrer">Source</a></p>
-    </footer>
         <script src="/js/common.js" type="module" nonce="{{CSP_NONCE}}" defer></script>
         <script nonce="{{CSP_NONCE}}">(function(){
             async function postJson(path, data){
@@ -1539,7 +1536,12 @@ export async function getAdminHTML(locale = 'en', origin = 'https://securememo.a
                 out.textContent='Deleting...';
                 try {
                     const r = await postJson('/api/admin/delete-key', { apiKey: key });
-                    if(r.ok){ out.textContent='Deleted (if existed).'; }
+                    if(r.ok){
+                        out.textContent='Deleted (if existed).';
+                        // Clear the input after successful delete
+                        const inp = document.getElementById('apiKeyDel');
+                        if(inp) inp.value='';
+                    }
                     else { out.textContent='Error: '+(r.data && r.data.error || r.status); }
                 } catch(err){ out.textContent='Error deleting key'; }
             });
