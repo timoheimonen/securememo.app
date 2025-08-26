@@ -26,7 +26,7 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
   line-height: 1.6;
   color: #333;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #f5f5f5df 0%, #d0d0d0dd 100%);
   min-height: 100vh;
   padding-top: 70px; /* Account for fixed navbar height */
 }
