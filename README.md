@@ -63,10 +63,6 @@ securememo/
     ├── index.js                # Main Worker entry point (routing, security headers, cron jobs)
     ├── handlers/               # API request handlers
     │   └── auth.js             # Handles memo creation, reading, confirmation, and cleanup
-    ├── schemas/                # OpenAPI schema definitions
-    │   ├── confirm-delete.openapi.yaml
-    │   ├── create-memo.openapi.yaml
-    │   └── read-memo.openapi.yaml
     ├── styles/                 # CSS styling
     │   └── styles.js           # Dynamic CSS generation
     ├── templates/              # HTML and JavaScript templates
