@@ -10,6 +10,7 @@ import { getErrorMessage, getMemoAccessDeniedMessage } from '../utils/errorMessa
 import { uniformResponseDelay, constantTimeCompare } from '../utils/timingSecurity.js';
 import { extractLocaleFromRequest } from '../utils/localization.js';
 // import { checkRateLimit } from '../utils/rateLimiter.js'; //Ratelimiting disabled for now in here, enabled in WAF.
+import { recordKvFailureAndCheckLimit } from '../utils/rateLimiter.js';
 
 // Maximum allowed JSON request body size in bytes (defense-in-depth against large payload DoS)
 const MAX_REQUEST_BYTES = 64 * 1024; // 64 KB
@@ -19,7 +20,7 @@ async function delayedJsonError(bodyObj, status = 400, extraHeaders = {}) {
     await uniformResponseDelay();
     return new Response(JSON.stringify(bodyObj), {
         status,
-        headers: { 'Content-Type': 'application/json', ...extraHeaders }
+        headers: { 'Content-Type': 'application/json', 'Cache-Control': 'no-store', ...extraHeaders }
     });
 }
 
@@ -171,7 +172,7 @@ export async function handleCreateMemo(request, env, locale = 'en') {
                 await uniformResponseDelay();
                 return new Response(JSON.stringify({ error: getErrorMessage('REQUEST_TOO_LARGE', requestLocale) }), {
                     status: 413,
-                    headers: { 'Content-Type': 'application/json' }
+                    headers: { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' }
                 });
             }
             return delayedJsonError({ error: getErrorMessage('INVALID_JSON', requestLocale) });
@@ -188,7 +189,7 @@ export async function handleCreateMemo(request, env, locale = 'en') {
             await uniformResponseDelay();
             return new Response(JSON.stringify({ error: getErrorMessage('INVALID_MESSAGE_FORMAT', requestLocale) }), {
                 status: 400,
-                headers: { 'Content-Type': 'application/json' }
+                headers: { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' }
             });
         }
 
@@ -202,7 +203,7 @@ export async function handleCreateMemo(request, env, locale = 'en') {
             await uniformResponseDelay();
             return new Response(JSON.stringify({ error: getErrorMessage('INVALID_DELETION_TOKEN_HASH', requestLocale) }), {
                 status: 400,
-                headers: { 'Content-Type': 'application/json' }
+                headers: { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' }
             });
         }
 
@@ -212,7 +213,7 @@ export async function handleCreateMemo(request, env, locale = 'en') {
             await uniformResponseDelay();
             return new Response(JSON.stringify({ error: getErrorMessage('INVALID_EXPIRY_TIME', requestLocale) }), {
                 status: 400,
-                headers: { 'Content-Type': 'application/json' }
+                headers: { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' }
             });
         }
 
@@ -227,7 +228,7 @@ export async function handleCreateMemo(request, env, locale = 'en') {
             await uniformResponseDelay();
             return new Response(JSON.stringify({ error: getErrorMessage('MISSING_TURNSTILE', requestLocale) }), {
                 status: 400,
-                headers: { 'Content-Type': 'application/json' }
+                headers: { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' }
             });
         }
 
@@ -248,7 +249,7 @@ export async function handleCreateMemo(request, env, locale = 'en') {
                 await uniformResponseDelay();
                 return new Response(JSON.stringify({ error: getErrorMessage('TURNSTILE_API_ERROR', requestLocale) }), {
                     status: 500,
-                    headers: { 'Content-Type': 'application/json' }
+                    headers: { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' }
                 });
             }
 
@@ -258,14 +259,14 @@ export async function handleCreateMemo(request, env, locale = 'en') {
                 await uniformResponseDelay();
                 return new Response(JSON.stringify({ error: getErrorMessage('TURNSTILE_FAILED', requestLocale) }), {
                     status: 400,
-                    headers: { 'Content-Type': 'application/json' }
+                    headers: { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' }
                 });
             }
         } catch (turnstileError) {
             await uniformResponseDelay();
             return new Response(JSON.stringify({ error: getErrorMessage('TURNSTILE_VERIFICATION_ERROR', requestLocale) }), {
                 status: 500,
-                headers: { 'Content-Type': 'application/json' }
+                headers: { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' }
             });
         }
 
@@ -278,7 +279,7 @@ export async function handleCreateMemo(request, env, locale = 'en') {
             await uniformResponseDelay();
             return new Response(JSON.stringify({ error: getErrorMessage('MEMO_ID_GENERATION_ERROR', requestLocale) }), {
                 status: 500,
-                headers: { 'Content-Type': 'application/json' }
+                headers: { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' }
             });
         }
 
@@ -299,7 +300,7 @@ export async function handleCreateMemo(request, env, locale = 'en') {
                 await uniformResponseDelay();
                 return new Response(JSON.stringify({ error: getErrorMessage('MEMO_ID_COLLISION_ERROR', requestLocale) }), {
                     status: 500,
-                    headers: { 'Content-Type': 'application/json' }
+                    headers: { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' }
                 });
             }
 
@@ -307,7 +308,7 @@ export async function handleCreateMemo(request, env, locale = 'en') {
             await uniformResponseDelay();
             return new Response(JSON.stringify({ error: getErrorMessage('DATABASE_ERROR', requestLocale) }), {
                 status: 500,
-                headers: { 'Content-Type': 'application/json' }
+                headers: { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' }
             });
         }
 
@@ -331,7 +332,7 @@ export async function handleCreateMemo(request, env, locale = 'en') {
         await uniformResponseDelay();
         return new Response(JSON.stringify({ error: getErrorMessage('MEMO_CREATION_ERROR', requestLocale) }), {
             status: 500,
-            headers: { 'Content-Type': 'application/json' }
+            headers: { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' }
         });
     } finally {
         // Best-effort erase of confidential data
@@ -400,7 +401,7 @@ export async function handleReadMemo(request, env, locale = 'en') {
                 await uniformResponseDelay();
                 return new Response(JSON.stringify({ error: getErrorMessage('REQUEST_TOO_LARGE', requestLocale) }), {
                     status: 413,
-                    headers: { 'Content-Type': 'application/json' }
+                    headers: { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' }
                 });
             }
             return delayedJsonError({ error: getErrorMessage('INVALID_JSON', requestLocale) });
@@ -419,7 +420,7 @@ export async function handleReadMemo(request, env, locale = 'en') {
             await uniformResponseDelay();
             return new Response(JSON.stringify({ error: getErrorMessage('MISSING_TURNSTILE', requestLocale) }), {
                 status: 400,
-                headers: { 'Content-Type': 'application/json' }
+                headers: { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' }
             });
         }
 
@@ -440,7 +441,7 @@ export async function handleReadMemo(request, env, locale = 'en') {
                 await uniformResponseDelay();
                 return new Response(JSON.stringify({ error: getErrorMessage('TURNSTILE_API_ERROR', requestLocale) }), {
                     status: 500,
-                    headers: { 'Content-Type': 'application/json' }
+                    headers: { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' }
                 });
             }
 
@@ -450,14 +451,14 @@ export async function handleReadMemo(request, env, locale = 'en') {
                 await uniformResponseDelay();
                 return new Response(JSON.stringify({ error: getErrorMessage('TURNSTILE_FAILED', requestLocale) }), {
                     status: 400,
-                    headers: { 'Content-Type': 'application/json' }
+                    headers: { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' }
                 });
             }
         } catch (turnstileError) {
             await uniformResponseDelay();
             return new Response(JSON.stringify({ error: getErrorMessage('TURNSTILE_VERIFICATION_ERROR', requestLocale) }), {
                 status: 500,
-                headers: { 'Content-Type': 'application/json' }
+                headers: { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' }
             });
         }
 
@@ -469,7 +470,7 @@ export async function handleReadMemo(request, env, locale = 'en') {
             await uniformResponseDelay();
             return new Response(JSON.stringify({ error: getMemoAccessDeniedMessage() }), {
                 status: 404,
-                headers: { 'Content-Type': 'application/json' }
+                headers: { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' }
             });
         }
 
@@ -490,7 +491,7 @@ export async function handleReadMemo(request, env, locale = 'en') {
             await uniformResponseDelay();
             return new Response(JSON.stringify({ error: getErrorMessage('DATABASE_READ_ERROR', requestLocale) }), {
                 status: 500,
-                headers: { 'Content-Type': 'application/json' }
+                headers: { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' }
             });
         }
 
@@ -501,7 +502,7 @@ export async function handleReadMemo(request, env, locale = 'en') {
             await uniformResponseDelay();
             return new Response(JSON.stringify({ error: getMemoAccessDeniedMessage() }), {
                 status: 404,
-                headers: { 'Content-Type': 'application/json' }
+                headers: { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' }
             });
         }
 
@@ -527,7 +528,7 @@ export async function handleReadMemo(request, env, locale = 'en') {
         await uniformResponseDelay();
         return new Response(JSON.stringify({ error: getErrorMessage('MEMO_READ_ERROR', requestLocale) }), {
             status: 500,
-            headers: { 'Content-Type': 'application/json' }
+            headers: { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' }
         });
     }
 }
@@ -578,7 +579,7 @@ export async function handleConfirmDelete(request, env, locale = 'en') {
                 await uniformResponseDelay();
                 return new Response(JSON.stringify({ error: getErrorMessage('REQUEST_TOO_LARGE', requestLocale) }), {
                     status: 413,
-                    headers: { 'Content-Type': 'application/json' }
+                    headers: { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' }
                 });
             }
             return delayedJsonError({ error: getErrorMessage('INVALID_JSON', requestLocale) });
@@ -587,8 +588,16 @@ export async function handleConfirmDelete(request, env, locale = 'en') {
         ({ memoId, deletionToken } = requestData);
         // Strict memoId validation: reject invalid instead of transforming
         if (typeof memoId !== 'string' || !(await validateMemoIdSecure(memoId))) {
+            const rate = await recordKvFailureAndCheckLimit(request, env, { prefix: 'delFail', allowedFailures: 2, windowSeconds: 60, sliding: true });
+            if (rate.limited) {
+                await uniformResponseDelay();
+                return new Response(JSON.stringify({ error: getErrorMessage('RATE_LIMITED', requestLocale) }), {
+                    status: 429,
+                    headers: { 'Content-Type': 'application/json', 'Retry-After': '60' }
+                });
+            }
             await uniformResponseDelay();
-            return new Response(JSON.stringify({ error: getMemoAccessDeniedMessage(requestLocale) }), { status: 404 });
+            return new Response(JSON.stringify({ error: getMemoAccessDeniedMessage(requestLocale) }), { status: 404, headers: { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' } });
         }
 
         // Fetch memo details
@@ -596,27 +605,59 @@ export async function handleConfirmDelete(request, env, locale = 'en') {
         row = await fetchStmt.bind(memoId).first();
 
         if (!row) {
+            const rate = await recordKvFailureAndCheckLimit(request, env, { prefix: 'delFail', allowedFailures: 2, windowSeconds: 60, sliding: true });
+            if (rate.limited) {
+                await uniformResponseDelay();
+                return new Response(JSON.stringify({ error: getErrorMessage('RATE_LIMITED', requestLocale) }), {
+                    status: 429,
+                    headers: { 'Content-Type': 'application/json', 'Retry-After': '60' }
+                });
+            }
             await uniformResponseDelay();
-            return new Response(JSON.stringify({ error: getMemoAccessDeniedMessage() }), { status: 404 });
+            return new Response(JSON.stringify({ error: getMemoAccessDeniedMessage() }), { status: 404, headers: { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' } });
         }
 
         // Require deletion token
         if (!deletionToken) {
+            const rate = await recordKvFailureAndCheckLimit(request, env, { prefix: 'delFail', allowedFailures: 2, windowSeconds: 60, sliding: true });
+            if (rate.limited) {
+                await uniformResponseDelay();
+                return new Response(JSON.stringify({ error: getErrorMessage('RATE_LIMITED', requestLocale) }), {
+                    status: 429,
+                    headers: { 'Content-Type': 'application/json', 'Retry-After': '60' }
+                });
+            }
             await uniformResponseDelay();
-            return new Response(JSON.stringify({ error: getMemoAccessDeniedMessage() }), { status: 404 });
+            return new Response(JSON.stringify({ error: getMemoAccessDeniedMessage() }), { status: 404, headers: { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' } });
         }
 
         // Validate format using existing password validator without altering the token value
         if (!validatePassword(deletionToken)) {  // Reuse validator for token format
+            const rate = await recordKvFailureAndCheckLimit(request, env, { prefix: 'delFail', allowedFailures: 2, windowSeconds: 60, sliding: true });
+            if (rate.limited) {
+                await uniformResponseDelay();
+                return new Response(JSON.stringify({ error: getErrorMessage('RATE_LIMITED', requestLocale) }), {
+                    status: 429,
+                    headers: { 'Content-Type': 'application/json', 'Retry-After': '60' }
+                });
+            }
             await uniformResponseDelay();
-            return new Response(JSON.stringify({ error: getMemoAccessDeniedMessage() }), { status: 404 });
+            return new Response(JSON.stringify({ error: getMemoAccessDeniedMessage() }), { status: 404, headers: { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' } });
         }
 
         // Compute hash over the exact provided token (no sanitization) to match stored hash
         computedHash = await hashDeletionToken(deletionToken);
         if (!constantTimeCompare(computedHash, row.deletion_token_hash)) {
+            const rate = await recordKvFailureAndCheckLimit(request, env, { prefix: 'delFail', allowedFailures: 2, windowSeconds: 60, sliding: true });
+            if (rate.limited) {
+                await uniformResponseDelay();
+                return new Response(JSON.stringify({ error: getErrorMessage('RATE_LIMITED', requestLocale) }), {
+                    status: 429,
+                    headers: { 'Content-Type': 'application/json', 'Retry-After': '60' }
+                });
+            }
             await uniformResponseDelay();
-            return new Response(JSON.stringify({ error: getMemoAccessDeniedMessage() }), { status: 404 });
+            return new Response(JSON.stringify({ error: getMemoAccessDeniedMessage() }), { status: 404, headers: { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' } });
         }
 
         // Delete if validation passes (common for both cases)
@@ -624,7 +665,7 @@ export async function handleConfirmDelete(request, env, locale = 'en') {
         const result = await deleteStmt.bind(memoId).run();
         if (result.changes === 0) {
             await uniformResponseDelay();
-            return new Response(JSON.stringify({ error: getMemoAccessDeniedMessage() }), { status: 404 });
+            return new Response(JSON.stringify({ error: getMemoAccessDeniedMessage() }), { status: 404, headers: { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' } });
         }
 
         // Success-path delay to reduce timing differential
@@ -646,7 +687,7 @@ export async function handleConfirmDelete(request, env, locale = 'en') {
         await uniformResponseDelay();
         return new Response(JSON.stringify({ error: getErrorMessage('MEMO_DELETION_ERROR', requestLocale) }), {
             status: 500,
-            headers: { 'Content-Type': 'application/json' }
+            headers: { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' }
         });
     } finally {
         // Best-effort wiping of sensitive variables
@@ -687,7 +728,7 @@ export async function handleCleanupMemos(env) {
         await uniformResponseDelay();
         return new Response(JSON.stringify({ error: getErrorMessage('DATABASE_ERROR', 'en') }), {
             status: 500,
-            headers: { 'Content-Type': 'application/json' }
+            headers: { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' }
         });
     }
 } 
