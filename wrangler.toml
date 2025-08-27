@@ -37,6 +37,12 @@ binding = "DB"
 database_name = "my-database"
 database_id = "13dc8e43-a1bb-4414-9c52-f77296261b96"
 
+# Production KV ratelimit
+[[env.production.kv_namespaces]]
+binding = "KV"
+database_id = "8059de5708da44869862ceaf65e6aa38"
+
+
 # Production environment variables
 [env.production.vars]
 LOG_LEVEL = "INFO"
@@ -64,6 +70,11 @@ LOG_LEVEL = "DEBUG"
 binding = "DB"
 database_name = "securememo-dev"
 database_id = "159356d9-9eee-4f53-99e6-1b252b0df8df"
+
+# Development KV ratelimit
+[[env.dev.kv_namespaces]]
+binding = "KV"
+database_id = "8059de5708da44869862ceaf65e6aa38"
 
 # Development environment
 [env.dev.triggers]
