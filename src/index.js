@@ -49,7 +49,7 @@ import {
 import { getClientLocalizationJS } from './utils/clientLocalization.js';
 
 // Immutable asset version for cache-busting (bump on asset changes)
-const ASSET_VERSION = '20250827a';
+const ASSET_VERSION = '20250827c';
 
 // Tiny, safe JS minifier for generated strings (removes comments and trims/collapses intra-line whitespace)
 function minifyJS(code) {
@@ -142,12 +142,12 @@ const baseSecurityHeaders = {
 function generateNonce() {
   const bytes = new Uint8Array(16);
   crypto.getRandomValues(bytes);
-  // base64 encode
+  // Convert to URL-safe base64 (replace + with -, / with _, remove = padding)
   let binary = '';
   for (let i = 0; i < bytes.length; i++) {
     binary += String.fromCharCode(bytes[i]);
   }
-  return btoa(binary);
+  return btoa(binary).replace(/\+/g, '-').replace(/\//g, '_').replace(/=/g, '');
 }
 
 // Build CSP header string with provided nonce
