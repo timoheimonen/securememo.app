@@ -16,7 +16,7 @@ export function getStyles() {
 }
 
 /* Default wrapping behavior: avoid forcing mid-word breaks or hyphenation */
-html, body, .nav-logo, .nav-link, .language-item, p, h1, h2, h3, .memo-message p, .footer, .feature-card p, .feature-item, .memo-card, .url-copy-container input {
+html, body, .nav-logo, .nav-link, .language-item, p, h1, h2, h3, .footer, .feature-card p, .feature-item, .memo-card, .url-copy-container input {
   overflow-wrap: normal;
   word-break: normal;
   hyphens: none;
@@ -789,6 +789,9 @@ body {
   white-space: pre-wrap;
   line-height: 1.6;
   color: #333;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  hyphens: auto;
 }
 
 .memo-info {
