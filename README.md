@@ -39,71 +39,78 @@ securememo.app will run the main branch of this repo.
 
 ```
 securememo/
-├── src/
-│   ├── handlers/               # API request handlers
-│   │   └── auth.js             # Handles memo creation, reading, confirmation, and cleanup
-│   ├── templates/              # HTML and JavaScript templates
-│   │   ├── pages.js            # HTML page templates (e.g., index, about, create/read memo)
-│   │   └── js.js               # JavaScript templates (e.g., create/read memo logic)
-│   ├── utils/                  # Utility functions
-│   │   ├── errorMessages.js    # Centralized error handling with generic messages
-│   │   ├── timingSecurity.js   # Timing attack protections (e.g., constant-time comparisons, artificial delays)
-│   │   ├── validation.js       # Input validation, sanitization, and secure checks
-│   │   ├── localization.js     # Server-side localization utilities
-│   │   ├── clientLocalization.js # Client-side localization utilities
-│   │   ├── translations.js     # Translation registry
-│   │   ├── ar_translations.js  # Arabic translations
-│   │   ├── bn_translations.js  # Bengali translations
-│   │   ├── cs_translations.js  # Czech translations
-│   │   ├── da_translations.js  # Danish translations
-│   │   ├── de_translations.js  # German translations
-│   │   ├── el_translations.js  # Greek translations
-│   │   ├── en_translations.js  # English translations
-│   │   ├── es_translations.js  # Spanish translations
-│   │   ├── fi_translations.js  # Finnish translations
-│   │   ├── fr_translations.js  # French translations
-│   │   ├── hi_translations.js  # Hindi translations
-│   │   ├── hu_translations.js  # Hungarian translations
-│   │   ├── id_translations.js  # Indonesian translations
-│   │   ├── it_translations.js  # Italian translations
-│   │   ├── ja_translations.js  # Japanese translations
-│   │   ├── ko_translations.js  # Korean translations
-│   │   ├── no_translations.js  # Norwegian translations
-│   │   ├── nl_translations.js  # Dutch translations
-│   │   ├── pl_translations.js  # Polish translations
-│   │   ├── ptBR_translations.js # Portuguese (Brazil) translations
-│   │   ├── ptPT_translations.js # Portuguese (Portugal) translations
-│   │   ├── ro_translations.js  # Romanian translations
-│   │   ├── ru_translations.js  # Russian translations
-│   │   ├── sv_translations.js  # Swedish translations
-│   │   ├── tl_translations.js  # Takalog translations
-│   │   ├── th_translations.js  # Thai translations
-│   │   ├── tr_translations.js  # Turkish translations
-│   │   ├── uk_translations.js  # Ukrainian translations
-│   │   ├── vi_translations.js  # Vietnamese translations
-│   │   └── zh_translations.js  # Chinese translations
-│   ├── screenshots/            # Screenshots
-│   │   ├──  screenshot_001.png # Screenshot 001
-│   │   └──  screenshot_002.png # Screenshot 002
-│   ├── styles/                 # CSS styling
-│   │   └── styles.js           # Dynamic CSS generation
-│   └── index.js                # Main Worker entry point (routing, security headers, cron jobs)
-├── db/
-│   └── schema.sql              # Database schema definition
-├── public/                     # Static assets
-│   ├── favicon.ico
-│   ├── apple-touch-icon.png
-│   ├── android-chrome-192x192.png
-│   └── android-chrome-512x512.png
+├── CODE_OF_CONDUCT.md          # Community guidelines
+├── CONTRIBUTING.md             # Contribution guidelines
+├── LICENSE                     # License
+├── README.md                   # Project documentation
+├── SECURITY.md                 # Security policy and vulnerability reporting
+├── deploy.sh                   # Deployment script
 ├── package.json                # Project dependencies and configuration
 ├── package-lock.json           # Dependency lock file
 ├── wrangler.toml               # Cloudflare Workers configuration
-├── deploy.sh                   # Deployment script
-├── README.md                   # Project documentation
-├── LICENSE                     # License
-├── SECURITY.md                 # Security policy and vulnerability reporting
-├── CODE_OF_CONDUCT.md          # Community guidelines
-└── CONTRIBUTING.md             # Contribution guidelines
+├── db/
+│   └── schema.sql              # Database schema definition
+├── public/                     # Static assets
+│   ├── android-chrome-192x192.png
+│   ├── android-chrome-512x512.png
+│   ├── apple-touch-icon.png
+│   ├── favicon.ico
+│   └── robots.txt
+├── screenshots/                # Screenshots
+│   ├── screenshot_001.png      # Screenshot 001
+│   └── screenshot_002.png      # Screenshot 002
+└── src/
+    ├── index.js                # Main Worker entry point (routing, security headers, cron jobs)
+    ├── handlers/               # API request handlers
+    │   └── auth.js             # Handles memo creation, reading, confirmation, and cleanup
+    ├── schemas/                # OpenAPI schema definitions
+    │   ├── confirm-delete.openapi.yaml
+    │   ├── create-memo.openapi.yaml
+    │   └── read-memo.openapi.yaml
+    ├── styles/                 # CSS styling
+    │   └── styles.js           # Dynamic CSS generation
+    ├── templates/              # HTML and JavaScript templates
+    │   ├── js.js               # JavaScript templates (e.g., create/read memo logic)
+    │   └── pages.js            # HTML page templates (e.g., index, about, create/read memo)
+    └── utils/                  # Utility functions
+        ├── ar_translations.js  # Arabic translations
+        ├── bn_translations.js  # Bengali translations
+        ├── clientLocalization.js # Client-side localization utilities
+        ├── cs_translations.js  # Czech translations
+        ├── da_translations.js  # Danish translations
+        ├── de_translations.js  # German translations
+        ├── el_translations.js  # Greek translations
+        ├── en_translations.js  # English translations
+        ├── errorMessages.js    # Centralized error handling with generic messages
+        ├── es_translations.js  # Spanish translations
+        ├── fi_translations.js  # Finnish translations
+        ├── fr_translations.js  # French translations
+        ├── hi_translations.js  # Hindi translations
+        ├── hu_translations.js  # Hungarian translations
+        ├── id_translations.js  # Indonesian translations
+        ├── it_translations.js  # Italian translations
+        ├── ja_translations.js  # Japanese translations
+        ├── ko_translations.js  # Korean translations
+        ├── language_names.js   # Language names utility
+        ├── localization.js     # Server-side localization utilities
+        ├── nl_translations.js  # Dutch translations
+        ├── no_translations.js  # Norwegian translations
+        ├── pl_translations.js  # Polish translations
+        ├── ptBR_translations.js # Portuguese (Brazil) translations
+        ├── ptPT_translations.js # Portuguese (Portugal) translations
+        ├── rateLimiter.js      # Rate limiting utilities
+        ├── ro_translations.js  # Romanian translations
+        ├── ru_translations.js  # Russian translations
+        ├── sv_translations.js  # Swedish translations
+        ├── th_translations.js  # Thai translations
+        ├── timingSecurity.js   # Timing attack protections (e.g., constant-time comparisons, artificial delays)
+        ├── tl_translations.js  # Tagalog translations
+        ├── tr_translations.js  # Turkish translations
+        ├── translations.js     # Translation registry
+        ├── uk_translations.js  # Ukrainian translations
+        ├── validation.js       # Input validation, sanitization, and secure checks
+        ├── vi_translations.js  # Vietnamese translations
+        └── zh_translations.js  # Chinese translations
 ```
 
 ## Security
@@ -151,7 +158,7 @@ The supported languages are:
  - Romanian (ro)
  - Spanish (es)
  - Swedish (sv)
- - Takalog (tl)
+ - Tagalog (tl)
  - Thai (th)
  - Turkish (tr)
  - Ukrainian (uk)

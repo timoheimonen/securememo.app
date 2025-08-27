@@ -58,7 +58,7 @@ export async function checkRateLimit(request, env) {
  */
 export async function recordKvFailureAndCheckLimit(request, env, {
   prefix = 'fail',
-  windowSeconds = 60,
+  windowSeconds = 600,
   allowedFailures = 2,
   sliding = true
 } = {}) {
