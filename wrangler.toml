@@ -4,13 +4,6 @@
 # Deploy from Development branch > Cloudflare dev Worker
 #
 
-#This is for Worker Paid-tier.
-#CF Pro-tier allows 2 WAF ratelimit configurations.
-#[rate_limits]
-#binding = "API_RATE_LIMITER"
-#period = 60 
-#requests_per_period = 100  
-
 # Disable workers.dev by default (safety)
 workers_dev = false
 
