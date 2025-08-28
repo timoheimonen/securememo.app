@@ -168,21 +168,6 @@ function isLocaleSupported(locale) {
 }
 
 /**
- * Get current locale from URL
- * @returns {string} Current locale code
- */
-export function getCurrentLocale() {
-  const pathname = window.location.pathname;
-  const segments = pathname.replace(/^\/+/, '').split('/');
-  
-  if (segments.length > 0 && isLocaleSupported(segments[0])) {
-    return segments[0];
-  }
-  
-  return DEFAULT_LOCALE;
-}
-
-/**
  * Get translation for a key
  * @param {string} key - Translation key (e.g., 'nav.home')
  * @param {string} locale - Locale code (optional, uses current locale if not provided)

@@ -130,7 +130,7 @@ async function generateMemoId(env, maxRetries = 10, locale = 'en') {
 }
 
 // Create new memo with validation and Turnstile verification
-export async function handleCreateMemo(request, env, locale = 'en') {
+export async function handleCreateMemo(request, env) {
     // Best-effort memory wiping (limitations: GC & string immutability in JS)
     let sanitizedEncryptedMessage; // declare up-front so we can wipe in finally
     let deletionTokenHash; // shadow for wiping
@@ -323,18 +323,18 @@ export async function handleCreateMemo(request, env, locale = 'en') {
     } finally {
         // Best-effort erase of confidential data
         if (sanitizedEncryptedMessage) {
-            try { sanitizedEncryptedMessage = ''.padEnd(sanitizedEncryptedMessage.length, '\u0000'); } catch (_) { }
+            try { sanitizedEncryptedMessage = ''.padEnd(sanitizedEncryptedMessage.length, '\u0000'); } catch (_) { /* Ignore cleanup errors */ }
             sanitizedEncryptedMessage = null;
         }
         if (deletionTokenHash) {
-            try { deletionTokenHash = ''.padEnd(44, '\u0000'); } catch (_) { }
+            try { deletionTokenHash = ''.padEnd(44, '\u0000'); } catch (_) { /* Ignore cleanup errors */ }
             deletionTokenHash = null;
         }
         if (requestData) {
             try {
                 if (requestData.encryptedMessage) requestData.encryptedMessage = null;
                 if (requestData.deletionTokenHash) requestData.deletionTokenHash = null;
-            } catch (_) { }
+            } catch (_) { /* Ignore cleanup errors */ }
             requestData = null;
         }
     }
@@ -350,7 +350,7 @@ export async function handleCreateMemo(request, env, locale = 'en') {
  * - Returns consistent HTTP status codes (404) for all access failures
  * - Prevents information leakage about memo existence, read status, or expiry
  */
-export async function handleReadMemo(request, env, locale = 'en') {
+export async function handleReadMemo(request, env) {
     try {
         // Extract requestLocale from request headers/query for better UX
         const requestLocale = extractLocaleFromRequest(request);
@@ -511,7 +511,7 @@ export async function handleReadMemo(request, env, locale = 'en') {
  * Handle memo deletion after successful decryption
  * This endpoint is called only after the user successfully decrypts the memo
  */
-export async function handleConfirmDelete(request, env, locale = 'en') {
+export async function handleConfirmDelete(request, env) {
     let deletionToken; // capture for wipe
     let computedHash; // capture for wipe
     let memoId; // to wipe
@@ -655,11 +655,11 @@ export async function handleConfirmDelete(request, env, locale = 'en') {
             deletionToken = null;
         }
         if (computedHash) {
-            try { computedHash = ''.padEnd(44, '\u0000'); } catch (_) { }
+            try { computedHash = ''.padEnd(44, '\u0000'); } catch (_) { /* Ignore cleanup errors */ }
             computedHash = null;
         }
-        if (memoId) { try { memoId = null; } catch (_) { } }
-        if (row) { try { row.deletion_token_hash = null; row = null; } catch (_) { } }
+        if (memoId) { try { memoId = null; } catch (_) { /* Ignore cleanup errors */ } }
+        if (row) { try { row.deletion_token_hash = null; row = null; } catch (_) { /* Ignore cleanup errors */ } }
     }
 }
 

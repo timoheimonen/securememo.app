@@ -49,7 +49,7 @@ import {
 import { getClientLocalizationJS } from './lang/clientLocalization.js';
 
 // Immutable asset version for cache-busting (bump on asset changes)
-const ASSET_VERSION = '20250828m';
+const ASSET_VERSION = '20250828p';
 
 // Tiny, safe JS minifier for generated strings (removes comments and trims/collapses intra-line whitespace)
 function minifyJS(code) {
@@ -624,7 +624,7 @@ ${sitemapUrls}</urlset>`;
             if (refererLocaleInfo.locale && getSupportedLocales().includes(refererLocaleInfo.locale)) {
               jsLocale = refererLocaleInfo.locale;
             }
-          } catch { }
+          } catch { /* Ignore invalid referer URLs */ }
         }
 
         // Serve the optimized client localization utility with only the relevant translations
@@ -700,7 +700,7 @@ ${sitemapUrls}</urlset>`;
           response = versionAssetUrls((await getAboutHTML(locale, url.origin)).replace(/{{CSP_NONCE}}/g, cspNonce));
           cacheHeaders = { 'Cache-Control': 'public, max-age=604800' };
           break;
-        case '/create-memo.html':
+        case '/create-memo.html': {
           const siteKey = env.TURNSTILE_SITE_KEY || 'MISSING_SITE_KEY';
           cspNonce = cspNonce || generateNonce();
           response = versionAssetUrls((await getCreateMemoHTML(locale, url.origin))
@@ -708,7 +708,8 @@ ${sitemapUrls}</urlset>`;
             .replace(/{{CSP_NONCE}}/g, cspNonce));
           cacheHeaders = { 'Cache-Control': 'no-store' };
           break;
-        case '/read-memo.html':
+        }
+        case '/read-memo.html': {
           const readSiteKey = env.TURNSTILE_SITE_KEY || 'MISSING_SITE_KEY';
           cspNonce = cspNonce || generateNonce();
           response = versionAssetUrls((await getReadMemoHTML(locale, url.origin))
@@ -716,6 +717,7 @@ ${sitemapUrls}</urlset>`;
             .replace(/{{CSP_NONCE}}/g, cspNonce));
           cacheHeaders = { 'Cache-Control': 'no-store' };
           break;
+        }
         case '/tos.html':
           cspNonce = cspNonce || generateNonce();
           response = versionAssetUrls((await getToSHTML(locale, url.origin)).replace(/{{CSP_NONCE}}/g, cspNonce));
@@ -764,7 +766,7 @@ ${sitemapUrls}</urlset>`;
   },
 
   // Cron job: cleanup expired memos
-  async scheduled(event, env, ctx) {
+  async scheduled(event, env) {
     try {
       const result = await handleCleanupMemos(env);
       return result;
