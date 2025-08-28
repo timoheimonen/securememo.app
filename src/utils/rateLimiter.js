@@ -1,10 +1,6 @@
 // KV-based rate limiting helper for Cloudflare Workers
 // Implements sliding and fixed window rate limiting using Workers KV
 // -------------------------------------------------
-// Raw IP extractor (kept separate for potential future proxy chain parsing)
-function getRawClientIp(request) {
-  return request.headers.get('CF-Connecting-IP') || 'unknown';
-}
 
 /**
  * Hash an IP (or any identifier) using SHA-256 → hex string.
