@@ -147,14 +147,14 @@ export async function getIndexHTML(locale = 'en', origin = 'https://securememo.a
     <nav class="navbar">
         <div class="nav-container">
             <a href="/${locale}" class="nav-logo">securememo.app</a>
-            
+
             <!-- Hamburger Menu Button -->
             <button class="hamburger" type="button" aria-label="${t('nav.toggleMenu', locale)}" aria-expanded="false">
                 <span class="hamburger-line"></span>
                 <span class="hamburger-line"></span>
                 <span class="hamburger-line"></span>
             </button>
-            
+
             <!-- Navigation Menu -->
             <ul class="nav-menu" id="navMenu">
                 <li><a href="/${locale}" class="nav-link active">${t('nav.home', locale)}</a></li>
@@ -198,7 +198,7 @@ export async function getIndexHTML(locale = 'en', origin = 'https://securememo.a
                     </div>
                 </li>
             </ul>
-            
+
             <!-- Mobile Menu Overlay -->
             <div class="nav-overlay"></div>
         </div>
@@ -349,14 +349,14 @@ export async function getAboutHTML(locale = 'en', origin = 'https://securememo.a
     <nav class="navbar">
         <div class="nav-container">
             <a href="/${locale}" class="nav-logo">securememo.app</a>
-            
+
             <!-- Hamburger Menu Button -->
             <button class="hamburger" type="button" aria-label="${t('nav.toggleMenu', locale)}" aria-expanded="false">
                 <span class="hamburger-line"></span>
                 <span class="hamburger-line"></span>
                 <span class="hamburger-line"></span>
             </button>
-            
+
             <!-- Navigation Menu -->
             <ul class="nav-menu" id="navMenu">
                 <li><a href="/${locale}" class="nav-link">${t('nav.home', locale)}</a></li>
@@ -400,7 +400,7 @@ export async function getAboutHTML(locale = 'en', origin = 'https://securememo.a
                     </div>
                 </li>
             </ul>
-            
+
             <!-- Mobile Menu Overlay -->
             <div class="nav-overlay"></div>
         </div>
@@ -582,14 +582,14 @@ export async function getCreateMemoHTML(locale = 'en', origin = 'https://securem
     <nav class="navbar">
         <div class="nav-container">
             <a href="/${locale}" class="nav-logo">securememo.app</a>
-            
+
             <!-- Hamburger Menu Button -->
             <button class="hamburger" type="button" aria-label="${t('nav.toggleMenu', locale)}" aria-expanded="false">
                 <span class="hamburger-line"></span>
                 <span class="hamburger-line"></span>
                 <span class="hamburger-line"></span>
             </button>
-            
+
             <!-- Navigation Menu -->
             <ul class="nav-menu" id="navMenu">
                 <li><a href="/${locale}" class="nav-link">${t('nav.home', locale)}</a></li>
@@ -633,7 +633,7 @@ export async function getCreateMemoHTML(locale = 'en', origin = 'https://securem
                     </div>
                 </li>
             </ul>
-            
+
             <!-- Mobile Menu Overlay -->
             <div class="nav-overlay"></div>
         </div>
@@ -644,16 +644,16 @@ export async function getCreateMemoHTML(locale = 'en', origin = 'https://securem
             <div class="memo-card">
                 <h1>${t('create.hero.title', locale)}</h1>
                 <p class="memo-description">${t('create.hero.description', locale)}</p>
-                
+
                 <form id="memoForm" class="memo-form">
                     <div class="form-group">
                         <label for="message">${t('form.message.label', locale)}</label>
-                        <textarea id="message" name="message" required 
-                                  placeholder="${t('form.message.placeholder', locale)}" 
+                        <textarea id="message" name="message" required
+                                  placeholder="${t('form.message.placeholder', locale)}"
                                   rows="8" maxlength="10000"></textarea>
                         <small class="form-help">${t('form.message.help', locale)}</small>
                     </div>
-                    
+
                     <div class="form-group">
                         <label for="expiryHours">${t('form.expiry.label', locale)}</label>
                         <select id="expiryHours" name="expiryHours">
@@ -664,24 +664,24 @@ export async function getCreateMemoHTML(locale = 'en', origin = 'https://securem
                             <option value="720">${t('form.expiry.option.30d', locale)}</option>
                         </select>
                     </div>
-                    
+
                     <div class="form-group">
                         <div class="cf-turnstile" data-sitekey="{{TURNSTILE_SITE_KEY}}"></div>
                         <small class="form-help">${t('form.security.help', locale)}</small>
                     </div>
-                    
+
                     <button type="submit" class="btn btn-primary" id="submitButton">${t('btn.create', locale)}</button>
-                    
+
                     <!-- Loading indicator (hidden by default) -->
                     <div id="loadingIndicator" class="loading-spinner" style="display: none;">
                         <div class="spinner"></div>
                         <p>${t('msg.encrypting', locale)}</p>
                     </div>
                 </form>
-                
+
                 <div id="result" class="result-section" style="display: none;">
                     <h3>${t('msg.memoCreated', locale)}</h3>
-                    
+
                     <div class="memo-url-section">
                         <label for="memoUrl">${t('form.memoUrl.label', locale)}</label>
                         <div class="url-copy-container">
@@ -690,7 +690,7 @@ export async function getCreateMemoHTML(locale = 'en', origin = 'https://securem
                         </div>
                         <small class="form-help">${t('form.memoUrl.help', locale)}</small>
                     </div>
-                    
+
                     <div class="memo-password-section">
                         <label for="memoPassword">${t('form.memoPassword.label', locale)}</label>
                         <div class="url-copy-container">
@@ -700,7 +700,7 @@ export async function getCreateMemoHTML(locale = 'en', origin = 'https://securem
                         </div>
                         <small class="form-help">${t('form.memoPassword.help', locale)}</small>
                     </div>
-                    
+
                     <div class="memo-warning">
                         <p><strong>${t('warning.important', locale)}</strong></p>
                         <ul>
@@ -711,7 +711,7 @@ export async function getCreateMemoHTML(locale = 'en', origin = 'https://securem
                         </ul>
                     </div>
                 </div>
-                
+
                 <div id="statusMessage" class="message"></div>
             </div>
         </div>
@@ -801,14 +801,14 @@ export async function getReadMemoHTML(locale = 'en', origin = 'https://securemem
     <nav class="navbar">
         <div class="nav-container">
             <a href="/${locale}" class="nav-logo">securememo.app</a>
-            
+
             <!-- Hamburger Menu Button -->
             <button class="hamburger" type="button" aria-label="${t('nav.toggleMenu', locale)}" aria-expanded="false">
                 <span class="hamburger-line"></span>
                 <span class="hamburger-line"></span>
                 <span class="hamburger-line"></span>
             </button>
-            
+
             <!-- Navigation Menu -->
             <ul class="nav-menu" id="navMenu">
                 <li><a href="/${locale}" class="nav-link">${t('nav.home', locale)}</a></li>
@@ -852,7 +852,7 @@ export async function getReadMemoHTML(locale = 'en', origin = 'https://securemem
                     </div>
                 </li>
             </ul>
-            
+
             <!-- Mobile Menu Overlay -->
             <div class="nav-overlay"></div>
         </div>
@@ -863,13 +863,13 @@ export async function getReadMemoHTML(locale = 'en', origin = 'https://securemem
             <div class="memo-card">
                 <h1>${t('read.hero.title', locale)}</h1>
                 <p class="memo-description">${t('read.hero.description', locale)}</p>
-                
+
                 <div id="passwordForm" class="memo-form">
                     <form id="decryptForm">
                         <div class="form-group">
                             <label for="password">${t('form.password.label', locale)}</label>
                             <div class="password-input-container">
-                                <input type="password" id="password" name="password" required 
+                                <input type="password" id="password" name="password" required
                                        placeholder="${t('form.password.placeholder', locale)}">
                                 <button type="button" id="toggleReadPassword" class="btn btn-primary">${t('btn.show', locale)}</button>
                             </div>
@@ -880,7 +880,7 @@ export async function getReadMemoHTML(locale = 'en', origin = 'https://securemem
                             <small class="form-help">${t('form.security.help', locale)}</small>
                         </div>
                         <button type="submit" class="btn btn-primary" id="decryptButton">${t('btn.decrypt', locale)}</button>
-                        
+
                         <!-- Decrypt loading indicator (hidden by default) -->
                         <div id="decryptLoadingIndicator" class="loading-spinner" style="display: none;">
                             <div class="spinner"></div>
@@ -888,7 +888,7 @@ export async function getReadMemoHTML(locale = 'en', origin = 'https://securemem
                         </div>
                     </form>
                 </div>
-                
+
                 <div id="memoContent" class="memo-content" style="display: none;">
                     <h3>${t('msg.yourSecureMemo', locale)}</h3>
                     <div class="memo-message">
@@ -906,7 +906,7 @@ export async function getReadMemoHTML(locale = 'en', origin = 'https://securemem
                         <a href="/${locale}" class="btn btn-secondary">${t('btn.goHome', locale)}</a>
                     </div>
                 </div>
-                
+
                 <div id="errorContent" class="error-content" style="display: none;">
                     <h3>❌ ${t('common.error', locale)}</h3>
                     <p id="errorMessage"></p>
@@ -915,7 +915,7 @@ export async function getReadMemoHTML(locale = 'en', origin = 'https://securemem
                         <a href="/${locale}" class="btn btn-secondary">${t('btn.goHome', locale)}</a>
                     </div>
                 </div>
-                
+
                 <div id="statusMessage" class="message"></div>
             </div>
         </div>
@@ -999,14 +999,14 @@ export async function getToSHTML(locale = 'en', origin = 'https://securememo.app
     <nav class="navbar">
         <div class="nav-container">
             <a href="/${locale}" class="nav-logo">securememo.app</a>
-            
+
             <!-- Hamburger Menu Button -->
             <button class="hamburger" type="button" aria-label="${t('nav.toggleMenu', locale)}" aria-expanded="false">
                 <span class="hamburger-line"></span>
                 <span class="hamburger-line"></span>
                 <span class="hamburger-line"></span>
             </button>
-            
+
             <!-- Navigation Menu -->
             <ul class="nav-menu" id="navMenu">
                 <li><a href="/${locale}" class="nav-link">${t('nav.home', locale)}</a></li>
@@ -1050,7 +1050,7 @@ export async function getToSHTML(locale = 'en', origin = 'https://securememo.app
                     </div>
                 </li>
             </ul>
-            
+
             <!-- Mobile Menu Overlay -->
             <div class="nav-overlay"></div>
         </div>
@@ -1060,7 +1060,7 @@ export async function getToSHTML(locale = 'en', origin = 'https://securememo.app
         <div class="legal-section">
             <h1>${t('tos.hero.title', locale)}</h1>
             <p class="legal-meta"><strong>${t('tos.lastUpdated', locale)}</strong></p>
-            
+
             <div class="legal-toc">
                 <h2>${t('tos.tableOfContents.title', locale)}</h2>
                 <ol>
@@ -1258,14 +1258,14 @@ export async function getPrivacyHTML(locale = 'en', origin = 'https://securememo
     <nav class="navbar">
         <div class="nav-container">
             <a href="/${locale}" class="nav-logo">securememo.app</a>
-            
+
             <!-- Hamburger Menu Button -->
             <button class="hamburger" type="button" aria-label="${t('nav.toggleMenu', locale)}" aria-expanded="false">
                 <span class="hamburger-line"></span>
                 <span class="hamburger-line"></span>
                 <span class="hamburger-line"></span>
             </button>
-            
+
             <!-- Navigation Menu -->
             <ul class="nav-menu" id="navMenu">
                 <li><a href="/${locale}" class="nav-link">${t('nav.home', locale)}</a></li>
@@ -1309,7 +1309,7 @@ export async function getPrivacyHTML(locale = 'en', origin = 'https://securememo
                     </div>
                 </li>
             </ul>
-            
+
             <!-- Mobile Menu Overlay -->
             <div class="nav-overlay"></div>
         </div>
@@ -1319,7 +1319,7 @@ export async function getPrivacyHTML(locale = 'en', origin = 'https://securememo
         <div class="legal-section">
             <h1>${t('privacy.hero.title', locale)}</h1>
             <p class="legal-meta"><strong>${t('privacy.lastUpdated', locale)}</strong></p>
-            
+
             <div class="legal-toc">
                 <h2>${t('privacy.tableOfContents.title', locale)}</h2>
                 <ol>
@@ -1440,4 +1440,4 @@ export async function getPrivacyHTML(locale = 'en', origin = 'https://securememo
     <script src="/js/common.js" type="module" nonce="{{CSP_NONCE}}" defer></script>
 </body>
 </html>`;
-} 
+}
