@@ -64,16 +64,58 @@ export function t(key, locale = null) {
   }
 
   const currentLocale = locale || getCurrentLocale();
+  /**
+   * Resolve translations table for a supported locale without dynamic bracket access.
+   * Using an explicit switch avoids generic object injection sink patterns flagged by SAST.
+   * @param {string} loc Locale code
+   * @returns {object|undefined} Translation table
+   */
+  function getLocaleTable(loc) {
+    switch (loc) {
+      case 'ar': return TRANSLATIONS.ar;
+      case 'bn': return TRANSLATIONS.bn;
+      case 'cs': return TRANSLATIONS.cs;
+      case 'da': return TRANSLATIONS.da;
+      case 'de': return TRANSLATIONS.de;
+      case 'el': return TRANSLATIONS.el;
+      case 'en': return TRANSLATIONS.en;
+      case 'es': return TRANSLATIONS.es;
+      case 'fi': return TRANSLATIONS.fi;
+      case 'fr': return TRANSLATIONS.fr;
+      case 'hi': return TRANSLATIONS.hi;
+      case 'hu': return TRANSLATIONS.hu;
+      case 'id': return TRANSLATIONS.id;
+      case 'it': return TRANSLATIONS.it;
+      case 'ja': return TRANSLATIONS.ja;
+      case 'ko': return TRANSLATIONS.ko;
+      case 'nl': return TRANSLATIONS.nl;
+      case 'no': return TRANSLATIONS.no;
+      case 'pl': return TRANSLATIONS.pl;
+      case 'ptBR': return TRANSLATIONS.ptBR;
+      case 'ptPT': return TRANSLATIONS.ptPT;
+      case 'ro': return TRANSLATIONS.ro;
+      case 'ru': return TRANSLATIONS.ru;
+      case 'sv': return TRANSLATIONS.sv;
+      case 'th': return TRANSLATIONS.th;
+      case 'tl': return TRANSLATIONS.tl;
+      case 'tr': return TRANSLATIONS.tr;
+      case 'uk': return TRANSLATIONS.uk;
+      case 'vi': return TRANSLATIONS.vi;
+      case 'zh': return TRANSLATIONS.zh;
+      default: return TRANSLATIONS.en; // fallback
+    }
+  }
 
-  // Use safe property access
-  const translation = safeGetProperty(TRANSLATIONS[currentLocale], key);
+  const localeTable = getLocaleTable(currentLocale);
+  // Use safe property access on the resolved table
+  const translation = safeGetProperty(localeTable, key);
   if (translation !== undefined) {
     return translation;
   }
 
   // Fallback to default locale
   if (currentLocale !== DEFAULT_LOCALE) {
-    const fallbackTranslation = safeGetProperty(TRANSLATIONS[DEFAULT_LOCALE], key);
+    const fallbackTranslation = safeGetProperty(getLocaleTable(DEFAULT_LOCALE), key);
     if (fallbackTranslation !== undefined) {
       return fallbackTranslation;
     }
@@ -301,16 +343,51 @@ export function t(key, locale = null) {
   }
   
   const currentLocale = locale || getCurrentLocale();
-  
-  // Use safe property access
-  const translation = safeGetProperty(TRANSLATIONS[currentLocale], key);
+  // Resolve locale table without dynamic indexing (switch-based)
+  function getLocaleTable(loc) {
+    switch (loc) {
+      case 'ar': return TRANSLATIONS.ar;
+      case 'bn': return TRANSLATIONS.bn;
+      case 'cs': return TRANSLATIONS.cs;
+      case 'da': return TRANSLATIONS.da;
+      case 'de': return TRANSLATIONS.de;
+      case 'el': return TRANSLATIONS.el;
+      case 'en': return TRANSLATIONS.en;
+      case 'es': return TRANSLATIONS.es;
+      case 'fi': return TRANSLATIONS.fi;
+      case 'fr': return TRANSLATIONS.fr;
+      case 'hi': return TRANSLATIONS.hi;
+      case 'hu': return TRANSLATIONS.hu;
+      case 'id': return TRANSLATIONS.id;
+      case 'it': return TRANSLATIONS.it;
+      case 'ja': return TRANSLATIONS.ja;
+      case 'ko': return TRANSLATIONS.ko;
+      case 'nl': return TRANSLATIONS.nl;
+      case 'no': return TRANSLATIONS.no;
+      case 'pl': return TRANSLATIONS.pl;
+      case 'ptBR': return TRANSLATIONS.ptBR;
+      case 'ptPT': return TRANSLATIONS.ptPT;
+      case 'ro': return TRANSLATIONS.ro;
+      case 'ru': return TRANSLATIONS.ru;
+      case 'sv': return TRANSLATIONS.sv;
+      case 'th': return TRANSLATIONS.th;
+      case 'tl': return TRANSLATIONS.tl;
+      case 'tr': return TRANSLATIONS.tr;
+      case 'uk': return TRANSLATIONS.uk;
+      case 'vi': return TRANSLATIONS.vi;
+      case 'zh': return TRANSLATIONS.zh;
+      default: return TRANSLATIONS.en;
+    }
+  }
+  const localeTable = getLocaleTable(currentLocale);
+  const translation = safeGetProperty(localeTable, key);
   if (translation !== undefined) {
     return translation;
   }
   
   // Fallback to default locale
   if (currentLocale !== DEFAULT_LOCALE) {
-    const fallbackTranslation = safeGetProperty(TRANSLATIONS[DEFAULT_LOCALE], key);
+    const fallbackTranslation = safeGetProperty(getLocaleTable(DEFAULT_LOCALE), key);
     if (fallbackTranslation !== undefined) {
       return fallbackTranslation;
     }
