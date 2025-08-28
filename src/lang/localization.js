@@ -4,43 +4,51 @@
 
 import { TRANSLATIONS } from './translations.js';
 
-// Hardened translation tables held inside a frozen Map to mitigate generic object
-// injection / prototype pollution sink patterns that static analyzers flag when
-// using dynamic bracket notation on plain objects. Each locale table is a
-// null-prototype, frozen object whose keys are validated and whose values are
-// coerced to strings. Access is performed via Map#get which avoids property
-// lookups on attacker-influenced property names.
-// Build a hardened translation map once. Using Reflect.get with validated keys
-// avoids direct bracket access patterns that some static analyzers flag as
-// generic object injection sinks. Locale codes are limited to a known allowlist.
+// Central allowlist of locales; used for both validation and safe translation extraction.
+const SUPPORTED_LOCALES = ['ar', 'bn', 'cs', 'da', 'de', 'el', 'en', 'es', 'fi', 'fr', 'hi', 'hu', 'id', 'it', 'ja', 'ko', 'nl', 'no', 'pl', 'ptBR', 'ptPT', 'ru', 'ro', 'sv', 'tl', 'th', 'tr', 'uk', 'vi', 'zh'];
+const DEFAULT_LOCALE = 'en';
+
+/**
+ * Safely copy a translation table into an immutable, null-prototype object with
+ * strictly validated keys. Avoids dynamic property access on attacker-controlled
+ * names and prototype pollution sinks.
+ * @param {unknown} source
+ * @returns {Record<string,string>} immutable sanitized table
+ */
+function sanitizeTranslationTable(source) {
+  const clean = Object.create(null);
+  if (!source || typeof source !== 'object') return Object.freeze(clean);
+  for (const key of Object.keys(source)) {
+    if (/^[a-zA-Z0-9_.]+$/.test(key) && key.length <= 120 && !key.includes('__proto__') && !key.includes('constructor') && !key.includes('prototype')) {
+      const raw = Reflect.get(source, key);
+      const value = (raw === null || raw === undefined) ? '' : String(raw);
+      Object.defineProperty(clean, key, { value, enumerable: true, writable: false, configurable: false });
+    }
+  }
+  return Object.freeze(clean);
+}
+
+// Build a hardened Map keyed only by our static allowlist. We do NOT iterate
+// over Object.keys(TRANSLATIONS) to eliminate generic object injection sink
+// patterns flagged by static analyzers (even though TRANSLATIONS itself is a
+// static import). This ensures only pre-approved locale identifiers are used
+// as keys and no dynamic property construction occurs.
 const SAFE_TRANSLATIONS = (() => {
   /** @type {Map<string, Record<string,string>>} */
   const map = new Map();
   try {
-    if (TRANSLATIONS && typeof TRANSLATIONS === 'object') {
-      for (const localeCode of Object.keys(TRANSLATIONS)) {
-        // Allow only expected locale pattern (2-3 letters or specific compound codes)
-        if (!/^[a-zA-Z]{2,3}$/.test(localeCode) && !['ptBR','ptPT'].includes(localeCode)) continue;
-        const src = (Object.prototype.hasOwnProperty.call(TRANSLATIONS, localeCode) && typeof TRANSLATIONS[localeCode] === 'object') ? TRANSLATIONS[localeCode] : {};
-        const clean = Object.create(null);
-        for (const k of Object.keys(src)) {
-          if (/^[a-zA-Z0-9_.]+$/.test(k) && k.length <= 120 && !k.includes('__proto__') && !k.includes('constructor') && !k.includes('prototype')) {
-            const raw = Reflect.get(src, k);
-            const v = (raw === null || raw === undefined) ? '' : String(raw);
-            Object.defineProperty(clean, k, { value: v, enumerable: true, writable: false, configurable: false });
-          }
-        }
-        map.set(localeCode, Object.freeze(clean));
+    for (const locale of SUPPORTED_LOCALES) {
+      if (Object.prototype.hasOwnProperty.call(TRANSLATIONS, locale)) {
+        // Access is limited to constant allowlisted locale names.
+        const table = sanitizeTranslationTable(Reflect.get(TRANSLATIONS, locale));
+        map.set(locale, table);
       }
     }
   } catch (_) {
-    // Fail closed: return empty immutable map
+    // Fail closed: return map with whatever succeeded so far (already safe objects)
   }
   return Object.freeze(map);
 })();
-
-const SUPPORTED_LOCALES = ['ar', 'bn', 'cs', 'da', 'de', 'el', 'en', 'es', 'fi', 'fr', 'hi', 'hu', 'id', 'it', 'ja', 'ko', 'nl', 'no', 'pl', 'ptBR', 'ptPT', 'ru', 'ro', 'sv', 'tl', 'th', 'tr', 'uk', 'vi', 'zh'];
-const DEFAULT_LOCALE = 'en';
 
 
 

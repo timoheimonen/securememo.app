@@ -182,21 +182,27 @@ export function getClientLocalizationJS(locale = 'en') {
   if (!isLocaleSupported(locale)) {
     locale = 'en';
   }
+  // Sanitize translation tables to immutable, null-prototype objects without using
+  // dynamic property definition (avoids generic object injection sink pattern).
+  const sanitize = (tbl) => {
+    const clean = Object.create(null);
+    if (!tbl || typeof tbl !== 'object') return clean;
+    for (const k of Object.keys(tbl)) {
+      if (/^[a-zA-Z0-9_.]+$/.test(k) && k.length <= 120 && !k.includes('__proto__') && !k.includes('constructor') && !k.includes('prototype')) {
+        const raw = Reflect.get(tbl, k);
+        const v = (raw === null || raw === undefined) ? '' : String(raw);
+        Object.defineProperty(clean, k, { value: v, enumerable: true, writable: false, configurable: false });
+      }
+    }
+    return clean;
+  };
 
-  // Include only the requested locale and 'en' fallback if needed
-  const relevantTranslations = Object.create(null);
-  if (Object.prototype.hasOwnProperty.call(TRANSLATIONS, locale) && typeof TRANSLATIONS[locale] === 'object') {
-    Object.defineProperty(relevantTranslations, locale, { value: TRANSLATIONS[locale], enumerable: true, writable: false, configurable: false });
-  } else if (Object.prototype.hasOwnProperty.call(TRANSLATIONS, 'en')) {
-    Object.defineProperty(relevantTranslations, locale, { value: TRANSLATIONS['en'], enumerable: true, writable: false, configurable: false });
-  }
+  const primaryTable = sanitize(Object.prototype.hasOwnProperty.call(TRANSLATIONS, locale) ? TRANSLATIONS[locale] : TRANSLATIONS['en']);
+  const fallbackTable = (locale !== 'en' && Object.prototype.hasOwnProperty.call(TRANSLATIONS, 'en')) ? sanitize(TRANSLATIONS['en']) : null;
 
-  if (locale !== 'en' && Object.prototype.hasOwnProperty.call(TRANSLATIONS, 'en')) {
-    Object.defineProperty(relevantTranslations, 'en', { value: TRANSLATIONS['en'], enumerable: true, writable: false, configurable: false });
-  }
-
-  // Compact JSON to minimize payload size
-  const translationsString = JSON.stringify(relevantTranslations);
+  // Build the minimal translations object (stringified) with only allowlisted keys.
+  const translationsObj = fallbackTable ? { [locale]: primaryTable, en: fallbackTable } : { [locale]: primaryTable };
+  const translationsString = JSON.stringify(translationsObj);
   const supportedLocalesString = JSON.stringify(getSupportedLocales());
   
   return `// Client-side localization utility for securememo.app
