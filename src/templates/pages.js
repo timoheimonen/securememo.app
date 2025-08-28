@@ -71,7 +71,7 @@ function getFlagEmoji(locale) {
         vi: '🇻🇳',
         zh: '🈶',
     };
-    return flags[locale] || '🌐';
+    return `<span class="flag-emoji">${flags[locale] || '🌐'}</span>`;
 }
 
 export async function getIndexHTML(locale = 'en', origin = 'https://securememo.app') {
