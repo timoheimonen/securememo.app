@@ -79,7 +79,7 @@ export function buildLocalizedPath(locale, path) {
  * @returns {string|null} - Redirect path if needed, null otherwise
  */
 export function getLocaleRedirectPath(pathname) {
-  const { locale, pathWithoutLocale } = extractLocaleFromPath(pathname);
+  const { pathWithoutLocale } = extractLocaleFromPath(pathname);
   
   // If no locale detected in URL, redirect to default locale
   if (pathname === pathWithoutLocale) {

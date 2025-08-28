@@ -123,3 +123,11 @@ src/schemas/
 src/schemas/confirm-delete.openapi.yaml
 src/schemas/read-memo.openapi.yaml
 src/schemas/create-memo.openapi.yaml
+.github/instructions/*
+.github/instructions/
+
+
+#Ignore vscode AI rules
+.github/instructions/codacy.instructions.md
+.codacy/codacy.yaml
+.eslintrc.js
