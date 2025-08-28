@@ -671,11 +671,6 @@ export async function getCreateMemoHTML(locale = 'en', origin = 'https://securem
                             <option value="720">${t('form.expiry.option.30d', locale)}</option>
                         </select>
                     </div>
-                    
-                    <div class="form-group">
-                        <small class="form-help">${t('form.security.help', locale)}</small>
-                    </div>
-                    
                     <button type="submit" class="btn btn-primary" id="submitButton">${t('btn.create', locale)}</button>
                     
                     <!-- Loading indicator (hidden by default) -->
@@ -887,9 +882,6 @@ export async function getReadMemoHTML(locale = 'en', origin = 'https://securemem
                                 <button type="button" id="toggleReadPassword" class="btn btn-primary">${t('btn.show', locale)}</button>
                             </div>
                             <small class="form-help">${t('form.password.help', locale)}</small>
-                        </div>
-                        <div class="form-group">
-                            <small class="form-help">${t('form.security.help', locale)}</small>
                         </div>
                         <button type="submit" class="btn btn-primary" id="decryptButton">${t('btn.decrypt', locale)}</button>
                         
