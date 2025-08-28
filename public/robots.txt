@@ -6,4 +6,4 @@ Disallow: /tos
 Disallow: /privacy
 
 # Sitemap location
-Sitemap: https://securememo.com/sitemap.xml
+Sitemap: https://securememo.app/sitemap.xml
