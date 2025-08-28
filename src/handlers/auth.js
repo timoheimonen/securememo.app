@@ -7,22 +7,7 @@ import {
     normalizeCiphertextForResponse
 } from '../utils/validation.js';
 import { getErrorMessage, getMemoAccessDeniedMessage } from '../utils/errorMessages.js';
-import { uniform        // Best-effort memory wiping (limitations: GC & string immutability in JS)
-        if (sanitizedEncryptedMessage) {
-            try { sanitizedEncryptedMessage = ''.padEnd(sanitizedEncryptedMessage.length, '\u0000'); } catch (_) { /* Ignore cleanup errors */ }
-            sanitizedEncryptedMessage = null;
-        }
-        if (deletionTokenHash) {
-            try { deletionTokenHash = ''.padEnd(44, '\u0000'); } catch (_) { /* Ignore cleanup errors */ }
-            deletionTokenHash = null;
-        }
-        if (requestData) {
-            try {
-                if (requestData.encryptedMessage) requestData.encryptedMessage = null;
-                if (requestData.deletionTokenHash) requestData.deletionTokenHash = null;
-            } catch (_) { /* Ignore cleanup errors */ }
-            requestData = null;
-        }onstantTimeCompare } from '../utils/timingSecurity.js';
+import { uniformResponseDelay, constantTimeCompare } from '../utils/timingSecurity.js';
 import { extractLocaleFromRequest } from '../lang/localization.js';
 import { recordKvFailureAndCheckLimit } from '../utils/rateLimiter.js';
 
