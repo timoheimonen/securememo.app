@@ -8,7 +8,7 @@ import {
 } from '../utils/validation.js';
 import { getErrorMessage, getMemoAccessDeniedMessage } from '../utils/errorMessages.js';
 import { uniformResponseDelay, constantTimeCompare } from '../utils/timingSecurity.js';
-import { extractLocaleFromRequest } from '../utils/localization.js';
+import { extractLocaleFromRequest } from '../lang/localization.js';
 import { recordKvFailureAndCheckLimit } from '../utils/rateLimiter.js';
 
 // Maximum allowed JSON request body size in bytes (defense-in-depth against large payload DoS)
