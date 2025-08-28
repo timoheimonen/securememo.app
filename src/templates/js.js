@@ -7,7 +7,6 @@ const TURNSTILE_SITE_KEY = '{{TURNSTILE_SITE_KEY}}';
 let turnstileRendered = false;
 let turnstileWidgetId = null;
 let pendingSubmitEvent = null;
-let turnstileWidgetId = null;
 
 function highlightCurrentPage() {
     const currentPath = window.location.pathname;
@@ -451,6 +450,7 @@ export function getReadMemoJS() {
 // Turnstile site key - injected by server
 const TURNSTILE_SITE_KEY = '{{TURNSTILE_SITE_KEY}}';
 let turnstileRendered = false;
+let turnstileWidgetId = null; // Added to prevent implicit global usage
 
 // Error messages - injected by server
 const ERROR_MESSAGES = {
