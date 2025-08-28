@@ -547,7 +547,7 @@ export async function handleConfirmDelete(request, env, locale = 'en') {
         ({ memoId, deletionToken } = requestData);
         // Strict memoId validation: reject invalid instead of transforming
         if (typeof memoId !== 'string' || !(await validateMemoIdSecure(memoId))) {
-            const rate = await recordKvFailureAndCheckLimit(request, env, { prefix: 'delFail', allowedFailures: 2, windowSeconds: 60, sliding: true });
+            const rate = await recordKvFailureAndCheckLimit(request, env, { prefix: 'delFail', allowedFailures: 2, windowSeconds: 600, sliding: true });
             if (rate.limited) {
                 await uniformResponseDelay();
                 return new Response(JSON.stringify({ error: getErrorMessage('RATE_LIMITED', requestLocale) }), {
@@ -564,7 +564,7 @@ export async function handleConfirmDelete(request, env, locale = 'en') {
         row = await fetchStmt.bind(memoId).first();
 
         if (!row) {
-            const rate = await recordKvFailureAndCheckLimit(request, env, { prefix: 'delFail', allowedFailures: 2, windowSeconds: 60, sliding: true });
+            const rate = await recordKvFailureAndCheckLimit(request, env, { prefix: 'delFail', allowedFailures: 2, windowSeconds: 600, sliding: true });
             if (rate.limited) {
                 await uniformResponseDelay();
                 return new Response(JSON.stringify({ error: getErrorMessage('RATE_LIMITED', requestLocale) }), {
@@ -578,7 +578,7 @@ export async function handleConfirmDelete(request, env, locale = 'en') {
 
         // Require deletion token
         if (!deletionToken) {
-            const rate = await recordKvFailureAndCheckLimit(request, env, { prefix: 'delFail', allowedFailures: 2, windowSeconds: 60, sliding: true });
+            const rate = await recordKvFailureAndCheckLimit(request, env, { prefix: 'delFail', allowedFailures: 2, windowSeconds: 600, sliding: true });
             if (rate.limited) {
                 await uniformResponseDelay();
                 return new Response(JSON.stringify({ error: getErrorMessage('RATE_LIMITED', requestLocale) }), {
@@ -592,7 +592,7 @@ export async function handleConfirmDelete(request, env, locale = 'en') {
 
         // Validate format using existing password validator without altering the token value
         if (!validatePassword(deletionToken)) {  // Reuse validator for token format
-            const rate = await recordKvFailureAndCheckLimit(request, env, { prefix: 'delFail', allowedFailures: 2, windowSeconds: 60, sliding: true });
+            const rate = await recordKvFailureAndCheckLimit(request, env, { prefix: 'delFail', allowedFailures: 2, windowSeconds: 600, sliding: true });
             if (rate.limited) {
                 await uniformResponseDelay();
                 return new Response(JSON.stringify({ error: getErrorMessage('RATE_LIMITED', requestLocale) }), {
@@ -607,7 +607,7 @@ export async function handleConfirmDelete(request, env, locale = 'en') {
         // Compute hash over the exact provided token (no sanitization) to match stored hash
         computedHash = await hashDeletionToken(deletionToken);
         if (!constantTimeCompare(computedHash, row.deletion_token_hash)) {
-            const rate = await recordKvFailureAndCheckLimit(request, env, { prefix: 'delFail', allowedFailures: 2, windowSeconds: 60, sliding: true });
+            const rate = await recordKvFailureAndCheckLimit(request, env, { prefix: 'delFail', allowedFailures: 2, windowSeconds: 600, sliding: true });
             if (rate.limited) {
                 await uniformResponseDelay();
                 return new Response(JSON.stringify({ error: getErrorMessage('RATE_LIMITED', requestLocale) }), {
