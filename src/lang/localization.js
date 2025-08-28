@@ -4,6 +4,28 @@
 
 import { TRANSLATIONS } from './translations.js';
 
+// Hardened, null-prototype, frozen translation tables to avoid prototype pollution
+// and generic object injection concerns when performing dynamic property lookups.
+// We only copy keys that match the allowed pattern; values are coerced to strings.
+const SAFE_TRANSLATIONS = (() => {
+  const out = Object.create(null);
+  if (TRANSLATIONS && typeof TRANSLATIONS === 'object') {
+    for (const localeCode of Object.keys(TRANSLATIONS)) {
+      const src = TRANSLATIONS[localeCode] || {};
+      const clean = Object.create(null);
+      for (const k of Object.keys(src)) {
+        if (/^[a-zA-Z0-9_.]+$/.test(k)) {
+          // Coerce to string to avoid leaking objects/functions into templates
+          const v = src[k];
+          clean[k] = (v === null || v === undefined) ? '' : String(v);
+        }
+      }
+      out[localeCode] = Object.freeze(clean);
+    }
+  }
+  return Object.freeze(out);
+})();
+
 const SUPPORTED_LOCALES = ['ar', 'bn', 'cs', 'da', 'de', 'el', 'en', 'es', 'fi', 'fr', 'hi', 'hu', 'id', 'it', 'ja', 'ko', 'nl', 'no', 'pl', 'ptBR', 'ptPT', 'ru', 'ro', 'sv', 'tl', 'th', 'tr', 'uk', 'vi', 'zh'];
 const DEFAULT_LOCALE = 'en';
 
@@ -223,17 +245,19 @@ export function t(key, locale = DEFAULT_LOCALE) {
   if (!isValidKey) {
     return key;
   }
+  // Ensure locale is one we explicitly support; otherwise use default.
+  const safeLocale = isLocaleSupported(locale) ? locale : DEFAULT_LOCALE;
 
-  // Use safe hasOwnProperty checks when accessing translation objects
-  if (TRANSLATIONS[locale] && Object.prototype.hasOwnProperty.call(TRANSLATIONS[locale], key)) {
-    return TRANSLATIONS[locale][key];
+  const primaryTable = SAFE_TRANSLATIONS[safeLocale];
+  if (primaryTable && Object.prototype.hasOwnProperty.call(primaryTable, key)) {
+    return primaryTable[key];
   }
-
-  // Fallback to default locale
-  if (locale !== DEFAULT_LOCALE && TRANSLATIONS[DEFAULT_LOCALE] && Object.prototype.hasOwnProperty.call(TRANSLATIONS[DEFAULT_LOCALE], key)) {
-    return TRANSLATIONS[DEFAULT_LOCALE][key];
+  // Fallback to default locale if different
+  if (safeLocale !== DEFAULT_LOCALE) {
+    const fallbackTable = SAFE_TRANSLATIONS[DEFAULT_LOCALE];
+    if (fallbackTable && Object.prototype.hasOwnProperty.call(fallbackTable, key)) {
+      return fallbackTable[key];
+    }
   }
-
-  // Return key if no translation found
-  return key;
+  return key; // No translation found
 }
