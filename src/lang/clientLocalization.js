@@ -196,12 +196,33 @@ export function getClientLocalizationJS(locale = 'en') {
     }
     return clean;
   };
+  /**
+   * Resolve a safe locale key strictly from the supported locales list.
+   * This prevents prototype pollution or object injection through crafted keys.
+   * @param {string} loc Candidate locale
+   * @returns {string} Whitelisted locale
+   */
+  const resolveSafeLocale = (loc) => {
+    // Double validation: ensure string & exact match in supported locales
+    if (typeof loc !== 'string') return 'en';
+    const supported = getSupportedLocales();
+    return supported.includes(loc) ? loc : 'en';
+  };
 
-  const primaryTable = sanitize(Object.prototype.hasOwnProperty.call(TRANSLATIONS, locale) ? TRANSLATIONS[locale] : TRANSLATIONS['en']);
-  const fallbackTable = (locale !== 'en' && Object.prototype.hasOwnProperty.call(TRANSLATIONS, 'en')) ? sanitize(TRANSLATIONS['en']) : null;
+  const safeLocale = resolveSafeLocale(locale);
+
+  // Safe guarded access: only proceed if safeLocale is own property and value is an object
+  const baseTable = (
+    Object.prototype.hasOwnProperty.call(TRANSLATIONS, safeLocale) &&
+    TRANSLATIONS[safeLocale] && typeof TRANSLATIONS[safeLocale] === 'object'
+  ) ? TRANSLATIONS[safeLocale] : TRANSLATIONS['en'];
+
+  const primaryTable = sanitize(baseTable);
+  const fallbackTable = (safeLocale !== 'en' && Object.prototype.hasOwnProperty.call(TRANSLATIONS, 'en')) ? sanitize(TRANSLATIONS['en']) : null;
 
   // Build the minimal translations object (stringified) with only allowlisted keys.
-  const translationsObj = fallbackTable ? { [locale]: primaryTable, en: fallbackTable } : { [locale]: primaryTable };
+  // Build translations object using validated safeLocale only.
+  const translationsObj = fallbackTable ? { [safeLocale]: primaryTable, en: fallbackTable } : { [safeLocale]: primaryTable };
   const translationsString = JSON.stringify(translationsObj);
   const supportedLocalesString = JSON.stringify(getSupportedLocales());
   
