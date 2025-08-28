@@ -247,7 +247,14 @@ body {
   background: #5a6fd8;
 }
 
-/* Removed unused selectors: .auth-links, .user-links */
+/* Flag emoji styles for cross-platform compatibility */
+.flag-emoji {
+  font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", "Android Emoji", "EmojiSymbols", "EmojiOne Mozilla", "Twemoji Mozilla", "Segoe UI", sans-serif;
+  font-variant-emoji: emoji;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
 
 /* Main content */
 .main-content {
