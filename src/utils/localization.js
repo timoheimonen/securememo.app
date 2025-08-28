@@ -74,15 +74,19 @@ export function buildLocalizedPath(locale, path) {
 }
 
 /**
- * Get locale-aware canonical URL
- * @param {string} baseUrl - Base URL (e.g., 'https://securememo.app')
- * @param {string} locale - Locale code
- * @param {string} path - Path without locale
- * @returns {string} - Full canonical URL
+ * Check if a redirect to localized path is needed
+ * @param {string} pathname - Current pathname
+ * @returns {string|null} - Redirect path if needed, null otherwise
  */
-export function getCanonicalUrl(baseUrl, locale, path) {
-  const localizedPath = buildLocalizedPath(locale, path);
-  return baseUrl + localizedPath;
+export function getLocaleRedirectPath(pathname) {
+  const { locale, pathWithoutLocale } = extractLocaleFromPath(pathname);
+  
+  // If no locale detected in URL, redirect to default locale
+  if (pathname === pathWithoutLocale) {
+    return buildLocalizedPath(DEFAULT_LOCALE, pathname);
+  }
+  
+  return null;
 }
 
 /**
