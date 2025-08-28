@@ -35,6 +35,20 @@ export async function recordKvFailureAndCheckLimit(request, env, {
   allowedFailures = 2,
   sliding = true
 } = {}) {
+  // Input validation
+  if (typeof windowSeconds !== 'number' || windowSeconds <= 0) {
+    throw new Error('windowSeconds must be a positive number');
+  }
+  if (typeof allowedFailures !== 'number' || allowedFailures < 0) {
+    throw new Error('allowedFailures must be a non-negative number');
+  }
+  if (typeof prefix !== 'string') {
+    throw new Error('prefix must be a string');
+  }
+  if (typeof sliding !== 'boolean') {
+    throw new Error('sliding must be a boolean');
+  }
+
   try {
     if (!env || !env.KV) return { limited: false, count: 0, remaining: allowedFailures };
     const rawIp = request.headers.get('CF-Connecting-IP') || 'unknown';
