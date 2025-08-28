@@ -135,9 +135,9 @@ export async function handleCreateMemo(request, env) {
     let sanitizedEncryptedMessage; // declare up-front so we can wipe in finally
     let deletionTokenHash; // shadow for wiping
     let requestData; // for wiping fields post-use
+    // Extract requestLocale from request headers/query for better UX
+    const requestLocale = extractLocaleFromRequest(request);
     try {
-        // Extract requestLocale from request headers/query for better UX
-        const requestLocale = extractLocaleFromRequest(request);
 
         // Validate request method
         if (request.method !== 'POST') {
