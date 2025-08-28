@@ -214,15 +214,26 @@ export function extractLocaleFromRequest(request) {
  * @returns {string} Translated text or key if translation not found
  */
 export function t(key, locale = DEFAULT_LOCALE) {
-  if (TRANSLATIONS[locale] && TRANSLATIONS[locale][key]) {
+  // Validate translation key to avoid object injection/prototype access
+  // Allow alphanumeric, dots and underscores and reasonable length
+  const isValidKey = typeof key === 'string' && /^[a-zA-Z0-9_.]+$/.test(key) &&
+                     !key.includes('__proto__') && !key.includes('constructor') && !key.includes('prototype') &&
+                     key.length <= 100;
+
+  if (!isValidKey) {
+    return key;
+  }
+
+  // Use safe hasOwnProperty checks when accessing translation objects
+  if (TRANSLATIONS[locale] && Object.prototype.hasOwnProperty.call(TRANSLATIONS[locale], key)) {
     return TRANSLATIONS[locale][key];
   }
-  
+
   // Fallback to default locale
-  if (locale !== DEFAULT_LOCALE && TRANSLATIONS[DEFAULT_LOCALE] && TRANSLATIONS[DEFAULT_LOCALE][key]) {
+  if (locale !== DEFAULT_LOCALE && TRANSLATIONS[DEFAULT_LOCALE] && Object.prototype.hasOwnProperty.call(TRANSLATIONS[DEFAULT_LOCALE], key)) {
     return TRANSLATIONS[DEFAULT_LOCALE][key];
   }
-  
+
   // Return key if no translation found
   return key;
 }
