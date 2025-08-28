@@ -5,7 +5,9 @@ export function getCreateMemoJS() {
 // Turnstile site key - injected by server
 const TURNSTILE_SITE_KEY = '{{TURNSTILE_SITE_KEY}}';
 let turnstileRendered = false;
+let turnstileWidgetId = null;
 let pendingSubmitEvent = null;
+let turnstileWidgetId = null;
 
 function highlightCurrentPage() {
     const currentPath = window.location.pathname;
@@ -46,15 +48,14 @@ function renderTurnstileIfNeeded(callback) {
         return;
     }
     try {
-        turnstile.render(container, {
+    turnstileWidgetId = turnstile.render(container, {
             sitekey: TURNSTILE_SITE_KEY,
             callback: function() {
-                turnstileRendered = true;
+        turnstileRendered = true;
                 hideTurnstileOverlay();
                 callback();
             }
         });
-        turnstileRendered = true; // prevent double
     } catch (e) {
         callback(e);
     }
@@ -76,9 +77,13 @@ function hideTurnstileOverlay() {
 
 // Get Turnstile response safely
 function getTurnstileResponse() {
-    if (typeof turnstile !== 'undefined' && turnstile.getResponse) {
-        const response = turnstile.getResponse();
-        return response;
+    if (typeof turnstile !== 'undefined' && turnstile.getResponse && turnstileWidgetId !== null) {
+        try {
+            const response = turnstile.getResponse(turnstileWidgetId);
+            return response;
+        } catch (e) {
+            return null;
+        }
     }
     return null;
 }
@@ -511,7 +516,7 @@ function renderTurnstileIfNeeded(callback) {
     const container = document.getElementById('dynamicTurnstileContainer');
     if (!container) { callback(new Error('container_missing')); return; }
     try {
-        turnstile.render(container, {
+    turnstileWidgetId = turnstile.render(container, {
             sitekey: TURNSTILE_SITE_KEY,
             callback: function() {
                 turnstileRendered = true;
@@ -519,7 +524,6 @@ function renderTurnstileIfNeeded(callback) {
                 callback();
             }
         });
-        turnstileRendered = true;
     } catch (e) { callback(e); }
 }
 
@@ -539,9 +543,12 @@ function hideTurnstileOverlay() {
 
 // Get Turnstile response safely
 function getTurnstileResponse() {
-    if (typeof turnstile !== 'undefined' && turnstile.getResponse) {
-        const response = turnstile.getResponse();
-        return response;
+    if (typeof turnstile !== 'undefined' && turnstile.getResponse && turnstileWidgetId !== null) {
+        try {
+            return turnstile.getResponse(turnstileWidgetId);
+        } catch (e) {
+            return null;
+        }
     }
     return null;
 }
