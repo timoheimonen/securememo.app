@@ -49,7 +49,7 @@ import {
 import { getClientLocalizationJS } from './utils/clientLocalization.js';
 
 // Immutable asset version for cache-busting (bump on asset changes)
-const ASSET_VERSION = '20250828d';
+const ASSET_VERSION = '20250828e';
 
 // Tiny, safe JS minifier for generated strings (removes comments and trims/collapses intra-line whitespace)
 function minifyJS(code) {
