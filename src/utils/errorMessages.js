@@ -2,7 +2,7 @@
 // SECURITY: Generic error messages prevent information leakage and enumeration attacks
 // LOCALIZATION: Integrated with localization system - error messages now support multiple locales
 
-import { t, isLocaleSupported } from './localization.js';
+import { t, isLocaleSupported } from '../lang/localization.js';
 
 /**
  * Error message mapping by error code

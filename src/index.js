@@ -1,5 +1,5 @@
 import { getStyles } from './styles/styles.js';
-import { getSupportedLocales } from './utils/localization.js';
+import { getSupportedLocales } from './lang/localization.js';
 
 /**
  * Escape a string for safe injection into JavaScript string literals
@@ -45,11 +45,11 @@ import {
   t,
   extractLocaleFromRequest,
   getDefaultLocale
-} from './utils/localization.js';
-import { getClientLocalizationJS } from './utils/clientLocalization.js';
+} from './lang/localization.js';
+import { getClientLocalizationJS } from './lang/clientLocalization.js';
 
 // Immutable asset version for cache-busting (bump on asset changes)
-const ASSET_VERSION = '20250828g';
+const ASSET_VERSION = '20250828h';
 
 // Tiny, safe JS minifier for generated strings (removes comments and trims/collapses intra-line whitespace)
 function minifyJS(code) {
