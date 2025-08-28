@@ -9,7 +9,6 @@ import {
 import { getErrorMessage, getMemoAccessDeniedMessage } from '../utils/errorMessages.js';
 import { uniformResponseDelay, constantTimeCompare } from '../utils/timingSecurity.js';
 import { extractLocaleFromRequest } from '../utils/localization.js';
-// import { checkRateLimit } from '../utils/rateLimiter.js'; //Ratelimiting disabled for now in here, enabled in WAF.
 import { recordKvFailureAndCheckLimit } from '../utils/rateLimiter.js';
 
 // Maximum allowed JSON request body size in bytes (defense-in-depth against large payload DoS)
@@ -139,19 +138,6 @@ export async function handleCreateMemo(request, env, locale = 'en') {
     try {
         // Extract requestLocale from request headers/query for better UX
         const requestLocale = extractLocaleFromRequest(request);
-        // (future) Rate limiting placeholder
-        /*
-        const rate = await checkRateLimit(request, env);
-        if (rate.limit && !rate.limit.isAllowed) {
-            return new Response(JSON.stringify({ error: 'Rate limit exceeded. Try again later.' }), {
-                status: 429,
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Retry-After': Math.max(0, Math.ceil((rate.limit.reset - Date.now()) / 1000)).toString()
-                }
-            });
-        }
-        */
 
         // Validate request method
         if (request.method !== 'POST') {
@@ -368,19 +354,6 @@ export async function handleReadMemo(request, env, locale = 'en') {
     try {
         // Extract requestLocale from request headers/query for better UX
         const requestLocale = extractLocaleFromRequest(request);
-        // (future) Rate limiting placeholder
-        /*
-        const rate = await checkRateLimit(request, env);
-        if (rate.limit && !rate.limit.isAllowed) {
-            return new Response(JSON.stringify({ error: 'Rate limit exceeded. Try again later.' }), {
-                status: 429,
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Retry-After': Math.max(0, Math.ceil((rate.limit.reset - Date.now()) / 1000)).toString()
-                }
-            });
-        }
-        */
 
         // Validate request method
         if (request.method !== 'POST') {
@@ -546,20 +519,6 @@ export async function handleConfirmDelete(request, env, locale = 'en') {
     try {
         // Extract requestLocale from request headers/query for better UX
         const requestLocale = extractLocaleFromRequest(request);
-        // (future) Rate limiting placeholder
-        /*
-        const rate = await checkRateLimit(request, env);
-        if (rate.limit && !rate.limit.isAllowed) {
-            return new Response(JSON.stringify({ error: 'Rate limit exceeded. Try again later.' }), {
-                status: 429,
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Retry-After': Math.max(0, Math.ceil((rate.limit.reset - Date.now()) / 1000)).toString()
-                }
-            });
-        }
-        */
-
         // Validate request method
         if (request.method !== 'POST') {
             return delayedJsonError({ error: getErrorMessage('METHOD_NOT_ALLOWED', requestLocale) }, 405, { 'Allow': 'POST' });
