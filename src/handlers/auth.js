@@ -4,7 +4,8 @@ import {
     validateExpiryHours,
     validatePassword,
     sanitizeForHTML,
-    normalizeCiphertextForResponse
+    normalizeCiphertextForResponse,
+    sanitizeLocale
 } from '../utils/validation.js';
 import { getErrorMessage, getMemoAccessDeniedMessage } from '../utils/errorMessages.js';
 import { uniformResponseDelay, constantTimeCompare } from '../utils/timingSecurity.js';
@@ -91,6 +92,7 @@ function calculateExpiryTime(expiryHours) {
 
 // Generate cryptographically secure random 40-char memo ID with collision detection
 async function generateMemoId(env, maxRetries = 10, locale = 'en') {
+    const sanitizedLocale = sanitizeLocale(locale);
     const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_';
 
     for (let attempt = 0; attempt < maxRetries; attempt++) {
@@ -126,7 +128,7 @@ async function generateMemoId(env, maxRetries = 10, locale = 'en') {
     }
 
     // If we've exhausted all retries, throw an error
-    throw new Error(getErrorMessage('MEMO_ID_GENERATION_MAX_RETRIES', locale));
+    throw new Error(getErrorMessage('MEMO_ID_GENERATION_MAX_RETRIES', sanitizedLocale));
 }
 
 // Create new memo with validation and Turnstile verification
@@ -136,7 +138,7 @@ export async function handleCreateMemo(request, env) {
     let deletionTokenHash; // shadow for wiping
     let requestData; // for wiping fields post-use
     // Extract requestLocale from request headers/query for better UX
-    const requestLocale = extractLocaleFromRequest(request);
+    const requestLocale = sanitizeLocale(extractLocaleFromRequest(request));
     try {
 
         // Validate request method

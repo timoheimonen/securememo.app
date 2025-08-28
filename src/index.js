@@ -47,9 +47,10 @@ import {
   getDefaultLocale
 } from './lang/localization.js';
 import { getClientLocalizationJS } from './lang/clientLocalization.js';
+import { sanitizeLocale } from './utils/validation.js';
 
 // Immutable asset version for cache-busting (bump on asset changes)
-const ASSET_VERSION = '20250828s';
+const ASSET_VERSION = '20250828u2';
 
 // Tiny, safe JS minifier for generated strings (removes comments and trims/collapses intra-line whitespace)
 function minifyJS(code) {
@@ -246,7 +247,7 @@ export default {
 
       if (!isStaticAsset) {
         const localeResult = extractLocaleFromPath(pathname);
-        locale = localeResult.locale;
+        locale = sanitizeLocale(localeResult.locale);
         pathWithoutLocale = localeResult.pathWithoutLocale;
 
         // Check for nested locale patterns and redirect to normalized path

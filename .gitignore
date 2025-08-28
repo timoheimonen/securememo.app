@@ -131,3 +131,4 @@ src/schemas/create-memo.openapi.yaml
 .github/instructions/codacy.instructions.md
 .codacy/codacy.yaml
 .eslintrc.js
+.codacy/cli.sh

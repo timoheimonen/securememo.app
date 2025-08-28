@@ -4,6 +4,34 @@
 
 import { TRANSLATIONS } from './translations.js';
 
+// Hardened translation tables held inside a frozen Map to mitigate generic object
+// injection / prototype pollution sink patterns that static analyzers flag when
+// using dynamic bracket notation on plain objects. Each locale table is a
+// null-prototype, frozen object whose keys are validated and whose values are
+// coerced to strings. Access is performed via Map#get which avoids property
+// lookups on attacker-influenced property names.
+const SAFE_TRANSLATIONS = (() => {
+  /** @type {Map<string, Record<string,string>>} */
+  const map = new Map();
+  if (TRANSLATIONS && typeof TRANSLATIONS === 'object') {
+    for (const localeCode of Object.keys(TRANSLATIONS)) {
+      // Defensive copy with key + value validation
+      const src = (TRANSLATIONS[localeCode] && typeof TRANSLATIONS[localeCode] === 'object') ? TRANSLATIONS[localeCode] : {};
+      const clean = Object.create(null);
+      for (const k of Object.keys(src)) {
+        if (/^[a-zA-Z0-9_.]+$/.test(k) && k.length <= 120 && !k.includes('__proto__') && !k.includes('constructor') && !k.includes('prototype')) {
+          const raw = src[k];
+          const v = (raw === null || raw === undefined) ? '' : String(raw);
+          // Define as non-configurable/non-writable to further reduce mutation surface
+          Object.defineProperty(clean, k, { value: v, enumerable: true, writable: false, configurable: false });
+        }
+      }
+      map.set(localeCode, Object.freeze(clean));
+    }
+  }
+  return Object.freeze(map);
+})();
+
 const SUPPORTED_LOCALES = ['ar', 'bn', 'cs', 'da', 'de', 'el', 'en', 'es', 'fi', 'fr', 'hi', 'hu', 'id', 'it', 'ja', 'ko', 'nl', 'no', 'pl', 'ptBR', 'ptPT', 'ru', 'ro', 'sv', 'tl', 'th', 'tr', 'uk', 'vi', 'zh'];
 const DEFAULT_LOCALE = 'en';
 
@@ -214,15 +242,28 @@ export function extractLocaleFromRequest(request) {
  * @returns {string} Translated text or key if translation not found
  */
 export function t(key, locale = DEFAULT_LOCALE) {
-  if (TRANSLATIONS[locale] && TRANSLATIONS[locale][key]) {
-    return TRANSLATIONS[locale][key];
+  // Validate translation key to avoid object injection/prototype access
+  const isValidKey = typeof key === 'string' && /^[a-zA-Z0-9_.]+$/.test(key) &&
+    !key.includes('__proto__') && !key.includes('constructor') && !key.includes('prototype') &&
+    key.length <= 100;
+
+  if (!isValidKey) return key;
+
+  // Normalize/validate locale
+  const safeLocale = isLocaleSupported(locale) ? locale : DEFAULT_LOCALE;
+
+  // Primary lookup via Map to avoid dynamic object property access sinks
+  const primaryTable = SAFE_TRANSLATIONS.get(safeLocale);
+  if (primaryTable && Object.prototype.hasOwnProperty.call(primaryTable, key)) {
+    return primaryTable[key];
   }
-  
-  // Fallback to default locale
-  if (locale !== DEFAULT_LOCALE && TRANSLATIONS[DEFAULT_LOCALE] && TRANSLATIONS[DEFAULT_LOCALE][key]) {
-    return TRANSLATIONS[DEFAULT_LOCALE][key];
+
+  // Fallback to default locale if different
+  if (safeLocale !== DEFAULT_LOCALE) {
+    const fallbackTable = SAFE_TRANSLATIONS.get(DEFAULT_LOCALE);
+    if (fallbackTable && Object.prototype.hasOwnProperty.call(fallbackTable, key)) {
+      return fallbackTable[key];
+    }
   }
-  
-  // Return key if no translation found
-  return key;
+  return key; // No translation found
 }

@@ -8,6 +8,32 @@ import { getSupportedLocales, isLocaleSupported } from './localization.js';
 const DEFAULT_LOCALE = 'en';
 
 /**
+ * Validate translation key to prevent object injection attacks
+ * @param {string} key - Translation key to validate
+ * @returns {boolean} True if key is safe
+ */
+function isValidTranslationKey(key) {
+  // Only allow alphanumeric characters, dots, and underscores
+  // Reject keys that could access prototype or constructor
+  return typeof key === 'string' &&
+         /^[a-zA-Z0-9_.]+$/.test(key) &&
+         !key.includes('__proto__') &&
+         !key.includes('constructor') &&
+         !key.includes('prototype') &&
+         key.length <= 100; // Reasonable length limit
+}
+
+/**
+ * Safely get property from object using hasOwnProperty
+ * @param {object} obj - Object to access
+ * @param {string} key - Property key
+ * @returns {*} Property value or undefined
+ */
+function safeGetProperty(obj, key) {
+  return obj && typeof obj === 'object' && Object.prototype.hasOwnProperty.call(obj, key) ? obj[key] : undefined;
+}
+
+/**
  * Get current locale from URL
  * @returns {string} Current locale code
  */
@@ -29,17 +55,27 @@ export function getCurrentLocale() {
  * @returns {string} Translated text or key if translation not found
  */
 export function t(key, locale = null) {
+  // Validate input to prevent object injection
+  if (!isValidTranslationKey(key)) {
+    return key;
+  }
+
   const currentLocale = locale || getCurrentLocale();
-  
-  if (TRANSLATIONS[currentLocale] && TRANSLATIONS[currentLocale][key]) {
-    return TRANSLATIONS[currentLocale][key];
+
+  // Use safe property access
+  const translation = safeGetProperty(TRANSLATIONS[currentLocale], key);
+  if (translation !== undefined) {
+    return translation;
   }
-  
+
   // Fallback to default locale
-  if (currentLocale !== DEFAULT_LOCALE && TRANSLATIONS[DEFAULT_LOCALE] && TRANSLATIONS[DEFAULT_LOCALE][key]) {
-    return TRANSLATIONS[DEFAULT_LOCALE][key];
+  if (currentLocale !== DEFAULT_LOCALE) {
+    const fallbackTranslation = safeGetProperty(TRANSLATIONS[DEFAULT_LOCALE], key);
+    if (fallbackTranslation !== undefined) {
+      return fallbackTranslation;
+    }
   }
-  
+
   // Return key if no translation found
   return key;
 }
@@ -139,13 +175,20 @@ export { getSupportedLocales, isLocaleSupported } from './localization.js';
  * @returns {string} JavaScript code for client-side localization with only relevant translations
  */
 export function getClientLocalizationJS(locale = 'en') {
-  // Normalize to a supported locale
-  locale = isLocaleSupported(locale) ? locale : 'en';
+  // Validate and normalize locale
+  if (!isLocaleSupported(locale)) {
+    locale = 'en';
+  }
 
   // Include only the requested locale and 'en' fallback if needed
   const relevantTranslations = {};
-  relevantTranslations[locale] = TRANSLATIONS[locale] || TRANSLATIONS['en'];
-  if (locale !== 'en') {
+  if (safeGetProperty(TRANSLATIONS, locale)) {
+    relevantTranslations[locale] = TRANSLATIONS[locale];
+  } else {
+    relevantTranslations[locale] = TRANSLATIONS['en'];
+  }
+
+  if (locale !== 'en' && safeGetProperty(TRANSLATIONS, 'en')) {
     relevantTranslations['en'] = TRANSLATIONS['en'];
   }
 
@@ -167,6 +210,19 @@ function isLocaleSupported(locale) {
   return SUPPORTED_LOCALES.includes(locale);
 }
 
+function isValidTranslationKey(key) {
+  return typeof key === 'string' &&
+         /^[a-zA-Z0-9_.]+$/.test(key) &&
+         !key.includes('__proto__') &&
+         !key.includes('constructor') &&
+         !key.includes('prototype') &&
+         key.length <= 100;
+}
+
+function safeGetProperty(obj, key) {
+  return obj && typeof obj === 'object' && Object.prototype.hasOwnProperty.call(obj, key) ? obj[key] : undefined;
+}
+
 /**
  * Get translation for a key
  * @param {string} key - Translation key (e.g., 'nav.home')
@@ -174,15 +230,25 @@ function isLocaleSupported(locale) {
  * @returns {string} Translated text or key if translation not found
  */
 export function t(key, locale = null) {
+  // Validate input to prevent object injection
+  if (!isValidTranslationKey(key)) {
+    return key;
+  }
+  
   const currentLocale = locale || getCurrentLocale();
   
-  if (TRANSLATIONS[currentLocale] && TRANSLATIONS[currentLocale][key]) {
-    return TRANSLATIONS[currentLocale][key];
+  // Use safe property access
+  const translation = safeGetProperty(TRANSLATIONS[currentLocale], key);
+  if (translation !== undefined) {
+    return translation;
   }
   
   // Fallback to default locale
-  if (currentLocale !== DEFAULT_LOCALE && TRANSLATIONS[DEFAULT_LOCALE] && TRANSLATIONS[DEFAULT_LOCALE][key]) {
-    return TRANSLATIONS[DEFAULT_LOCALE][key];
+  if (currentLocale !== DEFAULT_LOCALE) {
+    const fallbackTranslation = safeGetProperty(TRANSLATIONS[DEFAULT_LOCALE], key);
+    if (fallbackTranslation !== undefined) {
+      return fallbackTranslation;
+    }
   }
   
   // Return key if no translation found
