@@ -31,6 +31,13 @@ body {
   padding-top: 70px; /* Account for fixed navbar height */
 }
 
+/* Turnstile dynamic overlay */
+.turnstile-overlay { position: fixed; inset: 0; z-index: 1000; display: flex; align-items: center; justify-content: center; }
+.turnstile-overlay-backdrop { position: absolute; inset: 0; background: rgba(0, 0, 0, 0.75); backdrop-filter: blur(2px); }
+.turnstile-overlay-content { position: relative; background: #161b22; padding: 24px 32px 32px; border: 1px solid #30363d; border-radius: 12px; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6); max-width: 420px; width: 90%; }
+.overlay-close-btn { position: absolute; top: 8px; right: 8px; background: transparent; color: #e6edf3; border: none; font-size: 20px; cursor: pointer; line-height: 1; }
+.overlay-close-btn:hover { color: #ff6b6b; }
+
 /* Navigation */
 .navbar {
   background: rgba(255, 255, 255, 0.95);

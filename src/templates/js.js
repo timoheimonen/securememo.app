@@ -4,6 +4,8 @@ export function getCreateMemoJS() {
     return `
 // Turnstile site key - injected by server
 const TURNSTILE_SITE_KEY = '{{TURNSTILE_SITE_KEY}}';
+let turnstileRendered = false;
+let pendingSubmitEvent = null;
 
 function highlightCurrentPage() {
     const currentPath = window.location.pathname;
@@ -17,9 +19,59 @@ function highlightCurrentPage() {
     });
 }
 
-// Init Turnstile widget
-function initTurnstile() {
-    // Turnstile widget auto-initialized with data-sitekey attribute
+// Dynamic Turnstile rendering on-demand
+function renderTurnstileIfNeeded(callback) {
+    if (typeof turnstile === 'undefined') {
+        // Script may still be loading; poll briefly
+        let attempts = 0;
+        const iv = setInterval(() => {
+            attempts++;
+            if (typeof turnstile !== 'undefined') {
+                clearInterval(iv);
+                renderTurnstileIfNeeded(callback);
+            } else if (attempts > 40) { // ~4s
+                clearInterval(iv);
+                callback(new Error('turnstile_unavailable'));
+            }
+        }, 100);
+        return;
+    }
+    if (turnstileRendered) {
+        callback();
+        return;
+    }
+    const container = document.getElementById('dynamicTurnstileContainer');
+    if (!container) {
+        callback(new Error('container_missing'));
+        return;
+    }
+    try {
+        turnstile.render(container, {
+            sitekey: TURNSTILE_SITE_KEY,
+            callback: function() {
+                turnstileRendered = true;
+                hideTurnstileOverlay();
+                callback();
+            }
+        });
+        turnstileRendered = true; // prevent double
+    } catch (e) {
+        callback(e);
+    }
+}
+
+function showTurnstileOverlay(onReady) {
+    const overlay = document.getElementById('turnstileOverlay');
+    if (!overlay) { onReady(new Error('overlay_missing')); return; }
+    overlay.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+    renderTurnstileIfNeeded(onReady);
+}
+
+function hideTurnstileOverlay() {
+    const overlay = document.getElementById('turnstileOverlay');
+    if (overlay) overlay.style.display = 'none';
+    document.body.style.overflow = '';
 }
 
 // Get Turnstile response safely
@@ -41,7 +93,6 @@ function resetTurnstile() {
 // Init page state
 function initializePage() {
     highlightCurrentPage();
-    initTurnstile();
     
     // Hide result section by default
     const resultSection = document.getElementById('result');
@@ -159,8 +210,18 @@ async function encryptMessage(payload, password) {
 }
 
 // Handle form submission
+document.getElementById('closeTurnstileOverlay')?.addEventListener('click', () => {
+    hideTurnstileOverlay();
+    if (pendingSubmitEvent) {
+        const submitButton = document.getElementById('submitButton');
+        if (submitButton) submitButton.disabled = false;
+        pendingSubmitEvent = null;
+    }
+});
+
 document.getElementById('memoForm').addEventListener('submit', async (e) => {
     e.preventDefault();
+    pendingSubmitEvent = e;
     
     const message = document.getElementById('message').value.trim();
     const expiryHours = parseInt(document.getElementById('expiryHours').value);
@@ -175,11 +236,31 @@ document.getElementById('memoForm').addEventListener('submit', async (e) => {
         return;
     }
     
-    // Validate Turnstile completion
-    const turnstileResponse = getTurnstileResponse();
-    
+    // Ensure Turnstile solved before proceeding
+    let turnstileResponse = getTurnstileResponse();
     if (!turnstileResponse) {
-        showMessage('{{MISSING_SECURITY_CHALLENGE_ERROR}}', 'error');
+        // Show overlay and render
+        const submitButton = document.getElementById('submitButton');
+        if (submitButton) submitButton.disabled = true;
+        showTurnstileOverlay((err) => {
+            if (err) {
+                showMessage('{{MISSING_SECURITY_CHALLENGE_ERROR}}', 'error');
+                const submitButton2 = document.getElementById('submitButton');
+                if (submitButton2) submitButton2.disabled = false;
+                pendingSubmitEvent = null;
+                return;
+            }
+            // After solved re-trigger submit programmatically
+            turnstileResponse = getTurnstileResponse();
+            if (!turnstileResponse) {
+                showMessage('{{MISSING_SECURITY_CHALLENGE_ERROR}}', 'error');
+                const submitButton3 = document.getElementById('submitButton');
+                if (submitButton3) submitButton3.disabled = false;
+                pendingSubmitEvent = null;
+                return;
+            }
+            document.getElementById('memoForm').dispatchEvent(new Event('submit'));
+        });
         return;
     }
     
@@ -237,8 +318,8 @@ document.getElementById('memoForm').addEventListener('submit', async (e) => {
             // Clear form
             document.getElementById('message').value = '';
             
-            // Reset Turnstile only on success
-            resetTurnstile();
+        // Reset Turnstile only on success
+        resetTurnstile();
         } else {
             // Handle rate limiting specifically
             if (response.status === 429) {
@@ -364,6 +445,7 @@ export function getReadMemoJS() {
     return `
 // Turnstile site key - injected by server
 const TURNSTILE_SITE_KEY = '{{TURNSTILE_SITE_KEY}}';
+let turnstileRendered = false;
 
 // Error messages - injected by server
 const ERROR_MESSAGES = {
@@ -409,9 +491,50 @@ function highlightCurrentPage() {
     });
 }
 
-// Init Turnstile widget
-function initTurnstile() {
-    // Auto-init via data-sitekey attribute (explicit render removed to avoid duplicate widget)
+// Dynamic Turnstile rendering on-demand
+function renderTurnstileIfNeeded(callback) {
+    if (typeof turnstile === 'undefined') {
+        let attempts = 0;
+        const iv = setInterval(() => {
+            attempts++;
+            if (typeof turnstile !== 'undefined') {
+                clearInterval(iv);
+                renderTurnstileIfNeeded(callback);
+            } else if (attempts > 40) { // ~4s
+                clearInterval(iv);
+                callback(new Error('turnstile_unavailable'));
+            }
+        }, 100);
+        return;
+    }
+    if (turnstileRendered) { callback(); return; }
+    const container = document.getElementById('dynamicTurnstileContainer');
+    if (!container) { callback(new Error('container_missing')); return; }
+    try {
+        turnstile.render(container, {
+            sitekey: TURNSTILE_SITE_KEY,
+            callback: function() {
+                turnstileRendered = true;
+                hideTurnstileOverlay();
+                callback();
+            }
+        });
+        turnstileRendered = true;
+    } catch (e) { callback(e); }
+}
+
+function showTurnstileOverlay(onReady) {
+    const overlay = document.getElementById('turnstileOverlay');
+    if (!overlay) { onReady(new Error('overlay_missing')); return; }
+    overlay.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+    renderTurnstileIfNeeded(onReady);
+}
+
+function hideTurnstileOverlay() {
+    const overlay = document.getElementById('turnstileOverlay');
+    if (overlay) overlay.style.display = 'none';
+    document.body.style.overflow = '';
 }
 
 // Get Turnstile response safely
@@ -508,7 +631,6 @@ async function decryptMessage(encryptedData, password) {
 // Init page state
 function initializePage() {
     highlightCurrentPage();
-    initTurnstile();
     
     // Init page sections
     const passwordForm = document.getElementById('passwordForm');
@@ -526,6 +648,31 @@ function initializePage() {
 // Auto-fill password from URL hashtag if available
 window.addEventListener('load', () => {
     initializePage();
+    const closeBtn = document.getElementById('closeTurnstileOverlay');
+    if (closeBtn) {
+        closeBtn.addEventListener('click', () => {
+            hideTurnstileOverlay();
+            const decryptButton = document.getElementById('decryptButton');
+            if (decryptButton) decryptButton.disabled = false;
+        });
+    }
+    const overlay = document.getElementById('turnstileOverlay');
+    if (overlay) {
+        overlay.addEventListener('click', (e) => {
+            if (e.target.classList.contains('turnstile-overlay-backdrop')) {
+                hideTurnstileOverlay();
+                const decryptButton = document.getElementById('decryptButton');
+                if (decryptButton) decryptButton.disabled = false;
+            }
+        });
+    }
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            hideTurnstileOverlay();
+            const decryptButton = document.getElementById('decryptButton');
+            if (decryptButton) decryptButton.disabled = false;
+        }
+    });
     
     const memoId = getMemoId();
     
@@ -554,11 +701,27 @@ window.addEventListener('load', () => {
                 return;
             }
             
-            // Validate Turnstile completion
-            const turnstileResponse = getTurnstileResponse();
-            
+            // Ensure Turnstile solved before proceeding
+            let turnstileResponse = getTurnstileResponse();
             if (!turnstileResponse) {
-                showError(ERROR_MESSAGES.MISSING_SECURITY_CHALLENGE);
+                const decryptButton = document.getElementById('decryptButton');
+                if (decryptButton) decryptButton.disabled = true;
+                showTurnstileOverlay((err) => {
+                    if (err) {
+                        showError(ERROR_MESSAGES.MISSING_SECURITY_CHALLENGE);
+                        const decryptButton2 = document.getElementById('decryptButton');
+                        if (decryptButton2) decryptButton2.disabled = false;
+                        return;
+                    }
+                    turnstileResponse = getTurnstileResponse();
+                    if (!turnstileResponse) {
+                        showError(ERROR_MESSAGES.MISSING_SECURITY_CHALLENGE);
+                        const decryptButton3 = document.getElementById('decryptButton');
+                        if (decryptButton3) decryptButton3.disabled = false;
+                        return;
+                    }
+                    document.getElementById('decryptForm').dispatchEvent(new Event('submit'));
+                });
                 return;
             }
             
