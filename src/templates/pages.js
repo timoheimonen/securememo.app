@@ -907,7 +907,7 @@ export async function getReadMemoHTML(locale = 'en', origin = 'https://securemem
                     </div>
                     <div class="memo-actions">
                         <a href="/${locale}/create-memo.html" class="btn btn-primary">${t('btn.createNew', locale)}</a>
-                        <a href="/${locale}" class="btn btn-secondary">${t('btn.goHome', locale)}</a>
+                        <a href="/${locale}" class="btn btn-primary">${t('btn.goHome', locale)}</a>
                     </div>
                 </div>
                 
@@ -916,7 +916,7 @@ export async function getReadMemoHTML(locale = 'en', origin = 'https://securemem
                     <p id="errorMessage"></p>
                     <div class="memo-actions">
                         <a href="/${locale}/create-memo.html" class="btn btn-primary">${t('btn.createNew', locale)}</a>
-                        <a href="/${locale}" class="btn btn-secondary">${t('btn.goHome', locale)}</a>
+                        <a href="/${locale}" class="btn btn-primary">${t('btn.goHome', locale)}</a>
                     </div>
                 </div>
                 
