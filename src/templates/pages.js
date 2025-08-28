@@ -644,6 +644,13 @@ export async function getCreateMemoHTML(locale = 'en', origin = 'https://securem
             <div class="memo-card">
                 <h1>${t('create.hero.title', locale)}</h1>
                 <p class="memo-description">${t('create.hero.description', locale)}</p>
+                <div id="turnstileOverlay" class="turnstile-overlay" style="display:none;">
+                    <div class="turnstile-overlay-backdrop"></div>
+                    <div class="turnstile-overlay-content" role="dialog" aria-modal="true" aria-label="Security Challenge">
+                        <button type="button" id="closeTurnstileOverlay" class="overlay-close-btn" aria-label="Close">×</button>
+                        <div id="dynamicTurnstileContainer"></div>
+                    </div>
+                </div>
                 
                 <form id="memoForm" class="memo-form">
                     <div class="form-group">
@@ -666,7 +673,6 @@ export async function getCreateMemoHTML(locale = 'en', origin = 'https://securem
                     </div>
                     
                     <div class="form-group">
-                        <div class="cf-turnstile" data-sitekey="{{TURNSTILE_SITE_KEY}}"></div>
                         <small class="form-help">${t('form.security.help', locale)}</small>
                     </div>
                     
@@ -863,6 +869,13 @@ export async function getReadMemoHTML(locale = 'en', origin = 'https://securemem
             <div class="memo-card">
                 <h1>${t('read.hero.title', locale)}</h1>
                 <p class="memo-description">${t('read.hero.description', locale)}</p>
+                <div id="turnstileOverlay" class="turnstile-overlay" style="display:none;">
+                    <div class="turnstile-overlay-backdrop"></div>
+                    <div class="turnstile-overlay-content" role="dialog" aria-modal="true" aria-label="Security Challenge">
+                        <button type="button" id="closeTurnstileOverlay" class="overlay-close-btn" aria-label="Close">×</button>
+                        <div id="dynamicTurnstileContainer"></div>
+                    </div>
+                </div>
                 
                 <div id="passwordForm" class="memo-form">
                     <form id="decryptForm">
@@ -876,7 +889,6 @@ export async function getReadMemoHTML(locale = 'en', origin = 'https://securemem
                             <small class="form-help">${t('form.password.help', locale)}</small>
                         </div>
                         <div class="form-group">
-                            <div class="cf-turnstile" data-sitekey="{{TURNSTILE_SITE_KEY}}"></div>
                             <small class="form-help">${t('form.security.help', locale)}</small>
                         </div>
                         <button type="submit" class="btn btn-primary" id="decryptButton">${t('btn.decrypt', locale)}</button>
