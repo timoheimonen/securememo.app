@@ -135,9 +135,9 @@ export async function handleCreateMemo(request, env) {
     let sanitizedEncryptedMessage; // declare up-front so we can wipe in finally
     let deletionTokenHash; // shadow for wiping
     let requestData; // for wiping fields post-use
+    // Extract requestLocale from request headers/query for better UX
+    const requestLocale = extractLocaleFromRequest(request);
     try {
-        // Extract requestLocale from request headers/query for better UX
-        const requestLocale = extractLocaleFromRequest(request);
 
         // Validate request method
         if (request.method !== 'POST') {
@@ -351,9 +351,9 @@ export async function handleCreateMemo(request, env) {
  * - Prevents information leakage about memo existence, read status, or expiry
  */
 export async function handleReadMemo(request, env) {
+    // Extract requestLocale from request headers/query for better UX
+    const requestLocale = extractLocaleFromRequest(request);
     try {
-        // Extract requestLocale from request headers/query for better UX
-        const requestLocale = extractLocaleFromRequest(request);
 
         // Validate request method
         if (request.method !== 'POST') {
@@ -516,9 +516,9 @@ export async function handleConfirmDelete(request, env) {
     let computedHash; // capture for wipe
     let memoId; // to wipe
     let row; // db row ref
+    // Extract requestLocale from request headers/query for better UX
+    const requestLocale = extractLocaleFromRequest(request);
     try {
-        // Extract requestLocale from request headers/query for better UX
-        const requestLocale = extractLocaleFromRequest(request);
         // Validate request method
         if (request.method !== 'POST') {
             return delayedJsonError({ error: getErrorMessage('METHOD_NOT_ALLOWED', requestLocale) }, 405, { 'Allow': 'POST' });
