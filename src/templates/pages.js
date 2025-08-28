@@ -1,4 +1,4 @@
-import { t } from '../utils/localization.js';
+import { t } from '../lang/localization.js';
 
 // Helper function to get native language name
 function getLanguageDisplayName(locale) {

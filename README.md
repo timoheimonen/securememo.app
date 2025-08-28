@@ -68,45 +68,46 @@ securememo/
     ├── templates/              # HTML and JavaScript templates
     │   ├── js.js               # JavaScript templates (e.g., create/read memo logic)
     │   └── pages.js            # HTML page templates (e.g., index, about, create/read memo)
+    ├── lang/                   # Localization and translation files
+    │   ├── ar_translations.js  # Arabic translations
+    │   ├── bn_translations.js  # Bengali translations
+    │   ├── clientLocalization.js # Client-side localization utilities
+    │   ├── cs_translations.js  # Czech translations
+    │   ├── da_translations.js  # Danish translations
+    │   ├── de_translations.js  # German translations
+    │   ├── el_translations.js  # Greek translations
+    │   ├── en_translations.js  # English translations
+    │   ├── es_translations.js  # Spanish translations
+    │   ├── fi_translations.js  # Finnish translations
+    │   ├── fr_translations.js  # French translations
+    │   ├── hi_translations.js  # Hindi translations
+    │   ├── hu_translations.js  # Hungarian translations
+    │   ├── id_translations.js  # Indonesian translations
+    │   ├── it_translations.js  # Italian translations
+    │   ├── ja_translations.js  # Japanese translations
+    │   ├── ko_translations.js  # Korean translations
+    │   ├── language_names.js   # Language names utility
+    │   ├── localization.js     # Server-side localization utilities
+    │   ├── nl_translations.js  # Dutch translations
+    │   ├── no_translations.js  # Norwegian translations
+    │   ├── pl_translations.js  # Polish translations
+    │   ├── ptBR_translations.js # Portuguese (Brazil) translations
+    │   ├── ptPT_translations.js # Portuguese (Portugal) translations
+    │   ├── ro_translations.js  # Romanian translations
+    │   ├── ru_translations.js  # Russian translations
+    │   ├── sv_translations.js  # Swedish translations
+    │   ├── th_translations.js  # Thai translations
+    │   ├── tl_translations.js  # Tagalog translations
+    │   ├── tr_translations.js  # Turkish translations
+    │   ├── translations.js     # Translation registry
+    │   ├── uk_translations.js  # Ukrainian translations
+    │   ├── vi_translations.js  # Vietnamese translations
+    │   └── zh_translations.js  # Chinese translations
     └── utils/                  # Utility functions
-        ├── ar_translations.js  # Arabic translations
-        ├── bn_translations.js  # Bengali translations
-        ├── clientLocalization.js # Client-side localization utilities
-        ├── cs_translations.js  # Czech translations
-        ├── da_translations.js  # Danish translations
-        ├── de_translations.js  # German translations
-        ├── el_translations.js  # Greek translations
-        ├── en_translations.js  # English translations
         ├── errorMessages.js    # Centralized error handling with generic messages
-        ├── es_translations.js  # Spanish translations
-        ├── fi_translations.js  # Finnish translations
-        ├── fr_translations.js  # French translations
-        ├── hi_translations.js  # Hindi translations
-        ├── hu_translations.js  # Hungarian translations
-        ├── id_translations.js  # Indonesian translations
-        ├── it_translations.js  # Italian translations
-        ├── ja_translations.js  # Japanese translations
-        ├── ko_translations.js  # Korean translations
-        ├── language_names.js   # Language names utility
-        ├── localization.js     # Server-side localization utilities
-        ├── nl_translations.js  # Dutch translations
-        ├── no_translations.js  # Norwegian translations
-        ├── pl_translations.js  # Polish translations
-        ├── ptBR_translations.js # Portuguese (Brazil) translations
-        ├── ptPT_translations.js # Portuguese (Portugal) translations
         ├── rateLimiter.js      # Rate limiting utilities
-        ├── ro_translations.js  # Romanian translations
-        ├── ru_translations.js  # Russian translations
-        ├── sv_translations.js  # Swedish translations
-        ├── th_translations.js  # Thai translations
         ├── timingSecurity.js   # Timing attack protections (e.g., constant-time comparisons, artificial delays)
-        ├── tl_translations.js  # Tagalog translations
-        ├── tr_translations.js  # Turkish translations
-        ├── translations.js     # Translation registry
-        ├── uk_translations.js  # Ukrainian translations
-        ├── validation.js       # Input validation, sanitization, and secure checks
-        ├── vi_translations.js  # Vietnamese translations
-        └── zh_translations.js  # Chinese translations
+        └── validation.js       # Input validation, sanitization, and secure checks
 ```
 
 ## Security
