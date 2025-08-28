@@ -4,7 +4,8 @@ import {
     validateExpiryHours,
     validatePassword,
     sanitizeForHTML,
-    normalizeCiphertextForResponse
+    normalizeCiphertextForResponse,
+    sanitizeLocale
 } from '../utils/validation.js';
 import { getErrorMessage, getMemoAccessDeniedMessage } from '../utils/errorMessages.js';
 import { uniformResponseDelay, constantTimeCompare } from '../utils/timingSecurity.js';
@@ -89,44 +90,38 @@ function calculateExpiryTime(expiryHours) {
     return Math.floor(expiryTime.getTime() / 1000);
 }
 
-// Generate cryptographically secure random 40-char memo ID with collision detection
+/**
+ * Generate cryptographically secure random 40-char memo ID with collision detection.
+ * Returns null instead of throwing on exhaustion to keep error handling unified at call site.
+ * @param {any} env
+ * @param {number} maxRetries
+ * @param {string} locale
+ * @returns {Promise<string|null>}
+ */
 async function generateMemoId(env, maxRetries = 10, locale = 'en') {
     const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_';
-
     for (let attempt = 0; attempt < maxRetries; attempt++) {
         let result = '';
         const biasThreshold = 256 - (256 % chars.length);
-
-        // Use proper rejection sampling to avoid modulo bias
         for (let i = 0; i < 40; i++) {
             let value;
             do {
                 const array = new Uint8Array(1);
                 crypto.getRandomValues(array);
                 value = array[0];
-            } while (value >= biasThreshold); // Reject biased values
-
+            } while (value >= biasThreshold);
             result += chars[value % chars.length];
         }
-
-        // Check if this memo_id already exists in the database
         try {
             const checkStmt = env.DB.prepare('SELECT 1 FROM memos WHERE memo_id = ? LIMIT 1');
             const existing = await checkStmt.bind(result).first();
-
-            if (!existing) {
-                return result; // This memo_id is unique
-            }
-            // If we get here, there was a collision, try again
-        } catch (dbError) {
-            // If database check fails, return the generated ID anyway
-            // The database UNIQUE constraint will handle any collision
+            if (!existing) return result; // unique
+        } catch (_) {
+            // On DB error fall back to optimistic return; UNIQUE constraint will enforce safety
             return result;
         }
     }
-
-    // If we've exhausted all retries, throw an error
-    throw new Error(getErrorMessage('MEMO_ID_GENERATION_MAX_RETRIES', locale));
+    return null; // signal failure
 }
 
 // Create new memo with validation and Turnstile verification
@@ -136,7 +131,7 @@ export async function handleCreateMemo(request, env) {
     let deletionTokenHash; // shadow for wiping
     let requestData; // for wiping fields post-use
     // Extract requestLocale from request headers/query for better UX
-    const requestLocale = extractLocaleFromRequest(request);
+    const requestLocale = sanitizeLocale(extractLocaleFromRequest(request));
     try {
 
         // Validate request method
@@ -257,11 +252,8 @@ export async function handleCreateMemo(request, env) {
         }
 
         // Generate unique memo ID with collision detection
-        let memoId;
-        try {
-            memoId = await generateMemoId(env, 10, requestLocale);
-        } catch (generateError) {
-            // Add artificial delay for security
+        const memoId = await generateMemoId(env, 10, requestLocale);
+        if (!memoId) {
             await uniformResponseDelay();
             return new Response(JSON.stringify({ error: getErrorMessage('MEMO_ID_GENERATION_ERROR', requestLocale) }), {
                 status: 500,

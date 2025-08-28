@@ -172,4 +172,17 @@ export async function validateAndSanitizeEncryptedMessageSecure(message) {
   }
 
   return { isValid: true, sanitizedMessage: sanitizedForDB };
+}
+
+/**
+ * Sanitize locale input to prevent injection attacks
+ * @param {string} locale - The locale string to sanitize
+ * @returns {string} - Sanitized locale or 'en' as fallback
+ */
+export function sanitizeLocale(locale) {
+  if (!locale || typeof locale !== 'string') return 'en';
+  if (locale.length > 10) return 'en'; // Prevent extremely long inputs
+  // Only allow alphanumeric characters, hyphens, and underscores
+  if (!/^[a-zA-Z0-9_-]+$/.test(locale)) return 'en';
+  return locale;
 } 
