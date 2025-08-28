@@ -227,6 +227,13 @@ document.getElementById('memoForm').addEventListener('submit', async (e) => {
     e.preventDefault();
     pendingSubmitEvent = e;
     
+    // Check if we're already in success state (result section is visible)
+    const resultSection = document.getElementById('result');
+    if (resultSection && resultSection.style.display === 'block') {
+        // Already successfully created a memo, ignore this submission
+        return;
+    }
+    
     const message = document.getElementById('message').value.trim();
     const expiryHours = parseInt(document.getElementById('expiryHours').value);
     
@@ -322,8 +329,8 @@ document.getElementById('memoForm').addEventListener('submit', async (e) => {
             // Clear form
             document.getElementById('message').value = '';
             
-        // Reset Turnstile only on success
-        resetTurnstile();
+            // Reset Turnstile only on success
+            resetTurnstile();
         } else {
             // Handle rate limiting specifically
             if (response.status === 429) {
