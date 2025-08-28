@@ -313,28 +313,6 @@ body {
   animation: fadeInWord 0.3s ease-out forwards;
 }
 
-/* Generate word animations with staggered delays */
-.hero-section p span:nth-child(1) { animation-delay: 0.5s; }
-.hero-section p span:nth-child(2) { animation-delay: 0.6s; }
-.hero-section p span:nth-child(3) { animation-delay: 0.7s; }
-.hero-section p span:nth-child(4) { animation-delay: 0.8s; }
-.hero-section p span:nth-child(5) { animation-delay: 0.9s; }
-.hero-section p span:nth-child(6) { animation-delay: 1.0s; }
-.hero-section p span:nth-child(7) { animation-delay: 1.1s; }
-.hero-section p span:nth-child(8) { animation-delay: 1.2s; }
-.hero-section p span:nth-child(9) { animation-delay: 1.3s; }
-.hero-section p span:nth-child(10) { animation-delay: 1.4s; }
-.hero-section p span:nth-child(11) { animation-delay: 1.5s; }
-.hero-section p span:nth-child(12) { animation-delay: 1.6s; }
-.hero-section p span:nth-child(13) { animation-delay: 1.7s; }
-.hero-section p span:nth-child(14) { animation-delay: 1.8s; }
-.hero-section p span:nth-child(15) { animation-delay: 1.9s; }
-.hero-section p span:nth-child(16) { animation-delay: 2.0s; }
-.hero-section p span:nth-child(17) { animation-delay: 2.1s; }
-.hero-section p span:nth-child(18) { animation-delay: 2.2s; }
-.hero-section p span:nth-child(19) { animation-delay: 2.3s; }
-.hero-section p span:nth-child(20) { animation-delay: 2.4s; }
-
 @keyframes fadeInWord {
   0% {
     opacity: 0;

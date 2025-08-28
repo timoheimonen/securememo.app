@@ -113,48 +113,6 @@ export function getErrorMessage(errorCode, locale = 'en', fallback) {
 }
 
 /**
- * Get error message for security events
- * @param {string} event - The security event
- * @param {string} locale - Locale code (defaults to 'en')
- * @returns {string} - User-friendly error message
- */
-export function getSecurityErrorMessage(event, locale = 'en') {
-  // Try to get localized security error message
-  const translationKey = `error.security.${event}`;
-  const localizedMessage = t(translationKey, locale);
-  
-  // If translation exists (key doesn't equal returned value), use it
-  if (localizedMessage !== translationKey) {
-    return localizedMessage;
-  }
-  
-  // Fallback to hardcoded securityErrorMap for backward compatibility
-  const securityErrorMap = {
-    'INVALID_MESSAGE_FORMAT': 'Invalid request.',
-    'INVALID_EXPIRY_TIME': 'Invalid request.',
-    'MISSING_TURNSTILE': 'Security verification required.',
-    'TURNSTILE_FAILED': 'Security verification failed.',
-    'TURNSTILE_API_ERROR': 'Service temporarily unavailable.',
-    'TURNSTILE_VERIFICATION_ERROR': 'Security verification failed.',
-    'DATABASE_ERROR': 'Service temporarily unavailable.',
-    'MEMO_ID_GENERATION_ERROR': 'Service temporarily unavailable.',
-    'MEMO_ID_COLLISION_ERROR': 'Service temporarily unavailable.',
-    'MEMO_CREATION_ERROR': 'Unable to process your request.',
-    'INVALID_MEMO_ID': 'Invalid request.',
-    'MISSING_MEMO_ID': 'Invalid request.',
-    'MEMO_NOT_FOUND': 'This memo is no longer available.',
-    'MEMO_ALREADY_READ': 'This memo is no longer available.',
-    'MEMO_EXPIRED': 'This memo is no longer available.',
-    'DATABASE_READ_ERROR': 'Service temporarily unavailable.',
-    'MEMO_READ_ERROR': 'Unable to process your request.',
-    'METHOD_NOT_ALLOWED': 'Invalid request method.',
-    'FORBIDDEN': 'Access denied.'
-  };
-  
-  return securityErrorMap[event] || t('error.security.DEFAULT_FALLBACK', locale);
-}
-
-/**
  * Get a generic memo access error message to prevent enumeration attacks
  * This function returns the same message regardless of the specific failure reason
  * to avoid leaking information about memo states through error messages or timing
