@@ -212,10 +212,45 @@ export function getClientLocalizationJS(locale = 'en') {
   const safeLocale = resolveSafeLocale(locale);
 
   // Safe guarded access: only proceed if safeLocale is own property and value is an object
-  const baseTable = (
-    Object.prototype.hasOwnProperty.call(TRANSLATIONS, safeLocale) &&
-    TRANSLATIONS[safeLocale] && typeof TRANSLATIONS[safeLocale] === 'object'
-  ) ? TRANSLATIONS[safeLocale] : TRANSLATIONS['en'];
+  // Avoid dynamic bracket notation (generic object injection sink) by enumerating allowed locales explicitly.
+  let baseTable; // will remain undefined and fallback to 'en' if not matched
+  switch (safeLocale) {
+    case 'ar': baseTable = TRANSLATIONS.ar; break;
+    case 'bn': baseTable = TRANSLATIONS.bn; break;
+    case 'cs': baseTable = TRANSLATIONS.cs; break;
+    case 'da': baseTable = TRANSLATIONS.da; break;
+    case 'de': baseTable = TRANSLATIONS.de; break;
+    case 'el': baseTable = TRANSLATIONS.el; break;
+    case 'en': baseTable = TRANSLATIONS.en; break;
+    case 'es': baseTable = TRANSLATIONS.es; break;
+    case 'fi': baseTable = TRANSLATIONS.fi; break;
+    case 'fr': baseTable = TRANSLATIONS.fr; break;
+    case 'hi': baseTable = TRANSLATIONS.hi; break;
+    case 'hu': baseTable = TRANSLATIONS.hu; break;
+    case 'id': baseTable = TRANSLATIONS.id; break;
+    case 'it': baseTable = TRANSLATIONS.it; break;
+    case 'ja': baseTable = TRANSLATIONS.ja; break;
+    case 'ko': baseTable = TRANSLATIONS.ko; break;
+    case 'nl': baseTable = TRANSLATIONS.nl; break;
+    case 'no': baseTable = TRANSLATIONS.no; break;
+    case 'pl': baseTable = TRANSLATIONS.pl; break;
+    case 'ptBR': baseTable = TRANSLATIONS.ptBR; break;
+    case 'ptPT': baseTable = TRANSLATIONS.ptPT; break;
+    case 'ro': baseTable = TRANSLATIONS.ro; break;
+    case 'ru': baseTable = TRANSLATIONS.ru; break;
+    case 'sv': baseTable = TRANSLATIONS.sv; break;
+    case 'th': baseTable = TRANSLATIONS.th; break;
+    case 'tl': baseTable = TRANSLATIONS.tl; break;
+    case 'tr': baseTable = TRANSLATIONS.tr; break;
+    case 'uk': baseTable = TRANSLATIONS.uk; break;
+    case 'vi': baseTable = TRANSLATIONS.vi; break;
+    case 'zh': baseTable = TRANSLATIONS.zh; break;
+    default: baseTable = TRANSLATIONS.en; break;
+  }
+  // Final safety check: ensure object shape, else fallback.
+  if (!baseTable || typeof baseTable !== 'object') {
+    baseTable = TRANSLATIONS.en;
+  }
 
   const primaryTable = sanitize(baseTable);
   const fallbackTable = (safeLocale !== 'en' && Object.prototype.hasOwnProperty.call(TRANSLATIONS, 'en')) ? sanitize(TRANSLATIONS['en']) : null;
