@@ -165,12 +165,8 @@ function generateNonce() {
    */
   const bytes = new Uint8Array(16);
   crypto.getRandomValues(bytes);
-  // Convert to base64 using a small helper that batches into a single string
-  let binary = '';
-  // 16 bytes -> small, safe to map directly without exceeding argument limits
-  for (let i = 0; i < bytes.length; i++) {
-    binary += String.fromCharCode(bytes[i]);
-  }
+  // Convert to base64 using TextDecoder for safer byte-to-string conversion
+  const binary = new TextDecoder('latin1').decode(bytes);
   // Base64URL (RFC 4648 §5) without padding
   return btoa(binary).replace(/\+/g, '-').replace(/\//g, '_').replace(/=/g, '');
 }
@@ -760,6 +756,9 @@ ${sitemapUrls}</urlset>`;
           });
       }
 
+      // Safe HTML content: response variable contains trusted, server-generated HTML
+      // that has been processed through addAssetVersionsToHTML() and template replacements
+      // with only trusted values. No user input is injected at this point.
       const htmlResp = new Response(response, {
         headers: {
           'Content-Type': 'text/html',
