@@ -8,7 +8,10 @@
  * @returns {number} - Random delay in milliseconds
  */
 function getRandomDelay(minMs = 50, maxMs = 100) {
-  return Math.floor(Math.random() * (maxMs - minMs + 1)) + minMs;
+  const array = new Uint32Array(1);
+  crypto.getRandomValues(array);
+  const randomValue = array[0] / (0xFFFFFFFF + 1);
+  return Math.floor(randomValue * (maxMs - minMs + 1)) + minMs;
 }
 
 /**
