@@ -68,11 +68,9 @@ export function normalizeCiphertextForResponse(input) {
 export function sanitizeForDatabase(input) {
   if (typeof input !== 'string') return '';
 
-  // Remove null bytes and other problematic characters for database storage
-  return input
-    .replace(/\0/g, '') // Remove null bytes
-    .replace(/[\x01-\x08\x0B\x0C\x0E-\x1F\x7F]/g, '') // Remove control characters
-    .trim();
+  // Remove null bytes first, then strip other disallowed control characters
+  const withoutNull = input.replace(/\0/g, '');
+  return stripDisallowedControlChars(withoutNull).trim();
 }
 
 // sanitizeForURL removed (identifier inputs are strictly validated instead of transformed)
@@ -118,7 +116,7 @@ export function validateEncryptedMessage(message) {
   }
 
   // Check for other problematic control characters (except newlines, tabs, carriage returns)
-  if (/[\x01-\x08\x0B\x0C\x0E-\x1F\x7F]/.test(message)) {
+  if (containsDisallowedControlChars(message)) {
     return false;
   }
 
@@ -189,3 +187,43 @@ export function sanitizeLocale(locale) {
   if (!/^[a-zA-Z0-9_-]+$/.test(locale)) return 'en';
   return locale;
 } 
+
+/**
+ * Check if a string contains disallowed control characters excluding \n (10), \r (13) and \t (9).
+ * Null byte (0) is handled separately where needed, so this starts at 1.
+ * @param {string} str - Input string to inspect
+ * @returns {boolean} True if a disallowed control character is present
+ */
+function containsDisallowedControlChars(str) {
+  for (let i = 0; i < str.length; i++) {
+    const code = str.charCodeAt(i);
+    // Skip allowed whitespace controls: tab (9), LF (10), CR (13)
+    if (code === 9 || code === 10 || code === 13) continue;
+    if ((code >= 1 && code <= 8) || (code >= 11 && code <= 12) || (code >= 14 && code <= 31) || code === 127) {
+      return true;
+    }
+  }
+  return false;
+}
+
+/**
+ * Remove disallowed control characters (excluding tab, newline, carriage return) from a string.
+ * @param {string} str - Input string
+ * @returns {string} Sanitized string without disallowed control characters
+ */
+function stripDisallowedControlChars(str) {
+  let out = '';
+  for (let i = 0; i < str.length; i++) {
+    const ch = str[i];
+    const code = ch.charCodeAt(0);
+    if (code === 9 || code === 10 || code === 13) { // allowed controls
+      out += ch;
+      continue;
+    }
+    if ((code >= 1 && code <= 8) || (code >= 11 && code <= 12) || (code >= 14 && code <= 31) || code === 127) {
+      continue; // skip disallowed
+    }
+    out += ch;
+  }
+  return out;
+}

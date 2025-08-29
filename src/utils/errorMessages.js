@@ -80,6 +80,9 @@ export const errorMessages = {
   'CLEANUP_FAILED': 'Cleanup failed'
 };
 
+// Freeze to prevent prototype manipulation or runtime tampering
+Object.freeze(errorMessages);
+
 /**
  * Get user-friendly error message by error code
  * @param {string} errorCode - The error code
@@ -88,6 +91,14 @@ export const errorMessages = {
  * @returns {string} - User-friendly error message
  */
 export function getErrorMessage(errorCode, locale = 'en', fallback) {
+  // Sanitize errorCode early to avoid prototype pollution / object injection lookups
+  // Allow only A-Z, 0-9, underscore and max length 60
+  if (typeof errorCode !== 'string') {
+    errorCode = '';
+  }
+  if (!/^[A-Z0-9_]{1,60}$/.test(errorCode)) {
+    errorCode = 'GENERAL_ERROR';
+  }
   // Handle backward compatibility - if second parameter is a string but not a supported locale, treat it as fallback
   if (typeof locale === 'string' && !isLocaleSupported(locale) && !fallback) {
     fallback = locale;
@@ -109,7 +120,10 @@ export function getErrorMessage(errorCode, locale = 'en', fallback) {
   }
   
   // Fallback to hardcoded errorMessages for backward compatibility
-  return errorMessages[errorCode] || fallback;
+  if (Object.prototype.hasOwnProperty.call(errorMessages, errorCode)) {
+    return errorMessages[errorCode];
+  }
+  return fallback;
 }
 
 /**
