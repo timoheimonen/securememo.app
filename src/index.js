@@ -50,7 +50,7 @@ import { getClientLocalizationJS } from './lang/clientLocalization.js';
 import { sanitizeLocale } from './utils/validation.js';
 
 // Immutable asset version for cache-busting (bump on asset changes)
-const ASSET_VERSION = '20250828u5';
+const ASSET_VERSION = '20250829';
 
 // Tiny, safe JS minifier for generated strings (removes comments and trims/collapses intra-line whitespace)
 function minifyJS(code) {
