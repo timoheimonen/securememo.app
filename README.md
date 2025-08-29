@@ -8,7 +8,7 @@ securememo.app will run the main branch of this repo.
 [![Watchers](https://img.shields.io/github/watchers/timoheimonen/securememo.app)](https://github.com/timoheimonen/securememo.app/watchers)
 [![Forks](https://img.shields.io/github/forks/timoheimonen/securememo.app)](https://github.com/timoheimonen/securememo.app/network/members)
 [![Contributors](https://img.shields.io/github/contributors/timoheimonen/securememo.app)](https://github.com/timoheimonen/securememo.app/graphs/contributors)
-
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/5a670d56d40e4774a3166ccabb290952)](https://app.codacy.com/gh/timoheimonen/securememo.app/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
 
 ## Features
 
