@@ -95,10 +95,9 @@ function calculateExpiryTime(expiryHours) {
  * Returns null instead of throwing on exhaustion to keep error handling unified at call site.
  * @param {any} env
  * @param {number} maxRetries
- * @param {string} locale
  * @returns {Promise<string|null>}
  */
-async function generateMemoId(env, maxRetries = 10, locale = 'en') {
+async function generateMemoId(env, maxRetries = 10) {
     const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_';
     for (let attempt = 0; attempt < maxRetries; attempt++) {
         let result = '';
@@ -643,7 +642,7 @@ export async function handleConfirmDelete(request, env) {
     } finally {
         // Best-effort wiping of sensitive variables
         if (deletionToken) {
-            try { deletionToken = ''.padEnd(deletionToken.length, '\u0000'); } catch (_) { }
+            try { deletionToken = ''.padEnd(deletionToken.length, '\u0000'); } catch (_) { /* Ignore cleanup errors */ }
             deletionToken = null;
         }
         if (computedHash) {

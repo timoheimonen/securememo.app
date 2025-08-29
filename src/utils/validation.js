@@ -1,8 +1,10 @@
 // Input validation and sanitization utilities
 import { uniformResponseDelay } from './timingSecurity.js';
 
-/**
- * Sanitize user input for HTML context (prevents XSS)
+/**  // Check for null bytes and other control characters that could cause issues
+  if (/\0/.test(message)) {
+    return false; // Null bytes are not allowed
+  }Sanitize user input for HTML context (prevents XSS)
  * @param {string} input - The input to sanitize
  * @returns {string} - Sanitized input safe for HTML
  */
@@ -10,7 +12,7 @@ export function sanitizeForHTML(input) {
   if (typeof input !== 'string') return '';
 
   // First decode HTML entities to catch encoded malicious content
-  let decoded = input
+  const decoded = input
     .replace(/&lt;/g, '<')
     .replace(/&gt;/g, '>')
     .replace(/&amp;/g, '&')
@@ -21,7 +23,7 @@ export function sanitizeForHTML(input) {
     .replace(/&#47;/g, '/');
 
   // Remove HTML tags and event handlers
-  let sanitized = decoded
+  const sanitized = decoded
     .replace(/<[^>]*>/g, '') // Remove all tags
     .replace(/javascript:/gi, '')
     .replace(/on\w+=/gi, '')
@@ -54,7 +56,7 @@ export function sanitizeForHTML(input) {
 export function normalizeCiphertextForResponse(input) {
   if (typeof input !== 'string') return '';
   // Remove null byte and other non-printable control chars except \n, \r, \t
-  return input.replace(/[\x00-\x08\x0B\x0C\x0E-\x1F\x7F]/g, '');
+  return input.replace(/[\0\x01-\x08\x0B\x0C\x0E-\x1F\x7F]/g, '');
 }
 
 /**
@@ -67,7 +69,7 @@ export function sanitizeForDatabase(input) {
 
   // Remove null bytes and other problematic characters for database storage
   return input
-    .replace(/\x00/g, '') // Remove null bytes
+    .replace(/\0/g, '') // Remove null bytes
     .replace(/[\x01-\x08\x0B\x0C\x0E-\x1F\x7F]/g, '') // Remove control characters
     .trim();
 }
@@ -110,7 +112,7 @@ export function validateEncryptedMessage(message) {
   }
 
   // Check for null bytes and other control characters that could cause issues
-  if (/\x00/.test(message)) {
+  if (/\0/.test(message)) {
     return false; // Null bytes are not allowed
   }
 
