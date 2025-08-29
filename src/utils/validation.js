@@ -56,6 +56,7 @@ export function sanitizeForHTML(input) {
 export function normalizeCiphertextForResponse(input) {
   if (typeof input !== 'string') return '';
   // Remove null byte and other non-printable control chars except \n, \r, \t
+  // eslint-disable-next-line no-control-regex
   return input.replace(/[\0\x01-\x08\x0B\x0C\x0E-\x1F\x7F]/g, '');
 }
 
