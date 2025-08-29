@@ -121,7 +121,12 @@ export function getErrorMessage(errorCode, locale = 'en', fallback) {
   
   // Fallback to hardcoded errorMessages for backward compatibility
   if (Object.prototype.hasOwnProperty.call(errorMessages, errorCode)) {
-    return errorMessages[errorCode];
+    // SECURITY: errorCode was regex‑validated earlier; still avoid direct dynamic property value trust.
+    // Use a property descriptor read (does not invoke getters) and verify type.
+    const desc = Object.getOwnPropertyDescriptor(errorMessages, errorCode);
+    if (desc && typeof desc.value === 'string') {
+      return desc.value;
+    }
   }
   return fallback;
 }

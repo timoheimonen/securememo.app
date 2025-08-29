@@ -1,8 +1,3 @@
--- Set SQL Server compatibility mode (for linter compatibility only)
--- This is ignored by SQLite but silences SQL Server linters
-SET QUOTED_IDENTIFIER ON;
-GO
-
 CREATE TABLE IF NOT EXISTS memos (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     memo_id TEXT UNIQUE NOT NULL,
