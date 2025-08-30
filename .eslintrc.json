@@ -1,0 +1,60 @@
+{
+  "root": true,
+  "env": {
+    "browser": true,
+    "worker": true,
+    "es2021": true
+  },
+  "extends": ["eslint:recommended"],
+  "parserOptions": {
+    "ecmaVersion": "latest",
+    "sourceType": "module"
+  },
+  "globals": {
+    "Response": "readonly",
+    "Request": "readonly",
+    "fetch": "readonly",
+    "crypto": "readonly",
+    "caches": "readonly",
+    "URL": "readonly",
+    "URLSearchParams": "readonly",
+    "TextEncoder": "readonly",
+    "TextDecoder": "readonly",
+    "Headers": "readonly",
+    "FormData": "readonly",
+    "Blob": "readonly",
+    "File": "readonly",
+    "AbortController": "readonly",
+    "AbortSignal": "readonly",
+    "ReadableStream": "readonly",
+    "WritableStream": "readonly",
+    "TransformStream": "readonly",
+    "WebSocket": "readonly",
+    "WebSocketPair": "readonly",
+    "atob": "readonly",
+    "btoa": "readonly",
+    "setTimeout": "readonly",
+    "clearTimeout": "readonly",
+    "setInterval": "readonly",
+    "clearInterval": "readonly",
+    "globalThis": "readonly",
+  "self": "readonly",
+  "window": "readonly",
+  "document": "readonly"
+  },
+  "rules": {
+    "no-undef": "error",
+    "no-unused-vars": ["error", { "argsIgnorePattern": "^_" }],
+    "no-empty": ["error", { "allowEmptyCatch": true }],
+    "no-control-regex": "off",
+    "no-console": "warn",
+    "prefer-const": "error",
+    "no-var": "error"
+  },
+  "ignorePatterns": [
+    "node_modules/",
+    "dist/",
+    ".wrangler/",
+    "public/"
+  ]
+}

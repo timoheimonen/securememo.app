@@ -1,0 +1,86 @@
+openapi: 3.0.3
+info:
+  title: SecureMemo API - Read Memo
+  version: "1.0.0"
+  description: |
+    Schema for POST /api/read-memo on Cloudflare Workers.
+servers:
+  - url: https://securememo.app
+paths:
+  /api/read-memo:
+    post:
+      summary: Read a memo
+      description: |
+        Returns encrypted memo content for a given memo id (via query parameter). Requires Cloudflare Turnstile token. Memo id is validated server-side from URL query `id`.
+      parameters:
+        - in: query
+          name: id
+          required: true
+          schema:
+            type: string
+            pattern: ^([A-Za-z0-9_-]{32}|[A-Za-z0-9_-]{40})$
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [cfTurnstileResponse]
+              properties:
+                cfTurnstileResponse:
+                  type: string
+                  pattern: ^[A-Za-z0-9._-]{10,}$
+      responses:
+        "200":
+          description: Memo found
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [success, encryptedMessage]
+                properties:
+                  success:
+                    type: boolean
+                    enum: [true]
+                  encryptedMessage:
+                    type: string
+        "400":
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        "404":
+          description: Not found or access denied (generic)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        "405":
+          description: Method not allowed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        "413":
+          description: Payload too large
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        "500":
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+components:
+  schemas:
+    ErrorResponse:
+      type: object
+      required: [error]
+      properties:
+        error:
+          type: string
+
+

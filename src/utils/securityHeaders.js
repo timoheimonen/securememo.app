@@ -102,5 +102,8 @@ export function mergeSecurityHeadersIntoResponse(response, request) {
  */
 export function isValidOrigin(request) {
   const origin = request.headers.get('origin');
-  return !!(origin && allowedOrigins.includes(origin));
+  // Treat absence of an Origin header (e.g., server-to-server, tests, curl) as allowed.
+  // Only enforce allow-list when a browser supplies an Origin.
+  if (!origin) return true;
+  return allowedOrigins.includes(origin);
 }
