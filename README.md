@@ -44,9 +44,7 @@ securememo/
 ├── LICENSE                     # License
 ├── README.md                   # Project documentation
 ├── SECURITY.md                 # Security policy and vulnerability reporting
-├── deploy.sh                   # Deployment script
 ├── package.json                # Project dependencies and configuration
-├── package-lock.json           # Dependency lock file
 ├── wrangler.toml               # Cloudflare Workers configuration
 ├── db/
 │   └── schema.sql              # Database schema definition
@@ -104,15 +102,18 @@ securememo/
     │   ├── vi_translations.js  # Vietnamese translations
     │   └── zh_translations.js  # Chinese translations
     └── utils/                  # Utility functions
-        ├── errorMessages.js    # Centralized error handling with generic messages
+        ├──  errorMessages.js    # Centralized error handling with generic messages
+        ├──  http.js             # HTTP helper utilities (response formatting, headers)
+        ├── minifiers.js        # Minification helpers for scripts/styles
         ├── rateLimiter.js      # Rate limiting utilities
-        ├── timingSecurity.js   # Timing attack protections (e.g., constant-time comparisons, artificial delays)
+        ├──  securityHeaders.js  # Construction of strict security header set
+        ├── timingSecurity.js   # Timing attack protections (constant-time comparisons, delays)
         └── validation.js       # Input validation, sanitization, and secure checks
 ```
 
 ## Code Quality
 This project uses Codacy to automatically analyze code quality, security, and duplication. The badge at the top of this README reflects the current grade of the main branch. 
-The target for this project's code quality is always an A grade. This is achieved by using the Codacy addon in VS Code to ensure new code meets these standards before being committed.
+The target for this project's code quality is always an A grade. This is pursued by using the Codacy addon in VS Code to ensure new code meets these standards before being committed.
 
 ## Security
 
