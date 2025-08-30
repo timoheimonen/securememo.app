@@ -29,14 +29,14 @@ class InMemoryD1 {
       _bindings: [],
       bind(...vals) { this._bindings = vals; return this; },
       async first() {
-        if (/SELECT 1 FROM memos/.test(this._sql)) {
+  if (/SELECT 1 FROM memos/.test(this._sql)) {
           return db.memos.has(this._bindings[0]) ? 1 : null;
         }
-        if (/SELECT encrypted_message, deletion_token_hash FROM memos/.test(this._sql)) {
+  if (/SELECT encrypted_message, deletion_token_hash FROM memos/.test(this._sql.replace(/\s+/g,' '))) {
           const rec = db.memos.get(this._bindings[0]);
           return rec ? { encrypted_message: rec.encrypted_message, deletion_token_hash: rec.deletion_token_hash } : null;
         }
-        if (/SELECT deletion_token_hash FROM memos/.test(this._sql)) {
+  if (/SELECT deletion_token_hash FROM memos/.test(this._sql)) {
           const rec = db.memos.get(this._bindings[0]);
             return rec ? { deletion_token_hash: rec.deletion_token_hash } : null;
         }

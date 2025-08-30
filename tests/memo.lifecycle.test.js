@@ -1,4 +1,5 @@
 /* eslint-env node */
+/* global describe, it */
 /*
  * Lifecycle test for create -> read -> delete (manual assertions) without external test runner.
  * Exits with non-zero code on failure so CI detects errors.
@@ -65,7 +66,7 @@ function makeRequest(path, init) {
   return new globalThis.Request('https://example.com' + path, init);
 }
 
-async function main() {
+export async function lifecycleRun() {
   const env = { DB: new InMemoryD1(), TURNSTILE_SECRET: 'x', TURNSTILE_SITE_KEY: 'x' };
   const deletionToken = randomToken(32);
   const deletionTokenHash = await sha256b64(deletionToken);
@@ -134,8 +135,23 @@ async function main() {
   if (readAgainResp.status !== 404) throw new Error('Expected 404 after deletion');
 }
 
-// Execute lifecycle
-main().catch(err => {
-  // Emit minimal error signal without relying on console global directly
-  (globalThis.console && globalThis.console.error ? globalThis.console.error(err) : void 0);
-});
+// If executed directly (node), run lifecycle. Under Vitest we create a test wrapper.
+if (typeof describe === 'undefined') {
+  lifecycleRun().catch(err => {
+    (globalThis.console && globalThis.console.error ? globalThis.console.error(err) : void 0);
+  });
+}
+
+// Vitest compatibility
+try {
+  // Dynamically access global describe/it if present
+  if (typeof describe !== 'undefined') {
+    // eslint-disable-next-line no-undef
+    describe('manual lifecycle (legacy script)', () => {
+      // eslint-disable-next-line no-undef
+      it('runs create->read->delete flow', async () => {
+        await lifecycleRun();
+      });
+    });
+  }
+} catch (_) {/* ignore */}
