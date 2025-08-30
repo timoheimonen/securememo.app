@@ -1,7 +1,7 @@
 /* eslint-env node */
 /*
  * Lifecycle test for create -> read -> delete (manual assertions) without external test runner.
- * Exits with non-zero code on failure so CI detects errors.
+ * Exits with non-zero code on failure so CI detects errors. -
  */
 import worker from '../src/index.js';
 // Vitest functions are imported conditionally only when running under the Vitest runner
