@@ -4,7 +4,7 @@
  * Exits with non-zero code on failure so CI detects errors. -
  */
 import worker from '../src/index.js';
-import { InMemoryD1, randomToken, sha256b64, makeRequest, mockTurnstileFetch } from './helpers/testUtils.js';
+import { InMemoryD1, randomToken, sha256b64, makeRequest, mockTurnstileFetch, readMemo, deleteMemo, expectMemoGone } from './helpers/testUtils.js';
 // Vitest functions are imported conditionally only when running under the Vitest runner
 
 // Polyfill btoa if missing (Node < 16 browsers)
@@ -36,43 +36,15 @@ export async function lifecycleRun() {
   const memoId = createJson.memoId;
   if (!memoId) throw new Error('Missing memoId');
 
-  // Read memo
-  const readResp = await worker.fetch(
-    makeRequest(`/api/read-memo?id=${encodeURIComponent(memoId)}`, {
-      method: 'POST',
-      headers: { 'content-type': 'application/json' },
-      body: JSON.stringify({ cfTurnstileResponse: 'turnstiletoken12345' })
-    }),
-    env,
-    { waitUntil: () => {} }
-  );
-  if (readResp.status !== 200) throw new Error('Read failed');
-  const readJson = await readResp.json();
+  // Read memo & assert payload
+  const { json: readJson } = await readMemo(worker, env, memoId);
   if (readJson.encryptedMessage !== encryptedMessage) throw new Error('Encrypted message mismatch');
 
   // Delete memo
-  const deleteResp = await worker.fetch(
-    makeRequest('/api/confirm-delete', {
-      method: 'POST',
-      headers: { 'content-type': 'application/json' },
-      body: JSON.stringify({ memoId, deletionToken })
-    }),
-    env,
-    { waitUntil: () => {} }
-  );
-  if (deleteResp.status !== 200) throw new Error('Delete failed');
+  await deleteMemo(worker, env, memoId, deletionToken);
 
   // Read again should be 404
-  const readAgainResp = await worker.fetch(
-    makeRequest(`/api/read-memo?id=${encodeURIComponent(memoId)}`, {
-      method: 'POST',
-      headers: { 'content-type': 'application/json' },
-      body: JSON.stringify({ cfTurnstileResponse: 'turnstiletoken12345' })
-    }),
-    env,
-    { waitUntil: () => {} }
-  );
-  if (readAgainResp.status !== 404) throw new Error('Expected 404 after deletion');
+  await expectMemoGone(worker, env, memoId);
 
   // Restore fetch to avoid side effects when run under Vitest
   restoreFetch();

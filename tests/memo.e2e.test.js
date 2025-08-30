@@ -15,7 +15,7 @@
  NOTE: This is a lightweight test; it does not run real crypto, only validates server contract.
 */
 import { describe, it, expect, beforeAll } from 'vitest';
-import { InMemoryD1, randomToken, sha256b64, makeRequest, mockTurnstileFetch } from './helpers/testUtils.js';
+import { InMemoryD1, randomToken, sha256b64, makeRequest, mockTurnstileFetch, readMemo, deleteMemo, expectMemoGone } from './helpers/testUtils.js';
 
 let env; // shared env per test file
 let worker; // worker module
@@ -49,44 +49,15 @@ describe('memo lifecycle e2e', () => {
     const memoId = createJson.memoId;
     expect(memoId).toBeTruthy();
 
-    // Read memo
-    const readResp = await worker.fetch(
-      makeRequest(`/api/read-memo?id=${encodeURIComponent(memoId)}`, {
-        method: 'POST',
-        headers: { 'content-type': 'application/json' },
-        body: JSON.stringify({ cfTurnstileResponse: 'turnstiletoken12345' })
-      }),
-      env,
-      { waitUntil: () => {} }
-    );
-    expect(readResp.status).toBe(200);
-    const readJson = await readResp.json();
-    expect(readJson.encryptedMessage).toBe(encryptedMessage);
+  // Read memo & assert
+  const { json: readJson } = await readMemo(worker, env, memoId);
+  expect(readJson.encryptedMessage).toBe(encryptedMessage);
 
-    // Delete memo
-    const deleteResp = await worker.fetch(
-      makeRequest('/api/confirm-delete', {
-        method: 'POST',
-        headers: { 'content-type': 'application/json' },
-        body: JSON.stringify({ memoId, deletionToken })
-      }),
-      env,
-      { waitUntil: () => {} }
-    );
-    expect(deleteResp.status).toBe(200);
-    const deleteJson = await deleteResp.json();
-    expect(deleteJson.success).toBe(true);
+  // Delete memo
+  const { json: deleteJson } = await deleteMemo(worker, env, memoId, deletionToken);
+  expect(deleteJson.success).toBe(true);
 
-    // Second read should return 404 (generic denial)
-    const readAgain = await worker.fetch(
-      makeRequest(`/api/read-memo?id=${encodeURIComponent(memoId)}`, {
-        method: 'POST',
-        headers: { 'content-type': 'application/json' },
-        body: JSON.stringify({ cfTurnstileResponse: 'turnstiletoken12345' })
-      }),
-      env,
-      { waitUntil: () => {} }
-    );
-    expect(readAgain.status).toBe(404);
+  // Second read should return 404 (generic denial)
+  await expectMemoGone(worker, env, memoId);
   });
 });

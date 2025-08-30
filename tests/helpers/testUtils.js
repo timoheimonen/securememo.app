@@ -99,3 +99,61 @@ export function mockTurnstileFetch() {
   };
   return () => { globalThis.fetch = realFetch; };
 }
+
+/**
+ * Read a memo via POST /api/read-memo returning parsed JSON (expects success 200 by default).
+ * @param {any} worker worker module (with fetch)
+ * @param {Record<string,any>} env
+ * @param {string} memoId
+ * @param {string} turnstileToken
+ * @param {number} expectedStatus default 200
+ * @returns {Promise<{resp:Response,json:any}>}
+ */
+export async function readMemo(worker, env, memoId, turnstileToken = 'turnstiletoken12345', expectedStatus = 200) {
+  const resp = await worker.fetch(
+    makeRequest(`/api/read-memo?id=${encodeURIComponent(memoId)}`, {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ cfTurnstileResponse: turnstileToken })
+    }),
+    env,
+    { waitUntil: () => {} }
+  );
+  if (resp.status !== expectedStatus) throw new Error(`readMemo expected ${expectedStatus} got ${resp.status}`);
+  const json = expectedStatus === 200 ? await resp.json() : null;
+  return { resp, json };
+}
+
+/**
+ * Delete a memo via POST /api/confirm-delete and return parsed JSON (expects 200).
+ * @param {any} worker
+ * @param {Record<string,any>} env
+ * @param {string} memoId
+ * @param {string} deletionToken
+ * @returns {Promise<{resp:Response,json:any}>}
+ */
+export async function deleteMemo(worker, env, memoId, deletionToken) {
+  const resp = await worker.fetch(
+    makeRequest('/api/confirm-delete', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ memoId, deletionToken })
+    }),
+    env,
+    { waitUntil: () => {} }
+  );
+  if (resp.status !== 200) throw new Error(`deleteMemo expected 200 got ${resp.status}`);
+  const json = await resp.json();
+  return { resp, json };
+}
+
+/**
+ * Assert that subsequent read returns 404 (memo consumed or deleted).
+ * @param {any} worker
+ * @param {Record<string,any>} env
+ * @param {string} memoId
+ */
+export async function expectMemoGone(worker, env, memoId) {
+  const { resp } = await readMemo(worker, env, memoId, 'turnstiletoken12345', 404); // readMemo will throw if not 404
+  return resp;
+}
