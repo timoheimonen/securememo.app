@@ -1,0 +1,89 @@
+{
+    "root": true,
+    "env": {
+        "browser": true,
+        "worker": true,
+        "es2022": true
+    },
+    "parserOptions": {
+        "ecmaVersion": 2022,
+        "sourceType": "module"
+    },
+    "extends": [
+        "eslint:recommended"
+    ],
+    "globals": {
+        "caches": "readonly"
+    },
+    "rules": {
+        "no-unused-vars": [
+            "warn",
+            {
+                "argsIgnorePattern": "^_",
+                "varsIgnorePattern": "^_"
+            }
+        ],
+        "no-undef": "error",
+        "eqeqeq": [
+            "error",
+            "always",
+            {
+                "null": "ignore"
+            }
+        ],
+        "no-eval": "error",
+        "no-implied-eval": "error",
+        "no-new-func": "error",
+        "no-alert": "error",
+        "no-console": [
+            "warn",
+            {
+                "allow": [
+                    "warn",
+                    "error"
+                ]
+            }
+        ],
+        "no-var": "error",
+        "prefer-const": [
+            "error",
+            {
+                "destructuring": "all"
+            }
+        ],
+        "object-shorthand": [
+            "error",
+            "always"
+        ],
+        "prefer-template": "off",
+        "no-useless-concat": "error",
+        "arrow-body-style": [
+            "error",
+            "as-needed"
+        ],
+        "prefer-arrow-callback": "error",
+        "no-return-await": "off",
+        "consistent-return": "warn",
+        "default-case-last": "error",
+        "no-shadow": "warn",
+        "no-param-reassign": "off",
+        "yoda": [
+            "error",
+            "never"
+        ],
+        "curly": [
+            "warn",
+            "multi-line"
+        ]
+    },
+    "overrides": [
+        {
+            "files": [
+                "src/templates/**/*.js"
+            ],
+            "rules": {
+                "max-len": "off"
+            }
+        }
+    ]
+}

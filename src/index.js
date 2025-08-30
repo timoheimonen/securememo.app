@@ -254,13 +254,14 @@ export default {
         let sitemapUrls = '';
         pages.forEach(page => {
           supportedLocales.forEach(lang => {
-            const url = `https://securememo.app/${lang}${page.path}`;
+      // Renamed from 'url' to 'pageUrl' to avoid shadowing the outer 'url' variable
+      const pageUrl = `https://securememo.app/${lang}${page.path}`;
             const hreflangs = supportedLocales.map(hreflang =>
               `    <xhtml:link rel="alternate" hreflang="${hreflang}" href="https://securememo.app/${hreflang}${page.path}"/>`
             ).join('\n');
 
             sitemapUrls += `  <url>
-    <loc>${url}</loc>
+    <loc>${pageUrl}</loc>
     <lastmod>${currentDate}</lastmod>
     <changefreq>${page.changefreq}</changefreq>
     <priority>${page.priority}</priority>
