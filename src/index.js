@@ -1,22 +1,26 @@
+/* eslint-env worker */
 import { getStyles } from './styles/styles.js';
 import { getSupportedLocales } from './lang/localization.js';
+import { minifyJS, minifyCSS } from './utils/minifiers.js';
+import { getSecurityHeaders, mergeSecurityHeadersIntoResponse, isValidOrigin, generateNonce } from './utils/securityHeaders.js';
+import { ensureGetMethod, methodNotAllowedJSONResponse, notModifiedIfMatch } from './utils/http.js';
 
 /**
- * Escape a string for safe injection into JavaScript string literals
- * @param {string} str - The string to escape
- * @returns {string} - Escaped string safe for JS
+ * Escape a string for safe injection into JavaScript string literals.
+ * @param {string} str raw string
+ * @returns {string} escaped string
  */
 function escapeJavaScript(str) {
   if (typeof str !== 'string') return '';
   return str
-    .replace(/\\/g, '\\\\')  // Escape backslashes
-    .replace(/'/g, "\\'")    // Escape single quotes
-    .replace(/"/g, '\\"')    // Escape double quotes
-    .replace(/\r/g, '\\r')   // Escape carriage returns
-    .replace(/\n/g, '\\n')   // Escape newlines
-    .replace(/\t/g, '\\t')   // Escape tabs
-    .replace(/\u2028/g, '\\u2028') // Escape line separator
-    .replace(/\u2029/g, '\\u2029'); // Escape paragraph separator
+    .replace(/\\/g, '\\\\')
+    .replace(/'/g, "\\'")
+    .replace(/"/g, '\\"')
+    .replace(/\r/g, '\\r')
+    .replace(/\n/g, '\\n')
+    .replace(/\t/g, '\\t')
+    .replace(/\u2028/g, '\\u2028')
+    .replace(/\u2029/g, '\\u2029');
 }
 import {
   getIndexHTML,
@@ -52,48 +56,7 @@ import { sanitizeLocale } from './utils/validation.js';
 // Immutable asset version for cache-busting (bump on asset changes)
 const ASSET_VERSION = '20250829b';
 
-// Tiny, safe JS minifier for generated strings (removes comments and trims/collapses intra-line whitespace)
-function minifyJS(code) {
-  try {
-    return code
-      // Remove line comments that start at line-begin
-      .replace(/^\s*\/\/.*$/gm, '')
-      // Remove block comments that start at line-begin or after whitespace
-      // This avoids stripping sequences inside regex literals like /\/\* foo \*\//
-      .replace(/(^|\s)\/\*[\s\S]*?\*\//g, '$1')
-      // Process per line to preserve newlines (avoid ASI issues)
-      .split('\n')
-      // Collapse multiple spaces/tabs within a line and trim ends
-      .map(line => line.replace(/[ \t]+/g, ' ').trim())
-      // Drop empty lines
-      .filter(Boolean)
-      // Keep newlines to avoid ASI pitfalls
-      .join('\n')
-      .trim();
-  } catch (_) {
-    // In case of any unexpected issue, return original code
-    return code;
-  }
-}
-
-// Tiny CSS minifier: strips comments, collapses whitespace safely between tokens
-function minifyCSS(css) {
-  try {
-    return css
-      // Remove block comments
-      .replace(/\/\*[\s\S]*?\*\//g, '')
-      // Collapse whitespace
-      .replace(/[\t\r\n]+/g, ' ')
-      .replace(/\s{2,}/g, ' ')
-      // Trim around punctuation
-      .replace(/\s*([{}:;,>])\s*/g, '$1')
-      // Preserve spaces in calc() and similar by re-adding a single space where double removal could break
-      .replace(/calc\(([^)]*)\)/g, (m, inner) => `calc(${inner.replace(/\s{2,}/g, ' ')})`)
-      .trim();
-  } catch (_) {
-    return css;
-  }
-}
+// (Minifiers moved to ./utils/minifiers.js)
 
 /**
  * Safely post-process trusted template HTML to append immutable version query parameters
@@ -133,107 +96,14 @@ function addAssetVersionsToHTML(htmlInput) {
   }
 }
 
-// Allowed origins for CORS
-const allowedOrigins = [
-  'https://securememo.app',
-  'https://www.securememo.app',
-  'https://securememo-dev.timo-heimonen.workers.dev'
-];
-
-// Security headers base (CSP is added dynamically per-response to include a nonce)
-const baseSecurityHeaders = {
-  'X-Content-Type-Options': 'nosniff',
-  'X-Frame-Options': 'DENY',
-  'Referrer-Policy': 'strict-origin-when-cross-origin',
-  'Permissions-Policy': 'geolocation=(), microphone=(), camera=(), payment=(), usb=(), magnetometer=(), gyroscope=()',
-  'Strict-Transport-Security': 'max-age=31536000; includeSubDomains; preload',
-  'Cross-Origin-Opener-Policy': 'same-origin',
-  'Cross-Origin-Resource-Policy': 'same-origin',
-  'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
-  'Access-Control-Allow-Headers': 'Content-Type',
-  'Access-Control-Max-Age': '86400',
-  'Vary': 'Origin'
-};
-
-// Generate a cryptographically strong base64 nonce
-function generateNonce() {
-  /**
-   * We keep nonce generation minimal and allocation-safe while avoiding patterns
-   * sometimes flagged by SAST (e.g. repeated String.fromCharCode in a loop).
-   * Bytes are not attacker‑controlled (sourced from crypto RNG), so there is
-   * no object injection risk; still we convert using a single pass encode.
-   */
-  const bytes = new Uint8Array(16);
-  crypto.getRandomValues(bytes);
-  // Convert to base64 using TextDecoder for safer byte-to-string conversion
-  const binary = new TextDecoder('latin1').decode(bytes);
-  // Base64URL (RFC 4648 §5) without padding
-  return btoa(binary).replace(/\+/g, '-').replace(/\//g, '_').replace(/=/g, '');
-}
-
-// Build CSP header string with provided nonce
-function buildContentSecurityPolicy(nonce) {
-  const directives = [
-    "default-src 'none'",
-    "base-uri 'self'",
-    "form-action 'self'",
-    "frame-ancestors 'none'",
-    "connect-src 'self' https://challenges.cloudflare.com https://www.youtube-nocookie.com https://youtube.googleapis.com https://s.ytimg.com",
-    "frame-src https://challenges.cloudflare.com https://www.youtube.com https://www.youtube-nocookie.com blob:",
-    "child-src https://challenges.cloudflare.com https://www.youtube.com https://www.youtube-nocookie.com blob:",
-    "img-src 'self' https://challenges.cloudflare.com https://s.ytimg.com data:",
-    "style-src 'self' 'unsafe-inline'",
-    "worker-src 'self' blob:",
-    "object-src 'none'",
-    `script-src 'nonce-${nonce}' 'strict-dynamic' blob:`,
-    "require-trusted-types-for 'script'"
-  ];
-  return directives.join('; ') + ';';
-}
-
-// Function to validate origin and get security headers with proper CORS origin
-function getSecurityHeaders(request, nonce) {
-  const origin = request.headers.get('origin');
-  const headers = { ...baseSecurityHeaders };
-  if (nonce) {
-    headers['Content-Security-Policy'] = buildContentSecurityPolicy(nonce);
-  } else {
-    // Generate a nonce even for non-HTML responses; harmless and consistent
-    headers['Content-Security-Policy'] = buildContentSecurityPolicy(generateNonce());
-  }
-
-  // Only set CORS headers if origin is in allowed list
-  if (origin && allowedOrigins.includes(origin)) {
-    headers['Access-Control-Allow-Origin'] = origin;
-  }
-
-  return headers;
-}
-
-// Merge full security headers into an existing Response from handlers
-function mergeSecurityHeadersIntoResponse(response, request) {
-  const existingHeaders = Object.fromEntries(response.headers);
-  const mergedHeaders = { ...getSecurityHeaders(request), ...existingHeaders };
-  // Ensure sensitive API JSON responses are never cached
-  const ct = mergedHeaders['Content-Type'] || mergedHeaders['content-type'] || '';
-  if (ct.startsWith('application/json')) {
-    mergedHeaders['Cache-Control'] = 'no-store';
-  }
-  return new Response(response.body, { status: response.status, headers: mergedHeaders });
-}
-
-// Function to validate origin for CORS requests
-function isValidOrigin(request) {
-  const origin = request.headers.get('origin');
-  return origin && allowedOrigins.includes(origin);
-}
+// (Security & origin helpers moved to ./utils/securityHeaders.js)
 
 export default {
   async fetch(request, env, ctx) {
     try {
       // Check DB availability
       if (!env.DB) {
-        return new Response(getErrorMessage('SERVICE_UNAVAILABLE', 'en'), {
+  return new globalThis.Response(getErrorMessage('SERVICE_UNAVAILABLE', 'en'), {
           status: 503,
           headers: getSecurityHeaders(request)
         });
@@ -242,9 +112,9 @@ export default {
       // Parse and validate URL
       let url;
       try {
-        url = new URL(request.url);
+  url = new globalThis.URL(request.url);
       } catch (urlError) {
-        return new Response(getErrorMessage('BAD_REQUEST', 'en'), {
+  return new globalThis.Response(getErrorMessage('BAD_REQUEST', 'en'), {
           status: 400,
           headers: getSecurityHeaders(request)
         });
@@ -275,13 +145,13 @@ export default {
           // Redirect nested locale paths to proper single locale paths
           // localeResult.pathWithoutLocale is already clean, just add default locale prefix
           const normalizedPath = buildLocalizedPath(getDefaultLocale(), localeResult.pathWithoutLocale);
-          return Response.redirect(url.origin + normalizedPath, 301);
+          return globalThis.Response.redirect(url.origin + normalizedPath, 301);
         }
 
         // Check if redirect to localized path is needed (add /en prefix to non-localized URLs)
         const redirectPath = getLocaleRedirectPath(pathname);
         if (redirectPath && redirectPath !== pathname) {
-          return Response.redirect(url.origin + redirectPath, 301);
+          return globalThis.Response.redirect(url.origin + redirectPath, 301);
         }
       }
 
@@ -289,12 +159,12 @@ export default {
       if (request.method === 'OPTIONS') {
         // Only allow preflight for valid origins
         if (!isValidOrigin(request)) {
-          return new Response(null, {
+          return new globalThis.Response(null, {
             status: 403,
             headers: { 'Vary': 'Origin' }
           });
         }
-        return new Response(null, {
+  return new globalThis.Response(null, {
           status: 200,
           headers: getSecurityHeaders(request)
         });
@@ -309,7 +179,7 @@ export default {
 
         // Validate origin for API requests
         if (!isValidOrigin(request)) {
-          return new Response(JSON.stringify({ error: getErrorMessage('FORBIDDEN', apiLocale) }), {
+          return new globalThis.Response(JSON.stringify({ error: getErrorMessage('FORBIDDEN', apiLocale) }), {
             status: 403,
             headers: {
               'Content-Type': 'application/json',
@@ -321,51 +191,17 @@ export default {
         }
 
         // Validate request method for API endpoints
-        if (apiPath === 'create-memo' && request.method !== 'POST') {
-          return new Response(JSON.stringify({ error: getErrorMessage('METHOD_NOT_ALLOWED', apiLocale) }), {
-            status: 405,
-            headers: {
-              'Content-Type': 'application/json',
-              'Allow': 'POST',
-              'Cache-Control': 'no-store',
-              ...getSecurityHeaders(request)
-            }
-          });
-        }
-
-
-
-        // Check allowed methods for read-memo endpoint
-        if (apiPath === 'read-memo' && request.method !== 'POST') {
-          return new Response(JSON.stringify({ error: getErrorMessage('METHOD_NOT_ALLOWED', apiLocale) }), {
-            status: 405,
-            headers: {
-              'Content-Type': 'application/json',
-              'Allow': 'POST',
-              'Cache-Control': 'no-store',
-              ...getSecurityHeaders(request)
-            }
-          });
-        }
-
-        // Check allowed methods for confirm-delete endpoint
-        if (apiPath === 'confirm-delete' && request.method !== 'POST') {
-          return new Response(JSON.stringify({ error: getErrorMessage('METHOD_NOT_ALLOWED', apiLocale) }), {
-            status: 405,
-            headers: {
-              'Content-Type': 'application/json',
-              'Allow': 'POST',
-              'Cache-Control': 'no-store',
-              ...getSecurityHeaders(request)
-            }
-          });
+        // Enforce POST-only API endpoints
+        const postOnlyEndpoints = new Set(['create-memo', 'read-memo', 'confirm-delete']);
+        if (postOnlyEndpoints.has(apiPath) && request.method !== 'POST') {
+          return methodNotAllowedJSONResponse(request, 'POST', apiLocale, getErrorMessage, getSecurityHeaders);
         }
 
         // Check request size limit (100KB) for POST requests
         if (request.method === 'POST') {
           const contentLength = request.headers.get('content-length');
           if (contentLength && parseInt(contentLength) > 100000) {
-            return new Response(JSON.stringify({ error: getErrorMessage('REQUEST_TOO_LARGE', apiLocale) }), {
+            return new globalThis.Response(JSON.stringify({ error: getErrorMessage('REQUEST_TOO_LARGE', apiLocale) }), {
               status: 413,
               headers: {
                 'Content-Type': 'application/json',
@@ -390,7 +226,7 @@ export default {
             return mergeSecurityHeadersIntoResponse(res, request);
           }
           default:
-            return new Response(getErrorMessage('NOT_FOUND', apiLocale), {
+            return new globalThis.Response(getErrorMessage('NOT_FOUND', apiLocale), {
               status: 404,
               headers: { ...getSecurityHeaders(request), 'Cache-Control': 'no-store' }
             });
@@ -399,15 +235,8 @@ export default {
 
       // Serve sitemap.xml
       if (pathname === '/sitemap.xml') {
-        if (request.method !== 'GET') {
-          return new Response(getErrorMessage('METHOD_NOT_ALLOWED', locale), {
-            status: 405,
-            headers: {
-              'Allow': 'GET',
-              ...getSecurityHeaders(request)
-            }
-          });
-        }
+        const sitemapMethodCheck = ensureGetMethod(request, locale, getSecurityHeaders, getErrorMessage);
+        if (sitemapMethodCheck) return sitemapMethodCheck;
 
         // Generate multilingual sitemap for all supported languages
         const supportedLocales = getSupportedLocales();
@@ -443,7 +272,7 @@ ${hreflangs}
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:xhtml="http://www.w3.org/1999/xhtml">
 ${sitemapUrls}</urlset>`;
-        return new Response(sitemap, {
+  return new globalThis.Response(sitemap, {
           headers: {
             'Content-Type': 'application/xml',
             'Cache-Control': 'public, max-age=86400, s-maxage=86400, stale-while-revalidate=604800',
@@ -456,15 +285,8 @@ ${sitemapUrls}</urlset>`;
 
       // Serve static assets (use pathname for non-localized assets)
       if (pathname === '/styles.css') {
-        if (request.method !== 'GET') {
-          return new Response(getErrorMessage('METHOD_NOT_ALLOWED', locale), {
-            status: 405,
-            headers: {
-              'Allow': 'GET',
-              ...getSecurityHeaders(request)
-            }
-          });
-        }
+        const stylesMethodCheck = ensureGetMethod(request, locale, getSecurityHeaders, getErrorMessage);
+        if (stylesMethodCheck) return stylesMethodCheck;
         // Cache versioned CSS aggressively at the edge
         const isVersioned = url.searchParams.has('v');
         if (isVersioned) {
@@ -473,10 +295,9 @@ ${sitemapUrls}</urlset>`;
         }
         const css = minifyCSS(getStyles());
         const cssEtag = `"styles-${ASSET_VERSION}"`;
-        if (request.headers.get('if-none-match') === cssEtag) {
-          return new Response(null, { status: 304, headers: { ...getSecurityHeaders(request), ETag: cssEtag } });
-        }
-        const cssResp = new Response(css, {
+  const cssNotMod = notModifiedIfMatch(request, cssEtag, getSecurityHeaders);
+  if (cssNotMod) return cssNotMod;
+  const cssResp = new globalThis.Response(css, {
           headers: {
             'Content-Type': 'text/css',
             // Versioned -> immutable long cache; Unversioned -> short cache
@@ -497,15 +318,8 @@ ${sitemapUrls}</urlset>`;
       if (pathname === '/js/create-memo.js') {
         // Extract locale from query parameter for JavaScript files
         const jsLocale = url.searchParams.get('locale') || 'en';
-        if (request.method !== 'GET') {
-          return new Response(getErrorMessage('METHOD_NOT_ALLOWED', locale), {
-            status: 405,
-            headers: {
-              'Allow': 'GET',
-              ...getSecurityHeaders(request)
-            }
-          });
-        }
+        const createJsMethodCheck = ensureGetMethod(request, locale, getSecurityHeaders, getErrorMessage);
+        if (createJsMethodCheck) return createJsMethodCheck;
         // Edge cache per-locale + version
         const cached = await caches.default.match(request);
         if (cached) return cached;
@@ -530,10 +344,9 @@ ${sitemapUrls}</urlset>`;
           .replace(/{{BTN_HIDE}}/g, escapeJavaScript(t('btn.hide', jsLocale)))
           .replace(/{{BTN_COPY}}/g, escapeJavaScript(t('btn.copy', jsLocale)));
         const jsEtag = `"create-${ASSET_VERSION}-${jsLocale}"`;
-        if (request.headers.get('if-none-match') === jsEtag) {
-          return new Response(null, { status: 304, headers: { ...getSecurityHeaders(request), ETag: jsEtag } });
-        }
-        const jsResp = new Response(minifyJS(jsContent), {
+  const createJsNotMod = notModifiedIfMatch(request, jsEtag, getSecurityHeaders);
+  if (createJsNotMod) return createJsNotMod;
+  const jsResp = new globalThis.Response(minifyJS(jsContent), {
           headers: {
             'Content-Type': 'application/javascript',
             'Cache-Control': 'public, max-age=31536000, immutable',
@@ -548,15 +361,8 @@ ${sitemapUrls}</urlset>`;
       if (pathname === '/js/read-memo.js') {
         // Extract locale from query parameter for JavaScript files
         const jsLocale = url.searchParams.get('locale') || 'en';
-        if (request.method !== 'GET') {
-          return new Response(getErrorMessage('METHOD_NOT_ALLOWED', locale), {
-            status: 405,
-            headers: {
-              'Allow': 'GET',
-              ...getSecurityHeaders(request)
-            }
-          });
-        }
+        const readJsMethodCheck = ensureGetMethod(request, locale, getSecurityHeaders, getErrorMessage);
+        if (readJsMethodCheck) return readJsMethodCheck;
         // Edge cache per-locale + version
         const cached = await caches.default.match(request);
         if (cached) return cached;
@@ -581,10 +387,9 @@ ${sitemapUrls}</urlset>`;
           .replace(/{{BTN_COPIED}}/g, escapeJavaScript(t('btn.copied', jsLocale)))
           .replace(/{{DELETION_ERROR_MESSAGE}}/g, escapeJavaScript(t('msg.deletionError', jsLocale)));
         const jsEtag = `"read-${ASSET_VERSION}-${jsLocale}"`;
-        if (request.headers.get('if-none-match') === jsEtag) {
-          return new Response(null, { status: 304, headers: { ...getSecurityHeaders(request), ETag: jsEtag } });
-        }
-        const jsResp = new Response(minifyJS(jsContent), {
+  const readJsNotMod = notModifiedIfMatch(request, jsEtag, getSecurityHeaders);
+  if (readJsNotMod) return readJsNotMod;
+  const jsResp = new globalThis.Response(minifyJS(jsContent), {
           headers: {
             'Content-Type': 'application/javascript',
             'Cache-Control': 'public, max-age=31536000, immutable',
@@ -597,22 +402,14 @@ ${sitemapUrls}</urlset>`;
       }
 
       if (pathname === '/js/common.js') {
-        if (request.method !== 'GET') {
-          return new Response(getErrorMessage('METHOD_NOT_ALLOWED', locale), {
-            status: 405,
-            headers: {
-              'Allow': 'GET',
-              ...getSecurityHeaders(request)
-            }
-          });
-        }
+        const commonJsMethodCheck = ensureGetMethod(request, locale, getSecurityHeaders, getErrorMessage);
+        if (commonJsMethodCheck) return commonJsMethodCheck;
         const cached = await caches.default.match(request);
         if (cached) return cached;
         const cmnEtag = `"common-${ASSET_VERSION}"`;
-        if (request.headers.get('if-none-match') === cmnEtag) {
-          return new Response(null, { status: 304, headers: { ...getSecurityHeaders(request), ETag: cmnEtag } });
-        }
-        const commonResp = new Response(minifyJS(getCommonJS()), {
+  const commonNotMod = notModifiedIfMatch(request, cmnEtag, getSecurityHeaders);
+  if (commonNotMod) return commonNotMod;
+  const commonResp = new globalThis.Response(minifyJS(getCommonJS()), {
           headers: {
             'Content-Type': 'application/javascript',
             'Cache-Control': 'public, max-age=31536000, immutable',
@@ -625,22 +422,15 @@ ${sitemapUrls}</urlset>`;
       }
 
       if (pathname === '/js/clientLocalization.js') {
-        if (request.method !== 'GET') {
-          return new Response(getErrorMessage('METHOD_NOT_ALLOWED', locale), {
-            status: 405,
-            headers: {
-              'Allow': 'GET',
-              ...getSecurityHeaders(request)
-            }
-          });
-        }
+        const clientLocMethodCheck = ensureGetMethod(request, locale, getSecurityHeaders, getErrorMessage);
+        if (clientLocMethodCheck) return clientLocMethodCheck;
 
         // Extract locale from Referer header (e.g., https://securememo.app/en/about.html -> 'en')
         let jsLocale = 'en';
         const referer = request.headers.get('referer');
         if (referer) {
           try {
-            const refererUrl = new URL(referer);
+            const refererUrl = new globalThis.URL(referer);
             const refererLocaleInfo = extractLocaleFromPath(refererUrl.pathname);
             if (refererLocaleInfo.locale && getSupportedLocales().includes(refererLocaleInfo.locale)) {
               jsLocale = refererLocaleInfo.locale;
@@ -654,7 +444,7 @@ ${sitemapUrls}</urlset>`;
         secHeaders['Vary'] = 'Origin, Referer';
 
         // Edge cache by synthetic key including locale + version
-        const cacheKeyUrl = new URL('/js/clientLocalization.js', url.origin);
+  const cacheKeyUrl = new globalThis.URL('/js/clientLocalization.js', url.origin);
         cacheKeyUrl.searchParams.set('locale', jsLocale);
         cacheKeyUrl.searchParams.set('v', ASSET_VERSION);
         const cacheMatch = await caches.default.match(cacheKeyUrl.toString());
@@ -662,9 +452,9 @@ ${sitemapUrls}</urlset>`;
 
         const locEtag = `"clientloc-${ASSET_VERSION}-${jsLocale}"`;
         if (request.headers.get('if-none-match') === locEtag) {
-          return new Response(null, { status: 304, headers: { ...secHeaders, ETag: locEtag } });
+          return new globalThis.Response(null, { status: 304, headers: { ...secHeaders, ETag: locEtag } });
         }
-        const locResp = new Response(minifyJS(getClientLocalizationJS(jsLocale)), {
+  const locResp = new globalThis.Response(minifyJS(getClientLocalizationJS(jsLocale)), {
           headers: {
             'Content-Type': 'application/javascript',
             'Cache-Control': 'public, max-age=31536000, immutable',
@@ -677,15 +467,8 @@ ${sitemapUrls}</urlset>`;
       }
 
       // Route page requests
-      if (request.method !== 'GET') {
-        return new Response(getErrorMessage('METHOD_NOT_ALLOWED', locale), {
-          status: 405,
-          headers: {
-            'Allow': 'GET',
-            ...getSecurityHeaders(request)
-          }
-        });
-      }
+  const pageMethodCheck = ensureGetMethod(request, locale, getSecurityHeaders, getErrorMessage);
+  if (pageMethodCheck) return pageMethodCheck;
 
       let response;
       // Nonce for HTML responses (injected into CSP and script tags)
@@ -698,10 +481,9 @@ ${sitemapUrls}</urlset>`;
         // Support browser revalidation via strong ETag
         const pageKeyEarly = pathWithoutLocale === '/' ? 'home' : pathWithoutLocale.replace(/^\//, '').replace(/\W+/g, '-');
         const expectedETag = `"html-${ASSET_VERSION}-${locale}-${pageKeyEarly}"`;
-        if (request.headers.get('if-none-match') === expectedETag) {
-          return new Response(null, { status: 304, headers: { ...getSecurityHeaders(request), ETag: expectedETag } });
-        }
-        const cacheKeyUrl = new URL(pathname, url.origin);
+  const pageNotMod = notModifiedIfMatch(request, expectedETag, getSecurityHeaders);
+  if (pageNotMod) return pageNotMod;
+  const cacheKeyUrl = new globalThis.URL(pathname, url.origin);
         cacheKeyUrl.searchParams.set('v', ASSET_VERSION);
         const cachedHtml = await caches.default.match(cacheKeyUrl.toString());
         if (cachedHtml) {
@@ -750,7 +532,7 @@ ${sitemapUrls}</urlset>`;
           cacheHeaders = { 'Cache-Control': 'public, max-age=604800' };
           break;
         default:
-          return new Response(getErrorMessage('NOT_FOUND', locale), {
+          return new globalThis.Response(getErrorMessage('NOT_FOUND', locale), {
             status: 404,
             headers: getSecurityHeaders(request)
           });
@@ -759,7 +541,7 @@ ${sitemapUrls}</urlset>`;
       // Safe HTML content: response variable contains trusted, server-generated HTML
       // that has been processed through addAssetVersionsToHTML() and template replacements
       // with only trusted values. No user input is injected at this point.
-      const htmlResp = new Response(response, {
+  const htmlResp = new globalThis.Response(response, {
         headers: {
           'Content-Type': 'text/html',
           ...cacheHeaders,
@@ -769,7 +551,7 @@ ${sitemapUrls}</urlset>`;
 
       // Store cacheable HTML at edge with versioned key; skip create/read pages
       if (isCacheablePage) {
-        const cacheKeyUrl = new URL(pathname, url.origin);
+  const cacheKeyUrl = new globalThis.URL(pathname, url.origin);
         cacheKeyUrl.searchParams.set('v', ASSET_VERSION);
         // Add a simple ETag so browsers can revalidate too
         const pageKey = pathWithoutLocale === '/' ? 'home' : pathWithoutLocale.replace(/^\//, '').replace(/\W+/g, '-');
@@ -782,7 +564,7 @@ ${sitemapUrls}</urlset>`;
       }
       return htmlResp;
     } catch (error) {
-      return new Response(getErrorMessage('INTERNAL_SERVER_ERROR', 'en'), {
+  return new globalThis.Response(getErrorMessage('INTERNAL_SERVER_ERROR', 'en'), {
         status: 500,
         headers: getSecurityHeaders(request)
       });
@@ -795,7 +577,7 @@ ${sitemapUrls}</urlset>`;
       const result = await handleCleanupMemos(env);
       return result;
     } catch (error) {
-      return new Response(getErrorMessage('CLEANUP_FAILED', 'en'), { status: 500 });
+  return new globalThis.Response(getErrorMessage('CLEANUP_FAILED', 'en'), { status: 500 });
     }
   }
 };
