@@ -11,14 +11,14 @@
     "deploy:prod": "wrangler deploy",
     "db:create": "wrangler d1 create my-database",
     "db:migrate": "wrangler d1 execute my-database --file=./db/schema.sql",
-    "audit": "npm audit",
+  "audit": "npm audit",
   "lint": "eslint src/",
   "lint:fix": "eslint src/ --fix",
   "test": "vitest run",
   "test:lifecycle": "node tests/memo.lifecycle.test.js"
   },
   "devDependencies": {
-    "wrangler": "^4.28.0",
+  "wrangler": "^4.28.0",
   "eslint": "^8.57.0",
   "vitest": "^1.6.0"
   },
