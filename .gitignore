@@ -112,23 +112,10 @@ Thumbs.db
 # Local development
 .local/ 
 pages/_routes.json
-pages/android-chrome-192x192.png
-pages/android-chrome-512x512.png
-pages/apple-touch-icon.png
-pages/favicon.ico
 pages/build.js
-deploy.sh
-src/schemas/
-src/schemas/confirm-delete.openapi.yaml
-src/schemas/read-memo.openapi.yaml
-src/schemas/create-memo.openapi.yaml
-.github/instructions/*
-.github/instructions/
 
-
-#Ignore vscode AI rules
-.github/instructions/codacy.instructions.md
-.codacy/codacy.yaml
-.eslintrc.js
-.codacy/cli.sh
-.eslintrc.json
+# (The following removed patterns would hide important tracked files)
+# deploy.sh (kept tracked)
+# src/schemas/* (API schemas should be versioned)
+# .github/instructions/* (workflow instructions/configs should be versioned)
+# ESLint & Codacy config files should be tracked
