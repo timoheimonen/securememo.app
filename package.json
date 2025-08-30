@@ -2,7 +2,6 @@
   "name": "cloudflare-workers-d1",
   "version": "1.1.0",
   "description": "Cloudflare Workers with D1 database project",
-  "type": "module",
   "main": "src/index.js",
   "scripts": {
     "dev": "wrangler dev",
@@ -11,21 +10,13 @@
     "deploy:prod": "wrangler deploy",
     "db:create": "wrangler d1 create my-database",
     "db:migrate": "wrangler d1 execute my-database --file=./db/schema.sql",
-  "audit": "npm audit",
-  "audit:high": "npm audit --audit-level=high",
-  "lint": "eslint src/",
-  "lint:fix": "eslint src/ --fix",
-  "lint:security": "eslint --ext .js src/",
-  "test": "vitest run",
-  "test:coverage": "vitest run --coverage",
-  "test:lifecycle": "node tests/memo.lifecycle.test.js"
+    "audit": "npm audit",
+    "lint": "eslint src/",
+    "lint:fix": "eslint src/ --fix"
   },
   "devDependencies": {
-  "wrangler": "^4.28.0",
-  "eslint": "^8.57.0",
-  "eslint-plugin-security": "^1.7.1",
-  "vitest": "^1.6.1",
-  "@vitest/coverage-v8": "^1.6.1"
+    "wrangler": "^4.28.0",
+    "eslint": "^8.57.0"
   },
   "keywords": [
     "cloudflare",
