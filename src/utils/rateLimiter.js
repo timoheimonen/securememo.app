@@ -10,9 +10,10 @@
  */
 export async function hashIp(ip) {
   if (!ip) return null; // Handle missing IP
-  const encoder = new TextEncoder();
+  // Use explicit globalThis for Worker runtime compatibility & to satisfy lint (no-undef)
+  const encoder = new globalThis.TextEncoder();
   const data = encoder.encode(ip);
-  const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+  const hashBuffer = await globalThis.crypto.subtle.digest('SHA-256', data);
   const hashArray = Array.from(new Uint8Array(hashBuffer));
   return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
 }

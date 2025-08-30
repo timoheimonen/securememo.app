@@ -1,3 +1,6 @@
+/* eslint-env browser */
+// Bind DOM globals explicitly for static analysis without relying on implicit environment inference
+const { window: _window, document: _document } = globalThis;
 // Client-side localization utility for securememo.app
 // Privacy-first approach: uses only URL-based locale detection
 // No cookies, localStorage, or browser storage used
@@ -41,7 +44,7 @@ function safeGetProperty(obj, key) {
  * @returns {string} Current locale code
  */
 export function getCurrentLocale() {
-  const pathname = window.location.pathname;
+  const pathname = _window.location.pathname;
   const segments = pathname.replace(/^\/+/, '').split('/');
   
   if (segments.length > 0 && isLocaleSupported(segments[0])) {
@@ -147,7 +150,7 @@ export function localizeUrl(path, locale = null) {
  * Update navigation links to be locale-aware
  */
 export function updateNavigationLinks() {
-  const navLinks = document.querySelectorAll('.nav-link[href]');
+  const navLinks = _document.querySelectorAll('.nav-link[href]');
   
   navLinks.forEach(link => {
     const href = link.getAttribute('href');
@@ -167,7 +170,7 @@ export function updateNavigationLinks() {
  * Update logo link to be locale-aware
  */
 export function updateLogoLink() {
-  const logoLink = document.querySelector('.nav-logo');
+  const logoLink = _document.querySelector('.nav-logo');
   if (logoLink) {
     logoLink.setAttribute('href', localizeUrl('/'));
   }
@@ -177,7 +180,7 @@ export function updateLogoLink() {
  * Update all internal links to be locale-aware
  */
 export function updateInternalLinks() {
-  const links = document.querySelectorAll('a[href^="/"]');
+  const links = _document.querySelectorAll('a[href^="/"]');
   
   links.forEach(link => {
     const href = link.getAttribute('href');
@@ -208,7 +211,7 @@ export function initLocalization() {
   updateInternalLinks();
   
   // Set document language attribute
-  document.documentElement.setAttribute('lang', getCurrentLocale());
+  _document.documentElement.setAttribute('lang', getCurrentLocale());
 }
 
 // Re-export functions from localization.js for consistency
@@ -419,7 +422,7 @@ export function localizeUrl(path, locale = null) {
  * Update navigation links to be locale-aware
  */
 export function updateNavigationLinks() {
-  const navLinks = document.querySelectorAll('.nav-link[href]');
+  const navLinks = _document.querySelectorAll('.nav-link[href]');
   
   navLinks.forEach(link => {
     const href = link.getAttribute('href');
@@ -439,7 +442,7 @@ export function updateNavigationLinks() {
  * Update logo link to be locale-aware
  */
 export function updateLogoLink() {
-  const logoLink = document.querySelector('.nav-logo');
+  const logoLink = _document.querySelector('.nav-logo');
   if (logoLink) {
     logoLink.setAttribute('href', localizeUrl('/'));
   }
@@ -449,7 +452,7 @@ export function updateLogoLink() {
  * Update all internal links to be locale-aware
  */
 export function updateInternalLinks() {
-  const links = document.querySelectorAll('a[href^="/"]');
+  const links = _document.querySelectorAll('a[href^="/"]');
   
   links.forEach(link => {
     const href = link.getAttribute('href');
@@ -480,7 +483,7 @@ export function initLocalization() {
   updateInternalLinks();
   
   // Set document language attribute
-  document.documentElement.setAttribute('lang', getCurrentLocale());
+  _document.documentElement.setAttribute('lang', getCurrentLocale());
 }
 
 `;

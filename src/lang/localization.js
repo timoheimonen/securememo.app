@@ -2,6 +2,9 @@
 // Supports privacy-first localization using only URL paths
 // Default locale: /en, no cookies or browser storage used
 
+/* eslint-env worker, serviceworker */
+// Bind URL constructor from global scope for lint clarity
+const { URL } = globalThis;
 import { TRANSLATIONS } from './translations.js';
 
 // Central allowlist of locales; used for both validation and safe translation extraction.
