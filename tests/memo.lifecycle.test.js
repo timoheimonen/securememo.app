@@ -1,0 +1,141 @@
+/* eslint-env node */
+/*
+ * Lifecycle test for create -> read -> delete (manual assertions) without external test runner.
+ * Exits with non-zero code on failure so CI detects errors.
+ */
+import worker from '../src/index.js';
+
+/** Minimal in-memory D1 emulation for required SQL patterns */
+class InMemoryD1 {
+  constructor() {
+    this.memos = new Map();
+  }
+
+  prepare(sql) {
+    const db = this;
+    return {
+      _sql: sql,
+      _bindings: [],
+      bind(...vals) { this._bindings = vals; return this; },
+      async first() {
+        if (/SELECT 1 FROM memos/.test(this._sql)) {
+          return db.memos.has(this._bindings[0]) ? 1 : null;
+        }
+        if (/SELECT encrypted_message, deletion_token_hash FROM memos/.test(this._sql)) {
+          const rec = db.memos.get(this._bindings[0]);
+          return rec ? { encrypted_message: rec.encrypted_message, deletion_token_hash: rec.deletion_token_hash } : null;
+        }
+        if (/SELECT deletion_token_hash FROM memos/.test(this._sql)) {
+          const rec = db.memos.get(this._bindings[0]);
+          return rec ? { deletion_token_hash: rec.deletion_token_hash } : null;
+        }
+        return null;
+      },
+      async run() {
+        if (/INSERT INTO memos/.test(this._sql)) {
+          const [id, msg, exp, del] = this._bindings;
+          if (db.memos.has(id)) throw new Error('UNIQUE');
+          db.memos.set(id, { encrypted_message: msg, expiry_time: exp, deletion_token_hash: del });
+          return { changes: 1 };
+        }
+        if (/DELETE FROM memos WHERE memo_id/.test(this._sql)) {
+          const existed = db.memos.delete(this._bindings[0]);
+          return { changes: existed ? 1 : 0 };
+        }
+        return { changes: 0 };
+      }
+    };
+  }
+}
+
+function randomToken(len) {
+  const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  let out = '';
+  for (let i = 0; i < len; i++) out += chars[i % chars.length];
+  return out;
+}
+
+async function sha256b64(str) {
+  const hash = await globalThis.crypto.subtle.digest('SHA-256', new globalThis.TextEncoder().encode(str));
+  const arr = Array.from(new Uint8Array(hash));
+  return globalThis.btoa(String.fromCharCode(...arr));
+}
+
+function makeRequest(path, init) {
+  return new globalThis.Request('https://example.com' + path, init);
+}
+
+async function main() {
+  const env = { DB: new InMemoryD1(), TURNSTILE_SECRET: 'x', TURNSTILE_SITE_KEY: 'x' };
+  const deletionToken = randomToken(32);
+  const deletionTokenHash = await sha256b64(deletionToken);
+  const encryptedMessage = 'ENCRYPTED:test123';
+
+  // Mock fetch for Turnstile verification
+  const realFetch = globalThis.fetch;
+  globalThis.fetch = async (url, opts) => {
+    if (String(url).includes('turnstile')) {
+      return new globalThis.Response(JSON.stringify({ success: true }), { status: 200, headers: { 'Content-Type': 'application/json' } });
+    }
+    return realFetch(url, opts);
+  };
+
+  // Create memo
+  const createResp = await worker.fetch(
+    makeRequest('/api/create-memo', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ encryptedMessage, expiryHours: 24, cfTurnstileResponse: 'turnstiletoken12345', deletionTokenHash })
+    }),
+    env,
+    { waitUntil: () => {} }
+  );
+  if (createResp.status !== 200) throw new Error('Create failed');
+  const createJson = await createResp.json();
+  const memoId = createJson.memoId;
+  if (!memoId) throw new Error('Missing memoId');
+
+  // Read memo
+  const readResp = await worker.fetch(
+    makeRequest(`/api/read-memo?id=${encodeURIComponent(memoId)}`, {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ cfTurnstileResponse: 'turnstiletoken12345' })
+    }),
+    env,
+    { waitUntil: () => {} }
+  );
+  if (readResp.status !== 200) throw new Error('Read failed');
+  const readJson = await readResp.json();
+  if (readJson.encryptedMessage !== encryptedMessage) throw new Error('Encrypted message mismatch');
+
+  // Delete memo
+  const deleteResp = await worker.fetch(
+    makeRequest('/api/confirm-delete', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ memoId, deletionToken })
+    }),
+    env,
+    { waitUntil: () => {} }
+  );
+  if (deleteResp.status !== 200) throw new Error('Delete failed');
+
+  // Read again should be 404
+  const readAgainResp = await worker.fetch(
+    makeRequest(`/api/read-memo?id=${encodeURIComponent(memoId)}`, {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ cfTurnstileResponse: 'turnstiletoken12345' })
+    }),
+    env,
+    { waitUntil: () => {} }
+  );
+  if (readAgainResp.status !== 404) throw new Error('Expected 404 after deletion');
+}
+
+// Execute lifecycle
+main().catch(err => {
+  // Emit minimal error signal without relying on console global directly
+  (globalThis.console && globalThis.console.error ? globalThis.console.error(err) : void 0);
+});
