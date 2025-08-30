@@ -54,7 +54,7 @@ import { getClientLocalizationJS } from './lang/clientLocalization.js';
 import { sanitizeLocale } from './utils/validation.js';
 
 // Immutable asset version for cache-busting (bump on asset changes)
-const ASSET_VERSION = '20250829b';
+const ASSET_VERSION = '20250830';
 
 // (Minifiers moved to ./utils/minifiers.js)
 
