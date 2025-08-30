@@ -1,9 +1,9 @@
 /* eslint-env node */
-/* global describe, it */
 /*
  * Lifecycle test for create -> read -> delete (manual assertions) without external test runner.
  * Exits with non-zero code on failure so CI detects errors.
  */
+import { describe, it } from 'vitest';
 import worker from '../src/index.js';
 
 /** Minimal in-memory D1 emulation for required SQL patterns */
@@ -22,7 +22,7 @@ class InMemoryD1 {
         if (/SELECT 1 FROM memos/.test(this._sql)) {
           return db.memos.has(this._bindings[0]) ? 1 : null;
         }
-        if (/SELECT encrypted_message, deletion_token_hash FROM memos/.test(this._sql)) {
+  if (/SELECT[\s\S]*encrypted_message[\s\S]*deletion_token_hash[\s\S]*FROM[\s\S]*memos/.test(this._sql)) {
           const rec = db.memos.get(this._bindings[0]);
           return rec ? { encrypted_message: rec.encrypted_message, deletion_token_hash: rec.deletion_token_hash } : null;
         }
@@ -142,16 +142,11 @@ if (typeof describe === 'undefined') {
   });
 }
 
-// Vitest compatibility
-try {
-  // Dynamically access global describe/it if present
-  if (typeof describe !== 'undefined') {
-    // eslint-disable-next-line no-undef
-    describe('manual lifecycle (legacy script)', () => {
-      // eslint-disable-next-line no-undef
-      it('runs create->read->delete flow', async () => {
-        await lifecycleRun();
-      });
-    });
-  }
-} catch (_) {/* ignore */}
+// Vitest test suite (always register when run under Vitest)
+// eslint-disable-next-line no-undef
+describe('manual lifecycle (legacy script)', () => {
+  // eslint-disable-next-line no-undef
+  it('runs create->read->delete flow', async () => {
+    await lifecycleRun();
+  });
+});
