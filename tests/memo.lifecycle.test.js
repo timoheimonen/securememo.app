@@ -3,8 +3,17 @@
  * Lifecycle test for create -> read -> delete (manual assertions) without external test runner.
  * Exits with non-zero code on failure so CI detects errors.
  */
-import { describe, it } from 'vitest';
 import worker from '../src/index.js';
+
+// Polyfills for Node execution environment (outside Vitest runner)
+if (typeof globalThis.btoa !== 'function') {
+  /**
+   * Base64 encode a binary string (Node.js polyfill for browser btoa)
+   * @param {string} str
+   * @returns {string}
+   */
+  globalThis.btoa = (str) => globalThis.Buffer.from(str, 'binary').toString('base64');
+}
 
 /** Minimal in-memory D1 emulation for required SQL patterns */
 class InMemoryD1 {
@@ -135,18 +144,31 @@ export async function lifecycleRun() {
   if (readAgainResp.status !== 404) throw new Error('Expected 404 after deletion');
 }
 
-// If executed directly (node), run lifecycle. Under Vitest we create a test wrapper.
-if (typeof describe === 'undefined') {
-  lifecycleRun().catch(err => {
-    (globalThis.console && globalThis.console.error ? globalThis.console.error(err) : void 0);
-  });
+// If executed directly (node), run lifecycle. Under Vitest we dynamically register a test wrapper.
+const _proc = typeof globalThis.process !== 'undefined' ? globalThis.process : undefined;
+if (_proc && !_proc.env.VITEST) {
+  lifecycleRun()
+    .then(() => {
+      // Successful run; explicit exit for CI clarity
+      if (_proc && _proc.exit) _proc.exit(0); // Intentional process exit for CI script mode
+    })
+    .catch(err => {
+      if (globalThis.console && globalThis.console.error) globalThis.console.error(err);
+      if (_proc && _proc.exit) _proc.exit(1); // Intentional process exit for CI script mode
+    });
+} else {
+  // Running under Vitest (VITEST env var is set by the test runner)
+  (async () => {
+    try {
+      const { describe, it } = await import('vitest');
+      describe('manual lifecycle (legacy script)', () => {
+        it('runs create->read->delete flow', async () => {
+          await lifecycleRun();
+        });
+      });
+    } catch (e) {
+      // If vitest import fails outside runner, surface a clear error
+      if (globalThis.console && globalThis.console.error) globalThis.console.error('Vitest import failed:', e);
+    }
+  })();
 }
-
-// Vitest test suite (always register when run under Vitest)
-// eslint-disable-next-line no-undef
-describe('manual lifecycle (legacy script)', () => {
-  // eslint-disable-next-line no-undef
-  it('runs create->read->delete flow', async () => {
-    await lifecycleRun();
-  });
-});
