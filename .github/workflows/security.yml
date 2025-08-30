@@ -55,7 +55,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
       - name: Run Trivy
-        uses: aquasecurity/trivy-action@2b6a709711b54c2a62df4be8c5b91bf2ebfa8a47 # v0.20.0
+  # Pin to a stable released tag (avoid deleted commit SHA causing 404)
+  uses: aquasecurity/trivy-action@v0.24.0 # update from v0.20.0 due to missing commit
         with:
           scan-type: 'fs'
           ignore-unfixed: true
@@ -74,7 +75,12 @@ jobs:
       - name: Grep for obvious secrets
         run: |
           set -e
-          ! grep -RIE --line-number --color=always '(api_key|api-key|secret_key|secret-key|BEGIN RSA PRIVATE KEY|AWS_SECRET_ACCESS_KEY|-----BEGIN PRIVATE KEY-----)' . || (echo 'Potential secret pattern found. Inspect above output.' && exit 1)
+          # Exclude this workflow file to avoid self-matching the pattern definition line
+          ! grep -RIE --line-number --color=always \
+            --exclude '.github/workflows/security.yml' \
+            --exclude-dir 'node_modules' \
+            '(api_key|api-key|secret_key|secret-key|BEGIN RSA PRIVATE KEY|AWS_SECRET_ACCESS_KEY|-----BEGIN PRIVATE KEY-----)' . \
+            || (echo 'Potential secret pattern found. Inspect above output.' && exit 1)
 
   eslint-security:
     name: ESLint Security Lint
