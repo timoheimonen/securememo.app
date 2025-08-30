@@ -4,76 +4,12 @@
  * Exits with non-zero code on failure so CI detects errors. -
  */
 import worker from '../src/index.js';
+import { InMemoryD1, randomToken, sha256b64, makeRequest, mockTurnstileFetch } from './helpers/testUtils.js';
 // Vitest functions are imported conditionally only when running under the Vitest runner
 
-// Polyfills for Node execution environment (outside Vitest runner)
+// Polyfill btoa if missing (Node < 16 browsers)
 if (typeof globalThis.btoa !== 'function') {
-  /**
-   * Base64 encode a binary string (Node.js polyfill for browser btoa)
-   * @param {string} str
-   * @returns {string}
-   */
   globalThis.btoa = (str) => globalThis.Buffer.from(str, 'binary').toString('base64');
-}
-
-/** Minimal in-memory D1 emulation for required SQL patterns */
-class InMemoryD1 {
-  constructor() {
-    this.memos = new Map();
-  }
-
-  prepare(sql) {
-    const db = this;
-    return {
-      _sql: sql,
-      _bindings: [],
-      bind(...vals) { this._bindings = vals; return this; },
-      async first() {
-        if (/SELECT 1 FROM memos/.test(this._sql)) {
-          return db.memos.has(this._bindings[0]) ? 1 : null;
-        }
-  if (/SELECT[\s\S]*encrypted_message[\s\S]*deletion_token_hash[\s\S]*FROM[\s\S]*memos/.test(this._sql)) {
-          const rec = db.memos.get(this._bindings[0]);
-          return rec ? { encrypted_message: rec.encrypted_message, deletion_token_hash: rec.deletion_token_hash } : null;
-        }
-        if (/SELECT deletion_token_hash FROM memos/.test(this._sql)) {
-          const rec = db.memos.get(this._bindings[0]);
-          return rec ? { deletion_token_hash: rec.deletion_token_hash } : null;
-        }
-        return null;
-      },
-      async run() {
-        if (/INSERT INTO memos/.test(this._sql)) {
-          const [id, msg, exp, del] = this._bindings;
-          if (db.memos.has(id)) throw new Error('UNIQUE');
-          db.memos.set(id, { encrypted_message: msg, expiry_time: exp, deletion_token_hash: del });
-          return { changes: 1 };
-        }
-        if (/DELETE FROM memos WHERE memo_id/.test(this._sql)) {
-          const existed = db.memos.delete(this._bindings[0]);
-          return { changes: existed ? 1 : 0 };
-        }
-        return { changes: 0 };
-      }
-    };
-  }
-}
-
-function randomToken(len) {
-  const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-  let out = '';
-  for (let i = 0; i < len; i++) out += chars[i % chars.length];
-  return out;
-}
-
-async function sha256b64(str) {
-  const hash = await globalThis.crypto.subtle.digest('SHA-256', new globalThis.TextEncoder().encode(str));
-  const arr = Array.from(new Uint8Array(hash));
-  return globalThis.btoa(String.fromCharCode(...arr));
-}
-
-function makeRequest(path, init) {
-  return new globalThis.Request('https://example.com' + path, init);
 }
 
 export async function lifecycleRun() {
@@ -83,13 +19,7 @@ export async function lifecycleRun() {
   const encryptedMessage = 'ENCRYPTED:test123';
 
   // Mock fetch for Turnstile verification
-  const realFetch = globalThis.fetch;
-  globalThis.fetch = async (url, opts) => {
-    if (String(url).includes('turnstile')) {
-      return new globalThis.Response(JSON.stringify({ success: true }), { status: 200, headers: { 'Content-Type': 'application/json' } });
-    }
-    return realFetch(url, opts);
-  };
+  const restoreFetch = mockTurnstileFetch();
 
   // Create memo
   const createResp = await worker.fetch(
@@ -143,6 +73,9 @@ export async function lifecycleRun() {
     { waitUntil: () => {} }
   );
   if (readAgainResp.status !== 404) throw new Error('Expected 404 after deletion');
+
+  // Restore fetch to avoid side effects when run under Vitest
+  restoreFetch();
 }
 
 // If executed directly (node) run lifecycle once and exit; under Vitest we expose a proper suite.

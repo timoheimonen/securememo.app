@@ -15,91 +15,15 @@
  NOTE: This is a lightweight test; it does not run real crypto, only validates server contract.
 */
 import { describe, it, expect, beforeAll } from 'vitest';
-
-/**
- * Minimal in-memory D1 emulation for the subset of SQL patterns exercised by the tests.
- * This avoids adding external dependencies while giving deterministic behavior.
- */
-class InMemoryD1 {
-  constructor() { this.memos = new Map(); }
-  prepare(sql) {
-    const db = this;
-    return {
-      _sql: sql,
-      _bindings: [],
-      bind(...vals) { this._bindings = vals; return this; },
-      async first() {
-  if (/SELECT 1 FROM memos/.test(this._sql)) {
-          return db.memos.has(this._bindings[0]) ? 1 : null;
-        }
-  if (/SELECT encrypted_message, deletion_token_hash FROM memos/.test(this._sql.replace(/\s+/g,' '))) {
-          const rec = db.memos.get(this._bindings[0]);
-          return rec ? { encrypted_message: rec.encrypted_message, deletion_token_hash: rec.deletion_token_hash } : null;
-        }
-  if (/SELECT deletion_token_hash FROM memos/.test(this._sql)) {
-          const rec = db.memos.get(this._bindings[0]);
-            return rec ? { deletion_token_hash: rec.deletion_token_hash } : null;
-        }
-        return null;
-      },
-      async run() {
-        if (/INSERT INTO memos/.test(this._sql)) {
-          const [id, msg, exp, del] = this._bindings;
-          if (db.memos.has(id)) throw new Error('UNIQUE constraint failed: memos.memo_id');
-          db.memos.set(id, { encrypted_message: msg, expiry_time: exp, deletion_token_hash: del });
-          return { changes: 1 };
-        }
-        if (/DELETE FROM memos WHERE memo_id/.test(this._sql)) {
-          const existed = db.memos.delete(this._bindings[0]);
-          return { changes: existed ? 1 : 0 };
-        }
-        return { changes: 0 };
-      }
-    };
-  }
-}
-
-/**
- * Generate a deterministic pseudo-random token (simple for test purposes only).
- * @param {number} len length
- * @returns {string}
- */
-function randomToken(len) {
-  const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-  let out = '';
-  for (let i = 0; i < len; i++) out += chars[i % chars.length];
-  return out;
-}
-
-/**
- * Compute SHA-256 and return base64 encoding.
- * @param {string} str input
- * @returns {Promise<string>} base64 hash
- */
-async function sha256b64(str) {
-  const hash = await globalThis.crypto.subtle.digest('SHA-256', new globalThis.TextEncoder().encode(str));
-  return globalThis.Buffer.from(new Uint8Array(hash)).toString('base64');
-}
-
-function makeRequest(path, init) {
-  return new globalThis.Request('https://example.com' + path, init);
-}
+import { InMemoryD1, randomToken, sha256b64, makeRequest, mockTurnstileFetch } from './helpers/testUtils.js';
 
 let env; // shared env per test file
 let worker; // worker module
 
 beforeAll(async () => {
-  // Mock Turnstile verification fetch BEFORE importing worker so handler uses mocked fetch
-  const realFetch = globalThis.fetch;
-  globalThis.fetch = async (url, opts) => {
-    if (String(url).includes('turnstile')) {
-      return new globalThis.Response(JSON.stringify({ success: true }), { status: 200, headers: { 'Content-Type': 'application/json' } });
-    }
-    return realFetch(url, opts);
-  };
-  // Dynamically import worker after mocks (single import)
+  mockTurnstileFetch();
   const mod = await import('../src/index.js');
-  worker = mod.default || mod; // Worker export style compatibility
+  worker = mod.default || mod;
 });
 
 describe('memo lifecycle e2e', () => {
