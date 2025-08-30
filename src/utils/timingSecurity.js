@@ -9,7 +9,8 @@
  */
 function getRandomDelay(minMs = 50, maxMs = 100) {
   const array = new Uint32Array(1);
-  crypto.getRandomValues(array);
+  // Use globalThis to avoid ESLint no-undef in Worker environment
+  globalThis.crypto.getRandomValues(array);
   const randomValue = array[0] / (0xFFFFFFFF + 1);
   return Math.floor(randomValue * (maxMs - minMs + 1)) + minMs;
 }
@@ -22,7 +23,7 @@ function getRandomDelay(minMs = 50, maxMs = 100) {
  */
 export async function addArtificialDelay(minMs = 50, maxMs = 100) {
   const delay = getRandomDelay(minMs, maxMs);
-  return new Promise(resolve => setTimeout(resolve, delay));
+  return new Promise(resolve => globalThis.setTimeout(resolve, delay));
 }
 
 // Standardized response delay window for security-sensitive paths (enumeration resistance)

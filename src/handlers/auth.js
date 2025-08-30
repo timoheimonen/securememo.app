@@ -1,3 +1,16 @@
+/* eslint-env worker, browser, serviceworker */
+// Explicitly reference runtime-provided globals to satisfy static analysis (Codacy ESLint no-undef)
+// without disabling the rule. This is a safe destructuring of globalThis provided by the
+// Cloudflare Workers / browser environment. Only symbols actually used in this module are listed.
+const {
+    Response,
+    fetch,
+    URL,
+    URLSearchParams,
+    TextEncoder,
+    crypto,
+    btoa
+} = globalThis;
 import {
     validateMemoIdSecure,
     validateAndSanitizeEncryptedMessageSecure,

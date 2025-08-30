@@ -1,4 +1,6 @@
-/* eslint-env worker */
+/* eslint-env worker, serviceworker */
+// Explicit binding of selected worker globals for static analysis clarity
+const { caches } = globalThis;
 import { getStyles } from './styles/styles.js';
 import { getSupportedLocales } from './lang/localization.js';
 import { minifyJS, minifyCSS } from './utils/minifiers.js';
