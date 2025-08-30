@@ -4,8 +4,7 @@
  * Exits with non-zero code on failure so CI detects errors.
  */
 import worker from '../src/index.js';
-// When running under Vitest register tests synchronously so collection finds them
-import { describe, it } from 'vitest';
+// Vitest functions are imported conditionally only when running under the Vitest runner
 
 // Polyfills for Node execution environment (outside Vitest runner)
 if (typeof globalThis.btoa !== 'function') {
@@ -152,7 +151,9 @@ if (_proc && !_proc.env.VITEST) {
   lifecycleRun()
     .then(() => { if (_proc && _proc.exit) _proc.exit(0); })
     .catch(err => { if (globalThis.console && globalThis.console.error) globalThis.console.error(err); if (_proc && _proc.exit) _proc.exit(1); });
-} else if (typeof describe === 'function' && typeof it === 'function') {
+} else if (typeof _proc !== 'undefined' && _proc.env.VITEST) {
+  // Top-level await is supported (ESM). Import vitest only inside the runner environment.
+  const { describe, it } = await import('vitest');
   describe('manual lifecycle (legacy script)', () => {
     it('runs create->read->delete flow', async () => {
       await lifecycleRun();
