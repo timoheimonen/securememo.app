@@ -17,6 +17,7 @@
   "lint:fix": "eslint src/ --fix",
   "lint:security": "eslint --ext .js src/",
   "test": "vitest run",
+  "test:coverage": "vitest run --coverage",
   "test:lifecycle": "node tests/memo.lifecycle.test.js"
   },
   "devDependencies": {
