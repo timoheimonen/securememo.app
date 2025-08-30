@@ -39,76 +39,91 @@ securememo.app will run the main branch of this repo.
 
 ```
 securememo/
-├── CODE_OF_CONDUCT.md          # Community guidelines
-├── CONTRIBUTING.md             # Contribution guidelines
-├── LICENSE                     # License
-├── README.md                   # Project documentation
-├── SECURITY.md                 # Security policy and vulnerability reporting
-├── package.json                # Project dependencies and configuration
-├── wrangler.toml               # Cloudflare Workers configuration
+├── CODE_OF_CONDUCT.md            # Community guidelines
+├── CONTRIBUTING.md               # Contribution guidelines
+├── LICENSE                       # License
+├── README.md                     # Project documentation
+├── SECURITY.md                   # Security policy & vuln reporting
+├── deploy.sh                     # Deployment script (wrangler publish + migrations)
+├── package.json                  # Dependencies & scripts
+├── package-lock.json             # Locked dependency tree
+├── wrangler.toml                 # Cloudflare Workers configuration
+├── .eslintrc.json                # ESLint configuration
+├── .gitattributes                # Git attributes (e.g. LF normalization)
+├── .codacy/                      # Codacy configuration & metadata
+├── .github/                      # GitHub configs (workflows, instructions)
 ├── db/
-│   └── schema.sql              # Database schema definition
-├── public/                     # Static assets
+│   └── schema.sql                # D1 database schema definition
+├── public/                       # Static assets served as-is
 │   ├── android-chrome-192x192.png
 │   ├── android-chrome-512x512.png
 │   ├── apple-touch-icon.png
 │   ├── favicon.ico
 │   └── robots.txt
-├── screenshots/                # Screenshots
-│   ├── screenshot_001.png      # Screenshot 001
-│   └── screenshot_002.png      # Screenshot 002
-└── src/
-    ├── index.js                # Main Worker entry point (routing, security headers, cron jobs)
-    ├── handlers/               # API request handlers
-    │   └── auth.js             # Handles memo creation, reading, confirmation, and cleanup
-    ├── styles/                 # CSS styling
-    │   └── styles.js           # Dynamic CSS generation
-    ├── templates/              # HTML and JavaScript templates
-    │   ├── js.js               # JavaScript templates (e.g., create/read memo logic)
-    │   └── pages.js            # HTML page templates (e.g., index, about, create/read memo)
-    ├── lang/                   # Localization and translation files
-    │   ├── ar_translations.js  # Arabic translations
-    │   ├── bn_translations.js  # Bengali translations
-    │   ├── clientLocalization.js # Client-side localization utilities
-    │   ├── cs_translations.js  # Czech translations
-    │   ├── da_translations.js  # Danish translations
-    │   ├── de_translations.js  # German translations
-    │   ├── el_translations.js  # Greek translations
-    │   ├── en_translations.js  # English translations
-    │   ├── es_translations.js  # Spanish translations
-    │   ├── fi_translations.js  # Finnish translations
-    │   ├── fr_translations.js  # French translations
-    │   ├── hi_translations.js  # Hindi translations
-    │   ├── hu_translations.js  # Hungarian translations
-    │   ├── id_translations.js  # Indonesian translations
-    │   ├── it_translations.js  # Italian translations
-    │   ├── ja_translations.js  # Japanese translations
-    │   ├── ko_translations.js  # Korean translations
-    │   ├── language_names.js   # Language names utility
-    │   ├── localization.js     # Server-side localization utilities
-    │   ├── nl_translations.js  # Dutch translations
-    │   ├── no_translations.js  # Norwegian translations
-    │   ├── pl_translations.js  # Polish translations
-    │   ├── ptBR_translations.js # Portuguese (Brazil) translations
-    │   ├── ptPT_translations.js # Portuguese (Portugal) translations
-    │   ├── ro_translations.js  # Romanian translations
-    │   ├── ru_translations.js  # Russian translations
-    │   ├── sv_translations.js  # Swedish translations
-    │   ├── th_translations.js  # Thai translations
-    │   ├── tl_translations.js  # Tagalog translations
-    │   ├── tr_translations.js  # Turkish translations
-    │   ├── translations.js     # Translation registry
-    │   ├── uk_translations.js  # Ukrainian translations
-    │   ├── vi_translations.js  # Vietnamese translations
-    │   └── zh_translations.js  # Chinese translations
-    └── utils/                  # Utility functions
-        ├──  errorMessages.js    # Centralized error handling with generic messages
-        ├──  http.js             # HTTP helper utilities (response formatting, headers)
-        ├── minifiers.js        # Minification helpers for scripts/styles
-        ├── rateLimiter.js      # Rate limiting utilities
-        ├──  securityHeaders.js  # Construction of strict security header set
-        ├── timingSecurity.js   # Timing attack protections (constant-time comparisons, delays)
-        └── validation.js       # Input validation, sanitization, and secure checks
+├── screenshots/                  # Visual documentation
+│   ├── screenshot_001.png
+│   └── screenshot_002.png
+├── src/
+│   ├── index.js                  # Worker entry: routing, cron, security headers
+│   ├── handlers/
+│   │   └── auth.js               # Memo lifecycle (create/read/confirm/cleanup)
+│   ├── schemas/                  # OpenAPI specs for endpoints
+│   │   ├── confirm-delete.openapi.yaml
+│   │   ├── create-memo.openapi.yaml
+│   │   └── read-memo.openapi.yaml
+│   ├── styles/
+│   │   └── styles.js             # Minimal CSS (string templates)
+│   ├── templates/                # HTML & client JS templates
+│   │   ├── js.js                 # Front-end logic snippets (encryption, form handling)
+│   │   └── pages.js              # Page layout templates
+│   ├── lang/                     # Localization (auto-translated + helpers)
+│   │   ├── clientLocalization.js # Client-side localization utilities
+│   │   ├── language_names.js     # Language name mapping
+│   │   ├── localization.js       # Server-side localization utilities
+│   │   ├── translations.js       # Translation registry export
+│   │   ├── ar_translations.js    # Arabic
+│   │   ├── bn_translations.js    # Bengali
+│   │   ├── cs_translations.js    # Czech
+│   │   ├── da_translations.js    # Danish
+│   │   ├── de_translations.js    # German
+│   │   ├── el_translations.js    # Greek
+│   │   ├── en_translations.js    # English
+│   │   ├── es_translations.js    # Spanish
+│   │   ├── fi_translations.js    # Finnish
+│   │   ├── fr_translations.js    # French
+│   │   ├── hi_translations.js    # Hindi
+│   │   ├── hu_translations.js    # Hungarian
+│   │   ├── id_translations.js    # Indonesian
+│   │   ├── it_translations.js    # Italian
+│   │   ├── ja_translations.js    # Japanese
+│   │   ├── ko_translations.js    # Korean
+│   │   ├── nl_translations.js    # Dutch
+│   │   ├── no_translations.js    # Norwegian
+│   │   ├── pl_translations.js    # Polish
+│   │   ├── ptBR_translations.js  # Portuguese (Brazil)
+│   │   ├── ptPT_translations.js  # Portuguese (Portugal)
+│   │   ├── ro_translations.js    # Romanian
+│   │   ├── ru_translations.js    # Russian
+│   │   ├── sv_translations.js    # Swedish
+│   │   ├── th_translations.js    # Thai
+│   │   ├── tl_translations.js    # Tagalog
+│   │   ├── tr_translations.js    # Turkish
+│   │   ├── uk_translations.js    # Ukrainian
+│   │   ├── vi_translations.js    # Vietnamese
+│   │   └── zh_translations.js    # Chinese
+│   └── utils/                    # Reusable utilities
+│       ├── errorMessages.js      # Generic error messaging (no sensitive leaks)
+│       ├── http.js               # HTTP helpers (responses, status)
+│       ├── minifiers.js          # Lightweight JS/CSS minimization
+│       ├── rateLimiter.js        # Rate limiting primitives
+│       ├── securityHeaders.js    # CSP & security header construction
+│       ├── timingSecurity.js     # Timing attack mitigations
+│       └── validation.js         # Input validation & sanitization
+└── tests/                        # Automated tests (lifecycle & E2E)
+    ├── memo.lifecycle.test.js
+    ├── memo.e2e.test.js
+    └── helpers/
+        └── testUtils.js
 ```
 
 ## Code Quality
