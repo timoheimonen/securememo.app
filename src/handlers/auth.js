@@ -438,7 +438,7 @@ export async function handleCreateMemo(request, env) {
         await uniformResponseDelay();
         return new Response(JSON.stringify({
             success: true,
-            memoId: memoId
+            memoId
         }), {
             status: 200,
             headers: {
