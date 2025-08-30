@@ -26,6 +26,9 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Dependency audit (fail on high)
+        run: npm run audit:high
+
       - name: Lint
         run: npm run lint
 

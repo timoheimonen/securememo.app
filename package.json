@@ -12,14 +12,17 @@
     "db:create": "wrangler d1 create my-database",
     "db:migrate": "wrangler d1 execute my-database --file=./db/schema.sql",
   "audit": "npm audit",
+  "audit:high": "npm audit --audit-level=high",
   "lint": "eslint src/",
   "lint:fix": "eslint src/ --fix",
+  "lint:security": "eslint --ext .js src/",
   "test": "vitest run",
   "test:lifecycle": "node tests/memo.lifecycle.test.js"
   },
   "devDependencies": {
   "wrangler": "^4.28.0",
   "eslint": "^8.57.0",
+  "eslint-plugin-security": "^1.7.1",
   "vitest": "^1.6.0"
   },
   "keywords": [

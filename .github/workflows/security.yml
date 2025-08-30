@@ -1,0 +1,93 @@
+name: Security Suite
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  schedule:
+    - cron: '0 3 * * *'
+
+permissions:
+  contents: read
+  security-events: write
+
+jobs:
+  codeql:
+    name: CodeQL Analysis
+    runs-on: ubuntu-latest
+    permissions:
+      actions: read
+      contents: read
+      security-events: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@3ab4101902695724f9365a384f86c1074d94e18c # v3
+        with:
+          languages: javascript
+      - name: Autobuild
+        uses: github/codeql-action/autobuild@3ab4101902695724f9365a384f86c1074d94e18c # v3
+      - name: Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@3ab4101902695724f9365a384f86c1074d94e18c # v3
+
+  audit:
+    name: Dependency Audit (High+)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
+      - name: Setup Node
+        uses: actions/setup-node@60edb5dd545a775178f52524783378180af0d1f8 # v4
+        with:
+          node-version: 20
+          cache: npm
+      - name: Install
+        run: npm ci
+      - name: Audit High Severity
+        run: npm run audit:high
+
+  trivy:
+    name: Trivy FS Scan
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
+      - name: Run Trivy
+        uses: aquasecurity/trivy-action@2b6a709711b54c2a62df4be8c5b91bf2ebfa8a47 # v0.20.0
+        with:
+          scan-type: 'fs'
+          ignore-unfixed: true
+          severity: 'HIGH,CRITICAL'
+          exit-code: '1'
+          format: 'table'
+          security-checks: 'vuln,secret'
+          skip-dirs: 'node_modules/.cache'
+
+  secrets-lite:
+    name: Secret Patterns (fallback)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
+      - name: Grep for obvious secrets
+        run: |
+          set -e
+          ! grep -RIE --line-number --color=always '(api_key|api-key|secret_key|secret-key|BEGIN RSA PRIVATE KEY|AWS_SECRET_ACCESS_KEY|-----BEGIN PRIVATE KEY-----)' . || (echo 'Potential secret pattern found. Inspect above output.' && exit 1)
+
+  eslint-security:
+    name: ESLint Security Lint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
+      - name: Setup Node
+        uses: actions/setup-node@60edb5dd545a775178f52524783378180af0d1f8 # v4
+        with:
+          node-version: 20
+          cache: npm
+      - name: Install
+        run: npm ci
+      - name: Run ESLint security profile
+        run: npm run lint:security
