@@ -4,12 +4,13 @@
 // Cloudflare Workers / browser environment. Only symbols actually used in this module are listed.
 const {
     Response,
+    fetch,
     URL,
     URLSearchParams,
     TextEncoder,
     crypto,
     btoa
-} = globalThis; // Intentionally not destructuring fetch so tests can mock globalThis.fetch
+} = globalThis;
 import {
     validateMemoIdSecure,
     validateAndSanitizeEncryptedMessageSecure,
@@ -58,8 +59,7 @@ async function verifyTurnstileToken(token, env, requestLocale) {
     }
 
     try {
-    // Use dynamic globalThis.fetch so test environments can monkey-patch (mock) Turnstile calls
-    const turnstileResponse = await globalThis.fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
+        const turnstileResponse = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
