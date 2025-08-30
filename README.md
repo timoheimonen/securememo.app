@@ -112,7 +112,7 @@ securememo/
 
 ## Code Quality
 This project uses Codacy to automatically analyze code quality, security, and duplication. The badge at the top of this README reflects the current grade of the main branch. 
-The target for this project's code quality is always an A grade. This is achieved by using the Codacy addon in VS Code to ensure new code meets these standards before being committed.
+The target for this project's code quality is always an A grade. This is pursued by using the Codacy addon in VS Code to ensure new code meets these standards before being committed.
 
 ## Security
 
