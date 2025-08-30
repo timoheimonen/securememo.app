@@ -4,6 +4,8 @@
  * Exits with non-zero code on failure so CI detects errors.
  */
 import worker from '../src/index.js';
+// When running under Vitest register tests synchronously so collection finds them
+import { describe, it } from 'vitest';
 
 // Polyfills for Node execution environment (outside Vitest runner)
 if (typeof globalThis.btoa !== 'function') {
@@ -144,31 +146,16 @@ export async function lifecycleRun() {
   if (readAgainResp.status !== 404) throw new Error('Expected 404 after deletion');
 }
 
-// If executed directly (node), run lifecycle. Under Vitest we dynamically register a test wrapper.
+// If executed directly (node) run lifecycle once and exit; under Vitest we expose a proper suite.
 const _proc = typeof globalThis.process !== 'undefined' ? globalThis.process : undefined;
 if (_proc && !_proc.env.VITEST) {
   lifecycleRun()
-    .then(() => {
-      // Successful run; explicit exit for CI clarity
-      if (_proc && _proc.exit) _proc.exit(0); // Intentional process exit for CI script mode
-    })
-    .catch(err => {
-      if (globalThis.console && globalThis.console.error) globalThis.console.error(err);
-      if (_proc && _proc.exit) _proc.exit(1); // Intentional process exit for CI script mode
+    .then(() => { if (_proc && _proc.exit) _proc.exit(0); })
+    .catch(err => { if (globalThis.console && globalThis.console.error) globalThis.console.error(err); if (_proc && _proc.exit) _proc.exit(1); });
+} else if (typeof describe === 'function' && typeof it === 'function') {
+  describe('manual lifecycle (legacy script)', () => {
+    it('runs create->read->delete flow', async () => {
+      await lifecycleRun();
     });
-} else {
-  // Running under Vitest (VITEST env var is set by the test runner)
-  (async () => {
-    try {
-      const { describe, it } = await import('vitest');
-      describe('manual lifecycle (legacy script)', () => {
-        it('runs create->read->delete flow', async () => {
-          await lifecycleRun();
-        });
-      });
-    } catch (e) {
-      // If vitest import fails outside runner, surface a clear error
-      if (globalThis.console && globalThis.console.error) globalThis.console.error('Vitest import failed:', e);
-    }
-  })();
+  });
 }
