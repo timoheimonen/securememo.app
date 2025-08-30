@@ -25,7 +25,7 @@
   "eslint": "^8.57.0",
   "eslint-plugin-security": "^1.7.1",
   "vitest": "^1.6.1",
-  "@vitest/coverage-v8": "^1.6.1"
+  "@vitest/coverage-v8": "^3.2.4"
   },
   "keywords": [
     "cloudflare",
