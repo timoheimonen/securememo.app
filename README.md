@@ -3,7 +3,6 @@
 securememo.app is a simple, privacy-focused service for sharing sensitive memos securely. All encryption occurs client-side in your browser using AES-256-GCM with PBKDF2 key derivation—ensuring that plaintext is never transmitted or stored on the server. Each memo self-destructs permanently after being read or upon expiration.
 securememo.app will run the main branch of this repo.
 
-[![Codacy Badge](https://app.codacy.com/project/badge/Grade/beffc716bdc14df49649b6dcbc69a051)](https://app.codacy.com/gh/timoheimonen/securememo.app/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
 [![License](https://img.shields.io/github/license/timoheimonen/securememo.app)](https://github.com/timoheimonen/securememo.app/blob/main/LICENSE)
 [![Stars](https://img.shields.io/github/stars/timoheimonen/securememo.app)](https://github.com/timoheimonen/securememo.app/stargazers)
 [![Watchers](https://img.shields.io/github/watchers/timoheimonen/securememo.app)](https://github.com/timoheimonen/securememo.app/watchers)
@@ -109,11 +108,6 @@ securememo/
         ├── timingSecurity.js   # Timing attack protections (e.g., constant-time comparisons, artificial delays)
         └── validation.js       # Input validation, sanitization, and secure checks
 ```
-
-## Code Quality
-This project uses Codacy to automatically analyze code quality, security, and duplication. The badge at the top of this README reflects the current grade of the main branch. 
-The target for this project's code quality is always an A grade. This is pursued by using the Codacy addon in VS Code to ensure new code meets these standards before being committed.
-
 ## Security
 
 - **Client-side encryption**: Memos are encrypted in-browser using AES-256-GCM; servers receive only ciphertext.
