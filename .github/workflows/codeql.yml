@@ -1,0 +1,65 @@
+name: CodeQL
+
+on:
+  push:
+    branches: [ main, Development, features ]
+    paths:
+      - 'src/**/*.js'
+      - '.github/workflows/codeql.yml'
+      - '.github/codeql-config.yml'
+  pull_request:
+    branches: [ main, Development, features ]
+    paths:
+      - 'src/**/*.js'
+      - '.github/workflows/codeql.yml'
+      - '.github/codeql-config.yml'
+  schedule:
+    - cron: '24 3 * * 2'
+
+permissions:
+  contents: read
+  security-events: write
+  actions: read
+
+jobs:
+  analyze:
+    name: Analyze (JavaScript)
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    permissions:
+      contents: read
+      security-events: write
+      actions: read
+
+    strategy:
+      fail-fast: false
+      matrix:
+        language: [ 'javascript' ]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v3
+        with:
+          languages: ${{ matrix.language }}
+          config-file: ./.github/codeql-config.yml
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        if: hashFiles('package-lock.json') != ''
+        run: npm ci
+
+      - name: Autobuild
+        uses: github/codeql-action/autobuild@v3
+
+      - name: Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@v3
+        with:
+          category: "/language:${{matrix.language}}"
