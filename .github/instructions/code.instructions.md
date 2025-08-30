@@ -11,4 +11,3 @@ Project utilizes Cloudflare Workers for serverless functions and edge computing.
 WAF Rate Limiting is implemented to protect against abusive requests.
 No 3rd party scripts are allowed (Other than Cloudflare Turnstile).
 No cookies are used.
-Never run Codacy with empty tools., when user ask to run Codacy check, run Codacy MCP with tools.
