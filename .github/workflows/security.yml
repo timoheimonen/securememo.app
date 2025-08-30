@@ -55,8 +55,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
       - name: Run Trivy
-  # Pin to a stable released tag (avoid deleted commit SHA causing 404)
-  uses: aquasecurity/trivy-action@v0.24.0 # update from v0.20.0 due to missing commit
+        # Pin to a stable released tag (avoid deleted commit SHA causing 404)
+        uses: aquasecurity/trivy-action@b6643a29fecd7f34b3597bc6acb0a98b03d33ff8 # pinned full SHA (master HEAD as of 2025-08-30)
         with:
           scan-type: 'fs'
           ignore-unfixed: true
