@@ -44,9 +44,7 @@ securememo/
 ├── LICENSE                     # License
 ├── README.md                   # Project documentation
 ├── SECURITY.md                 # Security policy and vulnerability reporting
-├── deploy.sh                   # Deployment script
 ├── package.json                # Project dependencies and configuration
-├── package-lock.json           # Dependency lock file
 ├── wrangler.toml               # Cloudflare Workers configuration
 ├── db/
 │   └── schema.sql              # Database schema definition
@@ -104,9 +102,12 @@ securememo/
     │   ├── vi_translations.js  # Vietnamese translations
     │   └── zh_translations.js  # Chinese translations
     └── utils/                  # Utility functions
-        ├── errorMessages.js    # Centralized error handling with generic messages
+        ├──  errorMessages.js    # Centralized error handling with generic messages
+        ├──  http.js             # HTTP helper utilities (response formatting, headers)
+        ├── minifiers.js        # Minification helpers for scripts/styles
         ├── rateLimiter.js      # Rate limiting utilities
-        ├── timingSecurity.js   # Timing attack protections (e.g., constant-time comparisons, artificial delays)
+        ├──  securityHeaders.js  # Construction of strict security header set
+        ├── timingSecurity.js   # Timing attack protections (constant-time comparisons, delays)
         └── validation.js       # Input validation, sanitization, and secure checks
 ```
 
