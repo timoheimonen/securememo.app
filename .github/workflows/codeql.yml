@@ -2,19 +2,23 @@ name: CodeQL
 
 on:
   push:
-    branches: [ main, Development, features ]
+    branches: [ main, development, features ]
     paths:
       - 'src/**/*.js'
       - '.github/workflows/codeql.yml'
       - '.github/codeql-config.yml'
+      - 'package.json'
+      - 'package-lock.json'
   pull_request:
-    branches: [ main, Development, features ]
+    branches: [ main, development, features ]
     paths:
       - 'src/**/*.js'
       - '.github/workflows/codeql.yml'
       - '.github/codeql-config.yml'
+      - 'package.json'
+      - 'package-lock.json'
   schedule:
-    - cron: '24 3 * * 2'
+    - cron: '24 3 * * 5'
 
 permissions:
   contents: read
@@ -25,12 +29,11 @@ jobs:
   analyze:
     name: Analyze (JavaScript)
     runs-on: ubuntu-latest
-    timeout-minutes: 45
+    timeout-minutes: 30
     permissions:
       contents: read
       security-events: write
       actions: read
-
     strategy:
       fail-fast: false
       matrix:
@@ -40,26 +43,46 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install dependencies (production + dev)
+        run: |
+          if [ -f package-lock.json ]; then
+            npm ci --no-audit --no-fund
+          else
+            npm install --no-audit --no-fund
+          fi
+
       - name: Initialize CodeQL
         uses: github/codeql-action/init@v3
         with:
           languages: ${{ matrix.language }}
           config-file: ./.github/codeql-config.yml
+          queries: +security-extended,+security-and-quality
 
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-          cache: 'npm'
-
-      - name: Install dependencies
-        if: hashFiles('package-lock.json') != ''
-        run: npm ci
-
-      - name: Autobuild
-        uses: github/codeql-action/autobuild@v3
-
+      # If you have a build step for transpilation/bundling, add here. Workers project typically no build.
       - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@v3
         with:
-          category: "/language:${{matrix.language}}"
+          category: 'codeql:javascript'
+
+  # Optional: separate PR-only job to fail fast on CodeQL init issues
+  query-check:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      security-events: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: github/codeql-action/init@v3
+        with:
+          languages: javascript
+          config-file: ./.github/codeql-config.yml
+      - uses: github/codeql-action/analyze@v3
+        with:
+          category: 'codeql:pr-check'
