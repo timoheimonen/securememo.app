@@ -169,6 +169,60 @@ async function validateMemoIdWithRateLimit(memoId, request, env, requestLocale) 
 }
 
 /**
+ * Validate that request has JSON content-type.
+ * Returns null if valid, otherwise a delayed JSON error Response.
+ * @param {Request} request
+ * @param {string} requestLocale
+ * @returns {Promise<Response|null>}
+ */
+async function ensureJsonContentType(request, requestLocale) {
+    const contentType = request.headers.get('content-type');
+    const sanitizedContentType = sanitizeForHTML(contentType);
+    if (!sanitizedContentType || !sanitizedContentType.includes('application/json')) {
+        return delayedJsonError({ error: getErrorMessage('CONTENT_TYPE_ERROR', requestLocale) });
+    }
+    return null;
+}
+
+/**
+ * Parse JSON body with size limit; centralizes duplicated logic in handlers.
+ * Provides consistent error handling and timing semantics.
+ * @param {Request} request
+ * @param {string} requestLocale
+ * @returns {Promise<{data: any}|{errorResponse: Response}>}
+ */
+async function parseJsonRequest(request, requestLocale) {
+    const parsed = await safeParseJson(request, MAX_REQUEST_BYTES);
+    if (parsed?.error) {
+        if (parsed.error === 'SIZE_LIMIT') {
+            // Maintain explicit uniform delay + 413 semantics
+            await uniformResponseDelay();
+            return {
+                errorResponse: new Response(JSON.stringify({ error: getErrorMessage('REQUEST_TOO_LARGE', requestLocale) }), {
+                    status: 413,
+                    headers: { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' }
+                })
+            };
+        }
+        return { errorResponse: await delayedJsonError({ error: getErrorMessage('INVALID_JSON', requestLocale) }) };
+    }
+    return { data: parsed.data };
+}
+
+/**
+ * Return rate-limited or generic access denied response; consolidates repetition.
+ * @param {Request} request
+ * @param {any} env
+ * @param {string} requestLocale
+ * @returns {Promise<Response>}
+ */
+async function rateLimitOrAccessDenied(request, env, requestLocale) {
+    const rateResult = await handleRateLimited(request, env, requestLocale);
+    if (rateResult.limited) return rateResult.error;
+    return await createAccessDeniedResponse(requestLocale);
+}
+
+/**
  * Safely parse JSON with size limit enforcement.
  * Uses content-length header (if present) and actual decoded byte length.
  * Returns null on error; caller handles uniform error response.
@@ -282,26 +336,14 @@ export async function handleCreateMemo(request, env) {
             return delayedJsonError({ error: getErrorMessage('METHOD_NOT_ALLOWED', requestLocale) }, 405, { 'Allow': 'POST' });
         }
 
-        // Validate content type
-        const contentType = request.headers.get('content-type');
-        const sanitizedContentType = sanitizeForHTML(contentType);
-        if (!sanitizedContentType || !sanitizedContentType.includes('application/json')) {
-            return delayedJsonError({ error: getErrorMessage('CONTENT_TYPE_ERROR', requestLocale) });
-        }
+    // Validate content type
+    const ctError = await ensureJsonContentType(request, requestLocale);
+    if (ctError) return ctError;
 
-        // Parse request body with size limit
-        const parsedCreate = await safeParseJson(request, MAX_REQUEST_BYTES);
-        if (parsedCreate?.error) {
-            if (parsedCreate.error === 'SIZE_LIMIT') {
-                await uniformResponseDelay();
-                return new Response(JSON.stringify({ error: getErrorMessage('REQUEST_TOO_LARGE', requestLocale) }), {
-                    status: 413,
-                    headers: { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' }
-                });
-            }
-            return delayedJsonError({ error: getErrorMessage('INVALID_JSON', requestLocale) });
-        }
-        requestData = parsedCreate.data;
+    // Parse request body with size limit
+    const parsedCreate = await parseJsonRequest(request, requestLocale);
+    if ('errorResponse' in parsedCreate) return parsedCreate.errorResponse;
+    requestData = parsedCreate.data;
 
         const { encryptedMessage, expiryHours, cfTurnstileResponse } = requestData;
         deletionTokenHash = requestData.deletionTokenHash; // capture explicitly for wiping
@@ -453,26 +495,14 @@ export async function handleReadMemo(request, env) {
             return delayedJsonError({ error: getErrorMessage('METHOD_NOT_ALLOWED', requestLocale) }, 405, { 'Allow': 'POST' });
         }
 
-        // Validate content type
-        const contentType = request.headers.get('content-type');
-        const sanitizedContentType = sanitizeForHTML(contentType);
-        if (!sanitizedContentType || !sanitizedContentType.includes('application/json')) {
-            return delayedJsonError({ error: getErrorMessage('CONTENT_TYPE_ERROR', requestLocale) });
-        }
+    // Validate content type
+    const ctError = await ensureJsonContentType(request, requestLocale);
+    if (ctError) return ctError;
 
-        // Parse request body with size limit
-        const parsedRead = await safeParseJson(request, MAX_REQUEST_BYTES);
-        if (parsedRead?.error) {
-            if (parsedRead.error === 'SIZE_LIMIT') {
-                await uniformResponseDelay();
-                return new Response(JSON.stringify({ error: getErrorMessage('REQUEST_TOO_LARGE', requestLocale) }), {
-                    status: 413,
-                    headers: { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' }
-                });
-            }
-            return delayedJsonError({ error: getErrorMessage('INVALID_JSON', requestLocale) });
-        }
-        const requestData = parsedRead.data;
+    // Parse request body with size limit
+    const parsedRead = await parseJsonRequest(request, requestLocale);
+    if ('errorResponse' in parsedRead) return parsedRead.errorResponse;
+    const requestData = parsedRead.data;
 
         const { cfTurnstileResponse } = requestData;
 
@@ -567,26 +597,14 @@ export async function handleConfirmDelete(request, env) {
             return delayedJsonError({ error: getErrorMessage('METHOD_NOT_ALLOWED', requestLocale) }, 405, { 'Allow': 'POST' });
         }
 
-        // Validate content type
-        const contentType = request.headers.get('content-type');
-        const sanitizedContentType = sanitizeForHTML(contentType);
-        if (!sanitizedContentType || !sanitizedContentType.includes('application/json')) {
-            return delayedJsonError({ error: getErrorMessage('CONTENT_TYPE_ERROR', requestLocale) });
-        }
+    // Validate content type
+    const ctError = await ensureJsonContentType(request, requestLocale);
+    if (ctError) return ctError;
 
-        // Parse request body with size limit
-        const parsedDelete = await safeParseJson(request, MAX_REQUEST_BYTES);
-        if (parsedDelete?.error) {
-            if (parsedDelete.error === 'SIZE_LIMIT') {
-                await uniformResponseDelay();
-                return new Response(JSON.stringify({ error: getErrorMessage('REQUEST_TOO_LARGE', requestLocale) }), {
-                    status: 413,
-                    headers: { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' }
-                });
-            }
-            return delayedJsonError({ error: getErrorMessage('INVALID_JSON', requestLocale) });
-        }
-        const requestData = parsedDelete.data;
+    // Parse request body with size limit
+    const parsedDelete = await parseJsonRequest(request, requestLocale);
+    if ('errorResponse' in parsedDelete) return parsedDelete.errorResponse;
+    const requestData = parsedDelete.data;
         ({ memoId, deletionToken } = requestData);
         // Strict memoId validation: reject invalid instead of transforming
         const memoIdValidation = await validateMemoIdWithRateLimit(memoId, request, env, requestLocale);
@@ -598,41 +616,17 @@ export async function handleConfirmDelete(request, env) {
         const fetchStmt = env.DB.prepare('SELECT deletion_token_hash FROM memos WHERE memo_id = ? AND (expiry_time IS NULL OR expiry_time > unixepoch(\'now\'))');
         row = await fetchStmt.bind(memoId).first();
 
-        if (!row) {
-            const rateResult = await handleRateLimited(request, env, requestLocale);
-            if (rateResult.limited) {
-                return rateResult.error;
-            }
-            return await createAccessDeniedResponse(requestLocale);
-        }
+    if (!row) return await rateLimitOrAccessDenied(request, env, requestLocale);
 
         // Require deletion token
-        if (!deletionToken) {
-            const rateResult = await handleRateLimited(request, env, requestLocale);
-            if (rateResult.limited) {
-                return rateResult.error;
-            }
-            return await createAccessDeniedResponse(requestLocale);
-        }
+    if (!deletionToken) return await rateLimitOrAccessDenied(request, env, requestLocale);
 
         // Validate format using existing password validator without altering the token value
-        if (!validatePassword(deletionToken)) {  // Reuse validator for token format
-            const rateResult = await handleRateLimited(request, env, requestLocale);
-            if (rateResult.limited) {
-                return rateResult.error;
-            }
-            return await createAccessDeniedResponse(requestLocale);
-        }
+    if (!validatePassword(deletionToken)) return await rateLimitOrAccessDenied(request, env, requestLocale); // Reuse validator for token format
 
         // Compute hash over the exact provided token (no sanitization) to match stored hash
         computedHash = await hashDeletionToken(deletionToken);
-        if (!constantTimeCompare(computedHash, row.deletion_token_hash)) {
-            const rateResult = await handleRateLimited(request, env, requestLocale);
-            if (rateResult.limited) {
-                return rateResult.error;
-            }
-            return await createAccessDeniedResponse(requestLocale);
-        }
+    if (!constantTimeCompare(computedHash, row.deletion_token_hash)) return await rateLimitOrAccessDenied(request, env, requestLocale);
 
         // Delete if validation passes (common for both cases)
         const deleteStmt = env.DB.prepare('DELETE FROM memos WHERE memo_id = ?');
