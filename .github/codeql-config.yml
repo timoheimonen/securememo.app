@@ -1,0 +1,24 @@
+name: SecureMemo CodeQL Configuration
+
+# Analyze only application source JavaScript files under src/
+paths:
+  - src
+
+paths-ignore:
+  - node_modules
+  - public
+  - screenshots
+  - db
+  - '**/dist'
+  - '**/build'
+  - '**/*.test.js'
+  - '**/__tests__/**'
+
+queries:
+  - uses: security-extended
+  - uses: security-and-quality
+
+query-filters:
+  - exclude:
+      id: js/zipslip
+      reason: Not handling archive extraction in this project.
