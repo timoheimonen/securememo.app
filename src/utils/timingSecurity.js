@@ -44,7 +44,7 @@ export async function uniformResponseDelay() {
  * @returns {boolean} - True if strings are equal, false otherwise
  */
 export function constantTimeCompare(a, b) {
-  if (typeof a !== "string" || typeof b !== "string") {
+  if (typeof a !== 'string' || typeof b !== 'string') {
     return false;
   }
 

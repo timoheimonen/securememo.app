@@ -5,10 +5,10 @@ const { window: _window, document: _document } = globalThis;
 // Privacy-first approach: uses only URL-based locale detection
 // No cookies, localStorage, or browser storage used
 
-import { TRANSLATIONS } from "./translations.js";
-import { getSupportedLocales, isLocaleSupported } from "./localization.js";
+import { TRANSLATIONS } from './translations.js';
+import { getSupportedLocales, isLocaleSupported } from './localization.js';
 
-const DEFAULT_LOCALE = "en";
+const DEFAULT_LOCALE = 'en';
 
 /**
  * Validate translation key to prevent object injection attacks
@@ -19,11 +19,11 @@ function isValidTranslationKey(key) {
   // Only allow alphanumeric characters, dots, and underscores
   // Reject keys that could access prototype or constructor
   return (
-    typeof key === "string" &&
+    typeof key === 'string' &&
     /^[a-zA-Z0-9_.]+$/.test(key) &&
-    !key.includes("__proto__") &&
-    !key.includes("constructor") &&
-    !key.includes("prototype") &&
+    !key.includes('__proto__') &&
+    !key.includes('constructor') &&
+    !key.includes('prototype') &&
     key.length <= 100
   ); // Reasonable length limit
 }
@@ -35,7 +35,7 @@ function isValidTranslationKey(key) {
  * @returns {*} Property value or undefined
  */
 function safeGetProperty(obj, key) {
-  if (!obj || typeof obj !== "object") return undefined;
+  if (!obj || typeof obj !== 'object') return undefined;
   if (!isValidTranslationKey(key)) return undefined;
   // Use Reflect.get on a validated key to avoid direct bracket notation flagged by some analyzers
   return Object.prototype.hasOwnProperty.call(obj, key) ? Reflect.get(obj, key) : undefined;
@@ -47,7 +47,7 @@ function safeGetProperty(obj, key) {
  */
 export function getCurrentLocale() {
   const pathname = _window.location.pathname;
-  const segments = pathname.replace(/^\/+/, "").split("/");
+  const segments = pathname.replace(/^\/+/, '').split('/');
 
   if (segments.length > 0 && isLocaleSupported(segments[0])) {
     return segments[0];
@@ -77,65 +77,65 @@ export function t(key, locale = null) {
    */
   function getLocaleTable(loc) {
     switch (loc) {
-      case "ar":
+      case 'ar':
         return TRANSLATIONS.ar;
-      case "bn":
+      case 'bn':
         return TRANSLATIONS.bn;
-      case "cs":
+      case 'cs':
         return TRANSLATIONS.cs;
-      case "da":
+      case 'da':
         return TRANSLATIONS.da;
-      case "de":
+      case 'de':
         return TRANSLATIONS.de;
-      case "el":
+      case 'el':
         return TRANSLATIONS.el;
-      case "en":
+      case 'en':
         return TRANSLATIONS.en;
-      case "es":
+      case 'es':
         return TRANSLATIONS.es;
-      case "fi":
+      case 'fi':
         return TRANSLATIONS.fi;
-      case "fr":
+      case 'fr':
         return TRANSLATIONS.fr;
-      case "hi":
+      case 'hi':
         return TRANSLATIONS.hi;
-      case "hu":
+      case 'hu':
         return TRANSLATIONS.hu;
-      case "id":
+      case 'id':
         return TRANSLATIONS.id;
-      case "it":
+      case 'it':
         return TRANSLATIONS.it;
-      case "ja":
+      case 'ja':
         return TRANSLATIONS.ja;
-      case "ko":
+      case 'ko':
         return TRANSLATIONS.ko;
-      case "nl":
+      case 'nl':
         return TRANSLATIONS.nl;
-      case "no":
+      case 'no':
         return TRANSLATIONS.no;
-      case "pl":
+      case 'pl':
         return TRANSLATIONS.pl;
-      case "ptBR":
+      case 'ptBR':
         return TRANSLATIONS.ptBR;
-      case "ptPT":
+      case 'ptPT':
         return TRANSLATIONS.ptPT;
-      case "ro":
+      case 'ro':
         return TRANSLATIONS.ro;
-      case "ru":
+      case 'ru':
         return TRANSLATIONS.ru;
-      case "sv":
+      case 'sv':
         return TRANSLATIONS.sv;
-      case "th":
+      case 'th':
         return TRANSLATIONS.th;
-      case "tl":
+      case 'tl':
         return TRANSLATIONS.tl;
-      case "tr":
+      case 'tr':
         return TRANSLATIONS.tr;
-      case "uk":
+      case 'uk':
         return TRANSLATIONS.uk;
-      case "vi":
+      case 'vi':
         return TRANSLATIONS.vi;
-      case "zh":
+      case 'zh':
         return TRANSLATIONS.zh;
       default:
         return TRANSLATIONS.en; // fallback
@@ -169,10 +169,10 @@ export function t(key, locale = null) {
  */
 export function localizeUrl(path, locale = null) {
   const currentLocale = locale || getCurrentLocale();
-  const normalizedPath = path.startsWith("/") ? path : "/" + path;
+  const normalizedPath = path.startsWith('/') ? path : '/' + path;
 
   // Handle root path
-  if (normalizedPath === "/") {
+  if (normalizedPath === '/') {
     return `/${currentLocale}`;
   }
 
@@ -183,19 +183,19 @@ export function localizeUrl(path, locale = null) {
  * Update navigation links to be locale-aware
  */
 export function updateNavigationLinks() {
-  const navLinks = _document.querySelectorAll(".nav-link[href]");
+  const navLinks = _document.querySelectorAll('.nav-link[href]');
 
   navLinks.forEach((link) => {
-    const href = link.getAttribute("href");
+    const href = link.getAttribute('href');
 
     // Skip external links and already localized links
-    if (href.startsWith("http") || href.startsWith(`/${getCurrentLocale()}`)) {
+    if (href.startsWith('http') || href.startsWith(`/${getCurrentLocale()}`)) {
       return;
     }
 
     // Update href to include current locale
     const localizedHref = localizeUrl(href);
-    link.setAttribute("href", localizedHref);
+    link.setAttribute('href', localizedHref);
   });
 }
 
@@ -203,9 +203,9 @@ export function updateNavigationLinks() {
  * Update logo link to be locale-aware
  */
 export function updateLogoLink() {
-  const logoLink = _document.querySelector(".nav-logo");
+  const logoLink = _document.querySelector('.nav-logo');
   if (logoLink) {
-    logoLink.setAttribute("href", localizeUrl("/"));
+    logoLink.setAttribute('href', localizeUrl('/'));
   }
 }
 
@@ -216,22 +216,22 @@ export function updateInternalLinks() {
   const links = _document.querySelectorAll('a[href^="/"]');
 
   links.forEach((link) => {
-    const href = link.getAttribute("href");
+    const href = link.getAttribute('href');
 
     // Skip already localized links and special paths
     if (
       href.startsWith(`/${getCurrentLocale()}`) ||
-      href.startsWith("/api/") ||
-      href.startsWith("/js/") ||
-      href.startsWith("/styles.css") ||
-      href.startsWith("/sitemap.xml")
+      href.startsWith('/api/') ||
+      href.startsWith('/js/') ||
+      href.startsWith('/styles.css') ||
+      href.startsWith('/sitemap.xml')
     ) {
       return;
     }
 
     // Update href to include current locale
     const localizedHref = localizeUrl(href);
-    link.setAttribute("href", localizedHref);
+    link.setAttribute('href', localizedHref);
   });
 }
 
@@ -246,37 +246,37 @@ export function initLocalization() {
   updateInternalLinks();
 
   // Set document language attribute
-  _document.documentElement.setAttribute("lang", getCurrentLocale());
+  _document.documentElement.setAttribute('lang', getCurrentLocale());
 }
 
 // Re-export functions from localization.js for consistency
-export { getSupportedLocales, isLocaleSupported } from "./localization.js";
+export { getSupportedLocales, isLocaleSupported } from './localization.js';
 
 /**
  * Get the client localization code as a string for serving as a JS file
  * @param {string} [locale='en'] - The locale to include translations for
  * @returns {string} JavaScript code for client-side localization with only relevant translations
  */
-export function getClientLocalizationJS(locale = "en") {
+export function getClientLocalizationJS(locale = 'en') {
   // Validate and normalize locale
   if (!isLocaleSupported(locale)) {
-    locale = "en";
+    locale = 'en';
   }
   // Sanitize translation tables to immutable, null-prototype objects without using
   // dynamic property definition (avoids generic object injection sink pattern).
   const sanitize = (tbl) => {
     const clean = Object.create(null);
-    if (!tbl || typeof tbl !== "object") return clean;
+    if (!tbl || typeof tbl !== 'object') return clean;
     for (const k of Object.keys(tbl)) {
       if (
         /^[a-zA-Z0-9_.]+$/.test(k) &&
         k.length <= 120 &&
-        !k.includes("__proto__") &&
-        !k.includes("constructor") &&
-        !k.includes("prototype")
+        !k.includes('__proto__') &&
+        !k.includes('constructor') &&
+        !k.includes('prototype')
       ) {
         const raw = Reflect.get(tbl, k);
-        const v = raw === null || raw === undefined ? "" : String(raw);
+        const v = raw === null || raw === undefined ? '' : String(raw);
         Object.defineProperty(clean, k, { value: v, enumerable: true, writable: false, configurable: false });
       }
     }
@@ -290,9 +290,9 @@ export function getClientLocalizationJS(locale = "en") {
    */
   const resolveSafeLocale = (loc) => {
     // Double validation: ensure string & exact match in supported locales
-    if (typeof loc !== "string") return "en";
+    if (typeof loc !== 'string') return 'en';
     const supported = getSupportedLocales();
-    return supported.includes(loc) ? loc : "en";
+    return supported.includes(loc) ? loc : 'en';
   };
 
   const safeLocale = resolveSafeLocale(locale);
@@ -301,94 +301,94 @@ export function getClientLocalizationJS(locale = "en") {
   // Avoid dynamic bracket notation (generic object injection sink) by enumerating allowed locales explicitly.
   let baseTable; // will remain undefined and fallback to 'en' if not matched
   switch (safeLocale) {
-    case "ar":
+    case 'ar':
       baseTable = TRANSLATIONS.ar;
       break;
-    case "bn":
+    case 'bn':
       baseTable = TRANSLATIONS.bn;
       break;
-    case "cs":
+    case 'cs':
       baseTable = TRANSLATIONS.cs;
       break;
-    case "da":
+    case 'da':
       baseTable = TRANSLATIONS.da;
       break;
-    case "de":
+    case 'de':
       baseTable = TRANSLATIONS.de;
       break;
-    case "el":
+    case 'el':
       baseTable = TRANSLATIONS.el;
       break;
-    case "en":
+    case 'en':
       baseTable = TRANSLATIONS.en;
       break;
-    case "es":
+    case 'es':
       baseTable = TRANSLATIONS.es;
       break;
-    case "fi":
+    case 'fi':
       baseTable = TRANSLATIONS.fi;
       break;
-    case "fr":
+    case 'fr':
       baseTable = TRANSLATIONS.fr;
       break;
-    case "hi":
+    case 'hi':
       baseTable = TRANSLATIONS.hi;
       break;
-    case "hu":
+    case 'hu':
       baseTable = TRANSLATIONS.hu;
       break;
-    case "id":
+    case 'id':
       baseTable = TRANSLATIONS.id;
       break;
-    case "it":
+    case 'it':
       baseTable = TRANSLATIONS.it;
       break;
-    case "ja":
+    case 'ja':
       baseTable = TRANSLATIONS.ja;
       break;
-    case "ko":
+    case 'ko':
       baseTable = TRANSLATIONS.ko;
       break;
-    case "nl":
+    case 'nl':
       baseTable = TRANSLATIONS.nl;
       break;
-    case "no":
+    case 'no':
       baseTable = TRANSLATIONS.no;
       break;
-    case "pl":
+    case 'pl':
       baseTable = TRANSLATIONS.pl;
       break;
-    case "ptBR":
+    case 'ptBR':
       baseTable = TRANSLATIONS.ptBR;
       break;
-    case "ptPT":
+    case 'ptPT':
       baseTable = TRANSLATIONS.ptPT;
       break;
-    case "ro":
+    case 'ro':
       baseTable = TRANSLATIONS.ro;
       break;
-    case "ru":
+    case 'ru':
       baseTable = TRANSLATIONS.ru;
       break;
-    case "sv":
+    case 'sv':
       baseTable = TRANSLATIONS.sv;
       break;
-    case "th":
+    case 'th':
       baseTable = TRANSLATIONS.th;
       break;
-    case "tl":
+    case 'tl':
       baseTable = TRANSLATIONS.tl;
       break;
-    case "tr":
+    case 'tr':
       baseTable = TRANSLATIONS.tr;
       break;
-    case "uk":
+    case 'uk':
       baseTable = TRANSLATIONS.uk;
       break;
-    case "vi":
+    case 'vi':
       baseTable = TRANSLATIONS.vi;
       break;
-    case "zh":
+    case 'zh':
       baseTable = TRANSLATIONS.zh;
       break;
     default:
@@ -396,14 +396,14 @@ export function getClientLocalizationJS(locale = "en") {
       break;
   }
   // Final safety check: ensure object shape, else fallback.
-  if (!baseTable || typeof baseTable !== "object") {
+  if (!baseTable || typeof baseTable !== 'object') {
     baseTable = TRANSLATIONS.en;
   }
 
   const primaryTable = sanitize(baseTable);
   const fallbackTable =
-    safeLocale !== "en" && Object.prototype.hasOwnProperty.call(TRANSLATIONS, "en")
-      ? sanitize(TRANSLATIONS["en"])
+    safeLocale !== 'en' && Object.prototype.hasOwnProperty.call(TRANSLATIONS, 'en')
+      ? sanitize(TRANSLATIONS['en'])
       : null;
 
   // Build the minimal translations object (stringified) with only allowlisted keys.

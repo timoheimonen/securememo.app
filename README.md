@@ -23,8 +23,6 @@ securememo.app will run the main branch of this repo.
 - **Automated cleanup**: Expired or read memos are permanently removed via scheduled cron jobs.
 - **Localization**: Currently supports 30 languages.
 
-
-
 ## Architecture
 
 ### Tech Stack
@@ -145,48 +143,51 @@ The target for this project's code quality is always an A grade. This is pursued
 This project uses GPL-3.0 license.
 
 ## Contributing
+
 You are welcome to contribute to the project in any way you can. This includes reporting bugs, auditing, suggesting features, or submitting pull requests via GitHub. Please ensure your contributions respect the project's security focus and follow standard open-source practices.
 
 For detailed contribution guidelines, please see [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## Supported languages in the application
-The supported languages are:  
- - Arabic (ar)
- - Bengali (bn)
- - Chinese (zh)
- - Danish (da)
- - Dutch (nl)
- - English (en)  
- - Finnish (fi)
- - French (fr)
- - German (de)
- - Greek (el)
- - Hindi (hi)
- - Hungarian (hu)
- - Indonesian (id)
- - Italian (it)
- - Japanese (ja)
- - Korean (ko)
- - Norwegian (no)
- - Polish (pl)
- - Portuguese (Brazil) (pt-BR)
- - Portuguese (Portugal) (pt-PT)
- - Russian (ru)
- - Romanian (ro)
- - Spanish (es)
- - Swedish (sv)
- - Tagalog (tl)
- - Thai (th)
- - Turkish (tr)
- - Ukrainian (uk)
- - Vietnamese (vi)
- - Czech (cs)
+
+The supported languages are:
+
+- Arabic (ar)
+- Bengali (bn)
+- Chinese (zh)
+- Danish (da)
+- Dutch (nl)
+- English (en)
+- Finnish (fi)
+- French (fr)
+- German (de)
+- Greek (el)
+- Hindi (hi)
+- Hungarian (hu)
+- Indonesian (id)
+- Italian (it)
+- Japanese (ja)
+- Korean (ko)
+- Norwegian (no)
+- Polish (pl)
+- Portuguese (Brazil) (pt-BR)
+- Portuguese (Portugal) (pt-PT)
+- Russian (ru)
+- Romanian (ro)
+- Spanish (es)
+- Swedish (sv)
+- Tagalog (tl)
+- Thai (th)
+- Turkish (tr)
+- Ukrainian (uk)
+- Vietnamese (vi)
+- Czech (cs)
 
 These are auto-translated from english, errors may occur.
 
 ## Author
 
-🇫🇮 Timo Heimonen (timo.heimonen@proton.me) 
+🇫🇮 Timo Heimonen (timo.heimonen@proton.me)
 
 ## Tags
 
