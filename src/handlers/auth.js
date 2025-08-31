@@ -395,8 +395,8 @@ export async function handleCreateMemo(request, env) {
       return turnstileResult.error;
     }
 
-    // Generate unique memo ID with collision detection
-    const memoId = await generateMemoId(env, 10, requestLocale);
+  // Generate unique memo ID with collision detection
+  const memoId = await generateMemoId(env, 10);
     if (!memoId) {
       await uniformResponseDelay();
       return new Response(JSON.stringify({ error: getErrorMessage("MEMO_ID_GENERATION_ERROR", requestLocale) }), {
