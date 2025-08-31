@@ -545,8 +545,8 @@ export const id = {
   "error.GENERAL_ERROR": "Layanan sementara tidak tersedia. Silakan coba lagi.",
 
   // Error messages - decryption errors
-  "error.DECRYPTION_FAILED": "Invalid request. Please check your input and try again.",
-  "error.INVALID_PASSWORD": "Invalid request. Please check your input and try again.",
+  "error.DECRYPTION_FAILED": "Permintaan tidak valid. Silakan periksa input Anda dan coba lagi.",
+  "error.INVALID_PASSWORD": "Permintaan tidak valid. Silakan periksa input Anda dan coba lagi.",
 
   // Error messages - network errors
   "error.NETWORK_ERROR": "Layanan sementara tidak tersedia. Silakan coba lagi.",
