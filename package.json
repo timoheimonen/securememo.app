@@ -1,6 +1,7 @@
 {
   "name": "cloudflare-workers-d1",
   "version": "1.1.0",
+  "type": "module",
   "description": "Cloudflare Workers with D1 database project",
   "main": "src/index.js",
   "scripts": {
@@ -14,7 +15,8 @@
     "lint": "eslint src/",
     "lint:fix": "eslint src/ --fix",
     "format": "prettier --write .",
-    "format:check": "prettier --check ."
+    "format:check": "prettier --check .",
+    "check-translations": "node scripts/check-translations.js"
   },
   "devDependencies": {
     "wrangler": "^4.28.0",
