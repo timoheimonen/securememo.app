@@ -5,11 +5,42 @@
 /* eslint-env worker, serviceworker */
 // Bind URL constructor from global scope for lint clarity
 const { URL } = globalThis;
-import { TRANSLATIONS } from './translations.js';
+import { TRANSLATIONS } from "./translations.js";
 
 // Central allowlist of locales; used for both validation and safe translation extraction.
-const SUPPORTED_LOCALES = ['ar', 'bn', 'cs', 'da', 'de', 'el', 'en', 'es', 'fi', 'fr', 'hi', 'hu', 'id', 'it', 'ja', 'ko', 'nl', 'no', 'pl', 'ptBR', 'ptPT', 'ru', 'ro', 'sv', 'tl', 'th', 'tr', 'uk', 'vi', 'zh'];
-const DEFAULT_LOCALE = 'en';
+const SUPPORTED_LOCALES = [
+  "ar",
+  "bn",
+  "cs",
+  "da",
+  "de",
+  "el",
+  "en",
+  "es",
+  "fi",
+  "fr",
+  "hi",
+  "hu",
+  "id",
+  "it",
+  "ja",
+  "ko",
+  "nl",
+  "no",
+  "pl",
+  "ptBR",
+  "ptPT",
+  "ru",
+  "ro",
+  "sv",
+  "tl",
+  "th",
+  "tr",
+  "uk",
+  "vi",
+  "zh",
+];
+const DEFAULT_LOCALE = "en";
 
 /**
  * Safely copy a translation table into an immutable, null-prototype object with
@@ -20,11 +51,17 @@ const DEFAULT_LOCALE = 'en';
  */
 function sanitizeTranslationTable(source) {
   const clean = Object.create(null);
-  if (!source || typeof source !== 'object') return Object.freeze(clean);
+  if (!source || typeof source !== "object") return Object.freeze(clean);
   for (const key of Object.keys(source)) {
-    if (/^[a-zA-Z0-9_.]+$/.test(key) && key.length <= 120 && !key.includes('__proto__') && !key.includes('constructor') && !key.includes('prototype')) {
+    if (
+      /^[a-zA-Z0-9_.]+$/.test(key) &&
+      key.length <= 120 &&
+      !key.includes("__proto__") &&
+      !key.includes("constructor") &&
+      !key.includes("prototype")
+    ) {
       const raw = Reflect.get(source, key);
-      const value = (raw === null || raw === undefined) ? '' : String(raw);
+      const value = raw === null || raw === undefined ? "" : String(raw);
       Object.defineProperty(clean, key, { value, enumerable: true, writable: false, configurable: false });
     }
   }
@@ -53,8 +90,6 @@ const SAFE_TRANSLATIONS = (() => {
   return Object.freeze(map);
 })();
 
-
-
 /**
  * Extract locale from URL pathname
  * @param {string} pathname - URL pathname (e.g., '/en/about.html')
@@ -62,42 +97,42 @@ const SAFE_TRANSLATIONS = (() => {
  */
 export function extractLocaleFromPath(pathname) {
   // Remove leading slash and split path
-  const segments = pathname.replace(/^\/+/, '').split('/');
-  
+  const segments = pathname.replace(/^\/+/, "").split("/");
+
   // Check if first segment is a supported locale
   if (segments.length > 0 && SUPPORTED_LOCALES.includes(segments[0])) {
     const locale = segments[0];
     const remainingSegments = segments.slice(1);
-    
+
     // Check for nested locale patterns and strip ALL leading locale segments
     let cleanSegments = remainingSegments;
     let hasNestedLocales = false;
-    
+
     // Strip all consecutive locale segments from the beginning
     while (cleanSegments.length > 0 && SUPPORTED_LOCALES.includes(cleanSegments[0])) {
       cleanSegments = cleanSegments.slice(1);
       hasNestedLocales = true;
     }
-    
+
     // If we found nested locales, return the clean path for redirect
     if (hasNestedLocales) {
-      const cleanPath = cleanSegments.length > 0 ? '/' + cleanSegments.join('/') : '/';
-      return { 
-        locale: DEFAULT_LOCALE, 
+      const cleanPath = cleanSegments.length > 0 ? "/" + cleanSegments.join("/") : "/";
+      return {
+        locale: DEFAULT_LOCALE,
         pathWithoutLocale: cleanPath,
-        needsRedirect: true 
+        needsRedirect: true,
       };
     }
-    
-    const pathWithoutLocale = remainingSegments.length > 0 ? '/' + remainingSegments.join('/') : '/';
-    
+
+    const pathWithoutLocale = remainingSegments.length > 0 ? "/" + remainingSegments.join("/") : "/";
+
     return { locale, pathWithoutLocale };
   }
-  
+
   // No locale found, return default
-  return { 
-    locale: DEFAULT_LOCALE, 
-    pathWithoutLocale: pathname 
+  return {
+    locale: DEFAULT_LOCALE,
+    pathWithoutLocale: pathname,
   };
 }
 
@@ -109,13 +144,13 @@ export function extractLocaleFromPath(pathname) {
  */
 export function buildLocalizedPath(locale, path) {
   // Ensure path starts with /
-  const normalizedPath = path.startsWith('/') ? path : '/' + path;
-  
+  const normalizedPath = path.startsWith("/") ? path : "/" + path;
+
   // Handle root path
-  if (normalizedPath === '/') {
+  if (normalizedPath === "/") {
     return `/${locale}`;
   }
-  
+
   return `/${locale}${normalizedPath}`;
 }
 
@@ -126,12 +161,12 @@ export function buildLocalizedPath(locale, path) {
  */
 export function getLocaleRedirectPath(pathname) {
   const { pathWithoutLocale } = extractLocaleFromPath(pathname);
-  
+
   // If no locale detected in URL, redirect to default locale
   if (pathname === pathWithoutLocale) {
     return buildLocalizedPath(DEFAULT_LOCALE, pathname);
   }
-  
+
   return null;
 }
 
@@ -167,38 +202,36 @@ export function isLocaleSupported(locale) {
  */
 function normalizeLocale(locale) {
   const lowerLocale = locale.toLowerCase();
-  
+
   // Handle exact matches first (for our compound codes like ptBR, ptPT)
-  const exactMatch = SUPPORTED_LOCALES.find(supported => 
-    supported.toLowerCase() === lowerLocale.replace('-', '')
-  );
+  const exactMatch = SUPPORTED_LOCALES.find((supported) => supported.toLowerCase() === lowerLocale.replace("-", ""));
   if (exactMatch) {
     return exactMatch;
   }
-  
+
   // Handle regional variants
-  const [lang, region] = lowerLocale.split('-');
-  
+  const [lang, region] = lowerLocale.split("-");
+
   // Portuguese regional mapping
-  if (lang === 'pt') {
-    if (region === 'br') return 'ptBR';
-    if (region === 'pt') return 'ptPT';
+  if (lang === "pt") {
+    if (region === "br") return "ptBR";
+    if (region === "pt") return "ptPT";
     // Default Portuguese to Brazil (more common)
-    return 'ptBR';
+    return "ptBR";
   }
-  
+
   // Chinese regional mapping
-  if (lang === 'zh') {
+  if (lang === "zh") {
     // Map all Chinese variants (zh-CN, zh-TW, zh-HK, zh-SG, etc.) to 'zh'
     // since we only support one Chinese translation (simplified Chinese)
-    return 'zh';
+    return "zh";
   }
-  
+
   // For other languages, check if base language is supported
   if (SUPPORTED_LOCALES.includes(lang)) {
     return lang;
   }
-  
+
   return null;
 }
 
@@ -211,25 +244,25 @@ export function extractLocaleFromRequest(request) {
   try {
     // First try to get locale from query parameter
     const url = new URL(request.url);
-    const queryLocale = url.searchParams.get('locale');
+    const queryLocale = url.searchParams.get("locale");
     if (queryLocale) {
       const normalized = normalizeLocale(queryLocale);
       if (normalized) return normalized;
     }
-    
+
     // Try to get locale from Accept-Language header
-    const acceptLanguage = request.headers.get('Accept-Language');
+    const acceptLanguage = request.headers.get("Accept-Language");
     if (acceptLanguage) {
       // Parse Accept-Language header (e.g., "en-US,en;q=0.9,pt-BR;q=0.8")
       const locales = acceptLanguage
-        .split(',')
-        .map(lang => {
-          const [locale, q] = lang.trim().split(';q=');
+        .split(",")
+        .map((lang) => {
+          const [locale, q] = lang.trim().split(";q=");
           const quality = q ? parseFloat(q) : 1.0;
           return { locale: locale.trim(), quality };
         })
         .sort((a, b) => b.quality - a.quality); // Sort by quality descending
-      
+
       // Find the first supported locale
       for (const { locale } of locales) {
         const normalized = normalizeLocale(locale);
@@ -238,9 +271,9 @@ export function extractLocaleFromRequest(request) {
         }
       }
     }
-    
+
     // Try to get locale from custom X-Locale header
-    const customLocale = request.headers.get('X-Locale');
+    const customLocale = request.headers.get("X-Locale");
     if (customLocale) {
       const normalized = normalizeLocale(customLocale);
       if (normalized) return normalized;
@@ -248,7 +281,7 @@ export function extractLocaleFromRequest(request) {
   } catch (error) {
     // If there's any error parsing, fall back to default
   }
-  
+
   // Fallback to default locale
   return DEFAULT_LOCALE;
 }
@@ -256,7 +289,7 @@ export function extractLocaleFromRequest(request) {
 /**
  * Server-side translation function
  * @param {string} key - Translation key (e.g., 'nav.home')
- * @param {string} locale - Locale code 
+ * @param {string} locale - Locale code
  * @returns {string} Translated text or key if translation not found
  */
 /**
@@ -268,7 +301,14 @@ export function extractLocaleFromRequest(request) {
  */
 function safeRead(table, key) {
   if (!table) return undefined;
-  if (typeof key !== 'string' || !/^[a-zA-Z0-9_.]+$/.test(key) || key.length > 100 || key.includes('__proto__') || key.includes('constructor') || key.includes('prototype')) {
+  if (
+    typeof key !== "string" ||
+    !/^[a-zA-Z0-9_.]+$/.test(key) ||
+    key.length > 100 ||
+    key.includes("__proto__") ||
+    key.includes("constructor") ||
+    key.includes("prototype")
+  ) {
     return undefined;
   }
   return Object.prototype.hasOwnProperty.call(table, key) ? Reflect.get(table, key) : undefined;

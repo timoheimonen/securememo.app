@@ -1,7 +1,7 @@
 // Client-side JS templates for memo operations
 
 export function getCreateMemoJS() {
-    return `
+  return `
 // Turnstile site key - injected by server
 const TURNSTILE_SITE_KEY = '{{TURNSTILE_SITE_KEY}}';
 let turnstileRendered = false;
@@ -453,7 +453,7 @@ function showMessage(message, type) {
 }
 
 export function getReadMemoJS() {
-    return `
+  return `
 // Turnstile site key - injected by server
 const TURNSTILE_SITE_KEY = '{{TURNSTILE_SITE_KEY}}';
 let turnstileRendered = false;
@@ -939,7 +939,7 @@ highlightCurrentPage();
 }
 
 export function getCommonJS() {
-    return `
+  return `
 // Initialize when DOM is ready (handles both cases)
 async function initializeApp() {
     // Load localization lazily so nav always initializes even if it fails
@@ -1237,4 +1237,4 @@ function initLanguageDropdown() {
 
 highlightCurrentPage();
 `;
-} 
+}
