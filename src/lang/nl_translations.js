@@ -1,501 +1,607 @@
 export const nl = {
   // Navigation
-  'nav.home': 'Startpagina',
-  'nav.about': 'Over',
-  'nav.create': 'Veilig Memo maken',
-  'nav.toggleMenu': 'Navigatiemenu openen/sluiten',
+  "nav.home": "Startpagina",
+  "nav.about": "Over",
+  "nav.create": "Veilig Memo maken",
+  "nav.toggleMenu": "Navigatiemenu openen/sluiten",
 
   // Common elements
-  'common.loading': 'Laden...',
-  'common.error': 'Fout',
-  'common.success': 'Succes',
-  'common.warning': 'Waarschuwing',
+  "common.loading": "Laden...",
+  "common.error": "Fout",
+  "common.success": "Succes",
+  "common.warning": "Waarschuwing",
 
   // Buttons
-  'btn.copy': 'Kopiëren',
-  'btn.copied': 'Gekopieerd!',
-  'btn.copyUrl': 'URL kopiëren',
-  'btn.copyPassword': 'Wachtwoord kopiëren',
-  'btn.show': 'Tonen',
-  'btn.hide': 'Verbergen',
-  'btn.create': 'Veilig Memo maken',
-  'btn.creating': 'Bezig met versleutelen...',
-  'btn.decrypt': 'Memo ontsleutelen',
-  'btn.decrypting': 'Bezig met ontsleutelen...',
-  'btn.goHome': 'Terug naar startpagina',
-  'btn.createNew': 'Nieuw memo maken',
+  "btn.copy": "Kopiëren",
+  "btn.copied": "Gekopieerd!",
+  "btn.copyUrl": "URL kopiëren",
+  "btn.copyPassword": "Wachtwoord kopiëren",
+  "btn.show": "Tonen",
+  "btn.hide": "Verbergen",
+  "btn.create": "Veilig Memo maken",
+  "btn.creating": "Bezig met versleutelen...",
+  "btn.decrypt": "Memo ontsleutelen",
+  "btn.decrypting": "Bezig met ontsleutelen...",
+  "btn.goHome": "Terug naar startpagina",
+  "btn.createNew": "Nieuw memo maken",
 
   // Form labels and placeholders
-  'form.message.label': 'Uw memo',
-  'form.message.placeholder': 'Typ hier uw geheime memo...',
-  'form.message.help': 'Maximaal 10.000 tekens',
-  'form.expiry.label': 'Verlooptijd',
-  'form.password.label': 'Versleutelingswachtwoord',
-  'form.password.placeholder': 'Voer het versleutelingswachtwoord in dat u apart heeft ontvangen',
-  'form.password.help': 'Het wachtwoord moet apart van de memo-URL met u gedeeld zijn',
-  'form.security.help': 'Voltooi de beveiligingscontrole',
+  "form.message.label": "Uw memo",
+  "form.message.placeholder": "Typ hier uw geheime memo...",
+  "form.message.help": "Maximaal 10.000 tekens",
+  "form.expiry.label": "Verlooptijd",
+  "form.password.label": "Versleutelingswachtwoord",
+  "form.password.placeholder": "Voer het versleutelingswachtwoord in dat u apart heeft ontvangen",
+  "form.password.help": "Het wachtwoord moet apart van de memo-URL met u gedeeld zijn",
+  "form.security.help": "Voltooi de beveiligingscontrole",
 
   // Messages and notifications
-  'msg.urlCopied': '✅ URL gekopieerd naar klembord!',
-  'msg.passwordCopied': '✅ Wachtwoord gekopieerd naar klembord!',
-  'msg.copyManual': '⚠️ Kopieer handmatig (Ctrl+C / Cmd+C)',
-  'msg.memoCreated': '✅ Memo succesvol aangemaakt!',
-  'msg.memoDecrypted': 'Memo ontsleuteld. Verwijderen bezig... Even geduld.',
-  'msg.memoDeleted': 'Memo bevestigd als gelezen en permanent verwijderd.',
-  'msg.deletionError': 'Fout bij het bevestigen van verwijdering. De memo wordt automatisch opgeruimd.',
+  "msg.urlCopied": "✅ URL gekopieerd naar klembord!",
+  "msg.passwordCopied": "✅ Wachtwoord gekopieerd naar klembord!",
+  "msg.copyManual": "⚠️ Kopieer handmatig (Ctrl+C / Cmd+C)",
+  "msg.memoCreated": "✅ Memo succesvol aangemaakt!",
+  "msg.memoDecrypted": "Memo ontsleuteld. Verwijderen bezig... Even geduld.",
+  "msg.memoDeleted": "Memo bevestigd als gelezen en permanent verwijderd.",
+  "msg.deletionError": "Fout bij het bevestigen van verwijdering. De memo wordt automatisch opgeruimd.",
 
   // Page titles and descriptions
-  'page.home.title': 'securememo.app - Versleutelde Zelfvernietigende Memo\'s',
-  'page.home.description': 'Maak versleutelde memo\'s die zichzelf vernietigen na het lezen. End-to-end encryptie, privacygericht en veilig delen van notities met AES-256. Geen tracking, geen advertenties.',
-  'page.home.keywords': 'veilige memo, versleutelde memo, zelfvernietigende memo, privé notitie delen, end-to-end encryptie, AES-256, privacy, veilige memo delen',
-  'page.home.ogTitle': 'securememo.app - Versleutelde Zelfvernietigende Memo\'s',
-  'page.home.ogDescription': 'Deel gevoelige informatie veilig met memo\'s die worden verwijderd na één keer bekijken of verlopen. Aangedreven door client-side AES-256 encryptie.',
-  'page.home.twitterDescription': 'Privacy-eerst app voor veilige, zelfvernietigende memo\'s.',
-  'page.about.title': 'Over securememo.app - Privacygerichte Versleutelde Notities',
-  'page.about.description': 'Lees over de privacygerichte aanpak van securememo.app voor versleutelde berichten. Gebouwd met client-side AES-256 encryptie, zelfvernietigende berichten en zero-knowledge architectuur.',
-  'page.about.keywords': 'over veilige memo, privacygericht berichten, client-side encryptie, AES-256, zelfvernietigende berichten, zero-knowledge, veilig notitie delen',
-  'page.about.ogTitle': 'Over securememo.app - Privacygerichte Versleutelde Notities',
-  'page.about.ogDescription': 'Ontdek hoe securememo.app uw privacy beschermt met client-side encryptie en zelfvernietigende berichten.',
-  'page.about.twitterDescription': 'Privacygerichte versleutelde berichten met client-side encryptie.',
-  'page.create.title': 'Veilig Memo maken - Versleutelde Zelfvernietigende Memo',
-  'page.create.keywords': 'veilige memo maken, versleutelde memo, zelfvernietigende notitie, AES-256 encryptie, privé memo delen, veilige notitie maken',
-  'page.read.title': 'Veilig Memo lezen - Versleutelde Memo Ontsleutelen',
-  'page.read.keywords': 'veilige memo lezen, memo ontsleutelen, versleutelde notitie lezen, AES-256 ontsleuteling, privé memo toegang',
-  'page.tos.title': 'Gebruiksvoorwaarden - securememo.app Juridische Voorwaarden',
-  'page.tos.description': 'Gebruiksvoorwaarden voor securememo.app - versleutelde memo deelservice. Lees over toegestaan gebruik, privacy, beveiliging en juridische voorwaarden voor ons veilige memo platform.',
-  'page.tos.keywords': 'gebruiksvoorwaarden, veilige memo juridisch, versleutelde memo voorwaarden, privacybeleid, toegestaan gebruik beleid, veilige notitie delen voorwaarden',
-  'page.tos.ogTitle': 'Gebruiksvoorwaarden - securememo.app Juridische Voorwaarden',
-  'page.tos.ogDescription': 'Juridische voorwaarden voor securememo.app versleutelde memo deelservice.',
-  'page.tos.twitterDescription': 'Juridische voorwaarden voor securememo.app versleutelde memo deelservice.',
-  'page.privacy.title': 'Privacyverklaring - securememo.app Gegevensbescherming',
-  'page.privacy.description': 'Privacyverklaring voor securememo.app - lees hoe wij uw gegevens beschermen met client-side encryptie, zero-knowledge architectuur en minimale gegevensverzameling voor veilig memo delen.',
-  'page.privacy.keywords': 'privacyverklaring, veilige memo privacy, gegevensbescherming, GDPR naleving, client-side encryptie, zero-knowledge, veilige memo privacy',
-  'page.privacy.ogTitle': 'Privacyverklaring - securememo.app Gegevensbescherming',
-  'page.privacy.ogDescription': 'Hoe securememo.app uw privacy beschermt met client-side encryptie en minimale gegevensverzameling.',
-  'page.privacy.twitterDescription': 'Privacybescherming met client-side encryptie en zero-knowledge architectuur.',
+  "page.home.title": "securememo.app - Versleutelde Zelfvernietigende Memo's",
+  "page.home.description":
+    "Maak versleutelde memo's die zichzelf vernietigen na het lezen. End-to-end encryptie, privacygericht en veilig delen van notities met AES-256. Geen tracking, geen advertenties.",
+  "page.home.keywords":
+    "veilige memo, versleutelde memo, zelfvernietigende memo, privé notitie delen, end-to-end encryptie, AES-256, privacy, veilige memo delen",
+  "page.home.ogTitle": "securememo.app - Versleutelde Zelfvernietigende Memo's",
+  "page.home.ogDescription":
+    "Deel gevoelige informatie veilig met memo's die worden verwijderd na één keer bekijken of verlopen. Aangedreven door client-side AES-256 encryptie.",
+  "page.home.twitterDescription": "Privacy-eerst app voor veilige, zelfvernietigende memo's.",
+  "page.about.title": "Over securememo.app - Privacygerichte Versleutelde Notities",
+  "page.about.description":
+    "Lees over de privacygerichte aanpak van securememo.app voor versleutelde berichten. Gebouwd met client-side AES-256 encryptie, zelfvernietigende berichten en zero-knowledge architectuur.",
+  "page.about.keywords":
+    "over veilige memo, privacygericht berichten, client-side encryptie, AES-256, zelfvernietigende berichten, zero-knowledge, veilig notitie delen",
+  "page.about.ogTitle": "Over securememo.app - Privacygerichte Versleutelde Notities",
+  "page.about.ogDescription":
+    "Ontdek hoe securememo.app uw privacy beschermt met client-side encryptie en zelfvernietigende berichten.",
+  "page.about.twitterDescription": "Privacygerichte versleutelde berichten met client-side encryptie.",
+  "page.create.title": "Veilig Memo maken - Versleutelde Zelfvernietigende Memo",
+  "page.create.keywords":
+    "veilige memo maken, versleutelde memo, zelfvernietigende notitie, AES-256 encryptie, privé memo delen, veilige notitie maken",
+  "page.read.title": "Veilig Memo lezen - Versleutelde Memo Ontsleutelen",
+  "page.read.keywords":
+    "veilige memo lezen, memo ontsleutelen, versleutelde notitie lezen, AES-256 ontsleuteling, privé memo toegang",
+  "page.tos.title": "Gebruiksvoorwaarden - securememo.app Juridische Voorwaarden",
+  "page.tos.description":
+    "Gebruiksvoorwaarden voor securememo.app - versleutelde memo deelservice. Lees over toegestaan gebruik, privacy, beveiliging en juridische voorwaarden voor ons veilige memo platform.",
+  "page.tos.keywords":
+    "gebruiksvoorwaarden, veilige memo juridisch, versleutelde memo voorwaarden, privacybeleid, toegestaan gebruik beleid, veilige notitie delen voorwaarden",
+  "page.tos.ogTitle": "Gebruiksvoorwaarden - securememo.app Juridische Voorwaarden",
+  "page.tos.ogDescription": "Juridische voorwaarden voor securememo.app versleutelde memo deelservice.",
+  "page.tos.twitterDescription": "Juridische voorwaarden voor securememo.app versleutelde memo deelservice.",
+  "page.privacy.title": "Privacyverklaring - securememo.app Gegevensbescherming",
+  "page.privacy.description":
+    "Privacyverklaring voor securememo.app - lees hoe wij uw gegevens beschermen met client-side encryptie, zero-knowledge architectuur en minimale gegevensverzameling voor veilig memo delen.",
+  "page.privacy.keywords":
+    "privacyverklaring, veilige memo privacy, gegevensbescherming, GDPR naleving, client-side encryptie, zero-knowledge, veilige memo privacy",
+  "page.privacy.ogTitle": "Privacyverklaring - securememo.app Gegevensbescherming",
+  "page.privacy.ogDescription":
+    "Hoe securememo.app uw privacy beschermt met client-side encryptie en minimale gegevensverzameling.",
+  "page.privacy.twitterDescription": "Privacybescherming met client-side encryptie en zero-knowledge architectuur.",
 
   // Main page content
-  'home.hero.title': 'securememo.app',
-  'home.hero.subtitle': 'Maak versleutelde memo\'s die zichzelf vernietigen na het lezen of verlopen. Uw geheimen blijven veilig.',
-  'home.hero.btnPrimary': 'Veilig Memo maken',
-  'home.hero.btnSecondary': 'Meer informatie',
+  "home.hero.title": "securememo.app",
+  "home.hero.subtitle":
+    "Maak versleutelde memo's die zichzelf vernietigen na het lezen of verlopen. Uw geheimen blijven veilig.",
+  "home.hero.btnPrimary": "Veilig Memo maken",
+  "home.hero.btnSecondary": "Meer informatie",
 
-  'home.features.title': 'Hoe werkt het',
-  'home.features.encrypt.title': '🔐 Versleutelen in de browser',
-  'home.features.encrypt.description': 'Typ uw memo. Deze wordt direct in uw browser versleuteld met sterke AES-256-encryptie voordat deze onze servers bereikt.',
-  'home.features.share.title': '🔗 Veilig delen',
-  'home.features.share.description': 'Ontvang een unieke URL en een apart willekeurig wachtwoord, en deel deze via verschillende kanalen voor extra veiligheid.',
-  'home.features.destruct.title': '💥 Automatische vernietiging',
-  'home.features.destruct.description': 'De memo verwijdert zichzelf permanent nadat deze is gelezen of wanneer de tijdslimiet is bereikt (van 8 uur tot 30 dagen).',
+  "home.features.title": "Hoe werkt het",
+  "home.features.encrypt.title": "🔐 Versleutelen in de browser",
+  "home.features.encrypt.description":
+    "Typ uw memo. Deze wordt direct in uw browser versleuteld met sterke AES-256-encryptie voordat deze onze servers bereikt.",
+  "home.features.share.title": "🔗 Veilig delen",
+  "home.features.share.description":
+    "Ontvang een unieke URL en een apart willekeurig wachtwoord, en deel deze via verschillende kanalen voor extra veiligheid.",
+  "home.features.destruct.title": "💥 Automatische vernietiging",
+  "home.features.destruct.description":
+    "De memo verwijdert zichzelf permanent nadat deze is gelezen of wanneer de tijdslimiet is bereikt (van 8 uur tot 30 dagen).",
 
-  'home.security.title': 'Beveiligingsfuncties',
-  'home.security.encryption.title': '🔒 Echte client-side encryptie',
-  'home.security.encryption.description': 'Uw memo wordt in de browser versleuteld met AES-256-GCM en een sterke sleutelafleiding. Wij zien nooit de platte tekst.',
-  'home.security.delete.title': '🗑️ Betrouwbare automatische verwijdering',
-  'home.security.delete.description': 'Memo\'s verdwijnen voorgoed na het lezen of verlopen, met automatische opruiming elk uur. Geen back-ups of herstel mogelijk.',
-  'home.security.password.title': '🌐 Geen wachtwoordkennis',
-  'home.security.password.description': 'Wij genereren en verwerken wachtwoorden volledig in uw browser. Ze worden nooit naar onze servers gestuurd of daar opgeslagen.',
+  "home.security.title": "Beveiligingsfuncties",
+  "home.security.encryption.title": "🔒 Echte client-side encryptie",
+  "home.security.encryption.description":
+    "Uw memo wordt in de browser versleuteld met AES-256-GCM en een sterke sleutelafleiding. Wij zien nooit de platte tekst.",
+  "home.security.delete.title": "🗑️ Betrouwbare automatische verwijdering",
+  "home.security.delete.description":
+    "Memo's verdwijnen voorgoed na het lezen of verlopen, met automatische opruiming elk uur. Geen back-ups of herstel mogelijk.",
+  "home.security.password.title": "🌐 Geen wachtwoordkennis",
+  "home.security.password.description":
+    "Wij genereren en verwerken wachtwoorden volledig in uw browser. Ze worden nooit naar onze servers gestuurd of daar opgeslagen.",
 
-  'footer.sourceCode': 'Bekijk broncode op GitHub',
-  'footer.tos': 'Gebruiksvoorwaarden',
-  'footer.privacy': 'Privacyverklaring',
-  'footer.tagline': 'Geen tracking, geen advertenties, geen onzin.',
+  "footer.sourceCode": "Bekijk broncode op GitHub",
+  "footer.tos": "Gebruiksvoorwaarden",
+  "footer.privacy": "Privacyverklaring",
+  "footer.tagline": "Geen tracking, geen advertenties, geen onzin.",
 
   // About page content
-  'about.hero.title': 'Over securememo.app',
-  'about.hero.subtitle': 'securememo.app is een privacygerichte applicatie waarmee u versleutelde memo\'s kunt maken die zichzelf vernietigen na het lezen of verlopen. Gebouwd met veiligheid en privacy als hoogste prioriteit. Broncode beschikbaar op GitHub.',
+  "about.hero.title": "Over securememo.app",
+  "about.hero.subtitle":
+    "securememo.app is een privacygerichte applicatie waarmee u versleutelde memo's kunt maken die zichzelf vernietigen na het lezen of verlopen. Gebouwd met veiligheid en privacy als hoogste prioriteit. Broncode beschikbaar op GitHub.",
 
-  'about.tech.title': 'Technologie Stack',
-  'about.tech.cloudflare': 'Cloudflare Workers: Serverloze rekenkracht voor wereldwijde prestaties',
-  'about.tech.d1': 'D1 Database: SQLite-gedreven database voor veilige opslag',
-  'about.tech.webcrypto': 'Web Crypto API: Client-side AES-256 encryptie',
-  'about.tech.frontend': 'HTML/CSS/JavaScript: Moderne, responsieve webinterface',
-  'about.tech.github': 'Broncode beschikbaar op GitHub:',
-  'about.tech.githubLink': 'Bekijk broncode op GitHub',
+  "about.tech.title": "Technologie Stack",
+  "about.tech.cloudflare": "Cloudflare Workers: Serverloze rekenkracht voor wereldwijde prestaties",
+  "about.tech.d1": "D1 Database: SQLite-gedreven database voor veilige opslag",
+  "about.tech.webcrypto": "Web Crypto API: Client-side AES-256 encryptie",
+  "about.tech.frontend": "HTML/CSS/JavaScript: Moderne, responsieve webinterface",
+  "about.tech.github": "Broncode beschikbaar op GitHub:",
+  "about.tech.githubLink": "Bekijk broncode op GitHub",
 
-  'about.features.title': 'Beveiligingsfuncties',
-  'about.features.clientEncryption.title': '🔐 Client-side encryptie',
-  'about.features.clientEncryption.description': 'Alle encryptie gebeurt in uw browser met de Web Crypto API. Uw memo wordt versleuteld met AES-256 voordat deze naar onze servers wordt gestuurd.',
-  'about.features.passwordSharing.title': '🔑 Gescheiden wachtwoorddeling',
-  'about.features.passwordSharing.description': 'Het encryptiewachtwoord wordt apart van de URL gegenereerd en moet via een ander kanaal worden gedeeld voor extra veiligheid.',
-  'about.features.selfDestruct.title': '💥 Zelfvernietigende memo\'s',
-  'about.features.selfDestruct.description': 'Zodra een memo is gelezen of verlopen, wordt deze direct en permanent uit onze database verwijderd. Er blijven geen sporen achter.',
-  'about.features.noStorage.title': '🌐 Geen wachtwoordopslag',
-  'about.features.noStorage.description': 'Wij slaan nooit encryptiewachtwoorden op onze servers op. Ze bestaan alleen in het geheugen van uw browser.',
-  'about.features.global.title': '⚡ Wereldwijde prestaties',
-  'about.features.global.description': 'Gebouwd op het wereldwijde netwerk van Cloudflare voor razendsnelle toegang vanuit elke locatie.',
-  'about.features.privacy.title': '🔒 Privacy eerst',
-  'about.features.privacy.description': 'Geen gebruikersaccounts vereist. Geen tracking. Geen analytics. Uw privacy is onze prioriteit.',
+  "about.features.title": "Beveiligingsfuncties",
+  "about.features.clientEncryption.title": "🔐 Client-side encryptie",
+  "about.features.clientEncryption.description":
+    "Alle encryptie gebeurt in uw browser met de Web Crypto API. Uw memo wordt versleuteld met AES-256 voordat deze naar onze servers wordt gestuurd.",
+  "about.features.passwordSharing.title": "🔑 Gescheiden wachtwoorddeling",
+  "about.features.passwordSharing.description":
+    "Het encryptiewachtwoord wordt apart van de URL gegenereerd en moet via een ander kanaal worden gedeeld voor extra veiligheid.",
+  "about.features.selfDestruct.title": "💥 Zelfvernietigende memo's",
+  "about.features.selfDestruct.description":
+    "Zodra een memo is gelezen of verlopen, wordt deze direct en permanent uit onze database verwijderd. Er blijven geen sporen achter.",
+  "about.features.noStorage.title": "🌐 Geen wachtwoordopslag",
+  "about.features.noStorage.description":
+    "Wij slaan nooit encryptiewachtwoorden op onze servers op. Ze bestaan alleen in het geheugen van uw browser.",
+  "about.features.global.title": "⚡ Wereldwijde prestaties",
+  "about.features.global.description":
+    "Gebouwd op het wereldwijde netwerk van Cloudflare voor razendsnelle toegang vanuit elke locatie.",
+  "about.features.privacy.title": "🔒 Privacy eerst",
+  "about.features.privacy.description":
+    "Geen gebruikersaccounts vereist. Geen tracking. Geen analytics. Uw privacy is onze prioriteit.",
 
-  'about.usage.title': 'Hoe te gebruiken',
-  'about.usage.create.title': '1. Maak een memo',
-  'about.usage.create.description': 'Ga naar "Veilig Memo maken" en typ uw memo. Kies een verlooptermijn (8u, 1d, 2d, 1 week of maximaal 30 dagen). Memo\'s worden verwijderd na lezen of verlopen. Het systeem genereert een willekeurig encryptiewachtwoord.',
-  'about.usage.share.title': '2. Deel de link en het wachtwoord',
-  'about.usage.share.description': 'Kopieer de gegenereerde URL en het wachtwoord, en deel deze via aparte kanalen voor extra veiligheid.',
-  'about.usage.destruct.title': '3. Zelfvernietiging',
-  'about.usage.destruct.description': 'Wanneer de ontvanger de link opent en het wachtwoord apart invoert, wordt de memo ontsleuteld en vervolgens permanent verwijderd als deze is gelezen, of automatisch verwijderd als deze is verlopen. Verlopen memo\'s worden elk uur automatisch opgeruimd.',
+  "about.usage.title": "Hoe te gebruiken",
+  "about.usage.create.title": "1. Maak een memo",
+  "about.usage.create.description":
+    'Ga naar "Veilig Memo maken" en typ uw memo. Kies een verlooptermijn (8u, 1d, 2d, 1 week of maximaal 30 dagen). Memo\'s worden verwijderd na lezen of verlopen. Het systeem genereert een willekeurig encryptiewachtwoord.',
+  "about.usage.share.title": "2. Deel de link en het wachtwoord",
+  "about.usage.share.description":
+    "Kopieer de gegenereerde URL en het wachtwoord, en deel deze via aparte kanalen voor extra veiligheid.",
+  "about.usage.destruct.title": "3. Zelfvernietiging",
+  "about.usage.destruct.description":
+    "Wanneer de ontvanger de link opent en het wachtwoord apart invoert, wordt de memo ontsleuteld en vervolgens permanent verwijderd als deze is gelezen, of automatisch verwijderd als deze is verlopen. Verlopen memo's worden elk uur automatisch opgeruimd.",
 
-  'about.cta.title': 'Klaar om te beginnen?',
-  'about.cta.subtitle': 'Maak nu uw eerste veilige memo en ervaar echte end-to-end encryptie.',
-  'about.cta.createBtn': 'Veilig Memo maken',
-  'about.cta.homeBtn': 'Terug naar startpagina',
+  "about.cta.title": "Klaar om te beginnen?",
+  "about.cta.subtitle": "Maak nu uw eerste veilige memo en ervaar echte end-to-end encryptie.",
+  "about.cta.createBtn": "Veilig Memo maken",
+  "about.cta.homeBtn": "Terug naar startpagina",
 
   // Terms of Service page content
-  'tos.hero.title': 'Gebruiksvoorwaarden',
-  'tos.lastUpdated': 'Laatst bijgewerkt: 24 augustus 2025',
-  'tos.tableOfContents.title': 'Inhoudsopgave',
-  'tos.tableOfContents.serviceDescription': 'Beschrijving van de dienst',
-  'tos.tableOfContents.acceptableUse': 'Toegestaan gebruik',
-  'tos.tableOfContents.privacyData': 'Privacy & Gegevensverwerking',
-  'tos.tableOfContents.serviceLimitations': 'Beperkingen van de dienst',
-  'tos.tableOfContents.securityDisclaimers': 'Beveiliging & Vrijwaring',
-  'tos.tableOfContents.intellectualProperty': 'Intellectueel eigendom',
-  'tos.tableOfContents.indemnification': 'Schadeloosstelling',
-  'tos.tableOfContents.termination': 'Beëindiging',
-  'tos.tableOfContents.changesTerms': 'Wijzigingen in voorwaarden',
-  'tos.tableOfContents.governingLaw': 'Toepasselijk recht & Jurisdictie',
-  'tos.tableOfContents.miscellaneous': 'Diversen',
-  'tos.tableOfContents.contact': 'Contact',
-  'tos.tableOfContents.languageDisclaimer': 'Taal en vertaling',
+  "tos.hero.title": "Gebruiksvoorwaarden",
+  "tos.lastUpdated": "Laatst bijgewerkt: 24 augustus 2025",
+  "tos.tableOfContents.title": "Inhoudsopgave",
+  "tos.tableOfContents.serviceDescription": "Beschrijving van de dienst",
+  "tos.tableOfContents.acceptableUse": "Toegestaan gebruik",
+  "tos.tableOfContents.privacyData": "Privacy & Gegevensverwerking",
+  "tos.tableOfContents.serviceLimitations": "Beperkingen van de dienst",
+  "tos.tableOfContents.securityDisclaimers": "Beveiliging & Vrijwaring",
+  "tos.tableOfContents.intellectualProperty": "Intellectueel eigendom",
+  "tos.tableOfContents.indemnification": "Schadeloosstelling",
+  "tos.tableOfContents.termination": "Beëindiging",
+  "tos.tableOfContents.changesTerms": "Wijzigingen in voorwaarden",
+  "tos.tableOfContents.governingLaw": "Toepasselijk recht & Jurisdictie",
+  "tos.tableOfContents.miscellaneous": "Diversen",
+  "tos.tableOfContents.contact": "Contact",
+  "tos.tableOfContents.languageDisclaimer": "Taal en vertaling",
 
-  'tos.serviceDescription.title': '1. Beschrijving van de dienst',
-  'tos.serviceDescription.content': 'securememo.app is een veilige memo-deeldienst waarmee gebruikers versleutelde memo\'s kunnen maken die zichzelf vernietigen na het lezen of verlopen. De dienst gebruikt client-side encryptie zodat memo-inhoud nooit toegankelijk is voor onze servers.',
+  "tos.serviceDescription.title": "1. Beschrijving van de dienst",
+  "tos.serviceDescription.content":
+    "securememo.app is een veilige memo-deeldienst waarmee gebruikers versleutelde memo's kunnen maken die zichzelf vernietigen na het lezen of verlopen. De dienst gebruikt client-side encryptie zodat memo-inhoud nooit toegankelijk is voor onze servers.",
 
-  'tos.acceptableUse.title': '2. Toegestaan gebruik',
-  'tos.acceptableUse.intro': 'U stemt ermee in deze dienst alleen te gebruiken voor wettige doeleinden en in overeenstemming met deze voorwaarden. U stemt ermee in om niet:',
-  'tos.acceptableUse.illegal': 'De dienst te gebruiken voor het verzenden van illegale, schadelijke, bedreigende, beledigende of lasterlijke inhoud',
-  'tos.acceptableUse.bypass': 'Pogingen te doen om beveiligingsmaatregelen of CAPTCHA-bescherming te omzeilen',
-  'tos.acceptableUse.automated': 'Geautomatiseerde tools of scripts te gebruiken om memo\'s te maken',
-  'tos.acceptableUse.malware': 'Memo\'s te delen die malware, phishinglinks of andere schadelijke inhoud bevatten',
-  'tos.acceptableUse.spam': 'De dienst te gebruiken voor spam of massaal ongevraagd delen van memo\'s',
-  'tos.acceptableUse.reverse': 'Pogingen te doen om de dienst te reverse-engineeren of te compromitteren',
+  "tos.acceptableUse.title": "2. Toegestaan gebruik",
+  "tos.acceptableUse.intro":
+    "U stemt ermee in deze dienst alleen te gebruiken voor wettige doeleinden en in overeenstemming met deze voorwaarden. U stemt ermee in om niet:",
+  "tos.acceptableUse.illegal":
+    "De dienst te gebruiken voor het verzenden van illegale, schadelijke, bedreigende, beledigende of lasterlijke inhoud",
+  "tos.acceptableUse.bypass": "Pogingen te doen om beveiligingsmaatregelen of CAPTCHA-bescherming te omzeilen",
+  "tos.acceptableUse.automated": "Geautomatiseerde tools of scripts te gebruiken om memo's te maken",
+  "tos.acceptableUse.malware": "Memo's te delen die malware, phishinglinks of andere schadelijke inhoud bevatten",
+  "tos.acceptableUse.spam": "De dienst te gebruiken voor spam of massaal ongevraagd delen van memo's",
+  "tos.acceptableUse.reverse": "Pogingen te doen om de dienst te reverse-engineeren of te compromitteren",
 
-  'tos.privacyData.title': '3. Privacy & Gegevensverwerking',
-  'tos.privacyData.noAccess': 'Geen toegang tot inhoud: Wij kunnen uw memo-inhoud niet openen, lezen of herstellen. Alle encryptie gebeurt in uw browser.',
-  'tos.privacyData.noPersonal': 'Minimale gegevensverzameling: Wij vereisen geen gebruikersaccounts en verzamelen geen persoonlijke informatie voor het gebruik van de dienst. De enige persoonsgegevens die wij mogelijk verzamelen zijn wanneer u ons vrijwillig contacteert voor ondersteuning. Wanneer u ons via e-mail contacteert, verzamelen wij uw e-mailadres en de inhoud van uw bericht om op uw vraag te reageren. Wij gebruiken deze informatie voor geen enkel ander doel en delen deze niet met derden zonder uw toestemming.',
-  'tos.privacyData.securityLogging': 'Beveiligingslogboeken: Wij loggen tijdelijk IP-adressen en beveiligingsgerelateerde metadata uitsluitend voor het voorkomen van misbruik en het beschermen van de integriteit van de dienst. Deze logboeken worden nooit gebruikt voor tracking of profilering.',
-  'tos.privacyData.automaticDeletion': 'Automatische verwijdering: Memo\'s worden automatisch verwijderd na het lezen of wanneer ze verlopen.',
-  'tos.privacyData.noRecovery': 'Geen herstel: Zodra een memo is verwijderd, kan deze niet worden hersteld.',
-  'tos.privacyData.gdpr': 'AVG-naleving: Wij zetten ons in voor de principes van de AVG. Wij minimaliseren de gegevensverzameling en verwerken alleen noodzakelijke gegevens, zoals tijdelijke beveiligingslogboeken, op basis van gerechtvaardigd belang om de dienst te beschermen.',
-  'tos.privacyData.moreDetails': 'Voor meer details, bekijk onze',
-  'tos.privacyData.privacyNotice': 'Privacyverklaring',
+  "tos.privacyData.title": "3. Privacy & Gegevensverwerking",
+  "tos.privacyData.noAccess":
+    "Geen toegang tot inhoud: Wij kunnen uw memo-inhoud niet openen, lezen of herstellen. Alle encryptie gebeurt in uw browser.",
+  "tos.privacyData.noPersonal":
+    "Minimale gegevensverzameling: Wij vereisen geen gebruikersaccounts en verzamelen geen persoonlijke informatie voor het gebruik van de dienst. De enige persoonsgegevens die wij mogelijk verzamelen zijn wanneer u ons vrijwillig contacteert voor ondersteuning. Wanneer u ons via e-mail contacteert, verzamelen wij uw e-mailadres en de inhoud van uw bericht om op uw vraag te reageren. Wij gebruiken deze informatie voor geen enkel ander doel en delen deze niet met derden zonder uw toestemming.",
+  "tos.privacyData.securityLogging":
+    "Beveiligingslogboeken: Wij loggen tijdelijk IP-adressen en beveiligingsgerelateerde metadata uitsluitend voor het voorkomen van misbruik en het beschermen van de integriteit van de dienst. Deze logboeken worden nooit gebruikt voor tracking of profilering.",
+  "tos.privacyData.automaticDeletion":
+    "Automatische verwijdering: Memo's worden automatisch verwijderd na het lezen of wanneer ze verlopen.",
+  "tos.privacyData.noRecovery": "Geen herstel: Zodra een memo is verwijderd, kan deze niet worden hersteld.",
+  "tos.privacyData.gdpr":
+    "AVG-naleving: Wij zetten ons in voor de principes van de AVG. Wij minimaliseren de gegevensverzameling en verwerken alleen noodzakelijke gegevens, zoals tijdelijke beveiligingslogboeken, op basis van gerechtvaardigd belang om de dienst te beschermen.",
+  "tos.privacyData.moreDetails": "Voor meer details, bekijk onze",
+  "tos.privacyData.privacyNotice": "Privacyverklaring",
 
-  'tos.serviceLimitations.title': '4. Beperkingen van de dienst',
-  'tos.serviceLimitations.messageSize': 'Berichtgrootte: Maximaal 10.000 tekens per memo',
-  'tos.serviceLimitations.expiryTimes': 'Verlooptijden: 8 uur, 24 uur, 48 uur, 1 week, of verwijderen na lezen (maximaal 30 dagen)',
-  'tos.serviceLimitations.availability': 'Beschikbaarheid: Dienst wordt geleverd "zoals het is" zonder garanties op beschikbaarheid',
-  'tos.serviceLimitations.noDelivery': 'Geen leveringsgarantie: Wij kunnen niet garanderen dat memo\'s worden afgeleverd, gelezen of op tijd verwijderd.',
+  "tos.serviceLimitations.title": "4. Beperkingen van de dienst",
+  "tos.serviceLimitations.messageSize": "Berichtgrootte: Maximaal 10.000 tekens per memo",
+  "tos.serviceLimitations.expiryTimes":
+    "Verlooptijden: 8 uur, 24 uur, 48 uur, 1 week, of verwijderen na lezen (maximaal 30 dagen)",
+  "tos.serviceLimitations.availability":
+    'Beschikbaarheid: Dienst wordt geleverd "zoals het is" zonder garanties op beschikbaarheid',
+  "tos.serviceLimitations.noDelivery":
+    "Geen leveringsgarantie: Wij kunnen niet garanderen dat memo's worden afgeleverd, gelezen of op tijd verwijderd.",
 
-  'tos.securityDisclaimers.title': '5. Beveiliging & Vrijwaring',
-  'tos.securityDisclaimers.userResponsibility': 'Gebruikersverantwoordelijkheid: U bent zelf verantwoordelijk voor het veilig delen van memo-URL\'s en het beschermen van de wachtwoorden. Als wachtwoorden verloren gaan, kunnen memo\'s niet worden hersteld.',
-  'tos.securityDisclaimers.noWarranty': 'Geen garantie: De dienst wordt geleverd zonder enige vorm van garantie. Onze encryptiediensten worden geleverd "zoals het is" en "zoals beschikbaar". Wij garanderen niet dat de encryptie ononderbroken, foutloos of volledig veilig is tegen alle mogelijke bedreigingen.',
-  'tos.securityDisclaimers.limitation': 'Beperking van aansprakelijkheid: Wij zijn niet aansprakelijk voor enige schade voortvloeiend uit het gebruik van de dienst. U erkent dat geen enkele methode van elektronische overdracht of opslag 100% veilig is, en wij zijn niet verantwoordelijk voor ongeautoriseerde toegang tot of onderschepping van uw memo\'s. Gebruik van onze encryptiediensten is op eigen risico.',
-  'tos.securityDisclaimers.securityMeasures': 'Beveiligingsmaatregelen: Hoewel wij beveiligingsmaatregelen implementeren, is geen enkel systeem 100% veilig.',
-  'tos.securityDisclaimers.exportControls': 'Exportbeperkingen: U stemt ermee in de dienst niet te gebruiken in strijd met exportwetgeving, waaronder het gebruik in gesanctioneerde landen.',
+  "tos.securityDisclaimers.title": "5. Beveiliging & Vrijwaring",
+  "tos.securityDisclaimers.userResponsibility":
+    "Gebruikersverantwoordelijkheid: U bent zelf verantwoordelijk voor het veilig delen van memo-URL's en het beschermen van de wachtwoorden. Als wachtwoorden verloren gaan, kunnen memo's niet worden hersteld.",
+  "tos.securityDisclaimers.noWarranty":
+    'Geen garantie: De dienst wordt geleverd zonder enige vorm van garantie. Onze encryptiediensten worden geleverd "zoals het is" en "zoals beschikbaar". Wij garanderen niet dat de encryptie ononderbroken, foutloos of volledig veilig is tegen alle mogelijke bedreigingen.',
+  "tos.securityDisclaimers.limitation":
+    "Beperking van aansprakelijkheid: Wij zijn niet aansprakelijk voor enige schade voortvloeiend uit het gebruik van de dienst. U erkent dat geen enkele methode van elektronische overdracht of opslag 100% veilig is, en wij zijn niet verantwoordelijk voor ongeautoriseerde toegang tot of onderschepping van uw memo's. Gebruik van onze encryptiediensten is op eigen risico.",
+  "tos.securityDisclaimers.securityMeasures":
+    "Beveiligingsmaatregelen: Hoewel wij beveiligingsmaatregelen implementeren, is geen enkel systeem 100% veilig.",
+  "tos.securityDisclaimers.exportControls":
+    "Exportbeperkingen: U stemt ermee in de dienst niet te gebruiken in strijd met exportwetgeving, waaronder het gebruik in gesanctioneerde landen.",
 
-  'tos.intellectualProperty.title': '6. Intellectueel eigendom',
-  'tos.intellectualProperty.content': 'De dienst en alle materialen die via de dienst worden aangeboden, waaronder maar niet beperkt tot tekst, afbeeldingen, logo\'s en software, zijn eigendom van securememo.app of haar licentiegevers en zijn beschermd door auteursrecht, handelsmerk en andere intellectuele eigendomsrechten. U stemt ermee in onze inhoud niet te wijzigen, reproduceren, verspreiden of afgeleide werken te maken zonder expliciete toestemming, behalve voor persoonlijk, niet-commercieel gebruik binnen de dienst.',
-  'tos.intellectualProperty.copyright': 'Auteursrecht & DMCA-beleid: Als u denkt dat uw auteursrecht is geschonden, neem dan contact op via contact@securememo.app met de vereiste informatie volgens de DMCA (bijv. identificatie van het werk, uw contactgegevens en een verklaring van goede trouw).',
+  "tos.intellectualProperty.title": "6. Intellectueel eigendom",
+  "tos.intellectualProperty.content":
+    "De dienst en alle materialen die via de dienst worden aangeboden, waaronder maar niet beperkt tot tekst, afbeeldingen, logo's en software, zijn eigendom van securememo.app of haar licentiegevers en zijn beschermd door auteursrecht, handelsmerk en andere intellectuele eigendomsrechten. U stemt ermee in onze inhoud niet te wijzigen, reproduceren, verspreiden of afgeleide werken te maken zonder expliciete toestemming, behalve voor persoonlijk, niet-commercieel gebruik binnen de dienst.",
+  "tos.intellectualProperty.copyright":
+    "Auteursrecht & DMCA-beleid: Als u denkt dat uw auteursrecht is geschonden, neem dan contact op via contact@securememo.app met de vereiste informatie volgens de DMCA (bijv. identificatie van het werk, uw contactgegevens en een verklaring van goede trouw).",
 
-  'tos.indemnification.title': '7. Schadeloosstelling',
-  'tos.indemnification.content': 'U stemt ermee in securememo.app en haar gelieerde ondernemingen, bestuurders, medewerkers en agenten te verdedigen, schadeloos te stellen en te vrijwaren van alle claims, aansprakelijkheden, schade, verliezen en kosten, inclusief redelijke advocaatkosten, die voortvloeien uit of op enige wijze verband houden met uw toegang tot of gebruik van onze diensten, inclusief elke schending van deze voorwaarden door u.',
+  "tos.indemnification.title": "7. Schadeloosstelling",
+  "tos.indemnification.content":
+    "U stemt ermee in securememo.app en haar gelieerde ondernemingen, bestuurders, medewerkers en agenten te verdedigen, schadeloos te stellen en te vrijwaren van alle claims, aansprakelijkheden, schade, verliezen en kosten, inclusief redelijke advocaatkosten, die voortvloeien uit of op enige wijze verband houden met uw toegang tot of gebruik van onze diensten, inclusief elke schending van deze voorwaarden door u.",
 
-  'tos.termination.title': '8. Beëindiging',
-  'tos.termination.content': 'Wij behouden ons het recht voor om de toegang tot de dienst te beëindigen of op te schorten bij schending van deze voorwaarden of om andere redenen naar eigen inzicht.',
+  "tos.termination.title": "8. Beëindiging",
+  "tos.termination.content":
+    "Wij behouden ons het recht voor om de toegang tot de dienst te beëindigen of op te schorten bij schending van deze voorwaarden of om andere redenen naar eigen inzicht.",
 
-  'tos.changesTerms.title': '9. Wijzigingen in voorwaarden',
-  'tos.changesTerms.content': 'Wij kunnen deze voorwaarden op elk moment bijwerken. Voortgezet gebruik van de dienst betekent acceptatie van de bijgewerkte voorwaarden.',
+  "tos.changesTerms.title": "9. Wijzigingen in voorwaarden",
+  "tos.changesTerms.content":
+    "Wij kunnen deze voorwaarden op elk moment bijwerken. Voortgezet gebruik van de dienst betekent acceptatie van de bijgewerkte voorwaarden.",
 
-  'tos.governingLaw.title': '10. Toepasselijk recht & Jurisdictie',
-  'tos.governingLaw.content': 'Deze gebruiksvoorwaarden en alle afzonderlijke overeenkomsten waarbij wij u diensten verlenen, worden beheerst door en geïnterpreteerd in overeenstemming met het recht van Finland, zonder rekening te houden met conflicten van rechtsbeginselen. Geschillen worden beslecht door de rechtbanken van Helsinki, Finland.',
+  "tos.governingLaw.title": "10. Toepasselijk recht & Jurisdictie",
+  "tos.governingLaw.content":
+    "Deze gebruiksvoorwaarden en alle afzonderlijke overeenkomsten waarbij wij u diensten verlenen, worden beheerst door en geïnterpreteerd in overeenstemming met het recht van Finland, zonder rekening te houden met conflicten van rechtsbeginselen. Geschillen worden beslecht door de rechtbanken van Helsinki, Finland.",
 
-  'tos.miscellaneous.title': '11. Diversen',
-  'tos.miscellaneous.severability': 'Scheiding: Als een bepaling van deze voorwaarden ongeldig of onafdwingbaar wordt bevonden door een bevoegde rechtbank, wordt die bepaling gescheiden van de voorwaarden en blijven de overige bepalingen volledig van kracht.',
-  'tos.miscellaneous.assignment': 'Overdracht: U mag deze voorwaarden niet overdragen of overdragen, hetzij van rechtswege of anderszins, zonder onze voorafgaande schriftelijke toestemming. Wij kunnen deze voorwaarden naar eigen inzicht overdragen zonder u hiervan op de hoogte te stellen.',
-  'tos.miscellaneous.waiver': 'Afstand: Geen afstand van een bepaling wordt beschouwd als een verdere of voortdurende afstand tenzij schriftelijk.',
-  'tos.miscellaneous.children': 'Privacy van kinderen: Onze dienst is niet bedoeld voor kinderen onder de 13 (of 16 in sommige rechtsgebieden). Wij verzamelen niet bewust gegevens van kinderen. Als wij dergelijke gegevens ontdekken, zullen wij deze onmiddellijk verwijderen.',
+  "tos.miscellaneous.title": "11. Diversen",
+  "tos.miscellaneous.severability":
+    "Scheiding: Als een bepaling van deze voorwaarden ongeldig of onafdwingbaar wordt bevonden door een bevoegde rechtbank, wordt die bepaling gescheiden van de voorwaarden en blijven de overige bepalingen volledig van kracht.",
+  "tos.miscellaneous.assignment":
+    "Overdracht: U mag deze voorwaarden niet overdragen of overdragen, hetzij van rechtswege of anderszins, zonder onze voorafgaande schriftelijke toestemming. Wij kunnen deze voorwaarden naar eigen inzicht overdragen zonder u hiervan op de hoogte te stellen.",
+  "tos.miscellaneous.waiver":
+    "Afstand: Geen afstand van een bepaling wordt beschouwd als een verdere of voortdurende afstand tenzij schriftelijk.",
+  "tos.miscellaneous.children":
+    "Privacy van kinderen: Onze dienst is niet bedoeld voor kinderen onder de 13 (of 16 in sommige rechtsgebieden). Wij verzamelen niet bewust gegevens van kinderen. Als wij dergelijke gegevens ontdekken, zullen wij deze onmiddellijk verwijderen.",
 
-  'tos.contact.title': '12. Contact',
-  'tos.contact.content': 'Voor vragen over deze voorwaarden, bezoek onze',
-  'tos.contact.github': 'GitHub-repository',
-  'tos.contact.email': 'of e-mail contact@securememo.app.',
+  "tos.contact.title": "12. Contact",
+  "tos.contact.content": "Voor vragen over deze voorwaarden, bezoek onze",
+  "tos.contact.github": "GitHub-repository",
+  "tos.contact.email": "of e-mail contact@securememo.app.",
 
-  'tos.languageDisclaimer.title': '13. Taal en vertaling',
-  'tos.languageDisclaimer.content': 'Deze gebruiksvoorwaarden kunnen voor uw gemak in andere talen worden vertaald. In geval van discrepantie of conflict tussen de Engelse versie en een vertaalde versie, prevaleert de Engelse versie.',
+  "tos.languageDisclaimer.title": "13. Taal en vertaling",
+  "tos.languageDisclaimer.content":
+    "Deze gebruiksvoorwaarden kunnen voor uw gemak in andere talen worden vertaald. In geval van discrepantie of conflict tussen de Engelse versie en een vertaalde versie, prevaleert de Engelse versie.",
 
   // Privacy Notice page content
-  'privacy.hero.title': 'Privacyverklaring voor securememo.app',
-  'privacy.lastUpdated': 'Laatst bijgewerkt: 24 augustus 2025',
-  'privacy.tableOfContents.title': 'Inhoudsopgave',
-  'privacy.tableOfContents.informationCollected': 'Welke informatie verzamelen wij',
-  'privacy.tableOfContents.howWeUse': 'Hoe gebruiken wij informatie',
-  'privacy.tableOfContents.dataSharing': 'Gegevensdeling en openbaarmaking',
-  'privacy.tableOfContents.dataSecurity': 'Gegevensbeveiliging',
-  'privacy.tableOfContents.dataRetention': 'Bewaartermijn van gegevens',
-  'privacy.tableOfContents.yourRights': 'Uw rechten en keuzes',
-  'privacy.tableOfContents.childrenPrivacy': 'Privacy van kinderen',
-  'privacy.tableOfContents.internationalTransfers': 'Internationale gegevensoverdracht',
-  'privacy.tableOfContents.changesNotice': 'Wijzigingen in deze privacyverklaring',
-  'privacy.tableOfContents.contact': 'Contact',
+  "privacy.hero.title": "Privacyverklaring voor securememo.app",
+  "privacy.lastUpdated": "Laatst bijgewerkt: 24 augustus 2025",
+  "privacy.tableOfContents.title": "Inhoudsopgave",
+  "privacy.tableOfContents.informationCollected": "Welke informatie verzamelen wij",
+  "privacy.tableOfContents.howWeUse": "Hoe gebruiken wij informatie",
+  "privacy.tableOfContents.dataSharing": "Gegevensdeling en openbaarmaking",
+  "privacy.tableOfContents.dataSecurity": "Gegevensbeveiliging",
+  "privacy.tableOfContents.dataRetention": "Bewaartermijn van gegevens",
+  "privacy.tableOfContents.yourRights": "Uw rechten en keuzes",
+  "privacy.tableOfContents.childrenPrivacy": "Privacy van kinderen",
+  "privacy.tableOfContents.internationalTransfers": "Internationale gegevensoverdracht",
+  "privacy.tableOfContents.changesNotice": "Wijzigingen in deze privacyverklaring",
+  "privacy.tableOfContents.contact": "Contact",
 
-  'privacy.intro.p1': 'securememo.app ("wij," "ons," of "onze") zet zich in voor het beschermen van uw privacy. Deze privacyverklaring legt uit hoe wij omgaan met informatie in verband met onze dienst, waarmee gebruikers versleutelde memo\'s kunnen maken en delen die zichzelf vernietigen na het lezen of verlopen. Onze dienst is ontworpen met privacy als kern: alle encryptie gebeurt in uw browser en wij hebben geen toegang tot uw memo-inhoud.',
-  'privacy.intro.p2': 'Door gebruik te maken van securememo.app gaat u akkoord met de praktijken zoals beschreven in deze privacyverklaring. Indien u niet akkoord gaat, verzoeken wij u onze dienst niet te gebruiken.',
+  "privacy.intro.p1":
+    'securememo.app ("wij," "ons," of "onze") zet zich in voor het beschermen van uw privacy. Deze privacyverklaring legt uit hoe wij omgaan met informatie in verband met onze dienst, waarmee gebruikers versleutelde memo\'s kunnen maken en delen die zichzelf vernietigen na het lezen of verlopen. Onze dienst is ontworpen met privacy als kern: alle encryptie gebeurt in uw browser en wij hebben geen toegang tot uw memo-inhoud.',
+  "privacy.intro.p2":
+    "Door gebruik te maken van securememo.app gaat u akkoord met de praktijken zoals beschreven in deze privacyverklaring. Indien u niet akkoord gaat, verzoeken wij u onze dienst niet te gebruiken.",
 
-  'privacy.informationCollected.title': '1. Welke informatie verzamelen wij',
-  'privacy.informationCollected.intro': 'Wij verzamelen minimale informatie om de dienst veilig en efficiënt te laten werken. Concreet:',
-  'privacy.informationCollected.memoData': 'Memo-gegevens: Wanneer u een memo maakt, slaan wij alleen de versleutelde versie van uw bericht op onze servers op (via Cloudflare Workers en D1 Database). De encryptiesleutel (wachtwoord) wordt volledig in uw browser gegenereerd en verwerkt, en wordt nooit naar ons verzonden of door ons opgeslagen. Memo\'s worden automatisch verwijderd na het lezen of verlopen (opties: 8 uur, 1 dag, 2 dagen, 1 week of 30 dagen).',
-  'privacy.informationCollected.noPersonal': 'Minimale gegevensverzameling: Wij vereisen geen gebruikersaccounts en verzamelen geen persoonlijke informatie voor het gebruik van de dienst. De enige persoonsgegevens die wij mogelijk verzamelen zijn wanneer u ons vrijwillig contacteert voor ondersteuning. Wanneer u ons via e-mail contacteert, verzamelen wij uw e-mailadres en de inhoud van uw bericht om op uw vraag te reageren. Wij gebruiken deze informatie voor geen enkel ander doel en delen deze niet met derden zonder uw toestemming.',
-  'privacy.informationCollected.securityData': 'Beveiligingsgerelateerde gegevens: Voor het voorkomen van misbruik en het waarborgen van de integriteit van de dienst:',
-  'privacy.informationCollected.ipLogs': 'Wij loggen tijdelijk IP-adressen en verzoekmetadata (zoals tijdstempels) om spam, bots of kwaadaardige activiteiten te detecteren en te beperken.',
-  'privacy.informationCollected.turnstile': 'Wij gebruiken Cloudflare Turnstile CAPTCHA om geautomatiseerd misbruik te voorkomen. Turnstile is ontworpen met privacybescherming en volgt gebruikers niet over verschillende sites.',
-  'privacy.informationCollected.noAnalytics': 'Geen analytics of tracking: Wij gebruiken geen cookies, trackingpixels, externe analytics of advertentietools. Er is geen gebruikersprofilering, gedragsanalyse of gegevensverzameling voor marketingdoeleinden.',
-  'privacy.informationCollected.noSensitive': 'Wij verzamelen geen gevoelige persoonsgegevens, locatiegegevens of apparaatidentificatie buiten wat nodig is voor de basiswerking van de dienst.',
+  "privacy.informationCollected.title": "1. Welke informatie verzamelen wij",
+  "privacy.informationCollected.intro":
+    "Wij verzamelen minimale informatie om de dienst veilig en efficiënt te laten werken. Concreet:",
+  "privacy.informationCollected.memoData":
+    "Memo-gegevens: Wanneer u een memo maakt, slaan wij alleen de versleutelde versie van uw bericht op onze servers op (via Cloudflare Workers en D1 Database). De encryptiesleutel (wachtwoord) wordt volledig in uw browser gegenereerd en verwerkt, en wordt nooit naar ons verzonden of door ons opgeslagen. Memo's worden automatisch verwijderd na het lezen of verlopen (opties: 8 uur, 1 dag, 2 dagen, 1 week of 30 dagen).",
+  "privacy.informationCollected.noPersonal":
+    "Minimale gegevensverzameling: Wij vereisen geen gebruikersaccounts en verzamelen geen persoonlijke informatie voor het gebruik van de dienst. De enige persoonsgegevens die wij mogelijk verzamelen zijn wanneer u ons vrijwillig contacteert voor ondersteuning. Wanneer u ons via e-mail contacteert, verzamelen wij uw e-mailadres en de inhoud van uw bericht om op uw vraag te reageren. Wij gebruiken deze informatie voor geen enkel ander doel en delen deze niet met derden zonder uw toestemming.",
+  "privacy.informationCollected.securityData":
+    "Beveiligingsgerelateerde gegevens: Voor het voorkomen van misbruik en het waarborgen van de integriteit van de dienst:",
+  "privacy.informationCollected.ipLogs":
+    "Wij loggen tijdelijk IP-adressen en verzoekmetadata (zoals tijdstempels) om spam, bots of kwaadaardige activiteiten te detecteren en te beperken.",
+  "privacy.informationCollected.turnstile":
+    "Wij gebruiken Cloudflare Turnstile CAPTCHA om geautomatiseerd misbruik te voorkomen. Turnstile is ontworpen met privacybescherming en volgt gebruikers niet over verschillende sites.",
+  "privacy.informationCollected.noAnalytics":
+    "Geen analytics of tracking: Wij gebruiken geen cookies, trackingpixels, externe analytics of advertentietools. Er is geen gebruikersprofilering, gedragsanalyse of gegevensverzameling voor marketingdoeleinden.",
+  "privacy.informationCollected.noSensitive":
+    "Wij verzamelen geen gevoelige persoonsgegevens, locatiegegevens of apparaatidentificatie buiten wat nodig is voor de basiswerking van de dienst.",
 
-  'privacy.howWeUse.title': '2. Hoe gebruiken wij informatie',
-  'privacy.howWeUse.intro': 'De beperkte informatie die wij verzamelen wordt uitsluitend gebruikt om:',
-  'privacy.howWeUse.coreService': 'De kernfunctie te bieden: Versleutelde memo\'s tijdelijk opslaan en hun veilige opvraging en verwijdering faciliteren.',
-  'privacy.howWeUse.security': 'Beveiliging te waarborgen: Misbruik zoals spam of denial-of-service aanvallen detecteren en voorkomen met behulp van IP-logs en CAPTCHA.',
-  'privacy.howWeUse.legal': 'Voldoen aan wettelijke verplichtingen: In zeldzame gevallen kunnen wij loggegevens gebruiken om te reageren op geldige juridische verzoeken (zoals dagvaardingen).',
-  'privacy.howWeUse.noOther': 'Wij gebruiken geen gegevens voor advertenties, verkoop aan derden of enig ander doel dat niet gerelateerd is aan het functioneren van securememo.app.',
+  "privacy.howWeUse.title": "2. Hoe gebruiken wij informatie",
+  "privacy.howWeUse.intro": "De beperkte informatie die wij verzamelen wordt uitsluitend gebruikt om:",
+  "privacy.howWeUse.coreService":
+    "De kernfunctie te bieden: Versleutelde memo's tijdelijk opslaan en hun veilige opvraging en verwijdering faciliteren.",
+  "privacy.howWeUse.security":
+    "Beveiliging te waarborgen: Misbruik zoals spam of denial-of-service aanvallen detecteren en voorkomen met behulp van IP-logs en CAPTCHA.",
+  "privacy.howWeUse.legal":
+    "Voldoen aan wettelijke verplichtingen: In zeldzame gevallen kunnen wij loggegevens gebruiken om te reageren op geldige juridische verzoeken (zoals dagvaardingen).",
+  "privacy.howWeUse.noOther":
+    "Wij gebruiken geen gegevens voor advertenties, verkoop aan derden of enig ander doel dat niet gerelateerd is aan het functioneren van securememo.app.",
 
-  'privacy.dataSharing.title': '3. Gegevensdeling en openbaarmaking',
-  'privacy.dataSharing.intro': 'Wij verkopen, verhuren of delen uw gegevens niet met derden, behalve in de volgende beperkte gevallen:',
-  'privacy.dataSharing.serviceProviders': 'Dienstverleners: Wij gebruiken Cloudflare voor hosting, databaseopslag (D1) en CAPTCHA (Turnstile). Deze providers verwerken gegevens namens ons onder strikte vertrouwelijkheid en hebben geen toegang tot memo-inhoud.',
-  'privacy.dataSharing.legal': 'Wettelijke vereisten: Wij kunnen informatie openbaar maken indien wettelijk vereist, bijvoorbeeld bij een gerechtelijk bevel of overheidsverzoek.',
-  'privacy.dataSharing.business': 'Bedrijfsoverdrachten: Als securememo.app wordt overgenomen of fuseert, kunnen gegevens worden overgedragen als onderdeel van de transactie, maar blijven ze onderworpen aan deze privacyverklaring.',
+  "privacy.dataSharing.title": "3. Gegevensdeling en openbaarmaking",
+  "privacy.dataSharing.intro":
+    "Wij verkopen, verhuren of delen uw gegevens niet met derden, behalve in de volgende beperkte gevallen:",
+  "privacy.dataSharing.serviceProviders":
+    "Dienstverleners: Wij gebruiken Cloudflare voor hosting, databaseopslag (D1) en CAPTCHA (Turnstile). Deze providers verwerken gegevens namens ons onder strikte vertrouwelijkheid en hebben geen toegang tot memo-inhoud.",
+  "privacy.dataSharing.legal":
+    "Wettelijke vereisten: Wij kunnen informatie openbaar maken indien wettelijk vereist, bijvoorbeeld bij een gerechtelijk bevel of overheidsverzoek.",
+  "privacy.dataSharing.business":
+    "Bedrijfsoverdrachten: Als securememo.app wordt overgenomen of fuseert, kunnen gegevens worden overgedragen als onderdeel van de transactie, maar blijven ze onderworpen aan deze privacyverklaring.",
 
-  'privacy.dataSecurity.title': '4. Gegevensbeveiliging',
-  'privacy.dataSecurity.encryption': 'Encryptie: Alle memo\'s worden client-side versleuteld met AES-256 met PBKDF2-sleutelafleiding. Wij slaan alleen versleutelde gegevens op en kunnen deze niet ontsleutelen.',
-  'privacy.dataSecurity.deletion': 'Verwijdering: Memo\'s worden permanent verwijderd na lezen of verlopen via geautomatiseerde cronjobs.',
-  'privacy.dataSecurity.securityMeasures': 'Beveiligingsmaatregelen: Wij implementeren sterke beveiligingsheaders (zoals CSP, HSTS), input-sanitatie, bescherming tegen timing-aanvallen en CAPTCHA om misbruik te voorkomen.',
-  'privacy.dataSecurity.noRecovery': 'Geen herstel: Zodra memo\'s zijn verwijderd, kunnen ze niet worden hersteld—ook niet door ons.',
-  'privacy.dataSecurity.disclaimer': 'Hoewel wij redelijke stappen nemen om onze systemen te beveiligen, is geen enkele dienst volledig immuun voor risico\'s. U bent zelf verantwoordelijk voor het veilig delen van URL\'s en wachtwoorden.',
+  "privacy.dataSecurity.title": "4. Gegevensbeveiliging",
+  "privacy.dataSecurity.encryption":
+    "Encryptie: Alle memo's worden client-side versleuteld met AES-256 met PBKDF2-sleutelafleiding. Wij slaan alleen versleutelde gegevens op en kunnen deze niet ontsleutelen.",
+  "privacy.dataSecurity.deletion":
+    "Verwijdering: Memo's worden permanent verwijderd na lezen of verlopen via geautomatiseerde cronjobs.",
+  "privacy.dataSecurity.securityMeasures":
+    "Beveiligingsmaatregelen: Wij implementeren sterke beveiligingsheaders (zoals CSP, HSTS), input-sanitatie, bescherming tegen timing-aanvallen en CAPTCHA om misbruik te voorkomen.",
+  "privacy.dataSecurity.noRecovery":
+    "Geen herstel: Zodra memo's zijn verwijderd, kunnen ze niet worden hersteld—ook niet door ons.",
+  "privacy.dataSecurity.disclaimer":
+    "Hoewel wij redelijke stappen nemen om onze systemen te beveiligen, is geen enkele dienst volledig immuun voor risico's. U bent zelf verantwoordelijk voor het veilig delen van URL's en wachtwoorden.",
 
-  'privacy.dataRetention.title': '5. Bewaartermijn van gegevens',
-  'privacy.dataRetention.memos': 'Versleutelde memo\'s worden alleen bewaard tot ze zijn gelezen of verlopen (maximaal 30 dagen).',
-  'privacy.dataRetention.logs': 'Beveiligingslogboeken (zoals IP-adressen) worden tijdelijk bewaard voor het voorkomen van misbruik en automatisch verwijderd na korte tijd (meestal binnen enkele dagen).',
-  'privacy.dataRetention.minimal': 'Wij bewaren geen gegevens langer dan noodzakelijk voor het functioneren van de dienst.',
+  "privacy.dataRetention.title": "5. Bewaartermijn van gegevens",
+  "privacy.dataRetention.memos":
+    "Versleutelde memo's worden alleen bewaard tot ze zijn gelezen of verlopen (maximaal 30 dagen).",
+  "privacy.dataRetention.logs":
+    "Beveiligingslogboeken (zoals IP-adressen) worden tijdelijk bewaard voor het voorkomen van misbruik en automatisch verwijderd na korte tijd (meestal binnen enkele dagen).",
+  "privacy.dataRetention.minimal":
+    "Wij bewaren geen gegevens langer dan noodzakelijk voor het functioneren van de dienst.",
 
-  'privacy.yourRights.title': '6. Uw rechten en keuzes',
-  'privacy.yourRights.intro': 'Omdat wij geen persoonsgegevens verzamelen:',
-  'privacy.yourRights.noAccounts': 'Er zijn geen gebruikersaccounts om te beheren.',
-  'privacy.yourRights.noRequests': 'U kunt geen verzoeken indienen voor inzage, correctie of verwijdering van gegevens, behalve de automatische zelfvernietiging van memo\'s.',
-  'privacy.yourRights.contact': 'Als u denkt dat wij informatie over u bewaren (bijv. uit logboeken), neem dan contact op (zie hieronder) om uw rechten onder toepasselijke wetgeving zoals AVG of CCPA te bespreken. Wij voldoen aan privacywetgeving en verwerken verzoeken waar mogelijk.',
+  "privacy.yourRights.title": "6. Uw rechten en keuzes",
+  "privacy.yourRights.intro": "Omdat wij geen persoonsgegevens verzamelen:",
+  "privacy.yourRights.noAccounts": "Er zijn geen gebruikersaccounts om te beheren.",
+  "privacy.yourRights.noRequests":
+    "U kunt geen verzoeken indienen voor inzage, correctie of verwijdering van gegevens, behalve de automatische zelfvernietiging van memo's.",
+  "privacy.yourRights.contact":
+    "Als u denkt dat wij informatie over u bewaren (bijv. uit logboeken), neem dan contact op (zie hieronder) om uw rechten onder toepasselijke wetgeving zoals AVG of CCPA te bespreken. Wij voldoen aan privacywetgeving en verwerken verzoeken waar mogelijk.",
 
-  'privacy.childrenPrivacy.title': '7. Privacy van kinderen',
-  'privacy.childrenPrivacy.content': 'Onze dienst is niet bedoeld voor kinderen onder de 13 (of 16 in sommige rechtsgebieden). Wij verzamelen niet bewust gegevens van kinderen. Als wij dergelijke gegevens ontdekken, zullen wij deze verwijderen.',
+  "privacy.childrenPrivacy.title": "7. Privacy van kinderen",
+  "privacy.childrenPrivacy.content":
+    "Onze dienst is niet bedoeld voor kinderen onder de 13 (of 16 in sommige rechtsgebieden). Wij verzamelen niet bewust gegevens van kinderen. Als wij dergelijke gegevens ontdekken, zullen wij deze verwijderen.",
 
-  'privacy.internationalTransfers.title': '8. Internationale gegevensoverdracht',
-  'privacy.internationalTransfers.content': 'securememo.app wordt gehost op het wereldwijde netwerk van Cloudflare. Gegevens kunnen in verschillende landen worden verwerkt, maar wij waarborgen gelijkwaardige privacybescherming door onze minimale gegevensverzameling.',
+  "privacy.internationalTransfers.title": "8. Internationale gegevensoverdracht",
+  "privacy.internationalTransfers.content":
+    "securememo.app wordt gehost op het wereldwijde netwerk van Cloudflare. Gegevens kunnen in verschillende landen worden verwerkt, maar wij waarborgen gelijkwaardige privacybescherming door onze minimale gegevensverzameling.",
 
-  'privacy.changesNotice.title': '9. Wijzigingen in deze privacyverklaring',
-  'privacy.changesNotice.content': 'Wij kunnen deze verklaring periodiek bijwerken. Wijzigingen worden hier gepubliceerd met een bijgewerkte "Laatst bijgewerkt"-datum. Voortgezet gebruik van de dienst na wijzigingen betekent acceptatie.',
+  "privacy.changesNotice.title": "9. Wijzigingen in deze privacyverklaring",
+  "privacy.changesNotice.content":
+    'Wij kunnen deze verklaring periodiek bijwerken. Wijzigingen worden hier gepubliceerd met een bijgewerkte "Laatst bijgewerkt"-datum. Voortgezet gebruik van de dienst na wijzigingen betekent acceptatie.',
 
-  'privacy.contact.title': '10. Contact',
-  'privacy.contact.intro': 'Voor vragen over deze privacyverklaring of onze werkwijze, bezoek onze',
-  'privacy.contact.github': 'GitHub-repository',
-  'privacy.contact.email': 'of e-mail contact@securememo.app.',
-  'privacy.contact.disclaimer': 'Deze privacyverklaring is alleen van toepassing op securememo.app en niet op externe websites die vanaf onze dienst worden gelinkt.',
+  "privacy.contact.title": "10. Contact",
+  "privacy.contact.intro": "Voor vragen over deze privacyverklaring of onze werkwijze, bezoek onze",
+  "privacy.contact.github": "GitHub-repository",
+  "privacy.contact.email": "of e-mail contact@securememo.app.",
+  "privacy.contact.disclaimer":
+    "Deze privacyverklaring is alleen van toepassing op securememo.app en niet op externe websites die vanaf onze dienst worden gelinkt.",
 
   // Schema.org structured data
-  'schema.app.description': 'Maak versleutelde memo\'s die zichzelf vernietigen na het lezen. End-to-end encryptie, privacygericht en veilig delen van notities met AES-256. Geen tracking, geen advertenties.',
-  'schema.app.category': 'Beveiligingsapplicatie',
-  'schema.app.os': 'Webbrowser',
-  'schema.app.requirements': 'Vereist JavaScript. Vereist HTML5.',
-  'schema.app.author': 'Timo Heimonen',
-  'schema.app.price': '0',
-  'schema.app.currency': 'USD',
-  'schema.app.features.encryption': 'Client-side AES-256 encryptie',
-  'schema.app.features.selfDestruct': 'Zelfvernietigende memo\'s',
-  'schema.app.features.zeroKnowledge': 'Zero-knowledge architectuur',
-  'schema.app.features.noAccounts': 'Geen gebruikersaccounts vereist',
-  'schema.app.features.globalPerformance': 'Wereldwijde prestaties via Cloudflare',
-  'schema.app.features.privacyFirst': 'Privacy-eerst ontwerp',
-  'schema.app.license': 'https://github.com/timoheimonen/securememo.app/blob/main/LICENSE',
-  'schema.app.repository': 'https://github.com/timoheimonen/securememo.app',
+  "schema.app.description":
+    "Maak versleutelde memo's die zichzelf vernietigen na het lezen. End-to-end encryptie, privacygericht en veilig delen van notities met AES-256. Geen tracking, geen advertenties.",
+  "schema.app.category": "Beveiligingsapplicatie",
+  "schema.app.os": "Webbrowser",
+  "schema.app.requirements": "Vereist JavaScript. Vereist HTML5.",
+  "schema.app.author": "Timo Heimonen",
+  "schema.app.price": "0",
+  "schema.app.currency": "USD",
+  "schema.app.features.encryption": "Client-side AES-256 encryptie",
+  "schema.app.features.selfDestruct": "Zelfvernietigende memo's",
+  "schema.app.features.zeroKnowledge": "Zero-knowledge architectuur",
+  "schema.app.features.noAccounts": "Geen gebruikersaccounts vereist",
+  "schema.app.features.globalPerformance": "Wereldwijde prestaties via Cloudflare",
+  "schema.app.features.privacyFirst": "Privacy-eerst ontwerp",
+  "schema.app.license": "https://github.com/timoheimonen/securememo.app/blob/main/LICENSE",
+  "schema.app.repository": "https://github.com/timoheimonen/securememo.app",
 
   // FAQ structured data
-  'faq.privacy.question': 'Hoe beschermt securememo.app mijn privacy?',
-  'faq.privacy.answer': 'securememo.app gebruikt client-side AES-256 encryptie, wat betekent dat uw memo in uw browser wordt versleuteld voordat deze naar onze servers wordt gestuurd. Wij zien nooit de platte tekst. Memo\'s vernietigen zichzelf na lezen of verlopen, en wij vereisen geen gebruikersaccounts of verzamelen persoonlijke informatie.',
-  'faq.encryption.question': 'Welke encryptie gebruikt securememo.app?',
-  'faq.encryption.answer': 'Wij gebruiken AES-256-GCM-encryptie met PBKDF2-sleutelafleiding. Alle encryptie gebeurt client-side in uw browser via de Web Crypto API. Het encryptiewachtwoord wordt apart gegenereerd en nooit op onze servers opgeslagen.',
-  'faq.duration.question': 'Hoe lang blijven memo\'s bewaard?',
-  'faq.duration.answer': 'Memo\'s kunnen worden ingesteld om te verlopen na 8 uur, 1 dag, 2 dagen, 1 week of maximaal 30 dagen. Ze worden ook direct verwijderd na het lezen. Verlopen memo\'s worden elk uur automatisch opgeruimd.',
-  'faq.recovery.question': 'Kan ik een verwijderde memo herstellen?',
-  'faq.recovery.answer': 'Nee, zodra een memo is verwijderd (na lezen of verlopen), kan deze niet worden hersteld. Dit is bewust zo ontworpen voor maximale privacy en veiligheid.',
-  'faq.cost.question': 'Is securememo.app gratis te gebruiken?',
-  'faq.cost.answer': 'Ja, securememo.app is volledig gratis te gebruiken. Er zijn geen verborgen kosten, geen premium functies en geen tracking of advertenties.',
-  'faq.technology.question': 'Welke technologie gebruikt securememo.app?',
-  'faq.technology.answer': 'securememo.app is gebouwd op Cloudflare Workers voor serverloze rekenkracht, D1 Database voor opslag, Web Crypto API voor client-side encryptie en moderne HTML/CSS/JavaScript. De broncode is open source en beschikbaar op GitHub.',
+  "faq.privacy.question": "Hoe beschermt securememo.app mijn privacy?",
+  "faq.privacy.answer":
+    "securememo.app gebruikt client-side AES-256 encryptie, wat betekent dat uw memo in uw browser wordt versleuteld voordat deze naar onze servers wordt gestuurd. Wij zien nooit de platte tekst. Memo's vernietigen zichzelf na lezen of verlopen, en wij vereisen geen gebruikersaccounts of verzamelen persoonlijke informatie.",
+  "faq.encryption.question": "Welke encryptie gebruikt securememo.app?",
+  "faq.encryption.answer":
+    "Wij gebruiken AES-256-GCM-encryptie met PBKDF2-sleutelafleiding. Alle encryptie gebeurt client-side in uw browser via de Web Crypto API. Het encryptiewachtwoord wordt apart gegenereerd en nooit op onze servers opgeslagen.",
+  "faq.duration.question": "Hoe lang blijven memo's bewaard?",
+  "faq.duration.answer":
+    "Memo's kunnen worden ingesteld om te verlopen na 8 uur, 1 dag, 2 dagen, 1 week of maximaal 30 dagen. Ze worden ook direct verwijderd na het lezen. Verlopen memo's worden elk uur automatisch opgeruimd.",
+  "faq.recovery.question": "Kan ik een verwijderde memo herstellen?",
+  "faq.recovery.answer":
+    "Nee, zodra een memo is verwijderd (na lezen of verlopen), kan deze niet worden hersteld. Dit is bewust zo ontworpen voor maximale privacy en veiligheid.",
+  "faq.cost.question": "Is securememo.app gratis te gebruiken?",
+  "faq.cost.answer":
+    "Ja, securememo.app is volledig gratis te gebruiken. Er zijn geen verborgen kosten, geen premium functies en geen tracking of advertenties.",
+  "faq.technology.question": "Welke technologie gebruikt securememo.app?",
+  "faq.technology.answer":
+    "securememo.app is gebouwd op Cloudflare Workers voor serverloze rekenkracht, D1 Database voor opslag, Web Crypto API voor client-side encryptie en moderne HTML/CSS/JavaScript. De broncode is open source en beschikbaar op GitHub.",
 
   // Accessibility and UI
 
-  'ui.breadcrumb.home': 'Startpagina',
-  'ui.breadcrumb.tos': 'Gebruiksvoorwaarden',
-  'ui.breadcrumb.privacy': 'Privacyverklaring',
+  "ui.breadcrumb.home": "Startpagina",
+  "ui.breadcrumb.tos": "Gebruiksvoorwaarden",
+  "ui.breadcrumb.privacy": "Privacyverklaring",
 
   // Create memo page content
-  'create.hero.title': 'Veilig Memo maken',
-  'create.hero.description': 'Uw memo wordt in uw browser versleuteld en vernietigt zichzelf na het lezen of verlopen.',
-  'create.hero.ogDescription': 'Maak versleutelde memo’s met client-side AES-256-encryptie. Memo’s vernietigen zichzelf na lezen voor maximale privacy.',
-  'create.hero.twitterDescription': 'Maak versleutelde memo’s met client-side encryptie.',
-  'create.schema.description': 'Maak versleutelde memo’s die zichzelf vernietigen na lezen. Client-side AES-256-encryptie zorgt dat uw geheimen privé blijven.',
-  'create.schema.actionDescription': 'Maak versleutelde memo’s met client-side AES-256-encryptie en automatische zelfvernietiging',
+  "create.hero.title": "Veilig Memo maken",
+  "create.hero.description": "Uw memo wordt in uw browser versleuteld en vernietigt zichzelf na het lezen of verlopen.",
+  "create.hero.ogDescription":
+    "Maak versleutelde memo’s met client-side AES-256-encryptie. Memo’s vernietigen zichzelf na lezen voor maximale privacy.",
+  "create.hero.twitterDescription": "Maak versleutelde memo’s met client-side encryptie.",
+  "create.schema.description":
+    "Maak versleutelde memo’s die zichzelf vernietigen na lezen. Client-side AES-256-encryptie zorgt dat uw geheimen privé blijven.",
+  "create.schema.actionDescription":
+    "Maak versleutelde memo’s met client-side AES-256-encryptie en automatische zelfvernietiging",
 
-  // Read memo page content  
-  'read.hero.title': 'Veilig Memo lezen',
-  'read.hero.description': 'Voer het wachtwoord in om de memo te ontsleutelen en te lezen. Het wachtwoord moet apart van de URL met u gedeeld zijn. De memo wordt verwijderd na lezen of verlopen.',
-  'read.hero.ogDescription': 'Ontsleutel en lees uw veilige memo. Memo’s vernietigen zichzelf na lezen voor maximale privacy.',
-  'read.hero.twitterDescription': 'Ontsleutel en lees uw veilige memo met client-side decryptie.',
-  'read.schema.description': 'Ontsleutel en lees uw veilige memo met het wachtwoord. Memo’s vernietigen zichzelf na lezen voor maximale privacy. Client-side AES-256-decryptie.',
+  // Read memo page content
+  "read.hero.title": "Veilig Memo lezen",
+  "read.hero.description":
+    "Voer het wachtwoord in om de memo te ontsleutelen en te lezen. Het wachtwoord moet apart van de URL met u gedeeld zijn. De memo wordt verwijderd na lezen of verlopen.",
+  "read.hero.ogDescription":
+    "Ontsleutel en lees uw veilige memo. Memo’s vernietigen zichzelf na lezen voor maximale privacy.",
+  "read.hero.twitterDescription": "Ontsleutel en lees uw veilige memo met client-side decryptie.",
+  "read.schema.description":
+    "Ontsleutel en lees uw veilige memo met het wachtwoord. Memo’s vernietigen zichzelf na lezen voor maximale privacy. Client-side AES-256-decryptie.",
 
   // Form options
-  'form.expiry.option.8h': 'Verwijderen na lezen of 8 uur',
-  'form.expiry.option.1d': 'Verwijderen na lezen of 1 dag',
-  'form.expiry.option.2d': 'Verwijderen na lezen of 2 dagen',
-  'form.expiry.option.1w': 'Verwijderen na lezen of 1 week',
-  'form.expiry.option.30d': 'Verwijderen na lezen of 30 dagen',
+  "form.expiry.option.8h": "Verwijderen na lezen of 8 uur",
+  "form.expiry.option.1d": "Verwijderen na lezen of 1 dag",
+  "form.expiry.option.2d": "Verwijderen na lezen of 2 dagen",
+  "form.expiry.option.1w": "Verwijderen na lezen of 1 week",
+  "form.expiry.option.30d": "Verwijderen na lezen of 30 dagen",
 
   // Loading and status messages
-  'msg.encrypting': 'Uw memo wordt veilig versleuteld... Dit kan even duren op oudere apparaten.',
-  'msg.decrypting': 'Uw memo wordt ontsleuteld... Dit kan even duren op oudere apparaten.',
-  'msg.deletingSecurely': 'Memo wordt veilig verwijderd...',
-  'msg.yourSecureMemo': '📝 Uw Veilige Memo',
-  'msg.status': 'Status:',
+  "msg.encrypting": "Uw memo wordt veilig versleuteld... Dit kan even duren op oudere apparaten.",
+  "msg.decrypting": "Uw memo wordt ontsleuteld... Dit kan even duren op oudere apparaten.",
+  "msg.deletingSecurely": "Memo wordt veilig verwijderd...",
+  "msg.yourSecureMemo": "📝 Uw Veilige Memo",
+  "msg.status": "Status:",
 
   // Labels and help text
-  'form.memoUrl.label': 'Memo-URL (deel deze met uw ontvanger):',
-  'form.memoUrl.help': 'Dit is de veilige link naar uw memo. Deel deze URL met uw ontvanger.',
-  'form.memoPassword.label': 'Versleutelingswachtwoord (deel dit apart):',
-  'form.memoPassword.help': 'Dit is het versleutelingswachtwoord. Deel dit apart van de URL voor extra veiligheid. Dit wordt niet op onze servers opgeslagen, herstel is niet mogelijk na het verlaten van deze pagina.',
+  "form.memoUrl.label": "Memo-URL (deel deze met uw ontvanger):",
+  "form.memoUrl.help": "Dit is de veilige link naar uw memo. Deel deze URL met uw ontvanger.",
+  "form.memoPassword.label": "Versleutelingswachtwoord (deel dit apart):",
+  "form.memoPassword.help":
+    "Dit is het versleutelingswachtwoord. Deel dit apart van de URL voor extra veiligheid. Dit wordt niet op onze servers opgeslagen, herstel is niet mogelijk na het verlaten van deze pagina.",
 
   // Warning messages
-  'warning.important': 'Belangrijk:',
-  'warning.memoDeleted': 'De memo wordt verwijderd na het lezen of wanneer de verlooptermijn is bereikt',
-  'warning.shareSecurely': 'Deel de URL en het wachtwoord apart voor maximale veiligheid',
-  'warning.needBoth': 'De ontvanger heeft zowel de URL als het wachtwoord nodig om de memo te openen',
-  'warning.pageCleared': 'Deze pagina wordt gewist wanneer u weg navigeert',
+  "warning.important": "Belangrijk:",
+  "warning.memoDeleted": "De memo wordt verwijderd na het lezen of wanneer de verlooptermijn is bereikt",
+  "warning.shareSecurely": "Deel de URL en het wachtwoord apart voor maximale veiligheid",
+  "warning.needBoth": "De ontvanger heeft zowel de URL als het wachtwoord nodig om de memo te openen",
+  "warning.pageCleared": "Deze pagina wordt gewist wanneer u weg navigeert",
 
   // Structured data texts
-  'schema.tos.name': 'Gebruiksvoorwaarden',
-  'schema.tos.description': 'Gebruiksvoorwaarden voor securememo.app - versleutelde memo deelservice. Lees over toegestaan gebruik, privacy, beveiliging en juridische voorwaarden.',
-  'schema.tos.breadcrumb.home': 'Startpagina',
-  'schema.tos.breadcrumb.tos': 'Gebruiksvoorwaarden',
-  'schema.tos.mainEntity.name': 'Gebruiksvoorwaarden',
-  'schema.tos.mainEntity.description': 'Juridische voorwaarden voor securememo.app versleutelde memo deelservice',
+  "schema.tos.name": "Gebruiksvoorwaarden",
+  "schema.tos.description":
+    "Gebruiksvoorwaarden voor securememo.app - versleutelde memo deelservice. Lees over toegestaan gebruik, privacy, beveiliging en juridische voorwaarden.",
+  "schema.tos.breadcrumb.home": "Startpagina",
+  "schema.tos.breadcrumb.tos": "Gebruiksvoorwaarden",
+  "schema.tos.mainEntity.name": "Gebruiksvoorwaarden",
+  "schema.tos.mainEntity.description": "Juridische voorwaarden voor securememo.app versleutelde memo deelservice",
 
-  'schema.privacy.name': 'Privacyverklaring',
-  'schema.privacy.description': 'Privacyverklaring voor securememo.app - lees hoe wij uw gegevens beschermen met client-side encryptie, zero-knowledge architectuur en minimale gegevensverzameling.',
-  'schema.privacy.breadcrumb.home': 'Startpagina',
-  'schema.privacy.breadcrumb.privacy': 'Privacyverklaring',
-  'schema.privacy.mainEntity.name': 'Privacyverklaring',
-  'schema.privacy.mainEntity.description': 'Hoe securememo.app uw privacy beschermt met client-side encryptie en minimale gegevensverzameling',
+  "schema.privacy.name": "Privacyverklaring",
+  "schema.privacy.description":
+    "Privacyverklaring voor securememo.app - lees hoe wij uw gegevens beschermen met client-side encryptie, zero-knowledge architectuur en minimale gegevensverzameling.",
+  "schema.privacy.breadcrumb.home": "Startpagina",
+  "schema.privacy.breadcrumb.privacy": "Privacyverklaring",
+  "schema.privacy.mainEntity.name": "Privacyverklaring",
+  "schema.privacy.mainEntity.description":
+    "Hoe securememo.app uw privacy beschermt met client-side encryptie en minimale gegevensverzameling",
 
   // Create memo featureList in structured data
-  'schema.create.featureList.clientSide': 'Client-side encryptie',
-  'schema.create.featureList.selfDestruct': 'Zelfvernietigende memo’s',
-  'schema.create.featureList.multiExpiry': 'Meerdere verloopopties',
-  'schema.create.featureList.noAccounts': 'Geen gebruikersaccounts vereist',
-  'schema.create.featureList.maxChars': 'Maximaal 10.000 tekens',
+  "schema.create.featureList.clientSide": "Client-side encryptie",
+  "schema.create.featureList.selfDestruct": "Zelfvernietigende memo’s",
+  "schema.create.featureList.multiExpiry": "Meerdere verloopopties",
+  "schema.create.featureList.noAccounts": "Geen gebruikersaccounts vereist",
+  "schema.create.featureList.maxChars": "Maximaal 10.000 tekens",
 
   // Read memo featureList in structured data
-  'schema.read.featureList.clientDecryption': 'Client-side decryptie',
-  'schema.read.featureList.passwordProtected': 'Toegang met wachtwoordbeveiliging',
-  'schema.read.featureList.autoDeletion': 'Automatische memo-verwijdering',
-  'schema.read.featureList.noDataRetention': 'Geen gegevensbewaring',
-  'schema.read.featureList.privacyFocused': 'Privacygericht ontwerp',
+  "schema.read.featureList.clientDecryption": "Client-side decryptie",
+  "schema.read.featureList.passwordProtected": "Toegang met wachtwoordbeveiliging",
+  "schema.read.featureList.autoDeletion": "Automatische memo-verwijdering",
+  "schema.read.featureList.noDataRetention": "Geen gegevensbewaring",
+  "schema.read.featureList.privacyFocused": "Privacygericht ontwerp",
 
   // Error messages - memo creation errors
-  'error.INVALID_MESSAGE_FORMAT': 'Ongeldige aanvraag. Controleer uw invoer en probeer het opnieuw.',
-  'error.INVALID_EXPIRY_TIME': 'Ongeldige aanvraag. Controleer uw invoer en probeer het opnieuw.',
-  'error.MISSING_TURNSTILE': 'Beveiligingsverificatie vereist. Probeer het opnieuw.',
-  'error.TURNSTILE_FAILED': 'Beveiligingsverificatie mislukt. Probeer het opnieuw.',
-  'error.TURNSTILE_API_ERROR': 'Dienst tijdelijk niet beschikbaar. Probeer het later opnieuw.',
-  'error.TURNSTILE_VERIFICATION_ERROR': 'Beveiligingsverificatie mislukt. Probeer het opnieuw.',
-  'error.DATABASE_ERROR': 'Dienst tijdelijk niet beschikbaar. Probeer het opnieuw.',
-  'error.MEMO_ID_GENERATION_ERROR': 'Dienst tijdelijk niet beschikbaar. Probeer het opnieuw.',
-  'error.MEMO_ID_COLLISION_ERROR': 'Dienst tijdelijk niet beschikbaar. Probeer het opnieuw.',
-  'error.MEMO_CREATION_ERROR': 'Kan uw aanvraag niet verwerken. Probeer het opnieuw.',
-  'error.MISSING_DELETION_TOKEN': 'Verwijderings-token vereist.',
-  'error.INVALID_DELETION_TOKEN_HASH': 'Ongeldige verwijderings-token hash.',
+  "error.INVALID_MESSAGE_FORMAT": "Ongeldige aanvraag. Controleer uw invoer en probeer het opnieuw.",
+  "error.INVALID_EXPIRY_TIME": "Ongeldige aanvraag. Controleer uw invoer en probeer het opnieuw.",
+  "error.MISSING_TURNSTILE": "Beveiligingsverificatie vereist. Probeer het opnieuw.",
+  "error.TURNSTILE_FAILED": "Beveiligingsverificatie mislukt. Probeer het opnieuw.",
+  "error.TURNSTILE_API_ERROR": "Dienst tijdelijk niet beschikbaar. Probeer het later opnieuw.",
+  "error.TURNSTILE_VERIFICATION_ERROR": "Beveiligingsverificatie mislukt. Probeer het opnieuw.",
+  "error.DATABASE_ERROR": "Dienst tijdelijk niet beschikbaar. Probeer het opnieuw.",
+  "error.MEMO_ID_GENERATION_ERROR": "Dienst tijdelijk niet beschikbaar. Probeer het opnieuw.",
+  "error.MEMO_ID_COLLISION_ERROR": "Dienst tijdelijk niet beschikbaar. Probeer het opnieuw.",
+  "error.MEMO_CREATION_ERROR": "Kan uw aanvraag niet verwerken. Probeer het opnieuw.",
+  "error.MISSING_DELETION_TOKEN": "Verwijderings-token vereist.",
+  "error.INVALID_DELETION_TOKEN_HASH": "Ongeldige verwijderings-token hash.",
 
   // Error messages - memo reading errors (security: generic messages to prevent enumeration attacks)
-  'error.INVALID_MEMO_ID': 'Ongeldige aanvraag. Controleer uw invoer en probeer het opnieuw.',
-  'error.MISSING_MEMO_ID': 'Ongeldige aanvraag. Controleer uw invoer en probeer het opnieuw.',
-  'error.MEMO_ACCESS_DENIED': 'Deze memo is niet langer beschikbaar.',
-  'error.MEMO_NOT_FOUND': 'Deze memo is niet langer beschikbaar.',
-  'error.MEMO_ALREADY_READ': 'Deze memo is niet langer beschikbaar.',
-  'error.MEMO_EXPIRED': 'Deze memo is niet langer beschikbaar.',
-  'error.DATABASE_READ_ERROR': 'Dienst tijdelijk niet beschikbaar. Probeer het opnieuw.',
-  'error.MEMO_READ_ERROR': 'Kan uw aanvraag niet verwerken. Probeer het opnieuw.',
-  'error.MEMO_DELETION_ERROR': 'Dienst tijdelijk niet beschikbaar. Probeer het opnieuw.',
+  "error.INVALID_MEMO_ID": "Ongeldige aanvraag. Controleer uw invoer en probeer het opnieuw.",
+  "error.MISSING_MEMO_ID": "Ongeldige aanvraag. Controleer uw invoer en probeer het opnieuw.",
+  "error.MEMO_ACCESS_DENIED": "Deze memo is niet langer beschikbaar.",
+  "error.MEMO_NOT_FOUND": "Deze memo is niet langer beschikbaar.",
+  "error.MEMO_ALREADY_READ": "Deze memo is niet langer beschikbaar.",
+  "error.MEMO_EXPIRED": "Deze memo is niet langer beschikbaar.",
+  "error.DATABASE_READ_ERROR": "Dienst tijdelijk niet beschikbaar. Probeer het opnieuw.",
+  "error.MEMO_READ_ERROR": "Kan uw aanvraag niet verwerken. Probeer het opnieuw.",
+  "error.MEMO_DELETION_ERROR": "Dienst tijdelijk niet beschikbaar. Probeer het opnieuw.",
 
   // Error messages - general errors
-  'error.INVALID_JSON': 'Ongeldige aanvraag. Controleer uw invoer en probeer het opnieuw.',
-  'error.REQUEST_TOO_LARGE': 'Aanvraag te groot. Probeer het opnieuw.',
-  'error.CONTENT_TYPE_ERROR': 'Ongeldige aanvraag. Controleer uw invoer en probeer het opnieuw.',
-  'error.METHOD_NOT_ALLOWED': 'Ongeldige aanvraagmethode.',
-  'error.FORBIDDEN': 'Toegang geweigerd.',
-  'error.GENERAL_ERROR': 'Dienst tijdelijk niet beschikbaar. Probeer het opnieuw.',
+  "error.INVALID_JSON": "Ongeldige aanvraag. Controleer uw invoer en probeer het opnieuw.",
+  "error.REQUEST_TOO_LARGE": "Aanvraag te groot. Probeer het opnieuw.",
+  "error.CONTENT_TYPE_ERROR": "Ongeldige aanvraag. Controleer uw invoer en probeer het opnieuw.",
+  "error.METHOD_NOT_ALLOWED": "Ongeldige aanvraagmethode.",
+  "error.FORBIDDEN": "Toegang geweigerd.",
+  "error.GENERAL_ERROR": "Dienst tijdelijk niet beschikbaar. Probeer het opnieuw.",
 
   // Error messages - decryption errors
-  'error.DECRYPTION_FAILED': 'Ongeldige aanvraag. Controleer uw invoer en probeer het opnieuw.',
-  'error.INVALID_PASSWORD': 'Ongeldige aanvraag. Controleer uw invoer en probeer het opnieuw.',
+  "error.DECRYPTION_FAILED": "Ongeldige aanvraag. Controleer uw invoer en probeer het opnieuw.",
+  "error.INVALID_PASSWORD": "Ongeldige aanvraag. Controleer uw invoer en probeer het opnieuw.",
 
   // Error messages - network errors
-  'error.NETWORK_ERROR': 'Dienst tijdelijk niet beschikbaar. Probeer het opnieuw.',
-  'error.SERVICE_UNAVAILABLE': 'Dienst tijdelijk niet beschikbaar. Probeer het later opnieuw.',
-  'error.RATE_LIMITED': 'Te veel verzoeken. Wacht even en probeer het opnieuw.',
+  "error.NETWORK_ERROR": "Dienst tijdelijk niet beschikbaar. Probeer het opnieuw.",
+  "error.SERVICE_UNAVAILABLE": "Dienst tijdelijk niet beschikbaar. Probeer het later opnieuw.",
+  "error.RATE_LIMITED": "Te veel verzoeken. Wacht even en probeer het opnieuw.",
 
   // Error messages - client-side validation errors
-  'error.MISSING_MESSAGE': 'Voer een memo in',
-  'error.MESSAGE_TOO_LONG': 'Memo is te lang (maximaal 10.000 tekens)',
-  'error.MISSING_SECURITY_CHALLENGE': 'Voltooi de beveiligingscontrole',
-  'error.CREATE_MEMO_FAILED': 'Memo maken mislukt',
-  'error.CREATE_MEMO_ERROR': 'Er is een fout opgetreden bij het maken van de memo',
-  'error.READ_MEMO_ERROR': 'Er is een fout opgetreden bij het lezen van de memo',
-  'error.DECRYPTION_ERROR': 'Ontsleutelen van bericht mislukt. Ongeldig wachtwoord of corrupte data.',
-  'error.MEMO_ID_GENERATION_MAX_RETRIES': 'Unieke memo_id genereren mislukt na maximaal aantal pogingen',
-  'error.MISSING_PASSWORD': 'Voer het versleutelingswachtwoord in',
-  'error.INVALID_MEMO_URL': 'Ongeldige memo-URL',
-  'error.MEMO_ALREADY_READ_DELETED': 'Deze memo is al gelezen en verwijderd, of is verlopen.',
-  'error.MEMO_EXPIRED_DELETED': 'Deze memo is verlopen en is verwijderd.',
-  'error.INVALID_PASSWORD_CHECK': 'Ongeldig wachtwoord. Controleer het wachtwoord dat u apart heeft ontvangen.',
-  'error.MISSING_PASSWORD_ERROR': 'Voer het versleutelingswachtwoord in',
-  'error.INVALID_MEMO_URL_ERROR': 'Ongeldige memo-URL',
-  'error.MEMO_ALREADY_READ_DELETED_ERROR': 'Deze memo is al gelezen en verwijderd, of is verlopen.',
-  'error.MEMO_EXPIRED_DELETED_ERROR': 'Deze memo is verlopen en is verwijderd.',
-  'error.INVALID_PASSWORD_CHECK_ERROR': 'Ongeldig wachtwoord. Controleer het wachtwoord dat u apart heeft ontvangen.',
-  'error.MISSING_SECURITY_CHALLENGE_ERROR': 'Voltooi de beveiligingscontrole',
+  "error.MISSING_MESSAGE": "Voer een memo in",
+  "error.MESSAGE_TOO_LONG": "Memo is te lang (maximaal 10.000 tekens)",
+  "error.MISSING_SECURITY_CHALLENGE": "Voltooi de beveiligingscontrole",
+  "error.CREATE_MEMO_FAILED": "Memo maken mislukt",
+  "error.CREATE_MEMO_ERROR": "Er is een fout opgetreden bij het maken van de memo",
+  "error.READ_MEMO_ERROR": "Er is een fout opgetreden bij het lezen van de memo",
+  "error.DECRYPTION_ERROR": "Ontsleutelen van bericht mislukt. Ongeldig wachtwoord of corrupte data.",
+  "error.MEMO_ID_GENERATION_MAX_RETRIES": "Unieke memo_id genereren mislukt na maximaal aantal pogingen",
+  "error.MISSING_PASSWORD": "Voer het versleutelingswachtwoord in",
+  "error.INVALID_MEMO_URL": "Ongeldige memo-URL",
+  "error.MEMO_ALREADY_READ_DELETED": "Deze memo is al gelezen en verwijderd, of is verlopen.",
+  "error.MEMO_EXPIRED_DELETED": "Deze memo is verlopen en is verwijderd.",
+  "error.INVALID_PASSWORD_CHECK": "Ongeldig wachtwoord. Controleer het wachtwoord dat u apart heeft ontvangen.",
+  "error.MISSING_PASSWORD_ERROR": "Voer het versleutelingswachtwoord in",
+  "error.INVALID_MEMO_URL_ERROR": "Ongeldige memo-URL",
+  "error.MEMO_ALREADY_READ_DELETED_ERROR": "Deze memo is al gelezen en verwijderd, of is verlopen.",
+  "error.MEMO_EXPIRED_DELETED_ERROR": "Deze memo is verlopen en is verwijderd.",
+  "error.INVALID_PASSWORD_CHECK_ERROR": "Ongeldig wachtwoord. Controleer het wachtwoord dat u apart heeft ontvangen.",
+  "error.MISSING_SECURITY_CHALLENGE_ERROR": "Voltooi de beveiligingscontrole",
 
   // Error messages - HTTP status errors
-  'error.INTERNAL_SERVER_ERROR': 'Interne serverfout',
-  'error.NOT_FOUND': 'Niet gevonden',
-  'error.BAD_REQUEST': 'Ongeldige aanvraag',
-  'error.CLEANUP_FAILED': 'Opruimen mislukt',
+  "error.INTERNAL_SERVER_ERROR": "Interne serverfout",
+  "error.NOT_FOUND": "Niet gevonden",
+  "error.BAD_REQUEST": "Ongeldige aanvraag",
+  "error.CLEANUP_FAILED": "Opruimen mislukt",
 
   // Error messages - default fallback
-  'error.DEFAULT_FALLBACK': 'Er is een fout opgetreden. Probeer het opnieuw.',
+  "error.DEFAULT_FALLBACK": "Er is een fout opgetreden. Probeer het opnieuw.",
 
   // Security error messages (shorter versions for security events)
-  'error.security.INVALID_MESSAGE_FORMAT': 'Ongeldige aanvraag.',
-  'error.security.INVALID_EXPIRY_TIME': 'Ongeldige aanvraag.',
-  'error.security.MISSING_TURNSTILE': 'Beveiligingsverificatie vereist.',
-  'error.security.TURNSTILE_FAILED': 'Beveiligingsverificatie mislukt.',
-  'error.security.TURNSTILE_API_ERROR': 'Dienst tijdelijk niet beschikbaar.',
-  'error.security.TURNSTILE_VERIFICATION_ERROR': 'Beveiligingsverificatie mislukt.',
-  'error.security.DATABASE_ERROR': 'Dienst tijdelijk niet beschikbaar.',
-  'error.security.MEMO_ID_GENERATION_ERROR': 'Dienst tijdelijk niet beschikbaar.',
-  'error.security.MEMO_ID_COLLISION_ERROR': 'Dienst tijdelijk niet beschikbaar.',
-  'error.security.MEMO_CREATION_ERROR': 'Kan uw aanvraag niet verwerken.',
-  'error.security.INVALID_MEMO_ID': 'Ongeldige aanvraag.',
-  'error.security.MISSING_MEMO_ID': 'Ongeldige aanvraag.',
-  'error.security.MEMO_NOT_FOUND': 'Deze memo is niet langer beschikbaar.',
-  'error.security.MEMO_ALREADY_READ': 'Deze memo is niet langer beschikbaar.',
-  'error.security.MEMO_EXPIRED': 'Deze memo is niet langer beschikbaar.',
-  'error.security.DATABASE_READ_ERROR': 'Dienst tijdelijk niet beschikbaar.',
-  'error.security.MEMO_READ_ERROR': 'Kan uw aanvraag niet verwerken.',
-  'error.security.METHOD_NOT_ALLOWED': 'Ongeldige aanvraagmethode.',
-  'error.security.FORBIDDEN': 'Toegang geweigerd.',
-  'error.security.DEFAULT_FALLBACK': 'Er is een fout opgetreden. Probeer het opnieuw.'
-}
+  "error.security.INVALID_MESSAGE_FORMAT": "Ongeldige aanvraag.",
+  "error.security.INVALID_EXPIRY_TIME": "Ongeldige aanvraag.",
+  "error.security.MISSING_TURNSTILE": "Beveiligingsverificatie vereist.",
+  "error.security.TURNSTILE_FAILED": "Beveiligingsverificatie mislukt.",
+  "error.security.TURNSTILE_API_ERROR": "Dienst tijdelijk niet beschikbaar.",
+  "error.security.TURNSTILE_VERIFICATION_ERROR": "Beveiligingsverificatie mislukt.",
+  "error.security.DATABASE_ERROR": "Dienst tijdelijk niet beschikbaar.",
+  "error.security.MEMO_ID_GENERATION_ERROR": "Dienst tijdelijk niet beschikbaar.",
+  "error.security.MEMO_ID_COLLISION_ERROR": "Dienst tijdelijk niet beschikbaar.",
+  "error.security.MEMO_CREATION_ERROR": "Kan uw aanvraag niet verwerken.",
+  "error.security.INVALID_MEMO_ID": "Ongeldige aanvraag.",
+  "error.security.MISSING_MEMO_ID": "Ongeldige aanvraag.",
+  "error.security.MEMO_NOT_FOUND": "Deze memo is niet langer beschikbaar.",
+  "error.security.MEMO_ALREADY_READ": "Deze memo is niet langer beschikbaar.",
+  "error.security.MEMO_EXPIRED": "Deze memo is niet langer beschikbaar.",
+  "error.security.DATABASE_READ_ERROR": "Dienst tijdelijk niet beschikbaar.",
+  "error.security.MEMO_READ_ERROR": "Kan uw aanvraag niet verwerken.",
+  "error.security.METHOD_NOT_ALLOWED": "Ongeldige aanvraagmethode.",
+  "error.security.FORBIDDEN": "Toegang geweigerd.",
+  "error.security.DEFAULT_FALLBACK": "Er is een fout opgetreden. Probeer het opnieuw.",
+};

@@ -13,12 +13,12 @@
 export function minifyJS(code) {
   try {
     return code
-      .replace(/^\s*\/\/.*$/gm, '')
-      .replace(/(^|\s)\/\*[\s\S]*?\*\//g, '$1')
-      .split('\n')
-      .map(line => line.replace(/[ \t]+/g, ' ').trim())
+      .replace(/^\s*\/\/.*$/gm, "")
+      .replace(/(^|\s)\/\*[\s\S]*?\*\//g, "$1")
+      .split("\n")
+      .map((line) => line.replace(/[ \t]+/g, " ").trim())
       .filter(Boolean)
-      .join('\n')
+      .join("\n")
       .trim();
   } catch {
     return code;
@@ -33,11 +33,11 @@ export function minifyJS(code) {
 export function minifyCSS(css) {
   try {
     return css
-      .replace(/\/\*[\s\S]*?\*\//g, '')
-      .replace(/[\t\r\n]+/g, ' ')
-      .replace(/\s{2,}/g, ' ')
-      .replace(/\s*([{}:;,>])\s*/g, '$1')
-      .replace(/calc\(([^)]*)\)/g, (m, inner) => `calc(${inner.replace(/\s{2,}/g, ' ')})`)
+      .replace(/\/\*[\s\S]*?\*\//g, "")
+      .replace(/[\t\r\n]+/g, " ")
+      .replace(/\s{2,}/g, " ")
+      .replace(/\s*([{}:;,>])\s*/g, "$1")
+      .replace(/calc\(([^)]*)\)/g, (m, inner) => `calc(${inner.replace(/\s{2,}/g, " ")})`)
       .trim();
   } catch {
     return css;

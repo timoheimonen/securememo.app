@@ -56,7 +56,6 @@ jobs:
 
   lint:
     name: ESLint
-    needs: audit
     runs-on: ubuntu-latest
     timeout-minutes: 10
     permissions:
@@ -84,7 +83,7 @@ jobs:
 
   analyze:
     name: Analyze (JavaScript)
-    needs: lint
+    needs: [audit, lint]
     runs-on: ubuntu-latest
     timeout-minutes: 30
     strategy:

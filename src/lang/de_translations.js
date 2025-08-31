@@ -1,501 +1,612 @@
 export const de = {
   // Navigation
-  'nav.home': 'Startseite',
-  'nav.about': 'Über uns',
-  'nav.create': 'Sichere Notiz erstellen',
-  'nav.toggleMenu': 'Navigationsmenü umschalten',
+  "nav.home": "Startseite",
+  "nav.about": "Über uns",
+  "nav.create": "Sichere Notiz erstellen",
+  "nav.toggleMenu": "Navigationsmenü umschalten",
 
   // Common elements
-  'common.loading': 'Wird geladen...',
-  'common.error': 'Fehler',
-  'common.success': 'Erfolgreich',
-  'common.warning': 'Warnung',
+  "common.loading": "Wird geladen...",
+  "common.error": "Fehler",
+  "common.success": "Erfolgreich",
+  "common.warning": "Warnung",
 
   // Buttons
-  'btn.copy': 'Kopieren',
-  'btn.copied': 'Kopiert!',
-  'btn.copyUrl': 'URL kopieren',
-  'btn.copyPassword': 'Passwort kopieren',
-  'btn.show': 'Anzeigen',
-  'btn.hide': 'Verbergen',
-  'btn.create': 'Sichere Notiz erstellen',
-  'btn.creating': 'Verschlüsseln...',
-  'btn.decrypt': 'Notiz entschlüsseln',
-  'btn.decrypting': 'Entschlüsseln...',
-  'btn.goHome': 'Zur Startseite',
-  'btn.createNew': 'Neue Notiz erstellen',
+  "btn.copy": "Kopieren",
+  "btn.copied": "Kopiert!",
+  "btn.copyUrl": "URL kopieren",
+  "btn.copyPassword": "Passwort kopieren",
+  "btn.show": "Anzeigen",
+  "btn.hide": "Verbergen",
+  "btn.create": "Sichere Notiz erstellen",
+  "btn.creating": "Verschlüsseln...",
+  "btn.decrypt": "Notiz entschlüsseln",
+  "btn.decrypting": "Entschlüsseln...",
+  "btn.goHome": "Zur Startseite",
+  "btn.createNew": "Neue Notiz erstellen",
 
   // Form labels and placeholders
-  'form.message.label': 'Ihre Notiz',
-  'form.message.placeholder': 'Geben Sie hier Ihre geheime Notiz ein...',
-  'form.message.help': 'Maximal 10.000 Zeichen',
-  'form.expiry.label': 'Ablaufzeit',
-  'form.password.label': 'Verschlüsselungspasswort',
-  'form.password.placeholder': 'Geben Sie das separat erhaltene Verschlüsselungspasswort ein',
-  'form.password.help': 'Das Passwort sollte Ihnen separat von der Notiz-URL mitgeteilt worden sein',
-  'form.security.help': 'Bitte vervollständigen Sie die Sicherheitsüberprüfung',
+  "form.message.label": "Ihre Notiz",
+  "form.message.placeholder": "Geben Sie hier Ihre geheime Notiz ein...",
+  "form.message.help": "Maximal 10.000 Zeichen",
+  "form.expiry.label": "Ablaufzeit",
+  "form.password.label": "Verschlüsselungspasswort",
+  "form.password.placeholder": "Geben Sie das separat erhaltene Verschlüsselungspasswort ein",
+  "form.password.help": "Das Passwort sollte Ihnen separat von der Notiz-URL mitgeteilt worden sein",
+  "form.security.help": "Bitte vervollständigen Sie die Sicherheitsüberprüfung",
 
   // Messages and notifications
-  'msg.urlCopied': '✅ URL in die Zwischenablage kopiert!',
-  'msg.passwordCopied': '✅ Passwort in die Zwischenablage kopiert!',
-  'msg.copyManual': '⚠️ Bitte manuell kopieren (Strg+C / Cmd+C)',
-  'msg.memoCreated': '✅ Notiz erfolgreich erstellt!',
-  'msg.memoDecrypted': 'Notiz entschlüsselt. Löschung läuft... Bitte warten.',
-  'msg.memoDeleted': 'Notiz als gelesen bestätigt und dauerhaft gelöscht.',
-  'msg.deletionError': 'Fehler beim Bestätigen der Löschung. Die Notiz wird automatisch bereinigt.',
+  "msg.urlCopied": "✅ URL in die Zwischenablage kopiert!",
+  "msg.passwordCopied": "✅ Passwort in die Zwischenablage kopiert!",
+  "msg.copyManual": "⚠️ Bitte manuell kopieren (Strg+C / Cmd+C)",
+  "msg.memoCreated": "✅ Notiz erfolgreich erstellt!",
+  "msg.memoDecrypted": "Notiz entschlüsselt. Löschung läuft... Bitte warten.",
+  "msg.memoDeleted": "Notiz als gelesen bestätigt und dauerhaft gelöscht.",
+  "msg.deletionError": "Fehler beim Bestätigen der Löschung. Die Notiz wird automatisch bereinigt.",
 
   // Page titles and descriptions
-  'page.home.title': 'securememo.app - Verschlüsselte selbstzerstörende Notizen',
-  'page.home.description': 'Erstellen Sie verschlüsselte Notizen, die sich nach dem Lesen selbst zerstören. Ende-zu-Ende-Verschlüsselung, datenschutzorientiert und sicheres Teilen von Notizen mit AES-256. Kein Tracking, keine Werbung.',
-  'page.home.keywords': 'sichere Notiz, verschlüsselte Notiz, selbstzerstörende Notiz, privates Teilen von Notizen, Ende-zu-Ende-Verschlüsselung, AES-256, Datenschutz, sicheres Teilen von Notizen',
-  'page.home.ogTitle': 'securememo.app - Verschlüsselte selbstzerstörende Notizen',
-  'page.home.ogDescription': 'Teilen Sie sensible Informationen sicher mit Notizen, die sich nach einmaligem Ansehen oder Ablauf löschen. Angetrieben von clientseitiger AES-256-Verschlüsselung.',
-  'page.home.twitterDescription': 'Datenschutz-erste App für sichere, selbstzerstörende Notizen.',
-  'page.about.title': 'Über securememo.app - Datenschutzorientierte verschlüsselte Notizen',
-  'page.about.description': 'Erfahren Sie mehr über securememo.app\'s datenschutzorientierten Ansatz für verschlüsselte Nachrichten. Entwickelt mit clientseitiger AES-256-Verschlüsselung, selbstzerstörenden Nachrichten und Zero-Knowledge-Architektur.',
-  'page.about.keywords': 'über sichere Notiz, datenschutzorientierte Nachrichten, clientseitige Verschlüsselung, AES-256, selbstzerstörende Nachrichten, Zero-Knowledge, sicheres Teilen von Notizen',
-  'page.about.ogTitle': 'Über securememo.app - Datenschutzorientierte verschlüsselte Notizen',
-  'page.about.ogDescription': 'Entdecken Sie, wie securememo.app Ihre Privatsphäre mit clientseitiger Verschlüsselung und selbstzerstörenden Nachrichten schützt.',
-  'page.about.twitterDescription': 'Datenschutz-erste verschlüsselte Nachrichten mit clientseitiger Verschlüsselung.',
-  'page.create.title': 'Sichere Notiz erstellen - Verschlüsselte selbstzerstörende Notiz',
-  'page.create.keywords': 'sichere Notiz erstellen, verschlüsselte Notiz, selbstzerstörende Notiz, AES-256-Verschlüsselung, privates Teilen von Notizen, sichere Notizerstellung',
-  'page.read.title': 'Sichere Notiz lesen - Verschlüsselte Notiz entschlüsseln',
-  'page.read.keywords': 'sichere Notiz lesen, Notiz entschlüsseln, verschlüsselte Notiz lesen, AES-256-Entschlüsselung, privater Notizzugang',
-  'page.tos.title': 'Nutzungsbedingungen - securememo.app Rechtliche Bedingungen',
-  'page.tos.description': 'Nutzungsbedingungen für securememo.app - verschlüsselter Notiz-Sharing-Service. Erfahren Sie mehr über akzeptable Nutzung, Datenschutz, Sicherheit und rechtliche Bedingungen für unsere sichere Notiz-Sharing-Plattform.',
-  'page.tos.keywords': 'Nutzungsbedingungen, sichere Notiz rechtlich, verschlüsselte Notiz Bedingungen, Datenschutzrichtlinie, akzeptable Nutzungsrichtlinie, sichere Notiz-Sharing-Bedingungen',
-  'page.tos.ogTitle': 'Nutzungsbedingungen - securememo.app Rechtliche Bedingungen',
-  'page.tos.ogDescription': 'Rechtliche Bedingungen und Konditionen für den securememo.app verschlüsselten Notiz-Sharing-Service.',
-  'page.tos.twitterDescription': 'Rechtliche Bedingungen für den securememo.app verschlüsselten Notiz-Sharing-Service.',
-  'page.privacy.title': 'Datenschutzhinweis - securememo.app Datenschutz',
-  'page.privacy.description': 'Datenschutzhinweis für securememo.app - erfahren Sie, wie wir Ihre Daten mit clientseitiger Verschlüsselung, Zero-Knowledge-Architektur und minimaler Datensammlung für sicheres Notiz-Sharing schützen.',
-  'page.privacy.keywords': 'Datenschutzhinweis, sichere Notiz Datenschutz, Datenschutz, DSGVO-Konformität, clientseitige Verschlüsselung, Zero-Knowledge, sicheres Notiz-Sharing Datenschutz',
-  'page.privacy.ogTitle': 'Datenschutzhinweis - securememo.app Datenschutz',
-  'page.privacy.ogDescription': 'Wie securememo.app Ihre Privatsphäre mit clientseitiger Verschlüsselung und minimaler Datensammlung schützt.',
-  'page.privacy.twitterDescription': 'Datenschutz mit clientseitiger Verschlüsselung und Zero-Knowledge-Architektur.',
+  "page.home.title": "securememo.app - Verschlüsselte selbstzerstörende Notizen",
+  "page.home.description":
+    "Erstellen Sie verschlüsselte Notizen, die sich nach dem Lesen selbst zerstören. Ende-zu-Ende-Verschlüsselung, datenschutzorientiert und sicheres Teilen von Notizen mit AES-256. Kein Tracking, keine Werbung.",
+  "page.home.keywords":
+    "sichere Notiz, verschlüsselte Notiz, selbstzerstörende Notiz, privates Teilen von Notizen, Ende-zu-Ende-Verschlüsselung, AES-256, Datenschutz, sicheres Teilen von Notizen",
+  "page.home.ogTitle": "securememo.app - Verschlüsselte selbstzerstörende Notizen",
+  "page.home.ogDescription":
+    "Teilen Sie sensible Informationen sicher mit Notizen, die sich nach einmaligem Ansehen oder Ablauf löschen. Angetrieben von clientseitiger AES-256-Verschlüsselung.",
+  "page.home.twitterDescription": "Datenschutz-erste App für sichere, selbstzerstörende Notizen.",
+  "page.about.title": "Über securememo.app - Datenschutzorientierte verschlüsselte Notizen",
+  "page.about.description":
+    "Erfahren Sie mehr über securememo.app's datenschutzorientierten Ansatz für verschlüsselte Nachrichten. Entwickelt mit clientseitiger AES-256-Verschlüsselung, selbstzerstörenden Nachrichten und Zero-Knowledge-Architektur.",
+  "page.about.keywords":
+    "über sichere Notiz, datenschutzorientierte Nachrichten, clientseitige Verschlüsselung, AES-256, selbstzerstörende Nachrichten, Zero-Knowledge, sicheres Teilen von Notizen",
+  "page.about.ogTitle": "Über securememo.app - Datenschutzorientierte verschlüsselte Notizen",
+  "page.about.ogDescription":
+    "Entdecken Sie, wie securememo.app Ihre Privatsphäre mit clientseitiger Verschlüsselung und selbstzerstörenden Nachrichten schützt.",
+  "page.about.twitterDescription": "Datenschutz-erste verschlüsselte Nachrichten mit clientseitiger Verschlüsselung.",
+  "page.create.title": "Sichere Notiz erstellen - Verschlüsselte selbstzerstörende Notiz",
+  "page.create.keywords":
+    "sichere Notiz erstellen, verschlüsselte Notiz, selbstzerstörende Notiz, AES-256-Verschlüsselung, privates Teilen von Notizen, sichere Notizerstellung",
+  "page.read.title": "Sichere Notiz lesen - Verschlüsselte Notiz entschlüsseln",
+  "page.read.keywords":
+    "sichere Notiz lesen, Notiz entschlüsseln, verschlüsselte Notiz lesen, AES-256-Entschlüsselung, privater Notizzugang",
+  "page.tos.title": "Nutzungsbedingungen - securememo.app Rechtliche Bedingungen",
+  "page.tos.description":
+    "Nutzungsbedingungen für securememo.app - verschlüsselter Notiz-Sharing-Service. Erfahren Sie mehr über akzeptable Nutzung, Datenschutz, Sicherheit und rechtliche Bedingungen für unsere sichere Notiz-Sharing-Plattform.",
+  "page.tos.keywords":
+    "Nutzungsbedingungen, sichere Notiz rechtlich, verschlüsselte Notiz Bedingungen, Datenschutzrichtlinie, akzeptable Nutzungsrichtlinie, sichere Notiz-Sharing-Bedingungen",
+  "page.tos.ogTitle": "Nutzungsbedingungen - securememo.app Rechtliche Bedingungen",
+  "page.tos.ogDescription":
+    "Rechtliche Bedingungen und Konditionen für den securememo.app verschlüsselten Notiz-Sharing-Service.",
+  "page.tos.twitterDescription": "Rechtliche Bedingungen für den securememo.app verschlüsselten Notiz-Sharing-Service.",
+  "page.privacy.title": "Datenschutzhinweis - securememo.app Datenschutz",
+  "page.privacy.description":
+    "Datenschutzhinweis für securememo.app - erfahren Sie, wie wir Ihre Daten mit clientseitiger Verschlüsselung, Zero-Knowledge-Architektur und minimaler Datensammlung für sicheres Notiz-Sharing schützen.",
+  "page.privacy.keywords":
+    "Datenschutzhinweis, sichere Notiz Datenschutz, Datenschutz, DSGVO-Konformität, clientseitige Verschlüsselung, Zero-Knowledge, sicheres Notiz-Sharing Datenschutz",
+  "page.privacy.ogTitle": "Datenschutzhinweis - securememo.app Datenschutz",
+  "page.privacy.ogDescription":
+    "Wie securememo.app Ihre Privatsphäre mit clientseitiger Verschlüsselung und minimaler Datensammlung schützt.",
+  "page.privacy.twitterDescription": "Datenschutz mit clientseitiger Verschlüsselung und Zero-Knowledge-Architektur.",
 
   // Main page content
-  'home.hero.title': 'securememo.app',
-  'home.hero.subtitle': 'Erstellen Sie verschlüsselte Notizen, die sich nach dem Lesen oder Ablauf selbst zerstören. Ihre Geheimnisse bleiben sicher.',
-  'home.hero.btnPrimary': 'Sichere Notiz erstellen',
-  'home.hero.btnSecondary': 'Mehr erfahren',
+  "home.hero.title": "securememo.app",
+  "home.hero.subtitle":
+    "Erstellen Sie verschlüsselte Notizen, die sich nach dem Lesen oder Ablauf selbst zerstören. Ihre Geheimnisse bleiben sicher.",
+  "home.hero.btnPrimary": "Sichere Notiz erstellen",
+  "home.hero.btnSecondary": "Mehr erfahren",
 
-  'home.features.title': 'So funktioniert es',
-  'home.features.encrypt.title': '🔐 Im Browser verschlüsseln',
-  'home.features.encrypt.description': 'Geben Sie Ihre Notiz ein. Sie wird direkt in Ihrem Browser mit starker AES-256-Verschlüsselung verschlüsselt, bevor sie unsere Server erreicht.',
-  'home.features.share.title': '🔗 Sicher teilen',
-  'home.features.share.description': 'Erhalten Sie eine eindeutige URL und ein separates zufälliges Passwort, und teilen Sie sie über verschiedene Kanäle für zusätzliche Sicherheit.',
-  'home.features.destruct.title': '💥 Automatische Selbstzerstörung',
-  'home.features.destruct.description': 'Die Notiz löscht sich dauerhaft selbst, nachdem sie gelesen wurde oder das Zeitlimit abläuft (von 8 Stunden bis 30 Tage).',
+  "home.features.title": "So funktioniert es",
+  "home.features.encrypt.title": "🔐 Im Browser verschlüsseln",
+  "home.features.encrypt.description":
+    "Geben Sie Ihre Notiz ein. Sie wird direkt in Ihrem Browser mit starker AES-256-Verschlüsselung verschlüsselt, bevor sie unsere Server erreicht.",
+  "home.features.share.title": "🔗 Sicher teilen",
+  "home.features.share.description":
+    "Erhalten Sie eine eindeutige URL und ein separates zufälliges Passwort, und teilen Sie sie über verschiedene Kanäle für zusätzliche Sicherheit.",
+  "home.features.destruct.title": "💥 Automatische Selbstzerstörung",
+  "home.features.destruct.description":
+    "Die Notiz löscht sich dauerhaft selbst, nachdem sie gelesen wurde oder das Zeitlimit abläuft (von 8 Stunden bis 30 Tage).",
 
-  'home.security.title': 'Sicherheitsfeatures',
-  'home.security.encryption.title': '🔒 Echte clientseitige Verschlüsselung',
-  'home.security.encryption.description': 'Ihre Notiz wird im Browser mit AES-256-GCM und einer starken Schlüsselableitung (2.200.000+ Iterationen) verschlüsselt. Wir sehen niemals den Klartext.',
-  'home.security.delete.title': '🗑️ Zuverlässige automatische Löschung',
-  'home.security.delete.description': 'Notizen verschwinden für immer nach dem Lesen oder Ablauf, mit automatischer Bereinigung jede Stunde. Keine Backups oder Wiederherstellung möglich.',
-  'home.security.password.title': '🌐 Kein Passwort-Wissen',
-  'home.security.password.description': 'Wir generieren und verwalten Passwörter vollständig in Ihrem Browser. Sie werden niemals an unsere Server gesendet oder dort gespeichert.',
+  "home.security.title": "Sicherheitsfeatures",
+  "home.security.encryption.title": "🔒 Echte clientseitige Verschlüsselung",
+  "home.security.encryption.description":
+    "Ihre Notiz wird im Browser mit AES-256-GCM und einer starken Schlüsselableitung (2.200.000+ Iterationen) verschlüsselt. Wir sehen niemals den Klartext.",
+  "home.security.delete.title": "🗑️ Zuverlässige automatische Löschung",
+  "home.security.delete.description":
+    "Notizen verschwinden für immer nach dem Lesen oder Ablauf, mit automatischer Bereinigung jede Stunde. Keine Backups oder Wiederherstellung möglich.",
+  "home.security.password.title": "🌐 Kein Passwort-Wissen",
+  "home.security.password.description":
+    "Wir generieren und verwalten Passwörter vollständig in Ihrem Browser. Sie werden niemals an unsere Server gesendet oder dort gespeichert.",
 
-  'footer.sourceCode': 'Quellcode auf GitHub ansehen',
-  'footer.tos': 'Nutzungsbedingungen',
-  'footer.privacy': 'Datenschutzhinweis',
-  'footer.tagline': 'Kein Tracking, keine Werbung, kein Unsinn.',
+  "footer.sourceCode": "Quellcode auf GitHub ansehen",
+  "footer.tos": "Nutzungsbedingungen",
+  "footer.privacy": "Datenschutzhinweis",
+  "footer.tagline": "Kein Tracking, keine Werbung, kein Unsinn.",
 
   // About page content
-  'about.hero.title': 'Über securememo.app',
-  'about.hero.subtitle': 'securememo.app ist eine datenschutzorientierte Anwendung, mit der Sie verschlüsselte Notizen erstellen können, die sich nach dem Lesen oder Ablauf selbst zerstören. Entwickelt mit Sicherheit und Datenschutz als oberste Prioritäten. Quellcode auf GitHub verfügbar.',
+  "about.hero.title": "Über securememo.app",
+  "about.hero.subtitle":
+    "securememo.app ist eine datenschutzorientierte Anwendung, mit der Sie verschlüsselte Notizen erstellen können, die sich nach dem Lesen oder Ablauf selbst zerstören. Entwickelt mit Sicherheit und Datenschutz als oberste Prioritäten. Quellcode auf GitHub verfügbar.",
 
-  'about.tech.title': 'Technologie-Stack',
-  'about.tech.cloudflare': 'Cloudflare Workers: Serverlose Computing-Plattform für globale Performance',
-  'about.tech.d1': 'D1-Datenbank: SQLite-betriebene Datenbank für sichere Speicherung',
-  'about.tech.webcrypto': 'Web Crypto API: Clientseitige AES-256-Verschlüsselung',
-  'about.tech.frontend': 'HTML/CSS/JavaScript: Moderne, responsive Web-Oberfläche',
-  'about.tech.github': 'Quellcode auf GitHub verfügbar:',
-  'about.tech.githubLink': 'Quellcode auf GitHub ansehen',
+  "about.tech.title": "Technologie-Stack",
+  "about.tech.cloudflare": "Cloudflare Workers: Serverlose Computing-Plattform für globale Performance",
+  "about.tech.d1": "D1-Datenbank: SQLite-betriebene Datenbank für sichere Speicherung",
+  "about.tech.webcrypto": "Web Crypto API: Clientseitige AES-256-Verschlüsselung",
+  "about.tech.frontend": "HTML/CSS/JavaScript: Moderne, responsive Web-Oberfläche",
+  "about.tech.github": "Quellcode auf GitHub verfügbar:",
+  "about.tech.githubLink": "Quellcode auf GitHub ansehen",
 
-  'about.features.title': 'Sicherheitsfeatures',
-  'about.features.clientEncryption.title': '🔐 Clientseitige Verschlüsselung',
-  'about.features.clientEncryption.description': 'Alle Verschlüsselung findet in Ihrem Browser mit der Web Crypto API statt. Ihre Notiz wird mit AES-256 verschlüsselt, bevor sie an unsere Server gesendet wird.',
-  'about.features.passwordSharing.title': '🔑 Separates Passwort-Teilen',
-  'about.features.passwordSharing.description': 'Das Verschlüsselungspasswort wird separat von der URL generiert und sollte über einen anderen Kanal geteilt werden für erhöhte Sicherheit.',
-  'about.features.selfDestruct.title': '💥 Selbstzerstörende Notizen',
-  'about.features.selfDestruct.description': 'Sobald eine Notiz gelesen oder abgelaufen ist, wird sie sofort und dauerhaft aus unserer Datenbank gelöscht. Keine Spuren bleiben zurück.',
-  'about.features.noStorage.title': '🌐 Keine Passwort-Speicherung',
-  'about.features.noStorage.description': 'Wir speichern niemals Verschlüsselungspasswörter auf unseren Servern. Sie existieren nur im Speicher Ihres Browsers.',
-  'about.features.global.title': '⚡ Globale Performance',
-  'about.features.global.description': 'Aufgebaut auf Cloudflare\'s globalem Netzwerk für blitzschnellen Zugang von überall auf der Welt.',
-  'about.features.privacy.title': '🔒 Datenschutz zuerst',
-  'about.features.privacy.description': 'Keine Benutzerkonten erforderlich. Kein Tracking. Keine Analytik. Ihre Privatsphäre ist unsere Priorität.',
+  "about.features.title": "Sicherheitsfeatures",
+  "about.features.clientEncryption.title": "🔐 Clientseitige Verschlüsselung",
+  "about.features.clientEncryption.description":
+    "Alle Verschlüsselung findet in Ihrem Browser mit der Web Crypto API statt. Ihre Notiz wird mit AES-256 verschlüsselt, bevor sie an unsere Server gesendet wird.",
+  "about.features.passwordSharing.title": "🔑 Separates Passwort-Teilen",
+  "about.features.passwordSharing.description":
+    "Das Verschlüsselungspasswort wird separat von der URL generiert und sollte über einen anderen Kanal geteilt werden für erhöhte Sicherheit.",
+  "about.features.selfDestruct.title": "💥 Selbstzerstörende Notizen",
+  "about.features.selfDestruct.description":
+    "Sobald eine Notiz gelesen oder abgelaufen ist, wird sie sofort und dauerhaft aus unserer Datenbank gelöscht. Keine Spuren bleiben zurück.",
+  "about.features.noStorage.title": "🌐 Keine Passwort-Speicherung",
+  "about.features.noStorage.description":
+    "Wir speichern niemals Verschlüsselungspasswörter auf unseren Servern. Sie existieren nur im Speicher Ihres Browsers.",
+  "about.features.global.title": "⚡ Globale Performance",
+  "about.features.global.description":
+    "Aufgebaut auf Cloudflare's globalem Netzwerk für blitzschnellen Zugang von überall auf der Welt.",
+  "about.features.privacy.title": "🔒 Datenschutz zuerst",
+  "about.features.privacy.description":
+    "Keine Benutzerkonten erforderlich. Kein Tracking. Keine Analytik. Ihre Privatsphäre ist unsere Priorität.",
 
-  'about.usage.title': 'Verwendung',
-  'about.usage.create.title': '1. Notiz erstellen',
-  'about.usage.create.description': 'Gehen Sie zu "Sichere Notiz erstellen" und geben Sie Ihre Notiz ein. Wählen Sie eine Ablaufzeit (8h, 1d, 2d, 1 Woche oder maximal 30 Tage). Notizen werden gelöscht, wenn sie gelesen oder abgelaufen sind. Das System generiert ein zufälliges Verschlüsselungspasswort.',
-  'about.usage.share.title': '2. Link und Passwort teilen',
-  'about.usage.share.description': 'Kopieren Sie die generierte URL und das Passwort, dann teilen Sie sie mit Ihrem Empfänger über separate Kanäle für erhöhte Sicherheit.',
-  'about.usage.destruct.title': '3. Selbstzerstörung',
-  'about.usage.destruct.description': 'Wenn der Empfänger den Link öffnet und das Passwort separat eingibt, wird die Notiz entschlüsselt und dann dauerhaft gelöscht, wenn sie gelesen wird, oder automatisch gelöscht, wenn sie abgelaufen ist. Abgelaufene Notizen werden automatisch jede Stunde bereinigt.',
+  "about.usage.title": "Verwendung",
+  "about.usage.create.title": "1. Notiz erstellen",
+  "about.usage.create.description":
+    'Gehen Sie zu "Sichere Notiz erstellen" und geben Sie Ihre Notiz ein. Wählen Sie eine Ablaufzeit (8h, 1d, 2d, 1 Woche oder maximal 30 Tage). Notizen werden gelöscht, wenn sie gelesen oder abgelaufen sind. Das System generiert ein zufälliges Verschlüsselungspasswort.',
+  "about.usage.share.title": "2. Link und Passwort teilen",
+  "about.usage.share.description":
+    "Kopieren Sie die generierte URL und das Passwort, dann teilen Sie sie mit Ihrem Empfänger über separate Kanäle für erhöhte Sicherheit.",
+  "about.usage.destruct.title": "3. Selbstzerstörung",
+  "about.usage.destruct.description":
+    "Wenn der Empfänger den Link öffnet und das Passwort separat eingibt, wird die Notiz entschlüsselt und dann dauerhaft gelöscht, wenn sie gelesen wird, oder automatisch gelöscht, wenn sie abgelaufen ist. Abgelaufene Notizen werden automatisch jede Stunde bereinigt.",
 
-  'about.cta.title': 'Bereit zu beginnen?',
-  'about.cta.subtitle': 'Erstellen Sie jetzt Ihre erste sichere Notiz und erleben Sie echte Ende-zu-Ende-Verschlüsselung.',
-  'about.cta.createBtn': 'Sichere Notiz erstellen',
-  'about.cta.homeBtn': 'Zur Startseite',
+  "about.cta.title": "Bereit zu beginnen?",
+  "about.cta.subtitle":
+    "Erstellen Sie jetzt Ihre erste sichere Notiz und erleben Sie echte Ende-zu-Ende-Verschlüsselung.",
+  "about.cta.createBtn": "Sichere Notiz erstellen",
+  "about.cta.homeBtn": "Zur Startseite",
 
   // Terms of Service page content
-  'tos.hero.title': 'Nutzungsbedingungen',
-  'tos.lastUpdated': 'Zuletzt aktualisiert: 24. August 2025',
-  'tos.tableOfContents.title': 'Inhaltsverzeichnis',
-  'tos.tableOfContents.serviceDescription': 'Service-Beschreibung',
-  'tos.tableOfContents.acceptableUse': 'Akzeptable Nutzung',
-  'tos.tableOfContents.privacyData': 'Datenschutz & Datenverarbeitung',
-  'tos.tableOfContents.serviceLimitations': 'Service-Beschränkungen',
-  'tos.tableOfContents.securityDisclaimers': 'Sicherheit & Haftungsausschlüsse',
-  'tos.tableOfContents.intellectualProperty': 'Geistiges Eigentum',
-  'tos.tableOfContents.indemnification': 'Schadensersatz',
-  'tos.tableOfContents.termination': 'Kündigung',
-  'tos.tableOfContents.changesTerms': 'Änderungen der Bedingungen',
-  'tos.tableOfContents.governingLaw': 'Anwendbares Recht & Gerichtsstand',
-  'tos.tableOfContents.miscellaneous': 'Verschiedenes',
-  'tos.tableOfContents.contact': 'Kontakt',
-  'tos.tableOfContents.languageDisclaimer': 'Sprache und Übersetzung',
+  "tos.hero.title": "Nutzungsbedingungen",
+  "tos.lastUpdated": "Zuletzt aktualisiert: 24. August 2025",
+  "tos.tableOfContents.title": "Inhaltsverzeichnis",
+  "tos.tableOfContents.serviceDescription": "Service-Beschreibung",
+  "tos.tableOfContents.acceptableUse": "Akzeptable Nutzung",
+  "tos.tableOfContents.privacyData": "Datenschutz & Datenverarbeitung",
+  "tos.tableOfContents.serviceLimitations": "Service-Beschränkungen",
+  "tos.tableOfContents.securityDisclaimers": "Sicherheit & Haftungsausschlüsse",
+  "tos.tableOfContents.intellectualProperty": "Geistiges Eigentum",
+  "tos.tableOfContents.indemnification": "Schadensersatz",
+  "tos.tableOfContents.termination": "Kündigung",
+  "tos.tableOfContents.changesTerms": "Änderungen der Bedingungen",
+  "tos.tableOfContents.governingLaw": "Anwendbares Recht & Gerichtsstand",
+  "tos.tableOfContents.miscellaneous": "Verschiedenes",
+  "tos.tableOfContents.contact": "Kontakt",
+  "tos.tableOfContents.languageDisclaimer": "Sprache und Übersetzung",
 
-  'tos.serviceDescription.title': '1. Service-Beschreibung',
-  'tos.serviceDescription.content': 'securememo.app ist ein sicherer Notiz-Sharing-Service, der es Benutzern ermöglicht, verschlüsselte Notizen zu erstellen, die sich nach dem Lesen oder Ablauf selbst zerstören. Der Service nutzt clientseitige Verschlüsselung, um sicherzustellen, dass Notizinhalte niemals für unsere Server zugänglich sind.',
+  "tos.serviceDescription.title": "1. Service-Beschreibung",
+  "tos.serviceDescription.content":
+    "securememo.app ist ein sicherer Notiz-Sharing-Service, der es Benutzern ermöglicht, verschlüsselte Notizen zu erstellen, die sich nach dem Lesen oder Ablauf selbst zerstören. Der Service nutzt clientseitige Verschlüsselung, um sicherzustellen, dass Notizinhalte niemals für unsere Server zugänglich sind.",
 
-  'tos.acceptableUse.title': '2. Akzeptable Nutzung',
-  'tos.acceptableUse.intro': 'Sie stimmen zu, diesen Service nur für rechtmäßige Zwecke und in Übereinstimmung mit diesen Bedingungen zu nutzen. Sie stimmen zu, nicht:',
-  'tos.acceptableUse.illegal': 'Den Service zu nutzen, um illegale, schädliche, bedrohende, beleidigende oder verleumdende Inhalte zu übertragen',
-  'tos.acceptableUse.bypass': 'Sicherheitsmaßnahmen oder CAPTCHA-Schutz zu umgehen',
-  'tos.acceptableUse.automated': 'Automatisierte Tools oder Skripte zur Erstellung von Notizen zu verwenden',
-  'tos.acceptableUse.malware': 'Notizen mit Malware, Phishing-Links oder anderen schädlichen Inhalten zu teilen',
-  'tos.acceptableUse.spam': 'Den Service für Spam oder Massen-Notiz-Sharing zu verwenden',
-  'tos.acceptableUse.reverse': 'Den Service zu analysieren oder zu kompromittieren',
+  "tos.acceptableUse.title": "2. Akzeptable Nutzung",
+  "tos.acceptableUse.intro":
+    "Sie stimmen zu, diesen Service nur für rechtmäßige Zwecke und in Übereinstimmung mit diesen Bedingungen zu nutzen. Sie stimmen zu, nicht:",
+  "tos.acceptableUse.illegal":
+    "Den Service zu nutzen, um illegale, schädliche, bedrohende, beleidigende oder verleumdende Inhalte zu übertragen",
+  "tos.acceptableUse.bypass": "Sicherheitsmaßnahmen oder CAPTCHA-Schutz zu umgehen",
+  "tos.acceptableUse.automated": "Automatisierte Tools oder Skripte zur Erstellung von Notizen zu verwenden",
+  "tos.acceptableUse.malware": "Notizen mit Malware, Phishing-Links oder anderen schädlichen Inhalten zu teilen",
+  "tos.acceptableUse.spam": "Den Service für Spam oder Massen-Notiz-Sharing zu verwenden",
+  "tos.acceptableUse.reverse": "Den Service zu analysieren oder zu kompromittieren",
 
-  'tos.privacyData.title': '3. Datenschutz & Datenverarbeitung',
-  'tos.privacyData.noAccess': 'Kein Inhaltszugriff: Wir können Ihre Notizinhalte nicht einsehen, lesen oder wiederherstellen. Alle Verschlüsselung findet in Ihrem Browser statt.',
-  'tos.privacyData.noPersonal': 'Minimale Datenerhebung: Wir benötigen keine Benutzerkonten und erheben keine personenbezogenen Daten, um den Dienst zu nutzen. Die einzigen personenbezogenen Daten, die wir möglicherweise erfassen, sind, wenn Sie uns freiwillig für Support kontaktieren. Wenn Sie uns per E‑Mail kontaktieren, erfassen wir Ihre E‑Mail-Adresse und den Inhalt Ihrer Nachricht, um auf Ihre Anfrage zu antworten. Wir verwenden diese Informationen nicht für andere Zwecke und geben sie ohne Ihre Zustimmung nicht an Dritte weiter.',
-  'tos.privacyData.securityLogging': 'Sicherheitsprotokollierung: Wir protokollieren vorübergehend IP-Adressen und sicherheitsbezogene Metadaten ausschließlich zur Missbrauchsbekämpfung und zum Schutz der Service-Integrität. Diese Protokolle werden niemals für Tracking oder Profiling verwendet.',
-  'tos.privacyData.automaticDeletion': 'Automatische Löschung: Notizen werden automatisch nach dem Lesen oder bei Ablauf gelöscht.',
-  'tos.privacyData.noRecovery': 'Keine Wiederherstellung: Sobald eine Notiz gelöscht ist, kann sie nicht wiederhergestellt werden.',
-  'tos.privacyData.gdpr': 'DSGVO-Konformität: Wir verpflichten uns den Grundsätzen der DSGVO. Wir minimieren die Datenerhebung und verarbeiten nur notwendige Daten, wie z. B. temporäre Sicherheitsprotokolle, auf Grundlage berechtigten Interesses zum Schutz des Dienstes.',
-  'tos.privacyData.moreDetails': 'Für weitere Details lesen Sie bitte unseren',
-  'tos.privacyData.privacyNotice': 'Datenschutzhinweis',
+  "tos.privacyData.title": "3. Datenschutz & Datenverarbeitung",
+  "tos.privacyData.noAccess":
+    "Kein Inhaltszugriff: Wir können Ihre Notizinhalte nicht einsehen, lesen oder wiederherstellen. Alle Verschlüsselung findet in Ihrem Browser statt.",
+  "tos.privacyData.noPersonal":
+    "Minimale Datenerhebung: Wir benötigen keine Benutzerkonten und erheben keine personenbezogenen Daten, um den Dienst zu nutzen. Die einzigen personenbezogenen Daten, die wir möglicherweise erfassen, sind, wenn Sie uns freiwillig für Support kontaktieren. Wenn Sie uns per E‑Mail kontaktieren, erfassen wir Ihre E‑Mail-Adresse und den Inhalt Ihrer Nachricht, um auf Ihre Anfrage zu antworten. Wir verwenden diese Informationen nicht für andere Zwecke und geben sie ohne Ihre Zustimmung nicht an Dritte weiter.",
+  "tos.privacyData.securityLogging":
+    "Sicherheitsprotokollierung: Wir protokollieren vorübergehend IP-Adressen und sicherheitsbezogene Metadaten ausschließlich zur Missbrauchsbekämpfung und zum Schutz der Service-Integrität. Diese Protokolle werden niemals für Tracking oder Profiling verwendet.",
+  "tos.privacyData.automaticDeletion":
+    "Automatische Löschung: Notizen werden automatisch nach dem Lesen oder bei Ablauf gelöscht.",
+  "tos.privacyData.noRecovery":
+    "Keine Wiederherstellung: Sobald eine Notiz gelöscht ist, kann sie nicht wiederhergestellt werden.",
+  "tos.privacyData.gdpr":
+    "DSGVO-Konformität: Wir verpflichten uns den Grundsätzen der DSGVO. Wir minimieren die Datenerhebung und verarbeiten nur notwendige Daten, wie z. B. temporäre Sicherheitsprotokolle, auf Grundlage berechtigten Interesses zum Schutz des Dienstes.",
+  "tos.privacyData.moreDetails": "Für weitere Details lesen Sie bitte unseren",
+  "tos.privacyData.privacyNotice": "Datenschutzhinweis",
 
-  'tos.serviceLimitations.title': '4. Service-Beschränkungen',
-  'tos.serviceLimitations.messageSize': 'Nachrichtengröße: Maximal 10.000 Zeichen pro Notiz',
-  'tos.serviceLimitations.expiryTimes': 'Ablaufzeiten: 8 Stunden, 24 Stunden, 48 Stunden, 1 Woche oder Löschung beim Lesen (max. 30 Tage)',
-  'tos.serviceLimitations.availability': 'Verfügbarkeit: Service wird "wie er ist" ohne Verfügbarkeitsgarantien bereitgestellt',
-  'tos.serviceLimitations.noDelivery': 'Keine Zustellungsgarantie: Wir können nicht garantieren, dass Notizen zugestellt, gelesen oder rechtzeitig gelöscht werden.',
+  "tos.serviceLimitations.title": "4. Service-Beschränkungen",
+  "tos.serviceLimitations.messageSize": "Nachrichtengröße: Maximal 10.000 Zeichen pro Notiz",
+  "tos.serviceLimitations.expiryTimes":
+    "Ablaufzeiten: 8 Stunden, 24 Stunden, 48 Stunden, 1 Woche oder Löschung beim Lesen (max. 30 Tage)",
+  "tos.serviceLimitations.availability":
+    'Verfügbarkeit: Service wird "wie er ist" ohne Verfügbarkeitsgarantien bereitgestellt',
+  "tos.serviceLimitations.noDelivery":
+    "Keine Zustellungsgarantie: Wir können nicht garantieren, dass Notizen zugestellt, gelesen oder rechtzeitig gelöscht werden.",
 
-  'tos.securityDisclaimers.title': '5. Sicherheit & Haftungsausschlüsse',
-  'tos.securityDisclaimers.userResponsibility': 'Benutzerverantwortung: Sie sind verantwortlich für das sichere Teilen von Notiz-URLs und den Schutz der Passwörter. Bei verloren gegangenen Passwörtern können Notizen nicht wiederhergestellt werden.',
-  'tos.securityDisclaimers.noWarranty': 'Keine Gewährleistung: Der Service wird ohne jegliche Gewährleistung bereitgestellt. Unsere Verschlüsselungsservices werden auf "wie sie sind" und "wie verfügbar" Basis bereitgestellt. Wir gewährleisten nicht, dass die Verschlüsselung ununterbrochen, fehlerfrei oder sicher vor allen potenziellen Bedrohungen ist.',
-  'tos.securityDisclaimers.limitation': 'Haftungsbeschränkung: Wir haften nicht für Schäden, die durch die Nutzung des Services entstehen. Sie erkennen an, dass keine Methode der elektronischen Übertragung oder Speicherung 100% sicher ist, und wir sind nicht verantwortlich für unbefugten Zugriff oder Abfangen Ihrer Notizen. Die Nutzung unserer Verschlüsselungsservices erfolgt auf eigenes Risiko.',
-  'tos.securityDisclaimers.securityMeasures': 'Sicherheitsmaßnahmen: Während wir Sicherheitsmaßnahmen implementieren, ist kein System 100% sicher.',
-  'tos.securityDisclaimers.exportControls': 'Exportkontrollen: Sie stimmen zu, den Service nicht unter Verletzung von Exportkontrollgesetzen zu nutzen, einschließlich solcher, die die Nutzung in sanktionierten Ländern beschränken.',
+  "tos.securityDisclaimers.title": "5. Sicherheit & Haftungsausschlüsse",
+  "tos.securityDisclaimers.userResponsibility":
+    "Benutzerverantwortung: Sie sind verantwortlich für das sichere Teilen von Notiz-URLs und den Schutz der Passwörter. Bei verloren gegangenen Passwörtern können Notizen nicht wiederhergestellt werden.",
+  "tos.securityDisclaimers.noWarranty":
+    'Keine Gewährleistung: Der Service wird ohne jegliche Gewährleistung bereitgestellt. Unsere Verschlüsselungsservices werden auf "wie sie sind" und "wie verfügbar" Basis bereitgestellt. Wir gewährleisten nicht, dass die Verschlüsselung ununterbrochen, fehlerfrei oder sicher vor allen potenziellen Bedrohungen ist.',
+  "tos.securityDisclaimers.limitation":
+    "Haftungsbeschränkung: Wir haften nicht für Schäden, die durch die Nutzung des Services entstehen. Sie erkennen an, dass keine Methode der elektronischen Übertragung oder Speicherung 100% sicher ist, und wir sind nicht verantwortlich für unbefugten Zugriff oder Abfangen Ihrer Notizen. Die Nutzung unserer Verschlüsselungsservices erfolgt auf eigenes Risiko.",
+  "tos.securityDisclaimers.securityMeasures":
+    "Sicherheitsmaßnahmen: Während wir Sicherheitsmaßnahmen implementieren, ist kein System 100% sicher.",
+  "tos.securityDisclaimers.exportControls":
+    "Exportkontrollen: Sie stimmen zu, den Service nicht unter Verletzung von Exportkontrollgesetzen zu nutzen, einschließlich solcher, die die Nutzung in sanktionierten Ländern beschränken.",
 
-  'tos.intellectualProperty.title': '6. Geistiges Eigentum',
-  'tos.intellectualProperty.content': 'Der Service und alle darüber bereitgestellten Materialien, einschließlich aber nicht beschränkt auf Text, Grafiken, Logos und Software, sind Eigentum von securememo.app oder seinen Lizenzgebern und sind durch Urheberrecht, Markenrecht und andere Gesetze zum geistigen Eigentum geschützt. Sie stimmen zu, unsere Inhalte nicht zu modifizieren, zu reproduzieren, zu verbreiten oder abgeleitete Werke darauf basierend zu erstellen ohne ausdrückliche Erlaubnis, außer für persönlichen, nicht-kommerziellen Gebrauch innerhalb des Services.',
-  'tos.intellectualProperty.copyright': 'Urheberrecht & DMCA-Richtlinie: Wenn Sie glauben, dass Ihr Urheberrecht verletzt wurde, kontaktieren Sie uns bitte unter contact@securememo.app mit den erforderlichen Informationen unter dem DMCA (z.B. Identifikation des Werks, Ihre Kontaktdaten und eine Erklärung des guten Glaubens).',
+  "tos.intellectualProperty.title": "6. Geistiges Eigentum",
+  "tos.intellectualProperty.content":
+    "Der Service und alle darüber bereitgestellten Materialien, einschließlich aber nicht beschränkt auf Text, Grafiken, Logos und Software, sind Eigentum von securememo.app oder seinen Lizenzgebern und sind durch Urheberrecht, Markenrecht und andere Gesetze zum geistigen Eigentum geschützt. Sie stimmen zu, unsere Inhalte nicht zu modifizieren, zu reproduzieren, zu verbreiten oder abgeleitete Werke darauf basierend zu erstellen ohne ausdrückliche Erlaubnis, außer für persönlichen, nicht-kommerziellen Gebrauch innerhalb des Services.",
+  "tos.intellectualProperty.copyright":
+    "Urheberrecht & DMCA-Richtlinie: Wenn Sie glauben, dass Ihr Urheberrecht verletzt wurde, kontaktieren Sie uns bitte unter contact@securememo.app mit den erforderlichen Informationen unter dem DMCA (z.B. Identifikation des Werks, Ihre Kontaktdaten und eine Erklärung des guten Glaubens).",
 
-  'tos.indemnification.title': '7. Schadensersatz',
-  'tos.indemnification.content': 'Sie stimmen zu, securememo.app und seine verbundenen Unternehmen, Führungskräfte, Direktoren, Mitarbeiter und Vertreter zu verteidigen, schadlos zu halten und von allen Ansprüchen, Verbindlichkeiten, Schäden, Verlusten und Ausgaben, einschließlich angemessener Anwaltsgebühren, freizustellen, die aus oder in Verbindung mit Ihrem Zugriff auf oder der Nutzung unserer Services entstehen, einschließlich jeder Verletzung dieser Bedingungen durch Sie.',
+  "tos.indemnification.title": "7. Schadensersatz",
+  "tos.indemnification.content":
+    "Sie stimmen zu, securememo.app und seine verbundenen Unternehmen, Führungskräfte, Direktoren, Mitarbeiter und Vertreter zu verteidigen, schadlos zu halten und von allen Ansprüchen, Verbindlichkeiten, Schäden, Verlusten und Ausgaben, einschließlich angemessener Anwaltsgebühren, freizustellen, die aus oder in Verbindung mit Ihrem Zugriff auf oder der Nutzung unserer Services entstehen, einschließlich jeder Verletzung dieser Bedingungen durch Sie.",
 
-  'tos.termination.title': '8. Kündigung',
-  'tos.termination.content': 'Wir behalten uns das Recht vor, den Zugang zum Service bei Verletzungen dieser Bedingungen oder aus jedem anderen Grund nach unserem Ermessen zu beenden oder auszusetzen.',
+  "tos.termination.title": "8. Kündigung",
+  "tos.termination.content":
+    "Wir behalten uns das Recht vor, den Zugang zum Service bei Verletzungen dieser Bedingungen oder aus jedem anderen Grund nach unserem Ermessen zu beenden oder auszusetzen.",
 
-  'tos.changesTerms.title': '9. Änderungen der Bedingungen',
-  'tos.changesTerms.content': 'Wir können diese Bedingungen jederzeit aktualisieren. Die fortgesetzte Nutzung des Services stellt die Annahme der aktualisierten Bedingungen dar.',
+  "tos.changesTerms.title": "9. Änderungen der Bedingungen",
+  "tos.changesTerms.content":
+    "Wir können diese Bedingungen jederzeit aktualisieren. Die fortgesetzte Nutzung des Services stellt die Annahme der aktualisierten Bedingungen dar.",
 
-  'tos.governingLaw.title': '10. Anwendbares Recht & Gerichtsstand',
-  'tos.governingLaw.content': 'Diese Nutzungsbedingungen und alle separaten Vereinbarungen, durch die wir Ihnen Services bereitstellen, unterliegen den Gesetzen Finnlands und sind in Übereinstimmung mit diesen auszulegen, ohne Berücksichtigung seiner Kollisionsnormen. Alle Streitigkeiten sind vor den Gerichten in Helsinki, Finnland zu lösen.',
+  "tos.governingLaw.title": "10. Anwendbares Recht & Gerichtsstand",
+  "tos.governingLaw.content":
+    "Diese Nutzungsbedingungen und alle separaten Vereinbarungen, durch die wir Ihnen Services bereitstellen, unterliegen den Gesetzen Finnlands und sind in Übereinstimmung mit diesen auszulegen, ohne Berücksichtigung seiner Kollisionsnormen. Alle Streitigkeiten sind vor den Gerichten in Helsinki, Finnland zu lösen.",
 
-  'tos.miscellaneous.title': '11. Verschiedenes',
-  'tos.miscellaneous.severability': 'Teilnichtigkeit: Sollte eine Bestimmung dieser Bedingungen von einem zuständigen Gericht als ungültig oder nicht durchsetzbar befunden werden, wird diese Bestimmung von den Bedingungen getrennt, und die verbleibenden Bestimmungen bleiben in vollem Umfang in Kraft.',
-  'tos.miscellaneous.assignment': 'Abtretung: Sie dürfen diese Bedingungen nicht abtreten oder übertragen, weder kraft Gesetzes noch anderweitig, ohne unsere vorherige schriftliche Zustimmung. Wir können diese Bedingungen nach unserem alleinigen Ermessen ohne Benachrichtigung an Sie abtreten.',
-  'tos.miscellaneous.waiver': 'Verzicht: Kein Verzicht auf eine Bestimmung gilt als weiterer oder fortdauernder Verzicht, es sei denn, er erfolgt schriftlich.',
-  'tos.miscellaneous.children': 'Datenschutz für Kinder: Unser Service ist nicht für Kinder unter 13 (oder 16 in einigen Jurisdiktionen) bestimmt. Wir sammeln wissentlich keine Daten von Kindern. Falls wir von solchen Daten erfahren, werden wir sie sofort löschen.',
+  "tos.miscellaneous.title": "11. Verschiedenes",
+  "tos.miscellaneous.severability":
+    "Teilnichtigkeit: Sollte eine Bestimmung dieser Bedingungen von einem zuständigen Gericht als ungültig oder nicht durchsetzbar befunden werden, wird diese Bestimmung von den Bedingungen getrennt, und die verbleibenden Bestimmungen bleiben in vollem Umfang in Kraft.",
+  "tos.miscellaneous.assignment":
+    "Abtretung: Sie dürfen diese Bedingungen nicht abtreten oder übertragen, weder kraft Gesetzes noch anderweitig, ohne unsere vorherige schriftliche Zustimmung. Wir können diese Bedingungen nach unserem alleinigen Ermessen ohne Benachrichtigung an Sie abtreten.",
+  "tos.miscellaneous.waiver":
+    "Verzicht: Kein Verzicht auf eine Bestimmung gilt als weiterer oder fortdauernder Verzicht, es sei denn, er erfolgt schriftlich.",
+  "tos.miscellaneous.children":
+    "Datenschutz für Kinder: Unser Service ist nicht für Kinder unter 13 (oder 16 in einigen Jurisdiktionen) bestimmt. Wir sammeln wissentlich keine Daten von Kindern. Falls wir von solchen Daten erfahren, werden wir sie sofort löschen.",
 
-  'tos.contact.title': '12. Kontakt',
-  'tos.contact.content': 'Für Fragen zu diesen Bedingungen besuchen Sie bitte unser',
-  'tos.contact.github': 'GitHub-Repository',
-  'tos.contact.email': 'oder senden Sie eine E-Mail an contact@securememo.app.',
+  "tos.contact.title": "12. Kontakt",
+  "tos.contact.content": "Für Fragen zu diesen Bedingungen besuchen Sie bitte unser",
+  "tos.contact.github": "GitHub-Repository",
+  "tos.contact.email": "oder senden Sie eine E-Mail an contact@securememo.app.",
 
-  'tos.languageDisclaimer.title': '13. Sprache und Übersetzung',
-  'tos.languageDisclaimer.content': 'Diese Nutzungsbedingungen können für Ihre Bequemlichkeit in andere Sprachen übersetzt werden. Im Falle von Diskrepanzen oder Konflikten zwischen der englischen Version und einer übersetzten Version hat die englische Version Vorrang.',
+  "tos.languageDisclaimer.title": "13. Sprache und Übersetzung",
+  "tos.languageDisclaimer.content":
+    "Diese Nutzungsbedingungen können für Ihre Bequemlichkeit in andere Sprachen übersetzt werden. Im Falle von Diskrepanzen oder Konflikten zwischen der englischen Version und einer übersetzten Version hat die englische Version Vorrang.",
 
   // Privacy Notice page content
-  'privacy.hero.title': 'Datenschutzhinweis für securememo.app',
-  'privacy.lastUpdated': 'Zuletzt aktualisiert: 24. August 2025',
-  'privacy.tableOfContents.title': 'Inhaltsverzeichnis',
-  'privacy.tableOfContents.informationCollected': 'Informationen, die wir sammeln',
-  'privacy.tableOfContents.howWeUse': 'Wie wir Informationen verwenden',
-  'privacy.tableOfContents.dataSharing': 'Datenweitergabe und Offenlegung',
-  'privacy.tableOfContents.dataSecurity': 'Datensicherheit',
-  'privacy.tableOfContents.dataRetention': 'Datenspeicherung',
-  'privacy.tableOfContents.yourRights': 'Ihre Rechte und Wahlmöglichkeiten',
-  'privacy.tableOfContents.childrenPrivacy': 'Datenschutz für Kinder',
-  'privacy.tableOfContents.internationalTransfers': 'Internationale Datenübertragungen',
-  'privacy.tableOfContents.changesNotice': 'Änderungen an diesem Datenschutzhinweis',
-  'privacy.tableOfContents.contact': 'Kontaktieren Sie uns',
+  "privacy.hero.title": "Datenschutzhinweis für securememo.app",
+  "privacy.lastUpdated": "Zuletzt aktualisiert: 24. August 2025",
+  "privacy.tableOfContents.title": "Inhaltsverzeichnis",
+  "privacy.tableOfContents.informationCollected": "Informationen, die wir sammeln",
+  "privacy.tableOfContents.howWeUse": "Wie wir Informationen verwenden",
+  "privacy.tableOfContents.dataSharing": "Datenweitergabe und Offenlegung",
+  "privacy.tableOfContents.dataSecurity": "Datensicherheit",
+  "privacy.tableOfContents.dataRetention": "Datenspeicherung",
+  "privacy.tableOfContents.yourRights": "Ihre Rechte und Wahlmöglichkeiten",
+  "privacy.tableOfContents.childrenPrivacy": "Datenschutz für Kinder",
+  "privacy.tableOfContents.internationalTransfers": "Internationale Datenübertragungen",
+  "privacy.tableOfContents.changesNotice": "Änderungen an diesem Datenschutzhinweis",
+  "privacy.tableOfContents.contact": "Kontaktieren Sie uns",
 
-  'privacy.intro.p1': 'securememo.app ("wir", "uns" oder "unser") ist dem Schutz Ihrer Privatsphäre verpflichtet. Dieser Datenschutzhinweis erklärt, wie wir Informationen im Zusammenhang mit unserem Service handhaben, der es Benutzern ermöglicht, verschlüsselte Notizen zu erstellen und zu teilen, die sich nach dem Lesen oder Ablauf selbst zerstören. Unser Service ist mit Datenschutz als Kern konzipiert: Alle Verschlüsselung erfolgt clientseitig in Ihrem Browser, und wir haben keinen Zugang zu Ihren Notizinhalten.',
-  'privacy.intro.p2': 'Durch die Nutzung von securememo.app stimmen Sie den in diesem Datenschutzhinweis beschriebenen Praktiken zu. Wenn Sie nicht zustimmen, nutzen Sie bitte unseren Service nicht.',
+  "privacy.intro.p1":
+    'securememo.app ("wir", "uns" oder "unser") ist dem Schutz Ihrer Privatsphäre verpflichtet. Dieser Datenschutzhinweis erklärt, wie wir Informationen im Zusammenhang mit unserem Service handhaben, der es Benutzern ermöglicht, verschlüsselte Notizen zu erstellen und zu teilen, die sich nach dem Lesen oder Ablauf selbst zerstören. Unser Service ist mit Datenschutz als Kern konzipiert: Alle Verschlüsselung erfolgt clientseitig in Ihrem Browser, und wir haben keinen Zugang zu Ihren Notizinhalten.',
+  "privacy.intro.p2":
+    "Durch die Nutzung von securememo.app stimmen Sie den in diesem Datenschutzhinweis beschriebenen Praktiken zu. Wenn Sie nicht zustimmen, nutzen Sie bitte unseren Service nicht.",
 
-  'privacy.informationCollected.title': '1. Informationen, die wir sammeln',
-  'privacy.informationCollected.intro': 'Wir sammeln minimale Informationen, um den Service sicher und effizient zu betreiben. Konkret:',
-  'privacy.informationCollected.memoData': 'Notizdaten: Wenn Sie eine Notiz erstellen, speichern wir nur die verschlüsselte Version Ihrer Nachricht auf unseren Servern (mit Cloudflare Workers und D1-Datenbank). Der Verschlüsselungsschlüssel (Passwort) wird vollständig in Ihrem Browser generiert und verwaltet und niemals an uns gesendet oder von uns gespeichert. Notizen werden automatisch nach dem Lesen oder bei Ablauf gelöscht (Optionen: 8 Stunden, 1 Tag, 2 Tage, 1 Woche oder 30 Tage).',
-  'privacy.informationCollected.noPersonal': 'Minimale Datenerhebung: Wir benötigen keine Benutzerkonten und erheben keine personenbezogenen Daten, um den Dienst zu nutzen. Die einzigen personenbezogenen Daten, die wir möglicherweise erfassen, sind, wenn Sie uns freiwillig für Support kontaktieren. Wenn Sie uns per E‑Mail kontaktieren, erfassen wir Ihre E‑Mail-Adresse und den Inhalt Ihrer Nachricht, um auf Ihre Anfrage zu antworten. Wir verwenden diese Informationen nicht für andere Zwecke und geben sie ohne Ihre Zustimmung nicht an Dritte weiter.',
-  'privacy.informationCollected.securityData': 'Sicherheitsbezogene Daten: Für Missbrauchsprävention und Service-Integrität:',
-  'privacy.informationCollected.ipLogs': 'Wir protokollieren vorübergehend IP-Adressen und Anfrage-Metadaten (z.B. Zeitstempel), um Spam, Bots oder böswillige Aktivitäten zu erkennen und zu bekämpfen.',
-  'privacy.informationCollected.turnstile': 'Wir verwenden Cloudflare Turnstile CAPTCHA, um automatisierten Missbrauch zu verhindern. Turnstile ist darauf ausgelegt, die Privatsphäre zu schützen und verfolgt Benutzer nicht über Websites hinweg.',
-  'privacy.informationCollected.noAnalytics': 'Keine Analytik oder Tracking: Wir verwenden keine Cookies, Tracking-Pixel, Drittanbieter-Analytik oder Werbewerkzeuge. Es gibt keine Benutzerprofilierung, Verhaltensverfolgung oder Datensammlung für Marketingzwecke.',
-  'privacy.informationCollected.noSensitive': 'Wir sammeln keine sensiblen persönlichen Daten, Standortinformationen oder Geräte-Identifikatoren über das hinaus, was für den grundlegenden Service-Betrieb notwendig ist.',
+  "privacy.informationCollected.title": "1. Informationen, die wir sammeln",
+  "privacy.informationCollected.intro":
+    "Wir sammeln minimale Informationen, um den Service sicher und effizient zu betreiben. Konkret:",
+  "privacy.informationCollected.memoData":
+    "Notizdaten: Wenn Sie eine Notiz erstellen, speichern wir nur die verschlüsselte Version Ihrer Nachricht auf unseren Servern (mit Cloudflare Workers und D1-Datenbank). Der Verschlüsselungsschlüssel (Passwort) wird vollständig in Ihrem Browser generiert und verwaltet und niemals an uns gesendet oder von uns gespeichert. Notizen werden automatisch nach dem Lesen oder bei Ablauf gelöscht (Optionen: 8 Stunden, 1 Tag, 2 Tage, 1 Woche oder 30 Tage).",
+  "privacy.informationCollected.noPersonal":
+    "Minimale Datenerhebung: Wir benötigen keine Benutzerkonten und erheben keine personenbezogenen Daten, um den Dienst zu nutzen. Die einzigen personenbezogenen Daten, die wir möglicherweise erfassen, sind, wenn Sie uns freiwillig für Support kontaktieren. Wenn Sie uns per E‑Mail kontaktieren, erfassen wir Ihre E‑Mail-Adresse und den Inhalt Ihrer Nachricht, um auf Ihre Anfrage zu antworten. Wir verwenden diese Informationen nicht für andere Zwecke und geben sie ohne Ihre Zustimmung nicht an Dritte weiter.",
+  "privacy.informationCollected.securityData":
+    "Sicherheitsbezogene Daten: Für Missbrauchsprävention und Service-Integrität:",
+  "privacy.informationCollected.ipLogs":
+    "Wir protokollieren vorübergehend IP-Adressen und Anfrage-Metadaten (z.B. Zeitstempel), um Spam, Bots oder böswillige Aktivitäten zu erkennen und zu bekämpfen.",
+  "privacy.informationCollected.turnstile":
+    "Wir verwenden Cloudflare Turnstile CAPTCHA, um automatisierten Missbrauch zu verhindern. Turnstile ist darauf ausgelegt, die Privatsphäre zu schützen und verfolgt Benutzer nicht über Websites hinweg.",
+  "privacy.informationCollected.noAnalytics":
+    "Keine Analytik oder Tracking: Wir verwenden keine Cookies, Tracking-Pixel, Drittanbieter-Analytik oder Werbewerkzeuge. Es gibt keine Benutzerprofilierung, Verhaltensverfolgung oder Datensammlung für Marketingzwecke.",
+  "privacy.informationCollected.noSensitive":
+    "Wir sammeln keine sensiblen persönlichen Daten, Standortinformationen oder Geräte-Identifikatoren über das hinaus, was für den grundlegenden Service-Betrieb notwendig ist.",
 
-  'privacy.howWeUse.title': '2. Wie wir Informationen verwenden',
-  'privacy.howWeUse.intro': 'Die begrenzten Informationen, die wir sammeln, werden ausschließlich verwendet, um:',
-  'privacy.howWeUse.coreService': 'Den Kernservice bereitzustellen: Verschlüsselte Notizen vorübergehend zu speichern und ihre sichere Abfrage und Löschung zu ermöglichen.',
-  'privacy.howWeUse.security': 'Sicherheit zu gewährleisten: Missbrauch wie Spam oder Denial-of-Service-Angriffe mit IP-Protokollen und CAPTCHA zu erkennen und zu verhindern.',
-  'privacy.howWeUse.legal': 'Rechtliche Verpflichtungen zu erfüllen: In seltenen Fällen können wir Protokolle verwenden, um auf gültige rechtliche Anfragen (z.B. Vorladungen) zu antworten.',
-  'privacy.howWeUse.noOther': 'Wir verwenden keine Daten für Werbung, Verkauf an Dritte oder einen anderen Zweck, der nicht mit dem Betrieb von securememo.app zusammenhängt.',
+  "privacy.howWeUse.title": "2. Wie wir Informationen verwenden",
+  "privacy.howWeUse.intro": "Die begrenzten Informationen, die wir sammeln, werden ausschließlich verwendet, um:",
+  "privacy.howWeUse.coreService":
+    "Den Kernservice bereitzustellen: Verschlüsselte Notizen vorübergehend zu speichern und ihre sichere Abfrage und Löschung zu ermöglichen.",
+  "privacy.howWeUse.security":
+    "Sicherheit zu gewährleisten: Missbrauch wie Spam oder Denial-of-Service-Angriffe mit IP-Protokollen und CAPTCHA zu erkennen und zu verhindern.",
+  "privacy.howWeUse.legal":
+    "Rechtliche Verpflichtungen zu erfüllen: In seltenen Fällen können wir Protokolle verwenden, um auf gültige rechtliche Anfragen (z.B. Vorladungen) zu antworten.",
+  "privacy.howWeUse.noOther":
+    "Wir verwenden keine Daten für Werbung, Verkauf an Dritte oder einen anderen Zweck, der nicht mit dem Betrieb von securememo.app zusammenhängt.",
 
-  'privacy.dataSharing.title': '3. Datenweitergabe und Offenlegung',
-  'privacy.dataSharing.intro': 'Wir verkaufen, vermieten oder teilen Ihre Daten nicht mit Dritten, außer in den folgenden begrenzten Umständen:',
-  'privacy.dataSharing.serviceProviders': 'Service-Anbieter: Wir nutzen Cloudflare für Hosting, Datenbankspeicherung (D1) und CAPTCHA (Turnstile). Diese Anbieter verarbeiten Daten in unserem Auftrag unter strenger Vertraulichkeit und haben keinen Zugang zu Notizinhalten.',
-  'privacy.dataSharing.legal': 'Rechtliche Anforderungen: Wir können Informationen offenlegen, wenn dies gesetzlich vorgeschrieben ist, z.B. als Antwort auf einen Gerichtsbeschluss oder eine Regierungsanfrage.',
-  'privacy.dataSharing.business': 'Geschäftsübertragungen: Falls securememo.app erworben oder fusioniert wird, können Daten als Teil der Transaktion übertragen werden, bleiben aber diesem Datenschutzhinweis unterworfen.',
+  "privacy.dataSharing.title": "3. Datenweitergabe und Offenlegung",
+  "privacy.dataSharing.intro":
+    "Wir verkaufen, vermieten oder teilen Ihre Daten nicht mit Dritten, außer in den folgenden begrenzten Umständen:",
+  "privacy.dataSharing.serviceProviders":
+    "Service-Anbieter: Wir nutzen Cloudflare für Hosting, Datenbankspeicherung (D1) und CAPTCHA (Turnstile). Diese Anbieter verarbeiten Daten in unserem Auftrag unter strenger Vertraulichkeit und haben keinen Zugang zu Notizinhalten.",
+  "privacy.dataSharing.legal":
+    "Rechtliche Anforderungen: Wir können Informationen offenlegen, wenn dies gesetzlich vorgeschrieben ist, z.B. als Antwort auf einen Gerichtsbeschluss oder eine Regierungsanfrage.",
+  "privacy.dataSharing.business":
+    "Geschäftsübertragungen: Falls securememo.app erworben oder fusioniert wird, können Daten als Teil der Transaktion übertragen werden, bleiben aber diesem Datenschutzhinweis unterworfen.",
 
-  'privacy.dataSecurity.title': '4. Datensicherheit',
-  'privacy.dataSecurity.encryption': 'Verschlüsselung: Alle Notizen werden clientseitig mit AES-256 und PBKDF2-Schlüsselableitung (2.200.000 Iterationen) verschlüsselt. Wir speichern nur verschlüsselte Daten und können sie nicht entschlüsseln.',
-  'privacy.dataSecurity.deletion': 'Löschung: Notizen werden nach dem Lesen oder Ablauf dauerhaft durch automatisierte Cron-Jobs gelöscht.',
-  'privacy.dataSecurity.securityMeasures': 'Sicherheitsmaßnahmen: Wir implementieren starke Sicherheits-Header (z.B. CSP, HSTS), Eingabebereinigung, Timing-Angriffs-Schutz und CAPTCHA zur Missbrauchsprävention.',
-  'privacy.dataSecurity.noRecovery': 'Keine Wiederherstellung: Einmal gelöscht, können Notizen nicht wiederhergestellt werden—auch nicht von uns.',
-  'privacy.dataSecurity.disclaimer': 'Während wir angemessene Schritte unternehmen, um unsere Systeme zu sichern, ist kein Service vollständig immun gegen Risiken. Sie sind verantwortlich für das sichere Teilen von URLs und Passwörtern.',
+  "privacy.dataSecurity.title": "4. Datensicherheit",
+  "privacy.dataSecurity.encryption":
+    "Verschlüsselung: Alle Notizen werden clientseitig mit AES-256 und PBKDF2-Schlüsselableitung (2.200.000 Iterationen) verschlüsselt. Wir speichern nur verschlüsselte Daten und können sie nicht entschlüsseln.",
+  "privacy.dataSecurity.deletion":
+    "Löschung: Notizen werden nach dem Lesen oder Ablauf dauerhaft durch automatisierte Cron-Jobs gelöscht.",
+  "privacy.dataSecurity.securityMeasures":
+    "Sicherheitsmaßnahmen: Wir implementieren starke Sicherheits-Header (z.B. CSP, HSTS), Eingabebereinigung, Timing-Angriffs-Schutz und CAPTCHA zur Missbrauchsprävention.",
+  "privacy.dataSecurity.noRecovery":
+    "Keine Wiederherstellung: Einmal gelöscht, können Notizen nicht wiederhergestellt werden—auch nicht von uns.",
+  "privacy.dataSecurity.disclaimer":
+    "Während wir angemessene Schritte unternehmen, um unsere Systeme zu sichern, ist kein Service vollständig immun gegen Risiken. Sie sind verantwortlich für das sichere Teilen von URLs und Passwörtern.",
 
-  'privacy.dataRetention.title': '5. Datenspeicherung',
-  'privacy.dataRetention.memos': 'Verschlüsselte Notizen werden nur bis zum Lesen oder Ablauf gespeichert (maximal 30 Tage).',
-  'privacy.dataRetention.logs': 'Sicherheitsprotokolle (z.B. IP-Adressen) werden vorübergehend zur Missbrauchsprävention gespeichert und nach kurzer Zeit automatisch gelöscht (typischerweise innerhalb von Tagen).',
-  'privacy.dataRetention.minimal': 'Wir behalten keine Daten länger als für den Betrieb des Services notwendig.',
+  "privacy.dataRetention.title": "5. Datenspeicherung",
+  "privacy.dataRetention.memos":
+    "Verschlüsselte Notizen werden nur bis zum Lesen oder Ablauf gespeichert (maximal 30 Tage).",
+  "privacy.dataRetention.logs":
+    "Sicherheitsprotokolle (z.B. IP-Adressen) werden vorübergehend zur Missbrauchsprävention gespeichert und nach kurzer Zeit automatisch gelöscht (typischerweise innerhalb von Tagen).",
+  "privacy.dataRetention.minimal": "Wir behalten keine Daten länger als für den Betrieb des Services notwendig.",
 
-  'privacy.yourRights.title': '6. Ihre Rechte und Wahlmöglichkeiten',
-  'privacy.yourRights.intro': 'Da wir keine persönlichen Daten sammeln:',
-  'privacy.yourRights.noAccounts': 'Es gibt keine Benutzerkonten zu verwalten.',
-  'privacy.yourRights.noRequests': 'Sie können keinen Datenzugang, -korrektur oder -löschung über die automatische Selbstzerstörung von Notizen hinaus beantragen.',
-  'privacy.yourRights.contact': 'Falls Sie glauben, dass wir Informationen über Sie haben (z.B. aus Protokollen), kontaktieren Sie uns (siehe unten), um sich über Ihre Rechte unter anwendbaren Gesetzen wie DSGVO oder CCPA zu erkundigen. Wir halten uns an Datenschutzbestimmungen und bearbeiten Anfragen, wo möglich.',
+  "privacy.yourRights.title": "6. Ihre Rechte und Wahlmöglichkeiten",
+  "privacy.yourRights.intro": "Da wir keine persönlichen Daten sammeln:",
+  "privacy.yourRights.noAccounts": "Es gibt keine Benutzerkonten zu verwalten.",
+  "privacy.yourRights.noRequests":
+    "Sie können keinen Datenzugang, -korrektur oder -löschung über die automatische Selbstzerstörung von Notizen hinaus beantragen.",
+  "privacy.yourRights.contact":
+    "Falls Sie glauben, dass wir Informationen über Sie haben (z.B. aus Protokollen), kontaktieren Sie uns (siehe unten), um sich über Ihre Rechte unter anwendbaren Gesetzen wie DSGVO oder CCPA zu erkundigen. Wir halten uns an Datenschutzbestimmungen und bearbeiten Anfragen, wo möglich.",
 
-  'privacy.childrenPrivacy.title': '7. Datenschutz für Kinder',
-  'privacy.childrenPrivacy.content': 'Unser Service ist nicht für Kinder unter 13 (oder 16 in einigen Jurisdiktionen) bestimmt. Wir sammeln wissentlich keine Daten von Kindern. Falls wir von solchen Daten erfahren, werden wir sie löschen.',
+  "privacy.childrenPrivacy.title": "7. Datenschutz für Kinder",
+  "privacy.childrenPrivacy.content":
+    "Unser Service ist nicht für Kinder unter 13 (oder 16 in einigen Jurisdiktionen) bestimmt. Wir sammeln wissentlich keine Daten von Kindern. Falls wir von solchen Daten erfahren, werden wir sie löschen.",
 
-  'privacy.internationalTransfers.title': '8. Internationale Datenübertragungen',
-  'privacy.internationalTransfers.content': 'securememo.app wird auf Cloudflare\'s globalem Netzwerk gehostet. Daten können in verschiedenen Ländern verarbeitet werden, aber wir gewährleisten äquivalenten Datenschutz durch unsere minimalen Sammlungspraktiken.',
+  "privacy.internationalTransfers.title": "8. Internationale Datenübertragungen",
+  "privacy.internationalTransfers.content":
+    "securememo.app wird auf Cloudflare's globalem Netzwerk gehostet. Daten können in verschiedenen Ländern verarbeitet werden, aber wir gewährleisten äquivalenten Datenschutz durch unsere minimalen Sammlungspraktiken.",
 
-  'privacy.changesNotice.title': '9. Änderungen an diesem Datenschutzhinweis',
-  'privacy.changesNotice.content': 'Wir können diesen Hinweis regelmäßig aktualisieren. Änderungen werden hier mit einem aktualisierten "Zuletzt aktualisiert" Datum veröffentlicht. Die fortgesetzte Nutzung des Services nach Änderungen stellt eine Annahme dar.',
+  "privacy.changesNotice.title": "9. Änderungen an diesem Datenschutzhinweis",
+  "privacy.changesNotice.content":
+    'Wir können diesen Hinweis regelmäßig aktualisieren. Änderungen werden hier mit einem aktualisierten "Zuletzt aktualisiert" Datum veröffentlicht. Die fortgesetzte Nutzung des Services nach Änderungen stellt eine Annahme dar.',
 
-  'privacy.contact.title': '10. Kontaktieren Sie uns',
-  'privacy.contact.intro': 'Für Fragen zu diesem Datenschutzhinweis oder unseren Praktiken besuchen Sie bitte unser',
-  'privacy.contact.github': 'GitHub-Repository',
-  'privacy.contact.email': 'oder senden Sie eine E-Mail an contact@securememo.app.',
-  'privacy.contact.disclaimer': 'Dieser Datenschutzhinweis gilt nur für securememo.app und nicht für Drittanbieter-Websites, die von unserem Service verlinkt sind.',
+  "privacy.contact.title": "10. Kontaktieren Sie uns",
+  "privacy.contact.intro": "Für Fragen zu diesem Datenschutzhinweis oder unseren Praktiken besuchen Sie bitte unser",
+  "privacy.contact.github": "GitHub-Repository",
+  "privacy.contact.email": "oder senden Sie eine E-Mail an contact@securememo.app.",
+  "privacy.contact.disclaimer":
+    "Dieser Datenschutzhinweis gilt nur für securememo.app und nicht für Drittanbieter-Websites, die von unserem Service verlinkt sind.",
 
   // Schema.org structured data
-  'schema.app.description': 'Erstellen Sie verschlüsselte Notizen, die sich nach dem Lesen selbst zerstören. Ende-zu-Ende-Verschlüsselung, datenschutzorientiert und sicheres Teilen von Notizen mit AES-256. Kein Tracking, keine Werbung.',
-  'schema.app.category': 'SecurityApplication',
-  'schema.app.os': 'Web Browser',
-  'schema.app.requirements': 'Benötigt JavaScript. Benötigt HTML5.',
-  'schema.app.author': 'Timo Heimonen',
-  'schema.app.price': '0',
-  'schema.app.currency': 'USD',
-  'schema.app.features.encryption': 'Clientseitige AES-256-Verschlüsselung',
-  'schema.app.features.selfDestruct': 'Selbstzerstörende Notizen',
-  'schema.app.features.zeroKnowledge': 'Zero-Knowledge-Architektur',
-  'schema.app.features.noAccounts': 'Keine Benutzerkonten erforderlich',
-  'schema.app.features.globalPerformance': 'Globale Performance über Cloudflare',
-  'schema.app.features.privacyFirst': 'Datenschutz-erstes Design',
-  'schema.app.license': 'https://github.com/timoheimonen/securememo.app/blob/main/LICENSE',
-  'schema.app.repository': 'https://github.com/timoheimonen/securememo.app',
+  "schema.app.description":
+    "Erstellen Sie verschlüsselte Notizen, die sich nach dem Lesen selbst zerstören. Ende-zu-Ende-Verschlüsselung, datenschutzorientiert und sicheres Teilen von Notizen mit AES-256. Kein Tracking, keine Werbung.",
+  "schema.app.category": "SecurityApplication",
+  "schema.app.os": "Web Browser",
+  "schema.app.requirements": "Benötigt JavaScript. Benötigt HTML5.",
+  "schema.app.author": "Timo Heimonen",
+  "schema.app.price": "0",
+  "schema.app.currency": "USD",
+  "schema.app.features.encryption": "Clientseitige AES-256-Verschlüsselung",
+  "schema.app.features.selfDestruct": "Selbstzerstörende Notizen",
+  "schema.app.features.zeroKnowledge": "Zero-Knowledge-Architektur",
+  "schema.app.features.noAccounts": "Keine Benutzerkonten erforderlich",
+  "schema.app.features.globalPerformance": "Globale Performance über Cloudflare",
+  "schema.app.features.privacyFirst": "Datenschutz-erstes Design",
+  "schema.app.license": "https://github.com/timoheimonen/securememo.app/blob/main/LICENSE",
+  "schema.app.repository": "https://github.com/timoheimonen/securememo.app",
 
   // FAQ structured data
-  'faq.privacy.question': 'Wie schützt securememo.app meine Privatsphäre?',
-  'faq.privacy.answer': 'securememo.app nutzt clientseitige AES-256-Verschlüsselung, das bedeutet, dass Ihre Notiz in Ihrem Browser verschlüsselt wird, bevor sie an unsere Server gesendet wird. Wir sehen niemals den Klartext-Inhalt. Notizen zerstören sich selbst nach dem Lesen oder Ablauf, und wir benötigen keine Benutzerkonten oder sammeln persönliche Informationen.',
-  'faq.encryption.question': 'Welche Verschlüsselung verwendet securememo.app?',
-  'faq.encryption.answer': 'Wir verwenden AES-256-GCM-Verschlüsselung mit PBKDF2-Schlüsselableitung (2.200.000+ Iterationen). Alle Verschlüsselung findet clientseitig in Ihrem Browser mit der Web Crypto API statt. Das Verschlüsselungspasswort wird separat generiert und niemals auf unseren Servern gespeichert.',
-  'faq.duration.question': 'Wie lange halten Notizen?',
-  'faq.duration.answer': 'Notizen können so eingestellt werden, dass sie nach 8 Stunden, 1 Tag, 2 Tagen, 1 Woche oder maximal 30 Tagen ablaufen. Sie werden auch sofort nach dem Lesen gelöscht. Abgelaufene Notizen werden automatisch jede Stunde bereinigt.',
-  'faq.recovery.question': 'Kann ich eine gelöschte Notiz wiederherstellen?',
-  'faq.recovery.answer': 'Nein, sobald eine Notiz gelöscht ist (entweder nach dem Lesen oder bei Ablauf), kann sie nicht wiederhergestellt werden. Das ist absichtlich so für maximale Privatsphäre und Sicherheit.',
-  'faq.cost.question': 'Ist securememo.app kostenlos zu nutzen?',
-  'faq.cost.answer': 'Ja, securememo.app ist vollständig kostenlos zu nutzen. Es gibt keine versteckten Gebühren, keine Premium-Features und kein Tracking oder Werbung.',
-  'faq.technology.question': 'Welche Technologie verwendet securememo.app?',
-  'faq.technology.answer': 'securememo.app ist aufgebaut auf Cloudflare Workers für serverloses Computing, D1-Datenbank für Speicherung, Web Crypto API für clientseitige Verschlüsselung und modernem HTML/CSS/JavaScript. Der Quellcode ist Open Source und auf GitHub verfügbar.',
+  "faq.privacy.question": "Wie schützt securememo.app meine Privatsphäre?",
+  "faq.privacy.answer":
+    "securememo.app nutzt clientseitige AES-256-Verschlüsselung, das bedeutet, dass Ihre Notiz in Ihrem Browser verschlüsselt wird, bevor sie an unsere Server gesendet wird. Wir sehen niemals den Klartext-Inhalt. Notizen zerstören sich selbst nach dem Lesen oder Ablauf, und wir benötigen keine Benutzerkonten oder sammeln persönliche Informationen.",
+  "faq.encryption.question": "Welche Verschlüsselung verwendet securememo.app?",
+  "faq.encryption.answer":
+    "Wir verwenden AES-256-GCM-Verschlüsselung mit PBKDF2-Schlüsselableitung (2.200.000+ Iterationen). Alle Verschlüsselung findet clientseitig in Ihrem Browser mit der Web Crypto API statt. Das Verschlüsselungspasswort wird separat generiert und niemals auf unseren Servern gespeichert.",
+  "faq.duration.question": "Wie lange halten Notizen?",
+  "faq.duration.answer":
+    "Notizen können so eingestellt werden, dass sie nach 8 Stunden, 1 Tag, 2 Tagen, 1 Woche oder maximal 30 Tagen ablaufen. Sie werden auch sofort nach dem Lesen gelöscht. Abgelaufene Notizen werden automatisch jede Stunde bereinigt.",
+  "faq.recovery.question": "Kann ich eine gelöschte Notiz wiederherstellen?",
+  "faq.recovery.answer":
+    "Nein, sobald eine Notiz gelöscht ist (entweder nach dem Lesen oder bei Ablauf), kann sie nicht wiederhergestellt werden. Das ist absichtlich so für maximale Privatsphäre und Sicherheit.",
+  "faq.cost.question": "Ist securememo.app kostenlos zu nutzen?",
+  "faq.cost.answer":
+    "Ja, securememo.app ist vollständig kostenlos zu nutzen. Es gibt keine versteckten Gebühren, keine Premium-Features und kein Tracking oder Werbung.",
+  "faq.technology.question": "Welche Technologie verwendet securememo.app?",
+  "faq.technology.answer":
+    "securememo.app ist aufgebaut auf Cloudflare Workers für serverloses Computing, D1-Datenbank für Speicherung, Web Crypto API für clientseitige Verschlüsselung und modernem HTML/CSS/JavaScript. Der Quellcode ist Open Source und auf GitHub verfügbar.",
 
   // Accessibility and UI
 
-  'ui.breadcrumb.home': 'Startseite',
-  'ui.breadcrumb.tos': 'Nutzungsbedingungen',
-  'ui.breadcrumb.privacy': 'Datenschutzhinweis',
+  "ui.breadcrumb.home": "Startseite",
+  "ui.breadcrumb.tos": "Nutzungsbedingungen",
+  "ui.breadcrumb.privacy": "Datenschutzhinweis",
 
   // Create memo page content
-  'create.hero.title': 'Sichere Notiz erstellen',
-  'create.hero.description': 'Ihre Notiz wird in Ihrem Browser verschlüsselt und zerstört sich selbst nach dem Lesen oder Ablauf.',
-  'create.hero.ogDescription': 'Erstellen Sie verschlüsselte Notizen mit clientseitiger AES-256-Verschlüsselung. Notizen zerstören sich selbst nach dem Lesen für maximale Privatsphäre.',
-  'create.hero.twitterDescription': 'Erstellen Sie verschlüsselte Notizen mit clientseitiger Verschlüsselung.',
-  'create.schema.description': 'Erstellen Sie verschlüsselte Notizen, die sich nach dem Lesen selbst zerstören. Clientseitige AES-256-Verschlüsselung sorgt dafür, dass Ihre Geheimnisse privat bleiben.',
-  'create.schema.actionDescription': 'Erstellen Sie verschlüsselte Notizen mit clientseitiger AES-256-Verschlüsselung und automatischer Selbstzerstörung',
+  "create.hero.title": "Sichere Notiz erstellen",
+  "create.hero.description":
+    "Ihre Notiz wird in Ihrem Browser verschlüsselt und zerstört sich selbst nach dem Lesen oder Ablauf.",
+  "create.hero.ogDescription":
+    "Erstellen Sie verschlüsselte Notizen mit clientseitiger AES-256-Verschlüsselung. Notizen zerstören sich selbst nach dem Lesen für maximale Privatsphäre.",
+  "create.hero.twitterDescription": "Erstellen Sie verschlüsselte Notizen mit clientseitiger Verschlüsselung.",
+  "create.schema.description":
+    "Erstellen Sie verschlüsselte Notizen, die sich nach dem Lesen selbst zerstören. Clientseitige AES-256-Verschlüsselung sorgt dafür, dass Ihre Geheimnisse privat bleiben.",
+  "create.schema.actionDescription":
+    "Erstellen Sie verschlüsselte Notizen mit clientseitiger AES-256-Verschlüsselung und automatischer Selbstzerstörung",
 
-  // Read memo page content  
-  'read.hero.title': 'Sichere Notiz lesen',
-  'read.hero.description': 'Geben Sie das Passwort ein, um die Notiz zu entschlüsseln und zu lesen. Das Passwort sollte Ihnen separat von der URL mitgeteilt worden sein. Die Notiz wird nach dem Lesen oder bei Ablauf gelöscht.',
-  'read.hero.ogDescription': 'Entschlüsseln und lesen Sie Ihre sichere Notiz. Notizen zerstören sich selbst nach dem Lesen für maximale Privatsphäre.',
-  'read.hero.twitterDescription': 'Entschlüsseln und lesen Sie Ihre sichere Notiz mit clientseitiger Entschlüsselung.',
-  'read.schema.description': 'Entschlüsseln und lesen Sie Ihre sichere Notiz mit dem Passwort. Notizen zerstören sich selbst nach dem Lesen für maximale Privatsphäre. Clientseitige AES-256-Entschlüsselung.',
+  // Read memo page content
+  "read.hero.title": "Sichere Notiz lesen",
+  "read.hero.description":
+    "Geben Sie das Passwort ein, um die Notiz zu entschlüsseln und zu lesen. Das Passwort sollte Ihnen separat von der URL mitgeteilt worden sein. Die Notiz wird nach dem Lesen oder bei Ablauf gelöscht.",
+  "read.hero.ogDescription":
+    "Entschlüsseln und lesen Sie Ihre sichere Notiz. Notizen zerstören sich selbst nach dem Lesen für maximale Privatsphäre.",
+  "read.hero.twitterDescription": "Entschlüsseln und lesen Sie Ihre sichere Notiz mit clientseitiger Entschlüsselung.",
+  "read.schema.description":
+    "Entschlüsseln und lesen Sie Ihre sichere Notiz mit dem Passwort. Notizen zerstören sich selbst nach dem Lesen für maximale Privatsphäre. Clientseitige AES-256-Entschlüsselung.",
 
   // Form options
-  'form.expiry.option.8h': 'Bei Lesen löschen oder nach 8 Stunden',
-  'form.expiry.option.1d': 'Bei Lesen löschen oder nach 1 Tag',
-  'form.expiry.option.2d': 'Bei Lesen löschen oder nach 2 Tagen',
-  'form.expiry.option.1w': 'Bei Lesen löschen oder nach 1 Woche',
-  'form.expiry.option.30d': 'Bei Lesen löschen oder nach 30 Tagen',
+  "form.expiry.option.8h": "Bei Lesen löschen oder nach 8 Stunden",
+  "form.expiry.option.1d": "Bei Lesen löschen oder nach 1 Tag",
+  "form.expiry.option.2d": "Bei Lesen löschen oder nach 2 Tagen",
+  "form.expiry.option.1w": "Bei Lesen löschen oder nach 1 Woche",
+  "form.expiry.option.30d": "Bei Lesen löschen oder nach 30 Tagen",
 
   // Loading and status messages
-  'msg.encrypting': 'Ihre Notiz wird sicher verschlüsselt... Dies kann auf älteren Geräten einen Moment dauern.',
-  'msg.decrypting': 'Ihre Notiz wird entschlüsselt... Dies kann auf älteren Geräten einen Moment dauern.',
-  'msg.deletingSecurely': 'Notiz wird sicher gelöscht...',
-  'msg.yourSecureMemo': '📝 Ihre sichere Notiz',
-  'msg.status': 'Status:',
+  "msg.encrypting": "Ihre Notiz wird sicher verschlüsselt... Dies kann auf älteren Geräten einen Moment dauern.",
+  "msg.decrypting": "Ihre Notiz wird entschlüsselt... Dies kann auf älteren Geräten einen Moment dauern.",
+  "msg.deletingSecurely": "Notiz wird sicher gelöscht...",
+  "msg.yourSecureMemo": "📝 Ihre sichere Notiz",
+  "msg.status": "Status:",
 
   // Labels and help text
-  'form.memoUrl.label': 'Notiz-URL (teilen Sie diese mit Ihrem Empfänger):',
-  'form.memoUrl.help': 'Dies ist der sichere Link zu Ihrer Notiz. Teilen Sie diese URL mit Ihrem Empfänger.',
-  'form.memoPassword.label': 'Verschlüsselungspasswort (separat teilen):',
-  'form.memoPassword.help': 'Dies ist das Verschlüsselungspasswort. Teilen Sie es separat von der URL für erhöhte Sicherheit. Es wird nicht auf unseren Servern gespeichert, Wiederherstellung nach Verlassen dieser Seite nicht möglich.',
+  "form.memoUrl.label": "Notiz-URL (teilen Sie diese mit Ihrem Empfänger):",
+  "form.memoUrl.help": "Dies ist der sichere Link zu Ihrer Notiz. Teilen Sie diese URL mit Ihrem Empfänger.",
+  "form.memoPassword.label": "Verschlüsselungspasswort (separat teilen):",
+  "form.memoPassword.help":
+    "Dies ist das Verschlüsselungspasswort. Teilen Sie es separat von der URL für erhöhte Sicherheit. Es wird nicht auf unseren Servern gespeichert, Wiederherstellung nach Verlassen dieser Seite nicht möglich.",
 
   // Warning messages
-  'warning.important': 'Wichtig:',
-  'warning.memoDeleted': 'Die Notiz wird nach dem Lesen oder bei Erreichen der Ablaufzeit gelöscht',
-  'warning.shareSecurely': 'Teilen Sie URL und Passwort separat für maximale Sicherheit',
-  'warning.needBoth': 'Der Empfänger benötigt sowohl die URL als auch das Passwort, um auf die Notiz zuzugreifen',
-  'warning.pageCleared': 'Diese Seite wird gelöscht, wenn Sie wegnavigieren',
+  "warning.important": "Wichtig:",
+  "warning.memoDeleted": "Die Notiz wird nach dem Lesen oder bei Erreichen der Ablaufzeit gelöscht",
+  "warning.shareSecurely": "Teilen Sie URL und Passwort separat für maximale Sicherheit",
+  "warning.needBoth": "Der Empfänger benötigt sowohl die URL als auch das Passwort, um auf die Notiz zuzugreifen",
+  "warning.pageCleared": "Diese Seite wird gelöscht, wenn Sie wegnavigieren",
 
   // Structured data texts
-  'schema.tos.name': 'Nutzungsbedingungen',
-  'schema.tos.description': 'Nutzungsbedingungen für securememo.app - verschlüsselter Notiz-Sharing-Service. Erfahren Sie mehr über akzeptable Nutzung, Datenschutz, Sicherheit und rechtliche Bedingungen.',
-  'schema.tos.breadcrumb.home': 'Startseite',
-  'schema.tos.breadcrumb.tos': 'Nutzungsbedingungen',
-  'schema.tos.mainEntity.name': 'Nutzungsbedingungen',
-  'schema.tos.mainEntity.description': 'Rechtliche Bedingungen und Konditionen für den securememo.app verschlüsselten Notiz-Sharing-Service',
+  "schema.tos.name": "Nutzungsbedingungen",
+  "schema.tos.description":
+    "Nutzungsbedingungen für securememo.app - verschlüsselter Notiz-Sharing-Service. Erfahren Sie mehr über akzeptable Nutzung, Datenschutz, Sicherheit und rechtliche Bedingungen.",
+  "schema.tos.breadcrumb.home": "Startseite",
+  "schema.tos.breadcrumb.tos": "Nutzungsbedingungen",
+  "schema.tos.mainEntity.name": "Nutzungsbedingungen",
+  "schema.tos.mainEntity.description":
+    "Rechtliche Bedingungen und Konditionen für den securememo.app verschlüsselten Notiz-Sharing-Service",
 
-  'schema.privacy.name': 'Datenschutzhinweis',
-  'schema.privacy.description': 'Datenschutzhinweis für securememo.app - erfahren Sie, wie wir Ihre Daten mit clientseitiger Verschlüsselung, Zero-Knowledge-Architektur und minimaler Datensammlung schützen.',
-  'schema.privacy.breadcrumb.home': 'Startseite',
-  'schema.privacy.breadcrumb.privacy': 'Datenschutzhinweis',
-  'schema.privacy.mainEntity.name': 'Datenschutzhinweis',
-  'schema.privacy.mainEntity.description': 'Wie securememo.app Ihre Privatsphäre mit clientseitiger Verschlüsselung und minimaler Datensammlung schützt',
+  "schema.privacy.name": "Datenschutzhinweis",
+  "schema.privacy.description":
+    "Datenschutzhinweis für securememo.app - erfahren Sie, wie wir Ihre Daten mit clientseitiger Verschlüsselung, Zero-Knowledge-Architektur und minimaler Datensammlung schützen.",
+  "schema.privacy.breadcrumb.home": "Startseite",
+  "schema.privacy.breadcrumb.privacy": "Datenschutzhinweis",
+  "schema.privacy.mainEntity.name": "Datenschutzhinweis",
+  "schema.privacy.mainEntity.description":
+    "Wie securememo.app Ihre Privatsphäre mit clientseitiger Verschlüsselung und minimaler Datensammlung schützt",
 
   // Create memo featureList in structured data
-  'schema.create.featureList.clientSide': 'Clientseitige Verschlüsselung',
-  'schema.create.featureList.selfDestruct': 'Selbstzerstörende Notizen',
-  'schema.create.featureList.multiExpiry': 'Mehrere Ablaufoptionen',
-  'schema.create.featureList.noAccounts': 'Keine Benutzerkonten erforderlich',
-  'schema.create.featureList.maxChars': 'Maximal 10.000 Zeichen',
+  "schema.create.featureList.clientSide": "Clientseitige Verschlüsselung",
+  "schema.create.featureList.selfDestruct": "Selbstzerstörende Notizen",
+  "schema.create.featureList.multiExpiry": "Mehrere Ablaufoptionen",
+  "schema.create.featureList.noAccounts": "Keine Benutzerkonten erforderlich",
+  "schema.create.featureList.maxChars": "Maximal 10.000 Zeichen",
 
   // Read memo featureList in structured data
-  'schema.read.featureList.clientDecryption': 'Clientseitige Entschlüfselung',
-  'schema.read.featureList.passwordProtected': 'Passwort-geschützter Zugang',
-  'schema.read.featureList.autoDeletion': 'Automatische Notiz-Löschung',
-  'schema.read.featureList.noDataRetention': 'Keine Datenspeicherung',
-  'schema.read.featureList.privacyFocused': 'Datenschutz-orientiertes Design',
+  "schema.read.featureList.clientDecryption": "Clientseitige Entschlüfselung",
+  "schema.read.featureList.passwordProtected": "Passwort-geschützter Zugang",
+  "schema.read.featureList.autoDeletion": "Automatische Notiz-Löschung",
+  "schema.read.featureList.noDataRetention": "Keine Datenspeicherung",
+  "schema.read.featureList.privacyFocused": "Datenschutz-orientiertes Design",
 
   // Error messages - memo creation errors
-  'error.INVALID_MESSAGE_FORMAT': 'Ungültige Anfrage. Bitte überprüfen Sie Ihre Eingabe und versuchen Sie es erneut.',
-  'error.INVALID_EXPIRY_TIME': 'Ungültige Anfrage. Bitte überprüfen Sie Ihre Eingabe und versuchen Sie es erneut.',
-  'error.MISSING_TURNSTILE': 'Sicherheitsüberprüfung erforderlich. Bitte versuchen Sie es erneut.',
-  'error.TURNSTILE_FAILED': 'Sicherheitsüberprüfung fehlgeschlagen. Bitte versuchen Sie es erneut.',
-  'error.TURNSTILE_API_ERROR': 'Service vorübergehend nicht verfügbar. Bitte versuchen Sie es später erneut.',
-  'error.TURNSTILE_VERIFICATION_ERROR': 'Sicherheitsüberprüfung fehlgeschlagen. Bitte versuchen Sie es erneut.',
-  'error.DATABASE_ERROR': 'Service vorübergehend nicht verfügbar. Bitte versuchen Sie es erneut.',
-  'error.MEMO_ID_GENERATION_ERROR': 'Service vorübergehend nicht verfügbar. Bitte versuchen Sie es erneut.',
-  'error.MEMO_ID_COLLISION_ERROR': 'Service vorübergehend nicht verfügbar. Bitte versuchen Sie es erneut.',
-  'error.MEMO_CREATION_ERROR': 'Ihre Anfrage kann nicht verarbeitet werden. Bitte versuchen Sie es erneut.',
-  'error.MISSING_DELETION_TOKEN': 'Lösch-Token erforderlich.',
-  'error.INVALID_DELETION_TOKEN_HASH': 'Ungültiger Lösch-Token-Hash.',
+  "error.INVALID_MESSAGE_FORMAT": "Ungültige Anfrage. Bitte überprüfen Sie Ihre Eingabe und versuchen Sie es erneut.",
+  "error.INVALID_EXPIRY_TIME": "Ungültige Anfrage. Bitte überprüfen Sie Ihre Eingabe und versuchen Sie es erneut.",
+  "error.MISSING_TURNSTILE": "Sicherheitsüberprüfung erforderlich. Bitte versuchen Sie es erneut.",
+  "error.TURNSTILE_FAILED": "Sicherheitsüberprüfung fehlgeschlagen. Bitte versuchen Sie es erneut.",
+  "error.TURNSTILE_API_ERROR": "Service vorübergehend nicht verfügbar. Bitte versuchen Sie es später erneut.",
+  "error.TURNSTILE_VERIFICATION_ERROR": "Sicherheitsüberprüfung fehlgeschlagen. Bitte versuchen Sie es erneut.",
+  "error.DATABASE_ERROR": "Service vorübergehend nicht verfügbar. Bitte versuchen Sie es erneut.",
+  "error.MEMO_ID_GENERATION_ERROR": "Service vorübergehend nicht verfügbar. Bitte versuchen Sie es erneut.",
+  "error.MEMO_ID_COLLISION_ERROR": "Service vorübergehend nicht verfügbar. Bitte versuchen Sie es erneut.",
+  "error.MEMO_CREATION_ERROR": "Ihre Anfrage kann nicht verarbeitet werden. Bitte versuchen Sie es erneut.",
+  "error.MISSING_DELETION_TOKEN": "Lösch-Token erforderlich.",
+  "error.INVALID_DELETION_TOKEN_HASH": "Ungültiger Lösch-Token-Hash.",
 
   // Error messages - memo reading errors (security: generic messages to prevent enumeration attacks)
-  'error.INVALID_MEMO_ID': 'Ungültige Anfrage. Bitte überprüfen Sie Ihre Eingabe und versuchen Sie es erneut.',
-  'error.MISSING_MEMO_ID': 'Ungültige Anfrage. Bitte überprüfen Sie Ihre Eingabe und versuchen Sie es erneut.',
-  'error.MEMO_ACCESS_DENIED': 'Diese Notiz ist nicht mehr verfügbar.',
-  'error.MEMO_NOT_FOUND': 'Diese Notiz ist nicht mehr verfügbar.',
-  'error.MEMO_ALREADY_READ': 'Diese Notiz ist nicht mehr verfügbar.',
-  'error.MEMO_EXPIRED': 'Diese Notiz ist nicht mehr verfügbar.',
-  'error.DATABASE_READ_ERROR': 'Service vorübergehend nicht verfügbar. Bitte versuchen Sie es erneut.',
-  'error.MEMO_READ_ERROR': 'Ihre Anfrage kann nicht verarbeitet werden. Bitte versuchen Sie es erneut.',
-  'error.MEMO_DELETION_ERROR': 'Service vorübergehend nicht verfügbar. Bitte versuchen Sie es erneut.',
+  "error.INVALID_MEMO_ID": "Ungültige Anfrage. Bitte überprüfen Sie Ihre Eingabe und versuchen Sie es erneut.",
+  "error.MISSING_MEMO_ID": "Ungültige Anfrage. Bitte überprüfen Sie Ihre Eingabe und versuchen Sie es erneut.",
+  "error.MEMO_ACCESS_DENIED": "Diese Notiz ist nicht mehr verfügbar.",
+  "error.MEMO_NOT_FOUND": "Diese Notiz ist nicht mehr verfügbar.",
+  "error.MEMO_ALREADY_READ": "Diese Notiz ist nicht mehr verfügbar.",
+  "error.MEMO_EXPIRED": "Diese Notiz ist nicht mehr verfügbar.",
+  "error.DATABASE_READ_ERROR": "Service vorübergehend nicht verfügbar. Bitte versuchen Sie es erneut.",
+  "error.MEMO_READ_ERROR": "Ihre Anfrage kann nicht verarbeitet werden. Bitte versuchen Sie es erneut.",
+  "error.MEMO_DELETION_ERROR": "Service vorübergehend nicht verfügbar. Bitte versuchen Sie es erneut.",
 
   // Error messages - general errors
-  'error.INVALID_JSON': 'Ungültige Anfrage. Bitte überprüfen Sie Ihre Eingabe und versuchen Sie es erneut.',
-  'error.REQUEST_TOO_LARGE': 'Anfrage zu groß. Bitte versuchen Sie es erneut.',
-  'error.CONTENT_TYPE_ERROR': 'Ungültige Anfrage. Bitte überprüfen Sie Ihre Eingabe und versuchen Sie es erneut.',
-  'error.METHOD_NOT_ALLOWED': 'Ungültige Anfragemethode.',
-  'error.FORBIDDEN': 'Zugriff verweigert.',
-  'error.GENERAL_ERROR': 'Service vorübergehend nicht verfügbar. Bitte versuchen Sie es erneut.',
+  "error.INVALID_JSON": "Ungültige Anfrage. Bitte überprüfen Sie Ihre Eingabe und versuchen Sie es erneut.",
+  "error.REQUEST_TOO_LARGE": "Anfrage zu groß. Bitte versuchen Sie es erneut.",
+  "error.CONTENT_TYPE_ERROR": "Ungültige Anfrage. Bitte überprüfen Sie Ihre Eingabe und versuchen Sie es erneut.",
+  "error.METHOD_NOT_ALLOWED": "Ungültige Anfragemethode.",
+  "error.FORBIDDEN": "Zugriff verweigert.",
+  "error.GENERAL_ERROR": "Service vorübergehend nicht verfügbar. Bitte versuchen Sie es erneut.",
 
   // Error messages - decryption errors
-  'error.DECRYPTION_FAILED': 'Ungültige Anfrage. Bitte überprüfen Sie Ihre Eingabe und versuchen Sie es erneut.',
-  'error.INVALID_PASSWORD': 'Ungültige Anfrage. Bitte überprüfen Sie Ihre Eingabe und versuchen Sie es erneut.',
+  "error.DECRYPTION_FAILED": "Ungültige Anfrage. Bitte überprüfen Sie Ihre Eingabe und versuchen Sie es erneut.",
+  "error.INVALID_PASSWORD": "Ungültige Anfrage. Bitte überprüfen Sie Ihre Eingabe und versuchen Sie es erneut.",
 
   // Error messages - network errors
-  'error.NETWORK_ERROR': 'Service vorübergehend nicht verfügbar. Bitte versuchen Sie es erneut.',
-  'error.SERVICE_UNAVAILABLE': 'Service vorübergehend nicht verfügbar. Bitte versuchen Sie es später erneut.',
-  'error.RATE_LIMITED': 'Zu viele Anfragen. Bitte warten Sie einen Moment und versuchen Sie es erneut.',
+  "error.NETWORK_ERROR": "Service vorübergehend nicht verfügbar. Bitte versuchen Sie es erneut.",
+  "error.SERVICE_UNAVAILABLE": "Service vorübergehend nicht verfügbar. Bitte versuchen Sie es später erneut.",
+  "error.RATE_LIMITED": "Zu viele Anfragen. Bitte warten Sie einen Moment und versuchen Sie es erneut.",
 
   // Error messages - client-side validation errors
-  'error.MISSING_MESSAGE': 'Bitte geben Sie eine Notiz ein',
-  'error.MESSAGE_TOO_LONG': 'Notiz ist zu lang (max. 10.000 Zeichen)',
-  'error.MISSING_SECURITY_CHALLENGE': 'Bitte vervollständigen Sie die Sicherheitsüberprüfung',
-  'error.CREATE_MEMO_FAILED': 'Notiz konnte nicht erstellt werden',
-  'error.CREATE_MEMO_ERROR': 'Ein Fehler ist beim Erstellen der Notiz aufgetreten',
-  'error.READ_MEMO_ERROR': 'Ein Fehler ist beim Lesen der Notiz aufgetreten',
-  'error.DECRYPTION_ERROR': 'Entschlüsselung der Nachricht fehlgeschlagen. Ungültiges Passwort oder beschädigte Daten.',
-  'error.MEMO_ID_GENERATION_MAX_RETRIES': 'Eindeutige Memo-ID konnte nach maximaler Anzahl von Versuchen nicht generiert werden',
-  'error.MISSING_PASSWORD': 'Bitte geben Sie das Verschlüsselungspasswort ein',
-  'error.INVALID_MEMO_URL': 'Ungültige Notiz-URL',
-  'error.MEMO_ALREADY_READ_DELETED': 'Diese Notiz wurde bereits gelesen und gelöscht oder ist abgelaufen.',
-  'error.MEMO_EXPIRED_DELETED': 'Diese Notiz ist abgelaufen und wurde gelöscht.',
-  'error.INVALID_PASSWORD_CHECK': 'Ungültiges Passwort. Bitte überprüfen Sie das separat erhaltene Passwort.',
-  'error.MISSING_PASSWORD_ERROR': 'Bitte geben Sie das Verschlüsselungspasswort ein',
-  'error.INVALID_MEMO_URL_ERROR': 'Ungültige Notiz-URL',
-  'error.MEMO_ALREADY_READ_DELETED_ERROR': 'Diese Notiz wurde bereits gelesen und gelöscht oder ist abgelaufen.',
-  'error.MEMO_EXPIRED_DELETED_ERROR': 'Diese Notiz ist abgelaufen und wurde gelöscht.',
-  'error.INVALID_PASSWORD_CHECK_ERROR': 'Ungültiges Passwort. Bitte überprüfen Sie das separat erhaltene Passwort.',
-  'error.MISSING_SECURITY_CHALLENGE_ERROR': 'Bitte vervollständigen Sie die Sicherheitsüberprüfung',
+  "error.MISSING_MESSAGE": "Bitte geben Sie eine Notiz ein",
+  "error.MESSAGE_TOO_LONG": "Notiz ist zu lang (max. 10.000 Zeichen)",
+  "error.MISSING_SECURITY_CHALLENGE": "Bitte vervollständigen Sie die Sicherheitsüberprüfung",
+  "error.CREATE_MEMO_FAILED": "Notiz konnte nicht erstellt werden",
+  "error.CREATE_MEMO_ERROR": "Ein Fehler ist beim Erstellen der Notiz aufgetreten",
+  "error.READ_MEMO_ERROR": "Ein Fehler ist beim Lesen der Notiz aufgetreten",
+  "error.DECRYPTION_ERROR": "Entschlüsselung der Nachricht fehlgeschlagen. Ungültiges Passwort oder beschädigte Daten.",
+  "error.MEMO_ID_GENERATION_MAX_RETRIES":
+    "Eindeutige Memo-ID konnte nach maximaler Anzahl von Versuchen nicht generiert werden",
+  "error.MISSING_PASSWORD": "Bitte geben Sie das Verschlüsselungspasswort ein",
+  "error.INVALID_MEMO_URL": "Ungültige Notiz-URL",
+  "error.MEMO_ALREADY_READ_DELETED": "Diese Notiz wurde bereits gelesen und gelöscht oder ist abgelaufen.",
+  "error.MEMO_EXPIRED_DELETED": "Diese Notiz ist abgelaufen und wurde gelöscht.",
+  "error.INVALID_PASSWORD_CHECK": "Ungültiges Passwort. Bitte überprüfen Sie das separat erhaltene Passwort.",
+  "error.MISSING_PASSWORD_ERROR": "Bitte geben Sie das Verschlüsselungspasswort ein",
+  "error.INVALID_MEMO_URL_ERROR": "Ungültige Notiz-URL",
+  "error.MEMO_ALREADY_READ_DELETED_ERROR": "Diese Notiz wurde bereits gelesen und gelöscht oder ist abgelaufen.",
+  "error.MEMO_EXPIRED_DELETED_ERROR": "Diese Notiz ist abgelaufen und wurde gelöscht.",
+  "error.INVALID_PASSWORD_CHECK_ERROR": "Ungültiges Passwort. Bitte überprüfen Sie das separat erhaltene Passwort.",
+  "error.MISSING_SECURITY_CHALLENGE_ERROR": "Bitte vervollständigen Sie die Sicherheitsüberprüfung",
 
   // Error messages - HTTP status errors
-  'error.INTERNAL_SERVER_ERROR': 'Interner Server-Fehler',
-  'error.NOT_FOUND': 'Nicht gefunden',
-  'error.BAD_REQUEST': 'Ungültige Anfrage',
-  'error.CLEANUP_FAILED': 'Bereinigung fehlgeschlagen',
+  "error.INTERNAL_SERVER_ERROR": "Interner Server-Fehler",
+  "error.NOT_FOUND": "Nicht gefunden",
+  "error.BAD_REQUEST": "Ungültige Anfrage",
+  "error.CLEANUP_FAILED": "Bereinigung fehlgeschlagen",
 
   // Error messages - default fallback
-  'error.DEFAULT_FALLBACK': 'Ein Fehler ist aufgetreten. Bitte versuchen Sie es erneut.',
+  "error.DEFAULT_FALLBACK": "Ein Fehler ist aufgetreten. Bitte versuchen Sie es erneut.",
 
   // Security error messages (shorter versions for security events)
-  'error.security.INVALID_MESSAGE_FORMAT': 'Ungültige Anfrage.',
-  'error.security.INVALID_EXPIRY_TIME': 'Ungültige Anfrage.',
-  'error.security.MISSING_TURNSTILE': 'Sicherheitsüberprüfung erforderlich.',
-  'error.security.TURNSTILE_FAILED': 'Sicherheitsüberprüfung fehlgeschlagen.',
-  'error.security.TURNSTILE_API_ERROR': 'Service vorübergehend nicht verfügbar.',
-  'error.security.TURNSTILE_VERIFICATION_ERROR': 'Sicherheitsüberprüfung fehlgeschlagen.',
-  'error.security.DATABASE_ERROR': 'Service vorübergehend nicht verfügbar.',
-  'error.security.MEMO_ID_GENERATION_ERROR': 'Service vorübergehend nicht verfügbar.',
-  'error.security.MEMO_ID_COLLISION_ERROR': 'Service vorübergehend nicht verfügbar.',
-  'error.security.MEMO_CREATION_ERROR': 'Ihre Anfrage kann nicht verarbeitet werden.',
-  'error.security.INVALID_MEMO_ID': 'Ungültige Anfrage.',
-  'error.security.MISSING_MEMO_ID': 'Ungültige Anfrage.',
-  'error.security.MEMO_NOT_FOUND': 'Diese Notiz ist nicht mehr verfügbar.',
-  'error.security.MEMO_ALREADY_READ': 'Diese Notiz ist nicht mehr verfügbar.',
-  'error.security.MEMO_EXPIRED': 'Diese Notiz ist nicht mehr verfügbar.',
-  'error.security.DATABASE_READ_ERROR': 'Service vorübergehend nicht verfügbar.',
-  'error.security.MEMO_READ_ERROR': 'Ihre Anfrage kann nicht verarbeitet werden.',
-  'error.security.METHOD_NOT_ALLOWED': 'Ungültige Anfragemethode.',
-  'error.security.FORBIDDEN': 'Zugriff verweigert.',
-  'error.security.DEFAULT_FALLBACK': 'Ein Fehler ist aufgetreten. Bitte versuchen Sie es erneut.'
-}
+  "error.security.INVALID_MESSAGE_FORMAT": "Ungültige Anfrage.",
+  "error.security.INVALID_EXPIRY_TIME": "Ungültige Anfrage.",
+  "error.security.MISSING_TURNSTILE": "Sicherheitsüberprüfung erforderlich.",
+  "error.security.TURNSTILE_FAILED": "Sicherheitsüberprüfung fehlgeschlagen.",
+  "error.security.TURNSTILE_API_ERROR": "Service vorübergehend nicht verfügbar.",
+  "error.security.TURNSTILE_VERIFICATION_ERROR": "Sicherheitsüberprüfung fehlgeschlagen.",
+  "error.security.DATABASE_ERROR": "Service vorübergehend nicht verfügbar.",
+  "error.security.MEMO_ID_GENERATION_ERROR": "Service vorübergehend nicht verfügbar.",
+  "error.security.MEMO_ID_COLLISION_ERROR": "Service vorübergehend nicht verfügbar.",
+  "error.security.MEMO_CREATION_ERROR": "Ihre Anfrage kann nicht verarbeitet werden.",
+  "error.security.INVALID_MEMO_ID": "Ungültige Anfrage.",
+  "error.security.MISSING_MEMO_ID": "Ungültige Anfrage.",
+  "error.security.MEMO_NOT_FOUND": "Diese Notiz ist nicht mehr verfügbar.",
+  "error.security.MEMO_ALREADY_READ": "Diese Notiz ist nicht mehr verfügbar.",
+  "error.security.MEMO_EXPIRED": "Diese Notiz ist nicht mehr verfügbar.",
+  "error.security.DATABASE_READ_ERROR": "Service vorübergehend nicht verfügbar.",
+  "error.security.MEMO_READ_ERROR": "Ihre Anfrage kann nicht verarbeitet werden.",
+  "error.security.METHOD_NOT_ALLOWED": "Ungültige Anfragemethode.",
+  "error.security.FORBIDDEN": "Zugriff verweigert.",
+  "error.security.DEFAULT_FALLBACK": "Ein Fehler ist aufgetreten. Bitte versuchen Sie es erneut.",
+};
