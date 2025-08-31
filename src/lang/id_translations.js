@@ -546,7 +546,7 @@ export const id = {
 
   // Error messages - decryption errors
   "error.DECRYPTION_FAILED": "Permintaan tidak valid. Silakan periksa input Anda dan coba lagi.",
-  "error.INVALID_PASSWORD": "Permintaan tidak valid. Silakan periksa input Anda dan coba lagi.",
+  "error.INVALID_PASSWORD": "Kata sandi yang dimasukkan salah. Silakan coba lagi.",
 
   // Error messages - network errors
   "error.NETWORK_ERROR": "Layanan sementara tidak tersedia. Silakan coba lagi.",
