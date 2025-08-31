@@ -2,38 +2,35 @@ name: CodeQL
 
 on:
   push:
-    branches: [ main, development, features ]
+    branches: [ main ]
     paths:
       - 'src/**/*.js'
       - '.github/workflows/codeql.yml'
       - '.github/codeql-config.yml'
       - 'package.json'
       - 'package-lock.json'
+      
   pull_request:
-    branches: [ main, development, features ]
+    branches: [ main, development ]
     paths:
       - 'src/**/*.js'
       - '.github/workflows/codeql.yml'
       - '.github/codeql-config.yml'
       - 'package.json'
       - 'package-lock.json'
+      
   schedule:
     - cron: '24 3 * * 5'
 
 permissions:
   contents: read
   security-events: write
-  actions: read
 
 jobs:
   analyze:
     name: Analyze (JavaScript)
     runs-on: ubuntu-latest
     timeout-minutes: 30
-    permissions:
-      contents: read
-      security-events: write
-      actions: read
     strategy:
       fail-fast: false
       matrix:
@@ -63,25 +60,7 @@ jobs:
           languages: ${{ matrix.language }}
           config-file: ./.github/codeql-config.yml
 
-      # If you have a build step for transpilation/bundling, add here. Workers project typically no build.
       - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@v3
         with:
           category: 'codeql:javascript'
-
-  # Optional: separate PR-only job to fail fast on CodeQL init issues
-  query-check:
-    if: github.event_name == 'pull_request'
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      security-events: write
-    steps:
-      - uses: actions/checkout@v4
-      - uses: github/codeql-action/init@v3
-        with:
-          languages: javascript
-          config-file: ./.github/codeql-config.yml
-      - uses: github/codeql-action/analyze@v3
-        with:
-          category: 'codeql:pr-check'
