@@ -631,18 +631,25 @@ export async function handleConfirmDelete(request, env) {
     );
     row = await fetchStmt.bind(memoId).first();
 
-    if (!row) return await rateLimitOrAccessDenied(request, env, requestLocale);
+    if (!row) {
+      return await rateLimitOrAccessDenied(request, env, requestLocale);
+    }
 
     // Require deletion token
-    if (!deletionToken) return await rateLimitOrAccessDenied(request, env, requestLocale);
+    if (!deletionToken) {
+      return await rateLimitOrAccessDenied(request, env, requestLocale);
+    }
 
     // Validate format using existing password validator without altering the token value
-    if (!validatePassword(deletionToken)) return await rateLimitOrAccessDenied(request, env, requestLocale); // Reuse validator for token format
+    if (!validatePassword(deletionToken)) {
+      return await rateLimitOrAccessDenied(request, env, requestLocale); // Reuse validator for token format
+    }
 
     // Compute hash over the exact provided token (no sanitization) to match stored hash
     computedHash = await hashDeletionToken(deletionToken);
-    if (!constantTimeCompare(computedHash, row.deletion_token_hash))
+    if (!constantTimeCompare(computedHash, row.deletion_token_hash)) {
       return await rateLimitOrAccessDenied(request, env, requestLocale);
+    }
 
     // Delete if validation passes (common for both cases)
     const deleteStmt = env.DB.prepare("DELETE FROM memos WHERE memo_id = ?");
