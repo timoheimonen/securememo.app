@@ -129,7 +129,7 @@ For detailed contribution guidelines, please see [CONTRIBUTING.md](CONTRIBUTING.
 
 ## Supported languages in the application
 
-SecureMemo supports **30 languages** with automatic translation from English:
+securememo.app supports **30 languages** with automatic translation from English:
 
 <details>
 <summary>Click to view all supported languages</summary>
