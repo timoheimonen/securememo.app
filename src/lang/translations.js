@@ -67,5 +67,5 @@ export const TRANSLATIONS = {
   tr: withLanguageNames(tr),
   uk: withLanguageNames(uk),
   vi: withLanguageNames(vi),
-  zh: withLanguageNames(zh)
+  zh: withLanguageNames(zh),
 };

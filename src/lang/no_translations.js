@@ -46,55 +46,75 @@ export const no = {
 
   // Page titles and descriptions
   'page.home.title': 'securememo.app - Krypterte selvdestruerende notater',
-  'page.home.description': 'Opprett krypterte notater som selvdestruerer etter at de er lest. Ende-til-ende-kryptering, personvernfokusert og sikker deling av notater med AES-256. Ingen sporing, ingen annonser.',
-  'page.home.keywords': 'sikkert notat, kryptert notat, selvdestruerende notat, privat deling av notater, ende-til-ende-kryptering, AES-256, personvern, sikker deling av notater',
+  'page.home.description':
+    'Opprett krypterte notater som selvdestruerer etter at de er lest. Ende-til-ende-kryptering, personvernfokusert og sikker deling av notater med AES-256. Ingen sporing, ingen annonser.',
+  'page.home.keywords':
+    'sikkert notat, kryptert notat, selvdestruerende notat, privat deling av notater, ende-til-ende-kryptering, AES-256, personvern, sikker deling av notater',
   'page.home.ogTitle': 'securememo.app - Krypterte selvdestruerende notater',
-  'page.home.ogDescription': 'Del sensitiv informasjon sikkert med notater som slettes etter én visning eller utløp. Drevet av klientbasert AES-256-kryptering.',
+  'page.home.ogDescription':
+    'Del sensitiv informasjon sikkert med notater som slettes etter én visning eller utløp. Drevet av klientbasert AES-256-kryptering.',
   'page.home.twitterDescription': 'Personvern først – app for sikre, selvdestruerende notater.',
   'page.about.title': 'Om securememo.app - Personvernfokuserte krypterte notater',
-  'page.about.description': 'Lær om securememo.apps personvernfokuserte tilnærming til kryptert meldingsutveksling. Bygget med klientbasert AES-256-kryptering, selvdestruerende meldinger og nullkunnskapsarkitektur.',
-  'page.about.keywords': 'om sikre notater, personvernfokusert meldingsutveksling, klientbasert kryptering, AES-256, selvdestruerende meldinger, nullkunnskap, sikker deling av notater',
+  'page.about.description':
+    'Lær om securememo.apps personvernfokuserte tilnærming til kryptert meldingsutveksling. Bygget med klientbasert AES-256-kryptering, selvdestruerende meldinger og nullkunnskapsarkitektur.',
+  'page.about.keywords':
+    'om sikre notater, personvernfokusert meldingsutveksling, klientbasert kryptering, AES-256, selvdestruerende meldinger, nullkunnskap, sikker deling av notater',
   'page.about.ogTitle': 'Om securememo.app - Personvernfokuserte krypterte notater',
-  'page.about.ogDescription': 'Oppdag hvordan securememo.app beskytter ditt personvern med klientbasert kryptering og selvdestruerende meldinger.',
+  'page.about.ogDescription':
+    'Oppdag hvordan securememo.app beskytter ditt personvern med klientbasert kryptering og selvdestruerende meldinger.',
   'page.about.twitterDescription': 'Personvern først – kryptert meldingsutveksling med klientbasert kryptering.',
   'page.create.title': 'Opprett sikkert notat - Kryptert selvdestruerende notat',
-  'page.create.keywords': 'opprett sikkert notat, kryptert notat, selvdestruerende notat, AES-256-kryptering, privat deling av notater, opprettelse av sikre notater',
+  'page.create.keywords':
+    'opprett sikkert notat, kryptert notat, selvdestruerende notat, AES-256-kryptering, privat deling av notater, opprettelse av sikre notater',
   'page.read.title': 'Les sikkert notat - Dekrypter notatet',
-  'page.read.keywords': 'les sikkert notat, dekrypter notat, lesing av kryptert notat, AES-256-dekryptering, privat tilgang til notat',
+  'page.read.keywords':
+    'les sikkert notat, dekrypter notat, lesing av kryptert notat, AES-256-dekryptering, privat tilgang til notat',
   'page.tos.title': 'Vilkår for bruk - securememo.app juridiske vilkår',
-  'page.tos.description': 'Vilkår for bruk for securememo.app - kryptert deling av notater. Lær om akseptabel bruk, personvern, sikkerhet og juridiske vilkår for vår sikre notatdelingsplattform.',
-  'page.tos.keywords': 'vilkår for bruk, juridiske vilkår for sikre notater, vilkår for krypterte notater, personvernerklæring, akseptabel bruk, vilkår for sikker deling av notater',
+  'page.tos.description':
+    'Vilkår for bruk for securememo.app - kryptert deling av notater. Lær om akseptabel bruk, personvern, sikkerhet og juridiske vilkår for vår sikre notatdelingsplattform.',
+  'page.tos.keywords':
+    'vilkår for bruk, juridiske vilkår for sikre notater, vilkår for krypterte notater, personvernerklæring, akseptabel bruk, vilkår for sikker deling av notater',
   'page.tos.ogTitle': 'Vilkår for bruk - securememo.app juridiske vilkår',
   'page.tos.ogDescription': 'Juridiske vilkår og betingelser for securememo.app kryptert deling av notater.',
   'page.tos.twitterDescription': 'Juridiske vilkår for securememo.app kryptert deling av notater.',
   'page.privacy.title': 'Personvernerklæring - securememo.app databeskyttelse',
-  'page.privacy.description': 'Personvernerklæring for securememo.app - lær hvordan vi beskytter dine data med klientbasert kryptering, nullkunnskapsarkitektur og minimal datainnsamling for sikker deling av notater.',
-  'page.privacy.keywords': 'personvernerklæring, personvern for sikre notater, databeskyttelse, GDPR-samsvar, klientbasert kryptering, nullkunnskap, personvern ved deling av notater',
+  'page.privacy.description':
+    'Personvernerklæring for securememo.app - lær hvordan vi beskytter dine data med klientbasert kryptering, nullkunnskapsarkitektur og minimal datainnsamling for sikker deling av notater.',
+  'page.privacy.keywords':
+    'personvernerklæring, personvern for sikre notater, databeskyttelse, GDPR-samsvar, klientbasert kryptering, nullkunnskap, personvern ved deling av notater',
   'page.privacy.ogTitle': 'Personvernerklæring - securememo.app databeskyttelse',
-  'page.privacy.ogDescription': 'Hvordan securememo.app beskytter ditt personvern med klientbasert kryptering og minimal datainnsamling.',
+  'page.privacy.ogDescription':
+    'Hvordan securememo.app beskytter ditt personvern med klientbasert kryptering og minimal datainnsamling.',
   'page.privacy.twitterDescription': 'Personvern med klientbasert kryptering og nullkunnskapsarkitektur.',
 
   // Main page content
   'home.hero.title': 'securememo.app',
-  'home.hero.subtitle': 'Opprett krypterte notater som selvdestruerer etter at de er lest eller utløpt. Dine hemmeligheter forblir trygge.',
+  'home.hero.subtitle':
+    'Opprett krypterte notater som selvdestruerer etter at de er lest eller utløpt. Dine hemmeligheter forblir trygge.',
   'home.hero.btnPrimary': 'Opprett sikkert notat',
   'home.hero.btnSecondary': 'Les mer',
 
   'home.features.title': 'Slik fungerer det',
   'home.features.encrypt.title': '🔐 Krypter i nettleseren',
-  'home.features.encrypt.description': 'Skriv inn notatet ditt. Det krypteres direkte i nettleseren din med sterk AES-256-kryptering før det når våre servere.',
+  'home.features.encrypt.description':
+    'Skriv inn notatet ditt. Det krypteres direkte i nettleseren din med sterk AES-256-kryptering før det når våre servere.',
   'home.features.share.title': '🔗 Del sikkert',
-  'home.features.share.description': 'Få en unik URL og et separat tilfeldig passord, og del dem via ulike kanaler for ekstra sikkerhet.',
+  'home.features.share.description':
+    'Få en unik URL og et separat tilfeldig passord, og del dem via ulike kanaler for ekstra sikkerhet.',
   'home.features.destruct.title': '💥 Selvdestruksjon',
-  'home.features.destruct.description': 'Notatet slettes permanent etter at det er lest eller når tidsgrensen utløper (fra 8 timer til 30 dager).',
+  'home.features.destruct.description':
+    'Notatet slettes permanent etter at det er lest eller når tidsgrensen utløper (fra 8 timer til 30 dager).',
 
   'home.security.title': 'Sikkerhetsfunksjoner',
   'home.security.encryption.title': '🔒 Ekte klientbasert kryptering',
-  'home.security.encryption.description': 'Notatet ditt krypteres i nettleseren med AES-256-GCM og sterk nøkkelavledning. Vi ser aldri klartekst.',
+  'home.security.encryption.description':
+    'Notatet ditt krypteres i nettleseren med AES-256-GCM og sterk nøkkelavledning. Vi ser aldri klartekst.',
   'home.security.delete.title': '🗑️ Pålitelig automatisk sletting',
-  'home.security.delete.description': 'Notater forsvinner for alltid etter lesing eller utløp, med automatisk opprydding hver time. Ingen sikkerhetskopier eller gjenoppretting mulig.',
+  'home.security.delete.description':
+    'Notater forsvinner for alltid etter lesing eller utløp, med automatisk opprydding hver time. Ingen sikkerhetskopier eller gjenoppretting mulig.',
   'home.security.password.title': '🌐 Nullkunnskap om passord',
-  'home.security.password.description': 'Vi genererer og håndterer passord kun i nettleseren din. De sendes aldri til eller lagres på våre servere.',
+  'home.security.password.description':
+    'Vi genererer og håndterer passord kun i nettleseren din. De sendes aldri til eller lagres på våre servere.',
 
   'footer.sourceCode': 'Se kildekode på GitHub',
   'footer.tos': 'Vilkår for bruk',
@@ -103,7 +123,8 @@ export const no = {
 
   // About page content
   'about.hero.title': 'Om securememo.app',
-  'about.hero.subtitle': 'securememo.app er en personvernfokusert applikasjon som lar deg opprette krypterte notater som selvdestruerer etter at de er lest eller utløpt. Bygget med sikkerhet og personvern som høyeste prioritet. Kildekoden er tilgjengelig på GitHub.',
+  'about.hero.subtitle':
+    'securememo.app er en personvernfokusert applikasjon som lar deg opprette krypterte notater som selvdestruerer etter at de er lest eller utløpt. Bygget med sikkerhet og personvern som høyeste prioritet. Kildekoden er tilgjengelig på GitHub.',
 
   'about.tech.title': 'Teknologier',
   'about.tech.cloudflare': 'Cloudflare Workers: Serverløs plattform for global ytelse',
@@ -115,25 +136,34 @@ export const no = {
 
   'about.features.title': 'Sikkerhetsfunksjoner',
   'about.features.clientEncryption.title': '🔐 Klientbasert kryptering',
-  'about.features.clientEncryption.description': 'All kryptering skjer i nettleseren din med Web Crypto API. Notatet ditt krypteres med AES-256 før det sendes til våre servere.',
+  'about.features.clientEncryption.description':
+    'All kryptering skjer i nettleseren din med Web Crypto API. Notatet ditt krypteres med AES-256 før det sendes til våre servere.',
   'about.features.passwordSharing.title': '🔑 Separat passorddeling',
-  'about.features.passwordSharing.description': 'Krypteringspassordet genereres separat fra URL-en og bør deles via en annen kanal for økt sikkerhet.',
+  'about.features.passwordSharing.description':
+    'Krypteringspassordet genereres separat fra URL-en og bør deles via en annen kanal for økt sikkerhet.',
   'about.features.selfDestruct.title': '💥 Selvdestruerende notater',
-  'about.features.selfDestruct.description': 'Når et notat er lest eller utløpt, slettes det umiddelbart og permanent fra vår database. Ingen spor gjenstår.',
+  'about.features.selfDestruct.description':
+    'Når et notat er lest eller utløpt, slettes det umiddelbart og permanent fra vår database. Ingen spor gjenstår.',
   'about.features.noStorage.title': '🌐 Ingen passordlagring',
-  'about.features.noStorage.description': 'Vi lagrer aldri krypteringspassord på våre servere. De eksisterer kun i nettleserens minne.',
+  'about.features.noStorage.description':
+    'Vi lagrer aldri krypteringspassord på våre servere. De eksisterer kun i nettleserens minne.',
   'about.features.global.title': '⚡ Global ytelse',
-  'about.features.global.description': 'Bygget på Cloudflares globale nettverk for lynrask tilgang fra hvor som helst i verden.',
+  'about.features.global.description':
+    'Bygget på Cloudflares globale nettverk for lynrask tilgang fra hvor som helst i verden.',
   'about.features.privacy.title': '🔒 Personvern først',
-  'about.features.privacy.description': 'Ingen brukerkontoer kreves. Ingen sporing. Ingen analyseverktøy. Ditt personvern er vår prioritet.',
+  'about.features.privacy.description':
+    'Ingen brukerkontoer kreves. Ingen sporing. Ingen analyseverktøy. Ditt personvern er vår prioritet.',
 
   'about.usage.title': 'Slik bruker du tjenesten',
   'about.usage.create.title': '1. Opprett et notat',
-  'about.usage.create.description': 'Gå til "Opprett sikkert notat" og skriv inn notatet ditt. Velg en utløpstid (8t, 1d, 2d, 1 uke eller maks 30 dager). Notater slettes når de er lest eller utløpt. Systemet genererer et tilfeldig krypteringspassord.',
+  'about.usage.create.description':
+    'Gå til "Opprett sikkert notat" og skriv inn notatet ditt. Velg en utløpstid (8t, 1d, 2d, 1 uke eller maks 30 dager). Notater slettes når de er lest eller utløpt. Systemet genererer et tilfeldig krypteringspassord.',
   'about.usage.share.title': '2. Del lenken og passordet',
-  'about.usage.share.description': 'Kopier den genererte URL-en og passordet, og del dem med mottakeren via separate kanaler for økt sikkerhet.',
+  'about.usage.share.description':
+    'Kopier den genererte URL-en og passordet, og del dem med mottakeren via separate kanaler for økt sikkerhet.',
   'about.usage.destruct.title': '3. Selvdestruksjon',
-  'about.usage.destruct.description': 'Når mottakeren åpner lenken og skriver inn passordet separat, vil notatet bli dekryptert og deretter permanent slettet hvis det er lest, eller slettet automatisk hvis det er utløpt. Utløpte notater ryddes automatisk hver time.',
+  'about.usage.destruct.description':
+    'Når mottakeren åpner lenken og skriver inn passordet separat, vil notatet bli dekryptert og deretter permanent slettet hvis det er lest, eller slettet automatisk hvis det er utløpt. Utløpte notater ryddes automatisk hver time.',
 
   'about.cta.title': 'Klar til å komme i gang?',
   'about.cta.subtitle': 'Opprett ditt første sikre notat nå og opplev ekte ende-til-ende-kryptering.',
@@ -159,11 +189,14 @@ export const no = {
   'tos.tableOfContents.languageDisclaimer': 'Språk og oversettelse',
 
   'tos.serviceDescription.title': '1. Tjenestebeskrivelse',
-  'tos.serviceDescription.content': 'securememo.app er en sikker tjeneste for deling av notater som lar brukere opprette krypterte notater som selvdestruerer etter at de er lest eller utløpt. Tjenesten bruker klientbasert kryptering for å sikre at innholdet aldri er tilgjengelig for våre servere.',
+  'tos.serviceDescription.content':
+    'securememo.app er en sikker tjeneste for deling av notater som lar brukere opprette krypterte notater som selvdestruerer etter at de er lest eller utløpt. Tjenesten bruker klientbasert kryptering for å sikre at innholdet aldri er tilgjengelig for våre servere.',
 
   'tos.acceptableUse.title': '2. Akseptabel bruk',
-  'tos.acceptableUse.intro': 'Du samtykker i å bruke denne tjenesten kun til lovlige formål og i samsvar med disse vilkårene. Du samtykker i å ikke:',
-  'tos.acceptableUse.illegal': 'Bruke tjenesten til å sende ulovlig, skadelig, truende, støtende eller ærekrenkende innhold',
+  'tos.acceptableUse.intro':
+    'Du samtykker i å bruke denne tjenesten kun til lovlige formål og i samsvar med disse vilkårene. Du samtykker i å ikke:',
+  'tos.acceptableUse.illegal':
+    'Bruke tjenesten til å sende ulovlig, skadelig, truende, støtende eller ærekrenkende innhold',
   'tos.acceptableUse.bypass': 'Forsøke å omgå sikkerhetstiltak eller CAPTCHA-beskyttelse',
   'tos.acceptableUse.automated': 'Bruke automatiserte verktøy eller skript for å opprette notater',
   'tos.acceptableUse.malware': 'Dele notater som inneholder skadevare, phishing-lenker eller annet skadelig innhold',
@@ -171,49 +204,72 @@ export const no = {
   'tos.acceptableUse.reverse': 'Forsøke å reversere, analysere eller kompromittere tjenesten',
 
   'tos.privacyData.title': '3. Personvern og databehandling',
-  'tos.privacyData.noAccess': 'Ingen tilgang til innhold: Vi kan ikke få tilgang til, lese eller gjenopprette innholdet i notatene dine. All kryptering skjer i nettleseren din.',
-  'tos.privacyData.noPersonal': 'Minimal datainnsamling: Vi krever ikke brukerkontoer og samler ikke inn personopplysninger for at du skal bruke tjenesten. De eneste personopplysningene vi kan samle inn er dersom du frivillig kontakter oss for support. Hvis du kontakter oss via e-post, samler vi inn e-postadressen din og innholdet i meldingen for å svare på henvendelsen. Vi bruker ikke denne informasjonen til andre formål og deler den ikke med tredjeparter uten ditt samtykke.',
-  'tos.privacyData.securityLogging': 'Sikkerhetslogging: Vi logger midlertidig IP-adresser og sikkerhetsrelatert metadata kun for å forhindre misbruk og beskytte tjenestens integritet. Disse loggene brukes aldri til sporing eller profilering.',
-  'tos.privacyData.automaticDeletion': 'Automatisk sletting: Notater slettes automatisk etter at de er lest eller utløpt.',
+  'tos.privacyData.noAccess':
+    'Ingen tilgang til innhold: Vi kan ikke få tilgang til, lese eller gjenopprette innholdet i notatene dine. All kryptering skjer i nettleseren din.',
+  'tos.privacyData.noPersonal':
+    'Minimal datainnsamling: Vi krever ikke brukerkontoer og samler ikke inn personopplysninger for at du skal bruke tjenesten. De eneste personopplysningene vi kan samle inn er dersom du frivillig kontakter oss for support. Hvis du kontakter oss via e-post, samler vi inn e-postadressen din og innholdet i meldingen for å svare på henvendelsen. Vi bruker ikke denne informasjonen til andre formål og deler den ikke med tredjeparter uten ditt samtykke.',
+  'tos.privacyData.securityLogging':
+    'Sikkerhetslogging: Vi logger midlertidig IP-adresser og sikkerhetsrelatert metadata kun for å forhindre misbruk og beskytte tjenestens integritet. Disse loggene brukes aldri til sporing eller profilering.',
+  'tos.privacyData.automaticDeletion':
+    'Automatisk sletting: Notater slettes automatisk etter at de er lest eller utløpt.',
   'tos.privacyData.noRecovery': 'Ingen gjenoppretting: Når et notat er slettet, kan det ikke gjenopprettes.',
-  'tos.privacyData.gdpr': 'GDPR-samsvar: Vi forplikter oss til prinsippene i GDPR. Vi minimaliserer datainnsamling og behandler kun nødvendige data, som midlertidige sikkerhetslogger, på grunnlag av berettiget interesse for å beskytte tjenesten.',
+  'tos.privacyData.gdpr':
+    'GDPR-samsvar: Vi forplikter oss til prinsippene i GDPR. Vi minimaliserer datainnsamling og behandler kun nødvendige data, som midlertidige sikkerhetslogger, på grunnlag av berettiget interesse for å beskytte tjenesten.',
   'tos.privacyData.moreDetails': 'For mer informasjon, se vår',
   'tos.privacyData.privacyNotice': 'Personvernerklæring',
 
   'tos.serviceLimitations.title': '4. Tjenestebegrensninger',
   'tos.serviceLimitations.messageSize': 'Meldingsstørrelse: Maksimalt 10 000 tegn per notat',
-  'tos.serviceLimitations.expiryTimes': 'Utløpstider: 8 timer, 24 timer, 48 timer, 1 uke eller slett ved lesing (maks 30 dager)',
-  'tos.serviceLimitations.availability': 'Tilgjengelighet: Tjenesten leveres "som den er" uten garanti for tilgjengelighet',
-  'tos.serviceLimitations.noDelivery': 'Ingen leveringsgaranti: Vi kan ikke garantere at notater blir levert, lest eller slettet i tide.',
+  'tos.serviceLimitations.expiryTimes':
+    'Utløpstider: 8 timer, 24 timer, 48 timer, 1 uke eller slett ved lesing (maks 30 dager)',
+  'tos.serviceLimitations.availability':
+    'Tilgjengelighet: Tjenesten leveres "som den er" uten garanti for tilgjengelighet',
+  'tos.serviceLimitations.noDelivery':
+    'Ingen leveringsgaranti: Vi kan ikke garantere at notater blir levert, lest eller slettet i tide.',
 
   'tos.securityDisclaimers.title': '5. Sikkerhet og ansvarsfraskrivelse',
-  'tos.securityDisclaimers.userResponsibility': 'Brukeransvar: Du er ansvarlig for å dele notat-URL-er sikkert og beskytte passordene. Hvis passord går tapt, kan notater ikke gjenopprettes.',
-  'tos.securityDisclaimers.noWarranty': 'Ingen garanti: Tjenesten leveres uten noen form for garanti. Våre krypteringstjenester leveres "som de er" og "som tilgjengelig". Vi garanterer ikke at krypteringen vil være uavbrutt, feilfri eller sikker mot alle potensielle trusler.',
-  'tos.securityDisclaimers.limitation': 'Ansvarsbegrensning: Vi er ikke ansvarlige for skader som oppstår ved bruk av tjenesten. Du erkjenner at ingen metode for elektronisk overføring eller lagring er 100 % sikker, og vi er ikke ansvarlige for uautorisert tilgang eller avlytting av dine notater. Bruk av våre krypteringstjenester skjer på eget ansvar.',
-  'tos.securityDisclaimers.securityMeasures': 'Sikkerhetstiltak: Selv om vi implementerer sikkerhetstiltak, er inget system 100 % sikkert.',
-  'tos.securityDisclaimers.exportControls': 'Eksportkontroll: Du samtykker i å ikke bruke tjenesten i strid med eksportkontrollovgivning, inkludert restriksjoner for bruk i sanksjonerte land.',
+  'tos.securityDisclaimers.userResponsibility':
+    'Brukeransvar: Du er ansvarlig for å dele notat-URL-er sikkert og beskytte passordene. Hvis passord går tapt, kan notater ikke gjenopprettes.',
+  'tos.securityDisclaimers.noWarranty':
+    'Ingen garanti: Tjenesten leveres uten noen form for garanti. Våre krypteringstjenester leveres "som de er" og "som tilgjengelig". Vi garanterer ikke at krypteringen vil være uavbrutt, feilfri eller sikker mot alle potensielle trusler.',
+  'tos.securityDisclaimers.limitation':
+    'Ansvarsbegrensning: Vi er ikke ansvarlige for skader som oppstår ved bruk av tjenesten. Du erkjenner at ingen metode for elektronisk overføring eller lagring er 100 % sikker, og vi er ikke ansvarlige for uautorisert tilgang eller avlytting av dine notater. Bruk av våre krypteringstjenester skjer på eget ansvar.',
+  'tos.securityDisclaimers.securityMeasures':
+    'Sikkerhetstiltak: Selv om vi implementerer sikkerhetstiltak, er inget system 100 % sikkert.',
+  'tos.securityDisclaimers.exportControls':
+    'Eksportkontroll: Du samtykker i å ikke bruke tjenesten i strid med eksportkontrollovgivning, inkludert restriksjoner for bruk i sanksjonerte land.',
 
   'tos.intellectualProperty.title': '6. Immaterielle rettigheter',
-  'tos.intellectualProperty.content': 'Tjenesten og alt materiale som leveres gjennom den, inkludert men ikke begrenset til tekst, grafikk, logoer og programvare, tilhører securememo.app eller dets lisensgivere og er beskyttet av opphavsrett, varemerke og andre immaterielle rettigheter. Du samtykker i å ikke endre, reprodusere, distribuere eller lage avledede verk basert på vårt innhold uten eksplisitt tillatelse, bortsett fra personlig, ikke-kommersiell bruk innenfor tjenesten.',
-  'tos.intellectualProperty.copyright': 'Opphavsrett og DMCA-policy: Hvis du mener at din opphavsrett er krenket, vennligst kontakt oss på contact@securememo.app med nødvendig informasjon i henhold til DMCA (f.eks. identifikasjon av verket, dine kontaktopplysninger og en erklæring om god tro).',
+  'tos.intellectualProperty.content':
+    'Tjenesten og alt materiale som leveres gjennom den, inkludert men ikke begrenset til tekst, grafikk, logoer og programvare, tilhører securememo.app eller dets lisensgivere og er beskyttet av opphavsrett, varemerke og andre immaterielle rettigheter. Du samtykker i å ikke endre, reprodusere, distribuere eller lage avledede verk basert på vårt innhold uten eksplisitt tillatelse, bortsett fra personlig, ikke-kommersiell bruk innenfor tjenesten.',
+  'tos.intellectualProperty.copyright':
+    'Opphavsrett og DMCA-policy: Hvis du mener at din opphavsrett er krenket, vennligst kontakt oss på contact@securememo.app med nødvendig informasjon i henhold til DMCA (f.eks. identifikasjon av verket, dine kontaktopplysninger og en erklæring om god tro).',
 
   'tos.indemnification.title': '7. Skadesløsholdelse',
-  'tos.indemnification.content': 'Du samtykker i å forsvare, holde skadesløs og fri for ansvar securememo.app og dets tilknyttede selskaper, ledere, styremedlemmer, ansatte og agenter fra og mot alle krav, ansvar, skader, tap og utgifter, inkludert rimelige advokathonorarer, som oppstår fra eller på noen måte er knyttet til din tilgang til eller bruk av våre tjenester, inkludert ethvert brudd på disse vilkårene fra din side.',
+  'tos.indemnification.content':
+    'Du samtykker i å forsvare, holde skadesløs og fri for ansvar securememo.app og dets tilknyttede selskaper, ledere, styremedlemmer, ansatte og agenter fra og mot alle krav, ansvar, skader, tap og utgifter, inkludert rimelige advokathonorarer, som oppstår fra eller på noen måte er knyttet til din tilgang til eller bruk av våre tjenester, inkludert ethvert brudd på disse vilkårene fra din side.',
 
   'tos.termination.title': '8. Oppsigelse',
-  'tos.termination.content': 'Vi forbeholder oss retten til å avslutte eller suspendere tilgangen til tjenesten ved brudd på disse vilkårene eller av andre grunner etter vårt skjønn.',
+  'tos.termination.content':
+    'Vi forbeholder oss retten til å avslutte eller suspendere tilgangen til tjenesten ved brudd på disse vilkårene eller av andre grunner etter vårt skjønn.',
 
   'tos.changesTerms.title': '9. Endringer i vilkår',
-  'tos.changesTerms.content': 'Vi kan oppdatere disse vilkårene når som helst. Fortsatt bruk av tjenesten innebærer aksept av oppdaterte vilkår.',
+  'tos.changesTerms.content':
+    'Vi kan oppdatere disse vilkårene når som helst. Fortsatt bruk av tjenesten innebærer aksept av oppdaterte vilkår.',
 
   'tos.governingLaw.title': '10. Lovvalg og jurisdiksjon',
-  'tos.governingLaw.content': 'Disse vilkårene for bruk og eventuelle separate avtaler der vi leverer tjenester til deg skal reguleres av og tolkes i samsvar med finsk lov, uten hensyn til prinsipper om lovkonflikt. Eventuelle tvister skal avgjøres i domstolene i Helsinki, Finland.',
+  'tos.governingLaw.content':
+    'Disse vilkårene for bruk og eventuelle separate avtaler der vi leverer tjenester til deg skal reguleres av og tolkes i samsvar med finsk lov, uten hensyn til prinsipper om lovkonflikt. Eventuelle tvister skal avgjøres i domstolene i Helsinki, Finland.',
 
   'tos.miscellaneous.title': '11. Diverse',
-  'tos.miscellaneous.severability': 'Delbarhet: Hvis noen bestemmelse i disse vilkårene anses som ugyldig eller ikke kan håndheves av en kompetent domstol, skal den aktuelle bestemmelsen skilles ut fra vilkårene, og de gjenværende bestemmelsene vil fortsatt være gyldige og i kraft.',
-  'tos.miscellaneous.assignment': 'Overdragelse: Du kan ikke overdra eller overføre disse vilkårene, verken ved lov eller på annen måte, uten vårt skriftlige samtykke. Vi kan overdra disse vilkårene etter eget skjønn uten varsel til deg.',
-  'tos.miscellaneous.waiver': 'Fraskrivelse: Ingen fraskrivelse av noen bestemmelse skal anses som en videre eller kontinuerlig fraskrivelse med mindre det er skriftlig.',
-  'tos.miscellaneous.children': 'Barns personvern: Tjenesten er ikke ment for barn under 13 år (eller 16 år i enkelte jurisdiksjoner). Vi samler ikke bevisst inn data fra barn. Hvis vi blir oppmerksomme på slik data, vil vi slette den umiddelbart.',
+  'tos.miscellaneous.severability':
+    'Delbarhet: Hvis noen bestemmelse i disse vilkårene anses som ugyldig eller ikke kan håndheves av en kompetent domstol, skal den aktuelle bestemmelsen skilles ut fra vilkårene, og de gjenværende bestemmelsene vil fortsatt være gyldige og i kraft.',
+  'tos.miscellaneous.assignment':
+    'Overdragelse: Du kan ikke overdra eller overføre disse vilkårene, verken ved lov eller på annen måte, uten vårt skriftlige samtykke. Vi kan overdra disse vilkårene etter eget skjønn uten varsel til deg.',
+  'tos.miscellaneous.waiver':
+    'Fraskrivelse: Ingen fraskrivelse av noen bestemmelse skal anses som en videre eller kontinuerlig fraskrivelse med mindre det er skriftlig.',
+  'tos.miscellaneous.children':
+    'Barns personvern: Tjenesten er ikke ment for barn under 13 år (eller 16 år i enkelte jurisdiksjoner). Vi samler ikke bevisst inn data fra barn. Hvis vi blir oppmerksomme på slik data, vil vi slette den umiddelbart.',
 
   'tos.contact.title': '12. Kontakt',
   'tos.contact.content': 'For spørsmål om disse vilkårene, vennligst besøk vår',
@@ -221,7 +277,8 @@ export const no = {
   'tos.contact.email': 'eller send e-post til contact@securememo.app.',
 
   'tos.languageDisclaimer.title': '13. Språk og oversettelse',
-  'tos.languageDisclaimer.content': 'Disse vilkårene for bruk kan oversettes til andre språk for din bekvemmelighet. Ved eventuelle avvik eller konflikt mellom den engelske versjonen og en oversatt versjon, skal den engelske versjonen ha forrang.',
+  'tos.languageDisclaimer.content':
+    'Disse vilkårene for bruk kan oversettes til andre språk for din bekvemmelighet. Ved eventuelle avvik eller konflikt mellom den engelske versjonen og en oversatt versjon, skal den engelske versjonen ha forrang.',
 
   // Privacy Notice page content
   'privacy.hero.title': 'Personvernerklæring for securememo.app',
@@ -238,67 +295,98 @@ export const no = {
   'privacy.tableOfContents.changesNotice': 'Endringer i denne personvernerklæringen',
   'privacy.tableOfContents.contact': 'Kontakt oss',
 
-  'privacy.intro.p1': 'securememo.app ("vi," "oss," eller "vår") er forpliktet til å beskytte ditt personvern. Denne personvernerklæringen forklarer hvordan vi håndterer informasjon i forbindelse med vår tjeneste, som lar brukere opprette og dele krypterte notater som selvdestruerer etter at de er lest eller utløpt. Tjenesten er bygget med personvern i fokus: all kryptering skjer i nettleseren din, og vi har ikke tilgang til innholdet i dine notater.',
-  'privacy.intro.p2': 'Ved å bruke securememo.app samtykker du til praksisene beskrevet i denne personvernerklæringen. Hvis du ikke samtykker, vennligst ikke bruk tjenesten.',
+  'privacy.intro.p1':
+    'securememo.app ("vi," "oss," eller "vår") er forpliktet til å beskytte ditt personvern. Denne personvernerklæringen forklarer hvordan vi håndterer informasjon i forbindelse med vår tjeneste, som lar brukere opprette og dele krypterte notater som selvdestruerer etter at de er lest eller utløpt. Tjenesten er bygget med personvern i fokus: all kryptering skjer i nettleseren din, og vi har ikke tilgang til innholdet i dine notater.',
+  'privacy.intro.p2':
+    'Ved å bruke securememo.app samtykker du til praksisene beskrevet i denne personvernerklæringen. Hvis du ikke samtykker, vennligst ikke bruk tjenesten.',
 
   'privacy.informationCollected.title': '1. Informasjon vi samler inn',
-  'privacy.informationCollected.intro': 'Vi samler inn minimal informasjon for å drive tjenesten sikkert og effektivt. Spesielt:',
-  'privacy.informationCollected.memoData': 'Notatdata: Når du oppretter et notat, lagrer vi kun den krypterte versjonen av meldingen på våre servere (ved bruk av Cloudflare Workers og D1 Database). Krypteringsnøkkelen (passordet) genereres og håndteres kun i nettleseren din og sendes aldri til eller lagres av oss. Notater slettes automatisk etter at de er lest eller utløpt (alternativer: 8 timer, 1 dag, 2 dager, 1 uke eller 30 dager).',
-  'privacy.informationCollected.noPersonal': 'Minimal datainnsamling: Vi krever ikke brukerkontoer og samler ikke inn personopplysninger for at du skal bruke tjenesten. De eneste personopplysningene vi kan samle inn er dersom du frivillig kontakter oss for support. Kontakter du oss via e-post, samler vi e-postadressen din og meldingens innhold for å kunne svare. Vi bruker ikke denne informasjonen til andre formål og deler den ikke med tredjeparter uten ditt samtykke.',
-  'privacy.informationCollected.securityData': 'Sikkerhetsrelaterte data: For å forhindre misbruk og beskytte tjenestens integritet:',
-  'privacy.informationCollected.ipLogs': 'Vi logger midlertidig IP-adresser og forespørselsmetadata (f.eks. tidsstempler) for å oppdage og motvirke spam, roboter eller ondsinnet aktivitet.',
-  'privacy.informationCollected.turnstile': 'Vi bruker Cloudflare Turnstile CAPTCHA for å forhindre automatisert misbruk. Turnstile er designet for å beskytte personvernet og sporer ikke brukere på tvers av nettsteder.',
-  'privacy.informationCollected.noAnalytics': 'Ingen analyse eller sporing: Vi bruker ikke informasjonskapsler, sporingspiksler, tredjepartsanalyse eller annonseringsverktøy. Ingen brukerprofilering, atferdssporing eller datainnsamling for markedsføringsformål.',
-  'privacy.informationCollected.noSensitive': 'Vi samler ikke inn sensitiv persondata, stedsinformasjon eller enhetsidentifikatorer utover det som er nødvendig for grunnleggende drift av tjenesten.',
+  'privacy.informationCollected.intro':
+    'Vi samler inn minimal informasjon for å drive tjenesten sikkert og effektivt. Spesielt:',
+  'privacy.informationCollected.memoData':
+    'Notatdata: Når du oppretter et notat, lagrer vi kun den krypterte versjonen av meldingen på våre servere (ved bruk av Cloudflare Workers og D1 Database). Krypteringsnøkkelen (passordet) genereres og håndteres kun i nettleseren din og sendes aldri til eller lagres av oss. Notater slettes automatisk etter at de er lest eller utløpt (alternativer: 8 timer, 1 dag, 2 dager, 1 uke eller 30 dager).',
+  'privacy.informationCollected.noPersonal':
+    'Minimal datainnsamling: Vi krever ikke brukerkontoer og samler ikke inn personopplysninger for at du skal bruke tjenesten. De eneste personopplysningene vi kan samle inn er dersom du frivillig kontakter oss for support. Kontakter du oss via e-post, samler vi e-postadressen din og meldingens innhold for å kunne svare. Vi bruker ikke denne informasjonen til andre formål og deler den ikke med tredjeparter uten ditt samtykke.',
+  'privacy.informationCollected.securityData':
+    'Sikkerhetsrelaterte data: For å forhindre misbruk og beskytte tjenestens integritet:',
+  'privacy.informationCollected.ipLogs':
+    'Vi logger midlertidig IP-adresser og forespørselsmetadata (f.eks. tidsstempler) for å oppdage og motvirke spam, roboter eller ondsinnet aktivitet.',
+  'privacy.informationCollected.turnstile':
+    'Vi bruker Cloudflare Turnstile CAPTCHA for å forhindre automatisert misbruk. Turnstile er designet for å beskytte personvernet og sporer ikke brukere på tvers av nettsteder.',
+  'privacy.informationCollected.noAnalytics':
+    'Ingen analyse eller sporing: Vi bruker ikke informasjonskapsler, sporingspiksler, tredjepartsanalyse eller annonseringsverktøy. Ingen brukerprofilering, atferdssporing eller datainnsamling for markedsføringsformål.',
+  'privacy.informationCollected.noSensitive':
+    'Vi samler ikke inn sensitiv persondata, stedsinformasjon eller enhetsidentifikatorer utover det som er nødvendig for grunnleggende drift av tjenesten.',
 
   'privacy.howWeUse.title': '2. Hvordan vi bruker informasjonen',
   'privacy.howWeUse.intro': 'Den begrensede informasjonen vi samler inn brukes kun til:',
-  'privacy.howWeUse.coreService': 'Levere kjernefunksjonen: Midlertidig lagre krypterte notater og legge til rette for sikker henting og sletting.',
-  'privacy.howWeUse.security': 'Opprettholde sikkerhet: Oppdage og forhindre misbruk, som spam eller tjenestenektangrep, ved bruk av IP-logger og CAPTCHA.',
-  'privacy.howWeUse.legal': 'Overholde juridiske forpliktelser: I sjeldne tilfeller kan vi bruke logger for å svare på gyldige juridiske forespørsler (f.eks. stevninger).',
-  'privacy.howWeUse.noOther': 'Vi bruker ikke data til annonsering, salg til tredjeparter eller til noe formål som ikke er relatert til drift av securememo.app.',
+  'privacy.howWeUse.coreService':
+    'Levere kjernefunksjonen: Midlertidig lagre krypterte notater og legge til rette for sikker henting og sletting.',
+  'privacy.howWeUse.security':
+    'Opprettholde sikkerhet: Oppdage og forhindre misbruk, som spam eller tjenestenektangrep, ved bruk av IP-logger og CAPTCHA.',
+  'privacy.howWeUse.legal':
+    'Overholde juridiske forpliktelser: I sjeldne tilfeller kan vi bruke logger for å svare på gyldige juridiske forespørsler (f.eks. stevninger).',
+  'privacy.howWeUse.noOther':
+    'Vi bruker ikke data til annonsering, salg til tredjeparter eller til noe formål som ikke er relatert til drift av securememo.app.',
 
   'privacy.dataSharing.title': '3. Datadeling og utlevering',
-  'privacy.dataSharing.intro': 'Vi selger, leier ut eller deler ikke dine data med tredjeparter, bortsett fra i følgende begrensede tilfeller:',
-  'privacy.dataSharing.serviceProviders': 'Tjenesteleverandører: Vi bruker Cloudflare for hosting, databaselagring (D1) og CAPTCHA (Turnstile). Disse leverandørene behandler data på våre vegne under streng konfidensialitet og har ikke tilgang til notatinnhold.',
-  'privacy.dataSharing.legal': 'Juridiske krav: Vi kan utlevere informasjon hvis det kreves ved lov, for eksempel som svar på en rettskjennelse eller myndighetsforespørsel.',
-  'privacy.dataSharing.business': 'Virksomhetsoverdragelser: Hvis securememo.app blir kjøpt opp eller fusjonert, kan data overføres som en del av transaksjonen, men vil fortsatt være underlagt denne personvernerklæringen.',
+  'privacy.dataSharing.intro':
+    'Vi selger, leier ut eller deler ikke dine data med tredjeparter, bortsett fra i følgende begrensede tilfeller:',
+  'privacy.dataSharing.serviceProviders':
+    'Tjenesteleverandører: Vi bruker Cloudflare for hosting, databaselagring (D1) og CAPTCHA (Turnstile). Disse leverandørene behandler data på våre vegne under streng konfidensialitet og har ikke tilgang til notatinnhold.',
+  'privacy.dataSharing.legal':
+    'Juridiske krav: Vi kan utlevere informasjon hvis det kreves ved lov, for eksempel som svar på en rettskjennelse eller myndighetsforespørsel.',
+  'privacy.dataSharing.business':
+    'Virksomhetsoverdragelser: Hvis securememo.app blir kjøpt opp eller fusjonert, kan data overføres som en del av transaksjonen, men vil fortsatt være underlagt denne personvernerklæringen.',
 
   'privacy.dataSecurity.title': '4. Datasikkerhet',
-  'privacy.dataSecurity.encryption': 'Kryptering: Alle notater krypteres i nettleseren med AES-256 og PBKDF2 nøkkelavledning. Vi lagrer kun kryptert data og kan ikke dekryptere den.',
-  'privacy.dataSecurity.deletion': 'Sletting: Notater slettes permanent etter lesing eller utløp via automatiserte cron-jobber.',
-  'privacy.dataSecurity.securityMeasures': 'Sikkerhetstiltak: Vi implementerer sterke sikkerhetsoverskrifter (f.eks. CSP, HSTS), inndatavalidering, beskyttelse mot timing-angrep og CAPTCHA for å forhindre misbruk.',
-  'privacy.dataSecurity.noRecovery': 'Ingen gjenoppretting: Når notater er slettet, kan de ikke gjenopprettes – heller ikke av oss.',
-  'privacy.dataSecurity.disclaimer': 'Selv om vi tar rimelige grep for å sikre våre systemer, er ingen tjeneste helt risikofri. Du er ansvarlig for å dele URL-er og passord på en sikker måte.',
+  'privacy.dataSecurity.encryption':
+    'Kryptering: Alle notater krypteres i nettleseren med AES-256 og PBKDF2 nøkkelavledning. Vi lagrer kun kryptert data og kan ikke dekryptere den.',
+  'privacy.dataSecurity.deletion':
+    'Sletting: Notater slettes permanent etter lesing eller utløp via automatiserte cron-jobber.',
+  'privacy.dataSecurity.securityMeasures':
+    'Sikkerhetstiltak: Vi implementerer sterke sikkerhetsoverskrifter (f.eks. CSP, HSTS), inndatavalidering, beskyttelse mot timing-angrep og CAPTCHA for å forhindre misbruk.',
+  'privacy.dataSecurity.noRecovery':
+    'Ingen gjenoppretting: Når notater er slettet, kan de ikke gjenopprettes – heller ikke av oss.',
+  'privacy.dataSecurity.disclaimer':
+    'Selv om vi tar rimelige grep for å sikre våre systemer, er ingen tjeneste helt risikofri. Du er ansvarlig for å dele URL-er og passord på en sikker måte.',
 
   'privacy.dataRetention.title': '5. Databevaring',
   'privacy.dataRetention.memos': 'Krypterte notater beholdes kun til de er lest eller utløpt (maksimalt 30 dager).',
-  'privacy.dataRetention.logs': 'Sikkerhetslogger (f.eks. IP-adresser) lagres midlertidig for å forhindre misbruk og slettes automatisk etter kort tid (vanligvis innen få dager).',
+  'privacy.dataRetention.logs':
+    'Sikkerhetslogger (f.eks. IP-adresser) lagres midlertidig for å forhindre misbruk og slettes automatisk etter kort tid (vanligvis innen få dager).',
   'privacy.dataRetention.minimal': 'Vi lagrer ikke data lenger enn nødvendig for tjenestens drift.',
 
   'privacy.yourRights.title': '6. Dine rettigheter og valg',
   'privacy.yourRights.intro': 'Siden vi ikke samler inn personopplysninger:',
   'privacy.yourRights.noAccounts': 'Det finnes ingen brukerkontoer å administrere.',
-  'privacy.yourRights.noRequests': 'Du kan ikke be om innsyn, retting eller sletting av data utover den automatiske selvdestruksjonen av notater.',
-  'privacy.yourRights.contact': 'Hvis du mener vi har informasjon om deg (f.eks. fra logger), kontakt oss (se nedenfor) for å undersøke dine rettigheter etter gjeldende lovverk som GDPR eller CCPA. Vi følger databeskyttelsesregler og behandler forespørsler der det er mulig.',
+  'privacy.yourRights.noRequests':
+    'Du kan ikke be om innsyn, retting eller sletting av data utover den automatiske selvdestruksjonen av notater.',
+  'privacy.yourRights.contact':
+    'Hvis du mener vi har informasjon om deg (f.eks. fra logger), kontakt oss (se nedenfor) for å undersøke dine rettigheter etter gjeldende lovverk som GDPR eller CCPA. Vi følger databeskyttelsesregler og behandler forespørsler der det er mulig.',
 
   'privacy.childrenPrivacy.title': '7. Barns personvern',
-  'privacy.childrenPrivacy.content': 'Tjenesten er ikke ment for barn under 13 år (eller 16 år i enkelte jurisdiksjoner). Vi samler ikke bevisst inn data fra barn. Hvis vi blir oppmerksomme på slik data, vil vi slette den.',
+  'privacy.childrenPrivacy.content':
+    'Tjenesten er ikke ment for barn under 13 år (eller 16 år i enkelte jurisdiksjoner). Vi samler ikke bevisst inn data fra barn. Hvis vi blir oppmerksomme på slik data, vil vi slette den.',
 
   'privacy.internationalTransfers.title': '8. Internasjonale dataoverføringer',
-  'privacy.internationalTransfers.content': 'securememo.app er hostet på Cloudflares globale nettverk. Data kan behandles i ulike land, men vi sikrer tilsvarende personvern gjennom vår minimale datainnsamling.',
+  'privacy.internationalTransfers.content':
+    'securememo.app er hostet på Cloudflares globale nettverk. Data kan behandles i ulike land, men vi sikrer tilsvarende personvern gjennom vår minimale datainnsamling.',
 
   'privacy.changesNotice.title': '9. Endringer i denne personvernerklæringen',
-  'privacy.changesNotice.content': 'Vi kan oppdatere denne erklæringen med jevne mellomrom. Endringer vil bli publisert her med oppdatert "Sist oppdatert"-dato. Fortsatt bruk av tjenesten etter endringer innebærer aksept.',
+  'privacy.changesNotice.content':
+    'Vi kan oppdatere denne erklæringen med jevne mellomrom. Endringer vil bli publisert her med oppdatert "Sist oppdatert"-dato. Fortsatt bruk av tjenesten etter endringer innebærer aksept.',
 
   'privacy.contact.title': '10. Kontakt oss',
   'privacy.contact.intro': 'For spørsmål om denne personvernerklæringen eller våre rutiner, vennligst besøk vår',
   'privacy.contact.github': 'GitHub-repositorium',
   'privacy.contact.email': 'eller send e-post til contact@securememo.app.',
-  'privacy.contact.disclaimer': 'Denne personvernerklæringen gjelder kun for securememo.app og ikke for tredjepartsnettsteder som er lenket fra vår tjeneste.',
+  'privacy.contact.disclaimer':
+    'Denne personvernerklæringen gjelder kun for securememo.app og ikke for tredjepartsnettsteder som er lenket fra vår tjeneste.',
 
   // Schema.org structured data
-  'schema.app.description': 'Opprett krypterte notater som selvdestruerer etter at de er lest. Ende-til-ende-kryptering, personvernfokusert og sikker deling av notater med AES-256. Ingen sporing, ingen annonser.',
+  'schema.app.description':
+    'Opprett krypterte notater som selvdestruerer etter at de er lest. Ende-til-ende-kryptering, personvernfokusert og sikker deling av notater med AES-256. Ingen sporing, ingen annonser.',
   'schema.app.category': 'Sikkerhetsapplikasjon',
   'schema.app.os': 'Nettleser',
   'schema.app.requirements': 'Krever JavaScript. Krever HTML5.',
@@ -316,17 +404,23 @@ export const no = {
 
   // FAQ structured data
   'faq.privacy.question': 'Hvordan beskytter securememo.app mitt personvern?',
-  'faq.privacy.answer': 'securememo.app bruker klientbasert AES-256-kryptering, noe som betyr at notatet ditt krypteres i nettleseren før det sendes til våre servere. Vi ser aldri klartekstinnholdet. Notater selvdestruerer etter at de er lest eller utløpt, og vi krever ikke brukerkonto eller samler inn personopplysninger.',
+  'faq.privacy.answer':
+    'securememo.app bruker klientbasert AES-256-kryptering, noe som betyr at notatet ditt krypteres i nettleseren før det sendes til våre servere. Vi ser aldri klartekstinnholdet. Notater selvdestruerer etter at de er lest eller utløpt, og vi krever ikke brukerkonto eller samler inn personopplysninger.',
   'faq.encryption.question': 'Hvilken kryptering bruker securememo.app?',
-  'faq.encryption.answer': 'Vi bruker AES-256-GCM-kryptering med PBKDF2 nøkkelavledning. All kryptering skjer klientbasert i nettleseren din med Web Crypto API. Krypteringspassordet genereres separat og lagres aldri på våre servere.',
+  'faq.encryption.answer':
+    'Vi bruker AES-256-GCM-kryptering med PBKDF2 nøkkelavledning. All kryptering skjer klientbasert i nettleseren din med Web Crypto API. Krypteringspassordet genereres separat og lagres aldri på våre servere.',
   'faq.duration.question': 'Hvor lenge varer notater?',
-  'faq.duration.answer': 'Notater kan settes til å utløpe etter 8 timer, 1 dag, 2 dager, 1 uke eller maks 30 dager. De slettes også umiddelbart etter at de er lest. Utløpte notater ryddes automatisk hver time.',
+  'faq.duration.answer':
+    'Notater kan settes til å utløpe etter 8 timer, 1 dag, 2 dager, 1 uke eller maks 30 dager. De slettes også umiddelbart etter at de er lest. Utløpte notater ryddes automatisk hver time.',
   'faq.recovery.question': 'Kan jeg gjenopprette et slettet notat?',
-  'faq.recovery.answer': 'Nei, når et notat er slettet (enten etter at det er lest eller utløpt), kan det ikke gjenopprettes. Dette er designet for maksimalt personvern og sikkerhet.',
+  'faq.recovery.answer':
+    'Nei, når et notat er slettet (enten etter at det er lest eller utløpt), kan det ikke gjenopprettes. Dette er designet for maksimalt personvern og sikkerhet.',
   'faq.cost.question': 'Er securememo.app gratis å bruke?',
-  'faq.cost.answer': 'Ja, securememo.app er helt gratis å bruke. Det er ingen skjulte avgifter, ingen premium-funksjoner og ingen sporing eller annonser.',
+  'faq.cost.answer':
+    'Ja, securememo.app er helt gratis å bruke. Det er ingen skjulte avgifter, ingen premium-funksjoner og ingen sporing eller annonser.',
   'faq.technology.question': 'Hvilken teknologi bruker securememo.app?',
-  'faq.technology.answer': 'securememo.app er bygget på Cloudflare Workers for serverløs databehandling, D1 Database for lagring, Web Crypto API for klientbasert kryptering og moderne HTML/CSS/JavaScript. Kildekoden er åpen og tilgjengelig på GitHub.',
+  'faq.technology.answer':
+    'securememo.app er bygget på Cloudflare Workers for serverløs databehandling, D1 Database for lagring, Web Crypto API for klientbasert kryptering og moderne HTML/CSS/JavaScript. Kildekoden er åpen og tilgjengelig på GitHub.',
 
   // Accessibility and UI
 
@@ -336,18 +430,25 @@ export const no = {
 
   // Create memo page content
   'create.hero.title': 'Opprett sikkert notat',
-  'create.hero.description': 'Notatet ditt vil bli kryptert i nettleseren og selvdestrueres etter at det er lest eller utløpt.',
-  'create.hero.ogDescription': 'Opprett krypterte notater med klientbasert AES-256-kryptering. Notater selvdestruerer etter lesing for maksimalt personvern.',
+  'create.hero.description':
+    'Notatet ditt vil bli kryptert i nettleseren og selvdestrueres etter at det er lest eller utløpt.',
+  'create.hero.ogDescription':
+    'Opprett krypterte notater med klientbasert AES-256-kryptering. Notater selvdestruerer etter lesing for maksimalt personvern.',
   'create.hero.twitterDescription': 'Opprett krypterte notater med klientbasert kryptering.',
-  'create.schema.description': 'Opprett krypterte notater som selvdestruerer etter lesing. Klientbasert AES-256-kryptering sikrer at hemmelighetene dine forblir private.',
-  'create.schema.actionDescription': 'Opprett krypterte notater med klientbasert AES-256-kryptering og automatisk selvdestruksjon',
+  'create.schema.description':
+    'Opprett krypterte notater som selvdestruerer etter lesing. Klientbasert AES-256-kryptering sikrer at hemmelighetene dine forblir private.',
+  'create.schema.actionDescription':
+    'Opprett krypterte notater med klientbasert AES-256-kryptering og automatisk selvdestruksjon',
 
-  // Read memo page content  
+  // Read memo page content
   'read.hero.title': 'Les sikkert notat',
-  'read.hero.description': 'Skriv inn passordet for å dekryptere og lese notatet. Passordet skal ha blitt delt med deg separat fra URL-en. Notatet vil bli slettet etter at det er lest eller utløpt.',
-  'read.hero.ogDescription': 'Dekrypter og les ditt sikre notat. Notater selvdestruerer etter lesing for maksimalt personvern.',
+  'read.hero.description':
+    'Skriv inn passordet for å dekryptere og lese notatet. Passordet skal ha blitt delt med deg separat fra URL-en. Notatet vil bli slettet etter at det er lest eller utløpt.',
+  'read.hero.ogDescription':
+    'Dekrypter og les ditt sikre notat. Notater selvdestruerer etter lesing for maksimalt personvern.',
   'read.hero.twitterDescription': 'Dekrypter og les ditt sikre notat med klientbasert dekryptering.',
-  'read.schema.description': 'Dekrypter og les ditt sikre notat med passordet. Notater selvdestruerer etter lesing for maksimalt personvern. Klientbasert AES-256-dekryptering.',
+  'read.schema.description':
+    'Dekrypter og les ditt sikre notat med passordet. Notater selvdestruerer etter lesing for maksimalt personvern. Klientbasert AES-256-dekryptering.',
 
   // Form options
   'form.expiry.option.8h': 'Slett ved lesing eller etter 8 timer',
@@ -367,7 +468,8 @@ export const no = {
   'form.memoUrl.label': 'Notat-URL (del denne med mottakeren):',
   'form.memoUrl.help': 'Dette er den sikre lenken til notatet ditt. Del denne URL-en med mottakeren.',
   'form.memoPassword.label': 'Krypteringspassord (del dette separat):',
-  'form.memoPassword.help': 'Dette er krypteringspassordet. Del dette separat fra URL-en for økt sikkerhet. Dette lagres ikke på våre servere, og gjenoppretting er ikke mulig etter at du har forlatt denne siden.',
+  'form.memoPassword.help':
+    'Dette er krypteringspassordet. Del dette separat fra URL-en for økt sikkerhet. Dette lagres ikke på våre servere, og gjenoppretting er ikke mulig etter at du har forlatt denne siden.',
 
   // Warning messages
   'warning.important': 'Viktig:',
@@ -378,18 +480,21 @@ export const no = {
 
   // Structured data texts
   'schema.tos.name': 'Vilkår for bruk',
-  'schema.tos.description': 'Vilkår for bruk for securememo.app – kryptert deling av notater. Lær om akseptabel bruk, personvern, sikkerhet og juridiske vilkår.',
+  'schema.tos.description':
+    'Vilkår for bruk for securememo.app – kryptert deling av notater. Lær om akseptabel bruk, personvern, sikkerhet og juridiske vilkår.',
   'schema.tos.breadcrumb.home': 'Hjem',
   'schema.tos.breadcrumb.tos': 'Vilkår for bruk',
   'schema.tos.mainEntity.name': 'Vilkår for bruk',
   'schema.tos.mainEntity.description': 'Juridiske vilkår og betingelser for securememo.app kryptert deling av notater',
 
   'schema.privacy.name': 'Personvernerklæring',
-  'schema.privacy.description': 'Personvernerklæring for securememo.app – lær hvordan vi beskytter dine data med klientbasert kryptering, nullkunnskapsarkitektur og minimal datainnsamling.',
+  'schema.privacy.description':
+    'Personvernerklæring for securememo.app – lær hvordan vi beskytter dine data med klientbasert kryptering, nullkunnskapsarkitektur og minimal datainnsamling.',
   'schema.privacy.breadcrumb.home': 'Hjem',
   'schema.privacy.breadcrumb.privacy': 'Personvernerklæring',
   'schema.privacy.mainEntity.name': 'Personvernerklæring',
-  'schema.privacy.mainEntity.description': 'Hvordan securememo.app beskytter ditt personvern med klientbasert kryptering og minimal datainnsamling',
+  'schema.privacy.mainEntity.description':
+    'Hvordan securememo.app beskytter ditt personvern med klientbasert kryptering og minimal datainnsamling',
 
   // Create memo featureList in structured data
   'schema.create.featureList.clientSide': 'Klientbasert kryptering',
@@ -497,5 +602,5 @@ export const no = {
   'error.security.MEMO_READ_ERROR': 'Kan ikke behandle forespørselen din.',
   'error.security.METHOD_NOT_ALLOWED': 'Ugyldig forespørselsmetode.',
   'error.security.FORBIDDEN': 'Ingen tilgang.',
-  'error.security.DEFAULT_FALLBACK': 'En feil oppstod. Vennligst prøv igjen.'
-}
+  'error.security.DEFAULT_FALLBACK': 'En feil oppstod. Vennligst prøv igjen.',
+};

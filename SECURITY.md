@@ -36,4 +36,4 @@ Currently, I do not offer a formal bug bounty program.
 
 This policy may be updated periodically. Check back for changes.
 
-**Last updated**: August 6, 2025 
+**Last updated**: August 6, 2025

@@ -3,88 +3,88 @@ import { sanitizeLocale } from '../utils/validation.js';
 
 // Helper function to get native language name
 function getLanguageDisplayName(locale) {
-    const sanitizedLocale = sanitizeLocale(locale);
+  const sanitizedLocale = sanitizeLocale(locale);
 
-    const languageNames = new Map([
-        ['ar', 'العربية'],
-        ['bn', 'বাংলা'],
-        ['cs', 'Čeština'],
-        ['da', 'Dansk'],
-        ['de', 'Deutsch'],
-        ['el', 'Ελληνικά'],
-        ['en', 'English'],
-        ['es', 'Español'],
-        ['fi', 'Suomi'],
-        ['fr', 'Français'],
-        ['hi', 'हिन्दी'],
-        ['hu', 'Magyar'],
-        ['id', 'Bahasa Indonesia'],
-        ['it', 'Italiano'],
-        ['ja', '日本語'],
-        ['ko', '한국어'],
-        ['nl', 'Nederlands'],
-        ['no', 'Norsk'],
-        ['pl', 'Polski'],
-        ['ptBR', 'Português (BR)'],
-        ['ptPT', 'Português'],
-        ['ru', 'Русский'],
-        ['ro', 'Română'],
-        ['sv', 'Svenska'],
-        ['tl', 'Tagalog'],
-        ['th', 'ไทย'],
-        ['tr', 'Türkçe'],
-        ['uk', 'Українська'],
-        ['vi', 'Tiếng Việt'],
-        ['zh', '中文'],
-    ]);
+  const languageNames = new Map([
+    ['ar', 'العربية'],
+    ['bn', 'বাংলা'],
+    ['cs', 'Čeština'],
+    ['da', 'Dansk'],
+    ['de', 'Deutsch'],
+    ['el', 'Ελληνικά'],
+    ['en', 'English'],
+    ['es', 'Español'],
+    ['fi', 'Suomi'],
+    ['fr', 'Français'],
+    ['hi', 'हिन्दी'],
+    ['hu', 'Magyar'],
+    ['id', 'Bahasa Indonesia'],
+    ['it', 'Italiano'],
+    ['ja', '日本語'],
+    ['ko', '한국어'],
+    ['nl', 'Nederlands'],
+    ['no', 'Norsk'],
+    ['pl', 'Polski'],
+    ['ptBR', 'Português (BR)'],
+    ['ptPT', 'Português'],
+    ['ru', 'Русский'],
+    ['ro', 'Română'],
+    ['sv', 'Svenska'],
+    ['tl', 'Tagalog'],
+    ['th', 'ไทย'],
+    ['tr', 'Türkçe'],
+    ['uk', 'Українська'],
+    ['vi', 'Tiếng Việt'],
+    ['zh', '中文'],
+  ]);
 
-    return languageNames.get(sanitizedLocale) || sanitizedLocale.toUpperCase();
+  return languageNames.get(sanitizedLocale) || sanitizedLocale.toUpperCase();
 }
 
 // function to get a flag emoji for the selected locale
 function getFlagEmoji(locale) {
-    const sanitizedLocale = sanitizeLocale(locale);
+  const sanitizedLocale = sanitizeLocale(locale);
 
-    const flags = new Map([
-        ['ar', '🌐'],
-        ['bn', '🇧🇩'],
-        ['cs', '🇨🇿'],
-        ['da', '🇩🇰'],
-        ['de', '🇩🇪'],
-        ['el', '🇬🇷'],
-        ['en', '🇬🇧'],
-        ['es', '🇪🇸'],
-        ['fi', '🇫🇮'],
-        ['fr', '🇫🇷'],
-        ['hi', '🇮🇳'],
-        ['hu', '🇭🇺'],
-        ['id', '🇮🇩'],
-        ['it', '🇮🇹'],
-        ['ja', '🇯🇵'],
-        ['ko', '🇰🇷'],
-        ['nl', '🇳🇱'],
-        ['no', '🇳🇴'],
-        ['pl', '🇵🇱'],
-        ['ptBR', '🇧🇷'],
-        ['ptPT', '🇵🇹'],
-        ['ro', '🇷🇴'],
-        ['ru', '🇷🇺'],
-        ['sv', '🇸🇪'],
-        ['tl', '🇵🇭'],
-        ['th', '🇹🇭'],
-        ['tr', '🇹🇷'],
-        ['uk', '🇺🇦'],
-        ['vi', '🇻🇳'],
-        ['zh', '🈶'],
-    ]);
+  const flags = new Map([
+    ['ar', '🌐'],
+    ['bn', '🇧🇩'],
+    ['cs', '🇨🇿'],
+    ['da', '🇩🇰'],
+    ['de', '🇩🇪'],
+    ['el', '🇬🇷'],
+    ['en', '🇬🇧'],
+    ['es', '🇪🇸'],
+    ['fi', '🇫🇮'],
+    ['fr', '🇫🇷'],
+    ['hi', '🇮🇳'],
+    ['hu', '🇭🇺'],
+    ['id', '🇮🇩'],
+    ['it', '🇮🇹'],
+    ['ja', '🇯🇵'],
+    ['ko', '🇰🇷'],
+    ['nl', '🇳🇱'],
+    ['no', '🇳🇴'],
+    ['pl', '🇵🇱'],
+    ['ptBR', '🇧🇷'],
+    ['ptPT', '🇵🇹'],
+    ['ro', '🇷🇴'],
+    ['ru', '🇷🇺'],
+    ['sv', '🇸🇪'],
+    ['tl', '🇵🇭'],
+    ['th', '🇹🇭'],
+    ['tr', '🇹🇷'],
+    ['uk', '🇺🇦'],
+    ['vi', '🇻🇳'],
+    ['zh', '🈶'],
+  ]);
 
-    return flags.get(sanitizedLocale) || '🌐';
+  return flags.get(sanitizedLocale) || '🌐';
 }
 
 export async function getIndexHTML(locale = 'en', origin = 'https://securememo.app') {
-    const sanitizedLocale = sanitizeLocale(locale);
-    const canonicalUrl = `${origin}/${sanitizedLocale}`;
-    return `<!DOCTYPE html>
+  const sanitizedLocale = sanitizeLocale(locale);
+  const canonicalUrl = `${origin}/${sanitizedLocale}`;
+  return `<!DOCTYPE html>
 <html lang="${sanitizedLocale}">
 <head>
     <meta charset="UTF-8">
@@ -157,7 +157,10 @@ export async function getIndexHTML(locale = 'en', origin = 'https://securememo.a
             <a href="/${sanitizedLocale}" class="nav-logo">securememo.app</a>
             
             <!-- Hamburger Menu Button -->
-            <button class="hamburger" type="button" aria-label="${t('nav.toggleMenu', sanitizedLocale)}" aria-expanded="false">
+            <button class="hamburger" type="button" aria-label="${t(
+              'nav.toggleMenu',
+              sanitizedLocale
+            )}" aria-expanded="false">
                 <span class="hamburger-line"></span>
                 <span class="hamburger-line"></span>
                 <span class="hamburger-line"></span>
@@ -166,43 +169,139 @@ export async function getIndexHTML(locale = 'en', origin = 'https://securememo.a
             <!-- Navigation Menu -->
             <ul class="nav-menu" id="navMenu">
                 <li><a href="/${sanitizedLocale}" class="nav-link active">${t('nav.home', sanitizedLocale)}</a></li>
-                <li><a href="/${sanitizedLocale}/about.html" class="nav-link">${t('nav.about', sanitizedLocale)}</a></li>
-                <li><a href="/${sanitizedLocale}/create-memo.html" class="nav-link">${t('nav.create', sanitizedLocale)}</a></li>
+                <li><a href="/${sanitizedLocale}/about.html" class="nav-link">${t(
+                  'nav.about',
+                  sanitizedLocale
+                )}</a></li>
+                <li><a href="/${sanitizedLocale}/create-memo.html" class="nav-link">${t(
+                  'nav.create',
+                  sanitizedLocale
+                )}</a></li>
                 <li class="language-dropdown">
                     <button class="language-toggle nav-link" aria-expanded="false" aria-haspopup="true">
                         ${getFlagEmoji(sanitizedLocale)} ${getLanguageDisplayName(sanitizedLocale)}
                     </button>
                     <div class="language-menu">
-                        <a href="/ar" class="language-item ${sanitizedLocale === 'ar' ? 'active' : ''}" title="${t('language.arabic', sanitizedLocale)}">🌐 العربية</a>
-                        <a href="/bn" class="language-item ${sanitizedLocale === 'bn' ? 'active' : ''}" title="${t('language.bengali', sanitizedLocale)}">🇧🇩 বাংলা</a>
-                        <a href="/cs" class="language-item ${sanitizedLocale === 'cs' ? 'active' : ''}" title="${t('language.czech', sanitizedLocale)}">🇨🇿 Čeština</a>
-                        <a href="/da" class="language-item ${sanitizedLocale === 'da' ? 'active' : ''}" title="${t('language.danish', sanitizedLocale)}">🇩🇰 Dansk</a>
-                        <a href="/de" class="language-item ${sanitizedLocale === 'de' ? 'active' : ''}" title="${t('language.german', sanitizedLocale)}">🇩🇪 Deutsch</a>
-                        <a href="/el" class="language-item ${sanitizedLocale === 'el' ? 'active' : ''}" title="${t('language.greek', sanitizedLocale)}">🇬🇷 Ελληνικά</a>
-                        <a href="/en" class="language-item ${sanitizedLocale === 'en' ? 'active' : ''}" title="${t('language.english', sanitizedLocale)}">🇬🇧 English</a>
-                        <a href="/es" class="language-item ${sanitizedLocale === 'es' ? 'active' : ''}" title="${t('language.spanish', sanitizedLocale)}">🇪🇸 Español</a>
-                        <a href="/fi" class="language-item ${sanitizedLocale === 'fi' ? 'active' : ''}" title="${t('language.finnish', sanitizedLocale)}">🇫🇮 Suomi</a>
-                        <a href="/fr" class="language-item ${sanitizedLocale === 'fr' ? 'active' : ''}" title="${t('language.french', sanitizedLocale)}">🇫🇷 Français</a>
-                        <a href="/hi" class="language-item ${sanitizedLocale === 'hi' ? 'active' : ''}" title="${t('language.hindi', sanitizedLocale)}">🇮🇳 हिन्दी</a>
-                        <a href="/hu" class="language-item ${sanitizedLocale === 'hu' ? 'active' : ''}" title="${t('language.hungarian', sanitizedLocale)}">🇭🇺 Magyar</a>
-                        <a href="/id" class="language-item ${sanitizedLocale === 'id' ? 'active' : ''}" title="${t('language.indonesian', sanitizedLocale)}">🇮🇩 Bahasa Indonesia</a>
-                        <a href="/it" class="language-item ${sanitizedLocale === 'it' ? 'active' : ''}" title="${t('language.italian', sanitizedLocale)}">🇮🇹 Italiano</a>
-                        <a href="/ja" class="language-item ${sanitizedLocale === 'ja' ? 'active' : ''}" title="${t('language.japanese', sanitizedLocale)}">🇯🇵 日本語</a>
-                        <a href="/ko" class="language-item ${sanitizedLocale === 'ko' ? 'active' : ''}" title="${t('language.korean', sanitizedLocale)}">🇰🇷 한국어</a>
-                        <a href="/nl" class="language-item ${sanitizedLocale === 'nl' ? 'active' : ''}" title="${t('language.dutch', sanitizedLocale)}">🇳🇱 Nederlands</a>
-                        <a href="/no" class="language-item ${sanitizedLocale === 'no' ? 'active' : ''}" title="${t('language.norwegian', sanitizedLocale)}">🇳🇴 Norsk</a>
-                        <a href="/pl" class="language-item ${sanitizedLocale === 'pl' ? 'active' : ''}" title="${t('language.polish', sanitizedLocale)}">🇵🇱 Polski</a>
-                        <a href="/ptPT" class="language-item ${sanitizedLocale === 'ptPT' ? 'active' : ''}" title="${t('language.portuguesePT', sanitizedLocale)}">🇵🇹 Português</a>
-                        <a href="/ptBR" class="language-item ${sanitizedLocale === 'ptBR' ? 'active' : ''}" title="${t('language.portugueseBR', sanitizedLocale)}">🇧🇷 Português (Brasil)</a>
-                        <a href="/ru" class="language-item ${sanitizedLocale === 'ru' ? 'active' : ''}" title="${t('language.russian', sanitizedLocale)}">🇷🇺 Русский</a>
-                        <a href="/ro" class="language-item ${sanitizedLocale === 'ro' ? 'active' : ''}" title="${t('language.romanian', sanitizedLocale)}">🇷🇴 Română</a>
-                        <a href="/sv" class="language-item ${sanitizedLocale === 'sv' ? 'active' : ''}" title="${t('language.swedish', sanitizedLocale)}">🇸🇪 Svenska</a>
-                        <a href="/tl" class="language-item ${sanitizedLocale === 'tl' ? 'active' : ''}" title="${t('language.tagalog', sanitizedLocale)}">🇵🇭 Tagalog</a>
-                        <a href="/th" class="language-item ${sanitizedLocale === 'th' ? 'active' : ''}" title="${t('language.thai', sanitizedLocale)}">🇹🇭 ไทย</a>
-                        <a href="/tr" class="language-item ${sanitizedLocale === 'tr' ? 'active' : ''}" title="${t('language.turkish', sanitizedLocale)}">🇹🇷 Türkçe</a>
-                        <a href="/uk" class="language-item ${sanitizedLocale === 'uk' ? 'active' : ''}" title="${t('language.ukrainian', sanitizedLocale)}">🇺🇦 Українська</a>
-                        <a href="/vi" class="language-item ${sanitizedLocale === 'vi' ? 'active' : ''}" title="${t('language.vietnamese', sanitizedLocale)}">🇻🇳 Tiếng Việt</a>
-                        <a href="/zh" class="language-item ${sanitizedLocale === 'zh' ? 'active' : ''}" title="${t('language.chinese', sanitizedLocale)}">🈶 中文</a>
+                        <a href="/ar" class="language-item ${sanitizedLocale === 'ar' ? 'active' : ''}" title="${t(
+                          'language.arabic',
+                          sanitizedLocale
+                        )}">🌐 العربية</a>
+                        <a href="/bn" class="language-item ${sanitizedLocale === 'bn' ? 'active' : ''}" title="${t(
+                          'language.bengali',
+                          sanitizedLocale
+                        )}">🇧🇩 বাংলা</a>
+                        <a href="/cs" class="language-item ${sanitizedLocale === 'cs' ? 'active' : ''}" title="${t(
+                          'language.czech',
+                          sanitizedLocale
+                        )}">🇨🇿 Čeština</a>
+                        <a href="/da" class="language-item ${sanitizedLocale === 'da' ? 'active' : ''}" title="${t(
+                          'language.danish',
+                          sanitizedLocale
+                        )}">🇩🇰 Dansk</a>
+                        <a href="/de" class="language-item ${sanitizedLocale === 'de' ? 'active' : ''}" title="${t(
+                          'language.german',
+                          sanitizedLocale
+                        )}">🇩🇪 Deutsch</a>
+                        <a href="/el" class="language-item ${sanitizedLocale === 'el' ? 'active' : ''}" title="${t(
+                          'language.greek',
+                          sanitizedLocale
+                        )}">🇬🇷 Ελληνικά</a>
+                        <a href="/en" class="language-item ${sanitizedLocale === 'en' ? 'active' : ''}" title="${t(
+                          'language.english',
+                          sanitizedLocale
+                        )}">🇬🇧 English</a>
+                        <a href="/es" class="language-item ${sanitizedLocale === 'es' ? 'active' : ''}" title="${t(
+                          'language.spanish',
+                          sanitizedLocale
+                        )}">🇪🇸 Español</a>
+                        <a href="/fi" class="language-item ${sanitizedLocale === 'fi' ? 'active' : ''}" title="${t(
+                          'language.finnish',
+                          sanitizedLocale
+                        )}">🇫🇮 Suomi</a>
+                        <a href="/fr" class="language-item ${sanitizedLocale === 'fr' ? 'active' : ''}" title="${t(
+                          'language.french',
+                          sanitizedLocale
+                        )}">🇫🇷 Français</a>
+                        <a href="/hi" class="language-item ${sanitizedLocale === 'hi' ? 'active' : ''}" title="${t(
+                          'language.hindi',
+                          sanitizedLocale
+                        )}">🇮🇳 हिन्दी</a>
+                        <a href="/hu" class="language-item ${sanitizedLocale === 'hu' ? 'active' : ''}" title="${t(
+                          'language.hungarian',
+                          sanitizedLocale
+                        )}">🇭🇺 Magyar</a>
+                        <a href="/id" class="language-item ${sanitizedLocale === 'id' ? 'active' : ''}" title="${t(
+                          'language.indonesian',
+                          sanitizedLocale
+                        )}">🇮🇩 Bahasa Indonesia</a>
+                        <a href="/it" class="language-item ${sanitizedLocale === 'it' ? 'active' : ''}" title="${t(
+                          'language.italian',
+                          sanitizedLocale
+                        )}">🇮🇹 Italiano</a>
+                        <a href="/ja" class="language-item ${sanitizedLocale === 'ja' ? 'active' : ''}" title="${t(
+                          'language.japanese',
+                          sanitizedLocale
+                        )}">🇯🇵 日本語</a>
+                        <a href="/ko" class="language-item ${sanitizedLocale === 'ko' ? 'active' : ''}" title="${t(
+                          'language.korean',
+                          sanitizedLocale
+                        )}">🇰🇷 한국어</a>
+                        <a href="/nl" class="language-item ${sanitizedLocale === 'nl' ? 'active' : ''}" title="${t(
+                          'language.dutch',
+                          sanitizedLocale
+                        )}">🇳🇱 Nederlands</a>
+                        <a href="/no" class="language-item ${sanitizedLocale === 'no' ? 'active' : ''}" title="${t(
+                          'language.norwegian',
+                          sanitizedLocale
+                        )}">🇳🇴 Norsk</a>
+                        <a href="/pl" class="language-item ${sanitizedLocale === 'pl' ? 'active' : ''}" title="${t(
+                          'language.polish',
+                          sanitizedLocale
+                        )}">🇵🇱 Polski</a>
+                        <a href="/ptPT" class="language-item ${sanitizedLocale === 'ptPT' ? 'active' : ''}" title="${t(
+                          'language.portuguesePT',
+                          sanitizedLocale
+                        )}">🇵🇹 Português</a>
+                        <a href="/ptBR" class="language-item ${sanitizedLocale === 'ptBR' ? 'active' : ''}" title="${t(
+                          'language.portugueseBR',
+                          sanitizedLocale
+                        )}">🇧🇷 Português (Brasil)</a>
+                        <a href="/ru" class="language-item ${sanitizedLocale === 'ru' ? 'active' : ''}" title="${t(
+                          'language.russian',
+                          sanitizedLocale
+                        )}">🇷🇺 Русский</a>
+                        <a href="/ro" class="language-item ${sanitizedLocale === 'ro' ? 'active' : ''}" title="${t(
+                          'language.romanian',
+                          sanitizedLocale
+                        )}">🇷🇴 Română</a>
+                        <a href="/sv" class="language-item ${sanitizedLocale === 'sv' ? 'active' : ''}" title="${t(
+                          'language.swedish',
+                          sanitizedLocale
+                        )}">🇸🇪 Svenska</a>
+                        <a href="/tl" class="language-item ${sanitizedLocale === 'tl' ? 'active' : ''}" title="${t(
+                          'language.tagalog',
+                          sanitizedLocale
+                        )}">🇵🇭 Tagalog</a>
+                        <a href="/th" class="language-item ${sanitizedLocale === 'th' ? 'active' : ''}" title="${t(
+                          'language.thai',
+                          sanitizedLocale
+                        )}">🇹🇭 ไทย</a>
+                        <a href="/tr" class="language-item ${sanitizedLocale === 'tr' ? 'active' : ''}" title="${t(
+                          'language.turkish',
+                          sanitizedLocale
+                        )}">🇹🇷 Türkçe</a>
+                        <a href="/uk" class="language-item ${sanitizedLocale === 'uk' ? 'active' : ''}" title="${t(
+                          'language.ukrainian',
+                          sanitizedLocale
+                        )}">🇺🇦 Українська</a>
+                        <a href="/vi" class="language-item ${sanitizedLocale === 'vi' ? 'active' : ''}" title="${t(
+                          'language.vietnamese',
+                          sanitizedLocale
+                        )}">🇻🇳 Tiếng Việt</a>
+                        <a href="/zh" class="language-item ${sanitizedLocale === 'zh' ? 'active' : ''}" title="${t(
+                          'language.chinese',
+                          sanitizedLocale
+                        )}">🈶 中文</a>
                     </div>
                 </li>
             </ul>
@@ -217,8 +316,14 @@ export async function getIndexHTML(locale = 'en', origin = 'https://securememo.a
             <h1>${t('home.hero.title', sanitizedLocale)}</h1>
             <p>${t('home.hero.subtitle', sanitizedLocale)}</p>
             <div class="cta-buttons">
-                <a href="/${sanitizedLocale}/create-memo.html" class="btn btn-primary">${t('home.hero.btnPrimary', sanitizedLocale)}</a>
-                <a href="/${sanitizedLocale}/about.html" class="btn btn-secondary">${t('home.hero.btnSecondary', sanitizedLocale)}</a>
+                <a href="/${sanitizedLocale}/create-memo.html" class="btn btn-primary">${t(
+                  'home.hero.btnPrimary',
+                  sanitizedLocale
+                )}</a>
+                <a href="/${sanitizedLocale}/about.html" class="btn btn-secondary">${t(
+                  'home.hero.btnSecondary',
+                  sanitizedLocale
+                )}</a>
             </div>
         </div>
 
@@ -260,7 +365,16 @@ export async function getIndexHTML(locale = 'en', origin = 'https://securememo.a
     </main>
 
     <footer class="footer">
-        <p><a href="https://github.com/timoheimonen/securememo.app" target="_blank" rel="noopener noreferrer">${t('footer.sourceCode', sanitizedLocale)}</a> | <a href="/${sanitizedLocale}/tos.html">${t('footer.tos', sanitizedLocale)}</a> | <a href="/${sanitizedLocale}/privacy.html">${t('footer.privacy', sanitizedLocale)}</a> | <a href="mailto:contact@securememo.app">contact@securememo.app</a></p>
+        <p><a href="https://github.com/timoheimonen/securememo.app" target="_blank" rel="noopener noreferrer">${t(
+          'footer.sourceCode',
+          sanitizedLocale
+        )}</a> | <a href="/${sanitizedLocale}/tos.html">${t(
+          'footer.tos',
+          sanitizedLocale
+        )}</a> | <a href="/${sanitizedLocale}/privacy.html">${t(
+          'footer.privacy',
+          sanitizedLocale
+        )}</a> | <a href="mailto:contact@securememo.app">contact@securememo.app</a></p>
         <p style="font-size: 0.8em; margin-top: 0.5em; opacity: 0.8;">${t('footer.tagline', sanitizedLocale)}</p>
     </footer>
 
@@ -270,9 +384,9 @@ export async function getIndexHTML(locale = 'en', origin = 'https://securememo.a
 }
 
 export async function getAboutHTML(locale = 'en', origin = 'https://securememo.app') {
-    const sanitizedLocale = sanitizeLocale(locale);
-    const canonicalUrl = `${origin}/${sanitizedLocale}/about.html`;
-    return `<!DOCTYPE html>
+  const sanitizedLocale = sanitizeLocale(locale);
+  const canonicalUrl = `${origin}/${sanitizedLocale}/about.html`;
+  return `<!DOCTYPE html>
 <html lang="${sanitizedLocale}">
 <head>
     <meta charset="UTF-8">
@@ -360,7 +474,10 @@ export async function getAboutHTML(locale = 'en', origin = 'https://securememo.a
             <a href="/${sanitizedLocale}" class="nav-logo">securememo.app</a>
             
             <!-- Hamburger Menu Button -->
-            <button class="hamburger" type="button" aria-label="${t('nav.toggleMenu', sanitizedLocale)}" aria-expanded="false">
+            <button class="hamburger" type="button" aria-label="${t(
+              'nav.toggleMenu',
+              sanitizedLocale
+            )}" aria-expanded="false">
                 <span class="hamburger-line"></span>
                 <span class="hamburger-line"></span>
                 <span class="hamburger-line"></span>
@@ -369,43 +486,130 @@ export async function getAboutHTML(locale = 'en', origin = 'https://securememo.a
             <!-- Navigation Menu -->
             <ul class="nav-menu" id="navMenu">
                 <li><a href="/${sanitizedLocale}" class="nav-link">${t('nav.home', sanitizedLocale)}</a></li>
-                <li><a href="/${sanitizedLocale}/about.html" class="nav-link active">${t('nav.about', sanitizedLocale)}</a></li>
-                <li><a href="/${sanitizedLocale}/create-memo.html" class="nav-link">${t('nav.create', sanitizedLocale)}</a></li>
+                <li><a href="/${sanitizedLocale}/about.html" class="nav-link active">${t(
+                  'nav.about',
+                  sanitizedLocale
+                )}</a></li>
+                <li><a href="/${sanitizedLocale}/create-memo.html" class="nav-link">${t(
+                  'nav.create',
+                  sanitizedLocale
+                )}</a></li>
                 <li class="language-dropdown">
                     <button class="language-toggle nav-link" aria-expanded="false" aria-haspopup="true">
                         ${getFlagEmoji(sanitizedLocale)} ${getLanguageDisplayName(sanitizedLocale)}
                     </button>
                     <div class="language-menu">
-                        <a href="/ar/about.html" class="language-item ${sanitizedLocale === 'ar' ? 'active' : ''}" title="${t('language.arabic', sanitizedLocale)}">🌐 العربية</a>
-                        <a href="/bn/about.html" class="language-item ${sanitizedLocale === 'bn' ? 'active' : ''}" title="${t('language.bengali', sanitizedLocale)}">🇧🇩 বাংলা</a>
-                        <a href="/cs/about.html" class="language-item ${sanitizedLocale === 'cs' ? 'active' : ''}" title="${t('language.czech', sanitizedLocale)}">🇨🇿 Čeština</a>
-                        <a href="/da/about.html" class="language-item ${sanitizedLocale === 'da' ? 'active' : ''}" title="${t('language.danish', sanitizedLocale)}">🇩🇰 Dansk</a>
-                        <a href="/de/about.html" class="language-item ${sanitizedLocale === 'de' ? 'active' : ''}" title="${t('language.german', sanitizedLocale)}">🇩🇪 Deutsch</a>
-                        <a href="/el/about.html" class="language-item ${sanitizedLocale === 'el' ? 'active' : ''}" title="${t('language.greek', sanitizedLocale)}">🇬🇷 Ελληνικά</a>
-                        <a href="/en/about.html" class="language-item ${sanitizedLocale === 'en' ? 'active' : ''}" title="${t('language.english', sanitizedLocale)}">🇬🇧 English</a>
-                        <a href="/es/about.html" class="language-item ${locale === 'es' ? 'active' : ''}" title="${t('language.spanish', sanitizedLocale)}">🇪🇸 Español</a>
-                        <a href="/fi/about.html" class="language-item ${locale === 'fi' ? 'active' : ''}" title="${t('language.finnish', sanitizedLocale)}">🇫🇮 Suomi</a>
-                        <a href="/fr/about.html" class="language-item ${locale === 'fr' ? 'active' : ''}" title="${t('language.french', sanitizedLocale)}">🇫🇷 Français</a>
-                        <a href="/hi/about.html" class="language-item ${locale === 'hi' ? 'active' : ''}" title="${t('language.hindi', sanitizedLocale)}">🇮🇳 हिन्दी</a>
-                        <a href="/hu/about.html" class="language-item ${locale === 'hu' ? 'active' : ''}" title="${t('language.hungarian', sanitizedLocale)}">🇭🇺 Magyar</a>
-                        <a href="/id/about.html" class="language-item ${locale === 'id' ? 'active' : ''}" title="${t('language.indonesian', sanitizedLocale)}">🇮🇩 Bahasa Indonesia</a>
-                        <a href="/it/about.html" class="language-item ${locale === 'it' ? 'active' : ''}" title="${t('language.italian', sanitizedLocale)}">🇮🇹 Italiano</a>
-                        <a href="/ja/about.html" class="language-item ${locale === 'ja' ? 'active' : ''}" title="${t('language.japanese', sanitizedLocale)}">🇯🇵 日本語</a>
-                        <a href="/ko/about.html" class="language-item ${locale === 'ko' ? 'active' : ''}" title="${t('language.korean', sanitizedLocale)}">🇰🇷 한국어</a>
-                        <a href="/nl/about.html" class="language-item ${locale === 'nl' ? 'active' : ''}" title="${t('language.dutch', sanitizedLocale)}">🇳🇱 Nederlands</a>
-                        <a href="/no/about.html" class="language-item ${locale === 'no' ? 'active' : ''}" title="${t('language.norwegian', sanitizedLocale)}">🇳🇴 Norsk</a>
-                        <a href="/pl/about.html" class="language-item ${locale === 'pl' ? 'active' : ''}" title="${t('language.polish', sanitizedLocale)}">🇵🇱 Polski</a>
-                        <a href="/ptPT/about.html" class="language-item ${locale === 'ptPT' ? 'active' : ''}" title="${t('language.portuguesePT', sanitizedLocale)}">🇵🇹 Português</a>
-                        <a href="/ptBR/about.html" class="language-item ${locale === 'ptBR' ? 'active' : ''}" title="${t('language.portugueseBR', sanitizedLocale)}">🇧🇷 Português (Brasil)</a>
-                        <a href="/ru/about.html" class="language-item ${locale === 'ru' ? 'active' : ''}" title="${t('language.russian', sanitizedLocale)}">🇷🇺 Русский</a>
-                        <a href="/ro/about.html" class="language-item ${locale === 'ro' ? 'active' : ''}" title="${t('language.romanian', sanitizedLocale)}">🇷🇴 Română</a>
-                        <a href="/sv/about.html" class="language-item ${locale === 'sv' ? 'active' : ''}" title="${t('language.swedish', sanitizedLocale)}">🇸🇪 Svenska</a>
-                        <a href="/tl/about.html" class="language-item ${locale === 'tl' ? 'active' : ''}" title="${t('language.tagalog', sanitizedLocale)}">🇵🇭 Tagalog</a>
-                        <a href="/th/about.html" class="language-item ${locale === 'th' ? 'active' : ''}" title="${t('language.thai', sanitizedLocale)}">🇹🇭 ไทย</a>
-                        <a href="/tr/about.html" class="language-item ${locale === 'tr' ? 'active' : ''}" title="${t('language.turkish', sanitizedLocale)}">🇹🇷 Türkçe</a>
-                        <a href="/uk/about.html" class="language-item ${locale === 'uk' ? 'active' : ''}" title="${t('language.ukrainian', sanitizedLocale)}">🇺🇦 Українська</a>
-                        <a href="/vi/about.html" class="language-item ${locale === 'vi' ? 'active' : ''}" title="${t('language.vietnamese', sanitizedLocale)}">🇻🇳 Tiếng Việt</a>
-                        <a href="/zh/about.html" class="language-item ${locale === 'zh' ? 'active' : ''}" title="${t('language.chinese', sanitizedLocale)}">🈶 中文</a>
+                        <a href="/ar/about.html" class="language-item ${
+                          sanitizedLocale === 'ar' ? 'active' : ''
+                        }" title="${t('language.arabic', sanitizedLocale)}">🌐 العربية</a>
+                        <a href="/bn/about.html" class="language-item ${
+                          sanitizedLocale === 'bn' ? 'active' : ''
+                        }" title="${t('language.bengali', sanitizedLocale)}">🇧🇩 বাংলা</a>
+                        <a href="/cs/about.html" class="language-item ${
+                          sanitizedLocale === 'cs' ? 'active' : ''
+                        }" title="${t('language.czech', sanitizedLocale)}">🇨🇿 Čeština</a>
+                        <a href="/da/about.html" class="language-item ${
+                          sanitizedLocale === 'da' ? 'active' : ''
+                        }" title="${t('language.danish', sanitizedLocale)}">🇩🇰 Dansk</a>
+                        <a href="/de/about.html" class="language-item ${
+                          sanitizedLocale === 'de' ? 'active' : ''
+                        }" title="${t('language.german', sanitizedLocale)}">🇩🇪 Deutsch</a>
+                        <a href="/el/about.html" class="language-item ${
+                          sanitizedLocale === 'el' ? 'active' : ''
+                        }" title="${t('language.greek', sanitizedLocale)}">🇬🇷 Ελληνικά</a>
+                        <a href="/en/about.html" class="language-item ${
+                          sanitizedLocale === 'en' ? 'active' : ''
+                        }" title="${t('language.english', sanitizedLocale)}">🇬🇧 English</a>
+                        <a href="/es/about.html" class="language-item ${locale === 'es' ? 'active' : ''}" title="${t(
+                          'language.spanish',
+                          sanitizedLocale
+                        )}">🇪🇸 Español</a>
+                        <a href="/fi/about.html" class="language-item ${locale === 'fi' ? 'active' : ''}" title="${t(
+                          'language.finnish',
+                          sanitizedLocale
+                        )}">🇫🇮 Suomi</a>
+                        <a href="/fr/about.html" class="language-item ${locale === 'fr' ? 'active' : ''}" title="${t(
+                          'language.french',
+                          sanitizedLocale
+                        )}">🇫🇷 Français</a>
+                        <a href="/hi/about.html" class="language-item ${locale === 'hi' ? 'active' : ''}" title="${t(
+                          'language.hindi',
+                          sanitizedLocale
+                        )}">🇮🇳 हिन्दी</a>
+                        <a href="/hu/about.html" class="language-item ${locale === 'hu' ? 'active' : ''}" title="${t(
+                          'language.hungarian',
+                          sanitizedLocale
+                        )}">🇭🇺 Magyar</a>
+                        <a href="/id/about.html" class="language-item ${locale === 'id' ? 'active' : ''}" title="${t(
+                          'language.indonesian',
+                          sanitizedLocale
+                        )}">🇮🇩 Bahasa Indonesia</a>
+                        <a href="/it/about.html" class="language-item ${locale === 'it' ? 'active' : ''}" title="${t(
+                          'language.italian',
+                          sanitizedLocale
+                        )}">🇮🇹 Italiano</a>
+                        <a href="/ja/about.html" class="language-item ${locale === 'ja' ? 'active' : ''}" title="${t(
+                          'language.japanese',
+                          sanitizedLocale
+                        )}">🇯🇵 日本語</a>
+                        <a href="/ko/about.html" class="language-item ${locale === 'ko' ? 'active' : ''}" title="${t(
+                          'language.korean',
+                          sanitizedLocale
+                        )}">🇰🇷 한국어</a>
+                        <a href="/nl/about.html" class="language-item ${locale === 'nl' ? 'active' : ''}" title="${t(
+                          'language.dutch',
+                          sanitizedLocale
+                        )}">🇳🇱 Nederlands</a>
+                        <a href="/no/about.html" class="language-item ${locale === 'no' ? 'active' : ''}" title="${t(
+                          'language.norwegian',
+                          sanitizedLocale
+                        )}">🇳🇴 Norsk</a>
+                        <a href="/pl/about.html" class="language-item ${locale === 'pl' ? 'active' : ''}" title="${t(
+                          'language.polish',
+                          sanitizedLocale
+                        )}">🇵🇱 Polski</a>
+                        <a href="/ptPT/about.html" class="language-item ${
+                          locale === 'ptPT' ? 'active' : ''
+                        }" title="${t('language.portuguesePT', sanitizedLocale)}">🇵🇹 Português</a>
+                        <a href="/ptBR/about.html" class="language-item ${
+                          locale === 'ptBR' ? 'active' : ''
+                        }" title="${t('language.portugueseBR', sanitizedLocale)}">🇧🇷 Português (Brasil)</a>
+                        <a href="/ru/about.html" class="language-item ${locale === 'ru' ? 'active' : ''}" title="${t(
+                          'language.russian',
+                          sanitizedLocale
+                        )}">🇷🇺 Русский</a>
+                        <a href="/ro/about.html" class="language-item ${locale === 'ro' ? 'active' : ''}" title="${t(
+                          'language.romanian',
+                          sanitizedLocale
+                        )}">🇷🇴 Română</a>
+                        <a href="/sv/about.html" class="language-item ${locale === 'sv' ? 'active' : ''}" title="${t(
+                          'language.swedish',
+                          sanitizedLocale
+                        )}">🇸🇪 Svenska</a>
+                        <a href="/tl/about.html" class="language-item ${locale === 'tl' ? 'active' : ''}" title="${t(
+                          'language.tagalog',
+                          sanitizedLocale
+                        )}">🇵🇭 Tagalog</a>
+                        <a href="/th/about.html" class="language-item ${locale === 'th' ? 'active' : ''}" title="${t(
+                          'language.thai',
+                          sanitizedLocale
+                        )}">🇹🇭 ไทย</a>
+                        <a href="/tr/about.html" class="language-item ${locale === 'tr' ? 'active' : ''}" title="${t(
+                          'language.turkish',
+                          sanitizedLocale
+                        )}">🇹🇷 Türkçe</a>
+                        <a href="/uk/about.html" class="language-item ${locale === 'uk' ? 'active' : ''}" title="${t(
+                          'language.ukrainian',
+                          sanitizedLocale
+                        )}">🇺🇦 Українська</a>
+                        <a href="/vi/about.html" class="language-item ${locale === 'vi' ? 'active' : ''}" title="${t(
+                          'language.vietnamese',
+                          sanitizedLocale
+                        )}">🇻🇳 Tiếng Việt</a>
+                        <a href="/zh/about.html" class="language-item ${locale === 'zh' ? 'active' : ''}" title="${t(
+                          'language.chinese',
+                          sanitizedLocale
+                        )}">🈶 中文</a>
                     </div>
                 </li>
             </ul>
@@ -427,7 +631,13 @@ export async function getAboutHTML(locale = 'en', origin = 'https://securememo.a
                     <li><strong>D1 Database:</strong> ${t('about.tech.d1', sanitizedLocale)}</li>
                     <li><strong>Web Crypto API:</strong> ${t('about.tech.webcrypto', sanitizedLocale)}</li>
                     <li><strong>HTML/CSS/JavaScript:</strong> ${t('about.tech.frontend', sanitizedLocale)}</li>
-                    <li><strong>${t('about.tech.github', sanitizedLocale)}</strong> <a href="https://github.com/timoheimonen/securememo.app" target="_blank" rel="noopener noreferrer">${t('about.tech.githubLink', sanitizedLocale)}</a></li>
+                    <li><strong>${t(
+                      'about.tech.github',
+                      sanitizedLocale
+                    )}</strong> <a href="https://github.com/timoheimonen/securememo.app" target="_blank" rel="noopener noreferrer">${t(
+                      'about.tech.githubLink',
+                      sanitizedLocale
+                    )}</a></li>
                 </ul>
             </div>
 
@@ -500,15 +710,30 @@ export async function getAboutHTML(locale = 'en', origin = 'https://securememo.a
                 <h2>${t('about.cta.title', sanitizedLocale)}</h2>
                 <p>${t('about.cta.subtitle', sanitizedLocale)}</p>
                 <div class="cta-buttons">
-                    <a href="/${sanitizedLocale}/create-memo.html" class="btn btn-primary">${t('about.cta.createBtn', sanitizedLocale)}</a>
-                    <a href="/${sanitizedLocale}" class="btn btn-secondary">${t('about.cta.homeBtn', sanitizedLocale)}</a>
+                    <a href="/${sanitizedLocale}/create-memo.html" class="btn btn-primary">${t(
+                      'about.cta.createBtn',
+                      sanitizedLocale
+                    )}</a>
+                    <a href="/${sanitizedLocale}" class="btn btn-secondary">${t(
+                      'about.cta.homeBtn',
+                      sanitizedLocale
+                    )}</a>
                 </div>
             </div>
         </div>
     </main>
 
     <footer class="footer">
-        <p><a href="https://github.com/timoheimonen/securememo.app" target="_blank" rel="noopener noreferrer">${t('footer.sourceCode', sanitizedLocale)}</a> | <a href="/${sanitizedLocale}/tos.html">${t('footer.tos', sanitizedLocale)}</a> | <a href="/${sanitizedLocale}/privacy.html">${t('footer.privacy', sanitizedLocale)}</a> | <a href="mailto:contact@securememo.app">contact@securememo.app</a></p>
+        <p><a href="https://github.com/timoheimonen/securememo.app" target="_blank" rel="noopener noreferrer">${t(
+          'footer.sourceCode',
+          sanitizedLocale
+        )}</a> | <a href="/${sanitizedLocale}/tos.html">${t(
+          'footer.tos',
+          sanitizedLocale
+        )}</a> | <a href="/${sanitizedLocale}/privacy.html">${t(
+          'footer.privacy',
+          sanitizedLocale
+        )}</a> | <a href="mailto:contact@securememo.app">contact@securememo.app</a></p>
         <p style="font-size: 0.8em; margin-top: 0.5em; opacity: 0.8;">${t('footer.tagline', sanitizedLocale)}</p>
     </footer>
 
@@ -518,9 +743,9 @@ export async function getAboutHTML(locale = 'en', origin = 'https://securememo.a
 }
 
 export async function getCreateMemoHTML(locale = 'en', origin = 'https://securememo.app') {
-    const sanitizedLocale = sanitizeLocale(locale);
-    const canonicalUrl = `${origin}/${sanitizedLocale}/create-memo.html`;
-    return `<!DOCTYPE html>
+  const sanitizedLocale = sanitizeLocale(locale);
+  const canonicalUrl = `${origin}/${sanitizedLocale}/create-memo.html`;
+  return `<!DOCTYPE html>
 <html lang="${sanitizedLocale}">
 <head>
     <meta charset="UTF-8">
@@ -594,7 +819,10 @@ export async function getCreateMemoHTML(locale = 'en', origin = 'https://securem
             <a href="/${sanitizedLocale}" class="nav-logo">securememo.app</a>
             
             <!-- Hamburger Menu Button -->
-            <button class="hamburger" type="button" aria-label="${t('nav.toggleMenu', sanitizedLocale)}" aria-expanded="false">
+            <button class="hamburger" type="button" aria-label="${t(
+              'nav.toggleMenu',
+              sanitizedLocale
+            )}" aria-expanded="false">
                 <span class="hamburger-line"></span>
                 <span class="hamburger-line"></span>
                 <span class="hamburger-line"></span>
@@ -603,43 +831,109 @@ export async function getCreateMemoHTML(locale = 'en', origin = 'https://securem
             <!-- Navigation Menu -->
             <ul class="nav-menu" id="navMenu">
                 <li><a href="/${sanitizedLocale}" class="nav-link">${t('nav.home', sanitizedLocale)}</a></li>
-                <li><a href="/${sanitizedLocale}/about.html" class="nav-link">${t('nav.about', sanitizedLocale)}</a></li>
-                <li><a href="/${sanitizedLocale}/create-memo.html" class="nav-link active">${t('nav.create', sanitizedLocale)}</a></li>
+                <li><a href="/${sanitizedLocale}/about.html" class="nav-link">${t(
+                  'nav.about',
+                  sanitizedLocale
+                )}</a></li>
+                <li><a href="/${sanitizedLocale}/create-memo.html" class="nav-link active">${t(
+                  'nav.create',
+                  sanitizedLocale
+                )}</a></li>
                 <li class="language-dropdown">
                     <button class="language-toggle nav-link" aria-expanded="false" aria-haspopup="true">
                         ${getFlagEmoji(sanitizedLocale)} ${getLanguageDisplayName(sanitizedLocale)}
                     </button>
                     <div class="language-menu">
-                        <a href="/ar/create-memo.html" class="language-item ${sanitizedLocale === 'ar' ? 'active' : ''}" title="${t('language.arabic', sanitizedLocale)}">🌐 العربية</a>
-                        <a href="/bn/create-memo.html" class="language-item ${sanitizedLocale === 'bn' ? 'active' : ''}" title="${t('language.bengali', sanitizedLocale)}">🇧🇩 বাংলা</a>
-                        <a href="/cs/create-memo.html" class="language-item ${sanitizedLocale === 'cs' ? 'active' : ''}" title="${t('language.czech', sanitizedLocale)}">🇨🇿 Čeština</a>
-                        <a href="/da/create-memo.html" class="language-item ${sanitizedLocale === 'da' ? 'active' : ''}" title="${t('language.danish', sanitizedLocale)}">🇩🇰 Dansk</a>
-                        <a href="/de/create-memo.html" class="language-item ${sanitizedLocale === 'de' ? 'active' : ''}" title="${t('language.german', sanitizedLocale)}">🇩🇪 Deutsch</a>
-                        <a href="/el/create-memo.html" class="language-item ${sanitizedLocale === 'el' ? 'active' : ''}" title="${t('language.greek', sanitizedLocale)}">🇬🇷 Ελληνικά</a>
-                        <a href="/en/create-memo.html" class="language-item ${sanitizedLocale === 'en' ? 'active' : ''}" title="${t('language.english', sanitizedLocale)}">🇬🇧 English</a>
-                        <a href="/es/create-memo.html" class="language-item ${sanitizedLocale === 'es' ? 'active' : ''}" title="${t('language.spanish', sanitizedLocale)}">🇪🇸 Español</a>
-                        <a href="/fi/create-memo.html" class="language-item ${sanitizedLocale === 'fi' ? 'active' : ''}" title="${t('language.finnish', sanitizedLocale)}">🇫🇮 Suomi</a>
-                        <a href="/fr/create-memo.html" class="language-item ${sanitizedLocale === 'fr' ? 'active' : ''}" title="${t('language.french', sanitizedLocale)}">🇫🇷 Français</a>
-                        <a href="/hi/create-memo.html" class="language-item ${sanitizedLocale === 'hi' ? 'active' : ''}" title="${t('language.hindi', sanitizedLocale)}">🇮🇳 हिन्दी</a>
-                        <a href="/hu/create-memo.html" class="language-item ${sanitizedLocale === 'hu' ? 'active' : ''}" title="${t('language.hungarian', sanitizedLocale)}">🇭🇺 Magyar</a>
-                        <a href="/id/create-memo.html" class="language-item ${sanitizedLocale === 'id' ? 'active' : ''}" title="${t('language.indonesian', sanitizedLocale)}">🇮🇩 Bahasa Indonesia</a>
-                        <a href="/it/create-memo.html" class="language-item ${sanitizedLocale === 'it' ? 'active' : ''}" title="${t('language.italian', sanitizedLocale)}">🇮🇹 Italiano</a>
-                        <a href="/ja/create-memo.html" class="language-item ${sanitizedLocale === 'ja' ? 'active' : ''}" title="${t('language.japanese', sanitizedLocale)}">🇯🇵 日本語</a>
-                        <a href="/ko/create-memo.html" class="language-item ${sanitizedLocale === 'ko' ? 'active' : ''}" title="${t('language.korean', sanitizedLocale)}">🇰🇷 한국어</a>
-                        <a href="/nl/create-memo.html" class="language-item ${sanitizedLocale === 'nl' ? 'active' : ''}" title="${t('language.dutch', sanitizedLocale)}">🇳🇱 Nederlands</a>
-                        <a href="/no/create-memo.html" class="language-item ${sanitizedLocale === 'no' ? 'active' : ''}" title="${t('language.norwegian', sanitizedLocale)}">🇳🇴 Norsk</a>
-                        <a href="/pl/create-memo.html" class="language-item ${sanitizedLocale === 'pl' ? 'active' : ''}" title="${t('language.polish', sanitizedLocale)}">🇵🇱 Polski</a>
-                        <a href="/ptPT/create-memo.html" class="language-item ${sanitizedLocale === 'ptPT' ? 'active' : ''}" title="${t('language.portuguesePT', sanitizedLocale)}">🇵🇹 Português</a>
-                        <a href="/ptBR/create-memo.html" class="language-item ${sanitizedLocale === 'ptBR' ? 'active' : ''}" title="${t('language.portugueseBR', sanitizedLocale)}">🇧🇷 Português (Brasil)</a>
-                        <a href="/ru/create-memo.html" class="language-item ${sanitizedLocale === 'ru' ? 'active' : ''}" title="${t('language.russian', sanitizedLocale)}">🇷🇺 Русский</a>
-                        <a href="/ro/create-memo.html" class="language-item ${sanitizedLocale === 'ro' ? 'active' : ''}" title="${t('language.romanian', sanitizedLocale)}">🇷🇴 Română</a>
-                        <a href="/sv/create-memo.html" class="language-item ${sanitizedLocale === 'sv' ? 'active' : ''}" title="${t('language.swedish', sanitizedLocale)}">🇸🇪 Svenska</a>
-                        <a href="/tl/create-memo.html" class="language-item ${sanitizedLocale === 'tl' ? 'active' : ''}" title="${t('language.tagalog', sanitizedLocale)}">🇵🇭 Tagalog</a>
-                        <a href="/th/create-memo.html" class="language-item ${sanitizedLocale === 'th' ? 'active' : ''}" title="${t('language.thai', sanitizedLocale)}">🇹🇭 ไทย</a>
-                        <a href="/tr/create-memo.html" class="language-item ${sanitizedLocale === 'tr' ? 'active' : ''}" title="${t('language.turkish', sanitizedLocale)}">🇹🇷 Türkçe</a>
-                        <a href="/uk/create-memo.html" class="language-item ${sanitizedLocale === 'uk' ? 'active' : ''}" title="${t('language.ukrainian', sanitizedLocale)}">🇺🇦 Українська</a>
-                        <a href="/vi/create-memo.html" class="language-item ${sanitizedLocale === 'vi' ? 'active' : ''}" title="${t('language.vietnamese', sanitizedLocale)}">🇻🇳 Tiếng Việt</a>
-                        <a href="/zh/create-memo.html" class="language-item ${sanitizedLocale === 'zh' ? 'active' : ''}" title="${t('language.chinese', sanitizedLocale)}">🈶 中文</a>
+                        <a href="/ar/create-memo.html" class="language-item ${
+                          sanitizedLocale === 'ar' ? 'active' : ''
+                        }" title="${t('language.arabic', sanitizedLocale)}">🌐 العربية</a>
+                        <a href="/bn/create-memo.html" class="language-item ${
+                          sanitizedLocale === 'bn' ? 'active' : ''
+                        }" title="${t('language.bengali', sanitizedLocale)}">🇧🇩 বাংলা</a>
+                        <a href="/cs/create-memo.html" class="language-item ${
+                          sanitizedLocale === 'cs' ? 'active' : ''
+                        }" title="${t('language.czech', sanitizedLocale)}">🇨🇿 Čeština</a>
+                        <a href="/da/create-memo.html" class="language-item ${
+                          sanitizedLocale === 'da' ? 'active' : ''
+                        }" title="${t('language.danish', sanitizedLocale)}">🇩🇰 Dansk</a>
+                        <a href="/de/create-memo.html" class="language-item ${
+                          sanitizedLocale === 'de' ? 'active' : ''
+                        }" title="${t('language.german', sanitizedLocale)}">🇩🇪 Deutsch</a>
+                        <a href="/el/create-memo.html" class="language-item ${
+                          sanitizedLocale === 'el' ? 'active' : ''
+                        }" title="${t('language.greek', sanitizedLocale)}">🇬🇷 Ελληνικά</a>
+                        <a href="/en/create-memo.html" class="language-item ${
+                          sanitizedLocale === 'en' ? 'active' : ''
+                        }" title="${t('language.english', sanitizedLocale)}">🇬🇧 English</a>
+                        <a href="/es/create-memo.html" class="language-item ${
+                          sanitizedLocale === 'es' ? 'active' : ''
+                        }" title="${t('language.spanish', sanitizedLocale)}">🇪🇸 Español</a>
+                        <a href="/fi/create-memo.html" class="language-item ${
+                          sanitizedLocale === 'fi' ? 'active' : ''
+                        }" title="${t('language.finnish', sanitizedLocale)}">🇫🇮 Suomi</a>
+                        <a href="/fr/create-memo.html" class="language-item ${
+                          sanitizedLocale === 'fr' ? 'active' : ''
+                        }" title="${t('language.french', sanitizedLocale)}">🇫🇷 Français</a>
+                        <a href="/hi/create-memo.html" class="language-item ${
+                          sanitizedLocale === 'hi' ? 'active' : ''
+                        }" title="${t('language.hindi', sanitizedLocale)}">🇮🇳 हिन्दी</a>
+                        <a href="/hu/create-memo.html" class="language-item ${
+                          sanitizedLocale === 'hu' ? 'active' : ''
+                        }" title="${t('language.hungarian', sanitizedLocale)}">🇭🇺 Magyar</a>
+                        <a href="/id/create-memo.html" class="language-item ${
+                          sanitizedLocale === 'id' ? 'active' : ''
+                        }" title="${t('language.indonesian', sanitizedLocale)}">🇮🇩 Bahasa Indonesia</a>
+                        <a href="/it/create-memo.html" class="language-item ${
+                          sanitizedLocale === 'it' ? 'active' : ''
+                        }" title="${t('language.italian', sanitizedLocale)}">🇮🇹 Italiano</a>
+                        <a href="/ja/create-memo.html" class="language-item ${
+                          sanitizedLocale === 'ja' ? 'active' : ''
+                        }" title="${t('language.japanese', sanitizedLocale)}">🇯🇵 日本語</a>
+                        <a href="/ko/create-memo.html" class="language-item ${
+                          sanitizedLocale === 'ko' ? 'active' : ''
+                        }" title="${t('language.korean', sanitizedLocale)}">🇰🇷 한국어</a>
+                        <a href="/nl/create-memo.html" class="language-item ${
+                          sanitizedLocale === 'nl' ? 'active' : ''
+                        }" title="${t('language.dutch', sanitizedLocale)}">🇳🇱 Nederlands</a>
+                        <a href="/no/create-memo.html" class="language-item ${
+                          sanitizedLocale === 'no' ? 'active' : ''
+                        }" title="${t('language.norwegian', sanitizedLocale)}">🇳🇴 Norsk</a>
+                        <a href="/pl/create-memo.html" class="language-item ${
+                          sanitizedLocale === 'pl' ? 'active' : ''
+                        }" title="${t('language.polish', sanitizedLocale)}">🇵🇱 Polski</a>
+                        <a href="/ptPT/create-memo.html" class="language-item ${
+                          sanitizedLocale === 'ptPT' ? 'active' : ''
+                        }" title="${t('language.portuguesePT', sanitizedLocale)}">🇵🇹 Português</a>
+                        <a href="/ptBR/create-memo.html" class="language-item ${
+                          sanitizedLocale === 'ptBR' ? 'active' : ''
+                        }" title="${t('language.portugueseBR', sanitizedLocale)}">🇧🇷 Português (Brasil)</a>
+                        <a href="/ru/create-memo.html" class="language-item ${
+                          sanitizedLocale === 'ru' ? 'active' : ''
+                        }" title="${t('language.russian', sanitizedLocale)}">🇷🇺 Русский</a>
+                        <a href="/ro/create-memo.html" class="language-item ${
+                          sanitizedLocale === 'ro' ? 'active' : ''
+                        }" title="${t('language.romanian', sanitizedLocale)}">🇷🇴 Română</a>
+                        <a href="/sv/create-memo.html" class="language-item ${
+                          sanitizedLocale === 'sv' ? 'active' : ''
+                        }" title="${t('language.swedish', sanitizedLocale)}">🇸🇪 Svenska</a>
+                        <a href="/tl/create-memo.html" class="language-item ${
+                          sanitizedLocale === 'tl' ? 'active' : ''
+                        }" title="${t('language.tagalog', sanitizedLocale)}">🇵🇭 Tagalog</a>
+                        <a href="/th/create-memo.html" class="language-item ${
+                          sanitizedLocale === 'th' ? 'active' : ''
+                        }" title="${t('language.thai', sanitizedLocale)}">🇹🇭 ไทย</a>
+                        <a href="/tr/create-memo.html" class="language-item ${
+                          sanitizedLocale === 'tr' ? 'active' : ''
+                        }" title="${t('language.turkish', sanitizedLocale)}">🇹🇷 Türkçe</a>
+                        <a href="/uk/create-memo.html" class="language-item ${
+                          sanitizedLocale === 'uk' ? 'active' : ''
+                        }" title="${t('language.ukrainian', sanitizedLocale)}">🇺🇦 Українська</a>
+                        <a href="/vi/create-memo.html" class="language-item ${
+                          sanitizedLocale === 'vi' ? 'active' : ''
+                        }" title="${t('language.vietnamese', sanitizedLocale)}">🇻🇳 Tiếng Việt</a>
+                        <a href="/zh/create-memo.html" class="language-item ${
+                          sanitizedLocale === 'zh' ? 'active' : ''
+                        }" title="${t('language.chinese', sanitizedLocale)}">🈶 中文</a>
                     </div>
                 </li>
             </ul>
@@ -681,7 +975,10 @@ export async function getCreateMemoHTML(locale = 'en', origin = 'https://securem
                             <option value="720">${t('form.expiry.option.30d', sanitizedLocale)}</option>
                         </select>
                     </div>
-                    <button type="submit" class="btn btn-primary" id="submitButton">${t('btn.create', sanitizedLocale)}</button>
+                    <button type="submit" class="btn btn-primary" id="submitButton">${t(
+                      'btn.create',
+                      sanitizedLocale
+                    )}</button>
                     
                     <!-- Loading indicator (hidden by default) -->
                     <div id="loadingIndicator" class="loading-spinner" style="display: none;">
@@ -696,8 +993,14 @@ export async function getCreateMemoHTML(locale = 'en', origin = 'https://securem
                     <div class="memo-url-section">
                         <label for="memoUrl">${t('form.memoUrl.label', sanitizedLocale)}</label>
                         <div class="url-copy-container">
-                            <input type="text" id="memoUrl" readonly onclick="this.select(); document.execCommand('copy'); showMessage('${t('msg.urlCopied', sanitizedLocale)}', '${t('common.success', sanitizedLocale)}');">
-                            <button type="button" id="copyUrl" class="btn btn-primary">${t('btn.copyUrl', sanitizedLocale)}</button>
+                            <input type="text" id="memoUrl" readonly onclick="this.select(); document.execCommand('copy'); showMessage('${t(
+                              'msg.urlCopied',
+                              sanitizedLocale
+                            )}', '${t('common.success', sanitizedLocale)}');">
+                            <button type="button" id="copyUrl" class="btn btn-primary">${t(
+                              'btn.copyUrl',
+                              sanitizedLocale
+                            )}</button>
                         </div>
                         <small class="form-help">${t('form.memoUrl.help', sanitizedLocale)}</small>
                     </div>
@@ -705,9 +1008,18 @@ export async function getCreateMemoHTML(locale = 'en', origin = 'https://securem
                     <div class="memo-password-section">
                         <label for="memoPassword">${t('form.memoPassword.label', sanitizedLocale)}</label>
                         <div class="url-copy-container">
-                            <input type="password" id="memoPassword" readonly onclick="this.select(); document.execCommand('copy'); showMessage('${t('msg.passwordCopied', sanitizedLocale)}', '${t('common.success', sanitizedLocale)}');">
-                            <button type="button" id="togglePassword" class="btn btn-primary" style="margin-right: 8px;">${t('btn.show', sanitizedLocale)}</button>
-                            <button type="button" id="copyPassword" class="btn btn-primary">${t('btn.copyPassword', sanitizedLocale)}</button>
+                            <input type="password" id="memoPassword" readonly onclick="this.select(); document.execCommand('copy'); showMessage('${t(
+                              'msg.passwordCopied',
+                              sanitizedLocale
+                            )}', '${t('common.success', sanitizedLocale)}');">
+                            <button type="button" id="togglePassword" class="btn btn-primary" style="margin-right: 8px;">${t(
+                              'btn.show',
+                              sanitizedLocale
+                            )}</button>
+                            <button type="button" id="copyPassword" class="btn btn-primary">${t(
+                              'btn.copyPassword',
+                              sanitizedLocale
+                            )}</button>
                         </div>
                         <small class="form-help">${t('form.memoPassword.help', sanitizedLocale)}</small>
                     </div>
@@ -729,7 +1041,16 @@ export async function getCreateMemoHTML(locale = 'en', origin = 'https://securem
     </main>
 
     <footer class="footer">
-        <p><a href="https://github.com/timoheimonen/securememo.app" target="_blank" rel="noopener noreferrer">${t('footer.sourceCode', sanitizedLocale)}</a> | <a href="/${sanitizedLocale}/tos.html">${t('footer.tos', sanitizedLocale)}</a> | <a href="/${sanitizedLocale}/privacy.html">${t('footer.privacy', sanitizedLocale)}</a> | <a href="mailto:contact@securememo.app">contact@securememo.app</a></p>
+        <p><a href="https://github.com/timoheimonen/securememo.app" target="_blank" rel="noopener noreferrer">${t(
+          'footer.sourceCode',
+          sanitizedLocale
+        )}</a> | <a href="/${sanitizedLocale}/tos.html">${t(
+          'footer.tos',
+          sanitizedLocale
+        )}</a> | <a href="/${sanitizedLocale}/privacy.html">${t(
+          'footer.privacy',
+          sanitizedLocale
+        )}</a> | <a href="mailto:contact@securememo.app">contact@securememo.app</a></p>
         <p style="font-size: 0.8em; margin-top: 0.5em; opacity: 0.8;">${t('footer.tagline', sanitizedLocale)}</p>
     </footer>
 
@@ -739,9 +1060,9 @@ export async function getCreateMemoHTML(locale = 'en', origin = 'https://securem
 }
 
 export async function getReadMemoHTML(locale = 'en', origin = 'https://securememo.app') {
-    const sanitizedLocale = sanitizeLocale(locale);
-    const canonicalUrl = `${origin}/${sanitizedLocale}/read-memo.html`;
-    return `<!DOCTYPE html>
+  const sanitizedLocale = sanitizeLocale(locale);
+  const canonicalUrl = `${origin}/${sanitizedLocale}/read-memo.html`;
+  return `<!DOCTYPE html>
 <html lang="${sanitizedLocale}">
 <head>
     <meta charset="UTF-8">
@@ -815,7 +1136,10 @@ export async function getReadMemoHTML(locale = 'en', origin = 'https://securemem
             <a href="/${sanitizedLocale}" class="nav-logo">securememo.app</a>
             
             <!-- Hamburger Menu Button -->
-            <button class="hamburger" type="button" aria-label="${t('nav.toggleMenu', sanitizedLocale)}" aria-expanded="false">
+            <button class="hamburger" type="button" aria-label="${t(
+              'nav.toggleMenu',
+              sanitizedLocale
+            )}" aria-expanded="false">
                 <span class="hamburger-line"></span>
                 <span class="hamburger-line"></span>
                 <span class="hamburger-line"></span>
@@ -824,43 +1148,109 @@ export async function getReadMemoHTML(locale = 'en', origin = 'https://securemem
             <!-- Navigation Menu -->
             <ul class="nav-menu" id="navMenu">
                 <li><a href="/${sanitizedLocale}" class="nav-link">${t('nav.home', sanitizedLocale)}</a></li>
-                <li><a href="/${sanitizedLocale}/about.html" class="nav-link">${t('nav.about', sanitizedLocale)}</a></li>
-                <li><a href="/${sanitizedLocale}/create-memo.html" class="nav-link">${t('nav.create', sanitizedLocale)}</a></li>
+                <li><a href="/${sanitizedLocale}/about.html" class="nav-link">${t(
+                  'nav.about',
+                  sanitizedLocale
+                )}</a></li>
+                <li><a href="/${sanitizedLocale}/create-memo.html" class="nav-link">${t(
+                  'nav.create',
+                  sanitizedLocale
+                )}</a></li>
                 <li class="language-dropdown">
                     <button class="language-toggle nav-link" aria-expanded="false" aria-haspopup="true">
                         ${getFlagEmoji(sanitizedLocale)} ${getLanguageDisplayName(sanitizedLocale)}
                     </button>
                     <div class="language-menu">
-                        <a href="/ar/read-memo.html" class="language-item ${sanitizedLocale === 'ar' ? 'active' : ''}" title="${t('language.arabic', sanitizedLocale)}">🌐 العربية</a>
-                        <a href="/bn/read-memo.html" class="language-item ${sanitizedLocale === 'bn' ? 'active' : ''}" title="${t('language.bengali', sanitizedLocale)}">🇧🇩 বাংলা</a>
-                        <a href="/cs/read-memo.html" class="language-item ${sanitizedLocale === 'cs' ? 'active' : ''}" title="${t('language.czech', sanitizedLocale)}">🇨🇿 Čeština</a>
-                        <a href="/da/read-memo.html" class="language-item ${sanitizedLocale === 'da' ? 'active' : ''}" title="${t('language.danish', sanitizedLocale)}">🇩🇰 Dansk</a>
-                        <a href="/de/read-memo.html" class="language-item ${sanitizedLocale === 'de' ? 'active' : ''}" title="${t('language.german', sanitizedLocale)}">🇩🇪 Deutsch</a>
-                        <a href="/el/read-memo.html" class="language-item ${sanitizedLocale === 'el' ? 'active' : ''}" title="${t('language.greek', sanitizedLocale)}">🇬🇷 Ελληνικά</a>
-                        <a href="/en/read-memo.html" class="language-item ${sanitizedLocale === 'en' ? 'active' : ''}" title="${t('language.english', sanitizedLocale)}">🇬🇧 English</a>
-                        <a href="/es/read-memo.html" class="language-item ${sanitizedLocale === 'es' ? 'active' : ''}" title="${t('language.spanish', sanitizedLocale)}">🇪🇸 Español</a>
-                        <a href="/fi/read-memo.html" class="language-item ${sanitizedLocale === 'fi' ? 'active' : ''}" title="${t('language.finnish', sanitizedLocale)}">🇫🇮 Suomi</a>
-                        <a href="/fr/read-memo.html" class="language-item ${sanitizedLocale === 'fr' ? 'active' : ''}" title="${t('language.french', sanitizedLocale)}">🇫🇷 Français</a>
-                        <a href="/hi/read-memo.html" class="language-item ${sanitizedLocale === 'hi' ? 'active' : ''}" title="${t('language.hindi', sanitizedLocale)}">🇮🇳 हिन्दी</a>
-                        <a href="/hu/read-memo.html" class="language-item ${sanitizedLocale === 'hu' ? 'active' : ''}" title="${t('language.hungarian', sanitizedLocale)}">🇭🇺 Magyar</a>
-                        <a href="/id/read-memo.html" class="language-item ${sanitizedLocale === 'id' ? 'active' : ''}" title="${t('language.indonesian', sanitizedLocale)}">🇮🇩 Bahasa Indonesia</a>
-                        <a href="/it/read-memo.html" class="language-item ${sanitizedLocale === 'it' ? 'active' : ''}" title="${t('language.italian', sanitizedLocale)}">🇮🇹 Italiano</a>
-                        <a href="/ja/read-memo.html" class="language-item ${sanitizedLocale === 'ja' ? 'active' : ''}" title="${t('language.japanese', sanitizedLocale)}">🇯🇵 日本語</a>
-                        <a href="/ko/read-memo.html" class="language-item ${sanitizedLocale === 'ko' ? 'active' : ''}" title="${t('language.korean', sanitizedLocale)}">🇰🇷 한국어</a>
-                        <a href="/nl/read-memo.html" class="language-item ${sanitizedLocale === 'nl' ? 'active' : ''}" title="${t('language.dutch', sanitizedLocale)}">🇳🇱 Nederlands</a>
-                        <a href="/no/read-memo.html" class="language-item ${sanitizedLocale === 'no' ? 'active' : ''}" title="${t('language.norwegian', sanitizedLocale)}">🇳🇴 Norsk</a>
-                        <a href="/pl/read-memo.html" class="language-item ${sanitizedLocale === 'pl' ? 'active' : ''}" title="${t('language.polish', sanitizedLocale)}">🇵🇱 Polski</a>
-                        <a href="/ptPT/read-memo.html" class="language-item ${sanitizedLocale === 'ptPT' ? 'active' : ''}" title="${t('language.portuguesePT', sanitizedLocale)}">🇵🇹 Português</a>
-                        <a href="/ptBR/read-memo.html" class="language-item ${sanitizedLocale === 'ptBR' ? 'active' : ''}" title="${t('language.portugueseBR', sanitizedLocale)}">🇧🇷 Português (Brasil)</a>
-                        <a href="/ru/read-memo.html" class="language-item ${sanitizedLocale === 'ru' ? 'active' : ''}" title="${t('language.russian', sanitizedLocale)}">🇷🇺 Русский</a>
-                        <a href="/ro/read-memo.html" class="language-item ${sanitizedLocale === 'ro' ? 'active' : ''}" title="${t('language.romanian', sanitizedLocale)}">🇷🇴 Română</a>
-                        <a href="/sv/read-memo.html" class="language-item ${sanitizedLocale === 'sv' ? 'active' : ''}" title="${t('language.swedish', sanitizedLocale)}">🇸🇪 Svenska</a>
-                        <a href="/tl/read-memo.html" class="language-item ${sanitizedLocale === 'tl' ? 'active' : ''}" title="${t('language.tagalog', sanitizedLocale)}">🇵🇭 Tagalog</a>
-                        <a href="/th/read-memo.html" class="language-item ${sanitizedLocale === 'th' ? 'active' : ''}" title="${t('language.thai', sanitizedLocale)}">🇹🇭 ไทย</a>
-                        <a href="/tr/read-memo.html" class="language-item ${sanitizedLocale === 'tr' ? 'active' : ''}" title="${t('language.turkish', sanitizedLocale)}">🇹🇷 Türkçe</a>
-                        <a href="/uk/read-memo.html" class="language-item ${sanitizedLocale === 'uk' ? 'active' : ''}" title="${t('language.ukrainian', sanitizedLocale)}">🇺🇦 Українська</a>
-                        <a href="/vi/read-memo.html" class="language-item ${sanitizedLocale === 'vi' ? 'active' : ''}" title="${t('language.vietnamese', sanitizedLocale)}">🇻🇳 Tiếng Việt</a>
-                        <a href="/zh/read-memo.html" class="language-item ${sanitizedLocale === 'zh' ? 'active' : ''}" title="${t('language.chinese', sanitizedLocale)}">🈶 中文</a>
+                        <a href="/ar/read-memo.html" class="language-item ${
+                          sanitizedLocale === 'ar' ? 'active' : ''
+                        }" title="${t('language.arabic', sanitizedLocale)}">🌐 العربية</a>
+                        <a href="/bn/read-memo.html" class="language-item ${
+                          sanitizedLocale === 'bn' ? 'active' : ''
+                        }" title="${t('language.bengali', sanitizedLocale)}">🇧🇩 বাংলা</a>
+                        <a href="/cs/read-memo.html" class="language-item ${
+                          sanitizedLocale === 'cs' ? 'active' : ''
+                        }" title="${t('language.czech', sanitizedLocale)}">🇨🇿 Čeština</a>
+                        <a href="/da/read-memo.html" class="language-item ${
+                          sanitizedLocale === 'da' ? 'active' : ''
+                        }" title="${t('language.danish', sanitizedLocale)}">🇩🇰 Dansk</a>
+                        <a href="/de/read-memo.html" class="language-item ${
+                          sanitizedLocale === 'de' ? 'active' : ''
+                        }" title="${t('language.german', sanitizedLocale)}">🇩🇪 Deutsch</a>
+                        <a href="/el/read-memo.html" class="language-item ${
+                          sanitizedLocale === 'el' ? 'active' : ''
+                        }" title="${t('language.greek', sanitizedLocale)}">🇬🇷 Ελληνικά</a>
+                        <a href="/en/read-memo.html" class="language-item ${
+                          sanitizedLocale === 'en' ? 'active' : ''
+                        }" title="${t('language.english', sanitizedLocale)}">🇬🇧 English</a>
+                        <a href="/es/read-memo.html" class="language-item ${
+                          sanitizedLocale === 'es' ? 'active' : ''
+                        }" title="${t('language.spanish', sanitizedLocale)}">🇪🇸 Español</a>
+                        <a href="/fi/read-memo.html" class="language-item ${
+                          sanitizedLocale === 'fi' ? 'active' : ''
+                        }" title="${t('language.finnish', sanitizedLocale)}">🇫🇮 Suomi</a>
+                        <a href="/fr/read-memo.html" class="language-item ${
+                          sanitizedLocale === 'fr' ? 'active' : ''
+                        }" title="${t('language.french', sanitizedLocale)}">🇫🇷 Français</a>
+                        <a href="/hi/read-memo.html" class="language-item ${
+                          sanitizedLocale === 'hi' ? 'active' : ''
+                        }" title="${t('language.hindi', sanitizedLocale)}">🇮🇳 हिन्दी</a>
+                        <a href="/hu/read-memo.html" class="language-item ${
+                          sanitizedLocale === 'hu' ? 'active' : ''
+                        }" title="${t('language.hungarian', sanitizedLocale)}">🇭🇺 Magyar</a>
+                        <a href="/id/read-memo.html" class="language-item ${
+                          sanitizedLocale === 'id' ? 'active' : ''
+                        }" title="${t('language.indonesian', sanitizedLocale)}">🇮🇩 Bahasa Indonesia</a>
+                        <a href="/it/read-memo.html" class="language-item ${
+                          sanitizedLocale === 'it' ? 'active' : ''
+                        }" title="${t('language.italian', sanitizedLocale)}">🇮🇹 Italiano</a>
+                        <a href="/ja/read-memo.html" class="language-item ${
+                          sanitizedLocale === 'ja' ? 'active' : ''
+                        }" title="${t('language.japanese', sanitizedLocale)}">🇯🇵 日本語</a>
+                        <a href="/ko/read-memo.html" class="language-item ${
+                          sanitizedLocale === 'ko' ? 'active' : ''
+                        }" title="${t('language.korean', sanitizedLocale)}">🇰🇷 한국어</a>
+                        <a href="/nl/read-memo.html" class="language-item ${
+                          sanitizedLocale === 'nl' ? 'active' : ''
+                        }" title="${t('language.dutch', sanitizedLocale)}">🇳🇱 Nederlands</a>
+                        <a href="/no/read-memo.html" class="language-item ${
+                          sanitizedLocale === 'no' ? 'active' : ''
+                        }" title="${t('language.norwegian', sanitizedLocale)}">🇳🇴 Norsk</a>
+                        <a href="/pl/read-memo.html" class="language-item ${
+                          sanitizedLocale === 'pl' ? 'active' : ''
+                        }" title="${t('language.polish', sanitizedLocale)}">🇵🇱 Polski</a>
+                        <a href="/ptPT/read-memo.html" class="language-item ${
+                          sanitizedLocale === 'ptPT' ? 'active' : ''
+                        }" title="${t('language.portuguesePT', sanitizedLocale)}">🇵🇹 Português</a>
+                        <a href="/ptBR/read-memo.html" class="language-item ${
+                          sanitizedLocale === 'ptBR' ? 'active' : ''
+                        }" title="${t('language.portugueseBR', sanitizedLocale)}">🇧🇷 Português (Brasil)</a>
+                        <a href="/ru/read-memo.html" class="language-item ${
+                          sanitizedLocale === 'ru' ? 'active' : ''
+                        }" title="${t('language.russian', sanitizedLocale)}">🇷🇺 Русский</a>
+                        <a href="/ro/read-memo.html" class="language-item ${
+                          sanitizedLocale === 'ro' ? 'active' : ''
+                        }" title="${t('language.romanian', sanitizedLocale)}">🇷🇴 Română</a>
+                        <a href="/sv/read-memo.html" class="language-item ${
+                          sanitizedLocale === 'sv' ? 'active' : ''
+                        }" title="${t('language.swedish', sanitizedLocale)}">🇸🇪 Svenska</a>
+                        <a href="/tl/read-memo.html" class="language-item ${
+                          sanitizedLocale === 'tl' ? 'active' : ''
+                        }" title="${t('language.tagalog', sanitizedLocale)}">🇵🇭 Tagalog</a>
+                        <a href="/th/read-memo.html" class="language-item ${
+                          sanitizedLocale === 'th' ? 'active' : ''
+                        }" title="${t('language.thai', sanitizedLocale)}">🇹🇭 ไทย</a>
+                        <a href="/tr/read-memo.html" class="language-item ${
+                          sanitizedLocale === 'tr' ? 'active' : ''
+                        }" title="${t('language.turkish', sanitizedLocale)}">🇹🇷 Türkçe</a>
+                        <a href="/uk/read-memo.html" class="language-item ${
+                          sanitizedLocale === 'uk' ? 'active' : ''
+                        }" title="${t('language.ukrainian', sanitizedLocale)}">🇺🇦 Українська</a>
+                        <a href="/vi/read-memo.html" class="language-item ${
+                          sanitizedLocale === 'vi' ? 'active' : ''
+                        }" title="${t('language.vietnamese', sanitizedLocale)}">🇻🇳 Tiếng Việt</a>
+                        <a href="/zh/read-memo.html" class="language-item ${
+                          sanitizedLocale === 'zh' ? 'active' : ''
+                        }" title="${t('language.chinese', sanitizedLocale)}">🈶 中文</a>
                     </div>
                 </li>
             </ul>
@@ -890,11 +1280,17 @@ export async function getReadMemoHTML(locale = 'en', origin = 'https://securemem
                             <div class="password-input-container">
                                 <input type="password" id="password" name="password" required 
                                        placeholder="${t('form.password.placeholder', sanitizedLocale)}">
-                                <button type="button" id="toggleReadPassword" class="btn btn-primary">${t('btn.show', sanitizedLocale)}</button>
+                                <button type="button" id="toggleReadPassword" class="btn btn-primary">${t(
+                                  'btn.show',
+                                  sanitizedLocale
+                                )}</button>
                             </div>
                             <small class="form-help">${t('form.password.help', sanitizedLocale)}</small>
                         </div>
-                        <button type="submit" class="btn btn-primary" id="decryptButton">${t('btn.decrypt', sanitizedLocale)}</button>
+                        <button type="submit" class="btn btn-primary" id="decryptButton">${t(
+                          'btn.decrypt',
+                          sanitizedLocale
+                        )}</button>
                         
                         <!-- Decrypt loading indicator (hidden by default) -->
                         <div id="decryptLoadingIndicator" class="loading-spinner" style="display: none;">
@@ -910,14 +1306,20 @@ export async function getReadMemoHTML(locale = 'en', origin = 'https://securemem
                         <p id="decryptedMessage"></p>
                     </div>
                     <div class="memo-info">
-                        <p><strong>${t('msg.status', sanitizedLocale)}</strong> <span id="memoStatus">${t('msg.memoDecrypted', sanitizedLocale)}</span></p>
+                        <p><strong>${t('msg.status', sanitizedLocale)}</strong> <span id="memoStatus">${t(
+                          'msg.memoDecrypted',
+                          sanitizedLocale
+                        )}</span></p>
                         <div id="deletionSpinner" class="loading-spinner" style="display: none;">
                             <div class="spinner"></div>
                             <p>${t('msg.deletingSecurely', sanitizedLocale)}</p>
                         </div>
                     </div>
                     <div class="memo-actions">
-                        <a href="/${sanitizedLocale}/create-memo.html" class="btn btn-primary">${t('btn.createNew', sanitizedLocale)}</a>
+                        <a href="/${sanitizedLocale}/create-memo.html" class="btn btn-primary">${t(
+                          'btn.createNew',
+                          sanitizedLocale
+                        )}</a>
                         <a href="/${sanitizedLocale}" class="btn btn-primary">${t('btn.goHome', sanitizedLocale)}</a>
                     </div>
                 </div>
@@ -926,7 +1328,10 @@ export async function getReadMemoHTML(locale = 'en', origin = 'https://securemem
                     <h3>❌ ${t('common.error', sanitizedLocale)}</h3>
                     <p id="errorMessage"></p>
                     <div class="memo-actions">
-                        <a href="/${sanitizedLocale}/create-memo.html" class="btn btn-primary">${t('btn.createNew', sanitizedLocale)}</a>
+                        <a href="/${sanitizedLocale}/create-memo.html" class="btn btn-primary">${t(
+                          'btn.createNew',
+                          sanitizedLocale
+                        )}</a>
                         <a href="/${sanitizedLocale}" class="btn btn-primary">${t('btn.goHome', sanitizedLocale)}</a>
                     </div>
                 </div>
@@ -937,7 +1342,16 @@ export async function getReadMemoHTML(locale = 'en', origin = 'https://securemem
     </main>
 
     <footer class="footer">
-        <p><a href="https://github.com/timoheimonen/securememo.app" target="_blank" rel="noopener noreferrer">${t('footer.sourceCode', sanitizedLocale)}</a> | <a href="/${sanitizedLocale}/tos.html">${t('footer.tos', sanitizedLocale)}</a> | <a href="/${sanitizedLocale}/privacy.html">${t('footer.privacy', sanitizedLocale)}</a> | <a href="mailto:contact@securememo.app">contact@securememo.app</a></p>
+        <p><a href="https://github.com/timoheimonen/securememo.app" target="_blank" rel="noopener noreferrer">${t(
+          'footer.sourceCode',
+          sanitizedLocale
+        )}</a> | <a href="/${sanitizedLocale}/tos.html">${t(
+          'footer.tos',
+          sanitizedLocale
+        )}</a> | <a href="/${sanitizedLocale}/privacy.html">${t(
+          'footer.privacy',
+          sanitizedLocale
+        )}</a> | <a href="mailto:contact@securememo.app">contact@securememo.app</a></p>
         <p style="font-size: 0.8em; margin-top: 0.5em; opacity: 0.8;">${t('footer.tagline', sanitizedLocale)}</p>
     </footer>
 
@@ -947,9 +1361,9 @@ export async function getReadMemoHTML(locale = 'en', origin = 'https://securemem
 }
 
 export async function getToSHTML(locale = 'en', origin = 'https://securememo.app') {
-    const sanitizedLocale = sanitizeLocale(locale);
-    const canonicalUrl = `${origin}/${sanitizedLocale}/tos.html`;
-    return `<!DOCTYPE html>
+  const sanitizedLocale = sanitizeLocale(locale);
+  const canonicalUrl = `${origin}/${sanitizedLocale}/tos.html`;
+  return `<!DOCTYPE html>
 <html lang="${sanitizedLocale}">
 <head>
     <meta charset="UTF-8">
@@ -1017,7 +1431,10 @@ export async function getToSHTML(locale = 'en', origin = 'https://securememo.app
             <a href="/${sanitizedLocale}" class="nav-logo">securememo.app</a>
             
             <!-- Hamburger Menu Button -->
-            <button class="hamburger" type="button" aria-label="${t('nav.toggleMenu', sanitizedLocale)}" aria-expanded="false">
+            <button class="hamburger" type="button" aria-label="${t(
+              'nav.toggleMenu',
+              sanitizedLocale
+            )}" aria-expanded="false">
                 <span class="hamburger-line"></span>
                 <span class="hamburger-line"></span>
                 <span class="hamburger-line"></span>
@@ -1026,43 +1443,109 @@ export async function getToSHTML(locale = 'en', origin = 'https://securememo.app
             <!-- Navigation Menu -->
             <ul class="nav-menu" id="navMenu">
                 <li><a href="/${sanitizedLocale}" class="nav-link">${t('nav.home', sanitizedLocale)}</a></li>
-                <li><a href="/${sanitizedLocale}/about.html" class="nav-link">${t('nav.about', sanitizedLocale)}</a></li>
-                <li><a href="/${sanitizedLocale}/create-memo.html" class="nav-link">${t('nav.create', sanitizedLocale)}</a></li>
+                <li><a href="/${sanitizedLocale}/about.html" class="nav-link">${t(
+                  'nav.about',
+                  sanitizedLocale
+                )}</a></li>
+                <li><a href="/${sanitizedLocale}/create-memo.html" class="nav-link">${t(
+                  'nav.create',
+                  sanitizedLocale
+                )}</a></li>
                 <li class="language-dropdown">
                     <button class="language-toggle nav-link" aria-expanded="false" aria-haspopup="true">
                         ${getFlagEmoji(sanitizedLocale)} ${getLanguageDisplayName(sanitizedLocale)}
                     </button>
                     <div class="language-menu">
-                        <a href="/ar/tos.html" class="language-item ${sanitizedLocale === 'ar' ? 'active' : ''}" title="${t('language.arabic', sanitizedLocale)}">🌐 العربية</a>
-                        <a href="/bn/tos.html" class="language-item ${sanitizedLocale === 'bn' ? 'active' : ''}" title="${t('language.bengali', sanitizedLocale)}">🇧🇩 বাংলা</a>
-                        <a href="/cs/tos.html" class="language-item ${sanitizedLocale === 'cs' ? 'active' : ''}" title="${t('language.czech', sanitizedLocale)}">🇨🇿 Čeština</a>
-                        <a href="/da/tos.html" class="language-item ${sanitizedLocale === 'da' ? 'active' : ''}" title="${t('language.danish', sanitizedLocale)}">🇩🇰 Dansk</a>
-                        <a href="/de/tos.html" class="language-item ${sanitizedLocale === 'de' ? 'active' : ''}" title="${t('language.german', sanitizedLocale)}">🇩🇪 Deutsch</a>
-                        <a href="/el/tos.html" class="language-item ${sanitizedLocale === 'el' ? 'active' : ''}" title="${t('language.greek', sanitizedLocale)}">🇬🇷 Ελληνικά</a>
-                        <a href="/en/tos.html" class="language-item ${sanitizedLocale === 'en' ? 'active' : ''}" title="${t('language.english', sanitizedLocale)}">🇬🇧 English</a>
-                        <a href="/es/tos.html" class="language-item ${sanitizedLocale === 'es' ? 'active' : ''}" title="${t('language.spanish', sanitizedLocale)}">🇪🇸 Español</a>
-                        <a href="/fi/tos.html" class="language-item ${sanitizedLocale === 'fi' ? 'active' : ''}" title="${t('language.finnish', sanitizedLocale)}">🇫🇮 Suomi</a>
-                        <a href="/fr/tos.html" class="language-item ${sanitizedLocale === 'fr' ? 'active' : ''}" title="${t('language.french', sanitizedLocale)}">🇫🇷 Français</a>
-                        <a href="/hi/tos.html" class="language-item ${sanitizedLocale === 'hi' ? 'active' : ''}" title="${t('language.hindi', sanitizedLocale)}">🇮🇳 हिन्दी</a>
-                        <a href="/hu/tos.html" class="language-item ${sanitizedLocale === 'hu' ? 'active' : ''}" title="${t('language.hungarian', sanitizedLocale)}">🇭🇺 Magyar</a>
-                        <a href="/id/tos.html" class="language-item ${sanitizedLocale === 'id' ? 'active' : ''}" title="${t('language.indonesian', sanitizedLocale)}">🇮🇩 Bahasa Indonesia</a>
-                        <a href="/it/tos.html" class="language-item ${sanitizedLocale === 'it' ? 'active' : ''}" title="${t('language.italian', sanitizedLocale)}">🇮🇹 Italiano</a>
-                        <a href="/ja/tos.html" class="language-item ${sanitizedLocale === 'ja' ? 'active' : ''}" title="${t('language.japanese', sanitizedLocale)}">🇯🇵 日本語</a>
-                        <a href="/ko/tos.html" class="language-item ${sanitizedLocale === 'ko' ? 'active' : ''}" title="${t('language.korean', sanitizedLocale)}">🇰🇷 한국어</a>
-                        <a href="/nl/tos.html" class="language-item ${sanitizedLocale === 'nl' ? 'active' : ''}" title="${t('language.dutch', sanitizedLocale)}">🇳🇱 Nederlands</a>
-                        <a href="/no/tos.html" class="language-item ${sanitizedLocale === 'no' ? 'active' : ''}" title="${t('language.norwegian', sanitizedLocale)}">🇳🇴 Norsk</a>
-                        <a href="/pl/tos.html" class="language-item ${sanitizedLocale === 'pl' ? 'active' : ''}" title="${t('language.polish', sanitizedLocale)}">🇵🇱 Polski</a>
-                        <a href="/ptPT/tos.html" class="language-item ${sanitizedLocale === 'ptPT' ? 'active' : ''}" title="${t('language.portuguesePT', sanitizedLocale)}">🇵🇹 Português</a>
-                        <a href="/ptBR/tos.html" class="language-item ${sanitizedLocale === 'ptBR' ? 'active' : ''}" title="${t('language.portugueseBR', sanitizedLocale)}">🇧🇷 Português (Brasil)</a>
-                        <a href="/ru/tos.html" class="language-item ${sanitizedLocale === 'ru' ? 'active' : ''}" title="${t('language.russian', sanitizedLocale)}">🇷🇺 Русский</a>
-                        <a href="/ro/tos.html" class="language-item ${sanitizedLocale === 'ro' ? 'active' : ''}" title="${t('language.romanian', sanitizedLocale)}">🇷🇴 Română</a>
-                        <a href="/sv/tos.html" class="language-item ${sanitizedLocale === 'sv' ? 'active' : ''}" title="${t('language.swedish', sanitizedLocale)}">🇸🇪 Svenska</a>
-                        <a href="/tl/tos.html" class="language-item ${sanitizedLocale === 'tl' ? 'active' : ''}" title="${t('language.tagalog', sanitizedLocale)}">🇵🇭 Tagalog</a>
-                        <a href="/th/tos.html" class="language-item ${sanitizedLocale === 'th' ? 'active' : ''}" title="${t('language.thai', sanitizedLocale)}">🇹🇭 ไทย</a>
-                        <a href="/tr/tos.html" class="language-item ${sanitizedLocale === 'tr' ? 'active' : ''}" title="${t('language.turkish', sanitizedLocale)}">🇹🇷 Türkçe</a>
-                        <a href="/uk/tos.html" class="language-item ${sanitizedLocale === 'uk' ? 'active' : ''}" title="${t('language.ukrainian', sanitizedLocale)}">🇺🇦 Українська</a>
-                        <a href="/vi/tos.html" class="language-item ${sanitizedLocale === 'vi' ? 'active' : ''}" title="${t('language.vietnamese', sanitizedLocale)}">🇻🇳 Tiếng Việt</a>
-                        <a href="/zh/tos.html" class="language-item ${sanitizedLocale === 'zh' ? 'active' : ''}" title="${t('language.chinese', sanitizedLocale)}">🈶 中文</a>
+                        <a href="/ar/tos.html" class="language-item ${
+                          sanitizedLocale === 'ar' ? 'active' : ''
+                        }" title="${t('language.arabic', sanitizedLocale)}">🌐 العربية</a>
+                        <a href="/bn/tos.html" class="language-item ${
+                          sanitizedLocale === 'bn' ? 'active' : ''
+                        }" title="${t('language.bengali', sanitizedLocale)}">🇧🇩 বাংলা</a>
+                        <a href="/cs/tos.html" class="language-item ${
+                          sanitizedLocale === 'cs' ? 'active' : ''
+                        }" title="${t('language.czech', sanitizedLocale)}">🇨🇿 Čeština</a>
+                        <a href="/da/tos.html" class="language-item ${
+                          sanitizedLocale === 'da' ? 'active' : ''
+                        }" title="${t('language.danish', sanitizedLocale)}">🇩🇰 Dansk</a>
+                        <a href="/de/tos.html" class="language-item ${
+                          sanitizedLocale === 'de' ? 'active' : ''
+                        }" title="${t('language.german', sanitizedLocale)}">🇩🇪 Deutsch</a>
+                        <a href="/el/tos.html" class="language-item ${
+                          sanitizedLocale === 'el' ? 'active' : ''
+                        }" title="${t('language.greek', sanitizedLocale)}">🇬🇷 Ελληνικά</a>
+                        <a href="/en/tos.html" class="language-item ${
+                          sanitizedLocale === 'en' ? 'active' : ''
+                        }" title="${t('language.english', sanitizedLocale)}">🇬🇧 English</a>
+                        <a href="/es/tos.html" class="language-item ${
+                          sanitizedLocale === 'es' ? 'active' : ''
+                        }" title="${t('language.spanish', sanitizedLocale)}">🇪🇸 Español</a>
+                        <a href="/fi/tos.html" class="language-item ${
+                          sanitizedLocale === 'fi' ? 'active' : ''
+                        }" title="${t('language.finnish', sanitizedLocale)}">🇫🇮 Suomi</a>
+                        <a href="/fr/tos.html" class="language-item ${
+                          sanitizedLocale === 'fr' ? 'active' : ''
+                        }" title="${t('language.french', sanitizedLocale)}">🇫🇷 Français</a>
+                        <a href="/hi/tos.html" class="language-item ${
+                          sanitizedLocale === 'hi' ? 'active' : ''
+                        }" title="${t('language.hindi', sanitizedLocale)}">🇮🇳 हिन्दी</a>
+                        <a href="/hu/tos.html" class="language-item ${
+                          sanitizedLocale === 'hu' ? 'active' : ''
+                        }" title="${t('language.hungarian', sanitizedLocale)}">🇭🇺 Magyar</a>
+                        <a href="/id/tos.html" class="language-item ${
+                          sanitizedLocale === 'id' ? 'active' : ''
+                        }" title="${t('language.indonesian', sanitizedLocale)}">🇮🇩 Bahasa Indonesia</a>
+                        <a href="/it/tos.html" class="language-item ${
+                          sanitizedLocale === 'it' ? 'active' : ''
+                        }" title="${t('language.italian', sanitizedLocale)}">🇮🇹 Italiano</a>
+                        <a href="/ja/tos.html" class="language-item ${
+                          sanitizedLocale === 'ja' ? 'active' : ''
+                        }" title="${t('language.japanese', sanitizedLocale)}">🇯🇵 日本語</a>
+                        <a href="/ko/tos.html" class="language-item ${
+                          sanitizedLocale === 'ko' ? 'active' : ''
+                        }" title="${t('language.korean', sanitizedLocale)}">🇰🇷 한국어</a>
+                        <a href="/nl/tos.html" class="language-item ${
+                          sanitizedLocale === 'nl' ? 'active' : ''
+                        }" title="${t('language.dutch', sanitizedLocale)}">🇳🇱 Nederlands</a>
+                        <a href="/no/tos.html" class="language-item ${
+                          sanitizedLocale === 'no' ? 'active' : ''
+                        }" title="${t('language.norwegian', sanitizedLocale)}">🇳🇴 Norsk</a>
+                        <a href="/pl/tos.html" class="language-item ${
+                          sanitizedLocale === 'pl' ? 'active' : ''
+                        }" title="${t('language.polish', sanitizedLocale)}">🇵🇱 Polski</a>
+                        <a href="/ptPT/tos.html" class="language-item ${
+                          sanitizedLocale === 'ptPT' ? 'active' : ''
+                        }" title="${t('language.portuguesePT', sanitizedLocale)}">🇵🇹 Português</a>
+                        <a href="/ptBR/tos.html" class="language-item ${
+                          sanitizedLocale === 'ptBR' ? 'active' : ''
+                        }" title="${t('language.portugueseBR', sanitizedLocale)}">🇧🇷 Português (Brasil)</a>
+                        <a href="/ru/tos.html" class="language-item ${
+                          sanitizedLocale === 'ru' ? 'active' : ''
+                        }" title="${t('language.russian', sanitizedLocale)}">🇷🇺 Русский</a>
+                        <a href="/ro/tos.html" class="language-item ${
+                          sanitizedLocale === 'ro' ? 'active' : ''
+                        }" title="${t('language.romanian', sanitizedLocale)}">🇷🇴 Română</a>
+                        <a href="/sv/tos.html" class="language-item ${
+                          sanitizedLocale === 'sv' ? 'active' : ''
+                        }" title="${t('language.swedish', sanitizedLocale)}">🇸🇪 Svenska</a>
+                        <a href="/tl/tos.html" class="language-item ${
+                          sanitizedLocale === 'tl' ? 'active' : ''
+                        }" title="${t('language.tagalog', sanitizedLocale)}">🇵🇭 Tagalog</a>
+                        <a href="/th/tos.html" class="language-item ${
+                          sanitizedLocale === 'th' ? 'active' : ''
+                        }" title="${t('language.thai', sanitizedLocale)}">🇹🇭 ไทย</a>
+                        <a href="/tr/tos.html" class="language-item ${
+                          sanitizedLocale === 'tr' ? 'active' : ''
+                        }" title="${t('language.turkish', sanitizedLocale)}">🇹🇷 Türkçe</a>
+                        <a href="/uk/tos.html" class="language-item ${
+                          sanitizedLocale === 'uk' ? 'active' : ''
+                        }" title="${t('language.ukrainian', sanitizedLocale)}">🇺🇦 Українська</a>
+                        <a href="/vi/tos.html" class="language-item ${
+                          sanitizedLocale === 'vi' ? 'active' : ''
+                        }" title="${t('language.vietnamese', sanitizedLocale)}">🇻🇳 Tiếng Việt</a>
+                        <a href="/zh/tos.html" class="language-item ${
+                          sanitizedLocale === 'zh' ? 'active' : ''
+                        }" title="${t('language.chinese', sanitizedLocale)}">🈶 中文</a>
                     </div>
                 </li>
             </ul>
@@ -1080,19 +1563,34 @@ export async function getToSHTML(locale = 'en', origin = 'https://securememo.app
             <div class="legal-toc">
                 <h2>${t('tos.tableOfContents.title', sanitizedLocale)}</h2>
                 <ol>
-                    <li><a href="#service-description">${t('tos.tableOfContents.serviceDescription', sanitizedLocale)}</a></li>
+                    <li><a href="#service-description">${t(
+                      'tos.tableOfContents.serviceDescription',
+                      sanitizedLocale
+                    )}</a></li>
                     <li><a href="#acceptable-use">${t('tos.tableOfContents.acceptableUse', sanitizedLocale)}</a></li>
                     <li><a href="#privacy-data">${t('tos.tableOfContents.privacyData', sanitizedLocale)}</a></li>
-                    <li><a href="#service-limitations">${t('tos.tableOfContents.serviceLimitations', sanitizedLocale)}</a></li>
-                    <li><a href="#security-disclaimers">${t('tos.tableOfContents.securityDisclaimers', sanitizedLocale)}</a></li>
-                    <li><a href="#intellectual-property">${t('tos.tableOfContents.intellectualProperty', sanitizedLocale)}</a></li>
+                    <li><a href="#service-limitations">${t(
+                      'tos.tableOfContents.serviceLimitations',
+                      sanitizedLocale
+                    )}</a></li>
+                    <li><a href="#security-disclaimers">${t(
+                      'tos.tableOfContents.securityDisclaimers',
+                      sanitizedLocale
+                    )}</a></li>
+                    <li><a href="#intellectual-property">${t(
+                      'tos.tableOfContents.intellectualProperty',
+                      sanitizedLocale
+                    )}</a></li>
                     <li><a href="#indemnification">${t('tos.tableOfContents.indemnification', sanitizedLocale)}</a></li>
                     <li><a href="#termination">${t('tos.tableOfContents.termination', sanitizedLocale)}</a></li>
                     <li><a href="#changes-terms">${t('tos.tableOfContents.changesTerms', sanitizedLocale)}</a></li>
                     <li><a href="#governing-law">${t('tos.tableOfContents.governingLaw', sanitizedLocale)}</a></li>
                     <li><a href="#miscellaneous">${t('tos.tableOfContents.miscellaneous', sanitizedLocale)}</a></li>
                     <li><a href="#contact">${t('tos.tableOfContents.contact', sanitizedLocale)}</a></li>
-                    <li><a href="#language-disclaimer">${t('tos.tableOfContents.languageDisclaimer', sanitizedLocale)}</a></li>
+                    <li><a href="#language-disclaimer">${t(
+                      'tos.tableOfContents.languageDisclaimer',
+                      sanitizedLocale
+                    )}</a></li>
                 </ol>
             </div>
 
@@ -1124,7 +1622,10 @@ export async function getToSHTML(locale = 'en', origin = 'https://securememo.app
                     <li>${t('tos.privacyData.noRecovery', sanitizedLocale)}</li>
                     <li>${t('tos.privacyData.gdpr', sanitizedLocale)}</li>
                 </ul>
-                <p>${t('tos.privacyData.moreDetails', sanitizedLocale)} <a href="/${sanitizedLocale}/privacy.html">${t('tos.privacyData.privacyNotice', sanitizedLocale)}</a>.</p>
+                <p>${t('tos.privacyData.moreDetails', sanitizedLocale)} <a href="/${sanitizedLocale}/privacy.html">${t(
+                  'tos.privacyData.privacyNotice',
+                  sanitizedLocale
+                )}</a>.</p>
             </div>
 
             <div class="usage-section" id="service-limitations">
@@ -1186,7 +1687,13 @@ export async function getToSHTML(locale = 'en', origin = 'https://securememo.app
 
             <div class="usage-section" id="contact">
                 <h2>${t('tos.contact.title', sanitizedLocale)}</h2>
-                <p>${t('tos.contact.content', sanitizedLocale)} <a href="https://github.com/timoheimonen/securememo.app" target="_blank" rel="noopener noreferrer">${t('tos.contact.github', sanitizedLocale)}</a> ${t('tos.contact.email', sanitizedLocale)}</p>
+                <p>${t(
+                  'tos.contact.content',
+                  sanitizedLocale
+                )} <a href="https://github.com/timoheimonen/securememo.app" target="_blank" rel="noopener noreferrer">${t(
+                  'tos.contact.github',
+                  sanitizedLocale
+                )}</a> ${t('tos.contact.email', sanitizedLocale)}</p>
             </div>
 
             <div class="features-detail" id="language-disclaimer">
@@ -1197,7 +1704,16 @@ export async function getToSHTML(locale = 'en', origin = 'https://securememo.app
     </main>
 
     <footer class="footer">
-        <p><a href="https://github.com/timoheimonen/securememo.app" target="_blank" rel="noopener noreferrer">${t('footer.sourceCode', sanitizedLocale)}</a> | <a href="/${sanitizedLocale}/tos.html">${t('footer.tos', sanitizedLocale)}</a> | <a href="/${sanitizedLocale}/privacy.html">${t('footer.privacy', sanitizedLocale)}</a> | <a href="mailto:contact@securememo.app">contact@securememo.app</a></p>
+        <p><a href="https://github.com/timoheimonen/securememo.app" target="_blank" rel="noopener noreferrer">${t(
+          'footer.sourceCode',
+          sanitizedLocale
+        )}</a> | <a href="/${sanitizedLocale}/tos.html">${t(
+          'footer.tos',
+          sanitizedLocale
+        )}</a> | <a href="/${sanitizedLocale}/privacy.html">${t(
+          'footer.privacy',
+          sanitizedLocale
+        )}</a> | <a href="mailto:contact@securememo.app">contact@securememo.app</a></p>
         <p style="font-size: 0.8em; margin-top: 0.5em; opacity: 0.8;">${t('footer.tagline', sanitizedLocale)}</p>
     </footer>
 
@@ -1207,9 +1723,9 @@ export async function getToSHTML(locale = 'en', origin = 'https://securememo.app
 }
 
 export async function getPrivacyHTML(locale = 'en', origin = 'https://securememo.app') {
-    const sanitizedLocale = sanitizeLocale(locale);
-    const canonicalUrl = `${origin}/${sanitizedLocale}/privacy.html`;
-    return `<!DOCTYPE html>
+  const sanitizedLocale = sanitizeLocale(locale);
+  const canonicalUrl = `${origin}/${sanitizedLocale}/privacy.html`;
+  return `<!DOCTYPE html>
 <html lang="${sanitizedLocale}">
 <head>
     <meta charset="UTF-8">
@@ -1277,7 +1793,10 @@ export async function getPrivacyHTML(locale = 'en', origin = 'https://securememo
             <a href="/${sanitizedLocale}" class="nav-logo">securememo.app</a>
             
             <!-- Hamburger Menu Button -->
-            <button class="hamburger" type="button" aria-label="${t('nav.toggleMenu', sanitizedLocale)}" aria-expanded="false">
+            <button class="hamburger" type="button" aria-label="${t(
+              'nav.toggleMenu',
+              sanitizedLocale
+            )}" aria-expanded="false">
                 <span class="hamburger-line"></span>
                 <span class="hamburger-line"></span>
                 <span class="hamburger-line"></span>
@@ -1286,43 +1805,109 @@ export async function getPrivacyHTML(locale = 'en', origin = 'https://securememo
             <!-- Navigation Menu -->
             <ul class="nav-menu" id="navMenu">
                 <li><a href="/${sanitizedLocale}" class="nav-link">${t('nav.home', sanitizedLocale)}</a></li>
-                <li><a href="/${sanitizedLocale}/about.html" class="nav-link">${t('nav.about', sanitizedLocale)}</a></li>
-                <li><a href="/${sanitizedLocale}/create-memo.html" class="nav-link">${t('nav.create', sanitizedLocale)}</a></li>
+                <li><a href="/${sanitizedLocale}/about.html" class="nav-link">${t(
+                  'nav.about',
+                  sanitizedLocale
+                )}</a></li>
+                <li><a href="/${sanitizedLocale}/create-memo.html" class="nav-link">${t(
+                  'nav.create',
+                  sanitizedLocale
+                )}</a></li>
                 <li class="language-dropdown">
                     <button class="language-toggle nav-link" aria-expanded="false" aria-haspopup="true">
                         ${getFlagEmoji(sanitizedLocale)} ${getLanguageDisplayName(sanitizedLocale)}
                     </button>
                     <div class="language-menu">
-                        <a href="/ar/privacy.html" class="language-item ${sanitizedLocale === 'ar' ? 'active' : ''}" title="${t('language.arabic', sanitizedLocale)}">🌐 العربية</a>
-                        <a href="/bn/privacy.html" class="language-item ${sanitizedLocale === 'bn' ? 'active' : ''}" title="${t('language.bengali', sanitizedLocale)}">🇧🇩 বাংলা</a>
-                        <a href="/cs/privacy.html" class="language-item ${sanitizedLocale === 'cs' ? 'active' : ''}" title="${t('language.czech', sanitizedLocale)}">🇨🇿 Čeština</a>
-                        <a href="/da/privacy.html" class="language-item ${sanitizedLocale === 'da' ? 'active' : ''}" title="${t('language.danish', sanitizedLocale)}">🇩🇰 Dansk</a>
-                        <a href="/de/privacy.html" class="language-item ${sanitizedLocale === 'de' ? 'active' : ''}" title="${t('language.german', sanitizedLocale)}">🇩🇪 Deutsch</a>
-                        <a href="/el/privacy.html" class="language-item ${sanitizedLocale === 'el' ? 'active' : ''}" title="${t('language.greek', sanitizedLocale)}">🇬🇷 Ελληνικά</a>
-                        <a href="/en/privacy.html" class="language-item ${sanitizedLocale === 'en' ? 'active' : ''}" title="${t('language.english', sanitizedLocale)}">🇬🇧 English</a>
-                        <a href="/es/privacy.html" class="language-item ${sanitizedLocale === 'es' ? 'active' : ''}" title="${t('language.spanish', sanitizedLocale)}">🇪🇸 Español</a>
-                        <a href="/fi/privacy.html" class="language-item ${sanitizedLocale === 'fi' ? 'active' : ''}" title="${t('language.finnish', sanitizedLocale)}">🇫🇮 Suomi</a>
-                        <a href="/fr/privacy.html" class="language-item ${sanitizedLocale === 'fr' ? 'active' : ''}" title="${t('language.french', sanitizedLocale)}">🇫🇷 Français</a>
-                        <a href="/hi/privacy.html" class="language-item ${sanitizedLocale === 'hi' ? 'active' : ''}" title="${t('language.hindi', sanitizedLocale)}">🇮🇳 हिन्दी</a>
-                        <a href="/hu/privacy.html" class="language-item ${sanitizedLocale === 'hu' ? 'active' : ''}" title="${t('language.hungarian', sanitizedLocale)}">🇭🇺 Magyar</a>
-                        <a href="/id/privacy.html" class="language-item ${sanitizedLocale === 'id' ? 'active' : ''}" title="${t('language.indonesian', sanitizedLocale)}">🇮🇩 Bahasa Indonesia</a>
-                        <a href="/it/privacy.html" class="language-item ${sanitizedLocale === 'it' ? 'active' : ''}" title="${t('language.italian', sanitizedLocale)}">🇮🇹 Italiano</a>
-                        <a href="/ja/privacy.html" class="language-item ${sanitizedLocale === 'ja' ? 'active' : ''}" title="${t('language.japanese', sanitizedLocale)}">🇯🇵 日本語</a>
-                        <a href="/ko/privacy.html" class="language-item ${sanitizedLocale === 'ko' ? 'active' : ''}" title="${t('language.korean', sanitizedLocale)}">🇰🇷 한국어</a>
-                        <a href="/nl/privacy.html" class="language-item ${sanitizedLocale === 'nl' ? 'active' : ''}" title="${t('language.dutch', sanitizedLocale)}">🇳🇱 Nederlands</a>
-                        <a href="/no/privacy.html" class="language-item ${sanitizedLocale === 'no' ? 'active' : ''}" title="${t('language.norwegian', sanitizedLocale)}">🇳🇴 Norsk</a>
-                        <a href="/pl/privacy.html" class="language-item ${sanitizedLocale === 'pl' ? 'active' : ''}" title="${t('language.polish', sanitizedLocale)}">🇵🇱 Polski</a>
-                        <a href="/ptPT/privacy.html" class="language-item ${sanitizedLocale === 'ptPT' ? 'active' : ''}" title="${t('language.portuguesePT', sanitizedLocale)}">🇵🇹 Português</a>
-                        <a href="/ptBR/privacy.html" class="language-item ${sanitizedLocale === 'ptBR' ? 'active' : ''}" title="${t('language.portugueseBR', sanitizedLocale)}">🇧🇷 Português (Brasil)</a>
-                        <a href="/ru/privacy.html" class="language-item ${sanitizedLocale === 'ru' ? 'active' : ''}" title="${t('language.russian', sanitizedLocale)}">🇷🇺 Русский</a>
-                        <a href="/ro/privacy.html" class="language-item ${sanitizedLocale === 'ro' ? 'active' : ''}" title="${t('language.romanian', sanitizedLocale)}">🇷🇴 Română</a>
-                        <a href="/sv/privacy.html" class="language-item ${sanitizedLocale === 'sv' ? 'active' : ''}" title="${t('language.swedish', sanitizedLocale)}">🇸🇪 Svenska</a>
-                        <a href="/tl/privacy.html" class="language-item ${sanitizedLocale === 'tl' ? 'active' : ''}" title="${t('language.tagalog', sanitizedLocale)}">🇵🇭 Tagalog</a>
-                        <a href="/th/privacy.html" class="language-item ${sanitizedLocale === 'th' ? 'active' : ''}" title="${t('language.thai', sanitizedLocale)}">🇹🇭 ไทย</a>
-                        <a href="/tr/privacy.html" class="language-item ${sanitizedLocale === 'tr' ? 'active' : ''}" title="${t('language.turkish', sanitizedLocale)}">🇹🇷 Türkçe</a>
-                        <a href="/uk/privacy.html" class="language-item ${sanitizedLocale === 'uk' ? 'active' : ''}" title="${t('language.ukrainian', sanitizedLocale)}">🇺🇦 Українська</a>
-                        <a href="/vi/privacy.html" class="language-item ${sanitizedLocale === 'vi' ? 'active' : ''}" title="${t('language.vietnamese', sanitizedLocale)}">🇻🇳 Tiếng Việt</a>
-                        <a href="/zh/privacy.html" class="language-item ${sanitizedLocale === 'zh' ? 'active' : ''}" title="${t('language.chinese', sanitizedLocale)}">🈶 中文</a>
+                        <a href="/ar/privacy.html" class="language-item ${
+                          sanitizedLocale === 'ar' ? 'active' : ''
+                        }" title="${t('language.arabic', sanitizedLocale)}">🌐 العربية</a>
+                        <a href="/bn/privacy.html" class="language-item ${
+                          sanitizedLocale === 'bn' ? 'active' : ''
+                        }" title="${t('language.bengali', sanitizedLocale)}">🇧🇩 বাংলা</a>
+                        <a href="/cs/privacy.html" class="language-item ${
+                          sanitizedLocale === 'cs' ? 'active' : ''
+                        }" title="${t('language.czech', sanitizedLocale)}">🇨🇿 Čeština</a>
+                        <a href="/da/privacy.html" class="language-item ${
+                          sanitizedLocale === 'da' ? 'active' : ''
+                        }" title="${t('language.danish', sanitizedLocale)}">🇩🇰 Dansk</a>
+                        <a href="/de/privacy.html" class="language-item ${
+                          sanitizedLocale === 'de' ? 'active' : ''
+                        }" title="${t('language.german', sanitizedLocale)}">🇩🇪 Deutsch</a>
+                        <a href="/el/privacy.html" class="language-item ${
+                          sanitizedLocale === 'el' ? 'active' : ''
+                        }" title="${t('language.greek', sanitizedLocale)}">🇬🇷 Ελληνικά</a>
+                        <a href="/en/privacy.html" class="language-item ${
+                          sanitizedLocale === 'en' ? 'active' : ''
+                        }" title="${t('language.english', sanitizedLocale)}">🇬🇧 English</a>
+                        <a href="/es/privacy.html" class="language-item ${
+                          sanitizedLocale === 'es' ? 'active' : ''
+                        }" title="${t('language.spanish', sanitizedLocale)}">🇪🇸 Español</a>
+                        <a href="/fi/privacy.html" class="language-item ${
+                          sanitizedLocale === 'fi' ? 'active' : ''
+                        }" title="${t('language.finnish', sanitizedLocale)}">🇫🇮 Suomi</a>
+                        <a href="/fr/privacy.html" class="language-item ${
+                          sanitizedLocale === 'fr' ? 'active' : ''
+                        }" title="${t('language.french', sanitizedLocale)}">🇫🇷 Français</a>
+                        <a href="/hi/privacy.html" class="language-item ${
+                          sanitizedLocale === 'hi' ? 'active' : ''
+                        }" title="${t('language.hindi', sanitizedLocale)}">🇮🇳 हिन्दी</a>
+                        <a href="/hu/privacy.html" class="language-item ${
+                          sanitizedLocale === 'hu' ? 'active' : ''
+                        }" title="${t('language.hungarian', sanitizedLocale)}">🇭🇺 Magyar</a>
+                        <a href="/id/privacy.html" class="language-item ${
+                          sanitizedLocale === 'id' ? 'active' : ''
+                        }" title="${t('language.indonesian', sanitizedLocale)}">🇮🇩 Bahasa Indonesia</a>
+                        <a href="/it/privacy.html" class="language-item ${
+                          sanitizedLocale === 'it' ? 'active' : ''
+                        }" title="${t('language.italian', sanitizedLocale)}">🇮🇹 Italiano</a>
+                        <a href="/ja/privacy.html" class="language-item ${
+                          sanitizedLocale === 'ja' ? 'active' : ''
+                        }" title="${t('language.japanese', sanitizedLocale)}">🇯🇵 日本語</a>
+                        <a href="/ko/privacy.html" class="language-item ${
+                          sanitizedLocale === 'ko' ? 'active' : ''
+                        }" title="${t('language.korean', sanitizedLocale)}">🇰🇷 한국어</a>
+                        <a href="/nl/privacy.html" class="language-item ${
+                          sanitizedLocale === 'nl' ? 'active' : ''
+                        }" title="${t('language.dutch', sanitizedLocale)}">🇳🇱 Nederlands</a>
+                        <a href="/no/privacy.html" class="language-item ${
+                          sanitizedLocale === 'no' ? 'active' : ''
+                        }" title="${t('language.norwegian', sanitizedLocale)}">🇳🇴 Norsk</a>
+                        <a href="/pl/privacy.html" class="language-item ${
+                          sanitizedLocale === 'pl' ? 'active' : ''
+                        }" title="${t('language.polish', sanitizedLocale)}">🇵🇱 Polski</a>
+                        <a href="/ptPT/privacy.html" class="language-item ${
+                          sanitizedLocale === 'ptPT' ? 'active' : ''
+                        }" title="${t('language.portuguesePT', sanitizedLocale)}">🇵🇹 Português</a>
+                        <a href="/ptBR/privacy.html" class="language-item ${
+                          sanitizedLocale === 'ptBR' ? 'active' : ''
+                        }" title="${t('language.portugueseBR', sanitizedLocale)}">🇧🇷 Português (Brasil)</a>
+                        <a href="/ru/privacy.html" class="language-item ${
+                          sanitizedLocale === 'ru' ? 'active' : ''
+                        }" title="${t('language.russian', sanitizedLocale)}">🇷🇺 Русский</a>
+                        <a href="/ro/privacy.html" class="language-item ${
+                          sanitizedLocale === 'ro' ? 'active' : ''
+                        }" title="${t('language.romanian', sanitizedLocale)}">🇷🇴 Română</a>
+                        <a href="/sv/privacy.html" class="language-item ${
+                          sanitizedLocale === 'sv' ? 'active' : ''
+                        }" title="${t('language.swedish', sanitizedLocale)}">🇸🇪 Svenska</a>
+                        <a href="/tl/privacy.html" class="language-item ${
+                          sanitizedLocale === 'tl' ? 'active' : ''
+                        }" title="${t('language.tagalog', sanitizedLocale)}">🇵🇭 Tagalog</a>
+                        <a href="/th/privacy.html" class="language-item ${
+                          sanitizedLocale === 'th' ? 'active' : ''
+                        }" title="${t('language.thai', sanitizedLocale)}">🇹🇭 ไทย</a>
+                        <a href="/tr/privacy.html" class="language-item ${
+                          sanitizedLocale === 'tr' ? 'active' : ''
+                        }" title="${t('language.turkish', sanitizedLocale)}">🇹🇷 Türkçe</a>
+                        <a href="/uk/privacy.html" class="language-item ${
+                          sanitizedLocale === 'uk' ? 'active' : ''
+                        }" title="${t('language.ukrainian', sanitizedLocale)}">🇺🇦 Українська</a>
+                        <a href="/vi/privacy.html" class="language-item ${
+                          sanitizedLocale === 'vi' ? 'active' : ''
+                        }" title="${t('language.vietnamese', sanitizedLocale)}">🇻🇳 Tiếng Việt</a>
+                        <a href="/zh/privacy.html" class="language-item ${
+                          sanitizedLocale === 'zh' ? 'active' : ''
+                        }" title="${t('language.chinese', sanitizedLocale)}">🈶 中文</a>
                     </div>
                 </li>
             </ul>
@@ -1340,15 +1925,30 @@ export async function getPrivacyHTML(locale = 'en', origin = 'https://securememo
             <div class="legal-toc">
                 <h2>${t('privacy.tableOfContents.title', sanitizedLocale)}</h2>
                 <ol>
-                    <li><a href="#information-collected">${t('privacy.tableOfContents.informationCollected', sanitizedLocale)}</a></li>
+                    <li><a href="#information-collected">${t(
+                      'privacy.tableOfContents.informationCollected',
+                      sanitizedLocale
+                    )}</a></li>
                     <li><a href="#how-we-use">${t('privacy.tableOfContents.howWeUse', sanitizedLocale)}</a></li>
                     <li><a href="#data-sharing">${t('privacy.tableOfContents.dataSharing', sanitizedLocale)}</a></li>
                     <li><a href="#data-security">${t('privacy.tableOfContents.dataSecurity', sanitizedLocale)}</a></li>
-                    <li><a href="#data-retention">${t('privacy.tableOfContents.dataRetention', sanitizedLocale)}</a></li>
+                    <li><a href="#data-retention">${t(
+                      'privacy.tableOfContents.dataRetention',
+                      sanitizedLocale
+                    )}</a></li>
                     <li><a href="#your-rights">${t('privacy.tableOfContents.yourRights', sanitizedLocale)}</a></li>
-                    <li><a href="#children-privacy">${t('privacy.tableOfContents.childrenPrivacy', sanitizedLocale)}</a></li>
-                    <li><a href="#international-transfers">${t('privacy.tableOfContents.internationalTransfers', sanitizedLocale)}</a></li>
-                    <li><a href="#changes-notice">${t('privacy.tableOfContents.changesNotice', sanitizedLocale)}</a></li>
+                    <li><a href="#children-privacy">${t(
+                      'privacy.tableOfContents.childrenPrivacy',
+                      sanitizedLocale
+                    )}</a></li>
+                    <li><a href="#international-transfers">${t(
+                      'privacy.tableOfContents.internationalTransfers',
+                      sanitizedLocale
+                    )}</a></li>
+                    <li><a href="#changes-notice">${t(
+                      'privacy.tableOfContents.changesNotice',
+                      sanitizedLocale
+                    )}</a></li>
                     <li><a href="#contact">${t('privacy.tableOfContents.contact', sanitizedLocale)}</a></li>
                 </ol>
             </div>
@@ -1443,18 +2043,33 @@ export async function getPrivacyHTML(locale = 'en', origin = 'https://securememo
 
             <div class="features-detail" id="contact">
                 <h2>${t('privacy.contact.title', sanitizedLocale)}</h2>
-                <p>${t('privacy.contact.intro', sanitizedLocale)} <a href="https://github.com/timoheimonen/securememo.app" target="_blank" rel="noopener noreferrer">${t('privacy.contact.github', sanitizedLocale)}</a> ${t('privacy.contact.email', sanitizedLocale)}</p>
+                <p>${t(
+                  'privacy.contact.intro',
+                  sanitizedLocale
+                )} <a href="https://github.com/timoheimonen/securememo.app" target="_blank" rel="noopener noreferrer">${t(
+                  'privacy.contact.github',
+                  sanitizedLocale
+                )}</a> ${t('privacy.contact.email', sanitizedLocale)}</p>
                 <p>${t('privacy.contact.disclaimer', sanitizedLocale)}</p>
             </div>
         </div>
     </main>
 
     <footer class="footer">
-        <p><a href="https://github.com/timoheimonen/securememo.app" target="_blank" rel="noopener noreferrer">${t('footer.sourceCode', sanitizedLocale)}</a> | <a href="/${sanitizedLocale}/tos.html">${t('footer.tos', sanitizedLocale)}</a> | <a href="/${sanitizedLocale}/privacy.html">${t('footer.privacy', sanitizedLocale)}</a> | <a href="mailto:contact@securememo.app">contact@securememo.app</a></p>
+        <p><a href="https://github.com/timoheimonen/securememo.app" target="_blank" rel="noopener noreferrer">${t(
+          'footer.sourceCode',
+          sanitizedLocale
+        )}</a> | <a href="/${sanitizedLocale}/tos.html">${t(
+          'footer.tos',
+          sanitizedLocale
+        )}</a> | <a href="/${sanitizedLocale}/privacy.html">${t(
+          'footer.privacy',
+          sanitizedLocale
+        )}</a> | <a href="mailto:contact@securememo.app">contact@securememo.app</a></p>
         <p style="font-size: 0.8em; margin-top: 0.5em; opacity: 0.8;">${t('footer.tagline', sanitizedLocale)}</p>
     </footer>
 
     <script src="/js/common.js" type="module" nonce="{{CSP_NONCE}}" defer></script>
 </body>
 </html>`;
-} 
+}

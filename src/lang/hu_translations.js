@@ -46,55 +46,76 @@ export const hu = {
 
   // Page titles and descriptions
   'page.home.title': 'securememo.app - Titkosított, önmegsemmisítő jegyzetek',
-  'page.home.description': 'Hozzon létre titkosított jegyzeteket, amelyek elolvasás után megsemmisülnek. Végponttól végpontig tartó titkosítás, adatvédelem, biztonságos jegyzetmegosztás AES-256-tal. Nincs követés, nincs reklám.',
-  'page.home.keywords': 'biztonságos jegyzet, titkosított jegyzet, önmegsemmisítő jegyzet, privát jegyzetmegosztás, végponttól végpontig titkosítás, AES-256, adatvédelem, biztonságos jegyzetmegosztás',
+  'page.home.description':
+    'Hozzon létre titkosított jegyzeteket, amelyek elolvasás után megsemmisülnek. Végponttól végpontig tartó titkosítás, adatvédelem, biztonságos jegyzetmegosztás AES-256-tal. Nincs követés, nincs reklám.',
+  'page.home.keywords':
+    'biztonságos jegyzet, titkosított jegyzet, önmegsemmisítő jegyzet, privát jegyzetmegosztás, végponttól végpontig titkosítás, AES-256, adatvédelem, biztonságos jegyzetmegosztás',
   'page.home.ogTitle': 'securememo.app - Titkosított, önmegsemmisítő jegyzetek',
-  'page.home.ogDescription': 'Ossza meg bizalmas információit biztonságosan olyan jegyzetekkel, amelyek egy megtekintés vagy lejárat után törlődnek. Böngészőoldali AES-256 titkosítás.',
+  'page.home.ogDescription':
+    'Ossza meg bizalmas információit biztonságosan olyan jegyzetekkel, amelyek egy megtekintés vagy lejárat után törlődnek. Böngészőoldali AES-256 titkosítás.',
   'page.home.twitterDescription': 'Adatvédelem-központú alkalmazás biztonságos, önmegsemmisítő jegyzetekhez.',
   'page.about.title': 'Névjegy securememo.app - Adatvédelem-központú titkosított jegyzetek',
-  'page.about.description': 'Ismerje meg a securememo.app adatvédelem-központú megközelítését a titkosított üzenetküldéshez. Böngészőoldali AES-256 titkosítás, önmegsemmisítő üzenetek és zero-knowledge architektúra.',
-  'page.about.keywords': 'névjegy biztonságos jegyzet, adatvédelem-központú üzenetküldés, böngészőoldali titkosítás, AES-256, önmegsemmisítő üzenetek, zero-knowledge, biztonságos jegyzetmegosztás',
+  'page.about.description':
+    'Ismerje meg a securememo.app adatvédelem-központú megközelítését a titkosított üzenetküldéshez. Böngészőoldali AES-256 titkosítás, önmegsemmisítő üzenetek és zero-knowledge architektúra.',
+  'page.about.keywords':
+    'névjegy biztonságos jegyzet, adatvédelem-központú üzenetküldés, böngészőoldali titkosítás, AES-256, önmegsemmisítő üzenetek, zero-knowledge, biztonságos jegyzetmegosztás',
   'page.about.ogTitle': 'Névjegy securememo.app - Adatvédelem-központú titkosított jegyzetek',
-  'page.about.ogDescription': 'Tudja meg, hogyan védi a securememo.app az Ön adatvédelmét böngészőoldali titkosítással és önmegsemmisítő üzenetekkel.',
+  'page.about.ogDescription':
+    'Tudja meg, hogyan védi a securememo.app az Ön adatvédelmét böngészőoldali titkosítással és önmegsemmisítő üzenetekkel.',
   'page.about.twitterDescription': 'Adatvédelem-központú titkosított üzenetküldés böngészőoldali titkosítással.',
   'page.create.title': 'Biztonságos jegyzet létrehozása - Titkosított, önmegsemmisítő jegyzet',
-  'page.create.keywords': 'biztonságos jegyzet létrehozása, titkosított jegyzet, önmegsemmisítő jegyzet, AES-256 titkosítás, privát jegyzetmegosztás, biztonságos jegyzet készítése',
+  'page.create.keywords':
+    'biztonságos jegyzet létrehozása, titkosított jegyzet, önmegsemmisítő jegyzet, AES-256 titkosítás, privát jegyzetmegosztás, biztonságos jegyzet készítése',
   'page.read.title': 'Biztonságos jegyzet olvasása - Titkosított jegyzet visszafejtése',
-  'page.read.keywords': 'biztonságos jegyzet olvasása, jegyzet visszafejtése, titkosított jegyzet olvasása, AES-256 visszafejtés, privát jegyzet hozzáférés',
+  'page.read.keywords':
+    'biztonságos jegyzet olvasása, jegyzet visszafejtése, titkosított jegyzet olvasása, AES-256 visszafejtés, privát jegyzet hozzáférés',
   'page.tos.title': 'Felhasználási feltételek - securememo.app jogi feltételek',
-  'page.tos.description': 'Felhasználási feltételek a securememo.app számára - titkosított jegyzetmegosztó szolgáltatás. Tudjon meg többet a megengedett használatról, adatvédelemről, biztonságról és jogi feltételekről biztonságos jegyzetmegosztó platformunkon.',
-  'page.tos.keywords': 'felhasználási feltételek, biztonságos jegyzet jogi, titkosított jegyzet feltételek, adatvédelmi irányelvek, megengedett használat, biztonságos jegyzetmegosztás feltételei',
+  'page.tos.description':
+    'Felhasználási feltételek a securememo.app számára - titkosított jegyzetmegosztó szolgáltatás. Tudjon meg többet a megengedett használatról, adatvédelemről, biztonságról és jogi feltételekről biztonságos jegyzetmegosztó platformunkon.',
+  'page.tos.keywords':
+    'felhasználási feltételek, biztonságos jegyzet jogi, titkosított jegyzet feltételek, adatvédelmi irányelvek, megengedett használat, biztonságos jegyzetmegosztás feltételei',
   'page.tos.ogTitle': 'Felhasználási feltételek - securememo.app jogi feltételek',
-  'page.tos.ogDescription': 'Jogi feltételek és kikötések a securememo.app titkosított jegyzetmegosztó szolgáltatáshoz.',
+  'page.tos.ogDescription':
+    'Jogi feltételek és kikötések a securememo.app titkosított jegyzetmegosztó szolgáltatáshoz.',
   'page.tos.twitterDescription': 'Jogi feltételek a securememo.app titkosított jegyzetmegosztó szolgáltatáshoz.',
   'page.privacy.title': 'Adatvédelmi tájékoztató - securememo.app adatvédelem',
-  'page.privacy.description': 'Adatvédelmi tájékoztató a securememo.app számára - tudja meg, hogyan védjük adatait böngészőoldali titkosítással, zero-knowledge architektúrával és minimális adatgyűjtéssel biztonságos jegyzetmegosztáshoz.',
-  'page.privacy.keywords': 'adatvédelmi tájékoztató, biztonságos jegyzet adatvédelem, adatvédelem, GDPR megfelelés, böngészőoldali titkosítás, zero-knowledge, biztonságos jegyzetmegosztás adatvédelem',
+  'page.privacy.description':
+    'Adatvédelmi tájékoztató a securememo.app számára - tudja meg, hogyan védjük adatait böngészőoldali titkosítással, zero-knowledge architektúrával és minimális adatgyűjtéssel biztonságos jegyzetmegosztáshoz.',
+  'page.privacy.keywords':
+    'adatvédelmi tájékoztató, biztonságos jegyzet adatvédelem, adatvédelem, GDPR megfelelés, böngészőoldali titkosítás, zero-knowledge, biztonságos jegyzetmegosztás adatvédelem',
   'page.privacy.ogTitle': 'Adatvédelmi tájékoztató - securememo.app adatvédelem',
-  'page.privacy.ogDescription': 'Hogyan védi a securememo.app az Ön adatvédelmét böngészőoldali titkosítással és minimális adatgyűjtéssel.',
+  'page.privacy.ogDescription':
+    'Hogyan védi a securememo.app az Ön adatvédelmét böngészőoldali titkosítással és minimális adatgyűjtéssel.',
   'page.privacy.twitterDescription': 'Adatvédelem böngészőoldali titkosítással és zero-knowledge architektúrával.',
 
   // Main page content
   'home.hero.title': 'securememo.app',
-  'home.hero.subtitle': 'Hozzon létre titkosított jegyzeteket, amelyek elolvasás vagy lejárat után önmegsemmisülnek. Titkai biztonságban maradnak.',
+  'home.hero.subtitle':
+    'Hozzon létre titkosított jegyzeteket, amelyek elolvasás vagy lejárat után önmegsemmisülnek. Titkai biztonságban maradnak.',
   'home.hero.btnPrimary': 'Biztonságos jegyzet létrehozása',
   'home.hero.btnSecondary': 'Tudjon meg többet',
 
   'home.features.title': 'Hogyan működik',
   'home.features.encrypt.title': '🔐 Titkosítás böngészőben',
-  'home.features.encrypt.description': 'Írja be jegyzetét. A jegyzet közvetlenül a böngészőben titkosításra kerül erős AES-256 titkosítással, mielőtt eljutna a szervereinkhez.',
+  'home.features.encrypt.description':
+    'Írja be jegyzetét. A jegyzet közvetlenül a böngészőben titkosításra kerül erős AES-256 titkosítással, mielőtt eljutna a szervereinkhez.',
   'home.features.share.title': '🔗 Biztonságos megosztás',
-  'home.features.share.description': 'Egyedi URL-t és külön véletlenszerű jelszót kap, amelyeket külön csatornákon keresztül oszthat meg a nagyobb biztonság érdekében.',
+  'home.features.share.description':
+    'Egyedi URL-t és külön véletlenszerű jelszót kap, amelyeket külön csatornákon keresztül oszthat meg a nagyobb biztonság érdekében.',
   'home.features.destruct.title': '💥 Önmegsemmisítés',
-  'home.features.destruct.description': 'A jegyzet véglegesen törlődik, miután elolvasták vagy lejárt az időkorlát (8 órától 30 napig).',
+  'home.features.destruct.description':
+    'A jegyzet véglegesen törlődik, miután elolvasták vagy lejárt az időkorlát (8 órától 30 napig).',
 
   'home.security.title': 'Biztonsági funkciók',
   'home.security.encryption.title': '🔒 Valódi kliensoldali titkosítás',
-  'home.security.encryption.description': 'Jegyzete a böngészőben AES-256-GCM-mel és erős kulcsszármaztatással van titkosítva. Soha nem látjuk a tiszta szöveget.',
+  'home.security.encryption.description':
+    'Jegyzete a böngészőben AES-256-GCM-mel és erős kulcsszármaztatással van titkosítva. Soha nem látjuk a tiszta szöveget.',
   'home.security.delete.title': '🗑️ Megbízható önmegsemmisítés',
-  'home.security.delete.description': 'A jegyzetek örökre eltűnnek olvasás vagy lejárat után, automatikus törléssel minden órában. Nincs biztonsági mentés vagy visszaállítás.',
+  'home.security.delete.description':
+    'A jegyzetek örökre eltűnnek olvasás vagy lejárat után, automatikus törléssel minden órában. Nincs biztonsági mentés vagy visszaállítás.',
   'home.security.password.title': '🌐 Nulla jelszóismeret',
-  'home.security.password.description': 'A jelszavakat teljesen a böngészőben generáljuk és kezeljük. Soha nem küldjük el vagy tároljuk szervereinken.',
+  'home.security.password.description':
+    'A jelszavakat teljesen a böngészőben generáljuk és kezeljük. Soha nem küldjük el vagy tároljuk szervereinken.',
 
   'footer.sourceCode': 'Forráskód megtekintése a GitHubon',
   'footer.tos': 'Felhasználási feltételek',
@@ -103,7 +124,8 @@ export const hu = {
 
   // About page content
   'about.hero.title': 'A securememo.app névjegye',
-  'about.hero.subtitle': 'A securememo.app egy adatvédelem-központú alkalmazás, amely lehetővé teszi titkosított jegyzetek létrehozását, amelyek elolvasás vagy lejárat után önmegsemmisülnek. A biztonság és az adatvédelem a legfontosabb szempontok. A forráskód elérhető a GitHubon.',
+  'about.hero.subtitle':
+    'A securememo.app egy adatvédelem-központú alkalmazás, amely lehetővé teszi titkosított jegyzetek létrehozását, amelyek elolvasás vagy lejárat után önmegsemmisülnek. A biztonság és az adatvédelem a legfontosabb szempontok. A forráskód elérhető a GitHubon.',
 
   'about.tech.title': 'Technológiai háttér',
   'about.tech.cloudflare': 'Cloudflare Workers: Szerver nélküli számítási platform globális teljesítményhez',
@@ -115,28 +137,38 @@ export const hu = {
 
   'about.features.title': 'Biztonsági funkciók',
   'about.features.clientEncryption.title': '🔐 Kliensoldali titkosítás',
-  'about.features.clientEncryption.description': 'Minden titkosítás a böngészőben történik a Web Crypto API segítségével. Jegyzeted AES-256-tal titkosítva kerül a szervereinkre.',
+  'about.features.clientEncryption.description':
+    'Minden titkosítás a böngészőben történik a Web Crypto API segítségével. Jegyzeted AES-256-tal titkosítva kerül a szervereinkre.',
   'about.features.passwordSharing.title': '🔑 Külön jelszómegosztás',
-  'about.features.passwordSharing.description': 'A titkosítási jelszó külön generálódik az URL-től, és biztonság érdekében más csatornán kell megosztani.',
+  'about.features.passwordSharing.description':
+    'A titkosítási jelszó külön generálódik az URL-től, és biztonság érdekében más csatornán kell megosztani.',
   'about.features.selfDestruct.title': '💥 Önmegsemmisítő jegyzetek',
-  'about.features.selfDestruct.description': 'A jegyzet elolvasás vagy lejárat után azonnal és véglegesen törlődik az adatbázisból. Nem marad nyoma.',
+  'about.features.selfDestruct.description':
+    'A jegyzet elolvasás vagy lejárat után azonnal és véglegesen törlődik az adatbázisból. Nem marad nyoma.',
   'about.features.noStorage.title': '🌐 Nincs jelszótárolás',
-  'about.features.noStorage.description': 'Soha nem tárolunk titkosítási jelszavakat a szervereinken. Ezek csak a böngésződ memóriájában léteznek.',
+  'about.features.noStorage.description':
+    'Soha nem tárolunk titkosítási jelszavakat a szervereinken. Ezek csak a böngésződ memóriájában léteznek.',
   'about.features.global.title': '⚡ Globális teljesítmény',
-  'about.features.global.description': 'A Cloudflare globális hálózatán fut, így villámgyors hozzáférést biztosít bárhonnan.',
+  'about.features.global.description':
+    'A Cloudflare globális hálózatán fut, így villámgyors hozzáférést biztosít bárhonnan.',
   'about.features.privacy.title': '🔒 Adatvédelem az első helyen',
-  'about.features.privacy.description': 'Nincs szükség felhasználói fiókra. Nincs követés. Nincs analitika. Az Ön adatvédelme a legfontosabb.',
+  'about.features.privacy.description':
+    'Nincs szükség felhasználói fiókra. Nincs követés. Nincs analitika. Az Ön adatvédelme a legfontosabb.',
 
   'about.usage.title': 'Használati útmutató',
   'about.usage.create.title': '1. Jegyzet létrehozása',
-  'about.usage.create.description': 'Lépjen a "Biztonságos jegyzet létrehozása" oldalra, írja be jegyzetét, és válasszon lejárati időt (8 óra, 1 nap, 2 nap, 1 hét vagy maximum 30 nap). A jegyzetek elolvasás vagy lejárat után törlődnek. A rendszer véletlenszerű titkosítási jelszót generál.',
+  'about.usage.create.description':
+    'Lépjen a "Biztonságos jegyzet létrehozása" oldalra, írja be jegyzetét, és válasszon lejárati időt (8 óra, 1 nap, 2 nap, 1 hét vagy maximum 30 nap). A jegyzetek elolvasás vagy lejárat után törlődnek. A rendszer véletlenszerű titkosítási jelszót generál.',
   'about.usage.share.title': '2. Link és jelszó megosztása',
-  'about.usage.share.description': 'Másolja ki a generált URL-t és jelszót, majd ossza meg őket a címzettel külön csatornákon a nagyobb biztonság érdekében.',
+  'about.usage.share.description':
+    'Másolja ki a generált URL-t és jelszót, majd ossza meg őket a címzettel külön csatornákon a nagyobb biztonság érdekében.',
   'about.usage.destruct.title': '3. Önmegsemmisítés',
-  'about.usage.destruct.description': 'Amikor a címzett megnyitja a linket és külön megadja a jelszót, a jegyzet visszafejtésre kerül, majd véglegesen törlődik, ha elolvasták, vagy automatikusan törlődik, ha lejárt. A lejárt jegyzetek automatikusan törlődnek minden órában.',
+  'about.usage.destruct.description':
+    'Amikor a címzett megnyitja a linket és külön megadja a jelszót, a jegyzet visszafejtésre kerül, majd véglegesen törlődik, ha elolvasták, vagy automatikusan törlődik, ha lejárt. A lejárt jegyzetek automatikusan törlődnek minden órában.',
 
   'about.cta.title': 'Készen áll az indulásra?',
-  'about.cta.subtitle': 'Hozza létre első biztonságos jegyzetét, és tapasztalja meg a valódi végponttól végpontig titkosítást.',
+  'about.cta.subtitle':
+    'Hozza létre első biztonságos jegyzetét, és tapasztalja meg a valódi végponttól végpontig titkosítást.',
   'about.cta.createBtn': 'Biztonságos jegyzet létrehozása',
   'about.cta.homeBtn': 'Vissza a kezdőlapra',
 
@@ -159,61 +191,88 @@ export const hu = {
   'tos.tableOfContents.languageDisclaimer': 'Nyelv és fordítás',
 
   'tos.serviceDescription.title': '1. Szolgáltatás leírása',
-  'tos.serviceDescription.content': 'A securememo.app egy biztonságos jegyzetmegosztó szolgáltatás, amely lehetővé teszi titkosított jegyzetek létrehozását, amelyek elolvasás vagy lejárat után önmegsemmisülnek. A szolgáltatás kliensoldali titkosítást használ, így a jegyzet tartalma soha nem érhető el a szervereink számára.',
+  'tos.serviceDescription.content':
+    'A securememo.app egy biztonságos jegyzetmegosztó szolgáltatás, amely lehetővé teszi titkosított jegyzetek létrehozását, amelyek elolvasás vagy lejárat után önmegsemmisülnek. A szolgáltatás kliensoldali titkosítást használ, így a jegyzet tartalma soha nem érhető el a szervereink számára.',
 
   'tos.acceptableUse.title': '2. Megengedett használat',
-  'tos.acceptableUse.intro': 'Ön vállalja, hogy a szolgáltatást csak jogszerű célokra és a jelen feltételeknek megfelelően használja. Nem engedélyezett:',
-  'tos.acceptableUse.illegal': 'A szolgáltatás használata illegális, káros, fenyegető, zaklató vagy rágalmazó tartalom továbbítására',
+  'tos.acceptableUse.intro':
+    'Ön vállalja, hogy a szolgáltatást csak jogszerű célokra és a jelen feltételeknek megfelelően használja. Nem engedélyezett:',
+  'tos.acceptableUse.illegal':
+    'A szolgáltatás használata illegális, káros, fenyegető, zaklató vagy rágalmazó tartalom továbbítására',
   'tos.acceptableUse.bypass': 'Biztonsági intézkedések vagy CAPTCHA védelmek megkerülésének kísérlete',
   'tos.acceptableUse.automated': 'Automatizált eszközök vagy szkriptek használata jegyzetek létrehozásához',
-  'tos.acceptableUse.malware': 'Kártékony szoftvert, adathalász linket vagy egyéb káros tartalmat tartalmazó jegyzetek megosztása',
+  'tos.acceptableUse.malware':
+    'Kártékony szoftvert, adathalász linket vagy egyéb káros tartalmat tartalmazó jegyzetek megosztása',
   'tos.acceptableUse.spam': 'A szolgáltatás használata spam vagy tömeges, kéretlen jegyzetek megosztására',
   'tos.acceptableUse.reverse': 'A szolgáltatás visszafejtésének vagy kompromittálásának kísérlete',
 
   'tos.privacyData.title': '3. Adatvédelem és adatkezelés',
-  'tos.privacyData.noAccess': 'Nincs tartalomhozzáférés: Nem tudjuk elérni, olvasni vagy visszaállítani a jegyzeted tartalmát. Minden titkosítás a böngésződben történik.',
-  'tos.privacyData.noPersonal': 'Minimális adatgyűjtés: Nem kérünk felhasználói fiókot és nem gyűjtünk személyes adatokat a szolgáltatás használatához. Az egyetlen személyes adat, amit gyűjthetünk, ha Ön önkéntesen felveszi velünk a kapcsolatot támogatás céljából. Ha e-mailt küld nekünk, az e-mail címét és az üzenet tartalmát csak a megkeresés megválaszolására használjuk. Ezt az információt más célra nem használjuk, és harmadik felekkel nem osztjuk meg az Ön hozzájárulása nélkül.',
-  'tos.privacyData.securityLogging': 'Biztonsági naplózás: Az IP-címeket és biztonsággal kapcsolatos metaadatokat ideiglenesen naplózzuk kizárólag visszaélés megelőzése és a szolgáltatás integritásának védelme érdekében. Ezeket a naplókat soha nem használjuk követésre vagy profilalkotásra.',
-  'tos.privacyData.automaticDeletion': 'Automatikus törlés: A jegyzetek automatikusan törlődnek olvasás után vagy lejáratkor.',
+  'tos.privacyData.noAccess':
+    'Nincs tartalomhozzáférés: Nem tudjuk elérni, olvasni vagy visszaállítani a jegyzeted tartalmát. Minden titkosítás a böngésződben történik.',
+  'tos.privacyData.noPersonal':
+    'Minimális adatgyűjtés: Nem kérünk felhasználói fiókot és nem gyűjtünk személyes adatokat a szolgáltatás használatához. Az egyetlen személyes adat, amit gyűjthetünk, ha Ön önkéntesen felveszi velünk a kapcsolatot támogatás céljából. Ha e-mailt küld nekünk, az e-mail címét és az üzenet tartalmát csak a megkeresés megválaszolására használjuk. Ezt az információt más célra nem használjuk, és harmadik felekkel nem osztjuk meg az Ön hozzájárulása nélkül.',
+  'tos.privacyData.securityLogging':
+    'Biztonsági naplózás: Az IP-címeket és biztonsággal kapcsolatos metaadatokat ideiglenesen naplózzuk kizárólag visszaélés megelőzése és a szolgáltatás integritásának védelme érdekében. Ezeket a naplókat soha nem használjuk követésre vagy profilalkotásra.',
+  'tos.privacyData.automaticDeletion':
+    'Automatikus törlés: A jegyzetek automatikusan törlődnek olvasás után vagy lejáratkor.',
   'tos.privacyData.noRecovery': 'Nincs visszaállítás: Ha egy jegyzet törlődik, nem lehet visszaállítani.',
-  'tos.privacyData.gdpr': 'GDPR megfelelés: Elkötelezettek vagyunk a GDPR alapelvei mellett. Minimalizáljuk az adatgyűjtést és csak a szükséges adatokat dolgozzuk fel (például ideiglenes biztonsági naplókat) jogos érdek alapján a szolgáltatás védelme érdekében.',
+  'tos.privacyData.gdpr':
+    'GDPR megfelelés: Elkötelezettek vagyunk a GDPR alapelvei mellett. Minimalizáljuk az adatgyűjtést és csak a szükséges adatokat dolgozzuk fel (például ideiglenes biztonsági naplókat) jogos érdek alapján a szolgáltatás védelme érdekében.',
   'tos.privacyData.moreDetails': 'További részletekért tekintse meg',
   'tos.privacyData.privacyNotice': 'Adatvédelmi tájékoztatónkat',
 
   'tos.serviceLimitations.title': '4. Szolgáltatás korlátai',
   'tos.serviceLimitations.messageSize': 'Üzenet mérete: Maximum 10 000 karakter jegyzetenként',
-  'tos.serviceLimitations.expiryTimes': 'Lejárati idők: 8 óra, 24 óra, 48 óra, 1 hét vagy olvasás után törlés (max. 30 nap)',
-  'tos.serviceLimitations.availability': 'Elérhetőség: A szolgáltatás "ahogy van" állapotban érhető el, garancia nélkül',
-  'tos.serviceLimitations.noDelivery': 'Nincs kézbesítési garancia: Nem tudjuk garantálni, hogy a jegyzeteket kézbesítik, elolvassák vagy időben törlik.',
+  'tos.serviceLimitations.expiryTimes':
+    'Lejárati idők: 8 óra, 24 óra, 48 óra, 1 hét vagy olvasás után törlés (max. 30 nap)',
+  'tos.serviceLimitations.availability':
+    'Elérhetőség: A szolgáltatás "ahogy van" állapotban érhető el, garancia nélkül',
+  'tos.serviceLimitations.noDelivery':
+    'Nincs kézbesítési garancia: Nem tudjuk garantálni, hogy a jegyzeteket kézbesítik, elolvassák vagy időben törlik.',
 
   'tos.securityDisclaimers.title': '5. Biztonság és jogi nyilatkozatok',
-  'tos.securityDisclaimers.userResponsibility': 'Felhasználói felelősség: Ön felelős a jegyzet URL-ek biztonságos megosztásáért és a jelszavak védelméért. Ha a jelszavak elvesznek, a jegyzetek nem állíthatók vissza.',
-  'tos.securityDisclaimers.noWarranty': 'Jótállás kizárása: A szolgáltatás mindenféle jótállás nélkül érhető el. Titkosítási szolgáltatásaink "ahogy van" és "ahogy elérhető" alapon működnek. Nem garantáljuk, hogy a titkosítás megszakítás nélkül, hibamentesen vagy minden fenyegetéstől védve működik.',
-  'tos.securityDisclaimers.limitation': 'Felelősség korlátozása: Nem vállalunk felelősséget a szolgáltatás használatából eredő károkért. Ön tudomásul veszi, hogy az elektronikus továbbítás vagy tárolás egyik módja sem 100%-ban biztonságos, és nem vállalunk felelősséget a jegyzetek jogosulatlan hozzáféréséért vagy elfogásáért. Titkosítási szolgáltatásaink használata saját felelősségre történik.',
-  'tos.securityDisclaimers.securityMeasures': 'Biztonsági intézkedések: Bár biztonsági intézkedéseket alkalmazunk, nincs 100%-ban biztonságos rendszer.',
-  'tos.securityDisclaimers.exportControls': 'Exportkorlátozások: Ön vállalja, hogy nem használja a szolgáltatást exportkorlátozó jogszabályok megsértésével, beleértve a szankcionált országokban való használatot.',
+  'tos.securityDisclaimers.userResponsibility':
+    'Felhasználói felelősség: Ön felelős a jegyzet URL-ek biztonságos megosztásáért és a jelszavak védelméért. Ha a jelszavak elvesznek, a jegyzetek nem állíthatók vissza.',
+  'tos.securityDisclaimers.noWarranty':
+    'Jótállás kizárása: A szolgáltatás mindenféle jótállás nélkül érhető el. Titkosítási szolgáltatásaink "ahogy van" és "ahogy elérhető" alapon működnek. Nem garantáljuk, hogy a titkosítás megszakítás nélkül, hibamentesen vagy minden fenyegetéstől védve működik.',
+  'tos.securityDisclaimers.limitation':
+    'Felelősség korlátozása: Nem vállalunk felelősséget a szolgáltatás használatából eredő károkért. Ön tudomásul veszi, hogy az elektronikus továbbítás vagy tárolás egyik módja sem 100%-ban biztonságos, és nem vállalunk felelősséget a jegyzetek jogosulatlan hozzáféréséért vagy elfogásáért. Titkosítási szolgáltatásaink használata saját felelősségre történik.',
+  'tos.securityDisclaimers.securityMeasures':
+    'Biztonsági intézkedések: Bár biztonsági intézkedéseket alkalmazunk, nincs 100%-ban biztonságos rendszer.',
+  'tos.securityDisclaimers.exportControls':
+    'Exportkorlátozások: Ön vállalja, hogy nem használja a szolgáltatást exportkorlátozó jogszabályok megsértésével, beleértve a szankcionált országokban való használatot.',
 
   'tos.intellectualProperty.title': '6. Szellemi tulajdon',
-  'tos.intellectualProperty.content': 'A szolgáltatás és minden hozzá kapcsolódó anyag, beleértve a szöveget, grafikákat, logókat és szoftvert, a securememo.app vagy licencadóinak tulajdona, és szerzői jog, védjegy és egyéb szellemi tulajdonjogi törvények védik. Ön vállalja, hogy nem módosítja, nem sokszorosítja, nem terjeszti és nem hoz létre származékos műveket a tartalmunk alapján kifejezett engedély nélkül, kivéve a személyes, nem kereskedelmi használatot a szolgáltatáson belül.',
-  'tos.intellectualProperty.copyright': 'Szerzői jog és DMCA irányelv: Ha úgy gondolja, hogy megsértették a szerzői jogát, kérjük, vegye fel velünk a kapcsolatot a contact@securememo.app címen a DMCA szerinti szükséges információkkal (pl. a mű azonosítása, elérhetőségei és jóhiszemű nyilatkozat).',
+  'tos.intellectualProperty.content':
+    'A szolgáltatás és minden hozzá kapcsolódó anyag, beleértve a szöveget, grafikákat, logókat és szoftvert, a securememo.app vagy licencadóinak tulajdona, és szerzői jog, védjegy és egyéb szellemi tulajdonjogi törvények védik. Ön vállalja, hogy nem módosítja, nem sokszorosítja, nem terjeszti és nem hoz létre származékos műveket a tartalmunk alapján kifejezett engedély nélkül, kivéve a személyes, nem kereskedelmi használatot a szolgáltatáson belül.',
+  'tos.intellectualProperty.copyright':
+    'Szerzői jog és DMCA irányelv: Ha úgy gondolja, hogy megsértették a szerzői jogát, kérjük, vegye fel velünk a kapcsolatot a contact@securememo.app címen a DMCA szerinti szükséges információkkal (pl. a mű azonosítása, elérhetőségei és jóhiszemű nyilatkozat).',
 
   'tos.indemnification.title': '7. Kártalanítás',
-  'tos.indemnification.content': 'Ön vállalja, hogy megvédi, kártalanítja és mentesíti a securememo.app-ot és annak leányvállalatait, tisztségviselőit, igazgatóit, alkalmazottait és ügynökeit minden olyan követeléssel, felelősséggel, kár, veszteség és költség alól, beleértve az ésszerű ügyvédi díjakat is, amelyek a szolgáltatásainkhoz való hozzáféréséből vagy használatából, illetve a jelen feltételek megsértéséből erednek.',
+  'tos.indemnification.content':
+    'Ön vállalja, hogy megvédi, kártalanítja és mentesíti a securememo.app-ot és annak leányvállalatait, tisztségviselőit, igazgatóit, alkalmazottait és ügynökeit minden olyan követeléssel, felelősséggel, kár, veszteség és költség alól, beleértve az ésszerű ügyvédi díjakat is, amelyek a szolgáltatásainkhoz való hozzáféréséből vagy használatából, illetve a jelen feltételek megsértéséből erednek.',
 
   'tos.termination.title': '8. Megszüntetés',
-  'tos.termination.content': 'Fenntartjuk a jogot, hogy megszüntessük vagy felfüggesszük a szolgáltatáshoz való hozzáférést a feltételek megsértése vagy bármely más okból saját belátásunk szerint.',
+  'tos.termination.content':
+    'Fenntartjuk a jogot, hogy megszüntessük vagy felfüggesszük a szolgáltatáshoz való hozzáférést a feltételek megsértése vagy bármely más okból saját belátásunk szerint.',
 
   'tos.changesTerms.title': '9. Feltételek módosítása',
-  'tos.changesTerms.content': 'A feltételeket bármikor frissíthetjük. A szolgáltatás további használata a frissített feltételek elfogadását jelenti.',
+  'tos.changesTerms.content':
+    'A feltételeket bármikor frissíthetjük. A szolgáltatás további használata a frissített feltételek elfogadását jelenti.',
 
   'tos.governingLaw.title': '10. Governing Law & Jurisdiction',
-  'tos.governingLaw.content': 'A jelen Felhasználási feltételekre és minden külön megállapodásra, amely alapján szolgáltatást nyújtunk Önnek, Finnország jogszabályai az irányadók, a kollíziós jogi elvek figyelmen kívül hagyásával. Az esetleges vitákat a Helsinki bíróságon kell rendezni.',
+  'tos.governingLaw.content':
+    'A jelen Felhasználási feltételekre és minden külön megállapodásra, amely alapján szolgáltatást nyújtunk Önnek, Finnország jogszabályai az irányadók, a kollíziós jogi elvek figyelmen kívül hagyásával. Az esetleges vitákat a Helsinki bíróságon kell rendezni.',
 
   'tos.miscellaneous.title': '11. Miscellaneous',
-  'tos.miscellaneous.severability': 'Elválaszthatóság: Ha a jelen feltételek bármely rendelkezését egy illetékes bíróság érvénytelennek vagy végrehajthatatlannak találja, az adott rendelkezés leválasztásra kerül, a többi rendelkezés pedig teljes mértékben hatályban marad.',
-  'tos.miscellaneous.assignment': 'Átruházás: Ön nem ruházhatja át vagy nem adhatja tovább a jelen feltételeket jogi úton vagy más módon, előzetes írásbeli hozzájárulásunk nélkül. Mi saját belátásunk szerint, értesítés nélkül átruházhatjuk ezeket a feltételeket.',
-  'tos.miscellaneous.waiver': 'Lemondás: Egyetlen feltételről való lemondás sem tekinthető további vagy folyamatos lemondásnak, kivéve, ha írásban történik.',
-  'tos.miscellaneous.children': 'Gyermekek adatvédelme: Szolgáltatásunk nem gyermekeknek (13 év alatt, vagy egyes joghatóságokban 16 év alatt) készült. Nem gyűjtünk tudatosan adatokat gyermekektől. Ha ilyen adatokról tudomást szerzünk, azonnal töröljük azokat.',
+  'tos.miscellaneous.severability':
+    'Elválaszthatóság: Ha a jelen feltételek bármely rendelkezését egy illetékes bíróság érvénytelennek vagy végrehajthatatlannak találja, az adott rendelkezés leválasztásra kerül, a többi rendelkezés pedig teljes mértékben hatályban marad.',
+  'tos.miscellaneous.assignment':
+    'Átruházás: Ön nem ruházhatja át vagy nem adhatja tovább a jelen feltételeket jogi úton vagy más módon, előzetes írásbeli hozzájárulásunk nélkül. Mi saját belátásunk szerint, értesítés nélkül átruházhatjuk ezeket a feltételeket.',
+  'tos.miscellaneous.waiver':
+    'Lemondás: Egyetlen feltételről való lemondás sem tekinthető további vagy folyamatos lemondásnak, kivéve, ha írásban történik.',
+  'tos.miscellaneous.children':
+    'Gyermekek adatvédelme: Szolgáltatásunk nem gyermekeknek (13 év alatt, vagy egyes joghatóságokban 16 év alatt) készült. Nem gyűjtünk tudatosan adatokat gyermekektől. Ha ilyen adatokról tudomást szerzünk, azonnal töröljük azokat.',
 
   'tos.contact.title': '12. Contact',
   'tos.contact.content': 'A feltételekkel kapcsolatos kérdésekért látogassa meg',
@@ -221,7 +280,8 @@ export const hu = {
   'tos.contact.email': 'vagy írjon a contact@securememo.app címre.',
 
   'tos.languageDisclaimer.title': '13. Language and Translation',
-  'tos.languageDisclaimer.content': 'A jelen Felhasználási feltételek más nyelvekre is lefordíthatók az Ön kényelme érdekében. Eltérés vagy ellentmondás esetén az angol nyelvű változat az irányadó.',
+  'tos.languageDisclaimer.content':
+    'A jelen Felhasználási feltételek más nyelvekre is lefordíthatók az Ön kényelme érdekében. Eltérés vagy ellentmondás esetén az angol nyelvű változat az irányadó.',
 
   // Privacy Notice page content
   'privacy.hero.title': 'Privacy Notice for securememo.app',
@@ -238,67 +298,100 @@ export const hu = {
   'privacy.tableOfContents.changesNotice': 'Az adatvédelmi tájékoztató változásai',
   'privacy.tableOfContents.contact': 'Kapcsolat',
 
-  'privacy.intro.p1': 'A securememo.app ("mi", "minket" vagy "miénk") elkötelezett az Ön adatainak védelme mellett. Ez az adatvédelmi tájékoztató bemutatja, hogyan kezeljük az információkat a szolgáltatásunkban, amely lehetővé teszi titkosított jegyzetek létrehozását és megosztását, amelyek elolvasás vagy lejárat után önmegsemmisülnek. Szolgáltatásunk középpontjában az adatvédelem áll: minden titkosítás a böngészőben, kliensoldalon történik, így nem férünk hozzá a jegyzet tartalmához.',
-  'privacy.intro.p2': 'A securememo.app használatával elfogadja az ebben az adatvédelmi tájékoztatóban leírt gyakorlatokat. Ha nem ért egyet, kérjük, ne használja a szolgáltatást.',
+  'privacy.intro.p1':
+    'A securememo.app ("mi", "minket" vagy "miénk") elkötelezett az Ön adatainak védelme mellett. Ez az adatvédelmi tájékoztató bemutatja, hogyan kezeljük az információkat a szolgáltatásunkban, amely lehetővé teszi titkosított jegyzetek létrehozását és megosztását, amelyek elolvasás vagy lejárat után önmegsemmisülnek. Szolgáltatásunk középpontjában az adatvédelem áll: minden titkosítás a böngészőben, kliensoldalon történik, így nem férünk hozzá a jegyzet tartalmához.',
+  'privacy.intro.p2':
+    'A securememo.app használatával elfogadja az ebben az adatvédelmi tájékoztatóban leírt gyakorlatokat. Ha nem ért egyet, kérjük, ne használja a szolgáltatást.',
 
   'privacy.informationCollected.title': '1. Milyen információkat gyűjtünk',
-  'privacy.informationCollected.intro': 'Minimális információt gyűjtünk a szolgáltatás biztonságos és hatékony működtetéséhez. Konkrétan:',
-  'privacy.informationCollected.memoData': 'Jegyzetadatok: Amikor jegyzetet hoz létre, csak az üzenet titkosított változatát tároljuk szervereinken (Cloudflare Workers és D1 adatbázis). A titkosítási kulcs (jelszó) teljes egészében a böngészőben generálódik és kezelődik, soha nem küldjük el vagy tároljuk. A jegyzetek automatikusan törlődnek elolvasás vagy lejárat után (opciók: 8 óra, 1 nap, 2 nap, 1 hét vagy 30 nap).',
-  'privacy.informationCollected.noPersonal': 'Minimális személyes adatgyűjtés: Nem kérünk felhasználói fiókot, e-mail címet, nevet vagy más azonosítót a szolgáltatás használatához, és nem gyűjtünk olyan adatot, amely közvetlenül azonosíthatná Önt. Az egyetlen személyes adat, amit kaphatunk, ha Ön önkéntesen e-mailben megkeres minket támogatásért – ekkor az e-mail címet és az üzenet tartalmát a válasz megadásához használjuk. Ezt az információt más célra nem használjuk és az Ön hozzájárulása nélkül nem osztjuk meg.',
-  'privacy.informationCollected.securityData': 'Biztonsággal kapcsolatos adatok: Visszaélés megelőzése és a szolgáltatás integritása érdekében:',
-  'privacy.informationCollected.ipLogs': 'Ideiglenesen naplózzuk az IP-címeket és a kérések metaadatait (pl. időbélyegek), hogy felismerjük és megelőzzük a spamet, botokat vagy rosszindulatú tevékenységet.',
-  'privacy.informationCollected.turnstile': 'Cloudflare Turnstile CAPTCHA-t használunk az automatizált visszaélések megelőzésére. A Turnstile az adatvédelem érdekében készült, és nem követi a felhasználókat webhelyek között.',
-  'privacy.informationCollected.noAnalytics': 'Nincs analitika vagy követés: Nem használunk sütiket, követő pixeleket, harmadik féltől származó analitikát vagy reklámeszközöket. Nincs felhasználói profilalkotás, viselkedéskövetés vagy marketing célú adatgyűjtés.',
-  'privacy.informationCollected.noSensitive': 'Nem gyűjtünk érzékeny személyes adatokat, helyadatokat vagy eszközazonosítókat azon kívül, ami a szolgáltatás alapvető működéséhez szükséges.',
+  'privacy.informationCollected.intro':
+    'Minimális információt gyűjtünk a szolgáltatás biztonságos és hatékony működtetéséhez. Konkrétan:',
+  'privacy.informationCollected.memoData':
+    'Jegyzetadatok: Amikor jegyzetet hoz létre, csak az üzenet titkosított változatát tároljuk szervereinken (Cloudflare Workers és D1 adatbázis). A titkosítási kulcs (jelszó) teljes egészében a böngészőben generálódik és kezelődik, soha nem küldjük el vagy tároljuk. A jegyzetek automatikusan törlődnek elolvasás vagy lejárat után (opciók: 8 óra, 1 nap, 2 nap, 1 hét vagy 30 nap).',
+  'privacy.informationCollected.noPersonal':
+    'Minimális személyes adatgyűjtés: Nem kérünk felhasználói fiókot, e-mail címet, nevet vagy más azonosítót a szolgáltatás használatához, és nem gyűjtünk olyan adatot, amely közvetlenül azonosíthatná Önt. Az egyetlen személyes adat, amit kaphatunk, ha Ön önkéntesen e-mailben megkeres minket támogatásért – ekkor az e-mail címet és az üzenet tartalmát a válasz megadásához használjuk. Ezt az információt más célra nem használjuk és az Ön hozzájárulása nélkül nem osztjuk meg.',
+  'privacy.informationCollected.securityData':
+    'Biztonsággal kapcsolatos adatok: Visszaélés megelőzése és a szolgáltatás integritása érdekében:',
+  'privacy.informationCollected.ipLogs':
+    'Ideiglenesen naplózzuk az IP-címeket és a kérések metaadatait (pl. időbélyegek), hogy felismerjük és megelőzzük a spamet, botokat vagy rosszindulatú tevékenységet.',
+  'privacy.informationCollected.turnstile':
+    'Cloudflare Turnstile CAPTCHA-t használunk az automatizált visszaélések megelőzésére. A Turnstile az adatvédelem érdekében készült, és nem követi a felhasználókat webhelyek között.',
+  'privacy.informationCollected.noAnalytics':
+    'Nincs analitika vagy követés: Nem használunk sütiket, követő pixeleket, harmadik féltől származó analitikát vagy reklámeszközöket. Nincs felhasználói profilalkotás, viselkedéskövetés vagy marketing célú adatgyűjtés.',
+  'privacy.informationCollected.noSensitive':
+    'Nem gyűjtünk érzékeny személyes adatokat, helyadatokat vagy eszközazonosítókat azon kívül, ami a szolgáltatás alapvető működéséhez szükséges.',
 
   'privacy.howWeUse.title': '2. Az információk felhasználása',
   'privacy.howWeUse.intro': 'A gyűjtött korlátozott információkat kizárólag az alábbi célokra használjuk:',
-  'privacy.howWeUse.coreService': 'Alapszolgáltatás nyújtása: Titkosított jegyzetek ideiglenes tárolása, biztonságos visszakeresése és törlése.',
-  'privacy.howWeUse.security': 'Biztonság fenntartása: Visszaélések, például spam vagy szolgáltatásmegtagadási támadások felismerése és megelőzése IP-naplók és CAPTCHA segítségével.',
-  'privacy.howWeUse.legal': 'Jogi kötelezettségek teljesítése: Ritka esetekben naplókat használhatunk jogszerű jogi megkeresések (pl. idézés) teljesítésére.',
-  'privacy.howWeUse.noOther': 'Nem használunk adatokat reklám, harmadik félnek történő értékesítés vagy a securememo.app működtetésétől eltérő célokra.',
+  'privacy.howWeUse.coreService':
+    'Alapszolgáltatás nyújtása: Titkosított jegyzetek ideiglenes tárolása, biztonságos visszakeresése és törlése.',
+  'privacy.howWeUse.security':
+    'Biztonság fenntartása: Visszaélések, például spam vagy szolgáltatásmegtagadási támadások felismerése és megelőzése IP-naplók és CAPTCHA segítségével.',
+  'privacy.howWeUse.legal':
+    'Jogi kötelezettségek teljesítése: Ritka esetekben naplókat használhatunk jogszerű jogi megkeresések (pl. idézés) teljesítésére.',
+  'privacy.howWeUse.noOther':
+    'Nem használunk adatokat reklám, harmadik félnek történő értékesítés vagy a securememo.app működtetésétől eltérő célokra.',
 
   'privacy.dataSharing.title': '3. Adatmegosztás és közzététel',
-  'privacy.dataSharing.intro': 'Nem adjuk el, nem bérbe adjuk és nem osztjuk meg adatait harmadik felekkel, kivéve az alábbi korlátozott eseteket:',
-  'privacy.dataSharing.serviceProviders': 'Szolgáltatók: A Cloudflare-t használjuk tárhelyhez, adatbázis-tároláshoz (D1) és CAPTCHA-hoz (Turnstile). Ezek a szolgáltatók szigorú titoktartás mellett dolgoznak, és nem férnek hozzá a jegyzet tartalmához.',
-  'privacy.dataSharing.legal': 'Jogi követelmények: Információkat hozhatunk nyilvánosságra, ha azt jogszabály írja elő, például bírósági végzés vagy hatósági megkeresés esetén.',
-  'privacy.dataSharing.business': 'Üzleti átruházás: Ha a securememo.app-ot felvásárolják vagy összeolvad, az adatok átadásra kerülhetnek az ügylet részeként, de továbbra is az adatvédelmi tájékoztató hatálya alá tartoznak.',
+  'privacy.dataSharing.intro':
+    'Nem adjuk el, nem bérbe adjuk és nem osztjuk meg adatait harmadik felekkel, kivéve az alábbi korlátozott eseteket:',
+  'privacy.dataSharing.serviceProviders':
+    'Szolgáltatók: A Cloudflare-t használjuk tárhelyhez, adatbázis-tároláshoz (D1) és CAPTCHA-hoz (Turnstile). Ezek a szolgáltatók szigorú titoktartás mellett dolgoznak, és nem férnek hozzá a jegyzet tartalmához.',
+  'privacy.dataSharing.legal':
+    'Jogi követelmények: Információkat hozhatunk nyilvánosságra, ha azt jogszabály írja elő, például bírósági végzés vagy hatósági megkeresés esetén.',
+  'privacy.dataSharing.business':
+    'Üzleti átruházás: Ha a securememo.app-ot felvásárolják vagy összeolvad, az adatok átadásra kerülhetnek az ügylet részeként, de továbbra is az adatvédelmi tájékoztató hatálya alá tartoznak.',
 
   'privacy.dataSecurity.title': '4. Adatbiztonság',
-  'privacy.dataSecurity.encryption': 'Titkosítás: Minden jegyzet kliensoldalon AES-256-tal PBKDF2 kulcsszármaztatással titkosítva van. Csak titkosított adatokat tárolunk, visszafejteni nem tudjuk.',
-  'privacy.dataSecurity.deletion': 'Törlés: A jegyzetek véglegesen törlődnek elolvasás vagy lejárat után, automatikus időzített törléssel.',
-  'privacy.dataSecurity.securityMeasures': 'Biztonsági intézkedések: Erős biztonsági fejléceket (pl. CSP, HSTS), bemeneti szűrést, időzítési támadások elleni védelmet és CAPTCHA-t alkalmazunk a visszaélések megelőzésére.',
-  'privacy.dataSecurity.noRecovery': 'Nincs visszaállítás: A törölt jegyzetek nem állíthatók vissza – még általunk sem.',
-  'privacy.dataSecurity.disclaimer': 'Bár ésszerű lépéseket teszünk rendszereink védelmére, nincs teljesen kockázatmentes szolgáltatás. Ön felelős az URL-ek és jelszavak biztonságos megosztásáért.',
+  'privacy.dataSecurity.encryption':
+    'Titkosítás: Minden jegyzet kliensoldalon AES-256-tal PBKDF2 kulcsszármaztatással titkosítva van. Csak titkosított adatokat tárolunk, visszafejteni nem tudjuk.',
+  'privacy.dataSecurity.deletion':
+    'Törlés: A jegyzetek véglegesen törlődnek elolvasás vagy lejárat után, automatikus időzített törléssel.',
+  'privacy.dataSecurity.securityMeasures':
+    'Biztonsági intézkedések: Erős biztonsági fejléceket (pl. CSP, HSTS), bemeneti szűrést, időzítési támadások elleni védelmet és CAPTCHA-t alkalmazunk a visszaélések megelőzésére.',
+  'privacy.dataSecurity.noRecovery':
+    'Nincs visszaállítás: A törölt jegyzetek nem állíthatók vissza – még általunk sem.',
+  'privacy.dataSecurity.disclaimer':
+    'Bár ésszerű lépéseket teszünk rendszereink védelmére, nincs teljesen kockázatmentes szolgáltatás. Ön felelős az URL-ek és jelszavak biztonságos megosztásáért.',
 
   'privacy.dataRetention.title': '5. Adatmegőrzés',
-  'privacy.dataRetention.memos': 'A titkosított jegyzeteket csak addig őrizzük meg, amíg el nem olvassák vagy le nem járnak (maximum 30 napig).',
-  'privacy.dataRetention.logs': 'A biztonsági naplókat (pl. IP-címek) ideiglenesen őrizzük visszaélés megelőzése céljából, majd automatikusan töröljük rövid időn belül (általában néhány napon belül).',
-  'privacy.dataRetention.minimal': 'Nem őrzünk meg semmilyen adatot a szolgáltatás működéséhez szükséges időnél tovább.',
+  'privacy.dataRetention.memos':
+    'A titkosított jegyzeteket csak addig őrizzük meg, amíg el nem olvassák vagy le nem járnak (maximum 30 napig).',
+  'privacy.dataRetention.logs':
+    'A biztonsági naplókat (pl. IP-címek) ideiglenesen őrizzük visszaélés megelőzése céljából, majd automatikusan töröljük rövid időn belül (általában néhány napon belül).',
+  'privacy.dataRetention.minimal':
+    'Nem őrzünk meg semmilyen adatot a szolgáltatás működéséhez szükséges időnél tovább.',
 
   'privacy.yourRights.title': '6. Az Ön jogai és lehetőségei',
   'privacy.yourRights.intro': 'Mivel nem gyűjtünk személyes adatokat:',
   'privacy.yourRights.noAccounts': 'Nincsenek kezelhető felhasználói fiókok.',
-  'privacy.yourRights.noRequests': 'Nem kérhet adat-hozzáférést, javítást vagy törlést, kivéve a jegyzetek automatikus önmegsemmisítését.',
-  'privacy.yourRights.contact': 'Ha úgy gondolja, hogy bármilyen információt tárolunk Önről (pl. naplókból), lépjen kapcsolatba velünk (lásd alább), hogy érdeklődjön jogairól az alkalmazandó jogszabályok, például a GDPR vagy a CCPA alapján. Betartjuk az adatvédelmi előírásokat, és lehetőség szerint feldolgozzuk a kérelmeket.',
+  'privacy.yourRights.noRequests':
+    'Nem kérhet adat-hozzáférést, javítást vagy törlést, kivéve a jegyzetek automatikus önmegsemmisítését.',
+  'privacy.yourRights.contact':
+    'Ha úgy gondolja, hogy bármilyen információt tárolunk Önről (pl. naplókból), lépjen kapcsolatba velünk (lásd alább), hogy érdeklődjön jogairól az alkalmazandó jogszabályok, például a GDPR vagy a CCPA alapján. Betartjuk az adatvédelmi előírásokat, és lehetőség szerint feldolgozzuk a kérelmeket.',
 
   'privacy.childrenPrivacy.title': '7. Gyermekek adatvédelme',
-  'privacy.childrenPrivacy.content': 'Szolgáltatásunk nem gyermekeknek (13 év alatt, vagy egyes joghatóságokban 16 év alatt) készült. Nem gyűjtünk tudatosan adatokat gyermekektől. Ha ilyen adatokról tudomást szerzünk, azonnal töröljük azokat.',
+  'privacy.childrenPrivacy.content':
+    'Szolgáltatásunk nem gyermekeknek (13 év alatt, vagy egyes joghatóságokban 16 év alatt) készült. Nem gyűjtünk tudatosan adatokat gyermekektől. Ha ilyen adatokról tudomást szerzünk, azonnal töröljük azokat.',
 
   'privacy.internationalTransfers.title': '8. Nemzetközi adattovábbítás',
-  'privacy.internationalTransfers.content': 'A securememo.app a Cloudflare globális hálózatán van hosztolva. Az adatok több országban is feldolgozásra kerülhetnek, de minimális adatgyűjtési gyakorlatunkkal egyenértékű adatvédelmet biztosítunk.',
+  'privacy.internationalTransfers.content':
+    'A securememo.app a Cloudflare globális hálózatán van hosztolva. Az adatok több országban is feldolgozásra kerülhetnek, de minimális adatgyűjtési gyakorlatunkkal egyenértékű adatvédelmet biztosítunk.',
 
   'privacy.changesNotice.title': '9. Az adatvédelmi tájékoztató változásai',
-  'privacy.changesNotice.content': 'Ezt a tájékoztatót időről időre frissíthetjük. A változásokat itt tesszük közzé, frissített "Utolsó frissítés" dátummal. A szolgáltatás további használata a változások elfogadását jelenti.',
+  'privacy.changesNotice.content':
+    'Ezt a tájékoztatót időről időre frissíthetjük. A változásokat itt tesszük közzé, frissített "Utolsó frissítés" dátummal. A szolgáltatás további használata a változások elfogadását jelenti.',
 
   'privacy.contact.title': '10. Kapcsolat',
   'privacy.contact.intro': 'Az adatvédelmi tájékoztatóval vagy gyakorlatunkkal kapcsolatos kérdésekért látogassa meg',
   'privacy.contact.github': 'GitHub tárházunkat',
   'privacy.contact.email': 'vagy írjon a contact@securememo.app címre.',
-  'privacy.contact.disclaimer': 'Ez az adatvédelmi tájékoztató csak a securememo.app-ra vonatkozik, nem pedig a szolgáltatásunkból hivatkozott harmadik fél webhelyekre.',
+  'privacy.contact.disclaimer':
+    'Ez az adatvédelmi tájékoztató csak a securememo.app-ra vonatkozik, nem pedig a szolgáltatásunkból hivatkozott harmadik fél webhelyekre.',
 
   // Schema.org structured data
-  'schema.app.description': 'Hozzon létre titkosított jegyzeteket, amelyek elolvasás után önmegsemmisülnek. Végponttól végpontig titkosítás, adatvédelem-központú, biztonságos jegyzetmegosztás AES-256-tal. Nincs követés, nincs reklám.',
+  'schema.app.description':
+    'Hozzon létre titkosított jegyzeteket, amelyek elolvasás után önmegsemmisülnek. Végponttól végpontig titkosítás, adatvédelem-központú, biztonságos jegyzetmegosztás AES-256-tal. Nincs követés, nincs reklám.',
   'schema.app.category': 'BiztonságiAlkalmazás',
   'schema.app.os': 'Web böngésző',
   'schema.app.requirements': 'JavaScript szükséges. HTML5 szükséges.',
@@ -316,17 +409,23 @@ export const hu = {
 
   // FAQ structured data
   'faq.privacy.question': 'Hogyan védi a securememo.app az adatvédelmemet?',
-  'faq.privacy.answer': 'A securememo.app böngészőoldali AES-256 titkosítást használ, vagyis a jegyzeted a böngésződben titkosítva van, mielőtt eljutna a szervereinkhez. Soha nem látjuk a jegyzet szövegét. A jegyzetek elolvasás vagy lejárat után önmegsemmisülnek, és nem kérünk felhasználói fiókot vagy személyes adatokat.',
+  'faq.privacy.answer':
+    'A securememo.app böngészőoldali AES-256 titkosítást használ, vagyis a jegyzeted a böngésződben titkosítva van, mielőtt eljutna a szervereinkhez. Soha nem látjuk a jegyzet szövegét. A jegyzetek elolvasás vagy lejárat után önmegsemmisülnek, és nem kérünk felhasználói fiókot vagy személyes adatokat.',
   'faq.encryption.question': 'Milyen titkosítást használ a securememo.app?',
-  'faq.encryption.answer': 'AES-256-GCM titkosítást használunk PBKDF2 kulcsszármaztatással. Minden titkosítás kliensoldalon a böngészőben történik a Web Crypto API-val. A titkosítási jelszó külön generálódik, és soha nem tároljuk a szervereinken.',
+  'faq.encryption.answer':
+    'AES-256-GCM titkosítást használunk PBKDF2 kulcsszármaztatással. Minden titkosítás kliensoldalon a böngészőben történik a Web Crypto API-val. A titkosítási jelszó külön generálódik, és soha nem tároljuk a szervereinken.',
   'faq.duration.question': 'Meddig maradnak meg a jegyzetek?',
-  'faq.duration.answer': 'A jegyzetek beállíthatók, hogy 8 óra, 1 nap, 2 nap, 1 hét vagy maximum 30 nap után lejárjanak. Elolvasás után azonnal törlődnek. A lejárt jegyzetek automatikusan törlődnek minden órában.',
+  'faq.duration.answer':
+    'A jegyzetek beállíthatók, hogy 8 óra, 1 nap, 2 nap, 1 hét vagy maximum 30 nap után lejárjanak. Elolvasás után azonnal törlődnek. A lejárt jegyzetek automatikusan törlődnek minden órában.',
   'faq.recovery.question': 'Vissza lehet állítani egy törölt jegyzetet?',
-  'faq.recovery.answer': 'Nem, ha egy jegyzet törlődik (elolvasás vagy lejárat után), nem lehet visszaállítani. Ez a maximális adatvédelem és biztonság érdekében van így.',
+  'faq.recovery.answer':
+    'Nem, ha egy jegyzet törlődik (elolvasás vagy lejárat után), nem lehet visszaállítani. Ez a maximális adatvédelem és biztonság érdekében van így.',
   'faq.cost.question': 'Ingyenes a securememo.app használata?',
-  'faq.cost.answer': 'Igen, a securememo.app teljesen ingyenes. Nincsenek rejtett díjak, prémium funkciók, követés vagy reklám.',
+  'faq.cost.answer':
+    'Igen, a securememo.app teljesen ingyenes. Nincsenek rejtett díjak, prémium funkciók, követés vagy reklám.',
   'faq.technology.question': 'Milyen technológiát használ a securememo.app?',
-  'faq.technology.answer': 'A securememo.app Cloudflare Workers-re épül (szerver nélküli számítás), D1 adatbázist használ tároláshoz, Web Crypto API-t böngészőoldali titkosításhoz, és modern HTML/CSS/JavaScript technológiákat. A forráskód nyílt és elérhető a GitHubon.',
+  'faq.technology.answer':
+    'A securememo.app Cloudflare Workers-re épül (szerver nélküli számítás), D1 adatbázist használ tároláshoz, Web Crypto API-t böngészőoldali titkosításhoz, és modern HTML/CSS/JavaScript technológiákat. A forráskód nyílt és elérhető a GitHubon.',
 
   // Accessibility and UI
 
@@ -337,17 +436,23 @@ export const hu = {
   // Create memo page content
   'create.hero.title': 'Biztonságos jegyzet létrehozása',
   'create.hero.description': 'A jegyzeted a böngészőben titkosítva lesz, és elolvasás vagy lejárat után önmegsemmisül.',
-  'create.hero.ogDescription': 'Hozzon létre titkosított jegyzeteket böngészőoldali AES-256 titkosítással. A jegyzetek elolvasás után önmegsemmisülnek a maximális adatvédelem érdekében.',
+  'create.hero.ogDescription':
+    'Hozzon létre titkosított jegyzeteket böngészőoldali AES-256 titkosítással. A jegyzetek elolvasás után önmegsemmisülnek a maximális adatvédelem érdekében.',
   'create.hero.twitterDescription': 'Hozzon létre titkosított jegyzeteket böngészőoldali titkosítással.',
-  'create.schema.description': 'Hozzon létre titkosított jegyzeteket, amelyek elolvasás után önmegsemmisülnek. A böngészőoldali AES-256 titkosítás biztosítja, hogy titkai privátak maradjanak.',
-  'create.schema.actionDescription': 'Titkosított jegyzetek létrehozása böngészőoldali AES-256 titkosítással és automatikus önmegsemmisítéssel',
+  'create.schema.description':
+    'Hozzon létre titkosított jegyzeteket, amelyek elolvasás után önmegsemmisülnek. A böngészőoldali AES-256 titkosítás biztosítja, hogy titkai privátak maradjanak.',
+  'create.schema.actionDescription':
+    'Titkosított jegyzetek létrehozása böngészőoldali AES-256 titkosítással és automatikus önmegsemmisítéssel',
 
-  // Read memo page content  
+  // Read memo page content
   'read.hero.title': 'Biztonságos jegyzet olvasása',
-  'read.hero.description': 'Add meg a jelszót a jegyzet visszafejtéséhez és elolvasásához. A jelszót külön kellett megkapnod az URL-től. A jegyzet elolvasás vagy lejárat után törlődik.',
-  'read.hero.ogDescription': 'Fejtse vissza és olvassa el biztonságos jegyzetét. A jegyzetek elolvasás után önmegsemmisülnek a maximális adatvédelem érdekében.',
+  'read.hero.description':
+    'Add meg a jelszót a jegyzet visszafejtéséhez és elolvasásához. A jelszót külön kellett megkapnod az URL-től. A jegyzet elolvasás vagy lejárat után törlődik.',
+  'read.hero.ogDescription':
+    'Fejtse vissza és olvassa el biztonságos jegyzetét. A jegyzetek elolvasás után önmegsemmisülnek a maximális adatvédelem érdekében.',
   'read.hero.twitterDescription': 'Biztonságos jegyzet visszafejtése böngészőoldali visszafejtéssel.',
-  'read.schema.description': 'Biztonságos jegyzet visszafejtése jelszóval. A jegyzetek elolvasás után önmegsemmisülnek a maximális adatvédelem érdekében. Böngészőoldali AES-256 visszafejtés.',
+  'read.schema.description':
+    'Biztonságos jegyzet visszafejtése jelszóval. A jegyzetek elolvasás után önmegsemmisülnek a maximális adatvédelem érdekében. Böngészőoldali AES-256 visszafejtés.',
 
   // Form options
   'form.expiry.option.8h': 'Olvasás után vagy 8 óra múlva törlés',
@@ -367,7 +472,8 @@ export const hu = {
   'form.memoUrl.label': 'Jegyzet URL (ezt ossza meg a címzettel):',
   'form.memoUrl.help': 'Ez a jegyzet biztonságos linkje. Ossza meg ezt az URL-t a címzettel.',
   'form.memoPassword.label': 'Titkosítási jelszó (ezt külön ossza meg):',
-  'form.memoPassword.help': 'Ez a titkosítási jelszó. Biztonság érdekében külön ossza meg az URL-től. Nem kerül mentésre a szervereinken, elhagyás után nem visszaállítható.',
+  'form.memoPassword.help':
+    'Ez a titkosítási jelszó. Biztonság érdekében külön ossza meg az URL-től. Nem kerül mentésre a szervereinken, elhagyás után nem visszaállítható.',
 
   // Warning messages
   'warning.important': 'Fontos:',
@@ -378,18 +484,22 @@ export const hu = {
 
   // Structured data texts
   'schema.tos.name': 'Felhasználási feltételek',
-  'schema.tos.description': 'Felhasználási feltételek a securememo.app számára - titkosított jegyzetmegosztó szolgáltatás. Tudjon meg többet a megengedett használatról, adatvédelemről, biztonságról és jogi feltételekről.',
+  'schema.tos.description':
+    'Felhasználási feltételek a securememo.app számára - titkosított jegyzetmegosztó szolgáltatás. Tudjon meg többet a megengedett használatról, adatvédelemről, biztonságról és jogi feltételekről.',
   'schema.tos.breadcrumb.home': 'Kezdőlap',
   'schema.tos.breadcrumb.tos': 'Felhasználási feltételek',
   'schema.tos.mainEntity.name': 'Felhasználási feltételek',
-  'schema.tos.mainEntity.description': 'Jogi feltételek és kikötések a securememo.app titkosított jegyzetmegosztó szolgáltatáshoz',
+  'schema.tos.mainEntity.description':
+    'Jogi feltételek és kikötések a securememo.app titkosított jegyzetmegosztó szolgáltatáshoz',
 
   'schema.privacy.name': 'Adatvédelmi tájékoztató',
-  'schema.privacy.description': 'Adatvédelmi tájékoztató a securememo.app számára - tudja meg, hogyan védjük adatait böngészőoldali titkosítással, zero-knowledge architektúrával és minimális adatgyűjtéssel.',
+  'schema.privacy.description':
+    'Adatvédelmi tájékoztató a securememo.app számára - tudja meg, hogyan védjük adatait böngészőoldali titkosítással, zero-knowledge architektúrával és minimális adatgyűjtéssel.',
   'schema.privacy.breadcrumb.home': 'Kezdőlap',
   'schema.privacy.breadcrumb.privacy': 'Adatvédelmi tájékoztató',
   'schema.privacy.mainEntity.name': 'Adatvédelmi tájékoztató',
-  'schema.privacy.mainEntity.description': 'Hogyan védi a securememo.app az Ön adatvédelmét böngészőoldali titkosítással és minimális adatgyűjtéssel',
+  'schema.privacy.mainEntity.description':
+    'Hogyan védi a securememo.app az Ön adatvédelmét böngészőoldali titkosítással és minimális adatgyűjtéssel',
 
   // Create memo featureList in structured data
   'schema.create.featureList.clientSide': 'Kliensoldali titkosítás',
@@ -497,5 +607,5 @@ export const hu = {
   'error.security.MEMO_READ_ERROR': 'Nem sikerült feldolgozni a kérését.',
   'error.security.METHOD_NOT_ALLOWED': 'Érvénytelen kérés típusa.',
   'error.security.FORBIDDEN': 'Hozzáférés megtagadva.',
-  'error.security.DEFAULT_FALLBACK': 'Hiba történt. Kérjük, próbálja újra.'
-}
+  'error.security.DEFAULT_FALLBACK': 'Hiba történt. Kérjük, próbálja újra.',
+};

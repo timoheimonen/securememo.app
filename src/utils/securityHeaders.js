@@ -10,7 +10,7 @@
 export const allowedOrigins = [
   'https://securememo.app',
   'https://www.securememo.app',
-  'https://securememo-dev.timo-heimonen.workers.dev'
+  'https://securememo-dev.timo-heimonen.workers.dev',
 ];
 
 // Base security headers applied to every response (CSP appended per-response with nonce)
@@ -25,7 +25,7 @@ export const baseSecurityHeaders = {
   'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
   'Access-Control-Allow-Headers': 'Content-Type',
   'Access-Control-Max-Age': '86400',
-  'Vary': 'Origin'
+  Vary: 'Origin',
 };
 
 /**
@@ -51,14 +51,14 @@ export function buildContentSecurityPolicy(nonce) {
     "form-action 'self'",
     "frame-ancestors 'none'",
     "connect-src 'self' https://challenges.cloudflare.com https://www.youtube-nocookie.com https://youtube.googleapis.com https://s.ytimg.com",
-    "frame-src https://challenges.cloudflare.com https://www.youtube.com https://www.youtube-nocookie.com blob:",
-    "child-src https://challenges.cloudflare.com https://www.youtube.com https://www.youtube-nocookie.com blob:",
+    'frame-src https://challenges.cloudflare.com https://www.youtube.com https://www.youtube-nocookie.com blob:',
+    'child-src https://challenges.cloudflare.com https://www.youtube.com https://www.youtube-nocookie.com blob:',
     "img-src 'self' https://challenges.cloudflare.com https://s.ytimg.com data:",
     "style-src 'self' 'unsafe-inline'",
     "worker-src 'self' blob:",
     "object-src 'none'",
     `script-src 'nonce-${nonce}' 'strict-dynamic' blob:`,
-    "require-trusted-types-for 'script'"
+    "require-trusted-types-for 'script'",
   ];
   return directives.join('; ') + ';';
 }

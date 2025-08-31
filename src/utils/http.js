@@ -13,9 +13,9 @@
  */
 export function ensureGetMethod(request, locale, getSecurityHeadersFn, getErrorMessageFn) {
   if (request.method !== 'GET') {
-  return new globalThis.Response(getErrorMessageFn('METHOD_NOT_ALLOWED', locale), {
+    return new globalThis.Response(getErrorMessageFn('METHOD_NOT_ALLOWED', locale), {
       status: 405,
-      headers: { 'Allow': 'GET', ...getSecurityHeadersFn(request) }
+      headers: { Allow: 'GET', ...getSecurityHeadersFn(request) },
     });
   }
   return null;
@@ -35,10 +35,10 @@ export function methodNotAllowedJSONResponse(request, allowed, locale, getErrorM
     status: 405,
     headers: {
       'Content-Type': 'application/json',
-      'Allow': allowed,
+      Allow: allowed,
       'Cache-Control': 'no-store',
-      ...getSecurityHeadersFn(request)
-    }
+      ...getSecurityHeadersFn(request),
+    },
   });
 }
 
@@ -51,7 +51,10 @@ export function methodNotAllowedJSONResponse(request, allowed, locale, getErrorM
  */
 export function notModifiedIfMatch(request, etag, getSecurityHeadersFn) {
   if (request.headers.get('if-none-match') === etag) {
-  return new globalThis.Response(null, { status: 304, headers: { ...getSecurityHeadersFn(request), ETag: etag } });
+    return new globalThis.Response(null, {
+      status: 304,
+      headers: { ...getSecurityHeadersFn(request), ETag: etag },
+    });
   }
   return null;
 }

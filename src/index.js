@@ -4,7 +4,12 @@ const { caches } = globalThis;
 import { getStyles } from './styles/styles.js';
 import { getSupportedLocales } from './lang/localization.js';
 import { minifyJS, minifyCSS } from './utils/minifiers.js';
-import { getSecurityHeaders, mergeSecurityHeadersIntoResponse, isValidOrigin, generateNonce } from './utils/securityHeaders.js';
+import {
+  getSecurityHeaders,
+  mergeSecurityHeadersIntoResponse,
+  isValidOrigin,
+  generateNonce,
+} from './utils/securityHeaders.js';
 import { ensureGetMethod, methodNotAllowedJSONResponse, notModifiedIfMatch } from './utils/http.js';
 
 /**
@@ -30,19 +35,10 @@ import {
   getCreateMemoHTML,
   getReadMemoHTML,
   getToSHTML,
-  getPrivacyHTML
+  getPrivacyHTML,
 } from './templates/pages.js';
-import {
-  getCreateMemoJS,
-  getReadMemoJS,
-  getCommonJS
-} from './templates/js.js';
-import {
-  handleCreateMemo,
-  handleReadMemo,
-  handleConfirmDelete,
-  handleCleanupMemos
-} from './handlers/auth.js';
+import { getCreateMemoJS, getReadMemoJS, getCommonJS } from './templates/js.js';
+import { handleCreateMemo, handleReadMemo, handleConfirmDelete, handleCleanupMemos } from './handlers/auth.js';
 import { getErrorMessage } from './utils/errorMessages.js';
 import {
   extractLocaleFromPath,
@@ -50,7 +46,7 @@ import {
   buildLocalizedPath,
   t,
   extractLocaleFromRequest,
-  getDefaultLocale
+  getDefaultLocale,
 } from './lang/localization.js';
 import { getClientLocalizationJS } from './lang/clientLocalization.js';
 import { sanitizeLocale } from './utils/validation.js';
@@ -79,20 +75,22 @@ const ASSET_VERSION = '20250831';
 function addAssetVersionsToHTML(htmlInput) {
   if (typeof htmlInput !== 'string' || !htmlInput) return htmlInput || '';
   try {
-    return htmlInput
-      // styles.css
-      .replace(/\/(styles\.css)(\b)/g, `/styles.css?v=${ASSET_VERSION}$2`)
-      // common.js
-      .replace(/\/(js\/common\.js)(\b)/g, `/js/common.js?v=${ASSET_VERSION}$2`)
-      // create-memo.js?locale=xx
-      .replace(/\/js\/create-memo\.js\?locale=([A-Za-z-_.]+)/g, `/js/create-memo.js?locale=$1&v=${ASSET_VERSION}`)
-      // read-memo.js?locale=xx
-      .replace(/\/(js\/read-memo\.js)\?locale=([A-Za-z-_.]+)/g, `/js/read-memo.js?locale=$2&v=${ASSET_VERSION}`)
-      // version icons to enable immutable caching on clients/CDN
-      .replace(/\/(favicon\.ico)(\b)/g, `/favicon.ico?v=${ASSET_VERSION}$2`)
-      .replace(/\/(apple-touch-icon\.png)(\b)/g, `/apple-touch-icon.png?v=${ASSET_VERSION}$2`)
-      .replace(/\/(android-chrome-192x192\.png)(\b)/g, `/android-chrome-192x192.png?v=${ASSET_VERSION}$2`)
-      .replace(/\/(android-chrome-512x512\.png)(\b)/g, `/android-chrome-512x512.png?v=${ASSET_VERSION}$2`);
+    return (
+      htmlInput
+        // styles.css
+        .replace(/\/(styles\.css)(\b)/g, `/styles.css?v=${ASSET_VERSION}$2`)
+        // common.js
+        .replace(/\/(js\/common\.js)(\b)/g, `/js/common.js?v=${ASSET_VERSION}$2`)
+        // create-memo.js?locale=xx
+        .replace(/\/js\/create-memo\.js\?locale=([A-Za-z-_.]+)/g, `/js/create-memo.js?locale=$1&v=${ASSET_VERSION}`)
+        // read-memo.js?locale=xx
+        .replace(/\/(js\/read-memo\.js)\?locale=([A-Za-z-_.]+)/g, `/js/read-memo.js?locale=$2&v=${ASSET_VERSION}`)
+        // version icons to enable immutable caching on clients/CDN
+        .replace(/\/(favicon\.ico)(\b)/g, `/favicon.ico?v=${ASSET_VERSION}$2`)
+        .replace(/\/(apple-touch-icon\.png)(\b)/g, `/apple-touch-icon.png?v=${ASSET_VERSION}$2`)
+        .replace(/\/(android-chrome-192x192\.png)(\b)/g, `/android-chrome-192x192.png?v=${ASSET_VERSION}$2`)
+        .replace(/\/(android-chrome-512x512\.png)(\b)/g, `/android-chrome-512x512.png?v=${ASSET_VERSION}$2`)
+    );
   } catch (_) {
     return htmlInput;
   }
@@ -105,27 +103,28 @@ export default {
     try {
       // Check DB availability
       if (!env.DB) {
-  return new globalThis.Response(getErrorMessage('SERVICE_UNAVAILABLE', 'en'), {
+        return new globalThis.Response(getErrorMessage('SERVICE_UNAVAILABLE', 'en'), {
           status: 503,
-          headers: getSecurityHeaders(request)
+          headers: getSecurityHeaders(request),
         });
       }
 
       // Parse and validate URL
       let url;
       try {
-  url = new globalThis.URL(request.url);
+        url = new globalThis.URL(request.url);
       } catch (urlError) {
-  return new globalThis.Response(getErrorMessage('BAD_REQUEST', 'en'), {
+        return new globalThis.Response(getErrorMessage('BAD_REQUEST', 'en'), {
           status: 400,
-          headers: getSecurityHeaders(request)
+          headers: getSecurityHeaders(request),
         });
       }
 
       const pathname = url.pathname;
 
       // Skip locale handling for static assets and API routes
-      const isStaticAsset = pathname.startsWith('/styles.css') ||
+      const isStaticAsset =
+        pathname.startsWith('/styles.css') ||
         pathname.startsWith('/js/') ||
         pathname.startsWith('/api/') ||
         pathname === '/sitemap.xml' ||
@@ -163,12 +162,12 @@ export default {
         if (!isValidOrigin(request)) {
           return new globalThis.Response(null, {
             status: 403,
-            headers: { 'Vary': 'Origin' }
+            headers: { Vary: 'Origin' },
           });
         }
-  return new globalThis.Response(null, {
+        return new globalThis.Response(null, {
           status: 200,
-          headers: getSecurityHeaders(request)
+          headers: getSecurityHeaders(request),
         });
       }
 
@@ -186,9 +185,9 @@ export default {
             headers: {
               'Content-Type': 'application/json',
               'Cache-Control': 'no-store',
-              'Vary': 'Origin',
-              ...getSecurityHeaders(request)
-            }
+              Vary: 'Origin',
+              ...getSecurityHeaders(request),
+            },
           });
         }
 
@@ -203,14 +202,19 @@ export default {
         if (request.method === 'POST') {
           const contentLength = request.headers.get('content-length');
           if (contentLength && parseInt(contentLength) > 100000) {
-            return new globalThis.Response(JSON.stringify({ error: getErrorMessage('REQUEST_TOO_LARGE', apiLocale) }), {
-              status: 413,
-              headers: {
-                'Content-Type': 'application/json',
-                'Cache-Control': 'no-store',
-                ...getSecurityHeaders(request)
+            return new globalThis.Response(
+              JSON.stringify({
+                error: getErrorMessage('REQUEST_TOO_LARGE', apiLocale),
+              }),
+              {
+                status: 413,
+                headers: {
+                  'Content-Type': 'application/json',
+                  'Cache-Control': 'no-store',
+                  ...getSecurityHeaders(request),
+                },
               }
-            });
+            );
           }
         }
 
@@ -230,7 +234,10 @@ export default {
           default:
             return new globalThis.Response(getErrorMessage('NOT_FOUND', apiLocale), {
               status: 404,
-              headers: { ...getSecurityHeaders(request), 'Cache-Control': 'no-store' }
+              headers: {
+                ...getSecurityHeaders(request),
+                'Cache-Control': 'no-store',
+              },
             });
         }
       }
@@ -248,17 +255,20 @@ export default {
           { path: '/about.html', priority: '0.8', changefreq: 'monthly' },
           { path: '/create-memo.html', priority: '0.9', changefreq: 'monthly' },
           { path: '/tos.html', priority: '0.3', changefreq: 'yearly' },
-          { path: '/privacy.html', priority: '0.3', changefreq: 'yearly' }
+          { path: '/privacy.html', priority: '0.3', changefreq: 'yearly' },
         ];
 
         let sitemapUrls = '';
-        pages.forEach(page => {
-          supportedLocales.forEach(lang => {
-      // Renamed from 'url' to 'pageUrl' to avoid shadowing the outer 'url' variable
-      const pageUrl = `https://securememo.app/${lang}${page.path}`;
-            const hreflangs = supportedLocales.map(hreflang =>
-              `    <xhtml:link rel="alternate" hreflang="${hreflang}" href="https://securememo.app/${hreflang}${page.path}"/>`
-            ).join('\n');
+        pages.forEach((page) => {
+          supportedLocales.forEach((lang) => {
+            // Renamed from 'url' to 'pageUrl' to avoid shadowing the outer 'url' variable
+            const pageUrl = `https://securememo.app/${lang}${page.path}`;
+            const hreflangs = supportedLocales
+              .map(
+                (hreflang) =>
+                  `    <xhtml:link rel="alternate" hreflang="${hreflang}" href="https://securememo.app/${hreflang}${page.path}"/>`
+              )
+              .join('\n');
 
             sitemapUrls += `  <url>
     <loc>${pageUrl}</loc>
@@ -275,14 +285,14 @@ ${hreflangs}
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:xhtml="http://www.w3.org/1999/xhtml">
 ${sitemapUrls}</urlset>`;
-  return new globalThis.Response(sitemap, {
+        return new globalThis.Response(sitemap, {
           headers: {
             'Content-Type': 'application/xml',
             'Cache-Control': 'public, max-age=86400, s-maxage=86400, stale-while-revalidate=604800',
-            'ETag': '"sitemap-v1"',
+            ETag: '"sitemap-v1"',
             'Last-Modified': 'Tue, 19 Aug 2025 16:15:00 GMT',
-            ...getSecurityHeaders(request)
-          }
+            ...getSecurityHeaders(request),
+          },
         });
       }
 
@@ -298,18 +308,16 @@ ${sitemapUrls}</urlset>`;
         }
         const css = minifyCSS(getStyles());
         const cssEtag = `"styles-${ASSET_VERSION}"`;
-  const cssNotMod = notModifiedIfMatch(request, cssEtag, getSecurityHeaders);
-  if (cssNotMod) return cssNotMod;
-  const cssResp = new globalThis.Response(css, {
+        const cssNotMod = notModifiedIfMatch(request, cssEtag, getSecurityHeaders);
+        if (cssNotMod) return cssNotMod;
+        const cssResp = new globalThis.Response(css, {
           headers: {
             'Content-Type': 'text/css',
             // Versioned -> immutable long cache; Unversioned -> short cache
-            'Cache-Control': isVersioned
-              ? 'public, max-age=31536000, immutable'
-              : 'public, max-age=3600',
-            'ETag': cssEtag,
-            ...getSecurityHeaders(request)
-          }
+            'Cache-Control': isVersioned ? 'public, max-age=31536000, immutable' : 'public, max-age=3600',
+            ETag: cssEtag,
+            ...getSecurityHeaders(request),
+          },
         });
         if (isVersioned) {
           ctx.waitUntil(caches.default.put(request, cssResp.clone()));
@@ -330,7 +338,10 @@ ${sitemapUrls}</urlset>`;
           .replace(/{{TURNSTILE_SITE_KEY}}/g, env.TURNSTILE_SITE_KEY)
           .replace(/{{MISSING_MESSAGE_ERROR}}/g, escapeJavaScript(getErrorMessage('MISSING_MESSAGE', jsLocale)))
           .replace(/{{MESSAGE_TOO_LONG_ERROR}}/g, escapeJavaScript(getErrorMessage('MESSAGE_TOO_LONG', jsLocale)))
-          .replace(/{{MISSING_SECURITY_CHALLENGE_ERROR}}/g, escapeJavaScript(getErrorMessage('MISSING_SECURITY_CHALLENGE', jsLocale)))
+          .replace(
+            /{{MISSING_SECURITY_CHALLENGE_ERROR}}/g,
+            escapeJavaScript(getErrorMessage('MISSING_SECURITY_CHALLENGE', jsLocale))
+          )
           .replace(/{{RATE_LIMITED_ERROR}}/g, escapeJavaScript(getErrorMessage('RATE_LIMITED', jsLocale)))
           .replace(/{{CREATE_MEMO_FAILED_ERROR}}/g, escapeJavaScript(getErrorMessage('CREATE_MEMO_FAILED', jsLocale)))
           .replace(/{{CREATE_MEMO_ERROR}}/g, escapeJavaScript(getErrorMessage('CREATE_MEMO_ERROR', jsLocale)))
@@ -347,15 +358,15 @@ ${sitemapUrls}</urlset>`;
           .replace(/{{BTN_HIDE}}/g, escapeJavaScript(t('btn.hide', jsLocale)))
           .replace(/{{BTN_COPY}}/g, escapeJavaScript(t('btn.copy', jsLocale)));
         const jsEtag = `"create-${ASSET_VERSION}-${jsLocale}"`;
-  const createJsNotMod = notModifiedIfMatch(request, jsEtag, getSecurityHeaders);
-  if (createJsNotMod) return createJsNotMod;
-  const jsResp = new globalThis.Response(minifyJS(jsContent), {
+        const createJsNotMod = notModifiedIfMatch(request, jsEtag, getSecurityHeaders);
+        if (createJsNotMod) return createJsNotMod;
+        const jsResp = new globalThis.Response(minifyJS(jsContent), {
           headers: {
             'Content-Type': 'application/javascript',
             'Cache-Control': 'public, max-age=31536000, immutable',
-            'ETag': jsEtag,
-            ...getSecurityHeaders(request)
-          }
+            ETag: jsEtag,
+            ...getSecurityHeaders(request),
+          },
         });
         ctx.waitUntil(caches.default.put(request, jsResp.clone()));
         return jsResp;
@@ -374,10 +385,22 @@ ${sitemapUrls}</urlset>`;
           .replace(/{{MISSING_MEMO_ID_ERROR}}/g, escapeJavaScript(getErrorMessage('MISSING_MEMO_ID', jsLocale)))
           .replace(/{{MISSING_PASSWORD_ERROR}}/g, escapeJavaScript(getErrorMessage('MISSING_PASSWORD_ERROR', jsLocale)))
           .replace(/{{INVALID_MEMO_URL_ERROR}}/g, escapeJavaScript(getErrorMessage('INVALID_MEMO_URL_ERROR', jsLocale)))
-          .replace(/{{MISSING_SECURITY_CHALLENGE_ERROR}}/g, escapeJavaScript(getErrorMessage('MISSING_SECURITY_CHALLENGE_ERROR', jsLocale)))
-          .replace(/{{MEMO_ALREADY_READ_DELETED_ERROR}}/g, escapeJavaScript(getErrorMessage('MEMO_ALREADY_READ_DELETED_ERROR', jsLocale)))
-          .replace(/{{MEMO_EXPIRED_DELETED_ERROR}}/g, escapeJavaScript(getErrorMessage('MEMO_EXPIRED_DELETED_ERROR', jsLocale)))
-          .replace(/{{INVALID_PASSWORD_CHECK_ERROR}}/g, escapeJavaScript(getErrorMessage('INVALID_PASSWORD_CHECK_ERROR', jsLocale)))
+          .replace(
+            /{{MISSING_SECURITY_CHALLENGE_ERROR}}/g,
+            escapeJavaScript(getErrorMessage('MISSING_SECURITY_CHALLENGE_ERROR', jsLocale))
+          )
+          .replace(
+            /{{MEMO_ALREADY_READ_DELETED_ERROR}}/g,
+            escapeJavaScript(getErrorMessage('MEMO_ALREADY_READ_DELETED_ERROR', jsLocale))
+          )
+          .replace(
+            /{{MEMO_EXPIRED_DELETED_ERROR}}/g,
+            escapeJavaScript(getErrorMessage('MEMO_EXPIRED_DELETED_ERROR', jsLocale))
+          )
+          .replace(
+            /{{INVALID_PASSWORD_CHECK_ERROR}}/g,
+            escapeJavaScript(getErrorMessage('INVALID_PASSWORD_CHECK_ERROR', jsLocale))
+          )
           .replace(/{{RATE_LIMITED_ERROR}}/g, escapeJavaScript(getErrorMessage('RATE_LIMITED', jsLocale)))
           .replace(/{{READ_MEMO_ERROR}}/g, escapeJavaScript(getErrorMessage('READ_MEMO_ERROR', jsLocale)))
           .replace(/{{DECRYPTION_ERROR}}/g, escapeJavaScript(getErrorMessage('DECRYPTION_ERROR', jsLocale)))
@@ -390,15 +413,15 @@ ${sitemapUrls}</urlset>`;
           .replace(/{{BTN_COPIED}}/g, escapeJavaScript(t('btn.copied', jsLocale)))
           .replace(/{{DELETION_ERROR_MESSAGE}}/g, escapeJavaScript(t('msg.deletionError', jsLocale)));
         const jsEtag = `"read-${ASSET_VERSION}-${jsLocale}"`;
-  const readJsNotMod = notModifiedIfMatch(request, jsEtag, getSecurityHeaders);
-  if (readJsNotMod) return readJsNotMod;
-  const jsResp = new globalThis.Response(minifyJS(jsContent), {
+        const readJsNotMod = notModifiedIfMatch(request, jsEtag, getSecurityHeaders);
+        if (readJsNotMod) return readJsNotMod;
+        const jsResp = new globalThis.Response(minifyJS(jsContent), {
           headers: {
             'Content-Type': 'application/javascript',
             'Cache-Control': 'public, max-age=31536000, immutable',
-            'ETag': jsEtag,
-            ...getSecurityHeaders(request)
-          }
+            ETag: jsEtag,
+            ...getSecurityHeaders(request),
+          },
         });
         ctx.waitUntil(caches.default.put(request, jsResp.clone()));
         return jsResp;
@@ -410,15 +433,15 @@ ${sitemapUrls}</urlset>`;
         const cached = await caches.default.match(request);
         if (cached) return cached;
         const cmnEtag = `"common-${ASSET_VERSION}"`;
-  const commonNotMod = notModifiedIfMatch(request, cmnEtag, getSecurityHeaders);
-  if (commonNotMod) return commonNotMod;
-  const commonResp = new globalThis.Response(minifyJS(getCommonJS()), {
+        const commonNotMod = notModifiedIfMatch(request, cmnEtag, getSecurityHeaders);
+        if (commonNotMod) return commonNotMod;
+        const commonResp = new globalThis.Response(minifyJS(getCommonJS()), {
           headers: {
             'Content-Type': 'application/javascript',
             'Cache-Control': 'public, max-age=31536000, immutable',
-            'ETag': cmnEtag,
-            ...getSecurityHeaders(request)
-          }
+            ETag: cmnEtag,
+            ...getSecurityHeaders(request),
+          },
         });
         ctx.waitUntil(caches.default.put(request, commonResp.clone()));
         return commonResp;
@@ -438,7 +461,9 @@ ${sitemapUrls}</urlset>`;
             if (refererLocaleInfo.locale && getSupportedLocales().includes(refererLocaleInfo.locale)) {
               jsLocale = refererLocaleInfo.locale;
             }
-          } catch { /* Ignore invalid referer URLs */ }
+          } catch {
+            /* Ignore invalid referer URLs */
+          }
         }
 
         // Serve the optimized client localization utility with only the relevant translations
@@ -447,7 +472,7 @@ ${sitemapUrls}</urlset>`;
         secHeaders['Vary'] = 'Origin, Referer';
 
         // Edge cache by synthetic key including locale + version
-  const cacheKeyUrl = new globalThis.URL('/js/clientLocalization.js', url.origin);
+        const cacheKeyUrl = new globalThis.URL('/js/clientLocalization.js', url.origin);
         cacheKeyUrl.searchParams.set('locale', jsLocale);
         cacheKeyUrl.searchParams.set('v', ASSET_VERSION);
         const cacheMatch = await caches.default.match(cacheKeyUrl.toString());
@@ -455,23 +480,26 @@ ${sitemapUrls}</urlset>`;
 
         const locEtag = `"clientloc-${ASSET_VERSION}-${jsLocale}"`;
         if (request.headers.get('if-none-match') === locEtag) {
-          return new globalThis.Response(null, { status: 304, headers: { ...secHeaders, ETag: locEtag } });
+          return new globalThis.Response(null, {
+            status: 304,
+            headers: { ...secHeaders, ETag: locEtag },
+          });
         }
-  const locResp = new globalThis.Response(minifyJS(getClientLocalizationJS(jsLocale)), {
+        const locResp = new globalThis.Response(minifyJS(getClientLocalizationJS(jsLocale)), {
           headers: {
             'Content-Type': 'application/javascript',
             'Cache-Control': 'public, max-age=31536000, immutable',
-            'ETag': locEtag,
-            ...secHeaders
-          }
+            ETag: locEtag,
+            ...secHeaders,
+          },
         });
         ctx.waitUntil(caches.default.put(cacheKeyUrl.toString(), locResp.clone()));
         return locResp;
       }
 
       // Route page requests
-  const pageMethodCheck = ensureGetMethod(request, locale, getSecurityHeaders, getErrorMessage);
-  if (pageMethodCheck) return pageMethodCheck;
+      const pageMethodCheck = ensureGetMethod(request, locale, getSecurityHeaders, getErrorMessage);
+      if (pageMethodCheck) return pageMethodCheck;
 
       let response;
       // Nonce for HTML responses (injected into CSP and script tags)
@@ -482,11 +510,12 @@ ${sitemapUrls}</urlset>`;
       const isCacheablePage = ['/', '/about.html', '/tos.html', '/privacy.html'].includes(pathWithoutLocale);
       if (isCacheablePage) {
         // Support browser revalidation via strong ETag
-        const pageKeyEarly = pathWithoutLocale === '/' ? 'home' : pathWithoutLocale.replace(/^\//, '').replace(/\W+/g, '-');
+        const pageKeyEarly =
+          pathWithoutLocale === '/' ? 'home' : pathWithoutLocale.replace(/^\//, '').replace(/\W+/g, '-');
         const expectedETag = `"html-${ASSET_VERSION}-${locale}-${pageKeyEarly}"`;
-  const pageNotMod = notModifiedIfMatch(request, expectedETag, getSecurityHeaders);
-  if (pageNotMod) return pageNotMod;
-  const cacheKeyUrl = new globalThis.URL(pathname, url.origin);
+        const pageNotMod = notModifiedIfMatch(request, expectedETag, getSecurityHeaders);
+        if (pageNotMod) return pageNotMod;
+        const cacheKeyUrl = new globalThis.URL(pathname, url.origin);
         cacheKeyUrl.searchParams.set('v', ASSET_VERSION);
         const cachedHtml = await caches.default.match(cacheKeyUrl.toString());
         if (cachedHtml) {
@@ -498,29 +527,37 @@ ${sitemapUrls}</urlset>`;
       switch (pathWithoutLocale) {
         case '/':
           cspNonce = generateNonce();
-          response = addAssetVersionsToHTML((await getIndexHTML(locale, url.origin)).replace(/{{CSP_NONCE}}/g, cspNonce));
+          response = addAssetVersionsToHTML(
+            (await getIndexHTML(locale, url.origin)).replace(/{{CSP_NONCE}}/g, cspNonce)
+          );
           cacheHeaders = { 'Cache-Control': 'public, max-age=604800' };
           break;
         case '/about.html':
           cspNonce = cspNonce || generateNonce();
-          response = addAssetVersionsToHTML((await getAboutHTML(locale, url.origin)).replace(/{{CSP_NONCE}}/g, cspNonce));
+          response = addAssetVersionsToHTML(
+            (await getAboutHTML(locale, url.origin)).replace(/{{CSP_NONCE}}/g, cspNonce)
+          );
           cacheHeaders = { 'Cache-Control': 'public, max-age=604800' };
           break;
         case '/create-memo.html': {
           const siteKey = env.TURNSTILE_SITE_KEY || 'MISSING_SITE_KEY';
           cspNonce = cspNonce || generateNonce();
-          response = addAssetVersionsToHTML((await getCreateMemoHTML(locale, url.origin))
-            .replace('{{TURNSTILE_SITE_KEY}}', siteKey)
-            .replace(/{{CSP_NONCE}}/g, cspNonce));
+          response = addAssetVersionsToHTML(
+            (await getCreateMemoHTML(locale, url.origin))
+              .replace('{{TURNSTILE_SITE_KEY}}', siteKey)
+              .replace(/{{CSP_NONCE}}/g, cspNonce)
+          );
           cacheHeaders = { 'Cache-Control': 'no-store' };
           break;
         }
         case '/read-memo.html': {
           const readSiteKey = env.TURNSTILE_SITE_KEY || 'MISSING_SITE_KEY';
           cspNonce = cspNonce || generateNonce();
-          response = addAssetVersionsToHTML((await getReadMemoHTML(locale, url.origin))
-            .replace('{{TURNSTILE_SITE_KEY}}', readSiteKey)
-            .replace(/{{CSP_NONCE}}/g, cspNonce));
+          response = addAssetVersionsToHTML(
+            (await getReadMemoHTML(locale, url.origin))
+              .replace('{{TURNSTILE_SITE_KEY}}', readSiteKey)
+              .replace(/{{CSP_NONCE}}/g, cspNonce)
+          );
           cacheHeaders = { 'Cache-Control': 'no-store' };
           break;
         }
@@ -531,30 +568,32 @@ ${sitemapUrls}</urlset>`;
           break;
         case '/privacy.html':
           cspNonce = cspNonce || generateNonce();
-          response = addAssetVersionsToHTML((await getPrivacyHTML(locale, url.origin)).replace(/{{CSP_NONCE}}/g, cspNonce));
+          response = addAssetVersionsToHTML(
+            (await getPrivacyHTML(locale, url.origin)).replace(/{{CSP_NONCE}}/g, cspNonce)
+          );
           cacheHeaders = { 'Cache-Control': 'public, max-age=604800' };
           break;
         default:
           return new globalThis.Response(getErrorMessage('NOT_FOUND', locale), {
             status: 404,
-            headers: getSecurityHeaders(request)
+            headers: getSecurityHeaders(request),
           });
       }
 
       // Safe HTML content: response variable contains trusted, server-generated HTML
       // that has been processed through addAssetVersionsToHTML() and template replacements
       // with only trusted values. No user input is injected at this point.
-  const htmlResp = new globalThis.Response(response, {
+      const htmlResp = new globalThis.Response(response, {
         headers: {
           'Content-Type': 'text/html',
           ...cacheHeaders,
-          ...getSecurityHeaders(request, cspNonce || generateNonce())
-        }
+          ...getSecurityHeaders(request, cspNonce || generateNonce()),
+        },
       });
 
       // Store cacheable HTML at edge with versioned key; skip create/read pages
       if (isCacheablePage) {
-  const cacheKeyUrl = new globalThis.URL(pathname, url.origin);
+        const cacheKeyUrl = new globalThis.URL(pathname, url.origin);
         cacheKeyUrl.searchParams.set('v', ASSET_VERSION);
         // Add a simple ETag so browsers can revalidate too
         const pageKey = pathWithoutLocale === '/' ? 'home' : pathWithoutLocale.replace(/^\//, '').replace(/\W+/g, '-');
@@ -567,9 +606,9 @@ ${sitemapUrls}</urlset>`;
       }
       return htmlResp;
     } catch (error) {
-  return new globalThis.Response(getErrorMessage('INTERNAL_SERVER_ERROR', 'en'), {
+      return new globalThis.Response(getErrorMessage('INTERNAL_SERVER_ERROR', 'en'), {
         status: 500,
-        headers: getSecurityHeaders(request)
+        headers: getSecurityHeaders(request),
       });
     }
   },
@@ -580,7 +619,9 @@ ${sitemapUrls}</urlset>`;
       const result = await handleCleanupMemos(env);
       return result;
     } catch (error) {
-  return new globalThis.Response(getErrorMessage('CLEANUP_FAILED', 'en'), { status: 500 });
+      return new globalThis.Response(getErrorMessage('CLEANUP_FAILED', 'en'), {
+        status: 500,
+      });
     }
-  }
+  },
 };

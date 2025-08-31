@@ -15,7 +15,7 @@ export async function hashIp(ip) {
   const data = encoder.encode(ip);
   const hashBuffer = await globalThis.crypto.subtle.digest('SHA-256', data);
   const hashArray = Array.from(new Uint8Array(hashBuffer));
-  return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+  return hashArray.map((b) => b.toString(16).padStart(2, '0')).join('');
 }
 
 // -------------------------------------------------
@@ -111,7 +111,7 @@ function localLimit(key, { sliding, windowSeconds, allowedFailures }) {
     count: state.count,
     remaining: limited ? 0 : Math.max(0, allowedFailures - state.count),
     key,
-    fallback: true
+    fallback: true,
   };
 }
 
@@ -133,23 +133,27 @@ function localLimit(key, { sliding, windowSeconds, allowedFailures }) {
  * @param {boolean} [opts.enforceOnFallback=true] - Whether to still enforce limits using per-isolate memory when KV down
  * @returns {Promise<{ limited: boolean, count: number, remaining: number, key?: string, fallback?: boolean, error?: boolean }>}
  */
-export async function recordKvFailureAndCheckLimit(request, env, {
-  prefix = 'fail',
-  windowSeconds = 600,
-  allowedFailures = 2,
-  sliding = true,
-  onError,
-  kvRetryMs = 30000,
-  enforceOnFallback = true,
-  /**
-   * Optional error handler invoked when an unexpected exception occurs while
-   * interacting with KV or computing the hash. The original error is not
-   * rethrown to avoid breaking request handling, but this callback allows the
-   * caller to observe/log/trace it centrally (e.g. to an analytics service).
-   * NOTE: The callback MUST NOT throw.
-   * @param {Error} err
-   */
-} = {}) {
+export async function recordKvFailureAndCheckLimit(
+  request,
+  env,
+  {
+    prefix = 'fail',
+    windowSeconds = 600,
+    allowedFailures = 2,
+    sliding = true,
+    onError,
+    kvRetryMs = 30000,
+    enforceOnFallback = true,
+    /**
+     * Optional error handler invoked when an unexpected exception occurs while
+     * interacting with KV or computing the hash. The original error is not
+     * rethrown to avoid breaking request handling, but this callback allows the
+     * caller to observe/log/trace it centrally (e.g. to an analytics service).
+     * NOTE: The callback MUST NOT throw.
+     * @param {Error} err
+     */
+  } = {}
+) {
   // Input validation
   if (typeof windowSeconds !== 'number' || windowSeconds <= 0) {
     throw new Error('windowSeconds must be a positive number');
@@ -219,7 +223,12 @@ export async function recordKvFailureAndCheckLimit(request, env, {
     }
     try {
       state = JSON.parse(current);
-      if (typeof state !== 'object' || state === null || typeof state.count !== 'number' || typeof state.first !== 'number') {
+      if (
+        typeof state !== 'object' ||
+        state === null ||
+        typeof state.count !== 'number' ||
+        typeof state.first !== 'number'
+      ) {
         state = { count: 1, first: nowSec }; // fallback to new window if structure unexpected
       }
     } catch (_) {
@@ -241,7 +250,7 @@ export async function recordKvFailureAndCheckLimit(request, env, {
       limited,
       count: state.count,
       remaining: limited ? 0 : Math.max(0, allowedFailures - state.count),
-      key
+      key,
     };
   } catch (err) {
     // Open circuit to avoid hammering KV repeatedly
@@ -250,7 +259,9 @@ export async function recordKvFailureAndCheckLimit(request, env, {
     try {
       if (typeof onError === 'function') onError(err);
       // Intentionally avoid console.* logging by default to comply with strict lint/security policy.
-    } catch (_) { /* swallow secondary errors */ }
+    } catch (_) {
+      /* swallow secondary errors */
+    }
     // Fall back to local memory logic if enabled
     if (enforceOnFallback) {
       try {
@@ -261,7 +272,9 @@ export async function recordKvFailureAndCheckLimit(request, env, {
           const res = localLimit(keyLocal, { sliding, windowSeconds, allowedFailures });
           return { ...res, error: true };
         }
-      } catch (_) { /* ignore secondary issues */ }
+      } catch (_) {
+        /* ignore secondary issues */
+      }
     }
     return { limited: false, count: 0, remaining: allowedFailures, error: true, fallback: true };
   }

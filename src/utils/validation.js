@@ -171,11 +171,13 @@ export function validateExpiryHours(expiryHours) {
  * @returns {boolean} - Whether the password is valid
  */
 export function validatePassword(password) {
-  return password &&
+  return (
+    password &&
     typeof password === 'string' &&
     password.length >= 32 &&
     password.length <= 64 &&
-    /^[A-Za-z0-9]+$/.test(password);
+    /^[A-Za-z0-9]+$/.test(password)
+  );
 }
 
 /**
@@ -214,7 +216,7 @@ export function sanitizeLocale(locale) {
   // Only allow alphanumeric characters, hyphens, and underscores
   if (!/^[a-zA-Z0-9_-]+$/.test(locale)) return 'en';
   return locale;
-} 
+}
 
 /**
  * Check if a string contains disallowed control characters excluding \n (10), \r (13) and \t (9).
@@ -247,7 +249,8 @@ function stripDisallowedControlChars(str) {
   for (let i = 0; i < str.length; i++) {
     // Direct indexing + charCodeAt to avoid false positive "object injection" pattern; strings are immutable primitives
     const code = str.charCodeAt(i);
-    if (code === 9 || code === 10 || code === 13) { // allowed controls
+    if (code === 9 || code === 10 || code === 13) {
+      // allowed controls
       // Use charAt instead of bracket notation to avoid SAST generic object injection false positives.
       // str is guaranteed to be a primitive string above, so charAt(i) returns a one-character string.
       out += str.charAt(i);

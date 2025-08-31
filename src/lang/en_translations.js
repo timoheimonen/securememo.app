@@ -46,55 +46,75 @@ export const en = {
 
   // Page titles and descriptions
   'page.home.title': 'securememo.app - Encrypted Self-Destructing Memos',
-  'page.home.description': 'Create encrypted memos that self-destruct after reading. End-to-end encryption, privacy-focused, and secure note sharing with AES-256. No tracking, no ads.',
-  'page.home.keywords': 'secure memo, encrypted memo, self-destructing memo, private note sharing, end-to-end encryption, AES-256, privacy, secure memo sharing',
+  'page.home.description':
+    'Create encrypted memos that self-destruct after reading. End-to-end encryption, privacy-focused, and secure note sharing with AES-256. No tracking, no ads.',
+  'page.home.keywords':
+    'secure memo, encrypted memo, self-destructing memo, private note sharing, end-to-end encryption, AES-256, privacy, secure memo sharing',
   'page.home.ogTitle': 'securememo.app - Encrypted Self-Destructing Memos',
-  'page.home.ogDescription': 'Share sensitive information securely with memos that delete after one view or expiration. Powered by client-side AES-256 encryption.',
+  'page.home.ogDescription':
+    'Share sensitive information securely with memos that delete after one view or expiration. Powered by client-side AES-256 encryption.',
   'page.home.twitterDescription': 'Privacy-first app for secure, self-destructing memos.',
   'page.about.title': 'About securememo.app - Privacy-Focused Encrypted Notes',
-  'page.about.description': 'Learn about securememo.app\'s privacy-first approach to encrypted messaging. Built with client-side AES-256 encryption, self-destructing messages, and zero-knowledge architecture.',
-  'page.about.keywords': 'about secure memo, privacy-focused messaging, client-side encryption, AES-256, self-destructing messages, zero-knowledge, secure note sharing',
+  'page.about.description':
+    "Learn about securememo.app's privacy-first approach to encrypted messaging. Built with client-side AES-256 encryption, self-destructing messages, and zero-knowledge architecture.",
+  'page.about.keywords':
+    'about secure memo, privacy-focused messaging, client-side encryption, AES-256, self-destructing messages, zero-knowledge, secure note sharing',
   'page.about.ogTitle': 'About securememo.app - Privacy-Focused Encrypted Notes',
-  'page.about.ogDescription': 'Discover how securememo.app protects your privacy with client-side encryption and self-destructing messages.',
+  'page.about.ogDescription':
+    'Discover how securememo.app protects your privacy with client-side encryption and self-destructing messages.',
   'page.about.twitterDescription': 'Privacy-first encrypted messaging with client-side encryption.',
   'page.create.title': 'Create Secure Memo - Encrypted Self-Destructing Memo',
-  'page.create.keywords': 'create secure memo, encrypted memo, self-destructing note, AES-256 encryption, private memo sharing, secure note creation',
+  'page.create.keywords':
+    'create secure memo, encrypted memo, self-destructing note, AES-256 encryption, private memo sharing, secure note creation',
   'page.read.title': 'Read Secure Memo - Decrypt Encrypted Memo',
-  'page.read.keywords': 'read secure memo, decrypt memo, encrypted note reading, AES-256 decryption, private memo access',
+  'page.read.keywords':
+    'read secure memo, decrypt memo, encrypted note reading, AES-256 decryption, private memo access',
   'page.tos.title': 'Terms of Service - securememo.app Legal Terms',
-  'page.tos.description': 'Terms of Service for securememo.app - encrypted memo sharing service. Learn about acceptable use, privacy, security, and legal terms for our secure memo sharing platform.',
-  'page.tos.keywords': 'terms of service, secure memo legal, encrypted memo terms, privacy policy, acceptable use policy, secure note sharing terms',
+  'page.tos.description':
+    'Terms of Service for securememo.app - encrypted memo sharing service. Learn about acceptable use, privacy, security, and legal terms for our secure memo sharing platform.',
+  'page.tos.keywords':
+    'terms of service, secure memo legal, encrypted memo terms, privacy policy, acceptable use policy, secure note sharing terms',
   'page.tos.ogTitle': 'Terms of Service - securememo.app Legal Terms',
   'page.tos.ogDescription': 'Legal terms and conditions for securememo.app encrypted memo sharing service.',
   'page.tos.twitterDescription': 'Legal terms for securememo.app encrypted memo sharing service.',
   'page.privacy.title': 'Privacy Notice - securememo.app Data Protection',
-  'page.privacy.description': 'Privacy Notice for securememo.app - learn how we protect your data with client-side encryption, zero-knowledge architecture, and minimal data collection for secure memo sharing.',
-  'page.privacy.keywords': 'privacy notice, secure memo privacy, data protection, GDPR compliance, client-side encryption, zero-knowledge, secure memo sharing privacy',
+  'page.privacy.description':
+    'Privacy Notice for securememo.app - learn how we protect your data with client-side encryption, zero-knowledge architecture, and minimal data collection for secure memo sharing.',
+  'page.privacy.keywords':
+    'privacy notice, secure memo privacy, data protection, GDPR compliance, client-side encryption, zero-knowledge, secure memo sharing privacy',
   'page.privacy.ogTitle': 'Privacy Notice - securememo.app Data Protection',
-  'page.privacy.ogDescription': 'How securememo.app protects your privacy with client-side encryption and minimal data collection.',
+  'page.privacy.ogDescription':
+    'How securememo.app protects your privacy with client-side encryption and minimal data collection.',
   'page.privacy.twitterDescription': 'Privacy protection with client-side encryption and zero-knowledge architecture.',
 
   // Main page content
   'home.hero.title': 'securememo.app',
-  'home.hero.subtitle': 'Create encrypted memos that self-destruct after being read or expired. Your secrets stay safe.',
+  'home.hero.subtitle':
+    'Create encrypted memos that self-destruct after being read or expired. Your secrets stay safe.',
   'home.hero.btnPrimary': 'Create Secure Memo',
   'home.hero.btnSecondary': 'Learn More',
 
   'home.features.title': 'How It Works',
   'home.features.encrypt.title': '🔐 Encrypt in Browser',
-  'home.features.encrypt.description': 'Type your memo. It gets encrypted right in your browser using strong AES-256 encryption before ever touching our servers.',
+  'home.features.encrypt.description':
+    'Type your memo. It gets encrypted right in your browser using strong AES-256 encryption before ever touching our servers.',
   'home.features.share.title': '🔗 Share Securely',
-  'home.features.share.description': 'Get a unique URL and a separate random password, and share them through different channels for extra security.',
+  'home.features.share.description':
+    'Get a unique URL and a separate random password, and share them through different channels for extra security.',
   'home.features.destruct.title': '💥 Auto-Destruct',
-  'home.features.destruct.description': 'The memo deletes itself permanently after it\'s read or the time limit expires (from 8 hours to 30 days).',
+  'home.features.destruct.description':
+    "The memo deletes itself permanently after it's read or the time limit expires (from 8 hours to 30 days).",
 
   'home.security.title': 'Security Features',
   'home.security.encryption.title': '🔒 True Client-Side Encryption',
-  'home.security.encryption.description': 'Your memo is encrypted in-browser with AES-256-GCM and a strong key derivation. We never see the plaintext.',
+  'home.security.encryption.description':
+    'Your memo is encrypted in-browser with AES-256-GCM and a strong key derivation. We never see the plaintext.',
   'home.security.delete.title': '🗑️ Reliable Auto-Delete',
-  'home.security.delete.description': 'Memos vanish forever after reading or expiration, with automatic cleanup every hour. No backups or recovery possible.',
+  'home.security.delete.description':
+    'Memos vanish forever after reading or expiration, with automatic cleanup every hour. No backups or recovery possible.',
   'home.security.password.title': '🌐 Zero Password Knowledge',
-  'home.security.password.description': 'We generate and handle passwords entirely in your browser. They\'re never sent to or stored on our servers.',
+  'home.security.password.description':
+    "We generate and handle passwords entirely in your browser. They're never sent to or stored on our servers.",
 
   'footer.sourceCode': 'View source code at GitHub',
   'footer.tos': 'Terms of Service',
@@ -103,7 +123,8 @@ export const en = {
 
   // About page content
   'about.hero.title': 'About securememo.app',
-  'about.hero.subtitle': 'securememo.app is a privacy-focused application that allows you to create encrypted memos that self-destruct after being read or expired. Built with security and privacy as the top priorities. Source code available on GitHub.',
+  'about.hero.subtitle':
+    'securememo.app is a privacy-focused application that allows you to create encrypted memos that self-destruct after being read or expired. Built with security and privacy as the top priorities. Source code available on GitHub.',
 
   'about.tech.title': 'Technology Stack',
   'about.tech.cloudflare': 'Cloudflare Workers: Serverless compute platform for global performance',
@@ -115,25 +136,34 @@ export const en = {
 
   'about.features.title': 'Security Features',
   'about.features.clientEncryption.title': '🔐 Client-Side Encryption',
-  'about.features.clientEncryption.description': 'All encryption happens in your browser using the Web Crypto API. Your memo is encrypted with AES-256 before being sent to our servers.',
+  'about.features.clientEncryption.description':
+    'All encryption happens in your browser using the Web Crypto API. Your memo is encrypted with AES-256 before being sent to our servers.',
   'about.features.passwordSharing.title': '🔑 Separate Password Sharing',
-  'about.features.passwordSharing.description': 'The encryption password is generated separately from the URL and should be shared through a different channel for enhanced security.',
+  'about.features.passwordSharing.description':
+    'The encryption password is generated separately from the URL and should be shared through a different channel for enhanced security.',
   'about.features.selfDestruct.title': '💥 Self-Destructing Memos',
-  'about.features.selfDestruct.description': 'Once a memo is read or expired, it\'s immediately and permanently deleted from our database. No traces remain.',
+  'about.features.selfDestruct.description':
+    "Once a memo is read or expired, it's immediately and permanently deleted from our database. No traces remain.",
   'about.features.noStorage.title': '🌐 No Password Storage',
-  'about.features.noStorage.description': 'We never store encryption passwords on our servers. They exist only in your browser\'s memory.',
+  'about.features.noStorage.description':
+    "We never store encryption passwords on our servers. They exist only in your browser's memory.",
   'about.features.global.title': '⚡ Global Performance',
-  'about.features.global.description': 'Built on Cloudflare\'s global network for lightning-fast access from anywhere in the world.',
+  'about.features.global.description':
+    "Built on Cloudflare's global network for lightning-fast access from anywhere in the world.",
   'about.features.privacy.title': '🔒 Privacy First',
-  'about.features.privacy.description': 'No user accounts required. No tracking. No analytics. Your privacy is our priority.',
+  'about.features.privacy.description':
+    'No user accounts required. No tracking. No analytics. Your privacy is our priority.',
 
   'about.usage.title': 'How to Use',
   'about.usage.create.title': '1. Create a Memo',
-  'about.usage.create.description': 'Go to "Create Secure Memo" and type your memo. Choose an expiry time (8h, 1d, 2d, 1 week or a maximum of 30 days). Memos are deleted when read or expired. The system will generate a random encryption password.',
+  'about.usage.create.description':
+    'Go to "Create Secure Memo" and type your memo. Choose an expiry time (8h, 1d, 2d, 1 week or a maximum of 30 days). Memos are deleted when read or expired. The system will generate a random encryption password.',
   'about.usage.share.title': '2. Share the Link and Password',
-  'about.usage.share.description': 'Copy the generated URL and password, then share them with your recipient through separate channels for enhanced security.',
+  'about.usage.share.description':
+    'Copy the generated URL and password, then share them with your recipient through separate channels for enhanced security.',
   'about.usage.destruct.title': '3. Self-Destruct',
-  'about.usage.destruct.description': 'When the recipient opens the link and enters the password separately, the memo will be decrypted and then permanently deleted if read, or deleted automatically if expired. Expired memos are automatically cleaned up every 1 hours.',
+  'about.usage.destruct.description':
+    'When the recipient opens the link and enters the password separately, the memo will be decrypted and then permanently deleted if read, or deleted automatically if expired. Expired memos are automatically cleaned up every 1 hours.',
 
   'about.cta.title': 'Ready to Get Started?',
   'about.cta.subtitle': 'Create your first secure memo now and experience true end-to-end encryption.',
@@ -159,11 +189,14 @@ export const en = {
   'tos.tableOfContents.languageDisclaimer': 'Language and Translation',
 
   'tos.serviceDescription.title': '1. Service Description',
-  'tos.serviceDescription.content': 'securememo.app is a secure memo sharing service that allows users to create encrypted memos that self-destruct after being read or expired. The service uses client-side encryption to ensure that memo content is never accessible to our servers.',
+  'tos.serviceDescription.content':
+    'securememo.app is a secure memo sharing service that allows users to create encrypted memos that self-destruct after being read or expired. The service uses client-side encryption to ensure that memo content is never accessible to our servers.',
 
   'tos.acceptableUse.title': '2. Acceptable Use',
-  'tos.acceptableUse.intro': 'You agree to use this service only for lawful purposes and in accordance with these Terms. You agree not to:',
-  'tos.acceptableUse.illegal': 'Use the service to transmit illegal, harmful, threatening, abusive, or defamatory content',
+  'tos.acceptableUse.intro':
+    'You agree to use this service only for lawful purposes and in accordance with these Terms. You agree not to:',
+  'tos.acceptableUse.illegal':
+    'Use the service to transmit illegal, harmful, threatening, abusive, or defamatory content',
   'tos.acceptableUse.bypass': 'Attempt to bypass security measures or CAPTCHA protection',
   'tos.acceptableUse.automated': 'Use automated tools or scripts to create memos',
   'tos.acceptableUse.malware': 'Share memos containing malware, phishing links, or other harmful content',
@@ -171,49 +204,71 @@ export const en = {
   'tos.acceptableUse.reverse': 'Attempt to reverse engineer or compromise the service',
 
   'tos.privacyData.title': '3. Privacy & Data Handling',
-  'tos.privacyData.noAccess': 'No Content Access: We cannot access, read, or recover your memo content. All encryption happens in your browser.',
-  'tos.privacyData.noPersonal': 'Minimal Data Collection: We do not require user accounts or collect personal information for you to use the service. The only personal data we may collect is if you voluntarily contact us for support. If you contact us via email, we collect your email address and message content to respond to your inquiry. We do not use this information for any other purposes and do not share it with third parties without your consent.',
-  'tos.privacyData.securityLogging': 'Security Logging: We temporarily log IP addresses and security-related metadata strictly for abuse mitigation and to protect service integrity. These logs are never used for tracking or profiling.',
-  'tos.privacyData.automaticDeletion': 'Automatic Deletion: Memos are automatically deleted after being read or when they expire.',
+  'tos.privacyData.noAccess':
+    'No Content Access: We cannot access, read, or recover your memo content. All encryption happens in your browser.',
+  'tos.privacyData.noPersonal':
+    'Minimal Data Collection: We do not require user accounts or collect personal information for you to use the service. The only personal data we may collect is if you voluntarily contact us for support. If you contact us via email, we collect your email address and message content to respond to your inquiry. We do not use this information for any other purposes and do not share it with third parties without your consent.',
+  'tos.privacyData.securityLogging':
+    'Security Logging: We temporarily log IP addresses and security-related metadata strictly for abuse mitigation and to protect service integrity. These logs are never used for tracking or profiling.',
+  'tos.privacyData.automaticDeletion':
+    'Automatic Deletion: Memos are automatically deleted after being read or when they expire.',
   'tos.privacyData.noRecovery': 'No Recovery: Once a memo is deleted, it cannot be recovered.',
-  'tos.privacyData.gdpr': 'GDPR Compliance: We are committed to GDPR principles. We minimize data collection and process necessary data, such as temporary security logs, under the basis of legitimate interest to protect the service.',
+  'tos.privacyData.gdpr':
+    'GDPR Compliance: We are committed to GDPR principles. We minimize data collection and process necessary data, such as temporary security logs, under the basis of legitimate interest to protect the service.',
   'tos.privacyData.moreDetails': 'For more details, please review our',
   'tos.privacyData.privacyNotice': 'Privacy Notice',
 
   'tos.serviceLimitations.title': '4. Service Limitations',
   'tos.serviceLimitations.messageSize': 'Message Size: Maximum 10,000 characters per memo',
-  'tos.serviceLimitations.expiryTimes': 'Expiry Times: 8 hours, 24 hours, 48 hours, 1 week, or delete on read (max 30 days)',
+  'tos.serviceLimitations.expiryTimes':
+    'Expiry Times: 8 hours, 24 hours, 48 hours, 1 week, or delete on read (max 30 days)',
   'tos.serviceLimitations.availability': 'Availability: Service provided "as is" without guarantees of availability',
-  'tos.serviceLimitations.noDelivery': 'No Delivery Guarantee: We cannot guarantee that memos will be delivered, read or deleted on time.',
+  'tos.serviceLimitations.noDelivery':
+    'No Delivery Guarantee: We cannot guarantee that memos will be delivered, read or deleted on time.',
 
   'tos.securityDisclaimers.title': '5. Security & Disclaimers',
-  'tos.securityDisclaimers.userResponsibility': 'User Responsibility: You are responsible for securely sharing memo URLs and protecting the passwords. If passwords are lost, memos cannot be recovered.',
-  'tos.securityDisclaimers.noWarranty': 'No Warranty: The service is provided without warranties of any kind. Our encryption services are provided on an "as-is" and "as-available" basis. We do not warrant that the encryption will be uninterrupted, error-free, or secure from all potential threats.',
-  'tos.securityDisclaimers.limitation': 'Limitation of Liability: We are not liable for any damages arising from use of the service. You acknowledge that no method of electronic transmission or storage is 100% secure, and we are not responsible for any unauthorized access or interception of your memos. Use of our encryption services is at your own risk.',
-  'tos.securityDisclaimers.securityMeasures': 'Security Measures: While we implement security measures, no system is 100% secure.',
-  'tos.securityDisclaimers.exportControls': 'Export Controls: You agree not to use the service in violation of any export control laws, including those restricting use in sanctioned countries.',
+  'tos.securityDisclaimers.userResponsibility':
+    'User Responsibility: You are responsible for securely sharing memo URLs and protecting the passwords. If passwords are lost, memos cannot be recovered.',
+  'tos.securityDisclaimers.noWarranty':
+    'No Warranty: The service is provided without warranties of any kind. Our encryption services are provided on an "as-is" and "as-available" basis. We do not warrant that the encryption will be uninterrupted, error-free, or secure from all potential threats.',
+  'tos.securityDisclaimers.limitation':
+    'Limitation of Liability: We are not liable for any damages arising from use of the service. You acknowledge that no method of electronic transmission or storage is 100% secure, and we are not responsible for any unauthorized access or interception of your memos. Use of our encryption services is at your own risk.',
+  'tos.securityDisclaimers.securityMeasures':
+    'Security Measures: While we implement security measures, no system is 100% secure.',
+  'tos.securityDisclaimers.exportControls':
+    'Export Controls: You agree not to use the service in violation of any export control laws, including those restricting use in sanctioned countries.',
 
   'tos.intellectualProperty.title': '6. Intellectual Property',
-  'tos.intellectualProperty.content': 'The Service and all materials provided through it, including but not limited to text, graphics, logos, and software, are the property of securememo.app or its licensors and are protected by copyright, trademark, and other intellectual property laws. You agree not to modify, reproduce, distribute, or create derivative works based on our content without explicit permission, except for personal, non-commercial use within the Service.',
-  'tos.intellectualProperty.copyright': 'Copyright & DMCA Policy: If you believe your copyright has been infringed, please contact us at contact@securememo.app with the required information under the DMCA (e.g., identification of the work, your contact details, and a statement of good faith belief).',
+  'tos.intellectualProperty.content':
+    'The Service and all materials provided through it, including but not limited to text, graphics, logos, and software, are the property of securememo.app or its licensors and are protected by copyright, trademark, and other intellectual property laws. You agree not to modify, reproduce, distribute, or create derivative works based on our content without explicit permission, except for personal, non-commercial use within the Service.',
+  'tos.intellectualProperty.copyright':
+    'Copyright & DMCA Policy: If you believe your copyright has been infringed, please contact us at contact@securememo.app with the required information under the DMCA (e.g., identification of the work, your contact details, and a statement of good faith belief).',
 
   'tos.indemnification.title': '7. Indemnification',
-  'tos.indemnification.content': 'You agree to defend, indemnify, and hold harmless securememo.app and its affiliates, officers, directors, employees, and agents from and against any claims, liabilities, damages, losses, and expenses, including reasonable attorneys\' fees, arising out of or in any way connected with your access to or use of our Services, including any violation of these Terms by you.',
+  'tos.indemnification.content':
+    "You agree to defend, indemnify, and hold harmless securememo.app and its affiliates, officers, directors, employees, and agents from and against any claims, liabilities, damages, losses, and expenses, including reasonable attorneys' fees, arising out of or in any way connected with your access to or use of our Services, including any violation of these Terms by you.",
 
   'tos.termination.title': '8. Termination',
-  'tos.termination.content': 'We reserve the right to terminate or suspend access to the service for violations of these terms or for any other reason at our discretion.',
+  'tos.termination.content':
+    'We reserve the right to terminate or suspend access to the service for violations of these terms or for any other reason at our discretion.',
 
   'tos.changesTerms.title': '9. Changes to Terms',
-  'tos.changesTerms.content': 'We may update these terms at any time. Continued use of the service constitutes acceptance of updated terms.',
+  'tos.changesTerms.content':
+    'We may update these terms at any time. Continued use of the service constitutes acceptance of updated terms.',
 
   'tos.governingLaw.title': '10. Governing Law & Jurisdiction',
-  'tos.governingLaw.content': 'These Terms of Service and any separate agreements whereby we provide you Services shall be governed by and construed in accordance with the laws of Finland, without regard to its conflict of law principles. Any disputes shall be resolved in the courts of Helsinki, Finland.',
+  'tos.governingLaw.content':
+    'These Terms of Service and any separate agreements whereby we provide you Services shall be governed by and construed in accordance with the laws of Finland, without regard to its conflict of law principles. Any disputes shall be resolved in the courts of Helsinki, Finland.',
 
   'tos.miscellaneous.title': '11. Miscellaneous',
-  'tos.miscellaneous.severability': 'Severability: If any provision of these Terms is found to be invalid or unenforceable by a court of competent jurisdiction, such provision shall be severed from the Terms, and the remaining provisions will remain in full force and effect.',
-  'tos.miscellaneous.assignment': 'Assignment: You may not assign or transfer these Terms, by operation of law or otherwise, without our prior written consent. We may assign these Terms at our sole discretion without notice to you.',
-  'tos.miscellaneous.waiver': 'Waiver: No waiver of any term shall be deemed a further or continuing waiver unless in writing.',
-  'tos.miscellaneous.children': 'Children\'s Privacy: Our service is not intended for children under 13 (or 16 in some jurisdictions). We do not knowingly collect data from children. If we become aware of such data, we will delete it immediately.',
+  'tos.miscellaneous.severability':
+    'Severability: If any provision of these Terms is found to be invalid or unenforceable by a court of competent jurisdiction, such provision shall be severed from the Terms, and the remaining provisions will remain in full force and effect.',
+  'tos.miscellaneous.assignment':
+    'Assignment: You may not assign or transfer these Terms, by operation of law or otherwise, without our prior written consent. We may assign these Terms at our sole discretion without notice to you.',
+  'tos.miscellaneous.waiver':
+    'Waiver: No waiver of any term shall be deemed a further or continuing waiver unless in writing.',
+  'tos.miscellaneous.children':
+    "Children's Privacy: Our service is not intended for children under 13 (or 16 in some jurisdictions). We do not knowingly collect data from children. If we become aware of such data, we will delete it immediately.",
 
   'tos.contact.title': '12. Contact',
   'tos.contact.content': 'For questions about these terms, please visit our',
@@ -221,7 +276,8 @@ export const en = {
   'tos.contact.email': 'or email contact@securememo.app.',
 
   'tos.languageDisclaimer.title': '13. Language and Translation',
-  'tos.languageDisclaimer.content': 'These Terms of Service may be translated into other languages for your convenience. In the event of any discrepancy or conflict between the English version and a translated version, the English version shall prevail.',
+  'tos.languageDisclaimer.content':
+    'These Terms of Service may be translated into other languages for your convenience. In the event of any discrepancy or conflict between the English version and a translated version, the English version shall prevail.',
 
   // Privacy Notice page content
   'privacy.hero.title': 'Privacy Notice for securememo.app',
@@ -233,72 +289,101 @@ export const en = {
   'privacy.tableOfContents.dataSecurity': 'Data Security',
   'privacy.tableOfContents.dataRetention': 'Data Retention',
   'privacy.tableOfContents.yourRights': 'Your Rights and Choices',
-  'privacy.tableOfContents.childrenPrivacy': 'Children\'s Privacy',
+  'privacy.tableOfContents.childrenPrivacy': "Children's Privacy",
   'privacy.tableOfContents.internationalTransfers': 'International Data Transfers',
   'privacy.tableOfContents.changesNotice': 'Changes to This Privacy Notice',
   'privacy.tableOfContents.contact': 'Contact Us',
 
-  'privacy.intro.p1': 'securememo.app ("we," "us," or "our") is committed to protecting your privacy. This Privacy Notice explains how we handle information in connection with our service, which allows users to create and share encrypted memos that self-destruct after being read or expired. Our service is designed with privacy at its core: all encryption occurs client-side in your browser, and we do not have access to your memo content.',
-  'privacy.intro.p2': 'By using securememo.app, you agree to the practices described in this Privacy Notice. If you do not agree, please do not use our service.',
+  'privacy.intro.p1':
+    'securememo.app ("we," "us," or "our") is committed to protecting your privacy. This Privacy Notice explains how we handle information in connection with our service, which allows users to create and share encrypted memos that self-destruct after being read or expired. Our service is designed with privacy at its core: all encryption occurs client-side in your browser, and we do not have access to your memo content.',
+  'privacy.intro.p2':
+    'By using securememo.app, you agree to the practices described in this Privacy Notice. If you do not agree, please do not use our service.',
 
   'privacy.informationCollected.title': '1. Information We Collect',
-  'privacy.informationCollected.intro': 'We collect minimal information to operate the service securely and efficiently. Specifically:',
-  'privacy.informationCollected.memoData': 'Memo Data: When you create a memo, we store only the encrypted version of your message on our servers (using Cloudflare Workers and D1 Database). The encryption key (password) is generated and handled entirely in your browser and is never sent to or stored by us. Memos are automatically deleted after being read or when they expire (options: 8 hours, 1 day, 2 days, 1 week, or 30 days).',
-  'privacy.informationCollected.noPersonal': 'Minimal Data Collection: We do not require user accounts or collect personal information for you to use the service. The only personal data we may collect is if you voluntarily contact us for support. If you contact us via email, we collect your email address and message content to respond to your inquiry. We do not use this information for any other purposes and do not share it with third parties without your consent.',
+  'privacy.informationCollected.intro':
+    'We collect minimal information to operate the service securely and efficiently. Specifically:',
+  'privacy.informationCollected.memoData':
+    'Memo Data: When you create a memo, we store only the encrypted version of your message on our servers (using Cloudflare Workers and D1 Database). The encryption key (password) is generated and handled entirely in your browser and is never sent to or stored by us. Memos are automatically deleted after being read or when they expire (options: 8 hours, 1 day, 2 days, 1 week, or 30 days).',
+  'privacy.informationCollected.noPersonal':
+    'Minimal Data Collection: We do not require user accounts or collect personal information for you to use the service. The only personal data we may collect is if you voluntarily contact us for support. If you contact us via email, we collect your email address and message content to respond to your inquiry. We do not use this information for any other purposes and do not share it with third parties without your consent.',
   'privacy.informationCollected.securityData': 'Security-Related Data: For abuse prevention and service integrity:',
-  'privacy.informationCollected.ipLogs': 'We temporarily log IP addresses and request metadata (e.g., timestamps) to detect and mitigate spam, bots, or malicious activity.',
-  'privacy.informationCollected.turnstile': 'We use Cloudflare Turnstile CAPTCHA to prevent automated abuse. Turnstile is designed to protect privacy and does not track users across sites.',
-  'privacy.informationCollected.noAnalytics': 'No Analytics or Tracking: We do not use cookies, tracking pixels, third-party analytics, or advertising tools. There is no user profiling, behavioral tracking, or data collection for marketing purposes.',
-  'privacy.informationCollected.noSensitive': 'We do not collect sensitive personal data, location information, or device identifiers beyond what is necessary for basic service operation.',
+  'privacy.informationCollected.ipLogs':
+    'We temporarily log IP addresses and request metadata (e.g., timestamps) to detect and mitigate spam, bots, or malicious activity.',
+  'privacy.informationCollected.turnstile':
+    'We use Cloudflare Turnstile CAPTCHA to prevent automated abuse. Turnstile is designed to protect privacy and does not track users across sites.',
+  'privacy.informationCollected.noAnalytics':
+    'No Analytics or Tracking: We do not use cookies, tracking pixels, third-party analytics, or advertising tools. There is no user profiling, behavioral tracking, or data collection for marketing purposes.',
+  'privacy.informationCollected.noSensitive':
+    'We do not collect sensitive personal data, location information, or device identifiers beyond what is necessary for basic service operation.',
 
   'privacy.howWeUse.title': '2. How We Use Information',
   'privacy.howWeUse.intro': 'The limited information we collect is used solely to:',
-  'privacy.howWeUse.coreService': 'Provide the core service: Store encrypted memos temporarily and facilitate their secure retrieval and deletion.',
-  'privacy.howWeUse.security': 'Maintain security: Detect and prevent abuse, such as spam or denial-of-service attacks, using IP logs and CAPTCHA.',
-  'privacy.howWeUse.legal': 'Comply with legal obligations: In rare cases, we may use logs to respond to valid legal requests (e.g., subpoenas).',
-  'privacy.howWeUse.noOther': 'We do not use any data for advertising, selling to third parties, or any purpose unrelated to operating securememo.app.',
+  'privacy.howWeUse.coreService':
+    'Provide the core service: Store encrypted memos temporarily and facilitate their secure retrieval and deletion.',
+  'privacy.howWeUse.security':
+    'Maintain security: Detect and prevent abuse, such as spam or denial-of-service attacks, using IP logs and CAPTCHA.',
+  'privacy.howWeUse.legal':
+    'Comply with legal obligations: In rare cases, we may use logs to respond to valid legal requests (e.g., subpoenas).',
+  'privacy.howWeUse.noOther':
+    'We do not use any data for advertising, selling to third parties, or any purpose unrelated to operating securememo.app.',
 
   'privacy.dataSharing.title': '3. Data Sharing and Disclosure',
-  'privacy.dataSharing.intro': 'We do not sell, rent, or share your data with third parties, except in the following limited circumstances:',
-  'privacy.dataSharing.serviceProviders': 'Service Providers: We use Cloudflare for hosting, database storage (D1), and CAPTCHA (Turnstile). These providers process data on our behalf under strict confidentiality and do not access memo content.',
-  'privacy.dataSharing.legal': 'Legal Requirements: We may disclose information if required by law, such as in response to a court order or government request.',
-  'privacy.dataSharing.business': 'Business Transfers: If securememo.app is acquired or merged, data may be transferred as part of the transaction, but it would remain subject to this Privacy Notice.',
+  'privacy.dataSharing.intro':
+    'We do not sell, rent, or share your data with third parties, except in the following limited circumstances:',
+  'privacy.dataSharing.serviceProviders':
+    'Service Providers: We use Cloudflare for hosting, database storage (D1), and CAPTCHA (Turnstile). These providers process data on our behalf under strict confidentiality and do not access memo content.',
+  'privacy.dataSharing.legal':
+    'Legal Requirements: We may disclose information if required by law, such as in response to a court order or government request.',
+  'privacy.dataSharing.business':
+    'Business Transfers: If securememo.app is acquired or merged, data may be transferred as part of the transaction, but it would remain subject to this Privacy Notice.',
 
   'privacy.dataSecurity.title': '4. Data Security',
-  'privacy.dataSecurity.encryption': 'Encryption: All memos are encrypted client-side using AES-256 with PBKDF2 key derivation. We store only encrypted data and cannot decrypt it.',
-  'privacy.dataSecurity.deletion': 'Deletion: Memos are permanently deleted after reading or expiration via automated cron jobs.',
-  'privacy.dataSecurity.securityMeasures': 'Security Measures: We implement strong security headers (e.g., CSP, HSTS), input sanitization, timing attack protections, and CAPTCHA to prevent abuse.',
+  'privacy.dataSecurity.encryption':
+    'Encryption: All memos are encrypted client-side using AES-256 with PBKDF2 key derivation. We store only encrypted data and cannot decrypt it.',
+  'privacy.dataSecurity.deletion':
+    'Deletion: Memos are permanently deleted after reading or expiration via automated cron jobs.',
+  'privacy.dataSecurity.securityMeasures':
+    'Security Measures: We implement strong security headers (e.g., CSP, HSTS), input sanitization, timing attack protections, and CAPTCHA to prevent abuse.',
   'privacy.dataSecurity.noRecovery': 'No Recovery: Once deleted, memos cannot be recovered—even by us.',
-  'privacy.dataSecurity.disclaimer': 'While we take reasonable steps to secure our systems, no service is completely immune to risks. You are responsible for securely sharing URLs and passwords.',
+  'privacy.dataSecurity.disclaimer':
+    'While we take reasonable steps to secure our systems, no service is completely immune to risks. You are responsible for securely sharing URLs and passwords.',
 
   'privacy.dataRetention.title': '5. Data Retention',
   'privacy.dataRetention.memos': 'Encrypted memos are retained only until read or expired (up to 30 days maximum).',
-  'privacy.dataRetention.logs': 'Security logs (e.g., IP addresses) are retained temporarily for abuse prevention and deleted automatically after a short period (typically within days).',
-  'privacy.dataRetention.minimal': 'We do not retain any data longer than necessary for the service\'s operation.',
+  'privacy.dataRetention.logs':
+    'Security logs (e.g., IP addresses) are retained temporarily for abuse prevention and deleted automatically after a short period (typically within days).',
+  'privacy.dataRetention.minimal': "We do not retain any data longer than necessary for the service's operation.",
 
   'privacy.yourRights.title': '6. Your Rights and Choices',
   'privacy.yourRights.intro': 'Since we collect no personal data:',
   'privacy.yourRights.noAccounts': 'There are no user accounts to manage.',
-  'privacy.yourRights.noRequests': 'You cannot request data access, correction, or deletion beyond the automatic self-destruction of memos.',
-  'privacy.yourRights.contact': 'If you believe we hold any information about you (e.g., from logs), contact us (see below) to inquire about your rights under applicable laws like GDPR or CCPA. We comply with data protection regulations and process requests where feasible.',
+  'privacy.yourRights.noRequests':
+    'You cannot request data access, correction, or deletion beyond the automatic self-destruction of memos.',
+  'privacy.yourRights.contact':
+    'If you believe we hold any information about you (e.g., from logs), contact us (see below) to inquire about your rights under applicable laws like GDPR or CCPA. We comply with data protection regulations and process requests where feasible.',
 
-  'privacy.childrenPrivacy.title': '7. Children\'s Privacy',
-  'privacy.childrenPrivacy.content': 'Our service is not intended for children under 13 (or 16 in some jurisdictions). We do not knowingly collect data from children. If we become aware of such data, we will delete it.',
+  'privacy.childrenPrivacy.title': "7. Children's Privacy",
+  'privacy.childrenPrivacy.content':
+    'Our service is not intended for children under 13 (or 16 in some jurisdictions). We do not knowingly collect data from children. If we become aware of such data, we will delete it.',
 
   'privacy.internationalTransfers.title': '8. International Data Transfers',
-  'privacy.internationalTransfers.content': 'securememo.app is hosted on Cloudflare\'s global network. Data may be processed in various countries, but we ensure equivalent privacy protections through our minimal collection practices.',
+  'privacy.internationalTransfers.content':
+    "securememo.app is hosted on Cloudflare's global network. Data may be processed in various countries, but we ensure equivalent privacy protections through our minimal collection practices.",
 
   'privacy.changesNotice.title': '9. Changes to This Privacy Notice',
-  'privacy.changesNotice.content': 'We may update this Notice periodically. Changes will be posted here with an updated "Last updated" date. Continued use of the service after changes constitutes acceptance.',
+  'privacy.changesNotice.content':
+    'We may update this Notice periodically. Changes will be posted here with an updated "Last updated" date. Continued use of the service after changes constitutes acceptance.',
 
   'privacy.contact.title': '10. Contact Us',
   'privacy.contact.intro': 'For questions about this Privacy Notice or our practices, please visit our',
   'privacy.contact.github': 'GitHub repository',
   'privacy.contact.email': 'or email contact@securememo.app.',
-  'privacy.contact.disclaimer': 'This Privacy Notice applies only to securememo.app and not to any third-party sites linked from our service.',
+  'privacy.contact.disclaimer':
+    'This Privacy Notice applies only to securememo.app and not to any third-party sites linked from our service.',
 
   // Schema.org structured data
-  'schema.app.description': 'Create encrypted memos that self-destruct after reading. End-to-end encryption, privacy-focused, and secure note sharing with AES-256. No tracking, no ads.',
+  'schema.app.description':
+    'Create encrypted memos that self-destruct after reading. End-to-end encryption, privacy-focused, and secure note sharing with AES-256. No tracking, no ads.',
   'schema.app.category': 'SecurityApplication',
   'schema.app.os': 'Web Browser',
   'schema.app.requirements': 'Requires JavaScript. Requires HTML5.',
@@ -316,17 +401,23 @@ export const en = {
 
   // FAQ structured data
   'faq.privacy.question': 'How does securememo.app protect my privacy?',
-  'faq.privacy.answer': 'securememo.app uses client-side AES-256 encryption, meaning your memo is encrypted in your browser before being sent to our servers. We never see the plaintext content. Memos self-destruct after being read or expired, and we don\'t require user accounts or collect personal information.',
+  'faq.privacy.answer':
+    "securememo.app uses client-side AES-256 encryption, meaning your memo is encrypted in your browser before being sent to our servers. We never see the plaintext content. Memos self-destruct after being read or expired, and we don't require user accounts or collect personal information.",
   'faq.encryption.question': 'What encryption does securememo.app use?',
-  'faq.encryption.answer': 'We use AES-256-GCM encryption with PBKDF2 key derivation. All encryption happens client-side in your browser using the Web Crypto API. The encryption password is generated separately and never stored on our servers.',
+  'faq.encryption.answer':
+    'We use AES-256-GCM encryption with PBKDF2 key derivation. All encryption happens client-side in your browser using the Web Crypto API. The encryption password is generated separately and never stored on our servers.',
   'faq.duration.question': 'How long do memos last?',
-  'faq.duration.answer': 'Memos can be set to expire after 8 hours, 1 day, 2 days, 1 week, or 30 days maximum. They are also deleted immediately after being read. Expired memos are automatically cleaned up every hour.',
+  'faq.duration.answer':
+    'Memos can be set to expire after 8 hours, 1 day, 2 days, 1 week, or 30 days maximum. They are also deleted immediately after being read. Expired memos are automatically cleaned up every hour.',
   'faq.recovery.question': 'Can I recover a deleted memo?',
-  'faq.recovery.answer': 'No, once a memo is deleted (either after being read or when expired), it cannot be recovered. This is by design for maximum privacy and security.',
+  'faq.recovery.answer':
+    'No, once a memo is deleted (either after being read or when expired), it cannot be recovered. This is by design for maximum privacy and security.',
   'faq.cost.question': 'Is securememo.app free to use?',
-  'faq.cost.answer': 'Yes, securememo.app is completely free to use. There are no hidden fees, no premium features, and no tracking or advertising.',
+  'faq.cost.answer':
+    'Yes, securememo.app is completely free to use. There are no hidden fees, no premium features, and no tracking or advertising.',
   'faq.technology.question': 'What technology does securememo.app use?',
-  'faq.technology.answer': 'securememo.app is built on Cloudflare Workers for serverless compute, D1 Database for storage, Web Crypto API for client-side encryption, and modern HTML/CSS/JavaScript. The source code is open source and available on GitHub.',
+  'faq.technology.answer':
+    'securememo.app is built on Cloudflare Workers for serverless compute, D1 Database for storage, Web Crypto API for client-side encryption, and modern HTML/CSS/JavaScript. The source code is open source and available on GitHub.',
 
   // Accessibility and UI
 
@@ -336,18 +427,25 @@ export const en = {
 
   // Create memo page content
   'create.hero.title': 'Create Secure Memo',
-  'create.hero.description': 'Your memo will be encrypted in your browser and self-destruct after being read or expired.',
-  'create.hero.ogDescription': 'Create encrypted memos with client-side AES-256 encryption. Memos self-destruct after reading for maximum privacy.',
+  'create.hero.description':
+    'Your memo will be encrypted in your browser and self-destruct after being read or expired.',
+  'create.hero.ogDescription':
+    'Create encrypted memos with client-side AES-256 encryption. Memos self-destruct after reading for maximum privacy.',
   'create.hero.twitterDescription': 'Create encrypted memos with client-side encryption.',
-  'create.schema.description': 'Create encrypted memos that self-destruct after reading. Client-side AES-256 encryption ensures your secrets stay private.',
-  'create.schema.actionDescription': 'Create encrypted memos with client-side AES-256 encryption and automatic self-destruction',
+  'create.schema.description':
+    'Create encrypted memos that self-destruct after reading. Client-side AES-256 encryption ensures your secrets stay private.',
+  'create.schema.actionDescription':
+    'Create encrypted memos with client-side AES-256 encryption and automatic self-destruction',
 
-  // Read memo page content  
+  // Read memo page content
   'read.hero.title': 'Read Secure Memo',
-  'read.hero.description': 'Enter the password to decrypt and read the memo. The password should have been shared with you separately from the URL. The memo will be deleted after being read or expired.',
-  'read.hero.ogDescription': 'Decrypt and read your secure memo. Memos self-destruct after reading for maximum privacy.',
+  'read.hero.description':
+    'Enter the password to decrypt and read the memo. The password should have been shared with you separately from the URL. The memo will be deleted after being read or expired.',
+  'read.hero.ogDescription':
+    'Decrypt and read your secure memo. Memos self-destruct after reading for maximum privacy.',
   'read.hero.twitterDescription': 'Decrypt and read your secure memo with client-side decryption.',
-  'read.schema.description': 'Decrypt and read your secure memo with the password. Memos self-destruct after reading for maximum privacy. Client-side AES-256 decryption.',
+  'read.schema.description':
+    'Decrypt and read your secure memo with the password. Memos self-destruct after reading for maximum privacy. Client-side AES-256 decryption.',
 
   // Form options
   'form.expiry.option.8h': 'Delete on read or 8 hours',
@@ -367,7 +465,8 @@ export const en = {
   'form.memoUrl.label': 'Memo URL (share this with your recipient):',
   'form.memoUrl.help': 'This is the secure link to your memo. Share this URL with your recipient.',
   'form.memoPassword.label': 'Encryption Password (share this separately):',
-  'form.memoPassword.help': 'This is the encryption password. Share this separately from the URL for enhanced security. This is not saved on our servers, recovery not possible after leaving this page.',
+  'form.memoPassword.help':
+    'This is the encryption password. Share this separately from the URL for enhanced security. This is not saved on our servers, recovery not possible after leaving this page.',
 
   // Warning messages
   'warning.important': 'Important:',
@@ -378,18 +477,21 @@ export const en = {
 
   // Structured data texts
   'schema.tos.name': 'Terms of Service',
-  'schema.tos.description': 'Terms of Service for securememo.app - encrypted memo sharing service. Learn about acceptable use, privacy, security, and legal terms.',
+  'schema.tos.description':
+    'Terms of Service for securememo.app - encrypted memo sharing service. Learn about acceptable use, privacy, security, and legal terms.',
   'schema.tos.breadcrumb.home': 'Home',
   'schema.tos.breadcrumb.tos': 'Terms of Service',
   'schema.tos.mainEntity.name': 'Terms of Service',
   'schema.tos.mainEntity.description': 'Legal terms and conditions for securememo.app encrypted memo sharing service',
 
   'schema.privacy.name': 'Privacy Notice',
-  'schema.privacy.description': 'Privacy Notice for securememo.app - learn how we protect your data with client-side encryption, zero-knowledge architecture, and minimal data collection.',
+  'schema.privacy.description':
+    'Privacy Notice for securememo.app - learn how we protect your data with client-side encryption, zero-knowledge architecture, and minimal data collection.',
   'schema.privacy.breadcrumb.home': 'Home',
   'schema.privacy.breadcrumb.privacy': 'Privacy Notice',
   'schema.privacy.mainEntity.name': 'Privacy Notice',
-  'schema.privacy.mainEntity.description': 'How securememo.app protects your privacy with client-side encryption and minimal data collection',
+  'schema.privacy.mainEntity.description':
+    'How securememo.app protects your privacy with client-side encryption and minimal data collection',
 
   // Create memo featureList in structured data
   'schema.create.featureList.clientSide': 'Client-side encryption',
@@ -497,5 +599,5 @@ export const en = {
   'error.security.MEMO_READ_ERROR': 'Unable to process your request.',
   'error.security.METHOD_NOT_ALLOWED': 'Invalid request method.',
   'error.security.FORBIDDEN': 'Access denied.',
-  'error.security.DEFAULT_FALLBACK': 'An error occurred. Please try again.'
-}
+  'error.security.DEFAULT_FALLBACK': 'An error occurred. Please try again.',
+};

@@ -31,5 +31,5 @@ export const LANGUAGE_NAMES = {
   'language.ukrainian': 'Українська',
   'language.vietnamese': 'Tiếng Việt',
   'language.romanian': 'Română',
-  'language.bengali': 'বাংলা'
+  'language.bengali': 'বাংলা',
 };

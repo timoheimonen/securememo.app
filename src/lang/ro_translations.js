@@ -46,55 +46,77 @@ export const ro = {
 
   // Page titles and descriptions
   'page.home.title': 'securememo.app - Memo-uri criptate cu autodistrugere',
-  'page.home.description': 'Creează memo-uri criptate care se autodistrug după citire. Criptare end-to-end, axată pe confidențialitate și partajare sigură de note cu AES-256. Fără urmărire, fără reclame.',
-  'page.home.keywords': 'memo securizat, memo criptat, memo cu autodistrugere, partajare privată de note, criptare end-to-end, AES-256, confidențialitate, partajare sigură de memo-uri',
+  'page.home.description':
+    'Creează memo-uri criptate care se autodistrug după citire. Criptare end-to-end, axată pe confidențialitate și partajare sigură de note cu AES-256. Fără urmărire, fără reclame.',
+  'page.home.keywords':
+    'memo securizat, memo criptat, memo cu autodistrugere, partajare privată de note, criptare end-to-end, AES-256, confidențialitate, partajare sigură de memo-uri',
   'page.home.ogTitle': 'securememo.app - Memo-uri criptate cu autodistrugere',
-  'page.home.ogDescription': 'Partajează informații sensibile în siguranță cu memo-uri care se șterg după o vizualizare sau la expirare. Alimentat de criptarea AES-256 pe partea clientului.',
+  'page.home.ogDescription':
+    'Partajează informații sensibile în siguranță cu memo-uri care se șterg după o vizualizare sau la expirare. Alimentat de criptarea AES-256 pe partea clientului.',
   'page.home.twitterDescription': 'Aplicație axată pe confidențialitate pentru memo-uri sigure cu autodistrugere.',
   'page.about.title': 'Despre securememo.app - Note criptate axate pe confidențialitate',
-  'page.about.description': 'Află despre abordarea securememo.app, orientată pe confidențialitate, pentru mesagerie criptată. Construită cu criptare AES-256 pe partea clientului, mesaje cu autodistrugere și arhitectură zero-knowledge.',
-  'page.about.keywords': 'despre memo securizat, mesagerie axată pe confidențialitate, criptare pe partea clientului, AES-256, mesaje cu autodistrugere, zero-knowledge, partajare sigură de note',
+  'page.about.description':
+    'Află despre abordarea securememo.app, orientată pe confidențialitate, pentru mesagerie criptată. Construită cu criptare AES-256 pe partea clientului, mesaje cu autodistrugere și arhitectură zero-knowledge.',
+  'page.about.keywords':
+    'despre memo securizat, mesagerie axată pe confidențialitate, criptare pe partea clientului, AES-256, mesaje cu autodistrugere, zero-knowledge, partajare sigură de note',
   'page.about.ogTitle': 'Despre securememo.app - Note criptate axate pe confidențialitate',
-  'page.about.ogDescription': 'Descoperă cum securememo.app îți protejează confidențialitatea cu criptare pe partea clientului și mesaje cu autodistrugere.',
+  'page.about.ogDescription':
+    'Descoperă cum securememo.app îți protejează confidențialitatea cu criptare pe partea clientului și mesaje cu autodistrugere.',
   'page.about.twitterDescription': 'Mesagerie criptată axată pe confidențialitate, cu criptare pe partea clientului.',
   'page.create.title': 'Creează memo securizat - Memo criptat cu autodistrugere',
-  'page.create.keywords': 'creează memo securizat, memo criptat, notă cu autodistrugere, criptare AES-256, partajare privată de memo, creare notă sigură',
+  'page.create.keywords':
+    'creează memo securizat, memo criptat, notă cu autodistrugere, criptare AES-256, partajare privată de memo, creare notă sigură',
   'page.read.title': 'Citește memo securizat - Decriptează memo criptat',
-  'page.read.keywords': 'citește memo securizat, decriptează memo, citire notă criptată, decriptare AES-256, acces privat la memo',
+  'page.read.keywords':
+    'citește memo securizat, decriptează memo, citire notă criptată, decriptare AES-256, acces privat la memo',
   'page.tos.title': 'Termeni de utilizare - securememo.app Termeni legali',
-  'page.tos.description': 'Termeni de utilizare pentru securememo.app - serviciu de partajare a memo-urilor criptate. Află despre utilizarea acceptabilă, confidențialitate, securitate și termenii legali ai platformei noastre de partajare sigură a memo-urilor.',
-  'page.tos.keywords': 'termeni de utilizare, termeni legali memo securizat, termeni memo criptat, politică de confidențialitate, politică de utilizare acceptabilă, termeni partajare notă sigură',
+  'page.tos.description':
+    'Termeni de utilizare pentru securememo.app - serviciu de partajare a memo-urilor criptate. Află despre utilizarea acceptabilă, confidențialitate, securitate și termenii legali ai platformei noastre de partajare sigură a memo-urilor.',
+  'page.tos.keywords':
+    'termeni de utilizare, termeni legali memo securizat, termeni memo criptat, politică de confidențialitate, politică de utilizare acceptabilă, termeni partajare notă sigură',
   'page.tos.ogTitle': 'Termeni de utilizare - securememo.app Termeni legali',
-  'page.tos.ogDescription': 'Termeni și condiții legale pentru serviciul securememo.app de partajare a memo-urilor criptate.',
+  'page.tos.ogDescription':
+    'Termeni și condiții legale pentru serviciul securememo.app de partajare a memo-urilor criptate.',
   'page.tos.twitterDescription': 'Termeni legali pentru serviciul securememo.app de partajare a memo-urilor criptate.',
   'page.privacy.title': 'Notificare de confidențialitate - securememo.app Protecția datelor',
-  'page.privacy.description': 'Notificare de confidențialitate pentru securememo.app - află cum îți protejăm datele prin criptare pe partea clientului, arhitectură zero-knowledge și colectare minimă de date pentru partajarea sigură a memo-urilor.',
-  'page.privacy.keywords': 'notificare de confidențialitate, confidențialitatea memo-urilor securizate, protecția datelor, conformitate GDPR, criptare pe partea clientului, zero-knowledge, confidențialitate partajare memo sigură',
+  'page.privacy.description':
+    'Notificare de confidențialitate pentru securememo.app - află cum îți protejăm datele prin criptare pe partea clientului, arhitectură zero-knowledge și colectare minimă de date pentru partajarea sigură a memo-urilor.',
+  'page.privacy.keywords':
+    'notificare de confidențialitate, confidențialitatea memo-urilor securizate, protecția datelor, conformitate GDPR, criptare pe partea clientului, zero-knowledge, confidențialitate partajare memo sigură',
   'page.privacy.ogTitle': 'Notificare de confidențialitate - securememo.app Protecția datelor',
-  'page.privacy.ogDescription': 'Cum securememo.app îți protejează confidențialitatea prin criptare pe partea clientului și colectare minimă de date.',
-  'page.privacy.twitterDescription': 'Protecția confidențialității cu criptare pe partea clientului și arhitectură zero-knowledge.',
+  'page.privacy.ogDescription':
+    'Cum securememo.app îți protejează confidențialitatea prin criptare pe partea clientului și colectare minimă de date.',
+  'page.privacy.twitterDescription':
+    'Protecția confidențialității cu criptare pe partea clientului și arhitectură zero-knowledge.',
 
   // Main page content
   'home.hero.title': 'securememo.app',
-  'home.hero.subtitle': 'Creează memo-uri criptate care se autodistrug după ce sunt citite sau când expiră. Secretele tale rămân în siguranță.',
+  'home.hero.subtitle':
+    'Creează memo-uri criptate care se autodistrug după ce sunt citite sau când expiră. Secretele tale rămân în siguranță.',
   'home.hero.btnPrimary': 'Creează memo securizat',
   'home.hero.btnSecondary': 'Află mai multe',
 
   'home.features.title': 'Cum funcționează',
   'home.features.encrypt.title': '🔐 Criptează în browser',
-  'home.features.encrypt.description': 'Tastează memoul tău. Este criptat direct în browserul tău folosind criptare puternică AES-256 înainte de a ajunge vreodată pe serverele noastre.',
+  'home.features.encrypt.description':
+    'Tastează memoul tău. Este criptat direct în browserul tău folosind criptare puternică AES-256 înainte de a ajunge vreodată pe serverele noastre.',
   'home.features.share.title': '🔗 Partajează în siguranță',
-  'home.features.share.description': 'Primești un URL unic și o parolă aleatoare separată, pe care le poți partaja prin canale diferite pentru securitate sporită.',
+  'home.features.share.description':
+    'Primești un URL unic și o parolă aleatoare separată, pe care le poți partaja prin canale diferite pentru securitate sporită.',
   'home.features.destruct.title': '💥 Autodistrugere',
-  'home.features.destruct.description': 'Memoul se șterge definitiv după ce este citit sau când expiră limita de timp (de la 8 ore la 30 de zile).',
+  'home.features.destruct.description':
+    'Memoul se șterge definitiv după ce este citit sau când expiră limita de timp (de la 8 ore la 30 de zile).',
 
   'home.security.title': 'Funcții de securitate',
   'home.security.encryption.title': '🔒 Adevărată criptare pe partea clientului',
-  'home.security.encryption.description': 'Memoul tău este criptat în browser cu AES-256-GCM și o derivare puternică a cheii. Nu vedem niciodată textul în clar.',
+  'home.security.encryption.description':
+    'Memoul tău este criptat în browser cu AES-256-GCM și o derivare puternică a cheii. Nu vedem niciodată textul în clar.',
   'home.security.delete.title': '🗑️ Ștergere automată fiabilă',
-  'home.security.delete.description': 'Memo-urile dispar pentru totdeauna după citire sau la expirare, cu curățare automată la fiecare oră. Fără copii de rezervă sau posibilitate de recuperare.',
+  'home.security.delete.description':
+    'Memo-urile dispar pentru totdeauna după citire sau la expirare, cu curățare automată la fiecare oră. Fără copii de rezervă sau posibilitate de recuperare.',
   'home.security.password.title': '🌐 Zero cunoaștere a parolei',
-  'home.security.password.description': 'Generăm și gestionăm parolele în întregime în browserul tău. Nu sunt niciodată trimise sau stocate pe serverele noastre.',
+  'home.security.password.description':
+    'Generăm și gestionăm parolele în întregime în browserul tău. Nu sunt niciodată trimise sau stocate pe serverele noastre.',
 
   'footer.sourceCode': 'Vezi codul sursă pe GitHub',
   'footer.tos': 'Termeni de utilizare',
@@ -103,7 +125,8 @@ export const ro = {
 
   // About page content
   'about.hero.title': 'Despre securememo.app',
-  'about.hero.subtitle': 'securememo.app este o aplicație axată pe confidențialitate care îți permite să creezi memo-uri criptate ce se autodistrug după ce sunt citite sau când expiră. Construită cu securitatea și confidențialitatea ca priorități principale. Codul sursă este disponibil pe GitHub.',
+  'about.hero.subtitle':
+    'securememo.app este o aplicație axată pe confidențialitate care îți permite să creezi memo-uri criptate ce se autodistrug după ce sunt citite sau când expiră. Construită cu securitatea și confidențialitatea ca priorități principale. Codul sursă este disponibil pe GitHub.',
 
   'about.tech.title': 'Stack tehnologic',
   'about.tech.cloudflare': 'Cloudflare Workers: Platformă de calcul serverless pentru performanță globală',
@@ -115,25 +138,34 @@ export const ro = {
 
   'about.features.title': 'Funcții de securitate',
   'about.features.clientEncryption.title': '🔐 Criptare pe partea clientului',
-  'about.features.clientEncryption.description': 'Toată criptarea are loc în browserul tău folosind Web Crypto API. Memo-ul tău este criptat cu AES-256 înainte de a fi trimis către serverele noastre.',
+  'about.features.clientEncryption.description':
+    'Toată criptarea are loc în browserul tău folosind Web Crypto API. Memo-ul tău este criptat cu AES-256 înainte de a fi trimis către serverele noastre.',
   'about.features.passwordSharing.title': '🔑 Partajarea parolei separat',
-  'about.features.passwordSharing.description': 'Parola de criptare este generată separat de URL și ar trebui partajată printr-un canal diferit pentru securitate sporită.',
+  'about.features.passwordSharing.description':
+    'Parola de criptare este generată separat de URL și ar trebui partajată printr-un canal diferit pentru securitate sporită.',
   'about.features.selfDestruct.title': '💥 Memo-uri cu autodistrugere',
-  'about.features.selfDestruct.description': 'Odată ce un memo este citit sau expirat, este șters imediat și definitiv din baza noastră de date. Nu rămân urme.',
+  'about.features.selfDestruct.description':
+    'Odată ce un memo este citit sau expirat, este șters imediat și definitiv din baza noastră de date. Nu rămân urme.',
   'about.features.noStorage.title': '🌐 Fără stocarea parolelor',
-  'about.features.noStorage.description': 'Nu stocăm niciodată parolele de criptare pe serverele noastre. Ele există doar în memoria browserului tău.',
+  'about.features.noStorage.description':
+    'Nu stocăm niciodată parolele de criptare pe serverele noastre. Ele există doar în memoria browserului tău.',
   'about.features.global.title': '⚡ Performanță globală',
-  'about.features.global.description': 'Construit pe rețeaua globală Cloudflare pentru acces extrem de rapid din orice colț al lumii.',
+  'about.features.global.description':
+    'Construit pe rețeaua globală Cloudflare pentru acces extrem de rapid din orice colț al lumii.',
   'about.features.privacy.title': '🔒 Confidențialitate pe primul loc',
-  'about.features.privacy.description': 'Nu sunt necesare conturi de utilizator. Fără urmărire. Fără analitice. Confidențialitatea ta este prioritatea noastră.',
+  'about.features.privacy.description':
+    'Nu sunt necesare conturi de utilizator. Fără urmărire. Fără analitice. Confidențialitatea ta este prioritatea noastră.',
 
   'about.usage.title': 'Cum se utilizează',
   'about.usage.create.title': '1. Creează un memo',
-  'about.usage.create.description': 'Mergi la „Creează memo securizat” și tastează memoul. Alege un timp de expirare (8h, 1 zi, 2 zile, 1 săptămână sau maximum 30 de zile). Memo-urile sunt șterse la citire sau la expirare. Sistemul va genera o parolă de criptare aleatoare.',
+  'about.usage.create.description':
+    'Mergi la „Creează memo securizat” și tastează memoul. Alege un timp de expirare (8h, 1 zi, 2 zile, 1 săptămână sau maximum 30 de zile). Memo-urile sunt șterse la citire sau la expirare. Sistemul va genera o parolă de criptare aleatoare.',
   'about.usage.share.title': '2. Partajează linkul și parola',
-  'about.usage.share.description': 'Copiază URL-ul și parola generate, apoi partajează-le destinatarului prin canale separate pentru securitate sporită.',
+  'about.usage.share.description':
+    'Copiază URL-ul și parola generate, apoi partajează-le destinatarului prin canale separate pentru securitate sporită.',
   'about.usage.destruct.title': '3. Autodistrugere',
-  'about.usage.destruct.description': 'Când destinatarul deschide linkul și introduce parola separat, memoul va fi decriptat și apoi șters definitiv dacă este citit, sau șters automat dacă expiră. Memo-urile expirate sunt curățate automat la fiecare oră.',
+  'about.usage.destruct.description':
+    'Când destinatarul deschide linkul și introduce parola separat, memoul va fi decriptat și apoi șters definitiv dacă este citit, sau șters automat dacă expiră. Memo-urile expirate sunt curățate automat la fiecare oră.',
 
   'about.cta.title': 'Gata să începi?',
   'about.cta.subtitle': 'Creează acum primul tău memo securizat și experimentează criptarea end-to-end reală.',
@@ -159,61 +191,88 @@ export const ro = {
   'tos.tableOfContents.languageDisclaimer': 'Limba și traducerea',
 
   'tos.serviceDescription.title': '1. Descrierea serviciului',
-  'tos.serviceDescription.content': 'securememo.app este un serviciu de partajare a memo-urilor securizat care permite utilizatorilor să creeze memo-uri criptate ce se autodistrug după ce sunt citite sau când expiră. Serviciul folosește criptare pe partea clientului pentru a se asigura că conținutul memo-ului nu este niciodată accesibil serverelor noastre.',
+  'tos.serviceDescription.content':
+    'securememo.app este un serviciu de partajare a memo-urilor securizat care permite utilizatorilor să creeze memo-uri criptate ce se autodistrug după ce sunt citite sau când expiră. Serviciul folosește criptare pe partea clientului pentru a se asigura că conținutul memo-ului nu este niciodată accesibil serverelor noastre.',
 
   'tos.acceptableUse.title': '2. Utilizare acceptabilă',
-  'tos.acceptableUse.intro': 'Ești de acord să folosești acest serviciu doar în scopuri legale și în conformitate cu acești Termeni. Ești de acord să nu:',
-  'tos.acceptableUse.illegal': 'Să folosești serviciul pentru a transmite conținut ilegal, dăunător, amenințător, abuziv sau defăimător',
+  'tos.acceptableUse.intro':
+    'Ești de acord să folosești acest serviciu doar în scopuri legale și în conformitate cu acești Termeni. Ești de acord să nu:',
+  'tos.acceptableUse.illegal':
+    'Să folosești serviciul pentru a transmite conținut ilegal, dăunător, amenințător, abuziv sau defăimător',
   'tos.acceptableUse.bypass': 'Să încerci să ocolești măsurile de securitate sau protecția CAPTCHA',
   'tos.acceptableUse.automated': 'Să utilizezi instrumente sau scripturi automate pentru a crea memo-uri',
-  'tos.acceptableUse.malware': 'Să partajezi memo-uri care conțin malware, linkuri de phishing sau alt conținut dăunător',
+  'tos.acceptableUse.malware':
+    'Să partajezi memo-uri care conțin malware, linkuri de phishing sau alt conținut dăunător',
   'tos.acceptableUse.spam': 'Să folosești serviciul pentru spam sau trimitere în masă nesolicitată de memo-uri',
   'tos.acceptableUse.reverse': 'Să încerci să faci inginerie inversă sau să compromiți serviciul',
 
   'tos.privacyData.title': '3. Confidențialitate și gestionarea datelor',
-  'tos.privacyData.noAccess': 'Fără acces la conținut: Nu putem accesa, citi sau recupera conținutul memoului tău. Toată criptarea are loc în browserul tău.',
-  'tos.privacyData.noPersonal': 'Colectare minimă de date: Nu solicităm conturi de utilizator și nu colectăm informații personale pentru a folosi serviciul. Singurele date personale pe care le-am putea colecta sunt dacă ne contactezi voluntar pentru suport. Dacă ne contactezi prin email, colectăm adresa ta de email și conținutul mesajului pentru a răspunde solicitării. Nu folosim aceste informații în alte scopuri și nu le partajăm cu terți fără consimțământul tău.',
-  'tos.privacyData.securityLogging': 'Jurnalizare de securitate: Jurnalizăm temporar adrese IP și metadate legate de securitate strict pentru atenuarea abuzurilor și protejarea integrității serviciului. Aceste jurnale nu sunt folosite niciodată pentru urmărire sau profilare.',
-  'tos.privacyData.automaticDeletion': 'Ștergere automată: Memo-urile sunt șterse automat după ce sunt citite sau când expiră.',
+  'tos.privacyData.noAccess':
+    'Fără acces la conținut: Nu putem accesa, citi sau recupera conținutul memoului tău. Toată criptarea are loc în browserul tău.',
+  'tos.privacyData.noPersonal':
+    'Colectare minimă de date: Nu solicităm conturi de utilizator și nu colectăm informații personale pentru a folosi serviciul. Singurele date personale pe care le-am putea colecta sunt dacă ne contactezi voluntar pentru suport. Dacă ne contactezi prin email, colectăm adresa ta de email și conținutul mesajului pentru a răspunde solicitării. Nu folosim aceste informații în alte scopuri și nu le partajăm cu terți fără consimțământul tău.',
+  'tos.privacyData.securityLogging':
+    'Jurnalizare de securitate: Jurnalizăm temporar adrese IP și metadate legate de securitate strict pentru atenuarea abuzurilor și protejarea integrității serviciului. Aceste jurnale nu sunt folosite niciodată pentru urmărire sau profilare.',
+  'tos.privacyData.automaticDeletion':
+    'Ștergere automată: Memo-urile sunt șterse automat după ce sunt citite sau când expiră.',
   'tos.privacyData.noRecovery': 'Fără recuperare: Odată ce un memo este șters, nu mai poate fi recuperat.',
-  'tos.privacyData.gdpr': 'Conformitate GDPR: Suntem angajați față de principiile GDPR. Minimizăm colectarea de date și procesăm doar datele necesare, cum ar fi jurnalele temporare de securitate, pe baza interesului legitim pentru a proteja serviciul.',
+  'tos.privacyData.gdpr':
+    'Conformitate GDPR: Suntem angajați față de principiile GDPR. Minimizăm colectarea de date și procesăm doar datele necesare, cum ar fi jurnalele temporare de securitate, pe baza interesului legitim pentru a proteja serviciul.',
   'tos.privacyData.moreDetails': 'Pentru mai multe detalii, te rugăm să consulți',
   'tos.privacyData.privacyNotice': 'Notificare de confidențialitate',
 
   'tos.serviceLimitations.title': '4. Limitările serviciului',
   'tos.serviceLimitations.messageSize': 'Dimensiunea mesajului: Maximum 10.000 de caractere per memo',
-  'tos.serviceLimitations.expiryTimes': 'Timpuri de expirare: 8 ore, 24 de ore, 48 de ore, 1 săptămână sau ștergere la citire (maxim 30 de zile)',
-  'tos.serviceLimitations.availability': 'Disponibilitate: Serviciu furnizat „ca atare” fără garanții de disponibilitate',
-  'tos.serviceLimitations.noDelivery': 'Fără garanție de livrare: Nu putem garanta că memo-urile vor fi livrate, citite sau șterse la timp.',
+  'tos.serviceLimitations.expiryTimes':
+    'Timpuri de expirare: 8 ore, 24 de ore, 48 de ore, 1 săptămână sau ștergere la citire (maxim 30 de zile)',
+  'tos.serviceLimitations.availability':
+    'Disponibilitate: Serviciu furnizat „ca atare” fără garanții de disponibilitate',
+  'tos.serviceLimitations.noDelivery':
+    'Fără garanție de livrare: Nu putem garanta că memo-urile vor fi livrate, citite sau șterse la timp.',
 
   'tos.securityDisclaimers.title': '5. Securitate și declinări de responsabilitate',
-  'tos.securityDisclaimers.userResponsibility': 'Responsabilitatea utilizatorului: Ești responsabil pentru partajarea în siguranță a URL-urilor memoului și protejarea parolelor. Dacă parolele sunt pierdute, memo-urile nu pot fi recuperate.',
-  'tos.securityDisclaimers.noWarranty': 'Fără garanție: Serviciul este furnizat fără garanții de niciun fel. Serviciile noastre de criptare sunt oferite pe baza „ca atare” și „în funcție de disponibilitate”. Nu garantăm că criptarea va fi neîntreruptă, fără erori sau protejată împotriva tuturor amenințărilor potențiale.',
-  'tos.securityDisclaimers.limitation': 'Limitarea răspunderii: Nu suntem răspunzători pentru niciun fel de daune care decurg din utilizarea serviciului. Recunoști că nicio metodă de transmitere sau stocare electronică nu este 100% sigură și nu suntem responsabili pentru niciun acces neautorizat sau interceptare a memo-urilor tale. Utilizarea serviciilor noastre de criptare se face pe propriul tău risc.',
-  'tos.securityDisclaimers.securityMeasures': 'Măsuri de securitate: Deși implementăm măsuri de securitate, niciun sistem nu este 100% sigur.',
-  'tos.securityDisclaimers.exportControls': 'Controlul exporturilor: Ești de acord să nu folosești serviciul cu încălcarea oricăror legi privind controlul exporturilor, inclusiv cele care restricționează utilizarea în țări sancționate.',
+  'tos.securityDisclaimers.userResponsibility':
+    'Responsabilitatea utilizatorului: Ești responsabil pentru partajarea în siguranță a URL-urilor memoului și protejarea parolelor. Dacă parolele sunt pierdute, memo-urile nu pot fi recuperate.',
+  'tos.securityDisclaimers.noWarranty':
+    'Fără garanție: Serviciul este furnizat fără garanții de niciun fel. Serviciile noastre de criptare sunt oferite pe baza „ca atare” și „în funcție de disponibilitate”. Nu garantăm că criptarea va fi neîntreruptă, fără erori sau protejată împotriva tuturor amenințărilor potențiale.',
+  'tos.securityDisclaimers.limitation':
+    'Limitarea răspunderii: Nu suntem răspunzători pentru niciun fel de daune care decurg din utilizarea serviciului. Recunoști că nicio metodă de transmitere sau stocare electronică nu este 100% sigură și nu suntem responsabili pentru niciun acces neautorizat sau interceptare a memo-urilor tale. Utilizarea serviciilor noastre de criptare se face pe propriul tău risc.',
+  'tos.securityDisclaimers.securityMeasures':
+    'Măsuri de securitate: Deși implementăm măsuri de securitate, niciun sistem nu este 100% sigur.',
+  'tos.securityDisclaimers.exportControls':
+    'Controlul exporturilor: Ești de acord să nu folosești serviciul cu încălcarea oricăror legi privind controlul exporturilor, inclusiv cele care restricționează utilizarea în țări sancționate.',
 
   'tos.intellectualProperty.title': '6. Proprietate intelectuală',
-  'tos.intellectualProperty.content': 'Serviciul și toate materialele furnizate prin intermediul acestuia, inclusiv, dar fără a se limita la text, grafică, logo-uri și software, sunt proprietatea securememo.app sau a licențiatorilor săi și sunt protejate de drepturi de autor, mărci comerciale și alte legi privind proprietatea intelectuală. Ești de acord să nu modifici, reproduci, distribui sau să creezi opere derivate pe baza conținutului nostru fără permisiune explicită, cu excepția utilizării personale, necomerciale în cadrul Serviciului.',
-  'tos.intellectualProperty.copyright': 'Drepturi de autor și politica DMCA: Dacă consideri că drepturile tale de autor au fost încălcate, te rugăm să ne contactezi la contact@securememo.app cu informațiile necesare conform DMCA (de exemplu, identificarea operei, datele tale de contact și o declarație de bună-credință).',
+  'tos.intellectualProperty.content':
+    'Serviciul și toate materialele furnizate prin intermediul acestuia, inclusiv, dar fără a se limita la text, grafică, logo-uri și software, sunt proprietatea securememo.app sau a licențiatorilor săi și sunt protejate de drepturi de autor, mărci comerciale și alte legi privind proprietatea intelectuală. Ești de acord să nu modifici, reproduci, distribui sau să creezi opere derivate pe baza conținutului nostru fără permisiune explicită, cu excepția utilizării personale, necomerciale în cadrul Serviciului.',
+  'tos.intellectualProperty.copyright':
+    'Drepturi de autor și politica DMCA: Dacă consideri că drepturile tale de autor au fost încălcate, te rugăm să ne contactezi la contact@securememo.app cu informațiile necesare conform DMCA (de exemplu, identificarea operei, datele tale de contact și o declarație de bună-credință).',
 
   'tos.indemnification.title': '7. Despăgubire',
-  'tos.indemnification.content': 'Ești de acord să aperi, să despăgubești și să ții în afara oricărei răspunderi securememo.app și afiliații, directorii, angajații și agenții săi împotriva oricăror pretenții, răspunderi, daune, pierderi și cheltuieli, inclusiv onorarii rezonabile ale avocaților, care decurg din sau au legătură cu accesul tău la sau utilizarea Serviciilor noastre, inclusiv orice încălcare a acestor Termeni de către tine.',
+  'tos.indemnification.content':
+    'Ești de acord să aperi, să despăgubești și să ții în afara oricărei răspunderi securememo.app și afiliații, directorii, angajații și agenții săi împotriva oricăror pretenții, răspunderi, daune, pierderi și cheltuieli, inclusiv onorarii rezonabile ale avocaților, care decurg din sau au legătură cu accesul tău la sau utilizarea Serviciilor noastre, inclusiv orice încălcare a acestor Termeni de către tine.',
 
   'tos.termination.title': '8. Încetare',
-  'tos.termination.content': 'Ne rezervăm dreptul de a încheia sau suspenda accesul la serviciu pentru încălcarea acestor termeni sau din orice alt motiv, la discreția noastră.',
+  'tos.termination.content':
+    'Ne rezervăm dreptul de a încheia sau suspenda accesul la serviciu pentru încălcarea acestor termeni sau din orice alt motiv, la discreția noastră.',
 
   'tos.changesTerms.title': '9. Modificări ale termenilor',
-  'tos.changesTerms.content': 'Putem actualiza acești termeni în orice moment. Utilizarea continuă a serviciului constituie acceptarea termenilor actualizați.',
+  'tos.changesTerms.content':
+    'Putem actualiza acești termeni în orice moment. Utilizarea continuă a serviciului constituie acceptarea termenilor actualizați.',
 
   'tos.governingLaw.title': '10. Legea aplicabilă și jurisdicție',
-  'tos.governingLaw.content': 'Acești Termeni de utilizare și orice acorduri separate prin care îți furnizăm Servicii vor fi guvernate și interpretate în conformitate cu legile Finlandei, fără a ține cont de principiile privind conflictul de legi. Orice dispute vor fi soluționate în instanțele din Helsinki, Finlanda.',
+  'tos.governingLaw.content':
+    'Acești Termeni de utilizare și orice acorduri separate prin care îți furnizăm Servicii vor fi guvernate și interpretate în conformitate cu legile Finlandei, fără a ține cont de principiile privind conflictul de legi. Orice dispute vor fi soluționate în instanțele din Helsinki, Finlanda.',
 
   'tos.miscellaneous.title': '11. Diverse',
-  'tos.miscellaneous.severability': 'Separabilitate: Dacă vreo prevedere a acestor Termeni este considerată invalidă sau inaplicabilă de către o instanță competentă, acea prevedere va fi separată din Termeni, iar prevederile rămase vor continua să producă efecte depline.',
-  'tos.miscellaneous.assignment': 'Cesionare: Nu poți cesiona sau transfera acești Termeni, prin efectul legii sau altfel, fără consimțământul nostru prealabil în scris. Putem cesiona acești Termeni la discreția noastră, fără a te notifica.',
-  'tos.miscellaneous.waiver': 'Renunțare: Nicio renunțare la vreo prevedere nu va fi considerată o renunțare ulterioară sau continuă decât dacă este făcută în scris.',
-  'tos.miscellaneous.children': 'Confidențialitatea copiilor: Serviciul nostru nu este destinat copiilor sub 13 ani (sau 16 în unele jurisdicții). Nu colectăm în mod conștient date de la copii. Dacă aflăm despre astfel de date, le vom șterge imediat.',
+  'tos.miscellaneous.severability':
+    'Separabilitate: Dacă vreo prevedere a acestor Termeni este considerată invalidă sau inaplicabilă de către o instanță competentă, acea prevedere va fi separată din Termeni, iar prevederile rămase vor continua să producă efecte depline.',
+  'tos.miscellaneous.assignment':
+    'Cesionare: Nu poți cesiona sau transfera acești Termeni, prin efectul legii sau altfel, fără consimțământul nostru prealabil în scris. Putem cesiona acești Termeni la discreția noastră, fără a te notifica.',
+  'tos.miscellaneous.waiver':
+    'Renunțare: Nicio renunțare la vreo prevedere nu va fi considerată o renunțare ulterioară sau continuă decât dacă este făcută în scris.',
+  'tos.miscellaneous.children':
+    'Confidențialitatea copiilor: Serviciul nostru nu este destinat copiilor sub 13 ani (sau 16 în unele jurisdicții). Nu colectăm în mod conștient date de la copii. Dacă aflăm despre astfel de date, le vom șterge imediat.',
 
   'tos.contact.title': '12. Contact',
   'tos.contact.content': 'Pentru întrebări despre acești termeni, te rugăm să vizitezi',
@@ -221,7 +280,8 @@ export const ro = {
   'tos.contact.email': 'sau trimite un e-mail la contact@securememo.app.',
 
   'tos.languageDisclaimer.title': '13. Limba și traducerea',
-  'tos.languageDisclaimer.content': 'Acești Termeni de utilizare pot fi traduși în alte limbi pentru comoditatea ta. În caz de discrepanță sau conflict între versiunea în limba engleză și o versiune tradusă, versiunea în limba engleză va prevala.',
+  'tos.languageDisclaimer.content':
+    'Acești Termeni de utilizare pot fi traduși în alte limbi pentru comoditatea ta. În caz de discrepanță sau conflict între versiunea în limba engleză și o versiune tradusă, versiunea în limba engleză va prevala.',
 
   // Privacy Notice page content
   'privacy.hero.title': 'Notificare de confidențialitate pentru securememo.app',
@@ -238,67 +298,100 @@ export const ro = {
   'privacy.tableOfContents.changesNotice': 'Modificări ale acestei notificări de confidențialitate',
   'privacy.tableOfContents.contact': 'Contactează-ne',
 
-  'privacy.intro.p1': 'securememo.app ("noi", "ne" sau "nostru") se angajează să îți protejeze confidențialitatea. Această Notificare de confidențialitate explică modul în care gestionăm informațiile în legătură cu serviciul nostru, care permite utilizatorilor să creeze și să partajeze memo-uri criptate ce se autodistrug după ce sunt citite sau când expiră. Serviciul nostru este conceput cu confidențialitatea în centru: toată criptarea are loc pe partea clientului, în browserul tău, și nu avem acces la conținutul memoului tău.',
-  'privacy.intro.p2': 'Prin utilizarea securememo.app, ești de acord cu practicile descrise în această Notificare de confidențialitate. Dacă nu ești de acord, te rugăm să nu folosești serviciul nostru.',
+  'privacy.intro.p1':
+    'securememo.app ("noi", "ne" sau "nostru") se angajează să îți protejeze confidențialitatea. Această Notificare de confidențialitate explică modul în care gestionăm informațiile în legătură cu serviciul nostru, care permite utilizatorilor să creeze și să partajeze memo-uri criptate ce se autodistrug după ce sunt citite sau când expiră. Serviciul nostru este conceput cu confidențialitatea în centru: toată criptarea are loc pe partea clientului, în browserul tău, și nu avem acces la conținutul memoului tău.',
+  'privacy.intro.p2':
+    'Prin utilizarea securememo.app, ești de acord cu practicile descrise în această Notificare de confidențialitate. Dacă nu ești de acord, te rugăm să nu folosești serviciul nostru.',
 
   'privacy.informationCollected.title': '1. Informațiile pe care le colectăm',
-  'privacy.informationCollected.intro': 'Colectăm informații minime pentru a opera serviciul în siguranță și eficient. Mai exact:',
-  'privacy.informationCollected.memoData': 'Date despre memo: Când creezi un memo, stocăm doar versiunea criptată a mesajului tău pe serverele noastre (folosind Cloudflare Workers și baza de date D1). Cheia de criptare (parola) este generată și gestionată în întregime în browserul tău și nu este niciodată trimisă sau stocată de noi. Memo-urile sunt șterse automat după ce sunt citite sau când expiră (opțiuni: 8 ore, 1 zi, 2 zile, 1 săptămână sau 30 de zile).',
-  'privacy.informationCollected.noPersonal': 'Colectare minimă de date: Nu solicităm conturi de utilizator și nu colectăm informații personale pentru a folosi serviciul. Singurele date personale pe care le-am putea colecta sunt dacă ne contactezi voluntar pentru suport. Dacă ne contactezi prin email, colectăm adresa ta de email și conținutul mesajului pentru a răspunde solicitării. Nu folosim aceste informații în alte scopuri și nu le partajăm cu terți fără consimțământul tău.',
-  'privacy.informationCollected.securityData': 'Date legate de securitate: Pentru prevenirea abuzurilor și integritatea serviciului:',
-  'privacy.informationCollected.ipLogs': 'Jurnalizăm temporar adrese IP și metadate ale cererilor (de ex., marcaje de timp) pentru a detecta și a atenua spamul, boții sau activitatea malițioasă.',
-  'privacy.informationCollected.turnstile': 'Folosim Cloudflare Turnstile CAPTCHA pentru a preveni abuzul automatizat. Turnstile este conceput să protejeze confidențialitatea și nu urmărește utilizatorii între site-uri.',
-  'privacy.informationCollected.noAnalytics': 'Fără analitice sau urmărire: Nu folosim cookie-uri, pixeli de tracking, analitice terțe sau instrumente de publicitate. Nu există profilare a utilizatorilor, urmărire comportamentală sau colectare de date în scopuri de marketing.',
-  'privacy.informationCollected.noSensitive': 'Nu colectăm date personale sensibile, informații despre locație sau identificatori ai dispozitivului dincolo de ceea ce este necesar pentru funcționarea de bază a serviciului.',
+  'privacy.informationCollected.intro':
+    'Colectăm informații minime pentru a opera serviciul în siguranță și eficient. Mai exact:',
+  'privacy.informationCollected.memoData':
+    'Date despre memo: Când creezi un memo, stocăm doar versiunea criptată a mesajului tău pe serverele noastre (folosind Cloudflare Workers și baza de date D1). Cheia de criptare (parola) este generată și gestionată în întregime în browserul tău și nu este niciodată trimisă sau stocată de noi. Memo-urile sunt șterse automat după ce sunt citite sau când expiră (opțiuni: 8 ore, 1 zi, 2 zile, 1 săptămână sau 30 de zile).',
+  'privacy.informationCollected.noPersonal':
+    'Colectare minimă de date: Nu solicităm conturi de utilizator și nu colectăm informații personale pentru a folosi serviciul. Singurele date personale pe care le-am putea colecta sunt dacă ne contactezi voluntar pentru suport. Dacă ne contactezi prin email, colectăm adresa ta de email și conținutul mesajului pentru a răspunde solicitării. Nu folosim aceste informații în alte scopuri și nu le partajăm cu terți fără consimțământul tău.',
+  'privacy.informationCollected.securityData':
+    'Date legate de securitate: Pentru prevenirea abuzurilor și integritatea serviciului:',
+  'privacy.informationCollected.ipLogs':
+    'Jurnalizăm temporar adrese IP și metadate ale cererilor (de ex., marcaje de timp) pentru a detecta și a atenua spamul, boții sau activitatea malițioasă.',
+  'privacy.informationCollected.turnstile':
+    'Folosim Cloudflare Turnstile CAPTCHA pentru a preveni abuzul automatizat. Turnstile este conceput să protejeze confidențialitatea și nu urmărește utilizatorii între site-uri.',
+  'privacy.informationCollected.noAnalytics':
+    'Fără analitice sau urmărire: Nu folosim cookie-uri, pixeli de tracking, analitice terțe sau instrumente de publicitate. Nu există profilare a utilizatorilor, urmărire comportamentală sau colectare de date în scopuri de marketing.',
+  'privacy.informationCollected.noSensitive':
+    'Nu colectăm date personale sensibile, informații despre locație sau identificatori ai dispozitivului dincolo de ceea ce este necesar pentru funcționarea de bază a serviciului.',
 
   'privacy.howWeUse.title': '2. Cum folosim informațiile',
   'privacy.howWeUse.intro': 'Informațiile limitate pe care le colectăm sunt folosite exclusiv pentru:',
-  'privacy.howWeUse.coreService': 'Furnizarea serviciului de bază: Stocarea temporară a memo-urilor criptate și facilitarea recuperării și ștergerii lor în siguranță.',
-  'privacy.howWeUse.security': 'Menținerea securității: Detectarea și prevenirea abuzurilor, precum spamul sau atacurile de tip denial-of-service, folosind jurnalele IP și CAPTCHA.',
-  'privacy.howWeUse.legal': 'Respectarea obligațiilor legale: În cazuri rare, putem folosi jurnalele pentru a răspunde solicitărilor legale valide (de ex., citații).',
-  'privacy.howWeUse.noOther': 'Nu folosim nicio dată pentru publicitate, vânzare către terți sau orice scop care nu are legătură cu operarea securememo.app.',
+  'privacy.howWeUse.coreService':
+    'Furnizarea serviciului de bază: Stocarea temporară a memo-urilor criptate și facilitarea recuperării și ștergerii lor în siguranță.',
+  'privacy.howWeUse.security':
+    'Menținerea securității: Detectarea și prevenirea abuzurilor, precum spamul sau atacurile de tip denial-of-service, folosind jurnalele IP și CAPTCHA.',
+  'privacy.howWeUse.legal':
+    'Respectarea obligațiilor legale: În cazuri rare, putem folosi jurnalele pentru a răspunde solicitărilor legale valide (de ex., citații).',
+  'privacy.howWeUse.noOther':
+    'Nu folosim nicio dată pentru publicitate, vânzare către terți sau orice scop care nu are legătură cu operarea securememo.app.',
 
   'privacy.dataSharing.title': '3. Partajarea și divulgarea datelor',
-  'privacy.dataSharing.intro': 'Nu vindem, nu închiriem și nu partajăm datele tale cu terți, cu excepția următoarelor circumstanțe limitate:',
-  'privacy.dataSharing.serviceProviders': 'Furnizori de servicii: Folosim Cloudflare pentru găzduire, stocarea bazei de date (D1) și CAPTCHA (Turnstile). Acești furnizori procesează datele în numele nostru sub confidențialitate strictă și nu au acces la conținutul memo-urilor.',
-  'privacy.dataSharing.legal': 'Cerințe legale: Putem divulga informații dacă este cerut de lege, de exemplu ca răspuns la o hotărâre judecătorească sau o solicitare guvernamentală.',
-  'privacy.dataSharing.business': 'Transferuri de afaceri: Dacă securememo.app este achiziționat sau fuzionează, datele pot fi transferate ca parte a tranzacției, dar vor rămâne supuse acestei Notificări de confidențialitate.',
+  'privacy.dataSharing.intro':
+    'Nu vindem, nu închiriem și nu partajăm datele tale cu terți, cu excepția următoarelor circumstanțe limitate:',
+  'privacy.dataSharing.serviceProviders':
+    'Furnizori de servicii: Folosim Cloudflare pentru găzduire, stocarea bazei de date (D1) și CAPTCHA (Turnstile). Acești furnizori procesează datele în numele nostru sub confidențialitate strictă și nu au acces la conținutul memo-urilor.',
+  'privacy.dataSharing.legal':
+    'Cerințe legale: Putem divulga informații dacă este cerut de lege, de exemplu ca răspuns la o hotărâre judecătorească sau o solicitare guvernamentală.',
+  'privacy.dataSharing.business':
+    'Transferuri de afaceri: Dacă securememo.app este achiziționat sau fuzionează, datele pot fi transferate ca parte a tranzacției, dar vor rămâne supuse acestei Notificări de confidențialitate.',
 
   'privacy.dataSecurity.title': '4. Securitatea datelor',
-  'privacy.dataSecurity.encryption': 'Criptare: Toate memo-urile sunt criptate pe partea clientului folosind AES-256 cu derivarea cheii PBKDF2. Stocăm doar date criptate și nu le putem decripta.',
-  'privacy.dataSecurity.deletion': 'Ștergere: Memo-urile sunt șterse definitiv după citire sau expirare prin joburi cron automate.',
-  'privacy.dataSecurity.securityMeasures': 'Măsuri de securitate: Implementăm antete de securitate puternice (de ex., CSP, HSTS), sanitizarea inputului, protecții împotriva atacurilor de temporizare și CAPTCHA pentru a preveni abuzurile.',
-  'privacy.dataSecurity.noRecovery': 'Fără recuperare: Odată șterse, memo-urile nu pot fi recuperate — nici măcar de noi.',
-  'privacy.dataSecurity.disclaimer': 'Deși luăm măsuri rezonabile pentru a ne securiza sistemele, niciun serviciu nu este complet imun la riscuri. Ești responsabil pentru partajarea în siguranță a URL-urilor și a parolelor.',
+  'privacy.dataSecurity.encryption':
+    'Criptare: Toate memo-urile sunt criptate pe partea clientului folosind AES-256 cu derivarea cheii PBKDF2. Stocăm doar date criptate și nu le putem decripta.',
+  'privacy.dataSecurity.deletion':
+    'Ștergere: Memo-urile sunt șterse definitiv după citire sau expirare prin joburi cron automate.',
+  'privacy.dataSecurity.securityMeasures':
+    'Măsuri de securitate: Implementăm antete de securitate puternice (de ex., CSP, HSTS), sanitizarea inputului, protecții împotriva atacurilor de temporizare și CAPTCHA pentru a preveni abuzurile.',
+  'privacy.dataSecurity.noRecovery':
+    'Fără recuperare: Odată șterse, memo-urile nu pot fi recuperate — nici măcar de noi.',
+  'privacy.dataSecurity.disclaimer':
+    'Deși luăm măsuri rezonabile pentru a ne securiza sistemele, niciun serviciu nu este complet imun la riscuri. Ești responsabil pentru partajarea în siguranță a URL-urilor și a parolelor.',
 
   'privacy.dataRetention.title': '5. Păstrarea datelor',
-  'privacy.dataRetention.memos': 'Memo-urile criptate sunt păstrate doar până la citire sau expirare (până la maximum 30 de zile).',
-  'privacy.dataRetention.logs': 'Jurnalele de securitate (de ex., adrese IP) sunt păstrate temporar pentru prevenirea abuzurilor și sunt șterse automat după o perioadă scurtă (de obicei în câteva zile).',
+  'privacy.dataRetention.memos':
+    'Memo-urile criptate sunt păstrate doar până la citire sau expirare (până la maximum 30 de zile).',
+  'privacy.dataRetention.logs':
+    'Jurnalele de securitate (de ex., adrese IP) sunt păstrate temporar pentru prevenirea abuzurilor și sunt șterse automat după o perioadă scurtă (de obicei în câteva zile).',
   'privacy.dataRetention.minimal': 'Nu păstrăm nicio dată mai mult decât este necesar pentru funcționarea serviciului.',
 
   'privacy.yourRights.title': '6. Drepturile și opțiunile tale',
   'privacy.yourRights.intro': 'Deoarece nu colectăm date personale:',
   'privacy.yourRights.noAccounts': 'Nu există conturi de utilizator de gestionat.',
-  'privacy.yourRights.noRequests': 'Nu poți solicita accesul la date, corectarea sau ștergerea acestora dincolo de autodistrugerea automată a memo-urilor.',
-  'privacy.yourRights.contact': 'Dacă consideri că deținem vreo informație despre tine (de ex., din jurnale), contactează-ne (vezi mai jos) pentru a te informa cu privire la drepturile tale în temeiul legilor aplicabile, precum GDPR sau CCPA. Respectăm reglementările privind protecția datelor și procesăm solicitările acolo unde este fezabil.',
+  'privacy.yourRights.noRequests':
+    'Nu poți solicita accesul la date, corectarea sau ștergerea acestora dincolo de autodistrugerea automată a memo-urilor.',
+  'privacy.yourRights.contact':
+    'Dacă consideri că deținem vreo informație despre tine (de ex., din jurnale), contactează-ne (vezi mai jos) pentru a te informa cu privire la drepturile tale în temeiul legilor aplicabile, precum GDPR sau CCPA. Respectăm reglementările privind protecția datelor și procesăm solicitările acolo unde este fezabil.',
 
   'privacy.childrenPrivacy.title': '7. Confidențialitatea copiilor',
-  'privacy.childrenPrivacy.content': 'Serviciul nostru nu este destinat copiilor sub 13 ani (sau 16 în unele jurisdicții). Nu colectăm în mod conștient date de la copii. Dacă aflăm despre astfel de date, le vom șterge.',
+  'privacy.childrenPrivacy.content':
+    'Serviciul nostru nu este destinat copiilor sub 13 ani (sau 16 în unele jurisdicții). Nu colectăm în mod conștient date de la copii. Dacă aflăm despre astfel de date, le vom șterge.',
 
   'privacy.internationalTransfers.title': '8. Transferuri internaționale de date',
-  'privacy.internationalTransfers.content': 'securememo.app este găzduit pe rețeaua globală a Cloudflare. Datele pot fi procesate în diverse țări, însă asigurăm protecții echivalente ale confidențialității prin practicile noastre de colectare minimă.',
+  'privacy.internationalTransfers.content':
+    'securememo.app este găzduit pe rețeaua globală a Cloudflare. Datele pot fi procesate în diverse țări, însă asigurăm protecții echivalente ale confidențialității prin practicile noastre de colectare minimă.',
 
   'privacy.changesNotice.title': '9. Modificări ale acestei notificări de confidențialitate',
-  'privacy.changesNotice.content': 'Putem actualiza periodic această Notificare. Modificările vor fi publicate aici cu data „Ultima actualizare” actualizată. Utilizarea continuă a serviciului după modificări constituie acceptare.',
+  'privacy.changesNotice.content':
+    'Putem actualiza periodic această Notificare. Modificările vor fi publicate aici cu data „Ultima actualizare” actualizată. Utilizarea continuă a serviciului după modificări constituie acceptare.',
 
   'privacy.contact.title': '10. Contactează-ne',
-  'privacy.contact.intro': 'Pentru întrebări despre această Notificare de confidențialitate sau practicile noastre, te rugăm să vizitezi',
+  'privacy.contact.intro':
+    'Pentru întrebări despre această Notificare de confidențialitate sau practicile noastre, te rugăm să vizitezi',
   'privacy.contact.github': 'repository-ul GitHub',
   'privacy.contact.email': 'sau trimite un e-mail la contact@securememo.app.',
-  'privacy.contact.disclaimer': 'Această Notificare de confidențialitate se aplică doar pentru securememo.app și nu pentru site-uri terțe la care se face trimitere din serviciul nostru.',
+  'privacy.contact.disclaimer':
+    'Această Notificare de confidențialitate se aplică doar pentru securememo.app și nu pentru site-uri terțe la care se face trimitere din serviciul nostru.',
 
   // Schema.org structured data
-  'schema.app.description': 'Creează memo-uri criptate care se autodistrug după citire. Criptare end-to-end, axată pe confidențialitate, și partajare sigură de note cu AES-256. Fără urmărire, fără reclame.',
+  'schema.app.description':
+    'Creează memo-uri criptate care se autodistrug după citire. Criptare end-to-end, axată pe confidențialitate, și partajare sigură de note cu AES-256. Fără urmărire, fără reclame.',
   'schema.app.category': 'Aplicație de securitate',
   'schema.app.os': 'Browser web',
   'schema.app.requirements': 'Necesită JavaScript. Necesită HTML5.',
@@ -316,17 +409,23 @@ export const ro = {
 
   // FAQ structured data
   'faq.privacy.question': 'Cum îmi protejează securememo.app confidențialitatea?',
-  'faq.privacy.answer': 'securememo.app folosește criptare AES-256 pe partea clientului, ceea ce înseamnă că memoul tău este criptat în browser înainte de a fi trimis către serverele noastre. Nu vedem niciodată conținutul în clar. Memo-urile se autodistrug după ce sunt citite sau când expiră, iar noi nu solicităm conturi de utilizator și nu colectăm informații personale.',
+  'faq.privacy.answer':
+    'securememo.app folosește criptare AES-256 pe partea clientului, ceea ce înseamnă că memoul tău este criptat în browser înainte de a fi trimis către serverele noastre. Nu vedem niciodată conținutul în clar. Memo-urile se autodistrug după ce sunt citite sau când expiră, iar noi nu solicităm conturi de utilizator și nu colectăm informații personale.',
   'faq.encryption.question': 'Ce criptare folosește securememo.app?',
-  'faq.encryption.answer': 'Folosim criptare AES-256-GCM cu derivarea cheii PBKDF2. Toată criptarea are loc pe partea clientului, în browserul tău, folosind Web Crypto API. Parola de criptare este generată separat și nu este niciodată stocată pe serverele noastre.',
+  'faq.encryption.answer':
+    'Folosim criptare AES-256-GCM cu derivarea cheii PBKDF2. Toată criptarea are loc pe partea clientului, în browserul tău, folosind Web Crypto API. Parola de criptare este generată separat și nu este niciodată stocată pe serverele noastre.',
   'faq.duration.question': 'Cât timp rămân memo-urile?',
-  'faq.duration.answer': 'Memo-urile pot fi setate să expire după 8 ore, 1 zi, 2 zile, 1 săptămână sau maximum 30 de zile. Sunt, de asemenea, șterse imediat după citire. Memo-urile expirate sunt curățate automat în fiecare oră.',
+  'faq.duration.answer':
+    'Memo-urile pot fi setate să expire după 8 ore, 1 zi, 2 zile, 1 săptămână sau maximum 30 de zile. Sunt, de asemenea, șterse imediat după citire. Memo-urile expirate sunt curățate automat în fiecare oră.',
   'faq.recovery.question': 'Pot recupera un memo șters?',
-  'faq.recovery.answer': 'Nu, odată ce un memo este șters (fie după citire, fie la expirare), nu mai poate fi recuperat. Acest lucru este intenționat pentru confidențialitate și securitate maxime.',
+  'faq.recovery.answer':
+    'Nu, odată ce un memo este șters (fie după citire, fie la expirare), nu mai poate fi recuperat. Acest lucru este intenționat pentru confidențialitate și securitate maxime.',
   'faq.cost.question': 'Este securememo.app gratuit de utilizat?',
-  'faq.cost.answer': 'Da, securememo.app este complet gratuit de utilizat. Nu există taxe ascunse, funcții premium, urmărire sau publicitate.',
+  'faq.cost.answer':
+    'Da, securememo.app este complet gratuit de utilizat. Nu există taxe ascunse, funcții premium, urmărire sau publicitate.',
   'faq.technology.question': 'Ce tehnologie folosește securememo.app?',
-  'faq.technology.answer': 'securememo.app este construit pe Cloudflare Workers pentru calcul serverless, baza de date D1 pentru stocare, Web Crypto API pentru criptare pe partea clientului și HTML/CSS/JavaScript moderne. Codul sursă este open-source și disponibil pe GitHub.',
+  'faq.technology.answer':
+    'securememo.app este construit pe Cloudflare Workers pentru calcul serverless, baza de date D1 pentru stocare, Web Crypto API pentru criptare pe partea clientului și HTML/CSS/JavaScript moderne. Codul sursă este open-source și disponibil pe GitHub.',
 
   // Accessibility and UI
 
@@ -336,18 +435,25 @@ export const ro = {
 
   // Create memo page content
   'create.hero.title': 'Creează memo securizat',
-  'create.hero.description': 'Memo-ul tău va fi criptat în browser și se va autodistruge după ce este citit sau la expirare.',
-  'create.hero.ogDescription': 'Creează memo-uri criptate cu criptare AES-256 pe partea clientului. Memo-urile se autodistrug după citire pentru confidențialitate maximă.',
+  'create.hero.description':
+    'Memo-ul tău va fi criptat în browser și se va autodistruge după ce este citit sau la expirare.',
+  'create.hero.ogDescription':
+    'Creează memo-uri criptate cu criptare AES-256 pe partea clientului. Memo-urile se autodistrug după citire pentru confidențialitate maximă.',
   'create.hero.twitterDescription': 'Creează memo-uri criptate cu criptare pe partea clientului.',
-  'create.schema.description': 'Creează memo-uri criptate care se autodistrug după citire. Criptarea AES-256 pe partea clientului îți păstrează secretele private.',
-  'create.schema.actionDescription': 'Creează memo-uri criptate cu criptare AES-256 pe partea clientului și autodistrugere automată',
+  'create.schema.description':
+    'Creează memo-uri criptate care se autodistrug după citire. Criptarea AES-256 pe partea clientului îți păstrează secretele private.',
+  'create.schema.actionDescription':
+    'Creează memo-uri criptate cu criptare AES-256 pe partea clientului și autodistrugere automată',
 
-  // Read memo page content  
+  // Read memo page content
   'read.hero.title': 'Citește memo securizat',
-  'read.hero.description': 'Introdu parola pentru a decripta și a citi memoul. Parola ar fi trebuit să-ți fie partajată separat de URL. Memoul va fi șters după ce este citit sau la expirare.',
-  'read.hero.ogDescription': 'Decriptează și citește memo-ul tău securizat. Memo-urile se autodistrug după citire pentru confidențialitate maximă.',
+  'read.hero.description':
+    'Introdu parola pentru a decripta și a citi memoul. Parola ar fi trebuit să-ți fie partajată separat de URL. Memoul va fi șters după ce este citit sau la expirare.',
+  'read.hero.ogDescription':
+    'Decriptează și citește memo-ul tău securizat. Memo-urile se autodistrug după citire pentru confidențialitate maximă.',
   'read.hero.twitterDescription': 'Decriptează și citește memo-ul tău securizat cu decriptare pe partea clientului.',
-  'read.schema.description': 'Decriptează și citește memo-ul tău securizat cu parola. Memo-urile se autodistrug după citire pentru confidențialitate maximă. Decriptare AES-256 pe partea clientului.',
+  'read.schema.description':
+    'Decriptează și citește memo-ul tău securizat cu parola. Memo-urile se autodistrug după citire pentru confidențialitate maximă. Decriptare AES-256 pe partea clientului.',
 
   // Form options
   'form.expiry.option.8h': 'Șterge la citire sau după 8 ore',
@@ -367,7 +473,8 @@ export const ro = {
   'form.memoUrl.label': 'URL-ul memoului (partajează-l cu destinatarul):',
   'form.memoUrl.help': 'Acesta este linkul securizat către memoul tău. Partajează acest URL cu destinatarul.',
   'form.memoPassword.label': 'Parola de criptare (partajeaz-o separat):',
-  'form.memoPassword.help': 'Aceasta este parola de criptare. Partajeaz-o separat de URL pentru securitate sporită. Aceasta nu este salvată pe serverele noastre; recuperarea nu este posibilă după ce părăsești această pagină.',
+  'form.memoPassword.help':
+    'Aceasta este parola de criptare. Partajeaz-o separat de URL pentru securitate sporită. Aceasta nu este salvată pe serverele noastre; recuperarea nu este posibilă după ce părăsești această pagină.',
 
   // Warning messages
   'warning.important': 'Important:',
@@ -378,18 +485,22 @@ export const ro = {
 
   // Structured data texts
   'schema.tos.name': 'Termeni de utilizare',
-  'schema.tos.description': 'Termeni de utilizare pentru securememo.app - serviciu de partajare a memo-urilor criptate. Află despre utilizare acceptabilă, confidențialitate, securitate și termeni legali.',
+  'schema.tos.description':
+    'Termeni de utilizare pentru securememo.app - serviciu de partajare a memo-urilor criptate. Află despre utilizare acceptabilă, confidențialitate, securitate și termeni legali.',
   'schema.tos.breadcrumb.home': 'Acasă',
   'schema.tos.breadcrumb.tos': 'Termeni de utilizare',
   'schema.tos.mainEntity.name': 'Termeni de utilizare',
-  'schema.tos.mainEntity.description': 'Termeni și condiții legale pentru serviciul securememo.app de partajare a memo-urilor criptate',
+  'schema.tos.mainEntity.description':
+    'Termeni și condiții legale pentru serviciul securememo.app de partajare a memo-urilor criptate',
 
   'schema.privacy.name': 'Notificare de confidențialitate',
-  'schema.privacy.description': 'Notificare de confidențialitate pentru securememo.app - află cum îți protejăm datele cu criptare pe partea clientului, arhitectură zero-knowledge și colectare minimă de date.',
+  'schema.privacy.description':
+    'Notificare de confidențialitate pentru securememo.app - află cum îți protejăm datele cu criptare pe partea clientului, arhitectură zero-knowledge și colectare minimă de date.',
   'schema.privacy.breadcrumb.home': 'Acasă',
   'schema.privacy.breadcrumb.privacy': 'Notificare de confidențialitate',
   'schema.privacy.mainEntity.name': 'Notificare de confidențialitate',
-  'schema.privacy.mainEntity.description': 'Cum securememo.app îți protejează confidențialitatea cu criptare pe partea clientului și colectare minimă de date',
+  'schema.privacy.mainEntity.description':
+    'Cum securememo.app îți protejează confidențialitatea cu criptare pe partea clientului și colectare minimă de date',
 
   // Create memo featureList in structured data
   'schema.create.featureList.clientSide': 'Criptare pe partea clientului',
@@ -497,5 +608,5 @@ export const ro = {
   'error.security.MEMO_READ_ERROR': 'Nu putem procesa cererea ta.',
   'error.security.METHOD_NOT_ALLOWED': 'Metodă de cerere invalidă.',
   'error.security.FORBIDDEN': 'Acces interzis.',
-  'error.security.DEFAULT_FALLBACK': 'A apărut o eroare. Te rugăm să încerci din nou.'
-}
+  'error.security.DEFAULT_FALLBACK': 'A apărut o eroare. Te rugăm să încerci din nou.',
+};

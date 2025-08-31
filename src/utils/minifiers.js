@@ -16,7 +16,7 @@ export function minifyJS(code) {
       .replace(/^\s*\/\/.*$/gm, '')
       .replace(/(^|\s)\/\*[\s\S]*?\*\//g, '$1')
       .split('\n')
-      .map(line => line.replace(/[ \t]+/g, ' ').trim())
+      .map((line) => line.replace(/[ \t]+/g, ' ').trim())
       .filter(Boolean)
       .join('\n')
       .trim();

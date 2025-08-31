@@ -46,55 +46,75 @@ export const cs = {
 
   // Page titles and descriptions
   'page.home.title': 'securememo.app - Šifrované zprávy se samosmazáním',
-  'page.home.description': 'Vytvářejte šifrované zprávy, které se po přečtení samy smažou. End-to-end šifrování, důraz na soukromí a bezpečné sdílení poznámek s AES-256. Bez sledování, bez reklam.',
-  'page.home.keywords': 'zabezpečená zpráva, šifrovaná zpráva, samosmazatelná zpráva, soukromé sdílení poznámek, end-to-end šifrování, AES-256, soukromí, bezpečné sdílení',
+  'page.home.description':
+    'Vytvářejte šifrované zprávy, které se po přečtení samy smažou. End-to-end šifrování, důraz na soukromí a bezpečné sdílení poznámek s AES-256. Bez sledování, bez reklam.',
+  'page.home.keywords':
+    'zabezpečená zpráva, šifrovaná zpráva, samosmazatelná zpráva, soukromé sdílení poznámek, end-to-end šifrování, AES-256, soukromí, bezpečné sdílení',
   'page.home.ogTitle': 'securememo.app - Šifrované zprávy se samosmazáním',
-  'page.home.ogDescription': 'Sdílejte citlivé informace bezpečně pomocí zpráv, které se smažou po jednom zobrazení nebo po vypršení. Poháněno klientským šifrováním AES-256.',
+  'page.home.ogDescription':
+    'Sdílejte citlivé informace bezpečně pomocí zpráv, které se smažou po jednom zobrazení nebo po vypršení. Poháněno klientským šifrováním AES-256.',
   'page.home.twitterDescription': 'Aplikace s důrazem na soukromí pro bezpečné, samosmazatelné zprávy.',
   'page.about.title': 'O securememo.app - Šifrované poznámky se zaměřením na soukromí',
-  'page.about.description': 'Zjistěte více o přístupu securememo.app zaměřeném na soukromí u šifrované komunikace. Vše postaveno na klientském šifrování AES-256, samosmazatelných zprávách a architektuře s nulovou znalostí.',
-  'page.about.keywords': 'o secure memo, soukromá komunikace, klientské šifrování, AES-256, samosmazatelné zprávy, zero-knowledge, bezpečné sdílení poznámek',
+  'page.about.description':
+    'Zjistěte více o přístupu securememo.app zaměřeném na soukromí u šifrované komunikace. Vše postaveno na klientském šifrování AES-256, samosmazatelných zprávách a architektuře s nulovou znalostí.',
+  'page.about.keywords':
+    'o secure memo, soukromá komunikace, klientské šifrování, AES-256, samosmazatelné zprávy, zero-knowledge, bezpečné sdílení poznámek',
   'page.about.ogTitle': 'O securememo.app - Šifrované poznámky se zaměřením na soukromí',
-  'page.about.ogDescription': 'Objevte, jak securememo.app chrání vaše soukromí pomocí klientského šifrování a samosmazatelných zpráv.',
+  'page.about.ogDescription':
+    'Objevte, jak securememo.app chrání vaše soukromí pomocí klientského šifrování a samosmazatelných zpráv.',
   'page.about.twitterDescription': 'Šifrované zprávy s důrazem na soukromí a klientské šifrování.',
   'page.create.title': 'Vytvořit zabezpečenou zprávu - Šifrovaná samosmazatelná zpráva',
-  'page.create.keywords': 'vytvořit zabezpečenou zprávu, šifrovaná zpráva, samosmazatelná poznámka, šifrování AES-256, soukromé sdílení zpráv, bezpečné vytváření poznámek',
+  'page.create.keywords':
+    'vytvořit zabezpečenou zprávu, šifrovaná zpráva, samosmazatelná poznámka, šifrování AES-256, soukromé sdílení zpráv, bezpečné vytváření poznámek',
   'page.read.title': 'Přečíst zabezpečenou zprávu - Dešifrovat šifrovanou zprávu',
-  'page.read.keywords': 'přečíst zabezpečenou zprávu, dešifrovat zprávu, čtení šifrovaných poznámek, dešifrování AES-256, soukromý přístup ke zprávám',
+  'page.read.keywords':
+    'přečíst zabezpečenou zprávu, dešifrovat zprávu, čtení šifrovaných poznámek, dešifrování AES-256, soukromý přístup ke zprávám',
   'page.tos.title': 'Podmínky služby - právní podmínky securememo.app',
-  'page.tos.description': 'Podmínky služby pro securememo.app - služba pro sdílení šifrovaných zpráv. Informace o přijatelném použití, soukromí, zabezpečení a právních podmínkách naší platformy pro bezpečné sdílení poznámek.',
-  'page.tos.keywords': 'podmínky služby, právní podmínky, šifrované zprávy, zásady ochrany soukromí, pravidla přijatelného použití, podmínky bezpečného sdílení poznámek',
+  'page.tos.description':
+    'Podmínky služby pro securememo.app - služba pro sdílení šifrovaných zpráv. Informace o přijatelném použití, soukromí, zabezpečení a právních podmínkách naší platformy pro bezpečné sdílení poznámek.',
+  'page.tos.keywords':
+    'podmínky služby, právní podmínky, šifrované zprávy, zásady ochrany soukromí, pravidla přijatelného použití, podmínky bezpečného sdílení poznámek',
   'page.tos.ogTitle': 'Podmínky služby - právní podmínky securememo.app',
   'page.tos.ogDescription': 'Právní podmínky a ustanovení pro službu securememo.app pro sdílení šifrovaných zpráv.',
   'page.tos.twitterDescription': 'Právní podmínky služby securememo.app pro sdílení šifrovaných zpráv.',
   'page.privacy.title': 'Oznámení o ochraně soukromí - zabezpečení dat securememo.app',
-  'page.privacy.description': 'Oznámení o ochraně soukromí pro securememo.app - zjistěte, jak chráníme vaše data pomocí klientského šifrování, architektury s nulovou znalostí a minimálního sběru dat pro bezpečné sdílení zpráv.',
-  'page.privacy.keywords': 'oznámení o ochraně soukromí, soukromí zabezpečených zpráv, ochrana dat, shoda s GDPR, klientské šifrování, zero-knowledge, soukromí při bezpečném sdílení',
+  'page.privacy.description':
+    'Oznámení o ochraně soukromí pro securememo.app - zjistěte, jak chráníme vaše data pomocí klientského šifrování, architektury s nulovou znalostí a minimálního sběru dat pro bezpečné sdílení zpráv.',
+  'page.privacy.keywords':
+    'oznámení o ochraně soukromí, soukromí zabezpečených zpráv, ochrana dat, shoda s GDPR, klientské šifrování, zero-knowledge, soukromí při bezpečném sdílení',
   'page.privacy.ogTitle': 'Oznámení o ochraně soukromí - zabezpečení dat securememo.app',
-  'page.privacy.ogDescription': 'Jak securememo.app chrání vaše soukromí pomocí klientského šifrování a minimálního sběru dat.',
+  'page.privacy.ogDescription':
+    'Jak securememo.app chrání vaše soukromí pomocí klientského šifrování a minimálního sběru dat.',
   'page.privacy.twitterDescription': 'Ochrana soukromí s klientským šifrováním a architekturou s nulovou znalostí.',
 
   // Main page content
   'home.hero.title': 'securememo.app',
-  'home.hero.subtitle': 'Vytvářejte šifrované zprávy, které se po přečtení nebo vypršení platnosti samy smažou. Vaše tajemství zůstanou v bezpečí.',
+  'home.hero.subtitle':
+    'Vytvářejte šifrované zprávy, které se po přečtení nebo vypršení platnosti samy smažou. Vaše tajemství zůstanou v bezpečí.',
   'home.hero.btnPrimary': 'Vytvořit zabezpečenou zprávu',
   'home.hero.btnSecondary': 'Zjistit více',
 
   'home.features.title': 'Jak to funguje',
   'home.features.encrypt.title': '🔐 Šifrování v prohlížeči',
-  'home.features.encrypt.description': 'Napište svou zprávu. Je zašifrována přímo ve vašem prohlížeči silným šifrováním AES-256 dříve, než se cokoli dotkne našich serverů.',
+  'home.features.encrypt.description':
+    'Napište svou zprávu. Je zašifrována přímo ve vašem prohlížeči silným šifrováním AES-256 dříve, než se cokoli dotkne našich serverů.',
   'home.features.share.title': '🔗 Sdílení bezpečně',
-  'home.features.share.description': 'Získáte jedinečné URL a samostatné náhodné heslo a pro vyšší bezpečnost je sdílejte různými kanály.',
+  'home.features.share.description':
+    'Získáte jedinečné URL a samostatné náhodné heslo a pro vyšší bezpečnost je sdílejte různými kanály.',
   'home.features.destruct.title': '💥 Automatické smazání',
-  'home.features.destruct.description': 'Zpráva se trvale smaže po přečtení nebo po uplynutí časového limitu (od 8 hodin do 30 dnů).',
+  'home.features.destruct.description':
+    'Zpráva se trvale smaže po přečtení nebo po uplynutí časového limitu (od 8 hodin do 30 dnů).',
 
   'home.security.title': 'Bezpečnostní funkce',
   'home.security.encryption.title': '🔒 Skutečné klientské šifrování',
-  'home.security.encryption.description': 'Vaše zpráva je šifrována v prohlížeči pomocí AES-256-GCM a silné derivace klíče (2 200 000+ iterací). Nikdy nevidíme otevřený text.',
+  'home.security.encryption.description':
+    'Vaše zpráva je šifrována v prohlížeči pomocí AES-256-GCM a silné derivace klíče (2 200 000+ iterací). Nikdy nevidíme otevřený text.',
   'home.security.delete.title': '🗑️ Spolehlivé automatické mazání',
-  'home.security.delete.description': 'Zprávy navždy zmizí po přečtení nebo po vypršení platnosti, s automatickým úklidem každou hodinu. Žádné zálohy ani obnova nejsou možné.',
+  'home.security.delete.description':
+    'Zprávy navždy zmizí po přečtení nebo po vypršení platnosti, s automatickým úklidem každou hodinu. Žádné zálohy ani obnova nejsou možné.',
   'home.security.password.title': '🌐 Nulová znalost hesla',
-  'home.security.password.description': 'Hesla generujeme a zpracováváme výhradně ve vašem prohlížeči. Nikdy nejsou odesílána ani ukládána na naše servery.',
+  'home.security.password.description':
+    'Hesla generujeme a zpracováváme výhradně ve vašem prohlížeči. Nikdy nejsou odesílána ani ukládána na naše servery.',
 
   'footer.sourceCode': 'Zobrazit zdrojový kód na GitHubu',
   'footer.tos': 'Podmínky služby',
@@ -103,7 +123,8 @@ export const cs = {
 
   // About page content
   'about.hero.title': 'O securememo.app',
-  'about.hero.subtitle': 'securememo.app je aplikace zaměřená na soukromí, která vám umožní vytvářet šifrované zprávy, jež se po přečtení nebo vypršení platnosti samy smažou. Vytvořeno s bezpečností a soukromím na prvním místě. Zdrojový kód je k dispozici na GitHubu.',
+  'about.hero.subtitle':
+    'securememo.app je aplikace zaměřená na soukromí, která vám umožní vytvářet šifrované zprávy, jež se po přečtení nebo vypršení platnosti samy smažou. Vytvořeno s bezpečností a soukromím na prvním místě. Zdrojový kód je k dispozici na GitHubu.',
 
   'about.tech.title': 'Technologický stack',
   'about.tech.cloudflare': 'Cloudflare Workers: Bezserverová výpočetní platforma pro globální výkon',
@@ -115,25 +136,34 @@ export const cs = {
 
   'about.features.title': 'Bezpečnostní funkce',
   'about.features.clientEncryption.title': '🔐 Klientské šifrování',
-  'about.features.clientEncryption.description': 'Veškeré šifrování probíhá ve vašem prohlížeči pomocí Web Crypto API. Vaše zpráva je zašifrována AES-256 ještě před odesláním na naše servery.',
+  'about.features.clientEncryption.description':
+    'Veškeré šifrování probíhá ve vašem prohlížeči pomocí Web Crypto API. Vaše zpráva je zašifrována AES-256 ještě před odesláním na naše servery.',
   'about.features.passwordSharing.title': '🔑 Sdílení hesla zvlášť',
-  'about.features.passwordSharing.description': 'Šifrovací heslo je generováno odděleně od URL a pro vyšší bezpečnost by mělo být sdíleno jiným kanálem.',
+  'about.features.passwordSharing.description':
+    'Šifrovací heslo je generováno odděleně od URL a pro vyšší bezpečnost by mělo být sdíleno jiným kanálem.',
   'about.features.selfDestruct.title': '💥 Samosmazatelné zprávy',
-  'about.features.selfDestruct.description': 'Jakmile je zpráva přečtena nebo vyprší její platnost, je okamžitě a trvale smazána z naší databáze. Nezůstanou žádné stopy.',
+  'about.features.selfDestruct.description':
+    'Jakmile je zpráva přečtena nebo vyprší její platnost, je okamžitě a trvale smazána z naší databáze. Nezůstanou žádné stopy.',
   'about.features.noStorage.title': '🌐 Bez ukládání hesel',
-  'about.features.noStorage.description': 'Šifrovací hesla nikdy na našich serverech neukládáme. Existují pouze v paměti vašeho prohlížeče.',
+  'about.features.noStorage.description':
+    'Šifrovací hesla nikdy na našich serverech neukládáme. Existují pouze v paměti vašeho prohlížeče.',
   'about.features.global.title': '⚡ Globální výkon',
-  'about.features.global.description': 'Postaveno na globální síti Cloudflare pro bleskově rychlý přístup odkudkoli na světě.',
+  'about.features.global.description':
+    'Postaveno na globální síti Cloudflare pro bleskově rychlý přístup odkudkoli na světě.',
   'about.features.privacy.title': '🔒 Soukromí na prvním místě',
-  'about.features.privacy.description': 'Nejsou potřeba uživatelské účty. Žádné sledování. Žádná analytika. Vaše soukromí je naší prioritou.',
+  'about.features.privacy.description':
+    'Nejsou potřeba uživatelské účty. Žádné sledování. Žádná analytika. Vaše soukromí je naší prioritou.',
 
   'about.usage.title': 'Jak používat',
   'about.usage.create.title': '1. Vytvoření zprávy',
-  'about.usage.create.description': 'Přejděte na „Vytvořit zabezpečenou zprávu“ a napište svou zprávu. Zvolte dobu platnosti (8 h, 1 d, 2 d, 1 týden nebo maximálně 30 dní). Zprávy jsou smazány po přečtení nebo po vypršení platnosti. Systém vygeneruje náhodné šifrovací heslo.',
+  'about.usage.create.description':
+    'Přejděte na „Vytvořit zabezpečenou zprávu“ a napište svou zprávu. Zvolte dobu platnosti (8 h, 1 d, 2 d, 1 týden nebo maximálně 30 dní). Zprávy jsou smazány po přečtení nebo po vypršení platnosti. Systém vygeneruje náhodné šifrovací heslo.',
   'about.usage.share.title': '2. Sdílení odkazu a hesla',
-  'about.usage.share.description': 'Zkopírujte vygenerované URL a heslo a sdílejte je s příjemcem odděleně pro vyšší bezpečnost.',
+  'about.usage.share.description':
+    'Zkopírujte vygenerované URL a heslo a sdílejte je s příjemcem odděleně pro vyšší bezpečnost.',
   'about.usage.destruct.title': '3. Samosmazání',
-  'about.usage.destruct.description': 'Jakmile příjemce otevře odkaz a zvlášť zadá heslo, zpráva se dešifruje a poté trvale smaže, nebo se po vypršení platnosti smaže automaticky. Expirace jsou automaticky čištěny každou hodinu.',
+  'about.usage.destruct.description':
+    'Jakmile příjemce otevře odkaz a zvlášť zadá heslo, zpráva se dešifruje a poté trvale smaže, nebo se po vypršení platnosti smaže automaticky. Expirace jsou automaticky čištěny každou hodinu.',
 
   'about.cta.title': 'Připraveni začít?',
   'about.cta.subtitle': 'Vytvořte svou první zabezpečenou zprávu a zažijte skutečné end-to-end šifrování.',
@@ -159,11 +189,14 @@ export const cs = {
   'tos.tableOfContents.languageDisclaimer': 'Jazyk a překlad',
 
   'tos.serviceDescription.title': '1. Popis služby',
-  'tos.serviceDescription.content': 'securememo.app je služba pro bezpečné sdílení zpráv, která umožňuje uživatelům vytvářet šifrované zprávy, jež se po přečtení nebo vypršení platnosti samy smažou. Služba využívá klientské šifrování, takže obsah zpráv není nikdy přístupný našim serverům.',
+  'tos.serviceDescription.content':
+    'securememo.app je služba pro bezpečné sdílení zpráv, která umožňuje uživatelům vytvářet šifrované zprávy, jež se po přečtení nebo vypršení platnosti samy smažou. Služba využívá klientské šifrování, takže obsah zpráv není nikdy přístupný našim serverům.',
 
   'tos.acceptableUse.title': '2. Přijatelné použití',
-  'tos.acceptableUse.intro': 'Zavazujete se používat tuto službu pouze k zákonným účelům a v souladu s těmito Podmínkami. Souhlasíte, že nebudete:',
-  'tos.acceptableUse.illegal': 'Používat službu k přenosu nelegálního, škodlivého, výhružného, urážlivého nebo pomlouvačného obsahu',
+  'tos.acceptableUse.intro':
+    'Zavazujete se používat tuto službu pouze k zákonným účelům a v souladu s těmito Podmínkami. Souhlasíte, že nebudete:',
+  'tos.acceptableUse.illegal':
+    'Používat službu k přenosu nelegálního, škodlivého, výhružného, urážlivého nebo pomlouvačného obsahu',
   'tos.acceptableUse.bypass': 'Pokusit se obejít bezpečnostní opatření nebo ochranu CAPTCHA',
   'tos.acceptableUse.automated': 'Používat automatizované nástroje nebo skripty k vytváření zpráv',
   'tos.acceptableUse.malware': 'Sdílet zprávy obsahující malware, phishingové odkazy nebo jiný škodlivý obsah',
@@ -171,49 +204,71 @@ export const cs = {
   'tos.acceptableUse.reverse': 'Pokusit se o reverzní inženýrství nebo kompromitaci služby',
 
   'tos.privacyData.title': '3. Soukromí a práce s daty',
-  'tos.privacyData.noAccess': 'Žádný přístup k obsahu: Nemáme přístup k obsahu vaší zprávy, nemůžeme jej číst ani obnovit. Veškeré šifrování probíhá ve vašem prohlížeči.',
-  'tos.privacyData.noPersonal': 'Minimální sběr dat: Nevyžadujeme uživatelské účty ani neshromažďujeme osobní údaje pro používání služby. Jediná osobní data, která můžeme získat, jsou pokud nás dobrovolně kontaktujete s žádostí o podporu. Pokud nás kontaktujete e‑mailem, shromáždíme vaši e‑mailovou adresu a obsah zprávy, abychom mohli odpovědět na váš dotaz. Tato informace není používána k žádným jiným účelům ani sdílena s třetími stranami bez vašeho souhlasu.',
-  'tos.privacyData.securityLogging': 'Bezpečnostní logování: Dočasně zapisujeme IP adresy a bezpečnostní metadata výhradně pro zmírnění zneužití a ochranu integrity služby. Tyto logy nikdy nepoužíváme ke sledování nebo profilování.',
-  'tos.privacyData.automaticDeletion': 'Automatické mazání: Zprávy jsou automaticky smazány po přečtení nebo po vypršení platnosti.',
+  'tos.privacyData.noAccess':
+    'Žádný přístup k obsahu: Nemáme přístup k obsahu vaší zprávy, nemůžeme jej číst ani obnovit. Veškeré šifrování probíhá ve vašem prohlížeči.',
+  'tos.privacyData.noPersonal':
+    'Minimální sběr dat: Nevyžadujeme uživatelské účty ani neshromažďujeme osobní údaje pro používání služby. Jediná osobní data, která můžeme získat, jsou pokud nás dobrovolně kontaktujete s žádostí o podporu. Pokud nás kontaktujete e‑mailem, shromáždíme vaši e‑mailovou adresu a obsah zprávy, abychom mohli odpovědět na váš dotaz. Tato informace není používána k žádným jiným účelům ani sdílena s třetími stranami bez vašeho souhlasu.',
+  'tos.privacyData.securityLogging':
+    'Bezpečnostní logování: Dočasně zapisujeme IP adresy a bezpečnostní metadata výhradně pro zmírnění zneužití a ochranu integrity služby. Tyto logy nikdy nepoužíváme ke sledování nebo profilování.',
+  'tos.privacyData.automaticDeletion':
+    'Automatické mazání: Zprávy jsou automaticky smazány po přečtení nebo po vypršení platnosti.',
   'tos.privacyData.noRecovery': 'Bez obnovy: Jakmile je zpráva smazána, nelze ji obnovit.',
-  'tos.privacyData.gdpr': 'Soulad s GDPR: Dodržujeme zásady GDPR. Minimalizujeme sběr dat a zpracováváme pouze nezbytná data, jako dočasné bezpečnostní logy, na základě oprávněného zájmu za účelem ochrany služby.',
+  'tos.privacyData.gdpr':
+    'Soulad s GDPR: Dodržujeme zásady GDPR. Minimalizujeme sběr dat a zpracováváme pouze nezbytná data, jako dočasné bezpečnostní logy, na základě oprávněného zájmu za účelem ochrany služby.',
   'tos.privacyData.moreDetails': 'Podrobnosti naleznete v našem',
   'tos.privacyData.privacyNotice': 'Oznámení o ochraně soukromí',
 
   'tos.serviceLimitations.title': '4. Omezení služby',
   'tos.serviceLimitations.messageSize': 'Velikost zprávy: Maximálně 10 000 znaků na zprávu',
-  'tos.serviceLimitations.expiryTimes': 'Doby platnosti: 8 hodin, 24 hodin, 48 hodin, 1 týden nebo smazat po přečtení (max. 30 dní)',
+  'tos.serviceLimitations.expiryTimes':
+    'Doby platnosti: 8 hodin, 24 hodin, 48 hodin, 1 týden nebo smazat po přečtení (max. 30 dní)',
   'tos.serviceLimitations.availability': 'Dostupnost: Služba je poskytována „tak jak je“ bez záruk dostupnosti',
-  'tos.serviceLimitations.noDelivery': 'Žádná záruka doručení: Nemůžeme zaručit, že zprávy budou doručeny, přečteny nebo smazány včas.',
+  'tos.serviceLimitations.noDelivery':
+    'Žádná záruka doručení: Nemůžeme zaručit, že zprávy budou doručeny, přečteny nebo smazány včas.',
 
   'tos.securityDisclaimers.title': '5. Zabezpečení a vyloučení odpovědnosti',
-  'tos.securityDisclaimers.userResponsibility': 'Odpovědnost uživatele: Jste odpovědní za bezpečné sdílení URL zprávy a ochranu hesel. Pokud jsou hesla ztracena, zprávy nelze obnovit.',
-  'tos.securityDisclaimers.noWarranty': 'Bez záruky: Služba je poskytována bez jakýchkoli záruk. Naše šifrovací služby jsou poskytovány „tak jak jsou“ a „dle dostupnosti“. Nezaručujeme, že šifrování bude nepřerušené, bezchybné nebo plně zabezpečené proti všem hrozbám.',
-  'tos.securityDisclaimers.limitation': 'Omezení odpovědnosti: Nenese me odpovědnost za žádné škody vzniklé používáním služby. Berete na vědomí, že žádná metoda elektronického přenosu nebo ukládání není 100% bezpečná, a nejsme odpovědní za neoprávněný přístup nebo zachycení vašich zpráv. Používání našich šifrovacích služeb je na vaše vlastní riziko.',
-  'tos.securityDisclaimers.securityMeasures': 'Bezpečnostní opatření: Přestože zavádíme bezpečnostní opatření, žádný systém není 100% bezpečný.',
-  'tos.securityDisclaimers.exportControls': 'Exportní omezení: Souhlasíte, že nebudete službu používat v rozporu s právními předpisy o kontrole vývozu, včetně omezení pro sankcionované země.',
+  'tos.securityDisclaimers.userResponsibility':
+    'Odpovědnost uživatele: Jste odpovědní za bezpečné sdílení URL zprávy a ochranu hesel. Pokud jsou hesla ztracena, zprávy nelze obnovit.',
+  'tos.securityDisclaimers.noWarranty':
+    'Bez záruky: Služba je poskytována bez jakýchkoli záruk. Naše šifrovací služby jsou poskytovány „tak jak jsou“ a „dle dostupnosti“. Nezaručujeme, že šifrování bude nepřerušené, bezchybné nebo plně zabezpečené proti všem hrozbám.',
+  'tos.securityDisclaimers.limitation':
+    'Omezení odpovědnosti: Nenese me odpovědnost za žádné škody vzniklé používáním služby. Berete na vědomí, že žádná metoda elektronického přenosu nebo ukládání není 100% bezpečná, a nejsme odpovědní za neoprávněný přístup nebo zachycení vašich zpráv. Používání našich šifrovacích služeb je na vaše vlastní riziko.',
+  'tos.securityDisclaimers.securityMeasures':
+    'Bezpečnostní opatření: Přestože zavádíme bezpečnostní opatření, žádný systém není 100% bezpečný.',
+  'tos.securityDisclaimers.exportControls':
+    'Exportní omezení: Souhlasíte, že nebudete službu používat v rozporu s právními předpisy o kontrole vývozu, včetně omezení pro sankcionované země.',
 
   'tos.intellectualProperty.title': '6. Duševní vlastnictví',
-  'tos.intellectualProperty.content': 'Služba a veškeré materiály poskytované prostřednictvím ní, včetně, mimo jiné, textů, grafiky, log a softwaru, jsou majetkem securememo.app nebo jeho poskytovatelů licencí a jsou chráněny autorským právem, ochrannými známkami a dalšími právními předpisy o duševním vlastnictví. Souhlasíte, že nebudete náš obsah upravovat, reprodukovat, distribuovat ani vytvářet odvozená díla bez výslovného souhlasu, s výjimkou osobního nekomerčního použití v rámci Služby.',
-  'tos.intellectualProperty.copyright': 'Autorská práva a politika DMCA: Pokud se domníváte, že došlo k porušení vašich autorských práv, kontaktujte nás na contact@securememo.app s požadovanými informacemi dle DMCA (např. identifikace díla, vaše kontaktní údaje a prohlášení o dobré víře).',
+  'tos.intellectualProperty.content':
+    'Služba a veškeré materiály poskytované prostřednictvím ní, včetně, mimo jiné, textů, grafiky, log a softwaru, jsou majetkem securememo.app nebo jeho poskytovatelů licencí a jsou chráněny autorským právem, ochrannými známkami a dalšími právními předpisy o duševním vlastnictví. Souhlasíte, že nebudete náš obsah upravovat, reprodukovat, distribuovat ani vytvářet odvozená díla bez výslovného souhlasu, s výjimkou osobního nekomerčního použití v rámci Služby.',
+  'tos.intellectualProperty.copyright':
+    'Autorská práva a politika DMCA: Pokud se domníváte, že došlo k porušení vašich autorských práv, kontaktujte nás na contact@securememo.app s požadovanými informacemi dle DMCA (např. identifikace díla, vaše kontaktní údaje a prohlášení o dobré víře).',
 
   'tos.indemnification.title': '7. Odškodnění',
-  'tos.indemnification.content': 'Souhlasíte, že budete bránit, odškodníte a zprostíte odpovědnosti securememo.app a jeho přidružené osoby, vedoucí pracovníky, ředitele, zaměstnance a zástupce od jakýchkoli nároků, závazků, škod, ztrát a nákladů, včetně přiměřených nákladů na právní zastoupení, vzniklých v souvislosti s vaším přístupem nebo používáním našich Služeb, včetně jakéhokoli porušení těchto Podmínek z vaší strany.',
+  'tos.indemnification.content':
+    'Souhlasíte, že budete bránit, odškodníte a zprostíte odpovědnosti securememo.app a jeho přidružené osoby, vedoucí pracovníky, ředitele, zaměstnance a zástupce od jakýchkoli nároků, závazků, škod, ztrát a nákladů, včetně přiměřených nákladů na právní zastoupení, vzniklých v souvislosti s vaším přístupem nebo používáním našich Služeb, včetně jakéhokoli porušení těchto Podmínek z vaší strany.',
 
   'tos.termination.title': '8. Ukončení',
-  'tos.termination.content': 'Vyhrazujeme si právo ukončit nebo pozastavit přístup ke službě při porušení těchto podmínek nebo z jakéhokoli jiného důvodu dle našeho uvážení.',
+  'tos.termination.content':
+    'Vyhrazujeme si právo ukončit nebo pozastavit přístup ke službě při porušení těchto podmínek nebo z jakéhokoli jiného důvodu dle našeho uvážení.',
 
   'tos.changesTerms.title': '9. Změny podmínek',
-  'tos.changesTerms.content': 'Tyto podmínky můžeme kdykoli aktualizovat. Dalším používáním služby vyjadřujete souhlas s aktualizovanými podmínkami.',
+  'tos.changesTerms.content':
+    'Tyto podmínky můžeme kdykoli aktualizovat. Dalším používáním služby vyjadřujete souhlas s aktualizovanými podmínkami.',
 
   'tos.governingLaw.title': '10. Rozhodné právo a jurisdikce',
-  'tos.governingLaw.content': 'Tyto Podmínky služby a případné samostatné dohody, na jejichž základě vám poskytujeme Služby, se řídí a vykládají podle práva Finska bez ohledu na kolizní normy. Jakékoli spory budou řešeny u soudů v Helsinkách, Finsko.',
+  'tos.governingLaw.content':
+    'Tyto Podmínky služby a případné samostatné dohody, na jejichž základě vám poskytujeme Služby, se řídí a vykládají podle práva Finska bez ohledu na kolizní normy. Jakékoli spory budou řešeny u soudů v Helsinkách, Finsko.',
 
   'tos.miscellaneous.title': '11. Různé',
-  'tos.miscellaneous.severability': 'Oddělitelnost: Pokud jakékoli ustanovení těchto Podmínek shledá příslušný soud neplatným nebo nevymahatelným, bude toto ustanovení od Podmínek odděleno a zbývající ustanovení zůstanou v plné platnosti.',
-  'tos.miscellaneous.assignment': 'Postoupení: Tyto Podmínky nesmíte postoupit ani převést, ať už ze zákona či jinak, bez našeho předchozího písemného souhlasu. My můžeme tyto Podmínky postoupit dle vlastního uvážení bez vašeho upozornění.',
-  'tos.miscellaneous.waiver': 'Zřeknutí se: Žádné zřeknutí se jakéhokoli ustanovení se nepovažuje za další či trvalé zřeknutí, pokud není písemné.',
-  'tos.miscellaneous.children': 'Soukromí dětí: Naše služba není určena pro děti mladší 13 let (nebo 16 let v některých jurisdikcích). Vědomě neshromažďujeme data o dětech. Pokud se o takových datech dozvíme, neprodleně je smažeme.',
+  'tos.miscellaneous.severability':
+    'Oddělitelnost: Pokud jakékoli ustanovení těchto Podmínek shledá příslušný soud neplatným nebo nevymahatelným, bude toto ustanovení od Podmínek odděleno a zbývající ustanovení zůstanou v plné platnosti.',
+  'tos.miscellaneous.assignment':
+    'Postoupení: Tyto Podmínky nesmíte postoupit ani převést, ať už ze zákona či jinak, bez našeho předchozího písemného souhlasu. My můžeme tyto Podmínky postoupit dle vlastního uvážení bez vašeho upozornění.',
+  'tos.miscellaneous.waiver':
+    'Zřeknutí se: Žádné zřeknutí se jakéhokoli ustanovení se nepovažuje za další či trvalé zřeknutí, pokud není písemné.',
+  'tos.miscellaneous.children':
+    'Soukromí dětí: Naše služba není určena pro děti mladší 13 let (nebo 16 let v některých jurisdikcích). Vědomě neshromažďujeme data o dětech. Pokud se o takových datech dozvíme, neprodleně je smažeme.',
 
   'tos.contact.title': '12. Kontakt',
   'tos.contact.content': 'V případě dotazů k těmto podmínkám navštivte náš',
@@ -221,7 +276,8 @@ export const cs = {
   'tos.contact.email': 'nebo napište na contact@securememo.app.',
 
   'tos.languageDisclaimer.title': '13. Jazyk a překlad',
-  'tos.languageDisclaimer.content': 'Tyto Podmínky služby mohou být pro vaše pohodlí přeloženy do jiných jazyků. V případě nesrovnalostí nebo rozporu mezi anglickou verzí a překladem má přednost anglická verze.',
+  'tos.languageDisclaimer.content':
+    'Tyto Podmínky služby mohou být pro vaše pohodlí přeloženy do jiných jazyků. V případě nesrovnalostí nebo rozporu mezi anglickou verzí a překladem má přednost anglická verze.',
 
   // Privacy Notice page content
   'privacy.hero.title': 'Oznámení o ochraně soukromí pro securememo.app',
@@ -238,67 +294,98 @@ export const cs = {
   'privacy.tableOfContents.changesNotice': 'Změny tohoto oznámení o ochraně soukromí',
   'privacy.tableOfContents.contact': 'Kontaktujte nás',
 
-  'privacy.intro.p1': 'securememo.app ("my", "nás" nebo "naše") je zavázáno chránit vaše soukromí. Toto Oznámení o ochraně soukromí vysvětluje, jak nakládáme s informacemi v souvislosti s naší službou, která umožňuje uživatelům vytvářet a sdílet šifrované zprávy, jež se po přečtení nebo po vypršení platnosti samy smažou. Naše služba je navržena s důrazem na soukromí: veškeré šifrování probíhá na straně klienta ve vašem prohlížeči a k obsahu vaší zprávy nemáme přístup.',
-  'privacy.intro.p2': 'Používáním securememo.app souhlasíte s postupy popsanými v tomto Oznámení o ochraně soukromí. Pokud nesouhlasíte, službu nepoužívejte.',
+  'privacy.intro.p1':
+    'securememo.app ("my", "nás" nebo "naše") je zavázáno chránit vaše soukromí. Toto Oznámení o ochraně soukromí vysvětluje, jak nakládáme s informacemi v souvislosti s naší službou, která umožňuje uživatelům vytvářet a sdílet šifrované zprávy, jež se po přečtení nebo po vypršení platnosti samy smažou. Naše služba je navržena s důrazem na soukromí: veškeré šifrování probíhá na straně klienta ve vašem prohlížeči a k obsahu vaší zprávy nemáme přístup.',
+  'privacy.intro.p2':
+    'Používáním securememo.app souhlasíte s postupy popsanými v tomto Oznámení o ochraně soukromí. Pokud nesouhlasíte, službu nepoužívejte.',
 
   'privacy.informationCollected.title': '1. Informace, které shromažďujeme',
-  'privacy.informationCollected.intro': 'Shromažďujeme jen minimum informací potřebných k bezpečnému a efektivnímu provozu služby. Konkrétně:',
-  'privacy.informationCollected.memoData': 'Data zprávy: Když vytvoříte zprávu, ukládáme na naše servery pouze šifrovanou verzi vašeho sdělení (za použití Cloudflare Workers a databáze D1). Šifrovací klíč (heslo) je generován a zpracováván výhradně ve vašem prohlížeči a nikdy není odeslán ani uložen u nás. Zprávy jsou automaticky smazány po přečtení nebo po vypršení platnosti (možnosti: 8 hodin, 1 den, 2 dny, 1 týden nebo 30 dní).',
-  'privacy.informationCollected.noPersonal': 'Minimální sběr dat: Nevyžadujeme uživatelské účty ani neshromažďujeme osobní údaje pro používání služby. Jediná osobní data, která můžeme získat, jsou pokud nás dobrovolně kontaktujete s žádostí o podporu. Pokud nás kontaktujete e‑mailem, shromáždíme vaši e‑mailovou adresu a obsah zprávy, abychom mohli odpovědět na váš dotaz. Tato informace není používána k žádným jiným účelům ani sdílena s třetími stranami bez vašeho souhlasu.',
-  'privacy.informationCollected.securityData': 'Data související se zabezpečením: Pro prevenci zneužití a zachování integrity služby:',
-  'privacy.informationCollected.ipLogs': 'Dočasně zaznamenáváme IP adresy a metadata požadavků (např. časová razítka) k detekci a zmírnění spamu, botů či škodlivé aktivity.',
-  'privacy.informationCollected.turnstile': 'Používáme Cloudflare Turnstile CAPTCHA k zabránění automatizovanému zneužití. Turnstile je navržen s ohledem na soukromí a nesleduje uživatele napříč weby.',
-  'privacy.informationCollected.noAnalytics': 'Bez analytiky a sledování: Nepoužíváme cookies, trackovací pixely, analytiku třetích stran ani reklamní nástroje. Neprobíhá profilování uživatelů, sledování chování ani sběr dat pro marketing.',
-  'privacy.informationCollected.noSensitive': 'Neshromažďujeme citlivé osobní údaje, informace o poloze ani identifikátory zařízení nad rámec nezbytného pro základní provoz služby.',
+  'privacy.informationCollected.intro':
+    'Shromažďujeme jen minimum informací potřebných k bezpečnému a efektivnímu provozu služby. Konkrétně:',
+  'privacy.informationCollected.memoData':
+    'Data zprávy: Když vytvoříte zprávu, ukládáme na naše servery pouze šifrovanou verzi vašeho sdělení (za použití Cloudflare Workers a databáze D1). Šifrovací klíč (heslo) je generován a zpracováván výhradně ve vašem prohlížeči a nikdy není odeslán ani uložen u nás. Zprávy jsou automaticky smazány po přečtení nebo po vypršení platnosti (možnosti: 8 hodin, 1 den, 2 dny, 1 týden nebo 30 dní).',
+  'privacy.informationCollected.noPersonal':
+    'Minimální sběr dat: Nevyžadujeme uživatelské účty ani neshromažďujeme osobní údaje pro používání služby. Jediná osobní data, která můžeme získat, jsou pokud nás dobrovolně kontaktujete s žádostí o podporu. Pokud nás kontaktujete e‑mailem, shromáždíme vaši e‑mailovou adresu a obsah zprávy, abychom mohli odpovědět na váš dotaz. Tato informace není používána k žádným jiným účelům ani sdílena s třetími stranami bez vašeho souhlasu.',
+  'privacy.informationCollected.securityData':
+    'Data související se zabezpečením: Pro prevenci zneužití a zachování integrity služby:',
+  'privacy.informationCollected.ipLogs':
+    'Dočasně zaznamenáváme IP adresy a metadata požadavků (např. časová razítka) k detekci a zmírnění spamu, botů či škodlivé aktivity.',
+  'privacy.informationCollected.turnstile':
+    'Používáme Cloudflare Turnstile CAPTCHA k zabránění automatizovanému zneužití. Turnstile je navržen s ohledem na soukromí a nesleduje uživatele napříč weby.',
+  'privacy.informationCollected.noAnalytics':
+    'Bez analytiky a sledování: Nepoužíváme cookies, trackovací pixely, analytiku třetích stran ani reklamní nástroje. Neprobíhá profilování uživatelů, sledování chování ani sběr dat pro marketing.',
+  'privacy.informationCollected.noSensitive':
+    'Neshromažďujeme citlivé osobní údaje, informace o poloze ani identifikátory zařízení nad rámec nezbytného pro základní provoz služby.',
 
   'privacy.howWeUse.title': '2. Jak informace používáme',
   'privacy.howWeUse.intro': 'Omezené informace, které shromažďujeme, používáme výhradně k:',
-  'privacy.howWeUse.coreService': 'Poskytování jádra služby: Dočasnému uložení šifrovaných zpráv a zajištění jejich bezpečného načtení a smazání.',
-  'privacy.howWeUse.security': 'Udržování bezpečnosti: Detekci a prevenci zneužití, jako je spam nebo útoky typu denial‑of‑service, pomocí IP logů a CAPTCHA.',
-  'privacy.howWeUse.legal': 'Plnění právních povinností: Ve výjimečných případech můžeme použít logy k odpovědi na platné právní požadavky (např. předvolání).',
-  'privacy.howWeUse.noOther': 'Nepoužíváme žádná data k reklamě, prodeji třetím stranám ani k jiným účelům nesouvisejícím s provozem securememo.app.',
+  'privacy.howWeUse.coreService':
+    'Poskytování jádra služby: Dočasnému uložení šifrovaných zpráv a zajištění jejich bezpečného načtení a smazání.',
+  'privacy.howWeUse.security':
+    'Udržování bezpečnosti: Detekci a prevenci zneužití, jako je spam nebo útoky typu denial‑of‑service, pomocí IP logů a CAPTCHA.',
+  'privacy.howWeUse.legal':
+    'Plnění právních povinností: Ve výjimečných případech můžeme použít logy k odpovědi na platné právní požadavky (např. předvolání).',
+  'privacy.howWeUse.noOther':
+    'Nepoužíváme žádná data k reklamě, prodeji třetím stranám ani k jiným účelům nesouvisejícím s provozem securememo.app.',
 
   'privacy.dataSharing.title': '3. Sdílení a zpřístupnění dat',
-  'privacy.dataSharing.intro': 'Vaše data neprodáváme, nepronajímáme ani nesdílíme s třetími stranami, s výjimkou následujících omezených situací:',
-  'privacy.dataSharing.serviceProviders': 'Poskytovatelé služeb: Využíváme Cloudflare pro hosting, databázové úložiště (D1) a CAPTCHA (Turnstile). Tito poskytovatelé zpracovávají data naším jménem za přísných podmínek důvěrnosti a nemají přístup k obsahu zpráv.',
-  'privacy.dataSharing.legal': 'Právní požadavky: Informace můžeme zveřejnit, pokud to vyžaduje zákon, např. v reakci na soudní příkaz nebo žádost orgánu.',
-  'privacy.dataSharing.business': 'Podnikové převody: Pokud bude securememo.app získán nebo sloučen, data mohou být převedena v rámci transakce, ale i nadále se na ně vztahuje toto Oznámení o ochraně soukromí.',
+  'privacy.dataSharing.intro':
+    'Vaše data neprodáváme, nepronajímáme ani nesdílíme s třetími stranami, s výjimkou následujících omezených situací:',
+  'privacy.dataSharing.serviceProviders':
+    'Poskytovatelé služeb: Využíváme Cloudflare pro hosting, databázové úložiště (D1) a CAPTCHA (Turnstile). Tito poskytovatelé zpracovávají data naším jménem za přísných podmínek důvěrnosti a nemají přístup k obsahu zpráv.',
+  'privacy.dataSharing.legal':
+    'Právní požadavky: Informace můžeme zveřejnit, pokud to vyžaduje zákon, např. v reakci na soudní příkaz nebo žádost orgánu.',
+  'privacy.dataSharing.business':
+    'Podnikové převody: Pokud bude securememo.app získán nebo sloučen, data mohou být převedena v rámci transakce, ale i nadále se na ně vztahuje toto Oznámení o ochraně soukromí.',
 
   'privacy.dataSecurity.title': '4. Zabezpečení dat',
-  'privacy.dataSecurity.encryption': 'Šifrování: Všechny zprávy jsou šifrovány na straně klienta pomocí AES-256 s derivací klíče PBKDF2 (2 200 000 iterací). Ukládáme pouze šifrovaná data a nemůžeme je dešifrovat.',
-  'privacy.dataSecurity.deletion': 'Mazání: Zprávy jsou po přečtení nebo vypršení platnosti trvale smazány pomocí automatických cron úloh.',
-  'privacy.dataSecurity.securityMeasures': 'Bezpečnostní opatření: Zavádíme silné bezpečnostní hlavičky (např. CSP, HSTS), sanitizaci vstupů, ochranu proti časovým útokům a CAPTCHA pro zamezení zneužití.',
+  'privacy.dataSecurity.encryption':
+    'Šifrování: Všechny zprávy jsou šifrovány na straně klienta pomocí AES-256 s derivací klíče PBKDF2 (2 200 000 iterací). Ukládáme pouze šifrovaná data a nemůžeme je dešifrovat.',
+  'privacy.dataSecurity.deletion':
+    'Mazání: Zprávy jsou po přečtení nebo vypršení platnosti trvale smazány pomocí automatických cron úloh.',
+  'privacy.dataSecurity.securityMeasures':
+    'Bezpečnostní opatření: Zavádíme silné bezpečnostní hlavičky (např. CSP, HSTS), sanitizaci vstupů, ochranu proti časovým útokům a CAPTCHA pro zamezení zneužití.',
   'privacy.dataSecurity.noRecovery': 'Bez obnovy: Jakmile jsou zprávy smazány, nelze je obnovit — ani námi.',
-  'privacy.dataSecurity.disclaimer': 'Ačkoli podnikáme přiměřené kroky k zabezpečení našich systémů, žádná služba není zcela imunní vůči rizikům. Jste odpovědní za bezpečné sdílení URL a hesel.',
+  'privacy.dataSecurity.disclaimer':
+    'Ačkoli podnikáme přiměřené kroky k zabezpečení našich systémů, žádná služba není zcela imunní vůči rizikům. Jste odpovědní za bezpečné sdílení URL a hesel.',
 
   'privacy.dataRetention.title': '5. Doba uchování dat',
-  'privacy.dataRetention.memos': 'Šifrované zprávy se uchovávají pouze do přečtení nebo vypršení platnosti (maximálně 30 dní).',
-  'privacy.dataRetention.logs': 'Bezpečnostní logy (např. IP adresy) jsou dočasně uchovávány pro prevenci zneužití a poté automaticky mazány po krátké době (obvykle v řádu dnů).',
+  'privacy.dataRetention.memos':
+    'Šifrované zprávy se uchovávají pouze do přečtení nebo vypršení platnosti (maximálně 30 dní).',
+  'privacy.dataRetention.logs':
+    'Bezpečnostní logy (např. IP adresy) jsou dočasně uchovávány pro prevenci zneužití a poté automaticky mazány po krátké době (obvykle v řádu dnů).',
   'privacy.dataRetention.minimal': 'Neuchováváme žádná data déle, než je nezbytné pro provoz služby.',
 
   'privacy.yourRights.title': '6. Vaše práva a volby',
   'privacy.yourRights.intro': 'Protože neshromažďujeme osobní data:',
   'privacy.yourRights.noAccounts': 'Neexistují žádné uživatelské účty k spravování.',
-  'privacy.yourRights.noRequests': 'Nemůžete žádat o přístup, opravu nebo smazání dat nad rámec automatického samosmazání zpráv.',
-  'privacy.yourRights.contact': 'Pokud se domníváte, že o vás uchováváme nějaké informace (např. z logů), kontaktujte nás (viz níže) a informujte se o svých právech dle platných zákonů, jako je GDPR nebo CCPA. Dodržujeme předpisy na ochranu dat a žádosti vyřizujeme, kde je to proveditelné.',
+  'privacy.yourRights.noRequests':
+    'Nemůžete žádat o přístup, opravu nebo smazání dat nad rámec automatického samosmazání zpráv.',
+  'privacy.yourRights.contact':
+    'Pokud se domníváte, že o vás uchováváme nějaké informace (např. z logů), kontaktujte nás (viz níže) a informujte se o svých právech dle platných zákonů, jako je GDPR nebo CCPA. Dodržujeme předpisy na ochranu dat a žádosti vyřizujeme, kde je to proveditelné.',
 
   'privacy.childrenPrivacy.title': '7. Soukromí dětí',
-  'privacy.childrenPrivacy.content': 'Naše služba není určena pro děti mladší 13 let (nebo 16 let v některých jurisdikcích). Vědomě neshromažďujeme data o dětech. Pokud se o takových datech dozvíme, smažeme je.',
+  'privacy.childrenPrivacy.content':
+    'Naše služba není určena pro děti mladší 13 let (nebo 16 let v některých jurisdikcích). Vědomě neshromažďujeme data o dětech. Pokud se o takových datech dozvíme, smažeme je.',
 
   'privacy.internationalTransfers.title': '8. Mezinárodní předávání dat',
-  'privacy.internationalTransfers.content': 'securememo.app běží na globální síti Cloudflare. Data mohou být zpracovávána v různých zemích, ale prostřednictvím našich minimálních sběrných praktik zajišťujeme rovnocennou ochranu soukromí.',
+  'privacy.internationalTransfers.content':
+    'securememo.app běží na globální síti Cloudflare. Data mohou být zpracovávána v různých zemích, ale prostřednictvím našich minimálních sběrných praktik zajišťujeme rovnocennou ochranu soukromí.',
 
   'privacy.changesNotice.title': '9. Změny tohoto Oznámení o ochraně soukromí',
-  'privacy.changesNotice.content': 'Toto Oznámení můžeme průběžně aktualizovat. Změny budou zveřejněny zde s aktualizovaným datem „Naposledy aktualizováno“. Dalším používáním služby po změnách vyjadřujete souhlas.',
+  'privacy.changesNotice.content':
+    'Toto Oznámení můžeme průběžně aktualizovat. Změny budou zveřejněny zde s aktualizovaným datem „Naposledy aktualizováno“. Dalším používáním služby po změnách vyjadřujete souhlas.',
 
   'privacy.contact.title': '10. Kontaktujte nás',
   'privacy.contact.intro': 'V případě dotazů k tomuto Oznámení o ochraně soukromí nebo našim postupům navštivte náš',
   'privacy.contact.github': 'repozitář na GitHubu',
   'privacy.contact.email': 'nebo napište na contact@securememo.app.',
-  'privacy.contact.disclaimer': 'Toto Oznámení o ochraně soukromí platí pouze pro securememo.app a nikoli pro weby třetích stran odkazované z naší služby.',
+  'privacy.contact.disclaimer':
+    'Toto Oznámení o ochraně soukromí platí pouze pro securememo.app a nikoli pro weby třetích stran odkazované z naší služby.',
 
   // Schema.org structured data
-  'schema.app.description': 'Vytvářejte šifrované zprávy, které se po přečtení samy smažou. End-to-end šifrování, důraz na soukromí a bezpečné sdílení poznámek s AES-256. Bez sledování, bez reklam.',
+  'schema.app.description':
+    'Vytvářejte šifrované zprávy, které se po přečtení samy smažou. End-to-end šifrování, důraz na soukromí a bezpečné sdílení poznámek s AES-256. Bez sledování, bez reklam.',
   'schema.app.category': 'SecurityApplication',
   'schema.app.os': 'Webový prohlížeč',
   'schema.app.requirements': 'Vyžaduje JavaScript. Vyžaduje HTML5.',
@@ -316,17 +403,23 @@ export const cs = {
 
   // FAQ structured data
   'faq.privacy.question': 'Jak securememo.app chrání mé soukromí?',
-  'faq.privacy.answer': 'securememo.app používá šifrování AES-256 na straně klienta, což znamená, že vaše zpráva je zašifrována ve vašem prohlížeči před odesláním na naše servery. Nikdy nevidíme otevřený obsah. Zprávy se po přečtení nebo po vypršení platnosti samy smažou a nevyžadujeme uživatelské účty ani nesbíráme osobní informace.',
+  'faq.privacy.answer':
+    'securememo.app používá šifrování AES-256 na straně klienta, což znamená, že vaše zpráva je zašifrována ve vašem prohlížeči před odesláním na naše servery. Nikdy nevidíme otevřený obsah. Zprávy se po přečtení nebo po vypršení platnosti samy smažou a nevyžadujeme uživatelské účty ani nesbíráme osobní informace.',
   'faq.encryption.question': 'Jaké šifrování securememo.app používá?',
-  'faq.encryption.answer': 'Používáme šifrování AES-256-GCM s derivací klíče PBKDF2 (2 200 000+ iterací). Veškeré šifrování probíhá na straně klienta ve vašem prohlížeči pomocí Web Crypto API. Šifrovací heslo je generováno zvlášť a nikdy není uloženo na našich serverech.',
+  'faq.encryption.answer':
+    'Používáme šifrování AES-256-GCM s derivací klíče PBKDF2 (2 200 000+ iterací). Veškeré šifrování probíhá na straně klienta ve vašem prohlížeči pomocí Web Crypto API. Šifrovací heslo je generováno zvlášť a nikdy není uloženo na našich serverech.',
   'faq.duration.question': 'Jak dlouho zprávy vydrží?',
-  'faq.duration.answer': 'Zprávám můžete nastavit platnost na 8 hodin, 1 den, 2 dny, 1 týden nebo maximálně 30 dní. Také jsou okamžitě smazány po přečtení. Expirace jsou automaticky čištěny každou hodinu.',
+  'faq.duration.answer':
+    'Zprávám můžete nastavit platnost na 8 hodin, 1 den, 2 dny, 1 týden nebo maximálně 30 dní. Také jsou okamžitě smazány po přečtení. Expirace jsou automaticky čištěny každou hodinu.',
   'faq.recovery.question': 'Mohu obnovit smazanou zprávu?',
-  'faq.recovery.answer': 'Ne, jakmile je zpráva smazána (po přečtení nebo po vypršení platnosti), nelze ji obnovit. Je to záměrné kvůli maximálnímu soukromí a bezpečnosti.',
+  'faq.recovery.answer':
+    'Ne, jakmile je zpráva smazána (po přečtení nebo po vypršení platnosti), nelze ji obnovit. Je to záměrné kvůli maximálnímu soukromí a bezpečnosti.',
   'faq.cost.question': 'Je securememo.app zdarma?',
-  'faq.cost.answer': 'Ano, securememo.app je zcela zdarma. Žádné skryté poplatky, žádné prémiové funkce a žádné sledování či reklama.',
+  'faq.cost.answer':
+    'Ano, securememo.app je zcela zdarma. Žádné skryté poplatky, žádné prémiové funkce a žádné sledování či reklama.',
   'faq.technology.question': 'Jaké technologie securememo.app používá?',
-  'faq.technology.answer': 'securememo.app je postaven na Cloudflare Workers pro bezserverové výpočty, databázi D1 pro úložiště, Web Crypto API pro klientské šifrování a moderní HTML/CSS/JavaScript. Zdrojový kód je open source a dostupný na GitHubu.',
+  'faq.technology.answer':
+    'securememo.app je postaven na Cloudflare Workers pro bezserverové výpočty, databázi D1 pro úložiště, Web Crypto API pro klientské šifrování a moderní HTML/CSS/JavaScript. Zdrojový kód je open source a dostupný na GitHubu.',
 
   // Accessibility and UI
 
@@ -336,18 +429,25 @@ export const cs = {
 
   // Create memo page content
   'create.hero.title': 'Vytvořit zabezpečenou zprávu',
-  'create.hero.description': 'Vaše zpráva bude zašifrována ve vašem prohlížeči a po přečtení nebo vypršení platnosti se sama smaže.',
-  'create.hero.ogDescription': 'Vytvářejte šifrované zprávy s klientským šifrováním AES-256. Zprávy se po přečtení samy smažou pro maximální soukromí.',
+  'create.hero.description':
+    'Vaše zpráva bude zašifrována ve vašem prohlížeči a po přečtení nebo vypršení platnosti se sama smaže.',
+  'create.hero.ogDescription':
+    'Vytvářejte šifrované zprávy s klientským šifrováním AES-256. Zprávy se po přečtení samy smažou pro maximální soukromí.',
   'create.hero.twitterDescription': 'Vytvářejte šifrované zprávy s klientským šifrováním.',
-  'create.schema.description': 'Vytvářejte šifrované zprávy, které se po přečtení samy smažou. Klientské šifrování AES-256 zajistí, že vaše tajemství zůstanou soukromá.',
-  'create.schema.actionDescription': 'Vytvářejte šifrované zprávy s klientským šifrováním AES-256 a automatickým samosmazáním',
+  'create.schema.description':
+    'Vytvářejte šifrované zprávy, které se po přečtení samy smažou. Klientské šifrování AES-256 zajistí, že vaše tajemství zůstanou soukromá.',
+  'create.schema.actionDescription':
+    'Vytvářejte šifrované zprávy s klientským šifrováním AES-256 a automatickým samosmazáním',
 
-  // Read memo page content  
+  // Read memo page content
   'read.hero.title': 'Přečíst zabezpečenou zprávu',
-  'read.hero.description': 'Zadejte heslo pro dešifrování a přečtení zprávy. Heslo by vám mělo být sdíleno zvlášť od URL. Zpráva bude po přečtení nebo po vypršení platnosti smazána.',
-  'read.hero.ogDescription': 'Dešifrujte a přečtěte si svou zabezpečenou zprávu. Zprávy se po přečtení samy smažou pro maximální soukromí.',
+  'read.hero.description':
+    'Zadejte heslo pro dešifrování a přečtení zprávy. Heslo by vám mělo být sdíleno zvlášť od URL. Zpráva bude po přečtení nebo po vypršení platnosti smazána.',
+  'read.hero.ogDescription':
+    'Dešifrujte a přečtěte si svou zabezpečenou zprávu. Zprávy se po přečtení samy smažou pro maximální soukromí.',
   'read.hero.twitterDescription': 'Dešifrujte a přečtěte si svou zabezpečenou zprávu s dešifrováním na straně klienta.',
-  'read.schema.description': 'Dešifrujte a přečtěte si zabezpečenou zprávu pomocí hesla. Zprávy se po přečtení samy smažou pro maximální soukromí. Dešifrování AES-256 na straně klienta.',
+  'read.schema.description':
+    'Dešifrujte a přečtěte si zabezpečenou zprávu pomocí hesla. Zprávy se po přečtení samy smažou pro maximální soukromí. Dešifrování AES-256 na straně klienta.',
 
   // Form options
   'form.expiry.option.8h': 'Smazat po přečtení nebo po 8 hodinách',
@@ -367,7 +467,8 @@ export const cs = {
   'form.memoUrl.label': 'URL zprávy (sdílejte s příjemcem):',
   'form.memoUrl.help': 'Toto je bezpečný odkaz na vaši zprávu. Sdílejte toto URL s příjemcem.',
   'form.memoPassword.label': 'Šifrovací heslo (sdílejte zvlášť):',
-  'form.memoPassword.help': 'Toto je šifrovací heslo. Sdílejte jej odděleně od URL pro vyšší bezpečnost. Neukládá se na našich serverech, obnova po opuštění této stránky není možná.',
+  'form.memoPassword.help':
+    'Toto je šifrovací heslo. Sdílejte jej odděleně od URL pro vyšší bezpečnost. Neukládá se na našich serverech, obnova po opuštění této stránky není možná.',
 
   // Warning messages
   'warning.important': 'Důležité:',
@@ -378,18 +479,22 @@ export const cs = {
 
   // Structured data texts
   'schema.tos.name': 'Podmínky služby',
-  'schema.tos.description': 'Podmínky služby pro securememo.app – služba pro sdílení šifrovaných zpráv. Informace o přijatelném použití, soukromí, zabezpečení a právních podmínkách.',
+  'schema.tos.description':
+    'Podmínky služby pro securememo.app – služba pro sdílení šifrovaných zpráv. Informace o přijatelném použití, soukromí, zabezpečení a právních podmínkách.',
   'schema.tos.breadcrumb.home': 'Domů',
   'schema.tos.breadcrumb.tos': 'Podmínky služby',
   'schema.tos.mainEntity.name': 'Podmínky služby',
-  'schema.tos.mainEntity.description': 'Právní podmínky a ustanovení pro službu securememo.app pro sdílení šifrovaných zpráv',
+  'schema.tos.mainEntity.description':
+    'Právní podmínky a ustanovení pro službu securememo.app pro sdílení šifrovaných zpráv',
 
   'schema.privacy.name': 'Oznámení o ochraně soukromí',
-  'schema.privacy.description': 'Oznámení o ochraně soukromí pro securememo.app – zjistěte, jak chráníme vaše data pomocí klientského šifrování, architektury s nulovou znalostí a minimálního sběru dat.',
+  'schema.privacy.description':
+    'Oznámení o ochraně soukromí pro securememo.app – zjistěte, jak chráníme vaše data pomocí klientského šifrování, architektury s nulovou znalostí a minimálního sběru dat.',
   'schema.privacy.breadcrumb.home': 'Domů',
   'schema.privacy.breadcrumb.privacy': 'Oznámení o ochraně soukromí',
   'schema.privacy.mainEntity.name': 'Oznámení o ochraně soukromí',
-  'schema.privacy.mainEntity.description': 'Jak securememo.app chrání vaše soukromí pomocí klientského šifrování a minimálního sběru dat',
+  'schema.privacy.mainEntity.description':
+    'Jak securememo.app chrání vaše soukromí pomocí klientského šifrování a minimálního sběru dat',
 
   // Create memo featureList in structured data
   'schema.create.featureList.clientSide': 'Šifrování na straně klienta',
@@ -497,5 +602,5 @@ export const cs = {
   'error.security.MEMO_READ_ERROR': 'Nelze zpracovat váš požadavek.',
   'error.security.METHOD_NOT_ALLOWED': 'Neplatná metoda požadavku.',
   'error.security.FORBIDDEN': 'Přístup zamítnut.',
-  'error.security.DEFAULT_FALLBACK': 'Došlo k chybě. Zkuste to prosím znovu.'
-}
+  'error.security.DEFAULT_FALLBACK': 'Došlo k chybě. Zkuste to prosím znovu.',
+};
