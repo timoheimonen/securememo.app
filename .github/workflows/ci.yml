@@ -5,7 +5,7 @@ on:
     branches: [ main ]
     paths:
       - 'src/**/*.js'
-      - '.github/workflows/codeql.yml'
+      - '.github/workflows/ci.yml'
       - '.github/codeql-config.yml'
       - 'package.json'
       - 'package-lock.json'
@@ -14,7 +14,7 @@ on:
     branches: [ main, development ]
     paths:
       - 'src/**/*.js'
-      - '.github/workflows/codeql.yml'
+      - '.github/workflows/ci.yml'
       - '.github/codeql-config.yml'
       - 'package.json'
       - 'package-lock.json'
@@ -81,9 +81,36 @@ jobs:
       - name: Run ESLint
         run: npm run lint
 
+  prettier:
+    name: Prettier Formatting Check
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: |
+          if [ -f package-lock.json ]; then
+            npm ci --no-audit --no-fund
+          else
+            npm install --no-audit --no-fund
+          fi
+
+      - name: Prettier Check
+        run: npm run format:check
+
   analyze:
     name: Analyze (JavaScript)
-    needs: [audit, lint]
+    needs: [audit, lint, prettier]
     runs-on: ubuntu-latest
     timeout-minutes: 30
     strategy:
