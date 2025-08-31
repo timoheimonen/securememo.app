@@ -461,7 +461,7 @@ export async function handleCreateMemo(request, env) {
     // Best-effort erase of confidential data
     if (sanitizedEncryptedMessage) {
       try {
-        sanitizedEncryptedMessage = "".padEnd(sanitizedEncryptedMessage.length, "\u0000");
+  // Intentionally not attempting string overwrite; strings are immutable and engines may intern.
       } catch (_) {
         /* Ignore cleanup errors */
       }
@@ -469,7 +469,7 @@ export async function handleCreateMemo(request, env) {
     }
     if (deletionTokenHash) {
       try {
-        deletionTokenHash = "".padEnd(44, "\u0000");
+  // Intentionally not overwriting string; will null out reference.
       } catch (_) {
         /* Ignore cleanup errors */
       }
@@ -689,7 +689,7 @@ export async function handleConfirmDelete(request, env) {
     // Best-effort wiping of sensitive variables
     if (deletionToken) {
       try {
-        deletionToken = "".padEnd(deletionToken.length, "\u0000");
+  // Skipping string overwrite; will null reference below.
       } catch (_) {
         /* Ignore cleanup errors */
       }
@@ -697,7 +697,7 @@ export async function handleConfirmDelete(request, env) {
     }
     if (computedHash) {
       try {
-        computedHash = "".padEnd(44, "\u0000");
+  // Skipping overwrite; will null reference below.
       } catch (_) {
         /* Ignore cleanup errors */
       }
