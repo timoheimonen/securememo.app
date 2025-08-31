@@ -395,8 +395,8 @@ export async function handleCreateMemo(request, env) {
       return turnstileResult.error;
     }
 
-  // Generate unique memo ID with collision detection
-  const memoId = await generateMemoId(env, 10);
+    // Generate unique memo ID with collision detection
+    const memoId = await generateMemoId(env, 10);
     if (!memoId) {
       await uniformResponseDelay();
       return new Response(JSON.stringify({ error: getErrorMessage("MEMO_ID_GENERATION_ERROR", requestLocale) }), {
@@ -461,7 +461,7 @@ export async function handleCreateMemo(request, env) {
     // Best-effort erase of confidential data
     if (sanitizedEncryptedMessage) {
       try {
-  // Intentionally not attempting string overwrite; strings are immutable and engines may intern.
+        // Intentionally not attempting string overwrite; strings are immutable and engines may intern.
       } catch (_) {
         /* Ignore cleanup errors */
       }
@@ -469,7 +469,7 @@ export async function handleCreateMemo(request, env) {
     }
     if (deletionTokenHash) {
       try {
-  // Intentionally not overwriting string; will null out reference.
+        // Intentionally not overwriting string; will null out reference.
       } catch (_) {
         /* Ignore cleanup errors */
       }
@@ -689,7 +689,7 @@ export async function handleConfirmDelete(request, env) {
     // Best-effort wiping of sensitive variables
     if (deletionToken) {
       try {
-  // Skipping string overwrite; will null reference below.
+        // Skipping string overwrite; will null reference below.
       } catch (_) {
         /* Ignore cleanup errors */
       }
@@ -697,7 +697,7 @@ export async function handleConfirmDelete(request, env) {
     }
     if (computedHash) {
       try {
-  // Skipping overwrite; will null reference below.
+        // Skipping overwrite; will null reference below.
       } catch (_) {
         /* Ignore cleanup errors */
       }
