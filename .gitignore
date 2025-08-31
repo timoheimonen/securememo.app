@@ -118,10 +118,7 @@ pages/apple-touch-icon.png
 pages/favicon.ico
 pages/build.js
 deploy.sh
-src/schemas/
-src/schemas/confirm-delete.openapi.yaml
-src/schemas/read-memo.openapi.yaml
-src/schemas/create-memo.openapi.yaml
+schema/
 .github/instructions/*
 .github/instructions/
 
