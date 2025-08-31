@@ -13,9 +13,9 @@ export async function hashIp(ip) {
   // Use explicit globalThis for Worker runtime compatibility & to satisfy lint (no-undef)
   const encoder = new globalThis.TextEncoder();
   const data = encoder.encode(ip);
-  const hashBuffer = await globalThis.crypto.subtle.digest("SHA-256", data);
+  const hashBuffer = await globalThis.crypto.subtle.digest('SHA-256', data);
   const hashArray = Array.from(new Uint8Array(hashBuffer));
-  return hashArray.map((b) => b.toString(16).padStart(2, "0")).join("");
+  return hashArray.map((b) => b.toString(16).padStart(2, '0')).join('');
 }
 
 // -------------------------------------------------
@@ -38,10 +38,10 @@ let kvDisabledUntil = 0; // circuit breaker timestamp (ms)
  * @returns {string}
  */
 function sanitizePrefix(prefix) {
-  if (typeof prefix !== "string") return "fail";
+  if (typeof prefix !== 'string') return 'fail';
   // Allow only alphanumerics, colon, hyphen and underscore (common key separators)
-  const cleaned = prefix.replace(/[^A-Za-z0-9:_-]/g, "").slice(0, 40);
-  return cleaned || "fail";
+  const cleaned = prefix.replace(/[^A-Za-z0-9:_-]/g, '').slice(0, 40);
+  return cleaned || 'fail';
 }
 
 /**
@@ -55,7 +55,7 @@ function sweepLocal(windowSeconds) {
   lastSweep = now;
   const threshold = Math.floor(now / 1000) - windowSeconds;
   for (const [k, v] of localBuckets) {
-    if (!v || typeof v.first !== "number") {
+    if (!v || typeof v.first !== 'number') {
       localBuckets.delete(k);
       continue;
     }
@@ -137,7 +137,7 @@ export async function recordKvFailureAndCheckLimit(
   request,
   env,
   {
-    prefix = "fail",
+    prefix = 'fail',
     windowSeconds = 600,
     allowedFailures = 2,
     sliding = true,
@@ -155,17 +155,17 @@ export async function recordKvFailureAndCheckLimit(
   } = {}
 ) {
   // Input validation
-  if (typeof windowSeconds !== "number" || windowSeconds <= 0) {
-    throw new Error("windowSeconds must be a positive number");
+  if (typeof windowSeconds !== 'number' || windowSeconds <= 0) {
+    throw new Error('windowSeconds must be a positive number');
   }
-  if (typeof allowedFailures !== "number" || allowedFailures < 0) {
-    throw new Error("allowedFailures must be a non-negative number");
+  if (typeof allowedFailures !== 'number' || allowedFailures < 0) {
+    throw new Error('allowedFailures must be a non-negative number');
   }
-  if (typeof prefix !== "string") {
-    throw new Error("prefix must be a string");
+  if (typeof prefix !== 'string') {
+    throw new Error('prefix must be a string');
   }
-  if (typeof sliding !== "boolean") {
-    throw new Error("sliding must be a boolean");
+  if (typeof sliding !== 'boolean') {
+    throw new Error('sliding must be a boolean');
   }
 
   // Sanitize prefix defensively to a constrained character set.
@@ -176,8 +176,8 @@ export async function recordKvFailureAndCheckLimit(
     const kvAvailable = env && env.KV && nowMs >= kvDisabledUntil;
     if (!kvAvailable) {
       if (enforceOnFallback) {
-        const rawIpLocal = request.headers.get("CF-Connecting-IP") || "unknown";
-        if (rawIpLocal === "unknown") {
+        const rawIpLocal = request.headers.get('CF-Connecting-IP') || 'unknown';
+        if (rawIpLocal === 'unknown') {
           return { limited: false, count: 0, remaining: allowedFailures, fallback: true };
         }
         const ipHashLocal = await hashIp(rawIpLocal);
@@ -187,8 +187,8 @@ export async function recordKvFailureAndCheckLimit(
       return { limited: false, count: 0, remaining: allowedFailures, fallback: true };
     }
     // Normal KV path
-    const rawIp = request.headers.get("CF-Connecting-IP") || "unknown";
-    if (rawIp === "unknown") {
+    const rawIp = request.headers.get('CF-Connecting-IP') || 'unknown';
+    if (rawIp === 'unknown') {
       // Fail open for unknown IP to avoid global bucket collision
       return { limited: false, count: 0, remaining: allowedFailures };
     }
@@ -199,7 +199,7 @@ export async function recordKvFailureAndCheckLimit(
     // Sliding window implementation (simple counter with refreshed TTL each failure)
     if (sliding) {
       if (!current) {
-        await env.KV.put(key, "1", { expirationTtl: windowSeconds });
+        await env.KV.put(key, '1', { expirationTtl: windowSeconds });
         return { limited: false, count: 1, remaining: Math.max(0, allowedFailures - 1), key };
       }
       const count = parseInt(current, 10) || 0;
@@ -224,10 +224,10 @@ export async function recordKvFailureAndCheckLimit(
     try {
       state = JSON.parse(current);
       if (
-        typeof state !== "object" ||
+        typeof state !== 'object' ||
         state === null ||
-        typeof state.count !== "number" ||
-        typeof state.first !== "number"
+        typeof state.count !== 'number' ||
+        typeof state.first !== 'number'
       ) {
         state = { count: 1, first: nowSec }; // fallback to new window if structure unexpected
       }
@@ -254,10 +254,10 @@ export async function recordKvFailureAndCheckLimit(
     };
   } catch (err) {
     // Open circuit to avoid hammering KV repeatedly
-    kvDisabledUntil = Date.now() + (typeof kvRetryMs === "number" && kvRetryMs > 0 ? kvRetryMs : 30000);
+    kvDisabledUntil = Date.now() + (typeof kvRetryMs === 'number' && kvRetryMs > 0 ? kvRetryMs : 30000);
     // Invoke optional error handler (never let it throw)
     try {
-      if (typeof onError === "function") onError(err);
+      if (typeof onError === 'function') onError(err);
       // Intentionally avoid console.* logging by default to comply with strict lint/security policy.
     } catch (_) {
       /* swallow secondary errors */
@@ -265,8 +265,8 @@ export async function recordKvFailureAndCheckLimit(
     // Fall back to local memory logic if enabled
     if (enforceOnFallback) {
       try {
-        const rawIpLocal = request.headers.get("CF-Connecting-IP") || "unknown";
-        if (rawIpLocal !== "unknown") {
+        const rawIpLocal = request.headers.get('CF-Connecting-IP') || 'unknown';
+        if (rawIpLocal !== 'unknown') {
           const ipHashLocal = await hashIp(rawIpLocal);
           const keyLocal = `${prefix}:${ipHashLocal}`;
           const res = localLimit(keyLocal, { sliding, windowSeconds, allowedFailures });

@@ -1,613 +1,613 @@
 export const ptBR = {
   // Navigation
-  "nav.home": "Início",
-  "nav.about": "Sobre",
-  "nav.create": "Criar Memo Seguro",
-  "nav.toggleMenu": "Alternar menu de navegação",
+  'nav.home': 'Início',
+  'nav.about': 'Sobre',
+  'nav.create': 'Criar Memo Seguro',
+  'nav.toggleMenu': 'Alternar menu de navegação',
 
   // Common elements
-  "common.loading": "Carregando...",
-  "common.error": "Erro",
-  "common.success": "Sucesso",
-  "common.warning": "Aviso",
+  'common.loading': 'Carregando...',
+  'common.error': 'Erro',
+  'common.success': 'Sucesso',
+  'common.warning': 'Aviso',
 
   // Buttons
-  "btn.copy": "Copiar",
-  "btn.copied": "Copiado!",
-  "btn.copyUrl": "Copiar URL",
-  "btn.copyPassword": "Copiar Senha",
-  "btn.show": "Mostrar",
-  "btn.hide": "Ocultar",
-  "btn.create": "Criar Memo Seguro",
-  "btn.creating": "Criptografando...",
-  "btn.decrypt": "Descriptografar Memo",
-  "btn.decrypting": "Descriptografando...",
-  "btn.goHome": "Ir para Início",
-  "btn.createNew": "Criar Novo Memo",
+  'btn.copy': 'Copiar',
+  'btn.copied': 'Copiado!',
+  'btn.copyUrl': 'Copiar URL',
+  'btn.copyPassword': 'Copiar Senha',
+  'btn.show': 'Mostrar',
+  'btn.hide': 'Ocultar',
+  'btn.create': 'Criar Memo Seguro',
+  'btn.creating': 'Criptografando...',
+  'btn.decrypt': 'Descriptografar Memo',
+  'btn.decrypting': 'Descriptografando...',
+  'btn.goHome': 'Ir para Início',
+  'btn.createNew': 'Criar Novo Memo',
 
   // Form labels and placeholders
-  "form.message.label": "Seu Memo",
-  "form.message.placeholder": "Digite seu memo secreto aqui...",
-  "form.message.help": "Máximo de 10.000 caracteres",
-  "form.expiry.label": "Tempo de Expiração",
-  "form.password.label": "Senha de Criptografia",
-  "form.password.placeholder": "Digite a senha de criptografia compartilhada separadamente",
-  "form.password.help": "A senha deve ter sido compartilhada separadamente da URL do memo",
-  "form.security.help": "Por favor, complete o desafio de segurança",
+  'form.message.label': 'Seu Memo',
+  'form.message.placeholder': 'Digite seu memo secreto aqui...',
+  'form.message.help': 'Máximo de 10.000 caracteres',
+  'form.expiry.label': 'Tempo de Expiração',
+  'form.password.label': 'Senha de Criptografia',
+  'form.password.placeholder': 'Digite a senha de criptografia compartilhada separadamente',
+  'form.password.help': 'A senha deve ter sido compartilhada separadamente da URL do memo',
+  'form.security.help': 'Por favor, complete o desafio de segurança',
 
   // Messages and notifications
-  "msg.urlCopied": "✅ URL copiada para a área de transferência!",
-  "msg.passwordCopied": "✅ Senha copiada para a área de transferência!",
-  "msg.copyManual": "⚠️ Por favor, copie manualmente (Ctrl+C / Cmd+C)",
-  "msg.memoCreated": "✅ Memo Criado com Sucesso!",
-  "msg.memoDecrypted": "Memo descriptografado. Excluindo... Aguarde.",
-  "msg.memoDeleted": "Memo confirmado como lido e excluído permanentemente.",
-  "msg.deletionError": "Erro ao confirmar exclusão. O memo será limpo automaticamente.",
+  'msg.urlCopied': '✅ URL copiada para a área de transferência!',
+  'msg.passwordCopied': '✅ Senha copiada para a área de transferência!',
+  'msg.copyManual': '⚠️ Por favor, copie manualmente (Ctrl+C / Cmd+C)',
+  'msg.memoCreated': '✅ Memo Criado com Sucesso!',
+  'msg.memoDecrypted': 'Memo descriptografado. Excluindo... Aguarde.',
+  'msg.memoDeleted': 'Memo confirmado como lido e excluído permanentemente.',
+  'msg.deletionError': 'Erro ao confirmar exclusão. O memo será limpo automaticamente.',
 
   // Page titles and descriptions
-  "page.home.title": "securememo.app - Memos Criptografados que se Autodestroem",
-  "page.home.description":
-    "Crie memos criptografados que se autodestroem após serem lidos. Criptografia ponta a ponta, focado na privacidade e compartilhamento seguro de notas com AES-256. Sem rastreamento, sem anúncios.",
-  "page.home.keywords":
-    "memo seguro, memo criptografado, memo autodestrutivo, compartilhamento privado de notas, criptografia ponta a ponta, AES-256, privacidade, compartilhamento seguro de memo",
-  "page.home.ogTitle": "securememo.app - Memos Criptografados que se Autodestroem",
-  "page.home.ogDescription":
-    "Compartilhe informações sensíveis com segurança usando memos que se excluem após uma visualização ou expiração. Alimentado por criptografia AES-256 do lado do cliente.",
-  "page.home.twitterDescription": "App focado na privacidade para memos seguros que se autodestroem.",
-  "page.about.title": "Sobre o securememo.app - Notas Criptografadas Focadas na Privacidade",
-  "page.about.description":
-    "Saiba mais sobre a abordagem do securememo.app que prioriza a privacidade para mensagens criptografadas. Construído com criptografia AES-256 do lado do cliente, mensagens autodestrutivas e arquitetura de conhecimento zero.",
-  "page.about.keywords":
-    "sobre memo seguro, mensagens focadas na privacidade, criptografia do lado do cliente, AES-256, mensagens autodestrutivas, conhecimento zero, compartilhamento seguro de notas",
-  "page.about.ogTitle": "Sobre o securememo.app - Notas Criptografadas Focadas na Privacidade",
-  "page.about.ogDescription":
-    "Descubra como o securememo.app protege sua privacidade com criptografia do lado do cliente e mensagens autodestrutivas.",
-  "page.about.twitterDescription":
-    "Mensagens criptografadas que priorizam a privacidade com criptografia do lado do cliente.",
-  "page.create.title": "Criar Memo Seguro - Memo Criptografado Autodestrutivo",
-  "page.create.keywords":
-    "criar memo seguro, memo criptografado, nota autodestrutiva, criptografia AES-256, compartilhamento privado de memo, criação de nota segura",
-  "page.read.title": "Ler Memo Seguro - Descriptografar Memo Criptografado",
-  "page.read.keywords":
-    "ler memo seguro, descriptografar memo, leitura de nota criptografada, descriptografia AES-256, acesso privado ao memo",
-  "page.tos.title": "Termos de Serviço - Termos Legais do securememo.app",
-  "page.tos.description":
-    "Termos de Serviço para o securememo.app - serviço de compartilhamento de memo criptografado. Saiba sobre uso aceitável, privacidade, segurança e termos legais para nossa plataforma de compartilhamento seguro de memos.",
-  "page.tos.keywords":
-    "termos de serviço, memo seguro legal, termos de memo criptografado, política de privacidade, política de uso aceitável, termos de compartilhamento de nota segura",
-  "page.tos.ogTitle": "Termos de Serviço - Termos Legais do securememo.app",
-  "page.tos.ogDescription":
-    "Termos e condições legais para o serviço de compartilhamento de memo criptografado securememo.app.",
-  "page.tos.twitterDescription":
-    "Termos legais para o serviço de compartilhamento de memo criptografado securememo.app.",
-  "page.privacy.title": "Aviso de Privacidade - Proteção de Dados do securememo.app",
-  "page.privacy.description":
-    "Aviso de Privacidade para o securememo.app - saiba como protegemos seus dados com criptografia do lado do cliente, arquitetura de conhecimento zero e coleta mínima de dados para compartilhamento seguro de memos.",
-  "page.privacy.keywords":
-    "aviso de privacidade, privacidade de memo seguro, proteção de dados, conformidade GDPR, criptografia do lado do cliente, conhecimento zero, privacidade de compartilhamento de memo seguro",
-  "page.privacy.ogTitle": "Aviso de Privacidade - Proteção de Dados do securememo.app",
-  "page.privacy.ogDescription":
-    "Como o securememo.app protege sua privacidade com criptografia do lado do cliente e coleta mínima de dados.",
-  "page.privacy.twitterDescription":
-    "Proteção de privacidade com criptografia do lado do cliente e arquitetura de conhecimento zero.",
+  'page.home.title': 'securememo.app - Memos Criptografados que se Autodestroem',
+  'page.home.description':
+    'Crie memos criptografados que se autodestroem após serem lidos. Criptografia ponta a ponta, focado na privacidade e compartilhamento seguro de notas com AES-256. Sem rastreamento, sem anúncios.',
+  'page.home.keywords':
+    'memo seguro, memo criptografado, memo autodestrutivo, compartilhamento privado de notas, criptografia ponta a ponta, AES-256, privacidade, compartilhamento seguro de memo',
+  'page.home.ogTitle': 'securememo.app - Memos Criptografados que se Autodestroem',
+  'page.home.ogDescription':
+    'Compartilhe informações sensíveis com segurança usando memos que se excluem após uma visualização ou expiração. Alimentado por criptografia AES-256 do lado do cliente.',
+  'page.home.twitterDescription': 'App focado na privacidade para memos seguros que se autodestroem.',
+  'page.about.title': 'Sobre o securememo.app - Notas Criptografadas Focadas na Privacidade',
+  'page.about.description':
+    'Saiba mais sobre a abordagem do securememo.app que prioriza a privacidade para mensagens criptografadas. Construído com criptografia AES-256 do lado do cliente, mensagens autodestrutivas e arquitetura de conhecimento zero.',
+  'page.about.keywords':
+    'sobre memo seguro, mensagens focadas na privacidade, criptografia do lado do cliente, AES-256, mensagens autodestrutivas, conhecimento zero, compartilhamento seguro de notas',
+  'page.about.ogTitle': 'Sobre o securememo.app - Notas Criptografadas Focadas na Privacidade',
+  'page.about.ogDescription':
+    'Descubra como o securememo.app protege sua privacidade com criptografia do lado do cliente e mensagens autodestrutivas.',
+  'page.about.twitterDescription':
+    'Mensagens criptografadas que priorizam a privacidade com criptografia do lado do cliente.',
+  'page.create.title': 'Criar Memo Seguro - Memo Criptografado Autodestrutivo',
+  'page.create.keywords':
+    'criar memo seguro, memo criptografado, nota autodestrutiva, criptografia AES-256, compartilhamento privado de memo, criação de nota segura',
+  'page.read.title': 'Ler Memo Seguro - Descriptografar Memo Criptografado',
+  'page.read.keywords':
+    'ler memo seguro, descriptografar memo, leitura de nota criptografada, descriptografia AES-256, acesso privado ao memo',
+  'page.tos.title': 'Termos de Serviço - Termos Legais do securememo.app',
+  'page.tos.description':
+    'Termos de Serviço para o securememo.app - serviço de compartilhamento de memo criptografado. Saiba sobre uso aceitável, privacidade, segurança e termos legais para nossa plataforma de compartilhamento seguro de memos.',
+  'page.tos.keywords':
+    'termos de serviço, memo seguro legal, termos de memo criptografado, política de privacidade, política de uso aceitável, termos de compartilhamento de nota segura',
+  'page.tos.ogTitle': 'Termos de Serviço - Termos Legais do securememo.app',
+  'page.tos.ogDescription':
+    'Termos e condições legais para o serviço de compartilhamento de memo criptografado securememo.app.',
+  'page.tos.twitterDescription':
+    'Termos legais para o serviço de compartilhamento de memo criptografado securememo.app.',
+  'page.privacy.title': 'Aviso de Privacidade - Proteção de Dados do securememo.app',
+  'page.privacy.description':
+    'Aviso de Privacidade para o securememo.app - saiba como protegemos seus dados com criptografia do lado do cliente, arquitetura de conhecimento zero e coleta mínima de dados para compartilhamento seguro de memos.',
+  'page.privacy.keywords':
+    'aviso de privacidade, privacidade de memo seguro, proteção de dados, conformidade GDPR, criptografia do lado do cliente, conhecimento zero, privacidade de compartilhamento de memo seguro',
+  'page.privacy.ogTitle': 'Aviso de Privacidade - Proteção de Dados do securememo.app',
+  'page.privacy.ogDescription':
+    'Como o securememo.app protege sua privacidade com criptografia do lado do cliente e coleta mínima de dados.',
+  'page.privacy.twitterDescription':
+    'Proteção de privacidade com criptografia do lado do cliente e arquitetura de conhecimento zero.',
 
   // Main page content
-  "home.hero.title": "securememo.app",
-  "home.hero.subtitle":
-    "Crie memos criptografados que se autodestroem após serem lidos ou expirarem. Seus segredos permanecem seguros.",
-  "home.hero.btnPrimary": "Criar Memo Seguro",
-  "home.hero.btnSecondary": "Saiba Mais",
+  'home.hero.title': 'securememo.app',
+  'home.hero.subtitle':
+    'Crie memos criptografados que se autodestroem após serem lidos ou expirarem. Seus segredos permanecem seguros.',
+  'home.hero.btnPrimary': 'Criar Memo Seguro',
+  'home.hero.btnSecondary': 'Saiba Mais',
 
-  "home.features.title": "Como Funciona",
-  "home.features.encrypt.title": "🔐 Criptografia no Navegador",
-  "home.features.encrypt.description":
-    "Digite seu memo. Ele é criptografado diretamente no seu navegador usando criptografia AES-256 forte antes de tocar nossos servidores.",
-  "home.features.share.title": "🔗 Compartilhe com Segurança",
-  "home.features.share.description":
-    "Obtenha uma URL única e uma senha aleatória separada, e compartilhe-as por canais diferentes para segurança extra.",
-  "home.features.destruct.title": "💥 Autodestruição",
-  "home.features.destruct.description":
-    "O memo se exclui permanentemente após ser lido ou quando o tempo limite expira (de 8 horas a 30 dias).",
+  'home.features.title': 'Como Funciona',
+  'home.features.encrypt.title': '🔐 Criptografia no Navegador',
+  'home.features.encrypt.description':
+    'Digite seu memo. Ele é criptografado diretamente no seu navegador usando criptografia AES-256 forte antes de tocar nossos servidores.',
+  'home.features.share.title': '🔗 Compartilhe com Segurança',
+  'home.features.share.description':
+    'Obtenha uma URL única e uma senha aleatória separada, e compartilhe-as por canais diferentes para segurança extra.',
+  'home.features.destruct.title': '💥 Autodestruição',
+  'home.features.destruct.description':
+    'O memo se exclui permanentemente após ser lido ou quando o tempo limite expira (de 8 horas a 30 dias).',
 
-  "home.security.title": "Recursos de Segurança",
-  "home.security.encryption.title": "🔒 Verdadeira Criptografia do Lado do Cliente",
-  "home.security.encryption.description":
-    "Seu memo é criptografado no navegador com AES-256-GCM e uma derivação de chave forte. Nunca vemos o texto em claro.",
-  "home.security.delete.title": "🗑️ Exclusão Automática Confiável",
-  "home.security.delete.description":
-    "Memos desaparecem para sempre após leitura ou expiração, com limpeza automática a cada hora. Nenhum backup ou recuperação possível.",
-  "home.security.password.title": "🌐 Conhecimento Zero de Senhas",
-  "home.security.password.description":
-    "Geramos e manipulamos senhas inteiramente no seu navegador. Elas nunca são enviadas ou armazenadas em nossos servidores.",
+  'home.security.title': 'Recursos de Segurança',
+  'home.security.encryption.title': '🔒 Verdadeira Criptografia do Lado do Cliente',
+  'home.security.encryption.description':
+    'Seu memo é criptografado no navegador com AES-256-GCM e uma derivação de chave forte. Nunca vemos o texto em claro.',
+  'home.security.delete.title': '🗑️ Exclusão Automática Confiável',
+  'home.security.delete.description':
+    'Memos desaparecem para sempre após leitura ou expiração, com limpeza automática a cada hora. Nenhum backup ou recuperação possível.',
+  'home.security.password.title': '🌐 Conhecimento Zero de Senhas',
+  'home.security.password.description':
+    'Geramos e manipulamos senhas inteiramente no seu navegador. Elas nunca são enviadas ou armazenadas em nossos servidores.',
 
-  "footer.sourceCode": "Ver código fonte no GitHub",
-  "footer.tos": "Termos de Serviço",
-  "footer.privacy": "Aviso de Privacidade",
-  "footer.tagline": "Sem rastreamento, sem anúncios, sem bobagens.",
+  'footer.sourceCode': 'Ver código fonte no GitHub',
+  'footer.tos': 'Termos de Serviço',
+  'footer.privacy': 'Aviso de Privacidade',
+  'footer.tagline': 'Sem rastreamento, sem anúncios, sem bobagens.',
 
   // About page content
-  "about.hero.title": "Sobre o securememo.app",
-  "about.hero.subtitle":
-    "O securememo.app é uma aplicação focada na privacidade que permite criar memos criptografados que se autodestroem após serem lidos ou expirarem. Construído com segurança e privacidade como principais prioridades. Código fonte disponível no GitHub.",
+  'about.hero.title': 'Sobre o securememo.app',
+  'about.hero.subtitle':
+    'O securememo.app é uma aplicação focada na privacidade que permite criar memos criptografados que se autodestroem após serem lidos ou expirarem. Construído com segurança e privacidade como principais prioridades. Código fonte disponível no GitHub.',
 
-  "about.tech.title": "Stack de Tecnologia",
-  "about.tech.cloudflare": "Cloudflare Workers: Plataforma de computação serverless para performance global",
-  "about.tech.d1": "Banco de Dados D1: Banco de dados baseado em SQLite para armazenamento seguro",
-  "about.tech.webcrypto": "Web Crypto API: Criptografia AES-256 do lado do cliente",
-  "about.tech.frontend": "HTML/CSS/JavaScript: Interface web moderna e responsiva",
-  "about.tech.github": "Código fonte disponível no GitHub:",
-  "about.tech.githubLink": "Ver código fonte no GitHub",
+  'about.tech.title': 'Stack de Tecnologia',
+  'about.tech.cloudflare': 'Cloudflare Workers: Plataforma de computação serverless para performance global',
+  'about.tech.d1': 'Banco de Dados D1: Banco de dados baseado em SQLite para armazenamento seguro',
+  'about.tech.webcrypto': 'Web Crypto API: Criptografia AES-256 do lado do cliente',
+  'about.tech.frontend': 'HTML/CSS/JavaScript: Interface web moderna e responsiva',
+  'about.tech.github': 'Código fonte disponível no GitHub:',
+  'about.tech.githubLink': 'Ver código fonte no GitHub',
 
-  "about.features.title": "Recursos de Segurança",
-  "about.features.clientEncryption.title": "🔐 Criptografia do Lado do Cliente",
-  "about.features.clientEncryption.description":
-    "Toda criptografia acontece no seu navegador usando a Web Crypto API. Seu memo é criptografado com AES-256 antes de ser enviado para nossos servidores.",
-  "about.features.passwordSharing.title": "🔑 Compartilhamento Separado de Senha",
-  "about.features.passwordSharing.description":
-    "A senha de criptografia é gerada separadamente da URL e deve ser compartilhada por um canal diferente para segurança aprimorada.",
-  "about.features.selfDestruct.title": "💥 Memos Autodestrutivos",
-  "about.features.selfDestruct.description":
-    "Uma vez que um memo é lido ou expira, ele é imediatamente e permanentemente excluído do nosso banco de dados. Nenhum rastro permanece.",
-  "about.features.noStorage.title": "🌐 Nenhum Armazenamento de Senha",
-  "about.features.noStorage.description":
-    "Nós nunca armazenamos senhas de criptografia em nossos servidores. Elas existem apenas na memória do seu navegador.",
-  "about.features.global.title": "⚡ Performance Global",
-  "about.features.global.description":
-    "Construído na rede global da Cloudflare para acesso ultrarrápido de qualquer lugar do mundo.",
-  "about.features.privacy.title": "🔒 Privacidade em Primeiro",
-  "about.features.privacy.description":
-    "Nenhuma conta de usuário necessária. Sem rastreamento. Sem análises. Sua privacidade é nossa prioridade.",
+  'about.features.title': 'Recursos de Segurança',
+  'about.features.clientEncryption.title': '🔐 Criptografia do Lado do Cliente',
+  'about.features.clientEncryption.description':
+    'Toda criptografia acontece no seu navegador usando a Web Crypto API. Seu memo é criptografado com AES-256 antes de ser enviado para nossos servidores.',
+  'about.features.passwordSharing.title': '🔑 Compartilhamento Separado de Senha',
+  'about.features.passwordSharing.description':
+    'A senha de criptografia é gerada separadamente da URL e deve ser compartilhada por um canal diferente para segurança aprimorada.',
+  'about.features.selfDestruct.title': '💥 Memos Autodestrutivos',
+  'about.features.selfDestruct.description':
+    'Uma vez que um memo é lido ou expira, ele é imediatamente e permanentemente excluído do nosso banco de dados. Nenhum rastro permanece.',
+  'about.features.noStorage.title': '🌐 Nenhum Armazenamento de Senha',
+  'about.features.noStorage.description':
+    'Nós nunca armazenamos senhas de criptografia em nossos servidores. Elas existem apenas na memória do seu navegador.',
+  'about.features.global.title': '⚡ Performance Global',
+  'about.features.global.description':
+    'Construído na rede global da Cloudflare para acesso ultrarrápido de qualquer lugar do mundo.',
+  'about.features.privacy.title': '🔒 Privacidade em Primeiro',
+  'about.features.privacy.description':
+    'Nenhuma conta de usuário necessária. Sem rastreamento. Sem análises. Sua privacidade é nossa prioridade.',
 
-  "about.usage.title": "Como Usar",
-  "about.usage.create.title": "1. Criar um Memo",
-  "about.usage.create.description":
+  'about.usage.title': 'Como Usar',
+  'about.usage.create.title': '1. Criar um Memo',
+  'about.usage.create.description':
     'Vá para "Criar Memo Seguro" e digite seu memo. Escolha um tempo de expiração (8h, 1d, 2d, 1 semana ou máximo de 30 dias). Memos são excluídos quando lidos ou expirados. O sistema gerará uma senha de criptografia aleatória.',
-  "about.usage.share.title": "2. Compartilhar o Link e a Senha",
-  "about.usage.share.description":
-    "Copie a URL e senha geradas, então compartilhe-as com seu destinatário por canais separados para segurança aprimorada.",
-  "about.usage.destruct.title": "3. Autodestruição",
-  "about.usage.destruct.description":
-    "Quando o destinatário abrir o link e digitar a senha separadamente, o memo será descriptografado e então permanentemente excluído se lido, ou excluído automaticamente se expirado. Memos expirados são automaticamente limpos a cada 1 hora.",
+  'about.usage.share.title': '2. Compartilhar o Link e a Senha',
+  'about.usage.share.description':
+    'Copie a URL e senha geradas, então compartilhe-as com seu destinatário por canais separados para segurança aprimorada.',
+  'about.usage.destruct.title': '3. Autodestruição',
+  'about.usage.destruct.description':
+    'Quando o destinatário abrir o link e digitar a senha separadamente, o memo será descriptografado e então permanentemente excluído se lido, ou excluído automaticamente se expirado. Memos expirados são automaticamente limpos a cada 1 hora.',
 
-  "about.cta.title": "Pronto para Começar?",
-  "about.cta.subtitle": "Crie seu primeiro memo seguro agora e experimente a verdadeira criptografia ponta a ponta.",
-  "about.cta.createBtn": "Criar Memo Seguro",
-  "about.cta.homeBtn": "Ir para Início",
+  'about.cta.title': 'Pronto para Começar?',
+  'about.cta.subtitle': 'Crie seu primeiro memo seguro agora e experimente a verdadeira criptografia ponta a ponta.',
+  'about.cta.createBtn': 'Criar Memo Seguro',
+  'about.cta.homeBtn': 'Ir para Início',
 
   // Terms of Service page content
-  "tos.hero.title": "Termos de Serviço",
-  "tos.lastUpdated": "Última atualização: 24 de agosto de 2025",
-  "tos.tableOfContents.title": "Índice",
-  "tos.tableOfContents.serviceDescription": "Descrição do Serviço",
-  "tos.tableOfContents.acceptableUse": "Uso Aceitável",
-  "tos.tableOfContents.privacyData": "Privacidade e Manuseio de Dados",
-  "tos.tableOfContents.serviceLimitations": "Limitações do Serviço",
-  "tos.tableOfContents.securityDisclaimers": "Segurança e Isenções de Responsabilidade",
-  "tos.tableOfContents.intellectualProperty": "Propriedade Intelectual",
-  "tos.tableOfContents.indemnification": "Indenização",
-  "tos.tableOfContents.termination": "Encerramento",
-  "tos.tableOfContents.changesTerms": "Alterações nos Termos",
-  "tos.tableOfContents.governingLaw": "Lei Aplicável e Jurisdição",
-  "tos.tableOfContents.miscellaneous": "Diversos",
-  "tos.tableOfContents.contact": "Contato",
-  "tos.tableOfContents.languageDisclaimer": "Idioma e Tradução",
+  'tos.hero.title': 'Termos de Serviço',
+  'tos.lastUpdated': 'Última atualização: 24 de agosto de 2025',
+  'tos.tableOfContents.title': 'Índice',
+  'tos.tableOfContents.serviceDescription': 'Descrição do Serviço',
+  'tos.tableOfContents.acceptableUse': 'Uso Aceitável',
+  'tos.tableOfContents.privacyData': 'Privacidade e Manuseio de Dados',
+  'tos.tableOfContents.serviceLimitations': 'Limitações do Serviço',
+  'tos.tableOfContents.securityDisclaimers': 'Segurança e Isenções de Responsabilidade',
+  'tos.tableOfContents.intellectualProperty': 'Propriedade Intelectual',
+  'tos.tableOfContents.indemnification': 'Indenização',
+  'tos.tableOfContents.termination': 'Encerramento',
+  'tos.tableOfContents.changesTerms': 'Alterações nos Termos',
+  'tos.tableOfContents.governingLaw': 'Lei Aplicável e Jurisdição',
+  'tos.tableOfContents.miscellaneous': 'Diversos',
+  'tos.tableOfContents.contact': 'Contato',
+  'tos.tableOfContents.languageDisclaimer': 'Idioma e Tradução',
 
-  "tos.serviceDescription.title": "1. Descrição do Serviço",
-  "tos.serviceDescription.content":
-    "O securememo.app é um serviço de compartilhamento de memo seguro que permite aos usuários criar memos criptografados que se autodestroem após serem lidos ou expirarem. O serviço usa criptografia do lado do cliente para garantir que o conteúdo do memo nunca seja acessível aos nossos servidores.",
+  'tos.serviceDescription.title': '1. Descrição do Serviço',
+  'tos.serviceDescription.content':
+    'O securememo.app é um serviço de compartilhamento de memo seguro que permite aos usuários criar memos criptografados que se autodestroem após serem lidos ou expirarem. O serviço usa criptografia do lado do cliente para garantir que o conteúdo do memo nunca seja acessível aos nossos servidores.',
 
-  "tos.acceptableUse.title": "2. Uso Aceitável",
-  "tos.acceptableUse.intro":
-    "Você concorda em usar este serviço apenas para fins legais e de acordo com estes Termos. Você concorda em não:",
-  "tos.acceptableUse.illegal":
-    "Usar o serviço para transmitir conteúdo ilegal, prejudicial, ameaçador, abusivo ou difamatório",
-  "tos.acceptableUse.bypass": "Tentar contornar medidas de segurança ou proteção CAPTCHA",
-  "tos.acceptableUse.automated": "Usar ferramentas automatizadas ou scripts para criar memos",
-  "tos.acceptableUse.malware": "Compartilhar memos contendo malware, links de phishing ou outro conteúdo prejudicial",
-  "tos.acceptableUse.spam": "Usar o serviço para spam ou compartilhamento de memo não solicitado em massa",
-  "tos.acceptableUse.reverse": "Tentar fazer engenharia reversa ou comprometer o serviço",
+  'tos.acceptableUse.title': '2. Uso Aceitável',
+  'tos.acceptableUse.intro':
+    'Você concorda em usar este serviço apenas para fins legais e de acordo com estes Termos. Você concorda em não:',
+  'tos.acceptableUse.illegal':
+    'Usar o serviço para transmitir conteúdo ilegal, prejudicial, ameaçador, abusivo ou difamatório',
+  'tos.acceptableUse.bypass': 'Tentar contornar medidas de segurança ou proteção CAPTCHA',
+  'tos.acceptableUse.automated': 'Usar ferramentas automatizadas ou scripts para criar memos',
+  'tos.acceptableUse.malware': 'Compartilhar memos contendo malware, links de phishing ou outro conteúdo prejudicial',
+  'tos.acceptableUse.spam': 'Usar o serviço para spam ou compartilhamento de memo não solicitado em massa',
+  'tos.acceptableUse.reverse': 'Tentar fazer engenharia reversa ou comprometer o serviço',
 
-  "tos.privacyData.title": "3. Privacidade e Manuseio de Dados",
-  "tos.privacyData.noAccess":
-    "Nenhum Acesso ao Conteúdo: Não podemos acessar, ler ou recuperar o conteúdo do seu memo. Toda criptografia acontece no seu navegador.",
-  "tos.privacyData.noPersonal":
-    "Coleta Mínima de Dados: Não exigimos contas de usuário nem coletamos informações pessoais para que você use o serviço. Os únicos dados pessoais que podemos coletar ocorrem se você optar por nos contatar para suporte. Se você entrar em contato por email, coletaremos seu endereço de email e o conteúdo da mensagem para responder à sua solicitação. Não usamos essas informações para nenhum outro propósito e não as compartilhamos com terceiros sem o seu consentimento.",
-  "tos.privacyData.securityLogging":
-    "Log de Segurança: Registramos temporariamente endereços IP e metadados relacionados à segurança estritamente para mitigação de abuso e para proteger a integridade do serviço. Esses logs nunca são usados para rastreamento ou criação de perfil.",
-  "tos.privacyData.automaticDeletion":
-    "Exclusão Automática: Memos são automaticamente excluídos após serem lidos ou quando expiram.",
-  "tos.privacyData.noRecovery": "Nenhuma Recuperação: Uma vez que um memo é excluído, não pode ser recuperado.",
-  "tos.privacyData.gdpr":
-    "Conformidade com o GDPR: Estamos comprometidos com os princípios do GDPR. Minimimizamos a coleta de dados e processamos os dados necessários, como logs temporários de segurança, com base em interesse legítimo para proteger o serviço.",
-  "tos.privacyData.moreDetails": "Para mais detalhes, por favor revise nosso",
-  "tos.privacyData.privacyNotice": "Aviso de Privacidade",
+  'tos.privacyData.title': '3. Privacidade e Manuseio de Dados',
+  'tos.privacyData.noAccess':
+    'Nenhum Acesso ao Conteúdo: Não podemos acessar, ler ou recuperar o conteúdo do seu memo. Toda criptografia acontece no seu navegador.',
+  'tos.privacyData.noPersonal':
+    'Coleta Mínima de Dados: Não exigimos contas de usuário nem coletamos informações pessoais para que você use o serviço. Os únicos dados pessoais que podemos coletar ocorrem se você optar por nos contatar para suporte. Se você entrar em contato por email, coletaremos seu endereço de email e o conteúdo da mensagem para responder à sua solicitação. Não usamos essas informações para nenhum outro propósito e não as compartilhamos com terceiros sem o seu consentimento.',
+  'tos.privacyData.securityLogging':
+    'Log de Segurança: Registramos temporariamente endereços IP e metadados relacionados à segurança estritamente para mitigação de abuso e para proteger a integridade do serviço. Esses logs nunca são usados para rastreamento ou criação de perfil.',
+  'tos.privacyData.automaticDeletion':
+    'Exclusão Automática: Memos são automaticamente excluídos após serem lidos ou quando expiram.',
+  'tos.privacyData.noRecovery': 'Nenhuma Recuperação: Uma vez que um memo é excluído, não pode ser recuperado.',
+  'tos.privacyData.gdpr':
+    'Conformidade com o GDPR: Estamos comprometidos com os princípios do GDPR. Minimimizamos a coleta de dados e processamos os dados necessários, como logs temporários de segurança, com base em interesse legítimo para proteger o serviço.',
+  'tos.privacyData.moreDetails': 'Para mais detalhes, por favor revise nosso',
+  'tos.privacyData.privacyNotice': 'Aviso de Privacidade',
 
-  "tos.serviceLimitations.title": "4. Limitações do Serviço",
-  "tos.serviceLimitations.messageSize": "Tamanho da Mensagem: Máximo de 10.000 caracteres por memo",
-  "tos.serviceLimitations.expiryTimes":
-    "Tempos de Expiração: 8 horas, 24 horas, 48 horas, 1 semana, ou excluir ao ler (máx 30 dias)",
-  "tos.serviceLimitations.availability":
+  'tos.serviceLimitations.title': '4. Limitações do Serviço',
+  'tos.serviceLimitations.messageSize': 'Tamanho da Mensagem: Máximo de 10.000 caracteres por memo',
+  'tos.serviceLimitations.expiryTimes':
+    'Tempos de Expiração: 8 horas, 24 horas, 48 horas, 1 semana, ou excluir ao ler (máx 30 dias)',
+  'tos.serviceLimitations.availability':
     'Disponibilidade: Serviço fornecido "como está" sem garantias de disponibilidade',
-  "tos.serviceLimitations.noDelivery":
-    "Nenhuma Garantia de Entrega: Não podemos garantir que memos serão entregues, lidos ou excluídos dentro do prazo.",
+  'tos.serviceLimitations.noDelivery':
+    'Nenhuma Garantia de Entrega: Não podemos garantir que memos serão entregues, lidos ou excluídos dentro do prazo.',
 
-  "tos.securityDisclaimers.title": "5. Segurança e Isenções de Responsabilidade",
-  "tos.securityDisclaimers.userResponsibility":
-    "Responsabilidade do Usuário: Você é responsável por compartilhar com segurança URLs de memo e proteger as senhas. Se as senhas forem perdidas, os memos não podem ser recuperados.",
-  "tos.securityDisclaimers.noWarranty":
+  'tos.securityDisclaimers.title': '5. Segurança e Isenções de Responsabilidade',
+  'tos.securityDisclaimers.userResponsibility':
+    'Responsabilidade do Usuário: Você é responsável por compartilhar com segurança URLs de memo e proteger as senhas. Se as senhas forem perdidas, os memos não podem ser recuperados.',
+  'tos.securityDisclaimers.noWarranty':
     'Nenhuma Garantia: O serviço é fornecido sem garantias de qualquer tipo. Nossos serviços de criptografia são fornecidos "como está" e "conforme disponível". Não garantimos que a criptografia será ininterrupta, livre de erros ou segura contra todas as ameaças potenciais.',
-  "tos.securityDisclaimers.limitation":
-    "Limitação de Responsabilidade: Não somos responsáveis por quaisquer danos decorrentes do uso do serviço. Você reconhece que nenhum método de transmissão ou armazenamento eletrônico é 100% seguro, e não somos responsáveis por qualquer acesso não autorizado ou interceptação de seus memos. O uso de nossos serviços de criptografia é por sua própria conta e risco.",
-  "tos.securityDisclaimers.securityMeasures":
-    "Medidas de Segurança: Embora implementemos medidas de segurança, nenhum sistema é 100% seguro.",
-  "tos.securityDisclaimers.exportControls":
-    "Controles de Exportação: Você concorda em não usar o serviço em violação de quaisquer leis de controle de exportação, incluindo aquelas que restringem o uso em países sancionados.",
+  'tos.securityDisclaimers.limitation':
+    'Limitação de Responsabilidade: Não somos responsáveis por quaisquer danos decorrentes do uso do serviço. Você reconhece que nenhum método de transmissão ou armazenamento eletrônico é 100% seguro, e não somos responsáveis por qualquer acesso não autorizado ou interceptação de seus memos. O uso de nossos serviços de criptografia é por sua própria conta e risco.',
+  'tos.securityDisclaimers.securityMeasures':
+    'Medidas de Segurança: Embora implementemos medidas de segurança, nenhum sistema é 100% seguro.',
+  'tos.securityDisclaimers.exportControls':
+    'Controles de Exportação: Você concorda em não usar o serviço em violação de quaisquer leis de controle de exportação, incluindo aquelas que restringem o uso em países sancionados.',
 
-  "tos.intellectualProperty.title": "6. Propriedade Intelectual",
-  "tos.intellectualProperty.content":
-    "O Serviço e todos os materiais fornecidos através dele, incluindo mas não limitado a texto, gráficos, logotipos e software, são propriedade do securememo.app ou seus licenciadores e são protegidos por leis de direitos autorais, marcas registradas e outras leis de propriedade intelectual. Você concorda em não modificar, reproduzir, distribuir ou criar trabalhos derivados baseados em nosso conteúdo sem permissão explícita, exceto para uso pessoal e não comercial dentro do Serviço.",
-  "tos.intellectualProperty.copyright":
-    "Política de Direitos Autorais e DMCA: Se você acredita que seus direitos autorais foram violados, por favor entre em contato conosco em contact@securememo.app com as informações necessárias sob o DMCA (por exemplo, identificação do trabalho, seus detalhes de contato e uma declaração de crença de boa fé).",
+  'tos.intellectualProperty.title': '6. Propriedade Intelectual',
+  'tos.intellectualProperty.content':
+    'O Serviço e todos os materiais fornecidos através dele, incluindo mas não limitado a texto, gráficos, logotipos e software, são propriedade do securememo.app ou seus licenciadores e são protegidos por leis de direitos autorais, marcas registradas e outras leis de propriedade intelectual. Você concorda em não modificar, reproduzir, distribuir ou criar trabalhos derivados baseados em nosso conteúdo sem permissão explícita, exceto para uso pessoal e não comercial dentro do Serviço.',
+  'tos.intellectualProperty.copyright':
+    'Política de Direitos Autorais e DMCA: Se você acredita que seus direitos autorais foram violados, por favor entre em contato conosco em contact@securememo.app com as informações necessárias sob o DMCA (por exemplo, identificação do trabalho, seus detalhes de contato e uma declaração de crença de boa fé).',
 
-  "tos.indemnification.title": "7. Indenização",
-  "tos.indemnification.content":
-    "Você concorda em defender, indenizar e isentar o securememo.app e suas afiliadas, oficiais, diretores, funcionários e agentes de e contra quaisquer reivindicações, responsabilidades, danos, perdas e despesas, incluindo honorários razoáveis de advogados, decorrentes de ou de qualquer forma conectados com seu acesso ou uso de nossos Serviços, incluindo qualquer violação destes Termos por você.",
+  'tos.indemnification.title': '7. Indenização',
+  'tos.indemnification.content':
+    'Você concorda em defender, indenizar e isentar o securememo.app e suas afiliadas, oficiais, diretores, funcionários e agentes de e contra quaisquer reivindicações, responsabilidades, danos, perdas e despesas, incluindo honorários razoáveis de advogados, decorrentes de ou de qualquer forma conectados com seu acesso ou uso de nossos Serviços, incluindo qualquer violação destes Termos por você.',
 
-  "tos.termination.title": "8. Encerramento",
-  "tos.termination.content":
-    "Reservamo-nos o direito de encerrar ou suspender o acesso ao serviço por violações destes termos ou por qualquer outro motivo a nosso critério.",
+  'tos.termination.title': '8. Encerramento',
+  'tos.termination.content':
+    'Reservamo-nos o direito de encerrar ou suspender o acesso ao serviço por violações destes termos ou por qualquer outro motivo a nosso critério.',
 
-  "tos.changesTerms.title": "9. Alterações nos Termos",
-  "tos.changesTerms.content":
-    "Podemos atualizar estes termos a qualquer momento. O uso contínuo do serviço constitui aceitação dos termos atualizados.",
+  'tos.changesTerms.title': '9. Alterações nos Termos',
+  'tos.changesTerms.content':
+    'Podemos atualizar estes termos a qualquer momento. O uso contínuo do serviço constitui aceitação dos termos atualizados.',
 
-  "tos.governingLaw.title": "10. Lei Aplicável e Jurisdição",
-  "tos.governingLaw.content":
-    "Estes Termos de Serviço e quaisquer acordos separados pelos quais fornecemos Serviços serão regidos e interpretados de acordo com as leis da Finlândia, sem consideração aos seus princípios de conflito de leis. Quaisquer disputas serão resolvidas nos tribunais de Helsinque, Finlândia.",
+  'tos.governingLaw.title': '10. Lei Aplicável e Jurisdição',
+  'tos.governingLaw.content':
+    'Estes Termos de Serviço e quaisquer acordos separados pelos quais fornecemos Serviços serão regidos e interpretados de acordo com as leis da Finlândia, sem consideração aos seus princípios de conflito de leis. Quaisquer disputas serão resolvidas nos tribunais de Helsinque, Finlândia.',
 
-  "tos.miscellaneous.title": "11. Diversos",
-  "tos.miscellaneous.severability":
-    "Separabilidade: Se qualquer disposição destes Termos for considerada inválida ou inexequível por um tribunal de jurisdição competente, tal disposição será separada dos Termos, e as disposições restantes permanecerão em pleno vigor e efeito.",
-  "tos.miscellaneous.assignment":
-    "Cessão: Você não pode ceder ou transferir estes Termos, por operação da lei ou de outra forma, sem nosso consentimento prévio por escrito. Podemos ceder estes Termos a nosso exclusivo critério sem aviso a você.",
-  "tos.miscellaneous.waiver":
-    "Renúncia: Nenhuma renúncia de qualquer termo será considerada uma renúncia adicional ou contínua, a menos que por escrito.",
-  "tos.miscellaneous.children":
-    "Privacidade de Crianças: Nosso serviço não é destinado a crianças menores de 13 anos (ou 16 em algumas jurisdições). Não coletamos conscientemente dados de crianças. Se tomarmos conhecimento de tais dados, os excluiremos imediatamente.",
+  'tos.miscellaneous.title': '11. Diversos',
+  'tos.miscellaneous.severability':
+    'Separabilidade: Se qualquer disposição destes Termos for considerada inválida ou inexequível por um tribunal de jurisdição competente, tal disposição será separada dos Termos, e as disposições restantes permanecerão em pleno vigor e efeito.',
+  'tos.miscellaneous.assignment':
+    'Cessão: Você não pode ceder ou transferir estes Termos, por operação da lei ou de outra forma, sem nosso consentimento prévio por escrito. Podemos ceder estes Termos a nosso exclusivo critério sem aviso a você.',
+  'tos.miscellaneous.waiver':
+    'Renúncia: Nenhuma renúncia de qualquer termo será considerada uma renúncia adicional ou contínua, a menos que por escrito.',
+  'tos.miscellaneous.children':
+    'Privacidade de Crianças: Nosso serviço não é destinado a crianças menores de 13 anos (ou 16 em algumas jurisdições). Não coletamos conscientemente dados de crianças. Se tomarmos conhecimento de tais dados, os excluiremos imediatamente.',
 
-  "tos.contact.title": "12. Contato",
-  "tos.contact.content": "Para perguntas sobre estes termos, por favor visite nosso",
-  "tos.contact.github": "repositório GitHub",
-  "tos.contact.email": "ou envie email para contact@securememo.app.",
+  'tos.contact.title': '12. Contato',
+  'tos.contact.content': 'Para perguntas sobre estes termos, por favor visite nosso',
+  'tos.contact.github': 'repositório GitHub',
+  'tos.contact.email': 'ou envie email para contact@securememo.app.',
 
-  "tos.languageDisclaimer.title": "13. Idioma e Tradução",
-  "tos.languageDisclaimer.content":
-    "Estes Termos de Serviço podem ser traduzidos para outros idiomas para sua conveniência. No caso de qualquer discrepância ou conflito entre a versão em inglês e uma versão traduzida, a versão em inglês prevalecerá.",
+  'tos.languageDisclaimer.title': '13. Idioma e Tradução',
+  'tos.languageDisclaimer.content':
+    'Estes Termos de Serviço podem ser traduzidos para outros idiomas para sua conveniência. No caso de qualquer discrepância ou conflito entre a versão em inglês e uma versão traduzida, a versão em inglês prevalecerá.',
 
   // Privacy Notice page content
-  "privacy.hero.title": "Aviso de Privacidade para o securememo.app",
-  "privacy.lastUpdated": "Última atualização: 24 de agosto de 2025",
-  "privacy.tableOfContents.title": "Índice",
-  "privacy.tableOfContents.informationCollected": "Informações que Coletamos",
-  "privacy.tableOfContents.howWeUse": "Como Usamos as Informações",
-  "privacy.tableOfContents.dataSharing": "Compartilhamento e Divulgação de Dados",
-  "privacy.tableOfContents.dataSecurity": "Segurança de Dados",
-  "privacy.tableOfContents.dataRetention": "Retenção de Dados",
-  "privacy.tableOfContents.yourRights": "Seus Direitos e Escolhas",
-  "privacy.tableOfContents.childrenPrivacy": "Privacidade de Crianças",
-  "privacy.tableOfContents.internationalTransfers": "Transferências Internacionais de Dados",
-  "privacy.tableOfContents.changesNotice": "Alterações neste Aviso de Privacidade",
-  "privacy.tableOfContents.contact": "Entre em Contato",
+  'privacy.hero.title': 'Aviso de Privacidade para o securememo.app',
+  'privacy.lastUpdated': 'Última atualização: 24 de agosto de 2025',
+  'privacy.tableOfContents.title': 'Índice',
+  'privacy.tableOfContents.informationCollected': 'Informações que Coletamos',
+  'privacy.tableOfContents.howWeUse': 'Como Usamos as Informações',
+  'privacy.tableOfContents.dataSharing': 'Compartilhamento e Divulgação de Dados',
+  'privacy.tableOfContents.dataSecurity': 'Segurança de Dados',
+  'privacy.tableOfContents.dataRetention': 'Retenção de Dados',
+  'privacy.tableOfContents.yourRights': 'Seus Direitos e Escolhas',
+  'privacy.tableOfContents.childrenPrivacy': 'Privacidade de Crianças',
+  'privacy.tableOfContents.internationalTransfers': 'Transferências Internacionais de Dados',
+  'privacy.tableOfContents.changesNotice': 'Alterações neste Aviso de Privacidade',
+  'privacy.tableOfContents.contact': 'Entre em Contato',
 
-  "privacy.intro.p1":
+  'privacy.intro.p1':
     'O securememo.app ("nós", "nosso" ou "nossa") está comprometido em proteger sua privacidade. Este Aviso de Privacidade explica como lidamos com informações em conexão com nosso serviço, que permite aos usuários criar e compartilhar memos criptografados que se autodestroem após serem lidos ou expirarem. Nosso serviço é projetado com privacidade em seu núcleo: toda criptografia ocorre do lado do cliente em seu navegador, e não temos acesso ao conteúdo do seu memo.',
-  "privacy.intro.p2":
-    "Ao usar o securememo.app, você concorda com as práticas descritas neste Aviso de Privacidade. Se você não concordar, por favor não use nosso serviço.",
+  'privacy.intro.p2':
+    'Ao usar o securememo.app, você concorda com as práticas descritas neste Aviso de Privacidade. Se você não concordar, por favor não use nosso serviço.',
 
-  "privacy.informationCollected.title": "1. Informações que Coletamos",
-  "privacy.informationCollected.intro":
-    "Coletamos informações mínimas para operar o serviço com segurança e eficiência. Especificamente:",
-  "privacy.informationCollected.memoData":
-    "Dados do Memo: Quando você cria um memo, armazenamos apenas a versão criptografada da sua mensagem em nossos servidores (usando Cloudflare Workers e Banco de Dados D1). A chave de criptografia (senha) é gerada e manipulada inteiramente no seu navegador e nunca é enviada ou armazenada por nós. Memos são automaticamente excluídos após serem lidos ou quando expiram (opções: 8 horas, 1 dia, 2 dias, 1 semana ou 30 dias).",
-  "privacy.informationCollected.noPersonal":
-    "Coleta Mínima de Dados: Não exigimos contas de usuário nem coletamos informações pessoais para que você use o serviço. Os únicos dados pessoais que podemos coletar ocorrem se você optar por nos contatar para suporte. Se você entrar em contato por email, coletaremos seu endereço de email e o conteúdo da mensagem para responder à sua solicitação. Não usamos essas informações para nenhum outro propósito e não as compartilhamos com terceiros sem o seu consentimento.",
-  "privacy.informationCollected.securityData":
-    "Dados Relacionados à Segurança: Para prevenção de abuso e integridade do serviço:",
-  "privacy.informationCollected.ipLogs":
-    "Registramos temporariamente endereços IP e metadados de solicitação (por exemplo, timestamps) para detectar e mitigar spam, bots ou atividade maliciosa.",
-  "privacy.informationCollected.turnstile":
-    "Usamos o Cloudflare Turnstile CAPTCHA para prevenir abuso automatizado. O Turnstile é projetado para proteger a privacidade e não rastreia usuários entre sites.",
-  "privacy.informationCollected.noAnalytics":
-    "Nenhuma Análise ou Rastreamento: Não usamos cookies, pixels de rastreamento, análises de terceiros ou ferramentas de publicidade. Não há criação de perfil de usuário, rastreamento comportamental ou coleta de dados para fins de marketing.",
-  "privacy.informationCollected.noSensitive":
-    "Não coletamos dados pessoais sensíveis, informações de localização ou identificadores de dispositivo além do necessário para operação básica do serviço.",
+  'privacy.informationCollected.title': '1. Informações que Coletamos',
+  'privacy.informationCollected.intro':
+    'Coletamos informações mínimas para operar o serviço com segurança e eficiência. Especificamente:',
+  'privacy.informationCollected.memoData':
+    'Dados do Memo: Quando você cria um memo, armazenamos apenas a versão criptografada da sua mensagem em nossos servidores (usando Cloudflare Workers e Banco de Dados D1). A chave de criptografia (senha) é gerada e manipulada inteiramente no seu navegador e nunca é enviada ou armazenada por nós. Memos são automaticamente excluídos após serem lidos ou quando expiram (opções: 8 horas, 1 dia, 2 dias, 1 semana ou 30 dias).',
+  'privacy.informationCollected.noPersonal':
+    'Coleta Mínima de Dados: Não exigimos contas de usuário nem coletamos informações pessoais para que você use o serviço. Os únicos dados pessoais que podemos coletar ocorrem se você optar por nos contatar para suporte. Se você entrar em contato por email, coletaremos seu endereço de email e o conteúdo da mensagem para responder à sua solicitação. Não usamos essas informações para nenhum outro propósito e não as compartilhamos com terceiros sem o seu consentimento.',
+  'privacy.informationCollected.securityData':
+    'Dados Relacionados à Segurança: Para prevenção de abuso e integridade do serviço:',
+  'privacy.informationCollected.ipLogs':
+    'Registramos temporariamente endereços IP e metadados de solicitação (por exemplo, timestamps) para detectar e mitigar spam, bots ou atividade maliciosa.',
+  'privacy.informationCollected.turnstile':
+    'Usamos o Cloudflare Turnstile CAPTCHA para prevenir abuso automatizado. O Turnstile é projetado para proteger a privacidade e não rastreia usuários entre sites.',
+  'privacy.informationCollected.noAnalytics':
+    'Nenhuma Análise ou Rastreamento: Não usamos cookies, pixels de rastreamento, análises de terceiros ou ferramentas de publicidade. Não há criação de perfil de usuário, rastreamento comportamental ou coleta de dados para fins de marketing.',
+  'privacy.informationCollected.noSensitive':
+    'Não coletamos dados pessoais sensíveis, informações de localização ou identificadores de dispositivo além do necessário para operação básica do serviço.',
 
-  "privacy.howWeUse.title": "2. Como Usamos as Informações",
-  "privacy.howWeUse.intro": "As informações limitadas que coletamos são usadas exclusivamente para:",
-  "privacy.howWeUse.coreService":
-    "Fornecer o serviço principal: Armazenar memos criptografados temporariamente e facilitar sua recuperação e exclusão seguras.",
-  "privacy.howWeUse.security":
-    "Manter a segurança: Detectar e prevenir abuso, como spam ou ataques de negação de serviço, usando logs de IP e CAPTCHA.",
-  "privacy.howWeUse.legal":
-    "Cumprir obrigações legais: Em casos raros, podemos usar logs para responder a solicitações legais válidas (por exemplo, intimações).",
-  "privacy.howWeUse.noOther":
-    "Não usamos quaisquer dados para publicidade, venda a terceiros ou qualquer propósito não relacionado à operação do securememo.app.",
+  'privacy.howWeUse.title': '2. Como Usamos as Informações',
+  'privacy.howWeUse.intro': 'As informações limitadas que coletamos são usadas exclusivamente para:',
+  'privacy.howWeUse.coreService':
+    'Fornecer o serviço principal: Armazenar memos criptografados temporariamente e facilitar sua recuperação e exclusão seguras.',
+  'privacy.howWeUse.security':
+    'Manter a segurança: Detectar e prevenir abuso, como spam ou ataques de negação de serviço, usando logs de IP e CAPTCHA.',
+  'privacy.howWeUse.legal':
+    'Cumprir obrigações legais: Em casos raros, podemos usar logs para responder a solicitações legais válidas (por exemplo, intimações).',
+  'privacy.howWeUse.noOther':
+    'Não usamos quaisquer dados para publicidade, venda a terceiros ou qualquer propósito não relacionado à operação do securememo.app.',
 
-  "privacy.dataSharing.title": "3. Compartilhamento e Divulgação de Dados",
-  "privacy.dataSharing.intro":
-    "Não vendemos, alugamos ou compartilhamos seus dados com terceiros, exceto nas seguintes circunstâncias limitadas:",
-  "privacy.dataSharing.serviceProviders":
-    "Provedores de Serviço: Usamos a Cloudflare para hospedagem, armazenamento de banco de dados (D1) e CAPTCHA (Turnstile). Esses provedores processam dados em nosso nome sob estrita confidencialidade e não acessam o conteúdo do memo.",
-  "privacy.dataSharing.legal":
-    "Requisitos Legais: Podemos divulgar informações se exigido por lei, como em resposta a uma ordem judicial ou solicitação governamental.",
-  "privacy.dataSharing.business":
-    "Transferências Comerciais: Se o securememo.app for adquirido ou fundido, os dados podem ser transferidos como parte da transação, mas permaneceriam sujeitos a este Aviso de Privacidade.",
+  'privacy.dataSharing.title': '3. Compartilhamento e Divulgação de Dados',
+  'privacy.dataSharing.intro':
+    'Não vendemos, alugamos ou compartilhamos seus dados com terceiros, exceto nas seguintes circunstâncias limitadas:',
+  'privacy.dataSharing.serviceProviders':
+    'Provedores de Serviço: Usamos a Cloudflare para hospedagem, armazenamento de banco de dados (D1) e CAPTCHA (Turnstile). Esses provedores processam dados em nosso nome sob estrita confidencialidade e não acessam o conteúdo do memo.',
+  'privacy.dataSharing.legal':
+    'Requisitos Legais: Podemos divulgar informações se exigido por lei, como em resposta a uma ordem judicial ou solicitação governamental.',
+  'privacy.dataSharing.business':
+    'Transferências Comerciais: Se o securememo.app for adquirido ou fundido, os dados podem ser transferidos como parte da transação, mas permaneceriam sujeitos a este Aviso de Privacidade.',
 
-  "privacy.dataSecurity.title": "4. Segurança de Dados",
-  "privacy.dataSecurity.encryption":
-    "Criptografia: Todos os memos são criptografados do lado do cliente usando AES-256 com derivação de chave PBKDF2. Armazenamos apenas dados criptografados e não podemos descriptografá-los.",
-  "privacy.dataSecurity.deletion":
-    "Exclusão: Memos são permanentemente excluídos após leitura ou expiração via tarefas cron automatizadas.",
-  "privacy.dataSecurity.securityMeasures":
-    "Medidas de Segurança: Implementamos cabeçalhos de segurança fortes (por exemplo, CSP, HSTS), sanitização de entrada, proteções contra ataques de timing e CAPTCHA para prevenir abuso.",
-  "privacy.dataSecurity.noRecovery":
-    "Nenhuma Recuperação: Uma vez excluídos, os memos não podem ser recuperados—nem mesmo por nós.",
-  "privacy.dataSecurity.disclaimer":
-    "Embora tomemos medidas razoáveis para proteger nossos sistemas, nenhum serviço é completamente imune a riscos. Você é responsável por compartilhar URLs e senhas com segurança.",
+  'privacy.dataSecurity.title': '4. Segurança de Dados',
+  'privacy.dataSecurity.encryption':
+    'Criptografia: Todos os memos são criptografados do lado do cliente usando AES-256 com derivação de chave PBKDF2. Armazenamos apenas dados criptografados e não podemos descriptografá-los.',
+  'privacy.dataSecurity.deletion':
+    'Exclusão: Memos são permanentemente excluídos após leitura ou expiração via tarefas cron automatizadas.',
+  'privacy.dataSecurity.securityMeasures':
+    'Medidas de Segurança: Implementamos cabeçalhos de segurança fortes (por exemplo, CSP, HSTS), sanitização de entrada, proteções contra ataques de timing e CAPTCHA para prevenir abuso.',
+  'privacy.dataSecurity.noRecovery':
+    'Nenhuma Recuperação: Uma vez excluídos, os memos não podem ser recuperados—nem mesmo por nós.',
+  'privacy.dataSecurity.disclaimer':
+    'Embora tomemos medidas razoáveis para proteger nossos sistemas, nenhum serviço é completamente imune a riscos. Você é responsável por compartilhar URLs e senhas com segurança.',
 
-  "privacy.dataRetention.title": "5. Retenção de Dados",
-  "privacy.dataRetention.memos":
-    "Memos criptografados são retidos apenas até serem lidos ou expirarem (máximo de 30 dias).",
-  "privacy.dataRetention.logs":
-    "Logs de segurança (por exemplo, endereços IP) são retidos temporariamente para prevenção de abuso e excluídos automaticamente após um período curto (tipicamente dentro de dias).",
-  "privacy.dataRetention.minimal":
-    "Não retemos quaisquer dados por mais tempo do que necessário para a operação do serviço.",
+  'privacy.dataRetention.title': '5. Retenção de Dados',
+  'privacy.dataRetention.memos':
+    'Memos criptografados são retidos apenas até serem lidos ou expirarem (máximo de 30 dias).',
+  'privacy.dataRetention.logs':
+    'Logs de segurança (por exemplo, endereços IP) são retidos temporariamente para prevenção de abuso e excluídos automaticamente após um período curto (tipicamente dentro de dias).',
+  'privacy.dataRetention.minimal':
+    'Não retemos quaisquer dados por mais tempo do que necessário para a operação do serviço.',
 
-  "privacy.yourRights.title": "6. Seus Direitos e Escolhas",
-  "privacy.yourRights.intro": "Como não coletamos dados pessoais:",
-  "privacy.yourRights.noAccounts": "Não há contas de usuário para gerenciar.",
-  "privacy.yourRights.noRequests":
-    "Você não pode solicitar acesso, correção ou exclusão de dados além da autodestruição automática de memos.",
-  "privacy.yourRights.contact":
-    "Se você acredita que mantemos alguma informação sobre você (por exemplo, de logs), entre em contato conosco (veja abaixo) para perguntar sobre seus direitos sob leis aplicáveis como GDPR ou CCPA. Cumprimos regulamentações de proteção de dados e processamos solicitações quando viável.",
+  'privacy.yourRights.title': '6. Seus Direitos e Escolhas',
+  'privacy.yourRights.intro': 'Como não coletamos dados pessoais:',
+  'privacy.yourRights.noAccounts': 'Não há contas de usuário para gerenciar.',
+  'privacy.yourRights.noRequests':
+    'Você não pode solicitar acesso, correção ou exclusão de dados além da autodestruição automática de memos.',
+  'privacy.yourRights.contact':
+    'Se você acredita que mantemos alguma informação sobre você (por exemplo, de logs), entre em contato conosco (veja abaixo) para perguntar sobre seus direitos sob leis aplicáveis como GDPR ou CCPA. Cumprimos regulamentações de proteção de dados e processamos solicitações quando viável.',
 
-  "privacy.childrenPrivacy.title": "7. Privacidade de Crianças",
-  "privacy.childrenPrivacy.content":
-    "Nosso serviço não é destinado a crianças menores de 13 anos (ou 16 em algumas jurisdições). Não coletamos conscientemente dados de crianças. Se tomarmos conhecimento de tais dados, os excluiremos.",
+  'privacy.childrenPrivacy.title': '7. Privacidade de Crianças',
+  'privacy.childrenPrivacy.content':
+    'Nosso serviço não é destinado a crianças menores de 13 anos (ou 16 em algumas jurisdições). Não coletamos conscientemente dados de crianças. Se tomarmos conhecimento de tais dados, os excluiremos.',
 
-  "privacy.internationalTransfers.title": "8. Transferências Internacionais de Dados",
-  "privacy.internationalTransfers.content":
-    "O securememo.app é hospedado na rede global da Cloudflare. Os dados podem ser processados em vários países, mas garantimos proteções de privacidade equivalentes através de nossas práticas de coleta mínima.",
+  'privacy.internationalTransfers.title': '8. Transferências Internacionais de Dados',
+  'privacy.internationalTransfers.content':
+    'O securememo.app é hospedado na rede global da Cloudflare. Os dados podem ser processados em vários países, mas garantimos proteções de privacidade equivalentes através de nossas práticas de coleta mínima.',
 
-  "privacy.changesNotice.title": "9. Alterações neste Aviso de Privacidade",
-  "privacy.changesNotice.content":
+  'privacy.changesNotice.title': '9. Alterações neste Aviso de Privacidade',
+  'privacy.changesNotice.content':
     'Podemos atualizar este Aviso periodicamente. As alterações serão publicadas aqui com uma data "Última atualização" atualizada. O uso contínuo do serviço após as alterações constitui aceitação.',
 
-  "privacy.contact.title": "10. Entre em Contato",
-  "privacy.contact.intro": "Para perguntas sobre este Aviso de Privacidade ou nossas práticas, por favor visite nosso",
-  "privacy.contact.github": "repositório GitHub",
-  "privacy.contact.email": "ou envie email para contact@securememo.app.",
-  "privacy.contact.disclaimer":
-    "Este Aviso de Privacidade se aplica apenas ao securememo.app e não a quaisquer sites de terceiros vinculados do nosso serviço.",
+  'privacy.contact.title': '10. Entre em Contato',
+  'privacy.contact.intro': 'Para perguntas sobre este Aviso de Privacidade ou nossas práticas, por favor visite nosso',
+  'privacy.contact.github': 'repositório GitHub',
+  'privacy.contact.email': 'ou envie email para contact@securememo.app.',
+  'privacy.contact.disclaimer':
+    'Este Aviso de Privacidade se aplica apenas ao securememo.app e não a quaisquer sites de terceiros vinculados do nosso serviço.',
 
   // Schema.org structured data
-  "schema.app.description":
-    "Crie memos criptografados que se autodestroem após serem lidos. Criptografia ponta a ponta, focado na privacidade e compartilhamento seguro de notas com AES-256. Sem rastreamento, sem anúncios.",
-  "schema.app.category": "SecurityApplication",
-  "schema.app.os": "Web Browser",
-  "schema.app.requirements": "Requer JavaScript. Requer HTML5.",
-  "schema.app.author": "Timo Heimonen",
-  "schema.app.price": "0",
-  "schema.app.currency": "USD",
-  "schema.app.features.encryption": "Criptografia AES-256 do lado do cliente",
-  "schema.app.features.selfDestruct": "Memos autodestrutivos",
-  "schema.app.features.zeroKnowledge": "Arquitetura de conhecimento zero",
-  "schema.app.features.noAccounts": "Nenhuma conta de usuário necessária",
-  "schema.app.features.globalPerformance": "Performance global via Cloudflare",
-  "schema.app.features.privacyFirst": "Design que prioriza a privacidade",
-  "schema.app.license": "https://github.com/timoheimonen/securememo.app/blob/main/LICENSE",
-  "schema.app.repository": "https://github.com/timoheimonen/securememo.app",
+  'schema.app.description':
+    'Crie memos criptografados que se autodestroem após serem lidos. Criptografia ponta a ponta, focado na privacidade e compartilhamento seguro de notas com AES-256. Sem rastreamento, sem anúncios.',
+  'schema.app.category': 'SecurityApplication',
+  'schema.app.os': 'Web Browser',
+  'schema.app.requirements': 'Requer JavaScript. Requer HTML5.',
+  'schema.app.author': 'Timo Heimonen',
+  'schema.app.price': '0',
+  'schema.app.currency': 'USD',
+  'schema.app.features.encryption': 'Criptografia AES-256 do lado do cliente',
+  'schema.app.features.selfDestruct': 'Memos autodestrutivos',
+  'schema.app.features.zeroKnowledge': 'Arquitetura de conhecimento zero',
+  'schema.app.features.noAccounts': 'Nenhuma conta de usuário necessária',
+  'schema.app.features.globalPerformance': 'Performance global via Cloudflare',
+  'schema.app.features.privacyFirst': 'Design que prioriza a privacidade',
+  'schema.app.license': 'https://github.com/timoheimonen/securememo.app/blob/main/LICENSE',
+  'schema.app.repository': 'https://github.com/timoheimonen/securememo.app',
 
   // FAQ structured data
-  "faq.privacy.question": "Como o securememo.app protege minha privacidade?",
-  "faq.privacy.answer":
-    "O securememo.app usa criptografia AES-256 do lado do cliente, significando que seu memo é criptografado no seu navegador antes de ser enviado para nossos servidores. Nós nunca vemos o conteúdo em texto simples. Memos se autodestroem após serem lidos ou expirarem, e não exigimos contas de usuário ou coletamos informações pessoais.",
-  "faq.encryption.question": "Que criptografia o securememo.app usa?",
-  "faq.encryption.answer":
-    "Usamos criptografia AES-256-GCM com derivação de chave PBKDF2. Toda criptografia acontece do lado do cliente no seu navegador usando a Web Crypto API. A senha de criptografia é gerada separadamente e nunca é armazenada em nossos servidores.",
-  "faq.duration.question": "Quanto tempo duram os memos?",
-  "faq.duration.answer":
-    "Memos podem ser configurados para expirar após 8 horas, 1 dia, 2 dias, 1 semana ou 30 dias no máximo. Eles também são excluídos imediatamente após serem lidos. Memos expirados são automaticamente limpos a cada hora.",
-  "faq.recovery.question": "Posso recuperar um memo excluído?",
-  "faq.recovery.answer":
-    "Não, uma vez que um memo é excluído (seja após ser lido ou quando expira), ele não pode ser recuperado. Isso é por design para máxima privacidade e segurança.",
-  "faq.cost.question": "O securememo.app é gratuito para usar?",
-  "faq.cost.answer":
-    "Sim, o securememo.app é completamente gratuito para usar. Não há taxas ocultas, recursos premium ou rastreamento ou publicidade.",
-  "faq.technology.question": "Que tecnologia o securememo.app usa?",
-  "faq.technology.answer":
-    "O securememo.app é construído em Cloudflare Workers para computação serverless, Banco de Dados D1 para armazenamento, Web Crypto API para criptografia do lado do cliente e HTML/CSS/JavaScript moderno. O código fonte é open source e disponível no GitHub.",
+  'faq.privacy.question': 'Como o securememo.app protege minha privacidade?',
+  'faq.privacy.answer':
+    'O securememo.app usa criptografia AES-256 do lado do cliente, significando que seu memo é criptografado no seu navegador antes de ser enviado para nossos servidores. Nós nunca vemos o conteúdo em texto simples. Memos se autodestroem após serem lidos ou expirarem, e não exigimos contas de usuário ou coletamos informações pessoais.',
+  'faq.encryption.question': 'Que criptografia o securememo.app usa?',
+  'faq.encryption.answer':
+    'Usamos criptografia AES-256-GCM com derivação de chave PBKDF2. Toda criptografia acontece do lado do cliente no seu navegador usando a Web Crypto API. A senha de criptografia é gerada separadamente e nunca é armazenada em nossos servidores.',
+  'faq.duration.question': 'Quanto tempo duram os memos?',
+  'faq.duration.answer':
+    'Memos podem ser configurados para expirar após 8 horas, 1 dia, 2 dias, 1 semana ou 30 dias no máximo. Eles também são excluídos imediatamente após serem lidos. Memos expirados são automaticamente limpos a cada hora.',
+  'faq.recovery.question': 'Posso recuperar um memo excluído?',
+  'faq.recovery.answer':
+    'Não, uma vez que um memo é excluído (seja após ser lido ou quando expira), ele não pode ser recuperado. Isso é por design para máxima privacidade e segurança.',
+  'faq.cost.question': 'O securememo.app é gratuito para usar?',
+  'faq.cost.answer':
+    'Sim, o securememo.app é completamente gratuito para usar. Não há taxas ocultas, recursos premium ou rastreamento ou publicidade.',
+  'faq.technology.question': 'Que tecnologia o securememo.app usa?',
+  'faq.technology.answer':
+    'O securememo.app é construído em Cloudflare Workers para computação serverless, Banco de Dados D1 para armazenamento, Web Crypto API para criptografia do lado do cliente e HTML/CSS/JavaScript moderno. O código fonte é open source e disponível no GitHub.',
 
   // Accessibility and UI
 
-  "ui.breadcrumb.home": "Início",
-  "ui.breadcrumb.tos": "Termos de Serviço",
-  "ui.breadcrumb.privacy": "Aviso de Privacidade",
+  'ui.breadcrumb.home': 'Início',
+  'ui.breadcrumb.tos': 'Termos de Serviço',
+  'ui.breadcrumb.privacy': 'Aviso de Privacidade',
 
   // Create memo page content
-  "create.hero.title": "Criar Memo Seguro",
-  "create.hero.description":
-    "Seu memo será criptografado no seu navegador e se autodestruirá após ser lido ou expirar.",
-  "create.hero.ogDescription":
-    "Crie memos criptografados com criptografia AES-256 do lado do cliente. Memos se autodestroem após leitura para máxima privacidade.",
-  "create.hero.twitterDescription": "Crie memos criptografados com criptografia do lado do cliente.",
-  "create.schema.description":
-    "Crie memos criptografados que se autodestroem após serem lidos. Criptografia AES-256 do lado do cliente garante que seus segredos permaneçam privados.",
-  "create.schema.actionDescription":
-    "Crie memos criptografados com criptografia AES-256 do lado do cliente e autodestruição automática",
+  'create.hero.title': 'Criar Memo Seguro',
+  'create.hero.description':
+    'Seu memo será criptografado no seu navegador e se autodestruirá após ser lido ou expirar.',
+  'create.hero.ogDescription':
+    'Crie memos criptografados com criptografia AES-256 do lado do cliente. Memos se autodestroem após leitura para máxima privacidade.',
+  'create.hero.twitterDescription': 'Crie memos criptografados com criptografia do lado do cliente.',
+  'create.schema.description':
+    'Crie memos criptografados que se autodestroem após serem lidos. Criptografia AES-256 do lado do cliente garante que seus segredos permaneçam privados.',
+  'create.schema.actionDescription':
+    'Crie memos criptografados com criptografia AES-256 do lado do cliente e autodestruição automática',
 
   // Read memo page content
-  "read.hero.title": "Ler Memo Seguro",
-  "read.hero.description":
-    "Digite a senha para descriptografar e ler o memo. A senha deve ter sido compartilhada com você separadamente da URL. O memo será excluído após ser lido ou expirar.",
-  "read.hero.ogDescription":
-    "Descriptografe e leia seu memo seguro. Memos se autodestroem após leitura para máxima privacidade.",
-  "read.hero.twitterDescription": "Descriptografe e leia seu memo seguro com descriptografia do lado do cliente.",
-  "read.schema.description":
-    "Descriptografe e leia seu memo seguro com a senha. Memos se autodestroem após leitura para máxima privacidade. Descriptografia AES-256 do lado do cliente.",
+  'read.hero.title': 'Ler Memo Seguro',
+  'read.hero.description':
+    'Digite a senha para descriptografar e ler o memo. A senha deve ter sido compartilhada com você separadamente da URL. O memo será excluído após ser lido ou expirar.',
+  'read.hero.ogDescription':
+    'Descriptografe e leia seu memo seguro. Memos se autodestroem após leitura para máxima privacidade.',
+  'read.hero.twitterDescription': 'Descriptografe e leia seu memo seguro com descriptografia do lado do cliente.',
+  'read.schema.description':
+    'Descriptografe e leia seu memo seguro com a senha. Memos se autodestroem após leitura para máxima privacidade. Descriptografia AES-256 do lado do cliente.',
 
   // Form options
-  "form.expiry.option.8h": "Excluir ao ler ou em 8 horas",
-  "form.expiry.option.1d": "Excluir ao ler ou em 1 dia",
-  "form.expiry.option.2d": "Excluir ao ler ou em 2 dias",
-  "form.expiry.option.1w": "Excluir ao ler ou em 1 semana",
-  "form.expiry.option.30d": "Excluir ao ler ou em 30 dias",
+  'form.expiry.option.8h': 'Excluir ao ler ou em 8 horas',
+  'form.expiry.option.1d': 'Excluir ao ler ou em 1 dia',
+  'form.expiry.option.2d': 'Excluir ao ler ou em 2 dias',
+  'form.expiry.option.1w': 'Excluir ao ler ou em 1 semana',
+  'form.expiry.option.30d': 'Excluir ao ler ou em 30 dias',
 
   // Loading and status messages
-  "msg.encrypting": "Criptografando seu memo com segurança... Isso pode levar um momento em dispositivos mais antigos.",
-  "msg.decrypting": "Descriptografando seu memo... Isso pode levar um momento em dispositivos mais antigos.",
-  "msg.deletingSecurely": "Excluindo memo com segurança...",
-  "msg.yourSecureMemo": "📝 Seu Memo Seguro",
-  "msg.status": "Status:",
+  'msg.encrypting': 'Criptografando seu memo com segurança... Isso pode levar um momento em dispositivos mais antigos.',
+  'msg.decrypting': 'Descriptografando seu memo... Isso pode levar um momento em dispositivos mais antigos.',
+  'msg.deletingSecurely': 'Excluindo memo com segurança...',
+  'msg.yourSecureMemo': '📝 Seu Memo Seguro',
+  'msg.status': 'Status:',
 
   // Labels and help text
-  "form.memoUrl.label": "URL do Memo (compartilhe com seu destinatário):",
-  "form.memoUrl.help": "Este é o link seguro para seu memo. Compartilhe esta URL com seu destinatário.",
-  "form.memoPassword.label": "Senha de Criptografia (compartilhe separadamente):",
-  "form.memoPassword.help":
-    "Esta é a senha de criptografia. Compartilhe separadamente da URL para segurança aprimorada. Isso não é salvo em nossos servidores, recuperação não é possível após sair desta página.",
+  'form.memoUrl.label': 'URL do Memo (compartilhe com seu destinatário):',
+  'form.memoUrl.help': 'Este é o link seguro para seu memo. Compartilhe esta URL com seu destinatário.',
+  'form.memoPassword.label': 'Senha de Criptografia (compartilhe separadamente):',
+  'form.memoPassword.help':
+    'Esta é a senha de criptografia. Compartilhe separadamente da URL para segurança aprimorada. Isso não é salvo em nossos servidores, recuperação não é possível após sair desta página.',
 
   // Warning messages
-  "warning.important": "Importante:",
-  "warning.memoDeleted": "O memo será excluído após ser lido ou quando o tempo de expiração for atingido",
-  "warning.shareSecurely": "Compartilhe a URL e senha separadamente para máxima segurança",
-  "warning.needBoth": "O destinatário precisa tanto da URL quanto da senha para acessar o memo",
-  "warning.pageCleared": "Esta página será limpa quando você navegar para longe",
+  'warning.important': 'Importante:',
+  'warning.memoDeleted': 'O memo será excluído após ser lido ou quando o tempo de expiração for atingido',
+  'warning.shareSecurely': 'Compartilhe a URL e senha separadamente para máxima segurança',
+  'warning.needBoth': 'O destinatário precisa tanto da URL quanto da senha para acessar o memo',
+  'warning.pageCleared': 'Esta página será limpa quando você navegar para longe',
 
   // Structured data texts
-  "schema.tos.name": "Termos de Serviço",
-  "schema.tos.description":
-    "Termos de Serviço para o securememo.app - serviço de compartilhamento de memo criptografado. Saiba sobre uso aceitável, privacidade, segurança e termos legais.",
-  "schema.tos.breadcrumb.home": "Início",
-  "schema.tos.breadcrumb.tos": "Termos de Serviço",
-  "schema.tos.mainEntity.name": "Termos de Serviço",
-  "schema.tos.mainEntity.description":
-    "Termos e condições legais para o serviço de compartilhamento de memo criptografado securememo.app",
+  'schema.tos.name': 'Termos de Serviço',
+  'schema.tos.description':
+    'Termos de Serviço para o securememo.app - serviço de compartilhamento de memo criptografado. Saiba sobre uso aceitável, privacidade, segurança e termos legais.',
+  'schema.tos.breadcrumb.home': 'Início',
+  'schema.tos.breadcrumb.tos': 'Termos de Serviço',
+  'schema.tos.mainEntity.name': 'Termos de Serviço',
+  'schema.tos.mainEntity.description':
+    'Termos e condições legais para o serviço de compartilhamento de memo criptografado securememo.app',
 
-  "schema.privacy.name": "Aviso de Privacidade",
-  "schema.privacy.description":
-    "Aviso de Privacidade para o securememo.app - saiba como protegemos seus dados com criptografia do lado do cliente, arquitetura de conhecimento zero e coleta mínima de dados.",
-  "schema.privacy.breadcrumb.home": "Início",
-  "schema.privacy.breadcrumb.privacy": "Aviso de Privacidade",
-  "schema.privacy.mainEntity.name": "Aviso de Privacidade",
-  "schema.privacy.mainEntity.description":
-    "Como o securememo.app protege sua privacidade com criptografia do lado do cliente e coleta mínima de dados",
+  'schema.privacy.name': 'Aviso de Privacidade',
+  'schema.privacy.description':
+    'Aviso de Privacidade para o securememo.app - saiba como protegemos seus dados com criptografia do lado do cliente, arquitetura de conhecimento zero e coleta mínima de dados.',
+  'schema.privacy.breadcrumb.home': 'Início',
+  'schema.privacy.breadcrumb.privacy': 'Aviso de Privacidade',
+  'schema.privacy.mainEntity.name': 'Aviso de Privacidade',
+  'schema.privacy.mainEntity.description':
+    'Como o securememo.app protege sua privacidade com criptografia do lado do cliente e coleta mínima de dados',
 
   // Create memo featureList in structured data
-  "schema.create.featureList.clientSide": "Criptografia do lado do cliente",
-  "schema.create.featureList.selfDestruct": "Memos autodestrutivos",
-  "schema.create.featureList.multiExpiry": "Múltiplas opções de expiração",
-  "schema.create.featureList.noAccounts": "Nenhuma conta de usuário necessária",
-  "schema.create.featureList.maxChars": "Máximo de 10.000 caracteres",
+  'schema.create.featureList.clientSide': 'Criptografia do lado do cliente',
+  'schema.create.featureList.selfDestruct': 'Memos autodestrutivos',
+  'schema.create.featureList.multiExpiry': 'Múltiplas opções de expiração',
+  'schema.create.featureList.noAccounts': 'Nenhuma conta de usuário necessária',
+  'schema.create.featureList.maxChars': 'Máximo de 10.000 caracteres',
 
   // Read memo featureList in structured data
-  "schema.read.featureList.clientDecryption": "Descriptografia do lado do cliente",
-  "schema.read.featureList.passwordProtected": "Acesso protegido por senha",
-  "schema.read.featureList.autoDeletion": "Exclusão automática de memo",
-  "schema.read.featureList.noDataRetention": "Nenhuma retenção de dados",
-  "schema.read.featureList.privacyFocused": "Design focado na privacidade",
+  'schema.read.featureList.clientDecryption': 'Descriptografia do lado do cliente',
+  'schema.read.featureList.passwordProtected': 'Acesso protegido por senha',
+  'schema.read.featureList.autoDeletion': 'Exclusão automática de memo',
+  'schema.read.featureList.noDataRetention': 'Nenhuma retenção de dados',
+  'schema.read.featureList.privacyFocused': 'Design focado na privacidade',
 
   // Error messages - memo creation errors
-  "error.INVALID_MESSAGE_FORMAT": "Solicitação inválida. Por favor, verifique sua entrada e tente novamente.",
-  "error.INVALID_EXPIRY_TIME": "Solicitação inválida. Por favor, verifique sua entrada e tente novamente.",
-  "error.MISSING_TURNSTILE": "Verificação de segurança necessária. Por favor, tente novamente.",
-  "error.TURNSTILE_FAILED": "Verificação de segurança falhou. Por favor, tente novamente.",
-  "error.TURNSTILE_API_ERROR": "Serviço temporariamente indisponível. Por favor, tente novamente mais tarde.",
-  "error.TURNSTILE_VERIFICATION_ERROR": "Verificação de segurança falhou. Por favor, tente novamente.",
-  "error.DATABASE_ERROR": "Serviço temporariamente indisponível. Por favor, tente novamente.",
-  "error.MEMO_ID_GENERATION_ERROR": "Serviço temporariamente indisponível. Por favor, tente novamente.",
-  "error.MEMO_ID_COLLISION_ERROR": "Serviço temporariamente indisponível. Por favor, tente novamente.",
-  "error.MEMO_CREATION_ERROR": "Não foi possível processar sua solicitação. Por favor, tente novamente.",
-  "error.MISSING_DELETION_TOKEN": "Token de exclusão necessário.",
-  "error.INVALID_DELETION_TOKEN_HASH": "Hash do token de exclusão inválido.",
+  'error.INVALID_MESSAGE_FORMAT': 'Solicitação inválida. Por favor, verifique sua entrada e tente novamente.',
+  'error.INVALID_EXPIRY_TIME': 'Solicitação inválida. Por favor, verifique sua entrada e tente novamente.',
+  'error.MISSING_TURNSTILE': 'Verificação de segurança necessária. Por favor, tente novamente.',
+  'error.TURNSTILE_FAILED': 'Verificação de segurança falhou. Por favor, tente novamente.',
+  'error.TURNSTILE_API_ERROR': 'Serviço temporariamente indisponível. Por favor, tente novamente mais tarde.',
+  'error.TURNSTILE_VERIFICATION_ERROR': 'Verificação de segurança falhou. Por favor, tente novamente.',
+  'error.DATABASE_ERROR': 'Serviço temporariamente indisponível. Por favor, tente novamente.',
+  'error.MEMO_ID_GENERATION_ERROR': 'Serviço temporariamente indisponível. Por favor, tente novamente.',
+  'error.MEMO_ID_COLLISION_ERROR': 'Serviço temporariamente indisponível. Por favor, tente novamente.',
+  'error.MEMO_CREATION_ERROR': 'Não foi possível processar sua solicitação. Por favor, tente novamente.',
+  'error.MISSING_DELETION_TOKEN': 'Token de exclusão necessário.',
+  'error.INVALID_DELETION_TOKEN_HASH': 'Hash do token de exclusão inválido.',
 
   // Error messages - memo reading errors (security: generic messages to prevent enumeration attacks)
-  "error.INVALID_MEMO_ID": "Solicitação inválida. Por favor, verifique sua entrada e tente novamente.",
-  "error.MISSING_MEMO_ID": "Solicitação inválida. Por favor, verifique sua entrada e tente novamente.",
-  "error.MEMO_ACCESS_DENIED": "Este memo não está mais disponível.",
-  "error.MEMO_NOT_FOUND": "Este memo não está mais disponível.",
-  "error.MEMO_ALREADY_READ": "Este memo não está mais disponível.",
-  "error.MEMO_EXPIRED": "Este memo não está mais disponível.",
-  "error.DATABASE_READ_ERROR": "Serviço temporariamente indisponível. Por favor, tente novamente.",
-  "error.MEMO_READ_ERROR": "Não foi possível processar sua solicitação. Por favor, tente novamente.",
-  "error.MEMO_DELETION_ERROR": "Serviço temporariamente indisponível. Por favor, tente novamente.",
+  'error.INVALID_MEMO_ID': 'Solicitação inválida. Por favor, verifique sua entrada e tente novamente.',
+  'error.MISSING_MEMO_ID': 'Solicitação inválida. Por favor, verifique sua entrada e tente novamente.',
+  'error.MEMO_ACCESS_DENIED': 'Este memo não está mais disponível.',
+  'error.MEMO_NOT_FOUND': 'Este memo não está mais disponível.',
+  'error.MEMO_ALREADY_READ': 'Este memo não está mais disponível.',
+  'error.MEMO_EXPIRED': 'Este memo não está mais disponível.',
+  'error.DATABASE_READ_ERROR': 'Serviço temporariamente indisponível. Por favor, tente novamente.',
+  'error.MEMO_READ_ERROR': 'Não foi possível processar sua solicitação. Por favor, tente novamente.',
+  'error.MEMO_DELETION_ERROR': 'Serviço temporariamente indisponível. Por favor, tente novamente.',
 
   // Error messages - general errors
-  "error.INVALID_JSON": "Solicitação inválida. Por favor, verifique sua entrada e tente novamente.",
-  "error.REQUEST_TOO_LARGE": "Solicitação muito grande. Por favor, tente novamente.",
-  "error.CONTENT_TYPE_ERROR": "Solicitação inválida. Por favor, verifique sua entrada e tente novamente.",
-  "error.METHOD_NOT_ALLOWED": "Método de solicitação inválido.",
-  "error.FORBIDDEN": "Acesso negado.",
-  "error.GENERAL_ERROR": "Serviço temporariamente indisponível. Por favor, tente novamente.",
+  'error.INVALID_JSON': 'Solicitação inválida. Por favor, verifique sua entrada e tente novamente.',
+  'error.REQUEST_TOO_LARGE': 'Solicitação muito grande. Por favor, tente novamente.',
+  'error.CONTENT_TYPE_ERROR': 'Solicitação inválida. Por favor, verifique sua entrada e tente novamente.',
+  'error.METHOD_NOT_ALLOWED': 'Método de solicitação inválido.',
+  'error.FORBIDDEN': 'Acesso negado.',
+  'error.GENERAL_ERROR': 'Serviço temporariamente indisponível. Por favor, tente novamente.',
 
   // Error messages - decryption errors
-  "error.DECRYPTION_FAILED": "Solicitação inválida. Por favor, verifique sua entrada e tente novamente.",
-  "error.INVALID_PASSWORD": "Solicitação inválida. Por favor, verifique sua entrada e tente novamente.",
+  'error.DECRYPTION_FAILED': 'Solicitação inválida. Por favor, verifique sua entrada e tente novamente.',
+  'error.INVALID_PASSWORD': 'Solicitação inválida. Por favor, verifique sua entrada e tente novamente.',
 
   // Error messages - network errors
-  "error.NETWORK_ERROR": "Serviço temporariamente indisponível. Por favor, tente novamente.",
-  "error.SERVICE_UNAVAILABLE": "Serviço temporariamente indisponível. Por favor, tente novamente mais tarde.",
-  "error.RATE_LIMITED": "Muitas solicitações. Por favor, aguarde um momento e tente novamente.",
+  'error.NETWORK_ERROR': 'Serviço temporariamente indisponível. Por favor, tente novamente.',
+  'error.SERVICE_UNAVAILABLE': 'Serviço temporariamente indisponível. Por favor, tente novamente mais tarde.',
+  'error.RATE_LIMITED': 'Muitas solicitações. Por favor, aguarde um momento e tente novamente.',
 
   // Error messages - client-side validation errors
-  "error.MISSING_MESSAGE": "Por favor, digite um memo",
-  "error.MESSAGE_TOO_LONG": "Memo muito longo (máx 10.000 caracteres)",
-  "error.MISSING_SECURITY_CHALLENGE": "Por favor, complete o desafio de segurança",
-  "error.CREATE_MEMO_FAILED": "Falha ao criar memo",
-  "error.CREATE_MEMO_ERROR": "Ocorreu um erro ao criar o memo",
-  "error.READ_MEMO_ERROR": "Ocorreu um erro ao ler o memo",
-  "error.DECRYPTION_ERROR": "Falha ao descriptografar mensagem. Senha inválida ou dados corrompidos.",
-  "error.MEMO_ID_GENERATION_MAX_RETRIES": "Falha ao gerar memo_id único após tentativas máximas",
-  "error.MISSING_PASSWORD": "Por favor, digite a senha de criptografia",
-  "error.INVALID_MEMO_URL": "URL do memo inválida",
-  "error.MEMO_ALREADY_READ_DELETED": "Este memo já foi lido e excluído, ou expirou.",
-  "error.MEMO_EXPIRED_DELETED": "Este memo expirou e foi excluído.",
-  "error.INVALID_PASSWORD_CHECK": "Senha inválida. Por favor, verifique a senha que você recebeu separadamente.",
-  "error.MISSING_PASSWORD_ERROR": "Por favor, digite a senha de criptografia",
-  "error.INVALID_MEMO_URL_ERROR": "URL do memo inválida",
-  "error.MEMO_ALREADY_READ_DELETED_ERROR": "Este memo já foi lido e excluído, ou expirou.",
-  "error.MEMO_EXPIRED_DELETED_ERROR": "Este memo expirou e foi excluído.",
-  "error.INVALID_PASSWORD_CHECK_ERROR": "Senha inválida. Por favor, verifique a senha que você recebeu separadamente.",
-  "error.MISSING_SECURITY_CHALLENGE_ERROR": "Por favor, complete o desafio de segurança",
+  'error.MISSING_MESSAGE': 'Por favor, digite um memo',
+  'error.MESSAGE_TOO_LONG': 'Memo muito longo (máx 10.000 caracteres)',
+  'error.MISSING_SECURITY_CHALLENGE': 'Por favor, complete o desafio de segurança',
+  'error.CREATE_MEMO_FAILED': 'Falha ao criar memo',
+  'error.CREATE_MEMO_ERROR': 'Ocorreu um erro ao criar o memo',
+  'error.READ_MEMO_ERROR': 'Ocorreu um erro ao ler o memo',
+  'error.DECRYPTION_ERROR': 'Falha ao descriptografar mensagem. Senha inválida ou dados corrompidos.',
+  'error.MEMO_ID_GENERATION_MAX_RETRIES': 'Falha ao gerar memo_id único após tentativas máximas',
+  'error.MISSING_PASSWORD': 'Por favor, digite a senha de criptografia',
+  'error.INVALID_MEMO_URL': 'URL do memo inválida',
+  'error.MEMO_ALREADY_READ_DELETED': 'Este memo já foi lido e excluído, ou expirou.',
+  'error.MEMO_EXPIRED_DELETED': 'Este memo expirou e foi excluído.',
+  'error.INVALID_PASSWORD_CHECK': 'Senha inválida. Por favor, verifique a senha que você recebeu separadamente.',
+  'error.MISSING_PASSWORD_ERROR': 'Por favor, digite a senha de criptografia',
+  'error.INVALID_MEMO_URL_ERROR': 'URL do memo inválida',
+  'error.MEMO_ALREADY_READ_DELETED_ERROR': 'Este memo já foi lido e excluído, ou expirou.',
+  'error.MEMO_EXPIRED_DELETED_ERROR': 'Este memo expirou e foi excluído.',
+  'error.INVALID_PASSWORD_CHECK_ERROR': 'Senha inválida. Por favor, verifique a senha que você recebeu separadamente.',
+  'error.MISSING_SECURITY_CHALLENGE_ERROR': 'Por favor, complete o desafio de segurança',
 
   // Error messages - HTTP status errors
-  "error.INTERNAL_SERVER_ERROR": "Erro Interno do Servidor",
-  "error.NOT_FOUND": "Não Encontrado",
-  "error.BAD_REQUEST": "Solicitação Inválida",
-  "error.CLEANUP_FAILED": "Limpeza falhou",
+  'error.INTERNAL_SERVER_ERROR': 'Erro Interno do Servidor',
+  'error.NOT_FOUND': 'Não Encontrado',
+  'error.BAD_REQUEST': 'Solicitação Inválida',
+  'error.CLEANUP_FAILED': 'Limpeza falhou',
 
   // Error messages - default fallback
-  "error.DEFAULT_FALLBACK": "Ocorreu um erro. Por favor, tente novamente.",
+  'error.DEFAULT_FALLBACK': 'Ocorreu um erro. Por favor, tente novamente.',
 
   // Security error messages (shorter versions for security events)
-  "error.security.INVALID_MESSAGE_FORMAT": "Solicitação inválida.",
-  "error.security.INVALID_EXPIRY_TIME": "Solicitação inválida.",
-  "error.security.MISSING_TURNSTILE": "Verificação de segurança necessária.",
-  "error.security.TURNSTILE_FAILED": "Verificação de segurança falhou.",
-  "error.security.TURNSTILE_API_ERROR": "Serviço temporariamente indisponível.",
-  "error.security.TURNSTILE_VERIFICATION_ERROR": "Verificação de segurança falhou.",
-  "error.security.DATABASE_ERROR": "Serviço temporariamente indisponível.",
-  "error.security.MEMO_ID_GENERATION_ERROR": "Serviço temporariamente indisponível.",
-  "error.security.MEMO_ID_COLLISION_ERROR": "Serviço temporariamente indisponível.",
-  "error.security.MEMO_CREATION_ERROR": "Não foi possível processar sua solicitação.",
-  "error.security.INVALID_MEMO_ID": "Solicitação inválida.",
-  "error.security.MISSING_MEMO_ID": "Solicitação inválida.",
-  "error.security.MEMO_NOT_FOUND": "Este memo não está mais disponível.",
-  "error.security.MEMO_ALREADY_READ": "Este memo não está mais disponível.",
-  "error.security.MEMO_EXPIRED": "Este memo não está mais disponível.",
-  "error.security.DATABASE_READ_ERROR": "Serviço temporariamente indisponível.",
-  "error.security.MEMO_READ_ERROR": "Não foi possível processar sua solicitação.",
-  "error.security.METHOD_NOT_ALLOWED": "Método de solicitação inválido.",
-  "error.security.FORBIDDEN": "Acesso negado.",
-  "error.security.DEFAULT_FALLBACK": "Ocorreu um erro. Por favor, tente novamente.",
+  'error.security.INVALID_MESSAGE_FORMAT': 'Solicitação inválida.',
+  'error.security.INVALID_EXPIRY_TIME': 'Solicitação inválida.',
+  'error.security.MISSING_TURNSTILE': 'Verificação de segurança necessária.',
+  'error.security.TURNSTILE_FAILED': 'Verificação de segurança falhou.',
+  'error.security.TURNSTILE_API_ERROR': 'Serviço temporariamente indisponível.',
+  'error.security.TURNSTILE_VERIFICATION_ERROR': 'Verificação de segurança falhou.',
+  'error.security.DATABASE_ERROR': 'Serviço temporariamente indisponível.',
+  'error.security.MEMO_ID_GENERATION_ERROR': 'Serviço temporariamente indisponível.',
+  'error.security.MEMO_ID_COLLISION_ERROR': 'Serviço temporariamente indisponível.',
+  'error.security.MEMO_CREATION_ERROR': 'Não foi possível processar sua solicitação.',
+  'error.security.INVALID_MEMO_ID': 'Solicitação inválida.',
+  'error.security.MISSING_MEMO_ID': 'Solicitação inválida.',
+  'error.security.MEMO_NOT_FOUND': 'Este memo não está mais disponível.',
+  'error.security.MEMO_ALREADY_READ': 'Este memo não está mais disponível.',
+  'error.security.MEMO_EXPIRED': 'Este memo não está mais disponível.',
+  'error.security.DATABASE_READ_ERROR': 'Serviço temporariamente indisponível.',
+  'error.security.MEMO_READ_ERROR': 'Não foi possível processar sua solicitação.',
+  'error.security.METHOD_NOT_ALLOWED': 'Método de solicitação inválido.',
+  'error.security.FORBIDDEN': 'Acesso negado.',
+  'error.security.DEFAULT_FALLBACK': 'Ocorreu um erro. Por favor, tente novamente.',
 };

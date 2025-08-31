@@ -1,5 +1,5 @@
 // Input validation and sanitization utilities
-import { uniformResponseDelay } from "./timingSecurity.js";
+import { uniformResponseDelay } from './timingSecurity.js';
 
 /**  // Check for null bytes and other control characters that could cause issues
   if (/\0/.test(message)) {
@@ -9,7 +9,7 @@ import { uniformResponseDelay } from "./timingSecurity.js";
  * @returns {string} - Sanitized input safe for HTML
  */
 export function sanitizeForHTML(input) {
-  if (typeof input !== "string") return "";
+  if (typeof input !== 'string') return '';
 
   // Decode HTML entities to catch encoded malicious content
   const decoded = decodeHtmlEntities(input);
@@ -28,14 +28,14 @@ export function sanitizeForHTML(input) {
  */
 function decodeHtmlEntities(input) {
   return input
-    .replace(/&lt;/g, "<")
-    .replace(/&gt;/g, ">")
-    .replace(/&amp;/g, "&")
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&amp;/g, '&')
     .replace(/&quot;/g, '"')
     .replace(/&#x27;/g, "'")
-    .replace(/&#x2F;/g, "/")
+    .replace(/&#x2F;/g, '/')
     .replace(/&#39;/g, "'")
-    .replace(/&#47;/g, "/");
+    .replace(/&#47;/g, '/');
 }
 
 /**
@@ -45,15 +45,15 @@ function decodeHtmlEntities(input) {
  */
 function removeHtmlTagsAndScripts(input) {
   return input
-    .replace(/<[^>]*>/g, "") // Remove all HTML tags
-    .replace(/javascript:/gi, "") // Remove javascript: URLs
-    .replace(/on\w+=/gi, "") // Remove event handlers
-    .replace(/vbscript:/gi, "") // Remove vbscript: URLs
-    .replace(/data:/gi, "") // Remove data: URLs
-    .replace(/expression\(/gi, "") // Remove CSS expressions
-    .replace(/eval\(/gi, "") // Remove eval calls
-    .replace(/setTimeout\(/gi, "") // Remove setTimeout calls
-    .replace(/setInterval\(/gi, "") // Remove setInterval calls
+    .replace(/<[^>]*>/g, '') // Remove all HTML tags
+    .replace(/javascript:/gi, '') // Remove javascript: URLs
+    .replace(/on\w+=/gi, '') // Remove event handlers
+    .replace(/vbscript:/gi, '') // Remove vbscript: URLs
+    .replace(/data:/gi, '') // Remove data: URLs
+    .replace(/expression\(/gi, '') // Remove CSS expressions
+    .replace(/eval\(/gi, '') // Remove eval calls
+    .replace(/setTimeout\(/gi, '') // Remove setTimeout calls
+    .replace(/setInterval\(/gi, '') // Remove setInterval calls
     .trim();
 }
 
@@ -64,11 +64,11 @@ function removeHtmlTagsAndScripts(input) {
  */
 function encodeHtmlEntities(input) {
   return input
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/&/g, "&amp;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#x27;");
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/&/g, '&amp;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#x27;');
 }
 
 /**
@@ -81,10 +81,10 @@ function encodeHtmlEntities(input) {
  * @returns {string}
  */
 export function normalizeCiphertextForResponse(input) {
-  if (typeof input !== "string") return "";
+  if (typeof input !== 'string') return '';
   // Remove null bytes first (explicit \0) then strip other disallowed control characters
   // using the existing, well-audited helper which avoids regex literals with control escapes.
-  const withoutNull = input.replace(/\0/g, "");
+  const withoutNull = input.replace(/\0/g, '');
   return stripDisallowedControlChars(withoutNull);
 }
 
@@ -94,10 +94,10 @@ export function normalizeCiphertextForResponse(input) {
  * @returns {string} - Sanitized input safe for database storage
  */
 export function sanitizeForDatabase(input) {
-  if (typeof input !== "string") return "";
+  if (typeof input !== 'string') return '';
 
   // Remove null bytes first, then strip other disallowed control characters
-  const withoutNull = input.replace(/\0/g, "");
+  const withoutNull = input.replace(/\0/g, '');
   return stripDisallowedControlChars(withoutNull).trim();
 }
 
@@ -134,7 +134,7 @@ export async function validateMemoIdSecure(memoId) {
  * @returns {boolean} - Whether the message is valid
  */
 export function validateEncryptedMessage(message) {
-  if (!message || typeof message !== "string" || message.length === 0 || message.length > 50000) {
+  if (!message || typeof message !== 'string' || message.length === 0 || message.length > 50000) {
     return false;
   }
 
@@ -173,7 +173,7 @@ export function validateExpiryHours(expiryHours) {
 export function validatePassword(password) {
   return (
     password &&
-    typeof password === "string" &&
+    typeof password === 'string' &&
     password.length >= 32 &&
     password.length <= 64 &&
     /^[A-Za-z0-9]+$/.test(password)
@@ -211,10 +211,10 @@ export async function validateAndSanitizeEncryptedMessageSecure(message) {
  * @returns {string} - Sanitized locale or 'en' as fallback
  */
 export function sanitizeLocale(locale) {
-  if (!locale || typeof locale !== "string") return "en";
-  if (locale.length > 10) return "en"; // Prevent extremely long inputs
+  if (!locale || typeof locale !== 'string') return 'en';
+  if (locale.length > 10) return 'en'; // Prevent extremely long inputs
   // Only allow alphanumeric characters, hyphens, and underscores
-  if (!/^[a-zA-Z0-9_-]+$/.test(locale)) return "en";
+  if (!/^[a-zA-Z0-9_-]+$/.test(locale)) return 'en';
   return locale;
 }
 
@@ -225,7 +225,7 @@ export function sanitizeLocale(locale) {
  * @returns {boolean} True if a disallowed control character is present
  */
 function containsDisallowedControlChars(str) {
-  if (typeof str !== "string" || !str) return false; // Early guard; non-strings can't contain disallowed chars
+  if (typeof str !== 'string' || !str) return false; // Early guard; non-strings can't contain disallowed chars
   for (let i = 0; i < str.length; i++) {
     // Direct charCodeAt access to avoid intermediate variable that some SAST tools misinterpret as an injection sink
     const code = str.charCodeAt(i);
@@ -244,8 +244,8 @@ function containsDisallowedControlChars(str) {
  * @returns {string} Sanitized string without disallowed control characters
  */
 function stripDisallowedControlChars(str) {
-  if (typeof str !== "string" || !str) return "";
-  let out = "";
+  if (typeof str !== 'string' || !str) return '';
+  let out = '';
   for (let i = 0; i < str.length; i++) {
     // Direct indexing + charCodeAt to avoid false positive "object injection" pattern; strings are immutable primitives
     const code = str.charCodeAt(i);
