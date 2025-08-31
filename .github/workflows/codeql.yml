@@ -27,8 +27,36 @@ permissions:
   security-events: write
 
 jobs:
+  audit:
+    name: NPM Audit (high severity)
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: |
+          if [ -f package-lock.json ]; then
+            npm ci --no-audit --no-fund
+          else
+            npm install --no-audit --no-fund
+          fi
+
+      - name: Run npm audit (high)
+        run: npm audit --audit-level=high
+
   lint:
     name: ESLint
+    needs: audit
     runs-on: ubuntu-latest
     timeout-minutes: 10
     permissions:
@@ -40,8 +68,8 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-            node-version: 20
-            cache: 'npm'
+          node-version: 20
+          cache: 'npm'
 
       - name: Install dependencies
         run: |
