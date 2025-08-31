@@ -5,7 +5,8 @@ securememo.app will run the main branch of this repo.
 
 [![License](https://img.shields.io/github/license/timoheimonen/securememo.app)](https://github.com/timoheimonen/securememo.app/blob/main/LICENSE)
 [![Stars](https://img.shields.io/github/stars/timoheimonen/securememo.app)](https://github.com/timoheimonen/securememo.app/stargazers)
-[![Watchers](https://img.shields.io/github/watchers/timoheimonen/securememo.app)](https://github.com/timoheimonen/securememo.app/watchers)
+[![CI](https://github.com/timoheimonen/securememo.app/workflows/CI/badge.svg)](https://github.com/timoheimonen/securememo.app/actions/workflows/ci.yml)
+[![CodeQL](https://github.com/timoheimonen/securememo.app/workflows/CodeQL/badge.svg)](https://github.com/timoheimonen/securememo.app/security/code-scanning)
 [![Forks](https://img.shields.io/github/forks/timoheimonen/securememo.app)](https://github.com/timoheimonen/securememo.app/network/members)
 [![Contributors](https://img.shields.io/github/contributors/timoheimonen/securememo.app)](https://github.com/timoheimonen/securememo.app/graphs/contributors)
 
@@ -128,40 +129,32 @@ For detailed contribution guidelines, please see [CONTRIBUTING.md](CONTRIBUTING.
 
 ## Supported languages in the application
 
-The supported languages are:
+SecureMemo supports **30 languages** with automatic translation from English:
 
-- Arabic (ar)
-- Bengali (bn)
-- Chinese (zh)
-- Danish (da)
-- Dutch (nl)
-- English (en)
-- Finnish (fi)
-- French (fr)
-- German (de)
-- Greek (el)
-- Hindi (hi)
-- Hungarian (hu)
-- Indonesian (id)
-- Italian (it)
-- Japanese (ja)
-- Korean (ko)
-- Norwegian (no)
-- Polish (pl)
-- Portuguese (Brazil) (pt-BR)
-- Portuguese (Portugal) (pt-PT)
-- Russian (ru)
-- Romanian (ro)
-- Spanish (es)
-- Swedish (sv)
-- Tagalog (tl)
-- Thai (th)
-- Turkish (tr)
-- Ukrainian (uk)
-- Vietnamese (vi)
-- Czech (cs)
+<details>
+<summary>Click to view all supported languages</summary>
 
-These are auto-translated from english, errors may occur.
+| Language | Code | Language | Code |
+|----------|------|----------|------|
+| Arabic | `ar` | Japanese | `ja` |
+| Bengali | `bn` | Korean | `ko` |
+| Chinese | `zh` | Norwegian | `no` |
+| Czech | `cs` | Polish | `pl` |
+| Danish | `da` | Portuguese (Brazil) | `pt-BR` |
+| Dutch | `nl` | Portuguese (Portugal) | `pt-PT` |
+| English | `en` | Romanian | `ro` |
+| Finnish | `fi` | Russian | `ru` |
+| French | `fr` | Spanish | `es` |
+| German | `de` | Swedish | `sv` |
+| Greek | `el` | Tagalog | `tl` |
+| Hindi | `hi` | Thai | `th` |
+| Hungarian | `hu` | Turkish | `tr` |
+| Indonesian | `id` | Ukrainian | `uk` |
+| Italian | `it` | Vietnamese | `vi` |
+
+</details>
+
+> **Note:** These translations are auto-generated from English. Some errors may occur. Contributions for translation improvements are welcome!
 
 ## Author
 
