@@ -296,7 +296,7 @@ export const it = {
   'privacy.tableOfContents.contact': 'Contattaci',
 
   'privacy.intro.p1':
-    'securememo.app ("noi", "ci" o "nostro") è impegnata a proteggere la tua privacy. Questa Informativa Privacy spiega come gestiamo le informazioni in connessione con il nostro servizio, che consente agli utenti di creare e condividere memo crittografate che si autodistruggono dopo essere stati letti o scaduti. Il nostro servizio è progettato con la privacy al centro: tutta la crittografia avviene lato client nel tuo browser, e non abbiamo accesso al contenuto delle tue memo.',
+    'securememo.app ("noi", "ci" o "nostro") è impegnata a proteggere la tua privacy. Questa Informativa Privacy spiega come gestiamo le informazioni in connessione con il nostro servizio, che consente agli utenti di creare e condividere memo crittografate che si autodistruggono dopo essere state lette o scadute. Il nostro servizio è progettato con la privacy al centro: tutta la crittografia avviene lato client nel tuo browser, e non abbiamo accesso al contenuto delle tue memo.',
   'privacy.intro.p2':
     'Utilizzando securememo.app, accetti le pratiche descritte in questa Informativa Privacy. Se non accetti, non utilizzare il nostro servizio.',
 
@@ -407,7 +407,7 @@ export const it = {
   // FAQ structured data
   'faq.privacy.question': 'Come securememo.app protegge la mia privacy?',
   'faq.privacy.answer':
-    'securememo.app utilizza la crittografia AES-256 lato client, il che significa che il tuo memo viene crittografato nel tuo browser prima di essere inviato ai nostri server. Non vediamo mai il contenuto in chiaro. I memo si autodistruggono dopo essere stati letti o scaduti, e non richiediamo account utente né raccogliamo informazioni personali.',
+    'securememo.app utilizza la crittografia AES-256 lato client, il che significa che il tuo memo viene crittografato nel tuo browser prima di essere inviato ai nostri server. Non vediamo mai il contenuto in chiaro. Le memo si autodistruggono dopo essere state lette o scadute, e non richiediamo account utente né raccogliamo informazioni personali.',
   'faq.encryption.question': 'Quale crittografia utilizza securememo.app?',
   'faq.encryption.answer':
     'Utilizziamo la crittografia AES-256-GCM con derivazione della chiave PBKDF2. Tutta la crittografia avviene lato client nel tuo browser utilizzando la Web Crypto API. La password di crittografia è generata separatamente e non viene mai memorizzata sui nostri server.',
