@@ -3,7 +3,7 @@ export const it = {
   'nav.home': 'Home',
   'nav.about': 'Info',
   'nav.create': 'Crea Memo Sicura',
-  'nav.toggleMenu': 'Attiva/disattiva menu di navigazione',
+  'nav.toggleMenu': 'Apri/chiudi il menu di navigazione',
 
   // Common elements
   'common.loading': 'Caricamento...',
@@ -20,10 +20,10 @@ export const it = {
   'btn.hide': 'Nascondi',
   'btn.create': 'Crea Memo Sicura',
   'btn.creating': 'Crittografia...',
-  'btn.decrypt': 'Decripta Memo',
+  'btn.decrypt': 'Decrittografa Memo',
   'btn.decrypting': 'Decrittografia...',
   'btn.goHome': 'Vai alla Home',
-  'btn.createNew': 'Crea Nuova Memo',
+  'btn.createNew': 'Crea Nuova Memo Sicura',
 
   // Form labels and placeholders
   'form.message.label': 'La Tua Memo',
@@ -40,7 +40,7 @@ export const it = {
   'msg.passwordCopied': '✅ Password copiata negli appunti!',
   'msg.copyManual': '⚠️ Copia manualmente (Ctrl+C / Cmd+C)',
   'msg.memoCreated': '✅ Memo Creata con Successo!',
-  'msg.memoDecrypted': 'Memo decriptata. Eliminazione in corso... Attendere.',
+  'msg.memoDecrypted': 'Memo decrittografata. Eliminazione in corso... Attendere.',
   'msg.memoDeleted': 'Memo confermata come letta e eliminata definitivamente.',
   'msg.deletionError': "Errore nella conferma dell'eliminazione. La memo verrà pulita automaticamente.",
 
@@ -120,7 +120,7 @@ export const it = {
   'footer.sourceCode': 'Visualizza codice sorgente su GitHub',
   'footer.tos': 'Termini di Servizio',
   'footer.privacy': 'Informativa Privacy',
-  'footer.tagline': 'Nessun tracciamento, nessuna pubblicità, nessun controsenso.',
+  'footer.tagline': 'Nessun tracciamento, nessuna pubblicità, niente fronzoli.',
 
   // About page content
   'about.hero.title': 'Info su securememo.app',
@@ -215,7 +215,7 @@ export const it = {
     'Eliminazione Automatica: Le memo vengono eliminate automaticamente dopo essere state lette o quando scadono.',
   'tos.privacyData.noRecovery': 'Nessun Recupero: Una volta che una memo è eliminata, non può essere recuperata.',
   'tos.privacyData.gdpr':
-    'Conformità GDPR: Siamo impegnati ai principi del GDPR. Minimizzamo la raccolta dei dati e trattiamo solo i dati necessari, come i log di sicurezza temporanei, sulla base del legittimo interesse per proteggere il servizio.',
+    'Conformità GDPR: Siamo impegnati ai principi del GDPR. Minimizziamo la raccolta dei dati e trattiamo solo i dati necessari, come i log di sicurezza temporanei, sulla base del legittimo interesse per proteggere il servizio.',
   'tos.privacyData.moreDetails': 'Per maggiori dettagli, consulta la nostra',
   'tos.privacyData.privacyNotice': 'Informativa Privacy',
 
@@ -296,7 +296,7 @@ export const it = {
   'privacy.tableOfContents.contact': 'Contattaci',
 
   'privacy.intro.p1':
-    'securememo.app ("noi", "ci" o "nostro") è impegnata a proteggere la tua privacy. Questa Informativa Privacy spiega come gestiamo le informazioni in connessione con il nostro servizio, che consente agli utenti di creare e condividere memo crittografate che si autodistruggono dopo essere state lette o scadute. Il nostro servizio è progettato con la privacy al centro: tutta la crittografia avviene lato client nel tuo browser, e non abbiamo accesso al contenuto delle tue memo.',
+    'securememo.app ("noi", "ci" o "nostro") è impegnata a proteggere la tua privacy. Questa Informativa Privacy spiega come gestiamo le informazioni in connessione con il nostro servizio, che consente agli utenti di creare e condividere memo crittografate che si autodistruggono dopo essere stati letti o scaduti. Il nostro servizio è progettato con la privacy al centro: tutta la crittografia avviene lato client nel tuo browser, e non abbiamo accesso al contenuto delle tue memo.',
   'privacy.intro.p2':
     'Utilizzando securememo.app, accetti le pratiche descritte in questa Informativa Privacy. Se non accetti, non utilizzare il nostro servizio.',
 
@@ -375,7 +375,7 @@ export const it = {
   'privacy.internationalTransfers.content':
     'securememo.app è ospitato sulla rete globale di Cloudflare. I dati possono essere elaborati in vari paesi, ma garantiamo protezioni della privacy equivalenti attraverso le nostre pratiche di raccolta minima.',
 
-  'privacy.changesNotice.title': '9. Modifiche a questa Informativa sulla Privacy',
+  'privacy.changesNotice.title': '9. Modifiche a questa Informativa Privacy',
   'privacy.changesNotice.content':
     'Potremmo aggiornare periodicamente questa Informativa. Le modifiche saranno pubblicate qui con una data "Ultimo aggiornamento" aggiornata. L\'uso continuato del servizio dopo le modifiche costituisce accettazione.',
 
@@ -390,7 +390,7 @@ export const it = {
   'schema.app.description':
     'Crea memo crittografati che si autodistruggono dopo la lettura. Crittografia end-to-end, focalizzata sulla privacy e condivisione sicura di note con AES-256. Nessun tracciamento, nessuna pubblicità.',
   'schema.app.category': 'SecurityApplication',
-  'schema.app.os': 'Web Browser',
+  'schema.app.os': 'Browser Web',
   'schema.app.requirements': 'Richiede JavaScript. Richiede HTML5.',
   'schema.app.author': 'Timo Heimonen',
   'schema.app.price': '0',
@@ -405,7 +405,7 @@ export const it = {
   'schema.app.repository': 'https://github.com/timoheimonen/securememo.app',
 
   // FAQ structured data
-  'faq.privacy.question': 'Come protegge la mia privacy securememo.app?',
+  'faq.privacy.question': 'Come securememo.app protegge la mia privacy?',
   'faq.privacy.answer':
     'securememo.app utilizza la crittografia AES-256 lato client, il che significa che il tuo memo viene crittografato nel tuo browser prima di essere inviato ai nostri server. Non vediamo mai il contenuto in chiaro. I memo si autodistruggono dopo essere stati letti o scaduti, e non richiediamo account utente né raccogliamo informazioni personali.',
   'faq.encryption.question': 'Quale crittografia utilizza securememo.app?',
@@ -431,7 +431,7 @@ export const it = {
   'ui.breadcrumb.privacy': 'Informativa sulla Privacy',
 
   // Create memo page content
-  'create.hero.title': 'Crea Memo Sicuro',
+  'create.hero.title': 'Crea Memo Sicura',
   'create.hero.description':
     'Il tuo memo sarà crittografato nel tuo browser e si autodistruggerà dopo essere stato letto o scaduto.',
   'create.hero.ogDescription':
@@ -443,7 +443,7 @@ export const it = {
     'Crea memo crittografati con crittografia AES-256 lato client e autodistruzione automatica',
 
   // Read memo page content
-  'read.hero.title': 'Leggi Memo Sicuro',
+  'read.hero.title': 'Leggi Memo Sicura',
   'read.hero.description':
     "Inserisci la password per decrittografare e leggere il memo. La password dovrebbe essere stata condivisa con te separatamente dall'URL. Il memo sarà eliminato dopo essere stato letto o scaduto.",
   'read.hero.ogDescription':
@@ -479,7 +479,7 @@ export const it = {
     'La memo verrà eliminata dopo essere stata letta o quando viene raggiunto il tempo di scadenza',
   'warning.shareSecurely': 'Condividi URL e password separatamente per massima sicurezza',
   'warning.needBoth': "Il destinatario ha bisogno sia dell'URL che della password per accedere alla memo",
-  'warning.pageCleared': 'Questa pagina verrà cancellata quando navighi via',
+  'warning.pageCleared': 'Questa pagina verrà svuotata quando la lasci',
 
   // Structured data texts
   'schema.tos.name': 'Termini di Servizio',
