@@ -4,11 +4,12 @@
 
 import assert from 'node:assert/strict';
 import test from 'node:test';
+import { Buffer } from 'node:buffer';
 import worker from '../src/index.js';
 import { getSupportedLocales } from '../src/lang/localization.js';
 
 // Minimal fake D1 binding: HTML routes require env.DB to be truthy or worker returns 503.
-const env = { DB: {} };
+const env = { DB: {}, TEST: true };
 
 // Polyfill crypto.getRandomValues for nonce generation in tests
 if (!globalThis.crypto) {
@@ -19,6 +20,10 @@ if (!globalThis.crypto.getRandomValues) {
     for (let i = 0; i < arr.length; i++) arr[i] = Math.floor(Math.random() * 256);
     return arr;
   };
+}
+// Polyfill btoa used in nonce generation (Cloudflare Workers provide it, Node does not by default)
+if (typeof globalThis.btoa !== 'function') {
+  globalThis.btoa = (str) => Buffer.from(str, 'binary').toString('base64');
 }
 
 // Simple in-memory cache polyfill implementing the subset used (match/put)
@@ -45,14 +50,7 @@ if (!globalThis.caches) {
 }
 
 // Pages to test (path without locale prefix)
-const pagePaths = [
-  '/',
-  '/about.html',
-  '/create-memo.html',
-  '/read-memo.html',
-  '/tos.html',
-  '/privacy.html',
-];
+const pagePaths = ['/', '/about.html', '/create-memo.html', '/read-memo.html', '/tos.html', '/privacy.html'];
 
 const locales = getSupportedLocales();
 
@@ -65,6 +63,10 @@ for (const locale of locales) {
     test(`GET ${localizedPath} returns 200 HTML (${locale})`, async () => {
       const req = new Request(`https://securememo.app${localizedPath}`, { method: 'GET' });
       const res = await worker.fetch(req, env, ctx);
+      if (res.status !== 200) {
+        const err = res.headers.get('X-Test-Error');
+        console.error('Debug failure', localizedPath, res.status, err);
+      }
       assert.equal(res.status, 200, `Expected 200 for ${localizedPath}, got ${res.status}`);
       const ct = res.headers.get('content-type') || '';
       assert.match(ct, /text\/html/i, 'Content-Type should be text/html');

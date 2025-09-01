@@ -16,7 +16,7 @@
     "lint:fix": "eslint src/ --fix",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "test": "node --test tests/**/*.test.js"
+    "test": "node --test"
   },
   "devDependencies": {
     "wrangler": "^4.28.0",

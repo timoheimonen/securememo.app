@@ -606,9 +606,17 @@ ${sitemapUrls}</urlset>`;
       }
       return htmlResp;
     } catch (error) {
+      const errHeaders = getSecurityHeaders(request);
+      try {
+        if (env && env.TEST) {
+          errHeaders['X-Test-Error'] = (error && (error.stack || error.message)) || 'unknown';
+        }
+      } catch (_) {
+        /* swallow */
+      }
       return new globalThis.Response(getErrorMessage('INTERNAL_SERVER_ERROR', 'en'), {
         status: 500,
-        headers: getSecurityHeaders(request),
+        headers: errHeaders,
       });
     }
   },
