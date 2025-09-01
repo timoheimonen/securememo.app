@@ -2,18 +2,30 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>Error 429 - Too Many Requests</title>
+    <style>
+      :root{--bg:#fff;--text:#0b1220;--muted:#515a66;--accent:#0066cc}
+      html,body{height:100%;margin:0}
+      body{font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial, sans-serif; background:var(--bg); color:var(--text); display:flex; align-items:center; justify-content:center; padding:28px}
+      .container{max-width:720px; width:100%; text-align:center}
+      h1{margin:0 0 .5rem; font-size:1.6rem}
+      p{margin:.5rem 0; color:var(--muted)}
+      ul{margin:.6rem auto 1rem; padding-left:1.25rem; text-align:left; display:inline-block}
+      a{color:var(--accent); text-decoration:none; font-weight:600}
+    </style>
   </head>
 
   <body>
-    <h1>Too Many Requests</h1>
-    <p>You have sent too many requests in a short period.</p>
-    <p>You can try:</p>
-    <ul>
-      <li>Waiting 1–2 minutes before retrying</li>
-      <li>Reducing rapid refreshing or scripted bursts</li>
-      <li>Adding backoff and jitter to automation</li>
-    </ul>
-    <a href="/">Return Home</a>
+    <div class="container">
+      <h1>Too Many Requests</h1>
+      <p>You have sent too many requests in a short period.</p>
+      <p>You can try:</p>
+      <ul>
+        <li>Waiting 1–2 minutes before retrying</li>
+        <li>Reducing rapid refreshing or scripted bursts</li>
+        <li>Adding backoff and jitter to automation</li>
+      </ul>
+    </div>
   </body>
 </html>

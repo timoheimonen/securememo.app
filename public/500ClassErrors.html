@@ -2,20 +2,32 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>Internal Server Error</title>
+    <style>
+      :root{--bg:#fff;--text:#0b1220;--muted:#515a66;--accent:#0066cc}
+      html,body{height:100%;margin:0}
+      body{font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial, sans-serif; background:var(--bg); color:var(--text); display:flex; align-items:center; justify-content:center; padding:28px}
+      .container{max-width:720px; width:100%; text-align:center}
+      h1{margin:0 0 .5rem; font-size:1.6rem}
+      p{margin:.5rem 0; color:var(--muted)}
+      ul{margin:.6rem auto 1rem; padding-left:1.25rem; text-align:left; display:inline-block}
+      a{color:var(--accent); text-decoration:none; font-weight:600}
+    </style>
   </head>
 
   <body>
-    <h1>Internal Server Error</h1>
-    <p>Something went wrong while processing your request.</p>
-    <p>::CLOUDFLARE_ERROR_500S_BOX::</p>
-    <!-- Required token; Cloudflare will insert the appropriate challenge here -->
-    <p>You can try:</p>
-    <ul>
-      <li>Refreshing the page in a few seconds</li>
-      <li>Clearing your browser cache (rarely needed)</li>
-      <li>Returning later if the issue persists</li>
-    </ul>
-    <a href="/">Return Home</a>
+    <div class="container">
+      <h1>Internal Server Error</h1>
+      <p>Something went wrong while processing your request.</p>
+      <p>::CLOUDFLARE_ERROR_500S_BOX::</p>
+      <!-- Required token; Cloudflare will insert the appropriate challenge here -->
+      <p>You can try:</p>
+      <ul>
+        <li>Refreshing the page in a few seconds</li>
+        <li>Clearing your browser cache (rarely needed)</li>
+        <li>Returning later if the issue persists</li>
+      </ul>
+    </div>
   </body>
 </html>
