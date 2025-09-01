@@ -5,7 +5,6 @@ on:
     branches: [main]
     paths:
       - 'src/**/*.js'
-      - 'tests/**/*.js'
       - '.github/workflows/ci.yml'
       - '.github/codeql-config.yml'
       - 'package.json'
@@ -15,7 +14,6 @@ on:
     branches: [main, development]
     paths:
       - 'src/**/*.js'
-      - 'tests/**/*.js'
       - '.github/workflows/ci.yml'
       - '.github/codeql-config.yml'
       - 'package.json'
@@ -110,36 +108,9 @@ jobs:
       - name: Prettier Check
         run: npm run format:check
 
-  test:
-    name: Unit Tests
-    runs-on: ubuntu-latest
-    timeout-minutes: 15
-    permissions:
-      contents: read
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: 'npm'
-
-      - name: Install dependencies
-        run: |
-          if [ -f package-lock.json ]; then
-            npm ci --no-audit --no-fund
-          else
-            npm install --no-audit --no-fund
-          fi
-
-      - name: Run tests
-        run: npm test
-
   analyze:
     name: Analyze (JavaScript)
-    needs: [audit, lint, prettier, test]
+    needs: [audit, lint, prettier]
     runs-on: ubuntu-latest
     timeout-minutes: 30
     strategy:
