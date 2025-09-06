@@ -95,15 +95,15 @@ export const sv = {
   'home.hero.btnSecondary': 'Läs mer',
 
   'home.features.title': 'Hur det fungerar',
-  'home.features.encrypt.title': '🔐 Kryptera i webbläsaren',
+  'home.features.encrypt.title': '🔐 Skriv din memo',
   'home.features.encrypt.description':
-    'Skriv din memo. Den krypteras direkt i din webbläsare med stark AES-256-kryptering innan den når våra servrar.',
+    'Du har kontrollen. Din text krypteras på din enhet och den okrypterade versionen lämnar aldrig din webbläsare.',
   'home.features.share.title': '🔗 Dela säkert',
   'home.features.share.description':
-    'Få en unik URL och ett separat slumpmässigt lösenord, och dela dem via olika kanaler för extra säkerhet.',
+    'Få en unik URL och ett separat starkt lösenord och dela dem via olika kanaler för extra säkerhet.',
   'home.features.destruct.title': '💥 Självförstör',
   'home.features.destruct.description':
-    'Memot raderas permanent efter att det lästs eller när tidsgränsen har passerat (från 8 timmar till 30 dagar).',
+    'Memot raderas automatiskt permanent efter att det lästs eller när tidsgränsen har passerat (från 8 timmar till 30 dagar).',
 
   'home.security.title': 'Säkerhetsfunktioner',
   'home.security.encryption.title': '🔒 Äkta klientbaserad kryptering',

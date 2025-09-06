@@ -95,15 +95,15 @@ export const cs = {
   'home.hero.btnSecondary': 'Zjistit více',
 
   'home.features.title': 'Jak to funguje',
-  'home.features.encrypt.title': '🔐 Šifrování v prohlížeči',
+  'home.features.encrypt.title': '🔐 Napište svou zprávu',
   'home.features.encrypt.description':
-    'Napište svou zprávu. Je zašifrována přímo ve vašem prohlížeči silným šifrováním AES-256 dříve, než se cokoli dotkne našich serverů.',
+    'Máte to pod kontrolou. Váš text se šifruje přímo ve vašem zařízení a nezašifrovaná verze nikdy neopustí váš prohlížeč.',
   'home.features.share.title': '🔗 Sdílení bezpečně',
   'home.features.share.description':
-    'Získáte jedinečné URL a samostatné náhodné heslo a pro vyšší bezpečnost je sdílejte různými kanály.',
+    'Získejte jedinečné URL a samostatné silné heslo a pro vyšší bezpečnost je sdílejte různými kanály.',
   'home.features.destruct.title': '💥 Automatické smazání',
   'home.features.destruct.description':
-    'Zpráva se trvale smaže po přečtení nebo po uplynutí časového limitu (od 8 hodin do 30 dnů).',
+    'Zpráva se po přečtení nebo po uplynutí časového limitu (od 8 hodin do 30 dnů) automaticky a trvale smaže.',
 
   'home.security.title': 'Bezpečnostní funkce',
   'home.security.encryption.title': '🔒 Skutečné klientské šifrování',

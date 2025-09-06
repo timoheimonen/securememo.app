@@ -96,15 +96,15 @@ export const pl = {
   'home.hero.btnSecondary': 'Dowiedz się więcej',
 
   'home.features.title': 'Jak to działa',
-  'home.features.encrypt.title': '🔐 Szyfrowanie w przeglądarce',
+  'home.features.encrypt.title': '🔐 Wpisz swoją notatkę',
   'home.features.encrypt.description':
-    'Wpisz swoją notatkę. Zostanie ona zaszyfrowana bezpośrednio w Twojej przeglądarce przy użyciu silnego szyfrowania AES-256 zanim trafi na nasze serwery.',
+    'Masz pełną kontrolę. Twój tekst jest szyfrowany na Twoim urządzeniu, a wersja niezaszyfrowana nigdy nie opuszcza Twojej przeglądarki.',
   'home.features.share.title': '🔗 Bezpieczne udostępnianie',
   'home.features.share.description':
-    'Otrzymasz unikalny URL i osobne losowe hasło, które możesz przekazać różnymi kanałami dla dodatkowego bezpieczeństwa.',
+    'Otrzymasz unikalny adres URL i osobne, silne hasło — udostępnij je różnymi kanałami dla dodatkowego bezpieczeństwa.',
   'home.features.destruct.title': '💥 Samozniszczenie',
   'home.features.destruct.description':
-    'Notatka zostanie trwale usunięta po odczytaniu lub po upływie czasu (od 8 godzin do 30 dni).',
+    'Notatka jest automatycznie i trwale usuwana po odczytaniu lub po upływie limitu czasu (od 8 godzin do 30 dni).',
 
   'home.security.title': 'Funkcje bezpieczeństwa',
   'home.security.encryption.title': '🔒 Prawdziwe szyfrowanie po stronie klienta',

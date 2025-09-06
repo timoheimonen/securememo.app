@@ -95,15 +95,15 @@ export const nl = {
   'home.hero.btnSecondary': 'Meer informatie',
 
   'home.features.title': 'Hoe werkt het',
-  'home.features.encrypt.title': '🔐 Versleutelen in de browser',
+  'home.features.encrypt.title': '🔐 Typ uw memo',
   'home.features.encrypt.description':
-    'Typ uw memo. Deze wordt direct in uw browser versleuteld met sterke AES-256-encryptie voordat deze onze servers bereikt.',
+    'U heeft de controle. Uw tekst wordt op uw apparaat versleuteld en de onversleutelde versie verlaat uw browser nooit.',
   'home.features.share.title': '🔗 Veilig delen',
   'home.features.share.description':
-    'Ontvang een unieke URL en een apart willekeurig wachtwoord, en deel deze via verschillende kanalen voor extra veiligheid.',
+    'Ontvang een unieke URL en een apart sterk wachtwoord, en deel deze via verschillende kanalen voor extra veiligheid.',
   'home.features.destruct.title': '💥 Automatische vernietiging',
   'home.features.destruct.description':
-    'De memo verwijdert zichzelf permanent nadat deze is gelezen of wanneer de tijdslimiet is bereikt (van 8 uur tot 30 dagen).',
+    'De memo wordt automatisch en permanent verwijderd nadat deze is gelezen of wanneer de tijdslimiet verstrijkt (van 8 uur tot 30 dagen).',
 
   'home.security.title': 'Beveiligingsfuncties',
   'home.security.encryption.title': '🔒 Echte client-side encryptie',

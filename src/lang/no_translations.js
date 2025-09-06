@@ -95,15 +95,15 @@ export const no = {
   'home.hero.btnSecondary': 'Les mer',
 
   'home.features.title': 'Slik fungerer det',
-  'home.features.encrypt.title': '🔐 Krypter i nettleseren',
+  'home.features.encrypt.title': '🔐 Skriv notatet ditt',
   'home.features.encrypt.description':
-    'Skriv inn notatet ditt. Det krypteres direkte i nettleseren din med sterk AES-256-kryptering før det når våre servere.',
+    'Du har kontrollen. Teksten din krypteres på enheten din, og klartekstversjonen forlater aldri nettleseren din.',
   'home.features.share.title': '🔗 Del sikkert',
   'home.features.share.description':
-    'Få en unik URL og et separat tilfeldig passord, og del dem via ulike kanaler for ekstra sikkerhet.',
+    'Få en unik URL og et separat sterkt passord, og del dem via ulike kanaler for ekstra sikkerhet.',
   'home.features.destruct.title': '💥 Selvdestruksjon',
   'home.features.destruct.description':
-    'Notatet slettes permanent etter at det er lest eller når tidsgrensen utløper (fra 8 timer til 30 dager).',
+    'Notatet slettes automatisk og permanent etter at det er lest eller når tidsgrensen utløper (fra 8 timer til 30 dager).',
 
   'home.security.title': 'Sikkerhetsfunksjoner',
   'home.security.encryption.title': '🔒 Ekte klientbasert kryptering',

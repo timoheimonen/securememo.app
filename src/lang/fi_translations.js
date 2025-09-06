@@ -96,15 +96,15 @@ export const fi = {
   'home.hero.btnSecondary': 'Lisätietoja',
 
   'home.features.title': 'Näin Se Toimii',
-  'home.features.encrypt.title': '🔐 Salaa Selaimessa',
+  'home.features.encrypt.title': '🔐 Kirjoita muistiosi',
   'home.features.encrypt.description':
-    'Kirjoita muistiosi. Se salataan vahvalla AES-256-salauksella suoraan selaimessasi ennen kuin se lähetetään palvelimille.',
+    'Kontrolli on sinulla. Tekstisi salataan omalla laitteellasi, eikä selväkielinen versio poistu koskaan selaimestasi.',
   'home.features.share.title': '🔗 Jaa Turvallisesti',
   'home.features.share.description':
-    'Saat yksilöllisen URL-osoitteen ja erillisen satunnaisen salasanan, jotka kannattaa jakaa eri kanavia pitkin lisäturvan vuoksi.',
+    'Saat yksilöllisen URL-osoitteen ja erillisen vahvan salasanan, ja jaa ne eri kanavia pitkin lisäturvan vuoksi.',
   'home.features.destruct.title': '💥 Automaattinen poisto',
   'home.features.destruct.description':
-    'Muistio poistetaan pysyvästi, kun se on luettu tai kun aikaraja umpeutuu (8 tunnista 30 päivään).',
+    'Muistio poistetaan automaattisesti ja pysyvästi, kun se on luettu tai kun aikaraja umpeutuu (8 tunnista 30 päivään).',
 
   'home.security.title': 'Turvaominaisuudet',
   'home.security.encryption.title': '🔒 Aidosti Selaimessa Salattu',

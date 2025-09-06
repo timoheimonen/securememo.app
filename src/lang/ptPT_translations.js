@@ -98,15 +98,15 @@ export const ptPT = {
   'home.hero.btnSecondary': 'Saiba Mais',
 
   'home.features.title': 'Como Funciona',
-  'home.features.encrypt.title': '🔐 Criptografia no Navegador',
+  'home.features.encrypt.title': '🔐 Escreva o seu memo',
   'home.features.encrypt.description':
-    'Introduza o seu memo. É criptografado directamente no seu navegador usando criptografia AES-256 forte antes de tocar os nossos servidores.',
+    'Tem controlo total. O seu texto é cifrado no seu dispositivo e a versão não cifrada nunca sai do seu navegador.',
   'home.features.share.title': '🔗 Compartilhe com Segurança',
   'home.features.share.description':
-    'Obtenha uma URL única e uma palavra-passe aleatória separada, e partilhe-as por canais diferentes para segurança extra.',
+    'Obtenha uma URL única e uma palavra‑passe forte separada e partilhe‑as por canais diferentes para segurança adicional.',
   'home.features.destruct.title': '💥 Autodestruição',
   'home.features.destruct.description':
-    'O memo se exclui permanentemente após ser lido ou quando o tempo limite expira (de 8 horas a 30 dias).',
+    'O memo é eliminado automaticamente e de forma permanente após ser lido ou quando o limite de tempo expira (de 8 horas a 30 dias).',
 
   'home.security.title': 'Recursos de Segurança',
   'home.security.encryption.title': '🔒 Verdadeira Criptografia do Lado do Cliente',
