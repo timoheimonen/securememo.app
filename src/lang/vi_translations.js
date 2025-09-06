@@ -95,15 +95,15 @@ export const vi = {
   'home.hero.btnSecondary': 'Tìm hiểu thêm',
 
   'home.features.title': 'Cách hoạt động',
-  'home.features.encrypt.title': '🔐 Mã hóa trên trình duyệt',
+  'home.features.encrypt.title': '🔐 Nhập ghi chú của bạn',
   'home.features.encrypt.description':
-    'Nhập ghi chú của bạn. Ghi chú sẽ được mã hóa ngay trên trình duyệt bằng mã hóa AES-256 mạnh mẽ trước khi gửi lên máy chủ.',
+    'Bạn hoàn toàn kiểm soát. Nội dung của bạn được mã hóa ngay trên thiết bị, và phiên bản chưa mã hóa sẽ không bao giờ rời khỏi trình duyệt của bạn.',
   'home.features.share.title': '🔗 Chia sẻ an toàn',
   'home.features.share.description':
-    'Nhận một URL duy nhất và mật khẩu ngẫu nhiên riêng biệt, chia sẻ qua các kênh khác nhau để tăng bảo mật.',
+    'Nhận một URL duy nhất và một mật khẩu mạnh riêng biệt, và chia sẻ chúng qua các kênh khác nhau để tăng cường bảo mật.',
   'home.features.destruct.title': '💥 Tự hủy',
   'home.features.destruct.description':
-    'Ghi chú sẽ tự động xóa vĩnh viễn sau khi đọc hoặc khi hết thời gian (từ 8 giờ đến 30 ngày).',
+    'Ghi chú sẽ được tự động xóa vĩnh viễn sau khi được đọc hoặc khi hết thời hạn (từ 8 giờ đến 30 ngày).',
 
   'home.security.title': 'Tính năng bảo mật',
   'home.security.encryption.title': '🔒 Mã hóa phía khách hàng thực sự',

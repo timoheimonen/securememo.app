@@ -94,15 +94,15 @@ export const ja = {
   'home.hero.btnSecondary': '詳細を見る',
 
   'home.features.title': '仕組み',
-  'home.features.encrypt.title': '🔐 ブラウザで暗号化',
+  'home.features.encrypt.title': '🔐 メモを入力',
   'home.features.encrypt.description':
-    'メモを入力すると、強力なAES-256暗号化を使用してサーバーに送信される前にブラウザで暗号化されます。',
+    'コントロールはあなたにあります。テキストはお使いのデバイス上で暗号化され、平文のままのデータがブラウザの外へ出ることは決してありません。',
   'home.features.share.title': '🔗 安全に共有',
   'home.features.share.description':
-    '一意のURLと別々のランダムパスワードを取得し、セキュリティを強化するために異なるチャネルで共有します。',
+    '一意のURLと別の強力なパスワードを取得し、追加の安全性のために異なるチャネルで共有します。',
   'home.features.destruct.title': '💥 自動破壊',
   'home.features.destruct.description':
-    'メモは読み取られた後、または時間制限（8時間から30日）が切れた後に完全に削除されます。',
+    'メモは読み取り後、または時間制限（8時間〜30日）の満了時に自動的かつ永久に削除されます。',
 
   'home.security.title': 'セキュリティ機能',
   'home.security.encryption.title': '🔒 真のクライアントサイド暗号化',

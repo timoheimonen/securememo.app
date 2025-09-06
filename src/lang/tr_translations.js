@@ -94,15 +94,15 @@ export const tr = {
   'home.hero.btnSecondary': 'Daha Fazla Bilgi',
 
   'home.features.title': 'Nasıl Çalışır',
-  'home.features.encrypt.title': '🔐 Tarayıcıda Şifreleme',
+  'home.features.encrypt.title': '🔐 Notunuzu yazın',
   'home.features.encrypt.description':
-    'Notunuzu yazın. Notunuz, sunucularımıza ulaşmadan önce tarayıcınızda güçlü AES-256 şifreleme ile şifrelenir.',
+    'Kontrol sizde. Metniniz cihazınızda şifrelenir ve şifrelenmemiş hâli asla tarayıcınızdan dışarı çıkmaz.',
   'home.features.share.title': '🔗 Güvenli Paylaşım',
   'home.features.share.description':
-    'Benzersiz bir URL ve ayrı bir rastgele şifre alın, bunları ekstra güvenlik için farklı kanallardan paylaşın.',
+    'Benzersiz bir URL ve ayrı, güçlü bir şifre alın ve bunları ek güvenlik için farklı kanallar üzerinden paylaşın.',
   'home.features.destruct.title': '💥 Otomatik Yok Etme',
   'home.features.destruct.description':
-    'Not, okunduktan veya süre dolduktan sonra (8 saatten 30 güne kadar) kalıcı olarak silinir.',
+    'Not, okunduktan sonra veya zaman sınırı dolduğunda (8 saatten 30 güne kadar) otomatik olarak kalıcı biçimde silinir.',
 
   'home.security.title': 'Güvenlik Özellikleri',
   'home.security.encryption.title': '🔒 Gerçek Tarayıcıda Şifreleme',

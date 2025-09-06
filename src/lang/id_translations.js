@@ -95,15 +95,15 @@ export const id = {
   'home.hero.btnSecondary': 'Pelajari Lebih Lanjut',
 
   'home.features.title': 'Cara Kerja',
-  'home.features.encrypt.title': '🔐 Enkripsi di Browser',
+  'home.features.encrypt.title': '🔐 Ketik memo Anda',
   'home.features.encrypt.description':
-    'Ketik memo Anda. Memo akan dienkripsi langsung di browser Anda menggunakan enkripsi AES-256 yang kuat sebelum menyentuh server kami.',
+    'Kendali ada di tangan Anda. Teks Anda dienkripsi di perangkat Anda dan versi tidak terenkripsi tidak pernah meninggalkan browser Anda.',
   'home.features.share.title': '🔗 Bagikan dengan Aman',
   'home.features.share.description':
-    'Dapatkan URL unik dan kata sandi acak terpisah, lalu bagikan melalui saluran yang berbeda untuk keamanan ekstra.',
+    'Dapatkan URL unik dan kata sandi kuat yang terpisah, lalu bagikan keduanya melalui saluran yang berbeda untuk keamanan ekstra.',
   'home.features.destruct.title': '💥 Hancur Otomatis',
   'home.features.destruct.description':
-    'Memo akan menghapus dirinya secara permanen setelah dibaca atau batas waktu habis (dari 8 jam hingga 30 hari).',
+    'Memo akan dihapus otomatis dan permanen setelah dibaca atau saat batas waktu berakhir (dari 8 jam hingga 30 hari).',
 
   'home.security.title': 'Fitur Keamanan',
   'home.security.encryption.title': '🔒 Enkripsi Sisi Klien Sejati',

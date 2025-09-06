@@ -96,15 +96,15 @@ export const hu = {
   'home.hero.btnSecondary': 'Tudjon meg többet',
 
   'home.features.title': 'Hogyan működik',
-  'home.features.encrypt.title': '🔐 Titkosítás böngészőben',
+  'home.features.encrypt.title': '🔐 Írja be a jegyzetét',
   'home.features.encrypt.description':
-    'Írja be jegyzetét. A jegyzet közvetlenül a böngészőben titkosításra kerül erős AES-256 titkosítással, mielőtt eljutna a szervereinkhez.',
+    'Ön irányít. A szöveg az eszközén kerül titkosításra, és a titkosítatlan változat soha nem hagyja el a böngészőjét.',
   'home.features.share.title': '🔗 Biztonságos megosztás',
   'home.features.share.description':
-    'Egyedi URL-t és külön véletlenszerű jelszót kap, amelyeket külön csatornákon keresztül oszthat meg a nagyobb biztonság érdekében.',
+    'Egyedi URL-t és külön, erős jelszót kap, amelyeket külön csatornákon keresztül oszthat meg a nagyobb biztonság érdekében.',
   'home.features.destruct.title': '💥 Önmegsemmisítés',
   'home.features.destruct.description':
-    'A jegyzet véglegesen törlődik, miután elolvasták vagy lejárt az időkorlát (8 órától 30 napig).',
+    'A jegyzet automatikusan és véglegesen törlődik, miután elolvasták, vagy amikor lejár az időkorlát (8 órától 30 napig).',
 
   'home.security.title': 'Biztonsági funkciók',
   'home.security.encryption.title': '🔒 Valódi kliensoldali titkosítás',

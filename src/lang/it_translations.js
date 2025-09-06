@@ -96,15 +96,15 @@ export const it = {
   'home.hero.btnSecondary': 'Scopri di Più',
 
   'home.features.title': 'Come Funziona',
-  'home.features.encrypt.title': '🔐 Cripta nel Browser',
+  'home.features.encrypt.title': '🔐 Digita la tua memo',
   'home.features.encrypt.description':
-    'Scrivi la tua memo. Viene crittografata direttamente nel tuo browser utilizzando la forte crittografia AES-256 prima di toccare i nostri server.',
+    'Hai tu il controllo. Il tuo testo viene crittografato sul tuo dispositivo e la versione in chiaro non lascia mai il tuo browser.',
   'home.features.share.title': '🔗 Condividi in Sicurezza',
   'home.features.share.description':
-    'Ottieni un URL unico e una password casuale separata, e condividili attraverso canali diversi per sicurezza extra.',
+    'Ottieni un URL univoco e una password forte separata, e condividili tramite canali diversi per maggiore sicurezza.',
   'home.features.destruct.title': '💥 Auto-Distruzione',
   'home.features.destruct.description':
-    'La memo si elimina definitivamente dopo essere stata letta o quando scade il limite di tempo (da 8 ore a 30 giorni).',
+    'La memo viene eliminata automaticamente e definitivamente dopo la lettura o alla scadenza del limite di tempo (da 8 ore a 30 giorni).',
 
   'home.security.title': 'Caratteristiche di Sicurezza',
   'home.security.encryption.title': '🔒 Vera Crittografia Lato Client',

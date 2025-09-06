@@ -97,15 +97,15 @@ export const fr = {
   'home.hero.btnSecondary': 'En Savoir Plus',
 
   'home.features.title': 'Comment Ça Marche',
-  'home.features.encrypt.title': '🔐 Chiffrer dans le Navigateur',
+  'home.features.encrypt.title': '🔐 Saisissez votre mémo',
   'home.features.encrypt.description':
-    'Tapez votre mémo. Il est chiffré directement dans votre navigateur en utilisant un chiffrement AES-256 fort avant de toucher nos serveurs.',
+    'Vous avez le contrôle. Votre texte est chiffré sur votre appareil et la version en clair ne quitte jamais votre navigateur.',
   'home.features.share.title': '🔗 Partager en Sécurité',
   'home.features.share.description':
-    'Obtenez une URL unique et un mot de passe aléatoire séparé, et partagez-les via différents canaux pour une sécurité supplémentaire.',
+    'Obtenez une URL unique et un mot de passe fort séparé, et partagez-les via différents canaux pour une sécurité accrue.',
   'home.features.destruct.title': '💥 Auto-Destruction',
   'home.features.destruct.description':
-    'Le mémo se supprime définitivement après avoir été lu ou quand la limite de temps expire (de 8 heures à 30 jours).',
+    'Le mémo est supprimé automatiquement et définitivement après lecture ou à l’expiration du délai (de 8 heures à 30 jours).',
 
   'home.security.title': 'Fonctionnalités de Sécurité',
   'home.security.encryption.title': '🔒 Vrai Chiffrement Côté Client',

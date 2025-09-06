@@ -97,15 +97,15 @@ export const es = {
   'home.hero.btnSecondary': 'Saber Más',
 
   'home.features.title': 'Cómo Funciona',
-  'home.features.encrypt.title': '🔐 Cifrar en Navegador',
+  'home.features.encrypt.title': '🔐 Escribe tu memo',
   'home.features.encrypt.description':
-    'Escribe tu memo. Se cifra directamente en tu navegador usando cifrado AES-256 fuerte antes de tocar nuestros servidores.',
+    'Tú tienes el control. Tu texto se cifra en tu dispositivo y la versión sin cifrar nunca sale de tu navegador.',
   'home.features.share.title': '🔗 Compartir Seguramente',
   'home.features.share.description':
-    'Obtén una URL única y una contraseña aleatoria separada, y compártelas a través de diferentes canales para mayor seguridad.',
+    'Obtén una URL única y una contraseña fuerte separada, y compártelas por diferentes canales para mayor seguridad.',
   'home.features.destruct.title': '💥 Auto-Destrucción',
   'home.features.destruct.description':
-    'El memo se elimina permanentemente después de leerse o cuando expira el límite de tiempo (de 8 horas a 30 días).',
+    'El memo se elimina automáticamente y de forma permanente después de leerse o cuando expira el límite de tiempo (de 8 horas a 30 días).',
 
   'home.security.title': 'Características de Seguridad',
   'home.security.encryption.title': '🔒 Verdadero Cifrado del Lado del Cliente',

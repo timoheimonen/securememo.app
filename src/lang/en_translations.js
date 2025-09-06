@@ -95,16 +95,15 @@ export const en = {
   'home.hero.btnSecondary': 'Learn More',
 
   'home.features.title': 'How It Works',
-  'home.features.encrypt.title': '🔐 Encrypt in Browser',
+  'home.features.encrypt.title': '🔐 Type your memo',
   'home.features.encrypt.description':
-    'Type your memo. It gets encrypted right in your browser using strong AES-256 encryption before ever touching our servers.',
+    "You're in control. Your text is encrypted on your device and the unencrypted version never leaves your browser.",
   'home.features.share.title': '🔗 Share Securely',
   'home.features.share.description':
-    'Get a unique URL and a separate random password, and share them through different channels for extra security.',
+    'Get a unique URL and a separate strong password, and share them through different channels for extra security.',
   'home.features.destruct.title': '💥 Auto-Destruct',
   'home.features.destruct.description':
-    "The memo deletes itself permanently after it's read or the time limit expires (from 8 hours to 30 days).",
-
+    "The memo is auto-deleted permanently after it's read or the time limit expires (from 8 hours to 30 days).",
   'home.security.title': 'Security Features',
   'home.security.encryption.title': '🔒 True Client-Side Encryption',
   'home.security.encryption.description':

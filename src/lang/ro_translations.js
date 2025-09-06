@@ -97,15 +97,15 @@ export const ro = {
   'home.hero.btnSecondary': 'Află mai multe',
 
   'home.features.title': 'Cum funcționează',
-  'home.features.encrypt.title': '🔐 Criptează în browser',
+  'home.features.encrypt.title': '🔐 Tastează memoul tău',
   'home.features.encrypt.description':
-    'Tastează memoul tău. Este criptat direct în browserul tău folosind criptare puternică AES-256 înainte de a ajunge vreodată pe serverele noastre.',
+    'Ești în control. Textul tău este criptat pe dispozitivul tău, iar versiunea necriptată nu părăsește niciodată browserul.',
   'home.features.share.title': '🔗 Partajează în siguranță',
   'home.features.share.description':
-    'Primești un URL unic și o parolă aleatoare separată, pe care le poți partaja prin canale diferite pentru securitate sporită.',
+    'Primești un URL unic și o parolă separată, puternică, și le poți partaja prin canale diferite pentru securitate suplimentară.',
   'home.features.destruct.title': '💥 Autodistrugere',
   'home.features.destruct.description':
-    'Memoul se șterge definitiv după ce este citit sau când expiră limita de timp (de la 8 ore la 30 de zile).',
+    'Memoul este șters automat și definitiv după ce este citit sau când expiră limita de timp (de la 8 ore la 30 de zile).',
 
   'home.security.title': 'Funcții de securitate',
   'home.security.encryption.title': '🔒 Adevărată criptare pe partea clientului',
