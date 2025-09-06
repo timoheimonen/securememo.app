@@ -96,15 +96,15 @@ export const de = {
   'home.hero.btnSecondary': 'Mehr erfahren',
 
   'home.features.title': 'So funktioniert es',
-  'home.features.encrypt.title': '🔐 Im Browser verschlüsseln',
+  'home.features.encrypt.title': '🔐 Schreiben Sie Ihre Notiz',
   'home.features.encrypt.description':
-    'Geben Sie Ihre Notiz ein. Sie wird direkt in Ihrem Browser mit starker AES-256-Verschlüsselung verschlüsselt, bevor sie unsere Server erreicht.',
+    'Sie haben die Kontrolle. Ihr Text wird auf Ihrem Gerät verschlüsselt, und die unverschlüsselte Version verlässt Ihren Browser nie.',
   'home.features.share.title': '🔗 Sicher teilen',
   'home.features.share.description':
-    'Erhalten Sie eine eindeutige URL und ein separates zufälliges Passwort, und teilen Sie sie über verschiedene Kanäle für zusätzliche Sicherheit.',
+    'Erhalten Sie eine eindeutige URL und ein separates starkes Passwort und teilen Sie beides über verschiedene Kanäle für zusätzliche Sicherheit.',
   'home.features.destruct.title': '💥 Automatische Selbstzerstörung',
   'home.features.destruct.description':
-    'Die Notiz löscht sich dauerhaft selbst, nachdem sie gelesen wurde oder das Zeitlimit abläuft (von 8 Stunden bis 30 Tage).',
+    'Die Notiz wird automatisch und dauerhaft gelöscht, nachdem sie gelesen wurde oder wenn das Zeitlimit abläuft (von 8 Stunden bis 30 Tage).',
 
   'home.security.title': 'Sicherheitsfeatures',
   'home.security.encryption.title': '🔒 Echte clientseitige Verschlüsselung',

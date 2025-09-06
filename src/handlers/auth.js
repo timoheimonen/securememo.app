@@ -460,28 +460,14 @@ export async function handleCreateMemo(request, env) {
   } finally {
     // Best-effort erase of confidential data
     if (sanitizedEncryptedMessage) {
-      try {
-        // Intentionally not attempting string overwrite; strings are immutable and engines may intern.
-      } catch (_) {
-        /* Ignore cleanup errors */
-      }
       sanitizedEncryptedMessage = null;
     }
     if (deletionTokenHash) {
-      try {
-        // Intentionally not overwriting string; will null out reference.
-      } catch (_) {
-        /* Ignore cleanup errors */
-      }
       deletionTokenHash = null;
     }
-    if (requestData) {
-      try {
-        if (requestData.encryptedMessage) requestData.encryptedMessage = null;
-        if (requestData.deletionTokenHash) requestData.deletionTokenHash = null;
-      } catch (_) {
-        /* Ignore cleanup errors */
-      }
+    if (requestData && typeof requestData === 'object') {
+      if ('encryptedMessage' in requestData) requestData.encryptedMessage = null;
+      if ('deletionTokenHash' in requestData) requestData.deletionTokenHash = null;
       requestData = null;
     }
   }
@@ -688,35 +674,17 @@ export async function handleConfirmDelete(request, env) {
   } finally {
     // Best-effort wiping of sensitive variables
     if (deletionToken) {
-      try {
-        // Skipping string overwrite; will null reference below.
-      } catch (_) {
-        /* Ignore cleanup errors */
-      }
       deletionToken = null;
     }
     if (computedHash) {
-      try {
-        // Skipping overwrite; will null reference below.
-      } catch (_) {
-        /* Ignore cleanup errors */
-      }
       computedHash = null;
     }
     if (memoId) {
-      try {
-        memoId = null;
-      } catch (_) {
-        /* Ignore cleanup errors */
-      }
+      memoId = null;
     }
-    if (row) {
-      try {
-        row.deletion_token_hash = null;
-        row = null;
-      } catch (_) {
-        /* Ignore cleanup errors */
-      }
+    if (row && typeof row === 'object') {
+      if ('deletion_token_hash' in row) row.deletion_token_hash = null;
+      row = null;
     }
   }
 }

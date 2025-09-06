@@ -99,15 +99,15 @@ export const tl = {
   'home.hero.btnSecondary': 'Alamin Pa',
 
   'home.features.title': 'Paano Ito Gumagana',
-  'home.features.encrypt.title': '🔐 Encryption sa Browser',
+  'home.features.encrypt.title': '🔐 I-type ang iyong memo',
   'home.features.encrypt.description':
-    'I-type ang iyong memo. Ini-encrypt ito kaagad sa iyong browser gamit ang malakas na AES-256 bago pa man makarating sa aming mga server.',
+    'Ikaw ang may kontrol. Ang iyong teksto ay ini-encrypt sa iyong device at ang hindi naka-encrypt na bersyon ay hindi kailanman umaalis sa iyong browser.',
   'home.features.share.title': '🔗 Ligtas na Pagbabahagi',
   'home.features.share.description':
-    'Kumuha ng natatanging URL at hiwalay na random na password, at ibahagi ang mga ito sa magkaibang channel para dagdag seguridad.',
+    'Kumuha ng natatanging URL at hiwalay na malakas na password, at ibahagi ang mga ito sa magkaibang channel para dagdag seguridad.',
   'home.features.destruct.title': '💥 Awtomatikong Pagbura',
   'home.features.destruct.description':
-    'Ang memo ay permanenteng nabubura kapag nabasa o kapag lumampas na sa itinakdang oras (mula 8 oras hanggang 30 araw).',
+    'Ang memo ay awtomatikong nabubura nang permanente kapag nabasa o kapag lumampas na sa itinakdang oras (mula 8 oras hanggang 30 araw).',
 
   'home.security.title': 'Mga Tampok sa Seguridad',
   'home.security.encryption.title': '🔒 Tunay na Client-Side Encryption',
