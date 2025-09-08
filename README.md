@@ -60,7 +60,11 @@ securememo/
 └── src/
     ├── index.js                # Main Worker entry point (routing, security headers, cron jobs)
     ├── handlers/               # API request handlers
-    │   └── auth.js             # Handles memo creation, reading, confirmation, and cleanup
+    │   ├── auth-utils.js       # Shared utilities for authentication handlers
+    │   ├── memo-cleanup.js     # Handles cleanup of expired memos
+    │   ├── memo-create.js      # Handles memo creation
+    │   ├── memo-delete.js      # Handles memo deletion confirmation
+    │   └── memo-read.js        # Handles memo reading
     ├── styles/                 # CSS styling
     │   └── styles.js           # Dynamic CSS generation
     ├── templates/              # HTML and JavaScript templates
