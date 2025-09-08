@@ -3,7 +3,7 @@
 // without disabling the rule. This is a safe destructuring of globalThis provided by the
 // Cloudflare Workers / browser environment. Only symbols actually used in this module are listed.
 const { Response, fetch, URLSearchParams, TextEncoder, crypto, btoa } = globalThis;
-import { validateMemoIdSecure, validateExpiryHours } from '../utils/validation.js';
+import { validateMemoIdSecure, validateExpiryHours, sanitizeForHTML } from '../utils/validation.js';
 import { getErrorMessage, getMemoAccessDeniedMessage } from '../utils/errorMessages.js';
 import { uniformResponseDelay } from '../utils/timingSecurity.js';
 import { recordKvFailureAndCheckLimit } from '../utils/rateLimiter.js';
@@ -13,11 +13,11 @@ const MAX_REQUEST_BYTES = 64 * 1024; // 64 KB
 
 // Uniform delayed error helper to reduce timing side-channel variance
 async function delayedJsonError(bodyObj, status = 400, extraHeaders = {}) {
-  await uniformResponseDelay();
-  return new Response(JSON.stringify(bodyObj), {
-    status,
-    headers: { 'Content-Type': 'application/json', 'Cache-Control': 'no-store', ...extraHeaders },
-  });
+    await uniformResponseDelay();
+    return new Response(JSON.stringify(bodyObj), {
+        status,
+        headers: { 'Content-Type': 'application/json', 'Cache-Control': 'no-store', ...extraHeaders },
+    });
 }
 
 /**
@@ -28,66 +28,66 @@ async function delayedJsonError(bodyObj, status = 400, extraHeaders = {}) {
  * @returns {Promise<{success: boolean, error?: Response}>}
  */
 async function verifyTurnstileToken(token, env, requestLocale) {
-  const isValidTurnstile = /^[A-Za-z0-9._-]{10,}$/.test(token);
+    const isValidTurnstile = /^[A-Za-z0-9._-]{10,}$/.test(token);
 
-  if (!isValidTurnstile) {
-    await uniformResponseDelay();
-    return {
-      success: false,
-      error: new Response(JSON.stringify({ error: getErrorMessage('MISSING_TURNSTILE', requestLocale) }), {
-        status: 400,
-        headers: { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' },
-      }),
-    };
-  }
-
-  try {
-    const turnstileResponse = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-      },
-      body: new URLSearchParams({
-        secret: env.TURNSTILE_SECRET,
-        response: token,
-      }),
-    });
-
-    if (!turnstileResponse.ok) {
-      await uniformResponseDelay();
-      return {
-        success: false,
-        error: new Response(JSON.stringify({ error: getErrorMessage('TURNSTILE_API_ERROR', requestLocale) }), {
-          status: 500,
-          headers: { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' },
-        }),
-      };
+    if (!isValidTurnstile) {
+        await uniformResponseDelay();
+        return {
+            success: false,
+            error: new Response(JSON.stringify({ error: getErrorMessage('MISSING_TURNSTILE', requestLocale) }), {
+                status: 400,
+                headers: { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' },
+            }),
+        };
     }
 
-    const turnstileResult = await turnstileResponse.json();
+    try {
+        const turnstileResponse = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: new URLSearchParams({
+                secret: env.TURNSTILE_SECRET,
+                response: token,
+            }),
+        });
 
-    if (!turnstileResult.success) {
-      await uniformResponseDelay();
-      return {
-        success: false,
-        error: new Response(JSON.stringify({ error: getErrorMessage('TURNSTILE_FAILED', requestLocale) }), {
-          status: 400,
-          headers: { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' },
-        }),
-      };
+        if (!turnstileResponse.ok) {
+            await uniformResponseDelay();
+            return {
+                success: false,
+                error: new Response(JSON.stringify({ error: getErrorMessage('TURNSTILE_API_ERROR', requestLocale) }), {
+                    status: 500,
+                    headers: { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' },
+                }),
+            };
+        }
+
+        const turnstileResult = await turnstileResponse.json();
+
+        if (!turnstileResult.success) {
+            await uniformResponseDelay();
+            return {
+                success: false,
+                error: new Response(JSON.stringify({ error: getErrorMessage('TURNSTILE_FAILED', requestLocale) }), {
+                    status: 400,
+                    headers: { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' },
+                }),
+            };
+        }
+
+        return { success: true };
+    } catch (turnstileError) {
+        await uniformResponseDelay();
+        return {
+            success: false,
+            error: new Response(JSON.stringify({ error: getErrorMessage('TURNSTILE_VERIFICATION_ERROR', requestLocale) }), {
+                status: 500,
+                headers: { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' },
+            }),
+        };
     }
-
-    return { success: true };
-  } catch (turnstileError) {
-    await uniformResponseDelay();
-    return {
-      success: false,
-      error: new Response(JSON.stringify({ error: getErrorMessage('TURNSTILE_VERIFICATION_ERROR', requestLocale) }), {
-        status: 500,
-        headers: { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' },
-      }),
-    };
-  }
 }
 
 /**
@@ -98,23 +98,23 @@ async function verifyTurnstileToken(token, env, requestLocale) {
  * @returns {Promise<{limited: boolean, error?: Response}>}
  */
 async function handleRateLimited(request, env, requestLocale) {
-  const rate = await recordKvFailureAndCheckLimit(request, env, {
-    prefix: 'delFail',
-    allowedFailures: 2,
-    windowSeconds: 600,
-    sliding: true,
-  });
-  if (rate.limited) {
-    await uniformResponseDelay();
-    return {
-      limited: true,
-      error: new Response(JSON.stringify({ error: getErrorMessage('RATE_LIMITED', requestLocale) }), {
-        status: 429,
-        headers: { 'Content-Type': 'application/json', 'Retry-After': '60' },
-      }),
-    };
-  }
-  return { limited: false };
+    const rate = await recordKvFailureAndCheckLimit(request, env, {
+        prefix: 'delFail',
+        allowedFailures: 2,
+        windowSeconds: 600,
+        sliding: true,
+    });
+    if (rate.limited) {
+        await uniformResponseDelay();
+        return {
+            limited: true,
+            error: new Response(JSON.stringify({ error: getErrorMessage('RATE_LIMITED', requestLocale) }), {
+                status: 429,
+                headers: { 'Content-Type': 'application/json', 'Retry-After': '60' },
+            }),
+        };
+    }
+    return { limited: false };
 }
 
 /**
@@ -123,11 +123,11 @@ async function handleRateLimited(request, env, requestLocale) {
  * @returns {Promise<Response>}
  */
 async function createAccessDeniedResponse(requestLocale) {
-  await uniformResponseDelay();
-  return new Response(JSON.stringify({ error: getMemoAccessDeniedMessage(requestLocale) }), {
-    status: 404,
-    headers: { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' },
-  });
+    await uniformResponseDelay();
+    return new Response(JSON.stringify({ error: getMemoAccessDeniedMessage(requestLocale) }), {
+        status: 404,
+        headers: { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' },
+    });
 }
 
 /**
@@ -139,21 +139,21 @@ async function createAccessDeniedResponse(requestLocale) {
  * @returns {Promise<{valid: boolean, error?: Response}>}
  */
 async function validateMemoIdWithRateLimit(memoId, request, env, requestLocale) {
-  if (typeof memoId !== 'string' || !(await validateMemoIdSecure(memoId))) {
-    const rateResult = await handleRateLimited(request, env, requestLocale);
-    if (rateResult.limited) {
-      return { valid: false, error: rateResult.error };
+    if (typeof memoId !== 'string' || !(await validateMemoIdSecure(memoId))) {
+        const rateResult = await handleRateLimited(request, env, requestLocale);
+        if (rateResult.limited) {
+            return { valid: false, error: rateResult.error };
+        }
+        await uniformResponseDelay();
+        return {
+            valid: false,
+            error: new Response(JSON.stringify({ error: getMemoAccessDeniedMessage(requestLocale) }), {
+                status: 404,
+                headers: { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' },
+            }),
+        };
     }
-    await uniformResponseDelay();
-    return {
-      valid: false,
-      error: new Response(JSON.stringify({ error: getMemoAccessDeniedMessage(requestLocale) }), {
-        status: 404,
-        headers: { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' },
-      }),
-    };
-  }
-  return { valid: true };
+    return { valid: true };
 }
 
 /**
@@ -164,11 +164,12 @@ async function validateMemoIdWithRateLimit(memoId, request, env, requestLocale) 
  * @returns {Promise<Response|null>}
  */
 async function ensureJsonContentType(request, requestLocale) {
-  const contentType = request.headers.get('content-type');
-  if (!contentType || !contentType.includes('application/json')) {
-    return delayedJsonError({ error: getErrorMessage('CONTENT_TYPE_ERROR', requestLocale) });
-  }
-  return null;
+    const contentType = request.headers.get('content-type');
+    const sanitizedContentType = sanitizeForHTML(contentType);
+    if (!sanitizedContentType || !sanitizedContentType.includes('application/json')) {
+        return delayedJsonError({ error: getErrorMessage('CONTENT_TYPE_ERROR', requestLocale) });
+    }
+    return null;
 }
 
 /**
@@ -179,21 +180,21 @@ async function ensureJsonContentType(request, requestLocale) {
  * @returns {Promise<{data: any}|{errorResponse: Response}>}
  */
 async function parseJsonRequest(request, requestLocale) {
-  const parsed = await safeParseJson(request, MAX_REQUEST_BYTES);
-  if (parsed?.error) {
-    if (parsed.error === 'SIZE_LIMIT') {
-      // Maintain explicit uniform delay + 413 semantics
-      await uniformResponseDelay();
-      return {
-        errorResponse: new Response(JSON.stringify({ error: getErrorMessage('REQUEST_TOO_LARGE', requestLocale) }), {
-          status: 413,
-          headers: { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' },
-        }),
-      };
+    const parsed = await safeParseJson(request, MAX_REQUEST_BYTES);
+    if (parsed?.error) {
+        if (parsed.error === 'SIZE_LIMIT') {
+            // Maintain explicit uniform delay + 413 semantics
+            await uniformResponseDelay();
+            return {
+                errorResponse: new Response(JSON.stringify({ error: getErrorMessage('REQUEST_TOO_LARGE', requestLocale) }), {
+                    status: 413,
+                    headers: { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' },
+                }),
+            };
+        }
+        return { errorResponse: await delayedJsonError({ error: getErrorMessage('INVALID_JSON', requestLocale) }) };
     }
-    return { errorResponse: await delayedJsonError({ error: getErrorMessage('INVALID_JSON', requestLocale) }) };
-  }
-  return { data: parsed.data };
+    return { data: parsed.data };
 }
 
 /**
@@ -204,9 +205,9 @@ async function parseJsonRequest(request, requestLocale) {
  * @returns {Promise<Response>}
  */
 async function rateLimitOrAccessDenied(request, env, requestLocale) {
-  const rateResult = await handleRateLimited(request, env, requestLocale);
-  if (rateResult.limited) return rateResult.error;
-  return await createAccessDeniedResponse(requestLocale);
+    const rateResult = await handleRateLimited(request, env, requestLocale);
+    if (rateResult.limited) return rateResult.error;
+    return await createAccessDeniedResponse(requestLocale);
 }
 
 /**
@@ -218,39 +219,39 @@ async function rateLimitOrAccessDenied(request, env, requestLocale) {
  * @returns {Promise<object|null>}
  */
 async function safeParseJson(request, limitBytes) {
-  try {
-    const contentLengthHeader = request.headers.get('content-length');
-    if (contentLengthHeader) {
-      const declared = parseInt(contentLengthHeader, 10);
-      if (!Number.isNaN(declared) && declared > limitBytes) {
-        return { error: 'SIZE_LIMIT' };
-      }
-    }
-    // Read raw text once (can't reuse body afterwards)
-    const text = await request.text();
-    // Compute actual UTF-8 byte length
-    const byteLen = new TextEncoder().encode(text).length;
-    if (byteLen > limitBytes) {
-      return { error: 'SIZE_LIMIT' };
-    }
     try {
-      const data = JSON.parse(text);
-      return { data };
+        const contentLengthHeader = request.headers.get('content-length');
+        if (contentLengthHeader) {
+            const declared = parseInt(contentLengthHeader, 10);
+            if (!Number.isNaN(declared) && declared > limitBytes) {
+                return { error: 'SIZE_LIMIT' };
+            }
+        }
+        // Read raw text once (can't reuse body afterwards)
+        const text = await request.text();
+        // Compute actual UTF-8 byte length
+        const byteLen = new TextEncoder().encode(text).length;
+        if (byteLen > limitBytes) {
+            return { error: 'SIZE_LIMIT' };
+        }
+        try {
+            const data = JSON.parse(text);
+            return { data };
+        } catch (e) {
+            return { error: 'PARSE' };
+        }
     } catch (e) {
-      return { error: 'PARSE' };
+        return { error: 'PARSE' };
     }
-  } catch (e) {
-    return { error: 'PARSE' };
-  }
 }
 
 // Hash token (SHA-256 base64)
 async function hashDeletionToken(token) {
-  const encoder = new TextEncoder();
-  const data = encoder.encode(token);
-  const hashBuffer = await crypto.subtle.digest('SHA-256', data);
-  const hashArray = Array.from(new Uint8Array(hashBuffer));
-  return btoa(String.fromCharCode(...hashArray));
+    const encoder = new TextEncoder();
+    const data = encoder.encode(token);
+    const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+    const hashArray = Array.from(new Uint8Array(hashBuffer));
+    return btoa(String.fromCharCode(...hashArray));
 }
 
 /**
@@ -259,20 +260,20 @@ async function hashDeletionToken(token) {
  * @returns {number|null} - UNIX timestamp (seconds since epoch) or null if invalid
  */
 function calculateExpiryTime(expiryHours) {
-  // Parse expiry hours as integer
-  const hours = parseInt(expiryHours);
+    // Parse expiry hours as integer
+    const hours = parseInt(expiryHours);
 
-  // Validate that it's a valid option
-  if (!validateExpiryHours(expiryHours)) {
-    return null;
-  }
+    // Validate that it's a valid option
+    if (!validateExpiryHours(expiryHours)) {
+        return null;
+    }
 
-  const now = new Date();
-  // Calculate expiry time based on hours (all options now use hours)
-  const expiryTime = new Date(now.getTime() + hours * 60 * 60 * 1000);
+    const now = new Date();
+    // Calculate expiry time based on hours (all options now use hours)
+    const expiryTime = new Date(now.getTime() + hours * 60 * 60 * 1000);
 
-  // Return UNIX timestamp (seconds since epoch)
-  return Math.floor(expiryTime.getTime() / 1000);
+    // Return UNIX timestamp (seconds since epoch)
+    return Math.floor(expiryTime.getTime() / 1000);
 }
 
 /**
@@ -283,42 +284,42 @@ function calculateExpiryTime(expiryHours) {
  * @returns {Promise<string|null>}
  */
 async function generateMemoId(env, maxRetries = 10) {
-  const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_';
-  for (let attempt = 0; attempt < maxRetries; attempt++) {
-    let result = '';
-    const biasThreshold = 256 - (256 % chars.length);
-    for (let i = 0; i < 40; i++) {
-      let value;
-      do {
-        const array = new Uint8Array(1);
-        crypto.getRandomValues(array);
-        value = array[0];
-      } while (value >= biasThreshold);
-      result += chars[value % chars.length];
+    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_';
+    for (let attempt = 0; attempt < maxRetries; attempt++) {
+        let result = '';
+        const biasThreshold = 256 - (256 % chars.length);
+        for (let i = 0; i < 40; i++) {
+            let value;
+            do {
+                const array = new Uint8Array(1);
+                crypto.getRandomValues(array);
+                value = array[0];
+            } while (value >= biasThreshold);
+            result += chars[value % chars.length];
+        }
+        try {
+            const checkStmt = env.DB.prepare('SELECT 1 FROM memos WHERE memo_id = ? LIMIT 1');
+            const existing = await checkStmt.bind(result).first();
+            if (!existing) return result; // unique
+        } catch (_) {
+            // On DB error fall back to optimistic return; UNIQUE constraint will enforce safety
+            return result;
+        }
     }
-    try {
-      const checkStmt = env.DB.prepare('SELECT 1 FROM memos WHERE memo_id = ? LIMIT 1');
-      const existing = await checkStmt.bind(result).first();
-      if (!existing) return result; // unique
-    } catch (_) {
-      // On DB error fall back to optimistic return; UNIQUE constraint will enforce safety
-      return result;
-    }
-  }
-  return null; // signal failure
+    return null; // signal failure
 }
 
 export {
-  delayedJsonError,
-  verifyTurnstileToken,
-  handleRateLimited,
-  createAccessDeniedResponse,
-  validateMemoIdWithRateLimit,
-  ensureJsonContentType,
-  parseJsonRequest,
-  rateLimitOrAccessDenied,
-  safeParseJson,
-  hashDeletionToken,
-  calculateExpiryTime,
-  generateMemoId,
+    delayedJsonError,
+    verifyTurnstileToken,
+    handleRateLimited,
+    createAccessDeniedResponse,
+    validateMemoIdWithRateLimit,
+    ensureJsonContentType,
+    parseJsonRequest,
+    rateLimitOrAccessDenied,
+    safeParseJson,
+    hashDeletionToken,
+    calculateExpiryTime,
+    generateMemoId,
 };
