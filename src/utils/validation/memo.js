@@ -20,7 +20,7 @@ function containsDisallowedControlChars(str) {
 /**
  * Validate memo ID format (exactly 40 chars: alphanumeric, hyphen, underscore)
  * @param {string} memoId - The memo ID to validate
- * @returns {boolean} - Whether the memo ID is valid
+ * @returns {boolean} - whether the memo ID is valid
  */
 export function validateMemoId(memoId) {
   return /^[A-Za-z0-9\-_]{40}$/.test(memoId);
@@ -29,7 +29,7 @@ export function validateMemoId(memoId) {
 /**
  * Secure memo ID validation with artificial delay for error paths
  * @param {string} memoId - The memo ID to validate
- * @returns {Promise<boolean>} - Whether the memo ID is valid
+ * @returns {Promise<boolean>} - whether the memo ID is valid
  */
 export async function validateMemoIdSecure(memoId) {
   const result = validateMemoId(memoId);
@@ -45,7 +45,7 @@ export async function validateMemoIdSecure(memoId) {
 /**
  * Validate encrypted message format and size (max 50KB)
  * @param {string} message - The encrypted message to validate
- * @returns {boolean} - Whether the message is valid
+ * @returns {boolean} - whether the message is valid
  */
 export function validateEncryptedMessage(message) {
   if (!message || typeof message !== 'string' || message.length === 0 || message.length > 50000) {

@@ -24,16 +24,16 @@ export function sanitizeForHTML(input) {
  * @returns {string} - String with HTML entities decoded
  */
 function decodeHtmlEntities(input) {
-  // Important: decode specific entities first, ampersand last to prevent double-decoding
+  // Important: decode ampersand first to avoid double-decoding vulnerabilities
   return input
+    .replace(/&amp;/g, '&')
     .replace(/&lt;/g, '<')
     .replace(/&gt;/g, '>')
     .replace(/&quot;/g, '"')
     .replace(/&#x27;/g, "'")
     .replace(/&#39;/g, "'")
     .replace(/&#x2F;/g, '/')
-    .replace(/&#47;/g, '/')
-    .replace(/&amp;/g, '&');
+    .replace(/&#47;/g, '/');
 }
 
 /**
