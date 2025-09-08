@@ -1,7 +1,21 @@
 // Memo-specific validation functions
 import { uniformResponseDelay } from '../timingSecurity.js';
-import { containsDisallowedControlChars } from './shared.js';
 import { sanitizeForDatabase } from './database.js';
+
+// Private helper: Check if a string contains disallowed control characters excluding \n (10), \r (13) and \t (9).
+// Null byte (0) is handled separately where needed, so this starts at 1.
+function containsDisallowedControlChars(str) {
+  if (typeof str !== 'string' || !str) return false;
+  for (let i = 0; i < str.length; i++) {
+    const code = str.charCodeAt(i);
+    // Skip allowed whitespace controls: tab (9), LF (10), CR (13)
+    if (code === 9 || code === 10 || code === 13) continue;
+    if ((code >= 1 && code <= 8) || (code >= 11 && code <= 12) || (code >= 14 && code <= 31) || code === 127) {
+      return true;
+    }
+  }
+  return false;
+}
 
 /**
  * Validate memo ID format (exactly 40 chars: alphanumeric, hyphen, underscore)
