@@ -60,7 +60,11 @@ securememo/
 └── src/
     ├── index.js                # Main Worker entry point (routing, security headers, cron jobs)
     ├── handlers/               # API request handlers
-    │   └── auth.js             # Handles memo creation, reading, confirmation, and cleanup
+    │   ├── auth-utils.js       # Authentication utilities
+    │   ├── memo-cleanup.js     # Handles memo cleanup
+    │   ├── memo-create.js      # Handles memo creation
+    │   ├── memo-delete.js      # Handles memo deletion
+    │   └── memo-read.js        # Handles memo reading
     ├── styles/                 # CSS styling
     │   └── styles.js           # Dynamic CSS generation
     ├── templates/              # HTML and JavaScript templates
@@ -103,9 +107,17 @@ securememo/
     │   └── zh_translations.js  # Chinese translations
     └── utils/                  # Utility functions
         ├── errorMessages.js    # Centralized error handling with generic messages
+        ├── http.js             # HTTP utilities
+        ├── minifiers.js        # Minifier utilities
         ├── rateLimiter.js      # Rate limiting utilities
+        ├── securityHeaders.js  # Security header utilities
         ├── timingSecurity.js   # Timing attack protections (e.g., constant-time comparisons, artificial delays)
-        └── validation.js       # Input validation, sanitization, and secure checks
+        └── validation/         # Input validation and sanitization
+            ├── database.js     # Database sanitization
+            ├── html.js         # HTML sanitization
+            ├── index.js        # Barrel file for validation utilities
+            ├── memo.js         # Memo-specific validation
+            └── shared.js       # Shared validation utilities
 ```
 
 ## Security

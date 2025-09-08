@@ -15,7 +15,7 @@ import {
   parseJsonRequest,
   createAccessDeniedResponse,
 } from './auth-utils.js';
-import { validateMemoIdSecure, normalizeCiphertextForResponse } from '../utils/validation.js';
+import { validateMemoIdSecure, normalizeCiphertextForResponse } from '../utils/validation/index.js';
 import { getErrorMessage } from '../utils/errorMessages.js';
 import { uniformResponseDelay } from '../utils/timingSecurity.js';
 import { extractLocaleFromRequest } from '../lang/localization.js';

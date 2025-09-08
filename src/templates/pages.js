@@ -1,5 +1,5 @@
 import { t } from '../lang/localization.js';
-import { sanitizeLocale } from '../utils/validation.js';
+import { sanitizeLocale } from '../utils/validation/index.js';
 
 // Helper function to get native language name
 function getLanguageDisplayName(locale) {

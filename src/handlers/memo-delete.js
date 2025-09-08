@@ -11,7 +11,7 @@ import {
   rateLimitOrAccessDenied,
   hashDeletionToken,
 } from './auth-utils.js';
-import { validatePassword } from '../utils/validation.js';
+import { validatePassword } from '../utils/validation/index.js';
 import { getErrorMessage, getMemoAccessDeniedMessage } from '../utils/errorMessages.js';
 import { uniformResponseDelay, constantTimeCompare } from '../utils/timingSecurity.js';
 import { extractLocaleFromRequest } from '../lang/localization.js';

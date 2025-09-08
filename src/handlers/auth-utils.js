@@ -3,7 +3,7 @@
 // without disabling the rule. This is a safe destructuring of globalThis provided by the
 // Cloudflare Workers / browser environment. Only symbols actually used in this module are listed.
 const { Response, fetch, URLSearchParams, TextEncoder, crypto, btoa } = globalThis;
-import { validateMemoIdSecure, validateExpiryHours, sanitizeForHTML } from '../utils/validation.js';
+import { validateMemoIdSecure, validateExpiryHours, sanitizeForHTML } from '../utils/validation/index.js';
 import { getErrorMessage, getMemoAccessDeniedMessage } from '../utils/errorMessages.js';
 import { uniformResponseDelay } from '../utils/timingSecurity.js';
 import { recordKvFailureAndCheckLimit } from '../utils/rateLimiter.js';

@@ -6,7 +6,11 @@ import {
   calculateExpiryTime,
   generateMemoId,
 } from './auth-utils.js';
-import { validateAndSanitizeEncryptedMessageSecure, validateExpiryHours, sanitizeLocale } from '../utils/validation.js';
+import {
+  validateAndSanitizeEncryptedMessageSecure,
+  validateExpiryHours,
+  sanitizeLocale,
+} from '../utils/validation/index.js';
 import { getErrorMessage } from '../utils/errorMessages.js';
 import { uniformResponseDelay } from '../utils/timingSecurity.js';
 import { extractLocaleFromRequest } from '../lang/localization.js';
