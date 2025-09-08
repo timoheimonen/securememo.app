@@ -117,11 +117,6 @@ securememo/
 │       ├── securityHeaders.js    # CSP & security header construction
 │       ├── timingSecurity.js     # Timing attack mitigations
 │       └── validation.js         # Input validation & sanitization
-└── tests/                        # Automated tests (lifecycle & E2E)
-    ├── memo.lifecycle.test.js
-    ├── memo.e2e.test.js
-    └── helpers/
-        └── testUtils.js
 ```
 
 ## Code Quality
