@@ -61,9 +61,9 @@ function removeHtmlTagsAndScripts(input) {
  */
 function encodeHtmlEntities(input) {
   return input
+    .replace(/&/g, '&amp;')
     .replace(/</g, '&lt;')
     .replace(/>/g, '&gt;')
-    .replace(/&/g, '&amp;')
     .replace(/"/g, '&quot;')
     .replace(/'/g, '&#x27;');
 }
