@@ -38,7 +38,10 @@ import {
   getPrivacyHTML,
 } from './templates/pages.js';
 import { getCreateMemoJS, getReadMemoJS, getCommonJS } from './templates/js.js';
-import { handleCreateMemo, handleReadMemo, handleConfirmDelete, handleCleanupMemos } from './handlers/auth.js';
+import { handleCreateMemo } from './handlers/memo-create.js';
+import { handleReadMemo } from './handlers/memo-read.js';
+import { handleConfirmDelete } from './handlers/memo-delete.js';
+import { handleCleanupMemos } from './handlers/memo-cleanup.js';
 import { getErrorMessage } from './utils/errorMessages.js';
 import {
   extractLocaleFromPath,
@@ -52,7 +55,7 @@ import { getClientLocalizationJS } from './lang/clientLocalization.js';
 import { sanitizeLocale } from './utils/validation.js';
 
 // Immutable asset version for cache-busting (bump on asset changes)
-const ASSET_VERSION = '20250906';
+const ASSET_VERSION = '20250908';
 
 // (Minifiers moved to ./utils/minifiers.js)
 
