@@ -3,10 +3,10 @@
 securememo.app is a simple, privacy-focused service for sharing sensitive memos securely. All encryption occurs client-side in your browser using AES-256-GCM with PBKDF2 key derivation—ensuring that plaintext is never transmitted or stored on the server. Each memo self-destructs permanently after being read or upon expiration.
 securememo.app will run the main branch of this repo.
 
-[![Codacy Badge](https://app.codacy.com/project/badge/Grade/beffc716bdc14df49649b6dcbc69a051)](https://app.codacy.com/gh/timoheimonen/securememo.app/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
 [![License](https://img.shields.io/github/license/timoheimonen/securememo.app)](https://github.com/timoheimonen/securememo.app/blob/main/LICENSE)
 [![Stars](https://img.shields.io/github/stars/timoheimonen/securememo.app)](https://github.com/timoheimonen/securememo.app/stargazers)
-[![Watchers](https://img.shields.io/github/watchers/timoheimonen/securememo.app)](https://github.com/timoheimonen/securememo.app/watchers)
+[![CI](https://github.com/timoheimonen/securememo.app/workflows/CI/badge.svg)](https://github.com/timoheimonen/securememo.app/actions/workflows/ci.yml)
+[![CodeQL](https://github.com/timoheimonen/securememo.app/workflows/CodeQL/badge.svg)](https://github.com/timoheimonen/securememo.app/security/code-scanning)
 [![Forks](https://img.shields.io/github/forks/timoheimonen/securememo.app)](https://github.com/timoheimonen/securememo.app/network/members)
 [![Contributors](https://img.shields.io/github/contributors/timoheimonen/securememo.app)](https://github.com/timoheimonen/securememo.app/graphs/contributors)
 
@@ -37,92 +37,80 @@ securememo.app will run the main branch of this repo.
 
 ```
 securememo/
-├── CODE_OF_CONDUCT.md            # Community guidelines
-├── CONTRIBUTING.md               # Contribution guidelines
-├── LICENSE                       # License
-├── README.md                     # Project documentation
-├── SECURITY.md                   # Security policy & vuln reporting
-├── deploy.sh                     # Deployment script (wrangler publish + migrations)
-├── package.json                  # Dependencies & scripts
-├── package-lock.json             # Locked dependency tree
-├── wrangler.toml                 # Cloudflare Workers configuration
-├── .eslintrc.json                # ESLint configuration
-├── .gitattributes                # Git attributes (e.g. LF normalization)
-├── .codacy/                      # Codacy configuration & metadata
-├── .github/                      # GitHub configs (workflows, instructions)
+├── CODE_OF_CONDUCT.md          # Community guidelines
+├── CONTRIBUTING.md             # Contribution guidelines
+├── LICENSE                     # License
+├── README.md                   # Project documentation
+├── SECURITY.md                 # Security policy and vulnerability reporting
+├── deploy.sh                   # Deployment script
+├── package.json                # Project dependencies and configuration
+├── package-lock.json           # Dependency lock file
+├── wrangler.toml               # Cloudflare Workers configuration
 ├── db/
-│   └── schema.sql                # D1 database schema definition
-├── public/                       # Static assets served as-is
+│   └── schema.sql              # Database schema definition
+├── public/                     # Static assets
 │   ├── android-chrome-192x192.png
 │   ├── android-chrome-512x512.png
 │   ├── apple-touch-icon.png
 │   ├── favicon.ico
 │   └── robots.txt
-├── screenshots/                  # Visual documentation
-│   ├── screenshot_001.png
-│   └── screenshot_002.png
-├── src/
-│   ├── index.js                  # Worker entry: routing, cron, security headers
-│   ├── handlers/
-│   │   └── auth.js               # Memo lifecycle (create/read/confirm/cleanup)
-│   ├── schemas/                  # OpenAPI specs for endpoints
-│   │   ├── confirm-delete.openapi.yaml
-│   │   ├── create-memo.openapi.yaml
-│   │   └── read-memo.openapi.yaml
-│   ├── styles/
-│   │   └── styles.js             # Minimal CSS (string templates)
-│   ├── templates/                # HTML & client JS templates
-│   │   ├── js.js                 # Front-end logic snippets (encryption, form handling)
-│   │   └── pages.js              # Page layout templates
-│   ├── lang/                     # Localization (auto-translated + helpers)
-│   │   ├── clientLocalization.js # Client-side localization utilities
-│   │   ├── language_names.js     # Language name mapping
-│   │   ├── localization.js       # Server-side localization utilities
-│   │   ├── translations.js       # Translation registry export
-│   │   ├── ar_translations.js    # Arabic
-│   │   ├── bn_translations.js    # Bengali
-│   │   ├── cs_translations.js    # Czech
-│   │   ├── da_translations.js    # Danish
-│   │   ├── de_translations.js    # German
-│   │   ├── el_translations.js    # Greek
-│   │   ├── en_translations.js    # English
-│   │   ├── es_translations.js    # Spanish
-│   │   ├── fi_translations.js    # Finnish
-│   │   ├── fr_translations.js    # French
-│   │   ├── hi_translations.js    # Hindi
-│   │   ├── hu_translations.js    # Hungarian
-│   │   ├── id_translations.js    # Indonesian
-│   │   ├── it_translations.js    # Italian
-│   │   ├── ja_translations.js    # Japanese
-│   │   ├── ko_translations.js    # Korean
-│   │   ├── nl_translations.js    # Dutch
-│   │   ├── no_translations.js    # Norwegian
-│   │   ├── pl_translations.js    # Polish
-│   │   ├── ptBR_translations.js  # Portuguese (Brazil)
-│   │   ├── ptPT_translations.js  # Portuguese (Portugal)
-│   │   ├── ro_translations.js    # Romanian
-│   │   ├── ru_translations.js    # Russian
-│   │   ├── sv_translations.js    # Swedish
-│   │   ├── th_translations.js    # Thai
-│   │   ├── tl_translations.js    # Tagalog
-│   │   ├── tr_translations.js    # Turkish
-│   │   ├── uk_translations.js    # Ukrainian
-│   │   ├── vi_translations.js    # Vietnamese
-│   │   └── zh_translations.js    # Chinese
-│   └── utils/                    # Reusable utilities
-│       ├── errorMessages.js      # Generic error messaging (no sensitive leaks)
-│       ├── http.js               # HTTP helpers (responses, status)
-│       ├── minifiers.js          # Lightweight JS/CSS minimization
-│       ├── rateLimiter.js        # Rate limiting primitives
-│       ├── securityHeaders.js    # CSP & security header construction
-│       ├── timingSecurity.js     # Timing attack mitigations
-│       └── validation.js         # Input validation & sanitization
+├── screenshots/                # Screenshots
+│   ├── screenshot_001.png      # Screenshot 001
+│   └── screenshot_002.png      # Screenshot 002
+└── src/
+    ├── index.js                # Main Worker entry point (routing, security headers, cron jobs)
+    ├── handlers/               # API request handlers
+    │   ├── auth-utils.js       # Shared utilities for authentication handlers
+    │   ├── memo-cleanup.js     # Handles cleanup of expired memos
+    │   ├── memo-create.js      # Handles memo creation
+    │   ├── memo-delete.js      # Handles memo deletion confirmation
+    │   └── memo-read.js        # Handles memo reading
+    ├── styles/                 # CSS styling
+    │   └── styles.js           # Dynamic CSS generation
+    ├── templates/              # HTML and JavaScript templates
+    │   ├── js.js               # JavaScript templates (e.g., create/read memo logic)
+    │   └── pages.js            # HTML page templates (e.g., index, about, create/read memo)
+    ├── lang/                   # Localization and translation files
+    │   ├── ar_translations.js  # Arabic translations
+    │   ├── bn_translations.js  # Bengali translations
+    │   ├── clientLocalization.js # Client-side localization utilities
+    │   ├── cs_translations.js  # Czech translations
+    │   ├── da_translations.js  # Danish translations
+    │   ├── de_translations.js  # German translations
+    │   ├── el_translations.js  # Greek translations
+    │   ├── en_translations.js  # English translations
+    │   ├── es_translations.js  # Spanish translations
+    │   ├── fi_translations.js  # Finnish translations
+    │   ├── fr_translations.js  # French translations
+    │   ├── hi_translations.js  # Hindi translations
+    │   ├── hu_translations.js  # Hungarian translations
+    │   ├── id_translations.js  # Indonesian translations
+    │   ├── it_translations.js  # Italian translations
+    │   ├── ja_translations.js  # Japanese translations
+    │   ├── ko_translations.js  # Korean translations
+    │   ├── language_names.js   # Language names utility
+    │   ├── localization.js     # Server-side localization utilities
+    │   ├── nl_translations.js  # Dutch translations
+    │   ├── no_translations.js  # Norwegian translations
+    │   ├── pl_translations.js  # Polish translations
+    │   ├── ptBR_translations.js # Portuguese (Brazil) translations
+    │   ├── ptPT_translations.js # Portuguese (Portugal) translations
+    │   ├── ro_translations.js  # Romanian translations
+    │   ├── ru_translations.js  # Russian translations
+    │   ├── sv_translations.js  # Swedish translations
+    │   ├── th_translations.js  # Thai translations
+    │   ├── tl_translations.js  # Tagalog translations
+    │   ├── tr_translations.js  # Turkish translations
+    │   ├── translations.js     # Translation registry
+    │   ├── uk_translations.js  # Ukrainian translations
+    │   ├── vi_translations.js  # Vietnamese translations
+    │   └── zh_translations.js  # Chinese translations
+    └── utils/                  # Utility functions
+        ├── errorMessages.js    # Centralized error handling with generic messages
+        ├── rateLimiter.js      # Rate limiting utilities
+        ├── timingSecurity.js   # Timing attack protections (e.g., constant-time comparisons, artificial delays)
+        └── validation.js       # Input validation, sanitization, and secure checks
 ```
-
-## Code Quality
-This project uses Codacy to automatically analyze code quality, security, and duplication. The badge at the top of this README reflects the current grade of the main branch. 
-The target for this project's code quality is always an A grade. This is pursued by using the Codacy addon in VS Code to ensure new code meets these standards before being committed.
-
 ## Security
 
 - **Client-side encryption**: Memos are encrypted in-browser using AES-256-GCM; servers receive only ciphertext.
@@ -145,40 +133,32 @@ For detailed contribution guidelines, please see [CONTRIBUTING.md](CONTRIBUTING.
 
 ## Supported languages in the application
 
-The supported languages are:
+securememo.app supports **30 languages** with automatic translation from English:
 
-- Arabic (ar)
-- Bengali (bn)
-- Chinese (zh)
-- Danish (da)
-- Dutch (nl)
-- English (en)
-- Finnish (fi)
-- French (fr)
-- German (de)
-- Greek (el)
-- Hindi (hi)
-- Hungarian (hu)
-- Indonesian (id)
-- Italian (it)
-- Japanese (ja)
-- Korean (ko)
-- Norwegian (no)
-- Polish (pl)
-- Portuguese (Brazil) (pt-BR)
-- Portuguese (Portugal) (pt-PT)
-- Russian (ru)
-- Romanian (ro)
-- Spanish (es)
-- Swedish (sv)
-- Tagalog (tl)
-- Thai (th)
-- Turkish (tr)
-- Ukrainian (uk)
-- Vietnamese (vi)
-- Czech (cs)
+<details>
+<summary>Click to view all supported languages</summary>
 
-These are auto-translated from english, errors may occur.
+| Language | Code | Language | Code |
+|----------|------|----------|------|
+| Arabic | `ar` | Japanese | `ja` |
+| Bengali | `bn` | Korean | `ko` |
+| Chinese | `zh` | Norwegian | `no` |
+| Czech | `cs` | Polish | `pl` |
+| Danish | `da` | Portuguese (Brazil) | `pt-BR` |
+| Dutch | `nl` | Portuguese (Portugal) | `pt-PT` |
+| English | `en` | Romanian | `ro` |
+| Finnish | `fi` | Russian | `ru` |
+| French | `fr` | Spanish | `es` |
+| German | `de` | Swedish | `sv` |
+| Greek | `el` | Tagalog | `tl` |
+| Hindi | `hi` | Thai | `th` |
+| Hungarian | `hu` | Turkish | `tr` |
+| Indonesian | `id` | Ukrainian | `uk` |
+| Italian | `it` | Vietnamese | `vi` |
+
+</details>
+
+> **Note:** These translations are auto-generated from English. Some errors may occur. Contributions for translation improvements are welcome!
 
 ## Author
 
