@@ -21,7 +21,7 @@ export const baseSecurityHeaders = {
   'Permissions-Policy': 'geolocation=(), microphone=(), camera=(), payment=(), usb=(), magnetometer=(), gyroscope=()',
   'Strict-Transport-Security': 'max-age=31536000; includeSubDomains; preload',
   'Cross-Origin-Opener-Policy': 'same-origin-allow-popups',
-  'Cross-Origin-Resource-Policy': 'same-origin',
+  'Cross-Origin-Resource-Policy': 'cross-origin',
   'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
   'Access-Control-Allow-Headers': 'Content-Type',
   'Access-Control-Max-Age': '86400',
