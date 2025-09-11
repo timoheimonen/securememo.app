@@ -1,7 +1,7 @@
 // Client-side JS templates for memo operations
 
 export function getCreateMemoJS() {
-  return `
+    return `
 // Turnstile site key - injected by server
 const TURNSTILE_SITE_KEY = '{{TURNSTILE_SITE_KEY}}';
 let turnstileRendered = false;
@@ -351,9 +351,24 @@ document.getElementById('memoForm').addEventListener('submit', async (e) => {
     }
 });
 
+const memoUrlInput = document.getElementById('memoUrl');
+if (memoUrlInput) {
+    memoUrlInput.addEventListener('click', function() {
+        this.select();
+    });
+}
+
+const memoPasswordInput = document.getElementById('memoPassword');
+if (memoPasswordInput) {
+    memoPasswordInput.addEventListener('click', function() {
+        this.select();
+    });
+}
+
 // Copy URL to clipboard using modern Clipboard API
 document.getElementById('copyUrl').addEventListener('click', async () => {
     const urlInput = document.getElementById('memoUrl');
+    urlInput.select();
     const url = urlInput.value;
     
     try {
@@ -406,6 +421,7 @@ document.getElementById('togglePassword').addEventListener('click', () => {
 // Copy password to clipboard using modern Clipboard API
 document.getElementById('copyPassword').addEventListener('click', async () => {
     const passwordInput = document.getElementById('memoPassword');
+    passwordInput.select();
     const password = passwordInput.value;
     
     try {
@@ -453,7 +469,7 @@ function showMessage(message, type) {
 }
 
 export function getReadMemoJS() {
-  return `
+    return `
 // Turnstile site key - injected by server
 const TURNSTILE_SITE_KEY = '{{TURNSTILE_SITE_KEY}}';
 let turnstileRendered = false;
@@ -939,7 +955,7 @@ highlightCurrentPage();
 }
 
 export function getCommonJS() {
-  return `
+    return `
 // Initialize when DOM is ready (handles both cases)
 async function initializeApp() {
     // Load localization lazily so nav always initializes even if it fails

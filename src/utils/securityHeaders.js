@@ -57,7 +57,7 @@ export function buildContentSecurityPolicy(nonce) {
     "style-src 'self' 'unsafe-inline'",
     "worker-src 'self' blob:",
     "object-src 'none'",
-    `script-src 'nonce-${nonce}' 'strict-dynamic' 'unsafe-hashes' 'sha256-UM2ZFOxAvvWabJ55j/BzV9xNt126bDwtIHYx7r3kiR8=' 'sha256-Qv2hSxMUc+Vvt4JFBW4Kn5YU0XchTYzaKLyjH4jQSX0=' blob:`,
+    `script-src 'nonce-${nonce}' 'strict-dynamic' blob:`,
     "require-trusted-types-for 'script'",
   ];
   return directives.join('; ') + ';';
