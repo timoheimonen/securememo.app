@@ -20,7 +20,7 @@ export const baseSecurityHeaders = {
   'Referrer-Policy': 'strict-origin-when-cross-origin',
   'Permissions-Policy': 'geolocation=(), microphone=(), camera=(), payment=(), usb=(), magnetometer=(), gyroscope=()',
   'Strict-Transport-Security': 'max-age=31536000; includeSubDomains; preload',
-  'Cross-Origin-Opener-Policy': 'same-origin',
+  'Cross-Origin-Opener-Policy': 'same-origin-allow-popups',
   'Cross-Origin-Resource-Policy': 'same-origin',
   'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
   'Access-Control-Allow-Headers': 'Content-Type',
