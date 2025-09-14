@@ -54,7 +54,7 @@ export function buildContentSecurityPolicy(nonce) {
     'frame-src https://challenges.cloudflare.com https://www.youtube.com https://www.youtube-nocookie.com blob:',
     'child-src https://challenges.cloudflare.com https://www.youtube.com https://www.youtube-nocookie.com blob:',
     "img-src 'self' https://challenges.cloudflare.com https://s.ytimg.com data:",
-    "style-src 'self' 'unsafe-inline'",
+    "style-src 'self'",
     "worker-src 'self' blob:",
     "object-src 'none'",
     `script-src 'nonce-${nonce}' 'strict-dynamic' blob:`,
