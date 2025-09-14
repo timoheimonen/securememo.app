@@ -846,6 +846,12 @@ body {
   margin-top: 60px;
 }
 
+.footer-tagline {
+  font-size: 0.8em;
+  margin-top: 0.5em;
+  opacity: 0.8;
+}
+
 /* Touch-friendly elements */
 .btn, input[type="submit"], .nav-link {
   min-width: 44px;
@@ -1454,6 +1460,47 @@ input, textarea, select {
   background: #ccc;
   cursor: not-allowed;
   opacity: 0.7;
+}
+
+/* Utility classes */
+.hidden {
+  display: none;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.mr-8 {
+  margin-right: 8px;
+}
+
+/* Video embedding */
+.video-embed {
+  max-width: 900px;
+  margin: 1.5rem auto;
+}
+
+.video-aspect-ratio {
+  position: relative;
+  padding-bottom: 56.25%;
+  height: 0;
+  overflow: hidden;
+}
+
+.video-iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.video-caption {
+  font-size: 0.9rem;
+  text-align: center;
+  margin-top: 0.5rem;
 }
   `;
 }

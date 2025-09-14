@@ -375,7 +375,7 @@ export async function getIndexHTML(locale = 'en', origin = 'https://securememo.a
           'footer.privacy',
           sanitizedLocale
         )}</a> | <a href="mailto:contact@securememo.app">contact@securememo.app</a></p>
-        <p style="font-size: 0.8em; margin-top: 0.5em; opacity: 0.8;">${t('footer.tagline', sanitizedLocale)}</p>
+        <p class="footer-tagline">${t('footer.tagline', sanitizedLocale)}</p>
     </footer>
 
     <script src="/js/common.js" type="module" nonce="{{CSP_NONCE}}" defer></script>
@@ -688,22 +688,22 @@ export async function getAboutHTML(locale = 'en', origin = 'https://securememo.a
                     </div>
                 </div>
             </div>
-            <div class="video-embed" style="max-width:900px;margin:1.5rem auto;">
-                <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;">
+            <div class="video-embed">
+                <div class="video-aspect-ratio">
             <iframe src="https://www.youtube-nocookie.com/embed/V0vEHLLdDKk"
                 title="How to use securememo.app"
                             frameborder="0"
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                             allowfullscreen
                             loading="lazy"
-                            style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;">
+                            class="video-iframe">
                     </iframe>
                 </div>
-                <p style="font-size:0.9rem;text-align:center;margin-top:0.5rem;">
+                <p class="video-caption">
                     <a href="https://www.youtube-nocookie.com/watch?v=V0vEHLLdDKk" target="_blank" rel="noopener noreferrer">Watch on YouTube</a>
                 </p>
                 <noscript>
-                    <p style="text-align:center;"><a href="https://www.youtube-nocookie.com/watch?v=V0vEHLLdDKk" target="_blank" rel="noopener noreferrer">Watch the video (JavaScript disabled)</a></p>
+                    <p class="text-center"><a href="https://www.youtube-nocookie.com/watch?v=V0vEHLLdDKk" target="_blank" rel="noopener noreferrer">Watch the video (JavaScript disabled)</a></p>
                 </noscript>
             </div>
             <div class="cta-section">
@@ -734,7 +734,7 @@ export async function getAboutHTML(locale = 'en', origin = 'https://securememo.a
           'footer.privacy',
           sanitizedLocale
         )}</a> | <a href="mailto:contact@securememo.app">contact@securememo.app</a></p>
-        <p style="font-size: 0.8em; margin-top: 0.5em; opacity: 0.8;">${t('footer.tagline', sanitizedLocale)}</p>
+        <p class="footer-tagline">${t('footer.tagline', sanitizedLocale)}</p>
     </footer>
 
     <script src="/js/common.js" type="module" nonce="{{CSP_NONCE}}" defer></script>
@@ -948,7 +948,7 @@ export async function getCreateMemoHTML(locale = 'en', origin = 'https://securem
             <div class="memo-card">
                 <h1>${t('create.hero.title', sanitizedLocale)}</h1>
                 <p class="memo-description">${t('create.hero.description', sanitizedLocale)}</p>
-                <div id="turnstileOverlay" class="turnstile-overlay" style="display:none;">
+                <div id="turnstileOverlay" class="turnstile-overlay hidden">
                     <div class="turnstile-overlay-backdrop"></div>
                     <div class="turnstile-overlay-content" role="dialog" aria-modal="true" aria-label="Security Challenge">
                         <button type="button" id="closeTurnstileOverlay" class="overlay-close-btn" aria-label="Close">×</button>
@@ -981,13 +981,13 @@ export async function getCreateMemoHTML(locale = 'en', origin = 'https://securem
                     )}</button>
                     
                     <!-- Loading indicator (hidden by default) -->
-                    <div id="loadingIndicator" class="loading-spinner" style="display: none;">
+                    <div id="loadingIndicator" class="loading-spinner hidden">
                         <div class="spinner"></div>
                         <p>${t('msg.encrypting', sanitizedLocale)}</p>
                     </div>
                 </form>
                 
-                <div id="result" class="result-section" style="display: none;">
+                <div id="result" class="result-section hidden">
                     <h3>${t('msg.memoCreated', sanitizedLocale)}</h3>
                     
                     <div class="memo-url-section">
@@ -1012,7 +1012,7 @@ export async function getCreateMemoHTML(locale = 'en', origin = 'https://securem
                               'msg.passwordCopied',
                               sanitizedLocale
                             )}', '${t('common.success', sanitizedLocale)}');">
-                            <button type="button" id="togglePassword" class="btn btn-primary" style="margin-right: 8px;">${t(
+                            <button type="button" id="togglePassword" class="btn btn-primary mr-8">${t(
                               'btn.show',
                               sanitizedLocale
                             )}</button>
@@ -1051,7 +1051,7 @@ export async function getCreateMemoHTML(locale = 'en', origin = 'https://securem
           'footer.privacy',
           sanitizedLocale
         )}</a> | <a href="mailto:contact@securememo.app">contact@securememo.app</a></p>
-        <p style="font-size: 0.8em; margin-top: 0.5em; opacity: 0.8;">${t('footer.tagline', sanitizedLocale)}</p>
+        <p class="footer-tagline">${t('footer.tagline', sanitizedLocale)}</p>
     </footer>
 
     <script src="/js/common.js" type="module" nonce="{{CSP_NONCE}}" defer></script>
@@ -1265,7 +1265,7 @@ export async function getReadMemoHTML(locale = 'en', origin = 'https://securemem
             <div class="memo-card">
                 <h1>${t('read.hero.title', sanitizedLocale)}</h1>
                 <p class="memo-description">${t('read.hero.description', sanitizedLocale)}</p>
-                <div id="turnstileOverlay" class="turnstile-overlay" style="display:none;">
+                <div id="turnstileOverlay" class="turnstile-overlay hidden">
                     <div class="turnstile-overlay-backdrop"></div>
                     <div class="turnstile-overlay-content" role="dialog" aria-modal="true" aria-label="Security Challenge">
                         <button type="button" id="closeTurnstileOverlay" class="overlay-close-btn" aria-label="Close">×</button>
@@ -1293,14 +1293,14 @@ export async function getReadMemoHTML(locale = 'en', origin = 'https://securemem
                         )}</button>
                         
                         <!-- Decrypt loading indicator (hidden by default) -->
-                        <div id="decryptLoadingIndicator" class="loading-spinner" style="display: none;">
+                        <div id="decryptLoadingIndicator" class="loading-spinner hidden">
                             <div class="spinner"></div>
                             <p>${t('msg.decrypting', sanitizedLocale)}</p>
                         </div>
                     </form>
                 </div>
                 
-                <div id="memoContent" class="memo-content" style="display: none;">
+                <div id="memoContent" class="memo-content hidden">
                     <h3>${t('msg.yourSecureMemo', sanitizedLocale)}</h3>
                     <div class="memo-message">
                         <p id="decryptedMessage"></p>
@@ -1310,7 +1310,7 @@ export async function getReadMemoHTML(locale = 'en', origin = 'https://securemem
                           'msg.memoDecrypted',
                           sanitizedLocale
                         )}</span></p>
-                        <div id="deletionSpinner" class="loading-spinner" style="display: none;">
+                        <div id="deletionSpinner" class="loading-spinner hidden">
                             <div class="spinner"></div>
                             <p>${t('msg.deletingSecurely', sanitizedLocale)}</p>
                         </div>
@@ -1324,7 +1324,7 @@ export async function getReadMemoHTML(locale = 'en', origin = 'https://securemem
                     </div>
                 </div>
                 
-                <div id="errorContent" class="error-content" style="display: none;">
+                <div id="errorContent" class="error-content hidden">
                     <h3>❌ ${t('common.error', sanitizedLocale)}</h3>
                     <p id="errorMessage"></p>
                     <div class="memo-actions">
@@ -1352,7 +1352,7 @@ export async function getReadMemoHTML(locale = 'en', origin = 'https://securemem
           'footer.privacy',
           sanitizedLocale
         )}</a> | <a href="mailto:contact@securememo.app">contact@securememo.app</a></p>
-        <p style="font-size: 0.8em; margin-top: 0.5em; opacity: 0.8;">${t('footer.tagline', sanitizedLocale)}</p>
+        <p class="footer-tagline">${t('footer.tagline', sanitizedLocale)}</p>
     </footer>
 
     <script src="/js/common.js" type="module" nonce="{{CSP_NONCE}}" defer></script>
@@ -1714,7 +1714,7 @@ export async function getToSHTML(locale = 'en', origin = 'https://securememo.app
           'footer.privacy',
           sanitizedLocale
         )}</a> | <a href="mailto:contact@securememo.app">contact@securememo.app</a></p>
-        <p style="font-size: 0.8em; margin-top: 0.5em; opacity: 0.8;">${t('footer.tagline', sanitizedLocale)}</p>
+        <p class="footer-tagline">${t('footer.tagline', sanitizedLocale)}</p>
     </footer>
 
     <script src="/js/common.js" type="module" nonce="{{CSP_NONCE}}" defer></script>
@@ -2066,7 +2066,7 @@ export async function getPrivacyHTML(locale = 'en', origin = 'https://securememo
           'footer.privacy',
           sanitizedLocale
         )}</a> | <a href="mailto:contact@securememo.app">contact@securememo.app</a></p>
-        <p style="font-size: 0.8em; margin-top: 0.5em; opacity: 0.8;">${t('footer.tagline', sanitizedLocale)}</p>
+        <p class="footer-tagline">${t('footer.tagline', sanitizedLocale)}</p>
     </footer>
 
     <script src="/js/common.js" type="module" nonce="{{CSP_NONCE}}" defer></script>
