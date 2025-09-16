@@ -1,7 +1,7 @@
 // Client-side JS templates for memo operations
 
 export function getCreateMemoJS() {
-  return `
+    return `
 // Turnstile site key - injected by server
 const TURNSTILE_SITE_KEY = '{{TURNSTILE_SITE_KEY}}';
 let turnstileRendered = false;
@@ -176,7 +176,7 @@ async function encryptMessage(payload, password) {
     const keyMaterial = await crypto.subtle.importKey(
         'raw',
         encoder.encode(password),
-        { name: 'PBKDF2' },
+        'PBKDF2',
         false,
         ['deriveBits', 'deriveKey']
     );
@@ -453,7 +453,7 @@ function showMessage(message, type) {
 }
 
 export function getReadMemoJS() {
-  return `
+    return `
 // Turnstile site key - injected by server
 const TURNSTILE_SITE_KEY = '{{TURNSTILE_SITE_KEY}}';
 let turnstileRendered = false;
@@ -601,7 +601,7 @@ async function decryptMessage(encryptedData, password) {
                 const keyMaterial = await crypto.subtle.importKey(
                     'raw',
                     encoder.encode(password),
-                    { name: 'PBKDF2' },
+                    'PBKDF2',
                     false,
                     ['deriveBits', 'deriveKey']
                 );
@@ -939,7 +939,7 @@ highlightCurrentPage();
 }
 
 export function getCommonJS() {
-  return `
+    return `
 // Initialize when DOM is ready (handles both cases)
 async function initializeApp() {
     // Load localization lazily so nav always initializes even if it fails
