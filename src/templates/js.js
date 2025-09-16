@@ -176,7 +176,7 @@ async function encryptMessage(payload, password) {
     const keyMaterial = await crypto.subtle.importKey(
         'raw',
         encoder.encode(password),
-        { name: 'PBKDF2' },
+        'PBKDF2',
         false,
         ['deriveBits', 'deriveKey']
     );
@@ -601,7 +601,7 @@ async function decryptMessage(encryptedData, password) {
                 const keyMaterial = await crypto.subtle.importKey(
                     'raw',
                     encoder.encode(password),
-                    { name: 'PBKDF2' },
+                    'PBKDF2',
                     false,
                     ['deriveBits', 'deriveKey']
                 );
