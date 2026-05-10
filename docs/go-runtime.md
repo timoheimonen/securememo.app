@@ -16,7 +16,7 @@ The SQLite driver is `github.com/mattn/go-sqlite3`, so the build host needs CGO 
 Minimal environment:
 
 ```sh
-SECUREMEMO_ADDR=127.0.0.1:3000
+SECUREMEMO_ADDR=127.0.0.1:3005
 SECUREMEMO_DB_PATH=/var/lib/securememo/securememo.sqlite
 PUBLIC_ORIGIN=https://securememo.example.com
 ```
