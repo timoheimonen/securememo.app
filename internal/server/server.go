@@ -19,7 +19,7 @@ import (
 	"github.com/timoheimonen/securememo/internal/store"
 )
 
-const assetVersion = "20260510f"
+const assetVersion = "20260510i"
 
 type nonceKey struct{}
 
@@ -92,6 +92,8 @@ func (s *Server) serveGeneratedAsset(w http.ResponseWriter, r *http.Request, url
 		return s.serveFile(w, r, "generated/styles.css", "text/css; charset=utf-8", cacheStatic(r.URL.Query().Has("v")))
 	case "/js/common.js":
 		return s.serveFile(w, r, "generated/js/common.js", "application/javascript; charset=utf-8", cacheStatic(true))
+	case "/js/localization-core.js":
+		return s.serveFile(w, r, "generated/js/localization-core.js", "application/javascript; charset=utf-8", cacheStatic(true))
 	case "/js/create-memo.js":
 		return s.serveFile(w, r, "generated/js/create-memo.js", "application/javascript; charset=utf-8", cacheStatic(true))
 	case "/js/read-memo.js":

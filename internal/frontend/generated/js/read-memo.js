@@ -227,11 +227,11 @@ window.addEventListener('load', () => {
       if (passwordInput.type === 'password') {
         passwordInput.type = 'text';
         toggleBtn.textContent = t('btn.hide');
-        toggleBtn.style.backgroundColor = '#007bff';
+        toggleBtn.style.backgroundColor = '#111';
       } else {
         passwordInput.type = 'password';
         toggleBtn.textContent = t('btn.show');
-        toggleBtn.style.backgroundColor = '#007bff';
+        toggleBtn.style.backgroundColor = '#111';
       }
     });
   }

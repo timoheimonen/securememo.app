@@ -108,7 +108,7 @@ function initMobileMenu() {
   if (navOverlay) {
     navOverlay.addEventListener('click', closeMenu);
   }
-  const navLinks = navMenu.querySelectorAll('.nav-link');
+  const navLinks = navMenu.querySelectorAll('.nav-link[href]');
   navLinks.forEach(link => {
     link.addEventListener('click', closeMenu);
   });
