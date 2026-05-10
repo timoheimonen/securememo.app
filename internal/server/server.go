@@ -214,9 +214,6 @@ func (s *Server) serveSitemap(w http.ResponseWriter, r *http.Request) {
 	}{
 		{"", "1.0", "weekly"},
 		{"/about.html", "0.8", "monthly"},
-		{"/create-memo.html", "0.9", "monthly"},
-		{"/tos.html", "0.3", "yearly"},
-		{"/privacy.html", "0.3", "yearly"},
 	}
 	now := time.Now().UTC().Format("2006-01-02")
 	var entries []urlEntry
