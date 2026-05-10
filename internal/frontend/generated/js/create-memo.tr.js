@@ -92,7 +92,6 @@ return btoa(String.fromCharCode(...result));
 }
 document.getElementById('memoForm').addEventListener('submit', async (e) => {
 e.preventDefault();
-pendingSubmitEvent = e;
 const resultSection = document.getElementById('result');
 if (resultSection && resultSection.style.display === 'block') {
 return;
