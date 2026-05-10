@@ -87,6 +87,70 @@ async function encryptMessage(payload, password) {
 
 const t = (key) => (typeof window.t === 'function' ? window.t(key) : key);
 
+function cryptoWorkerURL() {
+  const workerURL = new URL('/js/memo-crypto-worker.js', window.location.origin);
+  const currentScript = document.currentScript || Array.from(document.scripts).find(script => script.src.includes('/js/create-memo.js'));
+  if (currentScript && currentScript.src) {
+    const version = new URL(currentScript.src).searchParams.get('v');
+    if (version) {
+      workerURL.searchParams.set('v', version);
+    }
+  }
+  return workerURL;
+}
+
+function runMemoCryptoWorker(type, payload) {
+  return new Promise((resolve, reject) => {
+    if (!window.Worker) {
+      reject(new Error('Crypto worker unavailable.'));
+      return;
+    }
+    let worker;
+    try {
+      worker = new Worker(cryptoWorkerURL(), { name: 'memo-crypto-worker' });
+    } catch (error) {
+      reject(error);
+      return;
+    }
+    const id = crypto.randomUUID ? crypto.randomUUID() : String(Date.now()) + Math.random();
+    const cleanup = () => {
+      worker.onmessage = null;
+      worker.onerror = null;
+      worker.terminate();
+    };
+    worker.onmessage = (event) => {
+      const data = event.data || {};
+      if (data.id !== id) {
+        return;
+      }
+      cleanup();
+      if (data.ok) {
+        resolve(data.result);
+      } else {
+        reject(new Error(data.error || 'Crypto worker failed.'));
+      }
+    };
+    worker.onerror = (event) => {
+      cleanup();
+      reject(new Error(event.message || 'Crypto worker failed.'));
+    };
+    worker.postMessage({ id: id, type: type, payload: payload });
+  });
+}
+
+async function encryptMemo(message) {
+  try {
+    return await runMemoCryptoWorker('encryptMemo', { message: message });
+  } catch (error) {
+    const password = generatePassword();
+    const deletionToken = generatePassword();
+    const payload = { message: message, deletionToken: deletionToken };
+    const encryptedMessage = await encryptMessage(payload, password);
+    const deletionTokenHash = await hashDeletionToken(deletionToken);
+    return { encryptedMessage, password, deletionTokenHash };
+  }
+}
+
 document.getElementById('memoForm').addEventListener('submit', async (e) => {
   e.preventDefault();
   const resultSection = document.getElementById('result');
@@ -109,15 +173,11 @@ document.getElementById('memoForm').addEventListener('submit', async (e) => {
   submitButton.textContent = t('btn.creating');
   loadingIndicator.style.display = 'block';
   try {
-    const password = generatePassword();
-    const deletionToken = generatePassword();
-    const payload = { message: message, deletionToken: deletionToken };
-    const encryptedMessage = await encryptMessage(payload, password);
-    const tokenHash = await hashDeletionToken(deletionToken);
+    const memoCrypto = await encryptMemo(message);
     const requestBody = {
-      encryptedMessage,
+      encryptedMessage: memoCrypto.encryptedMessage,
       expiryHours,
-      deletionTokenHash: tokenHash
+      deletionTokenHash: memoCrypto.deletionTokenHash
     };
     const response = await fetch('/api/create-memo', {
       method: 'POST',
@@ -133,7 +193,7 @@ document.getElementById('memoForm').addEventListener('submit', async (e) => {
       const currentLocale = window.location.pathname.split('/')[1] || 'en';
       const memoUrl = window.location.origin + '/' + currentLocale + '/read-memo.html?id=' + result.memoId;
       document.getElementById('memoUrl').value = memoUrl;
-      document.getElementById('memoPassword').value = password;
+      document.getElementById('memoPassword').value = memoCrypto.password;
       document.getElementById('result').style.display = 'block';
       document.getElementById('memoForm').style.display = 'none';
       document.getElementById('message').value = '';

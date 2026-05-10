@@ -95,6 +95,7 @@ func localizeHTML(templateHTML, locale, pathWithoutLocale, publicOrigin string) 
 	out := applyTranslations(templateHTML, locale)
 	out = rewriteLocaleURLs(out, locale, pathWithoutLocale, publicOrigin)
 	out = rewriteLocaleChrome(out, locale, pathWithoutLocale)
+	out = rewriteSEO(out, locale, pathWithoutLocale, publicOrigin)
 	return out
 }
 

@@ -39,6 +39,7 @@ func OpenSQLite(path string) (*SQLiteStore, error) {
 	values.Set("_busy_timeout", "5000")
 	values.Set("_foreign_keys", "on")
 	values.Set("_journal_mode", "WAL")
+	values.Set("_secure_delete", "FAST")
 	values.Set("_synchronous", "NORMAL")
 
 	db, err := sql.Open("sqlite3", fmt.Sprintf("file:%s?%s", path, values.Encode()))

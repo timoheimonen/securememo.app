@@ -1,11 +1,13 @@
 package memo
 
 import (
+	"net/http"
 	"net/http/httptest"
 	"path/filepath"
 	"testing"
 	"time"
 
+	"github.com/timoheimonen/securememo/internal/config"
 	"github.com/timoheimonen/securememo/internal/store"
 )
 
@@ -59,5 +61,29 @@ func TestFailureRateLimitRulesAreStricterThanDefault(t *testing.T) {
 	}
 	if failureRateLimitRules[1].Limit >= defaultRateLimitRules[1].Limit {
 		t.Fatalf("failure hourly limit should be stricter than default hourly limit")
+	}
+}
+
+func TestClientIPIgnoresForwardedHeadersByDefault(t *testing.T) {
+	handler := Handler{}
+	req := httptest.NewRequest(http.MethodPost, "/api/read-memo", nil)
+	req.RemoteAddr = "127.0.0.1:12345"
+	req.Header.Set("CF-Connecting-IP", "203.0.113.10")
+	req.Header.Set("X-Forwarded-For", "198.51.100.20")
+
+	if got := handler.clientIP(req); got != "127.0.0.1" {
+		t.Fatalf("clientIP() = %q, want loopback remote address", got)
+	}
+}
+
+func TestClientIPUsesForwardedHeadersWhenExplicitlyTrusted(t *testing.T) {
+	handler := Handler{Config: config.Config{TrustedProxyLocal: true}}
+	req := httptest.NewRequest(http.MethodPost, "/api/read-memo", nil)
+	req.RemoteAddr = "127.0.0.1:12345"
+	req.Header.Set("CF-Connecting-IP", "203.0.113.10")
+	req.Header.Set("X-Forwarded-For", "198.51.100.20")
+
+	if got := handler.clientIP(req); got != "203.0.113.10" {
+		t.Fatalf("clientIP() = %q, want CF-Connecting-IP", got)
 	}
 }

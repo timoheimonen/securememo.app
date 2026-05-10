@@ -187,23 +187,6 @@ func (h Handler) ConfirmDelete(w http.ResponseWriter, r *http.Request) {
 	})
 }
 
-func (h Handler) Cleanup(w http.ResponseWriter, r *http.Request) {
-	if r.Method != http.MethodPost {
-		http.Error(w, "method not allowed", http.StatusMethodNotAllowed)
-		return
-	}
-	result, err := h.Store.Cleanup(r.Context())
-	if err != nil {
-		delayedJSON(w, http.StatusInternalServerError, map[string]string{"error": "Database error."})
-		return
-	}
-	delayedJSON(w, http.StatusOK, map[string]interface{}{
-		"success":           true,
-		"cleanedUp":         result.MemosDeleted,
-		"rateLimitsCleaned": result.RateLimitsDeleted,
-	})
-}
-
 func (h Handler) requirePOST(w http.ResponseWriter, r *http.Request) bool {
 	if r.Method == http.MethodOptions {
 		w.WriteHeader(http.StatusOK)
