@@ -176,8 +176,6 @@ func rewriteLocaleChrome(input, locale, pathWithoutLocale string) string {
 
 func rewriteLocaleURLs(input, locale, pathWithoutLocale, publicOrigin string) string {
 	out := strings.ReplaceAll(input, `href="/en`, fmt.Sprintf(`href="/%s`, locale))
-	out = strings.ReplaceAll(out, `/js/create-memo.js?locale=en`, fmt.Sprintf(`/js/create-memo.js?locale=%s`, locale))
-	out = strings.ReplaceAll(out, `/js/read-memo.js?locale=en`, fmt.Sprintf(`/js/read-memo.js?locale=%s`, locale))
 	out = strings.ReplaceAll(out, `href="https://securememo.app/en`, fmt.Sprintf(`href="%s/%s`, publicOrigin, locale))
 	out = strings.ReplaceAll(out, `content="https://securememo.app/en`, fmt.Sprintf(`content="%s/%s`, publicOrigin, locale))
 	out = strings.ReplaceAll(out, `item": "https://securememo.app/en`, fmt.Sprintf(`item": "%s/%s`, publicOrigin, locale))

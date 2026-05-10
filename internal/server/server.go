@@ -19,7 +19,7 @@ import (
 	"github.com/timoheimonen/securememo/internal/store"
 )
 
-const assetVersion = "20260510e"
+const assetVersion = "20260510f"
 
 type nonceKey struct{}
 
@@ -93,11 +93,9 @@ func (s *Server) serveGeneratedAsset(w http.ResponseWriter, r *http.Request, url
 	case "/js/common.js":
 		return s.serveFile(w, r, "generated/js/common.js", "application/javascript; charset=utf-8", cacheStatic(true))
 	case "/js/create-memo.js":
-		locale := sanitizeSupportedLocale(r.URL.Query().Get("locale"))
-		return s.serveDynamicJS(w, r, fmt.Sprintf("generated/js/create-memo.%s.js", locale))
+		return s.serveFile(w, r, "generated/js/create-memo.js", "application/javascript; charset=utf-8", cacheStatic(true))
 	case "/js/read-memo.js":
-		locale := sanitizeSupportedLocale(r.URL.Query().Get("locale"))
-		return s.serveDynamicJS(w, r, fmt.Sprintf("generated/js/read-memo.%s.js", locale))
+		return s.serveFile(w, r, "generated/js/read-memo.js", "application/javascript; charset=utf-8", cacheStatic(true))
 	case "/js/clientLocalization.js":
 		locale := "en"
 		if referer := r.Header.Get("Referer"); referer != "" {
@@ -111,22 +109,6 @@ func (s *Server) serveGeneratedAsset(w http.ResponseWriter, r *http.Request, url
 	default:
 		return false
 	}
-}
-
-func (s *Server) serveDynamicJS(w http.ResponseWriter, r *http.Request, filename string) bool {
-	body, err := frontend.FS.ReadFile(filename)
-	if err != nil {
-		return false
-	}
-	out := string(body)
-	w.Header().Set("Content-Type", "application/javascript; charset=utf-8")
-	w.Header().Set("Cache-Control", cacheStatic(true))
-	w.Header().Set("ETag", fmt.Sprintf(`"js-%s-%x"`, assetVersion, len(out)))
-	if notModified(w, r) {
-		return true
-	}
-	_, _ = w.Write([]byte(out))
-	return true
 }
 
 func (s *Server) servePublicAsset(w http.ResponseWriter, r *http.Request, urlPath string) bool {
