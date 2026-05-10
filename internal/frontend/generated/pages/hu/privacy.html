@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adatvédelmi tájékoztató - securememo.app adatvédelem</title>
+    <meta name="description" content="Adatvédelmi tájékoztató a securememo.app számára - tudja meg, hogyan védjük adatait böngészőoldali titkosítással, zero-knowledge architektúrával és minimális adatgyűjtéssel biztonságos jegyzetmegosztáshoz.">
+    <meta name="keywords" content="adatvédelmi tájékoztató, biztonságos jegyzet adatvédelem, adatvédelem, GDPR megfelelés, böngészőoldali titkosítás, zero-knowledge, biztonságos jegyzetmegosztás adatvédelem">
+    <!-- Open Graph for social sharing -->
+    <meta property="og:title" content="Adatvédelmi tájékoztató - securememo.app adatvédelem">
+    <meta property="og:description" content="Hogyan védi a securememo.app az Ön adatvédelmét böngészőoldali titkosítással és minimális adatgyűjtéssel.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://securememo.app/privacy.html">
+    <meta property="og:image" content="https://securememo.app/android-chrome-512x512.png">
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Adatvédelmi tájékoztató - securememo.app adatvédelem">
+    <meta name="twitter:description" content="Adatvédelem böngészőoldali titkosítással és zero-knowledge architektúrával.">
+    <!-- Structured Data -->
+    <script type="application/ld+json" nonce="{{CSP_NONCE}}">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": "Adatvédelmi tájékoztató",
+      "description": "Adatvédelmi tájékoztató a securememo.app számára - tudja meg, hogyan védjük adatait böngészőoldali titkosítással, zero-knowledge architektúrával és minimális adatgyűjtéssel.",
+      "url": "https://securememo.app/privacy.html",
+      "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Kezdőlap",
+            "item": "https://securememo.app/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Adatvédelmi tájékoztató",
+            "item": "https://securememo.app/privacy.html"
+          }
+        ]
+      },
+      "mainEntity": {
+        "@type": "CreativeWork",
+        "name": "Adatvédelmi tájékoztató",
+        "author": {
+          "@type": "Organization",
+          "name": "securememo.app"
+        },
+        "dateModified": "2025-08-09",
+        "description": "Hogyan védi a securememo.app az Ön adatvédelmét böngészőoldali titkosítással és minimális adatgyűjtéssel"
+      }
+    }
+    </script>
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="/android-chrome-512x512.png">
+    <link rel="canonical" href="{{PUBLIC_ORIGIN}}/hu/privacy.html">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="/hu" class="nav-logo">securememo.app</a>
+            
+            <!-- Hamburger Menu Button -->
+            <button class="hamburger" type="button" aria-label="Navigációs menü váltása" aria-expanded="false">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+            
+            <!-- Navigation Menu -->
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="/hu" class="nav-link">Kezdőlap</a></li>
+                <li><a href="/hu/about.html" class="nav-link">Névjegy</a></li>
+                <li><a href="/hu/create-memo.html" class="nav-link">Biztonságos jegyzet létrehozása</a></li>
+                <li class="language-dropdown">
+                    <button class="language-toggle nav-link" aria-expanded="false" aria-haspopup="true">
+                        🇭🇺 Magyar
+                    </button>
+                    <div class="language-menu">
+                        <a href="/ar/privacy.html" class="language-item " title="العربية">🌐 العربية</a>
+                        <a href="/bn/privacy.html" class="language-item " title="বাংলা">🇧🇩 বাংলা</a>
+                        <a href="/cs/privacy.html" class="language-item " title="Čeština">🇨🇿 Čeština</a>
+                        <a href="/da/privacy.html" class="language-item " title="Dansk">🇩🇰 Dansk</a>
+                        <a href="/de/privacy.html" class="language-item " title="Deutsch">🇩🇪 Deutsch</a>
+                        <a href="/el/privacy.html" class="language-item " title="Ελληνικά">🇬🇷 Ελληνικά</a>
+                        <a href="/en/privacy.html" class="language-item " title="English">🇬🇧 English</a>
+                        <a href="/es/privacy.html" class="language-item " title="Español">🇪🇸 Español</a>
+                        <a href="/fi/privacy.html" class="language-item " title="Suomi">🇫🇮 Suomi</a>
+                        <a href="/fr/privacy.html" class="language-item " title="Français">🇫🇷 Français</a>
+                        <a href="/hi/privacy.html" class="language-item " title="हिन्दी">🇮🇳 हिन्दी</a>
+                        <a href="/hu/privacy.html" class="language-item active" title="Magyar">🇭🇺 Magyar</a>
+                        <a href="/id/privacy.html" class="language-item " title="Bahasa Indonesia">🇮🇩 Bahasa Indonesia</a>
+                        <a href="/it/privacy.html" class="language-item " title="Italiano">🇮🇹 Italiano</a>
+                        <a href="/ja/privacy.html" class="language-item " title="日本語">🇯🇵 日本語</a>
+                        <a href="/ko/privacy.html" class="language-item " title="한국어">🇰🇷 한국어</a>
+                        <a href="/nl/privacy.html" class="language-item " title="Nederlands">🇳🇱 Nederlands</a>
+                        <a href="/no/privacy.html" class="language-item " title="Norsk">🇳🇴 Norsk</a>
+                        <a href="/pl/privacy.html" class="language-item " title="Polski">🇵🇱 Polski</a>
+                        <a href="/ptPT/privacy.html" class="language-item " title="Português (Portugal)">🇵🇹 Português</a>
+                        <a href="/ptBR/privacy.html" class="language-item " title="Português (Brasil)">🇧🇷 Português (Brasil)</a>
+                        <a href="/ru/privacy.html" class="language-item " title="Русский">🇷🇺 Русский</a>
+                        <a href="/ro/privacy.html" class="language-item " title="Română">🇷🇴 Română</a>
+                        <a href="/sv/privacy.html" class="language-item " title="Svenska">🇸🇪 Svenska</a>
+                        <a href="/tl/privacy.html" class="language-item " title="Tagalog">🇵🇭 Tagalog</a>
+                        <a href="/th/privacy.html" class="language-item " title="ไทย">🇹🇭 ไทย</a>
+                        <a href="/tr/privacy.html" class="language-item " title="Türkçe">🇹🇷 Türkçe</a>
+                        <a href="/uk/privacy.html" class="language-item " title="Українська">🇺🇦 Українська</a>
+                        <a href="/vi/privacy.html" class="language-item " title="Tiếng Việt">🇻🇳 Tiếng Việt</a>
+                        <a href="/zh/privacy.html" class="language-item " title="中文">🈶 中文</a>
+                    </div>
+                </li>
+            </ul>
+            
+            <!-- Mobile Menu Overlay -->
+            <div class="nav-overlay"></div>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <div class="legal-section">
+            <h1>Privacy Notice for securememo.app</h1>
+            <p class="legal-meta"><strong>Utolsó frissítés: 2025. augusztus 24.</strong></p>
+            
+            <div class="legal-toc">
+                <h2>Tartalomjegyzék</h2>
+                <ol>
+                    <li><a href="#information-collected">Gyűjtött információk</a></li>
+                    <li><a href="#how-we-use">Az információk felhasználása</a></li>
+                    <li><a href="#data-sharing">Adatmegosztás és közzététel</a></li>
+                    <li><a href="#data-security">Adatbiztonság</a></li>
+                    <li><a href="#data-retention">Adatmegőrzés</a></li>
+                    <li><a href="#your-rights">Az Ön jogai és lehetőségei</a></li>
+                    <li><a href="#children-privacy">Gyermekek adatvédelme</a></li>
+                    <li><a href="#international-transfers">Nemzetközi adattovábbítás</a></li>
+                    <li><a href="#changes-notice">Az adatvédelmi tájékoztató változásai</a></li>
+                    <li><a href="#contact">Kapcsolat</a></li>
+                </ol>
+            </div>
+
+            <div class="features-detail">
+                <p>A securememo.app ("mi", "minket" vagy "miénk") elkötelezett az Ön adatainak védelme mellett. Ez az adatvédelmi tájékoztató bemutatja, hogyan kezeljük az információkat a szolgáltatásunkban, amely lehetővé teszi titkosított jegyzetek létrehozását és megosztását, amelyek elolvasás vagy lejárat után önmegsemmisülnek. Szolgáltatásunk középpontjában az adatvédelem áll: minden titkosítás a böngészőben, kliensoldalon történik, így nem férünk hozzá a jegyzet tartalmához.</p>
+                <p>A securememo.app használatával elfogadja az ebben az adatvédelmi tájékoztatóban leírt gyakorlatokat. Ha nem ért egyet, kérjük, ne használja a szolgáltatást.</p>
+            </div>
+
+            <div class="usage-section" id="information-collected">
+                <h2>1. Milyen információkat gyűjtünk</h2>
+                <p>Minimális információt gyűjtünk a szolgáltatás biztonságos és hatékony működtetéséhez. Konkrétan:</p>
+                <ul>
+                    <li>Jegyzetadatok: Amikor jegyzetet hoz létre, csak az üzenet titkosított változatát tároljuk szervereinken (Cloudflare Workers és D1 adatbázis). A titkosítási kulcs (jelszó) teljes egészében a böngészőben generálódik és kezelődik, soha nem küldjük el vagy tároljuk. A jegyzetek automatikusan törlődnek elolvasás vagy lejárat után (opciók: 8 óra, 1 nap, 2 nap, 1 hét vagy 30 nap).</li>
+                    <li>Minimális személyes adatgyűjtés: Nem kérünk felhasználói fiókot, e-mail címet, nevet vagy más azonosítót a szolgáltatás használatához, és nem gyűjtünk olyan adatot, amely közvetlenül azonosíthatná Önt. Az egyetlen személyes adat, amit kaphatunk, ha Ön önkéntesen e-mailben megkeres minket támogatásért – ekkor az e-mail címet és az üzenet tartalmát a válasz megadásához használjuk. Ezt az információt más célra nem használjuk és az Ön hozzájárulása nélkül nem osztjuk meg.</li>
+                    <li>Biztonsággal kapcsolatos adatok: Visszaélés megelőzése és a szolgáltatás integritása érdekében:
+                        <ul>
+                            <li>Ideiglenesen naplózzuk az IP-címeket és a kérések metaadatait (pl. időbélyegek), hogy felismerjük és megelőzzük a spamet, botokat vagy rosszindulatú tevékenységet.</li>
+                            <li>Cloudflare Turnstile CAPTCHA-t használunk az automatizált visszaélések megelőzésére. A Turnstile az adatvédelem érdekében készült, és nem követi a felhasználókat webhelyek között.</li>
+                        </ul>
+                    </li>
+                </ul>
+                <p>Nincs analitika vagy követés: Nem használunk sütiket, követő pixeleket, harmadik féltől származó analitikát vagy reklámeszközöket. Nincs felhasználói profilalkotás, viselkedéskövetés vagy marketing célú adatgyűjtés.</p>
+                <p>Nem gyűjtünk érzékeny személyes adatokat, helyadatokat vagy eszközazonosítókat azon kívül, ami a szolgáltatás alapvető működéséhez szükséges.</p>
+            </div>
+
+            <div class="features-detail" id="how-we-use">
+                <h2>2. Az információk felhasználása</h2>
+                <p>A gyűjtött korlátozott információkat kizárólag az alábbi célokra használjuk:</p>
+                <ul>
+                    <li>Alapszolgáltatás nyújtása: Titkosított jegyzetek ideiglenes tárolása, biztonságos visszakeresése és törlése.</li>
+                    <li>Biztonság fenntartása: Visszaélések, például spam vagy szolgáltatásmegtagadási támadások felismerése és megelőzése IP-naplók és CAPTCHA segítségével.</li>
+                    <li>Jogi kötelezettségek teljesítése: Ritka esetekben naplókat használhatunk jogszerű jogi megkeresések (pl. idézés) teljesítésére.</li>
+                </ul>
+                <p>Nem használunk adatokat reklám, harmadik félnek történő értékesítés vagy a securememo.app működtetésétől eltérő célokra.</p>
+            </div>
+
+            <div class="usage-section" id="data-sharing">
+                <h2>3. Adatmegosztás és közzététel</h2>
+                <p>Nem adjuk el, nem bérbe adjuk és nem osztjuk meg adatait harmadik felekkel, kivéve az alábbi korlátozott eseteket:</p>
+                <ul>
+                    <li>Szolgáltatók: A Cloudflare-t használjuk tárhelyhez, adatbázis-tároláshoz (D1) és CAPTCHA-hoz (Turnstile). Ezek a szolgáltatók szigorú titoktartás mellett dolgoznak, és nem férnek hozzá a jegyzet tartalmához.</li>
+                    <li>Jogi követelmények: Információkat hozhatunk nyilvánosságra, ha azt jogszabály írja elő, például bírósági végzés vagy hatósági megkeresés esetén.</li>
+                    <li>Üzleti átruházás: Ha a securememo.app-ot felvásárolják vagy összeolvad, az adatok átadásra kerülhetnek az ügylet részeként, de továbbra is az adatvédelmi tájékoztató hatálya alá tartoznak.</li>
+                </ul>
+            </div>
+
+            <div class="features-detail" id="data-security">
+                <h2>4. Adatbiztonság</h2>
+                <ul>
+                    <li>Titkosítás: Minden jegyzet kliensoldalon AES-256-tal PBKDF2 kulcsszármaztatással titkosítva van. Csak titkosított adatokat tárolunk, visszafejteni nem tudjuk.</li>
+                    <li>Törlés: A jegyzetek véglegesen törlődnek elolvasás vagy lejárat után, automatikus időzített törléssel.</li>
+                    <li>Biztonsági intézkedések: Erős biztonsági fejléceket (pl. CSP, HSTS), bemeneti szűrést, időzítési támadások elleni védelmet és CAPTCHA-t alkalmazunk a visszaélések megelőzésére.</li>
+                    <li>Nincs visszaállítás: A törölt jegyzetek nem állíthatók vissza – még általunk sem.</li>
+                </ul>
+                <p>Bár ésszerű lépéseket teszünk rendszereink védelmére, nincs teljesen kockázatmentes szolgáltatás. Ön felelős az URL-ek és jelszavak biztonságos megosztásáért.</p>
+            </div>
+
+            <div class="usage-section" id="data-retention">
+                <h2>5. Adatmegőrzés</h2>
+                <ul>
+                    <li>A titkosított jegyzeteket csak addig őrizzük meg, amíg el nem olvassák vagy le nem járnak (maximum 30 napig).</li>
+                    <li>A biztonsági naplókat (pl. IP-címek) ideiglenesen őrizzük visszaélés megelőzése céljából, majd automatikusan töröljük rövid időn belül (általában néhány napon belül).</li>
+                    <li>Nem őrzünk meg semmilyen adatot a szolgáltatás működéséhez szükséges időnél tovább.</li>
+                </ul>
+            </div>
+
+            <div class="features-detail" id="your-rights">
+                <h2>6. Az Ön jogai és lehetőségei</h2>
+                <p>Mivel nem gyűjtünk személyes adatokat:</p>
+                <ul>
+                    <li>Nincsenek kezelhető felhasználói fiókok.</li>
+                    <li>Nem kérhet adat-hozzáférést, javítást vagy törlést, kivéve a jegyzetek automatikus önmegsemmisítését.</li>
+                </ul>
+                <p>Ha úgy gondolja, hogy bármilyen információt tárolunk Önről (pl. naplókból), lépjen kapcsolatba velünk (lásd alább), hogy érdeklődjön jogairól az alkalmazandó jogszabályok, például a GDPR vagy a CCPA alapján. Betartjuk az adatvédelmi előírásokat, és lehetőség szerint feldolgozzuk a kérelmeket.</p>
+            </div>
+
+            <div class="usage-section" id="children-privacy">
+                <h2>7. Gyermekek adatvédelme</h2>
+                <p>Szolgáltatásunk nem gyermekeknek (13 év alatt, vagy egyes joghatóságokban 16 év alatt) készült. Nem gyűjtünk tudatosan adatokat gyermekektől. Ha ilyen adatokról tudomást szerzünk, azonnal töröljük azokat.</p>
+            </div>
+
+            <div class="features-detail" id="international-transfers">
+                <h2>8. Nemzetközi adattovábbítás</h2>
+                <p>A securememo.app a Cloudflare globális hálózatán van hosztolva. Az adatok több országban is feldolgozásra kerülhetnek, de minimális adatgyűjtési gyakorlatunkkal egyenértékű adatvédelmet biztosítunk.</p>
+            </div>
+
+            <div class="usage-section" id="changes-notice">
+                <h2>9. Az adatvédelmi tájékoztató változásai</h2>
+                <p>Ezt a tájékoztatót időről időre frissíthetjük. A változásokat itt tesszük közzé, frissített "Utolsó frissítés" dátummal. A szolgáltatás további használata a változások elfogadását jelenti.</p>
+            </div>
+
+            <div class="features-detail" id="contact">
+                <h2>10. Kapcsolat</h2>
+                <p>Az adatvédelmi tájékoztatóval vagy gyakorlatunkkal kapcsolatos kérdésekért látogassa meg <a href="https://github.com/timoheimonen/securememo.app" target="_blank" rel="noopener noreferrer">GitHub tárházunkat</a> vagy írjon a contact@securememo.app címre.</p>
+                <p>Ez az adatvédelmi tájékoztató csak a securememo.app-ra vonatkozik, nem pedig a szolgáltatásunkból hivatkozott harmadik fél webhelyekre.</p>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p><a href="https://github.com/timoheimonen/securememo.app" target="_blank" rel="noopener noreferrer">Forráskód megtekintése a GitHubon</a> | <a href="/hu/tos.html">Felhasználási feltételek</a> | <a href="/hu/privacy.html">Adatvédelmi tájékoztató</a> | <a href="mailto:contact@securememo.app">contact@securememo.app</a></p>
+        <p class="footer-tagline">Nincs követés, nincs reklám, nincs felesleges dolog.</p>
+    </footer>
+
+    <script src="/js/common.js" type="module" nonce="{{CSP_NONCE}}" defer></script>
+</body>
+</html>

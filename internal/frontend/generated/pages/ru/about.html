@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>О securememo.app — Защищённые приватные заметки | securememo.app</title>
+    <meta name="description" content="Узнайте о подходе securememo.app к приватности и шифрованию сообщений. Всё строится на клиентском AES-256, самоуничтожающихся сообщениях и архитектуре с нулевым знанием.">
+    <meta name="keywords" content="о защищённой заметке, приватные сообщения, клиентское шифрование, AES-256, самоуничтожающиеся сообщения, нулевое знание, безопасный обмен заметками">
+    <!-- Open Graph for social sharing -->
+    <meta property="og:title" content="О securememo.app — Защищённые приватные заметки">
+    <meta property="og:description" content="Узнайте, как securememo.app защищает вашу приватность с помощью клиентского шифрования и самоуничтожающихся сообщений.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://securememo.app/ru/about.html">
+    <meta property="og:image" content="https://securememo.app/android-chrome-512x512.png">
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="О securememo.app — Защищённые приватные заметки">
+    <meta name="twitter:description" content="Приватные зашифрованные сообщения с клиентским шифрованием.">
+    <!-- Structured Data -->
+    <script type="application/ld+json" nonce="{{CSP_NONCE}}">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Как securememo.app защищает мою приватность?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "securememo.app использует клиентское шифрование AES-256, то есть ваша заметка шифруется в браузере до отправки на сервер. Мы никогда не видим исходный текст. Заметки самоуничтожаются после прочтения или истечения срока, и мы не требуем аккаунтов или сбора личной информации."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Какое шифрование используется в securememo.app?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Мы используем шифрование AES-256-GCM с деривацией ключа PBKDF2. Всё шифрование происходит на стороне клиента в вашем браузере с использованием Web Crypto API. Пароль для шифрования генерируется отдельно и никогда не хранится на наших серверах."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Сколько времени хранятся заметки?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Заметки могут быть настроены на удаление через 8 часов, 1 день, 2 дня, 1 неделю или максимум 30 дней. Они также удаляются сразу после прочтения. Просроченные заметки автоматически очищаются каждый час."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Можно ли восстановить удалённую заметку?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Нет, после удаления заметки (после прочтения или истечения срока) восстановить её невозможно. Это сделано для максимальной приватности и безопасности."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "securememo.app бесплатен?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Да, securememo.app полностью бесплатен. Нет скрытых платежей, премиум-функций, отслеживания или рекламы."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "На какой технологии построен securememo.app?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "securememo.app построен на Cloudflare Workers для серверless-вычислений, базе данных D1 для хранения, Web Crypto API для клиентского шифрования и современном HTML/CSS/JavaScript. Исходный код открыт и доступен на GitHub."
+          }
+        }
+      ]
+    }
+    </script>
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="/android-chrome-512x512.png">
+    <link rel="canonical" href="{{PUBLIC_ORIGIN}}/ru/about.html">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="/ru" class="nav-logo">securememo.app</a>
+            
+            <!-- Hamburger Menu Button -->
+            <button class="hamburger" type="button" aria-label="Показать/скрыть меню навигации" aria-expanded="false">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+            
+            <!-- Navigation Menu -->
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="/ru" class="nav-link">Главная</a></li>
+                <li><a href="/ru/about.html" class="nav-link active">О сайте</a></li>
+                <li><a href="/ru/create-memo.html" class="nav-link">Создать защищённую заметку</a></li>
+                <li class="language-dropdown">
+                    <button class="language-toggle nav-link" aria-expanded="false" aria-haspopup="true">
+                        🇷🇺 Русский
+                    </button>
+                    <div class="language-menu">
+                        <a href="/ar/about.html" class="language-item " title="العربية">🌐 العربية</a>
+                        <a href="/bn/about.html" class="language-item " title="বাংলা">🇧🇩 বাংলা</a>
+                        <a href="/cs/about.html" class="language-item " title="Čeština">🇨🇿 Čeština</a>
+                        <a href="/da/about.html" class="language-item " title="Dansk">🇩🇰 Dansk</a>
+                        <a href="/de/about.html" class="language-item " title="Deutsch">🇩🇪 Deutsch</a>
+                        <a href="/el/about.html" class="language-item " title="Ελληνικά">🇬🇷 Ελληνικά</a>
+                        <a href="/en/about.html" class="language-item " title="English">🇬🇧 English</a>
+                        <a href="/es/about.html" class="language-item " title="Español">🇪🇸 Español</a>
+                        <a href="/fi/about.html" class="language-item " title="Suomi">🇫🇮 Suomi</a>
+                        <a href="/fr/about.html" class="language-item " title="Français">🇫🇷 Français</a>
+                        <a href="/hi/about.html" class="language-item " title="हिन्दी">🇮🇳 हिन्दी</a>
+                        <a href="/hu/about.html" class="language-item " title="Magyar">🇭🇺 Magyar</a>
+                        <a href="/id/about.html" class="language-item " title="Bahasa Indonesia">🇮🇩 Bahasa Indonesia</a>
+                        <a href="/it/about.html" class="language-item " title="Italiano">🇮🇹 Italiano</a>
+                        <a href="/ja/about.html" class="language-item " title="日本語">🇯🇵 日本語</a>
+                        <a href="/ko/about.html" class="language-item " title="한국어">🇰🇷 한국어</a>
+                        <a href="/nl/about.html" class="language-item " title="Nederlands">🇳🇱 Nederlands</a>
+                        <a href="/no/about.html" class="language-item " title="Norsk">🇳🇴 Norsk</a>
+                        <a href="/pl/about.html" class="language-item " title="Polski">🇵🇱 Polski</a>
+                        <a href="/ptPT/about.html" class="language-item " title="Português (Portugal)">🇵🇹 Português</a>
+                        <a href="/ptBR/about.html" class="language-item " title="Português (Brasil)">🇧🇷 Português (Brasil)</a>
+                        <a href="/ru/about.html" class="language-item active" title="Русский">🇷🇺 Русский</a>
+                        <a href="/ro/about.html" class="language-item " title="Română">🇷🇴 Română</a>
+                        <a href="/sv/about.html" class="language-item " title="Svenska">🇸🇪 Svenska</a>
+                        <a href="/tl/about.html" class="language-item " title="Tagalog">🇵🇭 Tagalog</a>
+                        <a href="/th/about.html" class="language-item " title="ไทย">🇹🇭 ไทย</a>
+                        <a href="/tr/about.html" class="language-item " title="Türkçe">🇹🇷 Türkçe</a>
+                        <a href="/uk/about.html" class="language-item " title="Українська">🇺🇦 Українська</a>
+                        <a href="/vi/about.html" class="language-item " title="Tiếng Việt">🇻🇳 Tiếng Việt</a>
+                        <a href="/zh/about.html" class="language-item " title="中文">🈶 中文</a>
+                    </div>
+                </li>
+            </ul>
+            
+            <!-- Mobile Menu Overlay -->
+            <div class="nav-overlay"></div>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <div class="about-section">
+            <h1>О securememo.app</h1>
+            <p>securememo.app — это приложение, ориентированное на приватность, позволяющее создавать зашифрованные заметки, которые самоуничтожаются после прочтения или истечения срока. Безопасность и приватность — наш приоритет. Исходный код доступен на GitHub.</p>
+            
+            <div class="tech-stack">
+                <h2>Технологии</h2>
+                <ul>
+                    <li><strong>Cloudflare Workers:</strong> Cloudflare Workers: серверless-платформа для высокой производительности по всему миру</li>
+                    <li><strong>D1 Database:</strong> D1 Database: база данных SQLite для безопасного хранения</li>
+                    <li><strong>Web Crypto API:</strong> Web Crypto API: клиентское шифрование AES-256</li>
+                    <li><strong>HTML/CSS/JavaScript:</strong> HTML/CSS/JavaScript: современный, адаптивный веб-интерфейс</li>
+                    <li><strong>Исходный код доступен на GitHub:</strong> <a href="https://github.com/timoheimonen/securememo.app" target="_blank" rel="noopener noreferrer">Посмотреть исходный код на GitHub</a></li>
+                </ul>
+            </div>
+
+            <div class="features-detail">
+                <h2>Функции безопасности</h2>
+                <div class="feature-list">
+                    <div class="feature-item">
+                        <h3>🔐 Клиентское шифрование</h3>
+                        <p>Всё шифрование происходит в вашем браузере с помощью Web Crypto API. Ваша заметка шифруется с помощью AES-256 до отправки на сервер.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>🔑 Отдельная передача пароля</h3>
+                        <p>Пароль для шифрования генерируется отдельно от ссылки и должен передаваться по другому каналу для повышения безопасности.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>💥 Самоуничтожающиеся заметки</h3>
+                        <p>После прочтения или истечения срока заметка немедленно и навсегда удаляется из нашей базы данных. Следов не остаётся.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>🌐 Без хранения паролей</h3>
+                        <p>Мы никогда не храним пароли для шифрования на наших серверах. Они существуют только в памяти вашего браузера.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>⚡ Глобальная производительность</h3>
+                        <p>Построено на глобальной сети Cloudflare для молниеносного доступа из любой точки мира.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>🔒 Приватность прежде всего</h3>
+                        <p>Не требуется аккаунт. Нет отслеживания. Нет аналитики. Ваша приватность — наш приоритет.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="usage-section">
+                <h2>Как пользоваться</h2>
+                <div class="feature-list">
+                    <div class="feature-item">
+                        <h3>1. Создайте заметку</h3>
+                        <p>Перейдите на "Создать защищённую заметку" и введите свою заметку. Выберите срок хранения (8ч, 1д, 2д, 1 неделя или максимум 30 дней). Заметки удаляются после прочтения или истечения срока. Система сгенерирует случайный пароль для шифрования.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>2. Передайте ссылку и пароль</h3>
+                        <p>Скопируйте сгенерированную ссылку и пароль, затем передайте их получателю через разные каналы для повышения безопасности.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>3. Самоуничтожение</h3>
+                        <p>Когда получатель откроет ссылку и введёт пароль отдельно, заметка будет расшифрована и навсегда удалена, если прочитана, либо удалена автоматически при истечении срока. Просроченные заметки автоматически очищаются каждый час.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="video-embed">
+                <div class="video-aspect-ratio">
+            <iframe src="https://www.youtube-nocookie.com/embed/V0vEHLLdDKk"
+                title="How to use securememo.app"
+                            frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            allowfullscreen
+                            loading="lazy"
+                            class="video-iframe">
+                    </iframe>
+                </div>
+                <p class="video-caption">
+                    <a href="https://www.youtube-nocookie.com/watch?v=V0vEHLLdDKk" target="_blank" rel="noopener noreferrer">Watch on YouTube</a>
+                </p>
+                <noscript>
+                    <p class="text-center"><a href="https://www.youtube-nocookie.com/watch?v=V0vEHLLdDKk" target="_blank" rel="noopener noreferrer">Watch the video (JavaScript disabled)</a></p>
+                </noscript>
+            </div>
+            <div class="cta-section">
+                <h2>Готовы начать?</h2>
+                <p>Создайте свою первую защищённую заметку и ощутите настоящее сквозное шифрование.</p>
+                <div class="cta-buttons">
+                    <a href="/ru/create-memo.html" class="btn btn-primary">Создать защищённую заметку</a>
+                    <a href="/ru" class="btn btn-secondary">На главную</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p><a href="https://github.com/timoheimonen/securememo.app" target="_blank" rel="noopener noreferrer">Исходный код на GitHub</a> | <a href="/ru/tos.html">Условия использования</a> | <a href="/ru/privacy.html">Уведомление о приватности</a> | <a href="mailto:contact@securememo.app">contact@securememo.app</a></p>
+        <p class="footer-tagline">Без отслеживания, без рекламы, без лишнего.</p>
+    </footer>
+
+    <script src="/js/common.js" type="module" nonce="{{CSP_NONCE}}" defer></script>
+</body>
+</html>

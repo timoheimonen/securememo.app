@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>securememo.app 소개 - 개인정보 보호 중심의 암호화된 메모 | securememo.app</title>
+    <meta name="description" content="securememo.app의 개인정보 우선 암호화 메시징 접근 방식에 대해 알아보세요. 클라이언트 측 AES-256 암호화, 자체 삭제 메시지, 무지식 아키텍처로 구축되었습니다.">
+    <meta name="keywords" content="보안 메모 소개, 개인정보 보호 중심 메시징, 클라이언트 측 암호화, AES-256, 자체 삭제 메시지, 무지식, 보안 메모 공유">
+    <!-- Open Graph for social sharing -->
+    <meta property="og:title" content="securememo.app 소개 - 개인정보 보호 중심의 암호화된 메모">
+    <meta property="og:description" content="securememo.app이 클라이언트 측 암호화와 자체 삭제 메시지로 개인정보를 보호하는 방법을 알아보세요.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://securememo.app/ko/about.html">
+    <meta property="og:image" content="https://securememo.app/android-chrome-512x512.png">
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="securememo.app 소개 - 개인정보 보호 중심의 암호화된 메모">
+    <meta name="twitter:description" content="클라이언트 측 암호화를 사용하는 개인정보 우선 암호화 메시징.">
+    <!-- Structured Data -->
+    <script type="application/ld+json" nonce="{{CSP_NONCE}}">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "securememo.app은 내 개인정보를 어떻게 보호하나요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "securememo.app은 클라이언트 측 AES-256 암호화를 사용합니다. 즉, 메모가 서버로 전송되기 전에 브라우저에서 암호화됩니다. 저희는 평문 콘텐츠를 절대 볼 수 없습니다. 메모는 읽거나 만료된 후 자체 삭제되며, 사용자 계정을 요구하거나 개인 정보를 수집하지 않습니다."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "securememo.app은 어떤 암호화를 사용하나요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "우리는 PBKDF2 키 유도와 함께 AES-256-GCM 암호화를 사용합니다. 모든 암호화 처리는 Web Crypto API를 통해 귀하의 브라우저에서 클라이언트 측으로 이루어집니다. 암호화 비밀번호는 별도로 생성되며 서버에 절대 저장되지 않습니다."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "메모는 얼마나 오래 지속되나요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "메모는 8시간, 1일, 2일, 1주일 또는 최대 30일 후에 만료되도록 설정할 수 있습니다. 또한 읽은 즉시 삭제됩니다. 만료된 메모는 매시간 자동으로 정리됩니다."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "삭제된 메모를 복구할 수 있나요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "아니요. 메모가 삭제되면(읽거나 만료된 후) 복구할 수 없습니다. 이는 최대 개인정보 보호와 보안을 위한 설계입니다."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "securememo.app은 무료로 사용할 수 있나요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "네, securememo.app은 완전히 무료로 사용할 수 있습니다. 숨겨진 수수료, 프리미엄 기능, 추적 또는 광고가 없습니다."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "securememo.app은 어떤 기술을 사용하나요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "securememo.app은 서버리스 컴퓨팅을 위한 Cloudflare Workers, 저장을 위한 D1 데이터베이스, 클라이언트 측 암호화를 위한 Web Crypto API, 그리고 현대적인 HTML/CSS/JavaScript로 구축되었습니다. 소스 코드는 오픈 소스이며 GitHub에서 확인할 수 있습니다."
+          }
+        }
+      ]
+    }
+    </script>
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="/android-chrome-512x512.png">
+    <link rel="canonical" href="{{PUBLIC_ORIGIN}}/ko/about.html">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="/ko" class="nav-logo">securememo.app</a>
+            
+            <!-- Hamburger Menu Button -->
+            <button class="hamburger" type="button" aria-label="메뉴 열기/닫기" aria-expanded="false">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+            
+            <!-- Navigation Menu -->
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="/ko" class="nav-link">홈</a></li>
+                <li><a href="/ko/about.html" class="nav-link active">소개</a></li>
+                <li><a href="/ko/create-memo.html" class="nav-link">보안 메모 작성</a></li>
+                <li class="language-dropdown">
+                    <button class="language-toggle nav-link" aria-expanded="false" aria-haspopup="true">
+                        🇰🇷 한국어
+                    </button>
+                    <div class="language-menu">
+                        <a href="/ar/about.html" class="language-item " title="العربية">🌐 العربية</a>
+                        <a href="/bn/about.html" class="language-item " title="বাংলা">🇧🇩 বাংলা</a>
+                        <a href="/cs/about.html" class="language-item " title="Čeština">🇨🇿 Čeština</a>
+                        <a href="/da/about.html" class="language-item " title="Dansk">🇩🇰 Dansk</a>
+                        <a href="/de/about.html" class="language-item " title="Deutsch">🇩🇪 Deutsch</a>
+                        <a href="/el/about.html" class="language-item " title="Ελληνικά">🇬🇷 Ελληνικά</a>
+                        <a href="/en/about.html" class="language-item " title="English">🇬🇧 English</a>
+                        <a href="/es/about.html" class="language-item " title="Español">🇪🇸 Español</a>
+                        <a href="/fi/about.html" class="language-item " title="Suomi">🇫🇮 Suomi</a>
+                        <a href="/fr/about.html" class="language-item " title="Français">🇫🇷 Français</a>
+                        <a href="/hi/about.html" class="language-item " title="हिन्दी">🇮🇳 हिन्दी</a>
+                        <a href="/hu/about.html" class="language-item " title="Magyar">🇭🇺 Magyar</a>
+                        <a href="/id/about.html" class="language-item " title="Bahasa Indonesia">🇮🇩 Bahasa Indonesia</a>
+                        <a href="/it/about.html" class="language-item " title="Italiano">🇮🇹 Italiano</a>
+                        <a href="/ja/about.html" class="language-item " title="日本語">🇯🇵 日本語</a>
+                        <a href="/ko/about.html" class="language-item active" title="한국어">🇰🇷 한국어</a>
+                        <a href="/nl/about.html" class="language-item " title="Nederlands">🇳🇱 Nederlands</a>
+                        <a href="/no/about.html" class="language-item " title="Norsk">🇳🇴 Norsk</a>
+                        <a href="/pl/about.html" class="language-item " title="Polski">🇵🇱 Polski</a>
+                        <a href="/ptPT/about.html" class="language-item " title="Português (Portugal)">🇵🇹 Português</a>
+                        <a href="/ptBR/about.html" class="language-item " title="Português (Brasil)">🇧🇷 Português (Brasil)</a>
+                        <a href="/ru/about.html" class="language-item " title="Русский">🇷🇺 Русский</a>
+                        <a href="/ro/about.html" class="language-item " title="Română">🇷🇴 Română</a>
+                        <a href="/sv/about.html" class="language-item " title="Svenska">🇸🇪 Svenska</a>
+                        <a href="/tl/about.html" class="language-item " title="Tagalog">🇵🇭 Tagalog</a>
+                        <a href="/th/about.html" class="language-item " title="ไทย">🇹🇭 ไทย</a>
+                        <a href="/tr/about.html" class="language-item " title="Türkçe">🇹🇷 Türkçe</a>
+                        <a href="/uk/about.html" class="language-item " title="Українська">🇺🇦 Українська</a>
+                        <a href="/vi/about.html" class="language-item " title="Tiếng Việt">🇻🇳 Tiếng Việt</a>
+                        <a href="/zh/about.html" class="language-item " title="中文">🈶 中文</a>
+                    </div>
+                </li>
+            </ul>
+            
+            <!-- Mobile Menu Overlay -->
+            <div class="nav-overlay"></div>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <div class="about-section">
+            <h1>securememo.app 소개</h1>
+            <p>securememo.app은 읽거나 만료된 후 자체 삭제되는 암호화된 메모를 생성할 수 있는 개인정보 보호 중심 애플리케이션입니다. 보안과 개인정보 보호를 최우선으로 구축되었습니다. 소스 코드는 GitHub에서 확인할 수 있습니다.</p>
+            
+            <div class="tech-stack">
+                <h2>기술 스택</h2>
+                <ul>
+                    <li><strong>Cloudflare Workers:</strong> Cloudflare Workers: 글로벌 성능을 위한 서버리스 컴퓨팅 플랫폼</li>
+                    <li><strong>D1 Database:</strong> D1 데이터베이스: 보안 저장을 위한 SQLite 기반 데이터베이스</li>
+                    <li><strong>Web Crypto API:</strong> Web Crypto API: 클라이언트 측 AES-256 암호화</li>
+                    <li><strong>HTML/CSS/JavaScript:</strong> HTML/CSS/JavaScript: 현대적이고 반응형 웹 인터페이스</li>
+                    <li><strong>GitHub에서 소스 코드 확인 가능:</strong> <a href="https://github.com/timoheimonen/securememo.app" target="_blank" rel="noopener noreferrer">GitHub에서 소스 코드 보기</a></li>
+                </ul>
+            </div>
+
+            <div class="features-detail">
+                <h2>보안 기능</h2>
+                <div class="feature-list">
+                    <div class="feature-item">
+                        <h3>🔐 클라이언트 측 암호화</h3>
+                        <p>Web Crypto API를 사용하여 브라우저에서 모든 암호화가 발생합니다. 메모는 서버로 전송되기 전에 AES-256으로 암호화됩니다.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>🔑 별도 비밀번호 공유</h3>
+                        <p>암호화 비밀번호는 URL과 별도로 생성되며 보안 강화를 위해 다른 채널을 통해 공유되어야 합니다.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>💥 자체 삭제 메모</h3>
+                        <p>메모가 읽히거나 만료되면 데이터베이스에서 즉시 영구적으로 삭제됩니다. 흔적이 남지 않습니다.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>🌐 비밀번호를 저장하지 않음</h3>
+                        <p>서버에 암호화 비밀번호를 저장하지 않습니다. 브라우저 메모리에만 존재합니다.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>⚡ 글로벌 성능</h3>
+                        <p>전 세계 어디서나 초고속 접근을 위해 Cloudflare의 글로벌 네트워크에 구축되었습니다.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>🔒 개인정보 보호 우선</h3>
+                        <p>사용자 계정이 필요하지 않습니다. 추적 없음. 분석 없음. 개인정보 보호가 우선순위입니다.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="usage-section">
+                <h2>사용 방법</h2>
+                <div class="feature-list">
+                    <div class="feature-item">
+                        <h3>1. 메모 작성</h3>
+                        <p>"보안 메모 작성"으로 이동하여 메모를 입력하세요. 만료 시간을 선택하세요(8시간, 1일, 2일, 1주일 또는 최대 30일). 메모는 읽거나 만료되면 삭제됩니다. 시스템이 무작위 암호화 비밀번호를 생성합니다.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>2. 링크와 비밀번호 공유</h3>
+                        <p>생성된 URL과 비밀번호를 복사한 후 보안 강화를 위해 별도의 채널을 통해 수신자와 공유하세요.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>3. 자체 삭제</h3>
+                        <p>수신자가 링크를 열고 별도로 비밀번호를 입력하면 메모가 복호화되고 읽은 경우 영구적으로 삭제되거나 만료된 경우 자동으로 삭제됩니다. 만료된 메모는 매 1시간마다 자동으로 정리됩니다.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="video-embed">
+                <div class="video-aspect-ratio">
+            <iframe src="https://www.youtube-nocookie.com/embed/V0vEHLLdDKk"
+                title="How to use securememo.app"
+                            frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            allowfullscreen
+                            loading="lazy"
+                            class="video-iframe">
+                    </iframe>
+                </div>
+                <p class="video-caption">
+                    <a href="https://www.youtube-nocookie.com/watch?v=V0vEHLLdDKk" target="_blank" rel="noopener noreferrer">Watch on YouTube</a>
+                </p>
+                <noscript>
+                    <p class="text-center"><a href="https://www.youtube-nocookie.com/watch?v=V0vEHLLdDKk" target="_blank" rel="noopener noreferrer">Watch the video (JavaScript disabled)</a></p>
+                </noscript>
+            </div>
+            <div class="cta-section">
+                <h2>시작할 준비가 되셨나요?</h2>
+                <p>지금 첫 번째 보안 메모를 작성하고 진정한 종단간 암호화를 경험해 보세요.</p>
+                <div class="cta-buttons">
+                    <a href="/ko/create-memo.html" class="btn btn-primary">보안 메모 작성</a>
+                    <a href="/ko" class="btn btn-secondary">홈으로 가기</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p><a href="https://github.com/timoheimonen/securememo.app" target="_blank" rel="noopener noreferrer">GitHub에서 소스 코드 보기</a> | <a href="/ko/tos.html">서비스 약관</a> | <a href="/ko/privacy.html">개인정보 보호 고지</a> | <a href="mailto:contact@securememo.app">contact@securememo.app</a></p>
+        <p class="footer-tagline">추적 없음, 광고 없음, 군더더기 없음.</p>
+    </footer>
+
+    <script src="/js/common.js" type="module" nonce="{{CSP_NONCE}}" defer></script>
+</body>
+</html>

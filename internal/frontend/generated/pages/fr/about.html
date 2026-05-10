@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>À propos de securememo.app - Notes Chiffrées Axées sur la Confidentialité | securememo.app</title>
+    <meta name="description" content="Découvrez l'approche de securememo.app centrée sur la confidentialité pour la messagerie chiffrée. Construit avec chiffrement AES-256 côté client, messages auto-destructeurs et architecture sans connaissance.">
+    <meta name="keywords" content="à propos mémo sécurisé, messagerie axée confidentialité, chiffrement côté client, AES-256, messages auto-destructeurs, zéro connaissance, partage notes sécurisé">
+    <!-- Open Graph for social sharing -->
+    <meta property="og:title" content="À propos de securememo.app - Notes Chiffrées Axées sur la Confidentialité">
+    <meta property="og:description" content="Découvrez comment securememo.app protège votre confidentialité avec le chiffrement côté client et les messages auto-destructeurs.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://securememo.app/fr/about.html">
+    <meta property="og:image" content="https://securememo.app/android-chrome-512x512.png">
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="À propos de securememo.app - Notes Chiffrées Axées sur la Confidentialité">
+    <meta name="twitter:description" content="Messagerie chiffrée axée sur la confidentialité avec chiffrement côté client.">
+    <!-- Structured Data -->
+    <script type="application/ld+json" nonce="{{CSP_NONCE}}">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Comment securememo.app protège-t-il ma confidentialité ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "securememo.app utilise le chiffrement AES-256 côté client, ce qui signifie que votre mémo est chiffré dans votre navigateur avant d'être envoyé à nos serveurs. Nous ne voyons jamais le contenu en texte clair. Les mémos s'autodétruisent après avoir été lus ou expirés, et nous n'exigeons pas de comptes utilisateur ni ne collectons d'informations personnelles."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Quel chiffrement utilise securememo.app ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Nous utilisons le chiffrement AES-256-GCM avec dérivation de clé PBKDF2. Tout le chiffrement se produit côté client dans votre navigateur en utilisant l'API Web Crypto. Le mot de passe de chiffrement est généré séparément et n'est jamais stocké sur nos serveurs."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Combien de temps durent les mémos ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Les mémos peuvent être configurés pour expirer après 8 heures, 1 jour, 2 jours, 1 semaine ou 30 jours maximum. Ils sont aussi supprimés immédiatement après avoir été lus. Les mémos expirés sont automatiquement nettoyés toutes les heures."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Puis-je récupérer un mémo supprimé ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Non, une fois qu'un mémo est supprimé (soit après avoir été lu ou à son expiration), il ne peut pas être récupéré. C'est par conception pour une confidentialité et sécurité maximales."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Est-ce que securememo.app est gratuit à utiliser ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Oui, securememo.app est complètement gratuit à utiliser. Il n'y a pas de frais cachés, pas de fonctionnalités premium, et pas de suivi ou publicité."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Quelle technologie utilise securememo.app ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "securememo.app est construit sur Cloudflare Workers pour le calcul sans serveur, Base de Données D1 pour le stockage, API Web Crypto pour le chiffrement côté client, et HTML/CSS/JavaScript moderne. Le code source est open source et disponible sur GitHub."
+          }
+        }
+      ]
+    }
+    </script>
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="/android-chrome-512x512.png">
+    <link rel="canonical" href="{{PUBLIC_ORIGIN}}/fr/about.html">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="/fr" class="nav-logo">securememo.app</a>
+            
+            <!-- Hamburger Menu Button -->
+            <button class="hamburger" type="button" aria-label="Basculer le menu de navigation" aria-expanded="false">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+            
+            <!-- Navigation Menu -->
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="/fr" class="nav-link">Accueil</a></li>
+                <li><a href="/fr/about.html" class="nav-link active">À propos</a></li>
+                <li><a href="/fr/create-memo.html" class="nav-link">Créer un Mémo Sécurisé</a></li>
+                <li class="language-dropdown">
+                    <button class="language-toggle nav-link" aria-expanded="false" aria-haspopup="true">
+                        🇫🇷 Français
+                    </button>
+                    <div class="language-menu">
+                        <a href="/ar/about.html" class="language-item " title="العربية">🌐 العربية</a>
+                        <a href="/bn/about.html" class="language-item " title="বাংলা">🇧🇩 বাংলা</a>
+                        <a href="/cs/about.html" class="language-item " title="Čeština">🇨🇿 Čeština</a>
+                        <a href="/da/about.html" class="language-item " title="Dansk">🇩🇰 Dansk</a>
+                        <a href="/de/about.html" class="language-item " title="Deutsch">🇩🇪 Deutsch</a>
+                        <a href="/el/about.html" class="language-item " title="Ελληνικά">🇬🇷 Ελληνικά</a>
+                        <a href="/en/about.html" class="language-item " title="English">🇬🇧 English</a>
+                        <a href="/es/about.html" class="language-item " title="Español">🇪🇸 Español</a>
+                        <a href="/fi/about.html" class="language-item " title="Suomi">🇫🇮 Suomi</a>
+                        <a href="/fr/about.html" class="language-item active" title="Français">🇫🇷 Français</a>
+                        <a href="/hi/about.html" class="language-item " title="हिन्दी">🇮🇳 हिन्दी</a>
+                        <a href="/hu/about.html" class="language-item " title="Magyar">🇭🇺 Magyar</a>
+                        <a href="/id/about.html" class="language-item " title="Bahasa Indonesia">🇮🇩 Bahasa Indonesia</a>
+                        <a href="/it/about.html" class="language-item " title="Italiano">🇮🇹 Italiano</a>
+                        <a href="/ja/about.html" class="language-item " title="日本語">🇯🇵 日本語</a>
+                        <a href="/ko/about.html" class="language-item " title="한국어">🇰🇷 한국어</a>
+                        <a href="/nl/about.html" class="language-item " title="Nederlands">🇳🇱 Nederlands</a>
+                        <a href="/no/about.html" class="language-item " title="Norsk">🇳🇴 Norsk</a>
+                        <a href="/pl/about.html" class="language-item " title="Polski">🇵🇱 Polski</a>
+                        <a href="/ptPT/about.html" class="language-item " title="Português (Portugal)">🇵🇹 Português</a>
+                        <a href="/ptBR/about.html" class="language-item " title="Português (Brasil)">🇧🇷 Português (Brasil)</a>
+                        <a href="/ru/about.html" class="language-item " title="Русский">🇷🇺 Русский</a>
+                        <a href="/ro/about.html" class="language-item " title="Română">🇷🇴 Română</a>
+                        <a href="/sv/about.html" class="language-item " title="Svenska">🇸🇪 Svenska</a>
+                        <a href="/tl/about.html" class="language-item " title="Tagalog">🇵🇭 Tagalog</a>
+                        <a href="/th/about.html" class="language-item " title="ไทย">🇹🇭 ไทย</a>
+                        <a href="/tr/about.html" class="language-item " title="Türkçe">🇹🇷 Türkçe</a>
+                        <a href="/uk/about.html" class="language-item " title="Українська">🇺🇦 Українська</a>
+                        <a href="/vi/about.html" class="language-item " title="Tiếng Việt">🇻🇳 Tiếng Việt</a>
+                        <a href="/zh/about.html" class="language-item " title="中文">🈶 中文</a>
+                    </div>
+                </li>
+            </ul>
+            
+            <!-- Mobile Menu Overlay -->
+            <div class="nav-overlay"></div>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <div class="about-section">
+            <h1>À propos de securememo.app</h1>
+            <p>securememo.app est une application axée sur la confidentialité qui vous permet de créer des mémos chiffrés qui s'autodétruisent après avoir été lus ou expirés. Construite avec la sécurité et la confidentialité comme priorités principales. Code source disponible sur GitHub.</p>
+            
+            <div class="tech-stack">
+                <h2>Stack Technologique</h2>
+                <ul>
+                    <li><strong>Cloudflare Workers:</strong> Cloudflare Workers : Plateforme de calcul sans serveur pour des performances globales</li>
+                    <li><strong>D1 Database:</strong> Base de Données D1 : Base de données alimentée par SQLite pour un stockage sécurisé</li>
+                    <li><strong>Web Crypto API:</strong> Web Crypto API : Chiffrement AES-256 côté client</li>
+                    <li><strong>HTML/CSS/JavaScript:</strong> HTML/CSS/JavaScript : Interface web moderne et responsive</li>
+                    <li><strong>Code source disponible sur GitHub :</strong> <a href="https://github.com/timoheimonen/securememo.app" target="_blank" rel="noopener noreferrer">Voir le code source sur GitHub</a></li>
+                </ul>
+            </div>
+
+            <div class="features-detail">
+                <h2>Fonctionnalités de Sécurité</h2>
+                <div class="feature-list">
+                    <div class="feature-item">
+                        <h3>🔐 Chiffrement Côté Client</h3>
+                        <p>Tout le chiffrement se produit dans votre navigateur en utilisant l'API Web Crypto. Votre mémo est chiffré avec AES-256 avant d'être envoyé à nos serveurs.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>🔑 Partage de Mot de Passe Séparé</h3>
+                        <p>Le mot de passe de chiffrement est généré séparément de l'URL et devrait être partagé via un canal différent pour une sécurité renforcée.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>💥 Mémos Auto-Destructeurs</h3>
+                        <p>Une fois qu'un mémo est lu ou expiré, il est immédiatement et définitivement supprimé de notre base de données. Aucune trace ne demeure.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>🌐 Aucun Stockage de Mot de Passe</h3>
+                        <p>Nous ne stockons jamais les mots de passe de chiffrement sur nos serveurs. Ils n'existent que dans la mémoire de votre navigateur.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>⚡ Performance Globale</h3>
+                        <p>Construit sur le réseau global de Cloudflare pour un accès ultra-rapide depuis n'importe où dans le monde.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>🔒 Confidentialité d'Abord</h3>
+                        <p>Aucun compte utilisateur requis. Aucun suivi. Aucune analytique. Votre confidentialité est notre priorité.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="usage-section">
+                <h2>Comment Utiliser</h2>
+                <div class="feature-list">
+                    <div class="feature-item">
+                        <h3>1. Créer un Mémo</h3>
+                        <p>Allez à "Créer un Mémo Sécurisé" et tapez votre mémo. Choisissez un temps d'expiration (8h, 1j, 2j, 1 semaine ou maximum 30 jours). Les mémos sont supprimés quand ils sont lus ou expirés. Le système générera un mot de passe de chiffrement aléatoire.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>2. Partager le Lien et le Mot de Passe</h3>
+                        <p>Copiez l'URL et le mot de passe générés, puis partagez-les avec votre destinataire via des canaux séparés pour une sécurité renforcée.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>3. Auto-Destruction</h3>
+                        <p>Quand le destinataire ouvre le lien et saisit le mot de passe séparément, le mémo sera déchiffré puis supprimé définitivement s'il est lu, ou supprimé automatiquement s'il expire. Les mémos expirés sont automatiquement nettoyés toutes les heures.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="video-embed">
+                <div class="video-aspect-ratio">
+            <iframe src="https://www.youtube-nocookie.com/embed/V0vEHLLdDKk"
+                title="How to use securememo.app"
+                            frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            allowfullscreen
+                            loading="lazy"
+                            class="video-iframe">
+                    </iframe>
+                </div>
+                <p class="video-caption">
+                    <a href="https://www.youtube-nocookie.com/watch?v=V0vEHLLdDKk" target="_blank" rel="noopener noreferrer">Watch on YouTube</a>
+                </p>
+                <noscript>
+                    <p class="text-center"><a href="https://www.youtube-nocookie.com/watch?v=V0vEHLLdDKk" target="_blank" rel="noopener noreferrer">Watch the video (JavaScript disabled)</a></p>
+                </noscript>
+            </div>
+            <div class="cta-section">
+                <h2>Prêt à Commencer ?</h2>
+                <p>Créez votre premier mémo sécurisé maintenant et découvrez le vrai chiffrement de bout en bout.</p>
+                <div class="cta-buttons">
+                    <a href="/fr/create-memo.html" class="btn btn-primary">Créer un Mémo Sécurisé</a>
+                    <a href="/fr" class="btn btn-secondary">Retour à l'Accueil</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p><a href="https://github.com/timoheimonen/securememo.app" target="_blank" rel="noopener noreferrer">Voir le code source sur GitHub</a> | <a href="/fr/tos.html">Conditions d'Utilisation</a> | <a href="/fr/privacy.html">Avis de Confidentialité</a> | <a href="mailto:contact@securememo.app">contact@securememo.app</a></p>
+        <p class="footer-tagline">Aucun suivi, aucune publicité, aucun non-sens.</p>
+    </footer>
+
+    <script src="/js/common.js" type="module" nonce="{{CSP_NONCE}}" defer></script>
+</body>
+</html>

@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Über securememo.app - Datenschutzorientierte verschlüsselte Notizen | securememo.app</title>
+    <meta name="description" content="Erfahren Sie mehr über securememo.app's datenschutzorientierten Ansatz für verschlüsselte Nachrichten. Entwickelt mit clientseitiger AES-256-Verschlüsselung, selbstzerstörenden Nachrichten und Zero-Knowledge-Architektur.">
+    <meta name="keywords" content="über sichere Notiz, datenschutzorientierte Nachrichten, clientseitige Verschlüsselung, AES-256, selbstzerstörende Nachrichten, Zero-Knowledge, sicheres Teilen von Notizen">
+    <!-- Open Graph for social sharing -->
+    <meta property="og:title" content="Über securememo.app - Datenschutzorientierte verschlüsselte Notizen">
+    <meta property="og:description" content="Entdecken Sie, wie securememo.app Ihre Privatsphäre mit clientseitiger Verschlüsselung und selbstzerstörenden Nachrichten schützt.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://securememo.app/de/about.html">
+    <meta property="og:image" content="https://securememo.app/android-chrome-512x512.png">
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Über securememo.app - Datenschutzorientierte verschlüsselte Notizen">
+    <meta name="twitter:description" content="Datenschutz-erste verschlüsselte Nachrichten mit clientseitiger Verschlüsselung.">
+    <!-- Structured Data -->
+    <script type="application/ld+json" nonce="{{CSP_NONCE}}">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Wie schützt securememo.app meine Privatsphäre?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "securememo.app nutzt clientseitige AES-256-Verschlüsselung, das bedeutet, dass Ihre Notiz in Ihrem Browser verschlüsselt wird, bevor sie an unsere Server gesendet wird. Wir sehen niemals den Klartext-Inhalt. Notizen zerstören sich selbst nach dem Lesen oder Ablauf, und wir benötigen keine Benutzerkonten oder sammeln persönliche Informationen."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Welche Verschlüsselung verwendet securememo.app?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Wir verwenden AES-256-GCM-Verschlüsselung mit PBKDF2-Schlüsselableitung (2.200.000+ Iterationen). Alle Verschlüsselung findet clientseitig in Ihrem Browser mit der Web Crypto API statt. Das Verschlüsselungspasswort wird separat generiert und niemals auf unseren Servern gespeichert."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Wie lange halten Notizen?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Notizen können so eingestellt werden, dass sie nach 8 Stunden, 1 Tag, 2 Tagen, 1 Woche oder maximal 30 Tagen ablaufen. Sie werden auch sofort nach dem Lesen gelöscht. Abgelaufene Notizen werden automatisch jede Stunde bereinigt."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Kann ich eine gelöschte Notiz wiederherstellen?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Nein, sobald eine Notiz gelöscht ist (entweder nach dem Lesen oder bei Ablauf), kann sie nicht wiederhergestellt werden. Das ist absichtlich so für maximale Privatsphäre und Sicherheit."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Ist securememo.app kostenlos zu nutzen?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Ja, securememo.app ist vollständig kostenlos zu nutzen. Es gibt keine versteckten Gebühren, keine Premium-Features und kein Tracking oder Werbung."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Welche Technologie verwendet securememo.app?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "securememo.app ist aufgebaut auf Cloudflare Workers für serverloses Computing, D1-Datenbank für Speicherung, Web Crypto API für clientseitige Verschlüsselung und modernem HTML/CSS/JavaScript. Der Quellcode ist Open Source und auf GitHub verfügbar."
+          }
+        }
+      ]
+    }
+    </script>
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="/android-chrome-512x512.png">
+    <link rel="canonical" href="{{PUBLIC_ORIGIN}}/de/about.html">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="/de" class="nav-logo">securememo.app</a>
+            
+            <!-- Hamburger Menu Button -->
+            <button class="hamburger" type="button" aria-label="Navigationsmenü umschalten" aria-expanded="false">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+            
+            <!-- Navigation Menu -->
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="/de" class="nav-link">Startseite</a></li>
+                <li><a href="/de/about.html" class="nav-link active">Über uns</a></li>
+                <li><a href="/de/create-memo.html" class="nav-link">Sichere Notiz erstellen</a></li>
+                <li class="language-dropdown">
+                    <button class="language-toggle nav-link" aria-expanded="false" aria-haspopup="true">
+                        🇩🇪 Deutsch
+                    </button>
+                    <div class="language-menu">
+                        <a href="/ar/about.html" class="language-item " title="العربية">🌐 العربية</a>
+                        <a href="/bn/about.html" class="language-item " title="বাংলা">🇧🇩 বাংলা</a>
+                        <a href="/cs/about.html" class="language-item " title="Čeština">🇨🇿 Čeština</a>
+                        <a href="/da/about.html" class="language-item " title="Dansk">🇩🇰 Dansk</a>
+                        <a href="/de/about.html" class="language-item active" title="Deutsch">🇩🇪 Deutsch</a>
+                        <a href="/el/about.html" class="language-item " title="Ελληνικά">🇬🇷 Ελληνικά</a>
+                        <a href="/en/about.html" class="language-item " title="English">🇬🇧 English</a>
+                        <a href="/es/about.html" class="language-item " title="Español">🇪🇸 Español</a>
+                        <a href="/fi/about.html" class="language-item " title="Suomi">🇫🇮 Suomi</a>
+                        <a href="/fr/about.html" class="language-item " title="Français">🇫🇷 Français</a>
+                        <a href="/hi/about.html" class="language-item " title="हिन्दी">🇮🇳 हिन्दी</a>
+                        <a href="/hu/about.html" class="language-item " title="Magyar">🇭🇺 Magyar</a>
+                        <a href="/id/about.html" class="language-item " title="Bahasa Indonesia">🇮🇩 Bahasa Indonesia</a>
+                        <a href="/it/about.html" class="language-item " title="Italiano">🇮🇹 Italiano</a>
+                        <a href="/ja/about.html" class="language-item " title="日本語">🇯🇵 日本語</a>
+                        <a href="/ko/about.html" class="language-item " title="한국어">🇰🇷 한국어</a>
+                        <a href="/nl/about.html" class="language-item " title="Nederlands">🇳🇱 Nederlands</a>
+                        <a href="/no/about.html" class="language-item " title="Norsk">🇳🇴 Norsk</a>
+                        <a href="/pl/about.html" class="language-item " title="Polski">🇵🇱 Polski</a>
+                        <a href="/ptPT/about.html" class="language-item " title="Português (Portugal)">🇵🇹 Português</a>
+                        <a href="/ptBR/about.html" class="language-item " title="Português (Brasil)">🇧🇷 Português (Brasil)</a>
+                        <a href="/ru/about.html" class="language-item " title="Русский">🇷🇺 Русский</a>
+                        <a href="/ro/about.html" class="language-item " title="Română">🇷🇴 Română</a>
+                        <a href="/sv/about.html" class="language-item " title="Svenska">🇸🇪 Svenska</a>
+                        <a href="/tl/about.html" class="language-item " title="Tagalog">🇵🇭 Tagalog</a>
+                        <a href="/th/about.html" class="language-item " title="ไทย">🇹🇭 ไทย</a>
+                        <a href="/tr/about.html" class="language-item " title="Türkçe">🇹🇷 Türkçe</a>
+                        <a href="/uk/about.html" class="language-item " title="Українська">🇺🇦 Українська</a>
+                        <a href="/vi/about.html" class="language-item " title="Tiếng Việt">🇻🇳 Tiếng Việt</a>
+                        <a href="/zh/about.html" class="language-item " title="中文">🈶 中文</a>
+                    </div>
+                </li>
+            </ul>
+            
+            <!-- Mobile Menu Overlay -->
+            <div class="nav-overlay"></div>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <div class="about-section">
+            <h1>Über securememo.app</h1>
+            <p>securememo.app ist eine datenschutzorientierte Anwendung, mit der Sie verschlüsselte Notizen erstellen können, die sich nach dem Lesen oder Ablauf selbst zerstören. Entwickelt mit Sicherheit und Datenschutz als oberste Prioritäten. Quellcode auf GitHub verfügbar.</p>
+            
+            <div class="tech-stack">
+                <h2>Technologie-Stack</h2>
+                <ul>
+                    <li><strong>Cloudflare Workers:</strong> Cloudflare Workers: Serverlose Computing-Plattform für globale Performance</li>
+                    <li><strong>D1 Database:</strong> D1-Datenbank: SQLite-betriebene Datenbank für sichere Speicherung</li>
+                    <li><strong>Web Crypto API:</strong> Web Crypto API: Clientseitige AES-256-Verschlüsselung</li>
+                    <li><strong>HTML/CSS/JavaScript:</strong> HTML/CSS/JavaScript: Moderne, responsive Web-Oberfläche</li>
+                    <li><strong>Quellcode auf GitHub verfügbar:</strong> <a href="https://github.com/timoheimonen/securememo.app" target="_blank" rel="noopener noreferrer">Quellcode auf GitHub ansehen</a></li>
+                </ul>
+            </div>
+
+            <div class="features-detail">
+                <h2>Sicherheitsfeatures</h2>
+                <div class="feature-list">
+                    <div class="feature-item">
+                        <h3>🔐 Clientseitige Verschlüsselung</h3>
+                        <p>Alle Verschlüsselung findet in Ihrem Browser mit der Web Crypto API statt. Ihre Notiz wird mit AES-256 verschlüsselt, bevor sie an unsere Server gesendet wird.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>🔑 Separates Passwort-Teilen</h3>
+                        <p>Das Verschlüsselungspasswort wird separat von der URL generiert und sollte über einen anderen Kanal geteilt werden für erhöhte Sicherheit.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>💥 Selbstzerstörende Notizen</h3>
+                        <p>Sobald eine Notiz gelesen oder abgelaufen ist, wird sie sofort und dauerhaft aus unserer Datenbank gelöscht. Keine Spuren bleiben zurück.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>🌐 Keine Passwort-Speicherung</h3>
+                        <p>Wir speichern niemals Verschlüsselungspasswörter auf unseren Servern. Sie existieren nur im Speicher Ihres Browsers.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>⚡ Globale Performance</h3>
+                        <p>Aufgebaut auf Cloudflare's globalem Netzwerk für blitzschnellen Zugang von überall auf der Welt.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>🔒 Datenschutz zuerst</h3>
+                        <p>Keine Benutzerkonten erforderlich. Kein Tracking. Keine Analytik. Ihre Privatsphäre ist unsere Priorität.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="usage-section">
+                <h2>Verwendung</h2>
+                <div class="feature-list">
+                    <div class="feature-item">
+                        <h3>1. Notiz erstellen</h3>
+                        <p>Gehen Sie zu "Sichere Notiz erstellen" und geben Sie Ihre Notiz ein. Wählen Sie eine Ablaufzeit (8h, 1d, 2d, 1 Woche oder maximal 30 Tage). Notizen werden gelöscht, wenn sie gelesen oder abgelaufen sind. Das System generiert ein zufälliges Verschlüsselungspasswort.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>2. Link und Passwort teilen</h3>
+                        <p>Kopieren Sie die generierte URL und das Passwort, dann teilen Sie sie mit Ihrem Empfänger über separate Kanäle für erhöhte Sicherheit.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>3. Selbstzerstörung</h3>
+                        <p>Wenn der Empfänger den Link öffnet und das Passwort separat eingibt, wird die Notiz entschlüsselt und dann dauerhaft gelöscht, wenn sie gelesen wird, oder automatisch gelöscht, wenn sie abgelaufen ist. Abgelaufene Notizen werden automatisch jede Stunde bereinigt.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="video-embed">
+                <div class="video-aspect-ratio">
+            <iframe src="https://www.youtube-nocookie.com/embed/V0vEHLLdDKk"
+                title="How to use securememo.app"
+                            frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            allowfullscreen
+                            loading="lazy"
+                            class="video-iframe">
+                    </iframe>
+                </div>
+                <p class="video-caption">
+                    <a href="https://www.youtube-nocookie.com/watch?v=V0vEHLLdDKk" target="_blank" rel="noopener noreferrer">Watch on YouTube</a>
+                </p>
+                <noscript>
+                    <p class="text-center"><a href="https://www.youtube-nocookie.com/watch?v=V0vEHLLdDKk" target="_blank" rel="noopener noreferrer">Watch the video (JavaScript disabled)</a></p>
+                </noscript>
+            </div>
+            <div class="cta-section">
+                <h2>Bereit zu beginnen?</h2>
+                <p>Erstellen Sie jetzt Ihre erste sichere Notiz und erleben Sie echte Ende-zu-Ende-Verschlüsselung.</p>
+                <div class="cta-buttons">
+                    <a href="/de/create-memo.html" class="btn btn-primary">Sichere Notiz erstellen</a>
+                    <a href="/de" class="btn btn-secondary">Zur Startseite</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p><a href="https://github.com/timoheimonen/securememo.app" target="_blank" rel="noopener noreferrer">Quellcode auf GitHub ansehen</a> | <a href="/de/tos.html">Nutzungsbedingungen</a> | <a href="/de/privacy.html">Datenschutzhinweis</a> | <a href="mailto:contact@securememo.app">contact@securememo.app</a></p>
+        <p class="footer-tagline">Kein Tracking, keine Werbung, kein Unsinn.</p>
+    </footer>
+
+    <script src="/js/common.js" type="module" nonce="{{CSP_NONCE}}" defer></script>
+</body>
+</html>

@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Névjegy securememo.app - Adatvédelem-központú titkosított jegyzetek | securememo.app</title>
+    <meta name="description" content="Ismerje meg a securememo.app adatvédelem-központú megközelítését a titkosított üzenetküldéshez. Böngészőoldali AES-256 titkosítás, önmegsemmisítő üzenetek és zero-knowledge architektúra.">
+    <meta name="keywords" content="névjegy biztonságos jegyzet, adatvédelem-központú üzenetküldés, böngészőoldali titkosítás, AES-256, önmegsemmisítő üzenetek, zero-knowledge, biztonságos jegyzetmegosztás">
+    <!-- Open Graph for social sharing -->
+    <meta property="og:title" content="Névjegy securememo.app - Adatvédelem-központú titkosított jegyzetek">
+    <meta property="og:description" content="Tudja meg, hogyan védi a securememo.app az Ön adatvédelmét böngészőoldali titkosítással és önmegsemmisítő üzenetekkel.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://securememo.app/hu/about.html">
+    <meta property="og:image" content="https://securememo.app/android-chrome-512x512.png">
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Névjegy securememo.app - Adatvédelem-központú titkosított jegyzetek">
+    <meta name="twitter:description" content="Adatvédelem-központú titkosított üzenetküldés böngészőoldali titkosítással.">
+    <!-- Structured Data -->
+    <script type="application/ld+json" nonce="{{CSP_NONCE}}">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Hogyan védi a securememo.app az adatvédelmemet?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "A securememo.app böngészőoldali AES-256 titkosítást használ, vagyis a jegyzeted a böngésződben titkosítva van, mielőtt eljutna a szervereinkhez. Soha nem látjuk a jegyzet szövegét. A jegyzetek elolvasás vagy lejárat után önmegsemmisülnek, és nem kérünk felhasználói fiókot vagy személyes adatokat."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Milyen titkosítást használ a securememo.app?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "AES-256-GCM titkosítást használunk PBKDF2 kulcsszármaztatással. Minden titkosítás kliensoldalon a böngészőben történik a Web Crypto API-val. A titkosítási jelszó külön generálódik, és soha nem tároljuk a szervereinken."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Meddig maradnak meg a jegyzetek?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "A jegyzetek beállíthatók, hogy 8 óra, 1 nap, 2 nap, 1 hét vagy maximum 30 nap után lejárjanak. Elolvasás után azonnal törlődnek. A lejárt jegyzetek automatikusan törlődnek minden órában."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Vissza lehet állítani egy törölt jegyzetet?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Nem, ha egy jegyzet törlődik (elolvasás vagy lejárat után), nem lehet visszaállítani. Ez a maximális adatvédelem és biztonság érdekében van így."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Ingyenes a securememo.app használata?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Igen, a securememo.app teljesen ingyenes. Nincsenek rejtett díjak, prémium funkciók, követés vagy reklám."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Milyen technológiát használ a securememo.app?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "A securememo.app Cloudflare Workers-re épül (szerver nélküli számítás), D1 adatbázist használ tároláshoz, Web Crypto API-t böngészőoldali titkosításhoz, és modern HTML/CSS/JavaScript technológiákat. A forráskód nyílt és elérhető a GitHubon."
+          }
+        }
+      ]
+    }
+    </script>
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="/android-chrome-512x512.png">
+    <link rel="canonical" href="{{PUBLIC_ORIGIN}}/hu/about.html">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="/hu" class="nav-logo">securememo.app</a>
+            
+            <!-- Hamburger Menu Button -->
+            <button class="hamburger" type="button" aria-label="Navigációs menü váltása" aria-expanded="false">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+            
+            <!-- Navigation Menu -->
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="/hu" class="nav-link">Kezdőlap</a></li>
+                <li><a href="/hu/about.html" class="nav-link active">Névjegy</a></li>
+                <li><a href="/hu/create-memo.html" class="nav-link">Biztonságos jegyzet létrehozása</a></li>
+                <li class="language-dropdown">
+                    <button class="language-toggle nav-link" aria-expanded="false" aria-haspopup="true">
+                        🇭🇺 Magyar
+                    </button>
+                    <div class="language-menu">
+                        <a href="/ar/about.html" class="language-item " title="العربية">🌐 العربية</a>
+                        <a href="/bn/about.html" class="language-item " title="বাংলা">🇧🇩 বাংলা</a>
+                        <a href="/cs/about.html" class="language-item " title="Čeština">🇨🇿 Čeština</a>
+                        <a href="/da/about.html" class="language-item " title="Dansk">🇩🇰 Dansk</a>
+                        <a href="/de/about.html" class="language-item " title="Deutsch">🇩🇪 Deutsch</a>
+                        <a href="/el/about.html" class="language-item " title="Ελληνικά">🇬🇷 Ελληνικά</a>
+                        <a href="/en/about.html" class="language-item " title="English">🇬🇧 English</a>
+                        <a href="/es/about.html" class="language-item " title="Español">🇪🇸 Español</a>
+                        <a href="/fi/about.html" class="language-item " title="Suomi">🇫🇮 Suomi</a>
+                        <a href="/fr/about.html" class="language-item " title="Français">🇫🇷 Français</a>
+                        <a href="/hi/about.html" class="language-item " title="हिन्दी">🇮🇳 हिन्दी</a>
+                        <a href="/hu/about.html" class="language-item active" title="Magyar">🇭🇺 Magyar</a>
+                        <a href="/id/about.html" class="language-item " title="Bahasa Indonesia">🇮🇩 Bahasa Indonesia</a>
+                        <a href="/it/about.html" class="language-item " title="Italiano">🇮🇹 Italiano</a>
+                        <a href="/ja/about.html" class="language-item " title="日本語">🇯🇵 日本語</a>
+                        <a href="/ko/about.html" class="language-item " title="한국어">🇰🇷 한국어</a>
+                        <a href="/nl/about.html" class="language-item " title="Nederlands">🇳🇱 Nederlands</a>
+                        <a href="/no/about.html" class="language-item " title="Norsk">🇳🇴 Norsk</a>
+                        <a href="/pl/about.html" class="language-item " title="Polski">🇵🇱 Polski</a>
+                        <a href="/ptPT/about.html" class="language-item " title="Português (Portugal)">🇵🇹 Português</a>
+                        <a href="/ptBR/about.html" class="language-item " title="Português (Brasil)">🇧🇷 Português (Brasil)</a>
+                        <a href="/ru/about.html" class="language-item " title="Русский">🇷🇺 Русский</a>
+                        <a href="/ro/about.html" class="language-item " title="Română">🇷🇴 Română</a>
+                        <a href="/sv/about.html" class="language-item " title="Svenska">🇸🇪 Svenska</a>
+                        <a href="/tl/about.html" class="language-item " title="Tagalog">🇵🇭 Tagalog</a>
+                        <a href="/th/about.html" class="language-item " title="ไทย">🇹🇭 ไทย</a>
+                        <a href="/tr/about.html" class="language-item " title="Türkçe">🇹🇷 Türkçe</a>
+                        <a href="/uk/about.html" class="language-item " title="Українська">🇺🇦 Українська</a>
+                        <a href="/vi/about.html" class="language-item " title="Tiếng Việt">🇻🇳 Tiếng Việt</a>
+                        <a href="/zh/about.html" class="language-item " title="中文">🈶 中文</a>
+                    </div>
+                </li>
+            </ul>
+            
+            <!-- Mobile Menu Overlay -->
+            <div class="nav-overlay"></div>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <div class="about-section">
+            <h1>A securememo.app névjegye</h1>
+            <p>A securememo.app egy adatvédelem-központú alkalmazás, amely lehetővé teszi titkosított jegyzetek létrehozását, amelyek elolvasás vagy lejárat után önmegsemmisülnek. A biztonság és az adatvédelem a legfontosabb szempontok. A forráskód elérhető a GitHubon.</p>
+            
+            <div class="tech-stack">
+                <h2>Technológiai háttér</h2>
+                <ul>
+                    <li><strong>Cloudflare Workers:</strong> Cloudflare Workers: Szerver nélküli számítási platform globális teljesítményhez</li>
+                    <li><strong>D1 Database:</strong> D1 adatbázis: SQLite-alapú biztonságos tárolás</li>
+                    <li><strong>Web Crypto API:</strong> Web Crypto API: Böngészőoldali AES-256 titkosítás</li>
+                    <li><strong>HTML/CSS/JavaScript:</strong> HTML/CSS/JavaScript: Modern, reszponzív webes felület</li>
+                    <li><strong>Forráskód elérhető a GitHubon:</strong> <a href="https://github.com/timoheimonen/securememo.app" target="_blank" rel="noopener noreferrer">Forráskód megtekintése a GitHubon</a></li>
+                </ul>
+            </div>
+
+            <div class="features-detail">
+                <h2>Biztonsági funkciók</h2>
+                <div class="feature-list">
+                    <div class="feature-item">
+                        <h3>🔐 Kliensoldali titkosítás</h3>
+                        <p>Minden titkosítás a böngészőben történik a Web Crypto API segítségével. Jegyzeted AES-256-tal titkosítva kerül a szervereinkre.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>🔑 Külön jelszómegosztás</h3>
+                        <p>A titkosítási jelszó külön generálódik az URL-től, és biztonság érdekében más csatornán kell megosztani.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>💥 Önmegsemmisítő jegyzetek</h3>
+                        <p>A jegyzet elolvasás vagy lejárat után azonnal és véglegesen törlődik az adatbázisból. Nem marad nyoma.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>🌐 Nincs jelszótárolás</h3>
+                        <p>Soha nem tárolunk titkosítási jelszavakat a szervereinken. Ezek csak a böngésződ memóriájában léteznek.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>⚡ Globális teljesítmény</h3>
+                        <p>A Cloudflare globális hálózatán fut, így villámgyors hozzáférést biztosít bárhonnan.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>🔒 Adatvédelem az első helyen</h3>
+                        <p>Nincs szükség felhasználói fiókra. Nincs követés. Nincs analitika. Az Ön adatvédelme a legfontosabb.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="usage-section">
+                <h2>Használati útmutató</h2>
+                <div class="feature-list">
+                    <div class="feature-item">
+                        <h3>1. Jegyzet létrehozása</h3>
+                        <p>Lépjen a "Biztonságos jegyzet létrehozása" oldalra, írja be jegyzetét, és válasszon lejárati időt (8 óra, 1 nap, 2 nap, 1 hét vagy maximum 30 nap). A jegyzetek elolvasás vagy lejárat után törlődnek. A rendszer véletlenszerű titkosítási jelszót generál.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>2. Link és jelszó megosztása</h3>
+                        <p>Másolja ki a generált URL-t és jelszót, majd ossza meg őket a címzettel külön csatornákon a nagyobb biztonság érdekében.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>3. Önmegsemmisítés</h3>
+                        <p>Amikor a címzett megnyitja a linket és külön megadja a jelszót, a jegyzet visszafejtésre kerül, majd véglegesen törlődik, ha elolvasták, vagy automatikusan törlődik, ha lejárt. A lejárt jegyzetek automatikusan törlődnek minden órában.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="video-embed">
+                <div class="video-aspect-ratio">
+            <iframe src="https://www.youtube-nocookie.com/embed/V0vEHLLdDKk"
+                title="How to use securememo.app"
+                            frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            allowfullscreen
+                            loading="lazy"
+                            class="video-iframe">
+                    </iframe>
+                </div>
+                <p class="video-caption">
+                    <a href="https://www.youtube-nocookie.com/watch?v=V0vEHLLdDKk" target="_blank" rel="noopener noreferrer">Watch on YouTube</a>
+                </p>
+                <noscript>
+                    <p class="text-center"><a href="https://www.youtube-nocookie.com/watch?v=V0vEHLLdDKk" target="_blank" rel="noopener noreferrer">Watch the video (JavaScript disabled)</a></p>
+                </noscript>
+            </div>
+            <div class="cta-section">
+                <h2>Készen áll az indulásra?</h2>
+                <p>Hozza létre első biztonságos jegyzetét, és tapasztalja meg a valódi végponttól végpontig titkosítást.</p>
+                <div class="cta-buttons">
+                    <a href="/hu/create-memo.html" class="btn btn-primary">Biztonságos jegyzet létrehozása</a>
+                    <a href="/hu" class="btn btn-secondary">Vissza a kezdőlapra</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p><a href="https://github.com/timoheimonen/securememo.app" target="_blank" rel="noopener noreferrer">Forráskód megtekintése a GitHubon</a> | <a href="/hu/tos.html">Felhasználási feltételek</a> | <a href="/hu/privacy.html">Adatvédelmi tájékoztató</a> | <a href="mailto:contact@securememo.app">contact@securememo.app</a></p>
+        <p class="footer-tagline">Nincs követés, nincs reklám, nincs felesleges dolog.</p>
+    </footer>
+
+    <script src="/js/common.js" type="module" nonce="{{CSP_NONCE}}" defer></script>
+</body>
+</html>

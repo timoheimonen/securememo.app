@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Про securememo.app - Зашифровані нотатки з орієнтацією на конфіденційність | securememo.app</title>
+    <meta name="description" content="Дізнайтеся про підхід securememo.app до конфіденційності в зашифрованих повідомленнях. Побудовано з використанням шифрування AES-256 на стороні клієнта, самознищуваних повідомлень і архітектури з нульовим знанням.">
+    <meta name="keywords" content="про захищену записку, конфіденційні повідомлення, шифрування на стороні клієнта, AES-256, самознищувані повідомлення, нульове знання, безпечний обмін нотатками">
+    <!-- Open Graph for social sharing -->
+    <meta property="og:title" content="Про securememo.app - Зашифровані нотатки з орієнтацією на конфіденційність">
+    <meta property="og:description" content="Дізнайтеся, як securememo.app захищає вашу конфіденційність за допомогою шифрування на стороні клієнта і самознищуваних повідомлень.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://securememo.app/uk/about.html">
+    <meta property="og:image" content="https://securememo.app/android-chrome-512x512.png">
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Про securememo.app - Зашифровані нотатки з орієнтацією на конфіденційність">
+    <meta name="twitter:description" content="Конфіденційні зашифровані повідомлення з шифруванням на стороні клієнта.">
+    <!-- Structured Data -->
+    <script type="application/ld+json" nonce="{{CSP_NONCE}}">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Як securememo.app захищає мою конфіденційність?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "securememo.app використовує шифрування AES-256 на стороні клієнта, тобто ваша записка шифрується у браузері до надсилання на наш сервер. Ми ніколи не бачимо відкритий текст. Записки самознищуються після прочитання або закінчення терміну, і ми не вимагаємо облікових записів чи збору особистої інформації."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Яке шифрування використовує securememo.app?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Ми використовуємо шифрування AES-256-GCM з деривацією ключа PBKDF2. Весь процес шифрування відбувається у вашому браузері через Web Crypto API. Пароль для шифрування генерується окремо і ніколи не зберігається на наших серверах."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Скільки часу зберігаються записки?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Записки можуть бути налаштовані на видалення через 8 годин, 1 день, 2 дні, 1 тиждень або максимум 30 днів. Вони також видаляються одразу після прочитання. Прострочені записки автоматично очищаються щогодини."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Чи можу я відновити видалену записку?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Ні, після видалення записки (після прочитання або закінчення терміну) її неможливо відновити. Це зроблено для максимальної конфіденційності та безпеки."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Чи безкоштовний securememo.app?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Так, securememo.app повністю безкоштовний. Немає прихованих платежів, преміум-функцій, відстеження чи реклами."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Які технології використовує securememo.app?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "securememo.app побудовано на Cloudflare Workers для безсерверних обчислень, D1 Database для зберігання, Web Crypto API для шифрування на стороні клієнта і сучасних HTML/CSS/JavaScript. Вихідний код відкритий і доступний на GitHub."
+          }
+        }
+      ]
+    }
+    </script>
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="/android-chrome-512x512.png">
+    <link rel="canonical" href="{{PUBLIC_ORIGIN}}/uk/about.html">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="/uk" class="nav-logo">securememo.app</a>
+            
+            <!-- Hamburger Menu Button -->
+            <button class="hamburger" type="button" aria-label="Перемкнути меню навігації" aria-expanded="false">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+            
+            <!-- Navigation Menu -->
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="/uk" class="nav-link">Головна</a></li>
+                <li><a href="/uk/about.html" class="nav-link active">Про сайт</a></li>
+                <li><a href="/uk/create-memo.html" class="nav-link">Створити захищену записку</a></li>
+                <li class="language-dropdown">
+                    <button class="language-toggle nav-link" aria-expanded="false" aria-haspopup="true">
+                        🇺🇦 Українська
+                    </button>
+                    <div class="language-menu">
+                        <a href="/ar/about.html" class="language-item " title="العربية">🌐 العربية</a>
+                        <a href="/bn/about.html" class="language-item " title="বাংলা">🇧🇩 বাংলা</a>
+                        <a href="/cs/about.html" class="language-item " title="Čeština">🇨🇿 Čeština</a>
+                        <a href="/da/about.html" class="language-item " title="Dansk">🇩🇰 Dansk</a>
+                        <a href="/de/about.html" class="language-item " title="Deutsch">🇩🇪 Deutsch</a>
+                        <a href="/el/about.html" class="language-item " title="Ελληνικά">🇬🇷 Ελληνικά</a>
+                        <a href="/en/about.html" class="language-item " title="English">🇬🇧 English</a>
+                        <a href="/es/about.html" class="language-item " title="Español">🇪🇸 Español</a>
+                        <a href="/fi/about.html" class="language-item " title="Suomi">🇫🇮 Suomi</a>
+                        <a href="/fr/about.html" class="language-item " title="Français">🇫🇷 Français</a>
+                        <a href="/hi/about.html" class="language-item " title="हिन्दी">🇮🇳 हिन्दी</a>
+                        <a href="/hu/about.html" class="language-item " title="Magyar">🇭🇺 Magyar</a>
+                        <a href="/id/about.html" class="language-item " title="Bahasa Indonesia">🇮🇩 Bahasa Indonesia</a>
+                        <a href="/it/about.html" class="language-item " title="Italiano">🇮🇹 Italiano</a>
+                        <a href="/ja/about.html" class="language-item " title="日本語">🇯🇵 日本語</a>
+                        <a href="/ko/about.html" class="language-item " title="한국어">🇰🇷 한국어</a>
+                        <a href="/nl/about.html" class="language-item " title="Nederlands">🇳🇱 Nederlands</a>
+                        <a href="/no/about.html" class="language-item " title="Norsk">🇳🇴 Norsk</a>
+                        <a href="/pl/about.html" class="language-item " title="Polski">🇵🇱 Polski</a>
+                        <a href="/ptPT/about.html" class="language-item " title="Português (Portugal)">🇵🇹 Português</a>
+                        <a href="/ptBR/about.html" class="language-item " title="Português (Brasil)">🇧🇷 Português (Brasil)</a>
+                        <a href="/ru/about.html" class="language-item " title="Русский">🇷🇺 Русский</a>
+                        <a href="/ro/about.html" class="language-item " title="Română">🇷🇴 Română</a>
+                        <a href="/sv/about.html" class="language-item " title="Svenska">🇸🇪 Svenska</a>
+                        <a href="/tl/about.html" class="language-item " title="Tagalog">🇵🇭 Tagalog</a>
+                        <a href="/th/about.html" class="language-item " title="ไทย">🇹🇭 ไทย</a>
+                        <a href="/tr/about.html" class="language-item " title="Türkçe">🇹🇷 Türkçe</a>
+                        <a href="/uk/about.html" class="language-item active" title="Українська">🇺🇦 Українська</a>
+                        <a href="/vi/about.html" class="language-item " title="Tiếng Việt">🇻🇳 Tiếng Việt</a>
+                        <a href="/zh/about.html" class="language-item " title="中文">🈶 中文</a>
+                    </div>
+                </li>
+            </ul>
+            
+            <!-- Mobile Menu Overlay -->
+            <div class="nav-overlay"></div>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <div class="about-section">
+            <h1>Про securememo.app</h1>
+            <p>securememo.app — це додаток, орієнтований на конфіденційність, який дозволяє створювати зашифровані записки, що самознищуються після прочитання або закінчення терміну. Побудовано з акцентом на безпеку та конфіденційність. Вихідний код доступний на GitHub.</p>
+            
+            <div class="tech-stack">
+                <h2>Технологічний стек</h2>
+                <ul>
+                    <li><strong>Cloudflare Workers:</strong> Cloudflare Workers: Безсерверна платформа для глобальної продуктивності</li>
+                    <li><strong>D1 Database:</strong> D1 Database: База даних SQLite для безпечного зберігання</li>
+                    <li><strong>Web Crypto API:</strong> Web Crypto API: Шифрування AES-256 на стороні клієнта</li>
+                    <li><strong>HTML/CSS/JavaScript:</strong> HTML/CSS/JavaScript: Сучасний, адаптивний веб-інтерфейс</li>
+                    <li><strong>Вихідний код доступний на GitHub:</strong> <a href="https://github.com/timoheimonen/securememo.app" target="_blank" rel="noopener noreferrer">Переглянути вихідний код на GitHub</a></li>
+                </ul>
+            </div>
+
+            <div class="features-detail">
+                <h2>Функції безпеки</h2>
+                <div class="feature-list">
+                    <div class="feature-item">
+                        <h3>🔐 Шифрування на стороні клієнта</h3>
+                        <p>Весь процес шифрування відбувається у вашому браузері через Web Crypto API. Ваша записка шифрується AES-256 перед відправкою на сервер.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>🔑 Окремий обмін паролем</h3>
+                        <p>Пароль для шифрування генерується окремо від URL і має бути переданий іншим каналом для підвищення безпеки.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>💥 Самознищувані записки</h3>
+                        <p>Після прочитання або закінчення терміну записка негайно та остаточно видаляється з нашої бази даних. Жодних слідів не залишається.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>🌐 Без зберігання паролів</h3>
+                        <p>Ми ніколи не зберігаємо паролі для шифрування на наших серверах. Вони існують лише у пам’яті вашого браузера.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>⚡ Глобальна продуктивність</h3>
+                        <p>Побудовано на глобальній мережі Cloudflare для блискавичного доступу з будь-якої точки світу.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>🔒 Конфіденційність понад усе</h3>
+                        <p>Не потрібні облікові записи користувачів. Без відстеження. Без аналітики. Ваша конфіденційність — наш пріоритет.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="usage-section">
+                <h2>Як користуватися</h2>
+                <div class="feature-list">
+                    <div class="feature-item">
+                        <h3>1. Створіть записку</h3>
+                        <p>Перейдіть до "Створити захищену записку" і введіть свою записку. Виберіть час зберігання (8 год, 1 день, 2 дні, 1 тиждень або максимум 30 днів). Записки видаляються після прочитання або закінчення терміну. Система згенерує випадковий пароль для шифрування.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>2. Поділіться посиланням і паролем</h3>
+                        <p>Скопіюйте згенерований URL і пароль, а потім передайте їх отримувачу через різні канали для підвищення безпеки.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>3. Самознищення</h3>
+                        <p>Коли отримувач відкриє посилання і введе пароль окремо, записка буде розшифрована і остаточно видалена, якщо прочитана, або автоматично видалена, якщо закінчився термін. Прострочені записки автоматично очищаються щогодини.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="video-embed">
+                <div class="video-aspect-ratio">
+            <iframe src="https://www.youtube-nocookie.com/embed/V0vEHLLdDKk"
+                title="How to use securememo.app"
+                            frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            allowfullscreen
+                            loading="lazy"
+                            class="video-iframe">
+                    </iframe>
+                </div>
+                <p class="video-caption">
+                    <a href="https://www.youtube-nocookie.com/watch?v=V0vEHLLdDKk" target="_blank" rel="noopener noreferrer">Watch on YouTube</a>
+                </p>
+                <noscript>
+                    <p class="text-center"><a href="https://www.youtube-nocookie.com/watch?v=V0vEHLLdDKk" target="_blank" rel="noopener noreferrer">Watch the video (JavaScript disabled)</a></p>
+                </noscript>
+            </div>
+            <div class="cta-section">
+                <h2>Готові почати?</h2>
+                <p>Створіть свою першу захищену записку і відчуйте справжнє кінцеве шифрування.</p>
+                <div class="cta-buttons">
+                    <a href="/uk/create-memo.html" class="btn btn-primary">Створити захищену записку</a>
+                    <a href="/uk" class="btn btn-secondary">На головну</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p><a href="https://github.com/timoheimonen/securememo.app" target="_blank" rel="noopener noreferrer">Переглянути вихідний код на GitHub</a> | <a href="/uk/tos.html">Умови використання</a> | <a href="/uk/privacy.html">Повідомлення про конфіденційність</a> | <a href="mailto:contact@securememo.app">contact@securememo.app</a></p>
+        <p class="footer-tagline">Без відстеження, без реклами, без зайвого.</p>
+    </footer>
+
+    <script src="/js/common.js" type="module" nonce="{{CSP_NONCE}}" defer></script>
+</body>
+</html>

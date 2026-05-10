@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>securememo.app সম্পর্কে - প্রাইভেসি-কেন্দ্রিক এনক্রিপ্টেড নোট | securememo.app</title>
+    <meta name="description" content="securememo.app এর প্রাইভেসি-প্রথম এনক্রিপ্টেড মেসেজিং পদ্ধতি সম্পর্কে জানুন। ক্লায়েন্ট-সাইড AES-256 এনক্রিপশন, স্বয়ং-বিনষ্ট বার্তা এবং জিরো-নলেজ আর্কিটেকচারে নির্মিত।">
+    <meta name="keywords" content="নিরাপদ মেমো সম্পর্কে, প্রাইভেসি-কেন্দ্রিক মেসেজিং, ক্লায়েন্ট-সাইড এনক্রিপশন, AES-256, স্বয়ং-বিনষ্ট বার্তা, জিরো-নলেজ, নিরাপদ নোট শেয়ারিং">
+    <!-- Open Graph for social sharing -->
+    <meta property="og:title" content="securememo.app সম্পর্কে - প্রাইভেসি-কেন্দ্রিক এনক্রিপ্টেড নোট">
+    <meta property="og:description" content="ক্লায়েন্ট-সাইড এনক্রিপশন ও স্বয়ং-বিনষ্ট বার্তার মাধ্যমে securememo.app কিভাবে আপনার প্রাইভেসি রক্ষা করে তা আবিষ্কার করুন।">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://securememo.app/bn/about.html">
+    <meta property="og:image" content="https://securememo.app/android-chrome-512x512.png">
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="securememo.app সম্পর্কে - প্রাইভেসি-কেন্দ্রিক এনক্রিপ্টেড নোট">
+    <meta name="twitter:description" content="ক্লায়েন্ট-সাইড এনক্রিপশন সহ প্রাইভেসি-প্রথম এনক্রিপ্টেড মেসেজিং।">
+    <!-- Structured Data -->
+    <script type="application/ld+json" nonce="{{CSP_NONCE}}">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "securememo.app কীভাবে আমার প্রাইভেসি রক্ষা করে?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "securememo.app ক্লায়েন্ট-সাইড AES-256 এনক্রিপশন ব্যবহার করে, অর্থাৎ আপনার মেমো আমাদের সার্ভারে যাওয়ার আগেই আপনার ব্রাউজারে এনক্রিপ্ট হয়। আমরা কখনোই প্লেইনটেক্সট দেখি না। মেমো পড়া হলে বা মেয়াদ শেষ হলে স্বয়ংক্রিয়ভাবে মুছে যায় এবং আমরা কোনো ব্যবহারকারী অ্যাকাউন্ট বা ব্যক্তিগত তথ্যের প্রয়োজন করি না।"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "securememo.app কোন এনক্রিপশন ব্যবহার করে?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "আমরা AES-256-GCM এবং PBKDF2 কী ডেরিভেশন ব্যবহার করি। সব এনক্রিপশন আপনার ব্রাউজারের ক্লায়েন্ট-সাইডে Web Crypto API দিয়ে হয়। এনক্রিপশন পাসওয়ার্ড আলাদাভাবে তৈরি হয় এবং কখনো আমাদের সার্ভারে সংরক্ষণ হয় না।"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "মেমো কতক্ষণ থাকে?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "মেমোর মেয়াদ ৮ ঘন্টা, ১ দিন, ২ দিন, ১ সপ্তাহ বা সর্বোচ্চ ৩০ দিন পর্যন্ত নির্ধারণ করা যায়। পড়া হলে তাৎক্ষণিক মুছে যায়। মেয়াদোত্তীর্ণ মেমো প্রতি ঘন্টায় স্বয়ংক্রিয়ভাবে পরিষ্কার হয়।"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "মুছে ফেলা মেমো কি পুনরুদ্ধার করা যায়?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "না, একবার মেমো মুছে গেলে (পড়া বা মেয়াদ শেষ হওয়ার পর) তা পুনরুদ্ধারযোগ্য নয়। সর্বোচ্চ প্রাইভেসি ও নিরাপত্তার জন্যই এভাবে নকশা করা।"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "securememo.app কি ব্যবহার করতে ফ্রি?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "হ্যাঁ, securememo.app সম্পূর্ণ ফ্রি। লুকানো চার্জ নেই, প্রিমিয়াম ফিচার নেই, ট্র্যাকিং বা বিজ্ঞাপন নেই।"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "securememo.app কোন প্রযুক্তি ব্যবহার করে?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "securememo.app তৈরি হয়েছে Cloudflare Workers (সার্ভারবিহীন কম্পিউট), D1 Database (স্টোরেজ), Web Crypto API (ক্লায়েন্ট-সাইড এনক্রিপশন) এবং আধুনিক HTML/CSS/JavaScript দিয়ে। সোর্স কোড ওপেন সোর্স এবং GitHub এ উপলব্ধ।"
+          }
+        }
+      ]
+    }
+    </script>
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="/android-chrome-512x512.png">
+    <link rel="canonical" href="{{PUBLIC_ORIGIN}}/bn/about.html">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="/bn" class="nav-logo">securememo.app</a>
+            
+            <!-- Hamburger Menu Button -->
+            <button class="hamburger" type="button" aria-label="নেভিগেশন মেনু টগল করুন" aria-expanded="false">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+            
+            <!-- Navigation Menu -->
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="/bn" class="nav-link">হোম</a></li>
+                <li><a href="/bn/about.html" class="nav-link active">পরিচিতি</a></li>
+                <li><a href="/bn/create-memo.html" class="nav-link">নিরাপদ মেমো তৈরি করুন</a></li>
+                <li class="language-dropdown">
+                    <button class="language-toggle nav-link" aria-expanded="false" aria-haspopup="true">
+                        🇧🇩 বাংলা
+                    </button>
+                    <div class="language-menu">
+                        <a href="/ar/about.html" class="language-item " title="العربية">🌐 العربية</a>
+                        <a href="/bn/about.html" class="language-item active" title="বাংলা">🇧🇩 বাংলা</a>
+                        <a href="/cs/about.html" class="language-item " title="Čeština">🇨🇿 Čeština</a>
+                        <a href="/da/about.html" class="language-item " title="Dansk">🇩🇰 Dansk</a>
+                        <a href="/de/about.html" class="language-item " title="Deutsch">🇩🇪 Deutsch</a>
+                        <a href="/el/about.html" class="language-item " title="Ελληνικά">🇬🇷 Ελληνικά</a>
+                        <a href="/en/about.html" class="language-item " title="English">🇬🇧 English</a>
+                        <a href="/es/about.html" class="language-item " title="Español">🇪🇸 Español</a>
+                        <a href="/fi/about.html" class="language-item " title="Suomi">🇫🇮 Suomi</a>
+                        <a href="/fr/about.html" class="language-item " title="Français">🇫🇷 Français</a>
+                        <a href="/hi/about.html" class="language-item " title="हिन्दी">🇮🇳 हिन्दी</a>
+                        <a href="/hu/about.html" class="language-item " title="Magyar">🇭🇺 Magyar</a>
+                        <a href="/id/about.html" class="language-item " title="Bahasa Indonesia">🇮🇩 Bahasa Indonesia</a>
+                        <a href="/it/about.html" class="language-item " title="Italiano">🇮🇹 Italiano</a>
+                        <a href="/ja/about.html" class="language-item " title="日本語">🇯🇵 日本語</a>
+                        <a href="/ko/about.html" class="language-item " title="한국어">🇰🇷 한국어</a>
+                        <a href="/nl/about.html" class="language-item " title="Nederlands">🇳🇱 Nederlands</a>
+                        <a href="/no/about.html" class="language-item " title="Norsk">🇳🇴 Norsk</a>
+                        <a href="/pl/about.html" class="language-item " title="Polski">🇵🇱 Polski</a>
+                        <a href="/ptPT/about.html" class="language-item " title="Português (Portugal)">🇵🇹 Português</a>
+                        <a href="/ptBR/about.html" class="language-item " title="Português (Brasil)">🇧🇷 Português (Brasil)</a>
+                        <a href="/ru/about.html" class="language-item " title="Русский">🇷🇺 Русский</a>
+                        <a href="/ro/about.html" class="language-item " title="Română">🇷🇴 Română</a>
+                        <a href="/sv/about.html" class="language-item " title="Svenska">🇸🇪 Svenska</a>
+                        <a href="/tl/about.html" class="language-item " title="Tagalog">🇵🇭 Tagalog</a>
+                        <a href="/th/about.html" class="language-item " title="ไทย">🇹🇭 ไทย</a>
+                        <a href="/tr/about.html" class="language-item " title="Türkçe">🇹🇷 Türkçe</a>
+                        <a href="/uk/about.html" class="language-item " title="Українська">🇺🇦 Українська</a>
+                        <a href="/vi/about.html" class="language-item " title="Tiếng Việt">🇻🇳 Tiếng Việt</a>
+                        <a href="/zh/about.html" class="language-item " title="中文">🈶 中文</a>
+                    </div>
+                </li>
+            </ul>
+            
+            <!-- Mobile Menu Overlay -->
+            <div class="nav-overlay"></div>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <div class="about-section">
+            <h1>securememo.app সম্পর্কে</h1>
+            <p>securememo.app একটি প্রাইভেসি-কেন্দ্রিক অ্যাপ্লিকেশন যেখানে আপনি এনক্রিপ্টেড মেমো তৈরি করতে পারেন যা পড়া বা মেয়াদ শেষ হলে নিজে থেকেই মুছে যায়। সিকিউরিটি ও প্রাইভেসি সর্বোচ্চ অগ্রাধিকার। সোর্স কোড GitHub এ উন্মুক্ত।</p>
+            
+            <div class="tech-stack">
+                <h2>প্রযুক্তি স্ট্যাক</h2>
+                <ul>
+                    <li><strong>Cloudflare Workers:</strong> Cloudflare Workers: বৈশ্বিক উচ্চ কর্মক্ষমতার সার্ভারলেস কম্পিউট প্ল্যাটফর্ম</li>
+                    <li><strong>D1 Database:</strong> D1 ডাটাবেস: নিরাপদ স্টোরেজের জন্য SQLite-চালিত ডাটাবেস</li>
+                    <li><strong>Web Crypto API:</strong> Web Crypto API: ক্লায়েন্ট-সাইড AES-256 এনক্রিপশন</li>
+                    <li><strong>HTML/CSS/JavaScript:</strong> HTML/CSS/JavaScript: আধুনিক, রেসপন্সিভ ওয়েব ইন্টারফেস</li>
+                    <li><strong>সোর্স কোড GitHub এ উপলব্ধ:</strong> <a href="https://github.com/timoheimonen/securememo.app" target="_blank" rel="noopener noreferrer">GitHub এ সোর্স কোড দেখুন</a></li>
+                </ul>
+            </div>
+
+            <div class="features-detail">
+                <h2>নিরাপত্তা বৈশিষ্ট্য</h2>
+                <div class="feature-list">
+                    <div class="feature-item">
+                        <h3>🔐 ক্লায়েন্ট-সাইড এনক্রিপশন</h3>
+                        <p>সমস্ত এনক্রিপশন আপনার ব্রাউজারেই Web Crypto API ব্যবহার করে সম্পন্ন হয়। সার্ভারে পাঠানোর আগে আপনার মেমো AES-256 দিয়ে এনক্রিপ্ট হয়।</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>🔑 পৃথক পাসওয়ার্ড শেয়ারিং</h3>
+                        <p>এনক্রিপশন পাসওয়ার্ড URL থেকে আলাদাভাবে তৈরি হয় এবং বাড়তি নিরাপত্তার জন্য ভিন্ন চ্যানেলে শেয়ার করা উচিত।</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>💥 স্বয়ং-বিনষ্ট মেমো</h3>
+                        <p>মেমো পড়া বা মেয়াদ শেষ হওয়ার সাথে সাথেই আমাদের ডাটাবেস থেকে স্থায়ীভাবে মুছে যায়। কোন চিহ্ন থাকে না।</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>🌐 পাসওয়ার্ড সংরক্ষণ নয়</h3>
+                        <p>আমরা কখনোই সার্ভারে এনক্রিপশন পাসওয়ার্ড সংরক্ষণ করি না। এটি শুধু আপনার ব্রাউজারের মেমোরিতে থাকে।</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>⚡ বৈশ্বিক কর্মক্ষমতা</h3>
+                        <p>বিশ্বের যেকোনো স্থান থেকে দ্রুত অ্যাক্সেসের জন্য Cloudflare এর বৈশ্বিক নেটওয়ার্কে নির্মিত।</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>🔒 প্রাইভেসি প্রথম</h3>
+                        <p>কোনো ব্যবহারকারী একাউন্টের প্রয়োজন নেই। কোন ট্র্যাকিং নেই। কোন এনালিটিক্স নেই। আপনার প্রাইভেসি আমাদের অগ্রাধিকার।</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="usage-section">
+                <h2>কিভাবে ব্যবহার করবেন</h2>
+                <div class="feature-list">
+                    <div class="feature-item">
+                        <h3>১. একটি মেমো তৈরি করুন</h3>
+                        <p>"নিরাপদ মেমো তৈরি করুন" এ গিয়ে আপনার মেমো লিখুন। মেয়াদ (৮ ঘন্টা, ১ দিন, ২ দিন, ১ সপ্তাহ বা সর্বোচ্চ ৩০ দিন) নির্বাচন করুন। পড়া বা মেয়াদ শেষ হলে মেমো মুছে যায়। সিস্টেম একটি র্যান্ডম এনক্রিপশন পাসওয়ার্ড তৈরি করবে।</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>২. লিংক ও পাসওয়ার্ড শেয়ার করুন</h3>
+                        <p>জেনারেট হওয়া URL ও পাসওয়ার্ড কপি করে আলাদা চ্যানেলে আপনার প্রাপকের সাথে শেয়ার করুন অতিরিক্ত নিরাপত্তার জন্য।</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>৩. স্বয়ং-বিনষ্ট</h3>
+                        <p>প্রাপক লিংক খুলে আলাদা ভাবে পাওয়া পাসওয়ার্ড দিলে মেমো ডিক্রিপ্ট হবে এবং পড়া হলে স্থায়ীভাবে মুছে যাবে, অথবা মেয়াদ শেষ হলে স্বয়ংক্রিয়ভাবে মুছে যাবে। মেয়াদোত্তীর্ণ মেমো প্রতি ঘন্টায় স্বয়ংক্রিয়ভাবে পরিষ্কার করা হয়।</p>
+                    </div>
+                </div>
+            </div>
+            <div class="video-embed">
+                <div class="video-aspect-ratio">
+            <iframe src="https://www.youtube-nocookie.com/embed/V0vEHLLdDKk"
+                title="How to use securememo.app"
+                            frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            allowfullscreen
+                            loading="lazy"
+                            class="video-iframe">
+                    </iframe>
+                </div>
+                <p class="video-caption">
+                    <a href="https://www.youtube-nocookie.com/watch?v=V0vEHLLdDKk" target="_blank" rel="noopener noreferrer">Watch on YouTube</a>
+                </p>
+                <noscript>
+                    <p class="text-center"><a href="https://www.youtube-nocookie.com/watch?v=V0vEHLLdDKk" target="_blank" rel="noopener noreferrer">Watch the video (JavaScript disabled)</a></p>
+                </noscript>
+            </div>
+            <div class="cta-section">
+                <h2>শুরু করতে প্রস্তুত?</h2>
+                <p>এখনই আপনার প্রথম নিরাপদ মেমো তৈরি করুন এবং সত্যিকারের এন্ড-টু-এন্ড এনক্রিপশনের অভিজ্ঞতা নিন।</p>
+                <div class="cta-buttons">
+                    <a href="/bn/create-memo.html" class="btn btn-primary">নিরাপদ মেমো তৈরি করুন</a>
+                    <a href="/bn" class="btn btn-secondary">হোমে যান</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p><a href="https://github.com/timoheimonen/securememo.app" target="_blank" rel="noopener noreferrer">GitHub এ সোর্স কোড দেখুন</a> | <a href="/bn/tos.html">সার্ভিসের শর্তাবলী</a> | <a href="/bn/privacy.html">প্রাইভেসি নোটিস</a> | <a href="mailto:contact@securememo.app">contact@securememo.app</a></p>
+        <p class="footer-tagline">কোন ট্র্যাকিং নেই, কোন বিজ্ঞাপন নেই, কোন ঝামেলা নেই।</p>
+    </footer>
+
+    <script src="/js/common.js" type="module" nonce="{{CSP_NONCE}}" defer></script>
+</body>
+</html>

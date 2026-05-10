@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>创建安全备忘录 - 加密的自毁备忘录 | securememo.app</title>
+    <meta name="description" content="您的备忘录将在浏览器中加密，并在阅读或过期后自毁。">
+    <meta name="keywords" content="创建安全备忘录, 加密备忘录, 自毁笔记, AES-256 加密, 私密备忘录分享, 安全笔记创建">
+    <!-- Open Graph for social sharing -->
+    <meta property="og:title" content="创建安全备忘录 - 加密的自毁备忘录">
+    <meta property="og:description" content="使用客户端 AES-256 加密创建加密备忘录。备忘录在阅读后自毁，以获得最大隐私。">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://securememo.app/zh/create-memo.html">
+    <meta property="og:image" content="https://securememo.app/android-chrome-512x512.png">
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="创建安全备忘录 - 加密的自毁备忘录">
+    <meta name="twitter:description" content="使用客户端加密创建加密备忘录。">
+    <!-- Structured Data -->
+    <script type="application/ld+json" nonce="{{CSP_NONCE}}">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": "创建安全备忘录",
+      "description": "创建阅读后自毁的加密备忘录。客户端 AES-256 加密确保您的秘密保持私密。",
+      "url": "https://securememo.app/zh/create-memo.html",
+      "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "首页",
+            "item": "https://securememo.app/zh/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "创建安全备忘录",
+            "item": "https://securememo.app/zh/create-memo.html"
+          }
+        ]
+      },
+      "mainEntity": {
+        "@type": "SoftwareApplication",
+        "name": "创建安全备忘录",
+        "applicationCategory": "SecurityApplication",
+        "operatingSystem": "Web Browser",
+        "description": "使用客户端 AES-256 加密和自动自毁创建加密备忘录",
+        "featureList": [
+          "客户端加密",
+          "自毁备忘录",
+          "多种过期选项",
+          "无需用户账户",
+          "最多 10,000 个字符"
+        ]
+      }
+    }
+    </script>
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="/android-chrome-512x512.png">
+    <link rel="canonical" href="{{PUBLIC_ORIGIN}}/zh/create-memo.html">
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" nonce="{{CSP_NONCE}}" crossorigin="anonymous" async defer></script>
+    <script src="/js/create-memo.js?locale=zh" nonce="{{CSP_NONCE}}" defer></script>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="/zh" class="nav-logo">securememo.app</a>
+            
+            <!-- Hamburger Menu Button -->
+            <button class="hamburger" type="button" aria-label="切换导航菜单" aria-expanded="false">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+            
+            <!-- Navigation Menu -->
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="/zh" class="nav-link">首页</a></li>
+                <li><a href="/zh/about.html" class="nav-link">关于</a></li>
+                <li><a href="/zh/create-memo.html" class="nav-link active">创建安全备忘录</a></li>
+                <li class="language-dropdown">
+                    <button class="language-toggle nav-link" aria-expanded="false" aria-haspopup="true">
+                        🈶 中文
+                    </button>
+                    <div class="language-menu">
+                        <a href="/ar/create-memo.html" class="language-item " title="العربية">🌐 العربية</a>
+                        <a href="/bn/create-memo.html" class="language-item " title="বাংলা">🇧🇩 বাংলা</a>
+                        <a href="/cs/create-memo.html" class="language-item " title="Čeština">🇨🇿 Čeština</a>
+                        <a href="/da/create-memo.html" class="language-item " title="Dansk">🇩🇰 Dansk</a>
+                        <a href="/de/create-memo.html" class="language-item " title="Deutsch">🇩🇪 Deutsch</a>
+                        <a href="/el/create-memo.html" class="language-item " title="Ελληνικά">🇬🇷 Ελληνικά</a>
+                        <a href="/en/create-memo.html" class="language-item " title="English">🇬🇧 English</a>
+                        <a href="/es/create-memo.html" class="language-item " title="Español">🇪🇸 Español</a>
+                        <a href="/fi/create-memo.html" class="language-item " title="Suomi">🇫🇮 Suomi</a>
+                        <a href="/fr/create-memo.html" class="language-item " title="Français">🇫🇷 Français</a>
+                        <a href="/hi/create-memo.html" class="language-item " title="हिन्दी">🇮🇳 हिन्दी</a>
+                        <a href="/hu/create-memo.html" class="language-item " title="Magyar">🇭🇺 Magyar</a>
+                        <a href="/id/create-memo.html" class="language-item " title="Bahasa Indonesia">🇮🇩 Bahasa Indonesia</a>
+                        <a href="/it/create-memo.html" class="language-item " title="Italiano">🇮🇹 Italiano</a>
+                        <a href="/ja/create-memo.html" class="language-item " title="日本語">🇯🇵 日本語</a>
+                        <a href="/ko/create-memo.html" class="language-item " title="한국어">🇰🇷 한국어</a>
+                        <a href="/nl/create-memo.html" class="language-item " title="Nederlands">🇳🇱 Nederlands</a>
+                        <a href="/no/create-memo.html" class="language-item " title="Norsk">🇳🇴 Norsk</a>
+                        <a href="/pl/create-memo.html" class="language-item " title="Polski">🇵🇱 Polski</a>
+                        <a href="/ptPT/create-memo.html" class="language-item " title="Português (Portugal)">🇵🇹 Português</a>
+                        <a href="/ptBR/create-memo.html" class="language-item " title="Português (Brasil)">🇧🇷 Português (Brasil)</a>
+                        <a href="/ru/create-memo.html" class="language-item " title="Русский">🇷🇺 Русский</a>
+                        <a href="/ro/create-memo.html" class="language-item " title="Română">🇷🇴 Română</a>
+                        <a href="/sv/create-memo.html" class="language-item " title="Svenska">🇸🇪 Svenska</a>
+                        <a href="/tl/create-memo.html" class="language-item " title="Tagalog">🇵🇭 Tagalog</a>
+                        <a href="/th/create-memo.html" class="language-item " title="ไทย">🇹🇭 ไทย</a>
+                        <a href="/tr/create-memo.html" class="language-item " title="Türkçe">🇹🇷 Türkçe</a>
+                        <a href="/uk/create-memo.html" class="language-item " title="Українська">🇺🇦 Українська</a>
+                        <a href="/vi/create-memo.html" class="language-item " title="Tiếng Việt">🇻🇳 Tiếng Việt</a>
+                        <a href="/zh/create-memo.html" class="language-item active" title="中文">🈶 中文</a>
+                    </div>
+                </li>
+            </ul>
+            
+            <!-- Mobile Menu Overlay -->
+            <div class="nav-overlay"></div>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <div class="memo-container">
+            <div class="memo-card">
+                <h1>创建安全备忘录</h1>
+                <p class="memo-description">您的备忘录将在浏览器中加密，并在阅读或过期后自毁。</p>
+                <div id="turnstileOverlay" class="turnstile-overlay hidden">
+                    <div class="turnstile-overlay-backdrop"></div>
+                    <div class="turnstile-overlay-content" role="dialog" aria-modal="true" aria-label="Security Challenge">
+                        <button type="button" id="closeTurnstileOverlay" class="overlay-close-btn" aria-label="Close">×</button>
+                        <div id="dynamicTurnstileContainer"></div>
+                    </div>
+                </div>
+                
+                <form id="memoForm" class="memo-form">
+                    <div class="form-group">
+                        <label for="message">您的备忘录</label>
+                        <textarea id="message" name="message" required 
+                                  placeholder="在此输入您的机密备忘录..." 
+                                  rows="8" maxlength="10000"></textarea>
+                        <small class="form-help">最多 10,000 个字符</small>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="expiryHours">过期时间</label>
+                        <select id="expiryHours" name="expiryHours">
+                            <option value="8">阅读后删除或 8 小时</option>
+                            <option value="24">阅读后删除或 1 天</option>
+                            <option value="48">阅读后删除或 2 天</option>
+                            <option value="168">阅读后删除或 1 周</option>
+                            <option value="720">阅读后删除或 30 天</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary" id="submitButton">创建安全备忘录</button>
+                    
+                    <!-- Loading indicator (hidden by default) -->
+                    <div id="loadingIndicator" class="loading-spinner hidden">
+                        <div class="spinner"></div>
+                        <p>正在安全加密您的备忘录...在较旧的设备上可能需要一些时间。</p>
+                    </div>
+                </form>
+                
+                <div id="result" class="result-section hidden">
+                    <h3>✅ 备忘录创建成功！</h3>
+                    
+                    <div class="memo-url-section">
+                        <label for="memoUrl">备忘录 URL（与您的收件人分享）：</label>
+                        <div class="url-copy-container">
+                            <input type="text" id="memoUrl" readonly onclick="this.select(); document.execCommand('copy'); showMessage('✅ 链接已复制到剪贴板！', '成功');">
+                            <button type="button" id="copyUrl" class="btn btn-primary">复制链接</button>
+                        </div>
+                        <small class="form-help">这是您备忘录的安全链接。与您的收件人分享此 URL。</small>
+                    </div>
+                    
+                    <div class="memo-password-section">
+                        <label for="memoPassword">加密密码（单独分享）：</label>
+                        <div class="url-copy-container">
+                            <input type="password" id="memoPassword" readonly onclick="this.select(); document.execCommand('copy'); showMessage('✅ 密码已复制到剪贴板！', '成功');">
+                            <button type="button" id="togglePassword" class="btn btn-primary mr-8">显示</button>
+                            <button type="button" id="copyPassword" class="btn btn-primary">复制密码</button>
+                        </div>
+                        <small class="form-help">这是加密密码。为了增强安全性，请将其与 URL 分开分享。这不会保存在我们的服务器上，离开此页面后无法恢复。</small>
+                    </div>
+                    
+                    <div class="memo-warning">
+                        <p><strong>重要：</strong></p>
+                        <ul>
+                            <li>备忘录将在阅读后或过期时被删除</li>
+                            <li>为了最大安全性，请分开分享 URL 和密码</li>
+                            <li>收件人需要 URL 和密码才能访问备忘录</li>
+                            <li>离开此页面后将清空内容</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div id="statusMessage" class="message"></div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p><a href="https://github.com/timoheimonen/securememo.app" target="_blank" rel="noopener noreferrer">在 GitHub 上查看源代码</a> | <a href="/zh/tos.html">服务条款</a> | <a href="/zh/privacy.html">隐私声明</a> | <a href="mailto:contact@securememo.app">contact@securememo.app</a></p>
+        <p class="footer-tagline">无跟踪，无广告，无噱头。</p>
+    </footer>
+
+    <script src="/js/common.js" type="module" nonce="{{CSP_NONCE}}" defer></script>
+</body>
+</html>

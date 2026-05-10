@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>securememo.app - Κρυπτογραφημένες Σημειώσεις που Αυτοκαταστρέφονται | securememo.app</title>
+    <meta name="description" content="Δημιουργήστε κρυπτογραφημένες σημειώσεις που αυτοκαταστρέφονται μετά την ανάγνωση. Τερματική κρυπτογράφηση, εστίαση στην ιδιωτικότητα και ασφαλής διαμοιρασμός σημειώσεων με AES-256. Χωρίς παρακολούθηση, χωρίς διαφημίσεις.">
+    <meta name="keywords" content="ασφαλής σημείωση, κρυπτογραφημένη σημείωση, σημείωση που αυτοκαταστρέφεται, ιδιωτικός διαμοιρασμός σημειώσεων, τερματική κρυπτογράφηση, AES-256, ιδιωτικότητα, ασφαλής διαμοιρασμός σημειώσεων">
+    <!-- Open Graph for social sharing -->
+    <meta property="og:title" content="securememo.app - Κρυπτογραφημένες Σημειώσεις που Αυτοκαταστρέφονται">
+    <meta property="og:description" content="Μοιραστείτε ευαίσθητες πληροφορίες με ασφάλεια με σημειώσεις που διαγράφονται μετά από μία προβολή ή λήξη. Υποστηρίζεται από κρυπτογράφηση AES-256 στην πλευρά του πελάτη.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://securememo.app/">
+    <meta property="og:image" content="https://securememo.app/android-chrome-512x512.png">
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="securememo.app - Κρυπτογραφημένες Σημειώσεις που Αυτοκαταστρέφονται">
+    <meta name="twitter:description" content="Εφαρμογή με προτεραιότητα στην ιδιωτικότητα για ασφαλείς, αυτοκαταστρεφόμενες σημειώσεις.">
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="/android-chrome-512x512.png">
+    <link rel="canonical" href="{{PUBLIC_ORIGIN}}/el">
+    <!-- Structured Data -->
+    <script type="application/ld+json" nonce="{{CSP_NONCE}}">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "securememo.app",
+      "description": "Δημιουργήστε κρυπτογραφημένες σημειώσεις που αυτοκαταστρέφονται μετά την ανάγνωση. Τερματική κρυπτογράφηση, εστίαση στην ιδιωτικότητα και ασφαλής διαμοιρασμός σημειώσεων με AES-256. Χωρίς παρακολούθηση, χωρίς διαφημίσεις.",
+      "url": "https://securememo.app/",
+      "applicationCategory": "Εφαρμογή Ασφαλείας",
+      "operatingSystem": "Περιηγητής Ιστού",
+      "browserRequirements": "Απαιτείται JavaScript. Απαιτείται HTML5.",
+      "author": {
+        "@type": "Person",
+        "name": "Timo Heimonen",
+        "url": "https://github.com/timoheimonen"
+      },
+      "creator": {
+        "@type": "Person",
+        "name": "Timo Heimonen",
+        "url": "https://github.com/timoheimonen"
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "featureList": [
+        "Κρυπτογράφηση AES-256 στην πλευρά του πελάτη",
+        "Αυτοκαταστρεφόμενες σημειώσεις",
+        "Αρχιτεκτονική μηδενικής γνώσης",
+        "Δεν απαιτούνται λογαριασμοί χρήστη",
+        "Παγκόσμια απόδοση μέσω Cloudflare",
+        "Σχεδιασμός με προτεραιότητα στην ιδιωτικότητα"
+      ],
+      "screenshot": "https://securememo.app/android-chrome-512x512.png",
+      "softwareVersion": "1.0.3",
+      "datePublished": "2025-07-01",
+      "dateModified": "2025-08-17",
+      "license": "https://github.com/timoheimonen/securememo.app/blob/main/LICENSE",
+      "codeRepository": "https://github.com/timoheimonen/securememo.app"
+    }
+    </script>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="/el" class="nav-logo">securememo.app</a>
+            
+            <!-- Hamburger Menu Button -->
+            <button class="hamburger" type="button" aria-label="Εναλλαγή μενού πλοήγησης" aria-expanded="false">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+            
+            <!-- Navigation Menu -->
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="/el" class="nav-link active">Αρχική</a></li>
+                <li><a href="/el/about.html" class="nav-link">Σχετικά</a></li>
+                <li><a href="/el/create-memo.html" class="nav-link">Δημιουργία Ασφαλούς Σημείωσης</a></li>
+                <li class="language-dropdown">
+                    <button class="language-toggle nav-link" aria-expanded="false" aria-haspopup="true">
+                        🇬🇷 Ελληνικά
+                    </button>
+                    <div class="language-menu">
+                        <a href="/ar" class="language-item " title="العربية">🌐 العربية</a>
+                        <a href="/bn" class="language-item " title="বাংলা">🇧🇩 বাংলা</a>
+                        <a href="/cs" class="language-item " title="Čeština">🇨🇿 Čeština</a>
+                        <a href="/da" class="language-item " title="Dansk">🇩🇰 Dansk</a>
+                        <a href="/de" class="language-item " title="Deutsch">🇩🇪 Deutsch</a>
+                        <a href="/el" class="language-item active" title="Ελληνικά">🇬🇷 Ελληνικά</a>
+                        <a href="/en" class="language-item " title="English">🇬🇧 English</a>
+                        <a href="/es" class="language-item " title="Español">🇪🇸 Español</a>
+                        <a href="/fi" class="language-item " title="Suomi">🇫🇮 Suomi</a>
+                        <a href="/fr" class="language-item " title="Français">🇫🇷 Français</a>
+                        <a href="/hi" class="language-item " title="हिन्दी">🇮🇳 हिन्दी</a>
+                        <a href="/hu" class="language-item " title="Magyar">🇭🇺 Magyar</a>
+                        <a href="/id" class="language-item " title="Bahasa Indonesia">🇮🇩 Bahasa Indonesia</a>
+                        <a href="/it" class="language-item " title="Italiano">🇮🇹 Italiano</a>
+                        <a href="/ja" class="language-item " title="日本語">🇯🇵 日本語</a>
+                        <a href="/ko" class="language-item " title="한국어">🇰🇷 한국어</a>
+                        <a href="/nl" class="language-item " title="Nederlands">🇳🇱 Nederlands</a>
+                        <a href="/no" class="language-item " title="Norsk">🇳🇴 Norsk</a>
+                        <a href="/pl" class="language-item " title="Polski">🇵🇱 Polski</a>
+                        <a href="/ptPT" class="language-item " title="Português (Portugal)">🇵🇹 Português</a>
+                        <a href="/ptBR" class="language-item " title="Português (Brasil)">🇧🇷 Português (Brasil)</a>
+                        <a href="/ru" class="language-item " title="Русский">🇷🇺 Русский</a>
+                        <a href="/ro" class="language-item " title="Română">🇷🇴 Română</a>
+                        <a href="/sv" class="language-item " title="Svenska">🇸🇪 Svenska</a>
+                        <a href="/tl" class="language-item " title="Tagalog">🇵🇭 Tagalog</a>
+                        <a href="/th" class="language-item " title="ไทย">🇹🇭 ไทย</a>
+                        <a href="/tr" class="language-item " title="Türkçe">🇹🇷 Türkçe</a>
+                        <a href="/uk" class="language-item " title="Українська">🇺🇦 Українська</a>
+                        <a href="/vi" class="language-item " title="Tiếng Việt">🇻🇳 Tiếng Việt</a>
+                        <a href="/zh" class="language-item " title="中文">🈶 中文</a>
+                    </div>
+                </li>
+            </ul>
+            
+            <!-- Mobile Menu Overlay -->
+            <div class="nav-overlay"></div>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <div class="hero-section">
+            <h1>securememo.app</h1>
+            <p>Δημιουργήστε κρυπτογραφημένες σημειώσεις που αυτοκαταστρέφονται μετά την ανάγνωση ή τη λήξη. Τα μυστικά σας παραμένουν ασφαλή.</p>
+            <div class="cta-buttons">
+                <a href="/el/create-memo.html" class="btn btn-primary">Δημιουργία Ασφαλούς Σημείωσης</a>
+                <a href="/el/about.html" class="btn btn-secondary">Μάθετε Περισσότερα</a>
+            </div>
+        </div>
+
+        <div class="features-section">
+            <h2>Πώς Λειτουργεί</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <h3>🔐 Πληκτρολογήστε τη σημείωσή σας</h3>
+                    <p>Έχετε τον έλεγχο. Το κείμενό σας κρυπτογραφείται στη συσκευή σας και το μη κρυπτογραφημένο κείμενο δεν φεύγει ποτέ από τον περιηγητή σας.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>🔗 Ασφαλής Κοινοποίηση</h3>
+                    <p>Λάβετε ένα μοναδικό URL και έναν ξεχωριστό ισχυρό κωδικό και κοινοποιήστε τα μέσω διαφορετικών καναλιών για επιπλέον ασφάλεια.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>💥 Αυτοκαταστροφή</h3>
+                    <p>Η σημείωση διαγράφεται αυτόματα και οριστικά αφού διαβαστεί ή όταν λήξει το χρονικό όριο (από 8 ώρες έως 30 ημέρες).</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="security-section">
+            <h2>Χαρακτηριστικά Ασφαλείας</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <h3>🔒 Πραγματική Κρυπτογράφηση στην Πλευρά του Πελάτη</h3>
+                    <p>Η σημείωσή σας κρυπτογραφείται στον περιηγητή με AES-256-GCM και ισχυρή παραγωγή κλειδιού. Δεν βλέπουμε ποτέ το αρχικό κείμενο.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>🗑️ Αξιόπιστη Αυτόματη Διαγραφή</h3>
+                    <p>Οι σημειώσεις εξαφανίζονται για πάντα μετά την ανάγνωση ή τη λήξη, με αυτόματο καθαρισμό κάθε ώρα. Δεν υπάρχουν αντίγραφα ασφαλείας ή δυνατότητα ανάκτησης.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>🌐 Μηδενική Γνώση Κωδικού</h3>
+                    <p>Δημιουργούμε και διαχειριζόμαστε τους κωδικούς αποκλειστικά στον περιηγητή σας. Δεν αποστέλλονται ή αποθηκεύονται ποτέ στους διακομιστές μας.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p><a href="https://github.com/timoheimonen/securememo.app" target="_blank" rel="noopener noreferrer">Δείτε τον πηγαίο κώδικα στο GitHub</a> | <a href="/el/tos.html">Όροι Χρήσης</a> | <a href="/el/privacy.html">Σημείωση Ιδιωτικότητας</a> | <a href="mailto:contact@securememo.app">contact@securememo.app</a></p>
+        <p class="footer-tagline">Χωρίς παρακολούθηση, χωρίς διαφημίσεις, χωρίς ανοησίες.</p>
+    </footer>
+
+    <script src="/js/common.js" type="module" nonce="{{CSP_NONCE}}" defer></script>
+</body>
+</html>

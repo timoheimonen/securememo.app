@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="tl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tungkol sa securememo.app - Naka-encrypt na Mga Tala na Inuuna ang Privacy | securememo.app</title>
+    <meta name="description" content="Alamin ang paraan ng securememo.app sa pribado at naka-encrypt na pagmemensahe. Binuo gamit ang AES-256 na pag-encrypt sa browser, kusang nabuburang mensahe, at zero-knowledge na arkitektura.">
+    <meta name="keywords" content="tungkol sa secure memo, pagmemensahe na inuuna ang privacy, pag-encrypt sa browser, AES-256, kusang nabuburang mensahe, zero-knowledge, ligtas na pagbabahagi ng tala">
+    <!-- Open Graph for social sharing -->
+    <meta property="og:title" content="Tungkol sa securememo.app - Naka-encrypt na Mga Tala na Inuuna ang Privacy">
+    <meta property="og:description" content="Alamin kung paano pinoprotektahan ng securememo.app ang iyong privacy gamit ang pag-encrypt sa browser at kusang nabuburang mga mensahe.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://securememo.app/tl/about.html">
+    <meta property="og:image" content="https://securememo.app/android-chrome-512x512.png">
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Tungkol sa securememo.app - Naka-encrypt na Mga Tala na Inuuna ang Privacy">
+    <meta name="twitter:description" content="Prayoridad ang privacy: naka-encrypt na pagmemensahe gamit ang pag-encrypt sa browser.">
+    <!-- Structured Data -->
+    <script type="application/ld+json" nonce="{{CSP_NONCE}}">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Paano pinoprotektahan ng securememo.app ang aking privacy?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Gumagamit ang securememo.app ng AES-256 na pag-encrypt sa browser, ibig sabihin ang iyong memo ay ini-encrypt sa iyong browser bago ipadala sa aming mga server. Hindi namin nakikita ang plaintext na nilalaman. Kusang nabubura ang mga memo matapos mabasa o mag-expire, at hindi namin kailangan ng user accounts o kumokolekta ng personal na impormasyon."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Anong encryption ang ginagamit ng securememo.app?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Gumagamit kami ng AES-256-GCM encryption na may PBKDF2 key derivation. Lahat ng encryption ay nagaganap sa client-side sa iyong browser gamit ang Web Crypto API. Ang password para sa encryption ay hiwalay na ginagawa at hindi iniimbak sa aming mga server."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Gaano katagal nananatili ang mga memo?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Maaaring itakda ang mga memo na mag-expire pagkalipas ng 8 oras, 1 araw, 2 araw, 1 linggo, o hanggang 30 araw. Binubura rin sila kaagad pagkatapos mabasa. Awtomatikong nililinis ang mga nag-expire na memo bawat oras."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Maaari ko bang maibalik ang naburang memo?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Hindi, kapag nabura na ang memo (matapos mabasa o kapag nag-expire), hindi na ito maaaring maibalik. Disenyo ito para sa pinakamataas na privacy at seguridad."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Libre bang gamitin ang securememo.app?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Oo, ang securememo.app ay ganap na libreng gamitin. Walang nakatagong bayarin, walang premium na tampok, at walang tracking o advertising."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Anong teknolohiya ang ginagamit ng securememo.app?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Ang securememo.app ay binuo sa Cloudflare Workers para sa serverless compute, D1 Database para sa imbakan, Web Crypto API para sa pag-encrypt sa browser, at modernong HTML/CSS/JavaScript. Ang source code ay open source at makikita sa GitHub."
+          }
+        }
+      ]
+    }
+    </script>
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="/android-chrome-512x512.png">
+    <link rel="canonical" href="{{PUBLIC_ORIGIN}}/tl/about.html">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="/tl" class="nav-logo">securememo.app</a>
+            
+            <!-- Hamburger Menu Button -->
+            <button class="hamburger" type="button" aria-label="I-toggle ang menu ng nabigasyon" aria-expanded="false">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+            
+            <!-- Navigation Menu -->
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="/tl" class="nav-link">Bahay</a></li>
+                <li><a href="/tl/about.html" class="nav-link active">Tungkol</a></li>
+                <li><a href="/tl/create-memo.html" class="nav-link">Gumawa ng Ligtas na Memo</a></li>
+                <li class="language-dropdown">
+                    <button class="language-toggle nav-link" aria-expanded="false" aria-haspopup="true">
+                        🇵🇭 Tagalog
+                    </button>
+                    <div class="language-menu">
+                        <a href="/ar/about.html" class="language-item " title="العربية">🌐 العربية</a>
+                        <a href="/bn/about.html" class="language-item " title="বাংলা">🇧🇩 বাংলা</a>
+                        <a href="/cs/about.html" class="language-item " title="Čeština">🇨🇿 Čeština</a>
+                        <a href="/da/about.html" class="language-item " title="Dansk">🇩🇰 Dansk</a>
+                        <a href="/de/about.html" class="language-item " title="Deutsch">🇩🇪 Deutsch</a>
+                        <a href="/el/about.html" class="language-item " title="Ελληνικά">🇬🇷 Ελληνικά</a>
+                        <a href="/en/about.html" class="language-item " title="English">🇬🇧 English</a>
+                        <a href="/es/about.html" class="language-item " title="Español">🇪🇸 Español</a>
+                        <a href="/fi/about.html" class="language-item " title="Suomi">🇫🇮 Suomi</a>
+                        <a href="/fr/about.html" class="language-item " title="Français">🇫🇷 Français</a>
+                        <a href="/hi/about.html" class="language-item " title="हिन्दी">🇮🇳 हिन्दी</a>
+                        <a href="/hu/about.html" class="language-item " title="Magyar">🇭🇺 Magyar</a>
+                        <a href="/id/about.html" class="language-item " title="Bahasa Indonesia">🇮🇩 Bahasa Indonesia</a>
+                        <a href="/it/about.html" class="language-item " title="Italiano">🇮🇹 Italiano</a>
+                        <a href="/ja/about.html" class="language-item " title="日本語">🇯🇵 日本語</a>
+                        <a href="/ko/about.html" class="language-item " title="한국어">🇰🇷 한국어</a>
+                        <a href="/nl/about.html" class="language-item " title="Nederlands">🇳🇱 Nederlands</a>
+                        <a href="/no/about.html" class="language-item " title="Norsk">🇳🇴 Norsk</a>
+                        <a href="/pl/about.html" class="language-item " title="Polski">🇵🇱 Polski</a>
+                        <a href="/ptPT/about.html" class="language-item " title="Português (Portugal)">🇵🇹 Português</a>
+                        <a href="/ptBR/about.html" class="language-item " title="Português (Brasil)">🇧🇷 Português (Brasil)</a>
+                        <a href="/ru/about.html" class="language-item " title="Русский">🇷🇺 Русский</a>
+                        <a href="/ro/about.html" class="language-item " title="Română">🇷🇴 Română</a>
+                        <a href="/sv/about.html" class="language-item " title="Svenska">🇸🇪 Svenska</a>
+                        <a href="/tl/about.html" class="language-item active" title="Tagalog">🇵🇭 Tagalog</a>
+                        <a href="/th/about.html" class="language-item " title="ไทย">🇹🇭 ไทย</a>
+                        <a href="/tr/about.html" class="language-item " title="Türkçe">🇹🇷 Türkçe</a>
+                        <a href="/uk/about.html" class="language-item " title="Українська">🇺🇦 Українська</a>
+                        <a href="/vi/about.html" class="language-item " title="Tiếng Việt">🇻🇳 Tiếng Việt</a>
+                        <a href="/zh/about.html" class="language-item " title="中文">🈶 中文</a>
+                    </div>
+                </li>
+            </ul>
+            
+            <!-- Mobile Menu Overlay -->
+            <div class="nav-overlay"></div>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <div class="about-section">
+            <h1>Tungkol sa securememo.app</h1>
+            <p>Ang securememo.app ay isang privacy-focused na aplikasyon na nagbibigay-daan sa iyong gumawa ng mga naka-encrypt na memo na kusang nabubura kapag nabasa o nag-expire. Binuo na inuuna ang seguridad at privacy. Bukas ang source code sa GitHub.</p>
+            
+            <div class="tech-stack">
+                <h2>Teknolohiyang Ginamit</h2>
+                <ul>
+                    <li><strong>Cloudflare Workers:</strong> Cloudflare Workers: Serverless compute platform para sa pandaigdigang performance</li>
+                    <li><strong>D1 Database:</strong> D1 Database: SQLite-powered database para sa ligtas na imbakan</li>
+                    <li><strong>Web Crypto API:</strong> Web Crypto API: Client-side AES-256 encryption</li>
+                    <li><strong>HTML/CSS/JavaScript:</strong> HTML/CSS/JavaScript: Makabago at responsive na web interface</li>
+                    <li><strong>Bukás na source code sa GitHub:</strong> <a href="https://github.com/timoheimonen/securememo.app" target="_blank" rel="noopener noreferrer">Tingnan ang source code sa GitHub</a></li>
+                </ul>
+            </div>
+
+            <div class="features-detail">
+                <h2>Mga Tampok sa Seguridad</h2>
+                <div class="feature-list">
+                    <div class="feature-item">
+                        <h3>🔐 Pag-encrypt sa Browser</h3>
+                        <p>Lahat ng encryption ay nangyayari sa iyong browser gamit ang Web Crypto API. Ini-encrypt ang iyong memo gamit ang AES-256 bago ipadala sa aming mga server.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>🔑 Hiwalay na Pagbabahagi ng Password</h3>
+                        <p>Ang password para sa encryption ay ginagawa nang hiwalay sa URL at dapat ibahagi sa ibang channel para dagdag seguridad.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>💥 Kusang Nabuburang Mga Memo</h3>
+                        <p>Kapag nabasa o nag-expire ang memo, kaagad at permanenteng nabubura ito mula sa aming database. Walang bakas na maiiwan.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>🌐 Walang Pag-imbak ng Password</h3>
+                        <p>Hindi namin ini-store ang mga password ng encryption sa aming mga server. Nasa memory lamang ng iyong browser.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>⚡ Pandaigdigang Performance</h3>
+                        <p>Binuo sa pandaigdigang network ng Cloudflare para sa napakabilis na access saan mang panig ng mundo.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>🔒 Privacy ang Unang Prayoridad</h3>
+                        <p>Walang kailangang user account. Walang tracking. Walang analytics. Ang iyong privacy ang aming prayoridad.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="usage-section">
+                <h2>Paano Gamitin</h2>
+                <div class="feature-list">
+                    <div class="feature-item">
+                        <h3>1. Gumawa ng Memo</h3>
+                        <p>Pumunta sa "Gumawa ng Ligtas na Memo" at i-type ang iyong memo. Pumili ng oras ng pag-expire (8h, 1d, 2d, 1 linggo o hanggang 30 araw). Binubura ang mga memo kapag nabasa o nag-expire. Lilikha ang sistema ng random na password para sa encryption.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>2. Ibahagi ang Link at Password</h3>
+                        <p>Kopyahin ang nalikhang URL at password, tapos ibahagi ang mga ito sa iyong tatanggap sa magkaibang channel para dagdag seguridad.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>3. Kusang Pagbura</h3>
+                        <p>Kapag binuksan ng tatanggap ang link at inilagay ang password nang hiwalay, ang memo ay ide-decrypt at pagkatapos ay permanenteng buburahin kung nabasa, o awtomatikong buburahin kung nag-expire. Awtomatikong nililinis ang mga expired na memo bawat oras.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="video-embed">
+                <div class="video-aspect-ratio">
+            <iframe src="https://www.youtube-nocookie.com/embed/V0vEHLLdDKk"
+                title="How to use securememo.app"
+                            frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            allowfullscreen
+                            loading="lazy"
+                            class="video-iframe">
+                    </iframe>
+                </div>
+                <p class="video-caption">
+                    <a href="https://www.youtube-nocookie.com/watch?v=V0vEHLLdDKk" target="_blank" rel="noopener noreferrer">Watch on YouTube</a>
+                </p>
+                <noscript>
+                    <p class="text-center"><a href="https://www.youtube-nocookie.com/watch?v=V0vEHLLdDKk" target="_blank" rel="noopener noreferrer">Watch the video (JavaScript disabled)</a></p>
+                </noscript>
+            </div>
+            <div class="cta-section">
+                <h2>Handa ka na bang Magsimula?</h2>
+                <p>Gumawa ng una mong ligtas na memo ngayon at maranasan ang tunay na end-to-end encryption.</p>
+                <div class="cta-buttons">
+                    <a href="/tl/create-memo.html" class="btn btn-primary">Gumawa ng Ligtas na Memo</a>
+                    <a href="/tl" class="btn btn-secondary">Bumalik sa Bahay</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p><a href="https://github.com/timoheimonen/securememo.app" target="_blank" rel="noopener noreferrer">Tingnan ang source code sa GitHub</a> | <a href="/tl/tos.html">Mga Tuntunin ng Serbisyo</a> | <a href="/tl/privacy.html">Abiso sa Privacy</a> | <a href="mailto:contact@securememo.app">contact@securememo.app</a></p>
+        <p class="footer-tagline">Walang tracking, walang ads, walang kalokohan.</p>
+    </footer>
+
+    <script src="/js/common.js" type="module" nonce="{{CSP_NONCE}}" defer></script>
+</body>
+</html>

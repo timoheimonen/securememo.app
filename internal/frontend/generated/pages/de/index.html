@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>securememo.app - Verschlüsselte selbstzerstörende Notizen | securememo.app</title>
+    <meta name="description" content="Erstellen Sie verschlüsselte Notizen, die sich nach dem Lesen selbst zerstören. Ende-zu-Ende-Verschlüsselung, datenschutzorientiert und sicheres Teilen von Notizen mit AES-256. Kein Tracking, keine Werbung.">
+    <meta name="keywords" content="sichere Notiz, verschlüsselte Notiz, selbstzerstörende Notiz, privates Teilen von Notizen, Ende-zu-Ende-Verschlüsselung, AES-256, Datenschutz, sicheres Teilen von Notizen">
+    <!-- Open Graph for social sharing -->
+    <meta property="og:title" content="securememo.app - Verschlüsselte selbstzerstörende Notizen">
+    <meta property="og:description" content="Teilen Sie sensible Informationen sicher mit Notizen, die sich nach einmaligem Ansehen oder Ablauf löschen. Angetrieben von clientseitiger AES-256-Verschlüsselung.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://securememo.app/">
+    <meta property="og:image" content="https://securememo.app/android-chrome-512x512.png">
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="securememo.app - Verschlüsselte selbstzerstörende Notizen">
+    <meta name="twitter:description" content="Datenschutz-erste App für sichere, selbstzerstörende Notizen.">
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="/android-chrome-512x512.png">
+    <link rel="canonical" href="{{PUBLIC_ORIGIN}}/de">
+    <!-- Structured Data -->
+    <script type="application/ld+json" nonce="{{CSP_NONCE}}">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "securememo.app",
+      "description": "Erstellen Sie verschlüsselte Notizen, die sich nach dem Lesen selbst zerstören. Ende-zu-Ende-Verschlüsselung, datenschutzorientiert und sicheres Teilen von Notizen mit AES-256. Kein Tracking, keine Werbung.",
+      "url": "https://securememo.app/",
+      "applicationCategory": "SecurityApplication",
+      "operatingSystem": "Web Browser",
+      "browserRequirements": "Benötigt JavaScript. Benötigt HTML5.",
+      "author": {
+        "@type": "Person",
+        "name": "Timo Heimonen",
+        "url": "https://github.com/timoheimonen"
+      },
+      "creator": {
+        "@type": "Person",
+        "name": "Timo Heimonen",
+        "url": "https://github.com/timoheimonen"
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "featureList": [
+        "Clientseitige AES-256-Verschlüsselung",
+        "Selbstzerstörende Notizen",
+        "Zero-Knowledge-Architektur",
+        "Keine Benutzerkonten erforderlich",
+        "Globale Performance über Cloudflare",
+        "Datenschutz-erstes Design"
+      ],
+      "screenshot": "https://securememo.app/android-chrome-512x512.png",
+      "softwareVersion": "1.0.3",
+      "datePublished": "2025-07-01",
+      "dateModified": "2025-08-17",
+      "license": "https://github.com/timoheimonen/securememo.app/blob/main/LICENSE",
+      "codeRepository": "https://github.com/timoheimonen/securememo.app"
+    }
+    </script>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="/de" class="nav-logo">securememo.app</a>
+            
+            <!-- Hamburger Menu Button -->
+            <button class="hamburger" type="button" aria-label="Navigationsmenü umschalten" aria-expanded="false">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+            
+            <!-- Navigation Menu -->
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="/de" class="nav-link active">Startseite</a></li>
+                <li><a href="/de/about.html" class="nav-link">Über uns</a></li>
+                <li><a href="/de/create-memo.html" class="nav-link">Sichere Notiz erstellen</a></li>
+                <li class="language-dropdown">
+                    <button class="language-toggle nav-link" aria-expanded="false" aria-haspopup="true">
+                        🇩🇪 Deutsch
+                    </button>
+                    <div class="language-menu">
+                        <a href="/ar" class="language-item " title="العربية">🌐 العربية</a>
+                        <a href="/bn" class="language-item " title="বাংলা">🇧🇩 বাংলা</a>
+                        <a href="/cs" class="language-item " title="Čeština">🇨🇿 Čeština</a>
+                        <a href="/da" class="language-item " title="Dansk">🇩🇰 Dansk</a>
+                        <a href="/de" class="language-item active" title="Deutsch">🇩🇪 Deutsch</a>
+                        <a href="/el" class="language-item " title="Ελληνικά">🇬🇷 Ελληνικά</a>
+                        <a href="/en" class="language-item " title="English">🇬🇧 English</a>
+                        <a href="/es" class="language-item " title="Español">🇪🇸 Español</a>
+                        <a href="/fi" class="language-item " title="Suomi">🇫🇮 Suomi</a>
+                        <a href="/fr" class="language-item " title="Français">🇫🇷 Français</a>
+                        <a href="/hi" class="language-item " title="हिन्दी">🇮🇳 हिन्दी</a>
+                        <a href="/hu" class="language-item " title="Magyar">🇭🇺 Magyar</a>
+                        <a href="/id" class="language-item " title="Bahasa Indonesia">🇮🇩 Bahasa Indonesia</a>
+                        <a href="/it" class="language-item " title="Italiano">🇮🇹 Italiano</a>
+                        <a href="/ja" class="language-item " title="日本語">🇯🇵 日本語</a>
+                        <a href="/ko" class="language-item " title="한국어">🇰🇷 한국어</a>
+                        <a href="/nl" class="language-item " title="Nederlands">🇳🇱 Nederlands</a>
+                        <a href="/no" class="language-item " title="Norsk">🇳🇴 Norsk</a>
+                        <a href="/pl" class="language-item " title="Polski">🇵🇱 Polski</a>
+                        <a href="/ptPT" class="language-item " title="Português (Portugal)">🇵🇹 Português</a>
+                        <a href="/ptBR" class="language-item " title="Português (Brasil)">🇧🇷 Português (Brasil)</a>
+                        <a href="/ru" class="language-item " title="Русский">🇷🇺 Русский</a>
+                        <a href="/ro" class="language-item " title="Română">🇷🇴 Română</a>
+                        <a href="/sv" class="language-item " title="Svenska">🇸🇪 Svenska</a>
+                        <a href="/tl" class="language-item " title="Tagalog">🇵🇭 Tagalog</a>
+                        <a href="/th" class="language-item " title="ไทย">🇹🇭 ไทย</a>
+                        <a href="/tr" class="language-item " title="Türkçe">🇹🇷 Türkçe</a>
+                        <a href="/uk" class="language-item " title="Українська">🇺🇦 Українська</a>
+                        <a href="/vi" class="language-item " title="Tiếng Việt">🇻🇳 Tiếng Việt</a>
+                        <a href="/zh" class="language-item " title="中文">🈶 中文</a>
+                    </div>
+                </li>
+            </ul>
+            
+            <!-- Mobile Menu Overlay -->
+            <div class="nav-overlay"></div>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <div class="hero-section">
+            <h1>securememo.app</h1>
+            <p>Erstellen Sie verschlüsselte Notizen, die sich nach dem Lesen oder Ablauf selbst zerstören. Ihre Geheimnisse bleiben sicher.</p>
+            <div class="cta-buttons">
+                <a href="/de/create-memo.html" class="btn btn-primary">Sichere Notiz erstellen</a>
+                <a href="/de/about.html" class="btn btn-secondary">Mehr erfahren</a>
+            </div>
+        </div>
+
+        <div class="features-section">
+            <h2>So funktioniert es</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <h3>🔐 Schreiben Sie Ihre Notiz</h3>
+                    <p>Sie haben die Kontrolle. Ihr Text wird auf Ihrem Gerät verschlüsselt, und die unverschlüsselte Version verlässt Ihren Browser nie.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>🔗 Sicher teilen</h3>
+                    <p>Erhalten Sie eine eindeutige URL und ein separates starkes Passwort und teilen Sie beides über verschiedene Kanäle für zusätzliche Sicherheit.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>💥 Automatische Selbstzerstörung</h3>
+                    <p>Die Notiz wird automatisch und dauerhaft gelöscht, nachdem sie gelesen wurde oder wenn das Zeitlimit abläuft (von 8 Stunden bis 30 Tage).</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="security-section">
+            <h2>Sicherheitsfeatures</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <h3>🔒 Echte clientseitige Verschlüsselung</h3>
+                    <p>Ihre Notiz wird im Browser mit AES-256-GCM und einer starken Schlüsselableitung (2.200.000+ Iterationen) verschlüsselt. Wir sehen niemals den Klartext.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>🗑️ Zuverlässige automatische Löschung</h3>
+                    <p>Notizen verschwinden für immer nach dem Lesen oder Ablauf, mit automatischer Bereinigung jede Stunde. Keine Backups oder Wiederherstellung möglich.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>🌐 Kein Passwort-Wissen</h3>
+                    <p>Wir generieren und verwalten Passwörter vollständig in Ihrem Browser. Sie werden niemals an unsere Server gesendet oder dort gespeichert.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p><a href="https://github.com/timoheimonen/securememo.app" target="_blank" rel="noopener noreferrer">Quellcode auf GitHub ansehen</a> | <a href="/de/tos.html">Nutzungsbedingungen</a> | <a href="/de/privacy.html">Datenschutzhinweis</a> | <a href="mailto:contact@securememo.app">contact@securememo.app</a></p>
+        <p class="footer-tagline">Kein Tracking, keine Werbung, kein Unsinn.</p>
+    </footer>
+
+    <script src="/js/common.js" type="module" nonce="{{CSP_NONCE}}" defer></script>
+</body>
+</html>

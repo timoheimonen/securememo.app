@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>보안 메모 작성 - 암호화된 자체 삭제 메모 | securememo.app</title>
+    <meta name="description" content="메모는 브라우저에서 암호화되며 읽거나 만료된 후 자체 삭제됩니다.">
+    <meta name="keywords" content="보안 메모 작성, 암호화된 메모, 자체 삭제 메모, AES-256 암호화, 개인 메모 공유, 보안 메모 생성">
+    <!-- Open Graph for social sharing -->
+    <meta property="og:title" content="보안 메모 작성 - 암호화된 자체 삭제 메모">
+    <meta property="og:description" content="클라이언트 측 AES-256 암호화로 암호화된 메모를 만드세요. 최대 개인정보 보호를 위해 읽은 후 메모가 자체 삭제됩니다.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://securememo.app/ko/create-memo.html">
+    <meta property="og:image" content="https://securememo.app/android-chrome-512x512.png">
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="보안 메모 작성 - 암호화된 자체 삭제 메모">
+    <meta name="twitter:description" content="클라이언트 측 암호화로 암호화된 메모를 만드세요.">
+    <!-- Structured Data -->
+    <script type="application/ld+json" nonce="{{CSP_NONCE}}">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": "보안 메모 작성",
+      "description": "읽은 후 자체 삭제되는 암호화된 메모를 만드세요. 클라이언트 측 AES-256 암호화로 비밀이 비공개로 유지됩니다.",
+      "url": "https://securememo.app/ko/create-memo.html",
+      "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "홈",
+            "item": "https://securememo.app/ko/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "보안 메모 작성",
+            "item": "https://securememo.app/ko/create-memo.html"
+          }
+        ]
+      },
+      "mainEntity": {
+        "@type": "SoftwareApplication",
+        "name": "보안 메모 작성",
+        "applicationCategory": "SecurityApplication",
+        "operatingSystem": "Web Browser",
+        "description": "클라이언트 측 AES-256 암호화와 자동 자체 삭제로 암호화된 메모를 만드세요",
+        "featureList": [
+          "클라이언트 측 암호화",
+          "자체 삭제 메모",
+          "다중 만료 옵션",
+          "사용자 계정 불필요",
+          "최대 10,000자"
+        ]
+      }
+    }
+    </script>
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="/android-chrome-512x512.png">
+    <link rel="canonical" href="{{PUBLIC_ORIGIN}}/ko/create-memo.html">
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" nonce="{{CSP_NONCE}}" crossorigin="anonymous" async defer></script>
+    <script src="/js/create-memo.js?locale=ko" nonce="{{CSP_NONCE}}" defer></script>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="/ko" class="nav-logo">securememo.app</a>
+            
+            <!-- Hamburger Menu Button -->
+            <button class="hamburger" type="button" aria-label="메뉴 열기/닫기" aria-expanded="false">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+            
+            <!-- Navigation Menu -->
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="/ko" class="nav-link">홈</a></li>
+                <li><a href="/ko/about.html" class="nav-link">소개</a></li>
+                <li><a href="/ko/create-memo.html" class="nav-link active">보안 메모 작성</a></li>
+                <li class="language-dropdown">
+                    <button class="language-toggle nav-link" aria-expanded="false" aria-haspopup="true">
+                        🇰🇷 한국어
+                    </button>
+                    <div class="language-menu">
+                        <a href="/ar/create-memo.html" class="language-item " title="العربية">🌐 العربية</a>
+                        <a href="/bn/create-memo.html" class="language-item " title="বাংলা">🇧🇩 বাংলা</a>
+                        <a href="/cs/create-memo.html" class="language-item " title="Čeština">🇨🇿 Čeština</a>
+                        <a href="/da/create-memo.html" class="language-item " title="Dansk">🇩🇰 Dansk</a>
+                        <a href="/de/create-memo.html" class="language-item " title="Deutsch">🇩🇪 Deutsch</a>
+                        <a href="/el/create-memo.html" class="language-item " title="Ελληνικά">🇬🇷 Ελληνικά</a>
+                        <a href="/en/create-memo.html" class="language-item " title="English">🇬🇧 English</a>
+                        <a href="/es/create-memo.html" class="language-item " title="Español">🇪🇸 Español</a>
+                        <a href="/fi/create-memo.html" class="language-item " title="Suomi">🇫🇮 Suomi</a>
+                        <a href="/fr/create-memo.html" class="language-item " title="Français">🇫🇷 Français</a>
+                        <a href="/hi/create-memo.html" class="language-item " title="हिन्दी">🇮🇳 हिन्दी</a>
+                        <a href="/hu/create-memo.html" class="language-item " title="Magyar">🇭🇺 Magyar</a>
+                        <a href="/id/create-memo.html" class="language-item " title="Bahasa Indonesia">🇮🇩 Bahasa Indonesia</a>
+                        <a href="/it/create-memo.html" class="language-item " title="Italiano">🇮🇹 Italiano</a>
+                        <a href="/ja/create-memo.html" class="language-item " title="日本語">🇯🇵 日本語</a>
+                        <a href="/ko/create-memo.html" class="language-item active" title="한국어">🇰🇷 한국어</a>
+                        <a href="/nl/create-memo.html" class="language-item " title="Nederlands">🇳🇱 Nederlands</a>
+                        <a href="/no/create-memo.html" class="language-item " title="Norsk">🇳🇴 Norsk</a>
+                        <a href="/pl/create-memo.html" class="language-item " title="Polski">🇵🇱 Polski</a>
+                        <a href="/ptPT/create-memo.html" class="language-item " title="Português (Portugal)">🇵🇹 Português</a>
+                        <a href="/ptBR/create-memo.html" class="language-item " title="Português (Brasil)">🇧🇷 Português (Brasil)</a>
+                        <a href="/ru/create-memo.html" class="language-item " title="Русский">🇷🇺 Русский</a>
+                        <a href="/ro/create-memo.html" class="language-item " title="Română">🇷🇴 Română</a>
+                        <a href="/sv/create-memo.html" class="language-item " title="Svenska">🇸🇪 Svenska</a>
+                        <a href="/tl/create-memo.html" class="language-item " title="Tagalog">🇵🇭 Tagalog</a>
+                        <a href="/th/create-memo.html" class="language-item " title="ไทย">🇹🇭 ไทย</a>
+                        <a href="/tr/create-memo.html" class="language-item " title="Türkçe">🇹🇷 Türkçe</a>
+                        <a href="/uk/create-memo.html" class="language-item " title="Українська">🇺🇦 Українська</a>
+                        <a href="/vi/create-memo.html" class="language-item " title="Tiếng Việt">🇻🇳 Tiếng Việt</a>
+                        <a href="/zh/create-memo.html" class="language-item " title="中文">🈶 中文</a>
+                    </div>
+                </li>
+            </ul>
+            
+            <!-- Mobile Menu Overlay -->
+            <div class="nav-overlay"></div>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <div class="memo-container">
+            <div class="memo-card">
+                <h1>보안 메모 작성</h1>
+                <p class="memo-description">메모는 브라우저에서 암호화되며 읽거나 만료된 후 자체 삭제됩니다.</p>
+                <div id="turnstileOverlay" class="turnstile-overlay hidden">
+                    <div class="turnstile-overlay-backdrop"></div>
+                    <div class="turnstile-overlay-content" role="dialog" aria-modal="true" aria-label="Security Challenge">
+                        <button type="button" id="closeTurnstileOverlay" class="overlay-close-btn" aria-label="Close">×</button>
+                        <div id="dynamicTurnstileContainer"></div>
+                    </div>
+                </div>
+                
+                <form id="memoForm" class="memo-form">
+                    <div class="form-group">
+                        <label for="message">메모 내용</label>
+                        <textarea id="message" name="message" required 
+                                  placeholder="여기에 비밀 메모를 입력하세요..." 
+                                  rows="8" maxlength="10000"></textarea>
+                        <small class="form-help">최대 10,000자</small>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="expiryHours">만료 시간</label>
+                        <select id="expiryHours" name="expiryHours">
+                            <option value="8">읽음 시 삭제 또는 8시간</option>
+                            <option value="24">읽음 시 삭제 또는 1일</option>
+                            <option value="48">읽음 시 삭제 또는 2일</option>
+                            <option value="168">읽음 시 삭제 또는 1주일</option>
+                            <option value="720">읽음 시 삭제 또는 30일</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary" id="submitButton">보안 메모 작성</button>
+                    
+                    <!-- Loading indicator (hidden by default) -->
+                    <div id="loadingIndicator" class="loading-spinner hidden">
+                        <div class="spinner"></div>
+                        <p>메모를 안전하게 암호화하는 중... 오래된 기기에서는 시간이 걸릴 수 있습니다.</p>
+                    </div>
+                </form>
+                
+                <div id="result" class="result-section hidden">
+                    <h3>✅ 메모가 성공적으로 생성되었습니다!</h3>
+                    
+                    <div class="memo-url-section">
+                        <label for="memoUrl">메모 URL (수신자와 공유하세요):</label>
+                        <div class="url-copy-container">
+                            <input type="text" id="memoUrl" readonly onclick="this.select(); document.execCommand('copy'); showMessage('✅ URL이 클립보드에 복사되었습니다!', '성공');">
+                            <button type="button" id="copyUrl" class="btn btn-primary">URL 복사</button>
+                        </div>
+                        <small class="form-help">이것은 메모에 대한 보안 링크입니다. 이 URL을 수신자와 공유하세요.</small>
+                    </div>
+                    
+                    <div class="memo-password-section">
+                        <label for="memoPassword">암호화 비밀번호 (별도로 공유하세요):</label>
+                        <div class="url-copy-container">
+                            <input type="password" id="memoPassword" readonly onclick="this.select(); document.execCommand('copy'); showMessage('✅ 비밀번호가 클립보드에 복사되었습니다!', '성공');">
+                            <button type="button" id="togglePassword" class="btn btn-primary mr-8">보기</button>
+                            <button type="button" id="copyPassword" class="btn btn-primary">비밀번호 복사</button>
+                        </div>
+                        <small class="form-help">이것은 암호화 비밀번호입니다. 보안 강화를 위해 URL과 별도로 공유하세요. 서버에 저장되지 않으며 이 페이지를 떠난 후에는 복구가 불가능합니다.</small>
+                    </div>
+                    
+                    <div class="memo-warning">
+                        <p><strong>중요:</strong></p>
+                        <ul>
+                            <li>메모는 읽은 후 또는 만료 시간에 도달하면 삭제됩니다</li>
+                            <li>최대 보안을 위해 URL과 비밀번호를 별도로 공유하세요</li>
+                            <li>수신자가 메모에 접근하려면 URL과 비밀번호가 모두 필요합니다</li>
+                            <li>다른 곳으로 이동하면 이 페이지가 지워집니다</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div id="statusMessage" class="message"></div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p><a href="https://github.com/timoheimonen/securememo.app" target="_blank" rel="noopener noreferrer">GitHub에서 소스 코드 보기</a> | <a href="/ko/tos.html">서비스 약관</a> | <a href="/ko/privacy.html">개인정보 보호 고지</a> | <a href="mailto:contact@securememo.app">contact@securememo.app</a></p>
+        <p class="footer-tagline">추적 없음, 광고 없음, 군더더기 없음.</p>
+    </footer>
+
+    <script src="/js/common.js" type="module" nonce="{{CSP_NONCE}}" defer></script>
+</body>
+</html>

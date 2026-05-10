@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Σχετικά με το securememo.app - Εστίαση στην Ιδιωτικότητα & Κρυπτογράφηση | securememo.app</title>
+    <meta name="description" content="Μάθετε για την προσέγγιση ιδιωτικότητας του securememo.app στην κρυπτογραφημένη επικοινωνία. Χτισμένο με κρυπτογράφηση AES-256 στην πλευρά του πελάτη, αυτοκαταστρεφόμενα μηνύματα και αρχιτεκτονική μηδενικής γνώσης.">
+    <meta name="keywords" content="σχετικά με ασφαλή σημείωση, εστίαση στην ιδιωτικότητα, κρυπτογράφηση στην πλευρά του πελάτη, AES-256, αυτοκαταστρεφόμενα μηνύματα, μηδενική γνώση, ασφαλής διαμοιρασμός σημειώσεων">
+    <!-- Open Graph for social sharing -->
+    <meta property="og:title" content="Σχετικά με το securememo.app - Εστίαση στην Ιδιωτικότητα & Κρυπτογράφηση">
+    <meta property="og:description" content="Ανακαλύψτε πώς το securememo.app προστατεύει την ιδιωτικότητά σας με κρυπτογράφηση στην πλευρά του πελάτη και αυτοκαταστρεφόμενα μηνύματα.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://securememo.app/el/about.html">
+    <meta property="og:image" content="https://securememo.app/android-chrome-512x512.png">
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Σχετικά με το securememo.app - Εστίαση στην Ιδιωτικότητα & Κρυπτογράφηση">
+    <meta name="twitter:description" content="Κρυπτογραφημένη επικοινωνία με προτεραιότητα στην ιδιωτικότητα.">
+    <!-- Structured Data -->
+    <script type="application/ld+json" nonce="{{CSP_NONCE}}">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Πώς το securememo.app προστατεύει την ιδιωτικότητά μου;",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Το securememo.app χρησιμοποιεί κρυπτογράφηση AES-256 στην πλευρά του πελάτη, που σημαίνει ότι η σημείωσή σας κρυπτογραφείται στον περιηγητή σας πριν σταλεί στους διακομιστές μας. Δεν βλέπουμε ποτέ το αρχικό κείμενο. Οι σημειώσεις αυτοκαταστρέφονται μετά την ανάγνωση ή τη λήξη, και δεν απαιτούνται λογαριασμοί χρήστη ούτε συλλέγονται προσωπικά δεδομένα."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Τι είδους κρυπτογράφηση χρησιμοποιεί το securememo.app;",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Χρησιμοποιούμε κρυπτογράφηση AES-256-GCM με παραγωγή κλειδιού PBKDF2. Όλη η κρυπτογράφηση γίνεται στον περιηγητή σας μέσω του Web Crypto API. Ο κωδικός κρυπτογράφησης δημιουργείται ξεχωριστά και δεν αποθηκεύεται ποτέ στους διακομιστές μας."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Πόσο διαρκούν οι σημειώσεις;",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Οι σημειώσεις μπορούν να οριστούν να λήγουν μετά από 8 ώρες, 1 ημέρα, 2 ημέρες, 1 εβδομάδα ή μέγιστο 30 ημέρες. Διαγράφονται επίσης αμέσως μετά την ανάγνωση. Οι ληγμένες σημειώσεις καθαρίζονται αυτόματα κάθε ώρα."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Μπορώ να ανακτήσω μια διαγραμμένη σημείωση;",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Όχι, μόλις μια σημείωση διαγραφεί (είτε μετά την ανάγνωση είτε όταν λήξει), δεν μπορεί να ανακτηθεί. Αυτό γίνεται για μέγιστη ιδιωτικότητα και ασφάλεια."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Είναι δωρεάν το securememo.app;",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Ναι, το securememo.app είναι εντελώς δωρεάν στη χρήση. Δεν υπάρχουν κρυφές χρεώσεις, premium λειτουργίες ή παρακολούθηση/διαφημίσεις."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Τι τεχνολογία χρησιμοποιεί το securememo.app;",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Το securememo.app είναι χτισμένο σε Cloudflare Workers για serverless υπολογισμό, D1 Database για αποθήκευση, Web Crypto API για κρυπτογράφηση στην πλευρά του πελάτη και σύγχρονο HTML/CSS/JavaScript. Ο πηγαίος κώδικας είναι ανοιχτού κώδικα και διαθέσιμος στο GitHub."
+          }
+        }
+      ]
+    }
+    </script>
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="/android-chrome-512x512.png">
+    <link rel="canonical" href="{{PUBLIC_ORIGIN}}/el/about.html">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="/el" class="nav-logo">securememo.app</a>
+            
+            <!-- Hamburger Menu Button -->
+            <button class="hamburger" type="button" aria-label="Εναλλαγή μενού πλοήγησης" aria-expanded="false">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+            
+            <!-- Navigation Menu -->
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="/el" class="nav-link">Αρχική</a></li>
+                <li><a href="/el/about.html" class="nav-link active">Σχετικά</a></li>
+                <li><a href="/el/create-memo.html" class="nav-link">Δημιουργία Ασφαλούς Σημείωσης</a></li>
+                <li class="language-dropdown">
+                    <button class="language-toggle nav-link" aria-expanded="false" aria-haspopup="true">
+                        🇬🇷 Ελληνικά
+                    </button>
+                    <div class="language-menu">
+                        <a href="/ar/about.html" class="language-item " title="العربية">🌐 العربية</a>
+                        <a href="/bn/about.html" class="language-item " title="বাংলা">🇧🇩 বাংলা</a>
+                        <a href="/cs/about.html" class="language-item " title="Čeština">🇨🇿 Čeština</a>
+                        <a href="/da/about.html" class="language-item " title="Dansk">🇩🇰 Dansk</a>
+                        <a href="/de/about.html" class="language-item " title="Deutsch">🇩🇪 Deutsch</a>
+                        <a href="/el/about.html" class="language-item active" title="Ελληνικά">🇬🇷 Ελληνικά</a>
+                        <a href="/en/about.html" class="language-item " title="English">🇬🇧 English</a>
+                        <a href="/es/about.html" class="language-item " title="Español">🇪🇸 Español</a>
+                        <a href="/fi/about.html" class="language-item " title="Suomi">🇫🇮 Suomi</a>
+                        <a href="/fr/about.html" class="language-item " title="Français">🇫🇷 Français</a>
+                        <a href="/hi/about.html" class="language-item " title="हिन्दी">🇮🇳 हिन्दी</a>
+                        <a href="/hu/about.html" class="language-item " title="Magyar">🇭🇺 Magyar</a>
+                        <a href="/id/about.html" class="language-item " title="Bahasa Indonesia">🇮🇩 Bahasa Indonesia</a>
+                        <a href="/it/about.html" class="language-item " title="Italiano">🇮🇹 Italiano</a>
+                        <a href="/ja/about.html" class="language-item " title="日本語">🇯🇵 日本語</a>
+                        <a href="/ko/about.html" class="language-item " title="한국어">🇰🇷 한국어</a>
+                        <a href="/nl/about.html" class="language-item " title="Nederlands">🇳🇱 Nederlands</a>
+                        <a href="/no/about.html" class="language-item " title="Norsk">🇳🇴 Norsk</a>
+                        <a href="/pl/about.html" class="language-item " title="Polski">🇵🇱 Polski</a>
+                        <a href="/ptPT/about.html" class="language-item " title="Português (Portugal)">🇵🇹 Português</a>
+                        <a href="/ptBR/about.html" class="language-item " title="Português (Brasil)">🇧🇷 Português (Brasil)</a>
+                        <a href="/ru/about.html" class="language-item " title="Русский">🇷🇺 Русский</a>
+                        <a href="/ro/about.html" class="language-item " title="Română">🇷🇴 Română</a>
+                        <a href="/sv/about.html" class="language-item " title="Svenska">🇸🇪 Svenska</a>
+                        <a href="/tl/about.html" class="language-item " title="Tagalog">🇵🇭 Tagalog</a>
+                        <a href="/th/about.html" class="language-item " title="ไทย">🇹🇭 ไทย</a>
+                        <a href="/tr/about.html" class="language-item " title="Türkçe">🇹🇷 Türkçe</a>
+                        <a href="/uk/about.html" class="language-item " title="Українська">🇺🇦 Українська</a>
+                        <a href="/vi/about.html" class="language-item " title="Tiếng Việt">🇻🇳 Tiếng Việt</a>
+                        <a href="/zh/about.html" class="language-item " title="中文">🈶 中文</a>
+                    </div>
+                </li>
+            </ul>
+            
+            <!-- Mobile Menu Overlay -->
+            <div class="nav-overlay"></div>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <div class="about-section">
+            <h1>Σχετικά με το securememo.app</h1>
+            <p>Το securememo.app είναι μια εφαρμογή με έμφαση στην ιδιωτικότητα που σας επιτρέπει να δημιουργείτε κρυπτογραφημένες σημειώσεις που αυτοκαταστρέφονται μετά την ανάγνωση ή τη λήξη. Χτισμένο με προτεραιότητα στην ασφάλεια και την ιδιωτικότητα. Ο πηγαίος κώδικας είναι διαθέσιμος στο GitHub.</p>
+            
+            <div class="tech-stack">
+                <h2>Τεχνολογίες</h2>
+                <ul>
+                    <li><strong>Cloudflare Workers:</strong> Cloudflare Workers: Πλατφόρμα serverless για παγκόσμια απόδοση</li>
+                    <li><strong>D1 Database:</strong> D1 Database: Βάση δεδομένων SQLite για ασφαλή αποθήκευση</li>
+                    <li><strong>Web Crypto API:</strong> Web Crypto API: Κρυπτογράφηση AES-256 στην πλευρά του πελάτη</li>
+                    <li><strong>HTML/CSS/JavaScript:</strong> HTML/CSS/JavaScript: Σύγχρονο, ανταποκρινόμενο web περιβάλλον</li>
+                    <li><strong>Ο πηγαίος κώδικας είναι διαθέσιμος στο GitHub:</strong> <a href="https://github.com/timoheimonen/securememo.app" target="_blank" rel="noopener noreferrer">Δείτε τον πηγαίο κώδικα στο GitHub</a></li>
+                </ul>
+            </div>
+
+            <div class="features-detail">
+                <h2>Χαρακτηριστικά Ασφαλείας</h2>
+                <div class="feature-list">
+                    <div class="feature-item">
+                        <h3>🔐 Κρυπτογράφηση στην Πλευρά του Πελάτη</h3>
+                        <p>Όλη η κρυπτογράφηση γίνεται στον περιηγητή σας μέσω του Web Crypto API. Η σημείωσή σας κρυπτογραφείται με AES-256 πριν σταλεί στους διακομιστές μας.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>🔑 Ξεχωριστή Κοινοποίηση Κωδικού</h3>
+                        <p>Ο κωδικός κρυπτογράφησης δημιουργείται ξεχωριστά από το URL και πρέπει να κοινοποιείται μέσω διαφορετικού καναλιού για αυξημένη ασφάλεια.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>💥 Αυτοκαταστρεφόμενες Σημειώσεις</h3>
+                        <p>Μόλις μια σημείωση διαβαστεί ή λήξει, διαγράφεται άμεσα και οριστικά από τη βάση δεδομένων μας. Δεν μένουν ίχνη.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>🌐 Χωρίς Αποθήκευση Κωδικών</h3>
+                        <p>Δεν αποθηκεύουμε ποτέ τους κωδικούς κρυπτογράφησης στους διακομιστές μας. Υπάρχουν μόνο στη μνήμη του περιηγητή σας.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>⚡ Παγκόσμια Απόδοση</h3>
+                        <p>Χτισμένο στο παγκόσμιο δίκτυο της Cloudflare για αστραπιαία πρόσβαση από οπουδήποτε στον κόσμο.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>🔒 Ιδιωτικότητα Πάνω Απ’ Όλα</h3>
+                        <p>Δεν απαιτούνται λογαριασμοί χρήστη. Χωρίς παρακολούθηση. Χωρίς analytics. Η ιδιωτικότητά σας είναι προτεραιότητά μας.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="usage-section">
+                <h2>Πώς να Χρησιμοποιήσετε</h2>
+                <div class="feature-list">
+                    <div class="feature-item">
+                        <h3>1. Δημιουργία Σημείωσης</h3>
+                        <p>Μεταβείτε στη "Δημιουργία Ασφαλούς Σημείωσης" και πληκτρολογήστε τη σημείωσή σας. Επιλέξτε χρόνο λήξης (8 ώρες, 1 ημέρα, 2 ημέρες, 1 εβδομάδα ή μέγιστο 30 ημέρες). Οι σημειώσεις διαγράφονται όταν διαβαστούν ή λήξουν. Το σύστημα θα δημιουργήσει έναν τυχαίο κωδικό κρυπτογράφησης.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>2. Κοινοποίηση Συνδέσμου και Κωδικού</h3>
+                        <p>Αντιγράψτε το παραγόμενο URL και τον κωδικό, και κοινοποιήστε τα στον παραλήπτη σας μέσω ξεχωριστών καναλιών για αυξημένη ασφάλεια.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>3. Αυτοκαταστροφή</h3>
+                        <p>Όταν ο παραλήπτης ανοίξει τον σύνδεσμο και εισάγει τον κωδικό ξεχωριστά, η σημείωση θα αποκρυπτογραφηθεί και θα διαγραφεί οριστικά αν διαβαστεί, ή θα διαγραφεί αυτόματα αν λήξει. Οι ληγμένες σημειώσεις καθαρίζονται αυτόματα κάθε 1 ώρα.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="video-embed">
+                <div class="video-aspect-ratio">
+            <iframe src="https://www.youtube-nocookie.com/embed/V0vEHLLdDKk"
+                title="How to use securememo.app"
+                            frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            allowfullscreen
+                            loading="lazy"
+                            class="video-iframe">
+                    </iframe>
+                </div>
+                <p class="video-caption">
+                    <a href="https://www.youtube-nocookie.com/watch?v=V0vEHLLdDKk" target="_blank" rel="noopener noreferrer">Watch on YouTube</a>
+                </p>
+                <noscript>
+                    <p class="text-center"><a href="https://www.youtube-nocookie.com/watch?v=V0vEHLLdDKk" target="_blank" rel="noopener noreferrer">Watch the video (JavaScript disabled)</a></p>
+                </noscript>
+            </div>
+            <div class="cta-section">
+                <h2>Έτοιμοι να Ξεκινήσετε;</h2>
+                <p>Δημιουργήστε την πρώτη σας ασφαλή σημείωση τώρα και ζήστε πραγματική τερματική κρυπτογράφηση.</p>
+                <div class="cta-buttons">
+                    <a href="/el/create-memo.html" class="btn btn-primary">Δημιουργία Ασφαλούς Σημείωσης</a>
+                    <a href="/el" class="btn btn-secondary">Επιστροφή στην Αρχική</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p><a href="https://github.com/timoheimonen/securememo.app" target="_blank" rel="noopener noreferrer">Δείτε τον πηγαίο κώδικα στο GitHub</a> | <a href="/el/tos.html">Όροι Χρήσης</a> | <a href="/el/privacy.html">Σημείωση Ιδιωτικότητας</a> | <a href="mailto:contact@securememo.app">contact@securememo.app</a></p>
+        <p class="footer-tagline">Χωρίς παρακολούθηση, χωρίς διαφημίσεις, χωρίς ανοησίες.</p>
+    </footer>
+
+    <script src="/js/common.js" type="module" nonce="{{CSP_NONCE}}" defer></script>
+</body>
+</html>

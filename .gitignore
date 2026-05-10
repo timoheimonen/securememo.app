@@ -111,6 +111,9 @@ Thumbs.db
 
 # Local development
 .local/ 
+.gocache/
+.gopath/
+securememo
 pages/_routes.json
 pages/android-chrome-192x192.png
 pages/android-chrome-512x512.png

@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tentang securememo.app - Catatan Terenkripsi yang Fokus Privasi | securememo.app</title>
+    <meta name="description" content="Pelajari pendekatan securememo.app yang mengutamakan privasi dalam pesan terenkripsi. Dibangun dengan enkripsi AES-256 sisi klien, pesan yang menghancurkan diri, dan arsitektur tanpa pengetahuan.">
+    <meta name="keywords" content="tentang memo aman, pesan fokus privasi, enkripsi sisi klien, AES-256, pesan menghancurkan diri, tanpa pengetahuan, berbagi catatan aman">
+    <!-- Open Graph for social sharing -->
+    <meta property="og:title" content="Tentang securememo.app - Catatan Terenkripsi yang Fokus Privasi">
+    <meta property="og:description" content="Temukan bagaimana securememo.app melindungi privasi Anda dengan enkripsi sisi klien dan pesan yang menghancurkan diri.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://securememo.app/id/about.html">
+    <meta property="og:image" content="https://securememo.app/android-chrome-512x512.png">
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Tentang securememo.app - Catatan Terenkripsi yang Fokus Privasi">
+    <meta name="twitter:description" content="Pesan terenkripsi yang mengutamakan privasi dengan enkripsi sisi klien.">
+    <!-- Structured Data -->
+    <script type="application/ld+json" nonce="{{CSP_NONCE}}">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Bagaimana securememo.app melindungi privasi saya?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "securememo.app menggunakan enkripsi AES-256 sisi klien, artinya memo Anda dienkripsi di browser Anda sebelum dikirim ke server kami. Kami tidak pernah melihat konten teks asli. Memo menghancurkan diri setelah dibaca atau kedaluwarsa, dan kami tidak memerlukan akun pengguna atau mengumpulkan informasi pribadi."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Enkripsi apa yang digunakan securememo.app?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Kami menggunakan enkripsi AES-256-GCM dengan derivasi kunci PBKDF2. Semua enkripsi terjadi di sisi klien di browser Anda menggunakan Web Crypto API. Kata sandi enkripsi dihasilkan secara terpisah dan tidak pernah disimpan di server kami."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Berapa lama memo bertahan?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Memo dapat diatur untuk kedaluwarsa setelah 8 jam, 1 hari, 2 hari, 1 minggu, atau maksimal 30 hari. Memo juga dihapus segera setelah dibaca. Memo yang kedaluwarsa dibersihkan secara otomatis setiap jam."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Bisakah saya memulihkan memo yang dihapus?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Tidak, setelah memo dihapus (baik setelah dibaca atau saat kedaluwarsa), memo tidak dapat dipulihkan. Ini adalah desain untuk privasi dan keamanan maksimal."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Apakah securememo.app gratis untuk digunakan?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Ya, securememo.app benar-benar gratis untuk digunakan. Tidak ada biaya tersembunyi, tidak ada fitur premium, dan tidak ada pelacakan atau periklanan."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Teknologi apa yang digunakan securememo.app?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "securememo.app dibangun di atas Cloudflare Workers untuk komputasi tanpa server, D1 Database untuk penyimpanan, Web Crypto API untuk enkripsi sisi klien, dan HTML/CSS/JavaScript modern. Kode sumber bersifat open source dan tersedia di GitHub."
+          }
+        }
+      ]
+    }
+    </script>
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="/android-chrome-512x512.png">
+    <link rel="canonical" href="{{PUBLIC_ORIGIN}}/id/about.html">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="/id" class="nav-logo">securememo.app</a>
+            
+            <!-- Hamburger Menu Button -->
+            <button class="hamburger" type="button" aria-label="Buka/tutup menu navigasi" aria-expanded="false">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+            
+            <!-- Navigation Menu -->
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="/id" class="nav-link">Beranda</a></li>
+                <li><a href="/id/about.html" class="nav-link active">Tentang</a></li>
+                <li><a href="/id/create-memo.html" class="nav-link">Buat Memo Aman</a></li>
+                <li class="language-dropdown">
+                    <button class="language-toggle nav-link" aria-expanded="false" aria-haspopup="true">
+                        🇮🇩 Bahasa Indonesia
+                    </button>
+                    <div class="language-menu">
+                        <a href="/ar/about.html" class="language-item " title="العربية">🌐 العربية</a>
+                        <a href="/bn/about.html" class="language-item " title="বাংলা">🇧🇩 বাংলা</a>
+                        <a href="/cs/about.html" class="language-item " title="Čeština">🇨🇿 Čeština</a>
+                        <a href="/da/about.html" class="language-item " title="Dansk">🇩🇰 Dansk</a>
+                        <a href="/de/about.html" class="language-item " title="Deutsch">🇩🇪 Deutsch</a>
+                        <a href="/el/about.html" class="language-item " title="Ελληνικά">🇬🇷 Ελληνικά</a>
+                        <a href="/en/about.html" class="language-item " title="English">🇬🇧 English</a>
+                        <a href="/es/about.html" class="language-item " title="Español">🇪🇸 Español</a>
+                        <a href="/fi/about.html" class="language-item " title="Suomi">🇫🇮 Suomi</a>
+                        <a href="/fr/about.html" class="language-item " title="Français">🇫🇷 Français</a>
+                        <a href="/hi/about.html" class="language-item " title="हिन्दी">🇮🇳 हिन्दी</a>
+                        <a href="/hu/about.html" class="language-item " title="Magyar">🇭🇺 Magyar</a>
+                        <a href="/id/about.html" class="language-item active" title="Bahasa Indonesia">🇮🇩 Bahasa Indonesia</a>
+                        <a href="/it/about.html" class="language-item " title="Italiano">🇮🇹 Italiano</a>
+                        <a href="/ja/about.html" class="language-item " title="日本語">🇯🇵 日本語</a>
+                        <a href="/ko/about.html" class="language-item " title="한국어">🇰🇷 한국어</a>
+                        <a href="/nl/about.html" class="language-item " title="Nederlands">🇳🇱 Nederlands</a>
+                        <a href="/no/about.html" class="language-item " title="Norsk">🇳🇴 Norsk</a>
+                        <a href="/pl/about.html" class="language-item " title="Polski">🇵🇱 Polski</a>
+                        <a href="/ptPT/about.html" class="language-item " title="Português (Portugal)">🇵🇹 Português</a>
+                        <a href="/ptBR/about.html" class="language-item " title="Português (Brasil)">🇧🇷 Português (Brasil)</a>
+                        <a href="/ru/about.html" class="language-item " title="Русский">🇷🇺 Русский</a>
+                        <a href="/ro/about.html" class="language-item " title="Română">🇷🇴 Română</a>
+                        <a href="/sv/about.html" class="language-item " title="Svenska">🇸🇪 Svenska</a>
+                        <a href="/tl/about.html" class="language-item " title="Tagalog">🇵🇭 Tagalog</a>
+                        <a href="/th/about.html" class="language-item " title="ไทย">🇹🇭 ไทย</a>
+                        <a href="/tr/about.html" class="language-item " title="Türkçe">🇹🇷 Türkçe</a>
+                        <a href="/uk/about.html" class="language-item " title="Українська">🇺🇦 Українська</a>
+                        <a href="/vi/about.html" class="language-item " title="Tiếng Việt">🇻🇳 Tiếng Việt</a>
+                        <a href="/zh/about.html" class="language-item " title="中文">🈶 中文</a>
+                    </div>
+                </li>
+            </ul>
+            
+            <!-- Mobile Menu Overlay -->
+            <div class="nav-overlay"></div>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <div class="about-section">
+            <h1>Tentang securememo.app</h1>
+            <p>securememo.app adalah aplikasi yang berfokus pada privasi yang memungkinkan Anda membuat memo terenkripsi yang menghancurkan diri setelah dibaca atau kedaluwarsa. Dibangun dengan keamanan dan privasi sebagai prioritas utama. Kode sumber tersedia di GitHub.</p>
+            
+            <div class="tech-stack">
+                <h2>Tumpukan Teknologi</h2>
+                <ul>
+                    <li><strong>Cloudflare Workers:</strong> Cloudflare Workers: Platform komputasi tanpa server untuk performa global</li>
+                    <li><strong>D1 Database:</strong> D1 Database: Database bertenaga SQLite untuk penyimpanan aman</li>
+                    <li><strong>Web Crypto API:</strong> Web Crypto API: Enkripsi AES-256 sisi klien</li>
+                    <li><strong>HTML/CSS/JavaScript:</strong> HTML/CSS/JavaScript: Antarmuka web modern dan responsif</li>
+                    <li><strong>Kode sumber tersedia di GitHub:</strong> <a href="https://github.com/timoheimonen/securememo.app" target="_blank" rel="noopener noreferrer">Lihat kode sumber di GitHub</a></li>
+                </ul>
+            </div>
+
+            <div class="features-detail">
+                <h2>Fitur Keamanan</h2>
+                <div class="feature-list">
+                    <div class="feature-item">
+                        <h3>🔐 Enkripsi Sisi Klien</h3>
+                        <p>Semua enkripsi terjadi di browser Anda menggunakan Web Crypto API. Memo Anda dienkripsi dengan AES-256 sebelum dikirim ke server kami.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>🔑 Berbagi Kata Sandi Terpisah</h3>
+                        <p>Kata sandi enkripsi dihasilkan terpisah dari URL dan harus dibagikan melalui saluran yang berbeda untuk keamanan yang lebih baik.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>💥 Memo yang Menghancurkan Diri</h3>
+                        <p>Setelah memo dibaca atau kedaluwarsa, memo langsung dan permanen dihapus dari database kami. Tidak ada jejak yang tersisa.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>🌐 Tanpa Penyimpanan Kata Sandi</h3>
+                        <p>Kami tidak pernah menyimpan kata sandi enkripsi di server kami. Kata sandi hanya ada di memori browser Anda.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>⚡ Performa Global</h3>
+                        <p>Dibangun di jaringan global Cloudflare untuk akses super cepat dari mana saja di dunia.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>🔒 Privasi Utama</h3>
+                        <p>Tidak memerlukan akun pengguna. Tanpa pelacakan. Tanpa analitik. Privasi Anda adalah prioritas kami.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="usage-section">
+                <h2>Cara Menggunakan</h2>
+                <div class="feature-list">
+                    <div class="feature-item">
+                        <h3>1. Buat Memo</h3>
+                        <p>Pergi ke "Buat Memo Aman" dan ketik memo Anda. Pilih waktu kedaluwarsa (8j, 1h, 2h, 1 minggu atau maksimal 30 hari). Memo dihapus saat dibaca atau kedaluwarsa. Sistem akan menghasilkan kata sandi enkripsi acak.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>2. Bagikan Tautan dan Kata Sandi</h3>
+                        <p>Salin URL dan kata sandi yang dihasilkan, lalu bagikan kepada penerima melalui saluran terpisah untuk keamanan yang lebih baik.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>3. Hancur Sendiri</h3>
+                        <p>Ketika penerima membuka tautan dan memasukkan kata sandi secara terpisah, memo akan didekripsi dan kemudian dihapus secara permanen jika dibaca, atau dihapus otomatis jika kedaluwarsa. Memo yang kedaluwarsa dibersihkan otomatis setiap 1 jam.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="video-embed">
+                <div class="video-aspect-ratio">
+            <iframe src="https://www.youtube-nocookie.com/embed/V0vEHLLdDKk"
+                title="How to use securememo.app"
+                            frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            allowfullscreen
+                            loading="lazy"
+                            class="video-iframe">
+                    </iframe>
+                </div>
+                <p class="video-caption">
+                    <a href="https://www.youtube-nocookie.com/watch?v=V0vEHLLdDKk" target="_blank" rel="noopener noreferrer">Watch on YouTube</a>
+                </p>
+                <noscript>
+                    <p class="text-center"><a href="https://www.youtube-nocookie.com/watch?v=V0vEHLLdDKk" target="_blank" rel="noopener noreferrer">Watch the video (JavaScript disabled)</a></p>
+                </noscript>
+            </div>
+            <div class="cta-section">
+                <h2>Siap untuk Memulai?</h2>
+                <p>Buat memo aman pertama Anda sekarang dan rasakan enkripsi ujung-ke-ujung yang sesungguhnya.</p>
+                <div class="cta-buttons">
+                    <a href="/id/create-memo.html" class="btn btn-primary">Buat Memo Aman</a>
+                    <a href="/id" class="btn btn-secondary">Ke Beranda</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p><a href="https://github.com/timoheimonen/securememo.app" target="_blank" rel="noopener noreferrer">Lihat kode sumber di GitHub</a> | <a href="/id/tos.html">Syarat Layanan</a> | <a href="/id/privacy.html">Pemberitahuan Privasi</a> | <a href="mailto:contact@securememo.app">contact@securememo.app</a></p>
+        <p class="footer-tagline">Tanpa pelacakan, tanpa iklan, tanpa omong kosong.</p>
+    </footer>
+
+    <script src="/js/common.js" type="module" nonce="{{CSP_NONCE}}" defer></script>
+</body>
+</html>

@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>プライバシー通知 - securememo.app データ保護</title>
+    <meta name="description" content="securememo.appのプライバシー通知 - セキュアメモ共有のためのクライアントサイド暗号化、ゼロ知識アーキテクチャ、最小限のデータ収集でデータを保護する方法を学ぶ。">
+    <meta name="keywords" content="プライバシー通知, セキュアメモプライバシー, データ保護, GDPR遵守, クライアントサイド暗号化, ゼロ知識, セキュアメモ共有プライバシー">
+    <!-- Open Graph for social sharing -->
+    <meta property="og:title" content="プライバシー通知 - securememo.app データ保護">
+    <meta property="og:description" content="securememo.appがクライアントサイド暗号化と最小限のデータ収集でプライバシーを保護する方法。">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://securememo.app/privacy.html">
+    <meta property="og:image" content="https://securememo.app/android-chrome-512x512.png">
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="プライバシー通知 - securememo.app データ保護">
+    <meta name="twitter:description" content="クライアントサイド暗号化とゼロ知識アーキテクチャによるプライバシー保護。">
+    <!-- Structured Data -->
+    <script type="application/ld+json" nonce="{{CSP_NONCE}}">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": "プライバシー通知",
+      "description": "securememo.appのプライバシー通知 - クライアントサイド暗号化、ゼロ知識アーキテクチャ、最小限のデータ収集であなたのデータを保護する方法を学びましょう。",
+      "url": "https://securememo.app/privacy.html",
+      "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "ホーム",
+            "item": "https://securememo.app/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "プライバシー通知",
+            "item": "https://securememo.app/privacy.html"
+          }
+        ]
+      },
+      "mainEntity": {
+        "@type": "CreativeWork",
+        "name": "プライバシー通知",
+        "author": {
+          "@type": "Organization",
+          "name": "securememo.app"
+        },
+        "dateModified": "2025-08-09",
+        "description": "securememo.appがクライアントサイド暗号化と最小限のデータ収集でプライバシーを保護する方法"
+      }
+    }
+    </script>
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="/android-chrome-512x512.png">
+    <link rel="canonical" href="{{PUBLIC_ORIGIN}}/ja/privacy.html">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="/ja" class="nav-logo">securememo.app</a>
+            
+            <!-- Hamburger Menu Button -->
+            <button class="hamburger" type="button" aria-label="ナビゲーションメニューを切り替える" aria-expanded="false">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+            
+            <!-- Navigation Menu -->
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="/ja" class="nav-link">ホーム</a></li>
+                <li><a href="/ja/about.html" class="nav-link">概要</a></li>
+                <li><a href="/ja/create-memo.html" class="nav-link">セキュアメモを作成</a></li>
+                <li class="language-dropdown">
+                    <button class="language-toggle nav-link" aria-expanded="false" aria-haspopup="true">
+                        🇯🇵 日本語
+                    </button>
+                    <div class="language-menu">
+                        <a href="/ar/privacy.html" class="language-item " title="العربية">🌐 العربية</a>
+                        <a href="/bn/privacy.html" class="language-item " title="বাংলা">🇧🇩 বাংলা</a>
+                        <a href="/cs/privacy.html" class="language-item " title="Čeština">🇨🇿 Čeština</a>
+                        <a href="/da/privacy.html" class="language-item " title="Dansk">🇩🇰 Dansk</a>
+                        <a href="/de/privacy.html" class="language-item " title="Deutsch">🇩🇪 Deutsch</a>
+                        <a href="/el/privacy.html" class="language-item " title="Ελληνικά">🇬🇷 Ελληνικά</a>
+                        <a href="/en/privacy.html" class="language-item " title="English">🇬🇧 English</a>
+                        <a href="/es/privacy.html" class="language-item " title="Español">🇪🇸 Español</a>
+                        <a href="/fi/privacy.html" class="language-item " title="Suomi">🇫🇮 Suomi</a>
+                        <a href="/fr/privacy.html" class="language-item " title="Français">🇫🇷 Français</a>
+                        <a href="/hi/privacy.html" class="language-item " title="हिन्दी">🇮🇳 हिन्दी</a>
+                        <a href="/hu/privacy.html" class="language-item " title="Magyar">🇭🇺 Magyar</a>
+                        <a href="/id/privacy.html" class="language-item " title="Bahasa Indonesia">🇮🇩 Bahasa Indonesia</a>
+                        <a href="/it/privacy.html" class="language-item " title="Italiano">🇮🇹 Italiano</a>
+                        <a href="/ja/privacy.html" class="language-item active" title="日本語">🇯🇵 日本語</a>
+                        <a href="/ko/privacy.html" class="language-item " title="한국어">🇰🇷 한국어</a>
+                        <a href="/nl/privacy.html" class="language-item " title="Nederlands">🇳🇱 Nederlands</a>
+                        <a href="/no/privacy.html" class="language-item " title="Norsk">🇳🇴 Norsk</a>
+                        <a href="/pl/privacy.html" class="language-item " title="Polski">🇵🇱 Polski</a>
+                        <a href="/ptPT/privacy.html" class="language-item " title="Português (Portugal)">🇵🇹 Português</a>
+                        <a href="/ptBR/privacy.html" class="language-item " title="Português (Brasil)">🇧🇷 Português (Brasil)</a>
+                        <a href="/ru/privacy.html" class="language-item " title="Русский">🇷🇺 Русский</a>
+                        <a href="/ro/privacy.html" class="language-item " title="Română">🇷🇴 Română</a>
+                        <a href="/sv/privacy.html" class="language-item " title="Svenska">🇸🇪 Svenska</a>
+                        <a href="/tl/privacy.html" class="language-item " title="Tagalog">🇵🇭 Tagalog</a>
+                        <a href="/th/privacy.html" class="language-item " title="ไทย">🇹🇭 ไทย</a>
+                        <a href="/tr/privacy.html" class="language-item " title="Türkçe">🇹🇷 Türkçe</a>
+                        <a href="/uk/privacy.html" class="language-item " title="Українська">🇺🇦 Українська</a>
+                        <a href="/vi/privacy.html" class="language-item " title="Tiếng Việt">🇻🇳 Tiếng Việt</a>
+                        <a href="/zh/privacy.html" class="language-item " title="中文">🈶 中文</a>
+                    </div>
+                </li>
+            </ul>
+            
+            <!-- Mobile Menu Overlay -->
+            <div class="nav-overlay"></div>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <div class="legal-section">
+            <h1>securememo.appのプライバシー通知</h1>
+            <p class="legal-meta"><strong>最終更新日: 2025年8月24日</strong></p>
+            
+            <div class="legal-toc">
+                <h2>目次</h2>
+                <ol>
+                    <li><a href="#information-collected">私たちが収集する情報</a></li>
+                    <li><a href="#how-we-use">情報の使用方法</a></li>
+                    <li><a href="#data-sharing">データの共有と開示</a></li>
+                    <li><a href="#data-security">データセキュリティ</a></li>
+                    <li><a href="#data-retention">データ保存</a></li>
+                    <li><a href="#your-rights">あなたの権利と選択</a></li>
+                    <li><a href="#children-privacy">児童のプライバシー</a></li>
+                    <li><a href="#international-transfers">国際データ転送</a></li>
+                    <li><a href="#changes-notice">このプライバシー通知の変更</a></li>
+                    <li><a href="#contact">お問い合わせ</a></li>
+                </ol>
+            </div>
+
+            <div class="features-detail">
+                <p>securememo.app（以下「当社」）は、お客様のプライバシーを保護することを約束しています。このプライバシー通知は、読み取りまたは期限切れ後に自己破壊する暗号化メモを作成・共有できる当社サービスに関連して、当社が情報をどのように取り扱うかを説明します。当社のサービスはプライバシーを中核として設計されています。すべての暗号化はブラウザ内でクライアントサイドにて行われ、当社はメモの内容にアクセスできません。</p>
+                <p>securememo.appを使用することで、あなたはこのプライバシー通知に記載された実務に同意します。同意しない場合は、私たちのサービスを使用しないでください。</p>
+            </div>
+
+            <div class="usage-section" id="information-collected">
+                <h2>1. 私たちが収集する情報</h2>
+                <p>私たちはサービスを安全かつ効率的に運営するために最小限の情報を収集します。具体的には:</p>
+                <ul>
+                    <li>メモデータ: メモを作成すると、私たちはあなたのメッセージの暗号化版のみを私たちのサーバー（Cloudflare WorkersとD1データベースを使用）に保存します。暗号化キー（パスワード）はあなたのブラウザで完全に生成および処理され、私たちに送信されたり保存されたりすることはありません。メモは読み取り後または有効期限切れ時（オプション: 8時間、1日、2日、1週間、または30日）に自動的に削除されます。</li>
+                    <li>最小限のデータ収集: 私たちはサービス利用のためにユーザーアカウントを要求したり個人情報を収集したりしません。個人データを収集する可能性があるのは、あなたがサポート目的で任意に私たちへ連絡した場合のみです。メールでお問い合わせいただいた場合、回答するためにあなたのメールアドレスとメッセージ内容を取得します。これらの情報を他の目的で使用せず、あなたの同意なく第三者と共有しません。</li>
+                    <li>セキュリティ関連データ: 乱用防止とサービスの整合性のため:
+                        <ul>
+                            <li>スパム、ボット、または悪意のある活動を検出および緩和するためにIPアドレスとリクエストメタデータ（タイムスタンプなど）を一時的にログに記録します。</li>
+                            <li>自動化された乱用を防止するためにCloudflare Turnstile CAPTCHAを使用しています。Turnstileはプライバシーを保護するように設計されており、サイト間でユーザーを追跡することはありません。</li>
+                        </ul>
+                    </li>
+                </ul>
+                <p>アナリティクスや追跡なし: 私たちはクッキー、追跡ピクセル、サードパーティアナリティクス、または広告ツールを使用しません。ユーザープロファイリング、行動追跡、またはマーケティング目的のデータ収集は行いません。</p>
+                <p>私たちは基本的なサービス運営に必要なものを超えて、機密な個人データ、位置情報、またはデバイス識別子を収集することはありません。</p>
+            </div>
+
+            <div class="features-detail" id="how-we-use">
+                <h2>2. 情報の使用方法</h2>
+                <p>私たちが収集する限られた情報は、以下の目的でのみ使用されます:</p>
+                <ul>
+                    <li>コアサービスの提供: 暗号化メモを一時的に保存し、その安全な取得と削除を促進します。</li>
+                    <li>セキュリティの維持: IPログとCAPTCHAを使用して、スパムやサービス拒否攻撃などの乱用を検出および防止します。</li>
+                    <li>法的義務の遵守: 稀なケースで、有効な法的要求（召喚状など）に応じるためにログを使用することがあります。</li>
+                </ul>
+                <p>私たちは広告、第三者への売却、またはsecurememo.appの運営と無関係な目的にデータを使用することはありません。</p>
+            </div>
+
+            <div class="usage-section" id="data-sharing">
+                <h2>3. データの共有と開示</h2>
+                <p>私たちは、以下の限定的な状況を除き、あなたのデータを第三者に売却、賃貸、または共有することはありません:</p>
+                <ul>
+                    <li>サービスプロバイダー: 私たちはホスティング、データベースストレージ（D1）、およびCAPTCHA（Turnstile）にCloudflareを使用しています。これらのプロバイダーは私たちの代理で厳しい機密保持の下でデータを処理し、メモの内容にアクセスすることはありません。</li>
+                    <li>法的要求: 裁判所の命令や政府の要求など、法律で義務付けられた場合、情報を開示することがあります。</li>
+                    <li>事業譲渡: securememo.appが買収または合併された場合、データは取引の一部として転送される可能性がありますが、このプライバシー通知の対象であり続けます。</li>
+                </ul>
+            </div>
+
+            <div class="features-detail" id="data-security">
+                <h2>4. データセキュリティ</h2>
+                <ul>
+                    <li>暗号化: すべてのメモはクライアントサイドでAES-256とPBKDF2キー導出により暗号化されます。私たちは暗号化済みデータのみを保存し、復号することはできません。</li>
+                    <li>削除: メモは読み取りまたは有効期限切れ後、自動化されたcronジョブによって永久に削除されます。</li>
+                    <li>セキュリティ対策: 私たちは強力なセキュリティヘッダー（CSP、HSTSなど）、入力のサニタイゼーション、タイミング攻撃保護、および乱用防止のためのCAPTCHAを実装しています。</li>
+                    <li>復旧不可: 一度削除されたメモは、私たちでも復旧できません。</li>
+                </ul>
+                <p>私たちはシステムを保護するために合理的な手順を踏んでいますが、どのサービスもリスクに完全に免疫ではありません。あなたはURLとパスワードを安全に共有する責任があります。</p>
+            </div>
+
+            <div class="usage-section" id="data-retention">
+                <h2>5. データ保存</h2>
+                <ul>
+                    <li>暗号化メモは読み取りまたは有効期限切れまでのみ保存されます（最大30日まで）。</li>
+                    <li>セキュリティログ（IPアドレスなど）は乱用防止のために一時的に保存され、短期間（通常数日以内）後に自動的に削除されます。</li>
+                    <li>私たちはサービスの運営に必要な期間よりも長くデータを保存することはありません。</li>
+                </ul>
+            </div>
+
+            <div class="features-detail" id="your-rights">
+                <h2>6. あなたの権利と選択</h2>
+                <p>私たちは個人データを収集しないため:</p>
+                <ul>
+                    <li>管理するユーザーアカウントはありません。</li>
+                    <li>メモの自動自己破壊を超えて、データアクセス、修正、または削除を要求することはできません。</li>
+                </ul>
+                <p>私たちがあなたに関する情報（ログなど）を保持していると信じる場合は、私たちにお問い合わせ（以下を参照）いただき、GDPRやCCPAなどの適用法の下でのあなたの権利についてお尋ねください。私たちはデータ保護規則を遵守し、実行可能な範囲で要求を処理します。</p>
+            </div>
+
+            <div class="usage-section" id="children-privacy">
+                <h2>7. 児童のプライバシー</h2>
+                <p>私たちのサービスは13歳未満（一部の管轄区域では16歳未満）の児童を対象としていません。私たちは意図的に児童からデータを収集することはありません。そのようなデータを知った場合、私たちはそれを削除します。</p>
+            </div>
+
+            <div class="features-detail" id="international-transfers">
+                <h2>8. 国際データ転送</h2>
+                <p>securememo.appはCloudflareのグローバルネットワークでホストされています。データはさまざまな国で処理される可能性がありますが、私たちの最小限の収集実務を通じて同等のプライバシー保護を確保しています。</p>
+            </div>
+
+            <div class="usage-section" id="changes-notice">
+                <h2>9. このプライバシー通知の変更</h2>
+                <p>私たちはこの通知を定期的に更新することがあります。変更は「最終更新」日付とともにここに投稿されます。変更後のサービスの継続的な使用は受諾を構成します。</p>
+            </div>
+
+            <div class="features-detail" id="contact">
+                <h2>10. お問い合わせ</h2>
+                <p>このプライバシー通知や私たちの実務に関するご質問は、私たちの <a href="https://github.com/timoheimonen/securememo.app" target="_blank" rel="noopener noreferrer">GitHubリポジトリ</a> をご覧いただくか、contact@securememo.app までメールでお問い合わせください。</p>
+                <p>このプライバシー通知はsecurememo.appのみに適用され、私たちのサービスからリンクされた第三者のサイトには適用されません。</p>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p><a href="https://github.com/timoheimonen/securememo.app" target="_blank" rel="noopener noreferrer">GitHubでソースコードを見る</a> | <a href="/ja/tos.html">利用規約</a> | <a href="/ja/privacy.html">プライバシー通知</a> | <a href="mailto:contact@securememo.app">contact@securememo.app</a></p>
+        <p class="footer-tagline">追跡なし、広告なし、無駄なし。</p>
+    </footer>
+
+    <script src="/js/common.js" type="module" nonce="{{CSP_NONCE}}" defer></script>
+</body>
+</html>

@@ -4,6 +4,7 @@ export function getCreateMemoJS() {
   return `
 // Turnstile site key - injected by server
 const TURNSTILE_SITE_KEY = '{{TURNSTILE_SITE_KEY}}';
+const TURNSTILE_ENABLED = '{{TURNSTILE_ENABLED}}' !== 'false';
 let turnstileRendered = false;
 let turnstileWidgetId = null;
 let pendingSubmitEvent = null;
@@ -22,6 +23,10 @@ function highlightCurrentPage() {
 
 // Dynamic Turnstile rendering on-demand
 function renderTurnstileIfNeeded(callback) {
+    if (!TURNSTILE_ENABLED) {
+        callback();
+        return;
+    }
     if (typeof turnstile === 'undefined') {
         // Script may still be loading; poll briefly
         let attempts = 0;
@@ -76,6 +81,9 @@ function hideTurnstileOverlay() {
 
 // Get Turnstile response safely
 function getTurnstileResponse() {
+    if (!TURNSTILE_ENABLED) {
+        return 'turnstile-disabled';
+    }
     if (typeof turnstile !== 'undefined' && turnstile.getResponse && turnstileWidgetId !== null) {
         try {
             const response = turnstile.getResponse(turnstileWidgetId);
@@ -89,6 +97,9 @@ function getTurnstileResponse() {
 
 // Reset Turnstile safely
 function resetTurnstile() {
+    if (!TURNSTILE_ENABLED) {
+        return;
+    }
     if (typeof turnstile !== 'undefined' && turnstile.reset) {
         turnstile.reset();
     }
@@ -456,6 +467,7 @@ export function getReadMemoJS() {
   return `
 // Turnstile site key - injected by server
 const TURNSTILE_SITE_KEY = '{{TURNSTILE_SITE_KEY}}';
+const TURNSTILE_ENABLED = '{{TURNSTILE_ENABLED}}' !== 'false';
 let turnstileRendered = false;
 let turnstileWidgetId = null; // Added to prevent implicit global usage
 
@@ -505,6 +517,10 @@ function highlightCurrentPage() {
 
 // Dynamic Turnstile rendering on-demand
 function renderTurnstileIfNeeded(callback) {
+    if (!TURNSTILE_ENABLED) {
+        callback();
+        return;
+    }
     if (typeof turnstile === 'undefined') {
         let attempts = 0;
         const iv = setInterval(() => {
@@ -550,6 +566,9 @@ function hideTurnstileOverlay() {
 
 // Get Turnstile response safely
 function getTurnstileResponse() {
+    if (!TURNSTILE_ENABLED) {
+        return 'turnstile-disabled';
+    }
     if (typeof turnstile !== 'undefined' && turnstile.getResponse && turnstileWidgetId !== null) {
         try {
             return turnstile.getResponse(turnstileWidgetId);
@@ -562,6 +581,9 @@ function getTurnstileResponse() {
 
 // Reset Turnstile safely
 function resetTurnstile() {
+    if (!TURNSTILE_ENABLED) {
+        return;
+    }
     if (typeof turnstile !== 'undefined' && turnstile.reset) {
         turnstile.reset();
     }

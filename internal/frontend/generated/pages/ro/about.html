@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Despre securememo.app - Note criptate axate pe confidențialitate | securememo.app</title>
+    <meta name="description" content="Află despre abordarea securememo.app, orientată pe confidențialitate, pentru mesagerie criptată. Construită cu criptare AES-256 pe partea clientului, mesaje cu autodistrugere și arhitectură zero-knowledge.">
+    <meta name="keywords" content="despre memo securizat, mesagerie axată pe confidențialitate, criptare pe partea clientului, AES-256, mesaje cu autodistrugere, zero-knowledge, partajare sigură de note">
+    <!-- Open Graph for social sharing -->
+    <meta property="og:title" content="Despre securememo.app - Note criptate axate pe confidențialitate">
+    <meta property="og:description" content="Descoperă cum securememo.app îți protejează confidențialitatea cu criptare pe partea clientului și mesaje cu autodistrugere.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://securememo.app/ro/about.html">
+    <meta property="og:image" content="https://securememo.app/android-chrome-512x512.png">
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Despre securememo.app - Note criptate axate pe confidențialitate">
+    <meta name="twitter:description" content="Mesagerie criptată axată pe confidențialitate, cu criptare pe partea clientului.">
+    <!-- Structured Data -->
+    <script type="application/ld+json" nonce="{{CSP_NONCE}}">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Cum îmi protejează securememo.app confidențialitatea?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "securememo.app folosește criptare AES-256 pe partea clientului, ceea ce înseamnă că memoul tău este criptat în browser înainte de a fi trimis către serverele noastre. Nu vedem niciodată conținutul în clar. Memo-urile se autodistrug după ce sunt citite sau când expiră, iar noi nu solicităm conturi de utilizator și nu colectăm informații personale."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Ce criptare folosește securememo.app?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Folosim criptare AES-256-GCM cu derivarea cheii PBKDF2. Toată criptarea are loc pe partea clientului, în browserul tău, folosind Web Crypto API. Parola de criptare este generată separat și nu este niciodată stocată pe serverele noastre."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Cât timp rămân memo-urile?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Memo-urile pot fi setate să expire după 8 ore, 1 zi, 2 zile, 1 săptămână sau maximum 30 de zile. Sunt, de asemenea, șterse imediat după citire. Memo-urile expirate sunt curățate automat în fiecare oră."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Pot recupera un memo șters?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Nu, odată ce un memo este șters (fie după citire, fie la expirare), nu mai poate fi recuperat. Acest lucru este intenționat pentru confidențialitate și securitate maxime."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Este securememo.app gratuit de utilizat?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Da, securememo.app este complet gratuit de utilizat. Nu există taxe ascunse, funcții premium, urmărire sau publicitate."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Ce tehnologie folosește securememo.app?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "securememo.app este construit pe Cloudflare Workers pentru calcul serverless, baza de date D1 pentru stocare, Web Crypto API pentru criptare pe partea clientului și HTML/CSS/JavaScript moderne. Codul sursă este open-source și disponibil pe GitHub."
+          }
+        }
+      ]
+    }
+    </script>
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="/android-chrome-512x512.png">
+    <link rel="canonical" href="{{PUBLIC_ORIGIN}}/ro/about.html">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="/ro" class="nav-logo">securememo.app</a>
+            
+            <!-- Hamburger Menu Button -->
+            <button class="hamburger" type="button" aria-label="Comută meniul de navigare" aria-expanded="false">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+            
+            <!-- Navigation Menu -->
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="/ro" class="nav-link">Acasă</a></li>
+                <li><a href="/ro/about.html" class="nav-link active">Despre</a></li>
+                <li><a href="/ro/create-memo.html" class="nav-link">Creează memo securizat</a></li>
+                <li class="language-dropdown">
+                    <button class="language-toggle nav-link" aria-expanded="false" aria-haspopup="true">
+                        🇷🇴 Română
+                    </button>
+                    <div class="language-menu">
+                        <a href="/ar/about.html" class="language-item " title="العربية">🌐 العربية</a>
+                        <a href="/bn/about.html" class="language-item " title="বাংলা">🇧🇩 বাংলা</a>
+                        <a href="/cs/about.html" class="language-item " title="Čeština">🇨🇿 Čeština</a>
+                        <a href="/da/about.html" class="language-item " title="Dansk">🇩🇰 Dansk</a>
+                        <a href="/de/about.html" class="language-item " title="Deutsch">🇩🇪 Deutsch</a>
+                        <a href="/el/about.html" class="language-item " title="Ελληνικά">🇬🇷 Ελληνικά</a>
+                        <a href="/en/about.html" class="language-item " title="English">🇬🇧 English</a>
+                        <a href="/es/about.html" class="language-item " title="Español">🇪🇸 Español</a>
+                        <a href="/fi/about.html" class="language-item " title="Suomi">🇫🇮 Suomi</a>
+                        <a href="/fr/about.html" class="language-item " title="Français">🇫🇷 Français</a>
+                        <a href="/hi/about.html" class="language-item " title="हिन्दी">🇮🇳 हिन्दी</a>
+                        <a href="/hu/about.html" class="language-item " title="Magyar">🇭🇺 Magyar</a>
+                        <a href="/id/about.html" class="language-item " title="Bahasa Indonesia">🇮🇩 Bahasa Indonesia</a>
+                        <a href="/it/about.html" class="language-item " title="Italiano">🇮🇹 Italiano</a>
+                        <a href="/ja/about.html" class="language-item " title="日本語">🇯🇵 日本語</a>
+                        <a href="/ko/about.html" class="language-item " title="한국어">🇰🇷 한국어</a>
+                        <a href="/nl/about.html" class="language-item " title="Nederlands">🇳🇱 Nederlands</a>
+                        <a href="/no/about.html" class="language-item " title="Norsk">🇳🇴 Norsk</a>
+                        <a href="/pl/about.html" class="language-item " title="Polski">🇵🇱 Polski</a>
+                        <a href="/ptPT/about.html" class="language-item " title="Português (Portugal)">🇵🇹 Português</a>
+                        <a href="/ptBR/about.html" class="language-item " title="Português (Brasil)">🇧🇷 Português (Brasil)</a>
+                        <a href="/ru/about.html" class="language-item " title="Русский">🇷🇺 Русский</a>
+                        <a href="/ro/about.html" class="language-item active" title="Română">🇷🇴 Română</a>
+                        <a href="/sv/about.html" class="language-item " title="Svenska">🇸🇪 Svenska</a>
+                        <a href="/tl/about.html" class="language-item " title="Tagalog">🇵🇭 Tagalog</a>
+                        <a href="/th/about.html" class="language-item " title="ไทย">🇹🇭 ไทย</a>
+                        <a href="/tr/about.html" class="language-item " title="Türkçe">🇹🇷 Türkçe</a>
+                        <a href="/uk/about.html" class="language-item " title="Українська">🇺🇦 Українська</a>
+                        <a href="/vi/about.html" class="language-item " title="Tiếng Việt">🇻🇳 Tiếng Việt</a>
+                        <a href="/zh/about.html" class="language-item " title="中文">🈶 中文</a>
+                    </div>
+                </li>
+            </ul>
+            
+            <!-- Mobile Menu Overlay -->
+            <div class="nav-overlay"></div>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <div class="about-section">
+            <h1>Despre securememo.app</h1>
+            <p>securememo.app este o aplicație axată pe confidențialitate care îți permite să creezi memo-uri criptate ce se autodistrug după ce sunt citite sau când expiră. Construită cu securitatea și confidențialitatea ca priorități principale. Codul sursă este disponibil pe GitHub.</p>
+            
+            <div class="tech-stack">
+                <h2>Stack tehnologic</h2>
+                <ul>
+                    <li><strong>Cloudflare Workers:</strong> Cloudflare Workers: Platformă de calcul serverless pentru performanță globală</li>
+                    <li><strong>D1 Database:</strong> Baza de date D1: bază de date bazată pe SQLite pentru stocare sigură</li>
+                    <li><strong>Web Crypto API:</strong> Web Crypto API: Criptare AES-256 pe partea clientului</li>
+                    <li><strong>HTML/CSS/JavaScript:</strong> HTML/CSS/JavaScript: Interfață web modernă și responsivă</li>
+                    <li><strong>Codul sursă disponibil pe GitHub:</strong> <a href="https://github.com/timoheimonen/securememo.app" target="_blank" rel="noopener noreferrer">Vezi codul sursă pe GitHub</a></li>
+                </ul>
+            </div>
+
+            <div class="features-detail">
+                <h2>Funcții de securitate</h2>
+                <div class="feature-list">
+                    <div class="feature-item">
+                        <h3>🔐 Criptare pe partea clientului</h3>
+                        <p>Toată criptarea are loc în browserul tău folosind Web Crypto API. Memo-ul tău este criptat cu AES-256 înainte de a fi trimis către serverele noastre.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>🔑 Partajarea parolei separat</h3>
+                        <p>Parola de criptare este generată separat de URL și ar trebui partajată printr-un canal diferit pentru securitate sporită.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>💥 Memo-uri cu autodistrugere</h3>
+                        <p>Odată ce un memo este citit sau expirat, este șters imediat și definitiv din baza noastră de date. Nu rămân urme.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>🌐 Fără stocarea parolelor</h3>
+                        <p>Nu stocăm niciodată parolele de criptare pe serverele noastre. Ele există doar în memoria browserului tău.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>⚡ Performanță globală</h3>
+                        <p>Construit pe rețeaua globală Cloudflare pentru acces extrem de rapid din orice colț al lumii.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>🔒 Confidențialitate pe primul loc</h3>
+                        <p>Nu sunt necesare conturi de utilizator. Fără urmărire. Fără analitice. Confidențialitatea ta este prioritatea noastră.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="usage-section">
+                <h2>Cum se utilizează</h2>
+                <div class="feature-list">
+                    <div class="feature-item">
+                        <h3>1. Creează un memo</h3>
+                        <p>Mergi la „Creează memo securizat” și tastează memoul. Alege un timp de expirare (8h, 1 zi, 2 zile, 1 săptămână sau maximum 30 de zile). Memo-urile sunt șterse la citire sau la expirare. Sistemul va genera o parolă de criptare aleatoare.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>2. Partajează linkul și parola</h3>
+                        <p>Copiază URL-ul și parola generate, apoi partajează-le destinatarului prin canale separate pentru securitate sporită.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>3. Autodistrugere</h3>
+                        <p>Când destinatarul deschide linkul și introduce parola separat, memoul va fi decriptat și apoi șters definitiv dacă este citit, sau șters automat dacă expiră. Memo-urile expirate sunt curățate automat la fiecare oră.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="video-embed">
+                <div class="video-aspect-ratio">
+            <iframe src="https://www.youtube-nocookie.com/embed/V0vEHLLdDKk"
+                title="How to use securememo.app"
+                            frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            allowfullscreen
+                            loading="lazy"
+                            class="video-iframe">
+                    </iframe>
+                </div>
+                <p class="video-caption">
+                    <a href="https://www.youtube-nocookie.com/watch?v=V0vEHLLdDKk" target="_blank" rel="noopener noreferrer">Watch on YouTube</a>
+                </p>
+                <noscript>
+                    <p class="text-center"><a href="https://www.youtube-nocookie.com/watch?v=V0vEHLLdDKk" target="_blank" rel="noopener noreferrer">Watch the video (JavaScript disabled)</a></p>
+                </noscript>
+            </div>
+            <div class="cta-section">
+                <h2>Gata să începi?</h2>
+                <p>Creează acum primul tău memo securizat și experimentează criptarea end-to-end reală.</p>
+                <div class="cta-buttons">
+                    <a href="/ro/create-memo.html" class="btn btn-primary">Creează memo securizat</a>
+                    <a href="/ro" class="btn btn-secondary">Mergi la pagina principală</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p><a href="https://github.com/timoheimonen/securememo.app" target="_blank" rel="noopener noreferrer">Vezi codul sursă pe GitHub</a> | <a href="/ro/tos.html">Termeni de utilizare</a> | <a href="/ro/privacy.html">Notificare de confidențialitate</a> | <a href="mailto:contact@securememo.app">contact@securememo.app</a></p>
+        <p class="footer-tagline">Fără urmărire, fără reclame, fără complicații.</p>
+    </footer>
+
+    <script src="/js/common.js" type="module" nonce="{{CSP_NONCE}}" defer></script>
+</body>
+</html>

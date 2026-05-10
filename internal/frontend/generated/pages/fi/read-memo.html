@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lue Suojattu Muistio - Pura Salattu Muistio | securememo.app</title>
+    <meta name="description" content="Syötä salasana purkaaksesi ja lukeaksesi muistion. Salasana on jaettu sinulle erikseen URL-osoitteesta. Muistio poistetaan lukemisen tai vanhentumisen jälkeen.">
+    <meta name="keywords" content="lue suojattu muistio, pura muistio, salatun muistiinpanon lukeminen, AES-256-purku, yksityinen muistion käyttö">
+    <!-- Open Graph for social sharing -->
+    <meta property="og:title" content="Lue Suojattu Muistio - Pura Salattu Muistio">
+    <meta property="og:description" content="Pura ja lue suojattu muistiosi. Muistiot tuhoutuvat lukemisen jälkeen yksityisyyden takaamiseksi.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://securememo.app/fi/read-memo.html">
+    <meta property="og:image" content="https://securememo.app/android-chrome-512x512.png">
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Lue Suojattu Muistio - Pura Salattu Muistio">
+    <meta name="twitter:description" content="Pura ja lue suojattu muistiosi selaimessa tapahtuvalla purulla.">
+    <!-- Structured Data -->
+    <script type="application/ld+json" nonce="{{CSP_NONCE}}">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": "Lue Suojattu Muistio",
+      "description": "Pura ja lue suojattu muistiosi salasanalla. Muistiot tuhoutuvat lukemisen jälkeen yksityisyyden takaamiseksi. Selaimessa tapahtuva AES-256-purku.",
+      "url": "https://securememo.app/fi/read-memo.html",
+      "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Etusivu",
+            "item": "https://securememo.app/fi/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Lue Suojattu Muistio",
+            "item": "https://securememo.app/fi/read-memo.html"
+          }
+        ]
+      },
+      "mainEntity": {
+        "@type": "SoftwareApplication",
+        "name": "Lue Suojattu Muistio",
+        "applicationCategory": "SecurityApplication",
+        "operatingSystem": "Web Browser",
+        "description": "Pura ja lue suojattu muistiosi salasanalla. Muistiot tuhoutuvat lukemisen jälkeen yksityisyyden takaamiseksi. Selaimessa tapahtuva AES-256-purku.",
+        "featureList": [
+          "Purku selaimessa",
+          "Salasanalla suojattu pääsy",
+          "Automaattinen muistion poisto",
+          "Ei tietojen säilytystä",
+          "Yksityisyyteen keskittyvä suunnittelu"
+        ]
+      }
+    }
+    </script>
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="/android-chrome-512x512.png">
+    <link rel="canonical" href="{{PUBLIC_ORIGIN}}/fi/read-memo.html">
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" nonce="{{CSP_NONCE}}" crossorigin="anonymous" async defer></script>
+    <script src="/js/read-memo.js?locale=fi" nonce="{{CSP_NONCE}}" defer></script>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="/fi" class="nav-logo">securememo.app</a>
+            
+            <!-- Hamburger Menu Button -->
+            <button class="hamburger" type="button" aria-label="Avaa/sulje valikko" aria-expanded="false">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+            
+            <!-- Navigation Menu -->
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="/fi" class="nav-link">Etusivu</a></li>
+                <li><a href="/fi/about.html" class="nav-link">Tietoa</a></li>
+                <li><a href="/fi/create-memo.html" class="nav-link">Luo Suojattu Muistio</a></li>
+                <li class="language-dropdown">
+                    <button class="language-toggle nav-link" aria-expanded="false" aria-haspopup="true">
+                        🇫🇮 Suomi
+                    </button>
+                    <div class="language-menu">
+                        <a href="/ar/read-memo.html" class="language-item " title="العربية">🌐 العربية</a>
+                        <a href="/bn/read-memo.html" class="language-item " title="বাংলা">🇧🇩 বাংলা</a>
+                        <a href="/cs/read-memo.html" class="language-item " title="Čeština">🇨🇿 Čeština</a>
+                        <a href="/da/read-memo.html" class="language-item " title="Dansk">🇩🇰 Dansk</a>
+                        <a href="/de/read-memo.html" class="language-item " title="Deutsch">🇩🇪 Deutsch</a>
+                        <a href="/el/read-memo.html" class="language-item " title="Ελληνικά">🇬🇷 Ελληνικά</a>
+                        <a href="/en/read-memo.html" class="language-item " title="English">🇬🇧 English</a>
+                        <a href="/es/read-memo.html" class="language-item " title="Español">🇪🇸 Español</a>
+                        <a href="/fi/read-memo.html" class="language-item active" title="Suomi">🇫🇮 Suomi</a>
+                        <a href="/fr/read-memo.html" class="language-item " title="Français">🇫🇷 Français</a>
+                        <a href="/hi/read-memo.html" class="language-item " title="हिन्दी">🇮🇳 हिन्दी</a>
+                        <a href="/hu/read-memo.html" class="language-item " title="Magyar">🇭🇺 Magyar</a>
+                        <a href="/id/read-memo.html" class="language-item " title="Bahasa Indonesia">🇮🇩 Bahasa Indonesia</a>
+                        <a href="/it/read-memo.html" class="language-item " title="Italiano">🇮🇹 Italiano</a>
+                        <a href="/ja/read-memo.html" class="language-item " title="日本語">🇯🇵 日本語</a>
+                        <a href="/ko/read-memo.html" class="language-item " title="한국어">🇰🇷 한국어</a>
+                        <a href="/nl/read-memo.html" class="language-item " title="Nederlands">🇳🇱 Nederlands</a>
+                        <a href="/no/read-memo.html" class="language-item " title="Norsk">🇳🇴 Norsk</a>
+                        <a href="/pl/read-memo.html" class="language-item " title="Polski">🇵🇱 Polski</a>
+                        <a href="/ptPT/read-memo.html" class="language-item " title="Português (Portugal)">🇵🇹 Português</a>
+                        <a href="/ptBR/read-memo.html" class="language-item " title="Português (Brasil)">🇧🇷 Português (Brasil)</a>
+                        <a href="/ru/read-memo.html" class="language-item " title="Русский">🇷🇺 Русский</a>
+                        <a href="/ro/read-memo.html" class="language-item " title="Română">🇷🇴 Română</a>
+                        <a href="/sv/read-memo.html" class="language-item " title="Svenska">🇸🇪 Svenska</a>
+                        <a href="/tl/read-memo.html" class="language-item " title="Tagalog">🇵🇭 Tagalog</a>
+                        <a href="/th/read-memo.html" class="language-item " title="ไทย">🇹🇭 ไทย</a>
+                        <a href="/tr/read-memo.html" class="language-item " title="Türkçe">🇹🇷 Türkçe</a>
+                        <a href="/uk/read-memo.html" class="language-item " title="Українська">🇺🇦 Українська</a>
+                        <a href="/vi/read-memo.html" class="language-item " title="Tiếng Việt">🇻🇳 Tiếng Việt</a>
+                        <a href="/zh/read-memo.html" class="language-item " title="中文">🈶 中文</a>
+                    </div>
+                </li>
+            </ul>
+            
+            <!-- Mobile Menu Overlay -->
+            <div class="nav-overlay"></div>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <div class="memo-container">
+            <div class="memo-card">
+                <h1>Lue Suojattu Muistio</h1>
+                <p class="memo-description">Syötä salasana purkaaksesi ja lukeaksesi muistion. Salasana on jaettu sinulle erikseen URL-osoitteesta. Muistio poistetaan lukemisen tai vanhentumisen jälkeen.</p>
+                <div id="turnstileOverlay" class="turnstile-overlay hidden">
+                    <div class="turnstile-overlay-backdrop"></div>
+                    <div class="turnstile-overlay-content" role="dialog" aria-modal="true" aria-label="Security Challenge">
+                        <button type="button" id="closeTurnstileOverlay" class="overlay-close-btn" aria-label="Close">×</button>
+                        <div id="dynamicTurnstileContainer"></div>
+                    </div>
+                </div>
+                
+                <div id="passwordForm" class="memo-form">
+                    <form id="decryptForm">
+                        <div class="form-group">
+                            <label for="password">Salaussalasana</label>
+                            <div class="password-input-container">
+                                <input type="password" id="password" name="password" required 
+                                       placeholder="Syötä sinulle jaettu salaussalasana">
+                                <button type="button" id="toggleReadPassword" class="btn btn-primary">Näytä</button>
+                            </div>
+                            <small class="form-help">Salasana on jaettu sinulle erikseen muistion URL-osoitteesta</small>
+                        </div>
+                        <button type="submit" class="btn btn-primary" id="decryptButton">Pura Muistio</button>
+                        
+                        <!-- Decrypt loading indicator (hidden by default) -->
+                        <div id="decryptLoadingIndicator" class="loading-spinner hidden">
+                            <div class="spinner"></div>
+                            <p>Purkamassa muistiosi... Tämä voi kestää hetken vanhemmilla laitteilla.</p>
+                        </div>
+                    </form>
+                </div>
+                
+                <div id="memoContent" class="memo-content hidden">
+                    <h3>📝 Suojattu Muistiosi</h3>
+                    <div class="memo-message">
+                        <p id="decryptedMessage"></p>
+                    </div>
+                    <div class="memo-info">
+                        <p><strong>Tila:</strong> <span id="memoStatus">Muistio purettu. Poistetaan... Odota hetki.</span></p>
+                        <div id="deletionSpinner" class="loading-spinner hidden">
+                            <div class="spinner"></div>
+                            <p>Poistetaan muistio turvallisesti...</p>
+                        </div>
+                    </div>
+                    <div class="memo-actions">
+                        <a href="/fi/create-memo.html" class="btn btn-primary">Luo Uusi Muistio</a>
+                        <a href="/fi" class="btn btn-primary">Etusivulle</a>
+                    </div>
+                </div>
+                
+                <div id="errorContent" class="error-content hidden">
+                    <h3>❌ Virhe</h3>
+                    <p id="errorMessage"></p>
+                    <div class="memo-actions">
+                        <a href="/fi/create-memo.html" class="btn btn-primary">Luo Uusi Muistio</a>
+                        <a href="/fi" class="btn btn-primary">Etusivulle</a>
+                    </div>
+                </div>
+                
+                <div id="statusMessage" class="message"></div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p><a href="https://github.com/timoheimonen/securememo.app" target="_blank" rel="noopener noreferrer">Katso lähdekoodi GitHubissa</a> | <a href="/fi/tos.html">Käyttöehdot</a> | <a href="/fi/privacy.html">Tietosuojailmoitus</a> | <a href="mailto:contact@securememo.app">contact@securememo.app</a></p>
+        <p class="footer-tagline">Ei seurantaa, ei mainoksia, ei turhaa.</p>
+    </footer>
+
+    <script src="/js/common.js" type="module" nonce="{{CSP_NONCE}}" defer></script>
+</body>
+</html>

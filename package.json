@@ -3,6 +3,7 @@
   "version": "1.1.0",
   "description": "Cloudflare Workers with D1 database project",
   "main": "src/index.js",
+  "type": "module",
   "scripts": {
     "dev": "wrangler dev",
     "deploy": "wrangler deploy",
@@ -14,7 +15,10 @@
     "lint": "eslint src/",
     "lint:fix": "eslint src/ --fix",
     "format": "prettier --write .",
-    "format:check": "prettier --check ."
+    "format:check": "prettier --check .",
+    "go:assets": "node --no-warnings scripts/generate-go-assets.mjs",
+    "go:test": "GOCACHE=$(pwd)/.gocache GOPATH=$(pwd)/.gopath go test ./...",
+    "go:run": "npm run go:assets && GOCACHE=$(pwd)/.gocache GOPATH=$(pwd)/.gopath go run ./cmd/securememo"
   },
   "devDependencies": {
     "wrangler": "^4.28.0",

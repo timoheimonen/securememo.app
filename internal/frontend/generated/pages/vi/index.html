@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>securememo.app - Ghi chú mã hóa tự hủy | securememo.app</title>
+    <meta name="description" content="Tạo ghi chú mã hóa tự hủy sau khi đọc. Mã hóa đầu cuối, tập trung vào quyền riêng tư, chia sẻ ghi chú bảo mật với AES-256. Không theo dõi, không quảng cáo.">
+    <meta name="keywords" content="ghi chú bảo mật, ghi chú mã hóa, ghi chú tự hủy, chia sẻ ghi chú riêng tư, mã hóa đầu cuối, AES-256, quyền riêng tư, chia sẻ ghi chú bảo mật">
+    <!-- Open Graph for social sharing -->
+    <meta property="og:title" content="securememo.app - Ghi chú mã hóa tự hủy">
+    <meta property="og:description" content="Chia sẻ thông tin nhạy cảm một cách bảo mật với ghi chú tự xóa sau một lần xem hoặc hết hạn. Sử dụng mã hóa AES-256 phía khách hàng.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://securememo.app/">
+    <meta property="og:image" content="https://securememo.app/android-chrome-512x512.png">
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="securememo.app - Ghi chú mã hóa tự hủy">
+    <meta name="twitter:description" content="Ứng dụng ưu tiên quyền riêng tư cho ghi chú bảo mật tự hủy.">
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="/android-chrome-512x512.png">
+    <link rel="canonical" href="{{PUBLIC_ORIGIN}}/vi">
+    <!-- Structured Data -->
+    <script type="application/ld+json" nonce="{{CSP_NONCE}}">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "securememo.app",
+      "description": "Tạo ghi chú được mã hóa tự hủy sau khi đọc. Mã hóa đầu cuối, tập trung vào quyền riêng tư, chia sẻ ghi chú bảo mật với AES-256. Không theo dõi, không quảng cáo.",
+      "url": "https://securememo.app/",
+      "applicationCategory": "Ứng dụng bảo mật",
+      "operatingSystem": "Trình duyệt web",
+      "browserRequirements": "Yêu cầu JavaScript. Yêu cầu HTML5.",
+      "author": {
+        "@type": "Person",
+        "name": "Timo Heimonen",
+        "url": "https://github.com/timoheimonen"
+      },
+      "creator": {
+        "@type": "Person",
+        "name": "Timo Heimonen",
+        "url": "https://github.com/timoheimonen"
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "featureList": [
+        "Mã hóa AES-256 phía khách hàng",
+        "Ghi chú tự hủy",
+        "Kiến trúc không lưu trữ thông tin",
+        "Không yêu cầu tài khoản người dùng",
+        "Hiệu năng toàn cầu qua Cloudflare",
+        "Thiết kế ưu tiên quyền riêng tư"
+      ],
+      "screenshot": "https://securememo.app/android-chrome-512x512.png",
+      "softwareVersion": "1.0.3",
+      "datePublished": "2025-07-01",
+      "dateModified": "2025-08-17",
+      "license": "https://github.com/timoheimonen/securememo.app/blob/main/LICENSE",
+      "codeRepository": "https://github.com/timoheimonen/securememo.app"
+    }
+    </script>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="/vi" class="nav-logo">securememo.app</a>
+            
+            <!-- Hamburger Menu Button -->
+            <button class="hamburger" type="button" aria-label="Chuyển đổi menu điều hướng" aria-expanded="false">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+            
+            <!-- Navigation Menu -->
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="/vi" class="nav-link active">Trang chủ</a></li>
+                <li><a href="/vi/about.html" class="nav-link">Giới thiệu</a></li>
+                <li><a href="/vi/create-memo.html" class="nav-link">Tạo ghi chú bảo mật</a></li>
+                <li class="language-dropdown">
+                    <button class="language-toggle nav-link" aria-expanded="false" aria-haspopup="true">
+                        🇻🇳 Tiếng Việt
+                    </button>
+                    <div class="language-menu">
+                        <a href="/ar" class="language-item " title="العربية">🌐 العربية</a>
+                        <a href="/bn" class="language-item " title="বাংলা">🇧🇩 বাংলা</a>
+                        <a href="/cs" class="language-item " title="Čeština">🇨🇿 Čeština</a>
+                        <a href="/da" class="language-item " title="Dansk">🇩🇰 Dansk</a>
+                        <a href="/de" class="language-item " title="Deutsch">🇩🇪 Deutsch</a>
+                        <a href="/el" class="language-item " title="Ελληνικά">🇬🇷 Ελληνικά</a>
+                        <a href="/en" class="language-item " title="English">🇬🇧 English</a>
+                        <a href="/es" class="language-item " title="Español">🇪🇸 Español</a>
+                        <a href="/fi" class="language-item " title="Suomi">🇫🇮 Suomi</a>
+                        <a href="/fr" class="language-item " title="Français">🇫🇷 Français</a>
+                        <a href="/hi" class="language-item " title="हिन्दी">🇮🇳 हिन्दी</a>
+                        <a href="/hu" class="language-item " title="Magyar">🇭🇺 Magyar</a>
+                        <a href="/id" class="language-item " title="Bahasa Indonesia">🇮🇩 Bahasa Indonesia</a>
+                        <a href="/it" class="language-item " title="Italiano">🇮🇹 Italiano</a>
+                        <a href="/ja" class="language-item " title="日本語">🇯🇵 日本語</a>
+                        <a href="/ko" class="language-item " title="한국어">🇰🇷 한국어</a>
+                        <a href="/nl" class="language-item " title="Nederlands">🇳🇱 Nederlands</a>
+                        <a href="/no" class="language-item " title="Norsk">🇳🇴 Norsk</a>
+                        <a href="/pl" class="language-item " title="Polski">🇵🇱 Polski</a>
+                        <a href="/ptPT" class="language-item " title="Português (Portugal)">🇵🇹 Português</a>
+                        <a href="/ptBR" class="language-item " title="Português (Brasil)">🇧🇷 Português (Brasil)</a>
+                        <a href="/ru" class="language-item " title="Русский">🇷🇺 Русский</a>
+                        <a href="/ro" class="language-item " title="Română">🇷🇴 Română</a>
+                        <a href="/sv" class="language-item " title="Svenska">🇸🇪 Svenska</a>
+                        <a href="/tl" class="language-item " title="Tagalog">🇵🇭 Tagalog</a>
+                        <a href="/th" class="language-item " title="ไทย">🇹🇭 ไทย</a>
+                        <a href="/tr" class="language-item " title="Türkçe">🇹🇷 Türkçe</a>
+                        <a href="/uk" class="language-item " title="Українська">🇺🇦 Українська</a>
+                        <a href="/vi" class="language-item active" title="Tiếng Việt">🇻🇳 Tiếng Việt</a>
+                        <a href="/zh" class="language-item " title="中文">🈶 中文</a>
+                    </div>
+                </li>
+            </ul>
+            
+            <!-- Mobile Menu Overlay -->
+            <div class="nav-overlay"></div>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <div class="hero-section">
+            <h1>securememo.app</h1>
+            <p>Tạo ghi chú được mã hóa tự hủy sau khi đọc hoặc hết hạn. Bí mật của bạn luôn được bảo vệ.</p>
+            <div class="cta-buttons">
+                <a href="/vi/create-memo.html" class="btn btn-primary">Tạo ghi chú bảo mật</a>
+                <a href="/vi/about.html" class="btn btn-secondary">Tìm hiểu thêm</a>
+            </div>
+        </div>
+
+        <div class="features-section">
+            <h2>Cách hoạt động</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <h3>🔐 Nhập ghi chú của bạn</h3>
+                    <p>Bạn hoàn toàn kiểm soát. Nội dung của bạn được mã hóa ngay trên thiết bị, và phiên bản chưa mã hóa sẽ không bao giờ rời khỏi trình duyệt của bạn.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>🔗 Chia sẻ an toàn</h3>
+                    <p>Nhận một URL duy nhất và một mật khẩu mạnh riêng biệt, và chia sẻ chúng qua các kênh khác nhau để tăng cường bảo mật.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>💥 Tự hủy</h3>
+                    <p>Ghi chú sẽ được tự động xóa vĩnh viễn sau khi được đọc hoặc khi hết thời hạn (từ 8 giờ đến 30 ngày).</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="security-section">
+            <h2>Tính năng bảo mật</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <h3>🔒 Mã hóa phía khách hàng thực sự</h3>
+                    <p>Ghi chú của bạn được mã hóa trong trình duyệt với AES-256-GCM và quy trình tạo khóa mạnh. Chúng tôi không bao giờ thấy nội dung thuần của bạn.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>🗑️ Tự động xóa đáng tin cậy</h3>
+                    <p>Ghi chú sẽ biến mất vĩnh viễn sau khi đọc hoặc hết hạn, với dọn dẹp tự động mỗi giờ. Không có sao lưu hoặc khôi phục.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>🌐 Không lưu mật khẩu</h3>
+                    <p>Mật khẩu được tạo và xử lý hoàn toàn trên trình duyệt của bạn. Không bao giờ gửi hoặc lưu trên máy chủ.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p><a href="https://github.com/timoheimonen/securememo.app" target="_blank" rel="noopener noreferrer">Xem mã nguồn trên GitHub</a> | <a href="/vi/tos.html">Điều khoản dịch vụ</a> | <a href="/vi/privacy.html">Thông báo quyền riêng tư</a> | <a href="mailto:contact@securememo.app">contact@securememo.app</a></p>
+        <p class="footer-tagline">Không theo dõi, không quảng cáo, không phiền phức.</p>
+    </footer>
+
+    <script src="/js/common.js" type="module" nonce="{{CSP_NONCE}}" defer></script>
+</body>
+</html>

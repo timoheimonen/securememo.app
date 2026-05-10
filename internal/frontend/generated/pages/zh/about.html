@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>关于 securememo.app - 隐私优先的加密笔记 | securememo.app</title>
+    <meta name="description" content="了解 securememo.app 隐私优先的加密消息方法。基于客户端 AES-256 加密、自毁消息和零知识架构构建。">
+    <meta name="keywords" content="关于安全备忘录, 隐私优先消息, 客户端加密, AES-256, 自毁消息, 零知识, 安全笔记分享">
+    <!-- Open Graph for social sharing -->
+    <meta property="og:title" content="关于 securememo.app - 隐私优先的加密笔记">
+    <meta property="og:description" content="发现 securememo.app 如何通过客户端加密和自毁消息保护您的隐私。">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://securememo.app/zh/about.html">
+    <meta property="og:image" content="https://securememo.app/android-chrome-512x512.png">
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="关于 securememo.app - 隐私优先的加密笔记">
+    <meta name="twitter:description" content="隐私优先的客户端加密消息。">
+    <!-- Structured Data -->
+    <script type="application/ld+json" nonce="{{CSP_NONCE}}">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "securememo.app 如何保护我的隐私？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "securememo.app 使用客户端 AES-256 加密，意味着您的备忘录在发送到我们的服务器之前就在您的浏览器中加密。我们从不会看到明文内容。备忘录在阅读或过期后自毁，我们不需要用户账户或收集个人信息。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "securememo.app 使用什么加密？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "我们使用 AES-256-GCM 加密与 PBKDF2 密钥派生。所有加密都在您的浏览器中通过 Web Crypto API 在客户端完成。加密密码单独生成，且从不存储在我们的服务器上。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "备忘录能持续多久？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "备忘录可以设置为在 8 小时、1 天、2 天、1 周或最多 30 天后过期。它们也会在阅读后立即删除。过期的备忘录每小时自动清理。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "我可以恢复已删除的备忘录吗？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "不可以，一旦备忘录被删除（无论是阅读后还是过期时），它都不能被恢复。这是为了最大的隐私和安全性而设计的。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "securememo.app 使用免费吗？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "是的，securememo.app 完全免费使用。没有隐藏费用，没有付费功能，也没有跟踪或广告。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "securememo.app 使用什么技术？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "securememo.app 基于 Cloudflare Workers 的无服务器计算、D1 数据库的存储、Web Crypto API 的客户端加密和现代 HTML/CSS/JavaScript 构建。源代码开源并在 GitHub 上可用。"
+          }
+        }
+      ]
+    }
+    </script>
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="/android-chrome-512x512.png">
+    <link rel="canonical" href="{{PUBLIC_ORIGIN}}/zh/about.html">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="/zh" class="nav-logo">securememo.app</a>
+            
+            <!-- Hamburger Menu Button -->
+            <button class="hamburger" type="button" aria-label="切换导航菜单" aria-expanded="false">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+            
+            <!-- Navigation Menu -->
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="/zh" class="nav-link">首页</a></li>
+                <li><a href="/zh/about.html" class="nav-link active">关于</a></li>
+                <li><a href="/zh/create-memo.html" class="nav-link">创建安全备忘录</a></li>
+                <li class="language-dropdown">
+                    <button class="language-toggle nav-link" aria-expanded="false" aria-haspopup="true">
+                        🈶 中文
+                    </button>
+                    <div class="language-menu">
+                        <a href="/ar/about.html" class="language-item " title="العربية">🌐 العربية</a>
+                        <a href="/bn/about.html" class="language-item " title="বাংলা">🇧🇩 বাংলা</a>
+                        <a href="/cs/about.html" class="language-item " title="Čeština">🇨🇿 Čeština</a>
+                        <a href="/da/about.html" class="language-item " title="Dansk">🇩🇰 Dansk</a>
+                        <a href="/de/about.html" class="language-item " title="Deutsch">🇩🇪 Deutsch</a>
+                        <a href="/el/about.html" class="language-item " title="Ελληνικά">🇬🇷 Ελληνικά</a>
+                        <a href="/en/about.html" class="language-item " title="English">🇬🇧 English</a>
+                        <a href="/es/about.html" class="language-item " title="Español">🇪🇸 Español</a>
+                        <a href="/fi/about.html" class="language-item " title="Suomi">🇫🇮 Suomi</a>
+                        <a href="/fr/about.html" class="language-item " title="Français">🇫🇷 Français</a>
+                        <a href="/hi/about.html" class="language-item " title="हिन्दी">🇮🇳 हिन्दी</a>
+                        <a href="/hu/about.html" class="language-item " title="Magyar">🇭🇺 Magyar</a>
+                        <a href="/id/about.html" class="language-item " title="Bahasa Indonesia">🇮🇩 Bahasa Indonesia</a>
+                        <a href="/it/about.html" class="language-item " title="Italiano">🇮🇹 Italiano</a>
+                        <a href="/ja/about.html" class="language-item " title="日本語">🇯🇵 日本語</a>
+                        <a href="/ko/about.html" class="language-item " title="한국어">🇰🇷 한국어</a>
+                        <a href="/nl/about.html" class="language-item " title="Nederlands">🇳🇱 Nederlands</a>
+                        <a href="/no/about.html" class="language-item " title="Norsk">🇳🇴 Norsk</a>
+                        <a href="/pl/about.html" class="language-item " title="Polski">🇵🇱 Polski</a>
+                        <a href="/ptPT/about.html" class="language-item " title="Português (Portugal)">🇵🇹 Português</a>
+                        <a href="/ptBR/about.html" class="language-item " title="Português (Brasil)">🇧🇷 Português (Brasil)</a>
+                        <a href="/ru/about.html" class="language-item " title="Русский">🇷🇺 Русский</a>
+                        <a href="/ro/about.html" class="language-item " title="Română">🇷🇴 Română</a>
+                        <a href="/sv/about.html" class="language-item " title="Svenska">🇸🇪 Svenska</a>
+                        <a href="/tl/about.html" class="language-item " title="Tagalog">🇵🇭 Tagalog</a>
+                        <a href="/th/about.html" class="language-item " title="ไทย">🇹🇭 ไทย</a>
+                        <a href="/tr/about.html" class="language-item " title="Türkçe">🇹🇷 Türkçe</a>
+                        <a href="/uk/about.html" class="language-item " title="Українська">🇺🇦 Українська</a>
+                        <a href="/vi/about.html" class="language-item " title="Tiếng Việt">🇻🇳 Tiếng Việt</a>
+                        <a href="/zh/about.html" class="language-item active" title="中文">🈶 中文</a>
+                    </div>
+                </li>
+            </ul>
+            
+            <!-- Mobile Menu Overlay -->
+            <div class="nav-overlay"></div>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <div class="about-section">
+            <h1>关于 securememo.app</h1>
+            <p>securememo.app 是一个以隐私为重点的应用程序，允许您创建在阅读或过期后自毁的加密备忘录。以安全和隐私为首要优先级构建。源代码在 GitHub 上可用。</p>
+            
+            <div class="tech-stack">
+                <h2>技术栈</h2>
+                <ul>
+                    <li><strong>Cloudflare Workers:</strong> Cloudflare Workers：用于全球性能的无服务器计算平台</li>
+                    <li><strong>D1 Database:</strong> D1 数据库：由 SQLite 提供支持的安全存储数据库</li>
+                    <li><strong>Web Crypto API:</strong> Web Crypto API：客户端 AES-256 加密</li>
+                    <li><strong>HTML/CSS/JavaScript:</strong> HTML/CSS/JavaScript：现代、响应式网络界面</li>
+                    <li><strong>源代码在 GitHub 上可用：</strong> <a href="https://github.com/timoheimonen/securememo.app" target="_blank" rel="noopener noreferrer">在 GitHub 上查看源代码</a></li>
+                </ul>
+            </div>
+
+            <div class="features-detail">
+                <h2>安全功能</h2>
+                <div class="feature-list">
+                    <div class="feature-item">
+                        <h3>🔐 客户端加密</h3>
+                        <p>所有加密都在您的浏览器中使用 Web Crypto API 进行。您的备忘录在发送到我们的服务器之前会使用 AES-256 进行加密。</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>🔑 单独密码分享</h3>
+                        <p>加密密码与 URL 分开生成，应通过不同的渠道分享以增强安全性。</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>💥 自毁备忘录</h3>
+                        <p>一旦备忘录被阅读或过期，它会立即从我们的数据库中永久删除。不会留下任何痕迹。</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>🌐 不存储密码</h3>
+                        <p>我们从不在服务器上存储加密密码。它们只存在于您浏览器的内存中。</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>⚡ 全球性能</h3>
+                        <p>基于 Cloudflare 的全球网络构建，从世界任何地方都能闪电般访问。</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>🔒 隐私优先</h3>
+                        <p>无需用户账户。无跟踪。无分析工具。您的隐私是我们的首要考虑。</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="usage-section">
+                <h2>如何使用</h2>
+                <div class="feature-list">
+                    <div class="feature-item">
+                        <h3>1. 创建备忘录</h3>
+                        <p>转到“创建安全备忘录”并输入您的备忘录。选择过期时间（8小时、1天、2天、1周或最多30天）。备忘录在阅读或过期时会被删除。系统将生成一个随机加密密码。</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>2. 分享链接和密码</h3>
+                        <p>复制生成的 URL 和密码，然后通过单独的渠道与您的收件人分享，以增强安全性。</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>3. 自毁</h3>
+                        <p>当收件人打开链接并单独输入密码时，备忘录将被解密，然后在阅读后永久删除，或在过期后自动删除。过期的备忘录每小时自动清理一次。</p>
+                    </div>
+                </div>
+            </div>
+            <div class="video-embed">
+                <div class="video-aspect-ratio">
+            <iframe src="https://www.youtube-nocookie.com/embed/V0vEHLLdDKk"
+                title="How to use securememo.app"
+                            frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            allowfullscreen
+                            loading="lazy"
+                            class="video-iframe">
+                    </iframe>
+                </div>
+                <p class="video-caption">
+                    <a href="https://www.youtube-nocookie.com/watch?v=V0vEHLLdDKk" target="_blank" rel="noopener noreferrer">Watch on YouTube</a>
+                </p>
+                <noscript>
+                    <p class="text-center"><a href="https://www.youtube-nocookie.com/watch?v=V0vEHLLdDKk" target="_blank" rel="noopener noreferrer">Watch the video (JavaScript disabled)</a></p>
+                </noscript>
+            </div>
+            <div class="cta-section">
+                <h2>准备开始了吗？</h2>
+                <p>立即创建您的第一个安全备忘录，体验真正的端到端加密。</p>
+                <div class="cta-buttons">
+                    <a href="/zh/create-memo.html" class="btn btn-primary">创建安全备忘录</a>
+                    <a href="/zh" class="btn btn-secondary">返回首页</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p><a href="https://github.com/timoheimonen/securememo.app" target="_blank" rel="noopener noreferrer">在 GitHub 上查看源代码</a> | <a href="/zh/tos.html">服务条款</a> | <a href="/zh/privacy.html">隐私声明</a> | <a href="mailto:contact@securememo.app">contact@securememo.app</a></p>
+        <p class="footer-tagline">无跟踪，无广告，无噱头。</p>
+    </footer>
+
+    <script src="/js/common.js" type="module" nonce="{{CSP_NONCE}}" defer></script>
+</body>
+</html>

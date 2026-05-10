@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>securememo.app - Šifrované zprávy se samosmazáním | securememo.app</title>
+    <meta name="description" content="Vytvářejte šifrované zprávy, které se po přečtení samy smažou. End-to-end šifrování, důraz na soukromí a bezpečné sdílení poznámek s AES-256. Bez sledování, bez reklam.">
+    <meta name="keywords" content="zabezpečená zpráva, šifrovaná zpráva, samosmazatelná zpráva, soukromé sdílení poznámek, end-to-end šifrování, AES-256, soukromí, bezpečné sdílení">
+    <!-- Open Graph for social sharing -->
+    <meta property="og:title" content="securememo.app - Šifrované zprávy se samosmazáním">
+    <meta property="og:description" content="Sdílejte citlivé informace bezpečně pomocí zpráv, které se smažou po jednom zobrazení nebo po vypršení. Poháněno klientským šifrováním AES-256.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://securememo.app/">
+    <meta property="og:image" content="https://securememo.app/android-chrome-512x512.png">
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="securememo.app - Šifrované zprávy se samosmazáním">
+    <meta name="twitter:description" content="Aplikace s důrazem na soukromí pro bezpečné, samosmazatelné zprávy.">
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="/android-chrome-512x512.png">
+    <link rel="canonical" href="{{PUBLIC_ORIGIN}}/cs">
+    <!-- Structured Data -->
+    <script type="application/ld+json" nonce="{{CSP_NONCE}}">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "securememo.app",
+      "description": "Vytvářejte šifrované zprávy, které se po přečtení samy smažou. End-to-end šifrování, důraz na soukromí a bezpečné sdílení poznámek s AES-256. Bez sledování, bez reklam.",
+      "url": "https://securememo.app/",
+      "applicationCategory": "SecurityApplication",
+      "operatingSystem": "Webový prohlížeč",
+      "browserRequirements": "Vyžaduje JavaScript. Vyžaduje HTML5.",
+      "author": {
+        "@type": "Person",
+        "name": "Timo Heimonen",
+        "url": "https://github.com/timoheimonen"
+      },
+      "creator": {
+        "@type": "Person",
+        "name": "Timo Heimonen",
+        "url": "https://github.com/timoheimonen"
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "featureList": [
+        "Šifrování AES-256 na straně klienta",
+        "Samosmazatelné zprávy",
+        "Architektura s nulovou znalostí",
+        "Bez uživatelských účtů",
+        "Globální výkon díky Cloudflare",
+        "Design se zaměřením na soukromí"
+      ],
+      "screenshot": "https://securememo.app/android-chrome-512x512.png",
+      "softwareVersion": "1.0.3",
+      "datePublished": "2025-07-01",
+      "dateModified": "2025-08-17",
+      "license": "https://github.com/timoheimonen/securememo.app/blob/main/LICENSE",
+      "codeRepository": "https://github.com/timoheimonen/securememo.app"
+    }
+    </script>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="/cs" class="nav-logo">securememo.app</a>
+            
+            <!-- Hamburger Menu Button -->
+            <button class="hamburger" type="button" aria-label="Přepnout navigační menu" aria-expanded="false">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+            
+            <!-- Navigation Menu -->
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="/cs" class="nav-link active">Domů</a></li>
+                <li><a href="/cs/about.html" class="nav-link">O aplikaci</a></li>
+                <li><a href="/cs/create-memo.html" class="nav-link">Vytvořit zabezpečenou zprávu</a></li>
+                <li class="language-dropdown">
+                    <button class="language-toggle nav-link" aria-expanded="false" aria-haspopup="true">
+                        🇨🇿 Čeština
+                    </button>
+                    <div class="language-menu">
+                        <a href="/ar" class="language-item " title="العربية">🌐 العربية</a>
+                        <a href="/bn" class="language-item " title="বাংলা">🇧🇩 বাংলা</a>
+                        <a href="/cs" class="language-item active" title="Čeština">🇨🇿 Čeština</a>
+                        <a href="/da" class="language-item " title="Dansk">🇩🇰 Dansk</a>
+                        <a href="/de" class="language-item " title="Deutsch">🇩🇪 Deutsch</a>
+                        <a href="/el" class="language-item " title="Ελληνικά">🇬🇷 Ελληνικά</a>
+                        <a href="/en" class="language-item " title="English">🇬🇧 English</a>
+                        <a href="/es" class="language-item " title="Español">🇪🇸 Español</a>
+                        <a href="/fi" class="language-item " title="Suomi">🇫🇮 Suomi</a>
+                        <a href="/fr" class="language-item " title="Français">🇫🇷 Français</a>
+                        <a href="/hi" class="language-item " title="हिन्दी">🇮🇳 हिन्दी</a>
+                        <a href="/hu" class="language-item " title="Magyar">🇭🇺 Magyar</a>
+                        <a href="/id" class="language-item " title="Bahasa Indonesia">🇮🇩 Bahasa Indonesia</a>
+                        <a href="/it" class="language-item " title="Italiano">🇮🇹 Italiano</a>
+                        <a href="/ja" class="language-item " title="日本語">🇯🇵 日本語</a>
+                        <a href="/ko" class="language-item " title="한국어">🇰🇷 한국어</a>
+                        <a href="/nl" class="language-item " title="Nederlands">🇳🇱 Nederlands</a>
+                        <a href="/no" class="language-item " title="Norsk">🇳🇴 Norsk</a>
+                        <a href="/pl" class="language-item " title="Polski">🇵🇱 Polski</a>
+                        <a href="/ptPT" class="language-item " title="Português (Portugal)">🇵🇹 Português</a>
+                        <a href="/ptBR" class="language-item " title="Português (Brasil)">🇧🇷 Português (Brasil)</a>
+                        <a href="/ru" class="language-item " title="Русский">🇷🇺 Русский</a>
+                        <a href="/ro" class="language-item " title="Română">🇷🇴 Română</a>
+                        <a href="/sv" class="language-item " title="Svenska">🇸🇪 Svenska</a>
+                        <a href="/tl" class="language-item " title="Tagalog">🇵🇭 Tagalog</a>
+                        <a href="/th" class="language-item " title="ไทย">🇹🇭 ไทย</a>
+                        <a href="/tr" class="language-item " title="Türkçe">🇹🇷 Türkçe</a>
+                        <a href="/uk" class="language-item " title="Українська">🇺🇦 Українська</a>
+                        <a href="/vi" class="language-item " title="Tiếng Việt">🇻🇳 Tiếng Việt</a>
+                        <a href="/zh" class="language-item " title="中文">🈶 中文</a>
+                    </div>
+                </li>
+            </ul>
+            
+            <!-- Mobile Menu Overlay -->
+            <div class="nav-overlay"></div>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <div class="hero-section">
+            <h1>securememo.app</h1>
+            <p>Vytvářejte šifrované zprávy, které se po přečtení nebo vypršení platnosti samy smažou. Vaše tajemství zůstanou v bezpečí.</p>
+            <div class="cta-buttons">
+                <a href="/cs/create-memo.html" class="btn btn-primary">Vytvořit zabezpečenou zprávu</a>
+                <a href="/cs/about.html" class="btn btn-secondary">Zjistit více</a>
+            </div>
+        </div>
+
+        <div class="features-section">
+            <h2>Jak to funguje</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <h3>🔐 Napište svou zprávu</h3>
+                    <p>Máte to pod kontrolou. Váš text se šifruje přímo ve vašem zařízení a nezašifrovaná verze nikdy neopustí váš prohlížeč.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>🔗 Sdílení bezpečně</h3>
+                    <p>Získejte jedinečné URL a samostatné silné heslo a pro vyšší bezpečnost je sdílejte různými kanály.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>💥 Automatické smazání</h3>
+                    <p>Zpráva se po přečtení nebo po uplynutí časového limitu (od 8 hodin do 30 dnů) automaticky a trvale smaže.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="security-section">
+            <h2>Bezpečnostní funkce</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <h3>🔒 Skutečné klientské šifrování</h3>
+                    <p>Vaše zpráva je šifrována v prohlížeči pomocí AES-256-GCM a silné derivace klíče (2 200 000+ iterací). Nikdy nevidíme otevřený text.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>🗑️ Spolehlivé automatické mazání</h3>
+                    <p>Zprávy navždy zmizí po přečtení nebo po vypršení platnosti, s automatickým úklidem každou hodinu. Žádné zálohy ani obnova nejsou možné.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>🌐 Nulová znalost hesla</h3>
+                    <p>Hesla generujeme a zpracováváme výhradně ve vašem prohlížeči. Nikdy nejsou odesílána ani ukládána na naše servery.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p><a href="https://github.com/timoheimonen/securememo.app" target="_blank" rel="noopener noreferrer">Zobrazit zdrojový kód na GitHubu</a> | <a href="/cs/tos.html">Podmínky služby</a> | <a href="/cs/privacy.html">Oznámení o ochraně soukromí</a> | <a href="mailto:contact@securememo.app">contact@securememo.app</a></p>
+        <p class="footer-tagline">Žádné sledování, žádné reklamy, žádné zbytečnosti.</p>
+    </footer>
+
+    <script src="/js/common.js" type="module" nonce="{{CSP_NONCE}}" defer></script>
+</body>
+</html>
