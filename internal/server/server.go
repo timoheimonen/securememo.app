@@ -19,7 +19,7 @@ import (
 	"github.com/timoheimonen/securememo/internal/store"
 )
 
-const assetVersion = "20260510c"
+const assetVersion = "20260510d"
 
 type nonceKey struct{}
 
@@ -183,13 +183,13 @@ func (s *Server) servePage(w http.ResponseWriter, r *http.Request) {
 		http.NotFound(w, r)
 		return
 	}
-	body, err := frontend.FS.ReadFile(fmt.Sprintf("generated/pages/%s/%s", info.Locale, page))
+	body, err := frontend.FS.ReadFile(fmt.Sprintf("generated/pages/en/%s", page))
 	if err != nil {
 		http.NotFound(w, r)
 		return
 	}
 	nonce, _ := r.Context().Value(nonceKey{}).(string)
-	html := string(body)
+	html := localizeHTML(string(body), info.Locale, info.PathWithoutLocale, s.cfg.PublicOrigin)
 	html = strings.ReplaceAll(html, "{{CSP_NONCE}}", nonce)
 	html = strings.ReplaceAll(html, "{{PUBLIC_ORIGIN}}", s.cfg.PublicOrigin)
 	html = addAssetVersions(html)
