@@ -27,7 +27,7 @@ go build -o securememo ./cmd/securememo
 Minimal environment:
 
 ```sh
-SECUREMEMO_ADDR=127.0.0.1:3000
+SECUREMEMO_ADDR=127.0.0.1:3005
 SECUREMEMO_DB_PATH=/var/lib/securememo/securememo.sqlite
 PUBLIC_ORIGIN=https://securememo.example.com
 ```
