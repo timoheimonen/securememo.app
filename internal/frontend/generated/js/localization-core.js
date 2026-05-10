@@ -48,11 +48,16 @@ export function createLocalization(locale, translations) {
     return `/${loc}${normalizedPath}`;
   }
 
+  function startsWithSupportedLocale(path) {
+    const firstSegment = path.split('/').filter(Boolean)[0];
+    return isLocaleSupported(firstSegment);
+  }
+
   function updateNavigationLinks() {
     const navLinks = document.querySelectorAll('.nav-link[href]');
     navLinks.forEach(link => {
       const href = link.getAttribute('href');
-      if (href.startsWith('http') || href.startsWith(`/${locale}`)) {
+      if (href.startsWith('http') || startsWithSupportedLocale(href)) {
         return;
       }
       const localizedHref = localizeUrl(href);
@@ -71,7 +76,8 @@ export function createLocalization(locale, translations) {
     const links = document.querySelectorAll('a[href^="/"]');
     links.forEach(link => {
       const href = link.getAttribute('href');
-      if (href.startsWith(`/${locale}`) ||
+      if (link.classList.contains('language-item') ||
+          startsWithSupportedLocale(href) ||
           href.startsWith('/api/') ||
           href.startsWith('/js/') ||
           href.startsWith('/styles.css') ||
