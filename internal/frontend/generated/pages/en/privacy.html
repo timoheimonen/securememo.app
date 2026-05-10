@@ -189,9 +189,9 @@
                 <h2>4. Data Security</h2>
                 <ul>
                     <li>Encryption: All memos are encrypted client-side using AES-256 with PBKDF2 key derivation. We store only encrypted data and cannot decrypt it.</li>
-                    <li>Deletion: Memos are permanently deleted after reading or expiration via built-in cleanup jobs.</li>
+                    <li>Deletion: Memos are deleted after successful read confirmation or expiration via built-in cleanup jobs. SQLite secure-delete mode is enabled to reduce leftover deleted content in the database file.</li>
                     <li>Security Measures: We implement strong security headers (e.g., CSP, HSTS), input sanitization, timing attack protections, and rate limiting to prevent abuse.</li>
-                    <li>No Recovery: Once deleted, memos cannot be recovered—even by us.</li>
+                    <li>No app-level recovery: After deletion, the service does not provide a way to recover memo content.</li>
                 </ul>
                 <p>While we take reasonable steps to secure our systems, no service is completely immune to risks. You are responsible for securely sharing URLs and passwords.</p>
             </div>

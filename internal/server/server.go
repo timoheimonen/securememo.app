@@ -58,7 +58,6 @@ func (s *Server) routes() {
 	s.mux.HandleFunc("/api/create-memo", s.memo.Create)
 	s.mux.HandleFunc("/api/read-memo", s.memo.Read)
 	s.mux.HandleFunc("/api/confirm-delete", s.memo.ConfirmDelete)
-	s.mux.HandleFunc("/api/cleanup", s.memo.Cleanup)
 	s.mux.HandleFunc("/", s.handle)
 }
 
