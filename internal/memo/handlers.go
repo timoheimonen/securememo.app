@@ -19,7 +19,15 @@ import (
 	"github.com/timoheimonen/securememo/internal/store"
 )
 
-const maxJSONBytes = 64 * 1024
+const (
+	maxJSONBytes       = 64 * 1024
+	rateLimitEvents    = 10
+	rateLimitWindow    = time.Minute
+	rateLimitCreateKey = "create"
+	rateLimitReadKey   = "read"
+	rateLimitDeleteKey = "delete"
+	rateLimitFailKey   = "failure"
+)
 
 type Handler struct {
 	Config config.Config
@@ -28,6 +36,9 @@ type Handler struct {
 
 func (h Handler) Create(w http.ResponseWriter, r *http.Request) {
 	if !h.requirePOST(w, r) {
+		return
+	}
+	if !h.allowRateLimitedAction(w, r, rateLimitCreateKey) {
 		return
 	}
 	var req struct {
@@ -74,6 +85,9 @@ func (h Handler) Create(w http.ResponseWriter, r *http.Request) {
 
 func (h Handler) Read(w http.ResponseWriter, r *http.Request) {
 	if !h.requirePOST(w, r) {
+		return
+	}
+	if !h.allowRateLimitedAction(w, r, rateLimitReadKey) {
 		return
 	}
 	var req struct{}
@@ -136,6 +150,9 @@ func (h Handler) ConfirmDelete(w http.ResponseWriter, r *http.Request) {
 	hash := hashDeletionToken(req.DeletionToken)
 	if !security.ConstantTimeEqual(hash, row.DeletionTokenHash) {
 		h.rateLimitOrAccessDenied(w, r)
+		return
+	}
+	if !h.allowRateLimitedAction(w, r, rateLimitDeleteKey) {
 		return
 	}
 	deleted, err := h.Store.DeleteMemo(r.Context(), req.MemoID)
@@ -217,14 +234,40 @@ func (h Handler) accessDenied(w http.ResponseWriter) {
 }
 
 func (h Handler) rateLimitOrAccessDenied(w http.ResponseWriter, r *http.Request) {
-	key := "delFail:" + hashString(clientIP(r))
-	result, err := h.Store.RecordFailure(r.Context(), key, 2, 10*time.Minute)
+	result, err := h.recordRateLimit(r, rateLimitFailKey)
 	if err == nil && result.Limited {
-		w.Header().Set("Retry-After", "60")
+		w.Header().Set("Retry-After", retryAfterSeconds(result.RetryAfter))
 		delayedJSON(w, http.StatusTooManyRequests, map[string]string{"error": "Too many attempts. Please try again later."})
 		return
 	}
 	h.accessDenied(w)
+}
+
+func (h Handler) allowRateLimitedAction(w http.ResponseWriter, r *http.Request, action string) bool {
+	result, err := h.recordRateLimit(r, action)
+	if err != nil {
+		delayedJSON(w, http.StatusInternalServerError, map[string]string{"error": "Rate limit error."})
+		return false
+	}
+	if result.Limited {
+		w.Header().Set("Retry-After", retryAfterSeconds(result.RetryAfter))
+		delayedJSON(w, http.StatusTooManyRequests, map[string]string{"error": "Too many requests. Please try again later."})
+		return false
+	}
+	return true
+}
+
+func (h Handler) recordRateLimit(r *http.Request, action string) (store.RateLimitResult, error) {
+	key := "api:" + action + ":" + hashString(h.clientIP(r))
+	return h.Store.RecordEvent(r.Context(), key, rateLimitEvents, rateLimitWindow)
+}
+
+func retryAfterSeconds(duration time.Duration) string {
+	seconds := int(duration.Round(time.Second) / time.Second)
+	if seconds < 1 {
+		seconds = 1
+	}
+	return strconv.Itoa(seconds)
 }
 
 func (h Handler) generateMemoID(ctx context.Context, attempts int) (string, error) {
@@ -263,7 +306,20 @@ func hashString(input string) string {
 	return hex.EncodeToString(sum[:])
 }
 
-func clientIP(r *http.Request) string {
+func (h Handler) clientIP(r *http.Request) string {
+	remoteIP := remoteAddrIP(r.RemoteAddr)
+	if h.Config.TrustedProxyLocal && isLocalProxyPeer(remoteIP) {
+		if ip := forwardedClientIP(r); ip != "" {
+			return ip
+		}
+	}
+	if remoteIP != "" {
+		return remoteIP
+	}
+	return "unknown"
+}
+
+func forwardedClientIP(r *http.Request) string {
 	for _, header := range []string{"CF-Connecting-IP", "Cf-Connecting-Ip", "X-Forwarded-For"} {
 		value := strings.TrimSpace(r.Header.Get(header))
 		if value == "" {
@@ -276,14 +332,23 @@ func clientIP(r *http.Request) string {
 			return ip.String()
 		}
 	}
-	host, _, err := net.SplitHostPort(r.RemoteAddr)
+	return ""
+}
+
+func remoteAddrIP(remoteAddr string) string {
+	host, _, err := net.SplitHostPort(remoteAddr)
 	if err != nil {
-		return "unknown"
+		return ""
 	}
 	if ip := net.ParseIP(host); ip != nil {
 		return ip.String()
 	}
-	return "unknown"
+	return ""
+}
+
+func isLocalProxyPeer(ip string) bool {
+	parsed := net.ParseIP(ip)
+	return parsed != nil && parsed.IsLoopback()
 }
 
 func stringify(value interface{}) string {

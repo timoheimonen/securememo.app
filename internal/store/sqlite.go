@@ -163,14 +163,15 @@ WHERE expires_at < unixepoch('now')`)
 }
 
 type RateLimitResult struct {
-	Limited   bool
-	Count     int
-	Remaining int
+	Limited    bool
+	Count      int
+	Remaining  int
+	RetryAfter time.Duration
 }
 
-func (s *SQLiteStore) RecordFailure(ctx context.Context, key string, allowedFailures int, window time.Duration) (RateLimitResult, error) {
-	if allowedFailures < 0 {
-		return RateLimitResult{}, errors.New("allowedFailures must be non-negative")
+func (s *SQLiteStore) RecordEvent(ctx context.Context, key string, limit int, window time.Duration) (RateLimitResult, error) {
+	if limit <= 0 {
+		return RateLimitResult{}, errors.New("limit must be positive")
 	}
 	now := time.Now().Unix()
 	expiresAt := now + int64(window.Seconds())
@@ -199,29 +200,30 @@ ON CONFLICT(key) DO UPDATE SET
 		if err := tx.Commit(); err != nil {
 			return RateLimitResult{}, err
 		}
-		return RateLimitResult{Limited: false, Count: 1, Remaining: max(0, allowedFailures-1)}, nil
+		return RateLimitResult{Limited: false, Count: 1, Remaining: max(0, limit-1)}, nil
 	}
 	if err != nil {
 		return RateLimitResult{}, err
 	}
 
 	next := count + 1
-	if next > allowedFailures {
+	if next > limit {
 		if err := tx.Commit(); err != nil {
 			return RateLimitResult{}, err
 		}
-		return RateLimitResult{Limited: true, Count: count, Remaining: 0}, nil
+		retryAfter := time.Duration(max(1, int(currentExpiresAt-now))) * time.Second
+		return RateLimitResult{Limited: true, Count: count, Remaining: 0, RetryAfter: retryAfter}, nil
 	}
 
 	_, err = tx.ExecContext(ctx, `
 UPDATE rate_limits
-SET count = ?, updated_at = ?, expires_at = ?
-WHERE key = ?`, next, now, expiresAt, key)
+SET count = ?, updated_at = ?
+WHERE key = ?`, next, now, key)
 	if err != nil {
 		return RateLimitResult{}, err
 	}
 	if err := tx.Commit(); err != nil {
 		return RateLimitResult{}, err
 	}
-	return RateLimitResult{Limited: false, Count: next, Remaining: max(0, allowedFailures-next)}, nil
+	return RateLimitResult{Limited: false, Count: next, Remaining: max(0, limit-next)}, nil
 }
