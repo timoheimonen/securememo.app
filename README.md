@@ -2,8 +2,6 @@
 
 securememo.app is a small self-hosted service for sharing encrypted, self-destructing memos. The browser encrypts every memo with AES-256-GCM before upload, so the server stores only ciphertext and deletion metadata. Memos are deleted after a successful read confirmation or after their configured expiry time.
 
-This repository now targets a single Linux host running a Go HTTP service with a local SQLite database, typically behind a `cloudflared` tunnel.
-
 ## Features
 
 - Client-side encryption with AES-256-GCM and PBKDF2 key derivation.
