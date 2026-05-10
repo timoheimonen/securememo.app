@@ -182,4 +182,4 @@ GPL-3.0. See [LICENSE](LICENSE).
 
 ## Author
 
-Timo Heimonen
+Timo Heimonen <timo.heimonen@proton.me>
