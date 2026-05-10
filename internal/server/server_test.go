@@ -121,6 +121,47 @@ func TestRobotsAllowsNoIndexPagesToBeCrawled(t *testing.T) {
 	}
 }
 
+func TestMemoCryptoWorkerAssetIsServed(t *testing.T) {
+	app := newTestServer(t)
+	rec := httptest.NewRecorder()
+	req := httptest.NewRequest(http.MethodGet, "/js/memo-crypto-worker.js?v=test", nil)
+
+	app.ServeHTTP(rec, req)
+
+	if rec.Code != http.StatusOK {
+		t.Fatalf("GET /js/memo-crypto-worker.js status = %d, want %d", rec.Code, http.StatusOK)
+	}
+	if got := rec.Header().Get("Content-Type"); got != "application/javascript; charset=utf-8" {
+		t.Fatalf("content type = %q, want application/javascript; charset=utf-8", got)
+	}
+	if !strings.Contains(rec.Body.String(), "encryptMemo") {
+		t.Fatal("worker asset does not contain expected crypto handler")
+	}
+}
+
+func TestMemoScriptsAreVersioned(t *testing.T) {
+	app := newTestServer(t)
+	for _, tc := range []struct {
+		path string
+		js   string
+	}{
+		{"/en/create-memo.html", `/js/create-memo.js?v=` + assetVersion},
+		{"/en/read-memo.html", `/js/read-memo.js?v=` + assetVersion},
+	} {
+		rec := httptest.NewRecorder()
+		req := httptest.NewRequest(http.MethodGet, tc.path, nil)
+
+		app.ServeHTTP(rec, req)
+
+		if rec.Code != http.StatusOK {
+			t.Fatalf("GET %s status = %d, want %d", tc.path, rec.Code, http.StatusOK)
+		}
+		if !strings.Contains(rec.Body.String(), tc.js) {
+			t.Fatalf("GET %s missing versioned script %s", tc.path, tc.js)
+		}
+	}
+}
+
 func newTestServer(t *testing.T) *Server {
 	t.Helper()
 	db, err := store.OpenSQLite(filepath.Join(t.TempDir(), "securememo.sqlite"))

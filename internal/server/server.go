@@ -19,7 +19,7 @@ import (
 	"github.com/timoheimonen/securememo/internal/store"
 )
 
-const assetVersion = "20260510l"
+const assetVersion = "20260510m"
 
 type nonceKey struct{}
 
@@ -97,6 +97,8 @@ func (s *Server) serveGeneratedAsset(w http.ResponseWriter, r *http.Request, url
 		return s.serveFile(w, r, "generated/js/create-memo.js", "application/javascript; charset=utf-8", cacheStatic(true))
 	case "/js/read-memo.js":
 		return s.serveFile(w, r, "generated/js/read-memo.js", "application/javascript; charset=utf-8", cacheStatic(true))
+	case "/js/memo-crypto-worker.js":
+		return s.serveFile(w, r, "generated/js/memo-crypto-worker.js", "application/javascript; charset=utf-8", cacheStatic(true))
 	case "/js/clientLocalization.js":
 		locale := "en"
 		if referer := r.Header.Get("Referer"); referer != "" {
@@ -291,6 +293,8 @@ func addAssetVersions(input string) string {
 	}{
 		{"/styles.css", "/styles.css?v=" + assetVersion},
 		{"/js/common.js", "/js/common.js?v=" + assetVersion},
+		{`src="/js/create-memo.js"`, `src="/js/create-memo.js?v=` + assetVersion + `"`},
+		{`src="/js/read-memo.js"`, `src="/js/read-memo.js?v=` + assetVersion + `"`},
 		{"/favicon.ico", "/favicon.ico?v=" + assetVersion},
 		{"/apple-touch-icon.png", "/apple-touch-icon.png?v=" + assetVersion},
 		{"/android-chrome-192x192.png", "/android-chrome-192x192.png?v=" + assetVersion},

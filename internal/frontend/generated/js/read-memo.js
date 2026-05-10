@@ -60,7 +60,73 @@ async function decryptMessage(encryptedData, password) {
       }
     }
   } catch (error) {
-    throw new Error(t('error.decryptionError'));
+    throw new Error('Failed to decrypt memo.');
+  }
+}
+
+function cryptoWorkerURL() {
+  const workerURL = new URL('/js/memo-crypto-worker.js', window.location.origin);
+  const currentScript = document.currentScript || Array.from(document.scripts).find(script => script.src.includes('/js/read-memo.js'));
+  if (currentScript && currentScript.src) {
+    const version = new URL(currentScript.src).searchParams.get('v');
+    if (version) {
+      workerURL.searchParams.set('v', version);
+    }
+  }
+  return workerURL;
+}
+
+function runMemoCryptoWorker(type, payload) {
+  return new Promise((resolve, reject) => {
+    if (!window.Worker) {
+      reject(new Error('Crypto worker unavailable.'));
+      return;
+    }
+    let worker;
+    try {
+      worker = new Worker(cryptoWorkerURL(), { name: 'memo-crypto-worker' });
+    } catch (error) {
+      reject(error);
+      return;
+    }
+    const id = crypto.randomUUID ? crypto.randomUUID() : String(Date.now()) + Math.random();
+    const cleanup = () => {
+      worker.onmessage = null;
+      worker.onerror = null;
+      worker.terminate();
+    };
+    worker.onmessage = (event) => {
+      const data = event.data || {};
+      if (data.id !== id) {
+        return;
+      }
+      cleanup();
+      if (data.ok) {
+        resolve(data.result);
+      } else {
+        reject(new Error(data.error || 'Crypto worker failed.'));
+      }
+    };
+    worker.onerror = (event) => {
+      cleanup();
+      reject(new Error(event.message || 'Crypto worker failed.'));
+    };
+    worker.postMessage({ id: id, type: type, payload: payload });
+  });
+}
+
+async function decryptMemo(encryptedMessage, password) {
+  try {
+    const result = await runMemoCryptoWorker('decryptMemo', {
+      encryptedMessage: encryptedMessage,
+      password: password
+    });
+    return result.decryptedMessage;
+  } catch (error) {
+    if (error.message.includes('Failed to decrypt')) {
+      throw error;
+    }
+    return decryptMessage(encryptedMessage, password);
   }
 }
 
@@ -118,7 +184,7 @@ window.addEventListener('load', () => {
         }
         const result = await response.json();
         if (response.ok) {
-          const decryptedMessage = await decryptMessage(result.encryptedMessage, password);
+          const decryptedMessage = await decryptMemo(result.encryptedMessage, password);
           let decryptedPayload;
           try {
             decryptedPayload = JSON.parse(decryptedMessage);
