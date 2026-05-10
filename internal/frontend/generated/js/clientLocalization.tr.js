@@ -64,7 +64,7 @@ const TRANSLATIONS = {
     "page.privacy.ogDescription": "securememo.app’in gizliliğinizi tarayıcıda şifreleme ve minimum veri toplama ile nasıl koruduğu.",
     "page.privacy.twitterDescription": "Tarayıcıda şifreleme ve sıfır bilgi mimarisi ile gizlilik koruması.",
     "home.hero.title": "securememo.app",
-    "home.hero.subtitle": "Okunduktan veya süresi dolduktan sonra kendini yok eden şifreli notlar oluşturun. Sırlarınız güvende.",
+    "home.hero.subtitle": "Başarılı okuma onayı veya süre dolumu sonrasında silinen şifreli notlar oluşturun. Sırlarınız güvende kalır.",
     "home.hero.btnPrimary": "Güvenli Not Oluştur",
     "home.hero.btnSecondary": "Daha Fazla Bilgi",
     "home.features.title": "Nasıl Çalışır",

@@ -64,7 +64,7 @@ const TRANSLATIONS = {
     "page.privacy.ogDescription": "Wie securememo.app Ihre Privatsphäre mit clientseitiger Verschlüsselung und minimaler Datensammlung schützt.",
     "page.privacy.twitterDescription": "Datenschutz mit clientseitiger Verschlüsselung und Zero-Knowledge-Architektur.",
     "home.hero.title": "securememo.app",
-    "home.hero.subtitle": "Erstellen Sie verschlüsselte Notizen, die sich nach dem Lesen oder Ablauf selbst zerstören. Ihre Geheimnisse bleiben sicher.",
+    "home.hero.subtitle": "Erstellen Sie verschlüsselte Notizen, die nach erfolgreicher Lesebestätigung oder Ablauf gelöscht werden. Ihre Geheimnisse bleiben sicher.",
     "home.hero.btnPrimary": "Sichere Notiz erstellen",
     "home.hero.btnSecondary": "Mehr erfahren",
     "home.features.title": "So funktioniert es",

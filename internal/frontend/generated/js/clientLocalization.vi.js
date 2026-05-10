@@ -64,7 +64,7 @@ const TRANSLATIONS = {
     "page.privacy.ogDescription": "Cách securememo.app bảo vệ quyền riêng tư của bạn với mã hóa phía khách hàng và thu thập dữ liệu tối thiểu.",
     "page.privacy.twitterDescription": "Bảo vệ quyền riêng tư với mã hóa phía khách hàng và kiến trúc không lưu trữ thông tin.",
     "home.hero.title": "securememo.app",
-    "home.hero.subtitle": "Tạo ghi chú được mã hóa tự hủy sau khi đọc hoặc hết hạn. Bí mật của bạn luôn được bảo vệ.",
+    "home.hero.subtitle": "Tạo ghi chú đã mã hóa được xóa sau khi xác nhận đọc thành công hoặc khi hết hạn. Bí mật của bạn luôn được an toàn.",
     "home.hero.btnPrimary": "Tạo ghi chú bảo mật",
     "home.hero.btnSecondary": "Tìm hiểu thêm",
     "home.features.title": "Cách hoạt động",

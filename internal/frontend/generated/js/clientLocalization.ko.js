@@ -64,7 +64,7 @@ const TRANSLATIONS = {
     "page.privacy.ogDescription": "securememo.app이 클라이언트 측 암호화와 최소한의 데이터 수집으로 개인정보를 보호하는 방법.",
     "page.privacy.twitterDescription": "클라이언트 측 암호화와 무지식 아키텍처로 개인정보 보호.",
     "home.hero.title": "securememo.app",
-    "home.hero.subtitle": "읽거나 만료된 후 자체 삭제되는 암호화된 메모를 만드세요. 비밀은 안전하게 보호됩니다.",
+    "home.hero.subtitle": "성공적인 읽기 확인 또는 만료 후 삭제되는 암호화된 메모를 만드세요. 비밀은 안전하게 보호됩니다.",
     "home.hero.btnPrimary": "보안 메모 작성",
     "home.hero.btnSecondary": "더 알아보기",
     "home.features.title": "작동 방식",

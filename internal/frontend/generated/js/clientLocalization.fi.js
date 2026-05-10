@@ -64,7 +64,7 @@ const TRANSLATIONS = {
     "page.privacy.ogDescription": "Miten securememo.app suojaa yksityisyytesi selainpohjaisella salauksella ja minimikeräyksellä.",
     "page.privacy.twitterDescription": "Yksityisyyden suoja selainpohjaisella salauksella ja nollatietorakenteella.",
     "home.hero.title": "securememo.app",
-    "home.hero.subtitle": "Luo salattuja muistiota, jotka tuhoutuvat itsestään lukemisen tai vanhentumisen jälkeen. Salaisuutesi pysyvät turvassa.",
+    "home.hero.subtitle": "Luo salattuja muistioita, jotka poistetaan onnistuneen lukuvahvistuksen tai vanhentumisen jälkeen. Salaisuutesi pysyvät turvassa.",
     "home.hero.btnPrimary": "Luo Suojattu Muistio",
     "home.hero.btnSecondary": "Lisätietoja",
     "home.features.title": "Näin Se Toimii",

@@ -64,7 +64,7 @@ const TRANSLATIONS = {
     "page.privacy.ogDescription": "Hoe securememo.app uw privacy beschermt met client-side encryptie en minimale gegevensverzameling.",
     "page.privacy.twitterDescription": "Privacybescherming met client-side encryptie en zero-knowledge architectuur.",
     "home.hero.title": "securememo.app",
-    "home.hero.subtitle": "Maak versleutelde memo's die zichzelf vernietigen na het lezen of verlopen. Uw geheimen blijven veilig.",
+    "home.hero.subtitle": "Maak versleutelde memo’s die worden verwijderd na succesvolle leesbevestiging of na verlopen. Uw geheimen blijven veilig.",
     "home.hero.btnPrimary": "Veilig Memo maken",
     "home.hero.btnSecondary": "Meer informatie",
     "home.features.title": "Hoe werkt het",

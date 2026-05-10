@@ -64,7 +64,7 @@ const TRANSLATIONS = {
     "page.privacy.ogDescription": "Bagaimana securememo.app melindungi privasi Anda dengan enkripsi sisi klien dan pengumpulan data minimal.",
     "page.privacy.twitterDescription": "Perlindungan privasi dengan enkripsi sisi klien dan arsitektur tanpa pengetahuan.",
     "home.hero.title": "securememo.app",
-    "home.hero.subtitle": "Buat memo terenkripsi yang menghancurkan diri setelah dibaca atau kedaluwarsa. Rahasia Anda tetap aman.",
+    "home.hero.subtitle": "Buat memo terenkripsi yang dihapus setelah konfirmasi baca berhasil atau kedaluwarsa. Rahasia Anda tetap aman.",
     "home.hero.btnPrimary": "Buat Memo Aman",
     "home.hero.btnSecondary": "Pelajari Lebih Lanjut",
     "home.features.title": "Cara Kerja",

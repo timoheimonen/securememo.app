@@ -64,7 +64,7 @@ const TRANSLATIONS = {
     "page.privacy.ogDescription": "Kung paano pinoprotektahan ng securememo.app ang iyong privacy gamit ang pag-encrypt sa browser at minimal na pagkuha ng datos.",
     "page.privacy.twitterDescription": "Proteksyon sa privacy gamit ang pag-encrypt sa browser at zero-knowledge na arkitektura.",
     "home.hero.title": "securememo.app",
-    "home.hero.subtitle": "Gumawa ng mga naka-encrypt na memo na kusang nabubura kapag nabasa o nag-expire. Ligtas ang iyong mga lihim.",
+    "home.hero.subtitle": "Gumawa ng mga naka-encrypt na memo na binubura pagkatapos ng matagumpay na kumpirmasyon ng pagbasa o pag-expire. Ligtas ang iyong mga lihim.",
     "home.hero.btnPrimary": "Gumawa ng Ligtas na Memo",
     "home.hero.btnSecondary": "Alamin Pa",
     "home.features.title": "Paano Ito Gumagana",

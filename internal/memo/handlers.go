@@ -21,13 +21,30 @@ import (
 
 const (
 	maxJSONBytes       = 64 * 1024
-	rateLimitEvents    = 10
-	rateLimitWindow    = time.Minute
+	rateLimitMinute    = 10
+	rateLimitHour      = 100
+	failureLimitHour   = 20
 	rateLimitCreateKey = "create"
 	rateLimitReadKey   = "read"
 	rateLimitDeleteKey = "delete"
 	rateLimitFailKey   = "failure"
 )
+
+type rateLimitRule struct {
+	Name   string
+	Limit  int
+	Window time.Duration
+}
+
+var defaultRateLimitRules = []rateLimitRule{
+	{Name: "minute", Limit: rateLimitMinute, Window: time.Minute},
+	{Name: "hour", Limit: rateLimitHour, Window: time.Hour},
+}
+
+var failureRateLimitRules = []rateLimitRule{
+	{Name: "minute", Limit: rateLimitMinute, Window: time.Minute},
+	{Name: "hour", Limit: failureLimitHour, Window: time.Hour},
+}
 
 type Handler struct {
 	Config config.Config
@@ -234,7 +251,7 @@ func (h Handler) accessDenied(w http.ResponseWriter) {
 }
 
 func (h Handler) rateLimitOrAccessDenied(w http.ResponseWriter, r *http.Request) {
-	result, err := h.recordRateLimit(r, rateLimitFailKey)
+	result, err := h.recordRateLimits(r, rateLimitFailKey, failureRateLimitRules)
 	if err == nil && result.Limited {
 		w.Header().Set("Retry-After", retryAfterSeconds(result.RetryAfter))
 		delayedJSON(w, http.StatusTooManyRequests, map[string]string{"error": "Too many attempts. Please try again later."})
@@ -244,7 +261,7 @@ func (h Handler) rateLimitOrAccessDenied(w http.ResponseWriter, r *http.Request)
 }
 
 func (h Handler) allowRateLimitedAction(w http.ResponseWriter, r *http.Request, action string) bool {
-	result, err := h.recordRateLimit(r, action)
+	result, err := h.recordRateLimits(r, action, defaultRateLimitRules)
 	if err != nil {
 		delayedJSON(w, http.StatusInternalServerError, map[string]string{"error": "Rate limit error."})
 		return false
@@ -257,9 +274,16 @@ func (h Handler) allowRateLimitedAction(w http.ResponseWriter, r *http.Request, 
 	return true
 }
 
-func (h Handler) recordRateLimit(r *http.Request, action string) (store.RateLimitResult, error) {
-	key := "api:" + action + ":" + hashString(h.clientIP(r))
-	return h.Store.RecordEvent(r.Context(), key, rateLimitEvents, rateLimitWindow)
+func (h Handler) recordRateLimits(r *http.Request, action string, rules []rateLimitRule) (store.RateLimitResult, error) {
+	ipHash := hashString(h.clientIP(r))
+	for _, rule := range rules {
+		key := "api:" + action + ":" + rule.Name + ":" + ipHash
+		result, err := h.Store.RecordEvent(r.Context(), key, rule.Limit, rule.Window)
+		if err != nil || result.Limited {
+			return result, err
+		}
+	}
+	return store.RateLimitResult{}, nil
 }
 
 func retryAfterSeconds(duration time.Duration) string {

@@ -64,7 +64,7 @@ const TRANSLATIONS = {
     "page.privacy.ogDescription": "securememo.appがクライアントサイド暗号化と最小限のデータ収集でプライバシーを保護する方法。",
     "page.privacy.twitterDescription": "クライアントサイド暗号化とゼロ知識アーキテクチャによるプライバシー保護。",
     "home.hero.title": "securememo.app",
-    "home.hero.subtitle": "読み取りまたは期限切れ後に自己破壊する暗号化メモを作成します。あなたの秘密は安全に保たれます。",
+    "home.hero.subtitle": "読み取り確認が成功した後、または有効期限切れ後に削除される暗号化メモを作成します。秘密は安全に保たれます。",
     "home.hero.btnPrimary": "セキュアメモを作成",
     "home.hero.btnSecondary": "詳細を見る",
     "home.features.title": "仕組み",

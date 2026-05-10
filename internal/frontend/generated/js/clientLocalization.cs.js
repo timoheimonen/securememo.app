@@ -64,7 +64,7 @@ const TRANSLATIONS = {
     "page.privacy.ogDescription": "Jak securememo.app chrání vaše soukromí pomocí klientského šifrování a minimálního sběru dat.",
     "page.privacy.twitterDescription": "Ochrana soukromí s klientským šifrováním a architekturou s nulovou znalostí.",
     "home.hero.title": "securememo.app",
-    "home.hero.subtitle": "Vytvářejte šifrované zprávy, které se po přečtení nebo vypršení platnosti samy smažou. Vaše tajemství zůstanou v bezpečí.",
+    "home.hero.subtitle": "Vytvářejte šifrované poznámky, které se smažou po úspěšném potvrzení přečtení nebo po vypršení platnosti. Vaše tajemství zůstanou v bezpečí.",
     "home.hero.btnPrimary": "Vytvořit zabezpečenou zprávu",
     "home.hero.btnSecondary": "Zjistit více",
     "home.features.title": "Jak to funguje",

@@ -64,7 +64,7 @@ const TRANSLATIONS = {
     "page.privacy.ogDescription": "Hvordan securememo.app beskytter ditt personvern med klientbasert kryptering og minimal datainnsamling.",
     "page.privacy.twitterDescription": "Personvern med klientbasert kryptering og nullkunnskapsarkitektur.",
     "home.hero.title": "securememo.app",
-    "home.hero.subtitle": "Opprett krypterte notater som selvdestruerer etter at de er lest eller utløpt. Dine hemmeligheter forblir trygge.",
+    "home.hero.subtitle": "Lag krypterte memoer som slettes etter vellykket lesebekreftelse eller utløp. Hemmelighetene dine forblir trygge.",
     "home.hero.btnPrimary": "Opprett sikkert notat",
     "home.hero.btnSecondary": "Les mer",
     "home.features.title": "Slik fungerer det",

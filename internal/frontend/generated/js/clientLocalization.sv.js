@@ -64,7 +64,7 @@ const TRANSLATIONS = {
     "page.privacy.ogDescription": "Hur securememo.app skyddar din integritet med klientbaserad kryptering och minimal datainsamling.",
     "page.privacy.twitterDescription": "Integritetsskydd med klientbaserad kryptering och zero-knowledge-arkitektur.",
     "home.hero.title": "securememo.app",
-    "home.hero.subtitle": "Skapa krypterade memos som självförstörs efter att de lästs eller gått ut. Dina hemligheter är säkra.",
+    "home.hero.subtitle": "Skapa krypterade memon som raderas efter bekräftad läsning eller utgång. Dina hemligheter förblir säkra.",
     "home.hero.btnPrimary": "Skapa säker memo",
     "home.hero.btnSecondary": "Läs mer",
     "home.features.title": "Hur det fungerar",

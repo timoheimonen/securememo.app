@@ -64,7 +64,7 @@ const TRANSLATIONS = {
     "page.privacy.ogDescription": "Hogyan védi a securememo.app az Ön adatvédelmét böngészőoldali titkosítással és minimális adatgyűjtéssel.",
     "page.privacy.twitterDescription": "Adatvédelem böngészőoldali titkosítással és zero-knowledge architektúrával.",
     "home.hero.title": "securememo.app",
-    "home.hero.subtitle": "Hozzon létre titkosított jegyzeteket, amelyek elolvasás vagy lejárat után önmegsemmisülnek. Titkai biztonságban maradnak.",
+    "home.hero.subtitle": "Hozzon létre titkosított jegyzeteket, amelyek sikeres olvasási megerősítés vagy lejárat után törlődnek. Titkai biztonságban maradnak.",
     "home.hero.btnPrimary": "Biztonságos jegyzet létrehozása",
     "home.hero.btnSecondary": "Tudjon meg többet",
     "home.features.title": "Hogyan működik",

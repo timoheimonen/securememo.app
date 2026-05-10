@@ -64,7 +64,7 @@ const TRANSLATIONS = {
     "page.privacy.ogDescription": "securememo.app क्लाइंट-साइड एन्क्रिप्शन और न्यूनतम डेटा संग्रह के साथ आपकी गोपनीयता की सुरक्षा कैसे करता है।",
     "page.privacy.twitterDescription": "क्लाइंट-साइड एन्क्रिप्शन और शून्य-ज्ञान वास्तुकला के साथ गोपनीयता सुरक्षा।",
     "home.hero.title": "securememo.app",
-    "home.hero.subtitle": "एन्क्रिप्टेड मेमो बनाएं जो पढ़ने या समाप्ति के बाद स्व-विनाश हो जाते हैं। आपके रहस्य सुरक्षित रहते हैं।",
+    "home.hero.subtitle": "ऐसे एन्क्रिप्टेड मेमो बनाएं जो सफल पढ़ने की पुष्टि या समाप्ति के बाद हटा दिए जाते हैं। आपके रहस्य सुरक्षित रहते हैं।",
     "home.hero.btnPrimary": "सुरक्षित मेमो बनाएं",
     "home.hero.btnSecondary": "और जानें",
     "home.features.title": "यह कैसे काम करता है",

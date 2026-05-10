@@ -64,7 +64,7 @@ const TRANSLATIONS = {
     "page.privacy.ogDescription": "Comment securememo.app protège votre confidentialité avec le chiffrement côté client et la collecte minimale de données.",
     "page.privacy.twitterDescription": "Protection de la confidentialité avec chiffrement côté client et architecture sans connaissance.",
     "home.hero.title": "securememo.app",
-    "home.hero.subtitle": "Créez des mémos chiffrés qui s'autodétruisent après avoir été lus ou expirés. Vos secrets restent en sécurité.",
+    "home.hero.subtitle": "Créez des mémos chiffrés supprimés après confirmation de lecture réussie ou expiration. Vos secrets restent en sécurité.",
     "home.hero.btnPrimary": "Créer un Mémo Sécurisé",
     "home.hero.btnSecondary": "En Savoir Plus",
     "home.features.title": "Comment Ça Marche",

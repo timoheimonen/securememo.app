@@ -67,6 +67,7 @@ The public browser flow uses the first three endpoints. Cleanup also runs period
 - The memo password is generated and displayed only in the browser.
 - The server stores ciphertext, expiry time, memo ID, and a deletion-token hash.
 - Failed or invalid reads use generic responses to avoid memo enumeration.
+- API rate limits use short and long windows per client IP. Normal API actions are limited to 10/minute and 100/hour; failed access attempts are limited to 10/minute and 20/hour.
 - Expired memo cleanup runs at startup and hourly after that.
 
 ## License

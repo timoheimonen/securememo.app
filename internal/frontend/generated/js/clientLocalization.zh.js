@@ -64,7 +64,7 @@ const TRANSLATIONS = {
     "page.privacy.ogDescription": "securememo.app 如何通过客户端加密和最少数据收集保护您的隐私。",
     "page.privacy.twitterDescription": "通过客户端加密与零知识架构保护隐私。",
     "home.hero.title": "securememo.app",
-    "home.hero.subtitle": "创建阅读或过期后自毁的加密备忘录。您的秘密保持安全。",
+    "home.hero.subtitle": "创建在成功读取确认后或到期后删除的加密备忘录。你的秘密会保持安全。",
     "home.hero.btnPrimary": "创建安全备忘录",
     "home.hero.btnSecondary": "了解更多",
     "home.features.title": "工作原理",

@@ -64,7 +64,7 @@ const TRANSLATIONS = {
     "page.privacy.ogDescription": "Como o securememo.app protege sua privacidade com criptografia do lado do cliente e coleta mínima de dados.",
     "page.privacy.twitterDescription": "Proteção de privacidade com criptografia do lado do cliente e arquitetura de conhecimento zero.",
     "home.hero.title": "securememo.app",
-    "home.hero.subtitle": "Crie memos criptografados que se autodestroem após serem lidos ou expirarem. Seus segredos permanecem seguros.",
+    "home.hero.subtitle": "Crie memorandos criptografados que são excluídos após confirmação de leitura bem-sucedida ou expiração. Seus segredos permanecem seguros.",
     "home.hero.btnPrimary": "Criar Memo Seguro",
     "home.hero.btnSecondary": "Saiba Mais",
     "home.features.title": "Como Funciona",

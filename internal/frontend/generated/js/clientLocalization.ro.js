@@ -64,7 +64,7 @@ const TRANSLATIONS = {
     "page.privacy.ogDescription": "Cum securememo.app îți protejează confidențialitatea prin criptare pe partea clientului și colectare minimă de date.",
     "page.privacy.twitterDescription": "Protecția confidențialității cu criptare pe partea clientului și arhitectură zero-knowledge.",
     "home.hero.title": "securememo.app",
-    "home.hero.subtitle": "Creează memo-uri criptate care se autodistrug după ce sunt citite sau când expiră. Secretele tale rămân în siguranță.",
+    "home.hero.subtitle": "Creează memo-uri criptate care sunt șterse după confirmarea reușită a citirii sau la expirare. Secretele tale rămân în siguranță.",
     "home.hero.btnPrimary": "Creează memo securizat",
     "home.hero.btnSecondary": "Află mai multe",
     "home.features.title": "Cum funcționează",

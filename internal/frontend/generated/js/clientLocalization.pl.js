@@ -64,7 +64,7 @@ const TRANSLATIONS = {
     "page.privacy.ogDescription": "Jak securememo.app chroni Twoją prywatność dzięki szyfrowaniu po stronie klienta i minimalnej kolekcji danych.",
     "page.privacy.twitterDescription": "Ochrona prywatności dzięki szyfrowaniu po stronie klienta i architekturze zero-knowledge.",
     "home.hero.title": "securememo.app",
-    "home.hero.subtitle": "Twórz zaszyfrowane notatki, które niszczą się po odczytaniu lub wygaśnięciu. Twoje sekrety są bezpieczne.",
+    "home.hero.subtitle": "Twórz zaszyfrowane notatki, które są usuwane po udanym potwierdzeniu odczytu lub po wygaśnięciu. Twoje sekrety pozostają bezpieczne.",
     "home.hero.btnPrimary": "Utwórz bezpieczną notatkę",
     "home.hero.btnSecondary": "Dowiedz się więcej",
     "home.features.title": "Jak to działa",

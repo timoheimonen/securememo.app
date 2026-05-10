@@ -64,7 +64,7 @@ const TRANSLATIONS = {
     "page.privacy.ogDescription": "Come securememo.app protegge la tua privacy con crittografia lato client e raccolta dati minima.",
     "page.privacy.twitterDescription": "Protezione privacy con crittografia lato client e architettura zero-knowledge.",
     "home.hero.title": "securememo.app",
-    "home.hero.subtitle": "Crea memo crittografate che si autodistruggono dopo essere state lette o scadute. I tuoi segreti rimangono al sicuro.",
+    "home.hero.subtitle": "Crea memo cifrati che vengono eliminati dopo conferma di lettura riuscita o alla scadenza. I tuoi segreti restano al sicuro.",
     "home.hero.btnPrimary": "Crea Memo Sicura",
     "home.hero.btnSecondary": "Scopri di Più",
     "home.features.title": "Come Funziona",

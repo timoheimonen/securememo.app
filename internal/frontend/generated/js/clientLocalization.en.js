@@ -64,7 +64,7 @@ const TRANSLATIONS = {
     "page.privacy.ogDescription": "How securememo.app protects your privacy with client-side encryption and minimal data collection.",
     "page.privacy.twitterDescription": "Privacy protection with client-side encryption and zero-knowledge architecture.",
     "home.hero.title": "securememo.app",
-    "home.hero.subtitle": "Create encrypted memos that self-destruct after being read or expired. Your secrets stay safe.",
+    "home.hero.subtitle": "Create encrypted memos that are deleted after successful read confirmation or expiration. Your secrets stay safe.",
     "home.hero.btnPrimary": "Create Secure Memo",
     "home.hero.btnSecondary": "Learn More",
     "home.features.title": "How It Works",

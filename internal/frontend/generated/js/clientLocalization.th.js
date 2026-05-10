@@ -64,7 +64,7 @@ const TRANSLATIONS = {
     "page.privacy.ogDescription": "วิธีที่ securememo.app ปกป้องความเป็นส่วนตัวของคุณด้วยการเข้ารหัสฝั่งไคลเอนต์และการเก็บข้อมูลในระดับต่ำ",
     "page.privacy.twitterDescription": "การปกป้องความเป็นส่วนตัวด้วยการเข้ารหัสฝั่งไคลเอนต์และสถาปัตยกรรม zero-knowledge",
     "home.hero.title": "securememo.app",
-    "home.hero.subtitle": "สร้างบันทึกเข้ารหัสที่ทำลายตัวเองหลังจากถูกอ่านหรือหมดอายุ ความลับของคุณยังคงปลอดภัย",
+    "home.hero.subtitle": "สร้างบันทึกที่เข้ารหัสซึ่งจะถูกลบหลังจากยืนยันการอ่านสำเร็จหรือหมดอายุ ความลับของคุณยังคงปลอดภัย",
     "home.hero.btnPrimary": "สร้างบันทึกลับที่ปลอดภัย",
     "home.hero.btnSecondary": "เรียนรู้เพิ่มเติม",
     "home.features.title": "วิธีการทำงาน",

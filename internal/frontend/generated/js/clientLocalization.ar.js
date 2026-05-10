@@ -64,7 +64,7 @@ const TRANSLATIONS = {
     "page.privacy.ogDescription": "كيف يحمي securememo.app خصوصيتك من خلال التشفير من جهة العميل وجمع بيانات محدود.",
     "page.privacy.twitterDescription": "حماية الخصوصية مع التشفير من جهة العميل وهيكلية معرفة صفرية.",
     "home.hero.title": "securememo.app",
-    "home.hero.subtitle": "أنشئ مذكرات مشفرة يتم تدميرها ذاتياً بعد قراءتها أو انتهاء صلاحيتها. أسرارك تبقى آمنة.",
+    "home.hero.subtitle": "أنشئ مذكرات مشفرة تُحذف بعد تأكيد القراءة بنجاح أو عند انتهاء الصلاحية. تبقى أسرارك آمنة.",
     "home.hero.btnPrimary": "إنشاء مذكرة آمنة",
     "home.hero.btnSecondary": "اعرف المزيد",
     "home.features.title": "كيف يعمل التطبيق",

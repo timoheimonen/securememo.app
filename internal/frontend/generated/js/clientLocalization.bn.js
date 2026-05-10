@@ -64,7 +64,7 @@ const TRANSLATIONS = {
     "page.privacy.ogDescription": "securememo.app কিভাবে ক্লায়েন্ট-সাইড এনক্রিপশন ও ন্যূনতম ডেটা সংগ্রহ দিয়ে আপনার প্রাইভেসি রক্ষা করে।",
     "page.privacy.twitterDescription": "ক্লায়েন্ট-সাইড এনক্রিপশন ও জিরো-নলেজ আর্কিটেকচারে প্রাইভেসি সুরক্ষা।",
     "home.hero.title": "securememo.app",
-    "home.hero.subtitle": "এনক্রিপ্টেড মেমো তৈরি করুন যা পড়া বা মেয়াদ শেষ হলে নিজে থেকেই মুছে যায়। আপনার গোপনীয়তা সুরক্ষিত থাকে।",
+    "home.hero.subtitle": "এনক্রিপ্টেড মেমো তৈরি করুন, যা সফল পড়া নিশ্চিত হলে বা মেয়াদ শেষ হলে মুছে ফেলা হয়। আপনার গোপনীয়তা নিরাপদ থাকে।",
     "home.hero.btnPrimary": "নিরাপদ মেমো তৈরি করুন",
     "home.hero.btnSecondary": "আরও জানুন",
     "home.features.title": "কীভাবে কাজ করে",
