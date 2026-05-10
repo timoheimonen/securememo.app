@@ -12,29 +12,32 @@ securememo.app will run the main branch of this repo.
 
 ## Features
 
-- **True end-to-end encryption**: Performed entirely in the browser; servers handle only encrypted data.
-- **Password protection**: Random passwords are generated client-side and never sent to or stored on the server.
-- **One-time access**: Memos automatically delete after being read or when the selected time limit expires.
-- **Flexible expiry options**: Choose from delete-on-read with timeouts of 8 hours, 1 day, 2 days, 1 week, or 30 days.
-- **Powered by Cloudflare Workers**: Ensures fast, scalable, and globally distributed performance.
-- **D1 Database**: Utilizes SQLite-compatible storage for reliable, encrypted memo persistence.
-- **Turnstile CAPTCHA**: Prevents bot abuse and spam while maintaining user privacy (no tracking).
-- **Robust security headers**: Includes strict CSP, HSTS, and other policies to mitigate common web vulnerabilities.
-- **Automated cleanup**: Expired or read memos are permanently removed via scheduled cron jobs.
-- **Localization**: Currently supports 30 languages.
+- Client-side encryption with AES-256-GCM and PBKDF2 key derivation.
+- Random browser-generated passwords that are never sent to the server.
+- Delete-on-read flow with a client-side deletion token.
+- Expiry options: 8 hours, 1 day, 2 days, 1 week, or 30 days.
+- SQLite storage with WAL mode and automatic cleanup.
+- Strict security headers, input validation, timing delays, and generic access-denied responses.
+- No accounts, no analytics, no ads.
+- Localized generated frontend assets embedded into the Go binary.
 
-## Architecture
+## Build
 
-### Tech Stack
+The SQLite driver uses CGO, so the build host needs Go, CGO support, and a C compiler.
 
-- **Runtime**: Cloudflare Workers for serverless execution.
-- **Database**: Cloudflare D1 (SQLite-based) for secure, efficient storage.
-- **Frontend**: Vanilla JavaScript with ES6+ features for a lightweight, no-framework experience.
-- **Security**: Cloudflare Turnstile CAPTCHA, Content Security Policy (CSP) headers, and comprehensive input sanitization.
-- **Encryption**: Client-side AES-256-GCM with PBKDF2 (3,500,000+ iterations) for key derivation.
+```sh
+go test ./...
+go build -o securememo ./cmd/securememo
+```
 
-### Project Structure
+## Runtime Configuration
 
+Minimal environment:
+
+```sh
+SECUREMEMO_ADDR=127.0.0.1:3000
+SECUREMEMO_DB_PATH=/var/lib/securememo/securememo.sqlite
+PUBLIC_ORIGIN=https://securememo.example.com
 ```
 securememo/
 ├── CODE_OF_CONDUCT.md          # Community guidelines
@@ -113,15 +116,17 @@ securememo/
 ```
 ## Security
 
-- **Client-side encryption**: Memos are encrypted in-browser using AES-256-GCM; servers receive only ciphertext.
-- **Input sanitization**: Multi-context protection (HTML, JSON, database, URL) with entity encoding to prevent XSS and injection attacks.
-- **Turnstile CAPTCHA**: Blocks automated abuse without user tracking or cookies.
-- **Security headers**: Enforces strict CSP, HSTS, X-Frame-Options, and Permissions-Policy to defend against common threats.
-- **Request validation**: Includes size limits (e.g., 100KB max), method checks, and secure origin validation for CORS.
-- **Timing attack protection**: Implements constant-time comparisons, artificial delays, and secure validation to prevent information leakage.
-- **Automatic cleanup**: Memos are deleted immediately after reading (via confirmation) or expiration, with no recovery possible.
+```text
+cmd/securememo/              Go entrypoint
+internal/config/             Environment configuration
+internal/store/              SQLite schema, queries, cleanup, rate-limit storage
+internal/memo/               Memo API handlers
+internal/security/           Security headers, validation, timing helpers
+internal/server/             Routing, localization paths, embedded asset serving
+internal/frontend/           Embedded generated frontend assets
+```
 
-## License
+## API
 
 This project uses GPL-3.0 license.
 
@@ -160,16 +165,21 @@ securememo.app supports **30 languages** with automatic translation from English
 
 > **Note:** These translations are auto-generated from English. Some errors may occur. Contributions for translation improvements are welcome!
 
+The public browser flow uses the first three endpoints. Cleanup also runs periodically inside the process.
+
+## Security Model
+
+- Plaintext memo content never leaves the browser.
+- The memo password is generated and displayed only in the browser.
+- The server stores ciphertext, expiry time, memo ID, and a deletion-token hash.
+- Failed or invalid reads use generic responses to avoid memo enumeration.
+- API rate limits use short and long windows per client IP. Normal API actions are limited to 10/minute and 100/hour; failed access attempts are limited to 10/minute and 20/hour.
+- Expired memo cleanup runs at startup and hourly after that.
+
+## License
+
+GPL-3.0. See [LICENSE](LICENSE).
+
 ## Author
 
-🇫🇮 Timo Heimonen (timo.heimonen@proton.me)
-
-## Tags
-
-- #privacy
-- #encryption
-- #security
-- #cloudflare
-- #memos
-- #note
-- #secure
+Timo Heimonen

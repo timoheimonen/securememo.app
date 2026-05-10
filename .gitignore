@@ -1,130 +1,50 @@
-# Dependencies
-node_modules/
-
-# Environment files and secrets
+# Local environment
 .env
-.env.local
-.env.production
-.env.development
+.env.*
+!.env.example
 
-# Cloudflare Workers
-.wrangler/
-dist/
+# Local SQLite databases
+/data/
+*.db
+*.db-shm
+*.db-wal
+*.sqlite
+*.sqlite-shm
+*.sqlite-wal
+*.sqlite3
+*.sqlite3-shm
+*.sqlite3-wal
 
-# Logs
+# Go build and test output
+/securememo
+/bin/
+/dist/
+*.test
+*.out
+coverage.out
+/coverage/
+
+# Local Go caches used by development commands
+/.gocache/
+/.gopath/
+
+# Logs and temporary files
 *.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-lerna-debug.log*
+*.tmp
+*.temp
+*.bak
+*.backup
 
-# Runtime data
-pids
-*.pid
-*.seed
-*.pid.lock
-
-# Coverage directory used by tools like istanbul
-coverage/
-*.lcov
-
-# nyc test coverage
-.nyc_output
-
-# Dependency directories
-jspm_packages/
-
-# Optional npm cache directory
-.npm
-
-# Optional eslint cache
-.eslintcache
-
-# Optional REPL history
-.node_repl_history
-
-# Output of 'npm pack'
-*.tgz
-
-# Yarn Integrity file
-.yarn-integrity
-
-# dotenv environment variables file
-.env.test
-
-# parcel-bundler cache (https://parceljs.org/)
-.cache
-.parcel-cache
-
-# next.js build output
-.next
-
-# nuxt.js build output
-.nuxt
-
-# vuepress build output
-.vuepress/dist
-
-# Serverless directories
-.serverless/
-
-# FuseBox cache
-.fusebox/
-
-# DynamoDB Local files
-.dynamodb/
-
-# TernJS port file
-.tern-port
-
-# Stores VSCode versions used for testing VSCode extensions
-.vscode-test
-
-# OS generated files
+# OS and editor files
 .DS_Store
 .DS_Store?
 ._*
 .Spotlight-V100
 .Trashes
-ehthumbs.db
 Thumbs.db
-
-# IDE files
+ehthumbs.db
 .vscode/
 .idea/
 *.swp
 *.swo
 *~
-
-# Temporary files
-*.tmp
-*.temp
-
-# Database files (if any local development databases)
-*.db
-*.sqlite
-*.sqlite3
-
-# Backup files
-*.bak
-*.backup
-
-# Local development
-.local/ 
-pages/_routes.json
-pages/android-chrome-192x192.png
-pages/android-chrome-512x512.png
-pages/apple-touch-icon.png
-pages/favicon.ico
-pages/build.js
-deploy.sh
-schema/
-.github/instructions/*
-.github/instructions/
-
-
-#Ignore vscode AI rules
-.github/instructions/codacy.instructions.md
-.codacy/codacy.yaml
-.eslintrc.js
-.codacy/cli.sh

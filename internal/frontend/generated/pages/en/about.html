@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About securememo.app - Privacy-Focused Encrypted Notes | securememo.app</title>
+    <meta name="description" content="Learn about securememo.app's privacy-focused approach to encrypted memo sharing. Built with browser-side AES-256 encryption, automatic deletion, and no user accounts.">
+    <meta name="keywords" content="about secure memo, privacy-focused messaging, browser-side encryption, AES-256, automatic deletion, secure note sharing">
+    <!-- Open Graph for social sharing -->
+    <meta property="og:title" content="About securememo.app - Privacy-Focused Encrypted Notes">
+    <meta property="og:description" content="Discover how securememo.app protects memo content with browser-side encryption and automatic deletion after successful read confirmation or expiration.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://securememo.app/en/about.html">
+    <meta property="og:image" content="https://securememo.app/android-chrome-512x512.png">
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="About securememo.app - Privacy-Focused Encrypted Notes">
+    <meta name="twitter:description" content="Privacy-first encrypted messaging with client-side encryption.">
+    <!-- Structured Data -->
+    <script type="application/ld+json" nonce="{{CSP_NONCE}}">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How does securememo.app protect my privacy?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "securememo.app uses browser-side AES-256 encryption, meaning your memo is encrypted before being sent to our servers. We do not see the plaintext content. Memos are deleted after successful read confirmation or expiration, and we do not require user accounts."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What encryption does securememo.app use?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We use AES-256-GCM encryption with PBKDF2 key derivation. All encryption happens client-side in your browser using the Web Crypto API. The encryption password is generated separately and never stored on our servers."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How long do memos last?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Memos can be set to expire after 8 hours, 1 day, 2 days, 1 week, or 30 days maximum. After a successful read, the browser confirms deletion with the server. Expired memos are automatically cleaned up every hour."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I recover a deleted memo?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Once a memo has been deleted after successful read confirmation or expiration cleanup, it cannot be recovered. This is by design for maximum privacy and security."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is securememo.app free to use?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, securememo.app is completely free to use. There are no hidden fees, no premium features, and no tracking or advertising."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What technology does securememo.app use?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "securememo.app is built on Go service for HTTP handling, SQLite database for storage, Web Crypto API for client-side encryption, and modern HTML/CSS/JavaScript. The source code is open source and available on GitHub."
+          }
+        }
+      ]
+    }
+    </script>
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="/android-chrome-512x512.png">
+    <link rel="canonical" href="{{PUBLIC_ORIGIN}}/en/about.html">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="/en" class="nav-logo">securememo.app</a>
+            
+            <!-- Hamburger Menu Button -->
+            <button class="hamburger" type="button" aria-label="Toggle navigation menu" aria-expanded="false">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+            
+            <!-- Navigation Menu -->
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="/en" class="nav-link">Home</a></li>
+                <li><a href="/en/about.html" class="nav-link active">About</a></li>
+                <li><a href="/en/create-memo.html" class="nav-link">Create Secure Memo</a></li>
+                <li class="language-dropdown">
+                    <button class="language-toggle nav-link" aria-expanded="false" aria-haspopup="true">
+                        🇬🇧 English
+                    </button>
+                    <div class="language-menu">
+                        <a href="/ar/about.html" class="language-item " title="العربية">🌐 العربية</a>
+                        <a href="/bn/about.html" class="language-item " title="বাংলা">🇧🇩 বাংলা</a>
+                        <a href="/cs/about.html" class="language-item " title="Čeština">🇨🇿 Čeština</a>
+                        <a href="/da/about.html" class="language-item " title="Dansk">🇩🇰 Dansk</a>
+                        <a href="/de/about.html" class="language-item " title="Deutsch">🇩🇪 Deutsch</a>
+                        <a href="/el/about.html" class="language-item " title="Ελληνικά">🇬🇷 Ελληνικά</a>
+                        <a href="/en/about.html" class="language-item active" title="English">🇬🇧 English</a>
+                        <a href="/es/about.html" class="language-item " title="Español">🇪🇸 Español</a>
+                        <a href="/fi/about.html" class="language-item " title="Suomi">🇫🇮 Suomi</a>
+                        <a href="/fr/about.html" class="language-item " title="Français">🇫🇷 Français</a>
+                        <a href="/hi/about.html" class="language-item " title="हिन्दी">🇮🇳 हिन्दी</a>
+                        <a href="/hu/about.html" class="language-item " title="Magyar">🇭🇺 Magyar</a>
+                        <a href="/id/about.html" class="language-item " title="Bahasa Indonesia">🇮🇩 Bahasa Indonesia</a>
+                        <a href="/it/about.html" class="language-item " title="Italiano">🇮🇹 Italiano</a>
+                        <a href="/ja/about.html" class="language-item " title="日本語">🇯🇵 日本語</a>
+                        <a href="/ko/about.html" class="language-item " title="한국어">🇰🇷 한국어</a>
+                        <a href="/nl/about.html" class="language-item " title="Nederlands">🇳🇱 Nederlands</a>
+                        <a href="/no/about.html" class="language-item " title="Norsk">🇳🇴 Norsk</a>
+                        <a href="/pl/about.html" class="language-item " title="Polski">🇵🇱 Polski</a>
+                        <a href="/ptPT/about.html" class="language-item " title="Português (Portugal)">🇵🇹 Português</a>
+                        <a href="/ptBR/about.html" class="language-item " title="Português (Brasil)">🇧🇷 Português (Brasil)</a>
+                        <a href="/ru/about.html" class="language-item " title="Русский">🇷🇺 Русский</a>
+                        <a href="/ro/about.html" class="language-item " title="Română">🇷🇴 Română</a>
+                        <a href="/sv/about.html" class="language-item " title="Svenska">🇸🇪 Svenska</a>
+                        <a href="/tl/about.html" class="language-item " title="Tagalog">🇵🇭 Tagalog</a>
+                        <a href="/th/about.html" class="language-item " title="ไทย">🇹🇭 ไทย</a>
+                        <a href="/tr/about.html" class="language-item " title="Türkçe">🇹🇷 Türkçe</a>
+                        <a href="/uk/about.html" class="language-item " title="Українська">🇺🇦 Українська</a>
+                        <a href="/vi/about.html" class="language-item " title="Tiếng Việt">🇻🇳 Tiếng Việt</a>
+                        <a href="/zh/about.html" class="language-item " title="中文">🈶 中文</a>
+                    </div>
+                </li>
+            </ul>
+            
+            <!-- Mobile Menu Overlay -->
+            <div class="nav-overlay"></div>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <div class="about-section">
+            <h1>About securememo.app</h1>
+            <p>securememo.app is a privacy-focused application for creating encrypted memos that are deleted after successful read confirmation or expiration. Built with security and privacy as priorities. Source code available on GitHub.</p>
+            
+            <div class="features-detail">
+                <h2>Security Features</h2>
+                <div class="feature-list">
+                    <div class="feature-item">
+                        <h3>🔐 Client-Side Encryption</h3>
+                        <p>All encryption happens in your browser using the Web Crypto API. Your memo is encrypted with AES-256 before being sent to our servers.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>🔑 Separate Password Sharing</h3>
+                        <p>The encryption password is generated separately from the URL and should be shared through a different channel for enhanced security.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>Automatic Deletion</h3>
+                        <p>After a memo is successfully read, the browser confirms deletion with the server. Expired memos are removed automatically during cleanup.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>🌐 No Password Storage</h3>
+                        <p>We never send or store encryption passwords on our servers. The password is generated and handled in the browser.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>Service backend</h3>
+                        <p>The service uses a Go backend with SQLite for temporary encrypted memo storage.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>🔒 Privacy First</h3>
+                        <p>No user accounts, no analytics, and no marketing tracking. Limited operational data is used only to run and protect the service.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="usage-section">
+                <h2>How to Use</h2>
+                <div class="feature-list">
+                    <div class="feature-item">
+                        <h3>1. Create a Memo</h3>
+                        <p>Go to "Create Secure Memo" and type your memo. Choose an expiry time (8h, 1d, 2d, 1 week or a maximum of 30 days). Memos are deleted after successful read confirmation or expiration. The browser will generate a random encryption password.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>2. Share the Link and Password</h3>
+                        <p>Copy the generated URL and password, then share them with your recipient through separate channels for enhanced security.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>3. Automatic deletion</h3>
+                        <p>When the recipient opens the link and enters the password separately, the memo is decrypted in the browser. After a successful read, the browser asks the server to delete it; expired memos are cleaned up automatically every hour.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="cta-section">
+                <h2>Ready to Get Started?</h2>
+                <p>Create your first secure memo with browser-side encryption and separate password sharing.</p>
+                <div class="cta-buttons">
+                    <a href="/en/create-memo.html" class="btn btn-primary">Create Secure Memo</a>
+                    <a href="/en" class="btn btn-secondary">Go Home</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p><a href="https://github.com/timoheimonen/securememo.app" target="_blank" rel="noopener noreferrer">View source code at GitHub</a> | <a href="/en/tos.html">Terms of Service</a> | <a href="/en/privacy.html">Privacy Notice</a></p>
+        <p class="footer-tagline">No tracking, no ads, no nonsense.</p>
+    </footer>
+
+    <script src="/js/common.js" type="module" nonce="{{CSP_NONCE}}" defer></script>
+</body>
+</html>
