@@ -22,9 +22,8 @@ import (
 const maxJSONBytes = 64 * 1024
 
 type Handler struct {
-	Config    config.Config
-	Store     *store.SQLiteStore
-	Turnstile security.TurnstileVerifier
+	Config config.Config
+	Store  *store.SQLiteStore
 }
 
 func (h Handler) Create(w http.ResponseWriter, r *http.Request) {
@@ -32,10 +31,9 @@ func (h Handler) Create(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	var req struct {
-		EncryptedMessage    string      `json:"encryptedMessage"`
-		ExpiryHours         interface{} `json:"expiryHours"`
-		CFTurnstileResponse string      `json:"cfTurnstileResponse"`
-		DeletionTokenHash   string      `json:"deletionTokenHash"`
+		EncryptedMessage  string      `json:"encryptedMessage"`
+		ExpiryHours       interface{} `json:"expiryHours"`
+		DeletionTokenHash string      `json:"deletionTokenHash"`
 	}
 	if !decodeJSON(w, r, &req) {
 		return
@@ -55,11 +53,6 @@ func (h Handler) Create(w http.ResponseWriter, r *http.Request) {
 		delayedJSON(w, http.StatusBadRequest, map[string]string{"error": "Invalid deletion token."})
 		return
 	}
-	if err := h.Turnstile.Verify(r.Context(), req.CFTurnstileResponse); err != nil {
-		delayedJSON(w, http.StatusBadRequest, map[string]string{"error": "Security challenge failed."})
-		return
-	}
-
 	hours, _ := strconv.Atoi(expiryHours)
 	expiryTime := time.Now().Add(time.Duration(hours) * time.Hour).Unix()
 
@@ -83,14 +76,8 @@ func (h Handler) Read(w http.ResponseWriter, r *http.Request) {
 	if !h.requirePOST(w, r) {
 		return
 	}
-	var req struct {
-		CFTurnstileResponse string `json:"cfTurnstileResponse"`
-	}
+	var req struct{}
 	if !decodeJSON(w, r, &req) {
-		return
-	}
-	if err := h.Turnstile.Verify(r.Context(), req.CFTurnstileResponse); err != nil {
-		delayedJSON(w, http.StatusBadRequest, map[string]string{"error": "Security challenge failed."})
 		return
 	}
 

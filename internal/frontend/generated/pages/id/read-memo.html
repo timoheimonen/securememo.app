@@ -63,7 +63,6 @@
     <link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png">
     <link rel="icon" type="image/png" sizes="512x512" href="/android-chrome-512x512.png">
     <link rel="canonical" href="{{PUBLIC_ORIGIN}}/id/read-memo.html">
-    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" nonce="{{CSP_NONCE}}" crossorigin="anonymous" async defer></script>
     <script src="/js/read-memo.js?locale=id" nonce="{{CSP_NONCE}}" defer></script>
 </head>
 <body>
@@ -131,16 +130,7 @@
         <div class="memo-container">
             <div class="memo-card">
                 <h1>Baca Memo Aman</h1>
-                <p class="memo-description">Masukkan kata sandi untuk mendekripsi dan membaca memo. Kata sandi seharusnya dibagikan secara terpisah dari URL. Memo akan dihapus setelah dibaca atau kedaluwarsa.</p>
-                <div id="turnstileOverlay" class="turnstile-overlay hidden">
-                    <div class="turnstile-overlay-backdrop"></div>
-                    <div class="turnstile-overlay-content" role="dialog" aria-modal="true" aria-label="Security Challenge">
-                        <button type="button" id="closeTurnstileOverlay" class="overlay-close-btn" aria-label="Close">×</button>
-                        <div id="dynamicTurnstileContainer"></div>
-                    </div>
-                </div>
-                
-                <div id="passwordForm" class="memo-form">
+                <p class="memo-description">Masukkan kata sandi untuk mendekripsi dan membaca memo. Kata sandi seharusnya dibagikan secara terpisah dari URL. Memo akan dihapus setelah dibaca atau kedaluwarsa.</p><div id="passwordForm" class="memo-form">
                     <form id="decryptForm">
                         <div class="form-group">
                             <label for="password">Kata Sandi Enkripsi</label>

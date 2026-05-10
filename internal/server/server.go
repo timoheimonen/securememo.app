@@ -38,11 +38,6 @@ func New(cfg config.Config, db *store.SQLiteStore) *Server {
 	s.memo = memo.Handler{
 		Config: cfg,
 		Store:  db,
-		Turnstile: security.TurnstileVerifier{
-			Enabled: cfg.TurnstileEnabled,
-			Secret:  cfg.TurnstileSecret,
-			Bypass:  cfg.TurnstileBypass,
-		},
 	}
 	s.mux = http.NewServeMux()
 	s.routes()
@@ -123,8 +118,7 @@ func (s *Server) serveDynamicJS(w http.ResponseWriter, r *http.Request, filename
 	if err != nil {
 		return false
 	}
-	out := strings.ReplaceAll(string(body), "{{TURNSTILE_SITE_KEY}}", s.cfg.TurnstileSiteKey)
-	out = strings.ReplaceAll(out, "{{TURNSTILE_ENABLED}}", boolString(s.cfg.TurnstileEnabled))
+	out := string(body)
 	w.Header().Set("Content-Type", "application/javascript; charset=utf-8")
 	w.Header().Set("Cache-Control", cacheStatic(true))
 	w.Header().Set("ETag", fmt.Sprintf(`"js-%s-%x"`, assetVersion, len(out)))
@@ -197,11 +191,7 @@ func (s *Server) servePage(w http.ResponseWriter, r *http.Request) {
 	nonce, _ := r.Context().Value(nonceKey{}).(string)
 	html := string(body)
 	html = strings.ReplaceAll(html, "{{CSP_NONCE}}", nonce)
-	html = strings.ReplaceAll(html, "{{TURNSTILE_SITE_KEY}}", s.cfg.TurnstileSiteKey)
 	html = strings.ReplaceAll(html, "{{PUBLIC_ORIGIN}}", s.cfg.PublicOrigin)
-	if !s.cfg.TurnstileEnabled {
-		html = stripTurnstileScript(html)
-	}
 	html = addAssetVersions(html)
 
 	if isCacheablePage(info.PathWithoutLocale) {
@@ -333,17 +323,6 @@ func addAssetVersions(input string) string {
 	out = regexp.MustCompile(`/js/create-memo\.js\?locale=([A-Za-z0-9_-]+)`).ReplaceAllString(out, `/js/create-memo.js?locale=$1&v=`+assetVersion)
 	out = regexp.MustCompile(`/js/read-memo\.js\?locale=([A-Za-z0-9_-]+)`).ReplaceAllString(out, `/js/read-memo.js?locale=$1&v=`+assetVersion)
 	return out
-}
-
-func stripTurnstileScript(input string) string {
-	return regexp.MustCompile(`(?s)\s*<script src="https://challenges\.cloudflare\.com/turnstile/v0/api\.js"[^>]*></script>`).ReplaceAllString(input, "")
-}
-
-func boolString(value bool) string {
-	if value {
-		return "true"
-	}
-	return "false"
 }
 
 var _ fs.FS = frontend.FS

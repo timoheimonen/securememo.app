@@ -1,8 +1,3 @@
-const TURNSTILE_SITE_KEY = '{{TURNSTILE_SITE_KEY}}';
-const TURNSTILE_ENABLED = '{{TURNSTILE_ENABLED}}' !== 'false';
-let turnstileRendered = false;
-let turnstileWidgetId = null;
-let pendingSubmitEvent = null;
 function highlightCurrentPage() {
 const currentPath = window.location.pathname;
 const navLinks = document.querySelectorAll('.nav-link');
@@ -12,81 +7,6 @@ if (link.getAttribute('href') === currentPath) {
 link.classList.add('active');
 }
 });
-}
-function renderTurnstileIfNeeded(callback) {
-if (!TURNSTILE_ENABLED) {
-callback();
-return;
-}
-if (typeof turnstile === 'undefined') {
-let attempts = 0;
-const iv = setInterval(() => {
-attempts++;
-if (typeof turnstile !== 'undefined') {
-clearInterval(iv);
-renderTurnstileIfNeeded(callback);
-} else if (attempts > 40) { // ~4s
-clearInterval(iv);
-callback(new Error('turnstile_unavailable'));
-}
-}, 100);
-return;
-}
-if (turnstileRendered) {
-callback();
-return;
-}
-const container = document.getElementById('dynamicTurnstileContainer');
-if (!container) {
-callback(new Error('container_missing'));
-return;
-}
-try {
-turnstileWidgetId = turnstile.render(container, {
-sitekey: TURNSTILE_SITE_KEY,
-callback: function() {
-turnstileRendered = true;
-hideTurnstileOverlay();
-callback();
-}
-});
-} catch (e) {
-callback(e);
-}
-}
-function showTurnstileOverlay(onReady) {
-const overlay = document.getElementById('turnstileOverlay');
-if (!overlay) { onReady(new Error('overlay_missing')); return; }
-overlay.style.display = 'flex';
-document.body.style.overflow = 'hidden';
-renderTurnstileIfNeeded(onReady);
-}
-function hideTurnstileOverlay() {
-const overlay = document.getElementById('turnstileOverlay');
-if (overlay) overlay.style.display = 'none';
-document.body.style.overflow = '';
-}
-function getTurnstileResponse() {
-if (!TURNSTILE_ENABLED) {
-return 'turnstile-disabled';
-}
-if (typeof turnstile !== 'undefined' && turnstile.getResponse && turnstileWidgetId !== null) {
-try {
-const response = turnstile.getResponse(turnstileWidgetId);
-return response;
-} catch (e) {
-return null;
-}
-}
-return null;
-}
-function resetTurnstile() {
-if (!TURNSTILE_ENABLED) {
-return;
-}
-if (typeof turnstile !== 'undefined' && turnstile.reset) {
-turnstile.reset();
-}
 }
 function initializePage() {
 highlightCurrentPage();
@@ -170,14 +90,6 @@ result.set(iv, salt.length);
 result.set(new Uint8Array(encrypted), salt.length + iv.length);
 return btoa(String.fromCharCode(...result));
 }
-document.getElementById('closeTurnstileOverlay')?.addEventListener('click', () => {
-hideTurnstileOverlay();
-if (pendingSubmitEvent) {
-const submitButton = document.getElementById('submitButton');
-if (submitButton) submitButton.disabled = false;
-pendingSubmitEvent = null;
-}
-});
 document.getElementById('memoForm').addEventListener('submit', async (e) => {
 e.preventDefault();
 pendingSubmitEvent = e;
@@ -195,30 +107,6 @@ if (message.length > 10000) {
 showMessage('Memo-ul este prea lung (maxim 10.000 de caractere)', 'error');
 return;
 }
-let turnstileResponse = getTurnstileResponse();
-if (!turnstileResponse) {
-const submitButton = document.getElementById('submitButton');
-if (submitButton) submitButton.disabled = true;
-showTurnstileOverlay((err) => {
-if (err) {
-showMessage('Te rugăm să finalizezi provocarea de securitate', 'error');
-const submitButton2 = document.getElementById('submitButton');
-if (submitButton2) submitButton2.disabled = false;
-pendingSubmitEvent = null;
-return;
-}
-turnstileResponse = getTurnstileResponse();
-if (!turnstileResponse) {
-showMessage('Te rugăm să finalizezi provocarea de securitate', 'error');
-const submitButton3 = document.getElementById('submitButton');
-if (submitButton3) submitButton3.disabled = false;
-pendingSubmitEvent = null;
-return;
-}
-document.getElementById('memoForm').dispatchEvent(new Event('submit'));
-});
-return;
-}
 const submitButton = document.getElementById('submitButton');
 const loadingIndicator = document.getElementById('loadingIndicator');
 submitButton.disabled = true;
@@ -233,7 +121,6 @@ const tokenHash = await hashDeletionToken(deletionToken);
 const requestBody = {
 encryptedMessage,
 expiryHours,
-cfTurnstileResponse: turnstileResponse,
 deletionTokenHash: tokenHash // New
 };
 const response = await fetch('/api/create-memo', {
@@ -256,7 +143,6 @@ document.getElementById('memoPassword').value = password;
 document.getElementById('result').style.display = 'block';
 document.getElementById('memoForm').style.display = 'none';
 document.getElementById('message').value = '';
-resetTurnstile();
 } else {
 if (response.status === 429) {
 showMessage('Prea multe cereri. Așteaptă puțin și încearcă din nou.', 'error');

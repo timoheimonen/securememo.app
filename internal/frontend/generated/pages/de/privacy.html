@@ -151,12 +151,12 @@
                 <h2>1. Informationen, die wir sammeln</h2>
                 <p>Wir sammeln minimale Informationen, um den Service sicher und effizient zu betreiben. Konkret:</p>
                 <ul>
-                    <li>Notizdaten: Wenn Sie eine Notiz erstellen, speichern wir nur die verschlüsselte Version Ihrer Nachricht auf unseren Servern (mit Cloudflare Workers und D1-Datenbank). Der Verschlüsselungsschlüssel (Passwort) wird vollständig in Ihrem Browser generiert und verwaltet und niemals an uns gesendet oder von uns gespeichert. Notizen werden automatisch nach dem Lesen oder bei Ablauf gelöscht (Optionen: 8 Stunden, 1 Tag, 2 Tage, 1 Woche oder 30 Tage).</li>
+                    <li>Notizdaten: Wenn Sie eine Notiz erstellen, speichern wir nur die verschlüsselte Version Ihrer Nachricht auf unseren Servern (mit Go service und SQLite-Datenbank). Der Verschlüsselungsschlüssel (Passwort) wird vollständig in Ihrem Browser generiert und verwaltet und niemals an uns gesendet oder von uns gespeichert. Notizen werden automatisch nach dem Lesen oder bei Ablauf gelöscht (Optionen: 8 Stunden, 1 Tag, 2 Tage, 1 Woche oder 30 Tage).</li>
                     <li>Minimale Datenerhebung: Wir benötigen keine Benutzerkonten und erheben keine personenbezogenen Daten, um den Dienst zu nutzen. Die einzigen personenbezogenen Daten, die wir möglicherweise erfassen, sind, wenn Sie uns freiwillig für Support kontaktieren. Wenn Sie uns per E‑Mail kontaktieren, erfassen wir Ihre E‑Mail-Adresse und den Inhalt Ihrer Nachricht, um auf Ihre Anfrage zu antworten. Wir verwenden diese Informationen nicht für andere Zwecke und geben sie ohne Ihre Zustimmung nicht an Dritte weiter.</li>
                     <li>Sicherheitsbezogene Daten: Für Missbrauchsprävention und Service-Integrität:
                         <ul>
                             <li>Wir protokollieren vorübergehend IP-Adressen und Anfrage-Metadaten (z.B. Zeitstempel), um Spam, Bots oder böswillige Aktivitäten zu erkennen und zu bekämpfen.</li>
-                            <li>Wir verwenden Cloudflare Turnstile CAPTCHA, um automatisierten Missbrauch zu verhindern. Turnstile ist darauf ausgelegt, die Privatsphäre zu schützen und verfolgt Benutzer nicht über Websites hinweg.</li>
+                            <li>Wir verwenden rate limiting, um automatisierten Missbrauch zu verhindern. rate limiting ist darauf ausgelegt, die Privatsphäre zu schützen und verfolgt Benutzer nicht über Websites hinweg.</li>
                         </ul>
                     </li>
                 </ul>
@@ -169,7 +169,7 @@
                 <p>Die begrenzten Informationen, die wir sammeln, werden ausschließlich verwendet, um:</p>
                 <ul>
                     <li>Den Kernservice bereitzustellen: Verschlüsselte Notizen vorübergehend zu speichern und ihre sichere Abfrage und Löschung zu ermöglichen.</li>
-                    <li>Sicherheit zu gewährleisten: Missbrauch wie Spam oder Denial-of-Service-Angriffe mit IP-Protokollen und CAPTCHA zu erkennen und zu verhindern.</li>
+                    <li>Sicherheit zu gewährleisten: Missbrauch wie Spam oder Denial-of-Service-Angriffe mit IP-Protokollen und rate limiting zu erkennen und zu verhindern.</li>
                     <li>Rechtliche Verpflichtungen zu erfüllen: In seltenen Fällen können wir Protokolle verwenden, um auf gültige rechtliche Anfragen (z.B. Vorladungen) zu antworten.</li>
                 </ul>
                 <p>Wir verwenden keine Daten für Werbung, Verkauf an Dritte oder einen anderen Zweck, der nicht mit dem Betrieb von securememo.app zusammenhängt.</p>
@@ -179,7 +179,7 @@
                 <h2>3. Datenweitergabe und Offenlegung</h2>
                 <p>Wir verkaufen, vermieten oder teilen Ihre Daten nicht mit Dritten, außer in den folgenden begrenzten Umständen:</p>
                 <ul>
-                    <li>Service-Anbieter: Wir nutzen Cloudflare für Hosting, Datenbankspeicherung (D1) und CAPTCHA (Turnstile). Diese Anbieter verarbeiten Daten in unserem Auftrag unter strenger Vertraulichkeit und haben keinen Zugang zu Notizinhalten.</li>
+                    <li>Service-Anbieter: Wir nutzen the hosting provider für Hosting, Datenbankspeicherung (SQLite) und rate limiting (rate limiting). Diese Anbieter verarbeiten Daten in unserem Auftrag unter strenger Vertraulichkeit und haben keinen Zugang zu Notizinhalten.</li>
                     <li>Rechtliche Anforderungen: Wir können Informationen offenlegen, wenn dies gesetzlich vorgeschrieben ist, z.B. als Antwort auf einen Gerichtsbeschluss oder eine Regierungsanfrage.</li>
                     <li>Geschäftsübertragungen: Falls securememo.app erworben oder fusioniert wird, können Daten als Teil der Transaktion übertragen werden, bleiben aber diesem Datenschutzhinweis unterworfen.</li>
                 </ul>
@@ -189,8 +189,8 @@
                 <h2>4. Datensicherheit</h2>
                 <ul>
                     <li>Verschlüsselung: Alle Notizen werden clientseitig mit AES-256 und PBKDF2-Schlüsselableitung (2.200.000 Iterationen) verschlüsselt. Wir speichern nur verschlüsselte Daten und können sie nicht entschlüsseln.</li>
-                    <li>Löschung: Notizen werden nach dem Lesen oder Ablauf dauerhaft durch automatisierte Cron-Jobs gelöscht.</li>
-                    <li>Sicherheitsmaßnahmen: Wir implementieren starke Sicherheits-Header (z.B. CSP, HSTS), Eingabebereinigung, Timing-Angriffs-Schutz und CAPTCHA zur Missbrauchsprävention.</li>
+                    <li>Löschung: Notizen werden nach dem Lesen oder Ablauf dauerhaft durch automatisierte Cleanup-Jobs gelöscht.</li>
+                    <li>Sicherheitsmaßnahmen: Wir implementieren starke Sicherheits-Header (z.B. CSP, HSTS), Eingabebereinigung, Timing-Angriffs-Schutz und rate limiting zur Missbrauchsprävention.</li>
                     <li>Keine Wiederherstellung: Einmal gelöscht, können Notizen nicht wiederhergestellt werden—auch nicht von uns.</li>
                 </ul>
                 <p>Während wir angemessene Schritte unternehmen, um unsere Systeme zu sichern, ist kein Service vollständig immun gegen Risiken. Sie sind verantwortlich für das sichere Teilen von URLs und Passwörtern.</p>
@@ -222,7 +222,7 @@
 
             <div class="features-detail" id="international-transfers">
                 <h2>8. Internationale Datenübertragungen</h2>
-                <p>securememo.app wird auf Cloudflare's globalem Netzwerk gehostet. Daten können in verschiedenen Ländern verarbeitet werden, aber wir gewährleisten äquivalenten Datenschutz durch unsere minimalen Sammlungspraktiken.</p>
+                <p>securememo.app wird auf the hosting provider's globalem Netzwerk gehostet. Daten können in verschiedenen Ländern verarbeitet werden, aber wir gewährleisten äquivalenten Datenschutz durch unsere minimalen Sammlungspraktiken.</p>
             </div>
 
             <div class="usage-section" id="changes-notice">

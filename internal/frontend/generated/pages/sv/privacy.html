@@ -151,12 +151,12 @@
                 <h2>1. Information vi samlar in</h2>
                 <p>Vi samlar in minimal information för att driva tjänsten säkert och effektivt. Specifikt:</p>
                 <ul>
-                    <li>Memo-data: När du skapar en memo lagrar vi endast den krypterade versionen av ditt meddelande på våra servrar (med Cloudflare Workers och D1-databasen). Krypteringsnyckeln (lösenordet) genereras och hanteras helt i din webbläsare och skickas aldrig till eller lagras av oss. Memos raderas automatiskt efter att de lästs eller när de gått ut (alternativ: 8 timmar, 1 dag, 2 dagar, 1 vecka eller 30 dagar).</li>
+                    <li>Memo-data: När du skapar en memo lagrar vi endast den krypterade versionen av ditt meddelande på våra servrar (med Go service och SQLite-databasen). Krypteringsnyckeln (lösenordet) genereras och hanteras helt i din webbläsare och skickas aldrig till eller lagras av oss. Memos raderas automatiskt efter att de lästs eller när de gått ut (alternativ: 8 timmar, 1 dag, 2 dagar, 1 vecka eller 30 dagar).</li>
                     <li>Minimal datainsamling: Vi kräver inte användarkonton och samlar inte in personuppgifter för att du ska kunna använda tjänsten. De enda personuppgifter vi kan samla in är om du frivilligt kontaktar oss för support. Om du kontaktar oss via e-post samlar vi in din e-postadress och meddelandets innehåll för att kunna svara på din förfrågan. Vi använder inte denna information för några andra ändamål och delar den inte med tredje part utan ditt samtycke.</li>
                     <li>Säkerhetsrelaterad data: För att förhindra missbruk och skydda tjänstens integritet:
                         <ul>
                             <li>Vi loggar tillfälligt IP-adresser och begär metadata (t.ex. tidsstämplar) för att upptäcka och motverka spam, botar eller skadlig aktivitet.</li>
-                            <li>Vi använder Cloudflare Turnstile CAPTCHA för att förhindra automatiserat missbruk. Turnstile är utformad för att skydda integriteten och spårar inte användare över olika webbplatser.</li>
+                            <li>Vi använder rate limiting för att förhindra automatiserat missbruk. rate limiting är utformad för att skydda integriteten och spårar inte användare över olika webbplatser.</li>
                         </ul>
                     </li>
                 </ul>
@@ -169,7 +169,7 @@
                 <p>Den begränsade information vi samlar in används enbart för att:</p>
                 <ul>
                     <li>Tillhandahålla kärntjänsten: Lagra krypterade memos tillfälligt och möjliggöra deras säkra hämtning och radering.</li>
-                    <li>Upprätthålla säkerhet: Upptäcka och förhindra missbruk, såsom spam eller överbelastningsattacker, med hjälp av IP-loggar och CAPTCHA.</li>
+                    <li>Upprätthålla säkerhet: Upptäcka och förhindra missbruk, såsom spam eller överbelastningsattacker, med hjälp av IP-loggar och rate limiting.</li>
                     <li>Följa juridiska skyldigheter: I sällsynta fall kan vi använda loggar för att svara på giltiga juridiska förfrågningar (t.ex. stämningar).</li>
                 </ul>
                 <p>Vi använder inte någon data för reklam, försäljning till tredje part eller något ändamål som inte är relaterat till driften av securememo.app.</p>
@@ -179,7 +179,7 @@
                 <h2>3. Datadelning och utlämnande</h2>
                 <p>Vi säljer, hyr ut eller delar inte din data med tredje part, förutom i följande begränsade situationer:</p>
                 <ul>
-                    <li>Tjänsteleverantörer: Vi använder Cloudflare för hosting, databaslagring (D1) och CAPTCHA (Turnstile). Dessa leverantörer behandlar data för vår räkning under strikt sekretess och har inte tillgång till memo-innehåll.</li>
+                    <li>Tjänsteleverantörer: Vi använder the hosting provider för hosting, databaslagring (SQLite) och rate limiting (rate limiting). Dessa leverantörer behandlar data för vår räkning under strikt sekretess och har inte tillgång till memo-innehåll.</li>
                     <li>Juridiska krav: Vi kan lämna ut information om det krävs enligt lag, till exempel vid domstolsbeslut eller myndighetsförfrågan.</li>
                     <li>Företagsöverlåtelser: Om securememo.app förvärvas eller slås samman kan data överföras som en del av transaktionen, men den förblir skyddad av detta integritetsmeddelande.</li>
                 </ul>
@@ -189,8 +189,8 @@
                 <h2>4. Datasäkerhet</h2>
                 <ul>
                     <li>Kryptering: Alla memos krypteras klientbaserat med AES-256 och PBKDF2-nyckelderivering. Vi lagrar endast krypterad data och kan inte dekryptera den.</li>
-                    <li>Radering: Memos raderas permanent efter läsning eller utgång via automatiserade cron-jobb.</li>
-                    <li>Säkerhetsåtgärder: Vi implementerar starka säkerhetsrubriker (t.ex. CSP, HSTS), insatssanering, skydd mot timing-attacker och CAPTCHA för att förhindra missbruk.</li>
+                    <li>Radering: Memos raderas permanent efter läsning eller utgång via automatiserade cleanup-jobb.</li>
+                    <li>Säkerhetsåtgärder: Vi implementerar starka säkerhetsrubriker (t.ex. CSP, HSTS), insatssanering, skydd mot timing-attacker och rate limiting för att förhindra missbruk.</li>
                     <li>Ingen återställning: När en memo har raderats kan den inte återställas – inte ens av oss.</li>
                 </ul>
                 <p>Även om vi vidtar rimliga åtgärder för att säkra våra system är ingen tjänst helt riskfri. Du ansvarar för att dela URL:er och lösenord på ett säkert sätt.</p>
@@ -222,7 +222,7 @@
 
             <div class="features-detail" id="international-transfers">
                 <h2>8. Internationella dataöverföringar</h2>
-                <p>securememo.app är hostad på Cloudflares globala nätverk. Data kan behandlas i olika länder, men vi säkerställer likvärdigt integritetsskydd genom vår minimala insamling.</p>
+                <p>securememo.app är hostad på the hosting providers globala nätverk. Data kan behandlas i olika länder, men vi säkerställer likvärdigt integritetsskydd genom vår minimala insamling.</p>
             </div>
 
             <div class="usage-section" id="changes-notice">

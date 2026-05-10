@@ -1,12 +1,7 @@
-const TURNSTILE_SITE_KEY = '{{TURNSTILE_SITE_KEY}}';
-const TURNSTILE_ENABLED = '{{TURNSTILE_ENABLED}}' !== 'false';
-let turnstileRendered = false;
-let turnstileWidgetId = null; // Added to prevent implicit global usage
 const ERROR_MESSAGES = {
 MISSING_MEMO_ID: 'طلب غير صالح. يرجى التحقق من البيانات والمحاولة مرة أخرى.',
 MISSING_PASSWORD: 'يرجى إدخال كلمة مرور التشفير',
 INVALID_MEMO_URL: 'رابط المذكرة غير صالح',
-MISSING_SECURITY_CHALLENGE: 'يرجى إكمال التحدي الأمني',
 MEMO_ALREADY_READ_DELETED: 'تمت قراءة هذه المذكرة وحذفها بالفعل أو انتهت صلاحيتها.',
 MEMO_EXPIRED_DELETED: 'انتهت صلاحية هذه المذكرة وتم حذفها.',
 INVALID_PASSWORD_CHECK: 'كلمة المرور غير صحيحة. يرجى التحقق من كلمة المرور التي تلقيتها بشكل منفصل.',
@@ -30,72 +25,6 @@ if (link.getAttribute('href') === currentPath) {
 link.classList.add('active');
 }
 });
-}
-function renderTurnstileIfNeeded(callback) {
-if (!TURNSTILE_ENABLED) {
-callback();
-return;
-}
-if (typeof turnstile === 'undefined') {
-let attempts = 0;
-const iv = setInterval(() => {
-attempts++;
-if (typeof turnstile !== 'undefined') {
-clearInterval(iv);
-renderTurnstileIfNeeded(callback);
-} else if (attempts > 40) { // ~4s
-clearInterval(iv);
-callback(new Error('turnstile_unavailable'));
-}
-}, 100);
-return;
-}
-if (turnstileRendered) { callback(); return; }
-const container = document.getElementById('dynamicTurnstileContainer');
-if (!container) { callback(new Error('container_missing')); return; }
-try {
-turnstileWidgetId = turnstile.render(container, {
-sitekey: TURNSTILE_SITE_KEY,
-callback: function() {
-turnstileRendered = true;
-hideTurnstileOverlay();
-callback();
-}
-});
-} catch (e) { callback(e); }
-}
-function showTurnstileOverlay(onReady) {
-const overlay = document.getElementById('turnstileOverlay');
-if (!overlay) { onReady(new Error('overlay_missing')); return; }
-overlay.style.display = 'flex';
-document.body.style.overflow = 'hidden';
-renderTurnstileIfNeeded(onReady);
-}
-function hideTurnstileOverlay() {
-const overlay = document.getElementById('turnstileOverlay');
-if (overlay) overlay.style.display = 'none';
-document.body.style.overflow = '';
-}
-function getTurnstileResponse() {
-if (!TURNSTILE_ENABLED) {
-return 'turnstile-disabled';
-}
-if (typeof turnstile !== 'undefined' && turnstile.getResponse && turnstileWidgetId !== null) {
-try {
-return turnstile.getResponse(turnstileWidgetId);
-} catch (e) {
-return null;
-}
-}
-return null;
-}
-function resetTurnstile() {
-if (!TURNSTILE_ENABLED) {
-return;
-}
-if (typeof turnstile !== 'undefined' && turnstile.reset) {
-turnstile.reset();
-}
 }
 function getMemoId() {
 const urlParams = new URLSearchParams(window.location.search);
@@ -163,31 +92,6 @@ if (statusMessage) statusMessage.style.display = 'none';
 }
 window.addEventListener('load', () => {
 initializePage();
-const closeBtn = document.getElementById('closeTurnstileOverlay');
-if (closeBtn) {
-closeBtn.addEventListener('click', () => {
-hideTurnstileOverlay();
-const decryptButton = document.getElementById('decryptButton');
-if (decryptButton) decryptButton.disabled = false;
-});
-}
-const overlay = document.getElementById('turnstileOverlay');
-if (overlay) {
-overlay.addEventListener('click', (e) => {
-if (e.target.classList.contains('turnstile-overlay-backdrop')) {
-hideTurnstileOverlay();
-const decryptButton = document.getElementById('decryptButton');
-if (decryptButton) decryptButton.disabled = false;
-}
-});
-}
-document.addEventListener('keydown', (e) => {
-if (e.key === 'Escape') {
-hideTurnstileOverlay();
-const decryptButton = document.getElementById('decryptButton');
-if (decryptButton) decryptButton.disabled = false;
-}
-});
 const memoId = getMemoId();
 if (!memoId) {
 showError(ERROR_MESSAGES.MISSING_MEMO_ID);
@@ -207,28 +111,6 @@ if (!memoId) {
 showError(ERROR_MESSAGES.INVALID_MEMO_URL);
 return;
 }
-let turnstileResponse = getTurnstileResponse();
-if (!turnstileResponse) {
-const decryptButton = document.getElementById('decryptButton');
-if (decryptButton) decryptButton.disabled = true;
-showTurnstileOverlay((err) => {
-if (err) {
-showError(ERROR_MESSAGES.MISSING_SECURITY_CHALLENGE);
-const decryptButton2 = document.getElementById('decryptButton');
-if (decryptButton2) decryptButton2.disabled = false;
-return;
-}
-turnstileResponse = getTurnstileResponse();
-if (!turnstileResponse) {
-showError(ERROR_MESSAGES.MISSING_SECURITY_CHALLENGE);
-const decryptButton3 = document.getElementById('decryptButton');
-if (decryptButton3) decryptButton3.disabled = false;
-return;
-}
-document.getElementById('decryptForm').dispatchEvent(new Event('submit'));
-});
-return;
-}
 const decryptButton = document.getElementById('decryptButton');
 const decryptLoadingIndicator = document.getElementById('decryptLoadingIndicator');
 if (decryptButton) {
@@ -239,9 +121,7 @@ if (decryptLoadingIndicator) {
 decryptLoadingIndicator.style.display = 'block';
 }
 try {
-const requestBody = {
-cfTurnstileResponse: turnstileResponse
-};
+const requestBody = {};
 const response = await fetch('/api/read-memo?id=' + memoId, {
 method: 'POST',
 headers: {

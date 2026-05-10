@@ -22,21 +22,18 @@ func TestMemoLifecycle(t *testing.T) {
 	defer db.Close()
 
 	cfg := config.Config{
-		Addr:             "127.0.0.1:0",
-		DBPath:           "test",
-		PublicOrigin:     "https://securememo.test",
-		TurnstileSiteKey: "site-key",
-		TurnstileBypass:  true,
-		AllowedOrigins:   []string{"https://securememo.test"},
+		Addr:           "127.0.0.1:0",
+		DBPath:         "test",
+		PublicOrigin:   "https://securememo.test",
+		AllowedOrigins: []string{"https://securememo.test"},
 	}
 	app := New(cfg, db)
 
 	token := "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdef"
 	createBody := map[string]interface{}{
-		"encryptedMessage":    "encrypted-payload",
-		"expiryHours":         "8",
-		"cfTurnstileResponse": "bypass-token",
-		"deletionTokenHash":   hashDeletionTokenForTest(token),
+		"encryptedMessage":  "encrypted-payload",
+		"expiryHours":       "8",
+		"deletionTokenHash": hashDeletionTokenForTest(token),
 	}
 	createResp := doJSON(t, app, http.MethodPost, "/api/create-memo", createBody)
 	if createResp.Code != http.StatusOK {
@@ -53,9 +50,7 @@ func TestMemoLifecycle(t *testing.T) {
 		t.Fatalf("bad create response: %+v", createOut)
 	}
 
-	readResp := doJSON(t, app, http.MethodPost, "/api/read-memo?id="+createOut.MemoID, map[string]interface{}{
-		"cfTurnstileResponse": "bypass-token",
-	})
+	readResp := doJSON(t, app, http.MethodPost, "/api/read-memo?id="+createOut.MemoID, map[string]interface{}{})
 	if readResp.Code != http.StatusOK {
 		t.Fatalf("read status = %d body=%s", readResp.Code, readResp.Body.String())
 	}
@@ -78,9 +73,7 @@ func TestMemoLifecycle(t *testing.T) {
 		t.Fatalf("delete status = %d body=%s", deleteResp.Code, deleteResp.Body.String())
 	}
 
-	readAgainResp := doJSON(t, app, http.MethodPost, "/api/read-memo?id="+createOut.MemoID, map[string]interface{}{
-		"cfTurnstileResponse": "bypass-token",
-	})
+	readAgainResp := doJSON(t, app, http.MethodPost, "/api/read-memo?id="+createOut.MemoID, map[string]interface{}{})
 	if readAgainResp.Code != http.StatusNotFound {
 		t.Fatalf("read after delete status = %d body=%s", readAgainResp.Code, readAgainResp.Body.String())
 	}

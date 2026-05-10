@@ -151,12 +151,12 @@
                 <h2>1. Information We Collect</h2>
                 <p>We collect minimal information to operate the service securely and efficiently. Specifically:</p>
                 <ul>
-                    <li>Memo Data: When you create a memo, we store only the encrypted version of your message on our servers (using Cloudflare Workers and D1 Database). The encryption key (password) is generated and handled entirely in your browser and is never sent to or stored by us. Memos are automatically deleted after being read or when they expire (options: 8 hours, 1 day, 2 days, 1 week, or 30 days).</li>
+                    <li>Memo Data: When you create a memo, we store only the encrypted version of your message on our servers (using Go service and SQLite database). The encryption key (password) is generated and handled entirely in your browser and is never sent to or stored by us. Memos are automatically deleted after being read or when they expire (options: 8 hours, 1 day, 2 days, 1 week, or 30 days).</li>
                     <li>Minimal Data Collection: We do not require user accounts or collect personal information for you to use the service. The only personal data we may collect is if you voluntarily contact us for support. If you contact us via email, we collect your email address and message content to respond to your inquiry. We do not use this information for any other purposes and do not share it with third parties without your consent.</li>
                     <li>Security-Related Data: For abuse prevention and service integrity:
                         <ul>
                             <li>We temporarily log IP addresses and request metadata (e.g., timestamps) to detect and mitigate spam, bots, or malicious activity.</li>
-                            <li>We use Cloudflare Turnstile CAPTCHA to prevent automated abuse. Turnstile is designed to protect privacy and does not track users across sites.</li>
+                            <li>We use rate limiting to prevent automated abuse. rate limiting is designed to protect privacy and does not track users across sites.</li>
                         </ul>
                     </li>
                 </ul>
@@ -169,7 +169,7 @@
                 <p>The limited information we collect is used solely to:</p>
                 <ul>
                     <li>Provide the core service: Store encrypted memos temporarily and facilitate their secure retrieval and deletion.</li>
-                    <li>Maintain security: Detect and prevent abuse, such as spam or denial-of-service attacks, using IP logs and CAPTCHA.</li>
+                    <li>Maintain security: Detect and prevent abuse, such as spam or denial-of-service attacks, using IP logs and rate limiting.</li>
                     <li>Comply with legal obligations: In rare cases, we may use logs to respond to valid legal requests (e.g., subpoenas).</li>
                 </ul>
                 <p>We do not use any data for advertising, selling to third parties, or any purpose unrelated to operating securememo.app.</p>
@@ -179,7 +179,7 @@
                 <h2>3. Data Sharing and Disclosure</h2>
                 <p>We do not sell, rent, or share your data with third parties, except in the following limited circumstances:</p>
                 <ul>
-                    <li>Service Providers: We use Cloudflare for hosting, database storage (D1), and CAPTCHA (Turnstile). These providers process data on our behalf under strict confidentiality and do not access memo content.</li>
+                    <li>Service Providers: We use the hosting provider for hosting, database storage (SQLite), and rate limiting (rate limiting). These providers process data on our behalf under strict confidentiality and do not access memo content.</li>
                     <li>Legal Requirements: We may disclose information if required by law, such as in response to a court order or government request.</li>
                     <li>Business Transfers: If securememo.app is acquired or merged, data may be transferred as part of the transaction, but it would remain subject to this Privacy Notice.</li>
                 </ul>
@@ -189,8 +189,8 @@
                 <h2>4. Data Security</h2>
                 <ul>
                     <li>Encryption: All memos are encrypted client-side using AES-256 with PBKDF2 key derivation. We store only encrypted data and cannot decrypt it.</li>
-                    <li>Deletion: Memos are permanently deleted after reading or expiration via automated cron jobs.</li>
-                    <li>Security Measures: We implement strong security headers (e.g., CSP, HSTS), input sanitization, timing attack protections, and CAPTCHA to prevent abuse.</li>
+                    <li>Deletion: Memos are permanently deleted after reading or expiration via built-in cleanup jobs.</li>
+                    <li>Security Measures: We implement strong security headers (e.g., CSP, HSTS), input sanitization, timing attack protections, and rate limiting to prevent abuse.</li>
                     <li>No Recovery: Once deleted, memos cannot be recovered—even by us.</li>
                 </ul>
                 <p>While we take reasonable steps to secure our systems, no service is completely immune to risks. You are responsible for securely sharing URLs and passwords.</p>
@@ -222,7 +222,7 @@
 
             <div class="features-detail" id="international-transfers">
                 <h2>8. International Data Transfers</h2>
-                <p>securememo.app is hosted on Cloudflare's global network. Data may be processed in various countries, but we ensure equivalent privacy protections through our minimal collection practices.</p>
+                <p>securememo.app is hosted on the self-hosted deployment. Data may be processed in various countries, but we ensure equivalent privacy protections through our minimal collection practices.</p>
             </div>
 
             <div class="usage-section" id="changes-notice">

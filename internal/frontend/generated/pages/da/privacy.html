@@ -151,12 +151,12 @@
                 <h2>1. Oplysninger vi indsamler</h2>
                 <p>Vi indsamler minimale oplysninger for at drive tjenesten sikkert og effektivt. Konkret:</p>
                 <ul>
-                    <li>Notat-data: Når du opretter et notat, gemmer vi kun den krypterede version af din besked på vores servere (via Cloudflare Workers og D1 Database). Krypteringsnøglen (adgangskoden) genereres og håndteres udelukkende i din browser og sendes eller gemmes aldrig hos os. Notater slettes automatisk efter de er læst eller udløbet (muligheder: 8 timer, 1 dag, 2 dage, 1 uge eller 30 dage).</li>
+                    <li>Notat-data: Når du opretter et notat, gemmer vi kun den krypterede version af din besked på vores servere (via Go service og SQLite database). Krypteringsnøglen (adgangskoden) genereres og håndteres udelukkende i din browser og sendes eller gemmes aldrig hos os. Notater slettes automatisk efter de er læst eller udløbet (muligheder: 8 timer, 1 dag, 2 dage, 1 uge eller 30 dage).</li>
                     <li>Minimal indsamling af data: Vi kræver ikke brugerkonti og indsamler ikke personoplysninger for, at du kan bruge tjenesten. De eneste persondata vi muligvis indsamler er, hvis du frivilligt kontakter os for support. Hvis du kontakter os via e‑mail, indsamler vi din e‑mailadresse og indholdet af din besked for at kunne besvare din henvendelse. Vi bruger ikke disse oplysninger til andre formål og deler dem ikke med tredjeparter uden dit samtykke.</li>
                     <li>Sikkerhedsrelaterede data: For at forhindre misbrug og beskytte tjenestens integritet:
                         <ul>
                             <li>Vi logger midlertidigt IP-adresser og anmodningsmetadata (f.eks. tidsstempler) for at opdage og begrænse spam, bots eller skadelig aktivitet.</li>
-                            <li>Vi bruger Cloudflare Turnstile CAPTCHA for at forhindre automatiseret misbrug. Turnstile er designet til at beskytte privatliv og sporer ikke brugere på tværs af sider.</li>
+                            <li>Vi bruger rate limiting for at forhindre automatiseret misbrug. rate limiting er designet til at beskytte privatliv og sporer ikke brugere på tværs af sider.</li>
                         </ul>
                     </li>
                 </ul>
@@ -169,7 +169,7 @@
                 <p>De begrænsede oplysninger vi indsamler bruges udelukkende til:</p>
                 <ul>
                     <li>At levere kernefunktionen: Midlertidig lagring af krypterede notater og muliggørelse af sikker hentning og sletning.</li>
-                    <li>At opretholde sikkerhed: Opdage og forhindre misbrug, såsom spam eller denial-of-service-angreb, ved hjælp af IP-logs og CAPTCHA.</li>
+                    <li>At opretholde sikkerhed: Opdage og forhindre misbrug, såsom spam eller denial-of-service-angreb, ved hjælp af IP-logs og rate limiting.</li>
                     <li>At overholde juridiske forpligtelser: I sjældne tilfælde kan vi bruge logs til at besvare gyldige juridiske anmodninger (f.eks. stævninger).</li>
                 </ul>
                 <p>Vi bruger ikke data til reklame, salg til tredjepart eller formål, der ikke er relateret til driften af securememo.app.</p>
@@ -179,7 +179,7 @@
                 <h2>3. Datadeling og videregivelse</h2>
                 <p>Vi sælger, udlejer eller deler ikke dine data med tredjeparter, undtagen i følgende begrænsede tilfælde:</p>
                 <ul>
-                    <li>Tjenesteudbydere: Vi bruger Cloudflare til hosting, databaselagring (D1) og CAPTCHA (Turnstile). Disse udbydere behandler data på vores vegne under streng fortrolighed og har ikke adgang til notatindhold.</li>
+                    <li>Tjenesteudbydere: Vi bruger the hosting provider til hosting, databaselagring (SQLite) og rate limiting (rate limiting). Disse udbydere behandler data på vores vegne under streng fortrolighed og har ikke adgang til notatindhold.</li>
                     <li>Juridiske krav: Vi kan videregive oplysninger, hvis det kræves ved lov, f.eks. som svar på en retskendelse eller myndighedsanmodning.</li>
                     <li>Virksomhedsoverdragelser: Hvis securememo.app overdrages eller fusioneres, kan data overføres som en del af transaktionen, men vil fortsat være underlagt denne privatlivsmeddelelse.</li>
                 </ul>
@@ -189,8 +189,8 @@
                 <h2>4. Datasikkerhed</h2>
                 <ul>
                     <li>Kryptering: Alle notater krypteres klientbaseret med AES-256 og PBKDF2 nøgleafledning (2.200.000 iterationer). Vi gemmer kun krypterede data og kan ikke dekryptere dem.</li>
-                    <li>Sletning: Notater slettes permanent efter læsning eller udløb via automatiserede cron-jobs.</li>
-                    <li>Sikkerhedsforanstaltninger: Vi implementerer stærke sikkerhedsheaders (f.eks. CSP, HSTS), input-sanitization, beskyttelse mod timing-angreb og CAPTCHA for at forhindre misbrug.</li>
+                    <li>Sletning: Notater slettes permanent efter læsning eller udløb via automatiserede cleanup-jobs.</li>
+                    <li>Sikkerhedsforanstaltninger: Vi implementerer stærke sikkerhedsheaders (f.eks. CSP, HSTS), input-sanitization, beskyttelse mod timing-angreb og rate limiting for at forhindre misbrug.</li>
                     <li>Ingen gendannelse: Når notater er slettet, kan de ikke gendannes – heller ikke af os.</li>
                 </ul>
                 <p>Selvom vi tager rimelige skridt for at sikre vores systemer, er ingen tjeneste helt risikofri. Du er ansvarlig for at dele URLer og adgangskoder sikkert.</p>
@@ -222,7 +222,7 @@
 
             <div class="features-detail" id="international-transfers">
                 <h2>8. Internationale dataoverførsler</h2>
-                <p>securememo.app hostes på Cloudflares globale netværk. Data kan behandles i forskellige lande, men vi sikrer tilsvarende privatlivsbeskyttelse gennem vores minimale indsamling.</p>
+                <p>securememo.app hostes på the hosting providers globale netværk. Data kan behandles i forskellige lande, men vi sikrer tilsvarende privatlivsbeskyttelse gennem vores minimale indsamling.</p>
             </div>
 
             <div class="usage-section" id="changes-notice">

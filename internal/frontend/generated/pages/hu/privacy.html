@@ -151,12 +151,12 @@
                 <h2>1. Milyen információkat gyűjtünk</h2>
                 <p>Minimális információt gyűjtünk a szolgáltatás biztonságos és hatékony működtetéséhez. Konkrétan:</p>
                 <ul>
-                    <li>Jegyzetadatok: Amikor jegyzetet hoz létre, csak az üzenet titkosított változatát tároljuk szervereinken (Cloudflare Workers és D1 adatbázis). A titkosítási kulcs (jelszó) teljes egészében a böngészőben generálódik és kezelődik, soha nem küldjük el vagy tároljuk. A jegyzetek automatikusan törlődnek elolvasás vagy lejárat után (opciók: 8 óra, 1 nap, 2 nap, 1 hét vagy 30 nap).</li>
+                    <li>Jegyzetadatok: Amikor jegyzetet hoz létre, csak az üzenet titkosított változatát tároljuk szervereinken (Go service és SQLite adatbázis). A titkosítási kulcs (jelszó) teljes egészében a böngészőben generálódik és kezelődik, soha nem küldjük el vagy tároljuk. A jegyzetek automatikusan törlődnek elolvasás vagy lejárat után (opciók: 8 óra, 1 nap, 2 nap, 1 hét vagy 30 nap).</li>
                     <li>Minimális személyes adatgyűjtés: Nem kérünk felhasználói fiókot, e-mail címet, nevet vagy más azonosítót a szolgáltatás használatához, és nem gyűjtünk olyan adatot, amely közvetlenül azonosíthatná Önt. Az egyetlen személyes adat, amit kaphatunk, ha Ön önkéntesen e-mailben megkeres minket támogatásért – ekkor az e-mail címet és az üzenet tartalmát a válasz megadásához használjuk. Ezt az információt más célra nem használjuk és az Ön hozzájárulása nélkül nem osztjuk meg.</li>
                     <li>Biztonsággal kapcsolatos adatok: Visszaélés megelőzése és a szolgáltatás integritása érdekében:
                         <ul>
                             <li>Ideiglenesen naplózzuk az IP-címeket és a kérések metaadatait (pl. időbélyegek), hogy felismerjük és megelőzzük a spamet, botokat vagy rosszindulatú tevékenységet.</li>
-                            <li>Cloudflare Turnstile CAPTCHA-t használunk az automatizált visszaélések megelőzésére. A Turnstile az adatvédelem érdekében készült, és nem követi a felhasználókat webhelyek között.</li>
+                            <li>rate limiting-t használunk az automatizált visszaélések megelőzésére. A rate limiting az adatvédelem érdekében készült, és nem követi a felhasználókat webhelyek között.</li>
                         </ul>
                     </li>
                 </ul>
@@ -169,7 +169,7 @@
                 <p>A gyűjtött korlátozott információkat kizárólag az alábbi célokra használjuk:</p>
                 <ul>
                     <li>Alapszolgáltatás nyújtása: Titkosított jegyzetek ideiglenes tárolása, biztonságos visszakeresése és törlése.</li>
-                    <li>Biztonság fenntartása: Visszaélések, például spam vagy szolgáltatásmegtagadási támadások felismerése és megelőzése IP-naplók és CAPTCHA segítségével.</li>
+                    <li>Biztonság fenntartása: Visszaélések, például spam vagy szolgáltatásmegtagadási támadások felismerése és megelőzése IP-naplók és rate limiting segítségével.</li>
                     <li>Jogi kötelezettségek teljesítése: Ritka esetekben naplókat használhatunk jogszerű jogi megkeresések (pl. idézés) teljesítésére.</li>
                 </ul>
                 <p>Nem használunk adatokat reklám, harmadik félnek történő értékesítés vagy a securememo.app működtetésétől eltérő célokra.</p>
@@ -179,7 +179,7 @@
                 <h2>3. Adatmegosztás és közzététel</h2>
                 <p>Nem adjuk el, nem bérbe adjuk és nem osztjuk meg adatait harmadik felekkel, kivéve az alábbi korlátozott eseteket:</p>
                 <ul>
-                    <li>Szolgáltatók: A Cloudflare-t használjuk tárhelyhez, adatbázis-tároláshoz (D1) és CAPTCHA-hoz (Turnstile). Ezek a szolgáltatók szigorú titoktartás mellett dolgoznak, és nem férnek hozzá a jegyzet tartalmához.</li>
+                    <li>Szolgáltatók: A the hosting provider-t használjuk tárhelyhez, adatbázis-tároláshoz (SQLite) és rate limiting-hoz (rate limiting). Ezek a szolgáltatók szigorú titoktartás mellett dolgoznak, és nem férnek hozzá a jegyzet tartalmához.</li>
                     <li>Jogi követelmények: Információkat hozhatunk nyilvánosságra, ha azt jogszabály írja elő, például bírósági végzés vagy hatósági megkeresés esetén.</li>
                     <li>Üzleti átruházás: Ha a securememo.app-ot felvásárolják vagy összeolvad, az adatok átadásra kerülhetnek az ügylet részeként, de továbbra is az adatvédelmi tájékoztató hatálya alá tartoznak.</li>
                 </ul>
@@ -190,7 +190,7 @@
                 <ul>
                     <li>Titkosítás: Minden jegyzet kliensoldalon AES-256-tal PBKDF2 kulcsszármaztatással titkosítva van. Csak titkosított adatokat tárolunk, visszafejteni nem tudjuk.</li>
                     <li>Törlés: A jegyzetek véglegesen törlődnek elolvasás vagy lejárat után, automatikus időzített törléssel.</li>
-                    <li>Biztonsági intézkedések: Erős biztonsági fejléceket (pl. CSP, HSTS), bemeneti szűrést, időzítési támadások elleni védelmet és CAPTCHA-t alkalmazunk a visszaélések megelőzésére.</li>
+                    <li>Biztonsági intézkedések: Erős biztonsági fejléceket (pl. CSP, HSTS), bemeneti szűrést, időzítési támadások elleni védelmet és rate limiting-t alkalmazunk a visszaélések megelőzésére.</li>
                     <li>Nincs visszaállítás: A törölt jegyzetek nem állíthatók vissza – még általunk sem.</li>
                 </ul>
                 <p>Bár ésszerű lépéseket teszünk rendszereink védelmére, nincs teljesen kockázatmentes szolgáltatás. Ön felelős az URL-ek és jelszavak biztonságos megosztásáért.</p>
@@ -222,7 +222,7 @@
 
             <div class="features-detail" id="international-transfers">
                 <h2>8. Nemzetközi adattovábbítás</h2>
-                <p>A securememo.app a Cloudflare globális hálózatán van hosztolva. Az adatok több országban is feldolgozásra kerülhetnek, de minimális adatgyűjtési gyakorlatunkkal egyenértékű adatvédelmet biztosítunk.</p>
+                <p>A securememo.app a the hosting provider globális hálózatán van hosztolva. Az adatok több országban is feldolgozásra kerülhetnek, de minimális adatgyűjtési gyakorlatunkkal egyenértékű adatvédelmet biztosítunk.</p>
             </div>
 
             <div class="usage-section" id="changes-notice">

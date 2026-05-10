@@ -151,12 +151,12 @@
                 <h2>1. Informations que Nous Collectons</h2>
                 <p>Nous collectons un minimum d'informations pour faire fonctionner le service de manière sécurisée et efficace. Spécifiquement :</p>
                 <ul>
-                    <li>Données du Mémo : Quand vous créez un mémo, nous stockons seulement la version chiffrée de votre message sur nos serveurs (en utilisant Cloudflare Workers et Base de Données D1). La clé de chiffrement (mot de passe) est générée et gérée entièrement dans votre navigateur et n'est jamais envoyée ou stockée par nous. Les mémos sont automatiquement supprimés après avoir été lus ou à leur expiration (options : 8 heures, 1 jour, 2 jours, 1 semaine ou 30 jours).</li>
+                    <li>Données du Mémo : Quand vous créez un mémo, nous stockons seulement la version chiffrée de votre message sur nos serveurs (en utilisant Go service et Base de Données SQLite). La clé de chiffrement (mot de passe) est générée et gérée entièrement dans votre navigateur et n'est jamais envoyée ou stockée par nous. Les mémos sont automatiquement supprimés après avoir été lus ou à leur expiration (options : 8 heures, 1 jour, 2 jours, 1 semaine ou 30 jours).</li>
                     <li>Collecte Minimale de Données : Nous n'exigeons pas de comptes utilisateur ni ne collectons d'informations personnelles pour que vous utilisiez le service. Les seules données personnelles que nous pouvons recueillir sont si vous nous contactez volontairement pour du support. Si vous nous contactez par courriel, nous collectons votre adresse courriel et le contenu du message afin de répondre à votre demande. Nous n'utilisons pas ces informations à d'autres fins et ne les partageons pas avec des tiers sans votre consentement.</li>
                     <li>Données Liées à la Sécurité : Pour la prévention des abus et l'intégrité du service :
                         <ul>
                             <li>Nous enregistrons temporairement les adresses IP et les métadonnées de requête (par exemple, horodatages) pour détecter et atténuer le spam, les bots ou l'activité malveillante.</li>
-                            <li>Nous utilisons Cloudflare Turnstile CAPTCHA pour prévenir les abus automatisés. Turnstile est conçu pour protéger la confidentialité et ne suit pas les utilisateurs à travers les sites.</li>
+                            <li>Nous utilisons rate limiting pour prévenir les abus automatisés. rate limiting est conçu pour protéger la confidentialité et ne suit pas les utilisateurs à travers les sites.</li>
                         </ul>
                     </li>
                 </ul>
@@ -169,7 +169,7 @@
                 <p>Les informations limitées que nous collectons sont utilisées uniquement pour :</p>
                 <ul>
                     <li>Fournir le service principal : Stocker les mémos chiffrés temporairement et faciliter leur récupération et suppression sécurisées.</li>
-                    <li>Maintenir la sécurité : Détecter et prévenir les abus, comme le spam ou les attaques par déni de service, en utilisant les journaux IP et CAPTCHA.</li>
+                    <li>Maintenir la sécurité : Détecter et prévenir les abus, comme le spam ou les attaques par déni de service, en utilisant les journaux IP et rate limiting.</li>
                     <li>Respecter les obligations légales : Dans de rares cas, nous pouvons utiliser les journaux pour répondre à des demandes légales valides (par exemple, assignations).</li>
                 </ul>
                 <p>Nous n'utilisons aucune donnée pour la publicité, la vente à des tiers ou tout autre but non lié à l'exploitation de securememo.app.</p>
@@ -179,7 +179,7 @@
                 <h2>3. Partage et Divulgation des Données</h2>
                 <p>Nous ne vendons, ne louons ni ne partageons vos données avec des tiers, sauf dans les circonstances limitées suivantes :</p>
                 <ul>
-                    <li>Fournisseurs de Services : Nous utilisons Cloudflare pour l'hébergement, le stockage de base de données (D1) et CAPTCHA (Turnstile). Ces fournisseurs traitent les données en notre nom sous stricte confidentialité et n'accèdent pas au contenu des mémos.</li>
+                    <li>Fournisseurs de Services : Nous utilisons the hosting provider pour l'hébergement, le stockage de base de données (SQLite) et rate limiting (rate limiting). Ces fournisseurs traitent les données en notre nom sous stricte confidentialité et n'accèdent pas au contenu des mémos.</li>
                     <li>Exigences Légales : Nous pouvons divulguer des informations si requis par la loi, comme en réponse à une ordonnance du tribunal ou une demande gouvernementale.</li>
                     <li>Transferts d'Entreprise : Si securememo.app est acquise ou fusionnée, les données peuvent être transférées dans le cadre de la transaction, mais elles resteraient soumises à cet Avis de Confidentialité.</li>
                 </ul>
@@ -189,8 +189,8 @@
                 <h2>4. Sécurité des Données</h2>
                 <ul>
                     <li>Chiffrement : Tous les mémos sont chiffrés côté client en utilisant AES-256 avec dérivation de clé PBKDF2. Nous stockons seulement les données chiffrées et ne pouvons pas les déchiffrer.</li>
-                    <li>Suppression : Les mémos sont définitivement supprimés après lecture ou expiration via des tâches cron automatisées.</li>
-                    <li>Mesures de Sécurité : Nous implémentons de forts en-têtes de sécurité (par exemple, CSP, HSTS), désinfection des entrées, protections contre les attaques temporelles et CAPTCHA pour prévenir les abus.</li>
+                    <li>Suppression : Les mémos sont définitivement supprimés après lecture ou expiration via des tâches cleanup automatisées.</li>
+                    <li>Mesures de Sécurité : Nous implémentons de forts en-têtes de sécurité (par exemple, CSP, HSTS), désinfection des entrées, protections contre les attaques temporelles et rate limiting pour prévenir les abus.</li>
                     <li>Aucune Récupération : Une fois supprimés, les mémos ne peuvent pas être récupérés—même par nous.</li>
                 </ul>
                 <p>Bien que nous prenions des mesures raisonnables pour sécuriser nos systèmes, aucun service n'est complètement immunisé contre les risques. Vous êtes responsable du partage sécurisé des URLs et mots de passe.</p>
@@ -222,7 +222,7 @@
 
             <div class="features-detail" id="international-transfers">
                 <h2>8. Transferts Internationaux de Données</h2>
-                <p>securememo.app est hébergé sur le réseau global de Cloudflare. Les données peuvent être traitées dans divers pays, mais nous assurons des protections de confidentialité équivalentes grâce à nos pratiques de collecte minimale.</p>
+                <p>securememo.app est hébergé sur le réseau global de the hosting provider. Les données peuvent être traitées dans divers pays, mais nous assurons des protections de confidentialité équivalentes grâce à nos pratiques de collecte minimale.</p>
             </div>
 
             <div class="usage-section" id="changes-notice">

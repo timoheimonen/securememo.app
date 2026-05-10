@@ -151,12 +151,12 @@
                 <h2>1. Informasi yang Kami Kumpulkan</h2>
                 <p>Kami mengumpulkan informasi minimal untuk mengoperasikan layanan dengan aman dan efisien. Secara khusus:</p>
                 <ul>
-                    <li>Data Memo: Saat Anda membuat memo, kami hanya menyimpan versi terenkripsi dari pesan Anda di server kami (menggunakan Cloudflare Workers dan D1 Database). Kunci enkripsi (kata sandi) dihasilkan dan ditangani sepenuhnya di browser Anda dan tidak pernah dikirim ke atau disimpan oleh kami. Memo secara otomatis dihapus setelah dibaca atau saat kedaluwarsa (opsi: 8 jam, 1 hari, 2 hari, 1 minggu, atau 30 hari).</li>
+                    <li>Data Memo: Saat Anda membuat memo, kami hanya menyimpan versi terenkripsi dari pesan Anda di server kami (menggunakan Go service dan SQLite database). Kunci enkripsi (kata sandi) dihasilkan dan ditangani sepenuhnya di browser Anda dan tidak pernah dikirim ke atau disimpan oleh kami. Memo secara otomatis dihapus setelah dibaca atau saat kedaluwarsa (opsi: 8 jam, 1 hari, 2 hari, 1 minggu, atau 30 hari).</li>
                     <li>Pengumpulan Data Pribadi Minimal: Kami tidak memerlukan akun pengguna, alamat email, nama, atau pengenal lainnya agar layanan dapat digunakan, dan kami tidak mengumpulkan data apa pun yang dapat mengidentifikasi Anda secara langsung. Satu-satunya data pribadi yang mungkin kami peroleh adalah jika Anda secara sukarela mengirim email kepada kami untuk dukungan—dalam hal ini kami menggunakan alamat email dan isi pesan hanya untuk membalas. Kami tidak menggunakan data ini untuk tujuan lain dan tidak membagikannya tanpa persetujuan Anda.</li>
                     <li>Data Terkait Keamanan: Untuk pencegahan penyalahgunaan dan integritas layanan:
                         <ul>
                             <li>Kami untuk sementara mencatat alamat IP dan metadata permintaan (misalnya, stempel waktu) untuk mendeteksi dan mengurangi spam, bot, atau aktivitas berbahaya.</li>
-                            <li>Kami menggunakan Cloudflare Turnstile CAPTCHA untuk mencegah penyalahgunaan otomatis. Turnstile dirancang untuk melindungi privasi dan tidak melacak pengguna di seluruh situs.</li>
+                            <li>Kami menggunakan rate limiting untuk mencegah penyalahgunaan otomatis. rate limiting dirancang untuk melindungi privasi dan tidak melacak pengguna di seluruh situs.</li>
                         </ul>
                     </li>
                 </ul>
@@ -169,7 +169,7 @@
                 <p>Informasi terbatas yang kami kumpulkan digunakan semata-mata untuk:</p>
                 <ul>
                     <li>Menyediakan layanan inti: Menyimpan memo terenkripsi sementara dan memfasilitasi pengambilan dan penghapusan yang aman.</li>
-                    <li>Mempertahankan keamanan: Mendeteksi dan mencegah penyalahgunaan, seperti spam atau serangan denial-of-service, menggunakan log IP dan CAPTCHA.</li>
+                    <li>Mempertahankan keamanan: Mendeteksi dan mencegah penyalahgunaan, seperti spam atau serangan denial-of-service, menggunakan log IP dan rate limiting.</li>
                     <li>Mematuhi kewajiban hukum: Dalam kasus langka, kami dapat menggunakan log untuk merespons permintaan hukum yang valid (misalnya, panggilan pengadilan).</li>
                 </ul>
                 <p>Kami tidak menggunakan data apa pun untuk periklanan, menjual kepada pihak ketiga, atau tujuan apa pun yang tidak terkait dengan mengoperasikan securememo.app.</p>
@@ -179,7 +179,7 @@
                 <h2>3. Berbagi dan Pengungkapan Data</h2>
                 <p>Kami tidak menjual, menyewakan, atau berbagi data Anda dengan pihak ketiga, kecuali dalam keadaan terbatas berikut:</p>
                 <ul>
-                    <li>Penyedia Layanan: Kami menggunakan Cloudflare untuk hosting, penyimpanan database (D1), dan CAPTCHA (Turnstile). Penyedia ini memproses data atas nama kami di bawah kerahasiaan ketat dan tidak mengakses konten memo.</li>
+                    <li>Penyedia Layanan: Kami menggunakan the hosting provider untuk hosting, penyimpanan database (SQLite), dan rate limiting (rate limiting). Penyedia ini memproses data atas nama kami di bawah kerahasiaan ketat dan tidak mengakses konten memo.</li>
                     <li>Persyaratan Hukum: Kami dapat mengungkapkan informasi jika diperlukan oleh hukum, seperti sebagai respons terhadap perintah pengadilan atau permintaan pemerintah.</li>
                     <li>Transfer Bisnis: Jika securememo.app diakuisisi atau digabung, data dapat ditransfer sebagai bagian dari transaksi, tetapi akan tetap tunduk pada Pemberitahuan Privasi ini.</li>
                 </ul>
@@ -189,8 +189,8 @@
                 <h2>4. Keamanan Data</h2>
                 <ul>
                     <li>Enkripsi: Semua memo dienkripsi di sisi klien menggunakan AES-256 dengan derivasi kunci PBKDF2. Kami hanya menyimpan data terenkripsi dan tidak dapat mendekripsinya.</li>
-                    <li>Penghapusan: Memo dihapus secara permanen setelah dibaca atau kedaluwarsa melalui tugas cron otomatis.</li>
-                    <li>Langkah Keamanan: Kami menerapkan header keamanan yang kuat (misalnya, CSP, HSTS), sanitasi input, perlindungan serangan timing, dan CAPTCHA untuk mencegah penyalahgunaan.</li>
+                    <li>Penghapusan: Memo dihapus secara permanen setelah dibaca atau kedaluwarsa melalui tugas cleanup otomatis.</li>
+                    <li>Langkah Keamanan: Kami menerapkan header keamanan yang kuat (misalnya, CSP, HSTS), sanitasi input, perlindungan serangan timing, dan rate limiting untuk mencegah penyalahgunaan.</li>
                     <li>Tidak Ada Pemulihan: Setelah dihapus, memo tidak dapat dipulihkan—bahkan oleh kami.</li>
                 </ul>
                 <p>Meskipun kami mengambil langkah-langkah wajar untuk mengamankan sistem kami, tidak ada layanan yang sepenuhnya kebal terhadap risiko. Anda bertanggung jawab untuk berbagi URL dan kata sandi dengan aman.</p>
@@ -222,7 +222,7 @@
 
             <div class="features-detail" id="international-transfers">
                 <h2>8. Transfer Data Internasional</h2>
-                <p>securememo.app dihosting di jaringan global Cloudflare. Data mungkin diproses di berbagai negara, tetapi kami memastikan perlindungan privasi yang setara melalui praktik pengumpulan minimal kami.</p>
+                <p>securememo.app dihosting di jaringan the self-hosted deployment. Data mungkin diproses di berbagai negara, tetapi kami memastikan perlindungan privasi yang setara melalui praktik pengumpulan minimal kami.</p>
             </div>
 
             <div class="usage-section" id="changes-notice">

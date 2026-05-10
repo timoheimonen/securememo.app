@@ -10,10 +10,6 @@ type Config struct {
 	Addr              string
 	DBPath            string
 	PublicOrigin      string
-	TurnstileSiteKey  string
-	TurnstileSecret   string
-	TurnstileEnabled  bool
-	TurnstileBypass   bool
 	AllowedOrigins    []string
 	TrustedProxyLocal bool
 }
@@ -23,10 +19,6 @@ func FromEnv() (Config, error) {
 		Addr:              envOrDefault("SECUREMEMO_ADDR", "127.0.0.1:3000"),
 		DBPath:            envOrDefault("SECUREMEMO_DB_PATH", "./data/securememo.sqlite"),
 		PublicOrigin:      strings.TrimRight(envOrDefault("PUBLIC_ORIGIN", "https://securememo.app"), "/"),
-		TurnstileSiteKey:  os.Getenv("TURNSTILE_SITE_KEY"),
-		TurnstileSecret:   os.Getenv("TURNSTILE_SECRET"),
-		TurnstileEnabled:  envBool("SECUREMEMO_TURNSTILE_ENABLED"),
-		TurnstileBypass:   envBool("SECUREMEMO_TURNSTILE_BYPASS"),
 		TrustedProxyLocal: true,
 	}
 
@@ -46,15 +38,6 @@ func envOrDefault(key, fallback string) string {
 		return value
 	}
 	return fallback
-}
-
-func envBool(key string) bool {
-	switch strings.ToLower(strings.TrimSpace(os.Getenv(key))) {
-	case "1", "true", "yes", "on":
-		return true
-	default:
-		return false
-	}
 }
 
 func allowedOrigins(publicOrigin, extra string) []string {

@@ -151,12 +151,12 @@
                 <h2>1. Kerättävät tiedot</h2>
                 <p>Keräämme vain välttämättömät tiedot palvelun turvalliseen ja tehokkaaseen toimintaan. Tarkemmin:</p>
                 <ul>
-                    <li>Muistiotiedot: Kun luot muistion, tallennamme vain viestisi salatun version palvelimillemme (Cloudflare Workers ja D1-tietokanta). Salausavain (salasana) luodaan ja käsitellään kokonaan selaimessasi, eikä sitä koskaan lähetetä tai tallenneta meille. Muistiot poistetaan automaattisesti lukemisen jälkeen tai kun ne vanhentuvat (vaihtoehdot: 8 tuntia, 1 päivä, 2 päivää, 1 viikko tai 30 päivää).</li>
+                    <li>Muistiotiedot: Kun luot muistion, tallennamme vain viestisi salatun version palvelimillemme (Go service ja SQLite-tietokanta). Salausavain (salasana) luodaan ja käsitellään kokonaan selaimessasi, eikä sitä koskaan lähetetä tai tallenneta meille. Muistiot poistetaan automaattisesti lukemisen jälkeen tai kun ne vanhentuvat (vaihtoehdot: 8 tuntia, 1 päivä, 2 päivää, 1 viikko tai 30 päivää).</li>
                     <li>Minimaalinen tietojen keruu: Emme vaadi käyttäjätilejä tai kerää henkilötietoja palvelun käyttämistä varten. Ainoa mahdollinen henkilötieto, jonka voimme saada, on jos otat meihin vapaaehtoisesti yhteyttä tuen saamiseksi. Jos lähetät meille sähköpostia, keräämme sähköpostiosoitteesi ja viestin sisällön vastataksemme kyselyysi. Emme käytä näitä tietoja muihin tarkoituksiin emmekä jaa niitä kolmansille osapuolille ilman suostumustasi.</li>
                     <li>Turvallisuuteen liittyvät tiedot: Väärinkäytösten estoon ja palvelun eheyden suojaamiseen:
                         <ul>
                             <li>Kirjaamme tilapäisesti IP-osoitteita ja pyyntöjen metadataa (esim. aikaleimat) roskapostin, bottien tai haitallisen toiminnan havaitsemiseksi ja estämiseksi.</li>
-                            <li>Käytämme Cloudflare Turnstile CAPTCHAa automaattisen väärinkäytön estämiseksi. Turnstile on suunniteltu yksityisyyttä kunnioittaen, eikä se seuraa käyttäjiä sivustojen välillä.</li>
+                            <li>Käytämme rate limitinga automaattisen väärinkäytön estämiseksi. rate limiting on suunniteltu yksityisyyttä kunnioittaen, eikä se seuraa käyttäjiä sivustojen välillä.</li>
                         </ul>
                     </li>
                 </ul>
@@ -169,7 +169,7 @@
                 <p>Keräämiämme rajoitettuja tietoja käytetään vain seuraaviin tarkoituksiin:</p>
                 <ul>
                     <li>Palvelun tarjoaminen: Salattujen muistioiden tilapäinen tallennus ja niiden turvallinen nouto ja poisto.</li>
-                    <li>Turvallisuuden ylläpito: Väärinkäytösten, kuten roskapostin tai palvelunestohyökkäysten, havaitseminen ja estäminen IP-lokien ja CAPTCHA:n avulla.</li>
+                    <li>Turvallisuuden ylläpito: Väärinkäytösten, kuten roskapostin tai palvelunestohyökkäysten, havaitseminen ja estäminen IP-lokien ja rate limiting:n avulla.</li>
                     <li>Lakivelvoitteiden täyttäminen: Harvinaisissa tapauksissa voimme käyttää lokitietoja vastataksemme laillisiin pyyntöihin (esim. haasteet).</li>
                 </ul>
                 <p>Emme käytä mitään tietoja mainontaan, kolmansille osapuolille myyntiin tai mihinkään muuhun securememo.appin toimintaan liittymättömään tarkoitukseen.</p>
@@ -179,7 +179,7 @@
                 <h2>3. Tietojen jakaminen ja luovutus</h2>
                 <p>Emme myy, vuokraa tai jaa tietojasi kolmansille osapuolille, paitsi seuraavissa rajoitetuissa tilanteissa:</p>
                 <ul>
-                    <li>Palveluntarjoajat: Käytämme Cloudflarea palvelun isännöintiin, tietokannan tallennukseen (D1) ja CAPTCHA-suojaukseen (Turnstile). Nämä palveluntarjoajat käsittelevät tietoja puolestamme tiukasti luottamuksellisesti, eivätkä pääse muistion sisältöön.</li>
+                    <li>Palveluntarjoajat: Käytämme the hosting providera palvelun isännöintiin, tietokannan tallennukseen (SQLite) ja rate limiting-suojaukseen (rate limiting). Nämä palveluntarjoajat käsittelevät tietoja puolestamme tiukasti luottamuksellisesti, eivätkä pääse muistion sisältöön.</li>
                     <li>Lakivaatimukset: Voimme luovuttaa tietoja, jos laki sitä vaatii, esimerkiksi tuomioistuimen määräyksen tai viranomaispyynnön perusteella.</li>
                     <li>Liiketoiminnan siirrot: Jos securememo.app myydään tai yhdistetään toiseen yritykseen, tiedot voidaan siirtää osana kauppaa, mutta ne pysyvät tämän tietosuojailmoituksen alaisina.</li>
                 </ul>
@@ -189,8 +189,8 @@
                 <h2>4. Tietoturva</h2>
                 <ul>
                     <li>Salaus: Kaikki muistiot salataan selaimessa AES-256:lla PBKDF2-avainjohdannalla. Tallennamme vain salattua dataa emmekä voi purkaa sitä.</li>
-                    <li>Poisto: Muistiot poistetaan pysyvästi lukemisen tai vanhentumisen jälkeen automaattisten cron-ajojen avulla.</li>
-                    <li>Turvatoimet: Toteutamme vahvat suojausotsikot (esim. CSP, HSTS), syötteen puhdistuksen, ajoitushyökkäysten suojauksen ja CAPTCHA:n väärinkäytön estämiseksi.</li>
+                    <li>Poisto: Muistiot poistetaan pysyvästi lukemisen tai vanhentumisen jälkeen automaattisten cleanup-ajojen avulla.</li>
+                    <li>Turvatoimet: Toteutamme vahvat suojausotsikot (esim. CSP, HSTS), syötteen puhdistuksen, ajoitushyökkäysten suojauksen ja rate limiting:n väärinkäytön estämiseksi.</li>
                     <li>Ei palautusta: Kun muistio on poistettu, sitä ei voi palauttaa – edes meiltä.</li>
                 </ul>
                 <p>Vaikka suojaamme järjestelmämme huolellisesti, mikään palvelu ei ole täysin riskitön. Olet itse vastuussa URL-osoitteiden ja salasanojen turvallisesta jakamisesta.</p>
@@ -222,7 +222,7 @@
 
             <div class="features-detail" id="international-transfers">
                 <h2>8. Kansainväliset tiedonsiirrot</h2>
-                <p>securememo.app on isännöity Cloudflaren globaalissa verkossa. Tietoja voidaan käsitellä eri maissa, mutta varmistamme vastaavan yksityisyyden suojan minimikeräyksen avulla.</p>
+                <p>securememo.app on isännöity the hosting providern globaalissa verkossa. Tietoja voidaan käsitellä eri maissa, mutta varmistamme vastaavan yksityisyyden suojan minimikeräyksen avulla.</p>
             </div>
 
             <div class="usage-section" id="changes-notice">

@@ -151,12 +151,12 @@
                 <h2>1. Thông tin chúng tôi thu thập</h2>
                 <p>Chúng tôi thu thập thông tin tối thiểu để vận hành dịch vụ một cách an toàn và hiệu quả. Cụ thể:</p>
                 <ul>
-                    <li>Dữ liệu ghi chú: Khi bạn tạo ghi chú, chúng tôi chỉ lưu phiên bản đã mã hóa của tin nhắn trên máy chủ (sử dụng Cloudflare Workers và D1 Database). Khóa mã hóa (mật khẩu) được tạo và xử lý hoàn toàn trên trình duyệt của bạn và không bao giờ được gửi hoặc lưu bởi chúng tôi. Ghi chú sẽ tự động bị xóa sau khi đọc hoặc khi hết hạn (tùy chọn: 8 giờ, 1 ngày, 2 ngày, 1 tuần hoặc 30 ngày).</li>
+                    <li>Dữ liệu ghi chú: Khi bạn tạo ghi chú, chúng tôi chỉ lưu phiên bản đã mã hóa của tin nhắn trên máy chủ (sử dụng Go service và SQLite database). Khóa mã hóa (mật khẩu) được tạo và xử lý hoàn toàn trên trình duyệt của bạn và không bao giờ được gửi hoặc lưu bởi chúng tôi. Ghi chú sẽ tự động bị xóa sau khi đọc hoặc khi hết hạn (tùy chọn: 8 giờ, 1 ngày, 2 ngày, 1 tuần hoặc 30 ngày).</li>
                     <li>Thu thập dữ liệu tối thiểu: Chúng tôi không yêu cầu tài khoản người dùng hoặc thu thập thông tin cá nhân để bạn sử dụng dịch vụ. Dữ liệu cá nhân duy nhất chúng tôi có thể có là khi bạn chủ động liên hệ hỗ trợ. Nếu bạn gửi email, chúng tôi lưu địa chỉ email và nội dung tin nhắn để phản hồi. Chúng tôi không sử dụng cho mục đích khác và không chia sẻ với bên thứ ba nếu không có sự đồng ý của bạn.</li>
                     <li>Dữ liệu liên quan đến bảo mật: Để ngăn chặn lạm dụng và bảo vệ dịch vụ:
                         <ul>
                             <li>Chúng tôi tạm thời ghi lại địa chỉ IP và metadata yêu cầu (ví dụ: thời gian) để phát hiện và giảm thiểu spam, bot hoặc hoạt động độc hại.</li>
-                            <li>Chúng tôi sử dụng Cloudflare Turnstile CAPTCHA để ngăn chặn lạm dụng tự động. Turnstile được thiết kế bảo vệ quyền riêng tư và không theo dõi người dùng trên các trang web.</li>
+                            <li>Chúng tôi sử dụng rate limiting để ngăn chặn lạm dụng tự động. rate limiting được thiết kế bảo vệ quyền riêng tư và không theo dõi người dùng trên các trang web.</li>
                         </ul>
                     </li>
                 </ul>
@@ -169,7 +169,7 @@
                 <p>Thông tin hạn chế chúng tôi thu thập chỉ được sử dụng để:</p>
                 <ul>
                     <li>Cung cấp dịch vụ cốt lõi: Lưu trữ ghi chú đã mã hóa tạm thời và hỗ trợ truy xuất, xóa an toàn.</li>
-                    <li>Duy trì bảo mật: Phát hiện và ngăn chặn lạm dụng như spam hoặc tấn công từ chối dịch vụ, sử dụng nhật ký IP và CAPTCHA.</li>
+                    <li>Duy trì bảo mật: Phát hiện và ngăn chặn lạm dụng như spam hoặc tấn công từ chối dịch vụ, sử dụng nhật ký IP và rate limiting.</li>
                     <li>Tuân thủ nghĩa vụ pháp lý: Trong trường hợp hiếm, chúng tôi có thể sử dụng nhật ký để phản hồi yêu cầu pháp lý hợp lệ (ví dụ: trát đòi hầu tòa).</li>
                 </ul>
                 <p>Chúng tôi không sử dụng bất kỳ dữ liệu nào cho quảng cáo, bán cho bên thứ ba hoặc bất kỳ mục đích nào không liên quan đến vận hành securememo.app.</p>
@@ -179,7 +179,7 @@
                 <h2>3. Chia sẻ và tiết lộ dữ liệu</h2>
                 <p>Chúng tôi không bán, cho thuê hoặc chia sẻ dữ liệu của bạn với bên thứ ba, ngoại trừ các trường hợp giới hạn sau:</p>
                 <ul>
-                    <li>Nhà cung cấp dịch vụ: Chúng tôi sử dụng Cloudflare để lưu trữ, lưu trữ cơ sở dữ liệu (D1) và CAPTCHA (Turnstile). Các nhà cung cấp này xử lý dữ liệu thay mặt chúng tôi theo quy định bảo mật nghiêm ngặt và không truy cập nội dung ghi chú.</li>
+                    <li>Nhà cung cấp dịch vụ: Chúng tôi sử dụng the hosting provider để lưu trữ, lưu trữ cơ sở dữ liệu (SQLite) và rate limiting (rate limiting). Các nhà cung cấp này xử lý dữ liệu thay mặt chúng tôi theo quy định bảo mật nghiêm ngặt và không truy cập nội dung ghi chú.</li>
                     <li>Yêu cầu pháp lý: Chúng tôi có thể tiết lộ thông tin nếu pháp luật yêu cầu, ví dụ: theo lệnh tòa hoặc yêu cầu của chính phủ.</li>
                     <li>Chuyển giao kinh doanh: Nếu securememo.app bị mua lại hoặc sáp nhập, dữ liệu có thể được chuyển giao như một phần của giao dịch, nhưng vẫn tuân thủ thông báo quyền riêng tư này.</li>
                 </ul>
@@ -189,8 +189,8 @@
                 <h2>4. Bảo mật dữ liệu</h2>
                 <ul>
                     <li>Mã hóa: Tất cả ghi chú được mã hóa phía khách hàng bằng AES-256 với PBKDF2. Chúng tôi chỉ lưu dữ liệu đã mã hóa và không thể giải mã.</li>
-                    <li>Xóa: Ghi chú sẽ bị xóa vĩnh viễn sau khi đọc hoặc hết hạn thông qua cron job tự động.</li>
-                    <li>Biện pháp bảo mật: Chúng tôi triển khai các header bảo mật mạnh (ví dụ: CSP, HSTS), kiểm tra đầu vào, bảo vệ chống tấn công thời gian và CAPTCHA để ngăn chặn lạm dụng.</li>
+                    <li>Xóa: Ghi chú sẽ bị xóa vĩnh viễn sau khi đọc hoặc hết hạn thông qua cleanup job tự động.</li>
+                    <li>Biện pháp bảo mật: Chúng tôi triển khai các header bảo mật mạnh (ví dụ: CSP, HSTS), kiểm tra đầu vào, bảo vệ chống tấn công thời gian và rate limiting để ngăn chặn lạm dụng.</li>
                     <li>Không khôi phục: Khi đã xóa, ghi chú không thể khôi phục—even bởi chúng tôi.</li>
                 </ul>
                 <p>Mặc dù chúng tôi thực hiện các bước hợp lý để bảo vệ hệ thống, không dịch vụ nào hoàn toàn miễn nhiễm rủi ro. Bạn chịu trách nhiệm chia sẻ URL và mật khẩu một cách an toàn.</p>
@@ -222,7 +222,7 @@
 
             <div class="features-detail" id="international-transfers">
                 <h2>8. Chuyển dữ liệu quốc tế</h2>
-                <p>securememo.app được lưu trữ trên mạng lưới toàn cầu của Cloudflare. Dữ liệu có thể được xử lý ở nhiều quốc gia, nhưng chúng tôi đảm bảo bảo vệ quyền riêng tư tương đương thông qua thực tiễn thu thập tối thiểu.</p>
+                <p>securememo.app được lưu trữ trên mạng lưới toàn cầu của the hosting provider. Dữ liệu có thể được xử lý ở nhiều quốc gia, nhưng chúng tôi đảm bảo bảo vệ quyền riêng tư tương đương thông qua thực tiễn thu thập tối thiểu.</p>
             </div>
 
             <div class="usage-section" id="changes-notice">

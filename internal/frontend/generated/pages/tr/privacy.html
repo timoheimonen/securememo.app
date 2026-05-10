@@ -151,12 +151,12 @@
                 <h2>1. Topladığımız Bilgiler</h2>
                 <p>Hizmeti güvenli ve verimli bir şekilde işletmek için minimum düzeyde bilgi toplarız. Özellikle:</p>
                 <ul>
-                    <li>Not Verisi: Bir not oluşturduğunuzda, mesajınızın yalnızca şifrelenmiş halini sunucularımızda (Cloudflare Workers ve D1 Veritabanı kullanılarak) saklarız. Şifreleme anahtarı (şifre) tamamen tarayıcınızda oluşturulur ve yönetilir, bize asla gönderilmez veya tarafımızca saklanmaz. Notlar okunduktan veya süresi dolduktan sonra otomatik olarak silinir (seçenekler: 8 saat, 1 gün, 2 gün, 1 hafta veya 30 gün).</li>
+                    <li>Not Verisi: Bir not oluşturduğunuzda, mesajınızın yalnızca şifrelenmiş halini sunucularımızda (Go service ve SQLite Veritabanı kullanılarak) saklarız. Şifreleme anahtarı (şifre) tamamen tarayıcınızda oluşturulur ve yönetilir, bize asla gönderilmez veya tarafımızca saklanmaz. Notlar okunduktan veya süresi dolduktan sonra otomatik olarak silinir (seçenekler: 8 saat, 1 gün, 2 gün, 1 hafta veya 30 gün).</li>
                     <li>Minimum Veri Toplama: Hizmeti kullanmanız için kullanıcı hesabı veya kişisel bilgi talep etmiyoruz. Toplayabileceğimiz tek kişisel veri, destek amacıyla bize kendi isteğinizle ulaşmanız durumundadır. Bize e-posta ile ulaşırsanız, sorunuza yanıt vermek için e-posta adresinizi ve mesaj içeriğinizi kaydederiz. Bu bilgileri başka amaçlarla kullanmayız ve izniniz olmadan üçüncü taraflarla paylaşmayız.</li>
                     <li>Güvenlikle İlgili Veri: Kötüye kullanımı önlemek ve hizmet bütünlüğünü sağlamak için:
                         <ul>
                             <li>Spam, bot veya zararlı etkinliği tespit etmek ve önlemek için IP adreslerini ve istek meta verilerini (örn. zaman damgaları) geçici olarak kaydederiz.</li>
-                            <li>Otomatik kötüye kullanımı önlemek için Cloudflare Turnstile CAPTCHA kullanırız. Turnstile gizliliği korumak için tasarlanmıştır ve kullanıcıları siteler arasında takip etmez.</li>
+                            <li>Otomatik kötüye kullanımı önlemek için rate limiting kullanırız. rate limiting gizliliği korumak için tasarlanmıştır ve kullanıcıları siteler arasında takip etmez.</li>
                         </ul>
                     </li>
                 </ul>
@@ -169,7 +169,7 @@
                 <p>Topladığımız sınırlı bilgiler yalnızca aşağıdaki amaçlarla kullanılır:</p>
                 <ul>
                     <li>Temel hizmeti sağlamak: Şifreli notları geçici olarak saklamak ve güvenli şekilde erişim ve silme işlemlerini kolaylaştırmak.</li>
-                    <li>Güvenliği sağlamak: IP kayıtları ve CAPTCHA kullanarak spam veya hizmete yönelik saldırıları tespit etmek ve önlemek.</li>
+                    <li>Güvenliği sağlamak: IP kayıtları ve rate limiting kullanarak spam veya hizmete yönelik saldırıları tespit etmek ve önlemek.</li>
                     <li>Yasal yükümlülüklere uymak: Nadir durumlarda, geçerli yasal taleplere (örn. mahkeme celbi) yanıt vermek için kayıtları kullanabiliriz.</li>
                 </ul>
                 <p>Herhangi bir veriyi reklam, üçüncü taraflara satış veya securememo.app’in işletimiyle ilgisi olmayan başka bir amaç için kullanmayız.</p>
@@ -179,7 +179,7 @@
                 <h2>3. Veri Paylaşımı ve Açıklama</h2>
                 <p>Verilerinizi üçüncü taraflarla satmaz, kiralamaz veya paylaşmayız; yalnızca aşağıdaki sınırlı durumlar hariç:</p>
                 <ul>
-                    <li>Hizmet Sağlayıcılar: Barındırma, veritabanı depolama (D1) ve CAPTCHA (Turnstile) için Cloudflare kullanıyoruz. Bu sağlayıcılar verileri bizim adımıza gizlilikle işler ve not içeriğine erişmez.</li>
+                    <li>Hizmet Sağlayıcılar: Barındırma, veritabanı depolama (SQLite) ve rate limiting (rate limiting) için the hosting provider kullanıyoruz. Bu sağlayıcılar verileri bizim adımıza gizlilikle işler ve not içeriğine erişmez.</li>
                     <li>Yasal Gereklilikler: Yasa gereği, örneğin mahkeme kararı veya resmi talep üzerine bilgi açıklayabiliriz.</li>
                     <li>İş Transferleri: securememo.app devralınır veya birleşirse, veriler işlemin bir parçası olarak aktarılabilir; ancak bu Gizlilik Bildirimi kapsamında kalır.</li>
                 </ul>
@@ -190,7 +190,7 @@
                 <ul>
                     <li>Şifreleme: Tüm notlar istemci tarafında AES-256 ve PBKDF2 anahtar türetme kullanılarak şifrelenir. Yalnızca şifrelenmiş verileri saklarız ve bunları çözme imkanımız yoktur.</li>
                     <li>Silme: Notlar okunduktan veya süresi dolduktan sonra otomatik görevlerle kalıcı olarak silinir.</li>
-                    <li>Güvenlik Önlemleri: Güçlü güvenlik başlıkları (örn. CSP, HSTS), girdi doğrulama, zamanlama saldırısı korumaları ve CAPTCHA uygularız.</li>
+                    <li>Güvenlik Önlemleri: Güçlü güvenlik başlıkları (örn. CSP, HSTS), girdi doğrulama, zamanlama saldırısı korumaları ve rate limiting uygularız.</li>
                     <li>Geri Getirme Yok: Bir kez silinen notlar, bizim tarafımızdan bile geri getirilemez.</li>
                 </ul>
                 <p>Sistemlerimizi güvence altına almak için makul adımlar atsak da hiçbir hizmet tamamen risksiz değildir. URL ve şifreleri güvenli şekilde paylaşmak sizin sorumluluğunuzdadır.</p>
@@ -222,7 +222,7 @@
 
             <div class="features-detail" id="international-transfers">
                 <h2>8. Uluslararası Veri Aktarımları</h2>
-                <p>securememo.app, Cloudflare’ın küresel ağı üzerinde barındırılmaktadır. Veriler çeşitli ülkelerde işlenebilir; ancak minimum veri toplama uygulamamız sayesinde eşdeğer gizlilik koruması sağlanır.</p>
+                <p>securememo.app, the hosting provider’ın küresel ağı üzerinde barındırılmaktadır. Veriler çeşitli ülkelerde işlenebilir; ancak minimum veri toplama uygulamamız sayesinde eşdeğer gizlilik koruması sağlanır.</p>
             </div>
 
             <div class="usage-section" id="changes-notice">

@@ -151,12 +151,12 @@
                 <h2>1. Informace, které shromažďujeme</h2>
                 <p>Shromažďujeme jen minimum informací potřebných k bezpečnému a efektivnímu provozu služby. Konkrétně:</p>
                 <ul>
-                    <li>Data zprávy: Když vytvoříte zprávu, ukládáme na naše servery pouze šifrovanou verzi vašeho sdělení (za použití Cloudflare Workers a databáze D1). Šifrovací klíč (heslo) je generován a zpracováván výhradně ve vašem prohlížeči a nikdy není odeslán ani uložen u nás. Zprávy jsou automaticky smazány po přečtení nebo po vypršení platnosti (možnosti: 8 hodin, 1 den, 2 dny, 1 týden nebo 30 dní).</li>
+                    <li>Data zprávy: Když vytvoříte zprávu, ukládáme na naše servery pouze šifrovanou verzi vašeho sdělení (za použití Go service a databáze SQLite). Šifrovací klíč (heslo) je generován a zpracováván výhradně ve vašem prohlížeči a nikdy není odeslán ani uložen u nás. Zprávy jsou automaticky smazány po přečtení nebo po vypršení platnosti (možnosti: 8 hodin, 1 den, 2 dny, 1 týden nebo 30 dní).</li>
                     <li>Minimální sběr dat: Nevyžadujeme uživatelské účty ani neshromažďujeme osobní údaje pro používání služby. Jediná osobní data, která můžeme získat, jsou pokud nás dobrovolně kontaktujete s žádostí o podporu. Pokud nás kontaktujete e‑mailem, shromáždíme vaši e‑mailovou adresu a obsah zprávy, abychom mohli odpovědět na váš dotaz. Tato informace není používána k žádným jiným účelům ani sdílena s třetími stranami bez vašeho souhlasu.</li>
                     <li>Data související se zabezpečením: Pro prevenci zneužití a zachování integrity služby:
                         <ul>
                             <li>Dočasně zaznamenáváme IP adresy a metadata požadavků (např. časová razítka) k detekci a zmírnění spamu, botů či škodlivé aktivity.</li>
-                            <li>Používáme Cloudflare Turnstile CAPTCHA k zabránění automatizovanému zneužití. Turnstile je navržen s ohledem na soukromí a nesleduje uživatele napříč weby.</li>
+                            <li>Používáme rate limiting k zabránění automatizovanému zneužití. rate limiting je navržen s ohledem na soukromí a nesleduje uživatele napříč weby.</li>
                         </ul>
                     </li>
                 </ul>
@@ -169,7 +169,7 @@
                 <p>Omezené informace, které shromažďujeme, používáme výhradně k:</p>
                 <ul>
                     <li>Poskytování jádra služby: Dočasnému uložení šifrovaných zpráv a zajištění jejich bezpečného načtení a smazání.</li>
-                    <li>Udržování bezpečnosti: Detekci a prevenci zneužití, jako je spam nebo útoky typu denial‑of‑service, pomocí IP logů a CAPTCHA.</li>
+                    <li>Udržování bezpečnosti: Detekci a prevenci zneužití, jako je spam nebo útoky typu denial‑of‑service, pomocí IP logů a rate limiting.</li>
                     <li>Plnění právních povinností: Ve výjimečných případech můžeme použít logy k odpovědi na platné právní požadavky (např. předvolání).</li>
                 </ul>
                 <p>Nepoužíváme žádná data k reklamě, prodeji třetím stranám ani k jiným účelům nesouvisejícím s provozem securememo.app.</p>
@@ -179,7 +179,7 @@
                 <h2>3. Sdílení a zpřístupnění dat</h2>
                 <p>Vaše data neprodáváme, nepronajímáme ani nesdílíme s třetími stranami, s výjimkou následujících omezených situací:</p>
                 <ul>
-                    <li>Poskytovatelé služeb: Využíváme Cloudflare pro hosting, databázové úložiště (D1) a CAPTCHA (Turnstile). Tito poskytovatelé zpracovávají data naším jménem za přísných podmínek důvěrnosti a nemají přístup k obsahu zpráv.</li>
+                    <li>Poskytovatelé služeb: Využíváme the hosting provider pro hosting, databázové úložiště (SQLite) a rate limiting (rate limiting). Tito poskytovatelé zpracovávají data naším jménem za přísných podmínek důvěrnosti a nemají přístup k obsahu zpráv.</li>
                     <li>Právní požadavky: Informace můžeme zveřejnit, pokud to vyžaduje zákon, např. v reakci na soudní příkaz nebo žádost orgánu.</li>
                     <li>Podnikové převody: Pokud bude securememo.app získán nebo sloučen, data mohou být převedena v rámci transakce, ale i nadále se na ně vztahuje toto Oznámení o ochraně soukromí.</li>
                 </ul>
@@ -189,8 +189,8 @@
                 <h2>4. Zabezpečení dat</h2>
                 <ul>
                     <li>Šifrování: Všechny zprávy jsou šifrovány na straně klienta pomocí AES-256 s derivací klíče PBKDF2 (2 200 000 iterací). Ukládáme pouze šifrovaná data a nemůžeme je dešifrovat.</li>
-                    <li>Mazání: Zprávy jsou po přečtení nebo vypršení platnosti trvale smazány pomocí automatických cron úloh.</li>
-                    <li>Bezpečnostní opatření: Zavádíme silné bezpečnostní hlavičky (např. CSP, HSTS), sanitizaci vstupů, ochranu proti časovým útokům a CAPTCHA pro zamezení zneužití.</li>
+                    <li>Mazání: Zprávy jsou po přečtení nebo vypršení platnosti trvale smazány pomocí automatických cleanup úloh.</li>
+                    <li>Bezpečnostní opatření: Zavádíme silné bezpečnostní hlavičky (např. CSP, HSTS), sanitizaci vstupů, ochranu proti časovým útokům a rate limiting pro zamezení zneužití.</li>
                     <li>Bez obnovy: Jakmile jsou zprávy smazány, nelze je obnovit — ani námi.</li>
                 </ul>
                 <p>Ačkoli podnikáme přiměřené kroky k zabezpečení našich systémů, žádná služba není zcela imunní vůči rizikům. Jste odpovědní za bezpečné sdílení URL a hesel.</p>
@@ -222,7 +222,7 @@
 
             <div class="features-detail" id="international-transfers">
                 <h2>8. Mezinárodní předávání dat</h2>
-                <p>securememo.app běží na globální síti Cloudflare. Data mohou být zpracovávána v různých zemích, ale prostřednictvím našich minimálních sběrných praktik zajišťujeme rovnocennou ochranu soukromí.</p>
+                <p>securememo.app běží na globální síti the hosting provider. Data mohou být zpracovávána v různých zemích, ale prostřednictvím našich minimálních sběrných praktik zajišťujeme rovnocennou ochranu soukromí.</p>
             </div>
 
             <div class="usage-section" id="changes-notice">

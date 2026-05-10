@@ -7,10 +7,6 @@ node_modules/
 .env.production
 .env.development
 
-# Cloudflare Workers
-.wrangler/
-dist/
-
 # Logs
 *.log
 npm-debug.log*

@@ -2,38 +2,41 @@
 
 ## Reporting a Vulnerability
 
-If you discover a security vulnerability in securememo.app, please report it responsibly. I appreciate your efforts to disclose issues in a way that allows me to address them promptly.
+If you discover a security vulnerability in securememo.app, please report it responsibly.
 
 ## How to Report
 
-- **Email**: Send details to timo.heimonen@proton.me. Use a descriptive subject line like "Security Vulnerability Report".
-- **GitHub Issues**: For non-sensitive issues, open a private issue in the repository if available, or use the email method.
-- **Response Time**: I aim to acknowledge reports as soon as possible and provide updates on progress.
+- Email: timo.heimonen@proton.me
+- Use a descriptive subject line such as `Security Vulnerability Report`.
+- Do not disclose the vulnerability publicly until there has been time to investigate and mitigate it.
 
-## What to Include in Your Report
+## What to Include
 
-- A clear description of the vulnerability.
-- Steps to reproduce the issue.
-- Potential impact (e.g., data exposure, denial of service).
-- Any proof-of-concept code or exploits (do not test on production without permission).
-- Your contact information for follow-up.
+- Clear vulnerability description.
+- Steps to reproduce.
+- Potential impact.
+- Proof-of-concept details, if available.
+- Your preferred contact information for follow-up.
 
-**Do not disclose the vulnerability publicly until I've had a chance to investigate and mitigate it.** I follow responsible disclosure practices and will credit you in any public announcements if desired.
+## Supported Version
 
-## Supported Versions
+Only the current main branch is supported. The current deployment target is the Go + SQLite self-hosted service in this repository.
 
-securememo.app is a Cloudflare Workers-based project. I support the latest version of the codebase. Report issues against the current main branch.
+## Security Properties
 
-## Security Features and Best Practices
-
-For details on my security implementation, refer to the README.md section. I employ client-side encryption, strict security headers, input sanitization, and automated cleanup to protect user data.
+- Memo content is encrypted client-side before upload.
+- The server stores only encrypted memo payloads and metadata needed for expiry and deletion.
+- Passwords are generated in the browser and are never sent to the server.
+- Memos are deleted after successful read confirmation or expiry.
+- The service applies strict security headers and validates request size, method, origin, memo IDs, and payload formats.
+- Rate limiting is stored locally in SQLite.
 
 ## Bug Bounty
 
-Currently, I do not offer a formal bug bounty program.
+There is no formal bug bounty program at this time.
 
 ## Policy Updates
 
-This policy may be updated periodically. Check back for changes.
+This policy may be updated periodically.
 
-**Last updated**: August 6, 2025
+Last updated: May 10, 2026

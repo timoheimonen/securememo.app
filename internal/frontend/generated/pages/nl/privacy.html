@@ -151,12 +151,12 @@
                 <h2>1. Welke informatie verzamelen wij</h2>
                 <p>Wij verzamelen minimale informatie om de dienst veilig en efficiënt te laten werken. Concreet:</p>
                 <ul>
-                    <li>Memo-gegevens: Wanneer u een memo maakt, slaan wij alleen de versleutelde versie van uw bericht op onze servers op (via Cloudflare Workers en D1 Database). De encryptiesleutel (wachtwoord) wordt volledig in uw browser gegenereerd en verwerkt, en wordt nooit naar ons verzonden of door ons opgeslagen. Memo's worden automatisch verwijderd na het lezen of verlopen (opties: 8 uur, 1 dag, 2 dagen, 1 week of 30 dagen).</li>
+                    <li>Memo-gegevens: Wanneer u een memo maakt, slaan wij alleen de versleutelde versie van uw bericht op onze servers op (via Go service en SQLite database). De encryptiesleutel (wachtwoord) wordt volledig in uw browser gegenereerd en verwerkt, en wordt nooit naar ons verzonden of door ons opgeslagen. Memo's worden automatisch verwijderd na het lezen of verlopen (opties: 8 uur, 1 dag, 2 dagen, 1 week of 30 dagen).</li>
                     <li>Minimale gegevensverzameling: Wij vereisen geen gebruikersaccounts en verzamelen geen persoonlijke informatie voor het gebruik van de dienst. De enige persoonsgegevens die wij mogelijk verzamelen zijn wanneer u ons vrijwillig contacteert voor ondersteuning. Wanneer u ons via e-mail contacteert, verzamelen wij uw e-mailadres en de inhoud van uw bericht om op uw vraag te reageren. Wij gebruiken deze informatie voor geen enkel ander doel en delen deze niet met derden zonder uw toestemming.</li>
                     <li>Beveiligingsgerelateerde gegevens: Voor het voorkomen van misbruik en het waarborgen van de integriteit van de dienst:
                         <ul>
                             <li>Wij loggen tijdelijk IP-adressen en verzoekmetadata (zoals tijdstempels) om spam, bots of kwaadaardige activiteiten te detecteren en te beperken.</li>
-                            <li>Wij gebruiken Cloudflare Turnstile CAPTCHA om geautomatiseerd misbruik te voorkomen. Turnstile is ontworpen met privacybescherming en volgt gebruikers niet over verschillende sites.</li>
+                            <li>Wij gebruiken rate limiting om geautomatiseerd misbruik te voorkomen. rate limiting is ontworpen met privacybescherming en volgt gebruikers niet over verschillende sites.</li>
                         </ul>
                     </li>
                 </ul>
@@ -169,7 +169,7 @@
                 <p>De beperkte informatie die wij verzamelen wordt uitsluitend gebruikt om:</p>
                 <ul>
                     <li>De kernfunctie te bieden: Versleutelde memo's tijdelijk opslaan en hun veilige opvraging en verwijdering faciliteren.</li>
-                    <li>Beveiliging te waarborgen: Misbruik zoals spam of denial-of-service aanvallen detecteren en voorkomen met behulp van IP-logs en CAPTCHA.</li>
+                    <li>Beveiliging te waarborgen: Misbruik zoals spam of denial-of-service aanvallen detecteren en voorkomen met behulp van IP-logs en rate limiting.</li>
                     <li>Voldoen aan wettelijke verplichtingen: In zeldzame gevallen kunnen wij loggegevens gebruiken om te reageren op geldige juridische verzoeken (zoals dagvaardingen).</li>
                 </ul>
                 <p>Wij gebruiken geen gegevens voor advertenties, verkoop aan derden of enig ander doel dat niet gerelateerd is aan het functioneren van securememo.app.</p>
@@ -179,7 +179,7 @@
                 <h2>3. Gegevensdeling en openbaarmaking</h2>
                 <p>Wij verkopen, verhuren of delen uw gegevens niet met derden, behalve in de volgende beperkte gevallen:</p>
                 <ul>
-                    <li>Dienstverleners: Wij gebruiken Cloudflare voor hosting, databaseopslag (D1) en CAPTCHA (Turnstile). Deze providers verwerken gegevens namens ons onder strikte vertrouwelijkheid en hebben geen toegang tot memo-inhoud.</li>
+                    <li>Dienstverleners: Wij gebruiken the hosting provider voor hosting, databaseopslag (SQLite) en rate limiting (rate limiting). Deze providers verwerken gegevens namens ons onder strikte vertrouwelijkheid en hebben geen toegang tot memo-inhoud.</li>
                     <li>Wettelijke vereisten: Wij kunnen informatie openbaar maken indien wettelijk vereist, bijvoorbeeld bij een gerechtelijk bevel of overheidsverzoek.</li>
                     <li>Bedrijfsoverdrachten: Als securememo.app wordt overgenomen of fuseert, kunnen gegevens worden overgedragen als onderdeel van de transactie, maar blijven ze onderworpen aan deze privacyverklaring.</li>
                 </ul>
@@ -189,8 +189,8 @@
                 <h2>4. Gegevensbeveiliging</h2>
                 <ul>
                     <li>Encryptie: Alle memo's worden client-side versleuteld met AES-256 met PBKDF2-sleutelafleiding. Wij slaan alleen versleutelde gegevens op en kunnen deze niet ontsleutelen.</li>
-                    <li>Verwijdering: Memo's worden permanent verwijderd na lezen of verlopen via geautomatiseerde cronjobs.</li>
-                    <li>Beveiligingsmaatregelen: Wij implementeren sterke beveiligingsheaders (zoals CSP, HSTS), input-sanitatie, bescherming tegen timing-aanvallen en CAPTCHA om misbruik te voorkomen.</li>
+                    <li>Verwijdering: Memo's worden permanent verwijderd na lezen of verlopen via geautomatiseerde cleanupjobs.</li>
+                    <li>Beveiligingsmaatregelen: Wij implementeren sterke beveiligingsheaders (zoals CSP, HSTS), input-sanitatie, bescherming tegen timing-aanvallen en rate limiting om misbruik te voorkomen.</li>
                     <li>Geen herstel: Zodra memo's zijn verwijderd, kunnen ze niet worden hersteld—ook niet door ons.</li>
                 </ul>
                 <p>Hoewel wij redelijke stappen nemen om onze systemen te beveiligen, is geen enkele dienst volledig immuun voor risico's. U bent zelf verantwoordelijk voor het veilig delen van URL's en wachtwoorden.</p>
@@ -222,7 +222,7 @@
 
             <div class="features-detail" id="international-transfers">
                 <h2>8. Internationale gegevensoverdracht</h2>
-                <p>securememo.app wordt gehost op het wereldwijde netwerk van Cloudflare. Gegevens kunnen in verschillende landen worden verwerkt, maar wij waarborgen gelijkwaardige privacybescherming door onze minimale gegevensverzameling.</p>
+                <p>securememo.app wordt gehost op het wereldwijde netwerk van the hosting provider. Gegevens kunnen in verschillende landen worden verwerkt, maar wij waarborgen gelijkwaardige privacybescherming door onze minimale gegevensverzameling.</p>
             </div>
 
             <div class="usage-section" id="changes-notice">

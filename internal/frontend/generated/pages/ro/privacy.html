@@ -151,12 +151,12 @@
                 <h2>1. Informațiile pe care le colectăm</h2>
                 <p>Colectăm informații minime pentru a opera serviciul în siguranță și eficient. Mai exact:</p>
                 <ul>
-                    <li>Date despre memo: Când creezi un memo, stocăm doar versiunea criptată a mesajului tău pe serverele noastre (folosind Cloudflare Workers și baza de date D1). Cheia de criptare (parola) este generată și gestionată în întregime în browserul tău și nu este niciodată trimisă sau stocată de noi. Memo-urile sunt șterse automat după ce sunt citite sau când expiră (opțiuni: 8 ore, 1 zi, 2 zile, 1 săptămână sau 30 de zile).</li>
+                    <li>Date despre memo: Când creezi un memo, stocăm doar versiunea criptată a mesajului tău pe serverele noastre (folosind Go service și baza de date SQLite). Cheia de criptare (parola) este generată și gestionată în întregime în browserul tău și nu este niciodată trimisă sau stocată de noi. Memo-urile sunt șterse automat după ce sunt citite sau când expiră (opțiuni: 8 ore, 1 zi, 2 zile, 1 săptămână sau 30 de zile).</li>
                     <li>Colectare minimă de date: Nu solicităm conturi de utilizator și nu colectăm informații personale pentru a folosi serviciul. Singurele date personale pe care le-am putea colecta sunt dacă ne contactezi voluntar pentru suport. Dacă ne contactezi prin email, colectăm adresa ta de email și conținutul mesajului pentru a răspunde solicitării. Nu folosim aceste informații în alte scopuri și nu le partajăm cu terți fără consimțământul tău.</li>
                     <li>Date legate de securitate: Pentru prevenirea abuzurilor și integritatea serviciului:
                         <ul>
                             <li>Jurnalizăm temporar adrese IP și metadate ale cererilor (de ex., marcaje de timp) pentru a detecta și a atenua spamul, boții sau activitatea malițioasă.</li>
-                            <li>Folosim Cloudflare Turnstile CAPTCHA pentru a preveni abuzul automatizat. Turnstile este conceput să protejeze confidențialitatea și nu urmărește utilizatorii între site-uri.</li>
+                            <li>Folosim rate limiting pentru a preveni abuzul automatizat. rate limiting este conceput să protejeze confidențialitatea și nu urmărește utilizatorii între site-uri.</li>
                         </ul>
                     </li>
                 </ul>
@@ -169,7 +169,7 @@
                 <p>Informațiile limitate pe care le colectăm sunt folosite exclusiv pentru:</p>
                 <ul>
                     <li>Furnizarea serviciului de bază: Stocarea temporară a memo-urilor criptate și facilitarea recuperării și ștergerii lor în siguranță.</li>
-                    <li>Menținerea securității: Detectarea și prevenirea abuzurilor, precum spamul sau atacurile de tip denial-of-service, folosind jurnalele IP și CAPTCHA.</li>
+                    <li>Menținerea securității: Detectarea și prevenirea abuzurilor, precum spamul sau atacurile de tip denial-of-service, folosind jurnalele IP și rate limiting.</li>
                     <li>Respectarea obligațiilor legale: În cazuri rare, putem folosi jurnalele pentru a răspunde solicitărilor legale valide (de ex., citații).</li>
                 </ul>
                 <p>Nu folosim nicio dată pentru publicitate, vânzare către terți sau orice scop care nu are legătură cu operarea securememo.app.</p>
@@ -179,7 +179,7 @@
                 <h2>3. Partajarea și divulgarea datelor</h2>
                 <p>Nu vindem, nu închiriem și nu partajăm datele tale cu terți, cu excepția următoarelor circumstanțe limitate:</p>
                 <ul>
-                    <li>Furnizori de servicii: Folosim Cloudflare pentru găzduire, stocarea bazei de date (D1) și CAPTCHA (Turnstile). Acești furnizori procesează datele în numele nostru sub confidențialitate strictă și nu au acces la conținutul memo-urilor.</li>
+                    <li>Furnizori de servicii: Folosim the hosting provider pentru găzduire, stocarea bazei de date (SQLite) și rate limiting (rate limiting). Acești furnizori procesează datele în numele nostru sub confidențialitate strictă și nu au acces la conținutul memo-urilor.</li>
                     <li>Cerințe legale: Putem divulga informații dacă este cerut de lege, de exemplu ca răspuns la o hotărâre judecătorească sau o solicitare guvernamentală.</li>
                     <li>Transferuri de afaceri: Dacă securememo.app este achiziționat sau fuzionează, datele pot fi transferate ca parte a tranzacției, dar vor rămâne supuse acestei Notificări de confidențialitate.</li>
                 </ul>
@@ -189,8 +189,8 @@
                 <h2>4. Securitatea datelor</h2>
                 <ul>
                     <li>Criptare: Toate memo-urile sunt criptate pe partea clientului folosind AES-256 cu derivarea cheii PBKDF2. Stocăm doar date criptate și nu le putem decripta.</li>
-                    <li>Ștergere: Memo-urile sunt șterse definitiv după citire sau expirare prin joburi cron automate.</li>
-                    <li>Măsuri de securitate: Implementăm antete de securitate puternice (de ex., CSP, HSTS), sanitizarea inputului, protecții împotriva atacurilor de temporizare și CAPTCHA pentru a preveni abuzurile.</li>
+                    <li>Ștergere: Memo-urile sunt șterse definitiv după citire sau expirare prin joburi cleanup automate.</li>
+                    <li>Măsuri de securitate: Implementăm antete de securitate puternice (de ex., CSP, HSTS), sanitizarea inputului, protecții împotriva atacurilor de temporizare și rate limiting pentru a preveni abuzurile.</li>
                     <li>Fără recuperare: Odată șterse, memo-urile nu pot fi recuperate — nici măcar de noi.</li>
                 </ul>
                 <p>Deși luăm măsuri rezonabile pentru a ne securiza sistemele, niciun serviciu nu este complet imun la riscuri. Ești responsabil pentru partajarea în siguranță a URL-urilor și a parolelor.</p>
@@ -222,7 +222,7 @@
 
             <div class="features-detail" id="international-transfers">
                 <h2>8. Transferuri internaționale de date</h2>
-                <p>securememo.app este găzduit pe rețeaua globală a Cloudflare. Datele pot fi procesate în diverse țări, însă asigurăm protecții echivalente ale confidențialității prin practicile noastre de colectare minimă.</p>
+                <p>securememo.app este găzduit pe rețeaua globală a the hosting provider. Datele pot fi procesate în diverse țări, însă asigurăm protecții echivalente ale confidențialității prin practicile noastre de colectare minimă.</p>
             </div>
 
             <div class="usage-section" id="changes-notice">
