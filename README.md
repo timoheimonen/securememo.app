@@ -30,6 +30,7 @@ Minimal environment:
 SECUREMEMO_ADDR=127.0.0.1:3005
 SECUREMEMO_DB_PATH=/var/lib/securememo/securememo.sqlite
 PUBLIC_ORIGIN=https://securememo.example.com
+SECUREMEMO_TRUST_PROXY_HEADERS=false
 ```
 
 Run the service process:
@@ -38,7 +39,9 @@ Run the service process:
 ./securememo
 ```
 
-The app uses `CF-Connecting-IP`, `X-Forwarded-For`, or the socket remote address only for abuse-rate-limit identity.
+By default, the app uses the socket remote address for abuse-rate-limit identity. Set
+`SECUREMEMO_TRUST_PROXY_HEADERS=true` only when the service is behind a trusted local
+reverse proxy that overwrites `CF-Connecting-IP` and `X-Forwarded-For`.
 
 ## Project Structure
 
@@ -57,9 +60,8 @@ internal/frontend/           Embedded generated frontend assets
 - `POST /api/create-memo`
 - `POST /api/read-memo?id=<memo_id>`
 - `POST /api/confirm-delete`
-- `POST /api/cleanup`
 
-The public browser flow uses the first three endpoints. Cleanup also runs periodically inside the process.
+The public browser flow uses these endpoints. Expired memo cleanup runs internally at startup and hourly after that.
 
 ## Security Model
 

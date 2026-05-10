@@ -19,7 +19,7 @@ import (
 	"github.com/timoheimonen/securememo/internal/store"
 )
 
-const assetVersion = "20260510l"
+const assetVersion = "20260510m"
 
 type nonceKey struct{}
 
@@ -58,7 +58,6 @@ func (s *Server) routes() {
 	s.mux.HandleFunc("/api/create-memo", s.memo.Create)
 	s.mux.HandleFunc("/api/read-memo", s.memo.Read)
 	s.mux.HandleFunc("/api/confirm-delete", s.memo.ConfirmDelete)
-	s.mux.HandleFunc("/api/cleanup", s.memo.Cleanup)
 	s.mux.HandleFunc("/", s.handle)
 }
 
@@ -98,6 +97,8 @@ func (s *Server) serveGeneratedAsset(w http.ResponseWriter, r *http.Request, url
 		return s.serveFile(w, r, "generated/js/create-memo.js", "application/javascript; charset=utf-8", cacheStatic(true))
 	case "/js/read-memo.js":
 		return s.serveFile(w, r, "generated/js/read-memo.js", "application/javascript; charset=utf-8", cacheStatic(true))
+	case "/js/memo-crypto-worker.js":
+		return s.serveFile(w, r, "generated/js/memo-crypto-worker.js", "application/javascript; charset=utf-8", cacheStatic(true))
 	case "/js/clientLocalization.js":
 		locale := "en"
 		if referer := r.Header.Get("Referer"); referer != "" {
@@ -215,9 +216,6 @@ func (s *Server) serveSitemap(w http.ResponseWriter, r *http.Request) {
 	}{
 		{"", "1.0", "weekly"},
 		{"/about.html", "0.8", "monthly"},
-		{"/create-memo.html", "0.9", "monthly"},
-		{"/tos.html", "0.3", "yearly"},
-		{"/privacy.html", "0.3", "yearly"},
 	}
 	now := time.Now().UTC().Format("2006-01-02")
 	var entries []urlEntry
@@ -295,6 +293,8 @@ func addAssetVersions(input string) string {
 	}{
 		{"/styles.css", "/styles.css?v=" + assetVersion},
 		{"/js/common.js", "/js/common.js?v=" + assetVersion},
+		{`src="/js/create-memo.js"`, `src="/js/create-memo.js?v=` + assetVersion + `"`},
+		{`src="/js/read-memo.js"`, `src="/js/read-memo.js?v=` + assetVersion + `"`},
 		{"/favicon.ico", "/favicon.ico?v=" + assetVersion},
 		{"/apple-touch-icon.png", "/apple-touch-icon.png?v=" + assetVersion},
 		{"/android-chrome-192x192.png", "/android-chrome-192x192.png?v=" + assetVersion},

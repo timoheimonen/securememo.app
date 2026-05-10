@@ -19,6 +19,9 @@ Minimal environment:
 SECUREMEMO_ADDR=127.0.0.1:3005
 SECUREMEMO_DB_PATH=/var/lib/securememo/securememo.sqlite
 PUBLIC_ORIGIN=https://securememo.example.com
+SECUREMEMO_TRUST_PROXY_HEADERS=false
 ```
 
-The service uses `CF-Connecting-IP`, `X-Forwarded-For`, or the socket remote address only for abuse-rate-limit identity.
+By default, the service uses the socket remote address for abuse-rate-limit identity.
+Set `SECUREMEMO_TRUST_PROXY_HEADERS=true` only when the service is behind a trusted
+local reverse proxy that overwrites `CF-Connecting-IP` and `X-Forwarded-For`.

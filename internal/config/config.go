@@ -19,7 +19,7 @@ func FromEnv() (Config, error) {
 		Addr:              envOrDefault("SECUREMEMO_ADDR", "127.0.0.1:3005"),
 		DBPath:            envOrDefault("SECUREMEMO_DB_PATH", "./data/securememo.sqlite"),
 		PublicOrigin:      strings.TrimRight(envOrDefault("PUBLIC_ORIGIN", "https://securememo.app"), "/"),
-		TrustedProxyLocal: true,
+		TrustedProxyLocal: envBoolDefault("SECUREMEMO_TRUST_PROXY_HEADERS", false),
 	}
 
 	if cfg.PublicOrigin == "" {
@@ -38,6 +38,20 @@ func envOrDefault(key, fallback string) string {
 		return value
 	}
 	return fallback
+}
+
+func envBoolDefault(key string, fallback bool) bool {
+	value := strings.ToLower(strings.TrimSpace(os.Getenv(key)))
+	switch value {
+	case "":
+		return fallback
+	case "1", "true", "yes", "on":
+		return true
+	case "0", "false", "no", "off":
+		return false
+	default:
+		return fallback
+	}
 }
 
 func allowedOrigins(publicOrigin, extra string) []string {
