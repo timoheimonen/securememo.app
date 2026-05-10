@@ -1,10 +1,22 @@
-import { createLocalization } from '/js/localization-core.js';
+function versionedAssetPath(path) {
+  const assetURL = new URL(path, window.location.origin);
+  const currentModuleURL = new URL(import.meta.url);
+  const version = currentModuleURL.searchParams.get('v');
+  if (version) {
+    assetURL.searchParams.set('v', version);
+  }
+  return assetURL.pathname + assetURL.search;
+}
 
 async function initializeApp() {
   try {
-    const clientModule = await import('/js/clientLocalization.js');
-    if (clientModule && clientModule.translations && clientModule.locale) {
-      const loc = createLocalization(clientModule.locale, clientModule.translations);
+    const [coreModule, clientModule] = await Promise.all([
+      import(versionedAssetPath('/js/localization-core.js')),
+      import(versionedAssetPath('/js/clientLocalization.js'))
+    ]);
+    if (coreModule && typeof coreModule.createLocalization === 'function' &&
+        clientModule && clientModule.translations && clientModule.locale) {
+      const loc = coreModule.createLocalization(clientModule.locale, clientModule.translations);
       window.t = loc.t;
       if (typeof loc.initLocalization === 'function') {
         loc.initLocalization();
