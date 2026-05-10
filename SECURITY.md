@@ -20,7 +20,7 @@ If you discover a security vulnerability in securememo.app, please report it res
 
 ## Supported Version
 
-Only the current main branch is supported. The current deployment target is the Go + SQLite self-hosted service in this repository.
+Only the current main branch is supported. The current service target is the Go + SQLite application in this repository.
 
 ## Security Properties
 

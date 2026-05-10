@@ -1,6 +1,6 @@
 # securememo.app
 
-securememo.app is a small self-hosted service for sharing encrypted, self-destructing memos. The browser encrypts every memo with AES-256-GCM before upload, so the server stores only ciphertext and deletion metadata. Memos are deleted after a successful read confirmation or after their configured expiry time.
+securememo.app is a hosted service for sharing encrypted memos with automatic deletion. The browser encrypts every memo with AES-256-GCM before upload, so the server stores only ciphertext and deletion metadata. Memos are deleted after a successful read confirmation or after their configured expiry time.
 
 ## Features
 
@@ -8,7 +8,7 @@ securememo.app is a small self-hosted service for sharing encrypted, self-destru
 - Random browser-generated passwords that are never sent to the server.
 - Delete-on-read flow with a client-side deletion token.
 - Expiry options: 8 hours, 1 day, 2 days, 1 week, or 30 days.
-- Local SQLite storage with WAL mode and automatic cleanup.
+- SQLite storage with WAL mode and automatic cleanup.
 - Strict security headers, input validation, timing delays, and generic access-denied responses.
 - No accounts, no analytics, no ads.
 - Localized generated frontend assets embedded into the Go binary.
@@ -22,7 +22,7 @@ go test ./...
 go build -o securememo ./cmd/securememo
 ```
 
-## Runtime
+## Runtime Configuration
 
 Minimal environment:
 
@@ -32,26 +32,13 @@ SECUREMEMO_DB_PATH=/var/lib/securememo/securememo.sqlite
 PUBLIC_ORIGIN=https://securememo.example.com
 ```
 
-Run:
+Run the service process:
 
 ```sh
 ./securememo
 ```
 
-The service should listen on localhost only when exposed through a tunnel or reverse proxy.
-
-## cloudflared
-
-Example tunnel ingress:
-
-```yaml
-ingress:
-  - hostname: securememo.example.com
-    service: http://127.0.0.1:3000
-  - service: http_status:404
-```
-
-The app uses `CF-Connecting-IP`, `X-Forwarded-For`, or the socket remote address only for abuse-rate-limit identity. Keep the service bound to `127.0.0.1` when trusting proxy headers.
+The app uses `CF-Connecting-IP`, `X-Forwarded-For`, or the socket remote address only for abuse-rate-limit identity.
 
 ## Project Structure
 
@@ -63,7 +50,6 @@ internal/memo/               Memo API handlers
 internal/security/           Security headers, validation, timing helpers
 internal/server/             Routing, localization paths, embedded asset serving
 internal/frontend/           Embedded generated frontend assets
-docs/                        Self-hosting notes
 ```
 
 ## API

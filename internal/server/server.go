@@ -19,7 +19,7 @@ import (
 	"github.com/timoheimonen/securememo/internal/store"
 )
 
-const assetVersion = "20260510k"
+const assetVersion = "20260510l"
 
 type nonceKey struct{}
 
