@@ -162,6 +162,25 @@ func TestMemoScriptsAreVersioned(t *testing.T) {
 	}
 }
 
+func TestLanguageMenuUsesRootRelativeLocaleLinks(t *testing.T) {
+	app := newTestServer(t)
+	rec := httptest.NewRecorder()
+	req := httptest.NewRequest(http.MethodGet, "/en", nil)
+
+	app.ServeHTTP(rec, req)
+
+	if rec.Code != http.StatusOK {
+		t.Fatalf("GET /en status = %d, want %d", rec.Code, http.StatusOK)
+	}
+	body := rec.Body.String()
+	if !strings.Contains(body, `href="/da" class="language-item `) {
+		t.Fatal("language menu missing root-relative /da link")
+	}
+	if strings.Contains(body, `href="da"`) || strings.Contains(body, `href="/en/da"`) {
+		t.Fatal("language menu contains relative or nested Danish locale link")
+	}
+}
+
 func newTestServer(t *testing.T) *Server {
 	t.Helper()
 	db, err := store.OpenSQLite(filepath.Join(t.TempDir(), "securememo.sqlite"))
