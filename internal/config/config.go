@@ -16,7 +16,7 @@ type Config struct {
 
 func FromEnv() (Config, error) {
 	cfg := Config{
-		Addr:              envOrDefault("SECUREMEMO_ADDR", "127.0.0.1:3000"),
+		Addr:              envOrDefault("SECUREMEMO_ADDR", "127.0.0.1:3005"),
 		DBPath:            envOrDefault("SECUREMEMO_DB_PATH", "./data/securememo.sqlite"),
 		PublicOrigin:      strings.TrimRight(envOrDefault("PUBLIC_ORIGIN", "https://securememo.app"), "/"),
 		TrustedProxyLocal: true,
@@ -55,8 +55,8 @@ func allowedOrigins(publicOrigin, extra string) []string {
 	add(publicOrigin, &origins)
 	add("https://securememo.app", &origins)
 	add("https://www.securememo.app", &origins)
-	add("http://127.0.0.1:3000", &origins)
-	add("http://localhost:3000", &origins)
+	add("http://127.0.0.1:3005", &origins)
+	add("http://localhost:3005", &origins)
 
 	for _, part := range strings.Split(extra, ",") {
 		add(part, &origins)
