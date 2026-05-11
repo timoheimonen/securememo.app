@@ -24,16 +24,18 @@ const assetVersion = "20260510o"
 type nonceKey struct{}
 
 type Server struct {
-	cfg  config.Config
-	db   *store.SQLiteStore
-	mux  *http.ServeMux
-	memo memo.Handler
+	cfg     config.Config
+	db      *store.SQLiteStore
+	mux     *http.ServeMux
+	memo    memo.Handler
+	metrics *Metrics
 }
 
 func New(cfg config.Config, db *store.SQLiteStore) *Server {
 	s := &Server{
-		cfg: cfg,
-		db:  db,
+		cfg:     cfg,
+		db:      db,
+		metrics: NewMetrics(),
 	}
 	s.memo = memo.Handler{
 		Config: cfg,
@@ -45,6 +47,22 @@ func New(cfg config.Config, db *store.SQLiteStore) *Server {
 }
 
 func (s *Server) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+	start := time.Now()
+	rw := &metricsResponseWriter{ResponseWriter: w, status: http.StatusOK}
+	s.serveHTTP(rw, r)
+	if s.metrics != nil {
+		s.metrics.Observe(r, rw.status, rw.bytes, time.Since(start))
+	}
+}
+
+func (s *Server) MetricsHandler() http.Handler {
+	if s.metrics == nil {
+		return http.NotFoundHandler()
+	}
+	return s.metrics.Handler()
+}
+
+func (s *Server) serveHTTP(w http.ResponseWriter, r *http.Request) {
 	nonce, err := security.Nonce()
 	if err != nil {
 		http.Error(w, "internal server error", http.StatusInternalServerError)

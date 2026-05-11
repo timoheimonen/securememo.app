@@ -10,7 +10,8 @@ securememo.app is a hosted service for sharing encrypted memos with automatic de
 - Expiry options: 8 hours, 1 day, 2 days, 1 week, or 30 days.
 - SQLite storage with WAL mode and automatic cleanup.
 - Strict security headers, input validation, timing delays, and generic access-denied responses.
-- No accounts, no analytics, no ads.
+- No accounts, no tracking, no third-party analytics, no ads.
+- Optional Prometheus-compatible operational metrics for monitoring service health and hosting status.
 - Localized generated frontend assets embedded into the Go binary.
 
 ## Build
@@ -42,6 +43,28 @@ Run the service process:
 By default, the app uses the socket remote address for abuse-rate-limit identity. Set
 `SECUREMEMO_TRUST_PROXY_HEADERS=true` only when the service is behind a trusted local
 reverse proxy that overwrites `CF-Connecting-IP` and `X-Forwarded-For`.
+
+
+## Operational Metrics
+
+securememo.app can expose optional Prometheus-compatible operational metrics on a separate metrics listener. This is intended for monitoring service health, hosting status, capacity, and abuse patterns. Keep the metrics listener private, for example bound to `127.0.0.1`, and scrape it from a local Prometheus instance. Do not expose `/metrics` on the public application origin.
+
+Example configuration:
+
+```sh
+SECUREMEMO_METRICS_ADDR=127.0.0.1:9305
+```
+
+The metrics are aggregated technical counters and histograms, such as:
+
+- HTTP request counts by method, normalized route group, status code, and coarse country code from `CF-IPCountry` when provided by a trusted proxy.
+- HTTP response byte totals by the same low-cardinality labels.
+- HTTP request duration histograms by the same low-cardinality labels.
+- Total successfully created and read memos.
+
+Metrics deliberately do not include IP addresses, user agents, cookies, session IDs, full URLs or query strings, memo IDs, memo contents, passwords, deletion tokens, email addresses, or persistent user identifiers. Route labels are normalized, for example `/api/read-memo?id=...` is reported only as `/api/read-memo`.
+
+These operational metrics are separate from analytics or tracking: they are server-side, aggregated, low-cardinality measurements for running and protecting the service, not browser-side tracking or behavioral profiling.
 
 ## Project Structure
 
