@@ -8,6 +8,7 @@ import (
 
 type Config struct {
 	Addr              string
+	MetricsAddr       string
 	DBPath            string
 	PublicOrigin      string
 	AllowedOrigins    []string
@@ -17,6 +18,7 @@ type Config struct {
 func FromEnv() (Config, error) {
 	cfg := Config{
 		Addr:              envOrDefault("SECUREMEMO_ADDR", "127.0.0.1:3005"),
+		MetricsAddr:       strings.TrimSpace(os.Getenv("SECUREMEMO_METRICS_ADDR")),
 		DBPath:            envOrDefault("SECUREMEMO_DB_PATH", "./data/securememo.sqlite"),
 		PublicOrigin:      strings.TrimRight(envOrDefault("PUBLIC_ORIGIN", "https://securememo.app"), "/"),
 		TrustedProxyLocal: envBoolDefault("SECUREMEMO_TRUST_PROXY_HEADERS", false),
