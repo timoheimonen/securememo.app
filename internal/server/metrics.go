@@ -53,7 +53,7 @@ func (m *Metrics) Observe(r *http.Request, status int, bytes int, elapsed time.D
 		return
 	}
 	key := metricKey{
-		Method:  r.Method,
+		Method:  metricMethod(r.Method),
 		Route:   metricRoute(r.URL.Path),
 		Status:  strconv.Itoa(status),
 		Country: metricCountry(r),
@@ -190,10 +190,29 @@ func metricCountry(r *http.Request) string {
 	if country == "" {
 		return "unknown"
 	}
-	if len(country) != 2 {
+	if len(country) != 2 || !isASCIILetter(country[0]) || !isASCIILetter(country[1]) {
 		return "other"
 	}
 	return country
+}
+
+func metricMethod(method string) string {
+	switch strings.ToUpper(strings.TrimSpace(method)) {
+	case http.MethodGet:
+		return http.MethodGet
+	case http.MethodHead:
+		return http.MethodHead
+	case http.MethodPost:
+		return http.MethodPost
+	case http.MethodOptions:
+		return http.MethodOptions
+	default:
+		return "OTHER"
+	}
+}
+
+func isASCIILetter(value byte) bool {
+	return value >= 'A' && value <= 'Z'
 }
 
 func (key metricKey) labels() string {
