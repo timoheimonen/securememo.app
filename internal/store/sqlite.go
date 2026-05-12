@@ -28,6 +28,16 @@ type CleanupResult struct {
 	RateLimitsDeleted int64
 }
 
+const (
+	AppStatMemosCreated = "memos_created_total"
+	AppStatMemosRead    = "memos_read_total"
+)
+
+type AppStats struct {
+	MemosCreated uint64
+	MemosRead    uint64
+}
+
 var ErrNotFound = errors.New("not found")
 
 func OpenSQLite(path string) (*SQLiteStore, error) {
@@ -87,8 +97,64 @@ CREATE TABLE IF NOT EXISTS rate_limits (
 );
 
 CREATE INDEX IF NOT EXISTS idx_rate_limits_expires_at ON rate_limits(expires_at);
+
+CREATE TABLE IF NOT EXISTS app_stats (
+    key TEXT PRIMARY KEY,
+    value INTEGER NOT NULL DEFAULT 0,
+    updated_at INTEGER NOT NULL
+);
 `)
 	return err
+}
+
+func (s *SQLiteStore) IncrementAppStat(ctx context.Context, key string) error {
+	if !validAppStatKey(key) {
+		return fmt.Errorf("unknown app stat key: %s", key)
+	}
+	now := time.Now().Unix()
+	_, err := s.db.ExecContext(ctx, `
+INSERT INTO app_stats (key, value, updated_at)
+VALUES (?, 1, ?)
+ON CONFLICT(key) DO UPDATE SET
+    value = value + 1,
+    updated_at = excluded.updated_at`, key, now)
+	return err
+}
+
+func (s *SQLiteStore) AppStats(ctx context.Context) (AppStats, error) {
+	rows, err := s.db.QueryContext(ctx, `SELECT key, value FROM app_stats WHERE key IN (?, ?)`, AppStatMemosCreated, AppStatMemosRead)
+	if err != nil {
+		return AppStats{}, err
+	}
+	defer rows.Close()
+
+	var stats AppStats
+	for rows.Next() {
+		var key string
+		var value uint64
+		if err := rows.Scan(&key, &value); err != nil {
+			return AppStats{}, err
+		}
+		switch key {
+		case AppStatMemosCreated:
+			stats.MemosCreated = value
+		case AppStatMemosRead:
+			stats.MemosRead = value
+		}
+	}
+	if err := rows.Err(); err != nil {
+		return AppStats{}, err
+	}
+	return stats, nil
+}
+
+func validAppStatKey(key string) bool {
+	switch key {
+	case AppStatMemosCreated, AppStatMemosRead:
+		return true
+	default:
+		return false
+	}
 }
 
 func (s *SQLiteStore) MemoExists(ctx context.Context, memoID string) (bool, error) {

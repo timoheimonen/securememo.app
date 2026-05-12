@@ -1,6 +1,7 @@
 package server
 
 import (
+	"context"
 	"fmt"
 	"net/http"
 	"sort"
@@ -8,11 +9,14 @@ import (
 	"strings"
 	"sync"
 	"time"
+
+	"github.com/timoheimonen/securememo/internal/store"
 )
 
 var httpDurationBuckets = []float64{0.005, 0.01, 0.025, 0.05, 0.1, 0.25, 0.5, 1, 2.5, 5, 10}
 
 type Metrics struct {
+	store        *store.SQLiteStore
 	mu           sync.Mutex
 	requests     map[metricKey]uint64
 	bytes        map[metricKey]uint64
@@ -40,8 +44,9 @@ type metricsResponseWriter struct {
 	bytes  int
 }
 
-func NewMetrics() *Metrics {
+func NewMetrics(store *store.SQLiteStore) *Metrics {
 	return &Metrics{
+		store:    store,
 		requests: make(map[metricKey]uint64),
 		bytes:    make(map[metricKey]uint64),
 		duration: make(map[metricKey]durationMetric),
@@ -68,8 +73,10 @@ func (m *Metrics) Observe(r *http.Request, status int, bytes int, elapsed time.D
 		switch key.Route {
 		case "/api/create-memo":
 			m.memosCreated++
+			m.incrementLifetimeStat(store.AppStatMemosCreated)
 		case "/api/read-memo":
 			m.memosRead++
+			m.incrementLifetimeStat(store.AppStatMemosRead)
 		}
 	}
 	if bytes > 0 {
@@ -87,6 +94,24 @@ func (m *Metrics) Observe(r *http.Request, status int, bytes int, elapsed time.D
 		}
 	}
 	m.duration[key] = d
+}
+
+func (m *Metrics) incrementLifetimeStat(key string) {
+	if m == nil || m.store == nil {
+		return
+	}
+	ctx, cancel := context.WithTimeout(context.Background(), 2*time.Second)
+	defer cancel()
+	_ = m.store.IncrementAppStat(ctx, key)
+}
+
+func (m *Metrics) lifetimeStats(ctx context.Context) (store.AppStats, error) {
+	if m == nil || m.store == nil {
+		return store.AppStats{MemosCreated: m.memosCreated, MemosRead: m.memosRead}, nil
+	}
+	readCtx, cancel := context.WithTimeout(ctx, 2*time.Second)
+	defer cancel()
+	return m.store.AppStats(readCtx)
 }
 
 func (m *Metrics) Handler() http.Handler {
@@ -115,6 +140,11 @@ func (m *Metrics) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	memosCreated := m.memosCreated
 	memosRead := m.memosRead
 	m.mu.Unlock()
+
+	if stats, err := m.lifetimeStats(r.Context()); err == nil {
+		memosCreated = stats.MemosCreated
+		memosRead = stats.MemosRead
+	}
 
 	fmt.Fprintln(w, "# HELP securememo_http_requests_total Total HTTP requests handled by securememo.app.")
 	fmt.Fprintln(w, "# TYPE securememo_http_requests_total counter")

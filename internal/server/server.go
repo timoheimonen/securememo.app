@@ -35,7 +35,7 @@ func New(cfg config.Config, db *store.SQLiteStore) *Server {
 	s := &Server{
 		cfg:     cfg,
 		db:      db,
-		metrics: NewMetrics(),
+		metrics: NewMetrics(db),
 	}
 	s.memo = memo.Handler{
 		Config: cfg,
