@@ -1,6 +1,8 @@
 package server
 
 import (
+	"encoding/json"
+	"fmt"
 	"io"
 	"net/http"
 	"net/http/httptest"
@@ -9,6 +11,7 @@ import (
 	"testing"
 
 	"github.com/timoheimonen/securememo/internal/config"
+	"github.com/timoheimonen/securememo/internal/frontend"
 	"github.com/timoheimonen/securememo/internal/store"
 )
 
@@ -121,6 +124,107 @@ func TestRobotsAllowsNoIndexPagesToBeCrawled(t *testing.T) {
 	}
 }
 
+func TestLegalPagesAreOnlyServedInEnglish(t *testing.T) {
+	app := newTestServer(t)
+	for _, tc := range []struct {
+		path     string
+		location string
+	}{
+		{"/fi/tos.html", "https://securememo.app/en/tos.html"},
+		{"/fi/privacy.html", "https://securememo.app/en/privacy.html"},
+		{"/zh/tos.html", "https://securememo.app/en/tos.html"},
+		{"/zh/privacy.html", "https://securememo.app/en/privacy.html"},
+	} {
+		rec := httptest.NewRecorder()
+		req := httptest.NewRequest(http.MethodGet, tc.path, nil)
+
+		app.ServeHTTP(rec, req)
+
+		if rec.Code != http.StatusMovedPermanently {
+			t.Fatalf("GET %s status = %d, want %d", tc.path, rec.Code, http.StatusMovedPermanently)
+		}
+		if got := rec.Header().Get("Location"); got != tc.location {
+			t.Fatalf("GET %s Location = %q, want %q", tc.path, got, tc.location)
+		}
+	}
+}
+
+func TestLocalizedPagesLinkToEnglishLegalPages(t *testing.T) {
+	app := newTestServer(t)
+	rec := httptest.NewRecorder()
+	req := httptest.NewRequest(http.MethodGet, "/fi", nil)
+
+	app.ServeHTTP(rec, req)
+
+	if rec.Code != http.StatusOK {
+		t.Fatalf("GET /fi status = %d, want %d", rec.Code, http.StatusOK)
+	}
+	body := rec.Body.String()
+	for _, href := range []string{`href="/en/tos.html"`, `href="/en/privacy.html"`} {
+		if !strings.Contains(body, href) {
+			t.Fatalf("localized page missing English legal link %s", href)
+		}
+	}
+	for _, href := range []string{`href="/fi/tos.html"`, `href="/fi/privacy.html"`} {
+		if strings.Contains(body, href) {
+			t.Fatalf("localized page contains localized legal link %s", href)
+		}
+	}
+}
+
+func TestLegalPagesHaveOnlyEnglishLanguageMenu(t *testing.T) {
+	app := newTestServer(t)
+	rec := httptest.NewRecorder()
+	req := httptest.NewRequest(http.MethodGet, "/en/tos.html", nil)
+
+	app.ServeHTTP(rec, req)
+
+	if rec.Code != http.StatusOK {
+		t.Fatalf("GET /en/tos.html status = %d, want %d", rec.Code, http.StatusOK)
+	}
+	body := rec.Body.String()
+	if !strings.Contains(body, `href="/en/tos.html" class="language-item active"`) {
+		t.Fatal("English legal page missing active English language item")
+	}
+	if strings.Contains(body, `href="/fi/tos.html"`) || strings.Contains(body, `href="/zh/tos.html"`) {
+		t.Fatal("English legal page contains localized legal language links")
+	}
+}
+
+func TestLegalDocumentTextIsNotInLocalizationBundles(t *testing.T) {
+	for _, locale := range supportedLocales {
+		filename := fmt.Sprintf("generated/js/clientLocalization.%s.js", locale)
+		body, err := frontend.FS.ReadFile(filename)
+		if err != nil {
+			t.Fatalf("read %s: %v", filename, err)
+		}
+		raw := extractTranslationJSON(string(body))
+		if raw == "" {
+			t.Fatalf("extract translations from %s", filename)
+		}
+		var catalog map[string]map[string]string
+		if err := json.Unmarshal([]byte(raw), &catalog); err != nil {
+			t.Fatalf("parse %s: %v", filename, err)
+		}
+		for catalogLocale, messages := range catalog {
+			for key := range messages {
+				if isLegalTranslationKey(key) {
+					t.Fatalf("%s catalog %s contains legal translation key %q", filename, catalogLocale, key)
+				}
+			}
+		}
+	}
+}
+
+func isLegalTranslationKey(key string) bool {
+	for _, prefix := range []string{"tos.", "privacy.", "page.tos.", "page.privacy.", "schema.tos.", "schema.privacy."} {
+		if strings.HasPrefix(key, prefix) {
+			return true
+		}
+	}
+	return false
+}
+
 func TestMemoCryptoWorkerAssetIsServed(t *testing.T) {
 	app := newTestServer(t)
 	rec := httptest.NewRecorder()
@@ -136,6 +240,24 @@ func TestMemoCryptoWorkerAssetIsServed(t *testing.T) {
 	}
 	if !strings.Contains(rec.Body.String(), "encryptMemo") {
 		t.Fatal("worker asset does not contain expected crypto handler")
+	}
+}
+
+func TestEnglishLocalizationBundleAssetIsServed(t *testing.T) {
+	app := newTestServer(t)
+	rec := httptest.NewRecorder()
+	req := httptest.NewRequest(http.MethodGet, "/js/clientLocalization.en.js", nil)
+
+	app.ServeHTTP(rec, req)
+
+	if rec.Code != http.StatusOK {
+		t.Fatalf("GET /js/clientLocalization.en.js status = %d, want %d", rec.Code, http.StatusOK)
+	}
+	if got := rec.Header().Get("Content-Type"); got != "application/javascript; charset=utf-8" {
+		t.Fatalf("content type = %q, want application/javascript; charset=utf-8", got)
+	}
+	if !strings.Contains(rec.Body.String(), `"nav.home": "Home"`) {
+		t.Fatal("English localization bundle does not contain expected translations")
 	}
 }
 
