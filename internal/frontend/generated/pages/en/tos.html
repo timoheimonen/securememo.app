@@ -210,7 +210,8 @@
                 <ul>
                     <li>The Service does not use accounts, cookies, advertising trackers, or behavioral profiling.</li>
                     <li>The Service processes encrypted memo data and minimal metadata needed to provide automatic deletion.</li>
-                    <li>The Service uses short-lived rate-limit data and operational metrics to protect and monitor the server.</li>
+                    <li>The Service uses short-lived rate-limit data and Prometheus-compatible operational metrics to protect and monitor the server.</li>
+                    <li>Operational metrics may be scraped into the operator's Prometheus-compatible monitoring system and visualized in Grafana. These metrics use low-cardinality labels such as method, normalized route group, status code, and coarse country code; they do not include memo contents, passwords, deletion tokens, memo IDs, full URLs, query strings, IP addresses, user agents, cookies, session IDs, email addresses, or persistent user identifiers.</li>
                     <li>The Service is behind Cloudflare for traffic routing, TLS, security, and operational metrics.</li>
                     <li>Cloudflare and hosting infrastructure may process technical request and network data needed to provide and protect the Service.</li>
                 </ul>

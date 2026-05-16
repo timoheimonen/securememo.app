@@ -181,11 +181,12 @@
                     <li><strong>Encrypted memo data:</strong> the encrypted memo payload created in your browser.</li>
                     <li><strong>Memo metadata:</strong> memo ID, creation time, expiration time, and deletion-token hash.</li>
                     <li><strong>Rate-limit data:</strong> short-lived abuse-prevention counters keyed by hashed client IP address, action, and time window.</li>
-                    <li><strong>Operational metrics:</strong> aggregate or technical data used to monitor service health, such as request counts, response status counts, latency, error rates, bandwidth, uptime, and cleanup counts.</li>
+                    <li><strong>Operational metrics:</strong> Prometheus-compatible aggregate technical counters and histograms exposed on a separate private metrics listener for operator monitoring. Metrics include HTTP request counts, response byte totals, request duration histograms by method, normalized route group, status code, and coarse country code from Cloudflare's <code>CF-IPCountry</code> header, plus lifetime totals of successfully created and read memos.</li>
                     <li><strong>Request metadata:</strong> limited technical metadata may be processed by the application or infrastructure to route requests, apply security controls, and diagnose operational issues. This can include IP address, time, requested path, response status, user agent, origin, and referrer headers.</li>
                     <li><strong>Contact data:</strong> if you contact us, we process your email address and message content so we can respond.</li>
                 </ul>
-                <p>Operational metrics are used to understand whether the server is working correctly. They are not used to track individual visitors across time or sites.</p>
+                <p>Operational metrics may be scraped by a Prometheus-compatible monitoring system and visualized in Grafana in the operator's monitoring environment. They are used to understand whether the server is working correctly, monitor capacity, and detect abuse patterns. They are not browser-side analytics and are not used to track individual visitors across time or sites.</p>
+                <p>Operational metrics deliberately do not include IP addresses, user agents, cookies, session IDs, full URLs, query strings, memo IDs, memo contents, memo passwords, deletion tokens, email addresses, or persistent user identifiers. Route labels are normalized; for example, a read URL with a memo ID query string is counted only as <code>/api/read-memo</code>.</p>
             </div>
 
             <div class="features-detail" id="information-not-collected">
@@ -196,6 +197,7 @@
                     <li>We do not create user accounts.</li>
                     <li>We do not use cookies.</li>
                     <li>We do not use tracking pixels, advertising tags, behavioral analytics, fingerprinting scripts, or third-party marketing beacons.</li>
+                    <li>We do not include memo IDs, full URLs, query strings, IP addresses, user agents, passwords, deletion tokens, or memo contents in operational metrics.</li>
                     <li>We do not sell, rent, or trade personal data.</li>
                     <li>We do not use memo data or operational metrics for advertising or profiling.</li>
                 </ul>
@@ -248,7 +250,7 @@
                     <li><strong>Encrypted memos:</strong> retained until successful read confirmation or expiration, with a maximum selected expiration of 30 days.</li>
                     <li><strong>Expired memos:</strong> removed by automatic cleanup jobs that run periodically.</li>
                     <li><strong>Rate-limit data:</strong> kept only for the active rate-limit window and removed by cleanup. Current windows are short, including minute and hour windows.</li>
-                    <li><strong>Operational metrics:</strong> kept only as long as needed to monitor service health, troubleshoot issues, and protect the service.</li>
+                    <li><strong>Operational metrics:</strong> current request, response byte, and duration metrics are kept in application memory and reset when the process restarts. Lifetime totals of successfully created and read memos are persisted in SQLite. If metrics are scraped into Prometheus-compatible monitoring or Grafana dashboards, they are retained only for operational monitoring, troubleshooting, capacity planning, and abuse prevention according to the monitoring stack configuration.</li>
                     <li><strong>Contact data:</strong> kept as long as needed to respond to and handle your message, unless a longer period is required for legitimate recordkeeping or legal reasons.</li>
                 </ul>
                 <p>After a memo is deleted, securememo.app does not provide app-level recovery. Because the service never stores the password, we cannot decrypt or restore memo content for you.</p>
