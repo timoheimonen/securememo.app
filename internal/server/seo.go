@@ -85,35 +85,12 @@ var seoPages = map[string]seoPage{
 			"schema.read.featureList.privacyFocused",
 		},
 	},
-	"/tos.html": {
-		Prefix:      "tos",
-		Description: "page.tos.description",
-		OGTitle:     "page.tos.ogTitle",
-		OGDesc:      "page.tos.ogDescription",
-		TwitterDesc: "page.tos.twitterDescription",
-		Keywords:    "page.tos.keywords",
-		NoIndex:     true,
-		Schema:      "creativeWork",
-		PageName:    "schema.tos.name",
-		Breadcrumb:  "schema.tos.breadcrumb.tos",
-		MainEntity:  "schema.tos.mainEntity.name",
-	},
-	"/privacy.html": {
-		Prefix:      "privacy",
-		Description: "page.privacy.description",
-		OGTitle:     "page.privacy.ogTitle",
-		OGDesc:      "page.privacy.ogDescription",
-		TwitterDesc: "page.privacy.twitterDescription",
-		Keywords:    "page.privacy.keywords",
-		NoIndex:     true,
-		Schema:      "creativeWork",
-		PageName:    "schema.privacy.name",
-		Breadcrumb:  "schema.privacy.breadcrumb.privacy",
-		MainEntity:  "schema.privacy.mainEntity.name",
-	},
 }
 
 func rewriteSEO(input, locale, pathWithoutLocale, publicOrigin string) string {
+	if isEnglishOnlyLegalPage(pathWithoutLocale) {
+		return rewriteEnglishOnlyLegalSEO(input, pathWithoutLocale, publicOrigin)
+	}
 	page, ok := seoPages[pathWithoutLocale]
 	if !ok {
 		return input
@@ -141,6 +118,15 @@ func rewriteSEO(input, locale, pathWithoutLocale, publicOrigin string) string {
 	out = rewriteRobotsMeta(out, page.NoIndex)
 	out = rewriteAlternateLinks(out, locale, pathWithoutLocale, publicOrigin, page.Hreflang)
 	out = rewriteJSONLD(out, buildJSONLD(page, locale, pathWithoutLocale, publicOrigin, canonical, description))
+	return out
+}
+
+func rewriteEnglishOnlyLegalSEO(input, pathWithoutLocale, publicOrigin string) string {
+	canonical := publicOrigin + buildLocalizedPath("en", pathWithoutLocale)
+	out := replaceProperty(input, "og:url", canonical)
+	out = replaceCanonical(out, canonical)
+	out = rewriteRobotsMeta(out, true)
+	out = rewriteAlternateLinks(out, "en", pathWithoutLocale, publicOrigin, false)
 	return out
 }
 

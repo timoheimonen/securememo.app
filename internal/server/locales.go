@@ -64,6 +64,15 @@ func buildLocalizedPath(locale, targetPath string) string {
 	return "/" + locale + targetPath
 }
 
+func isEnglishOnlyLegalPage(pathname string) bool {
+	switch pathname {
+	case "/tos.html", "/privacy.html":
+		return true
+	default:
+		return false
+	}
+}
+
 func localeRedirectPath(pathname string) string {
 	if strings.HasPrefix(pathname, "/api/") ||
 		strings.HasPrefix(pathname, "/js/") ||

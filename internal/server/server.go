@@ -111,6 +111,8 @@ func (s *Server) serveGeneratedAsset(w http.ResponseWriter, r *http.Request, url
 		return s.serveFile(w, r, "generated/js/common.js", "application/javascript; charset=utf-8", cacheStatic(true))
 	case "/js/localization-core.js":
 		return s.serveFile(w, r, "generated/js/localization-core.js", "application/javascript; charset=utf-8", cacheStatic(true))
+	case "/js/clientLocalization.en.js":
+		return s.serveFile(w, r, "generated/js/clientLocalization.en.js", "application/javascript; charset=utf-8", cacheStatic(false))
 	case "/js/create-memo.js":
 		return s.serveFile(w, r, "generated/js/create-memo.js", "application/javascript; charset=utf-8", cacheStatic(true))
 	case "/js/read-memo.js":
@@ -178,6 +180,10 @@ func (s *Server) servePage(w http.ResponseWriter, r *http.Request) {
 	}
 	if redirectPath := localeRedirectPath(r.URL.Path); redirectPath != "" && redirectPath != r.URL.Path {
 		http.Redirect(w, r, s.cfg.PublicOrigin+redirectPath, http.StatusMovedPermanently)
+		return
+	}
+	if isEnglishOnlyLegalPage(info.PathWithoutLocale) && info.Locale != "en" {
+		http.Redirect(w, r, s.cfg.PublicOrigin+buildLocalizedPath("en", info.PathWithoutLocale), http.StatusMovedPermanently)
 		return
 	}
 

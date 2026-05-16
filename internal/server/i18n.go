@@ -74,12 +74,17 @@ func loadTranslationCatalog() map[string]map[string]string {
 }
 
 func extractTranslationJSON(js string) string {
-	const start = "const TRANSLATIONS = "
-	startIndex := strings.Index(js, start)
+	startIndex := -1
+	for _, start := range []string{"const TRANSLATIONS = ", "const LOCAL_TRANSLATIONS = "} {
+		startIndex = strings.Index(js, start)
+		if startIndex >= 0 {
+			startIndex += len(start)
+			break
+		}
+	}
 	if startIndex < 0 {
 		return ""
 	}
-	startIndex += len(start)
 	endIndex := strings.Index(js[startIndex:], ";\nfunction")
 	if endIndex < 0 {
 		endIndex = strings.Index(js[startIndex:], ";\n")
@@ -187,13 +192,28 @@ func rewriteLocaleURLs(input, locale, pathWithoutLocale, publicOrigin string) st
 	out = strings.ReplaceAll(out, `content="https://securememo.app/privacy.html"`, fmt.Sprintf(`content="%s%s"`, publicOrigin, localizedPage))
 	out = strings.ReplaceAll(out, `url": "https://securememo.app/privacy.html"`, fmt.Sprintf(`url": "%s%s"`, publicOrigin, localizedPage))
 	out = strings.ReplaceAll(out, `item": "https://securememo.app/privacy.html"`, fmt.Sprintf(`item": "%s%s"`, publicOrigin, localizedPage))
+	out = keepLegalLinksEnglish(out, locale)
+	return out
+}
+
+func keepLegalLinksEnglish(input, locale string) string {
+	if locale == "en" {
+		return input
+	}
+	out := strings.ReplaceAll(input, fmt.Sprintf(`href="/%s/tos.html"`, locale), `href="/en/tos.html"`)
+	out = strings.ReplaceAll(out, fmt.Sprintf(`href="/%s/privacy.html"`, locale), `href="/en/privacy.html"`)
 	return out
 }
 
 func buildLanguageMenu(activeLocale, pathWithoutLocale string) string {
 	var out strings.Builder
 	out.WriteString(`<div class="language-menu">`)
-	for _, locale := range supportedLocales {
+	locales := supportedLocales
+	if isEnglishOnlyLegalPage(pathWithoutLocale) {
+		locales = []string{"en"}
+		activeLocale = "en"
+	}
+	for _, locale := range locales {
 		label := localeLabels[locale]
 		activeClass := ""
 		if locale == activeLocale {
