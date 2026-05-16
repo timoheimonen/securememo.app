@@ -3,19 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Terms of Service - securememo.app Legal Terms</title>
-    <meta name="description" content="Terms of Service for securememo.app - encrypted memo sharing service. Learn about acceptable use, privacy, security, and legal terms for our secure memo sharing platform.">
-    <meta name="keywords" content="terms of service, secure memo legal, encrypted memo terms, privacy policy, acceptable use policy, secure note sharing terms">
+    <title>Terms of Service - securememo.app</title>
+    <meta name="description" content="Terms of Service for securememo.app - encrypted memo sharing with browser-side encryption, automatic deletion, no accounts, no cookies, and no trackers.">
+    <meta name="keywords" content="terms of service, secure memo legal, encrypted memo terms, privacy, acceptable use policy, secure note sharing terms">
     <!-- Open Graph for social sharing -->
-    <meta property="og:title" content="Terms of Service - securememo.app Legal Terms">
-    <meta property="og:description" content="Legal terms and conditions for securememo.app encrypted memo sharing service.">
+    <meta property="og:title" content="Terms of Service - securememo.app">
+    <meta property="og:description" content="Terms for using securememo.app encrypted memo sharing.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="{{PUBLIC_ORIGIN}}/en/tos.html">
     <meta property="og:image" content="https://securememo.app/android-chrome-512x512.png">
     <!-- Twitter Cards -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Terms of Service - securememo.app Legal Terms">
-    <meta name="twitter:description" content="Legal terms for securememo.app encrypted memo sharing service.">
+    <meta name="twitter:title" content="Terms of Service - securememo.app">
+    <meta name="twitter:description" content="Terms for using securememo.app encrypted memo sharing.">
     <!-- Structured Data -->
     <script type="application/ld+json" nonce="{{CSP_NONCE}}">
     {
@@ -48,7 +48,7 @@
           "@type": "Organization",
           "name": "securememo.app"
         },
-        "dateModified": "2025-08-24",
+        "dateModified": "2026-05-16",
         "description": "Legal terms and conditions for securememo.app encrypted memo sharing service"
       }
     }
@@ -124,123 +124,155 @@
     <main class="main-content">
         <div class="legal-section">
             <h1>Terms of Service</h1>
-            <p class="legal-meta"><strong>Last updated: August 24, 2025</strong></p>
+            <p class="legal-meta"><strong>Last updated: May 16, 2026</strong></p>
             
             <div class="legal-toc">
                 <h2>Table of Contents</h2>
                 <ol>
+                    <li><a href="#overview">Overview</a></li>
+                    <li><a href="#operator">Operator and Contact</a></li>
                     <li><a href="#service-description">Service Description</a></li>
+                    <li><a href="#encryption-deletion">Encryption and Deletion Model</a></li>
+                    <li><a href="#user-responsibilities">Your Responsibilities</a></li>
                     <li><a href="#acceptable-use">Acceptable Use</a></li>
-                    <li><a href="#privacy-data">Privacy & Data Handling</a></li>
-                    <li><a href="#service-limitations">Service Limitations</a></li>
-                    <li><a href="#security-disclaimers">Security & Disclaimers</a></li>
-                    <li><a href="#intellectual-property">Intellectual Property</a></li>
-                    <li><a href="#indemnification">Indemnification</a></li>
-                    <li><a href="#termination">Termination</a></li>
+                    <li><a href="#privacy-data">Privacy and Data Handling</a></li>
+                    <li><a href="#service-limitations">Service Limits and Availability</a></li>
+                    <li><a href="#security-disclaimers">Security, No Recovery, and Disclaimers</a></li>
+                    <li><a href="#intellectual-property">Content and Intellectual Property</a></li>
+                    <li><a href="#termination">Suspension or Termination</a></li>
                     <li><a href="#changes-terms">Changes to Terms</a></li>
-                    <li><a href="#governing-law">Governing Law & Jurisdiction</a></li>
-                    <li><a href="#miscellaneous">Miscellaneous</a></li>
+                    <li><a href="#governing-law">Governing Law</a></li>
                     <li><a href="#contact">Contact</a></li>
                     <li><a href="#language-disclaimer">Language and Translation</a></li>
                 </ol>
             </div>
 
+            <div class="features-detail" id="overview">
+                <h2>1. Overview</h2>
+                <p>These Terms of Service ("Terms") govern your use of securememo.app (the "Service"). By using the Service, you agree to these Terms. If you do not agree, do not use the Service.</p>
+                <p>The Service is designed for temporary sharing of encrypted memos with browser-side encryption, automatic deletion, no user accounts, no cookies, no trackers, and no advertising.</p>
+            </div>
+
+            <div class="usage-section" id="operator">
+                <h2>2. Operator and Contact</h2>
+                <p>The Service is operated by Timo Heimonen.</p>
+                <p>Contact: <a href="mailto:timo.heimonen@proton.me">timo.heimonen@proton.me</a></p>
+            </div>
+
             <div class="features-detail" id="service-description">
-                <h2>1. Service Description</h2>
-                <p>securememo.app is a secure memo sharing service for encrypted memos that are deleted after successful read confirmation or expiration. The service uses client-side encryption to ensure that memo content is never accessible to our servers.</p>
+                <h2>3. Service Description</h2>
+                <p>securememo.app lets a user create an encrypted memo, share the memo URL with a recipient, and share the password separately. The recipient uses the password to decrypt the memo in their browser. Memos are deleted after successful read confirmation or expiration.</p>
+                <p>The Service is provided without user accounts. It is intended for temporary memo sharing, not permanent storage, backup, archiving, identity management, or emergency communication.</p>
+            </div>
+
+            <div class="usage-section" id="encryption-deletion">
+                <h2>4. Encryption and Deletion Model</h2>
+                <ul>
+                    <li>Memo content is encrypted in the browser before upload.</li>
+                    <li>The memo password is generated and handled in the browser. The server does not receive or store it.</li>
+                    <li>The server stores the encrypted memo payload, memo ID, expiration time, and deletion-token hash.</li>
+                    <li>Expiration options are 8 hours, 24 hours, 48 hours, 1 week, and 30 days.</li>
+                    <li>After successful decryption, the browser attempts to confirm deletion with the server.</li>
+                    <li>Expired memos are removed by automatic cleanup jobs.</li>
+                    <li>After deletion or expiration, the Service does not provide app-level recovery.</li>
+                </ul>
+            </div>
+
+            <div class="features-detail" id="user-responsibilities">
+                <h2>5. Your Responsibilities</h2>
+                <ul>
+                    <li>You are responsible for the memo content you create, submit, or share.</li>
+                    <li>You are responsible for sharing memo URLs and passwords securely and preferably through separate channels.</li>
+                    <li>You are responsible for keeping the password. If the password is lost, the Service cannot recover the memo.</li>
+                    <li>You should not use the Service as the only copy of important information.</li>
+                    <li>You are responsible for ensuring that your use of the Service is lawful where you are located and where your recipients are located.</li>
+                    <li>You should use devices and browsers you trust when creating or reading memos.</li>
+                </ul>
             </div>
 
             <div class="usage-section" id="acceptable-use">
-                <h2>2. Acceptable Use</h2>
-                <p>You agree to use this service only for lawful purposes and in accordance with these Terms. You agree not to:</p>
+                <h2>6. Acceptable Use</h2>
+                <p>You agree not to use the Service to:</p>
                 <ul>
-                    <li>Use the service to transmit illegal, harmful, threatening, abusive, or defamatory content</li>
-                    <li>Attempt to bypass security measures or rate limiting protection</li>
-                    <li>Use automated tools or scripts to create memos</li>
-                    <li>Share memos containing malware, phishing links, or other harmful content</li>
-                    <li>Use the service for spam or mass unsolicited memo sharing</li>
-                    <li>Attempt to reverse engineer or compromise the service</li>
+                    <li>violate any law or regulation;</li>
+                    <li>send threats, harassment, abuse, or unlawful harmful content;</li>
+                    <li>share malware, exploit code, phishing material, credential-harvesting pages, or other harmful content;</li>
+                    <li>send spam, bulk unsolicited messages, or automated mass-created memos;</li>
+                    <li>facilitate fraud, impersonation, unauthorized access, or other abuse;</li>
+                    <li>attempt to bypass rate limits, origin checks, security controls, or access restrictions;</li>
+                    <li>probe, scan, overload, disrupt, or compromise the Service or its infrastructure;</li>
+                    <li>use the Service in a way that interferes with other users' ability to use it.</li>
                 </ul>
             </div>
 
             <div class="features-detail" id="privacy-data">
-                <h2>3. Privacy & Data Handling</h2>
+                <h2>7. Privacy and Data Handling</h2>
                 <ul>
-                    <li>No Content Access: We cannot access, read, or recover your memo content. All encryption happens in your browser.</li>
-                    <li>Minimal Data Collection: We do not require user accounts. We process limited operational data to run and protect the service, and the only direct personal data we may collect is if you voluntarily contact us for support. If you contact us via email, we collect your email address and message content to respond to your inquiry. We do not use this information for any other purposes and do not share it with third parties without your consent.</li>
-                    <li>Security Logging: We temporarily log IP addresses and security-related metadata strictly for abuse mitigation and to protect service integrity. These logs are never used for tracking or profiling.</li>
-                    <li>Automatic Deletion: Memos are automatically deleted after being read or when they expire.</li>
-                    <li>No app-level recovery: After deletion, the service does not provide a way to recover memo content.</li>
-                    <li>GDPR Compliance: We are committed to GDPR principles. We minimize data collection and process necessary data, such as temporary security logs, under the basis of legitimate interest to protect the service.</li>
+                    <li>The Service does not use accounts, cookies, advertising trackers, or behavioral profiling.</li>
+                    <li>The Service processes encrypted memo data and minimal metadata needed to provide automatic deletion.</li>
+                    <li>The Service uses short-lived rate-limit data and operational metrics to protect and monitor the server.</li>
+                    <li>The Service is behind Cloudflare for traffic routing, TLS, security, and operational metrics.</li>
+                    <li>Cloudflare and hosting infrastructure may process technical request and network data needed to provide and protect the Service.</li>
                 </ul>
-                <p>For more details, please review our <a href="/en/privacy.html">Privacy Notice</a>.</p>
+                <p>For details, review the <a href="/en/privacy.html">Privacy Notice</a>.</p>
             </div>
 
             <div class="usage-section" id="service-limitations">
-                <h2>4. Service Limitations</h2>
+                <h2>8. Service Limits and Availability</h2>
                 <ul>
-                    <li>Message Size: Maximum 10,000 characters per memo</li>
-                    <li>Expiry Times: 8 hours, 24 hours, 48 hours, 1 week, or 30 days; memos are also deleted after a successful read.</li>
-                    <li>Availability: Service provided "as is" without guarantees of availability</li>
-                    <li>No Delivery Guarantee: We cannot guarantee that memos will be delivered, read or deleted on time.</li>
+                    <li>Memo form input is limited to 10,000 characters.</li>
+                    <li>Encrypted payloads and API requests are subject to server-side size limits.</li>
+                    <li>API actions are rate limited to protect the Service from abuse.</li>
+                    <li>The Service may be unavailable, delayed, interrupted, or changed without notice.</li>
+                    <li>We do not guarantee that a memo will be created, delivered, readable, read only once, deleted at an exact time, or recoverable.</li>
+                    <li>The Service is currently provided without charge, but we may change, suspend, or discontinue it.</li>
                 </ul>
             </div>
 
             <div class="features-detail" id="security-disclaimers">
-                <h2>5. Security & Disclaimers</h2>
+                <h2>9. Security, No Recovery, and Disclaimers</h2>
                 <ul>
-                    <li>User Responsibility: You are responsible for securely sharing memo URLs and protecting the passwords. If a password is lost, the service cannot decrypt the memo for you.</li>
-                    <li>No Warranty: The service is provided without warranties of any kind. Our encryption services are provided on an "as-is" and "as-available" basis. We do not warrant that the encryption will be uninterrupted, error-free, or secure from all potential threats.</li>
-                    <li>Limitation of Liability: We are not liable for any damages arising from use of the service. You acknowledge that no method of electronic transmission or storage is 100% secure, and we are not responsible for any unauthorized access or interception of your memos. Use of our encryption services is at your own risk.</li>
-                    <li>Security Measures: While we implement security measures, no system is 100% secure.</li>
-                    <li>Export Controls: You agree not to use the service in violation of any export control laws, including those restricting use in sanctioned countries.</li>
+                    <li>The Service is provided "as is" and "as available".</li>
+                    <li>No online service, encryption implementation, network path, browser, or device can be guaranteed perfectly secure.</li>
+                    <li>We do not have the memo password and cannot decrypt, inspect, restore, or recover memo content for you.</li>
+                    <li>You accept the risk that a memo may be lost, deleted, inaccessible, intercepted outside the Service, copied by a recipient, or exposed by a compromised device or browser.</li>
+                    <li>To the maximum extent permitted by law, we disclaim warranties of merchantability, fitness for a particular purpose, non-infringement, availability, and security.</li>
+                    <li>To the maximum extent permitted by law, we are not liable for indirect, incidental, consequential, special, exemplary, or punitive damages, or for loss of data, secrets, profits, revenue, or goodwill.</li>
                 </ul>
+                <p>Nothing in these Terms limits liability that cannot be limited under applicable law.</p>
             </div>
 
             <div class="usage-section" id="intellectual-property">
-                <h2>6. Intellectual Property</h2>
-                <p>The Service and all materials provided through it, including but not limited to text, graphics, logos, and software, are the property of securememo.app or its licensors and are protected by copyright, trademark, and other intellectual property laws. You agree not to modify, reproduce, distribute, or create derivative works based on our content without explicit permission, except for personal, non-commercial use within the Service.</p>
-                <p>Copyright & DMCA Policy: If you believe your copyright has been infringed, please contact us with the required information under the DMCA (e.g., identification of the work, your contact details, and a statement of good faith belief).</p>
+                <h2>10. Content and Intellectual Property</h2>
+                <p>You retain any rights you have in memo content you create. You grant us only the limited permission needed to process the encrypted memo payload for the purpose of providing the Service.</p>
+                <p>The Service software, design, text, logos, and other materials are owned by their respective owners and may be protected by copyright, trademark, and other laws. The source code may be available under its repository license.</p>
+                <p>If you believe content or materials related to the Service infringe your rights, contact us with enough information to review the claim.</p>
             </div>
 
-            <div class="features-detail" id="indemnification">
-                <h2>7. Indemnification</h2>
-                <p>You agree to defend, indemnify, and hold harmless securememo.app and its affiliates, officers, directors, employees, and agents from and against any claims, liabilities, damages, losses, and expenses, including reasonable attorneys' fees, arising out of or in any way connected with your access to or use of our Services, including any violation of these Terms by you.</p>
-            </div>
-
-            <div class="usage-section" id="termination">
-                <h2>8. Termination</h2>
-                <p>We reserve the right to terminate or suspend access to the service for violations of these terms or for any other reason at our discretion.</p>
+            <div class="features-detail" id="termination">
+                <h2>11. Suspension or Termination</h2>
+                <p>We may block, suspend, rate limit, remove memos, or stop providing the Service if we believe these Terms are violated, the Service is abused, or action is needed to protect the Service, users, infrastructure, or legal compliance.</p>
             </div>
 
             <div class="features-detail" id="changes-terms">
-                <h2>9. Changes to Terms</h2>
-                <p>We may update these terms at any time. Continued use of the service constitutes acceptance of updated terms.</p>
+                <h2>12. Changes to Terms</h2>
+                <p>We may update these Terms when the Service, law, or operational needs change. Updates will be posted on this page with a new "Last updated" date. Your continued use of the Service after updated Terms are posted means you accept the updated Terms.</p>
             </div>
 
             <div class="usage-section" id="governing-law">
-                <h2>10. Governing Law & Jurisdiction</h2>
-                <p>These Terms of Service and any separate agreements whereby we provide you Services shall be governed by and construed in accordance with the laws of Finland, without regard to its conflict of law principles. Any disputes shall be resolved in the courts of Helsinki, Finland.</p>
-            </div>
-
-            <div class="features-detail" id="miscellaneous">
-                <h2>11. Miscellaneous</h2>
-                <ul>
-                    <li>Severability: If any provision of these Terms is found to be invalid or unenforceable by a court of competent jurisdiction, such provision shall be severed from the Terms, and the remaining provisions will remain in full force and effect.</li>
-                    <li>Assignment: You may not assign or transfer these Terms, by operation of law or otherwise, without our prior written consent. We may assign these Terms at our sole discretion without notice to you.</li>
-                    <li>Waiver: No waiver of any term shall be deemed a further or continuing waiver unless in writing.</li>
-                    <li>Children's Privacy: Our service is not intended for children under 13 (or 16 in some jurisdictions). We do not knowingly collect data from children. If we become aware of such data, we will delete it immediately.</li>
-                </ul>
+                <h2>13. Governing Law</h2>
+                <p>These Terms are governed by the laws of Finland, excluding conflict-of-law rules. Courts in Finland have jurisdiction, unless mandatory consumer protection or other applicable law gives you the right to bring claims elsewhere.</p>
             </div>
 
             <div class="usage-section" id="contact">
-                <h2>12. Contact</h2>
-                <p>For questions about these terms, please visit our <a href="https://github.com/timoheimonen/securememo.app" target="_blank" rel="noopener noreferrer">GitHub repository</a>.</p>
+                <h2>14. Contact</h2>
+                <p>For questions about these Terms, contact Timo Heimonen at <a href="mailto:timo.heimonen@proton.me">timo.heimonen@proton.me</a>.</p>
+                <p>You can also review the source code in the <a href="https://github.com/timoheimonen/securememo.app" target="_blank" rel="noopener noreferrer">GitHub repository</a>.</p>
             </div>
 
             <div class="features-detail" id="language-disclaimer">
-                <h2>13. Language and Translation</h2>
-                <p>These Terms of Service may be translated into other languages for your convenience. In the event of any discrepancy or conflict between the English version and a translated version, the English version shall prevail.</p>
+                <h2>15. Language and Translation</h2>
+                <p>These Terms may be translated into other languages for convenience. If there is a conflict between the English version and a translation, the English version controls to the extent permitted by law.</p>
             </div>
         </div>
     </main>
