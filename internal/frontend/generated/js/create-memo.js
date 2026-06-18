@@ -223,10 +223,10 @@ document.getElementById('copyUrl').addEventListener('click', async () => {
       const copyBtn = document.getElementById('copyUrl');
       const originalText = copyBtn.textContent;
       copyBtn.textContent = t('btn.copied');
-      copyBtn.style.backgroundColor = '#111';
+      copyBtn.classList.add('btn-copied');
       setTimeout(() => {
         copyBtn.textContent = originalText;
-        copyBtn.style.backgroundColor = '';
+        copyBtn.classList.remove('btn-copied');
       }, 2000);
     } else {
       urlInput.select();
@@ -247,11 +247,9 @@ document.getElementById('togglePassword').addEventListener('click', () => {
   if (passwordInput.type === 'password') {
     passwordInput.type = 'text';
     toggleBtn.textContent = t('btn.hide');
-    toggleBtn.style.backgroundColor = '#111';
   } else {
     passwordInput.type = 'password';
     toggleBtn.textContent = t('btn.show');
-    toggleBtn.style.backgroundColor = '#111';
   }
 });
 
@@ -265,10 +263,10 @@ document.getElementById('copyPassword').addEventListener('click', async () => {
       const copyBtn = document.getElementById('copyPassword');
       const originalText = copyBtn.textContent;
       copyBtn.textContent = t('btn.copied');
-      copyBtn.style.backgroundColor = '#111';
+      copyBtn.classList.add('btn-copied');
       setTimeout(() => {
         copyBtn.textContent = originalText;
-        copyBtn.style.backgroundColor = '';
+        copyBtn.classList.remove('btn-copied');
       }, 2000);
     } else {
       passwordInput.select();
