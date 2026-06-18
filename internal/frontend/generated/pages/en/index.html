@@ -28,7 +28,7 @@
       "@context": "https://schema.org",
       "@type": "WebApplication",
       "name": "securememo.app",
-      "description": "Create encrypted memos that are deleted after reading or expiration. Browser-side encryption, privacy-focused, and secure note sharing with AES-256. No tracking, no ads.",
+      "description": "Create an encrypted memo in your browser. It deletes itself after it’s read or when it expires. No tracking, no ads.",
       "url": "https://securememo.app/",
       "applicationCategory": "SecurityApplication",
       "operatingSystem": "Web Browser",
@@ -49,12 +49,11 @@
         "priceCurrency": "USD"
       },
       "featureList": [
-        "Client-side AES-256 encryption",
-        "Self-destructing memos",
-        "Zero-knowledge architecture",
+        "Browser-side encryption",
+        "Self-deleting memos",
         "No user accounts required",
-        "Go and SQLite backend",
-        "Privacy-first design"
+        "No tracking or ads",
+        "Go and SQLite backend"
       ],
       "screenshot": "https://securememo.app/android-chrome-512x512.png",
       "softwareVersion": "1.0.4",
@@ -129,7 +128,7 @@
     <main class="main-content">
         <div class="hero-section">
             <h1>Share secrets that disappear.</h1>
-            <p>Create encrypted memos that are deleted after successful read confirmation or expiration. Your secrets stay safe.</p>
+            <p>Create an encrypted memo in your browser. It deletes itself after it’s read or when it expires.</p>
             <div class="cta-buttons">
                 <a href="/en/create-memo.html" class="btn btn-primary">Create Secure Memo</a>
                 <a href="/en/about.html" class="btn btn-secondary">Learn More</a>
@@ -137,37 +136,19 @@
         </div>
 
         <div class="features-section">
-            <h2>How It Works</h2>
+            <h2>How it works</h2>
             <div class="features-grid">
                 <div class="feature-card">
-                    <h3>Type your memo</h3>
-                    <p>You're in control. Your text is encrypted on your device and the unencrypted version never leaves your browser.</p>
+                    <h3>Write in your browser</h3>
+                    <p>Your memo is encrypted on your device before it ever reaches us. We can’t read it.</p>
                 </div>
                 <div class="feature-card">
-                    <h3>Share Securely</h3>
-                    <p>Get a unique URL and a separate strong password, and share them through different channels for extra security.</p>
+                    <h3>Share link and password separately</h3>
+                    <p>Copy the link and the password. Send them through different channels for extra safety.</p>
                 </div>
                 <div class="feature-card">
-                    <h3>Automatic Deletion</h3>
-                    <p>The memo is deleted after successful read confirmation or when the time limit expires (from 8 hours to 30 days).</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="security-section">
-            <h2>Security Features</h2>
-            <div class="features-grid">
-                <div class="feature-card">
-                    <h3>True Client-Side Encryption</h3>
-                    <p>Your memo is encrypted in-browser with AES-256-GCM and a strong key derivation. We never see the plaintext.</p>
-                </div>
-                <div class="feature-card">
-                    <h3>Automatic Cleanup</h3>
-                    <p>Memos are removed after successful read confirmation or expiration, and expired memos are cleaned up every hour.</p>
-                </div>
-                <div class="feature-card">
-                    <h3>Zero Password Knowledge</h3>
-                    <p>We generate and handle passwords entirely in your browser. They're never sent to or stored on our servers.</p>
+                    <h3>It deletes itself</h3>
+                    <p>The memo is removed after it’s read, or automatically when the expiry time runs out.</p>
                 </div>
             </div>
         </div>
