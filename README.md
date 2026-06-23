@@ -88,6 +88,8 @@ The public browser flow uses these endpoints. Expired memo cleanup runs internal
 
 ## Security Model
 
+For the detailed technical model, see [docs/security-model.md](docs/security-model.md).
+
 - Plaintext memo content never leaves the browser.
 - The memo password is generated and displayed only in the browser.
 - The server stores ciphertext, expiry time, memo ID, and a deletion-token hash.
