@@ -112,7 +112,13 @@ func (h Handler) Read(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	memoID := r.URL.Query().Get("id")
+	query := r.URL.Query()
+	memoIDs, ok := query["id"]
+	if !ok || len(memoIDs) != 1 || len(query) != 1 {
+		h.accessDenied(w)
+		return
+	}
+	memoID := memoIDs[0]
 	if !security.ValidMemoID(memoID) {
 		h.accessDenied(w)
 		return

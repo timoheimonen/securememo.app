@@ -1,12 +1,6 @@
 function initializePage() {
-  const resultSection = document.getElementById('result');
-  if (resultSection) {
-    resultSection.style.display = 'none';
-  }
-  const memoForm = document.getElementById('memoForm');
-  if (memoForm) {
-    memoForm.style.display = 'block';
-  }
+  hideElement('result');
+  showElement('memoForm');
 }
 
 if (document.readyState === 'loading') {
@@ -87,6 +81,22 @@ async function encryptMessage(payload, password) {
 
 const t = (key) => (typeof window.t === 'function' ? window.t(key) : key);
 
+function showElement(id, display = 'block') {
+  const element = document.getElementById(id);
+  if (element) {
+    element.classList.remove('hidden');
+    element.style.display = display;
+  }
+}
+
+function hideElement(id) {
+  const element = document.getElementById(id);
+  if (element) {
+    element.classList.add('hidden');
+    element.style.display = 'none';
+  }
+}
+
 function cryptoWorkerURL() {
   const workerURL = new URL('/js/memo-crypto-worker.js', window.location.origin);
   const currentScript = document.currentScript || Array.from(document.scripts).find(script => script.src.includes('/js/create-memo.js'));
@@ -154,7 +164,7 @@ async function encryptMemo(message) {
 document.getElementById('memoForm').addEventListener('submit', async (e) => {
   e.preventDefault();
   const resultSection = document.getElementById('result');
-  if (resultSection && resultSection.style.display === 'block') {
+  if (resultSection && !resultSection.classList.contains('hidden')) {
     return;
   }
   const message = document.getElementById('message').value.trim();
@@ -171,7 +181,7 @@ document.getElementById('memoForm').addEventListener('submit', async (e) => {
   const loadingIndicator = document.getElementById('loadingIndicator');
   submitButton.disabled = true;
   submitButton.textContent = t('btn.creating');
-  loadingIndicator.style.display = 'block';
+  showElement('loadingIndicator');
   try {
     const memoCrypto = await encryptMemo(message);
     const requestBody = {
@@ -194,8 +204,8 @@ document.getElementById('memoForm').addEventListener('submit', async (e) => {
       const memoUrl = window.location.origin + '/' + currentLocale + '/read-memo.html?id=' + result.memoId;
       document.getElementById('memoUrl').value = memoUrl;
       document.getElementById('memoPassword').value = memoCrypto.password;
-      document.getElementById('result').style.display = 'block';
-      document.getElementById('memoForm').style.display = 'none';
+      showElement('result');
+      hideElement('memoForm');
       document.getElementById('message').value = '';
     } else {
       if (response.status === 429) {
@@ -209,7 +219,7 @@ document.getElementById('memoForm').addEventListener('submit', async (e) => {
   } finally {
     submitButton.disabled = false;
     submitButton.textContent = t('btn.create');
-    loadingIndicator.style.display = 'none';
+    hideElement('loadingIndicator');
   }
 });
 

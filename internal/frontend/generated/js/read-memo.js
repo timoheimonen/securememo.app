@@ -8,10 +8,31 @@ const SECURITY_CONFIG = {
 };
 
 const t = (key) => (typeof window.t === 'function' ? window.t(key) : key);
+const MEMO_ID_PATTERN = /^[A-Za-z0-9_-]{40}$/;
+
+function showElement(id, display = 'block') {
+  const element = document.getElementById(id);
+  if (element) {
+    element.classList.remove('hidden');
+    element.style.display = display;
+  }
+}
+
+function hideElement(id) {
+  const element = document.getElementById(id);
+  if (element) {
+    element.classList.add('hidden');
+    element.style.display = 'none';
+  }
+}
 
 function getMemoId() {
   const urlParams = new URLSearchParams(window.location.search);
-  return urlParams.get('id');
+  const memoId = urlParams.get('id');
+  if (!memoId || !MEMO_ID_PATTERN.test(memoId)) {
+    return null;
+  }
+  return memoId;
 }
 
 async function decryptMessage(encryptedData, password) {
@@ -131,14 +152,10 @@ async function decryptMemo(encryptedMessage, password) {
 }
 
 function initializePage() {
-  const passwordForm = document.getElementById('passwordForm');
-  const memoContent = document.getElementById('memoContent');
-  const errorContent = document.getElementById('errorContent');
-  const statusMessage = document.getElementById('statusMessage');
-  if (passwordForm) passwordForm.style.display = 'block';
-  if (memoContent) memoContent.style.display = 'none';
-  if (errorContent) errorContent.style.display = 'none';
-  if (statusMessage) statusMessage.style.display = 'none';
+  showElement('passwordForm');
+  hideElement('memoContent');
+  hideElement('errorContent');
+  hideElement('statusMessage');
 }
 
 window.addEventListener('load', () => {
@@ -169,11 +186,12 @@ window.addEventListener('load', () => {
         decryptButton.textContent = t('btn.decrypting');
       }
       if (decryptLoadingIndicator) {
-        decryptLoadingIndicator.style.display = 'block';
+        showElement('decryptLoadingIndicator');
       }
       try {
         const requestBody = {};
-        const response = await fetch('/api/read-memo?id=' + memoId, {
+        const readParams = new URLSearchParams({ id: memoId });
+        const response = await fetch('/api/read-memo?' + readParams.toString(), {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(requestBody)
@@ -195,19 +213,19 @@ window.addEventListener('load', () => {
             decryptedPayload = { message: decryptedMessage };
           }
           document.getElementById('decryptedMessage').textContent = decryptedPayload.message;
-          document.getElementById('memoContent').style.display = 'block';
-          document.getElementById('passwordForm').style.display = 'none';
+          showElement('memoContent');
+          hideElement('passwordForm');
           const memoStatus = document.getElementById('memoStatus');
           const deletionSpinner = document.getElementById('deletionSpinner');
           if (memoStatus) {
             memoStatus.textContent = t('msg.memoDecrypted');
           }
           if (deletionSpinner) {
-            deletionSpinner.style.display = 'block';
+            showElement('deletionSpinner');
           }
           document.getElementById('password').value = '';
-          if (errorContent) errorContent.style.display = 'none';
-          if (statusMessage) statusMessage.style.display = 'none';
+          if (errorContent) hideElement('errorContent');
+          if (statusMessage) hideElement('statusMessage');
           const deleteBody = {};
           if (!decryptedPayload.deletionToken) {
             throw new Error('Missing deletion token in payload');
@@ -237,7 +255,7 @@ window.addEventListener('load', () => {
             showMessage(t('msg.tooManyRequests'), 'error');
             const deletionSpinner = document.getElementById('deletionSpinner');
             if (deletionSpinner) {
-              deletionSpinner.style.display = 'none';
+              hideElement('deletionSpinner');
             }
           } else if (deleteResponse && deleteResponse.ok) {
             const memoStatus = document.getElementById('memoStatus');
@@ -246,13 +264,13 @@ window.addEventListener('load', () => {
               memoStatus.textContent = t('msg.memoDeleted');
             }
             if (deletionSpinner) {
-              deletionSpinner.style.display = 'none';
+              hideElement('deletionSpinner');
             }
           } else {
             showMessage(t('msg.deletionError'), 'warning');
             const deletionSpinner = document.getElementById('deletionSpinner');
             if (deletionSpinner) {
-              deletionSpinner.style.display = 'none';
+              hideElement('deletionSpinner');
             }
           }
         } else {
@@ -280,7 +298,7 @@ window.addEventListener('load', () => {
           decryptButton.textContent = t('btn.decrypt');
         }
         if (decryptLoadingIndicator) {
-          decryptLoadingIndicator.style.display = 'none';
+          hideElement('decryptLoadingIndicator');
         }
       }
     });
@@ -303,8 +321,8 @@ window.addEventListener('load', () => {
 
 function showError(message) {
   document.getElementById('errorMessage').textContent = message;
-  document.getElementById('errorContent').style.display = 'block';
-  document.getElementById('passwordForm').style.display = 'none';
+  showElement('errorContent');
+  hideElement('passwordForm');
 }
 
 function showMessage(message, type) {

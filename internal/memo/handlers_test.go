@@ -1,9 +1,11 @@
 package memo
 
 import (
+	"context"
 	"net/http"
 	"net/http/httptest"
 	"path/filepath"
+	"strings"
 	"testing"
 	"time"
 
@@ -61,6 +63,43 @@ func TestFailureRateLimitRulesAreStricterThanDefault(t *testing.T) {
 	}
 	if failureRateLimitRules[1].Limit >= defaultRateLimitRules[1].Limit {
 		t.Fatalf("failure hourly limit should be stricter than default hourly limit")
+	}
+}
+
+func TestReadRejectsAmbiguousMemoIDQuery(t *testing.T) {
+	db, err := store.OpenSQLite(filepath.Join(t.TempDir(), "securememo.sqlite"))
+	if err != nil {
+		t.Fatalf("open sqlite: %v", err)
+	}
+	defer db.Close()
+
+	memoID := strings.Repeat("A", 40)
+	if err := db.CreateMemo(context.Background(), memoID, "ciphertext", time.Now().Add(time.Hour).Unix(), "hash"); err != nil {
+		t.Fatalf("create memo: %v", err)
+	}
+	handler := Handler{
+		Config: config.Config{AllowedOrigins: []string{"https://securememo.app"}},
+		Store:  db,
+	}
+
+	goodReq := httptest.NewRequest(http.MethodPost, "/api/read-memo?id="+memoID, strings.NewReader(`{}`))
+	goodReq.RemoteAddr = "203.0.113.10:12345"
+	goodReq.Header.Set("Origin", "https://securememo.app")
+	goodReq.Header.Set("Content-Type", "application/json")
+	goodRec := httptest.NewRecorder()
+	handler.Read(goodRec, goodReq)
+	if goodRec.Code != http.StatusOK {
+		t.Fatalf("valid read status = %d, want %d", goodRec.Code, http.StatusOK)
+	}
+
+	ambiguousReq := httptest.NewRequest(http.MethodPost, "/api/read-memo?id="+memoID+"&x=y", strings.NewReader(`{}`))
+	ambiguousReq.RemoteAddr = "203.0.113.10:12345"
+	ambiguousReq.Header.Set("Origin", "https://securememo.app")
+	ambiguousReq.Header.Set("Content-Type", "application/json")
+	ambiguousRec := httptest.NewRecorder()
+	handler.Read(ambiguousRec, ambiguousReq)
+	if ambiguousRec.Code != http.StatusNotFound {
+		t.Fatalf("ambiguous read status = %d, want %d", ambiguousRec.Code, http.StatusNotFound)
 	}
 }
 

@@ -8,11 +8,29 @@ function versionedAssetPath(path) {
   return assetURL.pathname + assetURL.search;
 }
 
+const SUPPORTED_LOCALES = new Set([
+  'ar', 'bn', 'cs', 'da', 'de', 'el', 'en', 'es', 'fi', 'fr',
+  'hi', 'hu', 'id', 'it', 'ja', 'ko', 'nl', 'no', 'pl', 'ptBR',
+  'ptPT', 'ru', 'ro', 'sv', 'tl', 'th', 'tr', 'uk', 'vi', 'zh'
+]);
+
+function currentLocale() {
+  const htmlLocale = document.documentElement.getAttribute('lang') || '';
+  const pathLocale = window.location.pathname.split('/').filter(Boolean)[0] || '';
+  for (const locale of [htmlLocale, pathLocale]) {
+    if (SUPPORTED_LOCALES.has(locale)) {
+      return locale;
+    }
+  }
+  return 'en';
+}
+
 async function initializeApp() {
   try {
+    const locale = currentLocale();
     const [coreModule, clientModule] = await Promise.all([
       import(versionedAssetPath('/js/localization-core.js')),
-      import(versionedAssetPath('/js/clientLocalization.js'))
+      import(versionedAssetPath('/js/clientLocalization.' + locale + '.js'))
     ]);
     if (coreModule && typeof coreModule.createLocalization === 'function' &&
         clientModule && clientModule.translations && clientModule.locale) {

@@ -19,7 +19,9 @@ import (
 	"github.com/timoheimonen/securememo/internal/store"
 )
 
-const assetVersion = "20260510o"
+const assetVersion = "20260623a"
+
+var clientLocalizationAssetRe = regexp.MustCompile(`^/js/clientLocalization\.([A-Za-z0-9_-]+)\.js$`)
 
 type nonceKey struct{}
 
@@ -104,6 +106,9 @@ func (s *Server) handle(w http.ResponseWriter, r *http.Request) {
 }
 
 func (s *Server) serveGeneratedAsset(w http.ResponseWriter, r *http.Request, urlPath string) bool {
+	if locale, ok := localizationAssetLocale(urlPath); ok {
+		return s.serveFile(w, r, fmt.Sprintf("generated/js/clientLocalization.%s.js", locale), "application/javascript; charset=utf-8", cacheStatic(r.URL.Query().Has("v")))
+	}
 	switch urlPath {
 	case "/styles.css":
 		return s.serveFile(w, r, "generated/styles.css", "text/css; charset=utf-8", cacheStatic(r.URL.Query().Has("v")))
@@ -111,8 +116,6 @@ func (s *Server) serveGeneratedAsset(w http.ResponseWriter, r *http.Request, url
 		return s.serveFile(w, r, "generated/js/common.js", "application/javascript; charset=utf-8", cacheStatic(true))
 	case "/js/localization-core.js":
 		return s.serveFile(w, r, "generated/js/localization-core.js", "application/javascript; charset=utf-8", cacheStatic(true))
-	case "/js/clientLocalization.en.js":
-		return s.serveFile(w, r, "generated/js/clientLocalization.en.js", "application/javascript; charset=utf-8", cacheStatic(false))
 	case "/js/create-memo.js":
 		return s.serveFile(w, r, "generated/js/create-memo.js", "application/javascript; charset=utf-8", cacheStatic(true))
 	case "/js/read-memo.js":
@@ -120,18 +123,18 @@ func (s *Server) serveGeneratedAsset(w http.ResponseWriter, r *http.Request, url
 	case "/js/memo-crypto-worker.js":
 		return s.serveFile(w, r, "generated/js/memo-crypto-worker.js", "application/javascript; charset=utf-8", cacheStatic(true))
 	case "/js/clientLocalization.js":
-		locale := "en"
-		if referer := r.Header.Get("Referer"); referer != "" {
-			if parsed, err := http.NewRequest(http.MethodGet, referer, nil); err == nil {
-				info := extractLocaleFromPath(parsed.URL.Path)
-				locale = info.Locale
-			}
-		}
-		w.Header().Set("Vary", "Origin, Referer")
-		return s.serveFile(w, r, fmt.Sprintf("generated/js/clientLocalization.%s.js", sanitizeSupportedLocale(locale)), "application/javascript; charset=utf-8", cacheStatic(true))
+		return s.serveFile(w, r, "generated/js/clientLocalization.en.js", "application/javascript; charset=utf-8", cacheStatic(false))
 	default:
 		return false
 	}
+}
+
+func localizationAssetLocale(urlPath string) (string, bool) {
+	matches := clientLocalizationAssetRe.FindStringSubmatch(urlPath)
+	if len(matches) != 2 || !supportedLocaleSet[matches[1]] {
+		return "", false
+	}
+	return matches[1], true
 }
 
 func (s *Server) servePublicAsset(w http.ResponseWriter, r *http.Request, urlPath string) bool {
