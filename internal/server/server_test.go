@@ -261,6 +261,65 @@ func TestEnglishLocalizationBundleAssetIsServed(t *testing.T) {
 	}
 }
 
+func TestLocalizationBundlesDoNotVaryOnReferer(t *testing.T) {
+	app := newTestServer(t)
+	memoID := strings.Repeat("A", 40)
+	for _, tc := range []struct {
+		name         string
+		path         string
+		cacheControl string
+		bodyContains string
+	}{
+		{
+			name:         "localized versioned asset",
+			path:         "/js/clientLocalization.fi.js?v=" + assetVersion,
+			cacheControl: "public, max-age=31536000, immutable",
+			bodyContains: "export const locale = 'fi';",
+		},
+		{
+			name:         "legacy fallback",
+			path:         "/js/clientLocalization.js",
+			cacheControl: "public, max-age=3600",
+			bodyContains: "export const locale = 'en';",
+		},
+	} {
+		t.Run(tc.name, func(t *testing.T) {
+			rec := httptest.NewRecorder()
+			req := httptest.NewRequest(http.MethodGet, tc.path, nil)
+			req.Header.Set("Referer", "https://securememo.app/en/read-memo.html?id="+memoID)
+
+			app.ServeHTTP(rec, req)
+
+			if rec.Code != http.StatusOK {
+				t.Fatalf("GET %s status = %d, want %d", tc.path, rec.Code, http.StatusOK)
+			}
+			if got := rec.Header().Get("Vary"); strings.Contains(got, "Referer") {
+				t.Fatalf("Vary = %q, must not include Referer", got)
+			}
+			if got := rec.Header().Get("Cache-Control"); got != tc.cacheControl {
+				t.Fatalf("Cache-Control = %q, want %q", got, tc.cacheControl)
+			}
+			if !strings.Contains(rec.Body.String(), tc.bodyContains) {
+				t.Fatalf("GET %s missing expected locale marker", tc.path)
+			}
+		})
+	}
+}
+
+func TestCommonScriptImportsExplicitLocalizationBundle(t *testing.T) {
+	body, err := frontend.FS.ReadFile("generated/js/common.js")
+	if err != nil {
+		t.Fatalf("read common.js: %v", err)
+	}
+	source := string(body)
+	if strings.Contains(source, "versionedAssetPath('/js/clientLocalization.js')") {
+		t.Fatal("common.js still imports Referer-selected localization bundle")
+	}
+	if !strings.Contains(source, "versionedAssetPath('/js/clientLocalization.' + locale + '.js')") {
+		t.Fatal("common.js does not import the explicit locale localization bundle")
+	}
+}
+
 func TestMemoScriptsAreVersioned(t *testing.T) {
 	app := newTestServer(t)
 	for _, tc := range []struct {
