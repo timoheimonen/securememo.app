@@ -35,7 +35,7 @@ const LOCAL_TRANSLATIONS = {
     "msg.copyManual": "⚠️ Kopieer handmatig (Ctrl+C / Cmd+C)",
     "msg.memoCreated": "✅ Memo succesvol aangemaakt!",
     "msg.memoDecrypted": "Memo ontsleuteld. Verwijderen bezig... Even geduld.",
-    "msg.memoDeleted": "Memo bevestigd zoals gelezen en verwijderd.",
+    "msg.memoDeleted": "Memo succesvol verwijderd.",
     "msg.deletionError": "Fout bij het bevestigen van verwijdering. De memo wordt automatisch opgeruimd.",
     "page.home.title": "securememo.app - Gecodeerde memo's met automatische verwijdering",
     "page.home.description": "Maak gecodeerde memo's die worden verwijderd na een succesvolle leesbevestiging of vervaldatum. Encryptie aan de browserzijde, gericht op privacy en veilig delen van notities met AES-256. Geen tracking, geen advertenties.",

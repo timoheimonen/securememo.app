@@ -35,7 +35,7 @@ const LOCAL_TRANSLATIONS = {
     "msg.copyManual": "⚠️ Vui lòng sao chép thủ công (Ctrl+C / Cmd+C)",
     "msg.memoCreated": "✅ Tạo ghi chú thành công!",
     "msg.memoDecrypted": "Ghi chú đã được giải mã. Đang xóa... Vui lòng chờ.",
-    "msg.memoDeleted": "Bản ghi nhớ đã được xác nhận là đã được đọc và yêu cầu xóa.",
+    "msg.memoDeleted": "Ghi chú đã được xóa thành công.",
     "msg.deletionError": "Lỗi xác nhận xóa. Ghi chú sẽ được dọn dẹp tự động.",
     "page.home.title": "securememo.app - Bản ghi nhớ được mã hóa với chức năng xóa tự động",
     "page.home.description": "Tạo bản ghi nhớ được mã hóa sẽ bị xóa sau khi xác nhận đọc thành công hoặc hết hạn. Mã hóa phía trình duyệt, tập trung vào quyền riêng tư và chia sẻ ghi chú an toàn với AES-256. Không theo dõi, không có quảng cáo.",

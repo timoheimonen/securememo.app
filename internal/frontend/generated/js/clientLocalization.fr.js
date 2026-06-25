@@ -35,7 +35,7 @@ const LOCAL_TRANSLATIONS = {
     "msg.copyManual": "⚠️ Veuillez copier manuellement (Ctrl+C / Cmd+C)",
     "msg.memoCreated": "✅ Mémo Créé avec Succès !",
     "msg.memoDecrypted": "Mémo déchiffré. Suppression en cours... Veuillez patienter.",
-    "msg.memoDeleted": "Mémo confirmé comme lu et suppression demandée.",
+    "msg.memoDeleted": "Mémo supprimé avec succès.",
     "msg.deletionError": "Erreur lors de la confirmation de suppression. Le mémo sera nettoyé automatiquement.",
     "page.home.title": "securememo.app - Mémos cryptés avec suppression automatique",
     "page.home.description": "Créez des mémos cryptés qui sont supprimés après une confirmation de lecture ou une expiration réussie. Cryptage côté navigateur, axé sur la confidentialité et partage de notes sécurisé avec AES-256. Pas de suivi, pas de publicité.",

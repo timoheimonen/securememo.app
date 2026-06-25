@@ -19,7 +19,7 @@ import (
 	"github.com/timoheimonen/securememo/internal/store"
 )
 
-const assetVersion = "20260623a"
+const assetVersion = "20260625b"
 
 var clientLocalizationAssetRe = regexp.MustCompile(`^/js/clientLocalization\.([A-Za-z0-9_-]+)\.js$`)
 
@@ -116,6 +116,8 @@ func (s *Server) serveGeneratedAsset(w http.ResponseWriter, r *http.Request, url
 		return s.serveFile(w, r, "generated/js/common.js", "application/javascript; charset=utf-8", cacheStatic(true))
 	case "/js/localization-core.js":
 		return s.serveFile(w, r, "generated/js/localization-core.js", "application/javascript; charset=utf-8", cacheStatic(true))
+	case "/js/memo-crypto-config.js":
+		return s.serveFile(w, r, "generated/js/memo-crypto-config.js", "application/javascript; charset=utf-8", cacheStatic(true))
 	case "/js/create-memo.js":
 		return s.serveFile(w, r, "generated/js/create-memo.js", "application/javascript; charset=utf-8", cacheStatic(true))
 	case "/js/read-memo.js":
@@ -320,6 +322,7 @@ func addAssetVersions(input string) string {
 	}{
 		{"/styles.css", "/styles.css?v=" + assetVersion},
 		{"/js/common.js", "/js/common.js?v=" + assetVersion},
+		{`src="/js/memo-crypto-config.js"`, `src="/js/memo-crypto-config.js?v=` + assetVersion + `"`},
 		{`src="/js/create-memo.js"`, `src="/js/create-memo.js?v=` + assetVersion + `"`},
 		{`src="/js/read-memo.js"`, `src="/js/read-memo.js?v=` + assetVersion + `"`},
 		{"/favicon.ico", "/favicon.ico?v=" + assetVersion},

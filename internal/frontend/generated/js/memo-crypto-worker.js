@@ -1,12 +1,3 @@
-const NEW_PBKDF2_ITERATIONS = 3500000;
-const OLD_PBKDF2_ITERATIONS = 2200000;
-const SECURITY_CONFIG = {
-  PBKDF2_ITERATIONS: NEW_PBKDF2_ITERATIONS,
-  SALT_LENGTH: 16,
-  IV_LENGTH: 12,
-  KEY_LENGTH: 256
-};
-
 function bytesToBase64(bytes) {
   const chunkSize = 0x8000;
   let binary = '';
@@ -46,37 +37,37 @@ async function hashDeletionToken(token) {
   return bytesToBase64(new Uint8Array(hashBuffer));
 }
 
-async function deriveKey(password, salt, iterations, usages) {
+async function deriveKey(password, salt, config, usages) {
   const encoder = new TextEncoder();
   const keyMaterial = await crypto.subtle.importKey(
     'raw',
     encoder.encode(password),
-    { name: 'PBKDF2' },
+    { name: config.kdf },
     false,
     ['deriveBits', 'deriveKey']
   );
   return crypto.subtle.deriveKey(
     {
-      name: 'PBKDF2',
+      name: config.kdf,
       salt: salt,
-      iterations: iterations,
-      hash: 'SHA-256'
+      iterations: config.iterations,
+      hash: config.hash
     },
     keyMaterial,
-    { name: 'AES-GCM', length: SECURITY_CONFIG.KEY_LENGTH },
+    { name: config.cipher, length: config.keyLength },
     false,
     usages
   );
 }
 
-async function encryptMessage(payload, password) {
+async function encryptMessage(payload, password, config) {
   const encoder = new TextEncoder();
   const data = encoder.encode(JSON.stringify(payload));
-  const salt = crypto.getRandomValues(new Uint8Array(SECURITY_CONFIG.SALT_LENGTH));
-  const key = await deriveKey(password, salt, SECURITY_CONFIG.PBKDF2_ITERATIONS, ['encrypt']);
-  const iv = crypto.getRandomValues(new Uint8Array(SECURITY_CONFIG.IV_LENGTH));
+  const salt = crypto.getRandomValues(new Uint8Array(config.saltLength));
+  const key = await deriveKey(password, salt, config, ['encrypt']);
+  const iv = crypto.getRandomValues(new Uint8Array(config.ivLength));
   const encrypted = await crypto.subtle.encrypt(
-    { name: 'AES-GCM', iv: iv },
+    { name: config.cipher, iv: iv },
     key,
     data
   );
@@ -84,37 +75,31 @@ async function encryptMessage(payload, password) {
   result.set(salt, 0);
   result.set(iv, salt.length);
   result.set(new Uint8Array(encrypted), salt.length + iv.length);
-  return bytesToBase64(result);
+  return config.prefix + bytesToBase64(result);
 }
 
-async function decryptMessage(encryptedData, password) {
-  const encryptedBytes = base64ToBytes(encryptedData);
-  const salt = encryptedBytes.slice(0, SECURITY_CONFIG.SALT_LENGTH);
-  const iv = encryptedBytes.slice(SECURITY_CONFIG.SALT_LENGTH, SECURITY_CONFIG.SALT_LENGTH + SECURITY_CONFIG.IV_LENGTH);
-  const encrypted = encryptedBytes.slice(SECURITY_CONFIG.SALT_LENGTH + SECURITY_CONFIG.IV_LENGTH);
-  const attempts = [NEW_PBKDF2_ITERATIONS, OLD_PBKDF2_ITERATIONS];
-  for (const iterations of attempts) {
-    try {
-      const key = await deriveKey(password, salt, iterations, ['decrypt']);
-      const decrypted = await crypto.subtle.decrypt(
-        { name: 'AES-GCM', iv: iv },
-        key,
-        encrypted
-      );
-      return new TextDecoder().decode(decrypted);
-    } catch (error) {
-      if (iterations === attempts[attempts.length - 1]) {
-        throw new Error('Failed to decrypt memo.');
-      }
-    }
+async function decryptMessage(ciphertext, password, config) {
+  try {
+    const encryptedBytes = base64ToBytes(ciphertext);
+    const salt = encryptedBytes.slice(0, config.saltLength);
+    const iv = encryptedBytes.slice(config.saltLength, config.saltLength + config.ivLength);
+    const encrypted = encryptedBytes.slice(config.saltLength + config.ivLength);
+    const key = await deriveKey(password, salt, config, ['decrypt']);
+    const decrypted = await crypto.subtle.decrypt(
+      { name: config.cipher, iv: iv },
+      key,
+      encrypted
+    );
+    return new TextDecoder().decode(decrypted);
+  } catch (error) {
+    throw new Error('Failed to decrypt memo.');
   }
-  throw new Error('Failed to decrypt memo.');
 }
 
-async function encryptMemo(message) {
+async function encryptMemo(message, config) {
   const password = generatePassword();
   const deletionToken = generatePassword();
-  const encryptedMessage = await encryptMessage({ message: message, deletionToken: deletionToken }, password);
+  const encryptedMessage = await encryptMessage({ message: message, deletionToken: deletionToken }, password, config);
   const deletionTokenHash = await hashDeletionToken(deletionToken);
   return { encryptedMessage, password, deletionTokenHash };
 }
@@ -124,10 +109,10 @@ self.addEventListener('message', async (event) => {
   try {
     let result;
     if (data.type === 'encryptMemo') {
-      result = await encryptMemo(data.payload.message);
+      result = await encryptMemo(data.payload.message, data.payload.config);
     } else if (data.type === 'decryptMemo') {
       result = {
-        decryptedMessage: await decryptMessage(data.payload.encryptedMessage, data.payload.password)
+        decryptedMessage: await decryptMessage(data.payload.ciphertext, data.payload.password, data.payload.config)
       };
     } else {
       throw new Error('Unknown crypto worker task.');

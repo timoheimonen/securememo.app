@@ -33,7 +33,7 @@ const TRANSLATIONS = {
     "msg.copyManual": "⚠️ Please copy manually (Ctrl+C / Cmd+C)",
     "msg.memoCreated": "✅ Memo Created Successfully!",
     "msg.memoDecrypted": "Memo decrypted. Deleting in progress... Please wait.",
-    "msg.memoDeleted": "Memo confirmed as read and deletion requested.",
+    "msg.memoDeleted": "Memo deleted successfully.",
     "msg.deletionError": "Error confirming deletion. The memo will be cleaned up automatically.",
     "page.home.title": "securememo.app - Encrypted Memos with Automatic Deletion",
     "page.home.description": "Create encrypted memos that are deleted after successful read confirmation or expiration. Browser-side encryption, privacy-focused, and secure note sharing with AES-256. No tracking, no ads.",

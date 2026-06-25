@@ -1,12 +1,3 @@
-const NEW_PBKDF2_ITERATIONS = 3500000;
-const OLD_PBKDF2_ITERATIONS = 2200000;
-const SECURITY_CONFIG = {
-  PBKDF2_ITERATIONS: NEW_PBKDF2_ITERATIONS,
-  SALT_LENGTH: 16,
-  IV_LENGTH: 12,
-  KEY_LENGTH: 256
-};
-
 const t = (key) => (typeof window.t === 'function' ? window.t(key) : key);
 const MEMO_ID_PATTERN = /^[A-Za-z0-9_-]{40}$/;
 
@@ -37,49 +28,37 @@ function getMemoId() {
 
 async function decryptMessage(encryptedData, password) {
   try {
-    const encryptedBytes = Uint8Array.from(atob(encryptedData), c => c.charCodeAt(0));
-    const salt = encryptedBytes.slice(0, SECURITY_CONFIG.SALT_LENGTH);
-    const iv = encryptedBytes.slice(SECURITY_CONFIG.SALT_LENGTH, SECURITY_CONFIG.SALT_LENGTH + SECURITY_CONFIG.IV_LENGTH);
-    const encrypted = encryptedBytes.slice(SECURITY_CONFIG.SALT_LENGTH + SECURITY_CONFIG.IV_LENGTH);
-    const attempts = [
-      { iterations: NEW_PBKDF2_ITERATIONS },
-      { iterations: OLD_PBKDF2_ITERATIONS }
-    ];
-    for (const attempt of attempts) {
-      try {
-        const encoder = new TextEncoder();
-        const keyMaterial = await crypto.subtle.importKey(
-          'raw',
-          encoder.encode(password),
-          { name: 'PBKDF2' },
-          false,
-          ['deriveBits', 'deriveKey']
-        );
-        const key = await crypto.subtle.deriveKey(
-          {
-            name: 'PBKDF2',
-            salt: salt,
-            iterations: attempt.iterations,
-            hash: 'SHA-256'
-          },
-          keyMaterial,
-          { name: 'AES-GCM', length: SECURITY_CONFIG.KEY_LENGTH },
-          false,
-          ['decrypt']
-        );
-        const decrypted = await crypto.subtle.decrypt(
-          { name: 'AES-GCM', iv: iv },
-          key,
-          encrypted
-        );
-        return new TextDecoder().decode(decrypted);
-      } catch (innerError) {
-        if (attempt !== attempts[attempts.length - 1]) {
-          continue;
-        }
-        throw innerError;
-      }
-    }
+    const parsed = MemoCryptoConfig.parseEncryptedMessage(encryptedData);
+    const encryptedBytes = Uint8Array.from(atob(parsed.ciphertext), c => c.charCodeAt(0));
+    const salt = encryptedBytes.slice(0, parsed.config.saltLength);
+    const iv = encryptedBytes.slice(parsed.config.saltLength, parsed.config.saltLength + parsed.config.ivLength);
+    const encrypted = encryptedBytes.slice(parsed.config.saltLength + parsed.config.ivLength);
+    const encoder = new TextEncoder();
+    const keyMaterial = await crypto.subtle.importKey(
+      'raw',
+      encoder.encode(password),
+      { name: parsed.config.kdf },
+      false,
+      ['deriveBits', 'deriveKey']
+    );
+    const key = await crypto.subtle.deriveKey(
+      {
+        name: parsed.config.kdf,
+        salt: salt,
+        iterations: parsed.config.iterations,
+        hash: parsed.config.hash
+      },
+      keyMaterial,
+      { name: parsed.config.cipher, length: parsed.config.keyLength },
+      false,
+      ['decrypt']
+    );
+    const decrypted = await crypto.subtle.decrypt(
+      { name: parsed.config.cipher, iv: iv },
+      key,
+      encrypted
+    );
+    return new TextDecoder().decode(decrypted);
   } catch (error) {
     throw new Error('Failed to decrypt memo.');
   }
@@ -138,8 +117,10 @@ function runMemoCryptoWorker(type, payload) {
 
 async function decryptMemo(encryptedMessage, password) {
   try {
+    const parsed = MemoCryptoConfig.parseEncryptedMessage(encryptedMessage);
     const result = await runMemoCryptoWorker('decryptMemo', {
-      encryptedMessage: encryptedMessage,
+      ciphertext: parsed.ciphertext,
+      config: parsed.config,
       password: password
     });
     return result.decryptedMessage;

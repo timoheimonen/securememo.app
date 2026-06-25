@@ -243,6 +243,24 @@ func TestMemoCryptoWorkerAssetIsServed(t *testing.T) {
 	}
 }
 
+func TestMemoCryptoConfigAssetIsServed(t *testing.T) {
+	app := newTestServer(t)
+	rec := httptest.NewRecorder()
+	req := httptest.NewRequest(http.MethodGet, "/js/memo-crypto-config.js?v=test", nil)
+
+	app.ServeHTTP(rec, req)
+
+	if rec.Code != http.StatusOK {
+		t.Fatalf("GET /js/memo-crypto-config.js status = %d, want %d", rec.Code, http.StatusOK)
+	}
+	if got := rec.Header().Get("Content-Type"); got != "application/javascript; charset=utf-8" {
+		t.Fatalf("content type = %q, want application/javascript; charset=utf-8", got)
+	}
+	if !strings.Contains(rec.Body.String(), "MemoCryptoConfig") {
+		t.Fatal("crypto config asset does not contain expected global config")
+	}
+}
+
 func TestEnglishLocalizationBundleAssetIsServed(t *testing.T) {
 	app := newTestServer(t)
 	rec := httptest.NewRecorder()
@@ -323,11 +341,23 @@ func TestCommonScriptImportsExplicitLocalizationBundle(t *testing.T) {
 func TestMemoScriptsAreVersioned(t *testing.T) {
 	app := newTestServer(t)
 	for _, tc := range []struct {
-		path string
-		js   string
+		path    string
+		scripts []string
 	}{
-		{"/en/create-memo.html", `/js/create-memo.js?v=` + assetVersion},
-		{"/en/read-memo.html", `/js/read-memo.js?v=` + assetVersion},
+		{
+			path: "/en/create-memo.html",
+			scripts: []string{
+				`/js/memo-crypto-config.js?v=` + assetVersion,
+				`/js/create-memo.js?v=` + assetVersion,
+			},
+		},
+		{
+			path: "/en/read-memo.html",
+			scripts: []string{
+				`/js/memo-crypto-config.js?v=` + assetVersion,
+				`/js/read-memo.js?v=` + assetVersion,
+			},
+		},
 	} {
 		rec := httptest.NewRecorder()
 		req := httptest.NewRequest(http.MethodGet, tc.path, nil)
@@ -337,8 +367,17 @@ func TestMemoScriptsAreVersioned(t *testing.T) {
 		if rec.Code != http.StatusOK {
 			t.Fatalf("GET %s status = %d, want %d", tc.path, rec.Code, http.StatusOK)
 		}
-		if !strings.Contains(rec.Body.String(), tc.js) {
-			t.Fatalf("GET %s missing versioned script %s", tc.path, tc.js)
+		previousIndex := -1
+		body := rec.Body.String()
+		for _, script := range tc.scripts {
+			index := strings.Index(body, script)
+			if index == -1 {
+				t.Fatalf("GET %s missing versioned script %s", tc.path, script)
+			}
+			if index < previousIndex {
+				t.Fatalf("GET %s has script %s before an earlier dependency", tc.path, script)
+			}
+			previousIndex = index
 		}
 	}
 }

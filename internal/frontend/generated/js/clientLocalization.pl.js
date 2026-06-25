@@ -35,7 +35,7 @@ const LOCAL_TRANSLATIONS = {
     "msg.copyManual": "⚠️ Proszę skopiować ręcznie (Ctrl+C / Cmd+C)",
     "msg.memoCreated": "✅ Notatka została utworzona!",
     "msg.memoDecrypted": "Notatka odszyfrowana. Trwa usuwanie... Proszę czekać.",
-    "msg.memoDeleted": "Notatka potwierdzona jako prośba o przeczytanie i usunięcie.",
+    "msg.memoDeleted": "Notatka została pomyślnie usunięta.",
     "msg.deletionError": "Błąd potwierdzenia usunięcia. Notatka zostanie automatycznie wyczyszczona.",
     "page.home.title": "securememo.app - Zaszyfrowane notatki z automatycznym usuwaniem",
     "page.home.description": "Twórz zaszyfrowane notatki, które są usuwane po pomyślnym potwierdzeniu odczytu lub wygaśnięciu. Szyfrowanie po stronie przeglądarki, zorientowanie na prywatność i bezpieczne udostępnianie notatek za pomocą AES-256. Bez śledzenia, bez reklam.",

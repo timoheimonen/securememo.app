@@ -35,7 +35,7 @@ const LOCAL_TRANSLATIONS = {
     "msg.copyManual": "⚠️ Bitte manuell kopieren (Strg+C / Cmd+C)",
     "msg.memoCreated": "✅ Notiz erfolgreich erstellt!",
     "msg.memoDecrypted": "Notiz entschlüsselt. Löschung läuft... Bitte warten.",
-    "msg.memoDeleted": "Memo als gelesen bestätigt und Löschung beantragt.",
+    "msg.memoDeleted": "Memo erfolgreich gelöscht.",
     "msg.deletionError": "Fehler beim Bestätigen der Löschung. Die Notiz wird automatisch bereinigt.",
     "page.home.title": "securememo.app – Verschlüsselte Memos mit automatischer Löschung",
     "page.home.description": "Erstellen Sie verschlüsselte Memos, die nach erfolgreicher Lesebestätigung oder nach Ablauf gelöscht werden. Browserseitige Verschlüsselung, datenschutzorientierter und sicherer Notizaustausch mit AES-256. Kein Tracking, keine Werbung.",

@@ -35,7 +35,7 @@ const LOCAL_TRANSLATIONS = {
     "msg.copyManual": "⚠️ 수동으로 복사해 주세요 (Ctrl+C / Cmd+C)",
     "msg.memoCreated": "✅ 메모가 성공적으로 생성되었습니다!",
     "msg.memoDecrypted": "메모가 복호화되었습니다. 삭제 진행 중... 잠시 기다려 주세요.",
-    "msg.memoDeleted": "메모 읽기 및 삭제 요청이 확인되었습니다.",
+    "msg.memoDeleted": "메모가 성공적으로 삭제되었습니다.",
     "msg.deletionError": "삭제 확인 중 오류가 발생했습니다. 메모는 자동으로 정리됩니다.",
     "page.home.title": "securememo.app - 자동 삭제 기능을 갖춘 암호화된 메모",
     "page.home.description": "읽기 확인 성공 또는 만료 후 삭제되는 암호화된 메모를 생성합니다. 브라우저 측 암호화, 개인정보 보호에 중점을 두고 AES-256을 통한 보안 메모 공유. 추적도 없고 광고도 없습니다.",

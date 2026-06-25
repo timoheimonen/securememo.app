@@ -35,7 +35,7 @@ const LOCAL_TRANSLATIONS = {
     "msg.copyManual": "⚠️ Kérjük, másold manuálisan (Ctrl+C / Cmd+C)",
     "msg.memoCreated": "✅ Jegyzet sikeresen létrehozva!",
     "msg.memoDecrypted": "Jegyzet visszafejtve. Törlés folyamatban... Kérjük, várj.",
-    "msg.memoDeleted": "A feljegyzés elolvasottként megerősítve, és törlés kért.",
+    "msg.memoDeleted": "A feljegyzés sikeresen törölve.",
     "msg.deletionError": "Hiba a törlés megerősítésekor. A jegyzet automatikusan törlődik.",
     "page.home.title": "securememo.app – Titkosított jegyzetek automatikus törléssel",
     "page.home.description": "Titkosított jegyzetek létrehozása, amelyek törlődnek a sikeres olvasási megerősítés vagy lejárat után. Böngészőoldali titkosítás, az adatvédelemre összpontosító és biztonságos jegyzetmegosztás az AES-256 segítségével. Nincs nyomon követés, nincsenek hirdetések.",
