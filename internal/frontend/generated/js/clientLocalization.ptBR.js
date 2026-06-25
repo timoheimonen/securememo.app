@@ -35,7 +35,7 @@ const LOCAL_TRANSLATIONS = {
     "msg.copyManual": "⚠️ Por favor, copie manualmente (Ctrl+C / Cmd+C)",
     "msg.memoCreated": "✅ Memo Criado com Sucesso!",
     "msg.memoDecrypted": "Memo descriptografado. Excluindo... Aguarde.",
-    "msg.memoDeleted": "Memorando confirmado como lido e exclusão solicitada.",
+    "msg.memoDeleted": "Memo excluído com sucesso.",
     "msg.deletionError": "Erro ao confirmar exclusão. O memo será limpo automaticamente.",
     "page.home.title": "securememo.app - Memorandos criptografados com exclusão automática",
     "page.home.description": "Crie memorandos criptografados que são excluídos após confirmação de leitura ou expiração bem-sucedida. Criptografia no navegador, foco na privacidade e compartilhamento seguro de notas com AES-256. Sem rastreamento, sem anúncios.",

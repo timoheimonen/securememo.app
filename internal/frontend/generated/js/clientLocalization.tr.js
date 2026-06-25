@@ -35,7 +35,7 @@ const LOCAL_TRANSLATIONS = {
     "msg.copyManual": "⚠️ Lütfen elle kopyalayın (Ctrl+C / Cmd+C)",
     "msg.memoCreated": "✅ Not başarıyla oluşturuldu!",
     "msg.memoDecrypted": "Not çözüldü. Siliniyor... Lütfen bekleyin.",
-    "msg.memoDeleted": "Notun okunması ve silinmesi istendiği için onaylandı.",
+    "msg.memoDeleted": "Not başarıyla silindi.",
     "msg.deletionError": "Silme onayında hata. Not otomatik olarak temizlenecek.",
     "page.home.title": "securememo.app - Otomatik Silinebilen Şifrelenmiş Notlar",
     "page.home.description": "Başarılı okuma onayı veya sona erdikten sonra silinen şifreli notlar oluşturun. AES-256 ile tarayıcı tarafı şifreleme, gizlilik odaklı ve güvenli not paylaşımı. Takip yok, reklam yok.",

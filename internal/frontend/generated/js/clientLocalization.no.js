@@ -35,7 +35,7 @@ const LOCAL_TRANSLATIONS = {
     "msg.copyManual": "⚠️ Vennligst kopier manuelt (Ctrl+C / Cmd+C)",
     "msg.memoCreated": "✅ Notat opprettet!",
     "msg.memoDecrypted": "Notatet er dekryptert. Sletter... Vennligst vent.",
-    "msg.memoDeleted": "Memo bekreftet som lest og sletting forespurt.",
+    "msg.memoDeleted": "Notatet ble slettet.",
     "msg.deletionError": "Feil ved bekreftelse av sletting. Notatet vil bli ryddet opp automatisk.",
     "page.home.title": "securememo.app - Krypterte notater med automatisk sletting",
     "page.home.description": "Lag krypterte notater som slettes etter vellykket lesebekreftelse eller utløp. Kryptering på nettlesersiden, personvernfokusert og sikker notatdeling med AES-256. Ingen sporing, ingen annonser.",

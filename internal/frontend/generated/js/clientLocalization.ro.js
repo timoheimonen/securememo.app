@@ -35,7 +35,7 @@ const LOCAL_TRANSLATIONS = {
     "msg.copyManual": "⚠️ Te rugăm să copiezi manual (Ctrl+C / Cmd+C)",
     "msg.memoCreated": "✅ Memo creat cu succes!",
     "msg.memoDecrypted": "Memo decriptat. Ștergere în curs... Te rugăm să aștepți.",
-    "msg.memoDeleted": "Notă confirmată ca citită și ștergere solicitată.",
+    "msg.memoDeleted": "Notă ștearsă cu succes.",
     "msg.deletionError": "Eroare la confirmarea ștergerii. Memoul va fi curățat automat.",
     "page.home.title": "securememo.app - Note criptate cu ștergere automată",
     "page.home.description": "Creați note criptate care sunt șterse după confirmarea sau expirarea cu succes a citirii. Criptare pe partea browserului, axată pe confidențialitate și partajare securizată a notelor cu AES-256. Fără urmărire, fără reclame.",

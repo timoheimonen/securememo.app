@@ -35,7 +35,7 @@ const LOCAL_TRANSLATIONS = {
     "msg.copyManual": "⚠️ Kopioi manuaalisesti (Ctrl+C / Cmd+C)",
     "msg.memoCreated": "✅ Muistio luotu onnistuneesti!",
     "msg.memoDecrypted": "Muistio purettu. Poistetaan... Odota hetki.",
-    "msg.memoDeleted": "Muistio vahvistettu luetuksi ja poistopyyntö lähetetty.",
+    "msg.memoDeleted": "Muistio poistettu onnistuneesti.",
     "msg.deletionError": "Virhe poistettaessa. Muistio poistetaan automaattisesti.",
     "page.home.title": "securememo.app - Salatut muistiot automaattisella poistolla",
     "page.home.description": "Luo salattuja muistioita, jotka poistetaan onnistuneen lukuvahvistuksen tai vanhentumisen jälkeen. Selaimessa tapahtuva salaus, yksityisyyteen keskittyvä muistioiden jakaminen AES-256:lla. Ei seurantaa, ei mainoksia.",

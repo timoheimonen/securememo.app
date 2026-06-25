@@ -35,7 +35,7 @@ const LOCAL_TRANSLATIONS = {
     "msg.copyManual": "⚠️ Por favor, copia manualmente (Ctrl+C / Cmd+C)",
     "msg.memoCreated": "✅ ¡Memo Creado Exitosamente!",
     "msg.memoDecrypted": "Memo descifrado. Eliminación en progreso... Por favor espera.",
-    "msg.memoDeleted": "Memo confirmado como leído y solicitado su eliminación.",
+    "msg.memoDeleted": "Memo eliminado correctamente.",
     "msg.deletionError": "Error al confirmar la eliminación. El memo será limpiado automáticamente.",
     "page.home.title": "securememo.app: notas cifradas con eliminación automática",
     "page.home.description": "Cree notas cifradas que se eliminan después de una confirmación de lectura exitosa o de su vencimiento. Cifrado del lado del navegador, centrado en la privacidad y uso compartido seguro de notas con AES-256. Sin seguimiento, sin anuncios.",

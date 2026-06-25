@@ -35,7 +35,7 @@ const LOCAL_TRANSLATIONS = {
     "msg.copyManual": "⚠️ Kopiera manuellt (Ctrl+C / Cmd+C)",
     "msg.memoCreated": "✅ Memo skapad!",
     "msg.memoDecrypted": "Memo dekrypterad. Radering pågår... Vänta.",
-    "msg.memoDeleted": "Memo bekräftat som läsning och radering begärd.",
+    "msg.memoDeleted": "Memot har raderats.",
     "msg.deletionError": "Fel vid bekräftelse av radering. Memo kommer att raderas automatiskt.",
     "page.home.title": "securememo.app - Krypterade anteckningar med automatisk radering",
     "page.home.description": "Skapa krypterade anteckningar som raderas efter framgångsrik läsningsbekräftelse eller utgång. Kryptering på webbläsaren, integritetsfokuserad och säker anteckningsdelning med AES-256. Ingen spårning, inga annonser.",

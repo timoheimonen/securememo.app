@@ -35,7 +35,7 @@ const LOCAL_TRANSLATIONS = {
     "msg.copyManual": "⚠️ Mangyaring kopyahin nang mano-mano (Ctrl+C / Cmd+C)",
     "msg.memoCreated": "✅ Matagumpay na Nalikha ang Memo!",
     "msg.memoDecrypted": "Na-decrypt ang memo. Binubura na... Mangyaring maghintay.",
-    "msg.memoDeleted": "Kinumpirma na nabasa ang memo at hiniling ang pagtanggal.",
+    "msg.memoDeleted": "Matagumpay na nabura ang memo.",
     "msg.deletionError": "Nagkaproblema sa pagkumpirma ng pagbura. Awtomatikong lilinisin ang memo.",
     "page.home.title": "securememo.app - Mga Naka-encrypt na Memo na may Awtomatikong Pagtanggal",
     "page.home.description": "Lumikha ng mga naka-encrypt na memo na tatanggalin pagkatapos ng matagumpay na pagkumpirma sa pagbasa o pag-expire. Pag-encrypt sa gilid ng browser, nakatuon sa privacy, at secure na pagbabahagi ng tala sa AES-256. Walang pagsubaybay, walang mga ad.",

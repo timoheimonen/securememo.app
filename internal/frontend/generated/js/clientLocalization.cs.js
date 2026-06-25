@@ -35,7 +35,7 @@ const LOCAL_TRANSLATIONS = {
     "msg.copyManual": "⚠️ Zkopírujte prosím ručně (Ctrl+C / Cmd+C)",
     "msg.memoCreated": "✅ Zpráva byla úspěšně vytvořena!",
     "msg.memoDecrypted": "Zpráva dešifrována. Probíhá mazání... Počkejte prosím.",
-    "msg.memoDeleted": "Poznámka potvrzena jako přečtení a žádost o smazání.",
+    "msg.memoDeleted": "Poznámka byla úspěšně smazána.",
     "msg.deletionError": "Chyba při potvrzení smazání. Zpráva bude automaticky odstraněna.",
     "page.home.title": "securememo.app – šifrované poznámky s automatickým mazáním",
     "page.home.description": "Vytvářejte šifrované poznámky, které se po úspěšném potvrzení přečtení nebo po vypršení platnosti odstraní. Šifrování na straně prohlížeče, zaměření na soukromí a bezpečné sdílení poznámek s AES-256. Žádné sledování, žádné reklamy.",

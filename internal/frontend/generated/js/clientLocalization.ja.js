@@ -35,7 +35,7 @@ const LOCAL_TRANSLATIONS = {
     "msg.copyManual": "⚠️ 手動でコピーしてください (Ctrl+C / Cmd+C)",
     "msg.memoCreated": "✅ メモが正常に作成されました！",
     "msg.memoDecrypted": "メモが復号化されました。削除中です...お待ちください。",
-    "msg.memoDeleted": "メモは読み取り済みであることが確認され、削除が要求されました。",
+    "msg.memoDeleted": "メモは正常に削除されました。",
     "msg.deletionError": "削除の確認中にエラーが発生しました。メモは自動的にクリーンアップされます。",
     "page.home.title": "securememo.app - 自動削除機能付き暗号化メモ",
     "page.home.description": "読み取り確認が成功した後、または有効期限が切れた後に削除される暗号化メモを作成します。ブラウザ側の暗号化、プライバシー重視、AES-256 による安全なメモ共有。追跡も広告もありません。",

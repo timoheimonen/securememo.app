@@ -35,7 +35,7 @@ const LOCAL_TRANSLATIONS = {
     "msg.copyManual": "⚠️ 请手动复制 (Ctrl+C / Cmd+C)",
     "msg.memoCreated": "✅ 备忘录创建成功！",
     "msg.memoDecrypted": "备忘录已解密。正在删除中...请稍候。",
-    "msg.memoDeleted": "备忘录已确认已阅读并已请求删除。",
+    "msg.memoDeleted": "备忘录已成功删除。",
     "msg.deletionError": "确认删除时出错。备忘录将自动清理。",
     "page.home.title": "securememo.app - 具有自动删除功能的加密备忘录",
     "page.home.description": "创建加密备忘录，并在成功读取确认或过期后删除。使用 AES-256 进行浏览器端加密、注重隐私和安全笔记共享。没有跟踪，没有广告。",

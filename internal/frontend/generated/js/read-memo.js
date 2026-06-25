@@ -1,12 +1,3 @@
-const SECURITY_CONFIG = {
-  ENCRYPTION_VERSION: 1,
-  PBKDF2_ITERATIONS: 3500000,
-  SALT_LENGTH: 16,
-  IV_LENGTH: 12,
-  KEY_LENGTH: 256
-};
-
-const ENCRYPTED_MESSAGE_PREFIX = 'v' + SECURITY_CONFIG.ENCRYPTION_VERSION + ':';
 const t = (key) => (typeof window.t === 'function' ? window.t(key) : key);
 const MEMO_ID_PATTERN = /^[A-Za-z0-9_-]{40}$/;
 
@@ -35,51 +26,35 @@ function getMemoId() {
   return memoId;
 }
 
-function extractVersionedCiphertext(encryptedData) {
-  if (typeof encryptedData !== 'string' || !encryptedData) {
-    throw new Error('Failed to decrypt memo.');
-  }
-  if (!encryptedData.startsWith(ENCRYPTED_MESSAGE_PREFIX)) {
-    if (encryptedData.includes(':')) {
-      throw new Error('Failed to decrypt memo.');
-    }
-    return encryptedData;
-  }
-  const ciphertext = encryptedData.slice(ENCRYPTED_MESSAGE_PREFIX.length);
-  if (!ciphertext) {
-    throw new Error('Failed to decrypt memo.');
-  }
-  return ciphertext;
-}
-
 async function decryptMessage(encryptedData, password) {
   try {
-    const encryptedBytes = Uint8Array.from(atob(extractVersionedCiphertext(encryptedData)), c => c.charCodeAt(0));
-    const salt = encryptedBytes.slice(0, SECURITY_CONFIG.SALT_LENGTH);
-    const iv = encryptedBytes.slice(SECURITY_CONFIG.SALT_LENGTH, SECURITY_CONFIG.SALT_LENGTH + SECURITY_CONFIG.IV_LENGTH);
-    const encrypted = encryptedBytes.slice(SECURITY_CONFIG.SALT_LENGTH + SECURITY_CONFIG.IV_LENGTH);
+    const parsed = MemoCryptoConfig.parseEncryptedMessage(encryptedData);
+    const encryptedBytes = Uint8Array.from(atob(parsed.ciphertext), c => c.charCodeAt(0));
+    const salt = encryptedBytes.slice(0, parsed.config.saltLength);
+    const iv = encryptedBytes.slice(parsed.config.saltLength, parsed.config.saltLength + parsed.config.ivLength);
+    const encrypted = encryptedBytes.slice(parsed.config.saltLength + parsed.config.ivLength);
     const encoder = new TextEncoder();
     const keyMaterial = await crypto.subtle.importKey(
       'raw',
       encoder.encode(password),
-      { name: 'PBKDF2' },
+      { name: parsed.config.kdf },
       false,
       ['deriveBits', 'deriveKey']
     );
     const key = await crypto.subtle.deriveKey(
       {
-        name: 'PBKDF2',
+        name: parsed.config.kdf,
         salt: salt,
-        iterations: SECURITY_CONFIG.PBKDF2_ITERATIONS,
-        hash: 'SHA-256'
+        iterations: parsed.config.iterations,
+        hash: parsed.config.hash
       },
       keyMaterial,
-      { name: 'AES-GCM', length: SECURITY_CONFIG.KEY_LENGTH },
+      { name: parsed.config.cipher, length: parsed.config.keyLength },
       false,
       ['decrypt']
     );
     const decrypted = await crypto.subtle.decrypt(
-      { name: 'AES-GCM', iv: iv },
+      { name: parsed.config.cipher, iv: iv },
       key,
       encrypted
     );
@@ -142,8 +117,10 @@ function runMemoCryptoWorker(type, payload) {
 
 async function decryptMemo(encryptedMessage, password) {
   try {
+    const parsed = MemoCryptoConfig.parseEncryptedMessage(encryptedMessage);
     const result = await runMemoCryptoWorker('decryptMemo', {
-      encryptedMessage: encryptedMessage,
+      ciphertext: parsed.ciphertext,
+      config: parsed.config,
       password: password
     });
     return result.decryptedMessage;

@@ -36,42 +36,33 @@ async function hashDeletionToken(token) {
   return btoa(String.fromCharCode(...hashArray));
 }
 
-const SECURITY_CONFIG = {
-  ENCRYPTION_VERSION: 1,
-  PBKDF2_ITERATIONS: 3500000,
-  SALT_LENGTH: 16,
-  IV_LENGTH: 12,
-  KEY_LENGTH: 256
-};
-
-const ENCRYPTED_MESSAGE_PREFIX = 'v' + SECURITY_CONFIG.ENCRYPTION_VERSION + ':';
-
 async function encryptMessage(payload, password) {
+  const config = MemoCryptoConfig.getCurrentVersion();
   const encoder = new TextEncoder();
   const data = encoder.encode(JSON.stringify(payload));
-  const salt = crypto.getRandomValues(new Uint8Array(SECURITY_CONFIG.SALT_LENGTH));
+  const salt = crypto.getRandomValues(new Uint8Array(config.saltLength));
   const keyMaterial = await crypto.subtle.importKey(
     'raw',
     encoder.encode(password),
-    { name: 'PBKDF2' },
+    { name: config.kdf },
     false,
     ['deriveBits', 'deriveKey']
   );
   const key = await crypto.subtle.deriveKey(
     {
-      name: 'PBKDF2',
+      name: config.kdf,
       salt: salt,
-      iterations: SECURITY_CONFIG.PBKDF2_ITERATIONS,
-      hash: 'SHA-256'
+      iterations: config.iterations,
+      hash: config.hash
     },
     keyMaterial,
-    { name: 'AES-GCM', length: SECURITY_CONFIG.KEY_LENGTH },
+    { name: config.cipher, length: config.keyLength },
     false,
     ['encrypt']
   );
-  const iv = crypto.getRandomValues(new Uint8Array(SECURITY_CONFIG.IV_LENGTH));
+  const iv = crypto.getRandomValues(new Uint8Array(config.ivLength));
   const encrypted = await crypto.subtle.encrypt(
-    { name: 'AES-GCM', iv: iv },
+    { name: config.cipher, iv: iv },
     key,
     data
   );
@@ -79,7 +70,7 @@ async function encryptMessage(payload, password) {
   result.set(salt, 0);
   result.set(iv, salt.length);
   result.set(new Uint8Array(encrypted), salt.length + iv.length);
-  return ENCRYPTED_MESSAGE_PREFIX + btoa(String.fromCharCode(...result));
+  return config.prefix + btoa(String.fromCharCode(...result));
 }
 
 const t = (key) => (typeof window.t === 'function' ? window.t(key) : key);
@@ -153,7 +144,10 @@ function runMemoCryptoWorker(type, payload) {
 
 async function encryptMemo(message) {
   try {
-    return await runMemoCryptoWorker('encryptMemo', { message: message });
+    return await runMemoCryptoWorker('encryptMemo', {
+      message: message,
+      config: MemoCryptoConfig.getCurrentVersion()
+    });
   } catch (error) {
     const password = generatePassword();
     const deletionToken = generatePassword();

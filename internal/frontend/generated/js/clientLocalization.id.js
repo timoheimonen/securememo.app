@@ -35,7 +35,7 @@ const LOCAL_TRANSLATIONS = {
     "msg.copyManual": "⚠️ Silakan salin secara manual (Ctrl+C / Cmd+C)",
     "msg.memoCreated": "✅ Memo Berhasil Dibuat!",
     "msg.memoDecrypted": "Memo telah didekripsi. Sedang menghapus... Mohon tunggu.",
-    "msg.memoDeleted": "Memo dikonfirmasi sebagai permintaan baca dan penghapusan.",
+    "msg.memoDeleted": "Memo berhasil dihapus.",
     "msg.deletionError": "Kesalahan dalam mengkonfirmasi penghapusan. Memo akan dibersihkan secara otomatis.",
     "page.home.title": "securememo.app - Memo Terenkripsi dengan Penghapusan Otomatis",
     "page.home.description": "Buat memo terenkripsi yang dihapus setelah konfirmasi atau kedaluwarsa berhasil dibaca. Enkripsi sisi browser, berfokus pada privasi, dan berbagi catatan aman dengan AES-256. Tanpa pelacakan, tanpa iklan.",

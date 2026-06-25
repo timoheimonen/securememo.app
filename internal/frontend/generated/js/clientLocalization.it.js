@@ -35,7 +35,7 @@ const LOCAL_TRANSLATIONS = {
     "msg.copyManual": "⚠️ Copia manualmente (Ctrl+C / Cmd+C)",
     "msg.memoCreated": "✅ Memo Creata con Successo!",
     "msg.memoDecrypted": "Memo decrittografata. Eliminazione in corso... Attendere.",
-    "msg.memoDeleted": "Memo confermato come letto e richiesta di cancellazione.",
+    "msg.memoDeleted": "Memo eliminato correttamente.",
     "msg.deletionError": "Errore nella conferma dell'eliminazione. La memo verrà pulita automaticamente.",
     "page.home.title": "securememo.app - Memo crittografati con cancellazione automatica",
     "page.home.description": "Crea promemoria crittografati che vengono eliminati dopo la conferma o la scadenza della lettura riuscita. Crittografia lato browser, attenzione alla privacy e condivisione sicura delle note con AES-256. Nessun monitoraggio, nessuna pubblicità.",
