@@ -37,11 +37,14 @@ async function hashDeletionToken(token) {
 }
 
 const SECURITY_CONFIG = {
+  ENCRYPTION_VERSION: 1,
   PBKDF2_ITERATIONS: 3500000,
   SALT_LENGTH: 16,
   IV_LENGTH: 12,
   KEY_LENGTH: 256
 };
+
+const ENCRYPTED_MESSAGE_PREFIX = 'v' + SECURITY_CONFIG.ENCRYPTION_VERSION + ':';
 
 async function encryptMessage(payload, password) {
   const encoder = new TextEncoder();
@@ -76,7 +79,7 @@ async function encryptMessage(payload, password) {
   result.set(salt, 0);
   result.set(iv, salt.length);
   result.set(new Uint8Array(encrypted), salt.length + iv.length);
-  return btoa(String.fromCharCode(...result));
+  return ENCRYPTED_MESSAGE_PREFIX + btoa(String.fromCharCode(...result));
 }
 
 const t = (key) => (typeof window.t === 'function' ? window.t(key) : key);

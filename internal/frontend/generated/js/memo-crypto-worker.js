@@ -1,11 +1,12 @@
-const NEW_PBKDF2_ITERATIONS = 3500000;
-const OLD_PBKDF2_ITERATIONS = 2200000;
 const SECURITY_CONFIG = {
-  PBKDF2_ITERATIONS: NEW_PBKDF2_ITERATIONS,
+  ENCRYPTION_VERSION: 1,
+  PBKDF2_ITERATIONS: 3500000,
   SALT_LENGTH: 16,
   IV_LENGTH: 12,
   KEY_LENGTH: 256
 };
+
+const ENCRYPTED_MESSAGE_PREFIX = 'v' + SECURITY_CONFIG.ENCRYPTION_VERSION + ':';
 
 function bytesToBase64(bytes) {
   const chunkSize = 0x8000;
@@ -18,6 +19,17 @@ function bytesToBase64(bytes) {
 
 function base64ToBytes(input) {
   return Uint8Array.from(atob(input), c => c.charCodeAt(0));
+}
+
+function extractVersionedCiphertext(encryptedData) {
+  if (typeof encryptedData !== 'string' || !encryptedData.startsWith(ENCRYPTED_MESSAGE_PREFIX)) {
+    throw new Error('Failed to decrypt memo.');
+  }
+  const ciphertext = encryptedData.slice(ENCRYPTED_MESSAGE_PREFIX.length);
+  if (!ciphertext) {
+    throw new Error('Failed to decrypt memo.');
+  }
+  return ciphertext;
 }
 
 function generatePassword() {
@@ -84,31 +96,25 @@ async function encryptMessage(payload, password) {
   result.set(salt, 0);
   result.set(iv, salt.length);
   result.set(new Uint8Array(encrypted), salt.length + iv.length);
-  return bytesToBase64(result);
+  return ENCRYPTED_MESSAGE_PREFIX + bytesToBase64(result);
 }
 
 async function decryptMessage(encryptedData, password) {
-  const encryptedBytes = base64ToBytes(encryptedData);
-  const salt = encryptedBytes.slice(0, SECURITY_CONFIG.SALT_LENGTH);
-  const iv = encryptedBytes.slice(SECURITY_CONFIG.SALT_LENGTH, SECURITY_CONFIG.SALT_LENGTH + SECURITY_CONFIG.IV_LENGTH);
-  const encrypted = encryptedBytes.slice(SECURITY_CONFIG.SALT_LENGTH + SECURITY_CONFIG.IV_LENGTH);
-  const attempts = [NEW_PBKDF2_ITERATIONS, OLD_PBKDF2_ITERATIONS];
-  for (const iterations of attempts) {
-    try {
-      const key = await deriveKey(password, salt, iterations, ['decrypt']);
-      const decrypted = await crypto.subtle.decrypt(
-        { name: 'AES-GCM', iv: iv },
-        key,
-        encrypted
-      );
-      return new TextDecoder().decode(decrypted);
-    } catch (error) {
-      if (iterations === attempts[attempts.length - 1]) {
-        throw new Error('Failed to decrypt memo.');
-      }
-    }
+  try {
+    const encryptedBytes = base64ToBytes(extractVersionedCiphertext(encryptedData));
+    const salt = encryptedBytes.slice(0, SECURITY_CONFIG.SALT_LENGTH);
+    const iv = encryptedBytes.slice(SECURITY_CONFIG.SALT_LENGTH, SECURITY_CONFIG.SALT_LENGTH + SECURITY_CONFIG.IV_LENGTH);
+    const encrypted = encryptedBytes.slice(SECURITY_CONFIG.SALT_LENGTH + SECURITY_CONFIG.IV_LENGTH);
+    const key = await deriveKey(password, salt, SECURITY_CONFIG.PBKDF2_ITERATIONS, ['decrypt']);
+    const decrypted = await crypto.subtle.decrypt(
+      { name: 'AES-GCM', iv: iv },
+      key,
+      encrypted
+    );
+    return new TextDecoder().decode(decrypted);
+  } catch (error) {
+    throw new Error('Failed to decrypt memo.');
   }
-  throw new Error('Failed to decrypt memo.');
 }
 
 async function encryptMemo(message) {
