@@ -22,8 +22,14 @@ function base64ToBytes(input) {
 }
 
 function extractVersionedCiphertext(encryptedData) {
-  if (typeof encryptedData !== 'string' || !encryptedData.startsWith(ENCRYPTED_MESSAGE_PREFIX)) {
+  if (typeof encryptedData !== 'string' || !encryptedData) {
     throw new Error('Failed to decrypt memo.');
+  }
+  if (!encryptedData.startsWith(ENCRYPTED_MESSAGE_PREFIX)) {
+    if (encryptedData.includes(':')) {
+      throw new Error('Failed to decrypt memo.');
+    }
+    return encryptedData;
   }
   const ciphertext = encryptedData.slice(ENCRYPTED_MESSAGE_PREFIX.length);
   if (!ciphertext) {
