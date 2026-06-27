@@ -4,18 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About securememo.app - Privacy-Focused Encrypted Notes | securememo.app</title>
-    <meta name="description" content="Learn about securememo.app's privacy-focused approach to encrypted memo sharing. Built with browser-side AES-256 encryption, automatic deletion, and no user accounts.">
+    <meta name="description" content="Learn how securememo.app handles private memo sharing with browser-side AES-256 encryption, automatic deletion, no accounts, and no tracking.">
     <meta name="keywords" content="about secure memo, privacy-focused messaging, browser-side encryption, AES-256, automatic deletion, secure note sharing">
     <!-- Open Graph for social sharing -->
     <meta property="og:title" content="About securememo.app - Privacy-Focused Encrypted Notes">
-    <meta property="og:description" content="Discover how securememo.app protects memo content with browser-side encryption and automatic deletion after it's read or when it expires.">
+    <meta property="og:description" content="Discover how securememo.app protects memo content with browser-side encryption, separate passwords, and automatic removal after read confirmation or expiry.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://securememo.app/en/about.html">
     <meta property="og:image" content="https://securememo.app/android-chrome-512x512.png">
     <!-- Twitter Cards -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="About securememo.app - Privacy-Focused Encrypted Notes">
-    <meta name="twitter:description" content="Privacy-first encrypted messaging with client-side encryption.">
+    <meta name="twitter:description" content="Privacy-first encrypted memo sharing with browser-side encryption.">
     <!-- Structured Data -->
     <script type="application/ld+json" nonce="{{CSP_NONCE}}">
     {
@@ -27,7 +27,7 @@
           "name": "How does securememo.app protect my privacy?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "securememo.app encrypts your memo in the browser before sending it to our servers. We never see the plaintext, we never store your password, and we don't ask for user accounts. Memos delete themselves after they're read or when they expire."
+            "text": "securememo.app encrypts your memo in the browser before sending it to our servers. We never see the plaintext, we never store your password, and we don't ask for user accounts. Memos are removed after successful read confirmation or when they expire."
           }
         },
         {
@@ -35,7 +35,7 @@
           "name": "How long do memos last?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "You can choose an expiry time of 8 hours, 1 day, 2 days, 1 week, or 30 days. A memo also deletes itself after it's read, whichever comes first. Expired memos are cleaned up automatically."
+            "text": "You can choose an expiry time of 8 hours, 1 day, 2 days, 1 week, or 30 days. After a successful read, the browser asks the server to delete the memo. Expired memos are cleaned up automatically."
           }
         },
         {
@@ -43,7 +43,7 @@
           "name": "Can I recover a deleted memo?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "No. Once a memo has been read or its expiry time has passed, it's gone. We don't store the password, so we can't decrypt or restore anything for you."
+            "text": "No. Once a memo has been deleted after read confirmation or expiry cleanup, it cannot be recovered. We don't store the password, so we can't decrypt or restore anything for you."
           }
         },
         {
@@ -125,7 +125,10 @@
     <main class="main-content page-about">
         <div class="page-hero">
             <h1>About securememo.app</h1>
-            <p>securememo.app lets you send short, private notes that vanish after reading. Everything is encrypted in your browser, so the server never sees what you wrote.</p>
+            <p>securememo.app is for short private notes. Memo contents are encrypted in your browser before upload, and the server only stores ciphertext plus the metadata needed to expire and delete the memo.</p>
+            <div class="cta-buttons page-hero-actions">
+                <a href="/en/create-memo.html" class="btn btn-primary">Create Secure Memo</a>
+            </div>
         </div>
 
         <section class="info-section">
@@ -140,8 +143,8 @@
                     <p>The encryption password is generated in your browser. It's never sent to or stored on our servers.</p>
                 </div>
                 <div class="info-card">
-                    <h3>Memos delete themselves</h3>
-                    <p>A memo is removed after it's read, or when its expiry time runs out. Choose from 8 hours up to 30 days.</p>
+                    <h3>Deleted after read or expiry</h3>
+                    <p>After a successful read, the browser confirms deletion with the server. Expired memos are cleaned up automatically.</p>
                 </div>
                 <div class="info-card">
                     <h3>No accounts, no tracking</h3>
@@ -150,7 +153,36 @@
             </div>
         </section>
 
-        <section class="steps-section">
+        <section class="storage-section" aria-labelledby="storage-title">
+            <div class="storage-panel">
+                <div class="storage-copy">
+                    <h2 id="storage-title">What the server stores</h2>
+                    <p>The server is designed to handle delivery and cleanup, not memo contents.</p>
+                </div>
+                <div class="storage-grid">
+                    <div class="storage-card">
+                        <h3>Stored temporarily</h3>
+                        <ul>
+                            <li>Encrypted memo ciphertext</li>
+                            <li>Expiry time</li>
+                            <li>Random memo ID</li>
+                            <li>Deletion-token hash</li>
+                        </ul>
+                    </div>
+                    <div class="storage-card storage-card-strong">
+                        <h3>Not stored</h3>
+                        <ul>
+                            <li>Plaintext memo contents</li>
+                            <li>Encryption passwords</li>
+                            <li>User accounts</li>
+                            <li>Cookies, analytics, or ads</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="steps-section" id="how-it-works">
             <h2>How to share a memo</h2>
             <ol class="steps-list">
                 <li>

@@ -4,18 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>securememo.app - Encrypted Memos with Automatic Deletion | securememo.app</title>
-    <meta name="description" content="Create encrypted memos that are deleted after reading or expiration. Browser-side encryption, privacy-focused, and secure note sharing with AES-256. No tracking, no ads.">
+    <meta name="description" content="Create private memos that are encrypted in your browser before upload and removed after read confirmation or expiry. No accounts, no tracking, no ads.">
     <meta name="keywords" content="secure memo, encrypted memo, encrypted memo with automatic deletion, private note sharing, end-to-end encryption, AES-256, privacy, secure memo sharing">
     <!-- Open Graph for social sharing -->
     <meta property="og:title" content="securememo.app - Encrypted Memos with Automatic Deletion">
-    <meta property="og:description" content="Share sensitive information securely with memos that delete after one view or expiration. Powered by client-side AES-256 encryption.">
+    <meta property="og:description" content="Share private notes with browser-side encryption and automatic removal after read confirmation or expiry.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://securememo.app/">
     <meta property="og:image" content="https://securememo.app/android-chrome-512x512.png">
     <!-- Twitter Cards -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="securememo.app - Encrypted Memos with Automatic Deletion">
-    <meta name="twitter:description" content="Privacy-first app for secure, encrypted memo with automatic deletions.">
+    <meta name="twitter:description" content="Privacy-first app for encrypted memos with automatic removal.">
     <link rel="stylesheet" href="/styles.css">
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
@@ -28,7 +28,7 @@
       "@context": "https://schema.org",
       "@type": "WebApplication",
       "name": "securememo.app",
-      "description": "Create an encrypted memo in your browser. It deletes itself after it’s read or when it expires. No tracking, no ads.",
+      "description": "Create a private memo in your browser. It is encrypted before upload and removed after read confirmation or expiry. No tracking, no ads.",
       "url": "https://securememo.app/",
       "applicationCategory": "SecurityApplication",
       "operatingSystem": "Web Browser",
@@ -50,7 +50,7 @@
       },
       "featureList": [
         "Browser-side encryption",
-        "Self-deleting memos",
+        "Automatic memo removal",
         "No user accounts required",
         "No tracking or ads",
         "Go and SQLite backend"
@@ -127,8 +127,8 @@
 
     <main class="main-content">
         <div class="hero-section">
-            <h1>Share secrets that disappear.</h1>
-            <p>Create an encrypted memo in your browser. It deletes itself after it’s read or when it expires.</p>
+            <h1>Share encrypted notes that expire.</h1>
+            <p>Create a private memo in your browser. It is encrypted before upload and removed after read confirmation or expiry.</p>
             <div class="cta-buttons">
                 <a href="/en/create-memo.html" class="btn btn-primary">Create Secure Memo</a>
                 <a href="/en/about.html" class="btn btn-secondary">Learn More</a>
@@ -147,8 +147,8 @@
                     <p>Copy the link and the password. Send them through different channels for extra safety.</p>
                 </div>
                 <div class="feature-card">
-                    <h3>It deletes itself</h3>
-                    <p>The memo is removed after it’s read, or automatically when the expiry time runs out.</p>
+                    <h3>Deleted after read or expiry</h3>
+                    <p>After a successful read, the browser asks the server to delete the memo. Expired memos are cleaned up automatically.</p>
                 </div>
             </div>
         </div>
