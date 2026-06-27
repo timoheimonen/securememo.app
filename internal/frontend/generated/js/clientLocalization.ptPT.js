@@ -96,7 +96,7 @@ const LOCAL_TRANSLATIONS = {
     "about.features.selfHosted.title": "Backend do serviço",
     "about.features.selfHosted.description": "O serviço usa um backend em Go com SQLite para armazenamento temporário de memorandos cifrados.",
     "about.features.privacy.title": "🔒 Privacidade em Primeiro",
-    "about.features.privacy.description": "Sem contas de utilizador, sem análise e sem rastreamento de marketing. Dados operacionais limitados são usados apenas para executar e proteger o serviço.",
+    "about.features.privacy.description": "Sem contas de utilizador, sem rastreadores de publicidade, sem analytics de terceiros e sem perfil comportamental. Métricas operacionais agregadas limitadas são usadas apenas para executar e proteger o serviço.",
     "about.usage.title": "Como Usar",
     "about.usage.create.title": "1. Criar um Memo",
     "about.usage.create.description": "Aceda a \"Criar Memo Seguro\" e escreva o memorando. Escolha um prazo de expiração (8 h, 1 dia, 2 dias, 1 semana ou no máximo 30 dias). Os memorandos são eliminados após confirmação de leitura bem-sucedida ou expiração. O navegador irá gerar uma palavra-passe de cifragem aleatória.",
@@ -268,7 +268,7 @@ const LOCAL_TRANSLATIONS = {
     "about.current.delete.description": "Após uma leitura bem-sucedida, o browser confirma a eliminação com o servidor. Memorandos expirados são limpos automaticamente.",
     "about.current.share.title": "Como partilhar um memorando",
     "about.current.write.title": "Escreva",
-    "about.current.noAccounts.description": "Não precisa de se inscrever. Não utilizamos cookies, análises ou anúncios. Apenas guardamos os dados mínimos necessários para executar o serviço.",
+    "about.current.noAccounts.description": "Não precisa de se inscrever. Não utilizamos cookies, rastreadores de publicidade, analytics de terceiros ou perfil comportamental. Guardamos apenas métricas operacionais agregadas limitadas necessárias para executar e proteger o serviço.",
     "about.current.readOnce.title": "Leia uma vez",
     "about.current.shareSeparately.title": "Partilhe separadamente",
     "about.current.shareSeparately.description": "Envie o link e a password através de vários canais para maior segurança.",
@@ -337,7 +337,7 @@ const LOCAL_TRANSLATIONS = {
     "about.current.storage.notStored.plaintext": "Conteúdo do memorando em texto simples",
     "about.current.storage.notStored.passwords": "Palavras-passe de encriptação",
     "about.current.storage.notStored.accounts": "Contas de utilizador",
-    "about.current.storage.notStored.tracking": "Cookies, analytics ou anúncios"
+    "about.current.storage.notStored.tracking": "Cookies, identificadores de rastreio ou dados de publicidade"
   }
 };
 const translations = {

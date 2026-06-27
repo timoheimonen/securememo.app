@@ -96,7 +96,7 @@ const LOCAL_TRANSLATIONS = {
     "about.features.selfHosted.title": "Hizmet arka ucu",
     "about.features.selfHosted.description": "Hizmet, şifrelenmiş notların geçici olarak saklanması için SQLite kullanan bir Go arka ucu kullanır.",
     "about.features.privacy.title": "🔒 Önce Gizlilik",
-    "about.features.privacy.description": "Kullanıcı hesabı yok, analiz yok ve pazarlama takibi yok. Sınırlı operasyonel veriler yalnızca hizmeti çalıştırmak ve korumak için kullanılır.",
+    "about.features.privacy.description": "Kullanıcı hesabı, reklam takipçileri, üçüncü taraf analizleri ve davranışsal profilleme yok. Sınırlı toplu operasyonel metrikler yalnızca hizmeti çalıştırmak ve korumak için kullanılır.",
     "about.usage.title": "Nasıl Kullanılır",
     "about.usage.create.title": "1. Not Oluşturun",
     "about.usage.create.description": "\"Güvenli Not Oluştur\" sayfasına gidin ve notunuzu yazın. Bir süre seçin (8 saat, 1 gün, 2 gün, 1 hafta veya en fazla 30 gün). Notlar başarılı okuma onayı veya süre dolumu sonrasında silinir. Tarayıcı rastgele bir şifreleme parolası oluşturur.",
@@ -268,7 +268,7 @@ const LOCAL_TRANSLATIONS = {
     "about.current.noAccounts.title": "Hesap yok, takip yok",
     "about.current.share.title": "Bir not nasıl paylaşılır",
     "about.current.write.title": "Yaz onu",
-    "about.current.noAccounts.description": "Kayıt olmanıza gerek yok. Çerezleri, analizleri veya reklamları kullanmıyoruz. Yalnızca hizmeti çalıştırmak için gereken minimum verileri saklıyoruz.",
+    "about.current.noAccounts.description": "Kayıt olmanıza gerek yok. Çerezler, reklam takipçileri, üçüncü taraf analizleri veya davranışsal profilleme kullanmıyoruz. Yalnızca hizmeti çalıştırmak ve korumak için gereken sınırlı toplu operasyonel metrikleri saklıyoruz.",
     "about.current.shareSeparately.description": "Ekstra güvenlik için bağlantıyı ve şifreyi farklı kanallardan gönderin.",
     "about.current.readOnce.title": "Bir kez okuyun",
     "about.current.shareSeparately.title": "Ayrı olarak paylaşın",
@@ -337,7 +337,7 @@ const LOCAL_TRANSLATIONS = {
     "about.current.storage.notStored.plaintext": "Düz metin not içeriği",
     "about.current.storage.notStored.passwords": "Şifreleme parolaları",
     "about.current.storage.notStored.accounts": "Kullanıcı hesapları",
-    "about.current.storage.notStored.tracking": "Çerezler, analizler veya reklamlar"
+    "about.current.storage.notStored.tracking": "Çerezler, izleme tanımlayıcıları veya reklam verileri"
   }
 };
 const translations = {

@@ -96,7 +96,7 @@ const LOCAL_TRANSLATIONS = {
     "about.features.selfHosted.title": "Backend služby",
     "about.features.selfHosted.description": "Služba používá backend v Go se SQLite pro dočasné ukládání šifrovaných poznámek.",
     "about.features.privacy.title": "🔒 Soukromí na prvním místě",
-    "about.features.privacy.description": "Žádné uživatelské účty, žádná analytika a žádné marketingové sledování. Omezená provozní data se používají pouze k provozu a ochraně služby.",
+    "about.features.privacy.description": "Žádné uživatelské účty, žádné reklamní trackery, žádná analytika třetích stran a žádné behaviorální profilování. Omezené agregované provozní metriky se používají pouze k provozu a ochraně služby.",
     "about.usage.title": "Jak používat",
     "about.usage.create.title": "1. Vytvoření zprávy",
     "about.usage.create.description": "Přejděte na „Vytvořit zabezpečenou zprávu“ a napište poznámku. Vyberte dobu expirace (8 h, 1 den, 2 dny, 1 týden nebo maximálně 30 dní). Poznámky se smažou po úspěšném potvrzení přečtení nebo po expiraci. Prohlížeč vygeneruje náhodné šifrovací heslo.",
@@ -266,7 +266,7 @@ const LOCAL_TRANSLATIONS = {
     "about.current.delete.title": "Odstraněno po přečtení nebo vypršení",
     "about.current.delete.description": "Po úspěšném přečtení prohlížeč potvrdí odstranění serveru. Prošlé poznámky se automaticky čistí.",
     "about.current.noAccounts.title": "Žádné účty, žádné sledování",
-    "about.current.noAccounts.description": "Nemusíte se registrovat. Nepoužíváme soubory cookie, analýzy ani reklamy. Uchováváme pouze minimum dat potřebných pro provoz služby.",
+    "about.current.noAccounts.description": "Nemusíte se registrovat. Nepoužíváme cookies, reklamní trackery, analytiku třetích stran ani behaviorální profilování. Uchováváme pouze omezené agregované provozní metriky potřebné k provozu a ochraně služby.",
     "about.current.share.title": "Jak sdílet poznámku",
     "about.current.shareSeparately.title": "Sdílejte samostatně",
     "about.current.write.title": "Napište to",
@@ -337,7 +337,7 @@ const LOCAL_TRANSLATIONS = {
     "about.current.storage.notStored.plaintext": "Obsah poznámky v plaintextu",
     "about.current.storage.notStored.passwords": "Šifrovací hesla",
     "about.current.storage.notStored.accounts": "Uživatelské účty",
-    "about.current.storage.notStored.tracking": "Cookies, analytika ani reklamy"
+    "about.current.storage.notStored.tracking": "Cookies, sledovací identifikátory nebo reklamní data"
   }
 };
 const translations = {

@@ -96,7 +96,7 @@ const LOCAL_TRANSLATIONS = {
     "about.features.selfHosted.title": "Szolgáltatás háttérrendszere",
     "about.features.selfHosted.description": "A szolgáltatás Go háttérrendszert és SQLite-ot használ a titkosított jegyzetek ideiglenes tárolásához.",
     "about.features.privacy.title": "🔒 Adatvédelem az első helyen",
-    "about.features.privacy.description": "Nincsenek felhasználói fiókok, nincs analitika és nincs marketingcélú követés. Korlátozott működési adatokat csak a szolgáltatás futtatásához és védelméhez használunk.",
+    "about.features.privacy.description": "Nincsenek felhasználói fiókok, hirdetési követők, harmadik féltől származó analitika és viselkedésalapú profilozás. Korlátozott aggregált működési metrikákat csak a szolgáltatás futtatásához és védelméhez használunk.",
     "about.usage.title": "Használati útmutató",
     "about.usage.create.title": "1. Jegyzet létrehozása",
     "about.usage.create.description": "Lépjen a \"Biztonságos jegyzet létrehozása\" oldalra, és írja meg a jegyzetet. Válasszon lejárati időt (8 óra, 1 nap, 2 nap, 1 hét vagy legfeljebb 30 nap). A jegyzetek sikeres olvasási megerősítés vagy lejárat után törlődnek. A böngésző véletlenszerű titkosítási jelszót generál.",
@@ -266,7 +266,7 @@ const LOCAL_TRANSLATIONS = {
     "about.current.delete.title": "Olvasás vagy lejárat után törlődik",
     "about.current.delete.description": "Sikeres olvasás után a böngésző megerősíti a törlést a szerver felé. A lejárt feljegyzések automatikusan törlődnek.",
     "about.current.noAccounts.title": "Nincsenek fiókok, nincs nyomon követés",
-    "about.current.noAccounts.description": "Nem kell jelentkezned. Nem használunk cookie-kat, elemzéseket vagy hirdetéseket. Csak a szolgáltatás futtatásához szükséges minimális adatmennyiséget tartjuk meg.",
+    "about.current.noAccounts.description": "Nem kell regisztrálnod. Nem használunk sütiket, hirdetési követőket, harmadik féltől származó analitikát vagy viselkedésalapú profilozást. Csak a szolgáltatás futtatásához és védelméhez szükséges korlátozott aggregált működési metrikákat tartjuk meg.",
     "about.current.share.title": "Hogyan lehet megosztani egy emlékeztetőt",
     "about.current.write.title": "Írd meg",
     "about.current.write.description": "Írja be a megjegyzést, és válasszon egy lejárati időt. A böngésződ titkosítja a feltöltés előtt.",
@@ -337,7 +337,7 @@ const LOCAL_TRANSLATIONS = {
     "about.current.storage.notStored.plaintext": "Feljegyzés tartalma egyszerű szövegként",
     "about.current.storage.notStored.passwords": "Titkosítási jelszavak",
     "about.current.storage.notStored.accounts": "Felhasználói fiókok",
-    "about.current.storage.notStored.tracking": "Sütik, analitika vagy reklámok"
+    "about.current.storage.notStored.tracking": "Sütik, követési azonosítók vagy hirdetési adatok"
   }
 };
 const translations = {

@@ -96,7 +96,7 @@ const LOCAL_TRANSLATIONS = {
     "about.features.selfHosted.title": "Backend du service",
     "about.features.selfHosted.description": "Le service utilise un backend Go avec SQLite pour le stockage temporaire des mémos chiffrés.",
     "about.features.privacy.title": "🔒 Confidentialité d'Abord",
-    "about.features.privacy.description": "Aucun compte utilisateur, aucune analytique et aucun suivi marketing. Les données opérationnelles limitées servent uniquement à exploiter et protéger le service.",
+    "about.features.privacy.description": "Aucun compte utilisateur, aucun traceur publicitaire, aucune analytique tierce et aucun profilage comportemental. Des métriques opérationnelles agrégées limitées servent uniquement à exploiter et protéger le service.",
     "about.usage.title": "Comment Utiliser",
     "about.usage.create.title": "1. Créer un Mémo",
     "about.usage.create.description": "Allez sur \"Créer un Mémo Sécurisé\" et saisissez votre mémo. Choisissez une durée d’expiration (8 h, 1 jour, 2 jours, 1 semaine ou 30 jours maximum). Les mémos sont supprimés après confirmation de lecture réussie ou expiration. Le navigateur générera un mot de passe de chiffrement aléatoire.",
@@ -266,7 +266,7 @@ const LOCAL_TRANSLATIONS = {
     "about.current.delete.title": "Supprimé après lecture ou expiration",
     "about.current.noAccounts.title": "Pas de comptes, pas de suivi",
     "about.current.delete.description": "Après une lecture réussie, le navigateur confirme la suppression auprès du serveur. Les mémos expirés sont nettoyés automatiquement.",
-    "about.current.noAccounts.description": "Vous n'avez pas besoin de vous inscrire. Nous n'utilisons pas de cookies, d'analyses ou de publicités. Nous ne conservons que le minimum de données nécessaire au fonctionnement du service.",
+    "about.current.noAccounts.description": "Vous n'avez pas besoin de vous inscrire. Nous n'utilisons pas de cookies, de traceurs publicitaires, d'analytiques tierces ni de profilage comportemental. Nous ne conservons que des métriques opérationnelles agrégées limitées nécessaires pour exploiter et protéger le service.",
     "about.current.share.title": "Comment partager un mémo",
     "about.current.write.title": "Écrivez-le",
     "about.current.shareSeparately.description": "Envoyez le lien et le mot de passe via différents canaux pour plus de sécurité.",
@@ -337,7 +337,7 @@ const LOCAL_TRANSLATIONS = {
     "about.current.storage.notStored.plaintext": "Contenu du mémo en clair",
     "about.current.storage.notStored.passwords": "Mots de passe de chiffrement",
     "about.current.storage.notStored.accounts": "Comptes utilisateur",
-    "about.current.storage.notStored.tracking": "Cookies, analytics ou publicités"
+    "about.current.storage.notStored.tracking": "Cookies, identifiants de suivi ou données publicitaires"
   }
 };
 const translations = {

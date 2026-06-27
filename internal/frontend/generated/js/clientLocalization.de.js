@@ -96,7 +96,7 @@ const LOCAL_TRANSLATIONS = {
     "about.features.selfHosted.title": "Service-Backend",
     "about.features.selfHosted.description": "Der Dienst verwendet ein Go-Backend mit SQLite zur temporären Speicherung verschlüsselter Notizen.",
     "about.features.privacy.title": "🔒 Datenschutz zuerst",
-    "about.features.privacy.description": "Keine Benutzerkonten, keine Analytik und kein Marketing-Tracking. Begrenzte Betriebsdaten werden nur zum Betrieb und Schutz des Dienstes verwendet.",
+    "about.features.privacy.description": "Keine Benutzerkonten, keine Werbetracker, keine Drittanbieter-Analytics und kein Verhaltensprofiling. Begrenzte aggregierte Betriebsmetriken werden nur zum Betrieb und Schutz des Dienstes verwendet.",
     "about.usage.title": "Verwendung",
     "about.usage.create.title": "1. Notiz erstellen",
     "about.usage.create.description": "Gehen Sie zu „Sichere Notiz erstellen“ und schreiben Sie Ihre Notiz. Wählen Sie eine Ablaufzeit (8 Stunden, 1 Tag, 2 Tage, 1 Woche oder maximal 30 Tage). Notizen werden nach erfolgreicher Lesebestätigung oder Ablauf gelöscht. Der Browser erzeugt ein zufälliges Verschlüsselungspasswort.",
@@ -265,7 +265,7 @@ const LOCAL_TRANSLATIONS = {
     "about.current.passwords.description": "Das Verschlüsselungspasswort wird in Ihrem Browser erzeugt. Es wird nie an unsere Server gesendet oder dort gespeichert.",
     "about.current.delete.title": "Nach Lesen oder Ablauf gelöscht",
     "about.current.noAccounts.title": "Keine Konten, kein Tracking",
-    "about.current.noAccounts.description": "Sie müssen sich nicht registrieren. Wir verwenden keine Cookies, keine Analysen und keine Werbung. Wir speichern nur die Mindestdaten, die für den Betrieb des Dienstes nötig sind.",
+    "about.current.noAccounts.description": "Sie müssen sich nicht registrieren. Wir verwenden keine Cookies, Werbetracker, Drittanbieter-Analytics oder Verhaltensprofiling. Wir speichern nur begrenzte aggregierte Betriebsmetriken, die zum Betrieb und Schutz des Dienstes nötig sind.",
     "about.current.delete.description": "Nach erfolgreichem Lesen bestätigt der Browser die Löschung beim Server. Abgelaufene Memos werden automatisch bereinigt.",
     "about.current.share.title": "So teilen Sie ein Memo",
     "about.current.write.title": "Schreiben",
@@ -337,7 +337,7 @@ const LOCAL_TRANSLATIONS = {
     "about.current.storage.notStored.plaintext": "Memo-Inhalte im Klartext",
     "about.current.storage.notStored.passwords": "Verschlüsselungspasswörter",
     "about.current.storage.notStored.accounts": "Benutzerkonten",
-    "about.current.storage.notStored.tracking": "Cookies, Analysen oder Werbung"
+    "about.current.storage.notStored.tracking": "Cookies, Tracking-Kennungen oder Werbedaten"
   }
 };
 const translations = {

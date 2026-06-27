@@ -96,7 +96,7 @@ const LOCAL_TRANSLATIONS = {
     "about.features.selfHosted.title": "Backendul serviciului",
     "about.features.selfHosted.description": "Serviciul folosește un backend Go cu SQLite pentru stocarea temporară a memo-urilor criptate.",
     "about.features.privacy.title": "🔒 Confidențialitate pe primul loc",
-    "about.features.privacy.description": "Fără conturi de utilizator, fără analitice și fără urmărire de marketing. Datele operaționale limitate sunt folosite doar pentru rularea și protejarea serviciului.",
+    "about.features.privacy.description": "Fără conturi de utilizator, fără trackere publicitare, fără analitice terțe și fără profilare comportamentală. Metricile operaționale agregate limitate sunt folosite doar pentru rularea și protejarea serviciului.",
     "about.usage.title": "Cum se utilizează",
     "about.usage.create.title": "1. Creează un memo",
     "about.usage.create.description": "Mergi la \"Creează memo securizat\" și scrie memo-ul. Alege un timp de expirare (8 h, 1 zi, 2 zile, 1 săptămână sau maximum 30 de zile). Memo-urile sunt șterse după confirmarea reușită a citirii sau la expirare. Browserul va genera o parolă de criptare aleatorie.",
@@ -265,7 +265,7 @@ const LOCAL_TRANSLATIONS = {
     "about.current.passwords.description": "Parola de criptare este generată în browserul dvs. Nu este niciodată trimis sau stocat pe serverele noastre.",
     "about.current.delete.description": "După o citire reușită, browserul confirmă ștergerea cu serverul. Memo-urile expirate sunt curățate automat.",
     "about.current.delete.title": "Șters după citire sau expirare",
-    "about.current.noAccounts.description": "Nu trebuie să vă înscrieți. Nu folosim cookie-uri, analize sau reclame. Păstrăm doar datele minime necesare pentru a rula serviciul.",
+    "about.current.noAccounts.description": "Nu trebuie să vă înscrieți. Nu folosim cookie-uri, trackere publicitare, analitice terțe sau profilare comportamentală. Păstrăm doar metrici operaționale agregate limitate necesare pentru rularea și protejarea serviciului.",
     "about.current.write.title": "Scrie-o",
     "about.current.noAccounts.title": "Fără conturi, fără urmărire",
     "about.current.share.title": "Cum să partajați o notă",
@@ -337,7 +337,7 @@ const LOCAL_TRANSLATIONS = {
     "about.current.storage.notStored.plaintext": "Conținutul memo-ului în plaintext",
     "about.current.storage.notStored.passwords": "Parole de criptare",
     "about.current.storage.notStored.accounts": "Conturi de utilizator",
-    "about.current.storage.notStored.tracking": "Cookie-uri, analytics sau reclame"
+    "about.current.storage.notStored.tracking": "Cookie-uri, identificatori de urmărire sau date publicitare"
   }
 };
 const translations = {

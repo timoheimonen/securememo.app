@@ -96,7 +96,7 @@ const LOCAL_TRANSLATIONS = {
     "about.features.selfHosted.title": "Tjänstens backend",
     "about.features.selfHosted.description": "Tjänsten använder en Go-backend med SQLite för tillfällig lagring av krypterade memon.",
     "about.features.privacy.title": "🔒 Integritet först",
-    "about.features.privacy.description": "Inga användarkonton, ingen analys och ingen marknadsföringsspårning. Begränsade driftsdata används endast för att driva och skydda tjänsten.",
+    "about.features.privacy.description": "Inga användarkonton, inga annonsspårare, ingen tredjepartsanalys och ingen beteendeprofilering. Begränsade aggregerade driftmätvärden används endast för att driva och skydda tjänsten.",
     "about.usage.title": "Så här använder du",
     "about.usage.create.title": "1. Skapa en memo",
     "about.usage.create.description": "Gå till \"Skapa säker memo\" och skriv ditt memo. Välj en utgångstid (8 h, 1 dag, 2 dagar, 1 vecka eller högst 30 dagar). Memon raderas efter bekräftad läsning eller utgång. Webbläsaren genererar ett slumpmässigt krypteringslösenord.",
@@ -266,7 +266,7 @@ const LOCAL_TRANSLATIONS = {
     "about.current.delete.description": "Efter en lyckad läsning bekräftar webbläsaren raderingen med servern. Utgångna memon rensas automatiskt.",
     "about.current.noAccounts.title": "Inga konton, ingen spårning",
     "about.current.delete.title": "Raderas efter läsning eller utgång",
-    "about.current.noAccounts.description": "Du behöver inte registrera dig. Vi använder inte cookies, analyser eller annonser. Vi behåller endast den minsta information som behövs för att köra tjänsten.",
+    "about.current.noAccounts.description": "Du behöver inte registrera dig. Vi använder inte cookies, annonsspårare, tredjepartsanalys eller beteendeprofilering. Vi sparar endast begränsade aggregerade driftmätvärden som behövs för att driva och skydda tjänsten.",
     "about.current.share.title": "Hur man delar ett memo",
     "about.current.write.title": "Skriv det",
     "about.current.shareSeparately.title": "Dela separat",
@@ -337,7 +337,7 @@ const LOCAL_TRANSLATIONS = {
     "about.current.storage.notStored.plaintext": "Memoinnehåll i klartext",
     "about.current.storage.notStored.passwords": "Krypteringslösenord",
     "about.current.storage.notStored.accounts": "Användarkonton",
-    "about.current.storage.notStored.tracking": "Cookies, analys eller annonser"
+    "about.current.storage.notStored.tracking": "Cookies, spårningsidentifierare eller annonsdata"
   }
 };
 const translations = {

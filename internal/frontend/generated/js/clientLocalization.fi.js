@@ -96,7 +96,7 @@ const LOCAL_TRANSLATIONS = {
     "about.features.selfHosted.title": "Palvelun taustajärjestelmä",
     "about.features.selfHosted.description": "Palvelu käyttää Go-taustajärjestelmää ja SQLitea salattujen muistioiden väliaikaiseen tallennukseen.",
     "about.features.privacy.title": "🔒 Yksityisyys Etusijalla",
-    "about.features.privacy.description": "Ei käyttäjätilejä, ei analytiikkaa eikä markkinointiseurantaa. Rajattua operatiivista dataa käytetään vain palvelun ylläpitoon ja suojaamiseen.",
+    "about.features.privacy.description": "Ei käyttäjätilejä, ei mainosseurantoja, ei kolmannen osapuolen analytiikkaa eikä käyttäytymisprofilointia. Rajattuja aggregoituja operatiivisia mittareita käytetään vain palvelun ylläpitoon ja suojaamiseen.",
     "about.usage.title": "Näin Käytät",
     "about.usage.create.title": "1. Luo Muistio",
     "about.usage.create.description": "Siirry \"Luo Suojattu Muistio\" -sivulle ja kirjoita muistiosi. Valitse vanhentumisaika (8 h, 1 pv, 2 pv, 1 viikko tai enintään 30 päivää). Muistiot poistetaan onnistuneen lukuvahvistuksen tai vanhentumisen jälkeen. Selain luo satunnaisen salaussalasanan.",
@@ -266,7 +266,7 @@ const LOCAL_TRANSLATIONS = {
     "about.current.delete.title": "Poistetaan lukemisen tai vanhenemisen jälkeen",
     "about.current.delete.description": "Onnistuneen lukemisen jälkeen selain vahvistaa poiston palvelimelle. Vanhentuneet muistiot siivotaan automaattisesti.",
     "about.current.noAccounts.title": "Ei käyttäjätilejä, ei seurantaa",
-    "about.current.noAccounts.description": "Sinun ei tarvitse rekisteröityä. Emme käytä evästeitä, analytiikkaa tai mainoksia. Säilytämme vain palvelun toimintaan tarvittavan vähimmäisdatan.",
+    "about.current.noAccounts.description": "Sinun ei tarvitse rekisteröityä. Emme käytä evästeitä, mainosseurantoja, kolmannen osapuolen analytiikkaa tai käyttäytymisprofilointia. Säilytämme vain rajattuja aggregoituja operatiivisia mittareita, joita tarvitaan palvelun ylläpitoon ja suojaamiseen.",
     "about.current.share.title": "Näin jaat muistion",
     "about.current.shareSeparately.title": "Jaa erikseen",
     "about.current.write.description": "Kirjoita muistiinpano ja valitse vanhentumisaika. Selaimesi salaa sen ennen lähetystä.",
@@ -337,7 +337,7 @@ const LOCAL_TRANSLATIONS = {
     "about.current.storage.notStored.plaintext": "Muistion selkokielinen sisältö",
     "about.current.storage.notStored.passwords": "Salaussalasanat",
     "about.current.storage.notStored.accounts": "Käyttäjätilit",
-    "about.current.storage.notStored.tracking": "Evästeet, analytiikka tai mainokset"
+    "about.current.storage.notStored.tracking": "Evästeet, seurantatunnisteet tai mainosdata"
   }
 };
 const translations = {

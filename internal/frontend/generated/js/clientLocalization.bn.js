@@ -96,7 +96,7 @@ const LOCAL_TRANSLATIONS = {
     "about.features.selfHosted.title": "সেবা ব্যাকএন্ড",
     "about.features.selfHosted.description": "অস্থায়ী এনক্রিপ্টেড মেমো সংরক্ষণের জন্য সেবাটি SQLite সহ একটি Go ব্যাকএন্ড ব্যবহার করে।",
     "about.features.privacy.title": "🔒 প্রাইভেসি প্রথম",
-    "about.features.privacy.description": "কোনো ব্যবহারকারী অ্যাকাউন্ট নেই, কোনো অ্যানালিটিক্স নেই, এবং কোনো মার্কেটিং ট্র্যাকিং নেই। সীমিত অপারেশনাল ডেটা শুধু সেবা চালানো ও সুরক্ষার জন্য ব্যবহৃত হয়।",
+    "about.features.privacy.description": "কোনো ব্যবহারকারী অ্যাকাউন্ট নেই, কোনো বিজ্ঞাপন ট্র্যাকার নেই, কোনো তৃতীয়-পক্ষ অ্যানালিটিক্স নেই এবং কোনো আচরণগত প্রোফাইলিং নেই। সীমিত সমষ্টিগত অপারেশনাল মেট্রিকস শুধু সেবা চালানো ও সুরক্ষার জন্য ব্যবহৃত হয়।",
     "about.usage.title": "কিভাবে ব্যবহার করবেন",
     "about.usage.create.title": "১. একটি মেমো তৈরি করুন",
     "about.usage.create.description": "\"নিরাপদ মেমো তৈরি করুন\" পৃষ্ঠায় যান এবং মেমো লিখুন। মেয়াদ নির্বাচন করুন (৮ ঘণ্টা, ১ দিন, ২ দিন, ১ সপ্তাহ বা সর্বোচ্চ ৩০ দিন)। সফল পড়া নিশ্চিত হলে বা মেয়াদ শেষ হলে মেমো মুছে ফেলা হয়। ব্রাউজার একটি এলোমেলো এনক্রিপশন পাসওয়ার্ড তৈরি করবে।",
@@ -264,7 +264,7 @@ const LOCAL_TRANSLATIONS = {
     "about.current.passwords.title": "পাসওয়ার্ড আপনার ডিভাইসে থাকে",
     "about.current.passwords.description": "আপনার ব্রাউজারে এনক্রিপশন পাসওয়ার্ড তৈরি করা হয়। এটি কখনই আমাদের সার্ভারে পাঠানো বা সংরক্ষণ করা হয় না।",
     "about.current.delete.title": "পড়া বা মেয়াদ শেষের পরে মুছে ফেলা হয়",
-    "about.current.noAccounts.description": "আপনি সাইন আপ করতে হবে না. আমরা কুকিজ, বিশ্লেষণ বা বিজ্ঞাপন ব্যবহার করি না। আমরা শুধুমাত্র পরিষেবা চালানোর জন্য প্রয়োজনীয় ন্যূনতম ডেটা রাখি।",
+    "about.current.noAccounts.description": "আপনাকে সাইন আপ করতে হবে না। আমরা কুকি, বিজ্ঞাপন ট্র্যাকার, তৃতীয়-পক্ষ অ্যানালিটিক্স বা আচরণগত প্রোফাইলিং ব্যবহার করি না। আমরা শুধু সেবা চালানো ও সুরক্ষার জন্য প্রয়োজনীয় সীমিত সমষ্টিগত অপারেশনাল মেট্রিকস রাখি।",
     "about.current.delete.description": "সফলভাবে পড়ার পরে ব্রাউজার সার্ভারের সঙ্গে মুছে ফেলা নিশ্চিত করে। মেয়াদোত্তীর্ণ মেমো স্বয়ংক্রিয়ভাবে পরিষ্কার করা হয়।",
     "about.current.noAccounts.title": "কোন অ্যাকাউন্ট, কোন ট্র্যাকিং",
     "about.current.share.title": "কিভাবে একটি মেমো শেয়ার করতে হয়",
@@ -337,7 +337,7 @@ const LOCAL_TRANSLATIONS = {
     "about.current.storage.notStored.plaintext": "প্লেইনটেক্সট মেমো কনটেন্ট",
     "about.current.storage.notStored.passwords": "এনক্রিপশন পাসওয়ার্ড",
     "about.current.storage.notStored.accounts": "ব্যবহারকারী অ্যাকাউন্ট",
-    "about.current.storage.notStored.tracking": "কুকি, অ্যানালিটিক্স বা বিজ্ঞাপন"
+    "about.current.storage.notStored.tracking": "কুকি, ট্র্যাকিং আইডেন্টিফায়ার বা বিজ্ঞাপন ডেটা"
   }
 };
 const translations = {

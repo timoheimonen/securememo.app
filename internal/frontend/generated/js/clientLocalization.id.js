@@ -96,7 +96,7 @@ const LOCAL_TRANSLATIONS = {
     "about.features.selfHosted.title": "Backend layanan",
     "about.features.selfHosted.description": "Layanan ini menggunakan backend Go dengan SQLite untuk penyimpanan sementara memo terenkripsi.",
     "about.features.privacy.title": "🔒 Privasi Utama",
-    "about.features.privacy.description": "Tanpa akun pengguna, tanpa analitik, dan tanpa pelacakan pemasaran. Data operasional terbatas hanya digunakan untuk menjalankan dan melindungi layanan.",
+    "about.features.privacy.description": "Tanpa akun pengguna, tanpa pelacak iklan, tanpa analitik pihak ketiga, dan tanpa profil perilaku. Metrik operasional agregat terbatas hanya digunakan untuk menjalankan dan melindungi layanan.",
     "about.usage.title": "Cara Menggunakan",
     "about.usage.create.title": "1. Buat Memo",
     "about.usage.create.description": "Buka \"Buat Memo Aman\" dan tulis memo Anda. Pilih waktu kedaluwarsa (8 jam, 1 hari, 2 hari, 1 minggu, atau maksimal 30 hari). Memo dihapus setelah konfirmasi baca berhasil atau kedaluwarsa. Browser akan membuat kata sandi enkripsi acak.",
@@ -266,7 +266,7 @@ const LOCAL_TRANSLATIONS = {
     "about.current.delete.title": "Dihapus setelah dibaca atau kedaluwarsa",
     "about.current.noAccounts.title": "Tidak ada akun, tidak ada pelacakan",
     "about.current.delete.description": "Setelah berhasil dibaca, browser mengonfirmasi penghapusan ke server. Memo kedaluwarsa dibersihkan otomatis.",
-    "about.current.noAccounts.description": "Anda tidak perlu mendaftar. Kami tidak menggunakan cookie, analitik, atau iklan. Kami hanya menyimpan data minimum yang diperlukan untuk menjalankan layanan.",
+    "about.current.noAccounts.description": "Anda tidak perlu mendaftar. Kami tidak menggunakan cookie, pelacak iklan, analitik pihak ketiga, atau profil perilaku. Kami hanya menyimpan metrik operasional agregat terbatas yang diperlukan untuk menjalankan dan melindungi layanan.",
     "about.current.share.title": "Cara membagikan memo",
     "about.current.write.title": "Tulislah",
     "about.current.shareSeparately.description": "Kirim tautan dan kata sandi melalui saluran berbeda untuk keamanan ekstra.",
@@ -337,7 +337,7 @@ const LOCAL_TRANSLATIONS = {
     "about.current.storage.notStored.plaintext": "Isi memo plaintext",
     "about.current.storage.notStored.passwords": "Kata sandi enkripsi",
     "about.current.storage.notStored.accounts": "Akun pengguna",
-    "about.current.storage.notStored.tracking": "Cookie, analitik, atau iklan"
+    "about.current.storage.notStored.tracking": "Cookie, pengenal pelacakan, atau data iklan"
   }
 };
 const translations = {

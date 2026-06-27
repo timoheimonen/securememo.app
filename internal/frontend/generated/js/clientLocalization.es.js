@@ -96,7 +96,7 @@ const LOCAL_TRANSLATIONS = {
     "about.features.selfHosted.title": "Backend del servicio",
     "about.features.selfHosted.description": "El servicio utiliza un backend en Go con SQLite para almacenar temporalmente memos cifrados.",
     "about.features.privacy.title": "🔒 Privacidad Primero",
-    "about.features.privacy.description": "Sin cuentas de usuario, sin analíticas y sin seguimiento de marketing. Los datos operativos limitados se usan solo para ejecutar y proteger el servicio.",
+    "about.features.privacy.description": "Sin cuentas de usuario, sin rastreadores publicitarios, sin analíticas de terceros y sin perfiles de comportamiento. Las métricas operativas agregadas limitadas se usan solo para ejecutar y proteger el servicio.",
     "about.usage.title": "Cómo Usar",
     "about.usage.create.title": "1. Crear un Memo",
     "about.usage.create.description": "Ve a \"Crear Memo Seguro\" y escribe tu memo. Elige un tiempo de expiración (8 h, 1 día, 2 días, 1 semana o un máximo de 30 días). Los memos se eliminan tras una confirmación de lectura correcta o al expirar. El navegador generará una contraseña de cifrado aleatoria.",
@@ -266,7 +266,7 @@ const LOCAL_TRANSLATIONS = {
     "about.current.delete.title": "Eliminado tras lectura o caducidad",
     "about.current.delete.description": "Tras una lectura correcta, el navegador confirma la eliminación con el servidor. Los memos caducados se limpian automáticamente.",
     "about.current.noAccounts.title": "Sin cuentas, sin seguimiento",
-    "about.current.noAccounts.description": "No es necesario registrarse. No utilizamos cookies, análisis ni anuncios. Solo conservamos los datos mínimos necesarios para ejecutar el servicio.",
+    "about.current.noAccounts.description": "No es necesario registrarse. No usamos cookies, rastreadores publicitarios, analíticas de terceros ni perfiles de comportamiento. Solo conservamos métricas operativas agregadas limitadas necesarias para ejecutar y proteger el servicio.",
     "about.current.share.title": "Cómo compartir una nota",
     "about.current.write.title": "Escríbelo",
     "about.current.write.description": "Escriba su nota y elija una hora de vencimiento. Su navegador lo cifra antes de cargarlo.",
@@ -337,7 +337,7 @@ const LOCAL_TRANSLATIONS = {
     "about.current.storage.notStored.plaintext": "Contenido del memo en texto plano",
     "about.current.storage.notStored.passwords": "Contraseñas de cifrado",
     "about.current.storage.notStored.accounts": "Cuentas de usuario",
-    "about.current.storage.notStored.tracking": "Cookies, analíticas o anuncios"
+    "about.current.storage.notStored.tracking": "Cookies, identificadores de seguimiento o datos publicitarios"
   }
 };
 const translations = {

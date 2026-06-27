@@ -96,7 +96,7 @@ const LOCAL_TRANSLATIONS = {
     "about.features.selfHosted.title": "Backend del servizio",
     "about.features.selfHosted.description": "Il servizio usa un backend Go con SQLite per l’archiviazione temporanea dei memo cifrati.",
     "about.features.privacy.title": "🔒 Privacy Prima di Tutto",
-    "about.features.privacy.description": "Nessun account utente, nessuna analisi e nessun tracciamento marketing. Dati operativi limitati vengono usati solo per eseguire e proteggere il servizio.",
+    "about.features.privacy.description": "Nessun account utente, nessun tracker pubblicitario, nessuna analisi di terze parti e nessuna profilazione comportamentale. Metriche operative aggregate limitate sono usate solo per gestire e proteggere il servizio.",
     "about.usage.title": "Come Usare",
     "about.usage.create.title": "1. Crea una Memo",
     "about.usage.create.description": "Vai su \"Crea Memo Sicura\" e scrivi il memo. Scegli una scadenza (8 ore, 1 giorno, 2 giorni, 1 settimana o massimo 30 giorni). I memo vengono eliminati dopo conferma di lettura riuscita o alla scadenza. Il browser genererà una password di cifratura casuale.",
@@ -266,7 +266,7 @@ const LOCAL_TRANSLATIONS = {
     "about.current.delete.title": "Eliminato dopo lettura o scadenza",
     "about.current.noAccounts.title": "Nessun account, nessun tracciamento",
     "about.current.delete.description": "Dopo una lettura riuscita, il browser conferma l’eliminazione al server. I memo scaduti vengono puliti automaticamente.",
-    "about.current.noAccounts.description": "Non è necessario registrarsi. Non utilizziamo cookie, analisi o pubblicità. Conserviamo solo i dati minimi necessari per eseguire il servizio.",
+    "about.current.noAccounts.description": "Non è necessario registrarsi. Non utilizziamo cookie, tracker pubblicitari, analisi di terze parti o profilazione comportamentale. Conserviamo solo metriche operative aggregate limitate necessarie per gestire e proteggere il servizio.",
     "about.current.share.title": "Come condividere un promemoria",
     "about.current.write.title": "Scrivilo",
     "about.current.shareSeparately.title": "Condividi separatamente",
@@ -337,7 +337,7 @@ const LOCAL_TRANSLATIONS = {
     "about.current.storage.notStored.plaintext": "Contenuto del memo in chiaro",
     "about.current.storage.notStored.passwords": "Password di crittografia",
     "about.current.storage.notStored.accounts": "Account utente",
-    "about.current.storage.notStored.tracking": "Cookie, analytics o pubblicità"
+    "about.current.storage.notStored.tracking": "Cookie, identificatori di tracciamento o dati pubblicitari"
   }
 };
 const translations = {

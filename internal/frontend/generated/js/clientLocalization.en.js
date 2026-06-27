@@ -94,7 +94,7 @@ const TRANSLATIONS = {
     "about.features.selfHosted.title": "Service backend",
     "about.features.selfHosted.description": "The service uses a Go backend with SQLite for temporary encrypted memo storage.",
     "about.features.privacy.title": "🔒 Privacy First",
-    "about.features.privacy.description": "No user accounts, no analytics, and no marketing tracking. Limited operational data is used only to run and protect the service.",
+    "about.features.privacy.description": "No user accounts, no advertising trackers, no third-party analytics, and no behavioral profiling. Limited aggregate operational metrics are used only to run and protect the service.",
     "about.usage.title": "How to Use",
     "about.usage.create.title": "1. Create a Memo",
     "about.usage.create.description": "Go to \"Create Secure Memo\" and type your memo. Choose an expiry time (8h, 1d, 2d, 1 week or a maximum of 30 days). Memos are deleted after successful read confirmation or expiration. The browser will generate a random encryption password.",
@@ -264,7 +264,7 @@ const TRANSLATIONS = {
     "about.current.delete.title": "Deleted after read or expiry",
     "about.current.delete.description": "After a successful read, the browser confirms deletion with the server. Expired memos are cleaned up automatically.",
     "about.current.noAccounts.title": "No accounts, no tracking",
-    "about.current.noAccounts.description": "You don't need to sign up. We don't use cookies, analytics, or ads. We only keep the minimum data needed to run the service.",
+    "about.current.noAccounts.description": "You don't need to sign up. We don't use cookies, advertising trackers, third-party analytics, or behavioral profiling. We keep only limited aggregate operational metrics needed to run and protect the service.",
     "about.current.share.title": "How to share a memo",
     "about.current.write.title": "Write it",
     "about.current.write.description": "Type your note and pick an expiry time. Your browser encrypts it before uploading.",
@@ -335,7 +335,7 @@ const TRANSLATIONS = {
     "about.current.storage.notStored.plaintext": "Plaintext memo contents",
     "about.current.storage.notStored.passwords": "Encryption passwords",
     "about.current.storage.notStored.accounts": "User accounts",
-    "about.current.storage.notStored.tracking": "Cookies, analytics, or ads"
+    "about.current.storage.notStored.tracking": "Cookies, tracking identifiers, or advertising data"
   }
 };
 export const locale = 'en';

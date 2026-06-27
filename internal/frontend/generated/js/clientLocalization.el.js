@@ -96,7 +96,7 @@ const LOCAL_TRANSLATIONS = {
     "about.features.selfHosted.title": "Backend υπηρεσίας",
     "about.features.selfHosted.description": "Η υπηρεσία χρησιμοποιεί backend σε Go με SQLite για προσωρινή αποθήκευση κρυπτογραφημένων memo.",
     "about.features.privacy.title": "🔒 Ιδιωτικότητα Πάνω Απ’ Όλα",
-    "about.features.privacy.description": "Δεν υπάρχουν λογαριασμοί χρηστών, analytics ή παρακολούθηση marketing. Περιορισμένα λειτουργικά δεδομένα χρησιμοποιούνται μόνο για τη λειτουργία και προστασία της υπηρεσίας.",
+    "about.features.privacy.description": "Δεν υπάρχουν λογαριασμοί χρηστών, διαφημιστικοί trackers, analytics τρίτων ή συμπεριφορικό profiling. Περιορισμένες συγκεντρωτικές λειτουργικές μετρήσεις χρησιμοποιούνται μόνο για τη λειτουργία και προστασία της υπηρεσίας.",
     "about.usage.title": "Πώς να Χρησιμοποιήσετε",
     "about.usage.create.title": "1. Δημιουργία Σημείωσης",
     "about.usage.create.description": "Μεταβείτε στο \"Δημιουργία Ασφαλούς Σημείωσης\" και γράψτε το memo σας. Επιλέξτε χρόνο λήξης (8 ώρες, 1 ημέρα, 2 ημέρες, 1 εβδομάδα ή έως 30 ημέρες). Τα memo διαγράφονται μετά από επιτυχή επιβεβαίωση ανάγνωσης ή λήξη. Το πρόγραμμα περιήγησης θα δημιουργήσει τυχαίο κωδικό κρυπτογράφησης.",
@@ -266,7 +266,7 @@ const LOCAL_TRANSLATIONS = {
     "about.current.delete.title": "Διαγράφεται μετά την ανάγνωση ή τη λήξη",
     "about.current.delete.description": "Μετά από επιτυχημένη ανάγνωση, το πρόγραμμα περιήγησης επιβεβαιώνει τη διαγραφή με τον διακομιστή. Τα ληγμένα σημειώματα καθαρίζονται αυτόματα.",
     "about.current.noAccounts.title": "Χωρίς λογαριασμούς, χωρίς παρακολούθηση",
-    "about.current.noAccounts.description": "Δεν χρειάζεται να εγγραφείτε. Δεν χρησιμοποιούμε cookies, αναλυτικά στοιχεία ή διαφημίσεις. Διατηρούμε μόνο τα ελάχιστα δεδομένα που απαιτούνται για την εκτέλεση της υπηρεσίας.",
+    "about.current.noAccounts.description": "Δεν χρειάζεται να εγγραφείτε. Δεν χρησιμοποιούμε cookies, διαφημιστικούς trackers, analytics τρίτων ή συμπεριφορικό profiling. Διατηρούμε μόνο περιορισμένες συγκεντρωτικές λειτουργικές μετρήσεις που χρειάζονται για τη λειτουργία και προστασία της υπηρεσίας.",
     "about.current.share.title": "Πώς να μοιραστείτε ένα σημείωμα",
     "about.current.write.description": "Πληκτρολογήστε τη σημείωσή σας και επιλέξτε χρόνο λήξης. Το πρόγραμμα περιήγησής σας το κρυπτογραφεί πριν από τη μεταφόρτωση.",
     "about.current.write.title": "Γράψτε το",
@@ -337,7 +337,7 @@ const LOCAL_TRANSLATIONS = {
     "about.current.storage.notStored.plaintext": "Περιεχόμενο σημειώματος σε απλό κείμενο",
     "about.current.storage.notStored.passwords": "Κωδικοί πρόσβασης κρυπτογράφησης",
     "about.current.storage.notStored.accounts": "Λογαριασμοί χρηστών",
-    "about.current.storage.notStored.tracking": "Cookies, analytics ή διαφημίσεις"
+    "about.current.storage.notStored.tracking": "Cookies, αναγνωριστικά παρακολούθησης ή διαφημιστικά δεδομένα"
   }
 };
 const translations = {

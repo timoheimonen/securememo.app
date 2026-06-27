@@ -96,7 +96,7 @@ const LOCAL_TRANSLATIONS = {
     "about.features.selfHosted.title": "Service-backend",
     "about.features.selfHosted.description": "De service gebruikt een Go-backend met SQLite voor tijdelijke opslag van versleutelde memo’s.",
     "about.features.privacy.title": "🔒 Privacy eerst",
-    "about.features.privacy.description": "Geen gebruikersaccounts, geen analytics en geen marketingtracking. Beperkte operationele gegevens worden alleen gebruikt om de service te laten werken en te beschermen.",
+    "about.features.privacy.description": "Geen gebruikersaccounts, geen advertentietrackers, geen analytics van derden en geen gedragsprofilering. Beperkte geaggregeerde operationele metrics worden alleen gebruikt om de service te laten werken en te beschermen.",
     "about.usage.title": "Hoe te gebruiken",
     "about.usage.create.title": "1. Maak een memo",
     "about.usage.create.description": "Ga naar \"Veilig Memo maken\" en typ uw memo. Kies een verlooptijd (8 uur, 1 dag, 2 dagen, 1 week of maximaal 30 dagen). Memo’s worden verwijderd na succesvolle leesbevestiging of na verlopen. De browser genereert een willekeurig encryptiewachtwoord.",
@@ -265,7 +265,7 @@ const LOCAL_TRANSLATIONS = {
     "about.current.delete.title": "Verwijderd na lezen of verlopen",
     "about.current.passwords.description": "Het coderingswachtwoord wordt in uw browser gegenereerd. Het wordt nooit verzonden naar of opgeslagen op onze servers.",
     "about.current.delete.description": "Na succesvol lezen bevestigt de browser de verwijdering bij de server. Verlopen memo’s worden automatisch opgeruimd.",
-    "about.current.noAccounts.description": "U hoeft zich niet aan te melden. We gebruiken geen cookies, analyses of advertenties. We bewaren alleen de minimale gegevens die nodig zijn om de service uit te voeren.",
+    "about.current.noAccounts.description": "U hoeft zich niet aan te melden. We gebruiken geen cookies, advertentietrackers, analytics van derden of gedragsprofilering. We bewaren alleen beperkte geaggregeerde operationele metrics die nodig zijn om de service te laten werken en te beschermen.",
     "about.current.noAccounts.title": "Geen accounts, geen tracking",
     "about.current.share.title": "Een memo delen",
     "about.current.write.title": "Schrijf het",
@@ -337,7 +337,7 @@ const LOCAL_TRANSLATIONS = {
     "about.current.storage.notStored.plaintext": "Memo-inhoud in platte tekst",
     "about.current.storage.notStored.passwords": "Versleutelingswachtwoorden",
     "about.current.storage.notStored.accounts": "Gebruikersaccounts",
-    "about.current.storage.notStored.tracking": "Cookies, analytics of advertenties"
+    "about.current.storage.notStored.tracking": "Cookies, tracking-ID's of advertentiegegevens"
   }
 };
 const translations = {
