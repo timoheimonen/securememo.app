@@ -96,7 +96,7 @@ const LOCAL_TRANSLATIONS = {
     "about.features.selfHosted.title": "सेवा बैकएंड",
     "about.features.selfHosted.description": "यह सेवा अस्थायी एन्क्रिप्टेड मेमो संग्रहण के लिए SQLite के साथ Go बैकएंड का उपयोग करती है।",
     "about.features.privacy.title": "🔒 गोपनीयता प्राथमिक",
-    "about.features.privacy.description": "कोई उपयोगकर्ता खाते नहीं, कोई analytics नहीं और कोई marketing tracking नहीं। सीमित संचालन डेटा केवल सेवा चलाने और सुरक्षित रखने के लिए उपयोग होता है।",
+    "about.features.privacy.description": "कोई उपयोगकर्ता खाते नहीं, कोई विज्ञापन ट्रैकर नहीं, कोई तृतीय-पक्ष analytics नहीं और कोई behavioral profiling नहीं। सीमित aggregate operational metrics केवल सेवा चलाने और सुरक्षित रखने के लिए उपयोग किए जाते हैं।",
     "about.usage.title": "उपयोग कैसे करें",
     "about.usage.create.title": "1. मेमो बनाएं",
     "about.usage.create.description": "\"सुरक्षित मेमो बनाएं\" पर जाएँ और अपना मेमो लिखें। समाप्ति समय चुनें (8 घंटे, 1 दिन, 2 दिन, 1 सप्ताह या अधिकतम 30 दिन)। सफल पढ़ने की पुष्टि या समाप्ति के बाद मेमो हटाए जाते हैं। ब्राउज़र एक यादृच्छिक एन्क्रिप्शन पासवर्ड बनाएगा।",
@@ -266,7 +266,7 @@ const LOCAL_TRANSLATIONS = {
     "about.current.passwords.title": "पासवर्ड आपके डिवाइस पर रहते हैं",
     "about.current.delete.description": "सफल पढ़ने के बाद ब्राउज़र सर्वर के साथ हटाने की पुष्टि करता है। समय समाप्त मेमो अपने आप साफ किए जाते हैं।",
     "about.current.noAccounts.title": "कोई खाता नहीं, कोई ट्रैकिंग नहीं",
-    "about.current.noAccounts.description": "आपको साइन अप करने की आवश्यकता नहीं है. हम कुकीज़, विश्लेषण या विज्ञापनों का उपयोग नहीं करते हैं। हम केवल सेवा चलाने के लिए आवश्यक न्यूनतम डेटा रखते हैं।",
+    "about.current.noAccounts.description": "आपको साइन अप करने की आवश्यकता नहीं है। हम cookies, advertising trackers, third-party analytics या behavioral profiling का उपयोग नहीं करते। हम केवल सेवा चलाने और सुरक्षित रखने के लिए आवश्यक सीमित aggregate operational metrics रखते हैं।",
     "about.current.share.title": "मेमो कैसे साझा करें",
     "about.current.write.title": "यह लिखना",
     "about.current.shareSeparately.title": "अलग से साझा करें",
@@ -337,7 +337,7 @@ const LOCAL_TRANSLATIONS = {
     "about.current.storage.notStored.plaintext": "प्लेनटेक्स्ट मेमो सामग्री",
     "about.current.storage.notStored.passwords": "एन्क्रिप्शन पासवर्ड",
     "about.current.storage.notStored.accounts": "उपयोगकर्ता अकाउंट",
-    "about.current.storage.notStored.tracking": "कुकी, एनालिटिक्स या विज्ञापन"
+    "about.current.storage.notStored.tracking": "Cookies, tracking identifiers या advertising data"
   }
 };
 const translations = {

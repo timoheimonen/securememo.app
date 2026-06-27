@@ -96,7 +96,7 @@ const LOCAL_TRANSLATIONS = {
     "about.features.selfHosted.title": "Backend ng serbisyo",
     "about.features.selfHosted.description": "Gumagamit ang serbisyo ng Go backend na may SQLite para sa pansamantalang imbakan ng mga naka-encrypt na memo.",
     "about.features.privacy.title": "🔒 Privacy ang Unang Prayoridad",
-    "about.features.privacy.description": "Walang user accounts, walang analytics, at walang marketing tracking. Limitadong operational data lang ang ginagamit para patakbuhin at protektahan ang serbisyo.",
+    "about.features.privacy.description": "Walang user accounts, walang advertising trackers, walang third-party analytics, at walang behavioral profiling. Limitadong aggregate operational metrics lang ang ginagamit para patakbuhin at protektahan ang serbisyo.",
     "about.usage.title": "Paano Gamitin",
     "about.usage.create.title": "1. Gumawa ng Memo",
     "about.usage.create.description": "Pumunta sa \"Gumawa ng Ligtas na Memo\" at isulat ang iyong memo. Pumili ng expiry time (8 oras, 1 araw, 2 araw, 1 linggo o hanggang 30 araw). Binubura ang mga memo pagkatapos ng matagumpay na kumpirmasyon ng pagbasa o pag-expire. Gagawa ang browser ng random na password para sa encryption.",
@@ -268,7 +268,7 @@ const LOCAL_TRANSLATIONS = {
     "about.current.share.title": "Paano magbahagi ng memo",
     "about.current.write.title": "Isulat ito",
     "about.current.noAccounts.title": "Walang mga account, walang pagsubaybay",
-    "about.current.noAccounts.description": "Hindi mo kailangang mag-sign up. Hindi kami gumagamit ng cookies, analytics, o ad. Pinapanatili lang namin ang pinakamababang data na kailangan para patakbuhin ang serbisyo.",
+    "about.current.noAccounts.description": "Hindi mo kailangang mag-sign up. Hindi kami gumagamit ng cookies, advertising trackers, third-party analytics, o behavioral profiling. Limitadong aggregate operational metrics lang ang pinapanatili namin na kailangan para patakbuhin at protektahan ang serbisyo.",
     "about.current.shareSeparately.description": "Ipadala ang link at ang password sa iba't ibang channel para sa karagdagang kaligtasan.",
     "about.current.write.description": "I-type ang iyong tala at pumili ng oras ng pag-expire. Ini-encrypt ito ng iyong browser bago i-upload.",
     "about.current.readOnce.title": "Basahin ito ng isang beses",
@@ -337,7 +337,7 @@ const LOCAL_TRANSLATIONS = {
     "about.current.storage.notStored.plaintext": "Plaintext na nilalaman ng memo",
     "about.current.storage.notStored.passwords": "Mga encryption password",
     "about.current.storage.notStored.accounts": "Mga user account",
-    "about.current.storage.notStored.tracking": "Cookies, analytics, o ads"
+    "about.current.storage.notStored.tracking": "Cookies, tracking identifiers, o advertising data"
   }
 };
 const translations = {

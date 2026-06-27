@@ -96,7 +96,7 @@ const LOCAL_TRANSLATIONS = {
     "about.features.selfHosted.title": "Серверная часть сервиса",
     "about.features.selfHosted.description": "Сервис использует backend на Go с SQLite для временного хранения зашифрованных заметок.",
     "about.features.privacy.title": "🔒 Приватность прежде всего",
-    "about.features.privacy.description": "Без учетных записей, аналитики и маркетингового отслеживания. Ограниченные операционные данные используются только для работы и защиты сервиса.",
+    "about.features.privacy.description": "Без учетных записей, рекламных трекеров, сторонней аналитики и поведенческого профилирования. Ограниченные агрегированные операционные метрики используются только для работы и защиты сервиса.",
     "about.usage.title": "Как пользоваться",
     "about.usage.create.title": "1. Создайте заметку",
     "about.usage.create.description": "Перейдите в \"Создать защищённую заметку\" и введите заметку. Выберите срок действия (8 часов, 1 день, 2 дня, 1 неделя или максимум 30 дней). Заметки удаляются после успешного подтверждения чтения или истечения срока. Браузер создаст случайный пароль шифрования.",
@@ -269,7 +269,7 @@ const LOCAL_TRANSLATIONS = {
     "about.current.share.title": "Как поделиться заметкой",
     "about.current.noAccounts.title": "Никаких аккаунтов, никакого отслеживания",
     "about.current.write.description": "Введите заметку и выберите срок действия. Ваш браузер шифрует его перед загрузкой.",
-    "about.current.noAccounts.description": "Вам не нужно регистрироваться. Мы не используем файлы cookie, аналитику или рекламу. Мы храним только минимальные данные, необходимые для запуска службы.",
+    "about.current.noAccounts.description": "Вам не нужно регистрироваться. Мы не используем файлы cookie, рекламные трекеры, стороннюю аналитику или поведенческое профилирование. Мы храним только ограниченные агрегированные операционные метрики, необходимые для работы и защиты сервиса.",
     "about.current.shareSeparately.description": "Отправьте ссылку и пароль по разным каналам для дополнительной безопасности.",
     "about.current.cta.title": "Готовы попробовать?",
     "about.current.readOnce.title": "Прочтите это один раз",
@@ -337,7 +337,7 @@ const LOCAL_TRANSLATIONS = {
     "about.current.storage.notStored.plaintext": "Содержимое заметки в открытом виде",
     "about.current.storage.notStored.passwords": "Пароли шифрования",
     "about.current.storage.notStored.accounts": "Аккаунты пользователей",
-    "about.current.storage.notStored.tracking": "Cookies, аналитика или реклама"
+    "about.current.storage.notStored.tracking": "Cookies, идентификаторы отслеживания или рекламные данные"
   }
 };
 const translations = {

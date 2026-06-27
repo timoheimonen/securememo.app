@@ -96,7 +96,7 @@ const LOCAL_TRANSLATIONS = {
     "about.features.selfHosted.title": "Phần backend của dịch vụ",
     "about.features.selfHosted.description": "Dịch vụ sử dụng backend Go với SQLite để lưu trữ tạm thời các ghi chú đã mã hóa.",
     "about.features.privacy.title": "🔒 Ưu tiên quyền riêng tư",
-    "about.features.privacy.description": "Không có tài khoản người dùng, không analytics và không theo dõi tiếp thị. Dữ liệu vận hành giới hạn chỉ được dùng để chạy và bảo vệ dịch vụ.",
+    "about.features.privacy.description": "Không có tài khoản người dùng, không có trình theo dõi quảng cáo, không có phân tích của bên thứ ba và không lập hồ sơ hành vi. Chỉ sử dụng các chỉ số vận hành tổng hợp giới hạn để chạy và bảo vệ dịch vụ.",
     "about.usage.title": "Cách sử dụng",
     "about.usage.create.title": "1. Tạo ghi chú",
     "about.usage.create.description": "Vào \"Tạo ghi chú bảo mật\" và nhập ghi chú của bạn. Chọn thời hạn (8 giờ, 1 ngày, 2 ngày, 1 tuần hoặc tối đa 30 ngày). Ghi chú được xóa sau khi xác nhận đọc thành công hoặc khi hết hạn. Trình duyệt sẽ tạo một mật khẩu mã hóa ngẫu nhiên.",
@@ -269,7 +269,7 @@ const LOCAL_TRANSLATIONS = {
     "about.current.share.title": "Cách chia sẻ bản ghi nhớ",
     "about.current.write.title": "Viết nó",
     "about.current.write.description": "Nhập ghi chú của bạn và chọn thời gian hết hạn. Trình duyệt của bạn mã hóa nó trước khi tải lên.",
-    "about.current.noAccounts.description": "Bạn không cần phải đăng ký. Chúng tôi không sử dụng cookie, phân tích hoặc quảng cáo. Chúng tôi chỉ giữ dữ liệu tối thiểu cần thiết để chạy dịch vụ.",
+    "about.current.noAccounts.description": "Bạn không cần đăng ký. Chúng tôi không sử dụng cookie, trình theo dõi quảng cáo, phân tích của bên thứ ba hoặc lập hồ sơ hành vi. Chúng tôi chỉ giữ các chỉ số vận hành tổng hợp giới hạn cần thiết để chạy và bảo vệ dịch vụ.",
     "about.current.shareSeparately.description": "Gửi liên kết và mật khẩu qua các kênh khác nhau để tăng thêm sự an toàn.",
     "about.current.readOnce.description": "Người nhận mở liên kết, nhập mật khẩu và giải mã bản ghi nhớ trong trình duyệt của họ.",
     "about.current.shareSeparately.title": "Chia sẻ riêng",
@@ -337,7 +337,7 @@ const LOCAL_TRANSLATIONS = {
     "about.current.storage.notStored.plaintext": "Nội dung memo dạng plaintext",
     "about.current.storage.notStored.passwords": "Mật khẩu mã hóa",
     "about.current.storage.notStored.accounts": "Tài khoản người dùng",
-    "about.current.storage.notStored.tracking": "Cookie, phân tích hoặc quảng cáo"
+    "about.current.storage.notStored.tracking": "Cookie, mã định danh theo dõi hoặc dữ liệu quảng cáo"
   }
 };
 const translations = {

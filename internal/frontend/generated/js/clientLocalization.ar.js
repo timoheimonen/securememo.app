@@ -96,7 +96,7 @@ const LOCAL_TRANSLATIONS = {
     "about.features.selfHosted.title": "واجهة الخدمة الخلفية",
     "about.features.selfHosted.description": "تستخدم الخدمة واجهة خلفية بلغة Go مع SQLite لتخزين المذكرات المشفرة مؤقتا.",
     "about.features.privacy.title": "🔒 الخصوصية أولاً",
-    "about.features.privacy.description": "لا توجد حسابات مستخدمين، ولا تحليلات، ولا تتبع تسويقي. تُستخدم البيانات التشغيلية المحدودة فقط لتشغيل الخدمة وحمايتها.",
+    "about.features.privacy.description": "لا توجد حسابات مستخدمين، ولا متتبعات إعلانية، ولا تحليلات طرف ثالث، ولا ملفات تعريف سلوكية. تُستخدم المقاييس التشغيلية التجميعية المحدودة فقط لتشغيل الخدمة وحمايتها.",
     "about.usage.title": "كيفية الاستخدام",
     "about.usage.create.title": "١. أنشئ مذكرة",
     "about.usage.create.description": "انتقل إلى \"إنشاء مذكرة آمنة\" واكتب مذكرتك. اختر مدة انتهاء الصلاحية (8 ساعات، يوم واحد، يومان، أسبوع واحد أو 30 يوما كحد أقصى). تُحذف المذكرات بعد تأكيد القراءة بنجاح أو عند انتهاء الصلاحية. سيقوم المتصفح بإنشاء كلمة مرور تشفير عشوائية.",
@@ -266,7 +266,7 @@ const LOCAL_TRANSLATIONS = {
     "about.current.delete.title": "تُحذف بعد القراءة أو انتهاء الصلاحية",
     "about.current.delete.description": "بعد قراءة ناجحة، يؤكد المتصفح الحذف مع الخادم. تتم إزالة المذكرات منتهية الصلاحية تلقائياً.",
     "about.current.noAccounts.title": "لا حسابات، لا تتبع",
-    "about.current.noAccounts.description": "لا تحتاج للتسجيل. نحن لا نستخدم ملفات تعريف الارتباط أو التحليلات أو الإعلانات. نحن نحتفظ فقط بالحد الأدنى من البيانات اللازمة لتشغيل الخدمة.",
+    "about.current.noAccounts.description": "لا تحتاج إلى التسجيل. لا نستخدم ملفات تعريف الارتباط أو متتبعات الإعلانات أو تحليلات الطرف الثالث أو ملفات التعريف السلوكية. نحتفظ فقط بمقاييس تشغيلية تجميعية محدودة لازمة لتشغيل الخدمة وحمايتها.",
     "about.current.share.title": "كيفية مشاركة مذكرة",
     "about.current.write.description": "اكتب ملاحظتك واختر وقت انتهاء الصلاحية. يقوم متصفحك بتشفيرها قبل التحميل.",
     "about.current.write.title": "اكتبها",
@@ -337,7 +337,7 @@ const LOCAL_TRANSLATIONS = {
     "about.current.storage.notStored.plaintext": "محتوى المذكرة كنص عادي",
     "about.current.storage.notStored.passwords": "كلمات مرور التشفير",
     "about.current.storage.notStored.accounts": "حسابات المستخدمين",
-    "about.current.storage.notStored.tracking": "ملفات تعريف الارتباط أو التحليلات أو الإعلانات"
+    "about.current.storage.notStored.tracking": "ملفات تعريف الارتباط أو معرفات التتبع أو بيانات الإعلان"
   }
 };
 const translations = {

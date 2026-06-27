@@ -96,7 +96,7 @@ const LOCAL_TRANSLATIONS = {
     "about.features.selfHosted.title": "서비스 백엔드",
     "about.features.selfHosted.description": "이 서비스는 암호화된 메모를 임시로 저장하기 위해 SQLite를 사용하는 Go 백엔드를 사용합니다.",
     "about.features.privacy.title": "🔒 개인정보 보호 우선",
-    "about.features.privacy.description": "사용자 계정, 분석 도구, 마케팅 추적이 없습니다. 제한된 운영 데이터는 서비스 운영과 보호를 위해서만 사용됩니다.",
+    "about.features.privacy.description": "사용자 계정, 광고 추적기, 제3자 분석, 행동 프로파일링이 없습니다. 제한된 집계 운영 지표는 서비스 운영과 보호를 위해서만 사용됩니다.",
     "about.usage.title": "사용 방법",
     "about.usage.create.title": "1. 메모 작성",
     "about.usage.create.description": "\"보안 메모 작성\"로 이동해 메모를 입력하세요. 만료 시간(8시간, 1일, 2일, 1주 또는 최대 30일)을 선택하세요. 메모는 성공적인 읽기 확인 또는 만료 후 삭제됩니다. 브라우저가 임의의 암호화 비밀번호를 생성합니다.",
@@ -266,7 +266,7 @@ const LOCAL_TRANSLATIONS = {
     "about.current.delete.title": "읽은 후 또는 만료 시 삭제",
     "about.current.delete.description": "성공적으로 읽은 후 브라우저가 서버에 삭제를 확인합니다. 만료된 메모는 자동으로 정리됩니다.",
     "about.current.noAccounts.title": "계정 없음, 추적 없음",
-    "about.current.noAccounts.description": "가입할 필요가 없습니다. 우리는 쿠키, 분석 또는 광고를 사용하지 않습니다. 서비스 운영에 필요한 최소한의 데이터만을 보관합니다.",
+    "about.current.noAccounts.description": "가입할 필요가 없습니다. 쿠키, 광고 추적기, 제3자 분석 또는 행동 프로파일링을 사용하지 않습니다. 서비스 운영과 보호에 필요한 제한된 집계 운영 지표만 보관합니다.",
     "about.current.share.title": "메모를 공유하는 방법",
     "about.current.write.title": "쓰다",
     "about.current.shareSeparately.title": "별도로 공유",
@@ -337,7 +337,7 @@ const LOCAL_TRANSLATIONS = {
     "about.current.storage.notStored.plaintext": "평문 메모 내용",
     "about.current.storage.notStored.passwords": "암호화 비밀번호",
     "about.current.storage.notStored.accounts": "사용자 계정",
-    "about.current.storage.notStored.tracking": "쿠키, 분석 또는 광고"
+    "about.current.storage.notStored.tracking": "쿠키, 추적 식별자 또는 광고 데이터"
   }
 };
 const translations = {

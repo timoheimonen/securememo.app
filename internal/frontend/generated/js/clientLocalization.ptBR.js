@@ -96,7 +96,7 @@ const LOCAL_TRANSLATIONS = {
     "about.features.selfHosted.title": "Backend do serviço",
     "about.features.selfHosted.description": "O serviço usa um backend em Go com SQLite para armazenamento temporário de memorandos criptografados.",
     "about.features.privacy.title": "🔒 Privacidade em Primeiro",
-    "about.features.privacy.description": "Sem contas de usuário, sem analytics e sem rastreamento de marketing. Dados operacionais limitados são usados apenas para executar e proteger o serviço.",
+    "about.features.privacy.description": "Sem contas de usuário, sem rastreadores de publicidade, sem analytics de terceiros e sem perfil comportamental. Métricas operacionais agregadas limitadas são usadas apenas para executar e proteger o serviço.",
     "about.usage.title": "Como Usar",
     "about.usage.create.title": "1. Criar um Memo",
     "about.usage.create.description": "Acesse \"Criar Memo Seguro\" e digite seu memorando. Escolha um prazo de expiração (8h, 1 dia, 2 dias, 1 semana ou no máximo 30 dias). Memorandos são excluídos após confirmação de leitura bem-sucedida ou expiração. O navegador gerará uma senha de criptografia aleatória.",
@@ -269,7 +269,7 @@ const LOCAL_TRANSLATIONS = {
     "about.current.noAccounts.title": "Sem contas, sem rastreamento",
     "about.current.write.title": "Escreva",
     "about.current.shareSeparately.description": "Envie o link e a senha por diversos canais para maior segurança.",
-    "about.current.noAccounts.description": "Você não precisa se inscrever. Não usamos cookies, análises ou anúncios. Mantemos apenas os dados mínimos necessários para executar o serviço.",
+    "about.current.noAccounts.description": "Você não precisa se inscrever. Não usamos cookies, rastreadores de publicidade, analytics de terceiros ou perfil comportamental. Mantemos apenas métricas operacionais agregadas limitadas necessárias para executar e proteger o serviço.",
     "about.current.write.description": "Digite sua nota e escolha um prazo de validade. Seu navegador o criptografa antes de fazer o upload.",
     "about.current.readOnce.title": "Leia uma vez",
     "about.current.cta.title": "Pronto para experimentar?",
@@ -337,7 +337,7 @@ const LOCAL_TRANSLATIONS = {
     "about.current.storage.notStored.plaintext": "Conteúdo do memorando em texto claro",
     "about.current.storage.notStored.passwords": "Senhas de criptografia",
     "about.current.storage.notStored.accounts": "Contas de usuário",
-    "about.current.storage.notStored.tracking": "Cookies, analytics ou anúncios"
+    "about.current.storage.notStored.tracking": "Cookies, identificadores de rastreamento ou dados de publicidade"
   }
 };
 const translations = {

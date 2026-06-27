@@ -96,7 +96,7 @@ const LOCAL_TRANSLATIONS = {
     "about.features.selfHosted.title": "Tjenestens backend",
     "about.features.selfHosted.description": "Tjenesten bruker en Go-backend med SQLite for midlertidig lagring av krypterte memoer.",
     "about.features.privacy.title": "🔒 Personvern først",
-    "about.features.privacy.description": "Ingen brukerkontoer, ingen analyseverktøy og ingen markedsføringssporing. Begrensede driftsdata brukes bare til å drive og beskytte tjenesten.",
+    "about.features.privacy.description": "Ingen brukerkontoer, ingen annonsesporere, ingen tredjepartsanalyse og ingen atferdsprofilering. Begrensede aggregerte driftsmålinger brukes bare til å drive og beskytte tjenesten.",
     "about.usage.title": "Slik bruker du tjenesten",
     "about.usage.create.title": "1. Opprett et notat",
     "about.usage.create.description": "Gå til \"Opprett sikkert notat\" og skriv memoet ditt. Velg utløpstid (8 timer, 1 dag, 2 dager, 1 uke eller maksimalt 30 dager). Memoer slettes etter vellykket lesebekreftelse eller utløp. Nettleseren genererer et tilfeldig krypteringspassord.",
@@ -267,7 +267,7 @@ const LOCAL_TRANSLATIONS = {
     "about.current.delete.description": "Etter vellykket lesing bekrefter nettleseren sletting med serveren. Utløpte memoer ryddes automatisk.",
     "about.current.noAccounts.title": "Ingen kontoer, ingen sporing",
     "about.current.share.title": "Hvordan dele et notat",
-    "about.current.noAccounts.description": "Du trenger ikke registrere deg. Vi bruker ikke informasjonskapsler, analyser eller annonser. Vi beholder kun minimumsdataene som trengs for å kjøre tjenesten.",
+    "about.current.noAccounts.description": "Du trenger ikke registrere deg. Vi bruker ikke informasjonskapsler, annonsesporere, tredjepartsanalyse eller atferdsprofilering. Vi lagrer bare begrensede aggregerte driftsmålinger som trengs for å drive og beskytte tjenesten.",
     "about.current.write.title": "Skriv det",
     "about.current.write.description": "Skriv inn notatet ditt og velg en utløpstid. Nettleseren din krypterer den før opplasting.",
     "about.current.readOnce.title": "Les den en gang",
@@ -337,7 +337,7 @@ const LOCAL_TRANSLATIONS = {
     "about.current.storage.notStored.plaintext": "Memoinnhold i klartekst",
     "about.current.storage.notStored.passwords": "Krypteringspassord",
     "about.current.storage.notStored.accounts": "Brukerkontoer",
-    "about.current.storage.notStored.tracking": "Informasjonskapsler, analyse eller annonser"
+    "about.current.storage.notStored.tracking": "Informasjonskapsler, sporingsidentifikatorer eller annonsedata"
   }
 };
 const translations = {

@@ -96,7 +96,7 @@ const LOCAL_TRANSLATIONS = {
     "about.features.selfHosted.title": "แบ็กเอนด์ของบริการ",
     "about.features.selfHosted.description": "บริการนี้ใช้แบ็กเอนด์ Go พร้อม SQLite สำหรับจัดเก็บบันทึกที่เข้ารหัสไว้ชั่วคราว",
     "about.features.privacy.title": "🔒 ความเป็นส่วนตัวมาก่อน",
-    "about.features.privacy.description": "ไม่มีบัญชีผู้ใช้ ไม่มี analytics และไม่มีการติดตามเพื่อการตลาด ข้อมูลปฏิบัติการที่จำกัดใช้เฉพาะเพื่อให้บริการทำงานและปกป้องบริการ",
+    "about.features.privacy.description": "ไม่มีบัญชีผู้ใช้ ไม่มีตัวติดตามโฆษณา ไม่มีการวิเคราะห์จากบุคคลที่สาม และไม่มีการทำโปรไฟล์พฤติกรรม เมตริกการดำเนินงานแบบรวมที่จำกัดใช้เฉพาะเพื่อให้บริการทำงานและปกป้องบริการเท่านั้น",
     "about.usage.title": "วิธีใช้งาน",
     "about.usage.create.title": "1. สร้างบันทึก",
     "about.usage.create.description": "ไปที่ \"สร้างบันทึกลับที่ปลอดภัย\" แล้วพิมพ์บันทึกของคุณ เลือกเวลาหมดอายุ (8 ชั่วโมง, 1 วัน, 2 วัน, 1 สัปดาห์ หรือสูงสุด 30 วัน) บันทึกจะถูกลบหลังจากยืนยันการอ่านสำเร็จหรือหมดอายุ เบราว์เซอร์จะสร้างรหัสผ่านเข้ารหัสแบบสุ่ม",
@@ -267,7 +267,7 @@ const LOCAL_TRANSLATIONS = {
     "about.current.delete.title": "ลบหลังจากอ่านหรือหมดอายุ",
     "about.current.share.title": "วิธีการแบ่งปันบันทึกช่วยจำ",
     "about.current.noAccounts.title": "ไม่มีบัญชี ไม่มีการติดตาม",
-    "about.current.noAccounts.description": "คุณไม่จำเป็นต้องลงทะเบียน เราไม่ใช้คุกกี้ การวิเคราะห์ หรือโฆษณา เราเก็บข้อมูลขั้นต่ำที่จำเป็นในการใช้บริการเท่านั้น",
+    "about.current.noAccounts.description": "คุณไม่จำเป็นต้องลงทะเบียน เราไม่ใช้คุกกี้ ตัวติดตามโฆษณา การวิเคราะห์จากบุคคลที่สาม หรือการทำโปรไฟล์พฤติกรรม เราเก็บเฉพาะเมตริกการดำเนินงานแบบรวมที่จำกัดซึ่งจำเป็นต่อการให้บริการทำงานและปกป้องบริการ",
     "about.current.shareSeparately.description": "ส่งลิงค์และรหัสผ่านผ่านช่องทางต่างๆ เพื่อความปลอดภัยเป็นพิเศษ",
     "about.current.write.description": "พิมพ์บันทึกย่อของคุณและเลือกเวลาหมดอายุ เบราว์เซอร์ของคุณเข้ารหัสก่อนที่จะอัปโหลด",
     "about.current.write.title": "เขียนมัน",
@@ -337,7 +337,7 @@ const LOCAL_TRANSLATIONS = {
     "about.current.storage.notStored.plaintext": "เนื้อหาบันทึกแบบข้อความธรรมดา",
     "about.current.storage.notStored.passwords": "รหัสผ่านการเข้ารหัส",
     "about.current.storage.notStored.accounts": "บัญชีผู้ใช้",
-    "about.current.storage.notStored.tracking": "คุกกี้ การวิเคราะห์ หรือโฆษณา"
+    "about.current.storage.notStored.tracking": "คุกกี้ ตัวระบุการติดตาม หรือข้อมูลโฆษณา"
   }
 };
 const translations = {

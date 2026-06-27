@@ -96,7 +96,7 @@ const LOCAL_TRANSLATIONS = {
     "about.features.selfHosted.title": "Backend usługi",
     "about.features.selfHosted.description": "Usługa używa backendu Go z SQLite do tymczasowego przechowywania zaszyfrowanych notatek.",
     "about.features.privacy.title": "🔒 Prywatność przede wszystkim",
-    "about.features.privacy.description": "Brak kont użytkowników, brak analityki i brak śledzenia marketingowego. Ograniczone dane operacyjne służą wyłącznie do działania i ochrony usługi.",
+    "about.features.privacy.description": "Brak kont użytkowników, trackerów reklamowych, analityki stron trzecich i profilowania behawioralnego. Ograniczone zagregowane metryki operacyjne służą wyłącznie do działania i ochrony usługi.",
     "about.usage.title": "Jak korzystać",
     "about.usage.create.title": "1. Utwórz notatkę",
     "about.usage.create.description": "Przejdź do \"Utwórz bezpieczną notatkę\" i wpisz notatkę. Wybierz czas wygaśnięcia (8 godz., 1 dzień, 2 dni, 1 tydzień lub maksymalnie 30 dni). Notatki są usuwane po udanym potwierdzeniu odczytu lub po wygaśnięciu. Przeglądarka wygeneruje losowe hasło szyfrujące.",
@@ -268,7 +268,7 @@ const LOCAL_TRANSLATIONS = {
     "about.current.noAccounts.title": "Żadnych kont, żadnego śledzenia",
     "about.current.write.title": "Napisz to",
     "about.current.share.title": "Jak udostępnić notatkę",
-    "about.current.noAccounts.description": "Nie musisz się rejestrować. Nie używamy plików cookie, analiz ani reklam. Przechowujemy jedynie minimum danych niezbędnych do uruchomienia usługi.",
+    "about.current.noAccounts.description": "Nie musisz się rejestrować. Nie używamy plików cookie, trackerów reklamowych, analityki stron trzecich ani profilowania behawioralnego. Przechowujemy tylko ograniczone zagregowane metryki operacyjne potrzebne do działania i ochrony usługi.",
     "about.current.write.description": "Wpisz notatkę i wybierz czas wygaśnięcia. Twoja przeglądarka szyfruje go przed przesłaniem.",
     "about.current.shareSeparately.title": "Udostępnij osobno",
     "about.current.readOnce.title": "Przeczytaj to raz",
@@ -337,7 +337,7 @@ const LOCAL_TRANSLATIONS = {
     "about.current.storage.notStored.plaintext": "Treść notatki w plaintext",
     "about.current.storage.notStored.passwords": "Hasła szyfrowania",
     "about.current.storage.notStored.accounts": "Konta użytkowników",
-    "about.current.storage.notStored.tracking": "Cookies, analityka lub reklamy"
+    "about.current.storage.notStored.tracking": "Cookies, identyfikatory śledzące lub dane reklamowe"
   }
 };
 const translations = {

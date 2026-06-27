@@ -96,7 +96,7 @@ const LOCAL_TRANSLATIONS = {
     "about.features.selfHosted.title": "サービスのバックエンド",
     "about.features.selfHosted.description": "このサービスは、暗号化されたメモを一時的に保存するために SQLite を備えた Go バックエンドを使用します。",
     "about.features.privacy.title": "🔒 プライバシー第一",
-    "about.features.privacy.description": "ユーザーアカウント、分析、マーケティング追跡はありません。限定的な運用データは、サービスの運用と保護のためにのみ使用されます。",
+    "about.features.privacy.description": "ユーザーアカウント、広告トラッカー、第三者分析、行動プロファイリングはありません。限定的な集計運用メトリクスは、サービスの運用と保護のためにのみ使用されます。",
     "about.usage.title": "使用方法",
     "about.usage.create.title": "1. メモを作成",
     "about.usage.create.description": "\"セキュアメモを作成\" に移動してメモを入力します。有効期限（8時間、1日、2日、1週間、または最大30日）を選択します。メモは読み取り確認が成功した後、または期限切れ後に削除されます。ブラウザがランダムな暗号化パスワードを生成します。",
@@ -266,7 +266,7 @@ const LOCAL_TRANSLATIONS = {
     "about.current.delete.title": "読了または期限切れ後に削除",
     "about.current.delete.description": "正常に読まれた後、ブラウザがサーバーに削除を確認します。期限切れのメモは自動的にクリーンアップされます。",
     "about.current.noAccounts.title": "アカウントも追跡もありません",
-    "about.current.noAccounts.description": "サインアップする必要はありません。私たちは Cookie、分析、広告を使用しません。サービスの実行に必要な最小限のデータのみを保持します。",
+    "about.current.noAccounts.description": "サインアップは不要です。Cookie、広告トラッカー、第三者分析、行動プロファイリングは使用しません。サービスの運用と保護に必要な限定的な集計運用メトリクスのみを保持します。",
     "about.current.share.title": "メモを共有する方法",
     "about.current.write.title": "書いてください",
     "about.current.write.description": "メモを入力し、有効期限を選択します。ブラウザはアップロード前に暗号化します。",
@@ -337,7 +337,7 @@ const LOCAL_TRANSLATIONS = {
     "about.current.storage.notStored.plaintext": "平文のメモ内容",
     "about.current.storage.notStored.passwords": "暗号化パスワード",
     "about.current.storage.notStored.accounts": "ユーザーアカウント",
-    "about.current.storage.notStored.tracking": "Cookie、分析、広告"
+    "about.current.storage.notStored.tracking": "Cookie、追跡識別子、広告データ"
   }
 };
 const translations = {

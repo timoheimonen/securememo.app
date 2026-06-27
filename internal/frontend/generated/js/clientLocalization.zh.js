@@ -96,7 +96,7 @@ const LOCAL_TRANSLATIONS = {
     "about.features.selfHosted.title": "服务后端",
     "about.features.selfHosted.description": "该服务使用带 SQLite 的 Go 后端来临时存储加密备忘录。",
     "about.features.privacy.title": "🔒 隐私优先",
-    "about.features.privacy.description": "无需用户账户，没有分析工具，也没有营销跟踪。有限的运行数据仅用于运行和保护服务。",
+    "about.features.privacy.description": "无需用户账户，没有广告跟踪器，没有第三方分析，也没有行为画像。有限的汇总运行指标仅用于运行和保护服务。",
     "about.usage.title": "如何使用",
     "about.usage.create.title": "1. 创建备忘录",
     "about.usage.create.description": "前往 \"创建安全备忘录\" 并输入备忘录。选择过期时间（8 小时、1 天、2 天、1 周或最多 30 天）。备忘录会在成功读取确认后或到期后删除。浏览器会生成随机加密密码。",
@@ -269,7 +269,7 @@ const LOCAL_TRANSLATIONS = {
     "about.current.write.title": "写下来",
     "about.current.share.title": "如何共享备忘录",
     "about.current.write.description": "输入您的注释并选择到期时间。您的浏览器在上传之前对其进行加密。",
-    "about.current.noAccounts.description": "您无需注册。我们不使用 cookie、分析或广告。我们只保留运行服务所需的最少数据。",
+    "about.current.noAccounts.description": "您无需注册。我们不使用 Cookie、广告跟踪器、第三方分析或行为画像。我们只保留运行和保护服务所需的有限汇总运行指标。",
     "about.current.shareSeparately.title": "单独分享",
     "about.current.readOnce.title": "读一遍",
     "about.current.cta.title": "准备好尝试了吗？",
@@ -337,7 +337,7 @@ const LOCAL_TRANSLATIONS = {
     "about.current.storage.notStored.plaintext": "明文备忘录内容",
     "about.current.storage.notStored.passwords": "加密密码",
     "about.current.storage.notStored.accounts": "用户账户",
-    "about.current.storage.notStored.tracking": "Cookie、分析或广告"
+    "about.current.storage.notStored.tracking": "Cookie、跟踪标识符或广告数据"
   }
 };
 const translations = {

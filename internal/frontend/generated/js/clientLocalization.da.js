@@ -96,7 +96,7 @@ const LOCAL_TRANSLATIONS = {
     "about.features.selfHosted.title": "Tjenestens backend",
     "about.features.selfHosted.description": "Tjenesten bruger en Go-backend med SQLite til midlertidig lagring af krypterede memoer.",
     "about.features.privacy.title": "🔒 Privatliv først",
-    "about.features.privacy.description": "Ingen brugerkonti, ingen analyseværktøjer og ingen markedsføringssporing. Begrænsede driftsdata bruges kun til at drive og beskytte tjenesten.",
+    "about.features.privacy.description": "Ingen brugerkonti, ingen annoncetrackere, ingen tredjepartsanalyse og ingen adfærdsprofilering. Begrænsede aggregerede driftsmålinger bruges kun til at drive og beskytte tjenesten.",
     "about.usage.title": "Sådan bruges",
     "about.usage.create.title": "1. Opret et notat",
     "about.usage.create.description": "Gå til \"Opret Sikkert Notat\" og skriv dit memo. Vælg en udløbstid (8 timer, 1 dag, 2 dage, 1 uge eller højst 30 dage). Memoer slettes efter bekræftet læsning eller udløb. Browseren genererer en tilfældig krypteringsadgangskode.",
@@ -265,7 +265,7 @@ const LOCAL_TRANSLATIONS = {
     "about.current.passwords.title": "Adgangskoder bliver på din enhed",
     "about.current.delete.title": "Slettet efter læsning eller udløb",
     "about.current.delete.description": "Efter en vellykket læsning bekræfter browseren sletningen over for serveren. Udløbne memoer ryddes automatisk op.",
-    "about.current.noAccounts.description": "Du behøver ikke tilmelde dig. Vi bruger ikke cookies, analyser eller annoncer. Vi opbevarer kun de minimumsdata, der er nødvendige for at køre tjenesten.",
+    "about.current.noAccounts.description": "Du behøver ikke tilmelde dig. Vi bruger ikke cookies, annoncetrackere, tredjepartsanalyse eller adfærdsprofilering. Vi gemmer kun begrænsede aggregerede driftsmålinger, der er nødvendige for at drive og beskytte tjenesten.",
     "about.current.noAccounts.title": "Ingen konti, ingen sporing",
     "about.current.share.title": "Sådan deler du et notat",
     "about.current.write.title": "Skriv det",
@@ -337,7 +337,7 @@ const LOCAL_TRANSLATIONS = {
     "about.current.storage.notStored.plaintext": "Memoindhold i klartekst",
     "about.current.storage.notStored.passwords": "Krypteringsadgangskoder",
     "about.current.storage.notStored.accounts": "Brugerkonti",
-    "about.current.storage.notStored.tracking": "Cookies, analyse eller annoncer"
+    "about.current.storage.notStored.tracking": "Cookies, sporingsidentifikatorer eller annoncedata"
   }
 };
 const translations = {
