@@ -896,13 +896,20 @@ button[type="submit"]:disabled {
   line-height: 1.7;
 }
 
+.page-hero-actions {
+  justify-content: center;
+  margin-top: 26px;
+}
+
 .info-section,
+.storage-section,
 .steps-section,
 .page-cta {
   margin-bottom: 96px;
 }
 
 .info-section h2,
+.storage-section h2,
 .steps-section h2,
 .page-cta h2 {
   font-size: 1.6rem;
@@ -914,7 +921,7 @@ button[type="submit"]:disabled {
 
 .info-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 24px;
 }
 
@@ -943,6 +950,80 @@ button[type="submit"]:disabled {
   color: var(--color-muted);
   line-height: 1.75;
   font-size: 1rem;
+}
+
+.storage-panel {
+  display: grid;
+  grid-template-columns: minmax(220px, 0.72fr) minmax(0, 1.28fr);
+  gap: 32px;
+  align-items: start;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 34px;
+  box-shadow: var(--shadow-sm);
+}
+
+.storage-copy h2 {
+  text-align: left;
+  margin-bottom: 14px;
+}
+
+.storage-copy p {
+  color: var(--color-muted);
+  line-height: 1.75;
+  font-size: 1rem;
+}
+
+.storage-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.storage-card {
+  background: var(--color-surface-soft);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 24px;
+}
+
+.storage-card-strong {
+  border-color: var(--color-border-strong);
+}
+
+.storage-card h3 {
+  font-size: 1.1rem;
+  margin-bottom: 14px;
+  color: var(--color-ink);
+  font-weight: 700;
+}
+
+.storage-card ul {
+  list-style: none;
+}
+
+.storage-card li {
+  position: relative;
+  padding-left: 22px;
+  margin-bottom: 10px;
+  color: var(--color-muted);
+  line-height: 1.55;
+}
+
+.storage-card li:last-child {
+  margin-bottom: 0;
+}
+
+.storage-card li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.72em;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--color-ink);
 }
 
 .steps-list {
@@ -1013,6 +1094,8 @@ button[type="submit"]:disabled {
 
 @media (max-width: 768px) {
   .info-grid,
+  .storage-panel,
+  .storage-grid,
   .steps-list {
     grid-template-columns: 1fr;
   }
@@ -1022,14 +1105,25 @@ button[type="submit"]:disabled {
   }
 
   .info-section,
+  .storage-section,
   .steps-section,
   .page-cta {
     margin-bottom: 72px;
   }
 
   .info-card,
+  .storage-panel,
+  .storage-card,
   .steps-list li {
     padding: 24px;
+  }
+
+  .storage-copy h2 {
+    text-align: center;
+  }
+
+  .storage-copy p {
+    text-align: center;
   }
 }
 
