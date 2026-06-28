@@ -7,6 +7,7 @@ securememo.app is a hosted service for sharing encrypted memos with automatic de
 - Client-side encryption with AES-256-GCM and PBKDF2 key derivation.
 - Random browser-generated passwords that are never sent to the server.
 - Delete-on-read flow with a client-side deletion token.
+- Sender revoke link for deleting an unread memo before expiry.
 - Expiry options: 8 hours, 1 day, 2 days, 1 week, or 30 days.
 - SQLite storage with WAL mode and automatic cleanup.
 - Strict security headers, input validation, timing delays, and generic access-denied responses.
@@ -83,6 +84,7 @@ internal/frontend/           Embedded generated frontend assets
 - `POST /api/create-memo`
 - `POST /api/read-memo?id=<memo_id>`
 - `POST /api/confirm-delete`
+- `POST /api/revoke-memo`
 
 The public browser flow uses these endpoints. Expired memo cleanup runs internally at startup and hourly after that.
 
@@ -92,7 +94,7 @@ For the detailed technical model, see [docs/security-model.md](docs/security-mod
 
 - Plaintext memo content never leaves the browser.
 - The memo password is generated and displayed only in the browser.
-- The server stores ciphertext, expiry time, memo ID, and a deletion-token hash.
+- The server stores ciphertext, expiry time, memo ID, a deletion-token hash, and a sender revoke-token hash.
 - Failed or invalid reads use generic responses to avoid memo enumeration.
 - API rate limits use short and long windows per client IP. Normal API actions are limited to 10/minute and 100/hour; failed access attempts are limited to 10/minute and 20/hour.
 - Expired memo cleanup runs at startup and hourly after that.

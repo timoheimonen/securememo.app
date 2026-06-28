@@ -7,6 +7,13 @@ function bytesToBase64(bytes) {
   return btoa(binary);
 }
 
+function bytesToBase64URL(bytes) {
+  return bytesToBase64(bytes)
+    .replace(/\+/g, '-')
+    .replace(/\//g, '_')
+    .replace(/=+$/g, '');
+}
+
 function base64ToBytes(input) {
   return Uint8Array.from(atob(input), c => c.charCodeAt(0));
 }
@@ -28,6 +35,10 @@ function generatePassword() {
     password += chars[value % chars.length];
   }
   return password;
+}
+
+function generateOwnerDeleteToken() {
+  return bytesToBase64URL(crypto.getRandomValues(new Uint8Array(32)));
 }
 
 async function hashDeletionToken(token) {
@@ -99,9 +110,11 @@ async function decryptMessage(ciphertext, password, config) {
 async function encryptMemo(message, config) {
   const password = generatePassword();
   const deletionToken = generatePassword();
+  const ownerDeleteToken = generateOwnerDeleteToken();
   const encryptedMessage = await encryptMessage({ message: message, deletionToken: deletionToken }, password, config);
   const deletionTokenHash = await hashDeletionToken(deletionToken);
-  return { encryptedMessage, password, deletionTokenHash };
+  const ownerDeletionTokenHash = await hashDeletionToken(ownerDeleteToken);
+  return { encryptedMessage, password, deletionTokenHash, ownerDeleteToken, ownerDeletionTokenHash };
 }
 
 self.addEventListener('message', async (event) => {

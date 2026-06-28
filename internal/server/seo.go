@@ -91,6 +91,9 @@ func rewriteSEO(input, locale, pathWithoutLocale, publicOrigin string) string {
 	if isEnglishOnlyLegalPage(pathWithoutLocale) {
 		return rewriteEnglishOnlyLegalSEO(input, pathWithoutLocale, publicOrigin)
 	}
+	if isEnglishOnlyPage(pathWithoutLocale) {
+		return rewriteEnglishOnlyNoIndexSEO(input, pathWithoutLocale, publicOrigin)
+	}
 	page, ok := seoPages[pathWithoutLocale]
 	if !ok {
 		return input
@@ -122,6 +125,15 @@ func rewriteSEO(input, locale, pathWithoutLocale, publicOrigin string) string {
 }
 
 func rewriteEnglishOnlyLegalSEO(input, pathWithoutLocale, publicOrigin string) string {
+	canonical := publicOrigin + buildLocalizedPath("en", pathWithoutLocale)
+	out := replaceProperty(input, "og:url", canonical)
+	out = replaceCanonical(out, canonical)
+	out = rewriteRobotsMeta(out, true)
+	out = rewriteAlternateLinks(out, "en", pathWithoutLocale, publicOrigin, false)
+	return out
+}
+
+func rewriteEnglishOnlyNoIndexSEO(input, pathWithoutLocale, publicOrigin string) string {
 	canonical := publicOrigin + buildLocalizedPath("en", pathWithoutLocale)
 	out := replaceProperty(input, "og:url", canonical)
 	out = replaceCanonical(out, canonical)

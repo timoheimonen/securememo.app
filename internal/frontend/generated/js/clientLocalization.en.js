@@ -331,9 +331,11 @@ const TRANSLATIONS = {
     "about.current.storage.stored.expiry": "Expiry time",
     "about.current.storage.stored.memoId": "Random memo ID",
     "about.current.storage.stored.deletionHash": "Deletion-token hash",
+    "about.current.storage.stored.revokeHash": "Sender revoke-token hash",
     "about.current.storage.notStored.title": "Not stored",
     "about.current.storage.notStored.plaintext": "Plaintext memo contents",
     "about.current.storage.notStored.passwords": "Encryption passwords",
+    "about.current.storage.notStored.rawTokens": "Raw deletion or revoke tokens",
     "about.current.storage.notStored.accounts": "User accounts",
     "about.current.storage.notStored.tracking": "Cookies, tracking identifiers, or advertising data"
   }

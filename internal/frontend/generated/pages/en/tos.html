@@ -124,7 +124,7 @@
     <main class="main-content">
         <div class="legal-section">
             <h1>Terms of Service</h1>
-            <p class="legal-meta"><strong>Last updated: June 18, 2026</strong></p>
+            <p class="legal-meta"><strong>Last updated: June 28, 2026</strong></p>
             
             <div class="legal-toc">
                 <h2>Table of Contents</h2>
@@ -170,7 +170,7 @@
                 <ul>
                     <li>Memo content is encrypted in the browser before upload.</li>
                     <li>The memo password is generated and handled in the browser. The server does not receive or store it.</li>
-                    <li>The server stores the encrypted memo payload, memo ID, expiration time, and deletion-token hash.</li>
+                    <li>The server stores the encrypted memo payload, memo ID, expiration time, deletion-token hash, and sender revoke-token hash.</li>
                     <li>Expiration options are 8 hours, 24 hours, 48 hours, 1 week, and 30 days.</li>
                     <li>After successful decryption, the browser attempts to confirm deletion with the server.</li>
                     <li>Expired memos are removed by automatic cleanup jobs.</li>
@@ -211,7 +211,7 @@
                     <li>The Service does not use accounts, cookies, advertising trackers, or behavioral profiling.</li>
                     <li>The Service processes encrypted memo data and minimal metadata needed to provide automatic deletion.</li>
                     <li>The Service uses short-lived rate-limit data and Prometheus-compatible operational metrics to protect and monitor the server.</li>
-                    <li>Operational metrics may be scraped into the operator's Prometheus-compatible monitoring system and visualized in Grafana. These metrics use low-cardinality labels such as method, normalized route group, status code, and coarse country code; they do not include memo contents, passwords, deletion tokens, memo IDs, full URLs, query strings, IP addresses, user agents, cookies, session IDs, email addresses, or persistent user identifiers.</li>
+                    <li>Operational metrics may be scraped into the operator's Prometheus-compatible monitoring system and visualized in Grafana. These metrics use low-cardinality labels such as method, normalized route group, status code, and coarse country code; they do not include memo contents, passwords, deletion tokens, sender revoke tokens, memo IDs, full URLs, query strings, IP addresses, user agents, cookies, session IDs, email addresses, or persistent user identifiers.</li>
                     <li>The Service is behind Cloudflare for traffic routing, TLS, security, and operational metrics.</li>
                     <li>Cloudflare and hosting infrastructure may process technical request and network data needed to provide and protect the Service.</li>
                 </ul>

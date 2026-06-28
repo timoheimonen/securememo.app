@@ -10,6 +10,7 @@ import (
 var (
 	memoIDRe            = regexp.MustCompile(`^[A-Za-z0-9\-_]{40}$`)
 	deletionTokenRe     = regexp.MustCompile(`^[A-Za-z0-9]+$`)
+	ownerDeleteTokenRe  = regexp.MustCompile(`^[A-Za-z0-9\-_]{43}$`)
 	deletionTokenHashRe = regexp.MustCompile(`^[A-Za-z0-9+/=]+$`)
 	localeRe            = regexp.MustCompile(`^[a-zA-Z0-9_-]+$`)
 )
@@ -20,6 +21,10 @@ func ValidMemoID(memoID string) bool {
 
 func ValidDeletionToken(token string) bool {
 	return len(token) >= 32 && len(token) <= 64 && deletionTokenRe.MatchString(token)
+}
+
+func ValidOwnerDeleteToken(token string) bool {
+	return ownerDeleteTokenRe.MatchString(token)
 }
 
 func ValidDeletionTokenHash(hash string) bool {

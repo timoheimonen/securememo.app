@@ -19,7 +19,7 @@ import (
 	"github.com/timoheimonen/securememo/internal/store"
 )
 
-const assetVersion = "20260627c"
+const assetVersion = "20260628a"
 
 var clientLocalizationAssetRe = regexp.MustCompile(`^/js/clientLocalization\.([A-Za-z0-9_-]+)\.js$`)
 
@@ -78,6 +78,7 @@ func (s *Server) routes() {
 	s.mux.HandleFunc("/api/create-memo", s.memo.Create)
 	s.mux.HandleFunc("/api/read-memo", s.memo.Read)
 	s.mux.HandleFunc("/api/confirm-delete", s.memo.ConfirmDelete)
+	s.mux.HandleFunc("/api/revoke-memo", s.memo.Revoke)
 	s.mux.HandleFunc("/", s.handle)
 }
 
@@ -122,6 +123,8 @@ func (s *Server) serveGeneratedAsset(w http.ResponseWriter, r *http.Request, url
 		return s.serveFile(w, r, "generated/js/create-memo.js", "application/javascript; charset=utf-8", cacheStatic(true))
 	case "/js/read-memo.js":
 		return s.serveFile(w, r, "generated/js/read-memo.js", "application/javascript; charset=utf-8", cacheStatic(true))
+	case "/js/revoke-memo.js":
+		return s.serveFile(w, r, "generated/js/revoke-memo.js", "application/javascript; charset=utf-8", cacheStatic(true))
 	case "/js/memo-crypto-worker.js":
 		return s.serveFile(w, r, "generated/js/memo-crypto-worker.js", "application/javascript; charset=utf-8", cacheStatic(true))
 	case "/js/clientLocalization.js":
@@ -187,7 +190,7 @@ func (s *Server) servePage(w http.ResponseWriter, r *http.Request) {
 		http.Redirect(w, r, s.cfg.PublicOrigin+redirectPath, http.StatusMovedPermanently)
 		return
 	}
-	if isEnglishOnlyLegalPage(info.PathWithoutLocale) && info.Locale != "en" {
+	if isEnglishOnlyPage(info.PathWithoutLocale) && info.Locale != "en" {
 		http.Redirect(w, r, s.cfg.PublicOrigin+buildLocalizedPath("en", info.PathWithoutLocale), http.StatusMovedPermanently)
 		return
 	}
@@ -297,6 +300,8 @@ func pageFilename(pathWithoutLocale string) string {
 		return "create-memo.html"
 	case "/read-memo.html":
 		return "read-memo.html"
+	case "/revoke-memo.html":
+		return "revoke-memo.html"
 	case "/tos.html":
 		return "tos.html"
 	case "/privacy.html":
@@ -325,6 +330,7 @@ func addAssetVersions(input string) string {
 		{`src="/js/memo-crypto-config.js"`, `src="/js/memo-crypto-config.js?v=` + assetVersion + `"`},
 		{`src="/js/create-memo.js"`, `src="/js/create-memo.js?v=` + assetVersion + `"`},
 		{`src="/js/read-memo.js"`, `src="/js/read-memo.js?v=` + assetVersion + `"`},
+		{`src="/js/revoke-memo.js"`, `src="/js/revoke-memo.js?v=` + assetVersion + `"`},
 		{"/favicon.ico", "/favicon.ico?v=" + assetVersion},
 		{"/apple-touch-icon.png", "/apple-touch-icon.png?v=" + assetVersion},
 		{"/android-chrome-192x192.png", "/android-chrome-192x192.png?v=" + assetVersion},
@@ -336,6 +342,7 @@ func addAssetVersions(input string) string {
 	}
 	out = regexp.MustCompile(`/js/create-memo\.js\?locale=([A-Za-z0-9_-]+)`).ReplaceAllString(out, `/js/create-memo.js?locale=$1&v=`+assetVersion)
 	out = regexp.MustCompile(`/js/read-memo\.js\?locale=([A-Za-z0-9_-]+)`).ReplaceAllString(out, `/js/read-memo.js?locale=$1&v=`+assetVersion)
+	out = regexp.MustCompile(`/js/revoke-memo\.js\?locale=([A-Za-z0-9_-]+)`).ReplaceAllString(out, `/js/revoke-memo.js?locale=$1&v=`+assetVersion)
 	return out
 }
 

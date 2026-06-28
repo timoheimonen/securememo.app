@@ -72,7 +72,7 @@ func TestRenderedSEOHeadUsesLocalizedMetadata(t *testing.T) {
 
 func TestNoIndexPagesAreMarkedButCrawlable(t *testing.T) {
 	app := newTestServer(t)
-	for _, path := range []string{"/en/create-memo.html", "/en/read-memo.html", "/en/tos.html", "/en/privacy.html"} {
+	for _, path := range []string{"/en/create-memo.html", "/en/read-memo.html", "/en/revoke-memo.html", "/en/tos.html", "/en/privacy.html"} {
 		rec := httptest.NewRecorder()
 		req := httptest.NewRequest(http.MethodGet, path, nil)
 
@@ -98,7 +98,7 @@ func TestSitemapOnlyIncludesIndexablePages(t *testing.T) {
 		t.Fatalf("GET /sitemap.xml status = %d, want %d", rec.Code, http.StatusOK)
 	}
 	body := rec.Body.String()
-	for _, path := range []string{"/create-memo.html", "/read-memo.html", "/tos.html", "/privacy.html"} {
+	for _, path := range []string{"/create-memo.html", "/read-memo.html", "/revoke-memo.html", "/tos.html", "/privacy.html"} {
 		if strings.Contains(body, path) {
 			t.Fatalf("sitemap includes noindex page %s", path)
 		}
@@ -134,6 +134,29 @@ func TestLegalPagesAreOnlyServedInEnglish(t *testing.T) {
 		{"/fi/privacy.html", "https://securememo.app/en/privacy.html"},
 		{"/zh/tos.html", "https://securememo.app/en/tos.html"},
 		{"/zh/privacy.html", "https://securememo.app/en/privacy.html"},
+	} {
+		rec := httptest.NewRecorder()
+		req := httptest.NewRequest(http.MethodGet, tc.path, nil)
+
+		app.ServeHTTP(rec, req)
+
+		if rec.Code != http.StatusMovedPermanently {
+			t.Fatalf("GET %s status = %d, want %d", tc.path, rec.Code, http.StatusMovedPermanently)
+		}
+		if got := rec.Header().Get("Location"); got != tc.location {
+			t.Fatalf("GET %s Location = %q, want %q", tc.path, got, tc.location)
+		}
+	}
+}
+
+func TestRevokePageIsOnlyServedInEnglishForNow(t *testing.T) {
+	app := newTestServer(t)
+	for _, tc := range []struct {
+		path     string
+		location string
+	}{
+		{"/fi/revoke-memo.html", "https://securememo.app/en/revoke-memo.html"},
+		{"/zh/revoke-memo.html", "https://securememo.app/en/revoke-memo.html"},
 	} {
 		rec := httptest.NewRecorder()
 		req := httptest.NewRequest(http.MethodGet, tc.path, nil)
@@ -261,6 +284,24 @@ func TestMemoCryptoConfigAssetIsServed(t *testing.T) {
 	}
 }
 
+func TestRevokeMemoScriptAssetIsServed(t *testing.T) {
+	app := newTestServer(t)
+	rec := httptest.NewRecorder()
+	req := httptest.NewRequest(http.MethodGet, "/js/revoke-memo.js?v=test", nil)
+
+	app.ServeHTTP(rec, req)
+
+	if rec.Code != http.StatusOK {
+		t.Fatalf("GET /js/revoke-memo.js status = %d, want %d", rec.Code, http.StatusOK)
+	}
+	if got := rec.Header().Get("Content-Type"); got != "application/javascript; charset=utf-8" {
+		t.Fatalf("content type = %q, want application/javascript; charset=utf-8", got)
+	}
+	if !strings.Contains(rec.Body.String(), "/api/revoke-memo") {
+		t.Fatal("revoke script asset does not contain expected API endpoint")
+	}
+}
+
 func TestEnglishLocalizationBundleAssetIsServed(t *testing.T) {
 	app := newTestServer(t)
 	rec := httptest.NewRecorder()
@@ -356,6 +397,12 @@ func TestMemoScriptsAreVersioned(t *testing.T) {
 			scripts: []string{
 				`/js/memo-crypto-config.js?v=` + assetVersion,
 				`/js/read-memo.js?v=` + assetVersion,
+			},
+		},
+		{
+			path: "/en/revoke-memo.html",
+			scripts: []string{
+				`/js/revoke-memo.js?v=` + assetVersion,
 			},
 		},
 	} {

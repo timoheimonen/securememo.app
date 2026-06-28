@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Revoke Secure Memo - Delete an Unread Memo | securememo.app</title>
+    <meta name="description" content="Use a private revoke link to delete an encrypted secure memo before it is read.">
+    <meta name="keywords" content="revoke secure memo, delete encrypted memo, secure note deletion, private memo revoke link">
+    <meta property="og:title" content="Revoke Secure Memo - Delete an Unread Memo">
+    <meta property="og:description" content="Delete an encrypted secure memo before it is read using your private revoke link.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://securememo.app/en/revoke-memo.html">
+    <meta property="og:image" content="https://securememo.app/android-chrome-512x512.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Revoke Secure Memo - Delete an Unread Memo">
+    <meta name="twitter:description" content="Delete an encrypted secure memo before it is read.">
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="/android-chrome-512x512.png">
+    <link rel="canonical" href="{{PUBLIC_ORIGIN}}/en/revoke-memo.html">
+    <script src="/js/revoke-memo.js" nonce="{{CSP_NONCE}}" defer></script>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="/en" class="nav-logo">securememo.app</a>
+
+            <button class="hamburger" type="button" aria-label="Toggle navigation menu" aria-expanded="false">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="/en" class="nav-link">Home</a></li>
+                <li><a href="/en/about.html" class="nav-link">About</a></li>
+                <li><a href="/en/create-memo.html" class="nav-link">Create Secure Memo</a></li>
+                <li class="language-dropdown">
+                    <button class="language-toggle nav-link" aria-expanded="false" aria-haspopup="true">
+                        English
+                    </button>
+                    <div class="language-menu">
+                        <a href="/en/revoke-memo.html" class="language-item active" title="English">English</a>
+                    </div>
+                </li>
+            </ul>
+
+            <div class="nav-overlay"></div>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <div class="memo-container">
+            <div class="memo-card">
+                <h1>Revoke Secure Memo</h1>
+                <p class="memo-description">This private revoke link can delete the memo before it is read. Deletion is permanent and cannot be undone.</p>
+
+                <div id="confirmContent" class="memo-content hidden">
+                    <h3>Delete this memo?</h3>
+                    <div class="memo-warning">
+                        <p>Before you continue:</p>
+                        <ul>
+                            <li>This deletes the memo immediately if it has not already been read, expired, or deleted</li>
+                            <li>Deletion is permanent and the memo cannot be recovered</li>
+                            <li>The recipient will no longer be able to read the memo</li>
+                            <li>This request sends only the memo ID and revoke token to the server. It does not send the memo password or plaintext memo contents.</li>
+                        </ul>
+                    </div>
+                    <div class="memo-actions">
+                        <button type="button" class="btn btn-primary" id="revokeButton">Delete Memo</button>
+                        <a href="/en/create-memo.html" class="btn btn-secondary">Create New Memo</a>
+                    </div>
+                    <div id="revokeLoadingIndicator" class="loading-spinner hidden">
+                        <div class="spinner"></div>
+                        <p>Deleting memo...</p>
+                    </div>
+                </div>
+
+                <div id="successContent" class="memo-content hidden">
+                    <h3>Memo Deleted</h3>
+                    <p>The memo was revoked successfully. The recipient can no longer read it.</p>
+                    <div class="memo-actions">
+                        <a href="/en/create-memo.html" class="btn btn-primary">Create New Memo</a>
+                        <a href="/en" class="btn btn-secondary">Go Home</a>
+                    </div>
+                </div>
+
+                <div id="errorContent" class="error-content hidden">
+                    <h3>Invalid Revoke Link</h3>
+                    <p id="errorMessage"></p>
+                    <div class="memo-actions">
+                        <a href="/en/create-memo.html" class="btn btn-primary">Create New Memo</a>
+                        <a href="/en" class="btn btn-secondary">Go Home</a>
+                    </div>
+                </div>
+
+                <div id="statusMessage" class="message"></div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p><a href="https://github.com/timoheimonen/securememo.app" target="_blank" rel="noopener noreferrer">View source code at GitHub</a> | <a href="/en/tos.html">Terms of Service</a> | <a href="/en/privacy.html">Privacy Notice</a></p>
+        <p class="footer-tagline">No tracking, no ads, no nonsense.</p>
+    </footer>
+
+    <script src="/js/common.js" type="module" nonce="{{CSP_NONCE}}" defer></script>
+</body>
+</html>

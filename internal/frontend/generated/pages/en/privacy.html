@@ -124,7 +124,7 @@
     <main class="main-content">
         <div class="legal-section">
             <h1>Privacy Notice for securememo.app</h1>
-            <p class="legal-meta"><strong>Last updated: June 18, 2026</strong></p>
+            <p class="legal-meta"><strong>Last updated: June 28, 2026</strong></p>
             
             <div class="legal-toc">
                 <h2>Table of Contents</h2>
@@ -164,11 +164,12 @@
                 <h2>3. How the Service Works</h2>
                 <ul>
                     <li>You type a memo in your browser.</li>
-                    <li>Your browser generates a random password and a deletion token.</li>
+                    <li>Your browser generates a random password, a deletion token, and a sender revoke token.</li>
                     <li>Your browser encrypts the memo and deletion token using Web Crypto API encryption before upload.</li>
-                    <li>The server stores only the encrypted memo payload, a memo ID, an expiration time, and a hash of the deletion token.</li>
+                    <li>The server stores only the encrypted memo payload, a memo ID, an expiration time, a hash of the deletion token, and a hash of the sender revoke token.</li>
                     <li>The password is shown only in your browser. It is not sent to or stored by securememo.app.</li>
                     <li>The recipient must receive both the memo URL and the password. They should be shared through separate channels.</li>
+                    <li>The sender revoke token is shown only inside the private revoke link. It is sent to the server only when the sender confirms revocation.</li>
                     <li>After the memo is successfully decrypted in the recipient's browser, the browser sends the deletion token to confirm deletion.</li>
                     <li>Memos are also deleted after expiration. Available expiration options are 8 hours, 24 hours, 48 hours, 1 week, and 30 days.</li>
                 </ul>
@@ -179,14 +180,14 @@
                 <p>We process only the information needed to operate, protect, and maintain the service:</p>
                 <ul>
                     <li><strong>Encrypted memo data:</strong> the encrypted memo payload created in your browser.</li>
-                    <li><strong>Memo metadata:</strong> memo ID, creation time, expiration time, and deletion-token hash.</li>
+                    <li><strong>Memo metadata:</strong> memo ID, creation time, expiration time, deletion-token hash, and sender revoke-token hash.</li>
                     <li><strong>Rate-limit data:</strong> short-lived abuse-prevention counters keyed by hashed client IP address, action, and time window.</li>
                     <li><strong>Operational metrics:</strong> Prometheus-compatible aggregate technical counters and histograms exposed on a separate private metrics listener for operator monitoring. Metrics include HTTP request counts, response byte totals, request duration histograms by method, normalized route group, status code, and coarse country code from Cloudflare's <code>CF-IPCountry</code> header, plus lifetime totals of successfully created and read memos.</li>
                     <li><strong>Request metadata:</strong> limited technical metadata may be processed by the application or infrastructure to route requests, apply security controls, and diagnose operational issues. This can include IP address, time, requested path, response status, user agent, origin, and referrer headers.</li>
                     <li><strong>Contact data:</strong> if you contact us, we process your email address and message content so we can respond.</li>
                 </ul>
                 <p>Operational metrics may be scraped by a Prometheus-compatible monitoring system and visualized in Grafana in the operator's monitoring environment. They are used to understand whether the server is working correctly, monitor capacity, and detect abuse patterns. They are not browser-side analytics and are not used to track individual visitors across time or sites.</p>
-                <p>Operational metrics deliberately do not include IP addresses, user agents, cookies, session IDs, full URLs, query strings, memo IDs, memo contents, memo passwords, deletion tokens, email addresses, or persistent user identifiers. Route labels are normalized; for example, a read URL with a memo ID query string is counted only as <code>/api/read-memo</code>.</p>
+                <p>Operational metrics deliberately do not include IP addresses, user agents, cookies, session IDs, full URLs, query strings, memo IDs, memo contents, memo passwords, deletion tokens, sender revoke tokens, email addresses, or persistent user identifiers. Route labels are normalized; for example, a read URL with a memo ID query string is counted only as <code>/api/read-memo</code>.</p>
             </div>
 
             <div class="features-detail" id="information-not-collected">
@@ -197,7 +198,7 @@
                     <li>We do not create user accounts.</li>
                     <li>We do not use cookies.</li>
                     <li>We do not use tracking pixels, advertising tags, behavioral analytics, fingerprinting scripts, or third-party marketing beacons.</li>
-                    <li>We do not include memo IDs, full URLs, query strings, IP addresses, user agents, passwords, deletion tokens, or memo contents in operational metrics.</li>
+                    <li>We do not include memo IDs, full URLs, query strings, IP addresses, user agents, passwords, deletion tokens, sender revoke tokens, or memo contents in operational metrics.</li>
                     <li>We do not sell, rent, or trade personal data.</li>
                     <li>We do not use memo data or operational metrics for advertising or profiling.</li>
                 </ul>
@@ -260,8 +261,8 @@
                 <h2>11. Security</h2>
                 <ul>
                     <li>Memos are encrypted in the browser before upload.</li>
-                    <li>The server stores encrypted payloads and deletion metadata, not plaintext memo content or passwords.</li>
-                    <li>Deletion confirmation uses a deletion token stored inside the encrypted memo payload and a server-side hash for verification.</li>
+                    <li>The server stores encrypted payloads and deletion metadata, not plaintext memo content, passwords, or raw deletion tokens.</li>
+                    <li>Deletion confirmation uses a deletion token stored inside the encrypted memo payload and a server-side hash for verification. Sender revocation uses a separate sender revoke token and server-side hash.</li>
                     <li>The service uses security headers, origin checks, input validation, size limits, timing protections, and rate limiting.</li>
                     <li>SQLite secure-delete mode is enabled to reduce recoverable deleted content in the database file.</li>
                 </ul>

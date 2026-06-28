@@ -59,9 +59,10 @@ func (h Handler) Create(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	var req struct {
-		EncryptedMessage  string      `json:"encryptedMessage"`
-		ExpiryHours       interface{} `json:"expiryHours"`
-		DeletionTokenHash string      `json:"deletionTokenHash"`
+		EncryptedMessage       string      `json:"encryptedMessage"`
+		ExpiryHours            interface{} `json:"expiryHours"`
+		DeletionTokenHash      string      `json:"deletionTokenHash"`
+		OwnerDeletionTokenHash string      `json:"ownerDeletionTokenHash"`
 	}
 	if !decodeJSON(w, r, &req) {
 		return
@@ -81,6 +82,10 @@ func (h Handler) Create(w http.ResponseWriter, r *http.Request) {
 		delayedJSON(w, http.StatusBadRequest, map[string]string{"error": "Invalid deletion token."})
 		return
 	}
+	if !security.ValidDeletionTokenHash(req.OwnerDeletionTokenHash) {
+		delayedJSON(w, http.StatusBadRequest, map[string]string{"error": "Invalid owner deletion token."})
+		return
+	}
 	hours, _ := strconv.Atoi(expiryHours)
 	expiryTime := time.Now().Add(time.Duration(hours) * time.Hour).Unix()
 
@@ -89,7 +94,7 @@ func (h Handler) Create(w http.ResponseWriter, r *http.Request) {
 		delayedJSON(w, http.StatusInternalServerError, map[string]string{"error": "Could not generate memo ID."})
 		return
 	}
-	if err := h.Store.CreateMemo(r.Context(), memoID, encryptedMessage, expiryTime, req.DeletionTokenHash); err != nil {
+	if err := h.Store.CreateMemo(r.Context(), memoID, encryptedMessage, expiryTime, req.DeletionTokenHash, req.OwnerDeletionTokenHash); err != nil {
 		delayedJSON(w, http.StatusInternalServerError, map[string]string{"error": "Database error."})
 		return
 	}
@@ -190,6 +195,57 @@ func (h Handler) ConfirmDelete(w http.ResponseWriter, r *http.Request) {
 	delayedJSON(w, http.StatusOK, map[string]interface{}{
 		"success": true,
 		"message": "Memo deleted successfully",
+	})
+}
+
+func (h Handler) Revoke(w http.ResponseWriter, r *http.Request) {
+	if !h.requirePOST(w, r) {
+		return
+	}
+	var req struct {
+		MemoID           string `json:"memoId"`
+		OwnerDeleteToken string `json:"ownerDeleteToken"`
+	}
+	if !decodeJSON(w, r, &req) {
+		return
+	}
+	if !security.ValidMemoID(req.MemoID) || !security.ValidOwnerDeleteToken(req.OwnerDeleteToken) {
+		h.rateLimitOrAccessDenied(w, r)
+		return
+	}
+
+	row, err := h.Store.ReadActiveMemo(r.Context(), req.MemoID)
+	if errors.Is(err, store.ErrNotFound) {
+		h.rateLimitOrAccessDenied(w, r)
+		return
+	}
+	if err != nil {
+		delayedJSON(w, http.StatusInternalServerError, map[string]string{"error": "Database read error."})
+		return
+	}
+	if row.OwnerDeletionTokenHash == "" {
+		h.rateLimitOrAccessDenied(w, r)
+		return
+	}
+
+	hash := hashDeletionToken(req.OwnerDeleteToken)
+	if !security.ConstantTimeEqual(hash, row.OwnerDeletionTokenHash) {
+		h.rateLimitOrAccessDenied(w, r)
+		return
+	}
+
+	deleted, err := h.Store.DeleteMemo(r.Context(), req.MemoID)
+	if err != nil {
+		delayedJSON(w, http.StatusInternalServerError, map[string]string{"error": "Memo deletion error."})
+		return
+	}
+	if !deleted {
+		h.accessDenied(w)
+		return
+	}
+	delayedJSON(w, http.StatusOK, map[string]interface{}{
+		"success": true,
+		"message": "Memo revoked successfully",
 	})
 }
 

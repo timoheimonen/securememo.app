@@ -28,12 +28,31 @@ function generatePassword() {
   return password;
 }
 
+function bytesToBase64(bytes) {
+  const chunkSize = 0x8000;
+  let binary = '';
+  for (let i = 0; i < bytes.length; i += chunkSize) {
+    binary += String.fromCharCode(...bytes.subarray(i, i + chunkSize));
+  }
+  return btoa(binary);
+}
+
+function bytesToBase64URL(bytes) {
+  return bytesToBase64(bytes)
+    .replace(/\+/g, '-')
+    .replace(/\//g, '_')
+    .replace(/=+$/g, '');
+}
+
+function generateOwnerDeleteToken() {
+  return bytesToBase64URL(crypto.getRandomValues(new Uint8Array(32)));
+}
+
 async function hashDeletionToken(token) {
   const encoder = new TextEncoder();
   const data = encoder.encode(token);
   const hashBuffer = await crypto.subtle.digest('SHA-256', data);
-  const hashArray = Array.from(new Uint8Array(hashBuffer));
-  return btoa(String.fromCharCode(...hashArray));
+  return bytesToBase64(new Uint8Array(hashBuffer));
 }
 
 async function encryptMessage(payload, password) {
@@ -151,10 +170,12 @@ async function encryptMemo(message) {
   } catch (error) {
     const password = generatePassword();
     const deletionToken = generatePassword();
+    const ownerDeleteToken = generateOwnerDeleteToken();
     const payload = { message: message, deletionToken: deletionToken };
     const encryptedMessage = await encryptMessage(payload, password);
     const deletionTokenHash = await hashDeletionToken(deletionToken);
-    return { encryptedMessage, password, deletionTokenHash };
+    const ownerDeletionTokenHash = await hashDeletionToken(ownerDeleteToken);
+    return { encryptedMessage, password, deletionTokenHash, ownerDeleteToken, ownerDeletionTokenHash };
   }
 }
 
@@ -184,7 +205,8 @@ document.getElementById('memoForm').addEventListener('submit', async (e) => {
     const requestBody = {
       encryptedMessage: memoCrypto.encryptedMessage,
       expiryHours,
-      deletionTokenHash: memoCrypto.deletionTokenHash
+      deletionTokenHash: memoCrypto.deletionTokenHash,
+      ownerDeletionTokenHash: memoCrypto.ownerDeletionTokenHash
     };
     const response = await fetch('/api/create-memo', {
       method: 'POST',
@@ -199,8 +221,10 @@ document.getElementById('memoForm').addEventListener('submit', async (e) => {
     if (response.ok) {
       const currentLocale = window.location.pathname.split('/')[1] || 'en';
       const memoUrl = window.location.origin + '/' + currentLocale + '/read-memo.html?id=' + result.memoId;
+      const ownerDeleteUrl = window.location.origin + '/en/revoke-memo.html?id=' + result.memoId + '#token=' + encodeURIComponent(memoCrypto.ownerDeleteToken);
       document.getElementById('memoUrl').value = memoUrl;
       document.getElementById('memoPassword').value = memoCrypto.password;
+      document.getElementById('ownerDeleteUrl').value = ownerDeleteUrl;
       showElement('result');
       hideElement('memoForm');
       document.getElementById('message').value = '';
@@ -284,6 +308,34 @@ document.getElementById('copyPassword').addEventListener('click', async () => {
   } catch (err) {
     passwordInput.select();
     passwordInput.setSelectionRange(0, 99999);
+    showMessage(t('msg.copyManual'), 'warning');
+  }
+});
+
+document.getElementById('copyOwnerDeleteUrl').addEventListener('click', async () => {
+  const ownerDeleteUrlInput = document.getElementById('ownerDeleteUrl');
+  const ownerDeleteUrl = ownerDeleteUrlInput.value;
+  try {
+    if (navigator.clipboard && window.isSecureContext) {
+      await navigator.clipboard.writeText(ownerDeleteUrl);
+      showMessage('Revoke link copied to clipboard!', 'success');
+      const copyBtn = document.getElementById('copyOwnerDeleteUrl');
+      const originalText = copyBtn.textContent;
+      copyBtn.textContent = t('btn.copied');
+      copyBtn.classList.add('btn-copied');
+      setTimeout(() => {
+        copyBtn.textContent = originalText;
+        copyBtn.classList.remove('btn-copied');
+      }, 2000);
+    } else {
+      ownerDeleteUrlInput.select();
+      ownerDeleteUrlInput.setSelectionRange(0, 99999);
+      document.execCommand('copy');
+      showMessage('Revoke link copied to clipboard!', 'success');
+    }
+  } catch (err) {
+    ownerDeleteUrlInput.select();
+    ownerDeleteUrlInput.setSelectionRange(0, 99999);
     showMessage(t('msg.copyManual'), 'warning');
   }
 });
