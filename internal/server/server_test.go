@@ -149,25 +149,33 @@ func TestLegalPagesAreOnlyServedInEnglish(t *testing.T) {
 	}
 }
 
-func TestRevokePageIsOnlyServedInEnglishForNow(t *testing.T) {
+func TestRevokePageIsLocalized(t *testing.T) {
 	app := newTestServer(t)
 	for _, tc := range []struct {
-		path     string
-		location string
+		path         string
+		localizedH1  string
+		canonicalURL string
 	}{
-		{"/fi/revoke-memo.html", "https://securememo.app/en/revoke-memo.html"},
-		{"/zh/revoke-memo.html", "https://securememo.app/en/revoke-memo.html"},
+		{"/fi/revoke-memo.html", "Peruuta suojattu muistio", "https://securememo.app/fi/revoke-memo.html"},
+		{"/zh/revoke-memo.html", "撤销安全备忘录", "https://securememo.app/zh/revoke-memo.html"},
 	} {
 		rec := httptest.NewRecorder()
 		req := httptest.NewRequest(http.MethodGet, tc.path, nil)
 
 		app.ServeHTTP(rec, req)
 
-		if rec.Code != http.StatusMovedPermanently {
-			t.Fatalf("GET %s status = %d, want %d", tc.path, rec.Code, http.StatusMovedPermanently)
+		if rec.Code != http.StatusOK {
+			t.Fatalf("GET %s status = %d, want %d", tc.path, rec.Code, http.StatusOK)
 		}
-		if got := rec.Header().Get("Location"); got != tc.location {
-			t.Fatalf("GET %s Location = %q, want %q", tc.path, got, tc.location)
+		body := rec.Body.String()
+		if !strings.Contains(body, tc.localizedH1) {
+			t.Fatalf("GET %s missing localized revoke heading %q", tc.path, tc.localizedH1)
+		}
+		if !strings.Contains(body, `<meta name="robots" content="noindex,follow">`) {
+			t.Fatalf("GET %s missing noindex robots meta", tc.path)
+		}
+		if !strings.Contains(body, fmt.Sprintf(`<link rel="canonical" href="%s">`, tc.canonicalURL)) {
+			t.Fatalf("GET %s missing localized canonical %q", tc.path, tc.canonicalURL)
 		}
 	}
 }

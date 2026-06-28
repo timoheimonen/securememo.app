@@ -92,7 +92,19 @@ async function encryptMessage(payload, password) {
   return config.prefix + btoa(String.fromCharCode(...result));
 }
 
-const t = (key) => (typeof window.t === 'function' ? window.t(key) : key);
+const fallbackText = Object.freeze({
+  'msg.revokeLinkCopied': 'Revoke link copied to clipboard!'
+});
+
+const t = (key) => {
+  if (typeof window.t === 'function') {
+    const translated = window.t(key);
+    if (translated && translated !== key) {
+      return translated;
+    }
+  }
+  return fallbackText[key] || key;
+};
 
 function showElement(id, display = 'block') {
   const element = document.getElementById(id);
@@ -221,7 +233,7 @@ document.getElementById('memoForm').addEventListener('submit', async (e) => {
     if (response.ok) {
       const currentLocale = window.location.pathname.split('/')[1] || 'en';
       const memoUrl = window.location.origin + '/' + currentLocale + '/read-memo.html?id=' + result.memoId;
-      const ownerDeleteUrl = window.location.origin + '/en/revoke-memo.html?id=' + result.memoId + '#token=' + encodeURIComponent(memoCrypto.ownerDeleteToken);
+      const ownerDeleteUrl = window.location.origin + '/' + currentLocale + '/revoke-memo.html?id=' + result.memoId + '#token=' + encodeURIComponent(memoCrypto.ownerDeleteToken);
       document.getElementById('memoUrl').value = memoUrl;
       document.getElementById('memoPassword').value = memoCrypto.password;
       document.getElementById('ownerDeleteUrl').value = ownerDeleteUrl;
@@ -318,7 +330,7 @@ document.getElementById('copyOwnerDeleteUrl').addEventListener('click', async ()
   try {
     if (navigator.clipboard && window.isSecureContext) {
       await navigator.clipboard.writeText(ownerDeleteUrl);
-      showMessage('Revoke link copied to clipboard!', 'success');
+      showMessage(t('msg.revokeLinkCopied'), 'success');
       const copyBtn = document.getElementById('copyOwnerDeleteUrl');
       const originalText = copyBtn.textContent;
       copyBtn.textContent = t('btn.copied');
@@ -331,7 +343,7 @@ document.getElementById('copyOwnerDeleteUrl').addEventListener('click', async ()
       ownerDeleteUrlInput.select();
       ownerDeleteUrlInput.setSelectionRange(0, 99999);
       document.execCommand('copy');
-      showMessage('Revoke link copied to clipboard!', 'success');
+      showMessage(t('msg.revokeLinkCopied'), 'success');
     }
   } catch (err) {
     ownerDeleteUrlInput.select();
@@ -348,4 +360,8 @@ function showMessage(message, type) {
   setTimeout(() => {
     messageDiv.style.display = 'none';
   }, 5000);
+}
+
+function showTranslatedMessage(key, type) {
+  showMessage(t(key), type);
 }

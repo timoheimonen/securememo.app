@@ -74,7 +74,7 @@ func isEnglishOnlyLegalPage(pathname string) bool {
 }
 
 func isEnglishOnlyPage(pathname string) bool {
-	return isEnglishOnlyLegalPage(pathname) || pathname == "/revoke-memo.html"
+	return isEnglishOnlyLegalPage(pathname)
 }
 
 func localeRedirectPath(pathname string) string {

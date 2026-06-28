@@ -85,6 +85,15 @@ var seoPages = map[string]seoPage{
 			"schema.read.featureList.privacyFocused",
 		},
 	},
+	"/revoke-memo.html": {
+		Prefix:      "revoke",
+		Description: "page.revoke.description",
+		OGTitle:     "page.revoke.title",
+		OGDesc:      "page.revoke.ogDescription",
+		TwitterDesc: "page.revoke.twitterDescription",
+		Keywords:    "page.revoke.keywords",
+		NoIndex:     true,
+	},
 }
 
 func rewriteSEO(input, locale, pathWithoutLocale, publicOrigin string) string {
