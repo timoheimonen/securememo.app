@@ -2,6 +2,7 @@ package memo
 
 import (
 	"context"
+	"errors"
 	"net/http"
 	"net/http/httptest"
 	"path/filepath"
@@ -74,7 +75,7 @@ func TestReadRejectsAmbiguousMemoIDQuery(t *testing.T) {
 	defer db.Close()
 
 	memoID := strings.Repeat("A", 40)
-	if err := db.CreateMemo(context.Background(), memoID, "ciphertext", time.Now().Add(time.Hour).Unix(), "hash"); err != nil {
+	if err := db.CreateMemo(context.Background(), memoID, "ciphertext", time.Now().Add(time.Hour).Unix(), "hash", "owner-hash"); err != nil {
 		t.Fatalf("create memo: %v", err)
 	}
 	handler := Handler{
@@ -124,5 +125,72 @@ func TestClientIPUsesForwardedHeadersWhenExplicitlyTrusted(t *testing.T) {
 
 	if got := handler.clientIP(req); got != "203.0.113.10" {
 		t.Fatalf("clientIP() = %q, want CF-Connecting-IP", got)
+	}
+}
+
+func TestRevokeDeletesMemoWithValidOwnerToken(t *testing.T) {
+	db, err := store.OpenSQLite(filepath.Join(t.TempDir(), "securememo.sqlite"))
+	if err != nil {
+		t.Fatalf("open sqlite: %v", err)
+	}
+	defer db.Close()
+
+	memoID := strings.Repeat("A", 40)
+	ownerToken := strings.Repeat("B", 43)
+	if err := db.CreateMemo(context.Background(), memoID, "ciphertext", time.Now().Add(time.Hour).Unix(), "deletion-hash", hashDeletionToken(ownerToken)); err != nil {
+		t.Fatalf("create memo: %v", err)
+	}
+	handler := Handler{
+		Config: config.Config{AllowedOrigins: []string{"https://securememo.app"}},
+		Store:  db,
+	}
+
+	req := httptest.NewRequest(http.MethodPost, "/api/revoke-memo", strings.NewReader(`{"memoId":"`+memoID+`","ownerDeleteToken":"`+ownerToken+`"}`))
+	req.RemoteAddr = "203.0.113.10:12345"
+	req.Header.Set("Origin", "https://securememo.app")
+	req.Header.Set("Content-Type", "application/json")
+	rec := httptest.NewRecorder()
+
+	handler.Revoke(rec, req)
+
+	if rec.Code != http.StatusOK {
+		t.Fatalf("revoke status = %d, want %d; body=%s", rec.Code, http.StatusOK, rec.Body.String())
+	}
+	if _, err := db.ReadActiveMemo(context.Background(), memoID); !errors.Is(err, store.ErrNotFound) {
+		t.Fatalf("memo still readable after revoke, err=%v", err)
+	}
+}
+
+func TestRevokeRejectsWrongOwnerToken(t *testing.T) {
+	db, err := store.OpenSQLite(filepath.Join(t.TempDir(), "securememo.sqlite"))
+	if err != nil {
+		t.Fatalf("open sqlite: %v", err)
+	}
+	defer db.Close()
+
+	memoID := strings.Repeat("A", 40)
+	ownerToken := strings.Repeat("B", 43)
+	wrongToken := strings.Repeat("C", 43)
+	if err := db.CreateMemo(context.Background(), memoID, "ciphertext", time.Now().Add(time.Hour).Unix(), "deletion-hash", hashDeletionToken(ownerToken)); err != nil {
+		t.Fatalf("create memo: %v", err)
+	}
+	handler := Handler{
+		Config: config.Config{AllowedOrigins: []string{"https://securememo.app"}},
+		Store:  db,
+	}
+
+	req := httptest.NewRequest(http.MethodPost, "/api/revoke-memo", strings.NewReader(`{"memoId":"`+memoID+`","ownerDeleteToken":"`+wrongToken+`"}`))
+	req.RemoteAddr = "203.0.113.10:12345"
+	req.Header.Set("Origin", "https://securememo.app")
+	req.Header.Set("Content-Type", "application/json")
+	rec := httptest.NewRecorder()
+
+	handler.Revoke(rec, req)
+
+	if rec.Code != http.StatusNotFound {
+		t.Fatalf("revoke status = %d, want %d; body=%s", rec.Code, http.StatusNotFound, rec.Body.String())
+	}
+	if _, err := db.ReadActiveMemo(context.Background(), memoID); err != nil {
+		t.Fatalf("memo should remain readable after wrong revoke token: %v", err)
 	}
 }

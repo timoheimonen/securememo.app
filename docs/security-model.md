@@ -47,7 +47,7 @@ The main trust boundary is between the browser and the server.
 
 The browser is trusted to:
 
-- Generate the memo password and deletion token.
+- Generate the memo password, deletion token, and sender revoke token.
 - Encrypt plaintext before upload.
 - Decrypt ciphertext after a user provides the memo password.
 - Send the deletion token back to the server after successful decryption.
@@ -56,7 +56,7 @@ The server is trusted to:
 
 - Store only encrypted memo payloads and deletion metadata.
 - Enforce memo ID validation, expiry, rate limits, and origin checks.
-- Delete memos when presented with the correct deletion token.
+- Delete memos when presented with the correct deletion token or sender revoke token.
 - Periodically remove expired memos.
 
 The server is not trusted with plaintext memo contents or memo passwords during
@@ -71,8 +71,10 @@ When a user creates a memo, the browser:
 1. Reads the plaintext memo from the form.
 2. Generates a random memo password.
 3. Generates a random deletion token.
-4. Creates an encrypted payload containing the memo text and deletion token.
-5. Uploads the encrypted payload, expiry setting, and deletion-token hash to the
+4. Generates a random sender revoke token.
+5. Creates an encrypted payload containing the memo text and deletion token.
+6. Uploads the encrypted payload, expiry setting, deletion-token hash, and
+   sender revoke-token hash to the
    server.
 
 The server generates a random memo ID and stores:
@@ -81,22 +83,30 @@ The server generates a random memo ID and stores:
 - Encrypted payload.
 - Expiry timestamp.
 - Hash of the deletion token.
+- Hash of the sender revoke token.
 
 Current memo IDs are 40-character URL-safe random strings.
 
-The server does not receive the plaintext memo, memo password, or raw deletion
-token during creation.
+The server does not receive the plaintext memo, memo password, raw deletion
+token, or raw sender revoke token during creation.
 
 ### 2. Sharing
 
-The browser displays two values to the sender:
+The browser displays three values to the sender:
 
 - Memo URL, containing the memo ID.
 - Memo password, generated separately from the URL.
+- Revoke URL, containing the memo ID in the query string and the sender revoke
+  token in the URL fragment.
 
 The password should be shared through a different channel from the URL. If the
 same attacker obtains both the memo URL and the memo password before deletion or
 expiry, the attacker can decrypt the memo.
+
+The revoke URL should be kept private by the sender. Anyone who has both the memo
+ID and the sender revoke token can delete the unread memo. The revoke token is
+placed in the URL fragment so it is not sent to the server during normal page
+loading; the browser sends it only when the sender confirms revocation.
 
 ### 3. Reading
 
@@ -120,7 +130,18 @@ If the token is valid, the server deletes the memo.
 If the deletion confirmation fails due to a transient error, the browser retries
 the deletion request a small number of times.
 
-### 5. Expiry Cleanup
+### 5. Sender Revocation
+
+The sender can delete an unread memo by opening the private revoke URL and
+confirming deletion. The browser reads the sender revoke token from the URL
+fragment, removes the fragment from the visible URL, and sends the memo ID plus
+raw sender revoke token to the server.
+
+The server hashes the provided sender revoke token and compares it with the
+stored sender revoke-token hash using constant-time comparison. If the token is
+valid and the memo is still active, the server deletes the memo.
+
+### 6. Expiry Cleanup
 
 Each memo has an expiry timestamp selected at creation time. Expired memos are no
 longer returned by the read endpoint. A cleanup process removes expired memos at
@@ -186,13 +207,15 @@ The server stores memo records in SQLite. Stored memo data includes:
 - Encrypted message payload.
 - Expiry timestamp.
 - Deletion-token hash.
+- Sender revoke-token hash.
 
-The server does not store plaintext memo contents, memo passwords, or raw
-deletion tokens.
+The server does not store plaintext memo contents, memo passwords, raw deletion
+tokens, or raw sender revoke tokens.
 
 The database is still sensitive. A database disclosure exposes ciphertext,
-expiry data, deletion-token hashes, and rate-limit state. Confidentiality of memo
-contents depends on the secrecy and strength of the memo password.
+expiry data, deletion-token hashes, sender revoke-token hashes, and rate-limit
+state. Confidentiality of memo contents depends on the secrecy and strength of
+the memo password.
 
 ## Delete-on-Read Semantics
 

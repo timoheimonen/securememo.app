@@ -209,7 +209,7 @@ func buildLanguageMenu(activeLocale, pathWithoutLocale string) string {
 	var out strings.Builder
 	out.WriteString(`<div class="language-menu">`)
 	locales := supportedLocales
-	if isEnglishOnlyLegalPage(pathWithoutLocale) {
+	if isEnglishOnlyPage(pathWithoutLocale) {
 		locales = []string{"en"}
 		activeLocale = "en"
 	}

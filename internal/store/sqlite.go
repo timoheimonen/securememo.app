@@ -18,9 +18,10 @@ type SQLiteStore struct {
 }
 
 type Memo struct {
-	ID                string
-	EncryptedMessage  string
-	DeletionTokenHash string
+	ID                     string
+	EncryptedMessage       string
+	DeletionTokenHash      string
+	OwnerDeletionTokenHash string
 }
 
 type CleanupResult struct {
@@ -82,7 +83,8 @@ CREATE TABLE IF NOT EXISTS memos (
     encrypted_message TEXT NOT NULL,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
     expiry_time INTEGER,
-    deletion_token_hash TEXT
+    deletion_token_hash TEXT,
+    owner_deletion_token_hash TEXT
 );
 
 CREATE INDEX IF NOT EXISTS idx_memos_memo_id ON memos(memo_id);
@@ -104,7 +106,10 @@ CREATE TABLE IF NOT EXISTS app_stats (
     updated_at INTEGER NOT NULL
 );
 `)
-	return err
+	if err != nil {
+		return err
+	}
+	return s.ensureColumn(ctx, "memos", "owner_deletion_token_hash", "TEXT")
 }
 
 func (s *SQLiteStore) IncrementAppStat(ctx context.Context, key string) error {
@@ -169,23 +174,24 @@ func (s *SQLiteStore) MemoExists(ctx context.Context, memoID string) (bool, erro
 	return true, nil
 }
 
-func (s *SQLiteStore) CreateMemo(ctx context.Context, memoID, encryptedMessage string, expiryTime int64, deletionTokenHash string) error {
+func (s *SQLiteStore) CreateMemo(ctx context.Context, memoID, encryptedMessage string, expiryTime int64, deletionTokenHash, ownerDeletionTokenHash string) error {
 	_, err := s.db.ExecContext(ctx, `
-INSERT INTO memos (memo_id, encrypted_message, expiry_time, deletion_token_hash)
-VALUES (?, ?, ?, ?)`, memoID, encryptedMessage, expiryTime, deletionTokenHash)
+INSERT INTO memos (memo_id, encrypted_message, expiry_time, deletion_token_hash, owner_deletion_token_hash)
+VALUES (?, ?, ?, ?, ?)`, memoID, encryptedMessage, expiryTime, deletionTokenHash, ownerDeletionTokenHash)
 	return err
 }
 
 func (s *SQLiteStore) ReadActiveMemo(ctx context.Context, memoID string) (Memo, error) {
 	var memo Memo
 	err := s.db.QueryRowContext(ctx, `
-SELECT memo_id, encrypted_message, deletion_token_hash
+SELECT memo_id, encrypted_message, deletion_token_hash, owner_deletion_token_hash
 FROM memos
 WHERE memo_id = ?
 AND (expiry_time IS NULL OR expiry_time > unixepoch('now'))`, memoID).Scan(
 		&memo.ID,
 		&memo.EncryptedMessage,
 		&memo.DeletionTokenHash,
+		&memo.OwnerDeletionTokenHash,
 	)
 	if errors.Is(err, sql.ErrNoRows) {
 		return Memo{}, ErrNotFound
@@ -293,4 +299,37 @@ WHERE key = ?`, next, now, key)
 		return RateLimitResult{}, err
 	}
 	return RateLimitResult{Limited: false, Count: next, Remaining: max(0, limit-next)}, nil
+}
+
+func (s *SQLiteStore) ensureColumn(ctx context.Context, tableName, columnName, columnType string) error {
+	if tableName != "memos" || columnName != "owner_deletion_token_hash" || columnType != "TEXT" {
+		return errors.New("unsupported migration column")
+	}
+
+	rows, err := s.db.QueryContext(ctx, `PRAGMA table_info(memos)`)
+	if err != nil {
+		return err
+	}
+	defer rows.Close()
+
+	for rows.Next() {
+		var cid int
+		var name string
+		var typeName string
+		var notNull int
+		var defaultValue sql.NullString
+		var pk int
+		if err := rows.Scan(&cid, &name, &typeName, &notNull, &defaultValue, &pk); err != nil {
+			return err
+		}
+		if name == columnName {
+			return rows.Err()
+		}
+	}
+	if err := rows.Err(); err != nil {
+		return err
+	}
+
+	_, err = s.db.ExecContext(ctx, `ALTER TABLE memos ADD COLUMN owner_deletion_token_hash TEXT`)
+	return err
 }

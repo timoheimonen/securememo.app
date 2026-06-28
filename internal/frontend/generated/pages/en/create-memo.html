@@ -179,11 +179,21 @@
                         <small class="form-help">This is the encryption password. Share it separately from the URL. It is not saved on our servers and cannot be recovered after leaving this page.</small>
                     </div>
 
+                    <div class="memo-owner-delete-section">
+                        <label for="ownerDeleteUrl">Revoke Link (keep this private):</label>
+                        <div class="url-copy-container">
+                            <input type="text" id="ownerDeleteUrl" readonly onclick="this.select(); document.execCommand('copy'); showTranslatedMessage('msg.revokeLinkCopied', 'success');">
+                            <button type="button" id="copyOwnerDeleteUrl" class="btn btn-primary">Copy Revoke Link</button>
+                        </div>
+                        <small class="form-help">Use this private link to delete the memo before it is read. It is shown only once and cannot be recovered after leaving this page.</small>
+                    </div>
+
                     <div class="memo-warning">
                         <p>Important:</p>
                         <ul>
                             <li>The memo will be deleted after being read or when the expiry time is reached</li>
                             <li>Share the URL and password separately for better security</li>
+                            <li>Keep the revoke link private; anyone with it can delete this memo before it is read</li>
                             <li>The recipient needs both the URL and password to access the memo</li>
                             <li>This page will be cleared when you navigate away</li>
                         </ul>

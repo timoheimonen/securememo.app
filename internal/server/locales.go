@@ -73,6 +73,10 @@ func isEnglishOnlyLegalPage(pathname string) bool {
 	}
 }
 
+func isEnglishOnlyPage(pathname string) bool {
+	return isEnglishOnlyLegalPage(pathname)
+}
+
 func localeRedirectPath(pathname string) string {
 	if strings.HasPrefix(pathname, "/api/") ||
 		strings.HasPrefix(pathname, "/js/") ||
