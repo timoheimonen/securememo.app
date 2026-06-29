@@ -163,11 +163,10 @@ The password is displayed to the sender but is not sent to the server.
 
 ## Key Derivation
 
-The browser derives an AES key from the memo password using PBKDF2 with
-SHA-256, a per-memo random salt, and the current configured iteration count.
-Newly created memos currently use 3,500,000 PBKDF2 iterations. The read path can
-also try the previous 2,200,000-iteration setting for compatibility with older
-encrypted payloads.
+The browser derives an AES key from the memo password using the only supported
+memo crypto configuration, v1. Version 1 uses PBKDF2 with SHA-256, a per-memo
+random salt, and 3,500,000 iterations. Versioned payloads outside v1 fail
+decryption.
 
 PBKDF2 primarily protects weaker user-provided passwords from fast offline
 guessing. In securememo.app, the generated memo password already has high
