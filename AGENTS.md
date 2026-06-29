@@ -16,3 +16,4 @@ Privacy comes first, always.
 - Keep changes small and aligned with the existing Go and embedded-frontend structure.
 - Preserve the client-side encryption model: plaintext memo content must never leave the browser.
 - Run `go test ./...` after behavior changes.
+- Keep `CHANGELOG.md` entries versioned with the same identifier as `assetVersion`; release-visible changes should update both together.
