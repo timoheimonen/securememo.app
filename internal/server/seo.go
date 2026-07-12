@@ -43,7 +43,8 @@ var seoPages = map[string]seoPage{
 		TwitterDesc: "page.about.twitterDescription",
 		Keywords:    "page.about.keywords",
 		Hreflang:    true,
-		Schema:      "faq",
+		Schema:      "about",
+		PageName:    "about.hero.title",
 	},
 	"/create-memo.html": {
 		Prefix:      "create",
@@ -52,7 +53,7 @@ var seoPages = map[string]seoPage{
 		OGDesc:      "create.hero.ogDescription",
 		TwitterDesc: "create.hero.twitterDescription",
 		Keywords:    "page.create.keywords",
-		NoIndex:     true,
+		Hreflang:    true,
 		Schema:      "softwarePage",
 		PageName:    "create.hero.title",
 		Breadcrumb:  "create.hero.title",
@@ -232,8 +233,8 @@ func buildJSONLD(page seoPage, locale, pathWithoutLocale, publicOrigin, canonica
 	switch page.Schema {
 	case "app":
 		data = appJSONLD(locale, canonical, description)
-	case "faq":
-		data = faqJSONLD(locale)
+	case "about":
+		data = aboutJSONLD(page, locale, canonical, description)
 	case "softwarePage":
 		data = softwarePageJSONLD(page, locale, pathWithoutLocale, publicOrigin, canonical, description)
 	case "creativeWork":
@@ -289,30 +290,14 @@ func appJSONLD(locale, canonical, description string) map[string]interface{} {
 	}
 }
 
-func faqJSONLD(locale string) map[string]interface{} {
+func aboutJSONLD(page seoPage, locale, canonical, description string) map[string]interface{} {
 	return map[string]interface{}{
-		"@context":   "https://schema.org",
-		"@type":      "FAQPage",
-		"inLanguage": hreflangCode(locale),
-		"mainEntity": []map[string]interface{}{
-			faqItem(locale, "faq.privacy.question", "faq.privacy.answer"),
-			faqItem(locale, "faq.encryption.question", "faq.encryption.answer"),
-			faqItem(locale, "faq.duration.question", "faq.duration.answer"),
-			faqItem(locale, "faq.recovery.question", "faq.recovery.answer"),
-			faqItem(locale, "faq.cost.question", "faq.cost.answer"),
-			faqItem(locale, "faq.technology.question", "faq.technology.answer"),
-		},
-	}
-}
-
-func faqItem(locale, questionKey, answerKey string) map[string]interface{} {
-	return map[string]interface{}{
-		"@type": "Question",
-		"name":  tr(locale, questionKey),
-		"acceptedAnswer": map[string]string{
-			"@type": "Answer",
-			"text":  tr(locale, answerKey),
-		},
+		"@context":    "https://schema.org",
+		"@type":       "AboutPage",
+		"name":        tr(locale, page.PageName),
+		"description": description,
+		"url":         canonical,
+		"inLanguage":  hreflangCode(locale),
 	}
 }
 

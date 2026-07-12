@@ -72,7 +72,7 @@ func TestRenderedSEOHeadUsesLocalizedMetadata(t *testing.T) {
 
 func TestNoIndexPagesAreMarkedButCrawlable(t *testing.T) {
 	app := newTestServer(t)
-	for _, path := range []string{"/en/create-memo.html", "/en/read-memo.html", "/en/revoke-memo.html", "/en/tos.html", "/en/privacy.html"} {
+	for _, path := range []string{"/en/read-memo.html", "/en/revoke-memo.html", "/en/tos.html", "/en/privacy.html"} {
 		rec := httptest.NewRecorder()
 		req := httptest.NewRequest(http.MethodGet, path, nil)
 
@@ -87,6 +87,52 @@ func TestNoIndexPagesAreMarkedButCrawlable(t *testing.T) {
 	}
 }
 
+func TestCreateMemoPageIsIndexableAndLocalized(t *testing.T) {
+	app := newTestServer(t)
+	rec := httptest.NewRecorder()
+	req := httptest.NewRequest(http.MethodGet, "/fi/create-memo.html", nil)
+
+	app.ServeHTTP(rec, req)
+
+	if rec.Code != http.StatusOK {
+		t.Fatalf("GET /fi/create-memo.html status = %d, want %d", rec.Code, http.StatusOK)
+	}
+	body := rec.Body.String()
+	if strings.Contains(body, `<meta name="robots" content="noindex,follow">`) {
+		t.Fatal("localized create page is marked noindex")
+	}
+	for _, want := range []string{
+		`<link rel="canonical" href="https://securememo.app/fi/create-memo.html">`,
+		`hreflang="fi" href="https://securememo.app/fi/create-memo.html"`,
+		`hreflang="x-default" href="https://securememo.app/en/create-memo.html"`,
+		`<h2 id="create-privacy-title">Mikä tekee siitä yksityisen</h2>`,
+		`<h3>Salattu selaimessasi</h3>`,
+	} {
+		if !strings.Contains(body, want) {
+			t.Fatalf("localized create page missing %q", want)
+		}
+	}
+}
+
+func TestAboutStructuredDataMatchesVisiblePageType(t *testing.T) {
+	app := newTestServer(t)
+	rec := httptest.NewRecorder()
+	req := httptest.NewRequest(http.MethodGet, "/en/about.html", nil)
+
+	app.ServeHTTP(rec, req)
+
+	if rec.Code != http.StatusOK {
+		t.Fatalf("GET /en/about.html status = %d, want %d", rec.Code, http.StatusOK)
+	}
+	body := rec.Body.String()
+	if strings.Contains(body, `"@type": "FAQPage"`) {
+		t.Fatal("about page contains FAQ structured data without a visible FAQ")
+	}
+	if !strings.Contains(body, `"@type": "AboutPage"`) {
+		t.Fatal("about page missing AboutPage structured data")
+	}
+}
+
 func TestSitemapOnlyIncludesIndexablePages(t *testing.T) {
 	app := newTestServer(t)
 	rec := httptest.NewRecorder()
@@ -98,15 +144,22 @@ func TestSitemapOnlyIncludesIndexablePages(t *testing.T) {
 		t.Fatalf("GET /sitemap.xml status = %d, want %d", rec.Code, http.StatusOK)
 	}
 	body := rec.Body.String()
-	for _, path := range []string{"/create-memo.html", "/read-memo.html", "/revoke-memo.html", "/tos.html", "/privacy.html"} {
+	for _, path := range []string{"/read-memo.html", "/revoke-memo.html", "/tos.html", "/privacy.html"} {
 		if strings.Contains(body, path) {
 			t.Fatalf("sitemap includes noindex page %s", path)
 		}
 	}
-	for _, path := range []string{"https://securememo.app/en", "https://securememo.app/en/about.html"} {
-		if !strings.Contains(body, path) {
-			t.Fatalf("sitemap missing indexable page %s", path)
+	for _, entry := range []string{
+		"<loc>https://securememo.app/en</loc>\n    <lastmod>2026-06-27</lastmod>",
+		"<loc>https://securememo.app/en/about.html</loc>\n    <lastmod>2026-07-12</lastmod>",
+		"<loc>https://securememo.app/en/create-memo.html</loc>\n    <lastmod>2026-07-12</lastmod>",
+	} {
+		if !strings.Contains(body, entry) {
+			t.Fatalf("sitemap missing indexable entry %q", entry)
 		}
+	}
+	if strings.Contains(body, "<changefreq>") || strings.Contains(body, "<priority>") {
+		t.Fatal("sitemap includes ignored changefreq or priority hints")
 	}
 }
 

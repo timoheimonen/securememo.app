@@ -19,7 +19,7 @@ import (
 	"github.com/timoheimonen/securememo/internal/store"
 )
 
-const assetVersion = "20260628a"
+const assetVersion = "20260712a"
 
 var clientLocalizationAssetRe = regexp.MustCompile(`^/js/clientLocalization\.([A-Za-z0-9_-]+)\.js$`)
 
@@ -231,10 +231,8 @@ func (s *Server) serveSitemap(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	type urlEntry struct {
-		Loc        string `xml:"loc"`
-		LastMod    string `xml:"lastmod"`
-		ChangeFreq string `xml:"changefreq"`
-		Priority   string `xml:"priority"`
+		Loc     string `xml:"loc"`
+		LastMod string `xml:"lastmod"`
 	}
 	type urlSet struct {
 		XMLName xml.Name   `xml:"urlset"`
@@ -242,22 +240,19 @@ func (s *Server) serveSitemap(w http.ResponseWriter, r *http.Request) {
 		URLs    []urlEntry `xml:"url"`
 	}
 	pages := []struct {
-		path       string
-		priority   string
-		changeFreq string
+		path    string
+		lastMod string
 	}{
-		{"", "1.0", "weekly"},
-		{"/about.html", "0.8", "monthly"},
+		{"", "2026-06-27"},
+		{"/about.html", "2026-07-12"},
+		{"/create-memo.html", "2026-07-12"},
 	}
-	now := time.Now().UTC().Format("2006-01-02")
 	var entries []urlEntry
 	for _, page := range pages {
 		for _, locale := range supportedLocales {
 			entries = append(entries, urlEntry{
-				Loc:        fmt.Sprintf("%s/%s%s", s.cfg.PublicOrigin, locale, page.path),
-				LastMod:    now,
-				ChangeFreq: page.changeFreq,
-				Priority:   page.priority,
+				Loc:     fmt.Sprintf("%s/%s%s", s.cfg.PublicOrigin, locale, page.path),
+				LastMod: page.lastMod,
 			})
 		}
 	}
