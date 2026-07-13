@@ -131,17 +131,22 @@
                 <p class="memo-description">Enter the password to decrypt and read the memo. The password should have been shared with you separately from the URL. The memo will be deleted after being read or expired.</p>
 
                 <div id="passwordForm" class="memo-form">
-                    <form id="decryptForm">
-                        <div class="form-group">
-                            <label for="password">Encryption Password</label>
-                            <div class="password-input-container">
-                                <input type="password" id="password" name="password" required
-                                       placeholder="Enter the encryption password shared with you separately">
-                                <button type="button" id="toggleReadPassword" class="btn btn-primary">Show</button>
+                    <form id="decryptForm" aria-busy="true" aria-describedby="decryptFormStatus">
+                        <fieldset id="decryptFormControls" class="sensitive-form-controls" disabled>
+                            <div class="form-group">
+                                <label for="password">Encryption Password</label>
+                                <div class="password-input-container">
+                                    <input type="password" id="password" required
+                                           placeholder="Enter the encryption password shared with you separately">
+                                    <button type="button" id="toggleReadPassword" class="btn btn-primary">Show</button>
+                                </div>
+                                <small class="form-help">The password should have been shared with you separately from the memo URL.</small>
                             </div>
-                            <small class="form-help">The password should have been shared with you separately from the memo URL.</small>
-                        </div>
-                        <button type="submit" class="btn btn-primary" id="decryptButton">Decrypt Memo</button>
+                            <button type="submit" class="btn btn-primary" id="decryptButton">Decrypt Memo</button>
+                        </fieldset>
+
+                        <p id="decryptFormStatus" class="form-help" role="status">Loading...</p>
+                        <noscript><p class="form-help">Requires JavaScript. Requires HTML5.</p></noscript>
 
                         <div id="decryptLoadingIndicator" class="loading-spinner hidden">
                             <div class="spinner"></div>
@@ -170,7 +175,7 @@
 
                 <div id="errorContent" class="error-content hidden">
                     <h3>Error</h3>
-                    <p id="errorMessage"></p>
+                    <p id="errorMessage">Invalid request. Please check your input and try again.</p>
                     <div class="memo-actions">
                         <a href="/en/create-memo.html" class="btn btn-primary">Create New Memo</a>
                         <a href="/en" class="btn btn-secondary">Go Home</a>
