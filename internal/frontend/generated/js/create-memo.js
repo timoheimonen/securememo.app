@@ -1,14 +1,3 @@
-function initializePage() {
-  hideElement('result');
-  showElement('memoForm');
-}
-
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', initializePage);
-} else {
-  initializePage();
-}
-
 function generatePassword() {
   const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
   const passwordLength = 32;
@@ -191,7 +180,7 @@ async function encryptMemo(message) {
   }
 }
 
-document.getElementById('memoForm').addEventListener('submit', async (e) => {
+async function handleCreateSubmit(e) {
   e.preventDefault();
   const resultSection = document.getElementById('result');
   if (resultSection && !resultSection.classList.contains('hidden')) {
@@ -254,7 +243,7 @@ document.getElementById('memoForm').addEventListener('submit', async (e) => {
     submitButton.textContent = t('btn.create');
     hideElement('loadingIndicator');
   }
-});
+}
 
 document.getElementById('copyUrl').addEventListener('click', async () => {
   const urlInput = document.getElementById('memoUrl');
@@ -364,4 +353,37 @@ function showMessage(message, type) {
 
 function showTranslatedMessage(key, type) {
   showMessage(t(key), type);
+}
+
+function hasRequiredCreateCapabilities() {
+  return typeof globalThis.fetch === 'function' &&
+    typeof globalThis.TextEncoder === 'function' &&
+    typeof globalThis.btoa === 'function' &&
+    globalThis.crypto &&
+    typeof globalThis.crypto.getRandomValues === 'function' &&
+    globalThis.crypto.subtle &&
+    globalThis.MemoCryptoConfig &&
+    typeof globalThis.MemoCryptoConfig.getCurrentVersion === 'function';
+}
+
+function initializeCreatePage() {
+  hideElement('result');
+  showElement('memoForm');
+
+  const memoForm = document.getElementById('memoForm');
+  const memoFormControls = document.getElementById('memoFormControls');
+  if (!memoForm || !memoFormControls || !hasRequiredCreateCapabilities()) {
+    return;
+  }
+
+  memoForm.addEventListener('submit', handleCreateSubmit);
+  memoFormControls.disabled = false;
+  memoForm.setAttribute('aria-busy', 'false');
+  hideElement('memoFormStatus');
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initializeCreatePage, { once: true });
+} else {
+  initializeCreatePage();
 }

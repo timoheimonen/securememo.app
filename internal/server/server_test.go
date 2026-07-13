@@ -490,6 +490,146 @@ func TestMemoScriptsAreVersioned(t *testing.T) {
 	}
 }
 
+func TestSensitiveMemoFormsFailClosedBeforeJavaScript(t *testing.T) {
+	app := newTestServer(t)
+	tests := []struct {
+		name          string
+		page          string
+		formID        string
+		fieldsetID    string
+		secretTagName string
+		secretID      string
+		statusID      string
+	}{
+		{
+			name:          "create",
+			page:          "create-memo.html",
+			formID:        "memoForm",
+			fieldsetID:    "memoFormControls",
+			secretTagName: "textarea",
+			secretID:      "message",
+			statusID:      "memoFormStatus",
+		},
+		{
+			name:          "read",
+			page:          "read-memo.html",
+			formID:        "decryptForm",
+			fieldsetID:    "decryptFormControls",
+			secretTagName: "input",
+			secretID:      "password",
+			statusID:      "decryptFormStatus",
+		},
+	}
+
+	for _, locale := range supportedLocales {
+		for _, tc := range tests {
+			t.Run(locale+"/"+tc.name, func(t *testing.T) {
+				rec := httptest.NewRecorder()
+				req := httptest.NewRequest(http.MethodGet, "/"+locale+"/"+tc.page, nil)
+				app.ServeHTTP(rec, req)
+
+				if rec.Code != http.StatusOK {
+					t.Fatalf("GET %s status = %d, want %d", req.URL.Path, rec.Code, http.StatusOK)
+				}
+				body := rec.Body.String()
+				secretTag := htmlStartTagByID(t, body, tc.secretTagName, tc.secretID)
+				if htmlStartTagHasAttribute(secretTag, "name") {
+					t.Fatalf("GET %s secret control is natively serializable: %s", req.URL.Path, secretTag)
+				}
+
+				fieldsetTag := htmlStartTagByID(t, body, "fieldset", tc.fieldsetID)
+				if !htmlStartTagHasAttribute(fieldsetTag, "disabled") {
+					t.Fatalf("GET %s sensitive fieldset is not disabled: %s", req.URL.Path, fieldsetTag)
+				}
+
+				formTag := htmlStartTagByID(t, body, "form", tc.formID)
+				if !strings.Contains(formTag, `aria-busy="true"`) {
+					t.Fatalf("GET %s sensitive form is not initially busy: %s", req.URL.Path, formTag)
+				}
+				htmlStartTagByID(t, body, "p", tc.statusID)
+			})
+		}
+	}
+}
+
+func TestSensitiveMemoScriptsAttachSubmitGuardsBeforeEnablingForms(t *testing.T) {
+	tests := []struct {
+		name            string
+		asset           string
+		attachStatement string
+		enableStatement string
+		forbidden       string
+	}{
+		{
+			name:            "create",
+			asset:           "generated/js/create-memo.js",
+			attachStatement: "memoForm.addEventListener('submit', handleCreateSubmit);",
+			enableStatement: "memoFormControls.disabled = false;",
+		},
+		{
+			name:            "read",
+			asset:           "generated/js/read-memo.js",
+			attachStatement: "decryptForm.addEventListener('submit', handleDecryptSubmit);",
+			enableStatement: "decryptFormControls.disabled = false;",
+			forbidden:       "window.addEventListener('load'",
+		},
+	}
+
+	for _, tc := range tests {
+		t.Run(tc.name, func(t *testing.T) {
+			body, err := frontend.FS.ReadFile(tc.asset)
+			if err != nil {
+				t.Fatalf("read %s: %v", tc.asset, err)
+			}
+			source := string(body)
+			attachIndex := strings.Index(source, tc.attachStatement)
+			if attachIndex == -1 {
+				t.Fatalf("%s missing submit guard %q", tc.asset, tc.attachStatement)
+			}
+			enableIndex := strings.Index(source, tc.enableStatement)
+			if enableIndex == -1 {
+				t.Fatalf("%s missing form enablement %q", tc.asset, tc.enableStatement)
+			}
+			if attachIndex > enableIndex {
+				t.Fatalf("%s enables the sensitive form before attaching its submit guard", tc.asset)
+			}
+			if tc.forbidden != "" && strings.Contains(source, tc.forbidden) {
+				t.Fatalf("%s still delays its submit guard with %q", tc.asset, tc.forbidden)
+			}
+		})
+	}
+}
+
+func htmlStartTagByID(t *testing.T, body, tagName, id string) string {
+	t.Helper()
+	needle := `id="` + id + `"`
+	idIndex := strings.Index(body, needle)
+	if idIndex == -1 {
+		t.Fatalf("missing element %s#%s", tagName, id)
+	}
+	startIndex := strings.LastIndex(body[:idIndex], "<")
+	endOffset := strings.Index(body[idIndex:], ">")
+	if startIndex == -1 || endOffset == -1 {
+		t.Fatalf("malformed start tag for %s#%s", tagName, id)
+	}
+	tag := body[startIndex : idIndex+endOffset+1]
+	if !strings.HasPrefix(strings.ToLower(tag), "<"+strings.ToLower(tagName)) {
+		t.Fatalf("element #%s is %s, want <%s>", id, tag, tagName)
+	}
+	return tag
+}
+
+func htmlStartTagHasAttribute(tag, attribute string) bool {
+	attribute = strings.ToLower(attribute)
+	for _, field := range strings.Fields(strings.Trim(tag, "<>")) {
+		field = strings.ToLower(strings.TrimSuffix(field, "/"))
+		if field == attribute || strings.HasPrefix(field, attribute+"=") {
+			return true
+		}
+	}
+	return false
+}
+
 func TestLanguageMenuUsesRootRelativeLocaleLinks(t *testing.T) {
 	app := newTestServer(t)
 	rec := httptest.NewRecorder()

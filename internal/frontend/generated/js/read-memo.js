@@ -139,166 +139,199 @@ function initializePage() {
   hideElement('statusMessage');
 }
 
-window.addEventListener('load', () => {
-  initializePage();
+async function handleDecryptSubmit(e) {
+  e.preventDefault();
+  const password = document.getElementById('password').value.trim();
   const memoId = getMemoId();
-  if (!memoId) {
-    showError(t('error.missingMemoId'));
+  if (!password) {
+    showError(t('error.missingPassword'));
     return;
   }
-  const decryptForm = document.getElementById('decryptForm');
-  if (decryptForm) {
-    decryptForm.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const password = document.getElementById('password').value.trim();
-      const memoId = getMemoId();
-      if (!password) {
-        showError(t('error.missingPassword'));
-        return;
-      }
-      if (!memoId) {
-        showError(t('error.invalidMemoUrl'));
-        return;
-      }
-      const decryptButton = document.getElementById('decryptButton');
-      const decryptLoadingIndicator = document.getElementById('decryptLoadingIndicator');
-      if (decryptButton) {
-        decryptButton.disabled = true;
-        decryptButton.textContent = t('btn.decrypting');
-      }
-      if (decryptLoadingIndicator) {
-        showElement('decryptLoadingIndicator');
-      }
+  if (!memoId) {
+    showError(t('error.invalidMemoUrl'));
+    return;
+  }
+  const decryptButton = document.getElementById('decryptButton');
+  const decryptLoadingIndicator = document.getElementById('decryptLoadingIndicator');
+  if (decryptButton) {
+    decryptButton.disabled = true;
+    decryptButton.textContent = t('btn.decrypting');
+  }
+  if (decryptLoadingIndicator) {
+    showElement('decryptLoadingIndicator');
+  }
+  try {
+    const requestBody = {};
+    const readParams = new URLSearchParams({ id: memoId });
+    const response = await fetch('/api/read-memo?' + readParams.toString(), {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(requestBody)
+    });
+    if (response.status === 429) {
+      showError(t('msg.tooManyRequests'));
+      return;
+    }
+    const result = await response.json();
+    if (response.ok) {
+      const decryptedMessage = await decryptMemo(result.encryptedMessage, password);
+      let decryptedPayload;
       try {
-        const requestBody = {};
-        const readParams = new URLSearchParams({ id: memoId });
-        const response = await fetch('/api/read-memo?' + readParams.toString(), {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(requestBody)
-        });
-        if (response.status === 429) {
-          showError(t('msg.tooManyRequests'));
-          return;
+        decryptedPayload = JSON.parse(decryptedMessage);
+        if (typeof decryptedPayload.message !== 'string' || (result.requiresDeletionToken && !decryptedPayload.deletionToken)) {
+          throw new Error();
         }
-        const result = await response.json();
-        if (response.ok) {
-          const decryptedMessage = await decryptMemo(result.encryptedMessage, password);
-          let decryptedPayload;
-          try {
-            decryptedPayload = JSON.parse(decryptedMessage);
-            if (typeof decryptedPayload.message !== 'string' || (result.requiresDeletionToken && !decryptedPayload.deletionToken)) {
-              throw new Error();
-            }
-          } catch {
-            decryptedPayload = { message: decryptedMessage };
+      } catch {
+        decryptedPayload = { message: decryptedMessage };
+      }
+      document.getElementById('decryptedMessage').textContent = decryptedPayload.message;
+      showElement('memoContent');
+      hideElement('passwordForm');
+      const memoStatus = document.getElementById('memoStatus');
+      const deletionSpinner = document.getElementById('deletionSpinner');
+      if (memoStatus) {
+        memoStatus.textContent = t('msg.memoDecrypted');
+      }
+      if (deletionSpinner) {
+        showElement('deletionSpinner');
+      }
+      document.getElementById('password').value = '';
+      const errorContent = document.getElementById('errorContent');
+      const statusMessage = document.getElementById('statusMessage');
+      if (errorContent) hideElement('errorContent');
+      if (statusMessage) hideElement('statusMessage');
+      const deleteBody = {};
+      if (!decryptedPayload.deletionToken) {
+        throw new Error('Missing deletion token in payload');
+      }
+      deleteBody.deletionToken = decryptedPayload.deletionToken;
+      deleteBody.memoId = memoId;
+      const maxAttempts = 3;
+      const delayMs = 3000;
+      let deleteResponse;
+      for (let attempt = 1; attempt <= maxAttempts; attempt++) {
+        try {
+          deleteResponse = await fetch('/api/confirm-delete', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(deleteBody)
+          });
+          if (deleteResponse.ok || [429, 403, 404].includes(deleteResponse.status)) {
+            break;
           }
-          document.getElementById('decryptedMessage').textContent = decryptedPayload.message;
-          showElement('memoContent');
-          hideElement('passwordForm');
-          const memoStatus = document.getElementById('memoStatus');
-          const deletionSpinner = document.getElementById('deletionSpinner');
-          if (memoStatus) {
-            memoStatus.textContent = t('msg.memoDecrypted');
-          }
-          if (deletionSpinner) {
-            showElement('deletionSpinner');
-          }
-          document.getElementById('password').value = '';
-          if (errorContent) hideElement('errorContent');
-          if (statusMessage) hideElement('statusMessage');
-          const deleteBody = {};
-          if (!decryptedPayload.deletionToken) {
-            throw new Error('Missing deletion token in payload');
-          }
-          deleteBody.deletionToken = decryptedPayload.deletionToken;
-          deleteBody.memoId = memoId;
-          const maxAttempts = 3;
-          const delayMs = 3000;
-          let deleteResponse;
-          for (let attempt = 1; attempt <= maxAttempts; attempt++) {
-            try {
-              deleteResponse = await fetch('/api/confirm-delete', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(deleteBody)
-              });
-              if (deleteResponse.ok || [429, 403, 404].includes(deleteResponse.status)) {
-                break;
-              }
-            } catch (e) {
-            }
-            if (attempt < maxAttempts) {
-              await new Promise(res => setTimeout(res, delayMs));
-            }
-          }
-          if (deleteResponse && deleteResponse.status === 429) {
-            showMessage(t('msg.tooManyRequests'), 'error');
-            const deletionSpinner = document.getElementById('deletionSpinner');
-            if (deletionSpinner) {
-              hideElement('deletionSpinner');
-            }
-          } else if (deleteResponse && deleteResponse.ok) {
-            const memoStatus = document.getElementById('memoStatus');
-            const deletionSpinner = document.getElementById('deletionSpinner');
-            if (memoStatus) {
-              memoStatus.textContent = t('msg.memoDeleted');
-            }
-            if (deletionSpinner) {
-              hideElement('deletionSpinner');
-            }
-          } else {
-            showMessage(t('msg.deletionError'), 'warning');
-            const deletionSpinner = document.getElementById('deletionSpinner');
-            if (deletionSpinner) {
-              hideElement('deletionSpinner');
-            }
-          }
-        } else {
-          if (response.status === 429) {
-            showError(t('msg.tooManyRequests'));
-          } else if (result.error === 'Memo not found') {
-            showError(t('error.memoAlreadyRead'));
-          } else if (result.error === 'Memo expired') {
-            showError(t('error.memoExpired'));
-          } else {
-            showError(result.error || t('error.readMemoError'));
-          }
+        } catch (e) {
         }
-      } catch (error) {
-        if (error.message.includes('Failed to decrypt')) {
-          showError(t('error.invalidPassword'));
-        } else {
-          showError(t('error.readMemoError'));
-        }
-      } finally {
-        const decryptButton = document.getElementById('decryptButton');
-        const decryptLoadingIndicator = document.getElementById('decryptLoadingIndicator');
-        if (decryptButton) {
-          decryptButton.disabled = false;
-          decryptButton.textContent = t('btn.decrypt');
-        }
-        if (decryptLoadingIndicator) {
-          hideElement('decryptLoadingIndicator');
+        if (attempt < maxAttempts) {
+          await new Promise(res => setTimeout(res, delayMs));
         }
       }
-    });
-  }
-  const toggleReadPasswordBtn = document.getElementById('toggleReadPassword');
-  if (toggleReadPasswordBtn) {
-    toggleReadPasswordBtn.addEventListener('click', () => {
-      const passwordInput = document.getElementById('password');
-      const toggleBtn = document.getElementById('toggleReadPassword');
-      if (passwordInput.type === 'password') {
-        passwordInput.type = 'text';
-        toggleBtn.textContent = t('btn.hide');
+      if (deleteResponse && deleteResponse.status === 429) {
+        showMessage(t('msg.tooManyRequests'), 'error');
+        const deletionSpinner = document.getElementById('deletionSpinner');
+        if (deletionSpinner) {
+          hideElement('deletionSpinner');
+        }
+      } else if (deleteResponse && deleteResponse.ok) {
+        const memoStatus = document.getElementById('memoStatus');
+        const deletionSpinner = document.getElementById('deletionSpinner');
+        if (memoStatus) {
+          memoStatus.textContent = t('msg.memoDeleted');
+        }
+        if (deletionSpinner) {
+          hideElement('deletionSpinner');
+        }
       } else {
-        passwordInput.type = 'password';
-        toggleBtn.textContent = t('btn.show');
+        showMessage(t('msg.deletionError'), 'warning');
+        const deletionSpinner = document.getElementById('deletionSpinner');
+        if (deletionSpinner) {
+          hideElement('deletionSpinner');
+        }
       }
-    });
+    } else {
+      if (response.status === 429) {
+        showError(t('msg.tooManyRequests'));
+      } else if (result.error === 'Memo not found') {
+        showError(t('error.memoAlreadyRead'));
+      } else if (result.error === 'Memo expired') {
+        showError(t('error.memoExpired'));
+      } else {
+        showError(result.error || t('error.readMemoError'));
+      }
+    }
+  } catch (error) {
+    if (error.message.includes('Failed to decrypt')) {
+      showError(t('error.invalidPassword'));
+    } else {
+      showError(t('error.readMemoError'));
+    }
+  } finally {
+    const decryptButton = document.getElementById('decryptButton');
+    const decryptLoadingIndicator = document.getElementById('decryptLoadingIndicator');
+    if (decryptButton) {
+      decryptButton.disabled = false;
+      decryptButton.textContent = t('btn.decrypt');
+    }
+    if (decryptLoadingIndicator) {
+      hideElement('decryptLoadingIndicator');
+    }
   }
-});
+}
+
+function handleToggleReadPassword() {
+  const toggleReadPasswordBtn = document.getElementById('toggleReadPassword');
+  const passwordInput = document.getElementById('password');
+  if (!toggleReadPasswordBtn || !passwordInput) {
+    return;
+  }
+  if (passwordInput.type === 'password') {
+    passwordInput.type = 'text';
+    toggleReadPasswordBtn.textContent = t('btn.hide');
+  } else {
+    passwordInput.type = 'password';
+    toggleReadPasswordBtn.textContent = t('btn.show');
+  }
+}
+
+function hasRequiredReadCapabilities() {
+  return typeof globalThis.fetch === 'function' &&
+    typeof globalThis.TextEncoder === 'function' &&
+    typeof globalThis.TextDecoder === 'function' &&
+    typeof globalThis.atob === 'function' &&
+    globalThis.crypto &&
+    globalThis.crypto.subtle &&
+    globalThis.MemoCryptoConfig &&
+    typeof globalThis.MemoCryptoConfig.parseEncryptedMessage === 'function';
+}
+
+function initializeReadPage() {
+  initializePage();
+
+  const memoId = getMemoId();
+  if (!memoId) {
+    const errorMessage = document.getElementById('errorMessage');
+    showError(errorMessage ? errorMessage.textContent : t('error.missingMemoId'));
+    return;
+  }
+
+  const decryptForm = document.getElementById('decryptForm');
+  const decryptFormControls = document.getElementById('decryptFormControls');
+  const toggleReadPasswordBtn = document.getElementById('toggleReadPassword');
+  if (!decryptForm || !decryptFormControls || !toggleReadPasswordBtn || !hasRequiredReadCapabilities()) {
+    return;
+  }
+
+  decryptForm.addEventListener('submit', handleDecryptSubmit);
+  toggleReadPasswordBtn.addEventListener('click', handleToggleReadPassword);
+  decryptFormControls.disabled = false;
+  decryptForm.setAttribute('aria-busy', 'false');
+  hideElement('decryptFormStatus');
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initializeReadPage, { once: true });
+} else {
+  initializeReadPage();
+}
 
 function showError(message) {
   document.getElementById('errorMessage').textContent = message;

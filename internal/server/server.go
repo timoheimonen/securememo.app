@@ -19,7 +19,7 @@ import (
 	"github.com/timoheimonen/securememo/internal/store"
 )
 
-const assetVersion = "20260712a"
+const assetVersion = "20260713a"
 
 var clientLocalizationAssetRe = regexp.MustCompile(`^/js/clientLocalization\.([A-Za-z0-9_-]+)\.js$`)
 

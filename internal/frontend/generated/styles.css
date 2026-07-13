@@ -655,6 +655,20 @@ button[type="submit"]:disabled {
   margin-bottom: 28px;
 }
 
+.sensitive-form-controls {
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.sensitive-form-controls:disabled input,
+.sensitive-form-controls:disabled textarea,
+.sensitive-form-controls:disabled select {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
 .form-group {
   margin-bottom: 22px;
 }

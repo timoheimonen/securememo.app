@@ -4,6 +4,12 @@ All notable changes to this project are documented here.
 
 Version identifiers match the application `assetVersion`.
 
+## 20260713a - 2026-07-13
+
+### Security
+- Make browser-only memo and password forms fail closed until their local encryption or decryption handlers are ready.
+- Prevent native form fallback from serializing memo plaintext or decryption passwords into request URLs.
+
 ## 20260712a - 2026-07-12
 
 ### Changed
