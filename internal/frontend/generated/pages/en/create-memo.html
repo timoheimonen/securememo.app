@@ -71,16 +71,16 @@
         <div class="nav-container">
             <a href="/en" class="nav-logo">securememo.app</a>
 
-            <button class="hamburger" type="button" aria-label="Toggle navigation menu" aria-expanded="false">
+            <button class="hamburger" type="button" aria-label="Toggle navigation menu" data-i18n-aria-label="nav.toggleMenu" aria-expanded="false">
                 <span class="hamburger-line"></span>
                 <span class="hamburger-line"></span>
                 <span class="hamburger-line"></span>
             </button>
 
             <ul class="nav-menu" id="navMenu">
-                <li><a href="/en" class="nav-link">Home</a></li>
-                <li><a href="/en/about.html" class="nav-link">About</a></li>
-                <li><a href="/en/create-memo.html" class="nav-link active">Create Secure Memo</a></li>
+                <li><a href="/en" class="nav-link" data-i18n="nav.home">Home</a></li>
+                <li><a href="/en/about.html" class="nav-link" data-i18n="nav.about">About</a></li>
+                <li><a href="/en/create-memo.html" class="nav-link active" data-i18n="nav.create">Create Secure Memo</a></li>
                 <li class="language-dropdown">
                     <button class="language-toggle nav-link" aria-expanded="false" aria-haspopup="true">
                         English
@@ -127,80 +127,80 @@
     <main class="main-content">
         <div class="memo-container">
             <div class="memo-card">
-                <h1>Create Secure Memo</h1>
-                <p class="memo-description">Your memo will be encrypted in your browser and deleted after successful read confirmation or expiration.</p>
+                <h1 data-i18n="create.hero.title">Create Secure Memo</h1>
+                <p class="memo-description" data-i18n="create.hero.description">Your memo will be encrypted in your browser and deleted after successful read confirmation or expiration.</p>
 
                 <form id="memoForm" class="memo-form" aria-busy="true" aria-describedby="memoFormStatus">
                     <fieldset id="memoFormControls" class="sensitive-form-controls" disabled>
                         <div class="form-group">
-                            <label for="message">Your Memo</label>
+                            <label for="message" data-i18n="form.message.label">Your Memo</label>
                             <textarea id="message" required
-                                      placeholder="Type your secret memo here..."
+                                      placeholder="Type your secret memo here..." data-i18n-placeholder="form.message.placeholder"
                                       rows="8" maxlength="10000"></textarea>
-                            <small class="form-help">Maximum 10,000 characters</small>
+                            <small class="form-help" data-i18n="form.message.help">Maximum 10,000 characters</small>
                         </div>
 
                         <div class="form-group">
-                            <label for="expiryHours">Expiry Time</label>
+                            <label for="expiryHours" data-i18n="form.expiry.label">Expiry Time</label>
                             <select id="expiryHours" name="expiryHours">
-                                <option value="8">Delete on read or 8 hours</option>
-                                <option value="24">Delete on read or 1 day</option>
-                                <option value="48">Delete on read or 2 days</option>
-                                <option value="168">Delete on read or 1 week</option>
-                                <option value="336">Delete on read or 2 weeks</option>
+                                <option value="8" data-i18n="form.expiry.option.8h">Delete on read or 8 hours</option>
+                                <option value="24" data-i18n="form.expiry.option.1d">Delete on read or 1 day</option>
+                                <option value="48" data-i18n="form.expiry.option.2d">Delete on read or 2 days</option>
+                                <option value="168" data-i18n="form.expiry.option.1w">Delete on read or 1 week</option>
+                                <option value="336" data-i18n="form.expiry.option.2w">Delete on read or 2 weeks</option>
                             </select>
                         </div>
-                        <button type="submit" class="btn btn-primary" id="submitButton">Create Secure Memo</button>
+                        <button type="submit" class="btn btn-primary" id="submitButton" data-i18n="btn.create">Create Secure Memo</button>
                     </fieldset>
 
-                    <p id="memoFormStatus" class="form-help" role="status">Loading...</p>
-                    <noscript><p class="form-help">Requires JavaScript. Requires HTML5.</p></noscript>
+                    <p id="memoFormStatus" class="form-help" role="status" data-i18n="common.loading">Loading...</p>
+                    <noscript><p class="form-help" data-i18n="schema.app.requirements">Requires JavaScript. Requires HTML5.</p></noscript>
 
                     <div id="loadingIndicator" class="loading-spinner hidden">
                         <div class="spinner"></div>
-                        <p>Encrypting your memo securely... This may take a moment on older devices.</p>
+                        <p data-i18n="msg.encrypting">Encrypting your memo securely... This may take a moment on older devices.</p>
                     </div>
                 </form>
 
                 <div id="result" class="result-section hidden">
-                    <h3>Memo Created Successfully</h3>
+                    <h3 data-i18n="create.result.title">Memo Created Successfully</h3>
 
                     <div class="memo-url-section">
-                        <label for="memoUrl">Memo URL (share this with your recipient):</label>
+                        <label for="memoUrl" data-i18n="form.memoUrl.label">Memo URL (share this with your recipient):</label>
                         <div class="url-copy-container">
-                            <input type="text" id="memoUrl" readonly onclick="this.select(); document.execCommand('copy'); showMessage('URL copied to clipboard!', 'success');">
-                            <button type="button" id="copyUrl" class="btn btn-primary">Copy URL</button>
+                            <input type="text" id="memoUrl" readonly onclick="this.select(); document.execCommand('copy'); showTranslatedMessage('msg.urlCopied.plain', 'success');">
+                            <button type="button" id="copyUrl" class="btn btn-primary" data-i18n="btn.copyUrl">Copy URL</button>
                         </div>
-                        <small class="form-help">This is the secure link to your memo. Share this URL with your recipient.</small>
+                        <small class="form-help" data-i18n="form.memoUrl.help">This is the secure link to your memo. Share this URL with your recipient.</small>
                     </div>
 
                     <div class="memo-password-section">
-                        <label for="memoPassword">Encryption Password (share this separately):</label>
+                        <label for="memoPassword" data-i18n="form.memoPassword.label">Encryption Password (share this separately):</label>
                         <div class="url-copy-container">
-                            <input type="password" id="memoPassword" readonly onclick="this.select(); document.execCommand('copy'); showMessage('Password copied to clipboard!', 'success');">
-                            <button type="button" id="togglePassword" class="btn btn-primary mr-8">Show</button>
-                            <button type="button" id="copyPassword" class="btn btn-primary">Copy Password</button>
+                            <input type="password" id="memoPassword" readonly onclick="this.select(); document.execCommand('copy'); showTranslatedMessage('msg.passwordCopied.plain', 'success');">
+                            <button type="button" id="togglePassword" class="btn btn-primary mr-8" data-i18n="btn.show">Show</button>
+                            <button type="button" id="copyPassword" class="btn btn-primary" data-i18n="btn.copyPassword">Copy Password</button>
                         </div>
-                        <small class="form-help">This is the encryption password. Share it separately from the URL. It is not saved on our servers and cannot be recovered after leaving this page.</small>
+                        <small class="form-help" data-i18n="create.result.passwordHelp">This is the encryption password. Share it separately from the URL. It is not saved on our servers and cannot be recovered after leaving this page.</small>
                     </div>
 
                     <div class="memo-owner-delete-section">
-                        <label for="ownerDeleteUrl">Revoke Link (keep this private):</label>
+                        <label for="ownerDeleteUrl" data-i18n="create.result.revokeLabel">Revoke Link (keep this private):</label>
                         <div class="url-copy-container">
                             <input type="text" id="ownerDeleteUrl" readonly onclick="this.select(); document.execCommand('copy'); showTranslatedMessage('msg.revokeLinkCopied', 'success');">
-                            <button type="button" id="copyOwnerDeleteUrl" class="btn btn-primary">Copy Revoke Link</button>
+                            <button type="button" id="copyOwnerDeleteUrl" class="btn btn-primary" data-i18n="btn.copyRevokeLink">Copy Revoke Link</button>
                         </div>
-                        <small class="form-help">Use this private link to delete the memo before it is read. It is shown only once and cannot be recovered after leaving this page.</small>
+                        <small class="form-help" data-i18n="create.result.revokeHelp">Use this private link to delete the memo before it is read. It is shown only once and cannot be recovered after leaving this page.</small>
                     </div>
 
                     <div class="memo-warning">
-                        <p>Important:</p>
+                        <p data-i18n="warning.important">Important:</p>
                         <ul>
-                            <li>The memo will be deleted after being read or when the expiry time is reached</li>
-                            <li>Share the URL and password separately for better security</li>
-                            <li>Keep the revoke link private; anyone with it can delete this memo before it is read</li>
-                            <li>The recipient needs both the URL and password to access the memo</li>
-                            <li>This page will be cleared when you navigate away</li>
+                            <li data-i18n="warning.memoDeleted">The memo will be deleted after being read or when the expiry time is reached</li>
+                            <li data-i18n="warning.shareSecurely">Share the URL and password separately for better security</li>
+                            <li data-i18n="create.result.revokeWarning">Keep the revoke link private; anyone with it can delete this memo before it is read</li>
+                            <li data-i18n="warning.needBoth">The recipient needs both the URL and password to access the memo</li>
+                            <li data-i18n="warning.pageCleared">This page will be cleared when you navigate away</li>
                         </ul>
                     </div>
                 </div>
@@ -210,31 +210,31 @@
         </div>
 
         <section class="info-section" aria-labelledby="create-privacy-title">
-            <h2 id="create-privacy-title">What makes it private</h2>
+            <h2 id="create-privacy-title" data-i18n="about.current.privacy.title">What makes it private</h2>
             <div class="info-grid">
                 <div class="info-card">
-                    <h3>Encrypted in your browser</h3>
-                    <p>Your memo is encrypted with AES-256-GCM before it leaves your device. We only store ciphertext.</p>
+                    <h3 data-i18n="about.current.encrypted.title">Encrypted in your browser</h3>
+                    <p data-i18n="about.current.encrypted.description">Your memo is encrypted with AES-256-GCM before it leaves your device. We only store ciphertext.</p>
                 </div>
                 <div class="info-card">
-                    <h3>Passwords stay on your device</h3>
-                    <p>The encryption password is generated in your browser. It's never sent to or stored on our servers.</p>
+                    <h3 data-i18n="about.current.passwords.title">Passwords stay on your device</h3>
+                    <p data-i18n="about.current.passwords.description">The encryption password is generated in your browser. It's never sent to or stored on our servers.</p>
                 </div>
                 <div class="info-card">
-                    <h3>Deleted after read or expiry</h3>
-                    <p>After a successful read, the browser confirms deletion with the server. Expired memos are cleaned up automatically.</p>
+                    <h3 data-i18n="about.current.delete.title">Deleted after read or expiry</h3>
+                    <p data-i18n="about.current.delete.description">After a successful read, the browser confirms deletion with the server. Expired memos are cleaned up automatically.</p>
                 </div>
                 <div class="info-card">
-                    <h3>No accounts, no tracking</h3>
-                    <p>You don't need to sign up. We don't use cookies, advertising trackers, third-party analytics, or behavioral profiling. We keep only limited aggregate operational metrics needed to run and protect the service.</p>
+                    <h3 data-i18n="about.current.noAccounts.title">No accounts, no tracking</h3>
+                    <p data-i18n="about.current.noAccounts.description">You don't need to sign up. We don't use cookies, advertising trackers, third-party analytics, or behavioral profiling. We keep only limited aggregate operational metrics needed to run and protect the service.</p>
                 </div>
             </div>
         </section>
     </main>
 
     <footer class="footer">
-        <p><a href="https://github.com/timoheimonen/securememo.app" target="_blank" rel="noopener noreferrer">View source code at GitHub</a> | <a href="/en/tos.html">Terms of Service</a> | <a href="/en/privacy.html">Privacy Notice</a></p>
-        <p class="footer-tagline">No tracking, no ads, no nonsense.</p>
+        <p><a href="https://github.com/timoheimonen/securememo.app" target="_blank" rel="noopener noreferrer" data-i18n="footer.sourceCode">View source code at GitHub</a> | <a href="/en/tos.html" data-i18n="footer.tos">Terms of Service</a> | <a href="/en/privacy.html" data-i18n="footer.privacy">Privacy Notice</a></p>
+        <p class="footer-tagline" data-i18n="footer.tagline">No tracking, no ads, no nonsense.</p>
     </footer>
 
     <script src="/js/common.js" type="module" nonce="{{CSP_NONCE}}" defer></script>

@@ -8,6 +8,8 @@ Version identifiers match the application `assetVersion`.
 
 ### Changed
 - Change the maximum memo expiry from 30 days to 2 weeks across application behavior and documentation.
+- Replace document-wide translation-value substitution with explicit, context-safe localization keys for HTML text and display attributes.
+- Return stable API error codes and translate them in the browser without exposing raw server error text.
 
 ## 20260713a - 2026-07-13
 

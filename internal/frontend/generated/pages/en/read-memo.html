@@ -71,16 +71,16 @@
         <div class="nav-container">
             <a href="/en" class="nav-logo">securememo.app</a>
 
-            <button class="hamburger" type="button" aria-label="Toggle navigation menu" aria-expanded="false">
+            <button class="hamburger" type="button" aria-label="Toggle navigation menu" data-i18n-aria-label="nav.toggleMenu" aria-expanded="false">
                 <span class="hamburger-line"></span>
                 <span class="hamburger-line"></span>
                 <span class="hamburger-line"></span>
             </button>
 
             <ul class="nav-menu" id="navMenu">
-                <li><a href="/en" class="nav-link">Home</a></li>
-                <li><a href="/en/about.html" class="nav-link">About</a></li>
-                <li><a href="/en/create-memo.html" class="nav-link">Create Secure Memo</a></li>
+                <li><a href="/en" class="nav-link" data-i18n="nav.home">Home</a></li>
+                <li><a href="/en/about.html" class="nav-link" data-i18n="nav.about">About</a></li>
+                <li><a href="/en/create-memo.html" class="nav-link" data-i18n="nav.create">Create Secure Memo</a></li>
                 <li class="language-dropdown">
                     <button class="language-toggle nav-link" aria-expanded="false" aria-haspopup="true">
                         English
@@ -127,58 +127,58 @@
     <main class="main-content">
         <div class="memo-container">
             <div class="memo-card">
-                <h1>Read Secure Memo</h1>
-                <p class="memo-description">Enter the password to decrypt and read the memo. The password should have been shared with you separately from the URL. The memo will be deleted after being read or expired.</p>
+                <h1 data-i18n="read.hero.title">Read Secure Memo</h1>
+                <p class="memo-description" data-i18n="read.hero.description">Enter the password to decrypt and read the memo. The password should have been shared with you separately from the URL. The memo will be deleted after being read or expired.</p>
 
                 <div id="passwordForm" class="memo-form">
                     <form id="decryptForm" aria-busy="true" aria-describedby="decryptFormStatus">
                         <fieldset id="decryptFormControls" class="sensitive-form-controls" disabled>
                             <div class="form-group">
-                                <label for="password">Encryption Password</label>
+                                <label for="password" data-i18n="form.password.label">Encryption Password</label>
                                 <div class="password-input-container">
                                     <input type="password" id="password" required
-                                           placeholder="Enter the encryption password shared with you separately">
-                                    <button type="button" id="toggleReadPassword" class="btn btn-primary">Show</button>
+                                           placeholder="Enter the encryption password shared with you separately" data-i18n-placeholder="form.password.placeholder">
+                                    <button type="button" id="toggleReadPassword" class="btn btn-primary" data-i18n="btn.show">Show</button>
                                 </div>
-                                <small class="form-help">The password should have been shared with you separately from the memo URL.</small>
+                                <small class="form-help" data-i18n="read.password.help.sentence">The password should have been shared with you separately from the memo URL.</small>
                             </div>
-                            <button type="submit" class="btn btn-primary" id="decryptButton">Decrypt Memo</button>
+                            <button type="submit" class="btn btn-primary" id="decryptButton" data-i18n="btn.decrypt">Decrypt Memo</button>
                         </fieldset>
 
-                        <p id="decryptFormStatus" class="form-help" role="status">Loading...</p>
-                        <noscript><p class="form-help">Requires JavaScript. Requires HTML5.</p></noscript>
+                        <p id="decryptFormStatus" class="form-help" role="status" data-i18n="common.loading">Loading...</p>
+                        <noscript><p class="form-help" data-i18n="schema.app.requirements">Requires JavaScript. Requires HTML5.</p></noscript>
 
                         <div id="decryptLoadingIndicator" class="loading-spinner hidden">
                             <div class="spinner"></div>
-                            <p>Decrypting your memo... This may take a moment on older devices.</p>
+                            <p data-i18n="msg.decrypting">Decrypting your memo... This may take a moment on older devices.</p>
                         </div>
                     </form>
                 </div>
 
                 <div id="memoContent" class="memo-content hidden">
-                    <h3>Your Secure Memo</h3>
+                    <h3 data-i18n="read.memo.title">Your Secure Memo</h3>
                     <div class="memo-message">
                         <p id="decryptedMessage"></p>
                     </div>
                     <div class="memo-info">
-                        <p><strong>Status:</strong> <span id="memoStatus">Memo decrypted. Deleting in progress... Please wait.</span></p>
+                        <p><strong data-i18n="msg.status">Status:</strong> <span id="memoStatus" data-i18n="msg.memoDecrypted">Memo decrypted. Deleting in progress... Please wait.</span></p>
                         <div id="deletionSpinner" class="loading-spinner hidden">
                             <div class="spinner"></div>
-                            <p>Deleting memo securely...</p>
+                            <p data-i18n="msg.deletingSecurely">Deleting memo securely...</p>
                         </div>
                     </div>
                     <div class="memo-actions">
-                        <a href="/en/create-memo.html" class="btn btn-primary">Create New Memo</a>
-                        <a href="/en" class="btn btn-secondary">Go Home</a>
+                        <a href="/en/create-memo.html" class="btn btn-primary" data-i18n="btn.createNew">Create New Memo</a>
+                        <a href="/en" class="btn btn-secondary" data-i18n="btn.goHome">Go Home</a>
                     </div>
                 </div>
 
                 <div id="errorContent" class="error-content hidden">
-                    <h3>Error</h3>
-                    <p id="errorMessage">Invalid request. Please check your input and try again.</p>
+                    <h3 data-i18n="common.error">Error</h3>
+                    <p id="errorMessage" data-i18n="error.missingMemoId">Invalid request. Please check your input and try again.</p>
                     <div class="memo-actions">
-                        <a href="/en/create-memo.html" class="btn btn-primary">Create New Memo</a>
-                        <a href="/en" class="btn btn-secondary">Go Home</a>
+                        <a href="/en/create-memo.html" class="btn btn-primary" data-i18n="btn.createNew">Create New Memo</a>
+                        <a href="/en" class="btn btn-secondary" data-i18n="btn.goHome">Go Home</a>
                     </div>
                 </div>
 
@@ -188,8 +188,8 @@
     </main>
 
     <footer class="footer">
-        <p><a href="https://github.com/timoheimonen/securememo.app" target="_blank" rel="noopener noreferrer">View source code at GitHub</a> | <a href="/en/tos.html">Terms of Service</a> | <a href="/en/privacy.html">Privacy Notice</a></p>
-        <p class="footer-tagline">No tracking, no ads, no nonsense.</p>
+        <p><a href="https://github.com/timoheimonen/securememo.app" target="_blank" rel="noopener noreferrer" data-i18n="footer.sourceCode">View source code at GitHub</a> | <a href="/en/tos.html" data-i18n="footer.tos">Terms of Service</a> | <a href="/en/privacy.html" data-i18n="footer.privacy">Privacy Notice</a></p>
+        <p class="footer-tagline" data-i18n="footer.tagline">No tracking, no ads, no nonsense.</p>
     </footer>
 
     <script src="/js/common.js" type="module" nonce="{{CSP_NONCE}}" defer></script>

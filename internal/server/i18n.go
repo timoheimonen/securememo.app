@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"html"
 	"regexp"
-	"sort"
 	"strings"
 
 	"github.com/timoheimonen/securememo/internal/frontend"
@@ -97,77 +96,61 @@ func extractTranslationJSON(js string) string {
 
 func localizeHTML(templateHTML, locale, pathWithoutLocale, publicOrigin string) string {
 	locale = sanitizeSupportedLocale(locale)
-	out := applyTranslations(templateHTML, locale)
+	out := applyLocalizedAttributes(templateHTML, locale)
+	out = applyLocalizedText(out, locale)
 	out = rewriteLocaleURLs(out, locale, pathWithoutLocale, publicOrigin)
 	out = rewriteLocaleChrome(out, locale, pathWithoutLocale)
 	out = rewriteSEO(out, locale, pathWithoutLocale, publicOrigin)
 	return out
 }
 
-func applyTranslations(input, locale string) string {
-	if locale == "en" {
-		return input
-	}
-	english := translationCatalog["en"]
-	localized := translationCatalog[locale]
-	if len(english) == 0 || len(localized) == 0 {
-		return input
-	}
+var localizedTextRegexp = regexp.MustCompile(`(?s)(<([A-Za-z][A-Za-z0-9]*)\b[^>]*\sdata-i18n="([A-Za-z0-9_.]+)"[^>]*>)([^<]*)(</([A-Za-z][A-Za-z0-9]*)\s*>)`)
+var localizedTextMarkerRegexp = regexp.MustCompile(`\sdata-i18n="[A-Za-z0-9_.]+"`)
+var htmlTagRegexp = regexp.MustCompile(`<[^>]+>`)
+var localizedAttributeMarkerRegexp = regexp.MustCompile(`\sdata-i18n-([a-z][a-z0-9-]*)="([A-Za-z0-9_.]+)"`)
 
-	keys := make([]string, 0, len(english))
-	for key, value := range english {
-		if value != "" && localized[key] != "" && localized[key] != value {
-			keys = append(keys, key)
+var localizableHTMLAttributes = map[string]bool{
+	"alt":         true,
+	"aria-label":  true,
+	"placeholder": true,
+	"title":       true,
+}
+
+// applyLocalizedText replaces only explicitly marked leaf text nodes. Translation
+// values are escaped for HTML text context and the marker is removed from output.
+func applyLocalizedText(input, locale string) string {
+	return localizedTextRegexp.ReplaceAllStringFunc(input, func(element string) string {
+		parts := localizedTextRegexp.FindStringSubmatch(element)
+		if len(parts) != 7 || !strings.EqualFold(parts[2], parts[6]) {
+			return element
 		}
-	}
-	sort.Slice(keys, func(i, j int) bool {
-		return len(english[keys[i]]) > len(english[keys[j]])
+		openingTag := localizedTextMarkerRegexp.ReplaceAllString(parts[1], "")
+		return openingTag + html.EscapeString(tr(locale, parts[3])) + parts[5]
 	})
+}
 
-	return replaceOutsideScriptTags(input, func(part string, inScript bool) string {
-		out := part
-		for _, key := range keys {
-			from := english[key]
-			to := localized[key]
-			if inScript {
-				out = strings.ReplaceAll(out, jsonStringBody(from), jsonStringBody(to))
+// applyLocalizedAttributes handles attribute values separately from text nodes.
+// Only a small allowlist of display attributes can be localized; structural
+// attributes such as value, maxlength, sizes, and viewport content are never
+// considered translation targets.
+func applyLocalizedAttributes(input, locale string) string {
+	return htmlTagRegexp.ReplaceAllStringFunc(input, func(tag string) string {
+		markers := localizedAttributeMarkerRegexp.FindAllStringSubmatch(tag, -1)
+		for _, marker := range markers {
+			attribute, key := marker[1], marker[2]
+			if !localizableHTMLAttributes[attribute] {
 				continue
 			}
-			out = strings.ReplaceAll(out, html.EscapeString(from), html.EscapeString(to))
-			out = strings.ReplaceAll(out, from, to)
+			attributeRegexp := regexp.MustCompile(fmt.Sprintf(`\s%s="[^"]*"`, regexp.QuoteMeta(attribute)))
+			if !attributeRegexp.MatchString(tag) {
+				continue
+			}
+			replacement := fmt.Sprintf(` %s="%s"`, attribute, html.EscapeString(tr(locale, key)))
+			tag = attributeRegexp.ReplaceAllStringFunc(tag, func(string) string { return replacement })
+			tag = strings.Replace(tag, marker[0], "", 1)
 		}
-		return out
+		return tag
 	})
-}
-
-func replaceOutsideScriptTags(input string, replace func(part string, inScript bool) string) string {
-	var out strings.Builder
-	remaining := input
-	for {
-		start := strings.Index(strings.ToLower(remaining), "<script")
-		if start < 0 {
-			out.WriteString(replace(remaining, false))
-			return out.String()
-		}
-		out.WriteString(replace(remaining[:start], false))
-		remaining = remaining[start:]
-		end := strings.Index(strings.ToLower(remaining), "</script>")
-		if end < 0 {
-			out.WriteString(replace(remaining, true))
-			return out.String()
-		}
-		end += len("</script>")
-		out.WriteString(replace(remaining[:end], true))
-		remaining = remaining[end:]
-	}
-}
-
-func jsonStringBody(value string) string {
-	body, err := json.Marshal(value)
-	if err != nil || len(body) < 2 {
-		return value
-	}
-	return string(body[1 : len(body)-1])
 }
 
 func rewriteLocaleChrome(input, locale, pathWithoutLocale string) string {

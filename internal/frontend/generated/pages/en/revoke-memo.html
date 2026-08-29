@@ -27,16 +27,16 @@
         <div class="nav-container">
             <a href="/en" class="nav-logo">securememo.app</a>
 
-            <button class="hamburger" type="button" aria-label="Toggle navigation menu" aria-expanded="false">
+            <button class="hamburger" type="button" aria-label="Toggle navigation menu" data-i18n-aria-label="nav.toggleMenu" aria-expanded="false">
                 <span class="hamburger-line"></span>
                 <span class="hamburger-line"></span>
                 <span class="hamburger-line"></span>
             </button>
 
             <ul class="nav-menu" id="navMenu">
-                <li><a href="/en" class="nav-link">Home</a></li>
-                <li><a href="/en/about.html" class="nav-link">About</a></li>
-                <li><a href="/en/create-memo.html" class="nav-link">Create Secure Memo</a></li>
+                <li><a href="/en" class="nav-link" data-i18n="nav.home">Home</a></li>
+                <li><a href="/en/about.html" class="nav-link" data-i18n="nav.about">About</a></li>
+                <li><a href="/en/create-memo.html" class="nav-link" data-i18n="nav.create">Create Secure Memo</a></li>
                 <li class="language-dropdown">
                     <button class="language-toggle nav-link" aria-expanded="false" aria-haspopup="true">
                         English
@@ -54,45 +54,45 @@
     <main class="main-content">
         <div class="memo-container">
             <div class="memo-card">
-                <h1>Revoke Secure Memo</h1>
-                <p class="memo-description">This private revoke link can delete the memo before it is read. Deletion is permanent and cannot be undone.</p>
+                <h1 data-i18n="revoke.hero.title">Revoke Secure Memo</h1>
+                <p class="memo-description" data-i18n="revoke.hero.description">This private revoke link can delete the memo before it is read. Deletion is permanent and cannot be undone.</p>
 
                 <div id="confirmContent" class="memo-content hidden">
-                    <h3>Delete this memo?</h3>
+                    <h3 data-i18n="revoke.confirm.title">Delete this memo?</h3>
                     <div class="memo-warning">
-                        <p>Before you continue:</p>
+                        <p data-i18n="revoke.confirm.before">Before you continue:</p>
                         <ul>
-                            <li>This deletes the memo immediately if it has not already been read, expired, or deleted</li>
-                            <li>Deletion is permanent and the memo cannot be recovered</li>
-                            <li>The recipient will no longer be able to read the memo</li>
-                            <li>This request sends only the memo ID and revoke token to the server. It does not send the memo password or plaintext memo contents.</li>
+                            <li data-i18n="revoke.confirm.exists">This deletes the memo immediately if it has not already been read, expired, or deleted</li>
+                            <li data-i18n="revoke.confirm.permanent">Deletion is permanent and the memo cannot be recovered</li>
+                            <li data-i18n="revoke.confirm.recipient">The recipient will no longer be able to read the memo</li>
+                            <li data-i18n="revoke.confirm.sends">This request sends only the memo ID and revoke token to the server. It does not send the memo password or plaintext memo contents.</li>
                         </ul>
                     </div>
                     <div class="memo-actions">
-                        <button type="button" class="btn btn-primary" id="revokeButton">Delete Memo</button>
-                        <a href="/en/create-memo.html" class="btn btn-secondary">Create New Memo</a>
+                        <button type="button" class="btn btn-primary" id="revokeButton" data-i18n="btn.deleteMemo">Delete Memo</button>
+                        <a href="/en/create-memo.html" class="btn btn-secondary" data-i18n="btn.createNew">Create New Memo</a>
                     </div>
                     <div id="revokeLoadingIndicator" class="loading-spinner hidden">
                         <div class="spinner"></div>
-                        <p>Deleting memo...</p>
+                        <p data-i18n="revoke.status.deleting">Deleting memo...</p>
                     </div>
                 </div>
 
                 <div id="successContent" class="memo-content hidden">
-                    <h3>Memo Deleted</h3>
-                    <p>The memo was revoked successfully. The recipient can no longer read it.</p>
+                    <h3 data-i18n="revoke.success.title">Memo Deleted</h3>
+                    <p data-i18n="revoke.success.description">The memo was revoked successfully. The recipient can no longer read it.</p>
                     <div class="memo-actions">
-                        <a href="/en/create-memo.html" class="btn btn-primary">Create New Memo</a>
-                        <a href="/en" class="btn btn-secondary">Go Home</a>
+                        <a href="/en/create-memo.html" class="btn btn-primary" data-i18n="btn.createNew">Create New Memo</a>
+                        <a href="/en" class="btn btn-secondary" data-i18n="btn.goHome">Go Home</a>
                     </div>
                 </div>
 
                 <div id="errorContent" class="error-content hidden">
-                    <h3>Invalid Revoke Link</h3>
+                    <h3 data-i18n="revoke.error.title">Invalid Revoke Link</h3>
                     <p id="errorMessage"></p>
                     <div class="memo-actions">
-                        <a href="/en/create-memo.html" class="btn btn-primary">Create New Memo</a>
-                        <a href="/en" class="btn btn-secondary">Go Home</a>
+                        <a href="/en/create-memo.html" class="btn btn-primary" data-i18n="btn.createNew">Create New Memo</a>
+                        <a href="/en" class="btn btn-secondary" data-i18n="btn.goHome">Go Home</a>
                     </div>
                 </div>
 
@@ -102,8 +102,8 @@
     </main>
 
     <footer class="footer">
-        <p><a href="https://github.com/timoheimonen/securememo.app" target="_blank" rel="noopener noreferrer">View source code at GitHub</a> | <a href="/en/tos.html">Terms of Service</a> | <a href="/en/privacy.html">Privacy Notice</a></p>
-        <p class="footer-tagline">No tracking, no ads, no nonsense.</p>
+        <p><a href="https://github.com/timoheimonen/securememo.app" target="_blank" rel="noopener noreferrer" data-i18n="footer.sourceCode">View source code at GitHub</a> | <a href="/en/tos.html" data-i18n="footer.tos">Terms of Service</a> | <a href="/en/privacy.html" data-i18n="footer.privacy">Privacy Notice</a></p>
+        <p class="footer-tagline" data-i18n="footer.tagline">No tracking, no ads, no nonsense.</p>
     </footer>
 
     <script src="/js/common.js" type="module" nonce="{{CSP_NONCE}}" defer></script>

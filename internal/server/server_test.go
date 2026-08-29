@@ -267,7 +267,7 @@ func TestRevokePageIsLocalized(t *testing.T) {
 			t.Fatalf("GET %s status = %d, want %d", tc.path, rec.Code, http.StatusOK)
 		}
 		body := rec.Body.String()
-		if !strings.Contains(body, tc.localizedH1) {
+		if !strings.Contains(body, fmt.Sprintf(`<h1>%s</h1>`, tc.localizedH1)) {
 			t.Fatalf("GET %s missing localized revoke heading %q", tc.path, tc.localizedH1)
 		}
 		if !strings.Contains(body, `<meta name="robots" content="noindex,follow">`) {

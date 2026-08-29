@@ -69,16 +69,16 @@
         <div class="nav-container">
             <a href="/en" class="nav-logo">securememo.app</a>
 
-            <button class="hamburger" type="button" aria-label="Toggle navigation menu" aria-expanded="false">
+            <button class="hamburger" type="button" aria-label="Toggle navigation menu" data-i18n-aria-label="nav.toggleMenu" aria-expanded="false">
                 <span class="hamburger-line"></span>
                 <span class="hamburger-line"></span>
                 <span class="hamburger-line"></span>
             </button>
 
             <ul class="nav-menu" id="navMenu">
-                <li><a href="/en" class="nav-link">Home</a></li>
-                <li><a href="/en/about.html" class="nav-link active">About</a></li>
-                <li><a href="/en/create-memo.html" class="nav-link">Create Secure Memo</a></li>
+                <li><a href="/en" class="nav-link" data-i18n="nav.home">Home</a></li>
+                <li><a href="/en/about.html" class="nav-link active" data-i18n="nav.about">About</a></li>
+                <li><a href="/en/create-memo.html" class="nav-link" data-i18n="nav.create">Create Secure Memo</a></li>
                 <li class="language-dropdown">
                     <button class="language-toggle nav-link" aria-expanded="false" aria-haspopup="true">
                         English
@@ -124,31 +124,31 @@
 
     <main class="main-content page-about">
         <div class="page-hero">
-            <h1>About securememo.app</h1>
-            <p>securememo.app is for short private notes. Memo contents are encrypted in your browser before upload, and the server only stores ciphertext plus the metadata needed to expire and delete the memo.</p>
+            <h1 data-i18n="about.hero.title">About securememo.app</h1>
+            <p data-i18n="about.current.hero.subtitle">securememo.app is for short private notes. Memo contents are encrypted in your browser before upload, and the server only stores ciphertext plus the metadata needed to expire and delete the memo.</p>
             <div class="cta-buttons page-hero-actions">
-                <a href="/en/create-memo.html" class="btn btn-primary">Create Secure Memo</a>
+                <a href="/en/create-memo.html" class="btn btn-primary" data-i18n="about.cta.createBtn">Create Secure Memo</a>
             </div>
         </div>
 
         <section class="info-section">
-            <h2>What makes it private</h2>
+            <h2 data-i18n="about.current.privacy.title">What makes it private</h2>
             <div class="info-grid">
                 <div class="info-card">
-                    <h3>Encrypted in your browser</h3>
-                    <p>Your memo is encrypted with AES-256-GCM before it leaves your device. We only store ciphertext.</p>
+                    <h3 data-i18n="about.current.encrypted.title">Encrypted in your browser</h3>
+                    <p data-i18n="about.current.encrypted.description">Your memo is encrypted with AES-256-GCM before it leaves your device. We only store ciphertext.</p>
                 </div>
                 <div class="info-card">
-                    <h3>Passwords stay on your device</h3>
-                    <p>The encryption password is generated in your browser. It's never sent to or stored on our servers.</p>
+                    <h3 data-i18n="about.current.passwords.title">Passwords stay on your device</h3>
+                    <p data-i18n="about.current.passwords.description">The encryption password is generated in your browser. It's never sent to or stored on our servers.</p>
                 </div>
                 <div class="info-card">
-                    <h3>Deleted after read or expiry</h3>
-                    <p>After a successful read, the browser confirms deletion with the server. Expired memos are cleaned up automatically.</p>
+                    <h3 data-i18n="about.current.delete.title">Deleted after read or expiry</h3>
+                    <p data-i18n="about.current.delete.description">After a successful read, the browser confirms deletion with the server. Expired memos are cleaned up automatically.</p>
                 </div>
                 <div class="info-card">
-                    <h3>No accounts, no tracking</h3>
-                    <p>You don't need to sign up. We don't use cookies, advertising trackers, third-party analytics, or behavioral profiling. We keep only limited aggregate operational metrics needed to run and protect the service.</p>
+                    <h3 data-i18n="about.current.noAccounts.title">No accounts, no tracking</h3>
+                    <p data-i18n="about.current.noAccounts.description">You don't need to sign up. We don't use cookies, advertising trackers, third-party analytics, or behavioral profiling. We keep only limited aggregate operational metrics needed to run and protect the service.</p>
                 </div>
             </div>
         </section>
@@ -156,28 +156,28 @@
         <section class="storage-section" aria-labelledby="storage-title">
             <div class="storage-panel">
                 <div class="storage-copy">
-                    <h2 id="storage-title">What the server stores</h2>
-                    <p>The server is designed to handle delivery and cleanup, not memo contents.</p>
+                    <h2 id="storage-title" data-i18n="about.current.storage.title">What the server stores</h2>
+                    <p data-i18n="about.current.storage.description">The server is designed to handle delivery and cleanup, not memo contents.</p>
                 </div>
                 <div class="storage-grid">
                     <div class="storage-card">
-                        <h3>Stored temporarily</h3>
+                        <h3 data-i18n="about.current.storage.stored.title">Stored temporarily</h3>
                         <ul>
-                            <li>Encrypted memo ciphertext</li>
-                            <li>Expiry time</li>
-                            <li>Random memo ID</li>
-                            <li>Deletion-token hash</li>
-                            <li>Sender revoke-token hash</li>
+                            <li data-i18n="about.current.storage.stored.ciphertext">Encrypted memo ciphertext</li>
+                            <li data-i18n="about.current.storage.stored.expiry">Expiry time</li>
+                            <li data-i18n="about.current.storage.stored.memoId">Random memo ID</li>
+                            <li data-i18n="about.current.storage.stored.deletionHash">Deletion-token hash</li>
+                            <li data-i18n="about.current.storage.stored.revokeHash">Sender revoke-token hash</li>
                         </ul>
                     </div>
                     <div class="storage-card storage-card-strong">
-                        <h3>Not stored</h3>
+                        <h3 data-i18n="about.current.storage.notStored.title">Not stored</h3>
                         <ul>
-                            <li>Plaintext memo contents</li>
-                            <li>Encryption passwords</li>
-                            <li>Raw deletion or revoke tokens</li>
-                            <li>User accounts</li>
-                            <li>Cookies, tracking identifiers, or advertising data</li>
+                            <li data-i18n="about.current.storage.notStored.plaintext">Plaintext memo contents</li>
+                            <li data-i18n="about.current.storage.notStored.passwords">Encryption passwords</li>
+                            <li data-i18n="about.current.storage.notStored.rawTokens">Raw deletion or revoke tokens</li>
+                            <li data-i18n="about.current.storage.notStored.accounts">User accounts</li>
+                            <li data-i18n="about.current.storage.notStored.tracking">Cookies, tracking identifiers, or advertising data</li>
                         </ul>
                     </div>
                 </div>
@@ -185,45 +185,45 @@
         </section>
 
         <section class="steps-section" id="how-it-works">
-            <h2>How to share a memo</h2>
+            <h2 data-i18n="about.current.share.title">How to share a memo</h2>
             <ol class="steps-list">
                 <li>
                     <span class="step-number">1</span>
                     <div class="step-content">
-                        <h3>Write it</h3>
-                        <p>Type your note and pick an expiry time. Your browser encrypts it before uploading.</p>
+                        <h3 data-i18n="about.current.write.title">Write it</h3>
+                        <p data-i18n="about.current.write.description">Type your note and pick an expiry time. Your browser encrypts it before uploading.</p>
                     </div>
                 </li>
                 <li>
                     <span class="step-number">2</span>
                     <div class="step-content">
-                        <h3>Share separately</h3>
-                        <p>Send the link and the password through different channels for extra safety.</p>
+                        <h3 data-i18n="about.current.shareSeparately.title">Share separately</h3>
+                        <p data-i18n="about.current.shareSeparately.description">Send the link and the password through different channels for extra safety.</p>
                     </div>
                 </li>
                 <li>
                     <span class="step-number">3</span>
                     <div class="step-content">
-                        <h3>Read it once</h3>
-                        <p>The recipient opens the link, enters the password, and the memo decrypts in their browser.</p>
+                        <h3 data-i18n="about.current.readOnce.title">Read it once</h3>
+                        <p data-i18n="about.current.readOnce.description">The recipient opens the link, enters the password, and the memo decrypts in their browser.</p>
                     </div>
                 </li>
             </ol>
         </section>
 
         <section class="page-cta">
-            <h2>Ready to try it?</h2>
-            <p>Create your first secure memo in seconds.</p>
+            <h2 data-i18n="about.current.cta.title">Ready to try it?</h2>
+            <p data-i18n="about.current.cta.subtitle">Create your first secure memo in seconds.</p>
             <div class="cta-buttons">
-                <a href="/en/create-memo.html" class="btn btn-primary">Create Secure Memo</a>
-                <a href="/en" class="btn btn-secondary">Go Home</a>
+                <a href="/en/create-memo.html" class="btn btn-primary" data-i18n="about.cta.createBtn">Create Secure Memo</a>
+                <a href="/en" class="btn btn-secondary" data-i18n="about.cta.homeBtn">Go Home</a>
             </div>
         </section>
     </main>
 
     <footer class="footer">
-        <p><a href="https://github.com/timoheimonen/securememo.app" target="_blank" rel="noopener noreferrer">View source code at GitHub</a> | <a href="/en/tos.html">Terms of Service</a> | <a href="/en/privacy.html">Privacy Notice</a></p>
-        <p class="footer-tagline">No tracking, no ads, no nonsense.</p>
+        <p><a href="https://github.com/timoheimonen/securememo.app" target="_blank" rel="noopener noreferrer" data-i18n="footer.sourceCode">View source code at GitHub</a> | <a href="/en/tos.html" data-i18n="footer.tos">Terms of Service</a> | <a href="/en/privacy.html" data-i18n="footer.privacy">Privacy Notice</a></p>
+        <p class="footer-tagline" data-i18n="footer.tagline">No tracking, no ads, no nonsense.</p>
     </footer>
 
     <script src="/js/common.js" type="module" nonce="{{CSP_NONCE}}" defer></script>
