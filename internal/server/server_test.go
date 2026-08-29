@@ -72,6 +72,53 @@ func TestRenderedSEOHeadUsesLocalizedMetadata(t *testing.T) {
 	}
 }
 
+func TestRenderedLocaleMetadataUsesBCP47AndRTLDirection(t *testing.T) {
+	app := newTestServer(t)
+	tests := []struct {
+		path      string
+		root      string
+		language  string
+		canonical string
+	}{
+		{
+			path:      "/ptBR",
+			root:      `<html lang="pt-BR">`,
+			language:  `"inLanguage": "pt-BR"`,
+			canonical: `<link rel="canonical" href="https://securememo.app/ptBR">`,
+		},
+		{
+			path:      "/ptPT/about.html",
+			root:      `<html lang="pt-PT">`,
+			language:  `"inLanguage": "pt-PT"`,
+			canonical: `<link rel="canonical" href="https://securememo.app/ptPT/about.html">`,
+		},
+		{
+			path:      "/ar/create-memo.html",
+			root:      `<html lang="ar" dir="rtl">`,
+			language:  `"inLanguage": "ar"`,
+			canonical: `<link rel="canonical" href="https://securememo.app/ar/create-memo.html">`,
+		},
+	}
+
+	for _, tc := range tests {
+		t.Run(tc.path, func(t *testing.T) {
+			rec := httptest.NewRecorder()
+			req := httptest.NewRequest(http.MethodGet, tc.path, nil)
+			app.ServeHTTP(rec, req)
+
+			if rec.Code != http.StatusOK {
+				t.Fatalf("GET %s status = %d, want %d", tc.path, rec.Code, http.StatusOK)
+			}
+			body := rec.Body.String()
+			for _, want := range []string{tc.root, tc.language, tc.canonical} {
+				if !strings.Contains(body, want) {
+					t.Fatalf("GET %s missing %q", tc.path, want)
+				}
+			}
+		})
+	}
+}
+
 func TestNoIndexPagesAreMarkedButCrawlable(t *testing.T) {
 	app := newTestServer(t)
 	for _, path := range []string{"/en/read-memo.html", "/en/revoke-memo.html", "/en/tos.html", "/en/privacy.html"} {

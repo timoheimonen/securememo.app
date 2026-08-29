@@ -198,6 +198,114 @@ func TestLocalizedRenderPreservesStructuralHTMLAttributes(t *testing.T) {
 	}
 }
 
+func TestLocalizedRootMetadataUsesPublicLanguageTagsAndDirection(t *testing.T) {
+	htmlRootRegexp := regexp.MustCompile(`(?m)^<html[^>]*>`)
+	for _, page := range localizedTemplatePages {
+		templateHTML := readLocalizedTemplate(t, page.filename)
+		for _, locale := range supportedLocales {
+			t.Run(locale+"/"+page.filename, func(t *testing.T) {
+				rendered := localizeHTML(templateHTML, locale, page.path, "https://securememo.app")
+				got := htmlRootRegexp.FindString(rendered)
+				want := fmt.Sprintf(`<html lang="%s">`, languageTag(locale))
+				if textDirection(locale) == "rtl" {
+					want = fmt.Sprintf(`<html lang="%s" dir="rtl">`, languageTag(locale))
+				}
+				if got != want {
+					t.Fatalf("localized root element = %q, want %q", got, want)
+				}
+			})
+		}
+	}
+}
+
+func TestLanguageMenuItemsDeclareTheirLanguageAndDirection(t *testing.T) {
+	rendered := localizeHTML(readLocalizedTemplate(t, "index.html"), "ar", "/", "https://securememo.app")
+	for _, want := range []string{
+		`class="language-item active" lang="ar" dir="rtl"`,
+		`lang="en" dir="ltr" title="English"`,
+		`lang="pt-BR" dir="ltr" title="Português (Brasil)"`,
+		`lang="pt-PT" dir="ltr" title="Português"`,
+	} {
+		if !strings.Contains(rendered, want) {
+			t.Fatalf("Arabic language menu is missing %q", want)
+		}
+	}
+}
+
+func TestLocalizationCoreDoesNotOverrideServerLocaleMetadata(t *testing.T) {
+	body, err := frontend.FS.ReadFile("generated/js/localization-core.js")
+	if err != nil {
+		t.Fatalf("read localization core: %v", err)
+	}
+	source := string(body)
+	for _, attribute := range []string{"lang", "dir"} {
+		if strings.Contains(source, "document.documentElement.setAttribute('"+attribute+"'") ||
+			strings.Contains(source, `document.documentElement.setAttribute("`+attribute+`"`) {
+			t.Fatalf("localization core overrides server-rendered %s metadata", attribute)
+		}
+	}
+}
+
+func TestBidirectionalContentDirections(t *testing.T) {
+	createTemplate := readLocalizedTemplate(t, "create-memo.html")
+	for _, want := range []string{
+		`<textarea id="message" dir="auto"`,
+		`<input type="text" id="memoUrl" dir="ltr"`,
+		`<input type="password" id="memoPassword" dir="ltr"`,
+		`<input type="text" id="ownerDeleteUrl" dir="ltr"`,
+	} {
+		if !strings.Contains(createTemplate, want) {
+			t.Fatalf("create template is missing bidirectional-content marker %q", want)
+		}
+	}
+
+	readTemplate := readLocalizedTemplate(t, "read-memo.html")
+	for _, want := range []string{
+		`<input type="password" id="password" dir="ltr"`,
+		`<p id="decryptedMessage" dir="auto"></p>`,
+	} {
+		if !strings.Contains(readTemplate, want) {
+			t.Fatalf("read template is missing bidirectional-content marker %q", want)
+		}
+	}
+}
+
+func TestRTLStylesUseLogicalInlineDirections(t *testing.T) {
+	body, err := frontend.FS.ReadFile("generated/styles.css")
+	if err != nil {
+		t.Fatalf("read stylesheet: %v", err)
+	}
+	styles := string(body)
+	requiredRules := map[string]string{
+		"language menu anchor":        `(?s)\.language-menu\s*\{[^}]*inset-inline-end:\s*0;`,
+		"hero text alignment":         `(?s)\.hero-section\s*\{[^}]*text-align:\s*start;`,
+		"callout accent":              `(?s)\.result-section,\s*\.memo-content\s*\{[^}]*border-inline-start:`,
+		"list marker position":        `(?s)\.storage-card li::before\s*\{[^}]*inset-inline-start:\s*0;`,
+		"mobile menu hidden position": `(?s)\.nav-menu\s*\{[^}]*inset-inline-end:\s*-100%;`,
+		"mobile menu open position":   `(?s)\.nav-menu\.active\s*\{[^}]*inset-inline-end:\s*0;`,
+		"RTL drawer shadow":           `(?s)html\[dir="rtl"\] \.nav-menu\s*\{[^}]*box-shadow:\s*5px 0`,
+		"RTL password placeholder":    `(?s)html\[dir="rtl"\] input\[dir="ltr"\]::placeholder\s*\{[^}]*text-align:\s*end;[^}]*unicode-bidi:\s*plaintext;`,
+	}
+	for name, pattern := range requiredRules {
+		if !regexp.MustCompile(pattern).MatchString(styles) {
+			t.Errorf("stylesheet is missing %s RTL rule", name)
+		}
+	}
+
+	physicalInlineProperty := regexp.MustCompile(`(?m)^\s*(?:left|right|border-left|border-right|padding-left|padding-right|margin-left|margin-right):|^\s*text-align:\s*(?:left|right);`)
+	if match := physicalInlineProperty.FindString(styles); match != "" {
+		t.Fatalf("stylesheet contains physical inline-direction property %q", strings.TrimSpace(match))
+	}
+}
+
+func TestPolishCatalogHasNoZeroWidthSpaces(t *testing.T) {
+	for key, value := range translationCatalog["pl"] {
+		if strings.ContainsRune(value, '\u200b') {
+			t.Errorf("Polish translation %q contains U+200B", key)
+		}
+	}
+}
+
 func TestLocalizedRenderIsDeterministic(t *testing.T) {
 	for _, page := range localizedTemplatePages {
 		templateHTML := readLocalizedTemplate(t, page.filename)

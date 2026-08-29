@@ -155,7 +155,11 @@ func applyLocalizedAttributes(input, locale string) string {
 
 func rewriteLocaleChrome(input, locale, pathWithoutLocale string) string {
 	label := localeLabels[locale]
-	out := strings.Replace(input, `<html lang="en">`, fmt.Sprintf(`<html lang="%s">`, locale), 1)
+	htmlTag := fmt.Sprintf(`<html lang="%s">`, languageTag(locale))
+	if textDirection(locale) == "rtl" {
+		htmlTag = fmt.Sprintf(`<html lang="%s" dir="rtl">`, languageTag(locale))
+	}
+	out := strings.Replace(input, `<html lang="en">`, htmlTag, 1)
 	out = languageToggleRegexp.ReplaceAllString(out, fmt.Sprintf(`<button class="language-toggle nav-link" aria-expanded="false" aria-haspopup="true">
                         %s %s
                     </button>`, label.Flag, label.Name))
@@ -203,7 +207,7 @@ func buildLanguageMenu(activeLocale, pathWithoutLocale string) string {
 			activeClass = "active"
 		}
 		out.WriteString(fmt.Sprintf(`
-                        <a href="%s" class="language-item %s" title="%s">%s %s</a>`, buildLocalizedPath(locale, pathWithoutLocale), activeClass, html.EscapeString(label.Name), label.Flag, html.EscapeString(label.Name)))
+                        <a href="%s" class="language-item %s" lang="%s" dir="%s" title="%s">%s %s</a>`, buildLocalizedPath(locale, pathWithoutLocale), activeClass, languageTag(locale), textDirection(locale), html.EscapeString(label.Name), label.Flag, html.EscapeString(label.Name)))
 	}
 	out.WriteString(`
                     </div>`)
