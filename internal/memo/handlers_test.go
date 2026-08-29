@@ -3,6 +3,7 @@ package memo
 import (
 	"context"
 	"errors"
+	"fmt"
 	"net/http"
 	"net/http/httptest"
 	"path/filepath"
@@ -13,6 +14,49 @@ import (
 	"github.com/timoheimonen/securememo/internal/config"
 	"github.com/timoheimonen/securememo/internal/store"
 )
+
+func TestCreateValidatesExpiryHours(t *testing.T) {
+	tests := []struct {
+		name        string
+		expiryHours int
+		wantStatus  int
+	}{
+		{name: "supported", expiryHours: 336, wantStatus: http.StatusOK},
+		{name: "unsupported", expiryHours: 999, wantStatus: http.StatusBadRequest},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			db, err := store.OpenSQLite(filepath.Join(t.TempDir(), "securememo.sqlite"))
+			if err != nil {
+				t.Fatalf("open sqlite: %v", err)
+			}
+			defer db.Close()
+
+			handler := Handler{
+				Config: config.Config{AllowedOrigins: []string{"https://securememo.app"}},
+				Store:  db,
+			}
+			body := fmt.Sprintf(
+				`{"encryptedMessage":"ciphertext","expiryHours":%d,"deletionTokenHash":"%s","ownerDeletionTokenHash":"%s"}`,
+				tt.expiryHours,
+				strings.Repeat("A", 44),
+				strings.Repeat("B", 44),
+			)
+			req := httptest.NewRequest(http.MethodPost, "/api/create-memo", strings.NewReader(body))
+			req.RemoteAddr = "203.0.113.10:12345"
+			req.Header.Set("Origin", "https://securememo.app")
+			req.Header.Set("Content-Type", "application/json")
+			rec := httptest.NewRecorder()
+
+			handler.Create(rec, req)
+
+			if rec.Code != tt.wantStatus {
+				t.Fatalf("create status = %d, want %d; body=%s", rec.Code, tt.wantStatus, rec.Body.String())
+			}
+		})
+	}
+}
 
 func TestRecordRateLimitsAppliesLaterWindow(t *testing.T) {
 	db, err := store.OpenSQLite(filepath.Join(t.TempDir(), "securememo.sqlite"))

@@ -48,7 +48,7 @@
           "@type": "Organization",
           "name": "securememo.app"
         },
-        "dateModified": "2026-06-18",
+        "dateModified": "2026-08-29",
         "description": "How securememo.app protects privacy with browser-side encryption, no cookies, no trackers, and limited operational metrics"
       }
     }
@@ -124,7 +124,7 @@
     <main class="main-content">
         <div class="legal-section">
             <h1>Privacy Notice for securememo.app</h1>
-            <p class="legal-meta"><strong>Last updated: June 28, 2026</strong></p>
+            <p class="legal-meta"><strong>Last updated: August 29, 2026</strong></p>
             
             <div class="legal-toc">
                 <h2>Table of Contents</h2>
@@ -171,7 +171,7 @@
                     <li>The recipient must receive both the memo URL and the password. They should be shared through separate channels.</li>
                     <li>The sender revoke token is shown only inside the private revoke link. It is sent to the server only when the sender confirms revocation.</li>
                     <li>After the memo is successfully decrypted in the recipient's browser, the browser sends the deletion token to confirm deletion.</li>
-                    <li>Memos are also deleted after expiration. Available expiration options are 8 hours, 24 hours, 48 hours, 1 week, and 30 days.</li>
+                    <li>Memos are also deleted after expiration. Available expiration options are 8 hours, 24 hours, 48 hours, 1 week, and 2 weeks.</li>
                 </ul>
             </div>
 
@@ -248,7 +248,7 @@
             <div class="usage-section" id="data-retention">
                 <h2>10. Retention and Deletion</h2>
                 <ul>
-                    <li><strong>Encrypted memos:</strong> retained until successful read confirmation or expiration, with a maximum selected expiration of 30 days.</li>
+                    <li><strong>Encrypted memos:</strong> retained until successful read confirmation or expiration, with a maximum selected expiration of 14 days.</li>
                     <li><strong>Expired memos:</strong> removed by automatic cleanup jobs that run periodically.</li>
                     <li><strong>Rate-limit data:</strong> kept only for the active rate-limit window and removed by cleanup. Current windows are short, including minute and hour windows.</li>
                     <li><strong>Operational metrics:</strong> current request, response byte, and duration metrics are kept in application memory and reset when the process restarts. Lifetime totals of successfully created and read memos are persisted in SQLite. If metrics are scraped into Prometheus-compatible monitoring or Grafana dashboards, they are retained only for operational monitoring, troubleshooting, capacity planning, and abuse prevention according to the monitoring stack configuration.</li>

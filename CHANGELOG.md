@@ -4,6 +4,11 @@ All notable changes to this project are documented here.
 
 Version identifiers match the application `assetVersion`.
 
+## 20260829a - 2026-08-29
+
+### Changed
+- Change the maximum memo expiry from 30 days to 2 weeks across application behavior and documentation.
+
 ## 20260713a - 2026-07-13
 
 ### Security

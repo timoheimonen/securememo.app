@@ -19,7 +19,7 @@ import (
 	"github.com/timoheimonen/securememo/internal/store"
 )
 
-const assetVersion = "20260713a"
+const assetVersion = "20260829a"
 
 var clientLocalizationAssetRe = regexp.MustCompile(`^/js/clientLocalization\.([A-Za-z0-9_-]+)\.js$`)
 
@@ -244,8 +244,8 @@ func (s *Server) serveSitemap(w http.ResponseWriter, r *http.Request) {
 		lastMod string
 	}{
 		{"", "2026-06-27"},
-		{"/about.html", "2026-07-12"},
-		{"/create-memo.html", "2026-07-12"},
+		{"/about.html", "2026-08-29"},
+		{"/create-memo.html", "2026-08-29"},
 	}
 	var entries []urlEntry
 	for _, page := range pages {
