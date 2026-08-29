@@ -10,6 +10,11 @@ Version identifiers match the application `assetVersion`.
 - Change the maximum memo expiry from 30 days to 2 weeks across application behavior and documentation.
 - Replace document-wide translation-value substitution with explicit, context-safe localization keys for HTML text and display attributes.
 - Return stable API error codes and translate them in the browser without exposing raw server error text.
+- Correct English remnants, inconsistent security and privacy terminology, and meaning-changing language errors across all 29 translated catalogs, including a full European Portuguese pass for `pt-PT`.
+- Use valid BCP 47 `pt-BR` and `pt-PT` language tags in rendered HTML while keeping the existing locale URL paths stable.
+- Add right-to-left rendering for Arabic navigation, forms, lists, callouts, mixed-direction memo fields, and language-menu metadata.
+- Remove invisible zero-width characters from Polish translations.
+- Document key-specific localization exceptions and retain audited legacy keys until deterministic runtime and browser-path coverage makes their removal safe.
 
 ## 20260713a - 2026-07-13
 
