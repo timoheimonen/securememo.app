@@ -8,7 +8,7 @@ securememo.app is a hosted service for sharing encrypted memos with automatic de
 - Random browser-generated passwords that are never sent to the server.
 - Delete-on-read flow with a client-side deletion token.
 - Sender revoke link for deleting an unread memo before expiry.
-- Expiry options: 8 hours, 1 day, 2 days, 1 week, or 30 days.
+- Expiry options: 8 hours, 1 day, 2 days, 1 week, or 2 weeks.
 - SQLite storage with WAL mode and automatic cleanup.
 - Strict security headers, input validation, timing delays, and generic access-denied responses.
 - No accounts, no tracking, no third-party analytics, no ads.

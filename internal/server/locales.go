@@ -29,6 +29,26 @@ func sanitizeSupportedLocale(locale string) string {
 	return "en"
 }
 
+// languageTag converts internal route and asset locale identifiers to the
+// public BCP 47 language tags used by HTML, hreflang, and structured data.
+func languageTag(locale string) string {
+	switch locale {
+	case "ptBR":
+		return "pt-BR"
+	case "ptPT":
+		return "pt-PT"
+	default:
+		return locale
+	}
+}
+
+func textDirection(locale string) string {
+	if locale == "ar" {
+		return "rtl"
+	}
+	return "ltr"
+}
+
 func extractLocaleFromPath(pathname string) localeInfo {
 	segments := strings.Split(strings.TrimLeft(pathname, "/"), "/")
 	if len(segments) > 0 && supportedLocaleSet[segments[0]] {

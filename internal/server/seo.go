@@ -197,21 +197,10 @@ func rewriteAlternateLinks(input, locale, pathWithoutLocale, publicOrigin string
 	}
 	var links strings.Builder
 	for _, candidate := range supportedLocales {
-		fmt.Fprintf(&links, `    <link rel="alternate" hreflang="%s" href="%s">`+"\n", hreflangCode(candidate), html.EscapeString(publicOrigin+buildLocalizedPath(candidate, pathWithoutLocale)))
+		fmt.Fprintf(&links, `    <link rel="alternate" hreflang="%s" href="%s">`+"\n", languageTag(candidate), html.EscapeString(publicOrigin+buildLocalizedPath(candidate, pathWithoutLocale)))
 	}
 	fmt.Fprintf(&links, `    <link rel="alternate" hreflang="x-default" href="%s">`+"\n", html.EscapeString(publicOrigin+buildLocalizedPath("en", pathWithoutLocale)))
 	return regexp.MustCompile(`(<link rel="canonical" href="[^"]+">\n)`).ReplaceAllString(out, "${1}"+links.String())
-}
-
-func hreflangCode(locale string) string {
-	switch locale {
-	case "ptBR":
-		return "pt-BR"
-	case "ptPT":
-		return "pt-PT"
-	default:
-		return locale
-	}
 }
 
 func replaceRegexp(input, pattern, replacement string) string {
@@ -285,7 +274,7 @@ func appJSONLD(locale, canonical, description string) map[string]interface{} {
 		"screenshot":          "https://securememo.app/android-chrome-512x512.png",
 		"license":             tr(locale, "schema.app.license"),
 		"codeRepository":      tr(locale, "schema.app.repository"),
-		"inLanguage":          hreflangCode(locale),
+		"inLanguage":          languageTag(locale),
 		"isAccessibleForFree": true,
 	}
 }
@@ -297,7 +286,7 @@ func aboutJSONLD(page seoPage, locale, canonical, description string) map[string
 		"name":        tr(locale, page.PageName),
 		"description": description,
 		"url":         canonical,
-		"inLanguage":  hreflangCode(locale),
+		"inLanguage":  languageTag(locale),
 	}
 }
 
@@ -312,7 +301,7 @@ func softwarePageJSONLD(page seoPage, locale, pathWithoutLocale, publicOrigin, c
 		"name":        tr(locale, page.PageName),
 		"description": description,
 		"url":         canonical,
-		"inLanguage":  hreflangCode(locale),
+		"inLanguage":  languageTag(locale),
 		"breadcrumb":  breadcrumb(locale, pathWithoutLocale, publicOrigin, tr(locale, page.Breadcrumb)),
 		"mainEntity": map[string]interface{}{
 			"@type":               "SoftwareApplication",
@@ -332,7 +321,7 @@ func creativeWorkJSONLD(page seoPage, locale, pathWithoutLocale, publicOrigin, c
 		"name":        tr(locale, page.PageName),
 		"description": description,
 		"url":         canonical,
-		"inLanguage":  hreflangCode(locale),
+		"inLanguage":  languageTag(locale),
 		"breadcrumb":  breadcrumb(locale, pathWithoutLocale, publicOrigin, tr(locale, page.Breadcrumb)),
 		"mainEntity": map[string]interface{}{
 			"@type":       "CreativeWork",

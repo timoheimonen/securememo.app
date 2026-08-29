@@ -70,7 +70,7 @@
             <a href="/en" class="nav-logo">securememo.app</a>
 
             <!-- Hamburger Menu Button -->
-            <button class="hamburger" type="button" aria-label="Toggle navigation menu" aria-expanded="false">
+            <button class="hamburger" type="button" aria-label="Toggle navigation menu" data-i18n-aria-label="nav.toggleMenu" aria-expanded="false">
                 <span class="hamburger-line"></span>
                 <span class="hamburger-line"></span>
                 <span class="hamburger-line"></span>
@@ -78,9 +78,9 @@
 
             <!-- Navigation Menu -->
             <ul class="nav-menu" id="navMenu">
-                <li><a href="/en" class="nav-link active">Home</a></li>
-                <li><a href="/en/about.html" class="nav-link">About</a></li>
-                <li><a href="/en/create-memo.html" class="nav-link">Create Secure Memo</a></li>
+                <li><a href="/en" class="nav-link active" data-i18n="nav.home">Home</a></li>
+                <li><a href="/en/about.html" class="nav-link" data-i18n="nav.about">About</a></li>
+                <li><a href="/en/create-memo.html" class="nav-link" data-i18n="nav.create">Create Secure Memo</a></li>
                 <li class="language-dropdown">
                     <button class="language-toggle nav-link" aria-expanded="false" aria-haspopup="true">
                         English
@@ -127,36 +127,36 @@
 
     <main class="main-content">
         <div class="hero-section">
-            <h1>Share encrypted notes that expire.</h1>
-            <p>Create a private memo in your browser. It is encrypted before upload and removed after read confirmation or expiry.</p>
+            <h1 data-i18n="home.current.hero.title">Share encrypted notes that expire.</h1>
+            <p data-i18n="home.current.hero.subtitle">Create a private memo in your browser. It is encrypted before upload and removed after read confirmation or expiry.</p>
             <div class="cta-buttons">
-                <a href="/en/create-memo.html" class="btn btn-primary">Create Secure Memo</a>
-                <a href="/en/about.html" class="btn btn-secondary">Learn More</a>
+                <a href="/en/create-memo.html" class="btn btn-primary" data-i18n="home.hero.btnPrimary">Create Secure Memo</a>
+                <a href="/en/about.html" class="btn btn-secondary" data-i18n="home.hero.btnSecondary">Learn More</a>
             </div>
         </div>
 
         <div class="features-section">
-            <h2>How it works</h2>
+            <h2 data-i18n="home.current.features.title">How it works</h2>
             <div class="features-grid">
                 <div class="feature-card">
-                    <h3>Write in your browser</h3>
-                    <p>Your memo is encrypted on your device before it ever reaches us. We can’t read it.</p>
+                    <h3 data-i18n="home.current.write.title">Write in your browser</h3>
+                    <p data-i18n="home.current.write.description">Your memo is encrypted on your device before it ever reaches us. We can’t read it.</p>
                 </div>
                 <div class="feature-card">
-                    <h3>Share link and password separately</h3>
-                    <p>Copy the link and the password. Send them through different channels for extra safety.</p>
+                    <h3 data-i18n="home.current.share.title">Share link and password separately</h3>
+                    <p data-i18n="home.current.share.description">Copy the link and the password. Send them through different channels for extra safety.</p>
                 </div>
                 <div class="feature-card">
-                    <h3>Deleted after read or expiry</h3>
-                    <p>After a successful read, the browser asks the server to delete the memo. Expired memos are cleaned up automatically.</p>
+                    <h3 data-i18n="home.current.delete.title">Deleted after read or expiry</h3>
+                    <p data-i18n="home.current.delete.description">After a successful read, the browser asks the server to delete the memo. Expired memos are cleaned up automatically.</p>
                 </div>
             </div>
         </div>
     </main>
 
     <footer class="footer">
-        <p><a href="https://github.com/timoheimonen/securememo.app" target="_blank" rel="noopener noreferrer">View source code at GitHub</a> | <a href="/en/tos.html">Terms of Service</a> | <a href="/en/privacy.html">Privacy Notice</a></p>
-        <p class="footer-tagline">No tracking, no ads, no nonsense.</p>
+        <p><a href="https://github.com/timoheimonen/securememo.app" target="_blank" rel="noopener noreferrer" data-i18n="footer.sourceCode">View source code at GitHub</a> | <a href="/en/tos.html" data-i18n="footer.tos">Terms of Service</a> | <a href="/en/privacy.html" data-i18n="footer.privacy">Privacy Notice</a></p>
+        <p class="footer-tagline" data-i18n="footer.tagline">No tracking, no ads, no nonsense.</p>
     </footer>
 
     <script src="/js/common.js" type="module" nonce="{{CSP_NONCE}}" defer></script>

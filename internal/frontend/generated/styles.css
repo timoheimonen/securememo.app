@@ -112,8 +112,7 @@ a:focus {
 .navbar {
   position: fixed;
   top: 0;
-  left: 0;
-  right: 0;
+  inset-inline: 0;
   z-index: 1002;
   background: rgba(255, 255, 255, 0.96);
   border-bottom: 1px solid var(--color-border);
@@ -149,6 +148,8 @@ a:focus {
   text-decoration: none;
   letter-spacing: -0.02em;
   transition: opacity 0.2s ease;
+  direction: ltr;
+  unicode-bidi: isolate;
 }
 
 .nav-logo:hover,
@@ -226,7 +227,7 @@ a:focus {
 .language-menu {
   position: absolute;
   top: calc(100% + 8px);
-  right: 0;
+  inset-inline-end: 0;
   background: var(--color-surface);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
@@ -285,7 +286,7 @@ a:focus {
 
 /* Hero */
 .hero-section {
-  text-align: left;
+  text-align: start;
   margin: 0 auto 56px;
   max-width: 900px;
 }
@@ -489,7 +490,7 @@ button[type="submit"]:disabled {
   margin-bottom: 36px;
   background: var(--color-surface-soft);
   border: 1px solid var(--color-border);
-  border-left: 4px solid var(--color-border-strong);
+  border-inline-start: 4px solid var(--color-border-strong);
   border-radius: var(--radius-md);
   padding: 24px;
 }
@@ -506,7 +507,7 @@ button[type="submit"]:disabled {
 
 .legal-toc ol li {
   position: relative;
-  padding-left: 30px;
+  padding-inline-start: 30px;
   margin: 8px 0;
   color: var(--color-muted);
 }
@@ -515,7 +516,7 @@ button[type="submit"]:disabled {
   counter-increment: section;
   content: counters(section, '.') '. ';
   position: absolute;
-  left: 0;
+  inset-inline-start: 0;
   top: 0;
   color: var(--color-ink);
   font-weight: 700;
@@ -541,7 +542,7 @@ button[type="submit"]:disabled {
 .feature-item {
   background: var(--color-surface-soft);
   border: 1px solid var(--color-border);
-  border-left: 4px solid var(--color-border-strong);
+  border-inline-start: 4px solid var(--color-border-strong);
   border-radius: var(--radius-md);
   padding: 20px;
   box-shadow: var(--shadow-xs);
@@ -585,7 +586,8 @@ button[type="submit"]:disabled {
 .features-detail li,
 .usage-section li {
   position: relative;
-  padding: 8px 0 8px 22px;
+  padding-block: 8px;
+  padding-inline: 22px 0;
   margin-bottom: 8px;
   line-height: 1.65;
   color: var(--color-muted);
@@ -595,7 +597,7 @@ button[type="submit"]:disabled {
 .usage-section li::before {
   content: '•';
   position: absolute;
-  left: 0;
+  inset-inline-start: 0;
   top: 8px;
   color: var(--color-ink);
   font-weight: 700;
@@ -603,13 +605,13 @@ button[type="submit"]:disabled {
 
 .features-detail li li,
 .usage-section li li {
-  padding-left: 18px;
+  padding-inline-start: 18px;
 }
 
 .features-detail li li::before,
 .usage-section li li::before {
   content: '◦';
-  left: -4px;
+  inset-inline-start: -4px;
 }
 
 .tech-stack li {
@@ -700,6 +702,16 @@ button[type="submit"]:disabled {
   font-family: inherit;
 }
 
+input[dir="ltr"] {
+  text-align: start;
+  unicode-bidi: isolate;
+}
+
+html[dir="rtl"] input[dir="ltr"]::placeholder {
+  text-align: end;
+  unicode-bidi: plaintext;
+}
+
 .form-group input:focus,
 .form-group textarea:focus,
 .form-group select:focus,
@@ -752,7 +764,7 @@ button[type="submit"]:disabled {
 .memo-content {
   background: var(--color-surface-soft);
   border: 1px solid var(--color-border);
-  border-left: 4px solid var(--color-border-strong);
+  border-inline-start: 4px solid var(--color-border-strong);
   border-radius: var(--radius-md);
   padding: 24px;
   margin-bottom: 24px;
@@ -776,7 +788,7 @@ button[type="submit"]:disabled {
 .memo-warning {
   background: var(--color-surface-soft);
   border: 1px solid var(--color-border);
-  border-left: 4px solid var(--color-border-strong);
+  border-inline-start: 4px solid var(--color-border-strong);
   border-radius: var(--radius-md);
   padding: 18px;
   margin-top: 22px;
@@ -789,7 +801,7 @@ button[type="submit"]:disabled {
 }
 
 .memo-warning ul {
-  margin-left: 20px;
+  margin-inline-start: 20px;
   color: var(--color-muted);
 }
 
@@ -829,7 +841,7 @@ button[type="submit"]:disabled {
 .error-content {
   background: var(--color-surface-soft);
   border: 1px solid var(--color-border);
-  border-left: 4px solid var(--color-border-strong);
+  border-inline-start: 4px solid var(--color-border-strong);
   border-radius: var(--radius-md);
   padding: 24px;
   box-shadow: var(--shadow-xs);
@@ -854,7 +866,7 @@ button[type="submit"]:disabled {
   display: none;
   background: var(--color-surface-soft);
   border: 1px solid var(--color-border);
-  border-left: 4px solid var(--color-border-strong);
+  border-inline-start: 4px solid var(--color-border-strong);
   color: var(--color-ink);
 }
 
@@ -980,7 +992,7 @@ button[type="submit"]:disabled {
 }
 
 .storage-copy h2 {
-  text-align: left;
+  text-align: start;
   margin-bottom: 14px;
 }
 
@@ -1020,7 +1032,7 @@ button[type="submit"]:disabled {
 
 .storage-card li {
   position: relative;
-  padding-left: 22px;
+  padding-inline-start: 22px;
   margin-bottom: 10px;
   color: var(--color-muted);
   line-height: 1.55;
@@ -1033,7 +1045,7 @@ button[type="submit"]:disabled {
 .storage-card li::before {
   content: '';
   position: absolute;
-  left: 0;
+  inset-inline-start: 0;
   top: 0.72em;
   width: 7px;
   height: 7px;
@@ -1227,7 +1239,7 @@ button[type="submit"]:disabled {
 }
 
 .mr-8 {
-  margin-right: 8px;
+  margin-inline-end: 8px;
 }
 
 .btn-active,
@@ -1245,7 +1257,7 @@ button[type="submit"]:disabled {
     visibility: visible !important;
     pointer-events: auto !important;
     transform: none !important;
-    right: auto !important;
+    inset-inline-end: auto !important;
     width: auto !important;
     height: auto !important;
     background: transparent !important;
@@ -1282,7 +1294,7 @@ button[type="submit"]:disabled {
     display: block;
     position: fixed;
     top: 0;
-    left: 0;
+    inset-inline-start: 0;
     width: 100%;
     height: 100%;
     background: var(--color-overlay);
@@ -1303,20 +1315,20 @@ button[type="submit"]:disabled {
   .nav-menu {
     position: fixed;
     top: 0;
-    right: -100%;
+    inset-inline-end: -100%;
     width: 100%;
     max-width: 320px;
     height: 100vh;
     height: calc(var(--vh, 1vh) * 100);
     background: var(--color-surface);
-    border-left: 1px solid var(--color-border);
+    border-inline-start: 1px solid var(--color-border);
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: stretch;
     padding: 0;
     box-shadow: -5px 0 20px rgba(0, 0, 0, 0.12);
-    transition: right 0.25s ease, opacity 0.25s ease, visibility 0.25s ease;
+    transition: inset-inline-end 0.25s ease, opacity 0.25s ease, visibility 0.25s ease;
     z-index: 1001;
     overflow-y: auto;
     overflow-x: hidden;
@@ -1324,6 +1336,10 @@ button[type="submit"]:disabled {
     touch-action: pan-y;
     scrollbar-width: thin;
     scrollbar-color: var(--color-border) transparent;
+  }
+
+  html[dir="rtl"] .nav-menu {
+    box-shadow: 5px 0 20px rgba(0, 0, 0, 0.12);
   }
 
   .nav-menu::before {
@@ -1339,7 +1355,7 @@ button[type="submit"]:disabled {
   }
 
   .nav-menu.active {
-    right: 0;
+    inset-inline-end: 0;
     opacity: 1;
     visibility: visible;
     pointer-events: auto;
@@ -1355,7 +1371,7 @@ button[type="submit"]:disabled {
     width: 100%;
     padding: 16px 24px;
     border-radius: 0;
-    text-align: left;
+    text-align: start;
     border-bottom: 1px solid var(--color-border);
     font-size: 1.05rem;
     min-height: 50px;

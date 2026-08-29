@@ -1,6 +1,26 @@
 const t = (key) => (typeof window.t === 'function' ? window.t(key) : key);
 const MEMO_ID_PATTERN = /^[A-Za-z0-9_-]{40}$/;
 
+const readAPIErrorTranslationKeys = Object.freeze({
+  MEMO_ACCESS_DENIED: 'error.MEMO_ACCESS_DENIED',
+  DATABASE_READ_ERROR: 'error.DATABASE_READ_ERROR',
+  MEMO_DELETION_ERROR: 'error.MEMO_DELETION_ERROR',
+  CONTENT_TYPE_ERROR: 'error.CONTENT_TYPE_ERROR',
+  INVALID_JSON: 'error.INVALID_JSON',
+  REQUEST_TOO_LARGE: 'error.REQUEST_TOO_LARGE',
+  METHOD_NOT_ALLOWED: 'error.METHOD_NOT_ALLOWED',
+  FORBIDDEN: 'error.FORBIDDEN',
+  RATE_LIMITED: 'error.RATE_LIMITED',
+  GENERAL_ERROR: 'error.GENERAL_ERROR'
+});
+
+function translatedReadAPIError(errorCode, fallbackKey = 'error.READ_MEMO_ERROR') {
+  const translationKey = typeof errorCode === 'string' && Object.prototype.hasOwnProperty.call(readAPIErrorTranslationKeys, errorCode)
+    ? readAPIErrorTranslationKeys[errorCode]
+    : fallbackKey;
+  return t(translationKey);
+}
+
 function showElement(id, display = 'block') {
   const element = document.getElementById(id);
   if (element) {
@@ -168,10 +188,6 @@ async function handleDecryptSubmit(e) {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(requestBody)
     });
-    if (response.status === 429) {
-      showError(t('msg.tooManyRequests'));
-      return;
-    }
     const result = await response.json();
     if (response.ok) {
       const decryptedMessage = await decryptMemo(result.encryptedMessage, password);
@@ -225,13 +241,7 @@ async function handleDecryptSubmit(e) {
           await new Promise(res => setTimeout(res, delayMs));
         }
       }
-      if (deleteResponse && deleteResponse.status === 429) {
-        showMessage(t('msg.tooManyRequests'), 'error');
-        const deletionSpinner = document.getElementById('deletionSpinner');
-        if (deletionSpinner) {
-          hideElement('deletionSpinner');
-        }
-      } else if (deleteResponse && deleteResponse.ok) {
+      if (deleteResponse && deleteResponse.ok) {
         const memoStatus = document.getElementById('memoStatus');
         const deletionSpinner = document.getElementById('deletionSpinner');
         if (memoStatus) {
@@ -241,22 +251,22 @@ async function handleDecryptSubmit(e) {
           hideElement('deletionSpinner');
         }
       } else {
-        showMessage(t('msg.deletionError'), 'warning');
+        let deleteErrorCode = '';
+        if (deleteResponse) {
+          try {
+            const deleteResult = await deleteResponse.json();
+            deleteErrorCode = deleteResult.errorCode;
+          } catch (error) {
+          }
+        }
+        showMessage(translatedReadAPIError(deleteErrorCode, 'error.MEMO_DELETION_ERROR'), 'warning');
         const deletionSpinner = document.getElementById('deletionSpinner');
         if (deletionSpinner) {
           hideElement('deletionSpinner');
         }
       }
     } else {
-      if (response.status === 429) {
-        showError(t('msg.tooManyRequests'));
-      } else if (result.error === 'Memo not found') {
-        showError(t('error.memoAlreadyRead'));
-      } else if (result.error === 'Memo expired') {
-        showError(t('error.memoExpired'));
-      } else {
-        showError(result.error || t('error.readMemoError'));
-      }
+      showError(translatedReadAPIError(result.errorCode));
     }
   } catch (error) {
     if (error.message.includes('Failed to decrypt')) {

@@ -14,10 +14,22 @@ const SUPPORTED_LOCALES = new Set([
   'ptPT', 'ru', 'ro', 'sv', 'tl', 'th', 'tr', 'uk', 'vi', 'zh'
 ]);
 
+function internalLocaleCode(locale) {
+  const normalized = typeof locale === 'string' ? locale.toLowerCase() : '';
+  if (normalized === 'pt-br' || normalized === 'ptbr') {
+    return 'ptBR';
+  }
+  if (normalized === 'pt-pt' || normalized === 'ptpt') {
+    return 'ptPT';
+  }
+  return normalized;
+}
+
 function currentLocale() {
   const htmlLocale = document.documentElement.getAttribute('lang') || '';
   const pathLocale = window.location.pathname.split('/').filter(Boolean)[0] || '';
-  for (const locale of [htmlLocale, pathLocale]) {
+  for (const candidate of [htmlLocale, pathLocale]) {
+    const locale = internalLocaleCode(candidate);
     if (SUPPORTED_LOCALES.has(locale)) {
       return locale;
     }

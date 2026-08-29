@@ -13,6 +13,19 @@ const fallbackText = Object.freeze({
   'msg.tooManyRequests': 'Too many requests. Please wait a moment and try again.'
 });
 
+const revokeAPIErrorTranslationKeys = Object.freeze({
+  MEMO_ACCESS_DENIED: 'error.MEMO_ACCESS_DENIED',
+  DATABASE_READ_ERROR: 'error.DATABASE_READ_ERROR',
+  MEMO_DELETION_ERROR: 'error.MEMO_DELETION_ERROR',
+  CONTENT_TYPE_ERROR: 'error.CONTENT_TYPE_ERROR',
+  INVALID_JSON: 'error.INVALID_JSON',
+  REQUEST_TOO_LARGE: 'error.REQUEST_TOO_LARGE',
+  METHOD_NOT_ALLOWED: 'error.METHOD_NOT_ALLOWED',
+  FORBIDDEN: 'error.FORBIDDEN',
+  RATE_LIMITED: 'error.RATE_LIMITED',
+  GENERAL_ERROR: 'error.GENERAL_ERROR'
+});
+
 function t(key) {
   if (typeof window.t === 'function') {
     const translated = window.t(key);
@@ -21,6 +34,13 @@ function t(key) {
     }
   }
   return fallbackText[key] || key;
+}
+
+function translatedRevokeAPIError(errorCode) {
+  const translationKey = typeof errorCode === 'string' && Object.prototype.hasOwnProperty.call(revokeAPIErrorTranslationKeys, errorCode)
+    ? revokeAPIErrorTranslationKeys[errorCode]
+    : 'error.DEFAULT_FALLBACK';
+  return t(translationKey);
 }
 
 function waitForLocalization() {
@@ -148,12 +168,12 @@ async function revokeMemo() {
       return;
     }
 
-    if (response.status === 429) {
-      showMessage(t('msg.tooManyRequests'), 'error');
-      return;
+    let result = {};
+    try {
+      result = await response.json();
+    } catch (error) {
     }
-
-    showMessage(t('error.revokeNotFound'), 'error');
+    showMessage(translatedRevokeAPIError(result.errorCode), 'error');
   } catch (error) {
     showMessage(t('error.revokeFailed'), 'error');
   } finally {
