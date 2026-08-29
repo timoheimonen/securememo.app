@@ -30,6 +30,28 @@ const (
 	rateLimitFailKey   = "failure"
 )
 
+const (
+	errorCodeInvalidMessageFormat     = "INVALID_MESSAGE_FORMAT"
+	errorCodeInvalidExpiryTime        = "INVALID_EXPIRY_TIME"
+	errorCodeInvalidDeletionTokenHash = "INVALID_DELETION_TOKEN_HASH"
+	errorCodeMemoIDGeneration         = "MEMO_ID_GENERATION_ERROR"
+	errorCodeDatabase                 = "DATABASE_ERROR"
+	errorCodeDatabaseRead             = "DATABASE_READ_ERROR"
+	errorCodeMemoDeletion             = "MEMO_DELETION_ERROR"
+	errorCodeMethodNotAllowed         = "METHOD_NOT_ALLOWED"
+	errorCodeForbidden                = "FORBIDDEN"
+	errorCodeContentType              = "CONTENT_TYPE_ERROR"
+	errorCodeInvalidJSON              = "INVALID_JSON"
+	errorCodeRequestTooLarge          = "REQUEST_TOO_LARGE"
+	errorCodeMemoAccessDenied         = "MEMO_ACCESS_DENIED"
+	errorCodeRateLimited              = "RATE_LIMITED"
+	errorCodeGeneral                  = "GENERAL_ERROR"
+)
+
+type apiErrorResponse struct {
+	ErrorCode string `json:"errorCode"`
+}
+
 type rateLimitRule struct {
 	Name   string
 	Limit  int
@@ -70,20 +92,20 @@ func (h Handler) Create(w http.ResponseWriter, r *http.Request) {
 
 	encryptedMessage, ok := security.SanitizeEncryptedMessage(req.EncryptedMessage)
 	if !ok {
-		delayedJSON(w, http.StatusBadRequest, map[string]string{"error": "Invalid message format."})
+		writeAPIError(w, http.StatusBadRequest, errorCodeInvalidMessageFormat)
 		return
 	}
 	expiryHours := stringify(req.ExpiryHours)
 	if !security.ValidExpiryHours(expiryHours) {
-		delayedJSON(w, http.StatusBadRequest, map[string]string{"error": "Invalid expiry time."})
+		writeAPIError(w, http.StatusBadRequest, errorCodeInvalidExpiryTime)
 		return
 	}
 	if !security.ValidDeletionTokenHash(req.DeletionTokenHash) {
-		delayedJSON(w, http.StatusBadRequest, map[string]string{"error": "Invalid deletion token."})
+		writeAPIError(w, http.StatusBadRequest, errorCodeInvalidDeletionTokenHash)
 		return
 	}
 	if !security.ValidDeletionTokenHash(req.OwnerDeletionTokenHash) {
-		delayedJSON(w, http.StatusBadRequest, map[string]string{"error": "Invalid owner deletion token."})
+		writeAPIError(w, http.StatusBadRequest, errorCodeInvalidDeletionTokenHash)
 		return
 	}
 	hours, _ := strconv.Atoi(expiryHours)
@@ -91,11 +113,11 @@ func (h Handler) Create(w http.ResponseWriter, r *http.Request) {
 
 	memoID, err := h.generateMemoID(r.Context(), 10)
 	if err != nil {
-		delayedJSON(w, http.StatusInternalServerError, map[string]string{"error": "Could not generate memo ID."})
+		writeAPIError(w, http.StatusInternalServerError, errorCodeMemoIDGeneration)
 		return
 	}
 	if err := h.Store.CreateMemo(r.Context(), memoID, encryptedMessage, expiryTime, req.DeletionTokenHash, req.OwnerDeletionTokenHash); err != nil {
-		delayedJSON(w, http.StatusInternalServerError, map[string]string{"error": "Database error."})
+		writeAPIError(w, http.StatusInternalServerError, errorCodeDatabase)
 		return
 	}
 
@@ -135,7 +157,7 @@ func (h Handler) Read(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	if err != nil {
-		delayedJSON(w, http.StatusInternalServerError, map[string]string{"error": "Database read error."})
+		writeAPIError(w, http.StatusInternalServerError, errorCodeDatabaseRead)
 		return
 	}
 
@@ -167,7 +189,7 @@ func (h Handler) ConfirmDelete(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	if err != nil {
-		delayedJSON(w, http.StatusInternalServerError, map[string]string{"error": "Database read error."})
+		writeAPIError(w, http.StatusInternalServerError, errorCodeDatabaseRead)
 		return
 	}
 	if !security.ValidDeletionToken(req.DeletionToken) {
@@ -185,7 +207,7 @@ func (h Handler) ConfirmDelete(w http.ResponseWriter, r *http.Request) {
 	}
 	deleted, err := h.Store.DeleteMemo(r.Context(), req.MemoID)
 	if err != nil {
-		delayedJSON(w, http.StatusInternalServerError, map[string]string{"error": "Memo deletion error."})
+		writeAPIError(w, http.StatusInternalServerError, errorCodeMemoDeletion)
 		return
 	}
 	if !deleted {
@@ -220,7 +242,7 @@ func (h Handler) Revoke(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	if err != nil {
-		delayedJSON(w, http.StatusInternalServerError, map[string]string{"error": "Database read error."})
+		writeAPIError(w, http.StatusInternalServerError, errorCodeDatabaseRead)
 		return
 	}
 	if row.OwnerDeletionTokenHash == "" {
@@ -236,7 +258,7 @@ func (h Handler) Revoke(w http.ResponseWriter, r *http.Request) {
 
 	deleted, err := h.Store.DeleteMemo(r.Context(), req.MemoID)
 	if err != nil {
-		delayedJSON(w, http.StatusInternalServerError, map[string]string{"error": "Memo deletion error."})
+		writeAPIError(w, http.StatusInternalServerError, errorCodeMemoDeletion)
 		return
 	}
 	if !deleted {
@@ -256,11 +278,11 @@ func (h Handler) requirePOST(w http.ResponseWriter, r *http.Request) bool {
 	}
 	if r.Method != http.MethodPost {
 		w.Header().Set("Allow", "POST")
-		delayedJSON(w, http.StatusMethodNotAllowed, map[string]string{"error": "Method not allowed."})
+		writeAPIError(w, http.StatusMethodNotAllowed, errorCodeMethodNotAllowed)
 		return false
 	}
 	if !security.IsAllowedOrigin(r.Header.Get("Origin"), h.Config.AllowedOrigins) {
-		delayedJSON(w, http.StatusForbidden, map[string]string{"error": "Forbidden."})
+		writeAPIError(w, http.StatusForbidden, errorCodeForbidden)
 		return false
 	}
 	return true
@@ -268,17 +290,26 @@ func (h Handler) requirePOST(w http.ResponseWriter, r *http.Request) bool {
 
 func decodeJSON(w http.ResponseWriter, r *http.Request, dst interface{}) bool {
 	if !strings.Contains(strings.ToLower(r.Header.Get("Content-Type")), "application/json") {
-		delayedJSON(w, http.StatusBadRequest, map[string]string{"error": "Content-Type must be application/json."})
+		writeAPIError(w, http.StatusBadRequest, errorCodeContentType)
 		return false
 	}
 	r.Body = http.MaxBytesReader(w, r.Body, maxJSONBytes)
 	dec := json.NewDecoder(r.Body)
 	dec.DisallowUnknownFields()
 	if err := dec.Decode(dst); err != nil {
-		delayedJSON(w, http.StatusBadRequest, map[string]string{"error": "Invalid JSON."})
+		var maxBytesError *http.MaxBytesError
+		if errors.As(err, &maxBytesError) {
+			writeAPIError(w, http.StatusRequestEntityTooLarge, errorCodeRequestTooLarge)
+			return false
+		}
+		writeAPIError(w, http.StatusBadRequest, errorCodeInvalidJSON)
 		return false
 	}
 	return true
+}
+
+func writeAPIError(w http.ResponseWriter, status int, errorCode string) {
+	delayedJSON(w, status, apiErrorResponse{ErrorCode: errorCode})
 }
 
 func delayedJSON(w http.ResponseWriter, status int, body interface{}) {
@@ -292,14 +323,14 @@ func delayedJSON(w http.ResponseWriter, status int, body interface{}) {
 }
 
 func (h Handler) accessDenied(w http.ResponseWriter) {
-	delayedJSON(w, http.StatusNotFound, map[string]string{"error": "Memo not found or access denied."})
+	writeAPIError(w, http.StatusNotFound, errorCodeMemoAccessDenied)
 }
 
 func (h Handler) rateLimitOrAccessDenied(w http.ResponseWriter, r *http.Request) {
 	result, err := h.recordRateLimits(r, rateLimitFailKey, failureRateLimitRules)
 	if err == nil && result.Limited {
 		w.Header().Set("Retry-After", retryAfterSeconds(result.RetryAfter))
-		delayedJSON(w, http.StatusTooManyRequests, map[string]string{"error": "Too many attempts. Please try again later."})
+		writeAPIError(w, http.StatusTooManyRequests, errorCodeRateLimited)
 		return
 	}
 	h.accessDenied(w)
@@ -308,12 +339,12 @@ func (h Handler) rateLimitOrAccessDenied(w http.ResponseWriter, r *http.Request)
 func (h Handler) allowRateLimitedAction(w http.ResponseWriter, r *http.Request, action string) bool {
 	result, err := h.recordRateLimits(r, action, defaultRateLimitRules)
 	if err != nil {
-		delayedJSON(w, http.StatusInternalServerError, map[string]string{"error": "Rate limit error."})
+		writeAPIError(w, http.StatusInternalServerError, errorCodeGeneral)
 		return false
 	}
 	if result.Limited {
 		w.Header().Set("Retry-After", retryAfterSeconds(result.RetryAfter))
-		delayedJSON(w, http.StatusTooManyRequests, map[string]string{"error": "Too many requests. Please try again later."})
+		writeAPIError(w, http.StatusTooManyRequests, errorCodeRateLimited)
 		return false
 	}
 	return true

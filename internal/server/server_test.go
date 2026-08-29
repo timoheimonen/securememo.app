@@ -3,10 +3,12 @@ package server
 import (
 	"encoding/json"
 	"fmt"
+	"html"
 	"io"
 	"net/http"
 	"net/http/httptest"
 	"path/filepath"
+	"regexp"
 	"strings"
 	"testing"
 
@@ -70,6 +72,53 @@ func TestRenderedSEOHeadUsesLocalizedMetadata(t *testing.T) {
 	}
 }
 
+func TestRenderedLocaleMetadataUsesBCP47AndRTLDirection(t *testing.T) {
+	app := newTestServer(t)
+	tests := []struct {
+		path      string
+		root      string
+		language  string
+		canonical string
+	}{
+		{
+			path:      "/ptBR",
+			root:      `<html lang="pt-BR">`,
+			language:  `"inLanguage": "pt-BR"`,
+			canonical: `<link rel="canonical" href="https://securememo.app/ptBR">`,
+		},
+		{
+			path:      "/ptPT/about.html",
+			root:      `<html lang="pt-PT">`,
+			language:  `"inLanguage": "pt-PT"`,
+			canonical: `<link rel="canonical" href="https://securememo.app/ptPT/about.html">`,
+		},
+		{
+			path:      "/ar/create-memo.html",
+			root:      `<html lang="ar" dir="rtl">`,
+			language:  `"inLanguage": "ar"`,
+			canonical: `<link rel="canonical" href="https://securememo.app/ar/create-memo.html">`,
+		},
+	}
+
+	for _, tc := range tests {
+		t.Run(tc.path, func(t *testing.T) {
+			rec := httptest.NewRecorder()
+			req := httptest.NewRequest(http.MethodGet, tc.path, nil)
+			app.ServeHTTP(rec, req)
+
+			if rec.Code != http.StatusOK {
+				t.Fatalf("GET %s status = %d, want %d", tc.path, rec.Code, http.StatusOK)
+			}
+			body := rec.Body.String()
+			for _, want := range []string{tc.root, tc.language, tc.canonical} {
+				if !strings.Contains(body, want) {
+					t.Fatalf("GET %s missing %q", tc.path, want)
+				}
+			}
+		})
+	}
+}
+
 func TestNoIndexPagesAreMarkedButCrawlable(t *testing.T) {
 	app := newTestServer(t)
 	for _, path := range []string{"/en/read-memo.html", "/en/revoke-memo.html", "/en/tos.html", "/en/privacy.html"} {
@@ -114,6 +163,50 @@ func TestCreateMemoPageIsIndexableAndLocalized(t *testing.T) {
 	}
 }
 
+func TestLocalizedCreateMemoExpiryOptions(t *testing.T) {
+	app := newTestServer(t)
+	wantValues := []string{"8", "24", "48", "168", "336"}
+	selectPattern := regexp.MustCompile(`(?s)<select[^>]*id="expiryHours"[^>]*>(.*?)</select>`)
+	optionPattern := regexp.MustCompile(`<option[^>]*value="([^"]+)"[^>]*>([^<]*)</option>`)
+
+	for _, locale := range supportedLocales {
+		t.Run(locale, func(t *testing.T) {
+			wantLabel := translationCatalog[locale]["form.expiry.option.2w"]
+			if wantLabel == "" {
+				t.Fatalf("locale %s has no translation for the two-week expiry option", locale)
+			}
+
+			rec := httptest.NewRecorder()
+			req := httptest.NewRequest(http.MethodGet, "/"+locale+"/create-memo.html", nil)
+			app.ServeHTTP(rec, req)
+
+			if rec.Code != http.StatusOK {
+				t.Fatalf("GET %s status = %d, want %d", req.URL.Path, rec.Code, http.StatusOK)
+			}
+			selectMatch := selectPattern.FindStringSubmatch(rec.Body.String())
+			if len(selectMatch) != 2 {
+				t.Fatalf("GET %s is missing the expiry select", req.URL.Path)
+			}
+
+			optionMatches := optionPattern.FindAllStringSubmatch(selectMatch[1], -1)
+			gotValues := make([]string, 0, len(optionMatches))
+			gotTwoWeekLabel := ""
+			for _, match := range optionMatches {
+				gotValues = append(gotValues, match[1])
+				if match[1] == "336" {
+					gotTwoWeekLabel = html.UnescapeString(strings.TrimSpace(match[2]))
+				}
+			}
+			if got, want := strings.Join(gotValues, ","), strings.Join(wantValues, ","); got != want {
+				t.Fatalf("GET %s expiry option values = %q, want %q", req.URL.Path, got, want)
+			}
+			if gotTwoWeekLabel != wantLabel {
+				t.Fatalf("GET %s two-week expiry label = %q, want %q", req.URL.Path, gotTwoWeekLabel, wantLabel)
+			}
+		})
+	}
+}
+
 func TestAboutStructuredDataMatchesVisiblePageType(t *testing.T) {
 	app := newTestServer(t)
 	rec := httptest.NewRecorder()
@@ -151,8 +244,8 @@ func TestSitemapOnlyIncludesIndexablePages(t *testing.T) {
 	}
 	for _, entry := range []string{
 		"<loc>https://securememo.app/en</loc>\n    <lastmod>2026-06-27</lastmod>",
-		"<loc>https://securememo.app/en/about.html</loc>\n    <lastmod>2026-07-12</lastmod>",
-		"<loc>https://securememo.app/en/create-memo.html</loc>\n    <lastmod>2026-07-12</lastmod>",
+		"<loc>https://securememo.app/en/about.html</loc>\n    <lastmod>2026-08-29</lastmod>",
+		"<loc>https://securememo.app/en/create-memo.html</loc>\n    <lastmod>2026-08-29</lastmod>",
 	} {
 		if !strings.Contains(body, entry) {
 			t.Fatalf("sitemap missing indexable entry %q", entry)
@@ -221,7 +314,7 @@ func TestRevokePageIsLocalized(t *testing.T) {
 			t.Fatalf("GET %s status = %d, want %d", tc.path, rec.Code, http.StatusOK)
 		}
 		body := rec.Body.String()
-		if !strings.Contains(body, tc.localizedH1) {
+		if !strings.Contains(body, fmt.Sprintf(`<h1>%s</h1>`, tc.localizedH1)) {
 			t.Fatalf("GET %s missing localized revoke heading %q", tc.path, tc.localizedH1)
 		}
 		if !strings.Contains(body, `<meta name="robots" content="noindex,follow">`) {

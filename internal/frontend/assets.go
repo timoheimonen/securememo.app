@@ -2,11 +2,6 @@ package frontend
 
 import "embed"
 
-// FS contains generated HTML, JS, CSS and public static files for the Go port.
-//
-// Regenerate with:
-//
-//	node scripts/generate-go-assets.mjs
-//
+// FS contains the checked-in frontend runtime assets embedded in the Go binary.
 //go:embed generated/**
 var FS embed.FS

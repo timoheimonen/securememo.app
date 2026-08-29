@@ -93,7 +93,6 @@ export function createLocalization(locale, translations) {
     updateNavigationLinks();
     updateLogoLink();
     updateInternalLinks();
-    document.documentElement.setAttribute('lang', locale);
   }
 
   return { t, localizeUrl, initLocalization };

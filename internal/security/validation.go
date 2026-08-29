@@ -37,7 +37,7 @@ func ValidExpiryHours(input string) bool {
 		return false
 	}
 	switch hours {
-	case 8, 24, 48, 168, 720:
+	case 8, 24, 48, 168, 336:
 		return true
 	default:
 		return false

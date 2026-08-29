@@ -85,6 +85,21 @@ const fallbackText = Object.freeze({
   'msg.revokeLinkCopied': 'Revoke link copied to clipboard!'
 });
 
+const createAPIErrorTranslationKeys = Object.freeze({
+  INVALID_MESSAGE_FORMAT: 'error.INVALID_MESSAGE_FORMAT',
+  INVALID_EXPIRY_TIME: 'error.INVALID_EXPIRY_TIME',
+  INVALID_DELETION_TOKEN_HASH: 'error.INVALID_DELETION_TOKEN_HASH',
+  MEMO_ID_GENERATION_ERROR: 'error.MEMO_ID_GENERATION_ERROR',
+  DATABASE_ERROR: 'error.DATABASE_ERROR',
+  CONTENT_TYPE_ERROR: 'error.CONTENT_TYPE_ERROR',
+  INVALID_JSON: 'error.INVALID_JSON',
+  REQUEST_TOO_LARGE: 'error.REQUEST_TOO_LARGE',
+  METHOD_NOT_ALLOWED: 'error.METHOD_NOT_ALLOWED',
+  FORBIDDEN: 'error.FORBIDDEN',
+  RATE_LIMITED: 'error.RATE_LIMITED',
+  GENERAL_ERROR: 'error.GENERAL_ERROR'
+});
+
 const t = (key) => {
   if (typeof window.t === 'function') {
     const translated = window.t(key);
@@ -94,6 +109,13 @@ const t = (key) => {
   }
   return fallbackText[key] || key;
 };
+
+function translatedCreateAPIError(errorCode) {
+  const translationKey = typeof errorCode === 'string' && Object.prototype.hasOwnProperty.call(createAPIErrorTranslationKeys, errorCode)
+    ? createAPIErrorTranslationKeys[errorCode]
+    : 'error.CREATE_MEMO_ERROR';
+  return t(translationKey);
+}
 
 function showElement(id, display = 'block') {
   const element = document.getElementById(id);
@@ -214,10 +236,6 @@ async function handleCreateSubmit(e) {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(requestBody)
     });
-    if (response.status === 429) {
-      showMessage(t('msg.tooManyRequests'), 'error');
-      return;
-    }
     const result = await response.json();
     if (response.ok) {
       const currentLocale = window.location.pathname.split('/')[1] || 'en';
@@ -230,11 +248,7 @@ async function handleCreateSubmit(e) {
       hideElement('memoForm');
       document.getElementById('message').value = '';
     } else {
-      if (response.status === 429) {
-        showMessage(t('msg.tooManyRequests'), 'error');
-      } else {
-        showMessage(result.error || t('msg.createFailed'), 'error');
-      }
+      showMessage(translatedCreateAPIError(result.errorCode), 'error');
     }
   } catch (error) {
     showMessage(t('msg.createError'), 'error');

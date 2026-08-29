@@ -13,6 +13,7 @@ Privacy comes first, always.
 
 ## Development
 
+- Never add files or directory contents excluded by version-control ignore rules to tracking, including through force-add or equivalent overrides.
 - Keep changes small and aligned with the existing Go and embedded-frontend structure.
 - Preserve the client-side encryption model: plaintext memo content must never leave the browser.
 - Run `go test ./...` after behavior changes.
