@@ -20,15 +20,18 @@ import (
 )
 
 const (
-	maxJSONBytes       = 64 * 1024
-	rateLimitMinute    = 10
-	rateLimitHour      = 100
-	failureLimitHour   = 20
-	rateLimitCreateKey = "create"
-	rateLimitReadKey   = "read"
-	rateLimitDeleteKey = "delete"
-	rateLimitRevokeKey = "revoke"
-	rateLimitFailKey   = "failure"
+	maxJSONBytes        = 64 * 1024
+	createLimitMinute   = 5
+	createLimitHour     = 30
+	standardLimitMinute = 10
+	standardLimitHour   = 100
+	failureLimitMinute  = 5
+	failureLimitHour    = 20
+	rateLimitCreateKey  = "create"
+	rateLimitReadKey    = "read"
+	rateLimitDeleteKey  = "delete"
+	rateLimitRevokeKey  = "revoke"
+	rateLimitFailKey    = "failure"
 )
 
 const (
@@ -60,13 +63,18 @@ type rateLimitRule struct {
 	Window time.Duration
 }
 
-var defaultRateLimitRules = []rateLimitRule{
-	{Name: "minute", Limit: rateLimitMinute, Window: time.Minute},
-	{Name: "hour", Limit: rateLimitHour, Window: time.Hour},
+var createRateLimitRules = []rateLimitRule{
+	{Name: "minute", Limit: createLimitMinute, Window: time.Minute},
+	{Name: "hour", Limit: createLimitHour, Window: time.Hour},
+}
+
+var standardRateLimitRules = []rateLimitRule{
+	{Name: "minute", Limit: standardLimitMinute, Window: time.Minute},
+	{Name: "hour", Limit: standardLimitHour, Window: time.Hour},
 }
 
 var failureRateLimitRules = []rateLimitRule{
-	{Name: "minute", Limit: rateLimitMinute, Window: time.Minute},
+	{Name: "minute", Limit: failureLimitMinute, Window: time.Minute},
 	{Name: "hour", Limit: failureLimitHour, Window: time.Hour},
 }
 
@@ -363,7 +371,7 @@ func (h Handler) rateLimitOrAccessDenied(w http.ResponseWriter, r *http.Request)
 }
 
 func (h Handler) allowRateLimitedAction(w http.ResponseWriter, r *http.Request, action string) bool {
-	result, err := h.recordRateLimits(r, action, defaultRateLimitRules)
+	result, err := h.recordRateLimits(r, action, rateLimitRulesForAction(action))
 	if err != nil {
 		if errors.Is(err, errInvalidCloudflareClientIP) {
 			writeAPIError(w, http.StatusForbidden, errorCodeForbidden)
@@ -387,6 +395,13 @@ func (h Handler) allowRateLimitedAction(w http.ResponseWriter, r *http.Request, 
 		return false
 	}
 	return true
+}
+
+func rateLimitRulesForAction(action string) []rateLimitRule {
+	if action == rateLimitCreateKey {
+		return createRateLimitRules
+	}
+	return standardRateLimitRules
 }
 
 func (h Handler) recordRateLimits(r *http.Request, action string, rules []rateLimitRule) (store.RateLimitResult, error) {

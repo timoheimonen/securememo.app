@@ -11,6 +11,7 @@ Version identifiers match the application `assetVersion`.
 - Apply delete and revoke admission limits before request parsing and memo lookup.
 
 ### Changed
+- Use cost-aware backend limits: memo creation 5/minute and 30/hour; read, delete, and revoke 10/minute and 100/hour; failed delete or revoke attempts 5/minute and 20/hour.
 - Commit minute and hour rate-limit counters atomically, return the longest blocking `Retry-After`, and use a bounded concurrency-safe in-memory fallback when disk-reserve protection prevents SQLite counter writes.
 - Reject invalid `SECUREMEMO_TRUST_PROXY_HEADERS` values during startup instead of silently disabling proxy-header trust.
 - Log the selected client-identity mode at startup, including an actionable warning when proxy-header trust is disabled behind Cloudflare Tunnel.

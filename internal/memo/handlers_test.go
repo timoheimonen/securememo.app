@@ -452,8 +452,8 @@ func TestRateLimitResponseUsesStableErrorCode(t *testing.T) {
 	}
 	seedReq := httptest.NewRequest(http.MethodPost, "/api/read-memo", nil)
 	seedReq.RemoteAddr = "203.0.113.40:12345"
-	for i := 0; i < rateLimitMinute; i++ {
-		result, err := handler.recordRateLimits(seedReq, rateLimitReadKey, defaultRateLimitRules)
+	for i := 0; i < standardLimitMinute; i++ {
+		result, err := handler.recordRateLimits(seedReq, rateLimitReadKey, standardRateLimitRules)
 		if err != nil {
 			t.Fatalf("seed rate limit event %d: %v", i+1, err)
 		}
@@ -473,6 +473,35 @@ func TestRateLimitResponseUsesStableErrorCode(t *testing.T) {
 	if rec.Header().Get("Retry-After") == "" {
 		t.Fatal("rate-limit response is missing Retry-After")
 	}
+}
+
+func TestCreateUsesStricterRateLimitRules(t *testing.T) {
+	db, err := store.OpenSQLite(filepath.Join(t.TempDir(), "securememo.sqlite"), store.StorageLimits{})
+	if err != nil {
+		t.Fatalf("open sqlite: %v", err)
+	}
+	defer db.Close()
+	handler := Handler{
+		Config: config.Config{AllowedOrigins: []string{"https://securememo.app"}},
+		Store:  db,
+	}
+	seedReq := httptest.NewRequest(http.MethodPost, "/api/create-memo", nil)
+	seedReq.RemoteAddr = "203.0.113.42:12345"
+	for attempt := 0; attempt < createLimitMinute; attempt++ {
+		result, err := handler.recordRateLimits(seedReq, rateLimitCreateKey, createRateLimitRules)
+		if err != nil || result.Limited {
+			t.Fatalf("seed create %d = %+v, %v; want allowed", attempt+1, result, err)
+		}
+	}
+
+	req := httptest.NewRequest(http.MethodPost, "/api/create-memo", strings.NewReader(`{`))
+	req.RemoteAddr = seedReq.RemoteAddr
+	req.Header.Set("Origin", "https://securememo.app")
+	req.Header.Set("Content-Type", "application/json")
+	rec := httptest.NewRecorder()
+	handler.Create(rec, req)
+
+	assertAPIError(t, rec, http.StatusTooManyRequests, errorCodeRateLimited)
 }
 
 func TestTrustedProxyModeFailsClosedWithoutCloudflareClientIP(t *testing.T) {
@@ -520,8 +549,8 @@ func TestDeleteAndRevokeAreRateLimitedBeforeRequestParsing(t *testing.T) {
 			remoteAddr := fmt.Sprintf("203.0.113.%d:12345", index+50)
 			seedReq := httptest.NewRequest(http.MethodPost, tt.target, nil)
 			seedReq.RemoteAddr = remoteAddr
-			for attempt := 0; attempt < rateLimitMinute; attempt++ {
-				result, err := handler.recordRateLimits(seedReq, tt.action, defaultRateLimitRules)
+			for attempt := 0; attempt < standardLimitMinute; attempt++ {
+				result, err := handler.recordRateLimits(seedReq, tt.action, standardRateLimitRules)
 				if err != nil {
 					t.Fatalf("seed rate limit %d: %v", attempt+1, err)
 				}
@@ -551,18 +580,38 @@ func TestRetryAfterSecondsRoundsUp(t *testing.T) {
 	}
 }
 
-func TestFailureRateLimitRulesAreStricterThanDefault(t *testing.T) {
-	if len(defaultRateLimitRules) != 2 || len(failureRateLimitRules) != 2 {
-		t.Fatal("expected minute and hour rules for default and failure limits")
+func TestRateLimitRulesMatchOperationCosts(t *testing.T) {
+	tests := []struct {
+		name       string
+		rules      []rateLimitRule
+		wantMinute int
+		wantHour   int
+	}{
+		{name: "create", rules: createRateLimitRules, wantMinute: 5, wantHour: 30},
+		{name: "standard", rules: standardRateLimitRules, wantMinute: 10, wantHour: 100},
+		{name: "failure", rules: failureRateLimitRules, wantMinute: 5, wantHour: 20},
 	}
-	if defaultRateLimitRules[1].Window != time.Hour {
-		t.Fatalf("expected default hourly rule, got %s", defaultRateLimitRules[1].Window)
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if len(tt.rules) != 2 {
+				t.Fatalf("rule count = %d, want minute and hour rules", len(tt.rules))
+			}
+			if tt.rules[0].Window != time.Minute || tt.rules[0].Limit != tt.wantMinute {
+				t.Fatalf("minute rule = %+v, want limit %d over one minute", tt.rules[0], tt.wantMinute)
+			}
+			if tt.rules[1].Window != time.Hour || tt.rules[1].Limit != tt.wantHour {
+				t.Fatalf("hour rule = %+v, want limit %d over one hour", tt.rules[1], tt.wantHour)
+			}
+		})
 	}
-	if failureRateLimitRules[1].Window != time.Hour {
-		t.Fatalf("expected failure hourly rule, got %s", failureRateLimitRules[1].Window)
+
+	if got := rateLimitRulesForAction(rateLimitCreateKey); got[0].Limit != createLimitMinute || got[1].Limit != createLimitHour {
+		t.Fatalf("create action rules = %+v", got)
 	}
-	if failureRateLimitRules[1].Limit >= defaultRateLimitRules[1].Limit {
-		t.Fatalf("failure hourly limit should be stricter than default hourly limit")
+	for _, action := range []string{rateLimitReadKey, rateLimitDeleteKey, rateLimitRevokeKey} {
+		if got := rateLimitRulesForAction(action); got[0].Limit != standardLimitMinute || got[1].Limit != standardLimitHour {
+			t.Fatalf("%s action rules = %+v", action, got)
+		}
 	}
 }
 

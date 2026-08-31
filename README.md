@@ -130,7 +130,7 @@ For the detailed technical model, see [docs/security-model.md](docs/security-mod
 - The memo password is generated and displayed only in the browser.
 - The server stores ciphertext, expiry time, memo ID, a deletion-token hash, and a sender revoke-token hash.
 - Failed or invalid reads use generic responses to avoid memo enumeration.
-- API rate limits use short and long windows per normalized client network. Normal API actions, including delete and revoke admission before body or database work, are limited to 10/minute and 100/hour; failed access attempts are additionally limited to 10/minute and 20/hour.
+- API rate limits use short and long windows per normalized client network. Memo creation is limited to 5/minute and 30/hour. Read, delete, and revoke actions are limited to 10/minute and 100/hour; failed delete or revoke attempts are additionally limited to 5/minute and 20/hour.
 - Expired memo cleanup runs at startup and hourly after that.
 
 ## License

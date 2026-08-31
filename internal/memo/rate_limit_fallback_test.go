@@ -172,7 +172,7 @@ func TestHandlerFallsBackToMemoryWhenRateLimitPersistenceIsUnavailable(t *testin
 	handler := NewHandler(config.Config{AllowedOrigins: []string{"https://securememo.app"}}, db)
 	memoID := strings.Repeat("A", 40)
 
-	for attempt := 0; attempt < rateLimitMinute; attempt++ {
+	for attempt := 0; attempt < standardLimitMinute; attempt++ {
 		req := httptest.NewRequest(http.MethodPost, "/api/read-memo?id="+memoID, strings.NewReader(`{}`))
 		req.RemoteAddr = "203.0.113.70:12345"
 		req.Header.Set("Origin", "https://securememo.app")
@@ -208,15 +208,15 @@ func TestHandlerKeepsFallbackCountersWarmWhileSQLiteIsAvailable(t *testing.T) {
 	req.RemoteAddr = "203.0.113.71:12345"
 
 	for attempt := 0; attempt < 3; attempt++ {
-		result, err := handler.recordRateLimits(req, rateLimitReadKey, defaultRateLimitRules)
+		result, err := handler.recordRateLimits(req, rateLimitReadKey, standardRateLimitRules)
 		if err != nil || result.Limited {
 			t.Fatalf("record %d = %+v, %v; want allowed", attempt+1, result, err)
 		}
 	}
 	handler.rateLimitFallback.mu.Lock()
 	defer handler.rateLimitFallback.mu.Unlock()
-	if len(handler.rateLimitFallback.entries) != len(defaultRateLimitRules) {
-		t.Fatalf("fallback entry count = %d, want %d", len(handler.rateLimitFallback.entries), len(defaultRateLimitRules))
+	if len(handler.rateLimitFallback.entries) != len(standardRateLimitRules) {
+		t.Fatalf("fallback entry count = %d, want %d", len(handler.rateLimitFallback.entries), len(standardRateLimitRules))
 	}
 	for key, entry := range handler.rateLimitFallback.entries {
 		if entry.count != 3 {
