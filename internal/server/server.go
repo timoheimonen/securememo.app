@@ -19,7 +19,7 @@ import (
 	"github.com/timoheimonen/securememo/internal/store"
 )
 
-const assetVersion = "20260831a"
+const assetVersion = "20260831b"
 
 var clientLocalizationAssetRe = regexp.MustCompile(`^/js/clientLocalization\.([A-Za-z0-9_-]+)\.js$`)
 
@@ -39,10 +39,7 @@ func New(cfg config.Config, db *store.SQLiteStore) *Server {
 		db:      db,
 		metrics: NewMetrics(db),
 	}
-	s.memo = memo.Handler{
-		Config: cfg,
-		Store:  db,
-	}
+	s.memo = memo.NewHandler(cfg, db)
 	s.mux = http.NewServeMux()
 	s.routes()
 	return s

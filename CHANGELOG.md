@@ -4,6 +4,23 @@ All notable changes to this project are documented here.
 
 Version identifiers match the application `assetVersion`.
 
+## 20260831b - 2026-08-31
+
+### Security
+- Harden Cloudflare Tunnel client identification by accepting one canonical `CF-Connecting-IP` only from the explicitly trusted loopback proxy boundary, rejecting ambiguous values, removing the spoofable `X-Forwarded-For` fallback, and grouping IPv6 clients by `/64`.
+- Apply delete and revoke admission limits before request parsing and memo lookup.
+
+### Changed
+- Use cost-aware backend limits: memo creation 5/minute and 30/hour; read, delete, and revoke 10/minute and 100/hour; failed delete or revoke attempts 5/minute and 20/hour.
+- Commit minute and hour rate-limit counters atomically, return the longest blocking `Retry-After`, and use a bounded concurrency-safe in-memory fallback when disk-reserve protection prevents SQLite counter writes.
+- Reject invalid `SECUREMEMO_TRUST_PROXY_HEADERS` values during startup instead of silently disabling proxy-header trust.
+- Log the selected client-identity mode at startup, including an actionable warning when proxy-header trust is disabled behind Cloudflare Tunnel.
+- Disclose Cloudflare's strictly necessary `cf_clearance` security cookie and session verification in the Privacy Notice.
+- Add an atomic service-wide retained-ciphertext and memo-count quota with a default decimal 100 GB limit, SQLite page ceiling, service-wide 5 GB free-disk reserve, and startup reconciliation.
+- Return a localized HTTP 507 `STORAGE_LIMIT_REACHED` response for new creates at capacity while preserving read, revoke, deletion, and cleanup paths.
+- Expose private unlabeled aggregate capacity gauges for quota, SQLite, WAL, and filesystem monitoring.
+- Bound cleanup transactions and truncate WAL between batches while allowing safe reuse of allocated SQLite freelist pages during drain-mode recovery.
+
 ## 20260831a - 2026-08-31
 
 ### Changed

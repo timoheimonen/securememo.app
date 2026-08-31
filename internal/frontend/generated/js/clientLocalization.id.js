@@ -211,6 +211,7 @@ const LOCAL_TRANSLATIONS = {
     "error.NETWORK_ERROR": "Layanan sementara tidak tersedia. Silakan coba lagi.",
     "error.SERVICE_UNAVAILABLE": "Layanan sementara tidak tersedia. Silakan coba lagi nanti.",
     "error.RATE_LIMITED": "Terlalu banyak permintaan. Silakan tunggu sejenak dan coba lagi.",
+    "error.STORAGE_LIMIT_REACHED": "Kapasitas penyimpanan layanan untuk sementara penuh. Silakan coba lagi nanti.",
     "error.MISSING_MESSAGE": "Silakan masukkan memo",
     "error.MESSAGE_TOO_LONG": "Memo terlalu panjang (maks 5.000 karakter)",
     "error.CREATE_MEMO_FAILED": "Gagal membuat memo",

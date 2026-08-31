@@ -211,6 +211,7 @@ const LOCAL_TRANSLATIONS = {
     "error.NETWORK_ERROR": "Tjenesten er midlertidig utilgjengelig. Vennligst prøv igjen.",
     "error.SERVICE_UNAVAILABLE": "Tjenesten er midlertidig utilgjengelig. Vennligst prøv igjen senere.",
     "error.RATE_LIMITED": "For mange forespørsler. Vennligst vent litt og prøv igjen.",
+    "error.STORAGE_LIMIT_REACHED": "Tjenestens lagringskapasitet er midlertidig full. Prøv igjen senere.",
     "error.MISSING_MESSAGE": "Vennligst skriv inn et notat",
     "error.MESSAGE_TOO_LONG": "Notatet er for langt (maks 5 000 tegn)",
     "error.CREATE_MEMO_FAILED": "Kunne ikke opprette notat",

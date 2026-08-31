@@ -211,6 +211,7 @@ const LOCAL_TRANSLATIONS = {
     "error.NETWORK_ERROR": "A szolgáltatás átmenetileg nem elérhető. Kérjük, próbálja újra.",
     "error.SERVICE_UNAVAILABLE": "A szolgáltatás átmenetileg nem elérhető. Kérjük, próbálja újra később.",
     "error.RATE_LIMITED": "Túl sok kérés. Kérjük, várjon egy kicsit és próbálja újra.",
+    "error.STORAGE_LIMIT_REACHED": "A szolgáltatás tárhelykapacitása átmenetileg betelt. Próbálja újra később.",
     "error.MISSING_MESSAGE": "Kérjük, adja meg a jegyzetet",
     "error.MESSAGE_TOO_LONG": "A jegyzet túl hosszú (max. 5 000 karakter)",
     "error.CREATE_MEMO_FAILED": "Nem sikerült létrehozni a jegyzetet",

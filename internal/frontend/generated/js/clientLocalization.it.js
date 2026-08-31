@@ -211,6 +211,7 @@ const LOCAL_TRANSLATIONS = {
     "error.NETWORK_ERROR": "Servizio temporaneamente non disponibile. Riprova.",
     "error.SERVICE_UNAVAILABLE": "Servizio temporaneamente non disponibile. Riprova più tardi.",
     "error.RATE_LIMITED": "Troppe richieste. Attendi un momento e riprova.",
+    "error.STORAGE_LIMIT_REACHED": "La capacità di archiviazione del servizio è temporaneamente esaurita. Riprova più tardi.",
     "error.MISSING_MESSAGE": "Inserisci un memo",
     "error.MESSAGE_TOO_LONG": "Il memo è troppo lungo (max 5.000 caratteri)",
     "error.CREATE_MEMO_FAILED": "Creazione del memo non riuscita",

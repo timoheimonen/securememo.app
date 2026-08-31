@@ -53,7 +53,7 @@ func TestValidEncryptedMessageEnforcesByteLimit(t *testing.T) {
 	// blocks. Therefore 40,999 is the largest canonical message length that
 	// can fit within the 41,000-byte limit.
 	largest := encryptedMessageForTest(make([]byte, 30_747))
-	if got, want := len(largest), maxEncryptedMessageBytes-1; got != want {
+	if got, want := len(largest), MaxEncryptedMessageBytes-1; got != want {
 		t.Fatalf("largest test message length = %d, want %d", got, want)
 	}
 	if !ValidEncryptedMessage(largest) {
@@ -61,8 +61,8 @@ func TestValidEncryptedMessageEnforcesByteLimit(t *testing.T) {
 	}
 
 	nextCanonical := encryptedMessageForTest(make([]byte, 30_748))
-	if len(nextCanonical) <= maxEncryptedMessageBytes {
-		t.Fatalf("next canonical message length = %d, want more than %d", len(nextCanonical), maxEncryptedMessageBytes)
+	if len(nextCanonical) <= MaxEncryptedMessageBytes {
+		t.Fatalf("next canonical message length = %d, want more than %d", len(nextCanonical), MaxEncryptedMessageBytes)
 	}
 	if ValidEncryptedMessage(nextCanonical) {
 		t.Fatal("canonical message over the byte limit was accepted")
