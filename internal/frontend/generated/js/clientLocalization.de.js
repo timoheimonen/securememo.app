@@ -211,6 +211,7 @@ const LOCAL_TRANSLATIONS = {
     "error.NETWORK_ERROR": "Service vorübergehend nicht verfügbar. Bitte versuchen Sie es erneut.",
     "error.SERVICE_UNAVAILABLE": "Service vorübergehend nicht verfügbar. Bitte versuchen Sie es später erneut.",
     "error.RATE_LIMITED": "Zu viele Anfragen. Bitte warten Sie einen Moment und versuchen Sie es erneut.",
+    "error.STORAGE_LIMIT_REACHED": "Die Speicherkapazität des Dienstes ist vorübergehend ausgeschöpft. Bitte versuchen Sie es später erneut.",
     "error.MISSING_MESSAGE": "Bitte geben Sie eine Notiz ein",
     "error.MESSAGE_TOO_LONG": "Notiz ist zu lang (max. 5.000 Zeichen)",
     "error.CREATE_MEMO_FAILED": "Notiz konnte nicht erstellt werden",

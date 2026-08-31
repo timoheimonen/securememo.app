@@ -211,6 +211,7 @@ const LOCAL_TRANSLATIONS = {
     "error.NETWORK_ERROR": "Tjänsten är tillfälligt otillgänglig. Försök igen.",
     "error.SERVICE_UNAVAILABLE": "Tjänsten är tillfälligt otillgänglig. Försök igen senare.",
     "error.RATE_LIMITED": "För många förfrågningar. Vänta en stund och försök igen.",
+    "error.STORAGE_LIMIT_REACHED": "Tjänstens lagringskapacitet är tillfälligt full. Försök igen senare.",
     "error.MISSING_MESSAGE": "Vänligen ange en memo",
     "error.MESSAGE_TOO_LONG": "Memo är för lång (max 5 000 tecken)",
     "error.CREATE_MEMO_FAILED": "Det gick inte att skapa memo",

@@ -211,6 +211,7 @@ const LOCAL_TRANSLATIONS = {
     "error.NETWORK_ERROR": "Panandaliang hindi magamit ang serbisyo. Subukang muli.",
     "error.SERVICE_UNAVAILABLE": "Panandaliang hindi magamit ang serbisyo. Subukang muli mamaya.",
     "error.RATE_LIMITED": "Sobra ang dami ng mga kahilingan. Maghintay sandali at subukang muli.",
+    "error.STORAGE_LIMIT_REACHED": "Pansamantalang puno ang kapasidad ng imbakan ng serbisyo. Subukan muli mamaya.",
     "error.MISSING_MESSAGE": "Pakilagay ang isang memo",
     "error.MESSAGE_TOO_LONG": "Masyadong mahaba ang memo (hindi hihigit sa 5,000 karakter)",
     "error.CREATE_MEMO_FAILED": "Nabigo ang paglikha ng memo",

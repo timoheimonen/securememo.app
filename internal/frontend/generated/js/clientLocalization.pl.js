@@ -211,6 +211,7 @@ const LOCAL_TRANSLATIONS = {
     "error.NETWORK_ERROR": "Usługa tymczasowo niedostępna. Spróbuj ponownie.",
     "error.SERVICE_UNAVAILABLE": "Usługa tymczasowo niedostępna. Spróbuj ponownie później.",
     "error.RATE_LIMITED": "Za dużo żądań. Proszę poczekać chwilę i spróbować ponownie.",
+    "error.STORAGE_LIMIT_REACHED": "Przestrzeń dyskowa usługi jest tymczasowo pełna. Spróbuj ponownie później.",
     "error.MISSING_MESSAGE": "Proszę wprowadzić notatkę",
     "error.MESSAGE_TOO_LONG": "Notatka jest za długa (maks. 5 000 znaków)",
     "error.CREATE_MEMO_FAILED": "Nie udało się utworzyć notatki",

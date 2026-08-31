@@ -211,6 +211,7 @@ const LOCAL_TRANSLATIONS = {
     "error.NETWORK_ERROR": "Hizmet geçici olarak kullanılamıyor. Lütfen tekrar deneyin.",
     "error.SERVICE_UNAVAILABLE": "Hizmet geçici olarak kullanılamıyor. Lütfen daha sonra tekrar deneyin.",
     "error.RATE_LIMITED": "Çok fazla istek yapıldı. Lütfen biraz bekleyip tekrar deneyin.",
+    "error.STORAGE_LIMIT_REACHED": "Hizmetin depolama kapasitesi geçici olarak dolu. Lütfen daha sonra tekrar deneyin.",
     "error.MISSING_MESSAGE": "Lütfen bir not girin",
     "error.MESSAGE_TOO_LONG": "Not çok uzun (maksimum 5.000 karakter)",
     "error.CREATE_MEMO_FAILED": "Not oluşturulamadı",

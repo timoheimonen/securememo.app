@@ -211,6 +211,7 @@ const LOCAL_TRANSLATIONS = {
     "error.NETWORK_ERROR": "บริการไม่พร้อมใช้งานชั่วคราว โปรดลองอีกครั้ง",
     "error.SERVICE_UNAVAILABLE": "บริการไม่พร้อมใช้งานชั่วคราว โปรดลองใหม่ภายหลัง",
     "error.RATE_LIMITED": "คำขอมากเกินไป โปรดรอสักครู่แล้วลองใหม่อีกครั้ง",
+    "error.STORAGE_LIMIT_REACHED": "พื้นที่จัดเก็บของบริการเต็มชั่วคราว โปรดลองอีกครั้งในภายหลัง",
     "error.MISSING_MESSAGE": "โปรดกรอกบันทึก",
     "error.MESSAGE_TOO_LONG": "บันทึกยาวเกินไป (สูงสุด 5,000 อักขระ)",
     "error.CREATE_MEMO_FAILED": "สร้างบันทึกไม่สำเร็จ",

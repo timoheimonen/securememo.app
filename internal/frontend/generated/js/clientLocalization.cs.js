@@ -211,6 +211,7 @@ const LOCAL_TRANSLATIONS = {
     "error.NETWORK_ERROR": "Služba je dočasně nedostupná. Zkuste to prosím znovu.",
     "error.SERVICE_UNAVAILABLE": "Služba je dočasně nedostupná. Zkuste to prosím později.",
     "error.RATE_LIMITED": "Příliš mnoho požadavků. Počkejte prosím a zkuste to znovu.",
+    "error.STORAGE_LIMIT_REACHED": "Kapacita úložiště služby je dočasně vyčerpána. Zkuste to prosím později.",
     "error.MISSING_MESSAGE": "Zadejte prosím zprávu",
     "error.MESSAGE_TOO_LONG": "Zpráva je příliš dlouhá (max. 5 000 znaků)",
     "error.CREATE_MEMO_FAILED": "Nepodařilo se vytvořit zprávu",

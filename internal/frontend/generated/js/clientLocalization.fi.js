@@ -211,6 +211,7 @@ const LOCAL_TRANSLATIONS = {
     "error.NETWORK_ERROR": "Palvelu ei ole tilapäisesti saatavilla. Yritä uudelleen.",
     "error.SERVICE_UNAVAILABLE": "Palvelu ei ole tilapäisesti saatavilla. Yritä myöhemmin uudelleen.",
     "error.RATE_LIMITED": "Liian monta pyyntöä. Odota hetki ja yritä uudelleen.",
+    "error.STORAGE_LIMIT_REACHED": "Palvelun tallennustila on tilapäisesti täynnä. Yritä myöhemmin uudelleen.",
     "error.MISSING_MESSAGE": "Syötä muistio",
     "error.MESSAGE_TOO_LONG": "Muistio on liian pitkä (max 5 000 merkkiä)",
     "error.CREATE_MEMO_FAILED": "Muistion luonti epäonnistui",

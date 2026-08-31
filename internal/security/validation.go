@@ -10,7 +10,7 @@ import (
 
 const (
 	encryptedMessagePrefix    = "v1:"
-	maxEncryptedMessageBytes  = 41_000
+	MaxEncryptedMessageBytes  = 41_000
 	minEncryptedEnvelopeBytes = 16 + 12 + 16 // salt + IV + AES-GCM tag
 )
 
@@ -52,7 +52,7 @@ func ValidExpiryHours(input string) bool {
 }
 
 func ValidEncryptedMessage(input string) bool {
-	if len(input) > maxEncryptedMessageBytes || !strings.HasPrefix(input, encryptedMessagePrefix) {
+	if len(input) > MaxEncryptedMessageBytes || !strings.HasPrefix(input, encryptedMessagePrefix) {
 		return false
 	}
 

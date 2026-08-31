@@ -2,6 +2,7 @@ package server
 
 import (
 	"context"
+	"errors"
 	"fmt"
 	"net/http"
 	"sort"
@@ -114,6 +115,15 @@ func (m *Metrics) lifetimeStats(ctx context.Context) (store.AppStats, error) {
 	return m.store.AppStats(readCtx)
 }
 
+func (m *Metrics) storageStats(ctx context.Context) (store.StorageStats, error) {
+	if m == nil || m.store == nil {
+		return store.StorageStats{}, errors.New("storage metrics are unavailable")
+	}
+	readCtx, cancel := context.WithTimeout(ctx, 2*time.Second)
+	defer cancel()
+	return m.store.StorageStats(readCtx)
+}
+
 func (m *Metrics) Handler() http.Handler {
 	return http.HandlerFunc(m.ServeHTTP)
 }
@@ -145,6 +155,7 @@ func (m *Metrics) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		memosCreated = stats.MemosCreated
 		memosRead = stats.MemosRead
 	}
+	storageStats, storageStatsErr := m.storageStats(r.Context())
 
 	fmt.Fprintln(w, "# HELP securememo_http_requests_total Total HTTP requests handled by securememo.app.")
 	fmt.Fprintln(w, "# TYPE securememo_http_requests_total counter")
@@ -166,6 +177,10 @@ func (m *Metrics) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintln(w, "# TYPE securememo_memos_read_total counter")
 	fmt.Fprintf(w, "securememo_memos_read_total %d\n", memosRead)
 
+	if storageStatsErr == nil {
+		writeStorageMetrics(w, storageStats)
+	}
+
 	fmt.Fprintln(w, "# HELP securememo_http_request_duration_seconds HTTP request duration in seconds.")
 	fmt.Fprintln(w, "# TYPE securememo_http_request_duration_seconds histogram")
 	for _, key := range sortedDurationKeys(durations) {
@@ -177,6 +192,36 @@ func (m *Metrics) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		fmt.Fprintf(w, "securememo_http_request_duration_seconds_sum%s %s\n", key.labels(), strconv.FormatFloat(d.Sum, 'f', -1, 64))
 		fmt.Fprintf(w, "securememo_http_request_duration_seconds_count%s %d\n", key.labels(), d.Count)
 	}
+}
+
+func writeStorageMetrics(w http.ResponseWriter, stats store.StorageStats) {
+	fmt.Fprintln(w, "# HELP securememo_storage_usage_bytes Ciphertext bytes charged to the global storage quota.")
+	fmt.Fprintln(w, "# TYPE securememo_storage_usage_bytes gauge")
+	fmt.Fprintf(w, "securememo_storage_usage_bytes %d\n", stats.UsageBytes)
+	fmt.Fprintln(w, "# HELP securememo_storage_limit_bytes Configured global ciphertext byte limit; zero means disabled.")
+	fmt.Fprintln(w, "# TYPE securememo_storage_limit_bytes gauge")
+	fmt.Fprintf(w, "securememo_storage_limit_bytes %d\n", stats.LimitBytes)
+	fmt.Fprintln(w, "# HELP securememo_storage_memos Memos charged to the global storage quota.")
+	fmt.Fprintln(w, "# TYPE securememo_storage_memos gauge")
+	fmt.Fprintf(w, "securememo_storage_memos %d\n", stats.Memos)
+	fmt.Fprintln(w, "# HELP securememo_storage_memos_limit Configured global memo-count limit; zero means disabled.")
+	fmt.Fprintln(w, "# TYPE securememo_storage_memos_limit gauge")
+	fmt.Fprintf(w, "securememo_storage_memos_limit %d\n", stats.MemosLimit)
+	fmt.Fprintln(w, "# HELP securememo_storage_sqlite_main_bytes SQLite main database bytes, including freelist pages.")
+	fmt.Fprintln(w, "# TYPE securememo_storage_sqlite_main_bytes gauge")
+	fmt.Fprintf(w, "securememo_storage_sqlite_main_bytes %d\n", stats.SQLiteMainBytes)
+	fmt.Fprintln(w, "# HELP securememo_storage_sqlite_freelist_bytes Reusable bytes within the SQLite main database; already included in sqlite_main_bytes.")
+	fmt.Fprintln(w, "# TYPE securememo_storage_sqlite_freelist_bytes gauge")
+	fmt.Fprintf(w, "securememo_storage_sqlite_freelist_bytes %d\n", stats.SQLiteFreelistBytes)
+	fmt.Fprintln(w, "# HELP securememo_storage_sqlite_wal_bytes Current SQLite write-ahead log file bytes.")
+	fmt.Fprintln(w, "# TYPE securememo_storage_sqlite_wal_bytes gauge")
+	fmt.Fprintf(w, "securememo_storage_sqlite_wal_bytes %d\n", stats.SQLiteWALBytes)
+	fmt.Fprintln(w, "# HELP securememo_storage_filesystem_available_bytes Filesystem bytes available to the service process.")
+	fmt.Fprintln(w, "# TYPE securememo_storage_filesystem_available_bytes gauge")
+	fmt.Fprintf(w, "securememo_storage_filesystem_available_bytes %d\n", stats.FilesystemAvailableBytes)
+	fmt.Fprintln(w, "# HELP securememo_storage_min_free_disk_bytes Configured filesystem reserve below which attacker-driven database growth stops; zero means disabled.")
+	fmt.Fprintln(w, "# TYPE securememo_storage_min_free_disk_bytes gauge")
+	fmt.Fprintf(w, "securememo_storage_min_free_disk_bytes %d\n", stats.MinFreeDiskBytes)
 }
 
 func (rw *metricsResponseWriter) WriteHeader(status int) {

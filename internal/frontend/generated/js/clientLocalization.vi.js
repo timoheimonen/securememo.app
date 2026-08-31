@@ -211,6 +211,7 @@ const LOCAL_TRANSLATIONS = {
     "error.NETWORK_ERROR": "Dịch vụ tạm thời không khả dụng. Vui lòng thử lại.",
     "error.SERVICE_UNAVAILABLE": "Dịch vụ tạm thời không khả dụng. Vui lòng thử lại sau.",
     "error.RATE_LIMITED": "Quá nhiều yêu cầu. Vui lòng chờ một chút và thử lại.",
+    "error.STORAGE_LIMIT_REACHED": "Dung lượng lưu trữ của dịch vụ tạm thời đã đầy. Vui lòng thử lại sau.",
     "error.MISSING_MESSAGE": "Vui lòng nhập ghi chú",
     "error.MESSAGE_TOO_LONG": "Ghi chú quá dài (tối đa 5.000 ký tự)",
     "error.CREATE_MEMO_FAILED": "Tạo ghi chú thất bại",

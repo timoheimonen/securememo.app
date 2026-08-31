@@ -12,7 +12,7 @@ func TestAppStatsPersistAcrossReopen(t *testing.T) {
 	path := filepath.Join(t.TempDir(), "securememo.sqlite")
 	ctx := context.Background()
 
-	db, err := OpenSQLite(path)
+	db, err := OpenSQLite(path, StorageLimits{})
 	if err != nil {
 		t.Fatalf("open sqlite: %v", err)
 	}
@@ -29,7 +29,7 @@ func TestAppStatsPersistAcrossReopen(t *testing.T) {
 		t.Fatalf("close sqlite: %v", err)
 	}
 
-	reopened, err := OpenSQLite(path)
+	reopened, err := OpenSQLite(path, StorageLimits{})
 	if err != nil {
 		t.Fatalf("reopen sqlite: %v", err)
 	}
@@ -48,7 +48,7 @@ func TestAppStatsPersistAcrossReopen(t *testing.T) {
 }
 
 func TestIncrementAppStatRejectsUnknownKey(t *testing.T) {
-	db, err := OpenSQLite(filepath.Join(t.TempDir(), "securememo.sqlite"))
+	db, err := OpenSQLite(filepath.Join(t.TempDir(), "securememo.sqlite"), StorageLimits{})
 	if err != nil {
 		t.Fatalf("open sqlite: %v", err)
 	}
@@ -83,7 +83,7 @@ CREATE TABLE memos (
 		t.Fatalf("close raw sqlite: %v", err)
 	}
 
-	db, err := OpenSQLite(path)
+	db, err := OpenSQLite(path, StorageLimits{})
 	if err != nil {
 		t.Fatalf("open migrated sqlite: %v", err)
 	}

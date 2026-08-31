@@ -4,7 +4,7 @@
 
 Privacy comes first, always.
 
-- Cookies are completely forbidden. Do not add, set, read, depend on, or recommend cookies anywhere in this project.
+- Cookies are forbidden except for Cloudflare's strictly necessary `cf_clearance` cookie when it is used solely for Precursor or challenge-based abuse protection. Application code must not set, read, repurpose, or depend on `cf_clearance`, and it must never be used for tracking, analytics, advertising, or behavioral profiling. Any other cookie requires explicit user approval and a privacy-impact review first.
 - Do not add tracking, analytics, fingerprinting, advertising, third-party beacons, or behavioral profiling.
 - Keep client-side storage minimal and avoid persistent identifiers unless the user explicitly requests them and the privacy impact is reviewed first.
 - Prefer explicit URL state and server-side behavior that does not identify or remember users.

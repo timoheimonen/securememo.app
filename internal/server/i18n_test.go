@@ -342,6 +342,15 @@ func TestPolishCatalogHasNoZeroWidthSpaces(t *testing.T) {
 	}
 }
 
+func TestStorageCapacityErrorIsTranslatedInEveryLocale(t *testing.T) {
+	const key = "error.STORAGE_LIMIT_REACHED"
+	for _, locale := range supportedLocales {
+		if translationCatalog[locale][key] == "" {
+			t.Errorf("locale %s is missing %s", locale, key)
+		}
+	}
+}
+
 func TestLocalizedRenderIsDeterministic(t *testing.T) {
 	for _, page := range localizedTemplatePages {
 		templateHTML := readLocalizedTemplate(t, page.filename)
