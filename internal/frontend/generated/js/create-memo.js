@@ -214,7 +214,7 @@ async function handleCreateSubmit(e) {
     showMessage(t('msg.emptyMemo'), 'error');
     return;
   }
-  if (message.length > 10000) {
+  if (message.length > 5000) {
     showMessage(t('msg.memoTooLong'), 'error');
     return;
   }

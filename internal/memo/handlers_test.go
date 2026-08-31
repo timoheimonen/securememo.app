@@ -2,6 +2,7 @@ package memo
 
 import (
 	"context"
+	"encoding/base64"
 	"encoding/json"
 	"errors"
 	"fmt"
@@ -42,7 +43,8 @@ func TestCreateValidatesExpiryHours(t *testing.T) {
 				Store:  db,
 			}
 			body := fmt.Sprintf(
-				`{"encryptedMessage":"ciphertext","expiryHours":%d,"deletionTokenHash":"%s","ownerDeletionTokenHash":"%s"}`,
+				`{"encryptedMessage":"%s","expiryHours":%d,"deletionTokenHash":"%s","ownerDeletionTokenHash":"%s"}`,
+				validEncryptedMessageForHandlerTest(44),
 				tt.expiryHours,
 				strings.Repeat("A", 44),
 				strings.Repeat("B", 44),
@@ -62,6 +64,107 @@ func TestCreateValidatesExpiryHours(t *testing.T) {
 				assertAPIError(t, rec, tt.wantStatus, tt.wantErrorCode)
 			}
 		})
+	}
+}
+
+func TestCreateRejectsInvalidEncryptedMessageFormat(t *testing.T) {
+	valid := validEncryptedMessageForHandlerTest(44)
+	tests := []struct {
+		name             string
+		encryptedMessage string
+	}{
+		{name: "empty"},
+		{name: "unversioned", encryptedMessage: strings.TrimPrefix(valid, "v1:")},
+		{name: "future version", encryptedMessage: "v2:" + strings.TrimPrefix(valid, "v1:")},
+		{name: "malformed base64", encryptedMessage: "v1:not-base64!"},
+		{name: "whitespace in base64", encryptedMessage: valid[:12] + "\n" + valid[12:]},
+		{name: "short envelope", encryptedMessage: validEncryptedMessageForHandlerTest(43)},
+		{name: "over byte limit", encryptedMessage: validEncryptedMessageForHandlerTest(30_748)},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			db, err := store.OpenSQLite(filepath.Join(t.TempDir(), "securememo.sqlite"))
+			if err != nil {
+				t.Fatalf("open sqlite: %v", err)
+			}
+			defer db.Close()
+
+			handler := Handler{
+				Config: config.Config{AllowedOrigins: []string{"https://securememo.app"}},
+				Store:  db,
+			}
+			body, err := json.Marshal(map[string]interface{}{
+				"encryptedMessage":       tt.encryptedMessage,
+				"expiryHours":            24,
+				"deletionTokenHash":      strings.Repeat("A", 44),
+				"ownerDeletionTokenHash": strings.Repeat("B", 44),
+			})
+			if err != nil {
+				t.Fatalf("encode request: %v", err)
+			}
+			req := httptest.NewRequest(http.MethodPost, "/api/create-memo", strings.NewReader(string(body)))
+			req.RemoteAddr = "203.0.113.11:12345"
+			req.Header.Set("Origin", "https://securememo.app")
+			req.Header.Set("Content-Type", "application/json")
+			rec := httptest.NewRecorder()
+
+			handler.Create(rec, req)
+
+			assertAPIError(t, rec, http.StatusBadRequest, errorCodeInvalidMessageFormat)
+		})
+	}
+}
+
+func TestCreateStoresEncryptedMessageUnchanged(t *testing.T) {
+	db, err := store.OpenSQLite(filepath.Join(t.TempDir(), "securememo.sqlite"))
+	if err != nil {
+		t.Fatalf("open sqlite: %v", err)
+	}
+	defer db.Close()
+
+	handler := Handler{
+		Config: config.Config{AllowedOrigins: []string{"https://securememo.app"}},
+		Store:  db,
+	}
+	encryptedMessage := "v1:" + base64.StdEncoding.EncodeToString([]byte{
+		0xfb, 0xff, 0xef, 0xfb, 0xff, 0xef, 0xfb, 0xff, 0xef, 0xfb, 0xff,
+		0xef, 0xfb, 0xff, 0xef, 0xfb, 0xff, 0xef, 0xfb, 0xff, 0xef, 0xfb,
+		0xff, 0xef, 0xfb, 0xff, 0xef, 0xfb, 0xff, 0xef, 0xfb, 0xff, 0xef,
+		0xfb, 0xff, 0xef, 0xfb, 0xff, 0xef, 0xfb, 0xff, 0xef, 0xfb, 0xff,
+	})
+	body, err := json.Marshal(map[string]interface{}{
+		"encryptedMessage":       encryptedMessage,
+		"expiryHours":            24,
+		"deletionTokenHash":      strings.Repeat("A", 44),
+		"ownerDeletionTokenHash": strings.Repeat("B", 44),
+	})
+	if err != nil {
+		t.Fatalf("encode request: %v", err)
+	}
+	req := httptest.NewRequest(http.MethodPost, "/api/create-memo", strings.NewReader(string(body)))
+	req.RemoteAddr = "203.0.113.12:12345"
+	req.Header.Set("Origin", "https://securememo.app")
+	req.Header.Set("Content-Type", "application/json")
+	rec := httptest.NewRecorder()
+
+	handler.Create(rec, req)
+
+	if rec.Code != http.StatusOK {
+		t.Fatalf("create status = %d, want %d; body=%s", rec.Code, http.StatusOK, rec.Body.String())
+	}
+	var result struct {
+		MemoID string `json:"memoId"`
+	}
+	if err := json.Unmarshal(rec.Body.Bytes(), &result); err != nil {
+		t.Fatalf("decode create response: %v", err)
+	}
+	row, err := db.ReadActiveMemo(context.Background(), result.MemoID)
+	if err != nil {
+		t.Fatalf("read created memo: %v", err)
+	}
+	if row.EncryptedMessage != encryptedMessage {
+		t.Fatalf("stored encrypted message = %q, want original %q", row.EncryptedMessage, encryptedMessage)
 	}
 }
 
@@ -528,4 +631,8 @@ func assertAPIError(t *testing.T, rec *httptest.ResponseRecorder, wantStatus int
 	if got, ok := body["errorCode"].(string); !ok || got != wantErrorCode {
 		t.Fatalf("errorCode = %v, want %q", body["errorCode"], wantErrorCode)
 	}
+}
+
+func validEncryptedMessageForHandlerTest(envelopeBytes int) string {
+	return "v1:" + base64.StdEncoding.EncodeToString(make([]byte, envelopeBytes))
 }

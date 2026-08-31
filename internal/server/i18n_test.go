@@ -3,6 +3,7 @@ package server
 import (
 	"fmt"
 	"html"
+	"io/fs"
 	"regexp"
 	"strings"
 	"testing"
@@ -178,7 +179,7 @@ func TestLocalizedRenderPreservesStructuralHTMLAttributes(t *testing.T) {
 		`sizes="192x192"`,
 		`sizes="512x512"`,
 		`rows="8"`,
-		`maxlength="10000"`,
+		`maxlength="5000"`,
 		`value="8"`,
 		`value="24"`,
 		`value="48"`,
@@ -195,6 +196,41 @@ func TestLocalizedRenderPreservesStructuralHTMLAttributes(t *testing.T) {
 				}
 			}
 		})
+	}
+}
+
+func TestFrontendAssetsDoNotReferenceRetiredMemoCharacterLimit(t *testing.T) {
+	retiredLimit := regexp.MustCompile(`(?:\b10(?:000|[ ,.\x{00A0}\x{202F}]000)\b|১০(?:০০০|[ ,.\x{00A0}\x{202F}]০০০))`)
+
+	err := fs.WalkDir(frontend.FS, "generated", func(assetPath string, entry fs.DirEntry, walkErr error) error {
+		if walkErr != nil {
+			return walkErr
+		}
+		if entry.IsDir() || (!strings.HasSuffix(assetPath, ".html") && !strings.HasSuffix(assetPath, ".js")) {
+			return nil
+		}
+
+		body, err := frontend.FS.ReadFile(assetPath)
+		if err != nil {
+			return err
+		}
+		if match := retiredLimit.Find(body); match != nil {
+			t.Errorf("frontend asset %s still references the retired memo character limit as %q", assetPath, match)
+		}
+		return nil
+	})
+	if err != nil {
+		t.Fatalf("walk frontend assets: %v", err)
+	}
+}
+
+func TestCreateMemoScriptEnforcesFiveThousandCharacterLimit(t *testing.T) {
+	body, err := frontend.FS.ReadFile("generated/js/create-memo.js")
+	if err != nil {
+		t.Fatalf("read create memo script: %v", err)
+	}
+	if !strings.Contains(string(body), "if (message.length > 5000) {") {
+		t.Fatal("create memo script does not enforce the 5,000-character limit")
 	}
 }
 
