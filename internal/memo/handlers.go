@@ -90,8 +90,7 @@ func (h Handler) Create(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	encryptedMessage, ok := security.SanitizeEncryptedMessage(req.EncryptedMessage)
-	if !ok {
+	if !security.ValidEncryptedMessage(req.EncryptedMessage) {
 		writeAPIError(w, http.StatusBadRequest, errorCodeInvalidMessageFormat)
 		return
 	}
@@ -116,7 +115,7 @@ func (h Handler) Create(w http.ResponseWriter, r *http.Request) {
 		writeAPIError(w, http.StatusInternalServerError, errorCodeMemoIDGeneration)
 		return
 	}
-	if err := h.Store.CreateMemo(r.Context(), memoID, encryptedMessage, expiryTime, req.DeletionTokenHash, req.OwnerDeletionTokenHash); err != nil {
+	if err := h.Store.CreateMemo(r.Context(), memoID, req.EncryptedMessage, expiryTime, req.DeletionTokenHash, req.OwnerDeletionTokenHash); err != nil {
 		writeAPIError(w, http.StatusInternalServerError, errorCodeDatabase)
 		return
 	}

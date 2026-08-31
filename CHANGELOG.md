@@ -4,6 +4,12 @@ All notable changes to this project are documented here.
 
 Version identifiers match the application `assetVersion`.
 
+## 20260831a - 2026-08-31
+
+### Changed
+- Reduce the maximum memo length from 10,000 to 5,000 characters across the frontend and localized content.
+- Require canonical Base64 ciphertext with the current `v1:` prefix and cap encrypted memo payloads at 41,000 bytes.
+
 ## 20260829a - 2026-08-29
 
 ### Changed
