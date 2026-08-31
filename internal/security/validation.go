@@ -1,10 +1,17 @@
 package security
 
 import (
+	"encoding/base64"
 	"regexp"
 	"strconv"
 	"strings"
 	"unicode"
+)
+
+const (
+	encryptedMessagePrefix    = "v1:"
+	maxEncryptedMessageBytes  = 41_000
+	minEncryptedEnvelopeBytes = 16 + 12 + 16 // salt + IV + AES-GCM tag
 )
 
 var (
@@ -44,27 +51,18 @@ func ValidExpiryHours(input string) bool {
 	}
 }
 
-func SanitizeEncryptedMessage(input string) (string, bool) {
-	if input == "" || len(input) > 50000 || strings.ContainsRune(input, 0) {
-		return "", false
+func ValidEncryptedMessage(input string) bool {
+	if len(input) > maxEncryptedMessageBytes || !strings.HasPrefix(input, encryptedMessagePrefix) {
+		return false
 	}
-	var b strings.Builder
-	b.Grow(len(input))
-	for _, r := range input {
-		if r == '\n' || r == '\r' || r == '\t' {
-			b.WriteRune(r)
-			continue
-		}
-		if unicode.IsControl(r) {
-			return "", false
-		}
-		b.WriteRune(r)
+
+	encoded := input[len(encryptedMessagePrefix):]
+	decoded, err := base64.StdEncoding.Strict().DecodeString(encoded)
+	if err != nil || len(decoded) < minEncryptedEnvelopeBytes {
+		return false
 	}
-	out := strings.TrimSpace(b.String())
-	if out == "" || len(out) > 50000 {
-		return "", false
-	}
-	return out, true
+
+	return base64.StdEncoding.EncodeToString(decoded) == encoded
 }
 
 func NormalizeCiphertext(input string) string {
