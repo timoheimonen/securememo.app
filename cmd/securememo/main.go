@@ -20,6 +20,11 @@ func main() {
 	if err != nil {
 		log.Fatalf("config: %v", err)
 	}
+	if cfg.TrustedProxyLocal {
+		log.Printf("rate-limit client identity: CF-Connecting-IP from loopback proxy peers")
+	} else {
+		log.Printf("warning: rate-limit client identity uses the socket peer; when cloudflared connects over loopback, set SECUREMEMO_TRUST_PROXY_HEADERS=true")
+	}
 
 	db, err := store.OpenSQLite(cfg.DBPath, store.StorageLimits{
 		MaxBytes:         cfg.StorageLimitBytes,

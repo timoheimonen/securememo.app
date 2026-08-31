@@ -383,6 +383,62 @@ func TestRecordRateLimitsAppliesLaterWindow(t *testing.T) {
 	}
 }
 
+func TestRecordRateLimitsReturnsLongestBlockingWindow(t *testing.T) {
+	db, err := store.OpenSQLite(filepath.Join(t.TempDir(), "securememo.sqlite"), store.StorageLimits{})
+	if err != nil {
+		t.Fatalf("open sqlite: %v", err)
+	}
+	defer db.Close()
+	handler := Handler{Store: db}
+	req := httptest.NewRequest(http.MethodPost, "/api/read-memo", nil)
+	req.RemoteAddr = "203.0.113.41:12345"
+	rules := []rateLimitRule{
+		{Name: "minute", Limit: 1, Window: time.Minute},
+		{Name: "hour", Limit: 1, Window: time.Hour},
+	}
+
+	if result, err := handler.recordRateLimits(req, rateLimitReadKey, rules); err != nil || result.Limited {
+		t.Fatalf("first record = %+v, %v; want allowed", result, err)
+	}
+	result, err := handler.recordRateLimits(req, rateLimitReadKey, rules)
+	if err != nil {
+		t.Fatalf("limited record: %v", err)
+	}
+	if !result.Limited || result.RetryAfter < 59*time.Minute {
+		t.Fatalf("limited result = %+v, want longest blocking window", result)
+	}
+}
+
+func TestTrustedCloudflareClientsUseSeparateRateLimitBuckets(t *testing.T) {
+	db, err := store.OpenSQLite(filepath.Join(t.TempDir(), "securememo.sqlite"), store.StorageLimits{})
+	if err != nil {
+		t.Fatalf("open sqlite: %v", err)
+	}
+	defer db.Close()
+	handler := Handler{
+		Config: config.Config{TrustedProxyLocal: true},
+		Store:  db,
+	}
+	rules := []rateLimitRule{{Name: "test", Limit: 1, Window: time.Minute}}
+	request := func(clientIP string) *http.Request {
+		req := httptest.NewRequest(http.MethodPost, "/api/read-memo", nil)
+		req.RemoteAddr = "127.0.0.1:12345"
+		req.Header.Set("CF-Connecting-IP", clientIP)
+		return req
+	}
+
+	clientA := request("203.0.113.10")
+	if result, err := handler.recordRateLimits(clientA, rateLimitReadKey, rules); err != nil || result.Limited {
+		t.Fatalf("client A first request = %+v, %v; want allowed", result, err)
+	}
+	if result, err := handler.recordRateLimits(clientA, rateLimitReadKey, rules); err != nil || !result.Limited {
+		t.Fatalf("client A second request = %+v, %v; want limited", result, err)
+	}
+	if result, err := handler.recordRateLimits(request("198.51.100.20"), rateLimitReadKey, rules); err != nil || result.Limited {
+		t.Fatalf("client B first request = %+v, %v; want separate allowed bucket", result, err)
+	}
+}
+
 func TestRateLimitResponseUsesStableErrorCode(t *testing.T) {
 	db, err := store.OpenSQLite(filepath.Join(t.TempDir(), "securememo.sqlite"), store.StorageLimits{})
 	if err != nil {
@@ -416,6 +472,82 @@ func TestRateLimitResponseUsesStableErrorCode(t *testing.T) {
 	assertAPIError(t, rec, http.StatusTooManyRequests, errorCodeRateLimited)
 	if rec.Header().Get("Retry-After") == "" {
 		t.Fatal("rate-limit response is missing Retry-After")
+	}
+}
+
+func TestTrustedProxyModeFailsClosedWithoutCloudflareClientIP(t *testing.T) {
+	handler := Handler{
+		Config: config.Config{
+			AllowedOrigins:    []string{"https://securememo.app"},
+			TrustedProxyLocal: true,
+		},
+	}
+	req := httptest.NewRequest(http.MethodPost, "/api/read-memo", strings.NewReader(`{}`))
+	req.RemoteAddr = "127.0.0.1:12345"
+	req.Header.Set("Origin", "https://securememo.app")
+	req.Header.Set("Content-Type", "application/json")
+	req.Header.Set("X-Forwarded-For", "203.0.113.10")
+	rec := httptest.NewRecorder()
+
+	handler.Read(rec, req)
+
+	assertAPIError(t, rec, http.StatusForbidden, errorCodeForbidden)
+}
+
+func TestDeleteAndRevokeAreRateLimitedBeforeRequestParsing(t *testing.T) {
+	db, err := store.OpenSQLite(filepath.Join(t.TempDir(), "securememo.sqlite"), store.StorageLimits{})
+	if err != nil {
+		t.Fatalf("open sqlite: %v", err)
+	}
+	defer db.Close()
+	handler := Handler{
+		Config: config.Config{AllowedOrigins: []string{"https://securememo.app"}},
+		Store:  db,
+	}
+
+	tests := []struct {
+		name   string
+		target string
+		action string
+		handle func(http.ResponseWriter, *http.Request)
+	}{
+		{name: "delete", target: "/api/confirm-delete", action: rateLimitDeleteKey, handle: handler.ConfirmDelete},
+		{name: "revoke", target: "/api/revoke-memo", action: rateLimitRevokeKey, handle: handler.Revoke},
+	}
+
+	for index, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			remoteAddr := fmt.Sprintf("203.0.113.%d:12345", index+50)
+			seedReq := httptest.NewRequest(http.MethodPost, tt.target, nil)
+			seedReq.RemoteAddr = remoteAddr
+			for attempt := 0; attempt < rateLimitMinute; attempt++ {
+				result, err := handler.recordRateLimits(seedReq, tt.action, defaultRateLimitRules)
+				if err != nil {
+					t.Fatalf("seed rate limit %d: %v", attempt+1, err)
+				}
+				if result.Limited {
+					t.Fatalf("seed request %d was unexpectedly limited", attempt+1)
+				}
+			}
+
+			req := httptest.NewRequest(http.MethodPost, tt.target, strings.NewReader(`{`))
+			req.RemoteAddr = remoteAddr
+			req.Header.Set("Origin", "https://securememo.app")
+			req.Header.Set("Content-Type", "application/json")
+			rec := httptest.NewRecorder()
+			tt.handle(rec, req)
+
+			assertAPIError(t, rec, http.StatusTooManyRequests, errorCodeRateLimited)
+			if rec.Header().Get("Retry-After") == "" {
+				t.Fatal("rate-limit response is missing Retry-After")
+			}
+		})
+	}
+}
+
+func TestRetryAfterSecondsRoundsUp(t *testing.T) {
+	if got := retryAfterSeconds(time.Second + time.Millisecond); got != "2" {
+		t.Fatalf("retryAfterSeconds() = %q, want 2", got)
 	}
 }
 
@@ -548,7 +680,11 @@ func TestClientIPIgnoresForwardedHeadersByDefault(t *testing.T) {
 	req.Header.Set("CF-Connecting-IP", "203.0.113.10")
 	req.Header.Set("X-Forwarded-For", "198.51.100.20")
 
-	if got := handler.clientIP(req); got != "127.0.0.1" {
+	got, err := handler.clientIP(req)
+	if err != nil {
+		t.Fatalf("clientIP() error = %v", err)
+	}
+	if got != "127.0.0.1" {
 		t.Fatalf("clientIP() = %q, want loopback remote address", got)
 	}
 }
@@ -560,8 +696,120 @@ func TestClientIPUsesForwardedHeadersWhenExplicitlyTrusted(t *testing.T) {
 	req.Header.Set("CF-Connecting-IP", "203.0.113.10")
 	req.Header.Set("X-Forwarded-For", "198.51.100.20")
 
-	if got := handler.clientIP(req); got != "203.0.113.10" {
+	got, err := handler.clientIP(req)
+	if err != nil {
+		t.Fatalf("clientIP() error = %v", err)
+	}
+	if got != "203.0.113.10" {
 		t.Fatalf("clientIP() = %q, want CF-Connecting-IP", got)
+	}
+}
+
+func TestClientIPRejectsUntrustedCloudflareHeaderFallbacks(t *testing.T) {
+	handler := Handler{Config: config.Config{TrustedProxyLocal: true}}
+	tests := []struct {
+		name    string
+		headers http.Header
+	}{
+		{
+			name:    "missing Cloudflare header",
+			headers: http.Header{"X-Forwarded-For": {"198.51.100.20"}},
+		},
+		{
+			name:    "invalid Cloudflare header",
+			headers: http.Header{"Cf-Connecting-Ip": {"not-an-ip"}},
+		},
+		{
+			name:    "duplicate Cloudflare header",
+			headers: http.Header{"Cf-Connecting-Ip": {"203.0.113.10", "203.0.113.11"}},
+		},
+		{
+			name:    "comma-separated Cloudflare header",
+			headers: http.Header{"Cf-Connecting-Ip": {"203.0.113.10, 203.0.113.11"}},
+		},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			req := httptest.NewRequest(http.MethodPost, "/api/read-memo", nil)
+			req.RemoteAddr = "127.0.0.1:12345"
+			req.Header = tt.headers
+			if got, err := handler.clientIP(req); !errors.Is(err, errInvalidCloudflareClientIP) {
+				t.Fatalf("clientIP() = %q, %v; want invalid Cloudflare client IP", got, err)
+			}
+		})
+	}
+}
+
+func TestClientIPIgnoresCloudflareHeadersFromNonLocalPeer(t *testing.T) {
+	handler := Handler{Config: config.Config{TrustedProxyLocal: true}}
+	req := httptest.NewRequest(http.MethodPost, "/api/read-memo", nil)
+	req.RemoteAddr = "198.51.100.20:12345"
+	req.Header.Set("CF-Connecting-IP", "203.0.113.10")
+
+	got, err := handler.clientIP(req)
+	if err != nil {
+		t.Fatalf("clientIP() error = %v", err)
+	}
+	if got != "198.51.100.20" {
+		t.Fatalf("clientIP() = %q, want socket peer", got)
+	}
+}
+
+func TestClientIPNormalizesIPv4AndIPv6Networks(t *testing.T) {
+	handler := Handler{Config: config.Config{TrustedProxyLocal: true}}
+	tests := []struct {
+		name         string
+		connectingIP string
+		connectingV6 string
+		wantIdentity string
+	}{
+		{
+			name:         "IPv4-mapped IPv6",
+			connectingIP: "::ffff:203.0.113.10",
+			wantIdentity: "203.0.113.10",
+		},
+		{
+			name:         "IPv6 prefix",
+			connectingIP: "2001:db8:abcd:12::1234",
+			wantIdentity: "2001:db8:abcd:12::/64",
+		},
+		{
+			name:         "Cloudflare pseudo IPv4",
+			connectingIP: "240.1.2.3",
+			connectingV6: "2001:db8:feed:beef::1234",
+			wantIdentity: "2001:db8:feed:beef::/64",
+		},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			req := httptest.NewRequest(http.MethodPost, "/api/read-memo", nil)
+			req.RemoteAddr = "127.0.0.1:12345"
+			req.Header.Set("CF-Connecting-IP", tt.connectingIP)
+			if tt.connectingV6 != "" {
+				req.Header.Set("CF-Connecting-IPv6", tt.connectingV6)
+			}
+
+			got, err := handler.clientIP(req)
+			if err != nil {
+				t.Fatalf("clientIP() error = %v", err)
+			}
+			if got != tt.wantIdentity {
+				t.Fatalf("clientIP() = %q, want %q", got, tt.wantIdentity)
+			}
+		})
+	}
+}
+
+func TestClientIPRejectsPseudoIPv4WithoutOriginalIPv6(t *testing.T) {
+	handler := Handler{Config: config.Config{TrustedProxyLocal: true}}
+	req := httptest.NewRequest(http.MethodPost, "/api/read-memo", nil)
+	req.RemoteAddr = "127.0.0.1:12345"
+	req.Header.Set("CF-Connecting-IP", "240.1.2.3")
+
+	if _, err := handler.clientIP(req); !errors.Is(err, errInvalidCloudflareClientIP) {
+		t.Fatalf("clientIP() error = %v, want invalid Cloudflare client IP", err)
 	}
 }
 

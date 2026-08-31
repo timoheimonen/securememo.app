@@ -84,3 +84,11 @@ func TestProxyHeadersCanBeExplicitlyTrusted(t *testing.T) {
 		t.Fatal("expected proxy headers to be trusted when explicitly enabled")
 	}
 }
+
+func TestProxyHeadersRejectInvalidConfiguration(t *testing.T) {
+	t.Setenv("SECUREMEMO_TRUST_PROXY_HEADERS", "treu")
+
+	if _, err := FromEnv(); err == nil {
+		t.Fatal("FromEnv accepted an invalid proxy-header boolean")
+	}
+}

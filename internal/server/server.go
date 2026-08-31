@@ -39,10 +39,7 @@ func New(cfg config.Config, db *store.SQLiteStore) *Server {
 		db:      db,
 		metrics: NewMetrics(db),
 	}
-	s.memo = memo.Handler{
-		Config: cfg,
-		Store:  db,
-	}
+	s.memo = memo.NewHandler(cfg, db)
 	s.mux = http.NewServeMux()
 	s.routes()
 	return s

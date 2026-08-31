@@ -221,7 +221,9 @@ func TestCleanupUsesBoundedBatchesAndTruncatesWAL(t *testing.T) {
 		if err := db.CreateMemo(ctx, fmt.Sprintf("expired-%d", index), "x", expiry, "delete", "owner"); err != nil {
 			t.Fatalf("create expired memo %d: %v", index, err)
 		}
-		if _, err := db.RecordEvent(ctx, fmt.Sprintf("expired-rate-%d", index), 10, -time.Second); err != nil {
+		if _, err := db.db.ExecContext(ctx, `
+INSERT INTO rate_limits (key, count, first_seen, updated_at, expires_at)
+VALUES (?, 1, ?, ?, ?)`, fmt.Sprintf("expired-rate-%d", index), expiry, expiry, expiry); err != nil {
 			t.Fatalf("create expired rate-limit row %d: %v", index, err)
 		}
 	}

@@ -36,13 +36,17 @@ func FromEnv() (Config, error) {
 	if err != nil {
 		return Config{}, err
 	}
+	trustedProxyLocal, err := envBool("SECUREMEMO_TRUST_PROXY_HEADERS", false)
+	if err != nil {
+		return Config{}, err
+	}
 
 	cfg := Config{
 		Addr:              envOrDefault("SECUREMEMO_ADDR", "127.0.0.1:3005"),
 		MetricsAddr:       strings.TrimSpace(os.Getenv("SECUREMEMO_METRICS_ADDR")),
 		DBPath:            envOrDefault("SECUREMEMO_DB_PATH", "./data/securememo.sqlite"),
 		PublicOrigin:      strings.TrimRight(envOrDefault("PUBLIC_ORIGIN", "https://securememo.app"), "/"),
-		TrustedProxyLocal: envBoolDefault("SECUREMEMO_TRUST_PROXY_HEADERS", false),
+		TrustedProxyLocal: trustedProxyLocal,
 		StorageLimitBytes: storageLimitBytes,
 		StorageMemoLimit:  storageMemoLimit(storageLimitBytes),
 		MinFreeDiskBytes:  minFreeDiskBytes,
@@ -89,17 +93,17 @@ func envOrDefault(key, fallback string) string {
 	return fallback
 }
 
-func envBoolDefault(key string, fallback bool) bool {
+func envBool(key string, fallback bool) (bool, error) {
 	value := strings.ToLower(strings.TrimSpace(os.Getenv(key)))
 	switch value {
 	case "":
-		return fallback
+		return fallback, nil
 	case "1", "true", "yes", "on":
-		return true
+		return true, nil
 	case "0", "false", "no", "off":
-		return false
+		return false, nil
 	default:
-		return fallback
+		return false, fmt.Errorf("%s must be a boolean (true/false, 1/0, yes/no, or on/off)", key)
 	}
 }
 

@@ -812,26 +812,71 @@ type RateLimitResult struct {
 	RetryAfter time.Duration
 }
 
+type RateLimitRule struct {
+	Key    string
+	Limit  int
+	Window time.Duration
+}
+
 func (s *SQLiteStore) RecordEvent(ctx context.Context, key string, limit int, window time.Duration) (RateLimitResult, error) {
-	if limit <= 0 {
-		return RateLimitResult{}, errors.New("limit must be positive")
+	results, err := s.RecordEvents(ctx, []RateLimitRule{{Key: key, Limit: limit, Window: window}})
+	if err != nil {
+		return RateLimitResult{}, err
 	}
+	return results[0], nil
+}
+
+func (s *SQLiteStore) RecordEvents(ctx context.Context, rules []RateLimitRule) ([]RateLimitResult, error) {
+	results := make([]RateLimitResult, len(rules))
+	for _, rule := range rules {
+		if rule.Key == "" {
+			return nil, errors.New("key must not be empty")
+		}
+		if rule.Limit <= 0 {
+			return nil, errors.New("limit must be positive")
+		}
+		if rule.Window <= 0 {
+			return nil, errors.New("window must be positive")
+		}
+	}
+	if len(rules) == 0 {
+		return results, nil
+	}
+
 	now := time.Now().Unix()
-	expiresAt := now + int64(window.Seconds())
 
 	tx, err := s.db.BeginTx(ctx, nil)
 	if err != nil {
-		return RateLimitResult{}, normalizeStorageError(err)
+		return nil, normalizeStorageError(err)
 	}
 	defer tx.Rollback()
 	if err := s.ensureFilesystemReserve(attackerWriteHeadroomBytes); err != nil {
-		return RateLimitResult{}, err
+		return nil, err
 	}
 
+	for index, rule := range rules {
+		result, err := recordRateLimitEvent(ctx, tx, rule, now)
+		if err != nil {
+			return nil, normalizeStorageError(err)
+		}
+		results[index] = result
+	}
+	if err := tx.Commit(); err != nil {
+		return nil, normalizeStorageError(err)
+	}
+	return results, nil
+}
+
+func recordRateLimitEvent(ctx context.Context, tx *sql.Tx, rule RateLimitRule, now int64) (RateLimitResult, error) {
 	var count int
 	var currentExpiresAt int64
-	err = tx.QueryRowContext(ctx, `SELECT count, expires_at FROM rate_limits WHERE key = ?`, key).Scan(&count, &currentExpiresAt)
+	err := tx.QueryRowContext(ctx, `SELECT count, expires_at FROM rate_limits WHERE key = ?`, rule.Key).Scan(&count, &currentExpiresAt)
 	if errors.Is(err, sql.ErrNoRows) || currentExpiresAt <= now {
+		windowSeconds := int64(rule.Window / time.Second)
+		if rule.Window%time.Second != 0 {
+			windowSeconds++
+		}
+		expiresAt := now + windowSeconds
 		_, err = tx.ExecContext(ctx, `
 INSERT INTO rate_limits (key, count, first_seen, updated_at, expires_at)
 VALUES (?, 1, ?, ?, ?)
@@ -839,24 +884,18 @@ ON CONFLICT(key) DO UPDATE SET
     count = excluded.count,
     first_seen = excluded.first_seen,
     updated_at = excluded.updated_at,
-    expires_at = excluded.expires_at`, key, now, now, expiresAt)
+    expires_at = excluded.expires_at`, rule.Key, now, now, expiresAt)
 		if err != nil {
-			return RateLimitResult{}, normalizeStorageError(err)
+			return RateLimitResult{}, err
 		}
-		if err := tx.Commit(); err != nil {
-			return RateLimitResult{}, normalizeStorageError(err)
-		}
-		return RateLimitResult{Limited: false, Count: 1, Remaining: max(0, limit-1)}, nil
+		return RateLimitResult{Limited: false, Count: 1, Remaining: max(0, rule.Limit-1)}, nil
 	}
 	if err != nil {
-		return RateLimitResult{}, normalizeStorageError(err)
+		return RateLimitResult{}, err
 	}
 
 	next := count + 1
-	if next > limit {
-		if err := tx.Commit(); err != nil {
-			return RateLimitResult{}, normalizeStorageError(err)
-		}
+	if next > rule.Limit {
 		retryAfter := time.Duration(max(1, int(currentExpiresAt-now))) * time.Second
 		return RateLimitResult{Limited: true, Count: count, Remaining: 0, RetryAfter: retryAfter}, nil
 	}
@@ -864,14 +903,11 @@ ON CONFLICT(key) DO UPDATE SET
 	_, err = tx.ExecContext(ctx, `
 UPDATE rate_limits
 SET count = ?, updated_at = ?
-WHERE key = ?`, next, now, key)
+WHERE key = ?`, next, now, rule.Key)
 	if err != nil {
-		return RateLimitResult{}, normalizeStorageError(err)
+		return RateLimitResult{}, err
 	}
-	if err := tx.Commit(); err != nil {
-		return RateLimitResult{}, normalizeStorageError(err)
-	}
-	return RateLimitResult{Limited: false, Count: next, Remaining: max(0, limit-next)}, nil
+	return RateLimitResult{Limited: false, Count: next, Remaining: max(0, rule.Limit-next)}, nil
 }
 
 func (s *SQLiteStore) ensureColumn(ctx context.Context, tableName, columnName, columnType string) error {

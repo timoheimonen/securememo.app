@@ -8,8 +8,8 @@ import (
 	"encoding/hex"
 	"encoding/json"
 	"errors"
-	"net"
 	"net/http"
+	"net/netip"
 	"strconv"
 	"strings"
 	"time"
@@ -27,6 +27,7 @@ const (
 	rateLimitCreateKey = "create"
 	rateLimitReadKey   = "read"
 	rateLimitDeleteKey = "delete"
+	rateLimitRevokeKey = "revoke"
 	rateLimitFailKey   = "failure"
 )
 
@@ -69,9 +70,23 @@ var failureRateLimitRules = []rateLimitRule{
 	{Name: "hour", Limit: failureLimitHour, Window: time.Hour},
 }
 
+var (
+	errInvalidCloudflareClientIP = errors.New("invalid Cloudflare client IP")
+	cloudflarePseudoIPv4Prefix   = netip.MustParsePrefix("240.0.0.0/4")
+)
+
 type Handler struct {
-	Config config.Config
-	Store  *store.SQLiteStore
+	Config            config.Config
+	Store             *store.SQLiteStore
+	rateLimitFallback *rateLimitFallback
+}
+
+func NewHandler(cfg config.Config, sqliteStore *store.SQLiteStore) Handler {
+	return Handler{
+		Config:            cfg,
+		Store:             sqliteStore,
+		rateLimitFallback: newRateLimitFallback(defaultRateLimitFallbackEntries),
+	}
 }
 
 func (h Handler) Create(w http.ResponseWriter, r *http.Request) {
@@ -175,6 +190,9 @@ func (h Handler) ConfirmDelete(w http.ResponseWriter, r *http.Request) {
 	if !h.requirePOST(w, r) {
 		return
 	}
+	if !h.allowRateLimitedAction(w, r, rateLimitDeleteKey) {
+		return
+	}
 	var req struct {
 		MemoID        string `json:"memoId"`
 		DeletionToken string `json:"deletionToken"`
@@ -206,9 +224,6 @@ func (h Handler) ConfirmDelete(w http.ResponseWriter, r *http.Request) {
 		h.rateLimitOrAccessDenied(w, r)
 		return
 	}
-	if !h.allowRateLimitedAction(w, r, rateLimitDeleteKey) {
-		return
-	}
 	deleted, err := h.Store.DeleteMemo(r.Context(), req.MemoID)
 	if err != nil {
 		writeAPIError(w, http.StatusInternalServerError, errorCodeMemoDeletion)
@@ -226,6 +241,9 @@ func (h Handler) ConfirmDelete(w http.ResponseWriter, r *http.Request) {
 
 func (h Handler) Revoke(w http.ResponseWriter, r *http.Request) {
 	if !h.requirePOST(w, r) {
+		return
+	}
+	if !h.allowRateLimitedAction(w, r, rateLimitRevokeKey) {
 		return
 	}
 	var req struct {
@@ -332,6 +350,10 @@ func (h Handler) accessDenied(w http.ResponseWriter) {
 
 func (h Handler) rateLimitOrAccessDenied(w http.ResponseWriter, r *http.Request) {
 	result, err := h.recordRateLimits(r, rateLimitFailKey, failureRateLimitRules)
+	if errors.Is(err, errInvalidCloudflareClientIP) {
+		writeAPIError(w, http.StatusForbidden, errorCodeForbidden)
+		return
+	}
 	if err == nil && result.Limited {
 		w.Header().Set("Retry-After", retryAfterSeconds(result.RetryAfter))
 		writeAPIError(w, http.StatusTooManyRequests, errorCodeRateLimited)
@@ -343,13 +365,17 @@ func (h Handler) rateLimitOrAccessDenied(w http.ResponseWriter, r *http.Request)
 func (h Handler) allowRateLimitedAction(w http.ResponseWriter, r *http.Request, action string) bool {
 	result, err := h.recordRateLimits(r, action, defaultRateLimitRules)
 	if err != nil {
+		if errors.Is(err, errInvalidCloudflareClientIP) {
+			writeAPIError(w, http.StatusForbidden, errorCodeForbidden)
+			return false
+		}
 		if errors.Is(err, store.ErrStorageLimitReached) {
 			if action == rateLimitCreateKey {
 				writeAPIError(w, http.StatusInsufficientStorage, errorCodeStorageLimitReached)
 				return false
 			}
-			// The trusted Cloudflare edge remains the fallback limiter when the
-			// physically saturated SQLite database cannot persist a read/delete event.
+			// NewHandler installs the bounded in-memory fallback. Keep direct Handler
+			// values fail-open here so reads and authenticated deletes remain available.
 			return true
 		}
 		writeAPIError(w, http.StatusInternalServerError, errorCodeGeneral)
@@ -364,19 +390,44 @@ func (h Handler) allowRateLimitedAction(w http.ResponseWriter, r *http.Request, 
 }
 
 func (h Handler) recordRateLimits(r *http.Request, action string, rules []rateLimitRule) (store.RateLimitResult, error) {
-	ipHash := hashString(h.clientIP(r))
+	clientIP, err := h.clientIP(r)
+	if err != nil {
+		return store.RateLimitResult{}, err
+	}
+	ipHash := hashString(clientIP)
+	storeRules := make([]store.RateLimitRule, 0, len(rules))
 	for _, rule := range rules {
 		key := "api:" + action + ":" + rule.Name + ":" + ipHash
-		result, err := h.Store.RecordEvent(r.Context(), key, rule.Limit, rule.Window)
-		if err != nil || result.Limited {
-			return result, err
+		storeRules = append(storeRules, store.RateLimitRule{Key: key, Limit: rule.Limit, Window: rule.Window})
+	}
+	fallbackResult := store.RateLimitResult{}
+	if h.rateLimitFallback != nil {
+		fallbackResult, err = h.rateLimitFallback.record(storeRules)
+		if err != nil {
+			return store.RateLimitResult{}, err
 		}
 	}
-	return store.RateLimitResult{}, nil
+	results, err := h.Store.RecordEvents(r.Context(), storeRules)
+	if errors.Is(err, store.ErrStorageLimitReached) && h.rateLimitFallback != nil {
+		return fallbackResult, nil
+	}
+	if err != nil {
+		return store.RateLimitResult{}, err
+	}
+	aggregate := store.RateLimitResult{}
+	for _, result := range results {
+		if result.Limited {
+			aggregate.Limited = true
+			if result.RetryAfter > aggregate.RetryAfter {
+				aggregate.RetryAfter = result.RetryAfter
+			}
+		}
+	}
+	return aggregate, nil
 }
 
 func retryAfterSeconds(duration time.Duration) string {
-	seconds := int(duration.Round(time.Second) / time.Second)
+	seconds := int((duration + time.Second - 1) / time.Second)
 	if seconds < 1 {
 		seconds = 1
 	}
@@ -419,49 +470,62 @@ func hashString(input string) string {
 	return hex.EncodeToString(sum[:])
 }
 
-func (h Handler) clientIP(r *http.Request) string {
-	remoteIP := remoteAddrIP(r.RemoteAddr)
-	if h.Config.TrustedProxyLocal && isLocalProxyPeer(remoteIP) {
-		if ip := forwardedClientIP(r); ip != "" {
-			return ip
+func (h Handler) clientIP(r *http.Request) (string, error) {
+	remoteIP, ok := remoteAddrIP(r.RemoteAddr)
+	if h.Config.TrustedProxyLocal && ok && remoteIP.IsLoopback() {
+		clientIP, err := cloudflareClientIP(r.Header)
+		if err != nil {
+			return "", err
 		}
+		return rateLimitIPIdentity(clientIP), nil
 	}
-	if remoteIP != "" {
-		return remoteIP
+	if ok {
+		return rateLimitIPIdentity(remoteIP), nil
 	}
-	return "unknown"
+	return "unknown", nil
 }
 
-func forwardedClientIP(r *http.Request) string {
-	for _, header := range []string{"CF-Connecting-IP", "Cf-Connecting-Ip", "X-Forwarded-For"} {
-		value := strings.TrimSpace(r.Header.Get(header))
-		if value == "" {
-			continue
-		}
-		if header == "X-Forwarded-For" {
-			value = strings.TrimSpace(strings.Split(value, ",")[0])
-		}
-		if ip := net.ParseIP(value); ip != nil {
-			return ip.String()
-		}
-	}
-	return ""
-}
-
-func remoteAddrIP(remoteAddr string) string {
-	host, _, err := net.SplitHostPort(remoteAddr)
+func cloudflareClientIP(header http.Header) (netip.Addr, error) {
+	clientIP, err := singleIPHeader(header, "CF-Connecting-IP")
 	if err != nil {
-		return ""
+		return netip.Addr{}, errInvalidCloudflareClientIP
 	}
-	if ip := net.ParseIP(host); ip != nil {
-		return ip.String()
+	if clientIP.Is4() && cloudflarePseudoIPv4Prefix.Contains(clientIP) {
+		clientIPv6, err := singleIPHeader(header, "CF-Connecting-IPv6")
+		if err != nil || !clientIPv6.Is6() {
+			return netip.Addr{}, errInvalidCloudflareClientIP
+		}
+		return clientIPv6, nil
 	}
-	return ""
+	return clientIP, nil
 }
 
-func isLocalProxyPeer(ip string) bool {
-	parsed := net.ParseIP(ip)
-	return parsed != nil && parsed.IsLoopback()
+func singleIPHeader(header http.Header, name string) (netip.Addr, error) {
+	values := header.Values(name)
+	if len(values) != 1 {
+		return netip.Addr{}, errInvalidCloudflareClientIP
+	}
+	addr, err := netip.ParseAddr(strings.TrimSpace(values[0]))
+	if err != nil || addr.Zone() != "" {
+		return netip.Addr{}, errInvalidCloudflareClientIP
+	}
+	return addr.Unmap(), nil
+}
+
+func rateLimitIPIdentity(addr netip.Addr) string {
+	addr = addr.Unmap()
+	if addr.Is6() {
+		return netip.PrefixFrom(addr, 64).Masked().String()
+	}
+	return addr.String()
+}
+
+func remoteAddrIP(remoteAddr string) (netip.Addr, bool) {
+	addrPort, err := netip.ParseAddrPort(remoteAddr)
+	if err != nil {
+		return netip.Addr{}, false
+	}
+	return addrPort.Addr().Unmap(), true
 }
 
 func stringify(value interface{}) string {

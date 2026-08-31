@@ -43,9 +43,19 @@ Run the service process:
 ./securememo
 ```
 
-By default, the app uses the socket remote address for abuse-rate-limit identity. Set
-`SECUREMEMO_TRUST_PROXY_HEADERS=true` only when the service is behind a trusted local
-reverse proxy that overwrites `CF-Connecting-IP` and `X-Forwarded-For`.
+By default, the app uses the socket remote address for abuse-rate-limit identity. For
+a same-host Cloudflare Tunnel, keep the service bound to loopback and set
+`SECUREMEMO_TRUST_PROXY_HEADERS=true`. In this mode, requests received from a loopback
+peer must contain exactly one valid `CF-Connecting-IP`; malformed or missing values
+fail closed, and `X-Forwarded-For` is never used as a fallback. Requests from any
+non-loopback peer ignore forwarded headers. Do not enable this mode if other local
+processes are outside the deployment trust boundary, and do not expose the origin
+listener publicly.
+
+IPv4 addresses are normalized and IPv6 clients are grouped by `/64` for rate-limit
+purposes. Minute and hour counters are updated in one SQLite transaction. If the
+filesystem reserve prevents rate-limit persistence, a bounded in-memory limiter keeps
+enforcing the same rules for the lifetime of the process instead of failing open.
 
 `SECUREMEMO_STORAGE_LIMIT_BYTES` defaults to decimal 100 GB and limits both
 retained ciphertext admission and SQLite main-database page allocation. The
@@ -120,7 +130,7 @@ For the detailed technical model, see [docs/security-model.md](docs/security-mod
 - The memo password is generated and displayed only in the browser.
 - The server stores ciphertext, expiry time, memo ID, a deletion-token hash, and a sender revoke-token hash.
 - Failed or invalid reads use generic responses to avoid memo enumeration.
-- API rate limits use short and long windows per client IP. Normal API actions are limited to 10/minute and 100/hour; failed access attempts are limited to 10/minute and 20/hour.
+- API rate limits use short and long windows per normalized client network. Normal API actions, including delete and revoke admission before body or database work, are limited to 10/minute and 100/hour; failed access attempts are additionally limited to 10/minute and 20/hour.
 - Expired memo cleanup runs at startup and hourly after that.
 
 ## License

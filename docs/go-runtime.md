@@ -25,8 +25,42 @@ SECUREMEMO_MIN_FREE_DISK_BYTES=5000000000
 ```
 
 By default, the service uses the socket remote address for abuse-rate-limit identity.
-Set `SECUREMEMO_TRUST_PROXY_HEADERS=true` only when the service is behind a trusted
-local reverse proxy that overwrites `CF-Connecting-IP` and `X-Forwarded-For`.
+For `cloudflared` running on the same host, bind the service to loopback and set
+`SECUREMEMO_TRUST_PROXY_HEADERS=true`. The backend then trusts exactly one valid
+`CF-Connecting-IP` only when the immediate socket peer is loopback. A missing,
+malformed, duplicated, or comma-separated value fails closed; `X-Forwarded-For` is
+not accepted as a fallback. Forwarded headers from non-loopback peers are ignored.
+Keep the origin listener private, since any process that can connect through the
+trusted local boundary could otherwise forge the header. Invalid boolean values make
+startup fail instead of silently disabling proxy mode.
+
+Rate-limit identities use canonical IPv4 addresses and IPv6 `/64` networks. The
+minute and hour rules commit together in one SQLite transaction and return the
+longest applicable `Retry-After`. A bounded, concurrency-safe in-memory fallback
+enforces the same rules if the filesystem reserve prevents SQLite rate-limit writes;
+active entries are never evicted to admit attacker-controlled identities.
+
+For a systemd service that already loads `/etc/securememo/securememo.env` through
+`EnvironmentFile=`, add the setting directly to that file:
+
+```sh
+SECUREMEMO_TRUST_PROXY_HEADERS=true
+```
+
+Restart the service after changing the environment file. A systemd daemon reload is
+not required unless the unit file itself also changed. If the unit has no environment
+file, use a drop-in instead:
+
+```ini
+# /etc/systemd/system/securememo.service.d/cloudflare-tunnel.conf
+[Service]
+Environment=SECUREMEMO_TRUST_PROXY_HEADERS=true
+```
+
+Apply a new or changed drop-in with `sudo systemctl daemon-reload`, then restart
+`securememo.service`. On the next start, the service logs the selected rate-limit
+client-identity mode. The expected message contains `CF-Connecting-IP from loopback
+proxy peers`.
 
 The storage byte limit is a decimal byte value. It defaults to 100 GB, controls
 the retained-ciphertext quota and SQLite `max_page_count`, and derives a memo

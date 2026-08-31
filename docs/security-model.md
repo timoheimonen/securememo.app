@@ -286,7 +286,13 @@ flow:
 - Origin checks for API requests.
 - Generic access-denied responses for missing, expired, invalid, or unauthorized
   memo reads.
-- Rate limits for create, read, delete, and failed-access paths.
+- Rate limits for create, read, delete, revoke, and failed-access paths. Delete and
+  revoke admission is checked before request parsing and memo lookup.
+- Strict Cloudflare Tunnel client-address handling that trusts one canonical
+  `CF-Connecting-IP` only from the configured local proxy boundary, never falls back
+  to `X-Forwarded-For`, and groups IPv6 identities by `/64`.
+- Atomic SQLite minute/hour counters with a bounded in-memory fallback when the
+  filesystem reserve prevents persistent rate-limit writes.
 - Transactional global ciphertext-byte and memo-count admission limits.
 - A SQLite main-file page ceiling and minimum free-filesystem reserve.
 - Bounded expiry/rate-limit cleanup batches with WAL checkpoints.
@@ -298,8 +304,8 @@ Existing memos remain readable and valid deletion and cleanup paths continue to
 free capacity. Private metrics expose only unlabeled, service-wide storage
 aggregates; they never expose individual memo sizes, IDs, contents, or tokens.
 If rate-limit persistence is withheld to preserve emergency disk headroom, the
-trusted Cloudflare edge remains the active request-rate boundary for reads and
-authenticated deletions.
+bounded in-memory limiter continues enforcing process-local limits while the trusted
+Cloudflare edge remains the outer request-rate boundary.
 
 These protections reduce abuse and accidental exposure, but they do not replace
 the client-side encryption model.
