@@ -211,6 +211,7 @@ const LOCAL_TRANSLATIONS = {
     "error.NETWORK_ERROR": "서비스가 일시적으로 사용할 수 없습니다. 다시 시도하세요.",
     "error.SERVICE_UNAVAILABLE": "서비스가 일시적으로 사용할 수 없습니다. 나중에 다시 시도하세요.",
     "error.RATE_LIMITED": "요청이 너무 많습니다. 잠시 기다린 후 다시 시도하세요.",
+    "error.STORAGE_LIMIT_REACHED": "서비스 저장 용량이 일시적으로 가득 찼습니다. 나중에 다시 시도해 주세요.",
     "error.MISSING_MESSAGE": "메모를 입력해 주세요",
     "error.MESSAGE_TOO_LONG": "메모가 너무 깁니다(최대 5,000자)",
     "error.CREATE_MEMO_FAILED": "메모 생성에 실패했습니다",

@@ -216,6 +216,23 @@ expiry data, deletion-token hashes, sender revoke-token hashes, and rate-limit
 state. Confidentiality of memo contents depends on the secrecy and strength of
 the memo password.
 
+The backend maintains a service-wide storage budget. Each memo creation reserves
+the exact ciphertext byte length and one memo slot in the same SQLite transaction
+as the insert. Deletion, revocation, and expiry cleanup release their exact
+charges only when the corresponding delete commits. Startup reconciles the
+aggregate counters from every physically retained memo. The default decimal
+100 GB byte limit also sets a SQLite main-file page ceiling, and a separate
+5 GB free-filesystem reserve preserves headroom for WAL and recovery work. The
+reserve applies to memo creation and auxiliary attacker-driven rate-limit and
+lifetime-counter writes. Expiry cleanup uses bounded transactions with a
+truncating WAL checkpoint between batches.
+
+These controls bound aggregate storage abuse but do not inspect encrypted
+content or identify senders. The deployment intentionally runs one backend
+writer per SQLite database. Cloudflare and application rate limits reduce the
+rate at which distributed clients can consume the finite budget; they do not
+replace it.
+
 ## Delete-on-Read Semantics
 
 The phrase "delete on read" means:
@@ -270,8 +287,19 @@ flow:
 - Generic access-denied responses for missing, expired, invalid, or unauthorized
   memo reads.
 - Rate limits for create, read, delete, and failed-access paths.
+- Transactional global ciphertext-byte and memo-count admission limits.
+- A SQLite main-file page ceiling and minimum free-filesystem reserve.
+- Bounded expiry/rate-limit cleanup batches with WAL checkpoints.
 - Security headers, including a restrictive Content Security Policy.
 - Automatic cleanup of expired memos and expired rate-limit records.
+
+When capacity is reached, new creates fail with a generic HTTP 507 response.
+Existing memos remain readable and valid deletion and cleanup paths continue to
+free capacity. Private metrics expose only unlabeled, service-wide storage
+aggregates; they never expose individual memo sizes, IDs, contents, or tokens.
+If rate-limit persistence is withheld to preserve emergency disk headroom, the
+trusted Cloudflare edge remains the active request-rate boundary for reads and
+authenticated deletions.
 
 These protections reduce abuse and accidental exposure, but they do not replace
 the client-side encryption model.
@@ -291,3 +319,7 @@ the client-side encryption model.
   infrastructure.
 - AES-GCM protects the encrypted payload, but it does not hide metadata such as
   approximate payload size or memo lifetime.
+- A finite global quota bounds disk growth but does not prevent distributed
+  clients from temporarily filling that quota and denying new memo creation.
+- SQLite `max_page_count` does not cap WAL files, backups, snapshots, temporary
+  files, or other processes on the same filesystem.

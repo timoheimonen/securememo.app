@@ -2,8 +2,17 @@ package config
 
 import (
 	"errors"
+	"fmt"
 	"os"
+	"strconv"
 	"strings"
+
+	"github.com/timoheimonen/securememo/internal/security"
+)
+
+const (
+	DefaultStorageLimitBytes = int64(100_000_000_000)
+	DefaultMinFreeDiskBytes  = int64(5_000_000_000)
 )
 
 type Config struct {
@@ -13,15 +22,30 @@ type Config struct {
 	PublicOrigin      string
 	AllowedOrigins    []string
 	TrustedProxyLocal bool
+	StorageLimitBytes int64
+	StorageMemoLimit  int64
+	MinFreeDiskBytes  int64
 }
 
 func FromEnv() (Config, error) {
+	storageLimitBytes, err := envNonNegativeInt64("SECUREMEMO_STORAGE_LIMIT_BYTES", DefaultStorageLimitBytes)
+	if err != nil {
+		return Config{}, err
+	}
+	minFreeDiskBytes, err := envNonNegativeInt64("SECUREMEMO_MIN_FREE_DISK_BYTES", DefaultMinFreeDiskBytes)
+	if err != nil {
+		return Config{}, err
+	}
+
 	cfg := Config{
 		Addr:              envOrDefault("SECUREMEMO_ADDR", "127.0.0.1:3005"),
 		MetricsAddr:       strings.TrimSpace(os.Getenv("SECUREMEMO_METRICS_ADDR")),
 		DBPath:            envOrDefault("SECUREMEMO_DB_PATH", "./data/securememo.sqlite"),
 		PublicOrigin:      strings.TrimRight(envOrDefault("PUBLIC_ORIGIN", "https://securememo.app"), "/"),
 		TrustedProxyLocal: envBoolDefault("SECUREMEMO_TRUST_PROXY_HEADERS", false),
+		StorageLimitBytes: storageLimitBytes,
+		StorageMemoLimit:  storageMemoLimit(storageLimitBytes),
+		MinFreeDiskBytes:  minFreeDiskBytes,
 	}
 
 	if cfg.PublicOrigin == "" {
@@ -33,6 +57,29 @@ func FromEnv() (Config, error) {
 
 	cfg.AllowedOrigins = allowedOrigins(cfg.PublicOrigin, os.Getenv("SECUREMEMO_ALLOWED_ORIGINS"))
 	return cfg, nil
+}
+
+func envNonNegativeInt64(key string, fallback int64) (int64, error) {
+	raw := strings.TrimSpace(os.Getenv(key))
+	if raw == "" {
+		return fallback, nil
+	}
+	value, err := strconv.ParseInt(raw, 10, 64)
+	if err != nil || value < 0 {
+		return 0, fmt.Errorf("%s must be a non-negative base-10 integer", key)
+	}
+	return value, nil
+}
+
+func storageMemoLimit(storageLimitBytes int64) int64 {
+	if storageLimitBytes == 0 {
+		return 0
+	}
+	limit := storageLimitBytes / int64(security.MaxEncryptedMessageBytes)
+	if limit < 1 {
+		return 1
+	}
+	return limit
 }
 
 func envOrDefault(key, fallback string) string {

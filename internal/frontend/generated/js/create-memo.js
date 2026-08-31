@@ -97,6 +97,7 @@ const createAPIErrorTranslationKeys = Object.freeze({
   METHOD_NOT_ALLOWED: 'error.METHOD_NOT_ALLOWED',
   FORBIDDEN: 'error.FORBIDDEN',
   RATE_LIMITED: 'error.RATE_LIMITED',
+  STORAGE_LIMIT_REACHED: 'error.STORAGE_LIMIT_REACHED',
   GENERAL_ERROR: 'error.GENERAL_ERROR'
 });
 

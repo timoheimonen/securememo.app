@@ -211,6 +211,7 @@ const LOCAL_TRANSLATIONS = {
     "error.NETWORK_ERROR": "सेवा अस्थायी रूप से अनुपलब्ध। कृपया फिर से कोशिश करें।",
     "error.SERVICE_UNAVAILABLE": "सेवा अस्थायी रूप से अनुपलब्ध। कृपया बाद में फिर से कोशिश करें।",
     "error.RATE_LIMITED": "बहुत सारे अनुरोध। कृपया एक क्षण प्रतीक्षा करें और फिर से कोशिश करें।",
+    "error.STORAGE_LIMIT_REACHED": "सेवा की संग्रहण क्षमता अस्थायी रूप से पूरी हो गई है। कृपया बाद में फिर प्रयास करें।",
     "error.MISSING_MESSAGE": "कृपया एक मेमो दर्ज करें",
     "error.MESSAGE_TOO_LONG": "मेमो बहुत लंबा है (अधिकतम 5,000 अक्षर)",
     "error.CREATE_MEMO_FAILED": "मेमो बनाने में विफल",

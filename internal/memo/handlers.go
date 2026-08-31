@@ -45,6 +45,7 @@ const (
 	errorCodeRequestTooLarge          = "REQUEST_TOO_LARGE"
 	errorCodeMemoAccessDenied         = "MEMO_ACCESS_DENIED"
 	errorCodeRateLimited              = "RATE_LIMITED"
+	errorCodeStorageLimitReached      = "STORAGE_LIMIT_REACHED"
 	errorCodeGeneral                  = "GENERAL_ERROR"
 )
 
@@ -116,6 +117,10 @@ func (h Handler) Create(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	if err := h.Store.CreateMemo(r.Context(), memoID, req.EncryptedMessage, expiryTime, req.DeletionTokenHash, req.OwnerDeletionTokenHash); err != nil {
+		if errors.Is(err, store.ErrStorageLimitReached) {
+			writeAPIError(w, http.StatusInsufficientStorage, errorCodeStorageLimitReached)
+			return
+		}
 		writeAPIError(w, http.StatusInternalServerError, errorCodeDatabase)
 		return
 	}
@@ -338,6 +343,15 @@ func (h Handler) rateLimitOrAccessDenied(w http.ResponseWriter, r *http.Request)
 func (h Handler) allowRateLimitedAction(w http.ResponseWriter, r *http.Request, action string) bool {
 	result, err := h.recordRateLimits(r, action, defaultRateLimitRules)
 	if err != nil {
+		if errors.Is(err, store.ErrStorageLimitReached) {
+			if action == rateLimitCreateKey {
+				writeAPIError(w, http.StatusInsufficientStorage, errorCodeStorageLimitReached)
+				return false
+			}
+			// The trusted Cloudflare edge remains the fallback limiter when the
+			// physically saturated SQLite database cannot persist a read/delete event.
+			return true
+		}
 		writeAPIError(w, http.StatusInternalServerError, errorCodeGeneral)
 		return false
 	}

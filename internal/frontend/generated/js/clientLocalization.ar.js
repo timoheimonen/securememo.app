@@ -211,6 +211,7 @@ const LOCAL_TRANSLATIONS = {
     "error.NETWORK_ERROR": "الخدمة غير متوفرة مؤقتًا. يرجى المحاولة مرة أخرى.",
     "error.SERVICE_UNAVAILABLE": "الخدمة غير متوفرة مؤقتًا. يرجى المحاولة لاحقًا.",
     "error.RATE_LIMITED": "عدد كبير من الطلبات. يرجى الانتظار قليلاً ثم المحاولة مرة أخرى.",
+    "error.STORAGE_LIMIT_REACHED": "سعة التخزين في الخدمة ممتلئة مؤقتًا. يُرجى المحاولة مرة أخرى لاحقًا.",
     "error.MISSING_MESSAGE": "يرجى إدخال المذكرة",
     "error.MESSAGE_TOO_LONG": "المذكرة طويلة جدًا (الحد الأقصى 5,000 حرف)",
     "error.CREATE_MEMO_FAILED": "فشل في إنشاء المذكرة",

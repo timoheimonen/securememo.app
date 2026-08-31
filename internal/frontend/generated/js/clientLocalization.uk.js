@@ -211,6 +211,7 @@ const LOCAL_TRANSLATIONS = {
     "error.NETWORK_ERROR": "Сервіс тимчасово недоступний. Спробуйте ще раз.",
     "error.SERVICE_UNAVAILABLE": "Сервіс тимчасово недоступний. Спробуйте пізніше.",
     "error.RATE_LIMITED": "Занадто багато запитів. Зачекайте і спробуйте ще раз.",
+    "error.STORAGE_LIMIT_REACHED": "Сховище сервісу тимчасово заповнене. Спробуйте ще раз пізніше.",
     "error.MISSING_MESSAGE": "Введіть нотатку",
     "error.MESSAGE_TOO_LONG": "Нотатка занадто довга (максимум 5 000 символів)",
     "error.CREATE_MEMO_FAILED": "Не вдалося створити нотатку",

@@ -4,25 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Privacy Notice - securememo.app</title>
-    <meta name="description" content="Privacy Notice for securememo.app - browser-side encryption, no accounts, no cookies, no trackers, and minimal operational metrics for secure memo sharing.">
-    <meta name="keywords" content="privacy notice, secure memo privacy, data protection, client-side encryption, no cookies, no tracking, secure memo sharing privacy">
+    <meta name="description" content="Privacy Notice for securememo.app - browser-side encryption, no accounts, no advertising trackers, a strictly necessary Cloudflare security cookie, and minimal operational metrics.">
+    <meta name="keywords" content="privacy notice, secure memo privacy, data protection, client-side encryption, Cloudflare security cookie, no advertising tracking, secure memo sharing privacy">
     <!-- Open Graph for social sharing -->
     <meta property="og:title" content="Privacy Notice - securememo.app">
-    <meta property="og:description" content="How securememo.app protects privacy with browser-side encryption, no cookies, no trackers, and limited operational metrics.">
+    <meta property="og:description" content="How securememo.app protects privacy with browser-side encryption, a strictly necessary Cloudflare security cookie, no advertising trackers, and limited operational metrics.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="{{PUBLIC_ORIGIN}}/en/privacy.html">
     <meta property="og:image" content="https://securememo.app/android-chrome-512x512.png">
     <!-- Twitter Cards -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Privacy Notice - securememo.app">
-    <meta name="twitter:description" content="Privacy protection with browser-side encryption, no cookies, and no trackers.">
+    <meta name="twitter:description" content="Privacy protection with browser-side encryption, a strictly necessary Cloudflare security cookie, and no advertising trackers.">
     <!-- Structured Data -->
     <script type="application/ld+json" nonce="{{CSP_NONCE}}">
     {
       "@context": "https://schema.org",
       "@type": "WebPage",
       "name": "Privacy Notice",
-      "description": "Privacy Notice for securememo.app - browser-side encryption, no accounts, no cookies, no trackers, and minimal operational metrics.",
+      "description": "Privacy Notice for securememo.app - browser-side encryption, no accounts, a strictly necessary Cloudflare security cookie, no advertising trackers, and minimal operational metrics.",
       "url": "{{PUBLIC_ORIGIN}}/en/privacy.html",
       "breadcrumb": {
         "@type": "BreadcrumbList",
@@ -48,8 +48,8 @@
           "@type": "Organization",
           "name": "securememo.app"
         },
-        "dateModified": "2026-08-29",
-        "description": "How securememo.app protects privacy with browser-side encryption, no cookies, no trackers, and limited operational metrics"
+        "dateModified": "2026-08-31",
+        "description": "How securememo.app protects privacy with browser-side encryption, a strictly necessary Cloudflare security cookie, no advertising trackers, and limited operational metrics"
       }
     }
     </script>
@@ -124,7 +124,7 @@
     <main class="main-content">
         <div class="legal-section">
             <h1>Privacy Notice for securememo.app</h1>
-            <p class="legal-meta"><strong>Last updated: August 29, 2026</strong></p>
+            <p class="legal-meta"><strong>Last updated: August 31, 2026</strong></p>
             
             <div class="legal-toc">
                 <h2>Table of Contents</h2>
@@ -150,7 +150,7 @@
 
             <div class="features-detail" id="overview">
                 <h2>1. Overview</h2>
-                <p>securememo.app is a privacy-focused service for creating encrypted memos that are deleted after successful read confirmation or expiration. The service is designed to collect as little information as possible: no accounts, no cookies, no trackers, no advertising, and no behavioral profiling.</p>
+                <p>securememo.app is a privacy-focused service for creating encrypted memos that are deleted after successful read confirmation or expiration. The service is designed to collect as little information as possible: no accounts, no advertising or analytics cookies, no advertising trackers, and no profiling for advertising. Cloudflare may use the strictly necessary <code>cf_clearance</code> cookie and session-based security verification solely to protect the service from automated abuse.</p>
                 <p>Memo content is encrypted in your browser before it is sent to the server. The server stores encrypted memo data temporarily, but it does not receive the plaintext memo content or the memo password and cannot decrypt memos for you.</p>
             </div>
 
@@ -182,11 +182,12 @@
                     <li><strong>Encrypted memo data:</strong> the encrypted memo payload created in your browser.</li>
                     <li><strong>Memo metadata:</strong> memo ID, creation time, expiration time, deletion-token hash, and sender revoke-token hash.</li>
                     <li><strong>Rate-limit data:</strong> short-lived abuse-prevention counters keyed by hashed client IP address, action, and time window.</li>
-                    <li><strong>Operational metrics:</strong> Prometheus-compatible aggregate technical counters and histograms exposed on a separate private metrics listener for operator monitoring. Metrics include HTTP request counts, response byte totals, request duration histograms by method, normalized route group, status code, and coarse country code from Cloudflare's <code>CF-IPCountry</code> header, plus lifetime totals of successfully created and read memos.</li>
+                    <li><strong>Operational metrics:</strong> Prometheus-compatible aggregate technical counters, gauges, and histograms exposed on a separate private metrics listener for operator monitoring. Metrics include HTTP request counts, response byte totals, request duration histograms by method, normalized route group, status code, and coarse country code from Cloudflare's <code>CF-IPCountry</code> header, lifetime totals of successfully created and read memos, and unlabeled service-wide storage-capacity gauges.</li>
                     <li><strong>Request metadata:</strong> limited technical metadata may be processed by the application or infrastructure to route requests, apply security controls, and diagnose operational issues. This can include IP address, time, requested path, response status, user agent, origin, and referrer headers.</li>
+                    <li><strong>Cloudflare security verification:</strong> when Precursor or challenge-based protection is enabled, Cloudflare may process client-side security signals and use the <code>cf_clearance</code> cookie to maintain verification state for the visitor's browser session. The securememo.app application does not read or use the cookie value.</li>
                     <li><strong>Contact data:</strong> if you contact us, we process your email address and message content so we can respond.</li>
                 </ul>
-                <p>Operational metrics may be scraped by a Prometheus-compatible monitoring system and visualized in Grafana in the operator's monitoring environment. They are used to understand whether the server is working correctly, monitor capacity, and detect abuse patterns. They are not browser-side analytics and are not used to track individual visitors across time or sites.</p>
+                <p>Operational metrics may be scraped by a Prometheus-compatible monitoring system and visualized in Grafana in the operator's monitoring environment. Storage gauges report only current aggregate ciphertext usage and limits, memo count, SQLite main/freelist/WAL sizes, and database-filesystem availability and reserve. They are used to understand whether the server is working correctly, monitor capacity, and detect abuse patterns. They are not browser-side analytics and are not used to track individual visitors across time or sites.</p>
                 <p>Operational metrics deliberately do not include IP addresses, user agents, cookies, session IDs, full URLs, query strings, memo IDs, memo contents, memo passwords, deletion tokens, sender revoke tokens, email addresses, or persistent user identifiers. Route labels are normalized; for example, a read URL with a memo ID query string is counted only as <code>/api/read-memo</code>.</p>
             </div>
 
@@ -196,8 +197,8 @@
                     <li>We do not receive or store plaintext memo content.</li>
                     <li>We do not receive or store memo passwords.</li>
                     <li>We do not create user accounts.</li>
-                    <li>We do not use cookies.</li>
-                    <li>We do not use tracking pixels, advertising tags, behavioral analytics, fingerprinting scripts, or third-party marketing beacons.</li>
+                    <li>We do not use advertising, analytics, personalization, or account cookies. Cloudflare may use the strictly necessary <code>cf_clearance</code> security cookie as described below.</li>
+                    <li>We do not use tracking pixels, advertising tags, marketing fingerprinting, third-party analytics, or third-party marketing beacons. Cloudflare may perform security-only client-side verification to detect automated abuse.</li>
                     <li>We do not include memo IDs, full URLs, query strings, IP addresses, user agents, passwords, deletion tokens, sender revoke tokens, or memo contents in operational metrics.</li>
                     <li>We do not sell, rent, or trade personal data.</li>
                     <li>We do not use memo data or operational metrics for advertising or profiling.</li>
@@ -219,18 +220,20 @@
             <div class="features-detail" id="cookies-storage">
                 <h2>7. Cookies, Tracking, and Browser Storage</h2>
                 <ul>
-                    <li>securememo.app does not set, read, or depend on cookies.</li>
+                    <li>Cloudflare may set and evaluate the strictly necessary <code>cf_clearance</code> cookie when Precursor or challenge-based abuse protection is enabled. It stores security verification state so a verified browser session can reach the service without unnecessary repeated challenges.</li>
+                    <li>The <code>cf_clearance</code> cookie is used only to secure the service. It is not used for advertising, analytics, personalization, or cross-site tracking.</li>
+                    <li>The cookie normally remains valid for the duration configured in Cloudflare's Challenge Passage setting, which is 30 minutes by default. Cloudflare may refresh, reduce, or invalidate its verification state as security signals change.</li>
+                    <li>The securememo.app application does not set, read, repurpose, or store the <code>cf_clearance</code> value.</li>
                     <li>securememo.app does not use localStorage, sessionStorage, IndexedDB, or persistent browser identifiers for memo data.</li>
                     <li>securememo.app does not use analytics or advertising trackers.</li>
                     <li>If you click a copy button, your browser may place the memo URL or password in your device clipboard. Clipboard handling is controlled by your browser and operating system.</li>
                 </ul>
-                <p>We do not enable Cloudflare features for this service that require visitor cookies.</p>
             </div>
 
             <div class="usage-section" id="cloudflare">
                 <h2>8. Cloudflare and Infrastructure Processing</h2>
                 <p>securememo.app is served behind Cloudflare. Cloudflare helps route traffic, protect the service from abuse, provide TLS termination, and produce security and operational metrics.</p>
-                <p>When you visit securememo.app, Cloudflare may process technical data such as IP address, request metadata, security events, and network data as part of providing its services. We use Cloudflare for infrastructure and security, not for advertising or behavioral tracking.</p>
+                <p>When you visit securememo.app, Cloudflare may process technical data such as IP address, request metadata, security events, network data, and client-side security signals as part of providing its services. When enabled, Precursor may continuously evaluate session-level signals and update verification state in the <code>cf_clearance</code> cookie. We use Cloudflare for infrastructure and security, not for advertising, marketing, or cross-site tracking.</p>
                 <p>Because memo content is encrypted in your browser before upload, Cloudflare does not receive plaintext memo content or memo passwords from the service flow.</p>
             </div>
 

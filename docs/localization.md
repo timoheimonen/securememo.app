@@ -44,10 +44,13 @@ browser API-error maps and must be retained:
 - `error.CREATE_MEMO_ERROR`, `error.READ_MEMO_ERROR`, and
   `error.DEFAULT_FALLBACK`.
 
+The current create path additionally reaches `error.STORAGE_LIMIT_REACHED`; it
+is a new runtime key and is not part of the fourteen-key historical count.
+
 Of the other historical candidates, 27 are named only by this content policy
 and 70 occur only in the catalogs. Neither category is proof that a key is safe
 to remove. Phase 3 therefore removes no catalog keys: every locale retains the
-same 361-key set. Any later removal requires the deterministic runtime-key
+same 362-key set. Any later removal requires the deterministic runtime-key
 registry and render plus browser error-path coverage planned for phase 4, and
 must update English, every localized catalog, and this policy atomically.
 

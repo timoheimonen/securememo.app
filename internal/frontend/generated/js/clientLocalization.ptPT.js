@@ -211,6 +211,7 @@ const LOCAL_TRANSLATIONS = {
     "error.NETWORK_ERROR": "Serviço temporariamente indisponível. Tente novamente.",
     "error.SERVICE_UNAVAILABLE": "Serviço temporariamente indisponível. Tente novamente mais tarde.",
     "error.RATE_LIMITED": "Demasiados pedidos. Aguarde um momento e tente novamente.",
+    "error.STORAGE_LIMIT_REACHED": "A capacidade de armazenamento do serviço está temporariamente esgotada. Tente novamente mais tarde.",
     "error.MISSING_MESSAGE": "Introduza um memorando",
     "error.MESSAGE_TOO_LONG": "O memorando é demasiado longo (máx. 5 000 caracteres)",
     "error.CREATE_MEMO_FAILED": "Não foi possível criar o memorando",

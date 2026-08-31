@@ -18,7 +18,7 @@ import (
 )
 
 func TestCleanupEndpointIsNotPubliclyRouted(t *testing.T) {
-	db, err := store.OpenSQLite(filepath.Join(t.TempDir(), "securememo.sqlite"))
+	db, err := store.OpenSQLite(filepath.Join(t.TempDir(), "securememo.sqlite"), store.StorageLimits{})
 	if err != nil {
 		t.Fatalf("open sqlite: %v", err)
 	}
@@ -744,7 +744,7 @@ func TestLanguageMenuUsesRootRelativeLocaleLinks(t *testing.T) {
 
 func newTestServer(t *testing.T) *Server {
 	t.Helper()
-	db, err := store.OpenSQLite(filepath.Join(t.TempDir(), "securememo.sqlite"))
+	db, err := store.OpenSQLite(filepath.Join(t.TempDir(), "securememo.sqlite"), store.StorageLimits{})
 	if err != nil {
 		t.Fatalf("open sqlite: %v", err)
 	}

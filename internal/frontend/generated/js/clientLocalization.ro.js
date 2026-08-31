@@ -211,6 +211,7 @@ const LOCAL_TRANSLATIONS = {
     "error.NETWORK_ERROR": "Serviciu indisponibil temporar. Te rugăm să încerci din nou.",
     "error.SERVICE_UNAVAILABLE": "Serviciu indisponibil temporar. Te rugăm să încerci mai târziu.",
     "error.RATE_LIMITED": "Prea multe cereri. Așteaptă puțin și încearcă din nou.",
+    "error.STORAGE_LIMIT_REACHED": "Capacitatea de stocare a serviciului este temporar epuizată. Încercați din nou mai târziu.",
     "error.MISSING_MESSAGE": "Te rugăm să introduci un memo",
     "error.MESSAGE_TOO_LONG": "Memo-ul este prea lung (maxim 5.000 de caractere)",
     "error.CREATE_MEMO_FAILED": "Crearea memoului a eșuat",

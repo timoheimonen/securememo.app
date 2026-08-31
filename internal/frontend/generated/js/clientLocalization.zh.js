@@ -211,6 +211,7 @@ const LOCAL_TRANSLATIONS = {
     "error.NETWORK_ERROR": "服务暂时不可用。请重试。",
     "error.SERVICE_UNAVAILABLE": "服务暂时不可用。请稍后重试。",
     "error.RATE_LIMITED": "请求过多。请稍等片刻后重试。",
+    "error.STORAGE_LIMIT_REACHED": "服务存储容量暂时已满。请稍后重试。",
     "error.MISSING_MESSAGE": "请输入备忘录",
     "error.MESSAGE_TOO_LONG": "备忘录过长（最多5,000个字符）",
     "error.CREATE_MEMO_FAILED": "创建备忘录失败",

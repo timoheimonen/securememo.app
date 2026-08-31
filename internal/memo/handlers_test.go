@@ -32,7 +32,7 @@ func TestCreateValidatesExpiryHours(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			db, err := store.OpenSQLite(filepath.Join(t.TempDir(), "securememo.sqlite"))
+			db, err := store.OpenSQLite(filepath.Join(t.TempDir(), "securememo.sqlite"), store.StorageLimits{})
 			if err != nil {
 				t.Fatalf("open sqlite: %v", err)
 			}
@@ -84,7 +84,7 @@ func TestCreateRejectsInvalidEncryptedMessageFormat(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			db, err := store.OpenSQLite(filepath.Join(t.TempDir(), "securememo.sqlite"))
+			db, err := store.OpenSQLite(filepath.Join(t.TempDir(), "securememo.sqlite"), store.StorageLimits{})
 			if err != nil {
 				t.Fatalf("open sqlite: %v", err)
 			}
@@ -117,7 +117,7 @@ func TestCreateRejectsInvalidEncryptedMessageFormat(t *testing.T) {
 }
 
 func TestCreateStoresEncryptedMessageUnchanged(t *testing.T) {
-	db, err := store.OpenSQLite(filepath.Join(t.TempDir(), "securememo.sqlite"))
+	db, err := store.OpenSQLite(filepath.Join(t.TempDir(), "securememo.sqlite"), store.StorageLimits{})
 	if err != nil {
 		t.Fatalf("open sqlite: %v", err)
 	}
@@ -168,8 +168,105 @@ func TestCreateStoresEncryptedMessageUnchanged(t *testing.T) {
 	}
 }
 
+func TestCreateReturnsGenericStorageCapacityError(t *testing.T) {
+	db, err := store.OpenSQLite(filepath.Join(t.TempDir(), "securememo.sqlite"), store.StorageLimits{
+		MaxBytes: 1_000_000,
+		MaxMemos: 1,
+	})
+	if err != nil {
+		t.Fatalf("open sqlite: %v", err)
+	}
+	defer db.Close()
+	if err := db.CreateMemo(context.Background(), "existing", "ciphertext", time.Now().Add(time.Hour).Unix(), "delete", "owner"); err != nil {
+		t.Fatalf("seed capacity: %v", err)
+	}
+
+	handler := Handler{
+		Config: config.Config{AllowedOrigins: []string{"https://securememo.app"}},
+		Store:  db,
+	}
+	body, err := json.Marshal(map[string]interface{}{
+		"encryptedMessage":       validEncryptedMessageForHandlerTest(44),
+		"expiryHours":            24,
+		"deletionTokenHash":      strings.Repeat("A", 44),
+		"ownerDeletionTokenHash": strings.Repeat("B", 44),
+	})
+	if err != nil {
+		t.Fatalf("encode request: %v", err)
+	}
+	req := httptest.NewRequest(http.MethodPost, "/api/create-memo", strings.NewReader(string(body)))
+	req.RemoteAddr = "203.0.113.90:12345"
+	req.Header.Set("Origin", "https://securememo.app")
+	req.Header.Set("Content-Type", "application/json")
+	rec := httptest.NewRecorder()
+
+	handler.Create(rec, req)
+
+	assertAPIError(t, rec, http.StatusInsufficientStorage, errorCodeStorageLimitReached)
+	if rec.Header().Get("Cache-Control") != "no-store" {
+		t.Fatalf("Cache-Control = %q, want no-store", rec.Header().Get("Cache-Control"))
+	}
+	if rec.Header().Get("Retry-After") != "" {
+		t.Fatalf("capacity response exposed Retry-After %q", rec.Header().Get("Retry-After"))
+	}
+}
+
+func TestFilesystemReservePreservesReadAndAuthenticatedDelete(t *testing.T) {
+	path := filepath.Join(t.TempDir(), "securememo.sqlite")
+	ctx := context.Background()
+	seed, err := store.OpenSQLite(path, store.StorageLimits{})
+	if err != nil {
+		t.Fatalf("open seed sqlite: %v", err)
+	}
+	memoID := strings.Repeat("A", 40)
+	deletionToken := strings.Repeat("D", 32)
+	if err := seed.CreateMemo(ctx, memoID, "ciphertext", time.Now().Add(time.Hour).Unix(), hashDeletionToken(deletionToken), "owner"); err != nil {
+		t.Fatalf("seed memo: %v", err)
+	}
+	if err := seed.Close(); err != nil {
+		t.Fatalf("close seed sqlite: %v", err)
+	}
+
+	db, err := store.OpenSQLite(path, store.StorageLimits{
+		MaxBytes:         1_000_000,
+		MaxMemos:         10,
+		MinFreeDiskBytes: int64(^uint64(0) >> 1),
+	})
+	if err != nil {
+		t.Fatalf("reopen sqlite at filesystem reserve: %v", err)
+	}
+	defer db.Close()
+	handler := Handler{
+		Config: config.Config{AllowedOrigins: []string{"https://securememo.app"}},
+		Store:  db,
+	}
+
+	readReq := httptest.NewRequest(http.MethodPost, "/api/read-memo?id="+memoID, strings.NewReader(`{}`))
+	readReq.RemoteAddr = "203.0.113.91:12345"
+	readReq.Header.Set("Origin", "https://securememo.app")
+	readReq.Header.Set("Content-Type", "application/json")
+	readRec := httptest.NewRecorder()
+	handler.Read(readRec, readReq)
+	if readRec.Code != http.StatusOK {
+		t.Fatalf("read at filesystem reserve status = %d, want 200; body=%s", readRec.Code, readRec.Body.String())
+	}
+
+	deleteReq := httptest.NewRequest(http.MethodPost, "/api/confirm-delete", strings.NewReader(`{"memoId":"`+memoID+`","deletionToken":"`+deletionToken+`"}`))
+	deleteReq.RemoteAddr = "203.0.113.91:12345"
+	deleteReq.Header.Set("Origin", "https://securememo.app")
+	deleteReq.Header.Set("Content-Type", "application/json")
+	deleteRec := httptest.NewRecorder()
+	handler.ConfirmDelete(deleteRec, deleteReq)
+	if deleteRec.Code != http.StatusOK {
+		t.Fatalf("delete at filesystem reserve status = %d, want 200; body=%s", deleteRec.Code, deleteRec.Body.String())
+	}
+	if _, err := db.ReadActiveMemo(ctx, memoID); !errors.Is(err, store.ErrNotFound) {
+		t.Fatalf("memo after delete at reserve error = %v, want ErrNotFound", err)
+	}
+}
+
 func TestRequestValidationUsesStableErrorCodes(t *testing.T) {
-	db, err := store.OpenSQLite(filepath.Join(t.TempDir(), "securememo.sqlite"))
+	db, err := store.OpenSQLite(filepath.Join(t.TempDir(), "securememo.sqlite"), store.StorageLimits{})
 	if err != nil {
 		t.Fatalf("open sqlite: %v", err)
 	}
@@ -249,7 +346,7 @@ func TestRequestValidationUsesStableErrorCodes(t *testing.T) {
 }
 
 func TestRecordRateLimitsAppliesLaterWindow(t *testing.T) {
-	db, err := store.OpenSQLite(filepath.Join(t.TempDir(), "securememo.sqlite"))
+	db, err := store.OpenSQLite(filepath.Join(t.TempDir(), "securememo.sqlite"), store.StorageLimits{})
 	if err != nil {
 		t.Fatalf("open sqlite: %v", err)
 	}
@@ -287,7 +384,7 @@ func TestRecordRateLimitsAppliesLaterWindow(t *testing.T) {
 }
 
 func TestRateLimitResponseUsesStableErrorCode(t *testing.T) {
-	db, err := store.OpenSQLite(filepath.Join(t.TempDir(), "securememo.sqlite"))
+	db, err := store.OpenSQLite(filepath.Join(t.TempDir(), "securememo.sqlite"), store.StorageLimits{})
 	if err != nil {
 		t.Fatalf("open sqlite: %v", err)
 	}
@@ -338,7 +435,7 @@ func TestFailureRateLimitRulesAreStricterThanDefault(t *testing.T) {
 }
 
 func TestReadRejectsAmbiguousMemoIDQuery(t *testing.T) {
-	db, err := store.OpenSQLite(filepath.Join(t.TempDir(), "securememo.sqlite"))
+	db, err := store.OpenSQLite(filepath.Join(t.TempDir(), "securememo.sqlite"), store.StorageLimits{})
 	if err != nil {
 		t.Fatalf("open sqlite: %v", err)
 	}
@@ -376,7 +473,7 @@ func TestReadRejectsAmbiguousMemoIDQuery(t *testing.T) {
 }
 
 func TestMemoAccessFailuresUseOneErrorCode(t *testing.T) {
-	db, err := store.OpenSQLite(filepath.Join(t.TempDir(), "securememo.sqlite"))
+	db, err := store.OpenSQLite(filepath.Join(t.TempDir(), "securememo.sqlite"), store.StorageLimits{})
 	if err != nil {
 		t.Fatalf("open sqlite: %v", err)
 	}
@@ -469,7 +566,7 @@ func TestClientIPUsesForwardedHeadersWhenExplicitlyTrusted(t *testing.T) {
 }
 
 func TestRevokeDeletesMemoWithValidOwnerToken(t *testing.T) {
-	db, err := store.OpenSQLite(filepath.Join(t.TempDir(), "securememo.sqlite"))
+	db, err := store.OpenSQLite(filepath.Join(t.TempDir(), "securememo.sqlite"), store.StorageLimits{})
 	if err != nil {
 		t.Fatalf("open sqlite: %v", err)
 	}
@@ -502,7 +599,7 @@ func TestRevokeDeletesMemoWithValidOwnerToken(t *testing.T) {
 }
 
 func TestRevokeRejectsWrongOwnerToken(t *testing.T) {
-	db, err := store.OpenSQLite(filepath.Join(t.TempDir(), "securememo.sqlite"))
+	db, err := store.OpenSQLite(filepath.Join(t.TempDir(), "securememo.sqlite"), store.StorageLimits{})
 	if err != nil {
 		t.Fatalf("open sqlite: %v", err)
 	}
@@ -555,6 +652,7 @@ func TestBrowserAPIErrorsUseExplicitTranslationKeys(t *testing.T) {
 				errorCodeMethodNotAllowed,
 				errorCodeForbidden,
 				errorCodeRateLimited,
+				errorCodeStorageLimitReached,
 				errorCodeGeneral,
 			},
 		},

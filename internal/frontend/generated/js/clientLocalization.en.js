@@ -209,6 +209,7 @@ const TRANSLATIONS = {
     "error.NETWORK_ERROR": "Service temporarily unavailable. Please try again.",
     "error.SERVICE_UNAVAILABLE": "Service temporarily unavailable. Please try again later.",
     "error.RATE_LIMITED": "Too many requests. Please wait a moment and try again.",
+    "error.STORAGE_LIMIT_REACHED": "The service is temporarily at storage capacity. Please try again later.",
     "error.MISSING_MESSAGE": "Please enter a memo",
     "error.MESSAGE_TOO_LONG": "Memo is too long (max 5,000 characters)",
     "error.CREATE_MEMO_FAILED": "Failed to create memo",

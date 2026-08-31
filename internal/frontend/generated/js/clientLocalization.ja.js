@@ -211,6 +211,7 @@ const LOCAL_TRANSLATIONS = {
     "error.NETWORK_ERROR": "サービスが一時的に利用できません。再試行してください。",
     "error.SERVICE_UNAVAILABLE": "サービスが一時的に利用できません。しばらくしてから再試行してください。",
     "error.RATE_LIMITED": "リクエストが多すぎます。少しお待ちいただいてから再度お試しください。",
+    "error.STORAGE_LIMIT_REACHED": "サービスの保存容量が一時的に上限に達しています。後でもう一度お試しください。",
     "error.MISSING_MESSAGE": "メモを入力してください",
     "error.MESSAGE_TOO_LONG": "メモが長すぎます（最大5,000文字）",
     "error.CREATE_MEMO_FAILED": "メモの作成に失敗しました",

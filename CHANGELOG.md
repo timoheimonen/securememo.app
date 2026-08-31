@@ -4,6 +4,15 @@ All notable changes to this project are documented here.
 
 Version identifiers match the application `assetVersion`.
 
+## 20260831b - 2026-08-31
+
+### Changed
+- Disclose Cloudflare's strictly necessary `cf_clearance` security cookie and session verification in the Privacy Notice.
+- Add an atomic service-wide retained-ciphertext and memo-count quota with a default decimal 100 GB limit, SQLite page ceiling, service-wide 5 GB free-disk reserve, and startup reconciliation.
+- Return a localized HTTP 507 `STORAGE_LIMIT_REACHED` response for new creates at capacity while preserving read, revoke, deletion, and cleanup paths.
+- Expose private unlabeled aggregate capacity gauges for quota, SQLite, WAL, and filesystem monitoring.
+- Bound cleanup transactions and truncate WAL between batches while allowing safe reuse of allocated SQLite freelist pages during drain-mode recovery.
+
 ## 20260831a - 2026-08-31
 
 ### Changed

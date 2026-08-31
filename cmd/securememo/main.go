@@ -21,7 +21,11 @@ func main() {
 		log.Fatalf("config: %v", err)
 	}
 
-	db, err := store.OpenSQLite(cfg.DBPath)
+	db, err := store.OpenSQLite(cfg.DBPath, store.StorageLimits{
+		MaxBytes:         cfg.StorageLimitBytes,
+		MaxMemos:         cfg.StorageMemoLimit,
+		MinFreeDiskBytes: cfg.MinFreeDiskBytes,
+	})
 	if err != nil {
 		log.Fatalf("database: %v", err)
 	}

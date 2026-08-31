@@ -211,6 +211,7 @@ const LOCAL_TRANSLATIONS = {
     "error.NETWORK_ERROR": "Dienst tijdelijk niet beschikbaar. Probeer het opnieuw.",
     "error.SERVICE_UNAVAILABLE": "Dienst tijdelijk niet beschikbaar. Probeer het later opnieuw.",
     "error.RATE_LIMITED": "Te veel verzoeken. Wacht even en probeer het opnieuw.",
+    "error.STORAGE_LIMIT_REACHED": "De opslagcapaciteit van de dienst is tijdelijk vol. Probeer het later opnieuw.",
     "error.MISSING_MESSAGE": "Voer een memo in",
     "error.MESSAGE_TOO_LONG": "Memo is te lang (maximaal 5.000 tekens)",
     "error.CREATE_MEMO_FAILED": "Memo maken mislukt",
