@@ -35,10 +35,20 @@ trusted local boundary could otherwise forge the header. Invalid boolean values 
 startup fail instead of silently disabling proxy mode.
 
 Rate-limit identities use canonical IPv4 addresses and IPv6 `/64` networks. The
-minute and hour rules commit together in one SQLite transaction and return the
-longest applicable `Retry-After`. A bounded, concurrency-safe in-memory fallback
-enforces the same rules if the filesystem reserve prevents SQLite rate-limit writes;
-active entries are never evicted to admit attacker-controlled identities.
+minute and hour rules are enforced atomically by one bounded, concurrency-safe
+in-memory limiter and return the longest applicable `Retry-After`. Only process-random
+HMAC-derived keys and counters are retained in RAM; client-network identities and
+rate-limit state are never written to SQLite. Active entries are never evicted to
+admit attacker-controlled identities. Restarting the process resets every window,
+and multiple backend processes each enforce an independent allowance, so keep an
+upstream abuse-control layer when scaling beyond the documented single process.
+During a schema-v1 upgrade, schema v2 requires free space equal to twice the
+larger of the physical and logical database size plus the configured reserve,
+temporarily switches SQLite from `FAST` to full `secure_delete`, drops the legacy
+rate-limit table, runs `VACUUM` to remove previously freed row remnants, restores
+the configured mode, and completes a truncating WAL checkpoint. Startup fails
+closed before the table is dropped when the rewrite cannot preserve the configured
+free-filesystem reserve.
 
 For a systemd service that already loads `/etc/securememo/securememo.env` through
 `EnvironmentFile=`, add the setting directly to that file:
@@ -69,8 +79,8 @@ database plus its metadata leaves the service in create-drain mode. `0` disables
 the byte, memo-count, and page limits without disabling usage accounting.
 
 The free-disk reserve defaults to decimal 5 GB and is checked using filesystem
-space available to the service process. Memo creation, attacker-keyed rate-limit
-writes, and lifetime-counter writes stop before consuming the reserve. `0`
+space available to the service process. Memo creation and lifetime-counter writes
+stop before consuming the reserve. `0`
 disables this circuit breaker. It does not replace a hosting or volume quota
 because SQLite WAL, backups, snapshots, temporary files, and unrelated processes
 are outside the main-file page limit.
@@ -80,7 +90,7 @@ reconciles the global usage row from all retained memos, including expired rows
 that cleanup has not yet removed. If a lowered limit is already exceeded, the
 backend starts in drain mode: creates return HTTP 507 / `STORAGE_LIMIT_REACHED`,
 but reads, revocation, deletion confirmation, and cleanup remain available.
-Cleanup deletes expired memo and rate-limit rows in bounded batches and performs
-a truncating WAL checkpoint between batches. Deletion-created freelist pages may
+Cleanup deletes expired memo rows in bounded batches and performs a truncating WAL
+checkpoint between batches. Deletion-created freelist pages may
 be reused under the logical quota even when the main file is still larger than a
 new lower limit; `max_page_count` prevents further file growth.

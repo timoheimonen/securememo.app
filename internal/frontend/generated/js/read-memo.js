@@ -1,6 +1,21 @@
 const t = (key) => (typeof window.t === 'function' ? window.t(key) : key);
 const MEMO_ID_PATTERN = /^[A-Za-z0-9_-]{40}$/;
 
+let readLifecycleEpoch = 0;
+let readPageHidden = false;
+let readOperationController = null;
+let readDeletionController = null;
+
+function readAbortError() {
+  const error = new Error('Read operation cancelled.');
+  error.name = 'AbortError';
+  return error;
+}
+
+function readOperationIsCurrent(epoch) {
+  return !readPageHidden && epoch === readLifecycleEpoch;
+}
+
 const readAPIErrorTranslationKeys = Object.freeze({
   MEMO_ACCESS_DENIED: 'error.MEMO_ACCESS_DENIED',
   DATABASE_READ_ERROR: 'error.DATABASE_READ_ERROR',
@@ -46,44 +61,6 @@ function getMemoId() {
   return memoId;
 }
 
-async function decryptMessage(encryptedData, password) {
-  try {
-    const parsed = MemoCryptoConfig.parseEncryptedMessage(encryptedData);
-    const encryptedBytes = Uint8Array.from(atob(parsed.ciphertext), c => c.charCodeAt(0));
-    const salt = encryptedBytes.slice(0, parsed.config.saltLength);
-    const iv = encryptedBytes.slice(parsed.config.saltLength, parsed.config.saltLength + parsed.config.ivLength);
-    const encrypted = encryptedBytes.slice(parsed.config.saltLength + parsed.config.ivLength);
-    const encoder = new TextEncoder();
-    const keyMaterial = await crypto.subtle.importKey(
-      'raw',
-      encoder.encode(password),
-      { name: parsed.config.kdf },
-      false,
-      ['deriveBits', 'deriveKey']
-    );
-    const key = await crypto.subtle.deriveKey(
-      {
-        name: parsed.config.kdf,
-        salt: salt,
-        iterations: parsed.config.iterations,
-        hash: parsed.config.hash
-      },
-      keyMaterial,
-      { name: parsed.config.cipher, length: parsed.config.keyLength },
-      false,
-      ['decrypt']
-    );
-    const decrypted = await crypto.subtle.decrypt(
-      { name: parsed.config.cipher, iv: iv },
-      key,
-      encrypted
-    );
-    return new TextDecoder().decode(decrypted);
-  } catch (error) {
-    throw new Error('Failed to decrypt memo.');
-  }
-}
-
 function cryptoWorkerURL() {
   const workerURL = new URL('/js/memo-crypto-worker.js', window.location.origin);
   const currentScript = document.currentScript || Array.from(document.scripts).find(script => script.src.includes('/js/read-memo.js'));
@@ -93,10 +70,10 @@ function cryptoWorkerURL() {
       workerURL.searchParams.set('v', version);
     }
   }
-  return workerURL;
+  return MemoCryptoConfig.createWorkerScriptURL(workerURL.href);
 }
 
-function runMemoCryptoWorker(type, payload) {
+function runMemoCryptoWorker(type, payload, signal) {
   return new Promise((resolve, reject) => {
     if (!window.Worker) {
       reject(new Error('Crypto worker unavailable.'));
@@ -110,16 +87,39 @@ function runMemoCryptoWorker(type, payload) {
       return;
     }
     const id = crypto.randomUUID ? crypto.randomUUID() : String(Date.now()) + Math.random();
+    let settled = false;
+    const abortWorker = () => {
+      if (settled) {
+        return;
+      }
+      settled = true;
+      cleanup();
+      reject(readAbortError());
+    };
     const cleanup = () => {
+      if (signal) {
+        signal.removeEventListener('abort', abortWorker);
+      }
       worker.onmessage = null;
       worker.onerror = null;
       worker.terminate();
     };
+    if (signal) {
+      if (signal.aborted) {
+        abortWorker();
+        return;
+      }
+      signal.addEventListener('abort', abortWorker, { once: true });
+    }
     worker.onmessage = (event) => {
       const data = event.data || {};
       if (data.id !== id) {
         return;
       }
+      if (settled) {
+        return;
+      }
+      settled = true;
       cleanup();
       if (data.ok) {
         resolve(data.result);
@@ -128,35 +128,134 @@ function runMemoCryptoWorker(type, payload) {
       }
     };
     worker.onerror = (event) => {
+      if (settled) {
+        return;
+      }
+      settled = true;
       cleanup();
       reject(new Error(event.message || 'Crypto worker failed.'));
     };
-    worker.postMessage({ id: id, type: type, payload: payload });
+    try {
+      worker.postMessage({ id: id, type: type, payload: payload });
+    } catch (error) {
+      if (!settled) {
+        settled = true;
+        cleanup();
+      }
+      reject(error);
+    }
   });
 }
 
-async function decryptMemo(encryptedMessage, password) {
-  try {
-    const parsed = MemoCryptoConfig.parseEncryptedMessage(encryptedMessage);
-    const result = await runMemoCryptoWorker('decryptMemo', {
-      ciphertext: parsed.ciphertext,
-      config: parsed.config,
-      password: password
-    });
-    return result.decryptedMessage;
-  } catch (error) {
-    if (error.message.includes('Failed to decrypt')) {
-      throw error;
-    }
-    return decryptMessage(encryptedMessage, password);
-  }
+async function decryptMemo(encryptedMessage, password, signal) {
+  const parsed = MemoCryptoConfig.parseEncryptedMessage(encryptedMessage);
+  const result = await runMemoCryptoWorker('decryptMemo', {
+    ciphertext: parsed.ciphertext,
+    config: parsed.config,
+    password: password
+  }, signal);
+  return result.decryptedMessage;
 }
 
-function initializePage() {
-  showElement('passwordForm');
-  hideElement('memoContent');
-  hideElement('errorContent');
-  hideElement('statusMessage');
+function waitForReadRetry(delayMs, signal) {
+  return new Promise((resolve) => {
+    let settled = false;
+    let timer = null;
+    const finish = (completed) => {
+      if (settled) {
+        return;
+      }
+      settled = true;
+      if (timer !== null) {
+        clearTimeout(timer);
+      }
+      if (signal) {
+        signal.removeEventListener('abort', handleAbort);
+      }
+      resolve(completed);
+    };
+    const handleAbort = () => finish(false);
+    if (signal && signal.aborted) {
+      finish(false);
+      return;
+    }
+    if (signal) {
+      signal.addEventListener('abort', handleAbort, { once: true });
+    }
+    timer = setTimeout(() => finish(true), delayMs);
+  });
+}
+
+async function confirmMemoDeletion(memoId, deletionToken, operationEpoch, signal) {
+  const deleteBody = {
+    deletionToken: deletionToken,
+    memoId: memoId
+  };
+  const maxAttempts = 3;
+  const delayMs = 3000;
+  let deleteResponse;
+  try {
+    for (let attempt = 1; attempt <= maxAttempts; attempt++) {
+      if (signal && signal.aborted) {
+        return;
+      }
+      try {
+        deleteResponse = await fetch('/api/confirm-delete', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(deleteBody),
+          signal: signal || undefined
+        });
+        if (deleteResponse.ok || [429, 403, 404].includes(deleteResponse.status)) {
+          break;
+        }
+      } catch (error) {
+        if ((signal && signal.aborted) || error.name === 'AbortError') {
+          return;
+        }
+      }
+      if (attempt < maxAttempts && !await waitForReadRetry(delayMs, signal)) {
+        return;
+      }
+    }
+
+    if (!readOperationIsCurrent(operationEpoch)) {
+      return;
+    }
+    if (deleteResponse && deleteResponse.ok) {
+      const memoStatus = document.getElementById('memoStatus');
+      const deletionSpinner = document.getElementById('deletionSpinner');
+      if (memoStatus) {
+        memoStatus.textContent = t('msg.memoDeleted');
+      }
+      if (deletionSpinner) {
+        hideElement('deletionSpinner');
+      }
+      return;
+    }
+
+    let deleteErrorCode = '';
+    if (deleteResponse) {
+      try {
+        const deleteResult = await deleteResponse.json();
+        deleteErrorCode = deleteResult.errorCode;
+      } catch (error) {
+      }
+    }
+    if (!readOperationIsCurrent(operationEpoch)) {
+      return;
+    }
+    showMessage(translatedReadAPIError(deleteErrorCode, 'error.MEMO_DELETION_ERROR'), 'warning');
+    const deletionSpinner = document.getElementById('deletionSpinner');
+    if (deletionSpinner) {
+      hideElement('deletionSpinner');
+    }
+  } finally {
+    deleteBody.deletionToken = '';
+    deleteBody.memoId = '';
+    deletionToken = '';
+    memoId = '';
+  }
 }
 
 async function handleDecryptSubmit(e) {
@@ -171,6 +270,12 @@ async function handleDecryptSubmit(e) {
     showError(t('error.invalidMemoUrl'));
     return;
   }
+  const operationEpoch = readLifecycleEpoch;
+  const operationController = typeof AbortController === 'function' ? new AbortController() : null;
+  if (readOperationController) {
+    readOperationController.abort();
+  }
+  readOperationController = operationController;
   const decryptButton = document.getElementById('decryptButton');
   const decryptLoadingIndicator = document.getElementById('decryptLoadingIndicator');
   if (decryptButton) {
@@ -186,11 +291,21 @@ async function handleDecryptSubmit(e) {
     const response = await fetch('/api/read-memo?' + readParams.toString(), {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(requestBody)
+      body: JSON.stringify(requestBody),
+      signal: operationController ? operationController.signal : undefined
     });
+    if (!readOperationIsCurrent(operationEpoch)) {
+      return;
+    }
     const result = await response.json();
+    if (!readOperationIsCurrent(operationEpoch)) {
+      return;
+    }
     if (response.ok) {
-      const decryptedMessage = await decryptMemo(result.encryptedMessage, password);
+      const decryptedMessage = await decryptMemo(result.encryptedMessage, password, operationController ? operationController.signal : null);
+      if (!readOperationIsCurrent(operationEpoch)) {
+        return;
+      }
       let decryptedPayload;
       try {
         decryptedPayload = JSON.parse(decryptedMessage);
@@ -216,65 +331,41 @@ async function handleDecryptSubmit(e) {
       const statusMessage = document.getElementById('statusMessage');
       if (errorContent) hideElement('errorContent');
       if (statusMessage) hideElement('statusMessage');
-      const deleteBody = {};
       if (!decryptedPayload.deletionToken) {
         throw new Error('Missing deletion token in payload');
       }
-      deleteBody.deletionToken = decryptedPayload.deletionToken;
-      deleteBody.memoId = memoId;
-      const maxAttempts = 3;
-      const delayMs = 3000;
-      let deleteResponse;
-      for (let attempt = 1; attempt <= maxAttempts; attempt++) {
-        try {
-          deleteResponse = await fetch('/api/confirm-delete', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(deleteBody)
-          });
-          if (deleteResponse.ok || [429, 403, 404].includes(deleteResponse.status)) {
-            break;
-          }
-        } catch (e) {
-        }
-        if (attempt < maxAttempts) {
-          await new Promise(res => setTimeout(res, delayMs));
-        }
+      let deletionToken = decryptedPayload.deletionToken;
+      decryptedPayload.deletionToken = '';
+      const deletionController = new AbortController();
+      if (readDeletionController) {
+        readDeletionController.abort();
       }
-      if (deleteResponse && deleteResponse.ok) {
-        const memoStatus = document.getElementById('memoStatus');
-        const deletionSpinner = document.getElementById('deletionSpinner');
-        if (memoStatus) {
-          memoStatus.textContent = t('msg.memoDeleted');
+      readDeletionController = deletionController;
+      readOperationController = null;
+      void confirmMemoDeletion(memoId, deletionToken, operationEpoch, deletionController.signal).finally(() => {
+        if (readDeletionController === deletionController) {
+          readDeletionController = null;
         }
-        if (deletionSpinner) {
-          hideElement('deletionSpinner');
-        }
-      } else {
-        let deleteErrorCode = '';
-        if (deleteResponse) {
-          try {
-            const deleteResult = await deleteResponse.json();
-            deleteErrorCode = deleteResult.errorCode;
-          } catch (error) {
-          }
-        }
-        showMessage(translatedReadAPIError(deleteErrorCode, 'error.MEMO_DELETION_ERROR'), 'warning');
-        const deletionSpinner = document.getElementById('deletionSpinner');
-        if (deletionSpinner) {
-          hideElement('deletionSpinner');
-        }
-      }
+      });
+      deletionToken = '';
     } else {
       showError(translatedReadAPIError(result.errorCode));
     }
   } catch (error) {
-    if (error.message.includes('Failed to decrypt')) {
-      showError(t('error.invalidPassword'));
-    } else {
-      showError(t('error.readMemoError'));
+    if (readOperationIsCurrent(operationEpoch) && error.name !== 'AbortError') {
+      if (error.message.includes('Failed to decrypt')) {
+        showError(t('error.invalidPassword'));
+      } else {
+        showError(t('error.readMemoError'));
+      }
     }
   } finally {
+    if (readOperationController === operationController) {
+      readOperationController = null;
+    }
+    if (!readOperationIsCurrent(operationEpoch)) {
+      return;
+    }
     const decryptButton = document.getElementById('decryptButton');
     const decryptLoadingIndicator = document.getElementById('decryptLoadingIndicator');
     if (decryptButton) {
@@ -304,22 +395,92 @@ function handleToggleReadPassword() {
 
 function hasRequiredReadCapabilities() {
   return typeof globalThis.fetch === 'function' &&
-    typeof globalThis.TextEncoder === 'function' &&
-    typeof globalThis.TextDecoder === 'function' &&
-    typeof globalThis.atob === 'function' &&
+    typeof globalThis.Worker === 'function' &&
+    typeof globalThis.AbortController === 'function' &&
     globalThis.crypto &&
-    globalThis.crypto.subtle &&
     globalThis.MemoCryptoConfig &&
-    typeof globalThis.MemoCryptoConfig.parseEncryptedMessage === 'function';
+    typeof globalThis.MemoCryptoConfig.parseEncryptedMessage === 'function' &&
+    typeof globalThis.MemoCryptoConfig.createWorkerScriptURL === 'function';
+}
+
+function resetReadButton(id) {
+  const button = document.getElementById(id);
+  if (!button) {
+    return;
+  }
+  if (!button.dataset.resetText) {
+    button.dataset.resetText = button.textContent;
+  }
+  button.textContent = button.dataset.resetText;
+}
+
+function resetReadSensitiveState() {
+  const passwordInput = document.getElementById('password');
+  if (passwordInput) {
+    passwordInput.value = '';
+    passwordInput.type = 'password';
+  }
+  const decryptedMessage = document.getElementById('decryptedMessage');
+  if (decryptedMessage) {
+    decryptedMessage.textContent = '';
+  }
+  resetReadButton('decryptButton');
+  resetReadButton('toggleReadPassword');
+  const decryptButton = document.getElementById('decryptButton');
+  if (decryptButton) {
+    decryptButton.disabled = false;
+  }
+  const memoStatus = document.getElementById('memoStatus');
+  if (memoStatus) {
+    if (!memoStatus.dataset.resetText) {
+      memoStatus.dataset.resetText = memoStatus.textContent;
+    }
+    memoStatus.textContent = memoStatus.dataset.resetText;
+  }
+  const statusMessage = document.getElementById('statusMessage');
+  if (statusMessage) {
+    statusMessage.className = 'message';
+    statusMessage.textContent = '';
+  }
+  const decryptForm = document.getElementById('decryptForm');
+  const decryptFormControls = document.getElementById('decryptFormControls');
+  if (decryptFormControls) {
+    decryptFormControls.disabled = true;
+  }
+  if (decryptForm) {
+    decryptForm.setAttribute('aria-busy', 'true');
+  }
+  showElement('passwordForm');
+  showElement('decryptFormStatus');
+  hideElement('memoContent');
+  hideElement('errorContent');
+  hideElement('statusMessage');
+  hideElement('decryptLoadingIndicator');
+  hideElement('deletionSpinner');
+}
+
+function deactivateReadPage() {
+  readPageHidden = true;
+  readLifecycleEpoch++;
+  if (readOperationController) {
+    readOperationController.abort();
+    readOperationController = null;
+  }
+  if (readDeletionController) {
+    readDeletionController.abort();
+    readDeletionController = null;
+  }
+  resetReadSensitiveState();
 }
 
 function initializeReadPage() {
-  initializePage();
+  readPageHidden = false;
+  resetReadSensitiveState();
 
   const memoId = getMemoId();
   if (!memoId) {
     const errorMessage = document.getElementById('errorMessage');
-    showError(errorMessage ? errorMessage.textContent : t('error.missingMemoId'));
+    showError(errorMessage && errorMessage.textContent ? errorMessage.textContent : t('error.missingMemoId'));
     return;
   }
 
@@ -337,6 +498,9 @@ function initializeReadPage() {
   hideElement('decryptFormStatus');
 }
 
+window.addEventListener('pagehide', deactivateReadPage);
+window.addEventListener('pageshow', initializeReadPage);
+
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', initializeReadPage, { once: true });
 } else {
@@ -344,6 +508,11 @@ if (document.readyState === 'loading') {
 }
 
 function showError(message) {
+  const passwordInput = document.getElementById('password');
+  if (passwordInput) {
+    passwordInput.value = '';
+    passwordInput.type = 'password';
+  }
   document.getElementById('errorMessage').textContent = message;
   showElement('errorContent');
   hideElement('passwordForm');

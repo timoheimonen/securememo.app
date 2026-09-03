@@ -38,10 +38,7 @@ func TestCreateValidatesExpiryHours(t *testing.T) {
 			}
 			defer db.Close()
 
-			handler := Handler{
-				Config: config.Config{AllowedOrigins: []string{"https://securememo.app"}},
-				Store:  db,
-			}
+			handler := newHandlerForTest(t, config.Config{AllowedOrigins: []string{"https://securememo.app"}}, db)
 			body := fmt.Sprintf(
 				`{"encryptedMessage":"%s","expiryHours":%d,"deletionTokenHash":"%s","ownerDeletionTokenHash":"%s"}`,
 				validEncryptedMessageForHandlerTest(44),
@@ -90,10 +87,7 @@ func TestCreateRejectsInvalidEncryptedMessageFormat(t *testing.T) {
 			}
 			defer db.Close()
 
-			handler := Handler{
-				Config: config.Config{AllowedOrigins: []string{"https://securememo.app"}},
-				Store:  db,
-			}
+			handler := newHandlerForTest(t, config.Config{AllowedOrigins: []string{"https://securememo.app"}}, db)
 			body, err := json.Marshal(map[string]interface{}{
 				"encryptedMessage":       tt.encryptedMessage,
 				"expiryHours":            24,
@@ -123,10 +117,7 @@ func TestCreateStoresEncryptedMessageUnchanged(t *testing.T) {
 	}
 	defer db.Close()
 
-	handler := Handler{
-		Config: config.Config{AllowedOrigins: []string{"https://securememo.app"}},
-		Store:  db,
-	}
+	handler := newHandlerForTest(t, config.Config{AllowedOrigins: []string{"https://securememo.app"}}, db)
 	encryptedMessage := "v1:" + base64.StdEncoding.EncodeToString([]byte{
 		0xfb, 0xff, 0xef, 0xfb, 0xff, 0xef, 0xfb, 0xff, 0xef, 0xfb, 0xff,
 		0xef, 0xfb, 0xff, 0xef, 0xfb, 0xff, 0xef, 0xfb, 0xff, 0xef, 0xfb,
@@ -181,10 +172,7 @@ func TestCreateReturnsGenericStorageCapacityError(t *testing.T) {
 		t.Fatalf("seed capacity: %v", err)
 	}
 
-	handler := Handler{
-		Config: config.Config{AllowedOrigins: []string{"https://securememo.app"}},
-		Store:  db,
-	}
+	handler := newHandlerForTest(t, config.Config{AllowedOrigins: []string{"https://securememo.app"}}, db)
 	body, err := json.Marshal(map[string]interface{}{
 		"encryptedMessage":       validEncryptedMessageForHandlerTest(44),
 		"expiryHours":            24,
@@ -236,10 +224,7 @@ func TestFilesystemReservePreservesReadAndAuthenticatedDelete(t *testing.T) {
 		t.Fatalf("reopen sqlite at filesystem reserve: %v", err)
 	}
 	defer db.Close()
-	handler := Handler{
-		Config: config.Config{AllowedOrigins: []string{"https://securememo.app"}},
-		Store:  db,
-	}
+	handler := newHandlerForTest(t, config.Config{AllowedOrigins: []string{"https://securememo.app"}}, db)
 
 	readReq := httptest.NewRequest(http.MethodPost, "/api/read-memo?id="+memoID, strings.NewReader(`{}`))
 	readReq.RemoteAddr = "203.0.113.91:12345"
@@ -272,24 +257,32 @@ func TestRequestValidationUsesStableErrorCodes(t *testing.T) {
 	}
 	defer db.Close()
 
-	handler := Handler{
-		Config: config.Config{AllowedOrigins: []string{"https://securememo.app"}},
-		Store:  db,
+	handler := newHandlerForTest(t, config.Config{AllowedOrigins: []string{"https://securememo.app"}}, db)
+	originalUniformDelay := uniformDelay
+	delayCalls := 0
+	uniformDelay = func() {
+		delayCalls++
 	}
+	t.Cleanup(func() {
+		uniformDelay = originalUniformDelay
+	})
 	tests := []struct {
-		name          string
-		method        string
-		origin        string
-		contentType   string
-		body          string
-		wantStatus    int
-		wantErrorCode string
+		name           string
+		method         string
+		origin         string
+		contentType    string
+		body           string
+		wantStatus     int
+		wantErrorCode  string
+		wantAllow      string
+		wantDelayCalls int
 	}{
 		{
 			name:          "method",
 			method:        http.MethodGet,
 			wantStatus:    http.StatusMethodNotAllowed,
 			wantErrorCode: errorCodeMethodNotAllowed,
+			wantAllow:     "POST",
 		},
 		{
 			name:          "origin",
@@ -299,30 +292,33 @@ func TestRequestValidationUsesStableErrorCodes(t *testing.T) {
 			wantErrorCode: errorCodeForbidden,
 		},
 		{
-			name:          "content type",
-			method:        http.MethodPost,
-			origin:        "https://securememo.app",
-			body:          `{}`,
-			wantStatus:    http.StatusBadRequest,
-			wantErrorCode: errorCodeContentType,
+			name:           "content type",
+			method:         http.MethodPost,
+			origin:         "https://securememo.app",
+			body:           `{}`,
+			wantStatus:     http.StatusBadRequest,
+			wantErrorCode:  errorCodeContentType,
+			wantDelayCalls: 1,
 		},
 		{
-			name:          "invalid JSON",
-			method:        http.MethodPost,
-			origin:        "https://securememo.app",
-			contentType:   "application/json",
-			body:          `{`,
-			wantStatus:    http.StatusBadRequest,
-			wantErrorCode: errorCodeInvalidJSON,
+			name:           "invalid JSON",
+			method:         http.MethodPost,
+			origin:         "https://securememo.app",
+			contentType:    "application/json",
+			body:           `{`,
+			wantStatus:     http.StatusBadRequest,
+			wantErrorCode:  errorCodeInvalidJSON,
+			wantDelayCalls: 1,
 		},
 		{
-			name:          "request too large",
-			method:        http.MethodPost,
-			origin:        "https://securememo.app",
-			contentType:   "application/json",
-			body:          `{"encryptedMessage":"` + strings.Repeat("x", maxJSONBytes) + `"}`,
-			wantStatus:    http.StatusRequestEntityTooLarge,
-			wantErrorCode: errorCodeRequestTooLarge,
+			name:           "request too large",
+			method:         http.MethodPost,
+			origin:         "https://securememo.app",
+			contentType:    "application/json",
+			body:           `{"encryptedMessage":"` + strings.Repeat("x", maxJSONBytes) + `"}`,
+			wantStatus:     http.StatusRequestEntityTooLarge,
+			wantErrorCode:  errorCodeRequestTooLarge,
+			wantDelayCalls: 1,
 		},
 	}
 
@@ -337,11 +333,31 @@ func TestRequestValidationUsesStableErrorCodes(t *testing.T) {
 				req.Header.Set("Content-Type", tt.contentType)
 			}
 			rec := httptest.NewRecorder()
+			delayCallsBefore := delayCalls
 
 			handler.Create(rec, req)
 
 			assertAPIError(t, rec, tt.wantStatus, tt.wantErrorCode)
+			if tt.wantAllow != "" && rec.Header().Get("Allow") != tt.wantAllow {
+				t.Fatalf("Allow header = %q, want %q", rec.Header().Get("Allow"), tt.wantAllow)
+			}
+			if got := delayCalls - delayCallsBefore; got != tt.wantDelayCalls {
+				t.Fatalf("uniform delay calls = %d, want %d", got, tt.wantDelayCalls)
+			}
 		})
+	}
+
+	delayCallsBefore := delayCalls
+	optionsRec := httptest.NewRecorder()
+	handler.Create(optionsRec, httptest.NewRequest(http.MethodOptions, "/api/create-memo", nil))
+	if optionsRec.Code != http.StatusOK {
+		t.Fatalf("OPTIONS status = %d, want %d", optionsRec.Code, http.StatusOK)
+	}
+	if optionsRec.Body.Len() != 0 {
+		t.Fatalf("OPTIONS body = %q, want empty", optionsRec.Body.String())
+	}
+	if got := delayCalls - delayCallsBefore; got != 0 {
+		t.Fatalf("OPTIONS uniform delay calls = %d, want 0", got)
 	}
 }
 
@@ -352,7 +368,7 @@ func TestRecordRateLimitsAppliesLaterWindow(t *testing.T) {
 	}
 	defer db.Close()
 
-	handler := Handler{Store: db}
+	handler := newHandlerForTest(t, config.Config{}, db)
 	req := httptest.NewRequest("POST", "/api/read-memo", nil)
 	req.RemoteAddr = "203.0.113.10:12345"
 
@@ -389,7 +405,7 @@ func TestRecordRateLimitsReturnsLongestBlockingWindow(t *testing.T) {
 		t.Fatalf("open sqlite: %v", err)
 	}
 	defer db.Close()
-	handler := Handler{Store: db}
+	handler := newHandlerForTest(t, config.Config{}, db)
 	req := httptest.NewRequest(http.MethodPost, "/api/read-memo", nil)
 	req.RemoteAddr = "203.0.113.41:12345"
 	rules := []rateLimitRule{
@@ -415,10 +431,7 @@ func TestTrustedCloudflareClientsUseSeparateRateLimitBuckets(t *testing.T) {
 		t.Fatalf("open sqlite: %v", err)
 	}
 	defer db.Close()
-	handler := Handler{
-		Config: config.Config{TrustedProxyLocal: true},
-		Store:  db,
-	}
+	handler := newHandlerForTest(t, config.Config{TrustedProxyLocal: true}, db)
 	rules := []rateLimitRule{{Name: "test", Limit: 1, Window: time.Minute}}
 	request := func(clientIP string) *http.Request {
 		req := httptest.NewRequest(http.MethodPost, "/api/read-memo", nil)
@@ -446,10 +459,15 @@ func TestRateLimitResponseUsesStableErrorCode(t *testing.T) {
 	}
 	defer db.Close()
 
-	handler := Handler{
-		Config: config.Config{AllowedOrigins: []string{"https://securememo.app"}},
-		Store:  db,
+	handler := newHandlerForTest(t, config.Config{AllowedOrigins: []string{"https://securememo.app"}}, db)
+	originalUniformDelay := uniformDelay
+	delayCalls := 0
+	uniformDelay = func() {
+		delayCalls++
 	}
+	t.Cleanup(func() {
+		uniformDelay = originalUniformDelay
+	})
 	seedReq := httptest.NewRequest(http.MethodPost, "/api/read-memo", nil)
 	seedReq.RemoteAddr = "203.0.113.40:12345"
 	for i := 0; i < standardLimitMinute; i++ {
@@ -473,6 +491,9 @@ func TestRateLimitResponseUsesStableErrorCode(t *testing.T) {
 	if rec.Header().Get("Retry-After") == "" {
 		t.Fatal("rate-limit response is missing Retry-After")
 	}
+	if delayCalls != 0 {
+		t.Fatalf("rate-limit response used uniform delay %d times, want 0", delayCalls)
+	}
 }
 
 func TestCreateUsesStricterRateLimitRules(t *testing.T) {
@@ -481,10 +502,7 @@ func TestCreateUsesStricterRateLimitRules(t *testing.T) {
 		t.Fatalf("open sqlite: %v", err)
 	}
 	defer db.Close()
-	handler := Handler{
-		Config: config.Config{AllowedOrigins: []string{"https://securememo.app"}},
-		Store:  db,
-	}
+	handler := newHandlerForTest(t, config.Config{AllowedOrigins: []string{"https://securememo.app"}}, db)
 	seedReq := httptest.NewRequest(http.MethodPost, "/api/create-memo", nil)
 	seedReq.RemoteAddr = "203.0.113.42:12345"
 	for attempt := 0; attempt < createLimitMinute; attempt++ {
@@ -505,22 +523,31 @@ func TestCreateUsesStricterRateLimitRules(t *testing.T) {
 }
 
 func TestTrustedProxyModeFailsClosedWithoutCloudflareClientIP(t *testing.T) {
-	handler := Handler{
-		Config: config.Config{
-			AllowedOrigins:    []string{"https://securememo.app"},
-			TrustedProxyLocal: true,
-		},
-	}
+	handler := newHandlerForTest(t, config.Config{
+		AllowedOrigins:    []string{"https://securememo.app"},
+		TrustedProxyLocal: true,
+	}, nil)
 	req := httptest.NewRequest(http.MethodPost, "/api/read-memo", strings.NewReader(`{}`))
 	req.RemoteAddr = "127.0.0.1:12345"
 	req.Header.Set("Origin", "https://securememo.app")
 	req.Header.Set("Content-Type", "application/json")
 	req.Header.Set("X-Forwarded-For", "203.0.113.10")
 	rec := httptest.NewRecorder()
+	originalUniformDelay := uniformDelay
+	delayCalls := 0
+	uniformDelay = func() {
+		delayCalls++
+	}
+	t.Cleanup(func() {
+		uniformDelay = originalUniformDelay
+	})
 
 	handler.Read(rec, req)
 
 	assertAPIError(t, rec, http.StatusForbidden, errorCodeForbidden)
+	if delayCalls != 0 {
+		t.Fatalf("proxy identity rejection used uniform delay %d times, want 0", delayCalls)
+	}
 }
 
 func TestDeleteAndRevokeAreRateLimitedBeforeRequestParsing(t *testing.T) {
@@ -529,10 +556,7 @@ func TestDeleteAndRevokeAreRateLimitedBeforeRequestParsing(t *testing.T) {
 		t.Fatalf("open sqlite: %v", err)
 	}
 	defer db.Close()
-	handler := Handler{
-		Config: config.Config{AllowedOrigins: []string{"https://securememo.app"}},
-		Store:  db,
-	}
+	handler := newHandlerForTest(t, config.Config{AllowedOrigins: []string{"https://securememo.app"}}, db)
 
 	tests := []struct {
 		name   string
@@ -626,10 +650,7 @@ func TestReadRejectsAmbiguousMemoIDQuery(t *testing.T) {
 	if err := db.CreateMemo(context.Background(), memoID, "ciphertext", time.Now().Add(time.Hour).Unix(), "hash", "owner-hash"); err != nil {
 		t.Fatalf("create memo: %v", err)
 	}
-	handler := Handler{
-		Config: config.Config{AllowedOrigins: []string{"https://securememo.app"}},
-		Store:  db,
-	}
+	handler := newHandlerForTest(t, config.Config{AllowedOrigins: []string{"https://securememo.app"}}, db)
 
 	goodReq := httptest.NewRequest(http.MethodPost, "/api/read-memo?id="+memoID, strings.NewReader(`{}`))
 	goodReq.RemoteAddr = "203.0.113.10:12345"
@@ -671,10 +692,7 @@ func TestMemoAccessFailuresUseOneErrorCode(t *testing.T) {
 		t.Fatalf("create expired memo: %v", err)
 	}
 
-	handler := Handler{
-		Config: config.Config{AllowedOrigins: []string{"https://securememo.app"}},
-		Store:  db,
-	}
+	handler := newHandlerForTest(t, config.Config{AllowedOrigins: []string{"https://securememo.app"}}, db)
 	tests := []struct {
 		name   string
 		target string
@@ -874,10 +892,7 @@ func TestRevokeDeletesMemoWithValidOwnerToken(t *testing.T) {
 	if err := db.CreateMemo(context.Background(), memoID, "ciphertext", time.Now().Add(time.Hour).Unix(), "deletion-hash", hashDeletionToken(ownerToken)); err != nil {
 		t.Fatalf("create memo: %v", err)
 	}
-	handler := Handler{
-		Config: config.Config{AllowedOrigins: []string{"https://securememo.app"}},
-		Store:  db,
-	}
+	handler := newHandlerForTest(t, config.Config{AllowedOrigins: []string{"https://securememo.app"}}, db)
 
 	req := httptest.NewRequest(http.MethodPost, "/api/revoke-memo", strings.NewReader(`{"memoId":"`+memoID+`","ownerDeleteToken":"`+ownerToken+`"}`))
 	req.RemoteAddr = "203.0.113.10:12345"
@@ -908,10 +923,7 @@ func TestRevokeRejectsWrongOwnerToken(t *testing.T) {
 	if err := db.CreateMemo(context.Background(), memoID, "ciphertext", time.Now().Add(time.Hour).Unix(), "deletion-hash", hashDeletionToken(ownerToken)); err != nil {
 		t.Fatalf("create memo: %v", err)
 	}
-	handler := Handler{
-		Config: config.Config{AllowedOrigins: []string{"https://securememo.app"}},
-		Store:  db,
-	}
+	handler := newHandlerForTest(t, config.Config{AllowedOrigins: []string{"https://securememo.app"}}, db)
 
 	req := httptest.NewRequest(http.MethodPost, "/api/revoke-memo", strings.NewReader(`{"memoId":"`+memoID+`","ownerDeleteToken":"`+wrongToken+`"}`))
 	req.RemoteAddr = "203.0.113.10:12345"
@@ -1026,8 +1038,27 @@ func assertAPIError(t *testing.T, rec *httptest.ResponseRecorder, wantStatus int
 	if got, ok := body["errorCode"].(string); !ok || got != wantErrorCode {
 		t.Fatalf("errorCode = %v, want %q", body["errorCode"], wantErrorCode)
 	}
+	for name, want := range map[string]string{
+		"Content-Type":           "application/json",
+		"Cache-Control":          "no-store",
+		"X-Content-Type-Options": "nosniff",
+		"X-Frame-Options":        "DENY",
+	} {
+		if got := rec.Header().Get(name); got != want {
+			t.Fatalf("%s header = %q, want %q", name, got, want)
+		}
+	}
 }
 
 func validEncryptedMessageForHandlerTest(envelopeBytes int) string {
 	return "v1:" + base64.StdEncoding.EncodeToString(make([]byte, envelopeBytes))
+}
+
+func newHandlerForTest(t *testing.T, cfg config.Config, db *store.SQLiteStore) Handler {
+	t.Helper()
+	handler, err := NewHandler(cfg, db)
+	if err != nil {
+		t.Fatalf("NewHandler: %v", err)
+	}
+	return handler
 }

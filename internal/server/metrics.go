@@ -11,19 +11,23 @@ import (
 	"sync"
 	"time"
 
+	"github.com/timoheimonen/securememo/internal/security"
 	"github.com/timoheimonen/securememo/internal/store"
 )
 
 var httpDurationBuckets = []float64{0.005, 0.01, 0.025, 0.05, 0.1, 0.25, 0.5, 1, 2.5, 5, 10}
 
 type Metrics struct {
-	store        *store.SQLiteStore
-	mu           sync.Mutex
-	requests     map[metricKey]uint64
-	bytes        map[metricKey]uint64
-	duration     map[metricKey]durationMetric
-	memosCreated uint64
-	memosRead    uint64
+	store             *store.SQLiteStore
+	incrementAppStat  func(context.Context, string) error
+	mu                sync.Mutex
+	lifetimeMu        sync.Mutex
+	requests          map[metricKey]uint64
+	bytes             map[metricKey]uint64
+	duration          map[metricKey]durationMetric
+	memosCreated      uint64
+	memosRead         uint64
+	trustedProxyLocal bool
 }
 
 type metricKey struct {
@@ -45,13 +49,18 @@ type metricsResponseWriter struct {
 	bytes  int
 }
 
-func NewMetrics(store *store.SQLiteStore) *Metrics {
-	return &Metrics{
-		store:    store,
-		requests: make(map[metricKey]uint64),
-		bytes:    make(map[metricKey]uint64),
-		duration: make(map[metricKey]durationMetric),
+func NewMetrics(sqliteStore *store.SQLiteStore, trustedProxyLocal bool) *Metrics {
+	metrics := &Metrics{
+		store:             sqliteStore,
+		requests:          make(map[metricKey]uint64),
+		bytes:             make(map[metricKey]uint64),
+		duration:          make(map[metricKey]durationMetric),
+		trustedProxyLocal: trustedProxyLocal,
 	}
+	if sqliteStore != nil {
+		metrics.incrementAppStat = sqliteStore.IncrementAppStat
+	}
+	return metrics
 }
 
 func (m *Metrics) Observe(r *http.Request, status int, bytes int, elapsed time.Duration) {
@@ -62,22 +71,21 @@ func (m *Metrics) Observe(r *http.Request, status int, bytes int, elapsed time.D
 		Method:  metricMethod(r.Method),
 		Route:   metricRoute(r.URL.Path),
 		Status:  strconv.Itoa(status),
-		Country: metricCountry(r),
+		Country: metricCountry(r, m.trustedProxyLocal),
 	}
 	seconds := elapsed.Seconds()
+	lifetimeStat := ""
 
 	m.mu.Lock()
-	defer m.mu.Unlock()
-
 	m.requests[key]++
 	if status == http.StatusOK && r.Method == http.MethodPost {
 		switch key.Route {
 		case "/api/create-memo":
 			m.memosCreated++
-			m.incrementLifetimeStat(store.AppStatMemosCreated)
+			lifetimeStat = store.AppStatMemosCreated
 		case "/api/read-memo":
 			m.memosRead++
-			m.incrementLifetimeStat(store.AppStatMemosRead)
+			lifetimeStat = store.AppStatMemosRead
 		}
 	}
 	if bytes > 0 {
@@ -95,15 +103,23 @@ func (m *Metrics) Observe(r *http.Request, status int, bytes int, elapsed time.D
 		}
 	}
 	m.duration[key] = d
+	m.mu.Unlock()
+
+	if lifetimeStat != "" {
+		m.incrementLifetimeStat(lifetimeStat)
+	}
 }
 
 func (m *Metrics) incrementLifetimeStat(key string) {
-	if m == nil || m.store == nil {
+	if m == nil || m.incrementAppStat == nil {
 		return
 	}
+	m.lifetimeMu.Lock()
+	defer m.lifetimeMu.Unlock()
+
 	ctx, cancel := context.WithTimeout(context.Background(), 2*time.Second)
 	defer cancel()
-	_ = m.store.IncrementAppStat(ctx, key)
+	_ = m.incrementAppStat(ctx, key)
 }
 
 func (m *Metrics) lifetimeStats(ctx context.Context) (store.AppStats, error) {
@@ -260,13 +276,17 @@ func metricRoute(urlPath string) string {
 	}
 }
 
-func metricCountry(r *http.Request) string {
-	country := strings.ToUpper(strings.TrimSpace(r.Header.Get("CF-IPCountry")))
-	if country == "" {
+func metricCountry(r *http.Request, trustedProxyLocal bool) string {
+	if !security.TrustedLocalProxyPeer(trustedProxyLocal, r.RemoteAddr) {
 		return "unknown"
 	}
+	values := r.Header.Values("CF-IPCountry")
+	if len(values) != 1 {
+		return "unknown"
+	}
+	country := strings.ToUpper(strings.TrimSpace(values[0]))
 	if len(country) != 2 || !isASCIILetter(country[0]) || !isASCIILetter(country[1]) {
-		return "other"
+		return "unknown"
 	}
 	return country
 }

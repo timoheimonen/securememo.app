@@ -36,7 +36,10 @@ func main() {
 	}
 	defer db.Close()
 
-	app := server.New(cfg, db)
+	app, err := server.New(cfg, db)
+	if err != nil {
+		log.Fatalf("server: %v", err)
+	}
 
 	ctx, stop := signal.NotifyContext(context.Background(), os.Interrupt, syscall.SIGTERM)
 	defer stop()
@@ -95,8 +98,8 @@ func main() {
 func runCleanup(ctx context.Context, db *store.SQLiteStore, interval time.Duration) {
 	if result, err := db.Cleanup(ctx); err != nil {
 		log.Printf("cleanup: %v", err)
-	} else if result.MemosDeleted > 0 || result.RateLimitsDeleted > 0 {
-		log.Printf("cleanup: deleted memos=%d rate_limits=%d", result.MemosDeleted, result.RateLimitsDeleted)
+	} else if result.MemosDeleted > 0 {
+		log.Printf("cleanup: deleted memos=%d", result.MemosDeleted)
 	}
 
 	ticker := time.NewTicker(interval)
@@ -108,8 +111,8 @@ func runCleanup(ctx context.Context, db *store.SQLiteStore, interval time.Durati
 		case <-ticker.C:
 			if result, err := db.Cleanup(ctx); err != nil {
 				log.Printf("cleanup: %v", err)
-			} else if result.MemosDeleted > 0 || result.RateLimitsDeleted > 0 {
-				log.Printf("cleanup: deleted memos=%d rate_limits=%d", result.MemosDeleted, result.RateLimitsDeleted)
+			} else if result.MemosDeleted > 0 {
+				log.Printf("cleanup: deleted memos=%d", result.MemosDeleted)
 			}
 		}
 	}

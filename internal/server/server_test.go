@@ -24,10 +24,13 @@ func TestCleanupEndpointIsNotPubliclyRouted(t *testing.T) {
 	}
 	defer db.Close()
 
-	app := New(config.Config{
+	app, err := New(config.Config{
 		PublicOrigin:   "https://securememo.app",
 		AllowedOrigins: []string{"https://securememo.app"},
 	}, db)
+	if err != nil {
+		t.Fatalf("New: %v", err)
+	}
 
 	req := httptest.NewRequest(http.MethodPost, "/api/cleanup", nil)
 	rec := httptest.NewRecorder()
@@ -693,6 +696,134 @@ func TestSensitiveMemoScriptsAttachSubmitGuardsBeforeEnablingForms(t *testing.T)
 	}
 }
 
+func TestSensitiveMemoScriptsWipeLifecycleState(t *testing.T) {
+	tests := []struct {
+		name     string
+		asset    string
+		required []string
+	}{
+		{
+			name:  "create",
+			asset: "generated/js/create-memo.js",
+			required: []string{
+				"window.addEventListener('pagehide', deactivateCreatePage);",
+				"window.addEventListener('pageshow', initializeCreatePage);",
+				"['message', 'memoUrl', 'memoPassword', 'ownerDeleteUrl']",
+				"passwordInput.type = 'password';",
+				"createLifecycleEpoch++;",
+				"createOperationController.abort();",
+				"createOperationIsCurrent(operationEpoch)",
+			},
+		},
+		{
+			name:  "read",
+			asset: "generated/js/read-memo.js",
+			required: []string{
+				"window.addEventListener('pagehide', deactivateReadPage);",
+				"window.addEventListener('pageshow', initializeReadPage);",
+				"passwordInput.value = '';",
+				"decryptedMessage.textContent = '';",
+				"passwordInput.type = 'password';",
+				"readLifecycleEpoch++;",
+				"readOperationController.abort();",
+				"readDeletionController.abort();",
+				"signal: signal || undefined",
+				"readOperationIsCurrent(operationEpoch)",
+			},
+		},
+		{
+			name:  "revoke",
+			asset: "generated/js/revoke-memo.js",
+			required: []string{
+				"window.addEventListener('pagehide', deactivateRevokePage);",
+				"window.addEventListener('pageshow', restoreRevokePage);",
+				"memoId = null;",
+				"ownerDeleteToken = null;",
+				"clearURLFragment();",
+				"revokeLifecycleEpoch++;",
+				"revokeOperationController.abort();",
+				"revokeOperationIsCurrent(operationEpoch)",
+				"typeof globalThis.AbortController === 'function'",
+			},
+		},
+	}
+
+	for _, tc := range tests {
+		t.Run(tc.name, func(t *testing.T) {
+			body, err := frontend.FS.ReadFile(tc.asset)
+			if err != nil {
+				t.Fatalf("read %s: %v", tc.asset, err)
+			}
+			source := string(body)
+			for _, required := range tc.required {
+				if !strings.Contains(source, required) {
+					t.Errorf("%s missing lifecycle safeguard %q", tc.asset, required)
+				}
+			}
+		})
+	}
+
+	for _, asset := range []string{"generated/js/create-memo.js", "generated/js/read-memo.js"} {
+		body, err := frontend.FS.ReadFile(asset)
+		if err != nil {
+			t.Fatalf("read %s: %v", asset, err)
+		}
+		source := string(body)
+		for _, required := range []string{
+			"typeof globalThis.Worker === 'function'",
+			"typeof globalThis.AbortController === 'function'",
+			"MemoCryptoConfig.createWorkerScriptURL(workerURL.href)",
+		} {
+			if !strings.Contains(source, required) {
+				t.Errorf("%s does not require abortable worker crypto: missing %q", asset, required)
+			}
+		}
+	}
+
+	configBody, err := frontend.FS.ReadFile("generated/js/memo-crypto-config.js")
+	if err != nil {
+		t.Fatalf("read memo crypto config: %v", err)
+	}
+	for _, required := range []string{
+		"url.origin !== globalThis.location.origin",
+		"url.pathname !== '/js/memo-crypto-worker.js'",
+		"createPolicy('securememo-crypto-worker'",
+	} {
+		if !strings.Contains(string(configBody), required) {
+			t.Errorf("memo crypto config missing trusted worker URL safeguard %q", required)
+		}
+	}
+}
+
+func TestSensitiveMemoControlsDisableAutocomplete(t *testing.T) {
+	app := newTestServer(t)
+	tests := []struct {
+		path string
+		tag  string
+		id   string
+		want string
+	}{
+		{path: "/en/create-memo.html", tag: "textarea", id: "message", want: "off"},
+		{path: "/en/create-memo.html", tag: "input", id: "memoUrl", want: "off"},
+		{path: "/en/create-memo.html", tag: "input", id: "memoPassword", want: "new-password"},
+		{path: "/en/create-memo.html", tag: "input", id: "ownerDeleteUrl", want: "off"},
+		{path: "/en/read-memo.html", tag: "input", id: "password", want: "new-password"},
+	}
+	for _, tc := range tests {
+		t.Run(tc.id, func(t *testing.T) {
+			rec := httptest.NewRecorder()
+			app.ServeHTTP(rec, httptest.NewRequest(http.MethodGet, tc.path, nil))
+			if rec.Code != http.StatusOK {
+				t.Fatalf("GET %s status = %d, want %d", tc.path, rec.Code, http.StatusOK)
+			}
+			tag := htmlStartTagByID(t, rec.Body.String(), tc.tag, tc.id)
+			if !strings.Contains(tag, `autocomplete="`+tc.want+`"`) {
+				t.Fatalf("%s#%s autocomplete = %s, want %q", tc.tag, tc.id, tag, tc.want)
+			}
+		})
+	}
+}
+
 func htmlStartTagByID(t *testing.T, body, tagName, id string) string {
 	t.Helper()
 	needle := `id="` + id + `"`
@@ -751,8 +882,12 @@ func newTestServer(t *testing.T) *Server {
 	t.Cleanup(func() {
 		_ = db.Close()
 	})
-	return New(config.Config{
+	app, err := New(config.Config{
 		PublicOrigin:   "https://securememo.app",
 		AllowedOrigins: []string{"https://securememo.app"},
 	}, db)
+	if err != nil {
+		t.Fatalf("New: %v", err)
+	}
+	return app
 }

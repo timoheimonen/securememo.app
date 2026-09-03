@@ -14,6 +14,36 @@
       ivLength: 12
     })
   });
+  let workerScriptPolicy = null;
+
+  function validatedWorkerScriptURL(input) {
+    const url = new URL(input, globalThis.location.origin);
+    const versionValues = url.searchParams.getAll('v');
+    const hasOnlyVersion = Array.from(url.searchParams.keys()).every(key => key === 'v');
+    if (url.origin !== globalThis.location.origin ||
+        url.pathname !== '/js/memo-crypto-worker.js' ||
+        url.hash ||
+        !hasOnlyVersion ||
+        versionValues.length > 1 ||
+        (versionValues.length === 1 && !/^[A-Za-z0-9_-]{1,32}$/.test(versionValues[0]))) {
+      throw new Error('Invalid crypto worker URL.');
+    }
+    return url.href;
+  }
+
+  function createWorkerScriptURL(input) {
+    const safeURL = validatedWorkerScriptURL(input);
+    const trustedTypesFactory = globalThis.trustedTypes;
+    if (!trustedTypesFactory || typeof trustedTypesFactory.createPolicy !== 'function') {
+      return safeURL;
+    }
+    if (!workerScriptPolicy) {
+      workerScriptPolicy = trustedTypesFactory.createPolicy('securememo-crypto-worker', {
+        createScriptURL: validatedWorkerScriptURL
+      });
+    }
+    return workerScriptPolicy.createScriptURL(safeURL);
+  }
 
   function getVersion(version) {
     const config = versions[version];
@@ -53,6 +83,7 @@
     versions: versions,
     getVersion: getVersion,
     getCurrentVersion: getCurrentVersion,
-    parseEncryptedMessage: parseEncryptedMessage
+    parseEncryptedMessage: parseEncryptedMessage,
+    createWorkerScriptURL: createWorkerScriptURL
   });
 })();

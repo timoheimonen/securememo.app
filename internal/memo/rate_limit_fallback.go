@@ -4,48 +4,61 @@ import (
 	"errors"
 	"sync"
 	"time"
-
-	"github.com/timoheimonen/securememo/internal/store"
 )
 
-const defaultRateLimitFallbackEntries = 65_536
+const defaultRateLimitEntries = 65_536
 
-type rateLimitFallback struct {
+type rateLimitBucketKey [32]byte
+
+type rateLimitCounterRule struct {
+	Key    rateLimitBucketKey
+	Limit  int
+	Window time.Duration
+}
+
+type rateLimitResult struct {
+	Limited    bool
+	Count      int
+	Remaining  int
+	RetryAfter time.Duration
+}
+
+type rateLimiter struct {
 	mu              sync.Mutex
-	entries         map[string]fallbackRateLimitEntry
+	entries         map[rateLimitBucketKey]rateLimitEntry
 	maxEntries      int
 	now             func() time.Time
 	nextSweep       time.Time
 	capacityRetryAt time.Time
 }
 
-type fallbackRateLimitEntry struct {
+type rateLimitEntry struct {
 	count     int
 	expiresAt time.Time
 }
 
-func newRateLimitFallback(maxEntries int) *rateLimitFallback {
-	return &rateLimitFallback{
-		entries:    make(map[string]fallbackRateLimitEntry),
+func newRateLimiter(maxEntries int) *rateLimiter {
+	return &rateLimiter{
+		entries:    make(map[rateLimitBucketKey]rateLimitEntry),
 		maxEntries: maxEntries,
 		now:        time.Now,
 	}
 }
 
-func (l *rateLimitFallback) record(rules []store.RateLimitRule) (store.RateLimitResult, error) {
+func (l *rateLimiter) record(rules []rateLimitCounterRule) (rateLimitResult, error) {
 	for _, rule := range rules {
-		if rule.Key == "" {
-			return store.RateLimitResult{}, errors.New("key must not be empty")
+		if rule.Key == (rateLimitBucketKey{}) {
+			return rateLimitResult{}, errors.New("key must not be empty")
 		}
 		if rule.Limit <= 0 {
-			return store.RateLimitResult{}, errors.New("limit must be positive")
+			return rateLimitResult{}, errors.New("limit must be positive")
 		}
 		if rule.Window <= 0 {
-			return store.RateLimitResult{}, errors.New("window must be positive")
+			return rateLimitResult{}, errors.New("window must be positive")
 		}
 	}
 	if len(rules) == 0 {
-		return store.RateLimitResult{}, nil
+		return rateLimitResult{}, nil
 	}
 
 	l.mu.Lock()
@@ -59,7 +72,7 @@ func (l *rateLimitFallback) record(rules []store.RateLimitRule) (store.RateLimit
 	missing := l.missingEntries(rules, now)
 	if len(l.entries)+missing > l.maxEntries {
 		if !l.capacityRetryAt.IsZero() && now.Before(l.capacityRetryAt) {
-			return store.RateLimitResult{
+			return rateLimitResult{
 				Limited:    true,
 				Remaining:  0,
 				RetryAfter: l.capacityRetryAt.Sub(now),
@@ -70,15 +83,15 @@ func (l *rateLimitFallback) record(rules []store.RateLimitRule) (store.RateLimit
 		if len(l.entries)+missing > l.maxEntries {
 			retryAfter := l.capacityRetry(now)
 			l.capacityRetryAt = now.Add(retryAfter)
-			return store.RateLimitResult{Limited: true, Remaining: 0, RetryAfter: retryAfter}, nil
+			return rateLimitResult{Limited: true, Remaining: 0, RetryAfter: retryAfter}, nil
 		}
 	}
 
-	result := store.RateLimitResult{}
+	result := rateLimitResult{}
 	for _, rule := range rules {
 		entry, exists := l.entries[rule.Key]
 		if !exists || !now.Before(entry.expiresAt) {
-			l.entries[rule.Key] = fallbackRateLimitEntry{
+			l.entries[rule.Key] = rateLimitEntry{
 				count:     1,
 				expiresAt: now.Add(rule.Window),
 			}
@@ -98,8 +111,8 @@ func (l *rateLimitFallback) record(rules []store.RateLimitRule) (store.RateLimit
 	return result, nil
 }
 
-func (l *rateLimitFallback) missingEntries(rules []store.RateLimitRule, now time.Time) int {
-	missing := make(map[string]struct{}, len(rules))
+func (l *rateLimiter) missingEntries(rules []rateLimitCounterRule, now time.Time) int {
+	missing := make(map[rateLimitBucketKey]struct{}, len(rules))
 	for _, rule := range rules {
 		entry, exists := l.entries[rule.Key]
 		if !exists || !now.Before(entry.expiresAt) {
@@ -109,7 +122,7 @@ func (l *rateLimitFallback) missingEntries(rules []store.RateLimitRule, now time
 	return len(missing)
 }
 
-func (l *rateLimitFallback) sweepExpired(now time.Time) {
+func (l *rateLimiter) sweepExpired(now time.Time) {
 	for key, entry := range l.entries {
 		if !now.Before(entry.expiresAt) {
 			delete(l.entries, key)
@@ -120,7 +133,7 @@ func (l *rateLimitFallback) sweepExpired(now time.Time) {
 	}
 }
 
-func (l *rateLimitFallback) capacityRetry(now time.Time) time.Duration {
+func (l *rateLimiter) capacityRetry(now time.Time) time.Duration {
 	var earliest time.Time
 	for _, entry := range l.entries {
 		if earliest.IsZero() || entry.expiresAt.Before(earliest) {

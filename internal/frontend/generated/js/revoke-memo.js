@@ -3,6 +3,9 @@ const OWNER_DELETE_TOKEN_PATTERN = /^[A-Za-z0-9_-]{43}$/;
 
 let memoId = null;
 let ownerDeleteToken = null;
+let revokeLifecycleEpoch = 0;
+let revokePageHidden = false;
+let revokeOperationController = null;
 
 const fallbackText = Object.freeze({
   'btn.deleteMemo': 'Delete Memo',
@@ -26,7 +29,7 @@ const revokeAPIErrorTranslationKeys = Object.freeze({
   GENERAL_ERROR: 'error.GENERAL_ERROR'
 });
 
-function t(key) {
+const t = (key) => {
   if (typeof window.t === 'function') {
     const translated = window.t(key);
     if (translated && translated !== key) {
@@ -34,7 +37,7 @@ function t(key) {
     }
   }
   return fallbackText[key] || key;
-}
+};
 
 function translatedRevokeAPIError(errorCode) {
   const translationKey = typeof errorCode === 'string' && Object.prototype.hasOwnProperty.call(revokeAPIErrorTranslationKeys, errorCode)
@@ -101,6 +104,19 @@ function clearURLFragment() {
   }
 }
 
+function revokeOperationIsCurrent(epoch) {
+  return !revokePageHidden && epoch === revokeLifecycleEpoch;
+}
+
+function hasRequiredRevokeCapabilities() {
+  return typeof globalThis.fetch === 'function' &&
+    typeof globalThis.AbortController === 'function';
+}
+
+memoId = getMemoId();
+ownerDeleteToken = getOwnerDeleteToken();
+clearURLFragment();
+
 function showError(message) {
   document.getElementById('errorMessage').textContent = message;
   showElement('errorContent');
@@ -116,22 +132,76 @@ function showMessage(message, type) {
   messageDiv.style.display = 'block';
 }
 
+function resetRevokeButton() {
+  const revokeButton = document.getElementById('revokeButton');
+  if (!revokeButton) {
+    return;
+  }
+  if (!revokeButton.dataset.resetText) {
+    revokeButton.dataset.resetText = revokeButton.textContent;
+  }
+  revokeButton.textContent = revokeButton.dataset.resetText;
+  revokeButton.disabled = true;
+}
+
+function resetRevokeSensitiveState(showExpiredState) {
+  memoId = null;
+  ownerDeleteToken = null;
+  clearURLFragment();
+  resetRevokeButton();
+  const statusMessage = document.getElementById('statusMessage');
+  if (statusMessage) {
+    statusMessage.className = 'message';
+    statusMessage.textContent = '';
+  }
+  hideElement('confirmContent');
+  hideElement('successContent');
+  hideElement('errorContent');
+  hideElement('statusMessage');
+  hideElement('revokeLoadingIndicator');
+  if (showExpiredState) {
+    showError(t('error.invalidRevokeLink'));
+  }
+}
+
+function deactivateRevokePage() {
+  revokePageHidden = true;
+  revokeLifecycleEpoch++;
+  if (revokeOperationController) {
+    revokeOperationController.abort();
+    revokeOperationController = null;
+  }
+  resetRevokeSensitiveState(false);
+}
+
+function restoreRevokePage(event) {
+  if (!revokePageHidden && !event.persisted) {
+    return;
+  }
+  revokePageHidden = false;
+  resetRevokeSensitiveState(true);
+}
+
 function initializePage() {
   hideElement('confirmContent');
   hideElement('successContent');
   hideElement('errorContent');
   hideElement('statusMessage');
+  resetRevokeButton();
 
-  memoId = getMemoId();
-  ownerDeleteToken = getOwnerDeleteToken();
-  clearURLFragment();
-
-  if (!memoId || !ownerDeleteToken) {
-    showError(t('error.invalidRevokeLink'));
+  if (!memoId || !ownerDeleteToken || !hasRequiredRevokeCapabilities()) {
+    resetRevokeSensitiveState(true);
     return;
   }
 
   showElement('confirmContent');
+  const revokeButton = document.getElementById('revokeButton');
+  if (revokeButton) {
+    if (!revokeButton.dataset.resetText) {
+      revokeButton.dataset.resetText = revokeButton.textContent;
+    }
+    revokeButton.disabled = false;
+  }
 }
 
 async function revokeMemo() {
@@ -139,6 +209,12 @@ async function revokeMemo() {
     showError(t('error.invalidRevokeLink'));
     return;
   }
+  const operationEpoch = revokeLifecycleEpoch;
+  const operationController = typeof AbortController === 'function' ? new AbortController() : null;
+  if (revokeOperationController) {
+    revokeOperationController.abort();
+  }
+  revokeOperationController = operationController;
 
   const revokeButton = document.getElementById('revokeButton');
   const revokeLoadingIndicator = document.getElementById('revokeLoadingIndicator');
@@ -158,11 +234,16 @@ async function revokeMemo() {
       body: JSON.stringify({
         memoId: memoId,
         ownerDeleteToken: ownerDeleteToken
-      })
+      }),
+      signal: operationController ? operationController.signal : undefined
     });
+    if (!revokeOperationIsCurrent(operationEpoch)) {
+      return;
+    }
 
     if (response.ok) {
       ownerDeleteToken = null;
+      memoId = null;
       hideElement('confirmContent');
       showElement('successContent');
       return;
@@ -173,10 +254,20 @@ async function revokeMemo() {
       result = await response.json();
     } catch (error) {
     }
-    showMessage(translatedRevokeAPIError(result.errorCode), 'error');
+    if (revokeOperationIsCurrent(operationEpoch)) {
+      showMessage(translatedRevokeAPIError(result.errorCode), 'error');
+    }
   } catch (error) {
-    showMessage(t('error.revokeFailed'), 'error');
+    if (revokeOperationIsCurrent(operationEpoch) && error.name !== 'AbortError') {
+      showMessage(t('error.revokeFailed'), 'error');
+    }
   } finally {
+    if (revokeOperationController === operationController) {
+      revokeOperationController = null;
+    }
+    if (!revokeOperationIsCurrent(operationEpoch)) {
+      return;
+    }
     if (revokeButton) {
       revokeButton.disabled = false;
       revokeButton.textContent = t('btn.deleteMemo');
@@ -188,9 +279,15 @@ async function revokeMemo() {
 }
 
 async function boot() {
+  const operationEpoch = revokeLifecycleEpoch;
   await waitForLocalization();
-  initializePage();
+  if (revokeOperationIsCurrent(operationEpoch)) {
+    initializePage();
+  }
 }
+
+window.addEventListener('pagehide', deactivateRevokePage);
+window.addEventListener('pageshow', restoreRevokePage);
 
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', boot);
