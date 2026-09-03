@@ -51,8 +51,7 @@ type Memo struct {
 }
 
 type CleanupResult struct {
-	MemosDeleted      int64
-	RateLimitsDeleted int64
+	MemosDeleted int64
 }
 
 const (
@@ -71,7 +70,7 @@ var (
 )
 
 const (
-	sqliteSchemaVersion        = 1
+	sqliteSchemaVersion        = 2
 	maxSQLitePageCount         = int64(0xfffffffe)
 	cleanupBatchSize           = 250
 	attackerWriteHeadroomBytes = int64(1_000_000)
@@ -189,16 +188,6 @@ CREATE TABLE IF NOT EXISTS memos (
 CREATE INDEX IF NOT EXISTS idx_memos_memo_id ON memos(memo_id);
 CREATE INDEX IF NOT EXISTS idx_memos_expiry_time ON memos(expiry_time);
 
-CREATE TABLE IF NOT EXISTS rate_limits (
-    key TEXT PRIMARY KEY,
-    count INTEGER NOT NULL,
-    first_seen INTEGER NOT NULL,
-    updated_at INTEGER NOT NULL,
-    expires_at INTEGER NOT NULL
-);
-
-CREATE INDEX IF NOT EXISTS idx_rate_limits_expires_at ON rate_limits(expires_at);
-
 CREATE TABLE IF NOT EXISTS app_stats (
     key TEXT PRIMARY KEY,
     value INTEGER NOT NULL DEFAULT 0,
@@ -218,10 +207,108 @@ CREATE TABLE IF NOT EXISTS storage_usage (
 	if err := s.ensureColumn(ctx, "memos", "owner_deletion_token_hash", "TEXT"); err != nil {
 		return err
 	}
+	if version < 2 {
+		if err := s.removeLegacyRateLimits(ctx, version == 1); err != nil {
+			return err
+		}
+	}
 	if version < sqliteSchemaVersion {
 		_, err = s.db.ExecContext(ctx, `PRAGMA user_version = `+strconv.Itoa(sqliteSchemaVersion))
 	}
 	return err
+}
+
+func (s *SQLiteStore) removeLegacyRateLimits(ctx context.Context, scrubHistoricalRows bool) error {
+	var legacyTableCount int
+	if err := s.db.QueryRowContext(ctx, `
+SELECT COUNT(*)
+FROM sqlite_master
+WHERE type = 'table' AND name = 'rate_limits'`).Scan(&legacyTableCount); err != nil {
+		return fmt.Errorf("inspect legacy rate-limit table: %w", err)
+	}
+	if legacyTableCount == 0 && !scrubHistoricalRows {
+		return nil
+	}
+	if err := s.ensureLegacyVacuumCapacity(ctx); err != nil {
+		return err
+	}
+
+	var previousSecureDelete int
+	if err := s.db.QueryRowContext(ctx, `PRAGMA secure_delete`).Scan(&previousSecureDelete); err != nil {
+		return fmt.Errorf("read SQLite secure_delete mode: %w", err)
+	}
+	if _, err := s.db.ExecContext(ctx, `PRAGMA secure_delete = ON`); err != nil {
+		return fmt.Errorf("enable SQLite secure deletion for legacy rate limits: %w", err)
+	}
+
+	_, dropErr := s.db.ExecContext(ctx, `DROP TABLE IF EXISTS rate_limits`)
+	var vacuumErr error
+	if dropErr == nil {
+		if _, err := s.db.ExecContext(ctx, `VACUUM`); err != nil {
+			vacuumErr = fmt.Errorf("vacuum legacy rate-limit remnants: %w", err)
+		}
+	}
+	restoreErr := restoreSecureDeleteMode(ctx, s.db, previousSecureDelete)
+	if dropErr != nil || vacuumErr != nil || restoreErr != nil {
+		return errors.Join(dropErr, vacuumErr, restoreErr)
+	}
+	if err := s.checkpointWAL(ctx); err != nil {
+		return fmt.Errorf("checkpoint scrubbed legacy rate limits: %w", err)
+	}
+	return nil
+}
+
+func (s *SQLiteStore) ensureLegacyVacuumCapacity(ctx context.Context) error {
+	databaseBytes, err := fileSizeOrZero(s.path)
+	if err != nil {
+		return fmt.Errorf("read database size for legacy rate-limit scrub: %w", err)
+	}
+	pageSize, pageCount, _, err := sqlitePageStats(ctx, s.db)
+	if err != nil {
+		return fmt.Errorf("read logical database size for legacy rate-limit scrub: %w", err)
+	}
+	logicalBytes, err := checkedProduct(pageSize, pageCount)
+	if err != nil {
+		return fmt.Errorf("calculate logical database size for legacy rate-limit scrub: %w", err)
+	}
+	if logicalBytes > databaseBytes {
+		databaseBytes = logicalBytes
+	}
+	available, err := s.availableDiskBytes(filepath.Dir(s.path))
+	if err != nil {
+		return fmt.Errorf("read filesystem capacity for legacy rate-limit scrub: %w", err)
+	}
+	if databaseBytes > (math.MaxInt64-s.limits.MinFreeDiskBytes)/2 {
+		return fmt.Errorf("calculate free space for legacy rate-limit scrub: %w", ErrStorageLimitReached)
+	}
+	vacuumFreeBytes := databaseBytes * 2
+	if available < vacuumFreeBytes+s.limits.MinFreeDiskBytes {
+		return fmt.Errorf(
+			"securely scrubbing the legacy rate-limit table needs at least %d bytes free in addition to the %d-byte filesystem reserve: %w",
+			vacuumFreeBytes,
+			s.limits.MinFreeDiskBytes,
+			ErrStorageLimitReached,
+		)
+	}
+	return nil
+}
+
+func restoreSecureDeleteMode(ctx context.Context, db *sql.DB, mode int) error {
+	var statement string
+	switch mode {
+	case 0:
+		statement = `PRAGMA secure_delete = OFF`
+	case 1:
+		statement = `PRAGMA secure_delete = ON`
+	case 2:
+		statement = `PRAGMA secure_delete = FAST`
+	default:
+		return fmt.Errorf("unsupported SQLite secure_delete mode %d", mode)
+	}
+	if _, err := db.ExecContext(ctx, statement); err != nil {
+		return fmt.Errorf("restore SQLite secure_delete mode: %w", err)
+	}
+	return nil
 }
 
 func (s *SQLiteStore) reconcileStorageUsage(ctx context.Context) error {
@@ -442,19 +529,6 @@ func (s *SQLiteStore) Cleanup(ctx context.Context) (CleanupResult, error) {
 		}
 	}
 
-	for {
-		deleted, err := s.cleanupRateLimitBatch(ctx, cutoff)
-		if err != nil {
-			return out, err
-		}
-		out.RateLimitsDeleted += deleted
-		if deleted == 0 {
-			break
-		}
-		if err := s.checkpointWAL(ctx); err != nil {
-			return out, err
-		}
-	}
 	return out, nil
 }
 
@@ -510,34 +584,6 @@ RETURNING length(CAST(encrypted_message AS BLOB))`, cutoff, cleanupBatchSize)
 		return 0, err
 	}
 	return deletedMemos, nil
-}
-
-func (s *SQLiteStore) cleanupRateLimitBatch(ctx context.Context, cutoff int64) (int64, error) {
-	tx, err := s.db.BeginTx(ctx, nil)
-	if err != nil {
-		return 0, err
-	}
-	defer tx.Rollback()
-	result, err := tx.ExecContext(ctx, `
-DELETE FROM rate_limits
-WHERE key IN (
-    SELECT key
-    FROM rate_limits
-    WHERE expires_at < ?
-    ORDER BY expires_at, key
-    LIMIT ?
-)`, cutoff, cleanupBatchSize)
-	if err != nil {
-		return 0, err
-	}
-	deleted, err := result.RowsAffected()
-	if err != nil {
-		return 0, err
-	}
-	if err := tx.Commit(); err != nil {
-		return 0, err
-	}
-	return deleted, nil
 }
 
 func (s *SQLiteStore) checkpointWAL(ctx context.Context) error {
@@ -803,111 +849,6 @@ func normalizeStorageError(err error) error {
 		return fmt.Errorf("%w: %v", ErrStorageLimitReached, err)
 	}
 	return err
-}
-
-type RateLimitResult struct {
-	Limited    bool
-	Count      int
-	Remaining  int
-	RetryAfter time.Duration
-}
-
-type RateLimitRule struct {
-	Key    string
-	Limit  int
-	Window time.Duration
-}
-
-func (s *SQLiteStore) RecordEvent(ctx context.Context, key string, limit int, window time.Duration) (RateLimitResult, error) {
-	results, err := s.RecordEvents(ctx, []RateLimitRule{{Key: key, Limit: limit, Window: window}})
-	if err != nil {
-		return RateLimitResult{}, err
-	}
-	return results[0], nil
-}
-
-func (s *SQLiteStore) RecordEvents(ctx context.Context, rules []RateLimitRule) ([]RateLimitResult, error) {
-	results := make([]RateLimitResult, len(rules))
-	for _, rule := range rules {
-		if rule.Key == "" {
-			return nil, errors.New("key must not be empty")
-		}
-		if rule.Limit <= 0 {
-			return nil, errors.New("limit must be positive")
-		}
-		if rule.Window <= 0 {
-			return nil, errors.New("window must be positive")
-		}
-	}
-	if len(rules) == 0 {
-		return results, nil
-	}
-
-	now := time.Now().Unix()
-
-	tx, err := s.db.BeginTx(ctx, nil)
-	if err != nil {
-		return nil, normalizeStorageError(err)
-	}
-	defer tx.Rollback()
-	if err := s.ensureFilesystemReserve(attackerWriteHeadroomBytes); err != nil {
-		return nil, err
-	}
-
-	for index, rule := range rules {
-		result, err := recordRateLimitEvent(ctx, tx, rule, now)
-		if err != nil {
-			return nil, normalizeStorageError(err)
-		}
-		results[index] = result
-	}
-	if err := tx.Commit(); err != nil {
-		return nil, normalizeStorageError(err)
-	}
-	return results, nil
-}
-
-func recordRateLimitEvent(ctx context.Context, tx *sql.Tx, rule RateLimitRule, now int64) (RateLimitResult, error) {
-	var count int
-	var currentExpiresAt int64
-	err := tx.QueryRowContext(ctx, `SELECT count, expires_at FROM rate_limits WHERE key = ?`, rule.Key).Scan(&count, &currentExpiresAt)
-	if errors.Is(err, sql.ErrNoRows) || currentExpiresAt <= now {
-		windowSeconds := int64(rule.Window / time.Second)
-		if rule.Window%time.Second != 0 {
-			windowSeconds++
-		}
-		expiresAt := now + windowSeconds
-		_, err = tx.ExecContext(ctx, `
-INSERT INTO rate_limits (key, count, first_seen, updated_at, expires_at)
-VALUES (?, 1, ?, ?, ?)
-ON CONFLICT(key) DO UPDATE SET
-    count = excluded.count,
-    first_seen = excluded.first_seen,
-    updated_at = excluded.updated_at,
-    expires_at = excluded.expires_at`, rule.Key, now, now, expiresAt)
-		if err != nil {
-			return RateLimitResult{}, err
-		}
-		return RateLimitResult{Limited: false, Count: 1, Remaining: max(0, rule.Limit-1)}, nil
-	}
-	if err != nil {
-		return RateLimitResult{}, err
-	}
-
-	next := count + 1
-	if next > rule.Limit {
-		retryAfter := time.Duration(max(1, int(currentExpiresAt-now))) * time.Second
-		return RateLimitResult{Limited: true, Count: count, Remaining: 0, RetryAfter: retryAfter}, nil
-	}
-
-	_, err = tx.ExecContext(ctx, `
-UPDATE rate_limits
-SET count = ?, updated_at = ?
-WHERE key = ?`, next, now, rule.Key)
-	if err != nil {
-		return RateLimitResult{}, err
-	}
-	return RateLimitResult{Limited: false, Count: next, Remaining: max(0, rule.Limit-next)}, nil
 }
 
 func (s *SQLiteStore) ensureColumn(ctx context.Context, tableName, columnName, columnType string) error {

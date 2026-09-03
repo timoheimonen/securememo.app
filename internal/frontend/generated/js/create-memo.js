@@ -1,84 +1,15 @@
-function generatePassword() {
-  const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-  const passwordLength = 32;
-  const array = new Uint8Array(passwordLength);
-  crypto.getRandomValues(array);
-  let password = '';
-  const biasThreshold = 256 - (256 % chars.length);
-  for (let i = 0; i < passwordLength; i++) {
-    let value = array[i];
-    while (value >= biasThreshold) {
-      const refill = new Uint8Array(1);
-      crypto.getRandomValues(refill);
-      value = refill[0];
-    }
-    password += chars[value % chars.length];
-  }
-  return password;
+let createLifecycleEpoch = 0;
+let createPageHidden = false;
+let createOperationController = null;
+
+function createAbortError() {
+  const error = new Error('Create operation cancelled.');
+  error.name = 'AbortError';
+  return error;
 }
 
-function bytesToBase64(bytes) {
-  const chunkSize = 0x8000;
-  let binary = '';
-  for (let i = 0; i < bytes.length; i += chunkSize) {
-    binary += String.fromCharCode(...bytes.subarray(i, i + chunkSize));
-  }
-  return btoa(binary);
-}
-
-function bytesToBase64URL(bytes) {
-  return bytesToBase64(bytes)
-    .replace(/\+/g, '-')
-    .replace(/\//g, '_')
-    .replace(/=+$/g, '');
-}
-
-function generateOwnerDeleteToken() {
-  return bytesToBase64URL(crypto.getRandomValues(new Uint8Array(32)));
-}
-
-async function hashDeletionToken(token) {
-  const encoder = new TextEncoder();
-  const data = encoder.encode(token);
-  const hashBuffer = await crypto.subtle.digest('SHA-256', data);
-  return bytesToBase64(new Uint8Array(hashBuffer));
-}
-
-async function encryptMessage(payload, password) {
-  const config = MemoCryptoConfig.getCurrentVersion();
-  const encoder = new TextEncoder();
-  const data = encoder.encode(JSON.stringify(payload));
-  const salt = crypto.getRandomValues(new Uint8Array(config.saltLength));
-  const keyMaterial = await crypto.subtle.importKey(
-    'raw',
-    encoder.encode(password),
-    { name: config.kdf },
-    false,
-    ['deriveBits', 'deriveKey']
-  );
-  const key = await crypto.subtle.deriveKey(
-    {
-      name: config.kdf,
-      salt: salt,
-      iterations: config.iterations,
-      hash: config.hash
-    },
-    keyMaterial,
-    { name: config.cipher, length: config.keyLength },
-    false,
-    ['encrypt']
-  );
-  const iv = crypto.getRandomValues(new Uint8Array(config.ivLength));
-  const encrypted = await crypto.subtle.encrypt(
-    { name: config.cipher, iv: iv },
-    key,
-    data
-  );
-  const result = new Uint8Array(salt.length + iv.length + encrypted.byteLength);
-  result.set(salt, 0);
-  result.set(iv, salt.length);
-  result.set(new Uint8Array(encrypted), salt.length + iv.length);
-  return config.prefix + btoa(String.fromCharCode(...result));
+function createOperationIsCurrent(epoch) {
+  return !createPageHidden && epoch === createLifecycleEpoch;
 }
 
 const fallbackText = Object.freeze({
@@ -143,10 +74,10 @@ function cryptoWorkerURL() {
       workerURL.searchParams.set('v', version);
     }
   }
-  return workerURL;
+  return MemoCryptoConfig.createWorkerScriptURL(workerURL.href);
 }
 
-function runMemoCryptoWorker(type, payload) {
+function runMemoCryptoWorker(type, payload, signal) {
   return new Promise((resolve, reject) => {
     if (!window.Worker) {
       reject(new Error('Crypto worker unavailable.'));
@@ -160,16 +91,39 @@ function runMemoCryptoWorker(type, payload) {
       return;
     }
     const id = crypto.randomUUID ? crypto.randomUUID() : String(Date.now()) + Math.random();
+    let settled = false;
+    const abortWorker = () => {
+      if (settled) {
+        return;
+      }
+      settled = true;
+      cleanup();
+      reject(createAbortError());
+    };
     const cleanup = () => {
+      if (signal) {
+        signal.removeEventListener('abort', abortWorker);
+      }
       worker.onmessage = null;
       worker.onerror = null;
       worker.terminate();
     };
+    if (signal) {
+      if (signal.aborted) {
+        abortWorker();
+        return;
+      }
+      signal.addEventListener('abort', abortWorker, { once: true });
+    }
     worker.onmessage = (event) => {
       const data = event.data || {};
       if (data.id !== id) {
         return;
       }
+      if (settled) {
+        return;
+      }
+      settled = true;
       cleanup();
       if (data.ok) {
         resolve(data.result);
@@ -178,29 +132,30 @@ function runMemoCryptoWorker(type, payload) {
       }
     };
     worker.onerror = (event) => {
+      if (settled) {
+        return;
+      }
+      settled = true;
       cleanup();
       reject(new Error(event.message || 'Crypto worker failed.'));
     };
-    worker.postMessage({ id: id, type: type, payload: payload });
+    try {
+      worker.postMessage({ id: id, type: type, payload: payload });
+    } catch (error) {
+      if (!settled) {
+        settled = true;
+        cleanup();
+      }
+      reject(error);
+    }
   });
 }
 
-async function encryptMemo(message) {
-  try {
-    return await runMemoCryptoWorker('encryptMemo', {
-      message: message,
-      config: MemoCryptoConfig.getCurrentVersion()
-    });
-  } catch (error) {
-    const password = generatePassword();
-    const deletionToken = generatePassword();
-    const ownerDeleteToken = generateOwnerDeleteToken();
-    const payload = { message: message, deletionToken: deletionToken };
-    const encryptedMessage = await encryptMessage(payload, password);
-    const deletionTokenHash = await hashDeletionToken(deletionToken);
-    const ownerDeletionTokenHash = await hashDeletionToken(ownerDeleteToken);
-    return { encryptedMessage, password, deletionTokenHash, ownerDeleteToken, ownerDeletionTokenHash };
-  }
+async function encryptMemo(message, signal) {
+  return runMemoCryptoWorker('encryptMemo', {
+    message: message,
+    config: MemoCryptoConfig.getCurrentVersion()
+  }, signal);
 }
 
 async function handleCreateSubmit(e) {
@@ -219,13 +174,22 @@ async function handleCreateSubmit(e) {
     showMessage(t('msg.memoTooLong'), 'error');
     return;
   }
+  const operationEpoch = createLifecycleEpoch;
+  const operationController = typeof AbortController === 'function' ? new AbortController() : null;
+  if (createOperationController) {
+    createOperationController.abort();
+  }
+  createOperationController = operationController;
   const submitButton = document.getElementById('submitButton');
   const loadingIndicator = document.getElementById('loadingIndicator');
   submitButton.disabled = true;
   submitButton.textContent = t('btn.creating');
   showElement('loadingIndicator');
   try {
-    const memoCrypto = await encryptMemo(message);
+    const memoCrypto = await encryptMemo(message, operationController ? operationController.signal : null);
+    if (!createOperationIsCurrent(operationEpoch)) {
+      return;
+    }
     const requestBody = {
       encryptedMessage: memoCrypto.encryptedMessage,
       expiryHours,
@@ -235,9 +199,16 @@ async function handleCreateSubmit(e) {
     const response = await fetch('/api/create-memo', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(requestBody)
+      body: JSON.stringify(requestBody),
+      signal: operationController ? operationController.signal : undefined
     });
+    if (!createOperationIsCurrent(operationEpoch)) {
+      return;
+    }
     const result = await response.json();
+    if (!createOperationIsCurrent(operationEpoch)) {
+      return;
+    }
     if (response.ok) {
       const currentLocale = window.location.pathname.split('/')[1] || 'en';
       const memoUrl = window.location.origin + '/' + currentLocale + '/read-memo.html?id=' + result.memoId;
@@ -252,11 +223,18 @@ async function handleCreateSubmit(e) {
       showMessage(translatedCreateAPIError(result.errorCode), 'error');
     }
   } catch (error) {
-    showMessage(t('msg.createError'), 'error');
+    if (createOperationIsCurrent(operationEpoch) && error.name !== 'AbortError') {
+      showMessage(t('msg.createError'), 'error');
+    }
   } finally {
-    submitButton.disabled = false;
-    submitButton.textContent = t('btn.create');
-    hideElement('loadingIndicator');
+    if (createOperationController === operationController) {
+      createOperationController = null;
+    }
+    if (createOperationIsCurrent(operationEpoch)) {
+      submitButton.disabled = false;
+      submitButton.textContent = t('btn.create');
+      hideElement('loadingIndicator');
+    }
   }
 }
 
@@ -372,18 +350,77 @@ function showTranslatedMessage(key, type) {
 
 function hasRequiredCreateCapabilities() {
   return typeof globalThis.fetch === 'function' &&
-    typeof globalThis.TextEncoder === 'function' &&
-    typeof globalThis.btoa === 'function' &&
+    typeof globalThis.Worker === 'function' &&
+    typeof globalThis.AbortController === 'function' &&
     globalThis.crypto &&
-    typeof globalThis.crypto.getRandomValues === 'function' &&
-    globalThis.crypto.subtle &&
     globalThis.MemoCryptoConfig &&
-    typeof globalThis.MemoCryptoConfig.getCurrentVersion === 'function';
+    typeof globalThis.MemoCryptoConfig.getCurrentVersion === 'function' &&
+    typeof globalThis.MemoCryptoConfig.createWorkerScriptURL === 'function';
+}
+
+function resetCreateButton(id) {
+  const button = document.getElementById(id);
+  if (!button) {
+    return;
+  }
+  if (!button.dataset.resetText) {
+    button.dataset.resetText = button.textContent;
+  }
+  button.textContent = button.dataset.resetText;
+  button.classList.remove('btn-copied');
+}
+
+function resetCreateSensitiveState() {
+  for (const id of ['message', 'memoUrl', 'memoPassword', 'ownerDeleteUrl']) {
+    const input = document.getElementById(id);
+    if (input) {
+      input.value = '';
+    }
+  }
+  const passwordInput = document.getElementById('memoPassword');
+  if (passwordInput) {
+    passwordInput.type = 'password';
+  }
+  for (const id of ['submitButton', 'togglePassword', 'copyUrl', 'copyPassword', 'copyOwnerDeleteUrl']) {
+    resetCreateButton(id);
+  }
+  const submitButton = document.getElementById('submitButton');
+  if (submitButton) {
+    submitButton.disabled = false;
+  }
+  const statusMessage = document.getElementById('statusMessage');
+  if (statusMessage) {
+    statusMessage.className = 'message';
+    statusMessage.textContent = '';
+  }
+  const memoForm = document.getElementById('memoForm');
+  const memoFormControls = document.getElementById('memoFormControls');
+  if (memoFormControls) {
+    memoFormControls.disabled = true;
+  }
+  if (memoForm) {
+    memoForm.setAttribute('aria-busy', 'true');
+  }
+  hideElement('result');
+  hideElement('loadingIndicator');
+  hideElement('statusMessage');
+  showElement('memoForm');
+  showElement('memoFormStatus');
+}
+
+function deactivateCreatePage() {
+  createPageHidden = true;
+  createLifecycleEpoch++;
+  if (createOperationController) {
+    createOperationController.abort();
+    createOperationController = null;
+  }
+  resetCreateSensitiveState();
 }
 
 function initializeCreatePage() {
-  hideElement('result');
-  showElement('memoForm');
+  createPageHidden = false;
+  resetCreateSensitiveState();
 
   const memoForm = document.getElementById('memoForm');
   const memoFormControls = document.getElementById('memoFormControls');
@@ -396,6 +433,9 @@ function initializeCreatePage() {
   memoForm.setAttribute('aria-busy', 'false');
   hideElement('memoFormStatus');
 }
+
+window.addEventListener('pagehide', deactivateCreatePage);
+window.addEventListener('pageshow', initializeCreatePage);
 
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', initializeCreatePage, { once: true });

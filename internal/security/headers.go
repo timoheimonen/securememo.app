@@ -71,6 +71,7 @@ func contentSecurityPolicy(nonce string) string {
 		"worker-src 'self' blob:",
 		"object-src 'none'",
 		"script-src 'nonce-" + nonce + "' 'strict-dynamic' blob:",
+		"trusted-types securememo-crypto-worker",
 		"require-trusted-types-for 'script'",
 	}
 	return strings.Join(directives, "; ") + ";"

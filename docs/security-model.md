@@ -128,7 +128,10 @@ compares it with the stored deletion-token hash using constant-time comparison.
 If the token is valid, the server deletes the memo.
 
 If the deletion confirmation fails due to a transient error, the browser retries
-the deletion request a small number of times.
+the deletion request a small number of times while the page remains active.
+Navigating away aborts the request and retry timer and releases the deletion
+token, so deletion may instead occur only at expiry if the confirmation had not
+already reached the server.
 
 ### 5. Sender Revocation
 
@@ -212,9 +215,9 @@ The server does not store plaintext memo contents, memo passwords, raw deletion
 tokens, or raw sender revoke tokens.
 
 The database is still sensitive. A database disclosure exposes ciphertext,
-expiry data, deletion-token hashes, sender revoke-token hashes, and rate-limit
-state. Confidentiality of memo contents depends on the secrecy and strength of
-the memo password.
+expiry data, deletion-token hashes, sender revoke-token hashes, and aggregate
+lifetime counters. Confidentiality of memo contents depends on the secrecy and
+strength of the memo password.
 
 The backend maintains a service-wide storage budget. Each memo creation reserves
 the exact ciphertext byte length and one memo slot in the same SQLite transaction
@@ -223,8 +226,8 @@ charges only when the corresponding delete commits. Startup reconciles the
 aggregate counters from every physically retained memo. The default decimal
 100 GB byte limit also sets a SQLite main-file page ceiling, and a separate
 5 GB free-filesystem reserve preserves headroom for WAL and recovery work. The
-reserve applies to memo creation and auxiliary attacker-driven rate-limit and
-lifetime-counter writes. Expiry cleanup uses bounded transactions with a
+reserve applies to memo creation and auxiliary lifetime-counter writes. Expiry
+cleanup uses bounded transactions with a
 truncating WAL checkpoint between batches.
 
 These controls bound aggregate storage abuse but do not inspect encrypted
@@ -260,8 +263,9 @@ The service intentionally avoids accounts, cookies, browser-side analytics,
 advertising tags, third-party beacons, and behavioral profiling.
 
 Operational data is limited to what is needed to run and protect the service,
-such as normalized route metrics, status codes, coarse country labels when
-provided by trusted infrastructure, and rate-limit counters. Operational metrics
+such as normalized route metrics, status codes, coarse country labels received
+through the explicitly trusted loopback proxy boundary, and process-local
+rate-limit counters. Operational metrics
 must not include memo contents, memo passwords, deletion tokens, memo IDs, full
 URLs, query strings, IP addresses, user agents, cookies, session IDs, email
 addresses, or persistent user identifiers.
@@ -272,7 +276,8 @@ operation:
 - Memo creation time.
 - Expiry time.
 - Memo size within server-side validation limits.
-- Hashed source network address used for abuse rate limiting.
+- A normalized source network address processed transiently to derive a
+  process-random HMAC key for RAM-only abuse-rate-limit counters.
 - Whether a memo has been deleted or expired.
 
 ## Operational Protections
@@ -291,20 +296,23 @@ flow:
 - Strict Cloudflare Tunnel client-address handling that trusts one canonical
   `CF-Connecting-IP` only from the configured local proxy boundary, never falls back
   to `X-Forwarded-For`, and groups IPv6 identities by `/64`.
-- Atomic SQLite minute/hour counters with a bounded in-memory fallback when the
-  filesystem reserve prevents persistent rate-limit writes.
+- Atomic, bounded RAM-only minute/hour counters keyed with a process-random HMAC;
+  active windows reset on process restart and capacity exhaustion fails closed.
+- A capacity-checked schema-v2 database rewrite that securely scrubs the former
+  persistent rate-limit table, prior freelist remnants, and WAL before normal
+  startup continues.
 - Transactional global ciphertext-byte and memo-count admission limits.
 - A SQLite main-file page ceiling and minimum free-filesystem reserve.
-- Bounded expiry/rate-limit cleanup batches with WAL checkpoints.
+- Bounded expiry cleanup batches with WAL checkpoints.
 - Security headers, including a restrictive Content Security Policy.
-- Automatic cleanup of expired memos and expired rate-limit records.
+- Automatic cleanup of expired memos.
 
 When capacity is reached, new creates fail with a generic HTTP 507 response.
 Existing memos remain readable and valid deletion and cleanup paths continue to
 free capacity. Private metrics expose only unlabeled, service-wide storage
 aggregates; they never expose individual memo sizes, IDs, contents, or tokens.
-If rate-limit persistence is withheld to preserve emergency disk headroom, the
-bounded in-memory limiter continues enforcing process-local limits while the trusted
+Rate-limit identity and counter state never enters SQLite. Each backend process
+enforces its own limits and loses active windows on restart, while the trusted
 Cloudflare edge remains the outer request-rate boundary.
 
 These protections reduce abuse and accidental exposure, but they do not replace

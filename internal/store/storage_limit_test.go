@@ -189,27 +189,20 @@ func TestCreateMemoHonorsFilesystemReserve(t *testing.T) {
 	}
 }
 
-func TestAttackerDrivenAuxiliaryWritesHonorFilesystemReserve(t *testing.T) {
+func TestLifetimeCounterWritesHonorFilesystemReserve(t *testing.T) {
 	db := openStorageTestStore(t, StorageLimits{MaxBytes: 1_000_000, MaxMemos: 10, MinFreeDiskBytes: 100})
 	ctx := context.Background()
 	db.availableDiskBytes = func(string) (int64, error) { return 100, nil }
 
-	if _, err := db.RecordEvent(ctx, "attacker-key", 10, time.Minute); !errors.Is(err, ErrStorageLimitReached) {
-		t.Fatalf("rate-limit write at filesystem reserve error = %v, want ErrStorageLimitReached", err)
-	}
 	if err := db.IncrementAppStat(ctx, AppStatMemosRead); !errors.Is(err, ErrStorageLimitReached) {
 		t.Fatalf("app-stat write at filesystem reserve error = %v, want ErrStorageLimitReached", err)
-	}
-	var rateRows int64
-	if err := db.db.QueryRowContext(ctx, `SELECT COUNT(*) FROM rate_limits`).Scan(&rateRows); err != nil {
-		t.Fatalf("count rate-limit rows: %v", err)
 	}
 	var appStatRows int64
 	if err := db.db.QueryRowContext(ctx, `SELECT COUNT(*) FROM app_stats`).Scan(&appStatRows); err != nil {
 		t.Fatalf("count app-stat rows: %v", err)
 	}
-	if rateRows != 0 || appStatRows != 0 {
-		t.Fatalf("reserve rejection persisted auxiliary rows: rate_limits=%d app_stats=%d", rateRows, appStatRows)
+	if appStatRows != 0 {
+		t.Fatalf("reserve rejection persisted app-stat rows: %d", appStatRows)
 	}
 }
 
@@ -221,11 +214,6 @@ func TestCleanupUsesBoundedBatchesAndTruncatesWAL(t *testing.T) {
 		if err := db.CreateMemo(ctx, fmt.Sprintf("expired-%d", index), "x", expiry, "delete", "owner"); err != nil {
 			t.Fatalf("create expired memo %d: %v", index, err)
 		}
-		if _, err := db.db.ExecContext(ctx, `
-INSERT INTO rate_limits (key, count, first_seen, updated_at, expires_at)
-VALUES (?, 1, ?, ?, ?)`, fmt.Sprintf("expired-rate-%d", index), expiry, expiry, expiry); err != nil {
-			t.Fatalf("create expired rate-limit row %d: %v", index, err)
-		}
 	}
 
 	result, err := db.Cleanup(ctx)
@@ -234,9 +222,6 @@ VALUES (?, 1, ?, ?, ?)`, fmt.Sprintf("expired-rate-%d", index), expiry, expiry, 
 	}
 	if result.MemosDeleted != cleanupBatchSize+1 {
 		t.Fatalf("MemosDeleted = %d, want %d", result.MemosDeleted, cleanupBatchSize+1)
-	}
-	if result.RateLimitsDeleted != cleanupBatchSize+1 {
-		t.Fatalf("RateLimitsDeleted = %d, want %d", result.RateLimitsDeleted, cleanupBatchSize+1)
 	}
 	stats := storageStatsForTest(t, db)
 	if stats.UsageBytes != 0 || stats.Memos != 0 {

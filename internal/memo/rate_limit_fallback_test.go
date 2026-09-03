@@ -1,25 +1,24 @@
 package memo
 
 import (
+	"crypto/sha256"
+	"errors"
 	"net/http"
 	"net/http/httptest"
-	"path/filepath"
-	"strings"
 	"sync"
 	"testing"
 	"time"
 
 	"github.com/timoheimonen/securememo/internal/config"
-	"github.com/timoheimonen/securememo/internal/store"
 )
 
-func TestRateLimitFallbackUsesLongestBlockingWindow(t *testing.T) {
+func TestRateLimiterUsesLongestBlockingWindow(t *testing.T) {
 	now := time.Date(2026, 8, 31, 12, 0, 0, 0, time.UTC)
-	limiter := newRateLimitFallback(10)
+	limiter := newRateLimiter(10)
 	limiter.now = func() time.Time { return now }
-	rules := []store.RateLimitRule{
-		{Key: "minute", Limit: 1, Window: time.Minute},
-		{Key: "hour", Limit: 1, Window: time.Hour},
+	rules := []rateLimitCounterRule{
+		{Key: testRateLimitKey(1), Limit: 1, Window: time.Minute},
+		{Key: testRateLimitKey(2), Limit: 1, Window: time.Hour},
 	}
 
 	if result, err := limiter.record(rules); err != nil || result.Limited {
@@ -32,26 +31,26 @@ func TestRateLimitFallbackUsesLongestBlockingWindow(t *testing.T) {
 	if !result.Limited || result.RetryAfter != time.Hour {
 		t.Fatalf("limited result = %+v, want one-hour retry", result)
 	}
-	if limiter.entries["minute"].count != 1 || limiter.entries["hour"].count != 1 {
+	if limiter.entries[testRateLimitKey(1)].count != 1 || limiter.entries[testRateLimitKey(2)].count != 1 {
 		t.Fatalf("limited buckets grew: %+v", limiter.entries)
 	}
 }
 
-func TestRateLimitFallbackRejectsInvalidRulesBeforeMutation(t *testing.T) {
-	limiter := newRateLimitFallback(10)
+func TestRateLimiterRejectsInvalidRulesBeforeMutation(t *testing.T) {
+	limiter := newRateLimiter(10)
 	tests := []struct {
 		name string
-		rule store.RateLimitRule
+		rule rateLimitCounterRule
 	}{
-		{name: "empty key", rule: store.RateLimitRule{Limit: 1, Window: time.Minute}},
-		{name: "zero limit", rule: store.RateLimitRule{Key: "zero-limit", Window: time.Minute}},
-		{name: "zero window", rule: store.RateLimitRule{Key: "zero-window", Limit: 1}},
-		{name: "negative window", rule: store.RateLimitRule{Key: "negative-window", Limit: 1, Window: -time.Second}},
+		{name: "empty key", rule: rateLimitCounterRule{Limit: 1, Window: time.Minute}},
+		{name: "zero limit", rule: rateLimitCounterRule{Key: testRateLimitKey(2), Window: time.Minute}},
+		{name: "zero window", rule: rateLimitCounterRule{Key: testRateLimitKey(3), Limit: 1}},
+		{name: "negative window", rule: rateLimitCounterRule{Key: testRateLimitKey(4), Limit: 1, Window: -time.Second}},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if _, err := limiter.record([]store.RateLimitRule{
-				{Key: "valid", Limit: 1, Window: time.Minute},
+			if _, err := limiter.record([]rateLimitCounterRule{
+				{Key: testRateLimitKey(1), Limit: 1, Window: time.Minute},
 				tt.rule,
 			}); err == nil {
 				t.Fatal("invalid rules succeeded")
@@ -63,17 +62,17 @@ func TestRateLimitFallbackRejectsInvalidRulesBeforeMutation(t *testing.T) {
 	}
 }
 
-func TestRateLimitFallbackIsConcurrentAndAtomic(t *testing.T) {
+func TestRateLimiterIsConcurrentAndAtomic(t *testing.T) {
 	const (
 		limit   = 20
 		workers = 64
 	)
-	limiter := newRateLimitFallback(10)
-	rules := []store.RateLimitRule{
-		{Key: "minute", Limit: limit, Window: time.Minute},
-		{Key: "hour", Limit: limit, Window: time.Hour},
+	limiter := newRateLimiter(10)
+	rules := []rateLimitCounterRule{
+		{Key: testRateLimitKey(1), Limit: limit, Window: time.Minute},
+		{Key: testRateLimitKey(2), Limit: limit, Window: time.Hour},
 	}
-	results := make(chan store.RateLimitResult, workers)
+	results := make(chan rateLimitResult, workers)
 	errors := make(chan error, workers)
 	var wait sync.WaitGroup
 	for range workers {
@@ -103,20 +102,22 @@ func TestRateLimitFallbackIsConcurrentAndAtomic(t *testing.T) {
 	if allowed != limit {
 		t.Fatalf("allowed records = %d, want %d", allowed, limit)
 	}
-	if limiter.entries["minute"].count != limit || limiter.entries["hour"].count != limit {
+	if limiter.entries[testRateLimitKey(1)].count != limit || limiter.entries[testRateLimitKey(2)].count != limit {
 		t.Fatalf("concurrent buckets = %+v", limiter.entries)
 	}
 }
 
-func TestRateLimitFallbackCapacityFailsClosedAndRecovers(t *testing.T) {
+func TestRateLimiterCapacityFailsClosedAndRecovers(t *testing.T) {
 	now := time.Date(2026, 8, 31, 12, 0, 0, 0, time.UTC)
-	limiter := newRateLimitFallback(1)
+	limiter := newRateLimiter(1)
 	limiter.now = func() time.Time { return now }
+	first := []rateLimitCounterRule{{Key: testRateLimitKey(1), Limit: 10, Window: time.Minute}}
+	second := []rateLimitCounterRule{{Key: testRateLimitKey(2), Limit: 10, Window: time.Minute}}
 
-	if result, err := limiter.record([]store.RateLimitRule{{Key: "first", Limit: 10, Window: time.Minute}}); err != nil || result.Limited {
+	if result, err := limiter.record(first); err != nil || result.Limited {
 		t.Fatalf("first identity = %+v, %v; want allowed", result, err)
 	}
-	result, err := limiter.record([]store.RateLimitRule{{Key: "second", Limit: 10, Window: time.Minute}})
+	result, err := limiter.record(second)
 	if err != nil {
 		t.Fatalf("capacity record: %v", err)
 	}
@@ -125,21 +126,21 @@ func TestRateLimitFallbackCapacityFailsClosedAndRecovers(t *testing.T) {
 	}
 
 	now = now.Add(time.Minute)
-	result, err = limiter.record([]store.RateLimitRule{{Key: "second", Limit: 10, Window: time.Minute}})
+	result, err = limiter.record(second)
 	if err != nil || result.Limited {
 		t.Fatalf("record after expiry = %+v, %v; want allowed", result, err)
 	}
-	if _, exists := limiter.entries["first"]; exists {
+	if _, exists := limiter.entries[testRateLimitKey(1)]; exists {
 		t.Fatal("expired entry was not removed")
 	}
 }
 
-func TestRateLimitFallbackCachesCapacityRetryWithoutRescanning(t *testing.T) {
+func TestRateLimiterCachesCapacityRetryWithoutRescanning(t *testing.T) {
 	now := time.Date(2026, 8, 31, 12, 0, 0, 0, time.UTC)
-	limiter := newRateLimitFallback(1)
+	limiter := newRateLimiter(1)
 	limiter.now = func() time.Time { return now }
-	first := []store.RateLimitRule{{Key: "first", Limit: 10, Window: time.Minute}}
-	second := []store.RateLimitRule{{Key: "second", Limit: 10, Window: time.Minute}}
+	first := []rateLimitCounterRule{{Key: testRateLimitKey(1), Limit: 10, Window: time.Minute}}
+	second := []rateLimitCounterRule{{Key: testRateLimitKey(2), Limit: 10, Window: time.Minute}}
 
 	if result, err := limiter.record(first); err != nil || result.Limited {
 		t.Fatalf("first identity = %+v, %v; want allowed", result, err)
@@ -148,9 +149,9 @@ func TestRateLimitFallbackCachesCapacityRetryWithoutRescanning(t *testing.T) {
 		t.Fatalf("first capacity result = %+v, %v", result, err)
 	}
 
-	entry := limiter.entries["first"]
+	entry := limiter.entries[testRateLimitKey(1)]
 	entry.expiresAt = now.Add(2 * time.Hour)
-	limiter.entries["first"] = entry
+	limiter.entries[testRateLimitKey(1)] = entry
 	now = now.Add(10 * time.Second)
 	result, err := limiter.record(second)
 	if err != nil {
@@ -161,66 +162,76 @@ func TestRateLimitFallbackCachesCapacityRetryWithoutRescanning(t *testing.T) {
 	}
 }
 
-func TestHandlerFallsBackToMemoryWhenRateLimitPersistenceIsUnavailable(t *testing.T) {
-	db, err := store.OpenSQLite(filepath.Join(t.TempDir(), "securememo.sqlite"), store.StorageLimits{
-		MinFreeDiskBytes: int64(^uint64(0) >> 1),
-	})
-	if err != nil {
-		t.Fatalf("open sqlite: %v", err)
+func TestRateLimitBucketKeysAreKeyedAndDomainSeparated(t *testing.T) {
+	handler := Handler{rateLimitHMACKey: testHMACKey(1)}
+	rule := rateLimitRule{Name: "minute", Limit: 10, Window: time.Minute}
+	identity := "203.0.113.7"
+
+	key := handler.deriveRateLimitBucketKey(identity, rateLimitReadKey, rule)
+	if key != handler.deriveRateLimitBucketKey(identity, rateLimitReadKey, rule) {
+		t.Fatal("same rate-limit inputs did not produce a stable in-process key")
 	}
-	defer db.Close()
-	handler := NewHandler(config.Config{AllowedOrigins: []string{"https://securememo.app"}}, db)
-	memoID := strings.Repeat("A", 40)
-
-	for attempt := 0; attempt < standardLimitMinute; attempt++ {
-		req := httptest.NewRequest(http.MethodPost, "/api/read-memo?id="+memoID, strings.NewReader(`{}`))
-		req.RemoteAddr = "203.0.113.70:12345"
-		req.Header.Set("Origin", "https://securememo.app")
-		req.Header.Set("Content-Type", "application/json")
-		rec := httptest.NewRecorder()
-		handler.Read(rec, req)
-		if rec.Code != http.StatusNotFound {
-			t.Fatalf("attempt %d status = %d, want 404; body=%s", attempt+1, rec.Code, rec.Body.String())
-		}
+	rawHash := sha256.Sum256([]byte(identity))
+	if key == rateLimitBucketKey(rawHash) {
+		t.Fatal("rate-limit key equals the enumerable raw SHA-256 identity hash")
 	}
-
-	req := httptest.NewRequest(http.MethodPost, "/api/read-memo?id="+memoID, strings.NewReader(`{}`))
-	req.RemoteAddr = "203.0.113.70:12345"
-	req.Header.Set("Origin", "https://securememo.app")
-	req.Header.Set("Content-Type", "application/json")
-	rec := httptest.NewRecorder()
-	handler.Read(rec, req)
-
-	assertAPIError(t, rec, http.StatusTooManyRequests, errorCodeRateLimited)
-	if rec.Header().Get("Retry-After") == "" {
-		t.Fatal("fallback rate-limit response is missing Retry-After")
+	if key == handler.deriveRateLimitBucketKey(identity, rateLimitCreateKey, rule) {
+		t.Fatal("rate-limit action was not domain-separated")
+	}
+	if key == handler.deriveRateLimitBucketKey(identity, rateLimitReadKey, rateLimitRule{Name: "hour", Limit: 10, Window: time.Hour}) {
+		t.Fatal("rate-limit window was not domain-separated")
+	}
+	otherHandler := Handler{rateLimitHMACKey: testHMACKey(2)}
+	if key == otherHandler.deriveRateLimitBucketKey(identity, rateLimitReadKey, rule) {
+		t.Fatal("different process keys produced the same rate-limit bucket")
 	}
 }
 
-func TestHandlerKeepsFallbackCountersWarmWhileSQLiteIsAvailable(t *testing.T) {
-	db, err := store.OpenSQLite(filepath.Join(t.TempDir(), "securememo.sqlite"), store.StorageLimits{})
+func TestHandlerRateLimitsWithoutPersistentStorageAndResetsOnRestart(t *testing.T) {
+	first, err := NewHandler(config.Config{}, nil)
 	if err != nil {
-		t.Fatalf("open sqlite: %v", err)
+		t.Fatalf("NewHandler: %v", err)
 	}
-	defer db.Close()
-	handler := NewHandler(config.Config{}, db)
-	req := httptest.NewRequest(http.MethodPost, "/api/read-memo", nil)
-	req.RemoteAddr = "203.0.113.71:12345"
+	request := httptest.NewRequest(http.MethodPost, "/api/read-memo", nil)
+	request.RemoteAddr = "203.0.113.71:12345"
+	rules := []rateLimitRule{{Name: "test", Limit: 1, Window: time.Hour}}
 
-	for attempt := 0; attempt < 3; attempt++ {
-		result, err := handler.recordRateLimits(req, rateLimitReadKey, standardRateLimitRules)
-		if err != nil || result.Limited {
-			t.Fatalf("record %d = %+v, %v; want allowed", attempt+1, result, err)
-		}
+	if result, err := first.recordRateLimits(request, rateLimitReadKey, rules); err != nil || result.Limited {
+		t.Fatalf("first process initial record = %+v, %v; want allowed", result, err)
 	}
-	handler.rateLimitFallback.mu.Lock()
-	defer handler.rateLimitFallback.mu.Unlock()
-	if len(handler.rateLimitFallback.entries) != len(standardRateLimitRules) {
-		t.Fatalf("fallback entry count = %d, want %d", len(handler.rateLimitFallback.entries), len(standardRateLimitRules))
+	if result, err := first.recordRateLimits(request, rateLimitReadKey, rules); err != nil || !result.Limited {
+		t.Fatalf("first process repeated record = %+v, %v; want limited", result, err)
 	}
-	for key, entry := range handler.rateLimitFallback.entries {
-		if entry.count != 3 {
-			t.Fatalf("fallback entry %q count = %d, want 3", key, entry.count)
-		}
+
+	restarted, err := NewHandler(config.Config{}, nil)
+	if err != nil {
+		t.Fatalf("restart NewHandler: %v", err)
 	}
+	if first.rateLimitHMACKey == restarted.rateLimitHMACKey {
+		t.Fatal("restart reused the process-local rate-limit key")
+	}
+	if result, err := restarted.recordRateLimits(request, rateLimitReadKey, rules); err != nil || result.Limited {
+		t.Fatalf("restarted process initial record = %+v, %v; want reset allowance", result, err)
+	}
+}
+
+func TestUninitializedHandlerFailsRateLimitAdmissionClosed(t *testing.T) {
+	request := httptest.NewRequest(http.MethodPost, "/api/read-memo", nil)
+	request.RemoteAddr = "203.0.113.72:12345"
+	_, err := (Handler{}).recordRateLimits(request, rateLimitReadKey, standardRateLimitRules)
+	if !errors.Is(err, errRateLimiterUnavailable) {
+		t.Fatalf("uninitialized rate limiter error = %v, want %v", err, errRateLimiterUnavailable)
+	}
+}
+
+func testRateLimitKey(value byte) rateLimitBucketKey {
+	var key rateLimitBucketKey
+	key[0] = value
+	return key
+}
+
+func testHMACKey(value byte) [32]byte {
+	var key [32]byte
+	key[0] = value
+	return key
 }
