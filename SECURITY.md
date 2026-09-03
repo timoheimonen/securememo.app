@@ -29,7 +29,7 @@ Only the current main branch is supported. The current service target is the Go 
 - Passwords are generated in the browser and are never sent to the server.
 - Memos are deleted after successful read confirmation or expiry.
 - The service applies strict security headers and validates request size, method, origin, memo IDs, and payload formats.
-- Rate limiting is stored locally in SQLite.
+- Rate-limit identities and counters are kept only in bounded process memory and reset on restart.
 
 ## Bug Bounty
 

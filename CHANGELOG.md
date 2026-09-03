@@ -4,6 +4,15 @@ All notable changes to this project are documented here.
 
 Version identifiers match the application `assetVersion`.
 
+## 20260903a - 2026-09-03
+
+### Security
+- Return method, origin, invalid trusted-proxy identity, and rate-limit rejection errors without the randomized response delay, while retaining timing equalization for state-sensitive memo responses.
+- Persist lifetime memo counters only after releasing the shared in-memory metrics lock, preventing SQLite contention from blocking unrelated request metrics.
+- Keep rate-limit identities and counters only in bounded process memory, keyed by a process-random HMAC; schema v2 capacity-checks and vacuums the database while securely removing the legacy persistent `rate_limits` table and prior freelist remnants.
+- Accept `CF-IPCountry` metrics only from a single well-formed header supplied through the explicitly trusted loopback proxy boundary.
+- Wipe memo plaintext, passwords, generated links, and revoke capabilities on page navigation; abort deletion retries; and keep cryptography in terminable workers so stale asynchronous work cannot retain or restore cleared secrets.
+
 ## 20260831b - 2026-08-31
 
 ### Security

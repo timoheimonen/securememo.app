@@ -134,7 +134,7 @@
                     <fieldset id="memoFormControls" class="sensitive-form-controls" disabled>
                         <div class="form-group">
                             <label for="message" data-i18n="form.message.label">Your Memo</label>
-                            <textarea id="message" dir="auto" required
+                            <textarea id="message" dir="auto" required autocomplete="off"
                                       placeholder="Type your secret memo here..." data-i18n-placeholder="form.message.placeholder"
                                       rows="8" maxlength="5000"></textarea>
                             <small class="form-help" data-i18n="form.message.help">Maximum 5,000 characters</small>
@@ -168,7 +168,7 @@
                     <div class="memo-url-section">
                         <label for="memoUrl" data-i18n="form.memoUrl.label">Memo URL (share this with your recipient):</label>
                         <div class="url-copy-container">
-                            <input type="text" id="memoUrl" dir="ltr" readonly onclick="this.select(); document.execCommand('copy'); showTranslatedMessage('msg.urlCopied.plain', 'success');">
+                            <input type="text" id="memoUrl" dir="ltr" readonly autocomplete="off" onclick="this.select(); document.execCommand('copy'); showTranslatedMessage('msg.urlCopied.plain', 'success');">
                             <button type="button" id="copyUrl" class="btn btn-primary" data-i18n="btn.copyUrl">Copy URL</button>
                         </div>
                         <small class="form-help" data-i18n="form.memoUrl.help">This is the secure link to your memo. Share this URL with your recipient.</small>
@@ -177,7 +177,7 @@
                     <div class="memo-password-section">
                         <label for="memoPassword" data-i18n="form.memoPassword.label">Encryption Password (share this separately):</label>
                         <div class="url-copy-container">
-                            <input type="password" id="memoPassword" dir="ltr" readonly onclick="this.select(); document.execCommand('copy'); showTranslatedMessage('msg.passwordCopied.plain', 'success');">
+                            <input type="password" id="memoPassword" dir="ltr" readonly autocomplete="new-password" onclick="this.select(); document.execCommand('copy'); showTranslatedMessage('msg.passwordCopied.plain', 'success');">
                             <button type="button" id="togglePassword" class="btn btn-primary mr-8" data-i18n="btn.show">Show</button>
                             <button type="button" id="copyPassword" class="btn btn-primary" data-i18n="btn.copyPassword">Copy Password</button>
                         </div>
@@ -187,7 +187,7 @@
                     <div class="memo-owner-delete-section">
                         <label for="ownerDeleteUrl" data-i18n="create.result.revokeLabel">Revoke Link (keep this private):</label>
                         <div class="url-copy-container">
-                            <input type="text" id="ownerDeleteUrl" dir="ltr" readonly onclick="this.select(); document.execCommand('copy'); showTranslatedMessage('msg.revokeLinkCopied', 'success');">
+                            <input type="text" id="ownerDeleteUrl" dir="ltr" readonly autocomplete="off" onclick="this.select(); document.execCommand('copy'); showTranslatedMessage('msg.revokeLinkCopied', 'success');">
                             <button type="button" id="copyOwnerDeleteUrl" class="btn btn-primary" data-i18n="btn.copyRevokeLink">Copy Revoke Link</button>
                         </div>
                         <small class="form-help" data-i18n="create.result.revokeHelp">Use this private link to delete the memo before it is read. It is shown only once and cannot be recovered after leaving this page.</small>

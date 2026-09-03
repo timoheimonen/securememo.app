@@ -53,9 +53,15 @@ processes are outside the deployment trust boundary, and do not expose the origi
 listener publicly.
 
 IPv4 addresses are normalized and IPv6 clients are grouped by `/64` for rate-limit
-purposes. Minute and hour counters are updated in one SQLite transaction. If the
-filesystem reserve prevents rate-limit persistence, a bounded in-memory limiter keeps
-enforcing the same rules for the lifetime of the process instead of failing open.
+purposes. Identities and minute/hour counters exist only in a bounded, concurrency-safe
+process-memory limiter; map keys are derived with a random per-process HMAC key, so raw
+network addresses are not retained as map keys or written to SQLite. Restarting the
+process resets active limits, and separate backend processes enforce independent
+allowances. The limiter fails closed for new identities if its fixed capacity is full.
+On a schema-v1 upgrade, schema v2 first requires free space equal to twice the
+current database footprint plus the configured reserve, then enables SQLite's full secure-delete
+mode, removes the old rate-limit table, vacuums prior freelist remnants, and
+truncates the WAL. Startup fails closed if there is not enough room for this rewrite.
 
 `SECUREMEMO_STORAGE_LIMIT_BYTES` defaults to decimal 100 GB and limits both
 retained ciphertext admission and SQLite main-database page allocation. The
@@ -65,8 +71,8 @@ ciphertext capacity can be lower than 100 GB. Setting the byte limit to `0`
 disables both logical and SQLite page limits; accounting remains enabled.
 
 `SECUREMEMO_MIN_FREE_DISK_BYTES` defaults to decimal 5 GB. New memos are rejected
-before consuming that filesystem reserve, and attacker-driven rate-limit and
-lifetime-counter writes stop as well; set it to `0` to disable the reserve.
+before consuming that filesystem reserve, and lifetime-counter writes stop as well;
+set it to `0` to disable the reserve.
 The SQLite page limit does not include WAL files, backups, or other files, so the
 deployment should also use a dedicated volume or hosting quota. Run only one
 securememo backend process per SQLite database; the global usage accounting is
@@ -89,7 +95,7 @@ SECUREMEMO_METRICS_ADDR=127.0.0.1:9305
 
 The metrics are aggregated technical counters, gauges, and histograms, such as:
 
-- HTTP request counts by method, normalized route group, status code, and coarse country code from `CF-IPCountry` when provided by a trusted proxy.
+- HTTP request counts by method, normalized route group, status code, and coarse country code from a single valid `CF-IPCountry` header received through the explicitly trusted loopback proxy boundary.
 - HTTP response byte totals by the same low-cardinality labels.
 - HTTP request duration histograms by the same low-cardinality labels.
 - Total successfully created and read memos.
@@ -106,8 +112,8 @@ These operational metrics are separate from analytics or tracking: they are serv
 ```text
 cmd/securememo/              Go entrypoint
 internal/config/             Environment configuration
-internal/store/              SQLite schema, queries, cleanup, rate-limit storage
-internal/memo/               Memo API handlers
+internal/store/              SQLite schema, queries, cleanup, aggregate counters
+internal/memo/               Memo API handlers and RAM-only rate limiting
 internal/security/           Security headers, validation, timing helpers
 internal/server/             Routing, localization paths, embedded asset serving
 internal/frontend/           Embedded generated frontend assets

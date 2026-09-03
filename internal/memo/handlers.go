@@ -2,12 +2,14 @@ package memo
 
 import (
 	"context"
+	"crypto/hmac"
 	"crypto/rand"
 	"crypto/sha256"
 	"encoding/base64"
-	"encoding/hex"
+	"encoding/binary"
 	"encoding/json"
 	"errors"
+	"fmt"
 	"net/http"
 	"net/netip"
 	"strconv"
@@ -80,21 +82,32 @@ var failureRateLimitRules = []rateLimitRule{
 
 var (
 	errInvalidCloudflareClientIP = errors.New("invalid Cloudflare client IP")
+	errRateLimiterUnavailable    = errors.New("rate limiter unavailable")
 	cloudflarePseudoIPv4Prefix   = netip.MustParsePrefix("240.0.0.0/4")
+	uniformDelay                 = security.UniformDelay
 )
 
 type Handler struct {
-	Config            config.Config
-	Store             *store.SQLiteStore
-	rateLimitFallback *rateLimitFallback
+	Config           config.Config
+	Store            *store.SQLiteStore
+	rateLimiter      *rateLimiter
+	rateLimitHMACKey [32]byte
 }
 
-func NewHandler(cfg config.Config, sqliteStore *store.SQLiteStore) Handler {
-	return Handler{
-		Config:            cfg,
-		Store:             sqliteStore,
-		rateLimitFallback: newRateLimitFallback(defaultRateLimitFallbackEntries),
+func NewHandler(cfg config.Config, sqliteStore *store.SQLiteStore) (Handler, error) {
+	var key [32]byte
+	if _, err := rand.Read(key[:]); err != nil {
+		return Handler{}, fmt.Errorf("generate rate-limit key: %w", err)
 	}
+	if key == ([32]byte{}) {
+		return Handler{}, errors.New("generate rate-limit key: empty random key")
+	}
+	return Handler{
+		Config:           cfg,
+		Store:            sqliteStore,
+		rateLimiter:      newRateLimiter(defaultRateLimitEntries),
+		rateLimitHMACKey: key,
+	}, nil
 }
 
 func (h Handler) Create(w http.ResponseWriter, r *http.Request) {
@@ -308,11 +321,11 @@ func (h Handler) requirePOST(w http.ResponseWriter, r *http.Request) bool {
 	}
 	if r.Method != http.MethodPost {
 		w.Header().Set("Allow", "POST")
-		writeAPIError(w, http.StatusMethodNotAllowed, errorCodeMethodNotAllowed)
+		writeImmediateAPIError(w, http.StatusMethodNotAllowed, errorCodeMethodNotAllowed)
 		return false
 	}
 	if !security.IsAllowedOrigin(r.Header.Get("Origin"), h.Config.AllowedOrigins) {
-		writeAPIError(w, http.StatusForbidden, errorCodeForbidden)
+		writeImmediateAPIError(w, http.StatusForbidden, errorCodeForbidden)
 		return false
 	}
 	return true
@@ -342,8 +355,16 @@ func writeAPIError(w http.ResponseWriter, status int, errorCode string) {
 	delayedJSON(w, status, apiErrorResponse{ErrorCode: errorCode})
 }
 
+func writeImmediateAPIError(w http.ResponseWriter, status int, errorCode string) {
+	writeJSON(w, status, apiErrorResponse{ErrorCode: errorCode})
+}
+
 func delayedJSON(w http.ResponseWriter, status int, body interface{}) {
-	security.UniformDelay()
+	uniformDelay()
+	writeJSON(w, status, body)
+}
+
+func writeJSON(w http.ResponseWriter, status int, body interface{}) {
 	w.Header().Set("Content-Type", "application/json")
 	w.Header().Set("Cache-Control", "no-store")
 	w.Header().Set("X-Content-Type-Options", "nosniff")
@@ -359,12 +380,12 @@ func (h Handler) accessDenied(w http.ResponseWriter) {
 func (h Handler) rateLimitOrAccessDenied(w http.ResponseWriter, r *http.Request) {
 	result, err := h.recordRateLimits(r, rateLimitFailKey, failureRateLimitRules)
 	if errors.Is(err, errInvalidCloudflareClientIP) {
-		writeAPIError(w, http.StatusForbidden, errorCodeForbidden)
+		writeImmediateAPIError(w, http.StatusForbidden, errorCodeForbidden)
 		return
 	}
 	if err == nil && result.Limited {
 		w.Header().Set("Retry-After", retryAfterSeconds(result.RetryAfter))
-		writeAPIError(w, http.StatusTooManyRequests, errorCodeRateLimited)
+		writeImmediateAPIError(w, http.StatusTooManyRequests, errorCodeRateLimited)
 		return
 	}
 	h.accessDenied(w)
@@ -374,24 +395,15 @@ func (h Handler) allowRateLimitedAction(w http.ResponseWriter, r *http.Request, 
 	result, err := h.recordRateLimits(r, action, rateLimitRulesForAction(action))
 	if err != nil {
 		if errors.Is(err, errInvalidCloudflareClientIP) {
-			writeAPIError(w, http.StatusForbidden, errorCodeForbidden)
+			writeImmediateAPIError(w, http.StatusForbidden, errorCodeForbidden)
 			return false
-		}
-		if errors.Is(err, store.ErrStorageLimitReached) {
-			if action == rateLimitCreateKey {
-				writeAPIError(w, http.StatusInsufficientStorage, errorCodeStorageLimitReached)
-				return false
-			}
-			// NewHandler installs the bounded in-memory fallback. Keep direct Handler
-			// values fail-open here so reads and authenticated deletes remain available.
-			return true
 		}
 		writeAPIError(w, http.StatusInternalServerError, errorCodeGeneral)
 		return false
 	}
 	if result.Limited {
 		w.Header().Set("Retry-After", retryAfterSeconds(result.RetryAfter))
-		writeAPIError(w, http.StatusTooManyRequests, errorCodeRateLimited)
+		writeImmediateAPIError(w, http.StatusTooManyRequests, errorCodeRateLimited)
 		return false
 	}
 	return true
@@ -404,41 +416,39 @@ func rateLimitRulesForAction(action string) []rateLimitRule {
 	return standardRateLimitRules
 }
 
-func (h Handler) recordRateLimits(r *http.Request, action string, rules []rateLimitRule) (store.RateLimitResult, error) {
+func (h Handler) recordRateLimits(r *http.Request, action string, rules []rateLimitRule) (rateLimitResult, error) {
 	clientIP, err := h.clientIP(r)
 	if err != nil {
-		return store.RateLimitResult{}, err
+		return rateLimitResult{}, err
 	}
-	ipHash := hashString(clientIP)
-	storeRules := make([]store.RateLimitRule, 0, len(rules))
+	if h.rateLimiter == nil || h.rateLimitHMACKey == ([32]byte{}) {
+		return rateLimitResult{}, errRateLimiterUnavailable
+	}
+	memoryRules := make([]rateLimitCounterRule, 0, len(rules))
 	for _, rule := range rules {
-		key := "api:" + action + ":" + rule.Name + ":" + ipHash
-		storeRules = append(storeRules, store.RateLimitRule{Key: key, Limit: rule.Limit, Window: rule.Window})
+		key := h.deriveRateLimitBucketKey(clientIP, action, rule)
+		memoryRules = append(memoryRules, rateLimitCounterRule{Key: key, Limit: rule.Limit, Window: rule.Window})
 	}
-	fallbackResult := store.RateLimitResult{}
-	if h.rateLimitFallback != nil {
-		fallbackResult, err = h.rateLimitFallback.record(storeRules)
-		if err != nil {
-			return store.RateLimitResult{}, err
-		}
+	return h.rateLimiter.record(memoryRules)
+}
+
+func (h Handler) deriveRateLimitBucketKey(clientIP, action string, rule rateLimitRule) rateLimitBucketKey {
+	mac := hmac.New(sha256.New, h.rateLimitHMACKey[:])
+	for _, field := range []string{
+		"securememo/rate-limit/v1",
+		action,
+		rule.Name,
+		strconv.FormatInt(int64(rule.Window), 10),
+		clientIP,
+	} {
+		var size [8]byte
+		binary.BigEndian.PutUint64(size[:], uint64(len(field)))
+		_, _ = mac.Write(size[:])
+		_, _ = mac.Write([]byte(field))
 	}
-	results, err := h.Store.RecordEvents(r.Context(), storeRules)
-	if errors.Is(err, store.ErrStorageLimitReached) && h.rateLimitFallback != nil {
-		return fallbackResult, nil
-	}
-	if err != nil {
-		return store.RateLimitResult{}, err
-	}
-	aggregate := store.RateLimitResult{}
-	for _, result := range results {
-		if result.Limited {
-			aggregate.Limited = true
-			if result.RetryAfter > aggregate.RetryAfter {
-				aggregate.RetryAfter = result.RetryAfter
-			}
-		}
-	}
-	return aggregate, nil
+	var key rateLimitBucketKey
+	copy(key[:], mac.Sum(nil))
+	return key
 }
 
 func retryAfterSeconds(duration time.Duration) string {
@@ -480,14 +490,9 @@ func hashDeletionToken(token string) string {
 	return base64.StdEncoding.EncodeToString(sum[:])
 }
 
-func hashString(input string) string {
-	sum := sha256.Sum256([]byte(input))
-	return hex.EncodeToString(sum[:])
-}
-
 func (h Handler) clientIP(r *http.Request) (string, error) {
 	remoteIP, ok := remoteAddrIP(r.RemoteAddr)
-	if h.Config.TrustedProxyLocal && ok && remoteIP.IsLoopback() {
+	if security.TrustedLocalProxyPeer(h.Config.TrustedProxyLocal, r.RemoteAddr) {
 		clientIP, err := cloudflareClientIP(r.Header)
 		if err != nil {
 			return "", err

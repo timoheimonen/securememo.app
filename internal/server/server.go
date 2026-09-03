@@ -19,7 +19,7 @@ import (
 	"github.com/timoheimonen/securememo/internal/store"
 )
 
-const assetVersion = "20260831b"
+const assetVersion = "20260903a"
 
 var clientLocalizationAssetRe = regexp.MustCompile(`^/js/clientLocalization\.([A-Za-z0-9_-]+)\.js$`)
 
@@ -33,16 +33,20 @@ type Server struct {
 	metrics *Metrics
 }
 
-func New(cfg config.Config, db *store.SQLiteStore) *Server {
+func New(cfg config.Config, db *store.SQLiteStore) (*Server, error) {
+	memoHandler, err := memo.NewHandler(cfg, db)
+	if err != nil {
+		return nil, err
+	}
 	s := &Server{
 		cfg:     cfg,
 		db:      db,
-		metrics: NewMetrics(db),
+		memo:    memoHandler,
+		metrics: NewMetrics(db, cfg.TrustedProxyLocal),
 	}
-	s.memo = memo.NewHandler(cfg, db)
 	s.mux = http.NewServeMux()
 	s.routes()
-	return s
+	return s, nil
 }
 
 func (s *Server) ServeHTTP(w http.ResponseWriter, r *http.Request) {
