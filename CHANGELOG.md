@@ -4,6 +4,13 @@ All notable changes to this project are documented here.
 
 Version identifiers match the application `assetVersion`.
 
+## 20260903b - 2026-09-03
+
+### Changed
+- Clarify across project documentation and the Privacy Notice that securememo.app does not use `cf_clearance` or any other cookies, removing the obsolete conditional cookie exception.
+- Update the security model for worker-only cryptography, fail-closed secret forms, page-lifecycle clearing, response timing, operation-specific rate limits, trusted-proxy handling, storage controls, and metrics boundaries.
+- Streamline the README around essential setup, deployment, privacy, and security guidance while linking detailed documentation.
+
 ## 20260903a - 2026-09-03
 
 ### Security
