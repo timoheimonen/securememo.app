@@ -12,42 +12,37 @@ import (
 
 var translationCatalog = loadTranslationCatalog()
 
-type localeLabel struct {
-	Flag string
-	Name string
-}
-
-var localeLabels = map[string]localeLabel{
-	"ar":   {"🌐", "العربية"},
-	"bn":   {"🇧🇩", "বাংলা"},
-	"cs":   {"🇨🇿", "Čeština"},
-	"da":   {"🇩🇰", "Dansk"},
-	"de":   {"🇩🇪", "Deutsch"},
-	"el":   {"🇬🇷", "Ελληνικά"},
-	"en":   {"🇬🇧", "English"},
-	"es":   {"🇪🇸", "Español"},
-	"fi":   {"🇫🇮", "Suomi"},
-	"fr":   {"🇫🇷", "Français"},
-	"hi":   {"🇮🇳", "हिन्दी"},
-	"hu":   {"🇭🇺", "Magyar"},
-	"id":   {"🇮🇩", "Bahasa Indonesia"},
-	"it":   {"🇮🇹", "Italiano"},
-	"ja":   {"🇯🇵", "日本語"},
-	"ko":   {"🇰🇷", "한국어"},
-	"nl":   {"🇳🇱", "Nederlands"},
-	"no":   {"🇳🇴", "Norsk"},
-	"pl":   {"🇵🇱", "Polski"},
-	"ptPT": {"🇵🇹", "Português"},
-	"ptBR": {"🇧🇷", "Português (Brasil)"},
-	"ro":   {"🇷🇴", "Română"},
-	"ru":   {"🇷🇺", "Русский"},
-	"sv":   {"🇸🇪", "Svenska"},
-	"tl":   {"🇵🇭", "Tagalog"},
-	"th":   {"🇹🇭", "ไทย"},
-	"tr":   {"🇹🇷", "Türkçe"},
-	"uk":   {"🇺🇦", "Українська"},
-	"vi":   {"🇻🇳", "Tiếng Việt"},
-	"zh":   {"🈶", "中文"},
+var localeNames = map[string]string{
+	"ar":   "العربية",
+	"bn":   "বাংলা",
+	"cs":   "Čeština",
+	"da":   "Dansk",
+	"de":   "Deutsch",
+	"el":   "Ελληνικά",
+	"en":   "English",
+	"es":   "Español",
+	"fi":   "Suomi",
+	"fr":   "Français",
+	"hi":   "हिन्दी",
+	"hu":   "Magyar",
+	"id":   "Bahasa Indonesia",
+	"it":   "Italiano",
+	"ja":   "日本語",
+	"ko":   "한국어",
+	"nl":   "Nederlands",
+	"no":   "Norsk",
+	"pl":   "Polski",
+	"ptPT": "Português",
+	"ptBR": "Português (Brasil)",
+	"ro":   "Română",
+	"ru":   "Русский",
+	"sv":   "Svenska",
+	"tl":   "Tagalog",
+	"th":   "ไทย",
+	"tr":   "Türkçe",
+	"uk":   "Українська",
+	"vi":   "Tiếng Việt",
+	"zh":   "中文",
 }
 
 func loadTranslationCatalog() map[string]map[string]string {
@@ -154,16 +149,17 @@ func applyLocalizedAttributes(input, locale string) string {
 }
 
 func rewriteLocaleChrome(input, locale, pathWithoutLocale string) string {
-	label := localeLabels[locale]
 	htmlTag := fmt.Sprintf(`<html lang="%s">`, languageTag(locale))
 	if textDirection(locale) == "rtl" {
 		htmlTag = fmt.Sprintf(`<html lang="%s" dir="rtl">`, languageTag(locale))
 	}
 	out := strings.Replace(input, `<html lang="en">`, htmlTag, 1)
-	out = languageToggleRegexp.ReplaceAllString(out, fmt.Sprintf(`<button class="language-toggle nav-link" aria-expanded="false" aria-haspopup="true">
-                        %s %s
-                    </button>`, label.Flag, label.Name))
-	out = languageMenuRegexp.ReplaceAllString(out, buildLanguageMenu(locale, pathWithoutLocale))
+	out = languageToggleRegexp.ReplaceAllLiteralString(out, fmt.Sprintf(`<button class="language-toggle nav-link" aria-expanded="false" aria-haspopup="true">
+                        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"></path></svg>
+                        <span class="language-name">%s</span>
+                        <svg class="icon language-chevron" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6"></path></svg>
+                    </button>`, html.EscapeString(localeNames[locale])))
+	out = languageMenuRegexp.ReplaceAllLiteralString(out, buildLanguageMenu(locale, pathWithoutLocale))
 	return out
 }
 
@@ -201,13 +197,13 @@ func buildLanguageMenu(activeLocale, pathWithoutLocale string) string {
 		activeLocale = "en"
 	}
 	for _, locale := range locales {
-		label := localeLabels[locale]
+		name := localeNames[locale]
 		activeClass := ""
 		if locale == activeLocale {
 			activeClass = "active"
 		}
 		out.WriteString(fmt.Sprintf(`
-                        <a href="%s" class="language-item %s" lang="%s" dir="%s" title="%s">%s %s</a>`, buildLocalizedPath(locale, pathWithoutLocale), activeClass, languageTag(locale), textDirection(locale), html.EscapeString(label.Name), label.Flag, html.EscapeString(label.Name)))
+                        <a href="%s" class="language-item %s" lang="%s" dir="%s" title="%s">%s</a>`, buildLocalizedPath(locale, pathWithoutLocale), activeClass, languageTag(locale), textDirection(locale), html.EscapeString(name), html.EscapeString(name)))
 	}
 	out.WriteString(`
                     </div>`)

@@ -11,11 +11,15 @@
     <meta property="og:description" content="Decrypt and read your secure memo. Memos are deleted after reading or expiration for added privacy.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://securememo.app/en/read-memo.html">
-    <meta property="og:image" content="https://securememo.app/android-chrome-512x512.png">
+    <meta property="og:image" content="https://securememo.app/og-image.png">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <!-- Twitter Cards -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Read Secure Memo - Decrypt Encrypted Memo">
     <meta name="twitter:description" content="Decrypt and read your secure memo with client-side decryption.">
+    <meta name="twitter:image" content="https://securememo.app/og-image.png">
     <!-- Structured Data -->
     <script type="application/ld+json" nonce="{{CSP_NONCE}}">
     {
@@ -57,8 +61,12 @@
       }
     }
     </script>
+    <meta name="color-scheme" content="light dark">
+    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#0d0d0d" media="(prefers-color-scheme: dark)">
     <link rel="stylesheet" href="/styles.css">
-    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" sizes="32x32">
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png">
     <link rel="icon" type="image/png" sizes="512x512" href="/android-chrome-512x512.png">
@@ -67,69 +75,47 @@
     <script src="/js/read-memo.js" nonce="{{CSP_NONCE}}" defer></script>
 </head>
 <body>
-    <nav class="navbar">
-        <div class="nav-container">
-            <a href="/en" class="nav-logo">securememo.app</a>
+    <a class="skip-link" href="#main" data-i18n="a11y.skip">Skip to content</a>
+    <header class="site-header">
+        <div class="header-inner">
+            <a href="/en" class="nav-logo"><svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path class="brand-shield" d="M16 2.5 5 6.8v8.1c0 7 4.7 12.6 11 14.6 6.3-2 11-7.6 11-14.6V6.8L16 2.5Z"></path><path class="brand-hole" d="M16 10.5a3.5 3.5 0 0 0-1.6 6.6l-.9 5.4h5l-.9-5.4a3.5 3.5 0 0 0-1.6-6.6Z"></path></svg>securememo.app<span class="logo-tagline" data-i18n="brand.tagline">private notes that delete after reading</span></a>
 
-            <button class="hamburger" type="button" aria-label="Toggle navigation menu" data-i18n-aria-label="nav.toggleMenu" aria-expanded="false">
-                <span class="hamburger-line"></span>
-                <span class="hamburger-line"></span>
-                <span class="hamburger-line"></span>
-            </button>
+            <nav class="main-nav">
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="/en" class="nav-link" data-i18n="nav.home">Home</a></li>
+                    <li><a href="/en/about.html" class="nav-link" data-i18n="nav.about">About</a></li>
+                    <li><a href="/en/create-memo.html" class="nav-link nav-cta" data-i18n="nav.create">Create Secure Memo</a></li>
+                </ul>
+            </nav>
 
-            <ul class="nav-menu" id="navMenu">
-                <li><a href="/en" class="nav-link" data-i18n="nav.home">Home</a></li>
-                <li><a href="/en/about.html" class="nav-link" data-i18n="nav.about">About</a></li>
-                <li><a href="/en/create-memo.html" class="nav-link" data-i18n="nav.create">Create Secure Memo</a></li>
-                <li class="language-dropdown">
+            <div class="header-actions">
+                <div class="language-dropdown">
                     <button class="language-toggle nav-link" aria-expanded="false" aria-haspopup="true">
                         English
                     </button>
                     <div class="language-menu">
-                        <a href="/ar/read-memo.html" class="language-item " title="العربية">العربية</a>
-                        <a href="/bn/read-memo.html" class="language-item " title="বাংলা">বাংলা</a>
-                        <a href="/cs/read-memo.html" class="language-item " title="Čeština">Čeština</a>
-                        <a href="/da/read-memo.html" class="language-item " title="Dansk">Dansk</a>
-                        <a href="/de/read-memo.html" class="language-item " title="Deutsch">Deutsch</a>
-                        <a href="/el/read-memo.html" class="language-item " title="Ελληνικά">Ελληνικά</a>
-                        <a href="/en/read-memo.html" class="language-item active" title="English">English</a>
-                        <a href="/es/read-memo.html" class="language-item " title="Español">Español</a>
-                        <a href="/fi/read-memo.html" class="language-item " title="Suomi">Suomi</a>
-                        <a href="/fr/read-memo.html" class="language-item " title="Français">Français</a>
-                        <a href="/hi/read-memo.html" class="language-item " title="हिन्दी">हिन्दी</a>
-                        <a href="/hu/read-memo.html" class="language-item " title="Magyar">Magyar</a>
-                        <a href="/id/read-memo.html" class="language-item " title="Bahasa Indonesia">Bahasa Indonesia</a>
-                        <a href="/it/read-memo.html" class="language-item " title="Italiano">Italiano</a>
-                        <a href="/ja/read-memo.html" class="language-item " title="日本語">日本語</a>
-                        <a href="/ko/read-memo.html" class="language-item " title="한국어">한국어</a>
-                        <a href="/nl/read-memo.html" class="language-item " title="Nederlands">Nederlands</a>
-                        <a href="/no/read-memo.html" class="language-item " title="Norsk">Norsk</a>
-                        <a href="/pl/read-memo.html" class="language-item " title="Polski">Polski</a>
-                        <a href="/ptPT/read-memo.html" class="language-item " title="Português (Portugal)">Português</a>
-                        <a href="/ptBR/read-memo.html" class="language-item " title="Português (Brasil)">Português (Brasil)</a>
-                        <a href="/ru/read-memo.html" class="language-item " title="Русский">Русский</a>
-                        <a href="/ro/read-memo.html" class="language-item " title="Română">Română</a>
-                        <a href="/sv/read-memo.html" class="language-item " title="Svenska">Svenska</a>
-                        <a href="/tl/read-memo.html" class="language-item " title="Tagalog">Tagalog</a>
-                        <a href="/th/read-memo.html" class="language-item " title="ไทย">ไทย</a>
-                        <a href="/tr/read-memo.html" class="language-item " title="Türkçe">Türkçe</a>
-                        <a href="/uk/read-memo.html" class="language-item " title="Українська">Українська</a>
-                        <a href="/vi/read-memo.html" class="language-item " title="Tiếng Việt">Tiếng Việt</a>
-                        <a href="/zh/read-memo.html" class="language-item " title="中文">中文</a>
+                        <a href="/en/read-memo.html" class="language-item active" lang="en" dir="ltr" title="English">English</a>
                     </div>
-                </li>
-            </ul>
-
+                </div>
+                <button class="hamburger" type="button" aria-label="Toggle navigation menu" data-i18n-aria-label="nav.toggleMenu" aria-expanded="false" aria-controls="navMenu">
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                </button>
+            </div>
             <div class="nav-overlay"></div>
         </div>
-    </nav>
+    </header>
 
-    <main class="main-content">
-        <div class="memo-container">
-            <div class="memo-card">
+    <main id="main">
+        <div class="container narrow">
+            <section class="page-hero hero-section">
                 <h1 data-i18n="read.hero.title">Read Secure Memo</h1>
-                <p class="memo-description" data-i18n="read.hero.description">Enter the password to decrypt and read the memo. The password should have been shared with you separately from the URL. The memo will be deleted after being read or expired.</p>
+                <p class="lead" data-i18n="read.hero.description">Enter the password to decrypt and read the memo. The password should have been shared with you separately from the URL. The memo will be deleted after being read or expired.</p>
+                <span class="local-badge"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="4" y="10" width="16" height="11" rx="2.5"></rect><path d="M8 10V7a4 4 0 0 1 8 0v3"></path></svg><span data-i18n="read.badge.local">Decrypted only in your browser</span></span>
+            </section>
 
+            <div class="panel memo-card">
                 <div id="passwordForm" class="memo-form">
                     <form id="decryptForm" aria-busy="true" aria-describedby="decryptFormStatus">
                         <fieldset id="decryptFormControls" class="sensitive-form-controls" disabled>
@@ -138,11 +124,13 @@
                                 <div class="password-input-container">
                                     <input type="password" id="password" dir="ltr" required autocomplete="new-password"
                                            placeholder="Enter the encryption password shared with you separately" data-i18n-placeholder="form.password.placeholder">
-                                    <button type="button" id="toggleReadPassword" class="btn btn-primary" data-i18n="btn.show">Show</button>
+                                    <button type="button" id="toggleReadPassword" class="btn btn-secondary btn-sm" data-i18n="btn.show">Show</button>
                                 </div>
                                 <small class="form-help" data-i18n="read.password.help.sentence">The password should have been shared with you separately from the memo URL.</small>
                             </div>
-                            <button type="submit" class="btn btn-primary" id="decryptButton" data-i18n="btn.decrypt">Decrypt Memo</button>
+                            <div class="form-submit">
+                                <button type="submit" class="btn btn-primary btn-block btn-unlock" id="decryptButton" data-i18n="btn.decrypt">Decrypt Memo</button>
+                            </div>
                         </fieldset>
 
                         <p id="decryptFormStatus" class="form-help" role="status" data-i18n="common.loading">Loading...</p>
@@ -156,10 +144,11 @@
                 </div>
 
                 <div id="memoContent" class="memo-content hidden">
-                    <h3 data-i18n="read.memo.title">Your Secure Memo</h3>
+                    <h2 data-i18n="read.memo.title">Your Secure Memo</h2>
                     <div class="memo-message">
                         <p id="decryptedMessage" dir="auto"></p>
                     </div>
+                    <p class="memo-note"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"></circle><path d="M12 11v5M12 8h.01"></path></svg><span data-i18n="read.note.once">This memo can be read only once. Copy anything you need before you leave the page.</span></p>
                     <div class="memo-info">
                         <p><strong data-i18n="msg.status">Status:</strong> <span id="memoStatus" data-i18n="msg.memoDecrypted">Memo decrypted. Deleting in progress... Please wait.</span></p>
                         <div id="deletionSpinner" class="loading-spinner hidden">
@@ -174,7 +163,7 @@
                 </div>
 
                 <div id="errorContent" class="error-content hidden">
-                    <h3 data-i18n="common.error">Error</h3>
+                    <h2 data-i18n="common.error">Error</h2>
                     <p id="errorMessage" data-i18n="error.missingMemoId">Invalid request. Please check your input and try again.</p>
                     <div class="memo-actions">
                         <a href="/en/create-memo.html" class="btn btn-primary" data-i18n="btn.createNew">Create New Memo</a>
@@ -182,14 +171,26 @@
                     </div>
                 </div>
 
-                <div id="statusMessage" class="message"></div>
+                <div id="statusMessage" class="message" role="status"></div>
             </div>
         </div>
     </main>
 
-    <footer class="footer">
-        <p><a href="https://github.com/timoheimonen/securememo.app" target="_blank" rel="noopener noreferrer" data-i18n="footer.sourceCode">View source code at GitHub</a> | <a href="/en/tos.html" data-i18n="footer.tos">Terms of Service</a> | <a href="/en/privacy.html" data-i18n="footer.privacy">Privacy Notice</a></p>
-        <p class="footer-tagline" data-i18n="footer.tagline">No tracking, no ads, no nonsense.</p>
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <a href="/en" class="footer-logo"><svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path class="brand-shield" d="M16 2.5 5 6.8v8.1c0 7 4.7 12.6 11 14.6 6.3-2 11-7.6 11-14.6V6.8L16 2.5Z"></path><path class="brand-hole" d="M16 10.5a3.5 3.5 0 0 0-1.6 6.6l-.9 5.4h5l-.9-5.4a3.5 3.5 0 0 0-1.6-6.6Z"></path></svg>securememo.app</a>
+                <p data-i18n="footer.note">Memos are encrypted in your browser. The server stores only ciphertext and deletes it after reading or expiry.</p>
+                <p class="footer-tagline" data-i18n="footer.tagline">No tracking, no ads, no nonsense.</p>
+            </div>
+            <ul class="footer-links">
+                <li><a href="/en/about.html" data-i18n="nav.about">About</a></li>
+                <li><a href="/en/tos.html" data-i18n="footer.tos">Terms of Service</a></li>
+                <li><a href="/en/create-memo.html" data-i18n="nav.create">Create Secure Memo</a></li>
+                <li><a href="/en/privacy.html" data-i18n="footer.privacy">Privacy Notice</a></li>
+                <li><a href="https://github.com/timoheimonen/securememo.app" target="_blank" rel="noopener noreferrer" data-i18n="footer.sourceCode">View source code at GitHub</a></li>
+            </ul>
+        </div>
     </footer>
 
     <script src="/js/common.js" type="module" nonce="{{CSP_NONCE}}" defer></script>

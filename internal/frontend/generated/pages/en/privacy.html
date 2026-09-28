@@ -11,11 +11,15 @@
     <meta property="og:description" content="How securememo.app protects privacy with browser-side encryption, no cookies, no advertising trackers, and limited operational metrics.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="{{PUBLIC_ORIGIN}}/en/privacy.html">
-    <meta property="og:image" content="https://securememo.app/android-chrome-512x512.png">
+    <meta property="og:image" content="https://securememo.app/og-image.png">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <!-- Twitter Cards -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Privacy Notice - securememo.app">
     <meta name="twitter:description" content="Privacy protection with browser-side encryption, no cookies, and no advertising trackers.">
+    <meta name="twitter:image" content="https://securememo.app/og-image.png">
     <!-- Structured Data -->
     <script type="application/ld+json" nonce="{{CSP_NONCE}}">
     {
@@ -53,75 +57,51 @@
       }
     }
     </script>
+    <meta name="color-scheme" content="light dark">
+    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#0d0d0d" media="(prefers-color-scheme: dark)">
     <link rel="stylesheet" href="/styles.css">
-    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" sizes="32x32">
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png">
     <link rel="icon" type="image/png" sizes="512x512" href="/android-chrome-512x512.png">
     <link rel="canonical" href="{{PUBLIC_ORIGIN}}/en/privacy.html">
 </head>
 <body>
-    <nav class="navbar">
-        <div class="nav-container">
-            <a href="/en" class="nav-logo">securememo.app</a>
-            
-            <!-- Hamburger Menu Button -->
-            <button class="hamburger" type="button" aria-label="Toggle navigation menu" aria-expanded="false">
-                <span class="hamburger-line"></span>
-                <span class="hamburger-line"></span>
-                <span class="hamburger-line"></span>
-            </button>
-            
-            <!-- Navigation Menu -->
-            <ul class="nav-menu" id="navMenu">
-                <li><a href="/en" class="nav-link">Home</a></li>
-                <li><a href="/en/about.html" class="nav-link">About</a></li>
-                <li><a href="/en/create-memo.html" class="nav-link">Create Secure Memo</a></li>
-                <li class="language-dropdown">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header">
+        <div class="header-inner">
+            <a href="/en" class="nav-logo"><svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path class="brand-shield" d="M16 2.5 5 6.8v8.1c0 7 4.7 12.6 11 14.6 6.3-2 11-7.6 11-14.6V6.8L16 2.5Z"></path><path class="brand-hole" d="M16 10.5a3.5 3.5 0 0 0-1.6 6.6l-.9 5.4h5l-.9-5.4a3.5 3.5 0 0 0-1.6-6.6Z"></path></svg>securememo.app<span class="logo-tagline">private notes that delete after reading</span></a>
+
+            <nav class="main-nav">
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="/en" class="nav-link">Home</a></li>
+                    <li><a href="/en/about.html" class="nav-link">About</a></li>
+                    <li><a href="/en/create-memo.html" class="nav-link nav-cta">Create Secure Memo</a></li>
+                </ul>
+            </nav>
+
+            <div class="header-actions">
+                <div class="language-dropdown">
                     <button class="language-toggle nav-link" aria-expanded="false" aria-haspopup="true">
                         English
                     </button>
                     <div class="language-menu">
-                        <a href="/ar/privacy.html" class="language-item " title="العربية">العربية</a>
-                        <a href="/bn/privacy.html" class="language-item " title="বাংলা">বাংলা</a>
-                        <a href="/cs/privacy.html" class="language-item " title="Čeština">Čeština</a>
-                        <a href="/da/privacy.html" class="language-item " title="Dansk">Dansk</a>
-                        <a href="/de/privacy.html" class="language-item " title="Deutsch">Deutsch</a>
-                        <a href="/el/privacy.html" class="language-item " title="Ελληνικά">Ελληνικά</a>
-                        <a href="/en/privacy.html" class="language-item active" title="English">English</a>
-                        <a href="/es/privacy.html" class="language-item " title="Español">Español</a>
-                        <a href="/fi/privacy.html" class="language-item " title="Suomi">Suomi</a>
-                        <a href="/fr/privacy.html" class="language-item " title="Français">Français</a>
-                        <a href="/hi/privacy.html" class="language-item " title="हिन्दी">हिन्दी</a>
-                        <a href="/hu/privacy.html" class="language-item " title="Magyar">Magyar</a>
-                        <a href="/id/privacy.html" class="language-item " title="Bahasa Indonesia">Bahasa Indonesia</a>
-                        <a href="/it/privacy.html" class="language-item " title="Italiano">Italiano</a>
-                        <a href="/ja/privacy.html" class="language-item " title="日本語">日本語</a>
-                        <a href="/ko/privacy.html" class="language-item " title="한국어">한국어</a>
-                        <a href="/nl/privacy.html" class="language-item " title="Nederlands">Nederlands</a>
-                        <a href="/no/privacy.html" class="language-item " title="Norsk">Norsk</a>
-                        <a href="/pl/privacy.html" class="language-item " title="Polski">Polski</a>
-                        <a href="/ptPT/privacy.html" class="language-item " title="Português (Portugal)">Português</a>
-                        <a href="/ptBR/privacy.html" class="language-item " title="Português (Brasil)">Português (Brasil)</a>
-                        <a href="/ru/privacy.html" class="language-item " title="Русский">Русский</a>
-                        <a href="/ro/privacy.html" class="language-item " title="Română">Română</a>
-                        <a href="/sv/privacy.html" class="language-item " title="Svenska">Svenska</a>
-                        <a href="/tl/privacy.html" class="language-item " title="Tagalog">Tagalog</a>
-                        <a href="/th/privacy.html" class="language-item " title="ไทย">ไทย</a>
-                        <a href="/tr/privacy.html" class="language-item " title="Türkçe">Türkçe</a>
-                        <a href="/uk/privacy.html" class="language-item " title="Українська">Українська</a>
-                        <a href="/vi/privacy.html" class="language-item " title="Tiếng Việt">Tiếng Việt</a>
-                        <a href="/zh/privacy.html" class="language-item " title="中文">中文</a>
+                        <a href="/en/privacy.html" class="language-item active" lang="en" dir="ltr" title="English">English</a>
                     </div>
-                </li>
-            </ul>
-            
-            <!-- Mobile Menu Overlay -->
+                </div>
+                <button class="hamburger" type="button" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="navMenu">
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                </button>
+            </div>
             <div class="nav-overlay"></div>
         </div>
-    </nav>
+    </header>
 
-    <main class="main-content">
+    <main id="main">
         <div class="legal-section">
             <h1>Privacy Notice for securememo.app</h1>
             <p class="legal-meta"><strong>Last updated: September 3, 2026</strong></p>
@@ -298,9 +278,21 @@
         </div>
     </main>
 
-    <footer class="footer">
-        <p><a href="https://github.com/timoheimonen/securememo.app" target="_blank" rel="noopener noreferrer">View source code at GitHub</a> | <a href="/en/tos.html">Terms of Service</a> | <a href="/en/privacy.html">Privacy Notice</a></p>
-        <p class="footer-tagline">No tracking, no ads, no nonsense.</p>
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <a href="/en" class="footer-logo"><svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path class="brand-shield" d="M16 2.5 5 6.8v8.1c0 7 4.7 12.6 11 14.6 6.3-2 11-7.6 11-14.6V6.8L16 2.5Z"></path><path class="brand-hole" d="M16 10.5a3.5 3.5 0 0 0-1.6 6.6l-.9 5.4h5l-.9-5.4a3.5 3.5 0 0 0-1.6-6.6Z"></path></svg>securememo.app</a>
+                <p>Memos are encrypted in your browser. The server stores only ciphertext and deletes it after reading or expiry.</p>
+                <p class="footer-tagline">No tracking, no ads, no nonsense.</p>
+            </div>
+            <ul class="footer-links">
+                <li><a href="/en/about.html">About</a></li>
+                <li><a href="/en/tos.html">Terms of Service</a></li>
+                <li><a href="/en/create-memo.html">Create Secure Memo</a></li>
+                <li><a href="/en/privacy.html">Privacy Notice</a></li>
+                <li><a href="https://github.com/timoheimonen/securememo.app" target="_blank" rel="noopener noreferrer">View source code at GitHub</a></li>
+            </ul>
+        </div>
     </footer>
 
     <script src="/js/common.js" type="module" nonce="{{CSP_NONCE}}" defer></script>

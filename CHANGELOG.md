@@ -4,6 +4,28 @@ All notable changes to this project are documented here.
 
 Version identifiers match the application `assetVersion`.
 
+## 20260928a - 2026-09-28
+
+### Added
+- Home page sections for private-by-design guarantees, typical uses (passwords, API keys, access codes, private messages), and six frequently asked questions, all translated into the 30 supported languages.
+- `FAQPage` structured data on the home page that mirrors the visible questions and answers in each language.
+- A "What happens when you create a memo" panel beside the create form, a "Decrypted only in your browser" badge on the read page, and a reminder that a memo can be read only once.
+- A skip-to-content link and an explanatory footer on every page.
+- A 1200 × 630 social sharing image (`og-image.png`) with `og:image` dimensions and `twitter:image` on every page, and a scalable `favicon.svg`.
+
+### Changed
+- Redesign the whole site with a calm, modern visual language shared with qrturbo.app: sticky translucent header with a shield logo, serif display headlines, monochrome surfaces with a single blue accent, and green privacy markers.
+- Follow the operating system light or dark setting automatically, without storing a theme preference.
+- Lead the home page with a welcoming hero, privacy highlights ("Encrypted in your browser", "No sign-up", "No cookies or tracking", "Deleted after reading", "Open source"), and an illustration of a sealed, expiring memo.
+- Show the created memo link, password, and revoke link as numbered steps with clearer copy actions, and style the revoke confirmation with a distinct delete action.
+- Redraw the favicon, Apple touch icon, and Android icons with the new shield logo.
+- Replace flag emoji in the language menu with language names and a globe icon, and show the menu as a two-column list.
+- Give the privacy notice and terms of service the new header, footer, and reading layout.
+- Update sitemap `lastmod` dates for the redesigned indexable pages, and list every language version of each page as `xhtml:link` `hreflang` alternates, including `x-default`.
+
+### Removed
+- Inline `onclick` copy handlers on the create page result fields, which the Content Security Policy already blocked.
+
 ## 20260903b - 2026-09-03
 
 ### Changed
