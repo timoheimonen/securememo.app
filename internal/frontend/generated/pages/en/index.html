@@ -11,13 +11,21 @@
     <meta property="og:description" content="Share private notes with browser-side encryption and automatic removal after read confirmation or expiry.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://securememo.app/">
-    <meta property="og:image" content="https://securememo.app/android-chrome-512x512.png">
+    <meta property="og:image" content="https://securememo.app/og-image.png">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <!-- Twitter Cards -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="securememo.app - Encrypted Memos with Automatic Deletion">
     <meta name="twitter:description" content="Privacy-first app for encrypted memos with automatic removal.">
+    <meta name="twitter:image" content="https://securememo.app/og-image.png">
+    <meta name="color-scheme" content="light dark">
+    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#0d0d0d" media="(prefers-color-scheme: dark)">
     <link rel="stylesheet" href="/styles.css">
-    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" sizes="32x32">
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png">
     <link rel="icon" type="image/png" sizes="512x512" href="/android-chrome-512x512.png">
@@ -55,7 +63,7 @@
         "No tracking or ads",
         "Go and SQLite backend"
       ],
-      "screenshot": "https://securememo.app/android-chrome-512x512.png",
+      "screenshot": "https://securememo.app/og-image.png",
       "softwareVersion": "1.0.4",
       "datePublished": "2025-07-01",
       "dateModified": "2026-06-18",
@@ -65,98 +73,219 @@
     </script>
 </head>
 <body>
-    <nav class="navbar">
-        <div class="nav-container">
-            <a href="/en" class="nav-logo">securememo.app</a>
+    <a class="skip-link" href="#main" data-i18n="a11y.skip">Skip to content</a>
+    <header class="site-header">
+        <div class="header-inner">
+            <a href="/en" class="nav-logo"><svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path class="brand-shield" d="M16 2.5 5 6.8v8.1c0 7 4.7 12.6 11 14.6 6.3-2 11-7.6 11-14.6V6.8L16 2.5Z"></path><path class="brand-hole" d="M16 10.5a3.5 3.5 0 0 0-1.6 6.6l-.9 5.4h5l-.9-5.4a3.5 3.5 0 0 0-1.6-6.6Z"></path></svg>securememo.app<span class="logo-tagline" data-i18n="brand.tagline">private notes that delete after reading</span></a>
 
-            <!-- Hamburger Menu Button -->
-            <button class="hamburger" type="button" aria-label="Toggle navigation menu" data-i18n-aria-label="nav.toggleMenu" aria-expanded="false">
-                <span class="hamburger-line"></span>
-                <span class="hamburger-line"></span>
-                <span class="hamburger-line"></span>
-            </button>
+            <nav class="main-nav">
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="/en" class="nav-link active" aria-current="page" data-i18n="nav.home">Home</a></li>
+                    <li><a href="/en/about.html" class="nav-link" data-i18n="nav.about">About</a></li>
+                    <li><a href="/en/create-memo.html" class="nav-link nav-cta" data-i18n="nav.create">Create Secure Memo</a></li>
+                </ul>
+            </nav>
 
-            <!-- Navigation Menu -->
-            <ul class="nav-menu" id="navMenu">
-                <li><a href="/en" class="nav-link active" data-i18n="nav.home">Home</a></li>
-                <li><a href="/en/about.html" class="nav-link" data-i18n="nav.about">About</a></li>
-                <li><a href="/en/create-memo.html" class="nav-link" data-i18n="nav.create">Create Secure Memo</a></li>
-                <li class="language-dropdown">
+            <div class="header-actions">
+                <div class="language-dropdown">
                     <button class="language-toggle nav-link" aria-expanded="false" aria-haspopup="true">
                         English
                     </button>
                     <div class="language-menu">
-                        <a href="/ar" class="language-item " title="العربية">العربية</a>
-                        <a href="/bn" class="language-item " title="বাংলা">বাংলা</a>
-                        <a href="/cs" class="language-item " title="Čeština">Čeština</a>
-                        <a href="/da" class="language-item " title="Dansk">Dansk</a>
-                        <a href="/de" class="language-item " title="Deutsch">Deutsch</a>
-                        <a href="/el" class="language-item " title="Ελληνικά">Ελληνικά</a>
-                        <a href="/en" class="language-item active" title="English">English</a>
-                        <a href="/es" class="language-item " title="Español">Español</a>
-                        <a href="/fi" class="language-item " title="Suomi">Suomi</a>
-                        <a href="/fr" class="language-item " title="Français">Français</a>
-                        <a href="/hi" class="language-item " title="हिन्दी">हिन्दी</a>
-                        <a href="/hu" class="language-item " title="Magyar">Magyar</a>
-                        <a href="/id" class="language-item " title="Bahasa Indonesia">Bahasa Indonesia</a>
-                        <a href="/it" class="language-item " title="Italiano">Italiano</a>
-                        <a href="/ja" class="language-item " title="日本語">日本語</a>
-                        <a href="/ko" class="language-item " title="한국어">한국어</a>
-                        <a href="/nl" class="language-item " title="Nederlands">Nederlands</a>
-                        <a href="/no" class="language-item " title="Norsk">Norsk</a>
-                        <a href="/pl" class="language-item " title="Polski">Polski</a>
-                        <a href="/ptPT" class="language-item " title="Português (Portugal)">Português</a>
-                        <a href="/ptBR" class="language-item " title="Português (Brasil)">Português (Brasil)</a>
-                        <a href="/ru" class="language-item " title="Русский">Русский</a>
-                        <a href="/ro" class="language-item " title="Română">Română</a>
-                        <a href="/sv" class="language-item " title="Svenska">Svenska</a>
-                        <a href="/tl" class="language-item " title="Tagalog">Tagalog</a>
-                        <a href="/th" class="language-item " title="ไทย">ไทย</a>
-                        <a href="/tr" class="language-item " title="Türkçe">Türkçe</a>
-                        <a href="/uk" class="language-item " title="Українська">Українська</a>
-                        <a href="/vi" class="language-item " title="Tiếng Việt">Tiếng Việt</a>
-                        <a href="/zh" class="language-item " title="中文">中文</a>
+                        <a href="/en" class="language-item active" lang="en" dir="ltr" title="English">English</a>
+                    </div>
+                </div>
+                <button class="hamburger" type="button" aria-label="Toggle navigation menu" data-i18n-aria-label="nav.toggleMenu" aria-expanded="false" aria-controls="navMenu">
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                </button>
+            </div>
+            <div class="nav-overlay"></div>
+        </div>
+    </header>
+
+    <main id="main">
+        <section class="container hero hero-section" aria-labelledby="hero-title">
+            <div class="hero-copy">
+                <h1 id="hero-title" class="eyebrow" data-i18n="home.hero.eyebrow">Encrypted memos that delete after reading</h1>
+                <p class="display" data-i18n="home.hero.display">A safe way to share a secret.</p>
+                <p class="lead" data-i18n="home.hero.lead">Write a password, an access code or a private message. It is encrypted on your device before upload, so we never see it, and it is deleted after it has been read or when it expires.</p>
+                <div class="cta-buttons">
+                    <a href="/en/create-memo.html" class="btn btn-primary" data-i18n="home.hero.btnPrimary">Create Secure Memo</a>
+                    <a href="#how-it-works" class="btn btn-secondary" data-i18n="home.hero.btnHow">See how it works</a>
+                </div>
+                <ul class="trust-list">
+                <li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="4" y="10" width="16" height="11" rx="2.5"></rect><path d="M8 10V7a4 4 0 0 1 8 0v3"></path></svg><span data-i18n="trust.encrypted">Encrypted in your browser</span></li>
+                <li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="8" r="4"></circle><path d="M4 21a8 8 0 0 1 12.5-6.6"></path><path d="m16 17 5 5M21 17l-5 5"></path></svg><span data-i18n="trust.noSignup">No sign-up</span></li>
+                <li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M10.6 5.1A10 10 0 0 1 12 5c5 0 9 4.5 10 7a13 13 0 0 1-2.5 3.6M6.6 6.6A13 13 0 0 0 2 12c1 2.5 5 7 10 7a9.8 9.8 0 0 0 5.4-1.6"></path><path d="M9.9 9.9a3 3 0 0 0 4.2 4.2"></path><path d="m3 3 18 18"></path></svg><span data-i18n="trust.noTracking">No cookies or tracking</span></li>
+                <li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 12a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2l1-12M9 7V4h6v3"></path></svg><span data-i18n="trust.deleted">Deleted after reading</span></li>
+                <li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m8 7-5 5 5 5M16 7l5 5-5 5M13.5 4l-3 16"></path></svg><a href="https://github.com/timoheimonen/securememo.app" target="_blank" rel="noopener noreferrer" data-i18n="trust.openSource">Open source</a></li>
+                </ul>
+            </div>
+        <div class="hero-visual" aria-hidden="true">
+            <div class="mock-card">
+                <div class="mock-head"><span></span><span></span><span></span></div>
+                <div class="mock-lines"><span></span><span></span><span></span><span></span></div>
+                <div class="mock-seal"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="4" y="10" width="16" height="11" rx="2.5"></rect><path d="M8 10V7a4 4 0 0 1 8 0v3"></path></svg></div>
+                <div class="mock-chips">
+                    <span class="mock-chip"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M10 13a5 5 0 0 0 7.07 0l3-3a5 5 0 0 0-7.07-7.07l-1.5 1.5"></path><path d="M14 11a5 5 0 0 0-7.07 0l-3 3a5 5 0 0 0 7.07 7.07l1.5-1.5"></path></svg></span>
+                    <span class="mock-chip"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="8" cy="15" r="4"></circle><path d="m10.8 12.2 8.7-8.7M17 6l3 3M14.5 8.5l2 2"></path></svg></span>
+                    <span class="mock-chip mock-chip-ok"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"></circle><path d="m8.5 12 2.5 2.5 4.5-5"></path></svg></span>
+                </div>
+                <div class="mock-timer"><svg viewBox="0 0 36 36" focusable="false"><circle class="ring-track" cx="18" cy="18" r="15.9"></circle><circle class="ring-value" cx="18" cy="18" r="15.9" pathLength="100"></circle></svg></div>
+                <div class="mock-shield"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3 5 6v5c0 4.5 3 8.5 7 10 4-1.5 7-5.5 7-10V6l-7-3Z"></path><path d="m9 12 2 2 4-4"></path></svg></div>
+            </div>
+        </div>
+        </section>
+
+        <section class="container section" id="how-it-works" aria-labelledby="how-title">
+            <h2 id="how-title" class="display display-small section-title" data-i18n="home.current.features.title">How it works</h2>
+            <ol class="steps">
+                <li>
+                    <span class="step-number">1</span>
+                    <h3 data-i18n="home.current.write.title">Write in your browser</h3>
+                    <p data-i18n="home.current.write.description">Your memo is encrypted on your device before it ever reaches us. We can’t read it.</p>
+                </li>
+                <li>
+                    <span class="step-number">2</span>
+                    <h3 data-i18n="home.current.share.title">Share link and password separately</h3>
+                    <p data-i18n="home.current.share.description">Copy the link and the password. Send them through different channels for extra safety.</p>
+                </li>
+                <li>
+                    <span class="step-number">3</span>
+                    <h3 data-i18n="home.current.delete.title">Deleted after read or expiry</h3>
+                    <p data-i18n="home.current.delete.description">After a successful read, the browser asks the server to delete the memo. Expired memos are cleaned up automatically.</p>
+                </li>
+            </ol>
+        </section>
+
+        <section class="container section section-split" aria-labelledby="privacy-title">
+            <div class="section-intro">
+                <h2 id="privacy-title" class="display display-small" data-i18n="home.privacy.title">Private by design</h2>
+                <p data-i18n="home.privacy.intro">Memos often hold the most sensitive things you share. securememo.app is built so that the server cannot read them, and it keeps as little as possible for as short a time as possible.</p>
+                <a href="/en/about.html" class="text-link"><span data-i18n="home.hero.btnSecondary">Learn More</span><svg class="icon icon-arrow" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a>
+            </div>
+            <div class="cards">
+                <div class="card">
+                    <span class="card-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="4" y="10" width="16" height="11" rx="2.5"></rect><path d="M8 10V7a4 4 0 0 1 8 0v3"></path></svg></span>
+                    <h3 data-i18n="about.current.encrypted.title">Encrypted in your browser</h3>
+                    <p data-i18n="about.current.encrypted.description">Your memo is encrypted with AES-256-GCM before it leaves your device. We only store ciphertext.</p>
+                </div>
+                <div class="card">
+                    <span class="card-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="5" y="2.5" width="14" height="19" rx="2.5"></rect><path d="M10 18h4"></path><path d="m9.5 10 2 2 3.5-4"></path></svg></span>
+                    <h3 data-i18n="about.current.passwords.title">Passwords stay on your device</h3>
+                    <p data-i18n="about.current.passwords.description">The encryption password is generated in your browser. It's never sent to or stored on our servers.</p>
+                </div>
+                <div class="card">
+                    <span class="card-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M10.6 5.1A10 10 0 0 1 12 5c5 0 9 4.5 10 7a13 13 0 0 1-2.5 3.6M6.6 6.6A13 13 0 0 0 2 12c1 2.5 5 7 10 7a9.8 9.8 0 0 0 5.4-1.6"></path><path d="M9.9 9.9a3 3 0 0 0 4.2 4.2"></path><path d="m3 3 18 18"></path></svg></span>
+                    <h3 data-i18n="about.current.noAccounts.title">No accounts, no tracking</h3>
+                    <p data-i18n="about.current.noAccounts.description">You don't need to sign up. We don't use cookies, advertising trackers, third-party analytics, or behavioral profiling. We keep only limited aggregate operational metrics needed to run and protect the service.</p>
+                </div>
+                <div class="card">
+                    <span class="card-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m8 7-5 5 5 5M16 7l5 5-5 5M13.5 4l-3 16"></path></svg></span>
+                    <h3 data-i18n="home.privacy.openTitle">Open to inspection</h3>
+                    <p data-i18n="home.privacy.openText">The full source code is public on GitHub, so anyone can check how memos are encrypted and deleted.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="container section section-split" aria-labelledby="uses-title">
+            <div class="section-intro">
+                <h2 id="uses-title" class="display display-small" data-i18n="home.uses.title">Made for things that should not linger</h2>
+                <p data-i18n="home.uses.intro">Chat histories and inboxes keep everything forever. Send the sensitive part as a memo instead.</p>
+            </div>
+            <ul class="uses">
+                <li>
+                    <span class="card-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M2 8.5a15 15 0 0 1 20 0M5 12a10 10 0 0 1 14 0M8.5 15.5a5 5 0 0 1 7 0"></path><path d="M12 19h.01"></path></svg></span>
+                    <div>
+                        <h3 data-i18n="home.uses.passwords.title">Passwords</h3>
+                        <p data-i18n="home.uses.passwords.text">Share a login or Wi-Fi password without leaving it in a chat history.</p>
+                    </div>
+                </li>
+                <li>
+                    <span class="card-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="8" cy="15" r="4"></circle><path d="m10.8 12.2 8.7-8.7M17 6l3 3M14.5 8.5l2 2"></path></svg></span>
+                    <div>
+                        <h3 data-i18n="home.uses.keys.title">API keys and tokens</h3>
+                        <p data-i18n="home.uses.keys.text">Hand credentials to a colleague without pasting them into email or support tickets.</p>
+                    </div>
+                </li>
+                <li>
+                    <span class="card-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="4" y="3" width="16" height="18" rx="2.5"></rect><path d="M8.5 7.5h.01M12 7.5h.01M15.5 7.5h.01M8.5 11.5h.01M12 11.5h.01M15.5 11.5h.01M8.5 15.5h.01M12 15.5h.01M15.5 15.5h.01"></path></svg></span>
+                    <div>
+                        <h3 data-i18n="home.uses.codes.title">Access codes</h3>
+                        <p data-i18n="home.uses.codes.text">Send a door code, alarm code or recovery code that should not stay around.</p>
+                    </div>
+                </li>
+                <li>
+                    <span class="card-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20.5 12a8.5 8.5 0 0 1-12.6 7.4L3 21l1.6-4.9A8.5 8.5 0 1 1 20.5 12Z"></path></svg></span>
+                    <div>
+                        <h3 data-i18n="home.uses.notes.title">Private messages</h3>
+                        <p data-i18n="home.uses.notes.text">Write something personal that is meant to be read once, not archived.</p>
                     </div>
                 </li>
             </ul>
+        </section>
 
-            <!-- Mobile Menu Overlay -->
-            <div class="nav-overlay"></div>
-        </div>
-    </nav>
-
-    <main class="main-content">
-        <div class="hero-section">
-            <h1 data-i18n="home.current.hero.title">Share encrypted notes that expire.</h1>
-            <p data-i18n="home.current.hero.subtitle">Create a private memo in your browser. It is encrypted before upload and removed after read confirmation or expiry.</p>
-            <div class="cta-buttons">
-                <a href="/en/create-memo.html" class="btn btn-primary" data-i18n="home.hero.btnPrimary">Create Secure Memo</a>
-                <a href="/en/about.html" class="btn btn-secondary" data-i18n="home.hero.btnSecondary">Learn More</a>
+        <section class="container section section-split" id="faq" aria-labelledby="faq-title">
+            <div class="section-intro">
+                <h2 id="faq-title" class="display display-small" data-i18n="home.faq.title">Frequently asked questions</h2>
+                <p data-i18n="home.faq.intro">Short answers about how your memo is protected.</p>
             </div>
-        </div>
-
-        <div class="features-section">
-            <h2 data-i18n="home.current.features.title">How it works</h2>
-            <div class="features-grid">
-                <div class="feature-card">
-                    <h3 data-i18n="home.current.write.title">Write in your browser</h3>
-                    <p data-i18n="home.current.write.description">Your memo is encrypted on your device before it ever reaches us. We can’t read it.</p>
-                </div>
-                <div class="feature-card">
-                    <h3 data-i18n="home.current.share.title">Share link and password separately</h3>
-                    <p data-i18n="home.current.share.description">Copy the link and the password. Send them through different channels for extra safety.</p>
-                </div>
-                <div class="feature-card">
-                    <h3 data-i18n="home.current.delete.title">Deleted after read or expiry</h3>
-                    <p data-i18n="home.current.delete.description">After a successful read, the browser asks the server to delete the memo. Expired memos are cleaned up automatically.</p>
-                </div>
+            <div class="faq-list">
+                <details class="faq-item">
+                    <summary data-i18n="home.faq.read.question">Can securememo.app read my memo?</summary>
+                    <p data-i18n="home.faq.read.answer">No. Your memo is encrypted in your browser with AES-256-GCM before upload, using a random password that never leaves your device. The server receives only ciphertext that it cannot decrypt.</p>
+                </details>
+                <details class="faq-item">
+                    <summary data-i18n="home.faq.separate.question">Why should the link and the password be sent separately?</summary>
+                    <p data-i18n="home.faq.separate.answer">Anyone who has both can open the memo. If you send the link by email and the password by text message, for example, one intercepted message is not enough.</p>
+                </details>
+                <details class="faq-item">
+                    <summary data-i18n="home.faq.afterRead.question">What happens after the memo is read?</summary>
+                    <p data-i18n="home.faq.afterRead.answer">When the memo decrypts successfully, the recipient's browser asks the server to delete it. A memo that is never read expires after the time you choose, from 8 hours to 2 weeks, and is then removed.</p>
+                </details>
+                <details class="faq-item">
+                    <summary data-i18n="home.faq.revoke.question">Can I delete a memo I have already sent?</summary>
+                    <p data-i18n="home.faq.revoke.answer">Yes. Together with the link and the password you get a private revoke link. Opening it lets you delete the memo before it has been read.</p>
+                </details>
+                <details class="faq-item">
+                    <summary data-i18n="home.faq.lost.question">What if the password is lost?</summary>
+                    <p data-i18n="home.faq.lost.answer">Then the memo cannot be opened. The password is never sent to our servers, so nobody can recover it. Simply create a new memo.</p>
+                </details>
+                <details class="faq-item">
+                    <summary data-i18n="home.faq.cost.question">Does it cost anything or need an account?</summary>
+                    <p data-i18n="home.faq.cost.answer">No. securememo.app is free, needs no account and uses no cookies, ads or analytics.</p>
+                </details>
             </div>
+        </section>
+
+        <div class="container">
+            <section class="cta-band" aria-labelledby="cta-title">
+                <h2 id="cta-title" data-i18n="about.current.cta.title">Ready to try it?</h2>
+                <p data-i18n="about.current.cta.subtitle">Create your first secure memo in seconds.</p>
+                <div class="cta-buttons">
+                    <a href="/en/create-memo.html" class="btn btn-primary" data-i18n="about.cta.createBtn">Create Secure Memo</a>
+                </div>
+            </section>
         </div>
     </main>
 
-    <footer class="footer">
-        <p><a href="https://github.com/timoheimonen/securememo.app" target="_blank" rel="noopener noreferrer" data-i18n="footer.sourceCode">View source code at GitHub</a> | <a href="/en/tos.html" data-i18n="footer.tos">Terms of Service</a> | <a href="/en/privacy.html" data-i18n="footer.privacy">Privacy Notice</a></p>
-        <p class="footer-tagline" data-i18n="footer.tagline">No tracking, no ads, no nonsense.</p>
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <a href="/en" class="footer-logo"><svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path class="brand-shield" d="M16 2.5 5 6.8v8.1c0 7 4.7 12.6 11 14.6 6.3-2 11-7.6 11-14.6V6.8L16 2.5Z"></path><path class="brand-hole" d="M16 10.5a3.5 3.5 0 0 0-1.6 6.6l-.9 5.4h5l-.9-5.4a3.5 3.5 0 0 0-1.6-6.6Z"></path></svg>securememo.app</a>
+                <p data-i18n="footer.note">Memos are encrypted in your browser. The server stores only ciphertext and deletes it after reading or expiry.</p>
+                <p class="footer-tagline" data-i18n="footer.tagline">No tracking, no ads, no nonsense.</p>
+            </div>
+            <ul class="footer-links">
+                <li><a href="/en/about.html" data-i18n="nav.about">About</a></li>
+                <li><a href="/en/tos.html" data-i18n="footer.tos">Terms of Service</a></li>
+                <li><a href="/en/create-memo.html" data-i18n="nav.create">Create Secure Memo</a></li>
+                <li><a href="/en/privacy.html" data-i18n="footer.privacy">Privacy Notice</a></li>
+                <li><a href="https://github.com/timoheimonen/securememo.app" target="_blank" rel="noopener noreferrer" data-i18n="footer.sourceCode">View source code at GitHub</a></li>
+            </ul>
+        </div>
     </footer>
 
     <script src="/js/common.js" type="module" nonce="{{CSP_NONCE}}" defer></script>

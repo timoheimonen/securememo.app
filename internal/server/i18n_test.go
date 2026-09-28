@@ -24,44 +24,60 @@ var localizedTemplatePages = []struct {
 
 var expectedLocalizedTextKeys = map[string]string{
 	"index.html": `
-		nav.home nav.about nav.create
-		home.current.hero.title home.current.hero.subtitle home.hero.btnPrimary home.hero.btnSecondary
-		home.current.features.title home.current.write.title home.current.write.description
-		home.current.share.title home.current.share.description home.current.delete.title home.current.delete.description
-		footer.sourceCode footer.tos footer.privacy footer.tagline`,
+		a11y.skip brand.tagline nav.home nav.about nav.create home.hero.eyebrow home.hero.display home.hero.lead
+		home.hero.btnPrimary home.hero.btnHow trust.encrypted trust.noSignup trust.noTracking trust.deleted trust.openSource
+		home.current.features.title home.current.write.title home.current.write.description home.current.share.title
+		home.current.share.description home.current.delete.title home.current.delete.description home.privacy.title
+		home.privacy.intro home.hero.btnSecondary about.current.encrypted.title about.current.encrypted.description
+		about.current.passwords.title about.current.passwords.description about.current.noAccounts.title
+		about.current.noAccounts.description home.privacy.openTitle home.privacy.openText home.uses.title home.uses.intro
+		home.uses.passwords.title home.uses.passwords.text home.uses.keys.title home.uses.keys.text home.uses.codes.title
+		home.uses.codes.text home.uses.notes.title home.uses.notes.text home.faq.title home.faq.intro home.faq.read.question
+		home.faq.read.answer home.faq.separate.question home.faq.separate.answer home.faq.afterRead.question
+		home.faq.afterRead.answer home.faq.revoke.question home.faq.revoke.answer home.faq.lost.question home.faq.lost.answer
+		home.faq.cost.question home.faq.cost.answer about.current.cta.title about.current.cta.subtitle about.cta.createBtn
+		footer.note footer.tagline nav.about footer.tos nav.create footer.privacy footer.sourceCode`,
 	"about.html": `
-		nav.home nav.about nav.create about.hero.title about.current.hero.subtitle about.cta.createBtn
-		about.current.privacy.title about.current.encrypted.title about.current.encrypted.description
-		about.current.passwords.title about.current.passwords.description about.current.delete.title about.current.delete.description
-		about.current.noAccounts.title about.current.noAccounts.description about.current.storage.title about.current.storage.description
-		about.current.storage.stored.title about.current.storage.stored.ciphertext about.current.storage.stored.expiry
-		about.current.storage.stored.memoId about.current.storage.stored.deletionHash about.current.storage.stored.revokeHash
-		about.current.storage.notStored.title about.current.storage.notStored.plaintext about.current.storage.notStored.passwords
-		about.current.storage.notStored.rawTokens about.current.storage.notStored.accounts about.current.storage.notStored.tracking
-		about.current.share.title about.current.write.title about.current.write.description
-		about.current.shareSeparately.title about.current.shareSeparately.description
+		a11y.skip brand.tagline nav.home nav.about nav.create about.hero.title about.current.hero.subtitle trust.encrypted
+		trust.noSignup trust.noTracking trust.deleted trust.openSource about.current.privacy.title
+		about.current.encrypted.title about.current.encrypted.description about.current.passwords.title
+		about.current.passwords.description about.current.delete.title about.current.delete.description
+		about.current.noAccounts.title about.current.noAccounts.description about.current.storage.title
+		about.current.storage.description about.current.storage.stored.title about.current.storage.stored.ciphertext
+		about.current.storage.stored.expiry about.current.storage.stored.memoId about.current.storage.stored.deletionHash
+		about.current.storage.stored.revokeHash about.current.storage.notStored.title
+		about.current.storage.notStored.plaintext about.current.storage.notStored.passwords
+		about.current.storage.notStored.rawTokens about.current.storage.notStored.accounts
+		about.current.storage.notStored.tracking about.current.share.title about.current.write.title
+		about.current.write.description about.current.shareSeparately.title about.current.shareSeparately.description
 		about.current.readOnce.title about.current.readOnce.description about.current.cta.title about.current.cta.subtitle
-		about.cta.createBtn about.cta.homeBtn footer.sourceCode footer.tos footer.privacy footer.tagline`,
+		about.cta.createBtn about.cta.homeBtn footer.note footer.tagline nav.about footer.tos nav.create footer.privacy
+		footer.sourceCode`,
 	"create-memo.html": `
-		nav.home nav.about nav.create create.hero.title create.hero.description form.message.label form.message.help
-		form.expiry.label form.expiry.option.8h form.expiry.option.1d form.expiry.option.2d form.expiry.option.1w form.expiry.option.2w
-		btn.create common.loading schema.app.requirements msg.encrypting create.result.title form.memoUrl.label btn.copyUrl
-		form.memoUrl.help form.memoPassword.label btn.show btn.copyPassword create.result.passwordHelp
-		create.result.revokeLabel btn.copyRevokeLink create.result.revokeHelp warning.important warning.memoDeleted
-		warning.shareSecurely create.result.revokeWarning warning.needBoth warning.pageCleared
-		about.current.privacy.title about.current.encrypted.title about.current.encrypted.description
-		about.current.passwords.title about.current.passwords.description about.current.delete.title about.current.delete.description
-		about.current.noAccounts.title about.current.noAccounts.description footer.sourceCode footer.tos footer.privacy footer.tagline`,
+		a11y.skip brand.tagline nav.home nav.about nav.create create.hero.title create.hero.description form.message.label
+		form.message.help form.expiry.label form.expiry.option.8h form.expiry.option.1d form.expiry.option.2d
+		form.expiry.option.1w form.expiry.option.2w btn.create common.loading schema.app.requirements msg.encrypting
+		create.result.title create.result.subtitle form.memoUrl.label btn.copyUrl form.memoUrl.help form.memoPassword.label
+		btn.show btn.copyPassword create.result.passwordHelp create.result.revokeLabel btn.copyRevokeLink
+		create.result.revokeHelp warning.important warning.memoDeleted warning.shareSecurely create.result.revokeWarning
+		warning.needBoth warning.pageCleared btn.createNew create.badge.local create.aside.title create.aside.password
+		create.aside.encrypt create.aside.upload about.current.privacy.title about.current.encrypted.title
+		about.current.encrypted.description about.current.passwords.title about.current.passwords.description
+		about.current.delete.title about.current.delete.description about.current.noAccounts.title
+		about.current.noAccounts.description footer.note footer.tagline nav.about footer.tos nav.create footer.privacy
+		footer.sourceCode`,
 	"read-memo.html": `
-		nav.home nav.about nav.create read.hero.title read.hero.description form.password.label btn.show
-		read.password.help.sentence btn.decrypt common.loading schema.app.requirements msg.decrypting read.memo.title
-		msg.status msg.memoDecrypted msg.deletingSecurely btn.createNew btn.goHome common.error error.missingMemoId
-		btn.createNew btn.goHome footer.sourceCode footer.tos footer.privacy footer.tagline`,
+		a11y.skip brand.tagline nav.home nav.about nav.create read.hero.title read.hero.description read.badge.local
+		form.password.label btn.show read.password.help.sentence btn.decrypt common.loading schema.app.requirements
+		msg.decrypting read.memo.title read.note.once msg.status msg.memoDecrypted msg.deletingSecurely btn.createNew
+		btn.goHome common.error error.missingMemoId btn.createNew btn.goHome footer.note footer.tagline nav.about footer.tos
+		nav.create footer.privacy footer.sourceCode`,
 	"revoke-memo.html": `
-		nav.home nav.about nav.create revoke.hero.title revoke.hero.description revoke.confirm.title revoke.confirm.before
-		revoke.confirm.exists revoke.confirm.permanent revoke.confirm.recipient revoke.confirm.sends btn.deleteMemo btn.createNew
-		revoke.status.deleting revoke.success.title revoke.success.description btn.createNew btn.goHome revoke.error.title
-		btn.createNew btn.goHome footer.sourceCode footer.tos footer.privacy footer.tagline`,
+		a11y.skip brand.tagline nav.home nav.about nav.create revoke.hero.title revoke.hero.description revoke.confirm.title
+		revoke.confirm.before revoke.confirm.exists revoke.confirm.permanent revoke.confirm.recipient revoke.confirm.sends
+		btn.deleteMemo btn.createNew revoke.status.deleting revoke.success.title revoke.success.description btn.createNew
+		btn.goHome revoke.error.title btn.createNew btn.goHome footer.note footer.tagline nav.about footer.tos nav.create
+		footer.privacy footer.sourceCode`,
 }
 
 var expectedLocalizedAttributeKeys = map[string]string{
@@ -315,7 +331,8 @@ func TestRTLStylesUseLogicalInlineDirections(t *testing.T) {
 	requiredRules := map[string]string{
 		"language menu anchor":        `(?s)\.language-menu\s*\{[^}]*inset-inline-end:\s*0;`,
 		"hero text alignment":         `(?s)\.hero-section\s*\{[^}]*text-align:\s*start;`,
-		"callout accent":              `(?s)\.result-section,\s*\.memo-content\s*\{[^}]*border-inline-start:`,
+		"logo tagline divider":        `(?s)\.logo-tagline\s*\{[^}]*border-inline-start:`,
+		"RTL select chevron":          `(?s)html\[dir="rtl"\] select\s*\{[^}]*background-position:\s*left`,
 		"list marker position":        `(?s)\.storage-card li::before\s*\{[^}]*inset-inline-start:\s*0;`,
 		"mobile menu hidden position": `(?s)\.nav-menu\s*\{[^}]*inset-inline-end:\s*-100%;`,
 		"mobile menu open position":   `(?s)\.nav-menu\.active\s*\{[^}]*inset-inline-end:\s*0;`,
