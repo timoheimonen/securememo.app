@@ -19,7 +19,7 @@ import (
 	"github.com/timoheimonen/securememo/internal/store"
 )
 
-const assetVersion = "20260903b"
+const assetVersion = "20260928a"
 
 var clientLocalizationAssetRe = regexp.MustCompile(`^/js/clientLocalization\.([A-Za-z0-9_-]+)\.js$`)
 
@@ -151,6 +151,9 @@ func (s *Server) servePublicAsset(w http.ResponseWriter, r *http.Request, urlPat
 	switch {
 	case strings.HasPrefix(name, "favicon"), strings.HasSuffix(name, ".png"), name == "robots.txt", strings.HasSuffix(name, ".html"):
 		contentType := mime.TypeByExtension(path.Ext(name))
+		if path.Ext(name) == ".svg" {
+			contentType = "image/svg+xml"
+		}
 		if contentType == "" {
 			contentType = "application/octet-stream"
 		}
@@ -231,33 +234,61 @@ func (s *Server) serveSitemap(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "method not allowed", http.StatusMethodNotAllowed)
 		return
 	}
+	type alternateLink struct {
+		XMLName  xml.Name `xml:"xhtml:link"`
+		Rel      string   `xml:"rel,attr"`
+		Hreflang string   `xml:"hreflang,attr"`
+		Href     string   `xml:"href,attr"`
+	}
 	type urlEntry struct {
-		Loc     string `xml:"loc"`
-		LastMod string `xml:"lastmod"`
+		Loc        string          `xml:"loc"`
+		LastMod    string          `xml:"lastmod"`
+		Alternates []alternateLink `xml:"xhtml:link"`
 	}
 	type urlSet struct {
-		XMLName xml.Name   `xml:"urlset"`
-		Xmlns   string     `xml:"xmlns,attr"`
-		URLs    []urlEntry `xml:"url"`
+		XMLName    xml.Name   `xml:"urlset"`
+		Xmlns      string     `xml:"xmlns,attr"`
+		XmlnsXHTML string     `xml:"xmlns:xhtml,attr"`
+		URLs       []urlEntry `xml:"url"`
 	}
 	pages := []struct {
 		path    string
 		lastMod string
 	}{
-		{"", "2026-06-27"},
-		{"/about.html", "2026-08-29"},
-		{"/create-memo.html", "2026-08-29"},
+		{"/", "2026-09-28"},
+		{"/about.html", "2026-09-28"},
+		{"/create-memo.html", "2026-09-28"},
 	}
 	var entries []urlEntry
 	for _, page := range pages {
+		// Every language version lists all of its alternates, matching the
+		// hreflang links in each page head.
+		alternates := make([]alternateLink, 0, len(supportedLocales)+1)
+		for _, locale := range supportedLocales {
+			alternates = append(alternates, alternateLink{
+				Rel:      "alternate",
+				Hreflang: languageTag(locale),
+				Href:     s.cfg.PublicOrigin + buildLocalizedPath(locale, page.path),
+			})
+		}
+		alternates = append(alternates, alternateLink{
+			Rel:      "alternate",
+			Hreflang: "x-default",
+			Href:     s.cfg.PublicOrigin + buildLocalizedPath("en", page.path),
+		})
 		for _, locale := range supportedLocales {
 			entries = append(entries, urlEntry{
-				Loc:     fmt.Sprintf("%s/%s%s", s.cfg.PublicOrigin, locale, page.path),
-				LastMod: page.lastMod,
+				Loc:        s.cfg.PublicOrigin + buildLocalizedPath(locale, page.path),
+				LastMod:    page.lastMod,
+				Alternates: alternates,
 			})
 		}
 	}
-	body, err := xml.MarshalIndent(urlSet{Xmlns: "http://www.sitemaps.org/schemas/sitemap/0.9", URLs: entries}, "", "  ")
+	body, err := xml.MarshalIndent(urlSet{
+		Xmlns:      "http://www.sitemaps.org/schemas/sitemap/0.9",
+		XmlnsXHTML: "http://www.w3.org/1999/xhtml",
+		URLs:       entries,
+	}, "", "  ")
 	if err != nil {
 		http.Error(w, "internal server error", http.StatusInternalServerError)
 		return
@@ -328,6 +359,7 @@ func addAssetVersions(input string) string {
 		{`src="/js/read-memo.js"`, `src="/js/read-memo.js?v=` + assetVersion + `"`},
 		{`src="/js/revoke-memo.js"`, `src="/js/revoke-memo.js?v=` + assetVersion + `"`},
 		{"/favicon.ico", "/favicon.ico?v=" + assetVersion},
+		{"/favicon.svg", "/favicon.svg?v=" + assetVersion},
 		{"/apple-touch-icon.png", "/apple-touch-icon.png?v=" + assetVersion},
 		{"/android-chrome-192x192.png", "/android-chrome-192x192.png?v=" + assetVersion},
 		{"/android-chrome-512x512.png", "/android-chrome-512x512.png?v=" + assetVersion},

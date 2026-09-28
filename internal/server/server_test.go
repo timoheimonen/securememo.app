@@ -157,7 +157,7 @@ func TestCreateMemoPageIsIndexableAndLocalized(t *testing.T) {
 		`<link rel="canonical" href="https://securememo.app/fi/create-memo.html">`,
 		`hreflang="fi" href="https://securememo.app/fi/create-memo.html"`,
 		`hreflang="x-default" href="https://securememo.app/en/create-memo.html"`,
-		`<h2 id="create-privacy-title">Mikä tekee siitä yksityisen</h2>`,
+		`<h2 id="create-privacy-title" class="display display-small section-title">Mikä tekee siitä yksityisen</h2>`,
 		`<h3>Salattu selaimessasi</h3>`,
 	} {
 		if !strings.Contains(body, want) {
@@ -229,6 +229,85 @@ func TestAboutStructuredDataMatchesVisiblePageType(t *testing.T) {
 	}
 }
 
+func TestHomeStructuredDataMatchesVisibleFAQ(t *testing.T) {
+	app := newTestServer(t)
+	rec := httptest.NewRecorder()
+	req := httptest.NewRequest(http.MethodGet, "/fi", nil)
+
+	app.ServeHTTP(rec, req)
+
+	if rec.Code != http.StatusOK {
+		t.Fatalf("GET /fi status = %d, want %d", rec.Code, http.StatusOK)
+	}
+	body := rec.Body.String()
+	for _, want := range []string{`"@type": "WebApplication"`, `"@type": "FAQPage"`, `"url": "https://securememo.app/fi#faq"`} {
+		if !strings.Contains(body, want) {
+			t.Fatalf("home page structured data missing %s", want)
+		}
+	}
+	for _, key := range homeFAQKeys {
+		question := tr("fi", "home.faq."+key+".question")
+		answer := tr("fi", "home.faq."+key+".answer")
+		if !strings.Contains(body, "<summary>"+html.EscapeString(question)+"</summary>") {
+			t.Fatalf("home page FAQ question %q is not visible", question)
+		}
+		for _, value := range []string{question, answer} {
+			encoded, err := json.Marshal(value)
+			if err != nil {
+				t.Fatalf("encode %q: %v", value, err)
+			}
+			if !strings.Contains(body, string(encoded)) {
+				t.Fatalf("home page structured data missing %s", encoded)
+			}
+		}
+	}
+}
+
+func TestLanguageMenuUsesLanguageNamesWithoutFlags(t *testing.T) {
+	rendered := localizeHTML(readLocalizedTemplate(t, "index.html"), "fi", "/", "https://securememo.app")
+	if !strings.Contains(rendered, `<span class="language-name">Suomi</span>`) {
+		t.Fatal("language toggle does not show the active language name")
+	}
+	if regexp.MustCompile(`[\x{1F1E6}-\x{1F1FF}\x{1F300}-\x{1F5FF}]`).MatchString(rendered) {
+		t.Fatal("language menu still contains flag or symbol emoji")
+	}
+}
+
+func TestBrandImagesAreServed(t *testing.T) {
+	app := newTestServer(t)
+	for _, tc := range []struct {
+		path        string
+		contentType string
+	}{
+		{"/favicon.svg", "image/svg+xml"},
+		{"/favicon.ico", "image/"},
+		{"/og-image.png", "image/png"},
+		{"/apple-touch-icon.png", "image/png"},
+	} {
+		rec := httptest.NewRecorder()
+		app.ServeHTTP(rec, httptest.NewRequest(http.MethodGet, tc.path, nil))
+		if rec.Code != http.StatusOK {
+			t.Fatalf("GET %s status = %d, want %d", tc.path, rec.Code, http.StatusOK)
+		}
+		if got := rec.Header().Get("Content-Type"); !strings.HasPrefix(got, tc.contentType) {
+			t.Fatalf("GET %s Content-Type = %q, want prefix %q", tc.path, got, tc.contentType)
+		}
+	}
+
+	rec := httptest.NewRecorder()
+	app.ServeHTTP(rec, httptest.NewRequest(http.MethodGet, "/fi", nil))
+	body := rec.Body.String()
+	for _, want := range []string{
+		`<meta property="og:image" content="https://securememo.app/og-image.png">`,
+		`<meta name="twitter:image" content="https://securememo.app/og-image.png">`,
+		`href="/favicon.svg?v=` + assetVersion + `"`,
+	} {
+		if !strings.Contains(body, want) {
+			t.Fatalf("home page missing %s", want)
+		}
+	}
+}
+
 func TestSitemapOnlyIncludesIndexablePages(t *testing.T) {
 	app := newTestServer(t)
 	rec := httptest.NewRecorder()
@@ -246,9 +325,9 @@ func TestSitemapOnlyIncludesIndexablePages(t *testing.T) {
 		}
 	}
 	for _, entry := range []string{
-		"<loc>https://securememo.app/en</loc>\n    <lastmod>2026-06-27</lastmod>",
-		"<loc>https://securememo.app/en/about.html</loc>\n    <lastmod>2026-08-29</lastmod>",
-		"<loc>https://securememo.app/en/create-memo.html</loc>\n    <lastmod>2026-08-29</lastmod>",
+		"<loc>https://securememo.app/en</loc>\n    <lastmod>2026-09-28</lastmod>",
+		"<loc>https://securememo.app/en/about.html</loc>\n    <lastmod>2026-09-28</lastmod>",
+		"<loc>https://securememo.app/en/create-memo.html</loc>\n    <lastmod>2026-09-28</lastmod>",
 	} {
 		if !strings.Contains(body, entry) {
 			t.Fatalf("sitemap missing indexable entry %q", entry)
@@ -256,6 +335,23 @@ func TestSitemapOnlyIncludesIndexablePages(t *testing.T) {
 	}
 	if strings.Contains(body, "<changefreq>") || strings.Contains(body, "<priority>") {
 		t.Fatal("sitemap includes ignored changefreq or priority hints")
+	}
+	if !strings.Contains(body, `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">`) {
+		t.Fatal("sitemap does not declare the xhtml namespace")
+	}
+	for _, want := range []string{
+		`<xhtml:link rel="alternate" hreflang="fi" href="https://securememo.app/fi/about.html"></xhtml:link>`,
+		`<xhtml:link rel="alternate" hreflang="pt-BR" href="https://securememo.app/ptBR/create-memo.html"></xhtml:link>`,
+		`<xhtml:link rel="alternate" hreflang="x-default" href="https://securememo.app/en"></xhtml:link>`,
+	} {
+		if !strings.Contains(body, want) {
+			t.Fatalf("sitemap missing alternate %s", want)
+		}
+	}
+	entries := strings.Count(body, "<url>")
+	alternates := strings.Count(body, "<xhtml:link ")
+	if want := entries * (len(supportedLocales) + 1); entries != 3*len(supportedLocales) || alternates != want {
+		t.Fatalf("sitemap has %d entries and %d alternates, want %d entries and %d alternates", entries, alternates, 3*len(supportedLocales), want)
 	}
 }
 

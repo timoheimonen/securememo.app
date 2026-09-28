@@ -221,7 +221,7 @@ func buildJSONLD(page seoPage, locale, pathWithoutLocale, publicOrigin, canonica
 	var data map[string]interface{}
 	switch page.Schema {
 	case "app":
-		data = appJSONLD(locale, canonical, description)
+		data = homeJSONLD(locale, canonical, description)
 	case "about":
 		data = aboutJSONLD(page, locale, canonical, description)
 	case "softwarePage":
@@ -271,11 +271,43 @@ func appJSONLD(locale, canonical, description string) map[string]interface{} {
 			tr(locale, "schema.app.features.selfHosted"),
 			tr(locale, "schema.app.features.privacyFirst"),
 		},
-		"screenshot":          "https://securememo.app/android-chrome-512x512.png",
+		"screenshot":          "https://securememo.app/og-image.png",
 		"license":             tr(locale, "schema.app.license"),
 		"codeRepository":      tr(locale, "schema.app.repository"),
 		"inLanguage":          languageTag(locale),
 		"isAccessibleForFree": true,
+	}
+}
+
+// homeFAQKeys lists the questions shown in the visible home page FAQ, so the
+// FAQPage structured data always matches what visitors can read.
+var homeFAQKeys = []string{"read", "separate", "afterRead", "revoke", "lost", "cost"}
+
+func homeJSONLD(locale, canonical, description string) map[string]interface{} {
+	app := appJSONLD(locale, canonical, description)
+	delete(app, "@context")
+	questions := make([]map[string]interface{}, 0, len(homeFAQKeys))
+	for _, key := range homeFAQKeys {
+		questions = append(questions, map[string]interface{}{
+			"@type": "Question",
+			"name":  tr(locale, "home.faq."+key+".question"),
+			"acceptedAnswer": map[string]string{
+				"@type": "Answer",
+				"text":  tr(locale, "home.faq."+key+".answer"),
+			},
+		})
+	}
+	return map[string]interface{}{
+		"@context": "https://schema.org",
+		"@graph": []map[string]interface{}{
+			app,
+			{
+				"@type":      "FAQPage",
+				"url":        canonical + "#faq",
+				"inLanguage": languageTag(locale),
+				"mainEntity": questions,
+			},
+		},
 	}
 }
 

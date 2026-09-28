@@ -54,6 +54,10 @@ same 362-key set. Any later removal requires the deterministic runtime-key
 registry and render plus browser error-path coverage planned for phase 4, and
 must update English, every localized catalog, and this policy atomically.
 
+The `20260928a` redesign added 48 keys for the new page chrome, home page
+sections, FAQ, and create and read page guidance. Every locale now has the same
+410-key set.
+
 ## Technical names inside localized text
 
 Only the named token may remain unchanged; the rest of each value must be
@@ -64,8 +68,9 @@ localized.
   `page.about.ogDescription`, `about.hero.title`, `about.hero.subtitle`,
   `faq.privacy.question`, `faq.privacy.answer`, `faq.encryption.question`,
   `faq.cost.question`, `faq.cost.answer`, `faq.technology.question`,
-  `faq.technology.answer`, `about.current.hero.subtitle`, and
-  `about.current.ogDescription`.
+  `faq.technology.answer`, `about.current.hero.subtitle`,
+  `about.current.ogDescription`, `home.privacy.intro`,
+  `home.faq.read.question`, and `home.faq.cost.answer`.
 - `AES-256` and `AES-256-GCM`: `page.home.keywords`,
   `page.about.description`, `page.about.keywords`, `page.create.keywords`,
   `page.read.keywords`, `home.security.encryption.description`,
@@ -73,7 +78,8 @@ localized.
   `schema.app.description`, `schema.app.features.encryption`,
   `faq.privacy.answer`, `faq.encryption.answer`, `create.hero.ogDescription`,
   `create.schema.description`, `create.schema.actionDescription`,
-  `read.schema.description`, and `about.current.encrypted.description`.
+  `read.schema.description`, `about.current.encrypted.description`,
+  `home.faq.read.answer`, and `create.aside.encrypt`.
 - `PBKDF2`: `faq.encryption.answer`.
 - `Web Crypto API`: `about.tech.webcrypto`,
   `about.features.clientEncryption.description`, `faq.encryption.answer`, and
@@ -85,7 +91,11 @@ localized.
 - `HTML`, `HTML5`, `CSS`, and `JavaScript`: `about.tech.frontend`,
   `schema.app.requirements`, and `faq.technology.answer`, as applicable.
 - `GitHub`: `footer.sourceCode`, `about.hero.subtitle`, `about.tech.github`,
-  `about.tech.githubLink`, and `faq.technology.answer`.
+  `about.tech.githubLink`, `faq.technology.answer`, and
+  `home.privacy.openText`.
+- `API`: `home.uses.keys.title` and `home.uses.keys.text`.
+- `Wi-Fi`: `home.uses.passwords.text`, where the language's usual spelling of
+  Wi-Fi is also valid.
 - `URL`: `btn.copyUrl`, `form.password.help`, `msg.urlCopied`,
   `home.features.share.description`, `about.features.passwordSharing.description`,
   `about.usage.share.description`, `read.hero.description`, `form.memoUrl.label`,
@@ -102,8 +112,9 @@ The words *ciphertext*, *plaintext*, *privacy-first*, *memo*, and *token* are
 not globally approved exceptions. A language may use a genuinely established
 loanword or an inflected local form, but mixed-language wording is an error.
 The established technical loanword *cookie* may remain in
-`about.current.noAccounts.description` and
-`about.current.storage.notStored.tracking`, including a target language's
+`about.current.noAccounts.description`,
+`about.current.storage.notStored.tracking`, `trust.noTracking`, and
+`home.faq.cost.answer`, including a target language's
 normal inflection or transliteration. Those values only state that the service
 does not use or store cookies; this exception does not permit cookie-based
 behavior.
